@@ -1,5 +1,6 @@
 import json
 import time
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from google import genai
@@ -25,6 +26,10 @@ MODELS = [
 ICONS_DIR = Path("data/icons")
 
 OUTPUT_DIR = Path("data/icon_descriptions")
+
+# How long to wait before retrying once all models are quota-exhausted.
+# Free-tier daily quotas reset roughly every 24h, plus a buffer.
+RETRY_WAIT_SECONDS = 24 * 60 * 60 + 30 * 60
 
 # --------------------------------------------------
 
@@ -257,50 +262,67 @@ def main():
 
     print(f"Found {len(icons)} icons")
 
-    pending = [
-        icon_path
-        for icon_path in icons
-        if not output_is_valid(OUTPUT_DIR / f"{icon_path.stem}.json")
-    ]
+    while True:
 
-    print(f"{len(pending)} icons need processing")
+        pending = [
+            icon_path
+            for icon_path in icons
+            if not output_is_valid(OUTPUT_DIR / f"{icon_path.stem}.json")
+        ]
 
-    processed_count = 0
-
-    for model, delay in MODELS:
+        print(f"{len(pending)} icons need processing")
 
         if not pending:
+            print("All icons processed.")
             break
 
-        print(f"=== Using model {model} ===")
+        processed_count = 0
 
-        remaining = []
+        for model, delay in MODELS:
 
-        for icon_path in pending:
-
-            try:
-                process_icon(icon_path, model, delay)
-                processed_count += 1
-
-            except KeyboardInterrupt:
-                raise
-
-            except QuotaExceededError as e:
-                print(f"QUOTA EXCEEDED for {model}: {e}")
-                remaining.append(icon_path)
-                remaining.extend(
-                    pending[pending.index(icon_path) + 1:]
-                )
+            if not pending:
                 break
 
-            except Exception as e:
-                print(f"ERROR {icon_path.name}: {e}")
-                remaining.append(icon_path)
+            print(f"=== Using model {model} ===")
 
-        pending = remaining
+            remaining = []
 
-    print(f"Processed {processed_count} icons this run")
-    print(f"{len(pending)} icons still pending")
+            for icon_path in pending:
+
+                try:
+                    process_icon(icon_path, model, delay)
+                    processed_count += 1
+
+                except KeyboardInterrupt:
+                    raise
+
+                except QuotaExceededError as e:
+                    print(f"QUOTA EXCEEDED for {model}: {e}")
+                    remaining.append(icon_path)
+                    remaining.extend(
+                        pending[pending.index(icon_path) + 1:]
+                    )
+                    break
+
+                except Exception as e:
+                    print(f"ERROR {icon_path.name}: {e}")
+                    remaining.append(icon_path)
+
+            pending = remaining
+
+        print(f"Processed {processed_count} icons this round")
+        print(f"{len(pending)} icons still pending")
+
+        if not pending:
+            print("All icons processed.")
+            break
+
+        retry_at = datetime.now() + timedelta(seconds=RETRY_WAIT_SECONDS)
+        print(
+            f"All models exhausted for now. "
+            f"Sleeping until {retry_at:%Y-%m-%d %H:%M:%S} before retrying."
+        )
+        time.sleep(RETRY_WAIT_SECONDS)
 
 
 if __name__ == "__main__":
