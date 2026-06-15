@@ -11,13 +11,20 @@ from google.genai import types
 
 API_KEY = "AIzaSyCWbHC2pvaz548x4aMDL5fRalKBBMOevNM"
 
-MODEL = "gemini-3.1-flash-lite"
+# Free-tier models, in priority order (largest daily quota first), each
+# paired with a per-request delay derived from its RPM limit
+# (delay = ceil(60 / rpm) + 1s buffer).
+MODELS = [
+    ("gemini-3.1-flash-lite", 5),
+    ("gemini-2.5-flash-lite", 7),
+    ("gemini-2.5-flash", 13),
+    ("gemini-3-flash", 13),
+    ("gemini-3.5-flash", 13),
+]
 
 ICONS_DIR = Path("data/icons")
 
 OUTPUT_DIR = Path("data/icon_descriptions")
-
-REQUEST_DELAY_SECONDS = 5
 
 # --------------------------------------------------
 
@@ -159,6 +166,21 @@ def validate_json(data):
     return True
 
 
+class QuotaExceededError(Exception):
+    """Raised when a model's daily/rate quota has been exhausted."""
+
+
+def is_quota_exceeded(exc):
+    code = getattr(exc, "code", None)
+    status = getattr(exc, "status", None)
+
+    if code == 429 or status == "RESOURCE_EXHAUSTED":
+        return True
+
+    message = str(exc)
+    return "RESOURCE_EXHAUSTED" in message and "429" in message
+
+
 def output_is_valid(path):
     if not path.exists():
         return False
@@ -173,32 +195,37 @@ def output_is_valid(path):
         return False
 
 
-def process_icon(icon_path):
+def process_icon(icon_path, model, delay):
 
     output_path = OUTPUT_DIR / f"{icon_path.stem}.json"
 
     if output_is_valid(output_path):
         print(f"SKIP {icon_path.name}")
-        return
+        return True
 
-    print(f"PROCESS {icon_path.name}")
+    print(f"PROCESS {icon_path.name} ({model})")
 
     image_bytes = icon_path.read_bytes()
 
-    response = client.models.generate_content(
-        model=MODEL,
-        contents=[
-            types.Part.from_bytes(
-                data=image_bytes,
-                mime_type="image/png",
+    try:
+        response = client.models.generate_content(
+            model=model,
+            contents=[
+                types.Part.from_bytes(
+                    data=image_bytes,
+                    mime_type="image/png",
+                ),
+                PROMPT,
+            ],
+            config=types.GenerateContentConfig(
+                temperature=0.2,
+                response_mime_type="application/json",
             ),
-            PROMPT,
-        ],
-        config=types.GenerateContentConfig(
-            temperature=0.2,
-            response_mime_type="application/json",
-        ),
-    )
+        )
+    except Exception as e:
+        if is_quota_exceeded(e):
+            raise QuotaExceededError(str(e)) from e
+        raise
 
     text = response.text
 
@@ -209,6 +236,8 @@ def process_icon(icon_path):
             f"Invalid schema for {icon_path.name}"
         )
 
+    data["_meta"] = {"model": model}
+
     with open(output_path, "w") as f:
         json.dump(
             data,
@@ -217,7 +246,9 @@ def process_icon(icon_path):
             ensure_ascii=False,
         )
 
-    time.sleep(REQUEST_DELAY_SECONDS)
+    time.sleep(delay)
+
+    return True
 
 
 def main():
@@ -226,18 +257,50 @@ def main():
 
     print(f"Found {len(icons)} icons")
 
-    for icon_path in icons:
+    pending = [
+        icon_path
+        for icon_path in icons
+        if not output_is_valid(OUTPUT_DIR / f"{icon_path.stem}.json")
+    ]
 
-        try:
-            process_icon(icon_path)
+    print(f"{len(pending)} icons need processing")
 
-        except KeyboardInterrupt:
-            raise
+    processed_count = 0
 
-        except Exception as e:
-            print(
-                f"ERROR {icon_path.name}: {e}"
-            )
+    for model, delay in MODELS:
+
+        if not pending:
+            break
+
+        print(f"=== Using model {model} ===")
+
+        remaining = []
+
+        for icon_path in pending:
+
+            try:
+                process_icon(icon_path, model, delay)
+                processed_count += 1
+
+            except KeyboardInterrupt:
+                raise
+
+            except QuotaExceededError as e:
+                print(f"QUOTA EXCEEDED for {model}: {e}")
+                remaining.append(icon_path)
+                remaining.extend(
+                    pending[pending.index(icon_path) + 1:]
+                )
+                break
+
+            except Exception as e:
+                print(f"ERROR {icon_path.name}: {e}")
+                remaining.append(icon_path)
+
+        pending = remaining
+
+    print(f"Processed {processed_count} icons this run")
+    print(f"{len(pending)} icons still pending")
 
 
 if __name__ == "__main__":
