@@ -179,6 +179,14 @@ class QuotaExceededError(Exception):
     """Raised when a model's daily/rate quota has been exhausted."""
 
 
+class FatalAPIError(Exception):
+    """Raised for errors that won't be fixed by switching models or waiting."""
+
+
+class ModelNotFoundError(Exception):
+    """Raised when a model ID is not recognised by the API."""
+
+
 def is_quota_exceeded(exc):
     code = getattr(exc, "code", None)
     status = getattr(exc, "status", None)
@@ -188,6 +196,23 @@ def is_quota_exceeded(exc):
 
     message = str(exc)
     return "RESOURCE_EXHAUSTED" in message and "429" in message
+
+
+def is_invalid_api_key(exc):
+    code = getattr(exc, "code", None)
+
+    message = str(exc)
+
+    if code == 400 and "API_KEY_INVALID" in message:
+        return True
+
+    return "API_KEY_INVALID" in message or "API key expired" in message
+
+
+def is_model_not_found(exc):
+    code = getattr(exc, "code", None)
+    message = str(exc)
+    return code == 404 or "NOT_FOUND" in message
 
 
 def output_is_valid(path):
@@ -232,6 +257,10 @@ def process_icon(icon_path, model, delay):
             ),
         )
     except Exception as e:
+        if is_invalid_api_key(e):
+            raise FatalAPIError(str(e)) from e
+        if is_model_not_found(e):
+            raise ModelNotFoundError(str(e)) from e
         if is_quota_exceeded(e):
             raise QuotaExceededError(str(e)) from e
         raise
@@ -266,6 +295,8 @@ def main():
 
     print(f"Found {len(icons)} icons")
 
+    bad_models = set()
+
     while True:
 
         pending = [
@@ -284,6 +315,9 @@ def main():
 
         for model, delay in MODELS:
 
+            if model in bad_models:
+                continue
+
             if not pending:
                 break
 
@@ -299,6 +333,21 @@ def main():
 
                 except KeyboardInterrupt:
                     raise
+
+                except FatalAPIError as e:
+                    print(f"FATAL ERROR {icon_path.name}: {e}")
+                    print("Stopping.")
+                    return
+
+                except ModelNotFoundError as e:
+                    print(f"MODEL NOT FOUND {model}: {e}")
+                    print(f"Skipping {model} permanently.")
+                    bad_models.add(model)
+                    remaining.append(icon_path)
+                    remaining.extend(
+                        pending[pending.index(icon_path) + 1:]
+                    )
+                    break
 
                 except QuotaExceededError as e:
                     print(f"QUOTA EXCEEDED for {model}: {e}")
