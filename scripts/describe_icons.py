@@ -1,16 +1,20 @@
 import json
+import os
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
 
+from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+
+load_dotenv()
 
 # --------------------------------------------------
 # CONFIG
 # --------------------------------------------------
 
-API_KEY = "AIzaSyCWbHC2pvaz548x4aMDL5fRalKBBMOevNM"
+API_KEY = os.environ["GEMINI_API_KEY"]
 
 # Free-tier models, in priority order (largest daily quota first), each
 # paired with a per-request delay derived from its RPM limit
