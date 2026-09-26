@@ -8,7 +8,7 @@ abstention rationale) is in [experimentation-strategy.md](experimentation-strate
 Every method below produces a **ranking** of icons for a query, then passes through a shared
 **abstention gate** (§Abstention) that returns the top-1 icon **or `None`**.
 
-Notation: a query `q` is a normalized task (title + tags). An icon `I` has a description document
+Notation: a query `q` is a normalized task (title, optionally + body). An icon `I` has a description document
 `d(I)` built from `visual_concepts` / `task_intents` / `example_tasks` / `reasoning`, a quality
 score `u(I) = icon_usefulness/10`, and `poor_matches(I)`.
 

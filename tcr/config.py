@@ -16,6 +16,9 @@ ICON_DESC_DIR = DATA_DIR / "icon_descriptions"
 ICON_PNG_DIR = DATA_DIR / "icons"
 CATALOG_PATH = DATA_DIR / "material_symbols_catalog.json"
 EVAL_DIR = DATA_DIR / "eval"
+DATASETS_DIR = DATA_DIR / "datasets"   # public task datasets (committed)
+PRIVATE_DIR = DATA_DIR / "private"     # personal tasks + their labels (gitignored)
+RAW_DIR = DATA_DIR / "raw"             # downloaded third-party corpora (gitignored)
 RESULTS_DIR = ROOT / "results"
 CACHE_DIR = ROOT / ".cache" / "tcr"  # embedding caches (gitignored)
 

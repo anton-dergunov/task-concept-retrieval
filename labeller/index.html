@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#ffffff">
+<title>Icon labelling</title>
+<style>
+:root {
+  --bg: #ffffff; --fg: #1d1d1f; --muted: #6e6e73; --line: #e5e5ea; --tile: #ffffff;
+  --accent: #0a66d8; --accent-fg: #ffffff; --chip: #f2f2f7; --icon-filter: none;
+  --cell: 52px; --gap: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111113; --fg: #f2f2f7; --muted: #98989f; --line: #2c2c2e; --tile: #1c1c1e;
+    --accent: #4c9dff; --accent-fg: #0b0b0c; --chip: #242426; --icon-filter: invert(1);
+  }
+}
+@media (min-width: 700px) { :root { --cell: 76px; --gap: 10px; } }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+  font: 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+body { display: flex; flex-direction: column; height: 100dvh; overflow: hidden;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left); }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer;
+  touch-action: manipulation; }
+
+header { display: flex; align-items: center; gap: 10px; padding: 8px 16px;
+  border-bottom: 1px solid var(--line); font-size: 14px; color: var(--muted); flex: none; }
+header select { font: inherit; font-weight: 600; color: var(--fg); background: none; border: 0;
+  padding: 2px 0; max-width: 45vw; }
+#progress { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#state { white-space: nowrap; }
+#state.ok { color: var(--accent); }
+#menuBtn { font-size: 20px; line-height: 1; padding: 2px 4px; color: var(--fg); }
+#menu { position: absolute; right: 12px; top: 44px; background: var(--tile); border: 1px solid var(--line);
+  border-radius: 10px; box-shadow: 0 6px 24px rgba(0,0,0,.15); display: none; z-index: 10; min-width: 200px; }
+#menu.open { display: block; }
+#menu button { display: block; width: 100%; text-align: left; padding: 11px 14px; font-size: 15px; }
+#menu button + button { border-top: 1px solid var(--line); }
+
+#task { flex: none; max-height: 34dvh; overflow-y: auto; padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--line); }
+#task.expanded { max-height: 58dvh; }
+#title { font-size: 18px; font-weight: 650; margin: 0 0 6px; overflow-wrap: anywhere; }
+#body { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px; color: var(--fg); }
+#body.clamp { max-height: 6.9em; overflow: hidden;
+  -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
+#more { color: var(--accent); font-size: 14px; margin-top: 4px; display: none; }
+#body code { font: 14px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip);
+  padding: 0 3px; border-radius: 4px; }
+#body a, #title a { color: var(--accent); text-decoration: none; }
+.ref { border-bottom: 1px dotted var(--muted); }
+
+#searchbar { flex: none; display: flex; gap: 8px; padding: 8px 16px; }
+#q { flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 7px 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--chip); color: var(--fg); }
+#clear { color: var(--accent); font-size: 15px; display: none; }
+
+#grid { flex: 1; overflow-y: auto; padding: 4px 16px 12px; display: grid; align-content: start;
+  grid-template-columns: repeat(auto-fill, minmax(var(--cell), 1fr)); gap: var(--gap); }
+.tile { position: relative; aspect-ratio: 1; background: var(--tile); border: 1px solid var(--line);
+  border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.tile img { width: 72%; height: 72%; filter: var(--icon-filter); pointer-events: none; user-select: none; }
+.tile.sel { border: 2px solid var(--accent); }
+.tile .badge { position: absolute; top: -6px; left: -6px; min-width: 22px; height: 22px; padding: 0 5px;
+  border-radius: 11px; background: var(--accent); color: var(--accent-fg); font-size: 13px; font-weight: 700;
+  display: none; align-items: center; justify-content: center; }
+.tile.sel .badge { display: flex; }
+#empty { grid-column: 1 / -1; color: var(--muted); text-align: center; padding: 24px 0; }
+
+footer { flex: none; display: flex; gap: 8px; padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line); }
+footer button { padding: 11px 14px; border-radius: 12px; background: var(--chip); font-weight: 600; }
+#none { flex: 1; }
+#none.on { background: var(--fg); color: var(--bg); }
+#next { background: var(--accent); color: var(--accent-fg); min-width: 92px; }
+#toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); background: var(--fg);
+  color: var(--bg); padding: 8px 14px; border-radius: 10px; font-size: 14px; opacity: 0;
+  transition: opacity .2s; pointer-events: none; }
+#toast.show { opacity: .92; }
+</style>
+</head>
+<body>
+<header>
+  <select id="ds" aria-label="Dataset"></select>
+  <span id="progress"></span>
+  <span id="state"></span>
+  <button id="menuBtn" aria-label="Menu">⋯</button>
+  <div id="menu">
+    <button data-act="open">Next unlabelled task</button>
+    <button data-act="goto">Go to task #…</button>
+    <button data-act="flag">Flag task (exclude it)</button>
+  </div>
+</header>
+<section id="task">
+  <h1 id="title"></h1>
+  <div id="body"></div>
+  <button id="more">more</button>
+</section>
+<div id="searchbar">
+  <input id="q" type="search" placeholder="Search icons" autocomplete="off" autocorrect="off"
+         autocapitalize="off" spellcheck="false" enterkeyhint="search">
+  <button id="clear">Clear</button>
+</div>
+<main id="grid"></main>
+<footer>
+  <button id="prev" aria-label="Previous">←</button>
+  <button id="none">No good icon</button>
+  <button id="next">Next →</button>
+</footer>
+<div id="toast"></div>
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+};
+let datasets = [];
+let cur = null;      // server task payload
+let ranking = [];    // selected icon names, best first
+let status = null;   // current label status or null (never saved)
+let queries = [];
+let results = null;  // search results, or null when showing candidates
+let shownAt = 0;
+let saveTimer = null;
+
+function toast(msg) {
+  const t = $("toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast.timer); toast.timer = setTimeout(() => t.classList.remove("show"), 1400);
+}
+async function api(path, body) {
+  const opt = body ? { method: "POST", headers: { "Content-Type": "application/json" },
+                       body: JSON.stringify(body) } : {};
+  const r = await fetch(path, opt);
+  if (!r.ok) throw new Error((await r.text()) || r.status);
+  return r.json();
+}
+const fmt = (n) => n.toLocaleString("en-US");
+
+// --- org rendering --------------------------------------------------------
+function esc(s) { return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]); }
+function shortUrl(u) {
+  try { const x = new URL(u); const p = x.pathname.replace(/\/$/, "");
+        const tail = p.split("/").filter(Boolean).slice(-1)[0] || "";
+        return x.hostname.replace(/^www\./, "") + (tail ? "/…/" + decodeURIComponent(tail).slice(0, 40) : ""); }
+  catch (e) { return u; }
+}
+function orgToHtml(text) {
+  const slots = [];
+  const hold = (html) => "\u0000" + (slots.push(html) - 1) + "\u0000";
+  const link = (target, desc) => {
+    if (/^https?:/.test(target)) return hold(`<a href="${esc(target)}" target="_blank" rel="noopener noreferrer">${esc(desc || shortUrl(target))}</a>`);
+    const label = desc || target.replace(/^[a-z][\w+.-]*:/i, "");
+    return hold(`<span class="ref">${esc(label)}</span>`);
+  };
+  let s = text
+    .replace(/\[\[([^\]]+)\]\[([^\]]+)\]\]/g, (_, t, d) => link(t, d))
+    .replace(/\[\[([^\]]+)\]\]/g, (_, t) => link(t, ""))
+    .replace(/https?:\/\/[^\s<>"\u0000]+[^\s<>".,;:!?)\u0000]/g, (u) => link(u, ""))
+    .replace(/(^|[\s(])([=~])(\S(?:.*?\S)?)\2(?=$|[\s.,;:!?)])/gm, (_, pre, m, inner) => pre + hold(`<code>${esc(inner)}</code>`));
+  s = esc(s)
+    .replace(/(^|[\s(])\*(\S(?:.*?\S)?)\*(?=$|[\s.,;:!?)])/gm, "$1<b>$2</b>")
+    .replace(/(^|[\s(])\/(\S(?:.*?\S)?)\/(?=$|[\s.,;:!?)])/gm, "$1<i>$2</i>")
+    .replace(/(^|[\s(])\+(\S(?:.*?\S)?)\+(?=$|[\s.,;:!?)])/gm, "$1<s>$2</s>")
+    .replace(/^(\s*)[-+] /gm, "$1• ");
+  return s.replace(/\u0000(\d+)\u0000/g, (_, i) => slots[+i]);
+}
+
+// --- rendering ------------------------------------------------------------
+function renderHeader() {
+  const d = datasets.find((x) => x.key === cur.dataset);
+  const left = cur.total - cur.done;
+  $("progress").textContent = `#${fmt(cur.pos + 1)} of ${fmt(cur.total)} · ${fmt(left)} left`;
+  if (d) { d.done = cur.done; }
+  const st = $("state");
+  const text = { labelled: "✓ saved", none: "✓ no icon", skip: "skipped", flagged: "⚑ flagged" }[status] || "";
+  st.textContent = text; st.className = status === "labelled" || status === "none" ? "ok" : "";
+  $("none").classList.toggle("on", status === "none");
+}
+function renderTask() {
+  $("title").innerHTML = orgToHtml(cur.task.title);
+  const body = $("body");
+  body.innerHTML = orgToHtml(cur.task.body || "");
+  body.classList.add("clamp");
+  $("task").classList.remove("expanded");
+  $("task").scrollTop = 0;
+  requestAnimationFrame(() => {
+    const over = body.scrollHeight > body.clientHeight + 2;
+    if (!over) body.classList.remove("clamp");
+    $("more").style.display = over ? "inline" : "none";
+    $("more").textContent = "more";
+  });
+}
+function renderGrid() {
+  const grid = $("grid");
+  const names = results !== null ? results
+    : cur.icons.concat(ranking.filter((n) => !cur.icons.includes(n)));
+  grid.innerHTML = "";
+  if (!names.length) {
+    grid.innerHTML = `<div id="empty">${results !== null ? "No icons match" : ""}</div>`;
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  for (const n of names) {
+    const b = document.createElement("button");
+    b.className = "tile"; b.dataset.n = n;
+    b.innerHTML = `<img src="icons/${n}.png" alt="" draggable="false" decoding="async"><span class="badge"></span>`;
+    frag.appendChild(b);
+  }
+  grid.appendChild(frag);
+  paintSelection();
+}
+function paintSelection() {
+  for (const b of $("grid").children) {
+    const k = ranking.indexOf(b.dataset.n);
+    b.classList.toggle("sel", k >= 0);
+    if (b.firstElementChild) b.lastElementChild.textContent = k >= 0 ? k + 1 : "";
+  }
+}
+
+// --- state changes --------------------------------------------------------
+async function load(pos) {
+  flushSave();
+  const q = pos === undefined || pos === null ? "" : `&pos=${pos}`;
+  cur = await api(`api/task?dataset=${encodeURIComponent(cur ? cur.dataset : $("ds").value)}${q}`);
+  ranking = cur.label ? cur.label.ranking.slice() : [];
+  status = cur.label ? cur.label.status : null;
+  queries = []; results = null; $("q").value = ""; $("clear").style.display = "none";
+  shownAt = Date.now();
+  renderHeader(); renderTask(); renderGrid();
+  $("grid").scrollTop = 0;
+  prefetch(cur.pos + 1);
+}
+async function prefetch(pos) {
+  if (pos >= cur.total) return;
+  try {
+    const nxt = await api(`api/task?dataset=${encodeURIComponent(cur.dataset)}&pos=${pos}`);
+    for (const n of nxt.icons) { const i = new Image(); i.src = `icons/${n}.png`; }
+  } catch (e) {}
+}
+function scheduleSave() { clearTimeout(saveTimer); saveTimer = setTimeout(save, 350); }
+function flushSave() { if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; save(); } }
+async function save() {
+  saveTimer = null;
+  if (!cur || status === null) return;
+  const snapshot = { dataset: cur.dataset, task_id: cur.task.id, status, ranking: ranking.slice(),
+    queries: queries.slice(), ms_spent: Date.now() - shownAt,
+    client: (navigator.userAgent.match(/iPad|iPhone|Android|Macintosh|Windows|Linux/) || [""])[0] };
+  try {
+    const s = await api("api/label", snapshot);
+    if (cur && cur.dataset === snapshot.dataset) { cur.done = s.done; cur.total = s.total; }
+    renderHeader();
+  } catch (e) { toast("Not saved — check connection"); $("state").textContent = "unsaved"; }
+}
+function toggle(name) {
+  const k = ranking.indexOf(name);
+  if (k >= 0) ranking.splice(k, 1); else ranking.push(name);
+  if (results !== null && k < 0 && $("q").value.trim()) rememberQuery($("q").value.trim());
+  status = ranking.length ? "labelled" : (status === null ? null : "cleared");
+  paintSelection(); renderHeader(); scheduleSave();
+}
+function rememberQuery(q) { if (queries[queries.length - 1] !== q) queries.push(q); }
+async function next() {
+  if (status === null || status === "cleared") { status = "skip"; }
+  await save();
+  if (cur.pos + 1 >= cur.total) { toast("Last task in this dataset"); renderHeader(); return; }
+  load(cur.pos + 1);
+}
+async function setAndAdvance(st, msg) {
+  status = st; if (st === "none") ranking = [];
+  paintSelection(); renderHeader(); await save(); toast(msg);
+  if (cur.pos + 1 < cur.total) load(cur.pos + 1);
+}
+
+// --- search ---------------------------------------------------------------
+let searchTimer = null;
+function onSearchInput() {
+  const q = $("q").value.trim();
+  $("clear").style.display = q ? "inline" : "none";
+  clearTimeout(searchTimer);
+  if (!q) { results = null; renderGrid(); return; }
+  searchTimer = setTimeout(async () => {
+    const r = await api(`api/search?q=${encodeURIComponent(q)}`);
+    if ($("q").value.trim() !== q) return;
+    results = r.icons; renderGrid(); $("grid").scrollTop = 0;
+  }, 220);
+}
+function clearSearch() { $("q").value = ""; onSearchInput(); }
+
+// --- wiring ---------------------------------------------------------------
+$("grid").addEventListener("click", (e) => {
+  const b = e.target.closest(".tile"); if (b) toggle(b.dataset.n);
+});
+$("next").onclick = next;
+$("prev").onclick = () => { if (cur.pos > 0) load(cur.pos - 1); };
+$("none").onclick = () => setAndAdvance("none", "No good icon");
+$("more").onclick = () => {
+  const body = $("body"), open = body.classList.toggle("clamp");
+  $("task").classList.toggle("expanded", !open);
+  $("more").textContent = open ? "more" : "less";
+};
+$("q").addEventListener("input", onSearchInput);
+$("q").addEventListener("keydown", (e) => { if (e.key === "Enter") $("q").blur(); if (e.key === "Escape") { clearSearch(); $("q").blur(); } });
+$("clear").onclick = clearSearch;
+$("ds").onchange = () => { flushSave(); store.set("ds", $("ds").value); cur = null; load(); };
+$("menuBtn").onclick = (e) => { e.stopPropagation(); $("menu").classList.toggle("open"); };
+document.addEventListener("click", () => $("menu").classList.remove("open"));
+$("menu").addEventListener("click", (e) => {
+  const act = e.target.dataset.act;
+  if (act === "open") load();
+  if (act === "goto") { const n = parseInt(prompt(`Task number (1–${cur.total})`), 10); if (n > 0) load(n - 1); }
+  if (act === "flag") setAndAdvance("flagged", "Flagged");
+});
+document.addEventListener("keydown", (e) => {
+  if (e.target === $("q")) return;
+  if (e.key === "ArrowRight") next();
+  else if (e.key === "ArrowLeft" && cur.pos > 0) load(cur.pos - 1);
+  else if (e.key === "/") { e.preventDefault(); $("q").focus(); }
+});
+document.addEventListener("visibilitychange", () => { if (document.hidden) flushSave(); });
+
+(async function init() {
+  datasets = await api("api/datasets");
+  const sel = $("ds");
+  for (const d of datasets) {
+    const o = document.createElement("option"); o.value = d.key; o.textContent = d.display; sel.appendChild(o);
+  }
+  // Deep link: #ds=<key>&pos=<n> (1-based task number, as shown in the header).
+  const h = new URLSearchParams(location.hash.slice(1));
+  const saved = h.get("ds") || store.get("ds");
+  if (saved && datasets.some((d) => d.key === saved)) sel.value = saved;
+  const n = parseInt(h.get("pos"), 10);
+  await load(n > 0 ? n - 1 : undefined);
+})().catch((e) => { document.body.innerHTML = `<p style="padding:16px">Cannot reach the server: ${esc(String(e.message || e))}</p>`; });
+</script>
+</body>
+</html>

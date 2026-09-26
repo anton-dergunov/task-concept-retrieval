@@ -16,7 +16,7 @@ This is **open-vocabulary retrieval + a decision to abstain**, not classificatio
 
 - **Corpus:** ~4,257 icons, each with a rich generated description (see schema below). Fixed,
   known in advance, embeddable offline.
-- **Query:** an arbitrary task title (+ tags), unseen vocabulary, any language.
+- **Query:** an arbitrary task title (optionally + body), unseen vocabulary, any language.
 - **Output:** the single best icon **or `None`**. Because the agenda auto-shows the top-1, a wrong
   icon is actively harmful — worse than showing nothing. So the system must **retrieve then
   decide** (rank candidates, then gate on confidence). This abstention requirement is treated as a
@@ -53,8 +53,10 @@ and to render/identify the icon, never as a matching feature.)
 
 ## 2. Query representation: what we feed the matcher
 
-**Decision: the normalized task title + its org tags.** The body/description is a *separate optional
-experiment*, not the default (most agenda tasks have no body, and bodies add noise and latency).
+**Decision: the normalized task title.** The body is a *first-class experiment* rather than the
+default: 96% of the user's real tasks have a body (median ~90 chars, p90 ~560), but the public
+realistic samples almost never do, and bodies add noise and latency. Tags are **not** matched on:
+they say *when/where* a task can be done (`:online:`, `:tablet:`, `:easy:`), not what it is about.
 Scheduling/timestamps are dropped — they carry no semantic signal for the icon.
 
 We keep the representation **system-agnostic** (a unified plain-text query) so the approach
@@ -62,8 +64,8 @@ transfers to non-org task systems later. The normalization pipeline:
 
 1. **Strip the TODO state and priority.** Remove leading keywords (`TODO`, `NEXT`, `INPR`, `WAIT`,
    `MAYB`, `DONE`, …) and priority cookies (`[#A]`, `[#B]`, `[#C]`).
-2. **Split off tags.** Parse trailing `:tag1:tag2:` and treat tags as a separate field appended to
-   the query text (they are short topic labels, e.g. `:career:planning:`).
+2. **Split off tags.** Parse trailing `:tag1:tag2:` and keep them aside as metadata (datasets store
+   them in `meta.tags`); they never enter the query text.
 3. **Drop scheduling lines** (`SCHEDULED:`, `DEADLINE:`, `CLOSED:`, `Started:`) and timestamps.
 4. **Normalize links — protocol-agnostic, not Obsidian-specific.** Keep the human-readable text,
    drop the machinery:
@@ -134,7 +136,7 @@ would look artificially good). They are **never** used as the held-out evaluatio
 | Source | What we extract | Role |
 |---|---|---|
 | **Vendored `samples/realistic`** | The existing ~22 org files / ~300 tasks, copied into `data/eval/realistic/` as a raw snapshot + parsed `tasks.jsonl` | In-domain held-out (small, trusted) |
-| **Anonymized personal extraction** | De-identified titles+tags abstracted from the user's ~2,000 real tasks | **Primary in-domain corpus** (realistic distribution) |
+| **Anonymized personal extraction** | Synthetic tasks generated from abstracted topics of the user's ~2,950 real tasks | **Primary in-domain corpus** (realistic distribution) |
 | **wikiHow goal-step** (`tasksource/goal-step-wikihow`) | ~187k *goal* titles ("How to X" → imperative tasks) | Generic breadth, realistic phrasings |
 | **Google Taskmaster-1/2/3** (`google-research-datasets/taskmaster{1,2,3}`) | User goals / action items across restaurants, food, movies, hotels, flights, music, sports | Generic, domain variety |
 | **SNIPS / ATIS / CLINC150** | Short imperative intent/reminder utterances | Generic, reminder-style phrasings |
@@ -149,17 +151,13 @@ would look artificially good). They are **never** used as the held-out evaluatio
 
 ### 5.2 Privacy-preserving personal extraction (primary realistic source)
 
-The user has ~2,000 real personal tasks (in a separate directory, never copied here raw). We run an
-LLM **anonymization / abstraction pass** that:
-
-- strips PII — names, employers, places, account numbers, project codenames, anything identifying;
-- rephrases each task into a **generic-but-faithful** title (+ generic tags), preserving the
-  *concept* (what icon it implies) while discarding specifics;
-- emits only de-identified output.
-
-This is gated by a **manual review** before anything is committed. The raw personal tasks never
-enter the repo. The result is the highest-value **in-domain** corpus because it matches the real
-task distribution the system will face.
+The user has ~2,950 real personal tasks. They are extracted to `data/private/personal.jsonl`
+(gitignored) and labelled privately as the **primary in-domain eval set** — the raw tasks never
+enter the repo. A separate public **Personal-synth** set is *generated*, not rewritten: tasks are
+produced from abstracted topic skeletons of clustered private tasks plus aggregate style statistics,
+then pass automated leakage gates, a canary audit, an LLM attribute-inference attacker and a manual
+review before anything is committed. Per-item rewriting was rejected because a rewritten personal
+list still leaks through quasi-identifiers. Protocol and literature: `design/anonymization.md`.
 
 ### 5.3 LLM choice per task (a decision rule, not one global model)
 
@@ -237,24 +235,36 @@ committee of retrieval **methods**. For each (task, candidate):
 
 The committee is itself a CV-worthy artifact (ensemble judging + disagreement-driven labelling).
 
-### 6.4 iPad labelling tool (gold labels)
+### 6.4 Labelling tool (gold labels) — implemented in `labeller/`
 
-A **FastAPI server + lightweight browser UI** for relaxed, sofa-friendly labelling on an iPad over a
-tunnel (e.g. tailscale/ngrok):
+A **stdlib-only Python 3.8 server + single-page UI** (`labeller/server.py`, `labeller/index.html`),
+hosted on the NAS and reached over Tailscale from a phone, iPad or desktop. Candidates are
+precomputed on the Mac (`scripts/build_label_bundle.py`), so the server needs no ML dependencies.
 
-- shows a task and a **grid of candidate icons** (rendered PNGs from `data/icons/`);
-- tap to rate each: **best / good / bad / no good icon** (the last is essential for abstention);
-- stores to SQLite/JSONL.
+- Shows one task (title + collapsible body, org markup rendered) and a **grid of 30 icons**, with
+  no icon names or descriptions (the end user only ever sees the glyph).
+- **Graded, ranked labels:** tap icons in preference order (1, 2, 3, … unbounded); tap again to
+  deselect. Explicit **"No good icon"** (a negative for the abstention gate), "skip" (unsure),
+  and "flag" (exclude the task) are distinct statuses.
+- **Search-augmented:** a BM25 search box over icon *descriptions* (Unicode tokens, light
+  stemming, prefix completion of the word being typed) pulls in icons the matchers missed.
+- **Storage:** append-only JSONL event log per dataset (`labels/<dataset>.jsonl`, latest record
+  per task wins), saved on every tap, so a device switch or a closed tab loses nothing.
 
-Candidate generation = **union of top-k from several methods** (diverse), so the labels are not
-biased toward one model's view.
+**Bias control, by design:**
 
-**Search-augmented labelling (explicit user requirement).** When the auto-retrieved candidates are
-poor, the user can pick up the keyboard and type a query into a **search box** in the UI; an
-on-device search (lexical / ripgrep-style over descriptions, or any registered method via the POC's
-`search` engine) pulls **additional** candidate icons into the grid to judge, on top of the
-retrieved set. This both rescues bad shortlists and captures gold labels for icons the automatic
-methods missed.
+- *Pool bias* (as in TREC pooling): candidates are a round-robin **union of several matchers**
+  (M3 on the title; M1, M2 and B1 on title + body) plus **6 uniformly random icons**. The random
+  icons are a control: how often a random icon gets chosen estimates how much the pool misses.
+  Every label records each icon's provenance (`M3@2`, `random`, `search`), so per-method
+  recall-of-pool can be measured, and search-added picks show where all methods failed.
+- *Position bias:* the grid is **shuffled per task** (seeded by the task id, so every device
+  shows the same order), and the displayed order is logged with each label. Click probability
+  vs. grid position can then be estimated as in unbiased learning-to-rank (Joachims et al. 2017).
+- *Sampling bias:* tasks are served in a fixed pseudo-random order (hash of the id), so **any
+  labelled prefix is a uniform random sample** of the dataset. Metrics are valid at any point
+  during the multi-day labelling effort, and adding tasks later does not reshuffle.
+- *Anchoring on the description:* the icon descriptions are never shown; only the glyph is.
 
 ### 6.5 Active learning
 

@@ -15,11 +15,12 @@ from rank_bm25 import BM25Okapi
 from ..data import IconDoc
 from .base import Matcher, Ranked
 
-_TOKEN_RE = re.compile(r"[A-Za-z0-9]+")
+# Unicode word tokens, so accented Spanish and Cyrillic survive (underscore excluded).
+_TOKEN_RE = re.compile(r"[^\W_]+")
 
 
 def _tokenize(text: str) -> List[str]:
-    return _TOKEN_RE.findall(text.lower())
+    return _TOKEN_RE.findall(text.casefold())
 
 
 class BM25Matcher(Matcher):

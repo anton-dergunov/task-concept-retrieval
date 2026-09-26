@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""Vendor the realistic sample org files into this repo for a self-contained,
-reproducible eval, and emit a parsed tasks.jsonl.
+"""Vendor the realistic sample org files into this repo and build the
+"Realistic" task dataset (D2) from them.
 
 Source (read-only): productivity-system/samples/realistic/**/*.org
-Dest: data/eval/realistic/  (raw .org snapshot, committed)
-      data/eval/realistic_tasks.jsonl  (parsed; gitignored, regenerable)
+Dest: data/eval/realistic/          raw .org snapshot (committed), mirrors the source
+      data/datasets/realistic.jsonl  parsed tasks, shared dataset schema (committed)
 
-The source is already generated/non-personal data, so it is copied verbatim.
+The source is generated, non-personal data, so it is copied verbatim. Files the
+agenda ignores (init/workspace, Journal/, …) are copied but not parsed.
 Run: python scripts/vendor_samples.py [--src <path>]
 """
 
 from __future__ import annotations
 
 import argparse
-import json
 import shutil
 import sys
 from pathlib import Path
@@ -21,11 +21,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from tcr.org_query import iter_tasks  # noqa: E402
+from tcr.datasets import DATASETS, write_jsonl  # noqa: E402
+from tcr.org_tasks import iter_org_files, parse_org_tasks, to_records  # noqa: E402
 
 DEFAULT_SRC = Path("/Users/anton/projects/products/productivity-system/samples/realistic")
 DEST_DIR = ROOT / "data" / "eval" / "realistic"
-JSONL = ROOT / "data" / "eval" / "realistic_tasks.jsonl"
 
 
 def main() -> None:
@@ -36,28 +36,23 @@ def main() -> None:
     if not args.src.exists():
         raise SystemExit(f"source not found: {args.src}")
 
-    DEST_DIR.mkdir(parents=True, exist_ok=True)
+    # Mirror the source exactly: drop files from an older layout first.
+    if DEST_DIR.exists():
+        shutil.rmtree(DEST_DIR)
     org_files = sorted(args.src.rglob("*.org"))
-    copied = 0
     for f in org_files:
-        rel = f.relative_to(args.src)
-        dest = DEST_DIR / rel
+        dest = DEST_DIR / f.relative_to(args.src)
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(f, dest)
-        copied += 1
 
-    n_tasks = 0
-    with open(JSONL, "w", encoding="utf-8") as out:
-        for f in sorted(DEST_DIR.rglob("*.org")):
-            text = f.read_text(encoding="utf-8")
-            for q in iter_tasks(text):
-                rec = {"file": str(f.relative_to(DEST_DIR)),
-                       "title": q.title, "tags": q.tags, "text": q.text}
-                out.write(json.dumps(rec, ensure_ascii=False) + "\n")
-                n_tasks += 1
+    ds = DATASETS["realistic"]
+    tasks = []
+    for f in iter_org_files(DEST_DIR):
+        tasks.extend(parse_org_tasks(f.read_text(encoding="utf-8")))
+    n = write_jsonl(ds.path, to_records(tasks, ds.key, ds.id_prefix))
 
-    print(f"Copied {copied} org files -> {DEST_DIR}")
-    print(f"Parsed {n_tasks} tasks -> {JSONL}")
+    print(f"Copied {len(org_files)} org files -> {DEST_DIR}")
+    print(f"Parsed {len(tasks)} tasks -> {n} unique -> {ds.path}")
 
 
 if __name__ == "__main__":

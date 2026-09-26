@@ -3,8 +3,10 @@
 A heading is a *task* only if it carries a TODO-type keyword. Bare headings are
 projects/sections and are skipped (they never appear in the agenda).
 
-Normalization keeps the representation system-agnostic plain text:
-title + tags, markup and links cleaned up. See design/experimentation-strategy.md §2.
+Normalization keeps the representation system-agnostic plain text: the title
+with markup and links cleaned up. Tags are kept aside but not matched on — they
+say *when/where* a task can be done, not what it is about.
+See design/experimentation-strategy.md §2.
 """
 
 from __future__ import annotations
@@ -38,17 +40,13 @@ _EMPHASIS_RE = re.compile(r"(?<![\w])([*/_=~+])(\S(?:.*?\S)?)\1(?![\w])")
 @dataclass
 class Query:
     title: str          # cleaned heading text (no tags)
-    tags: List[str]     # org tags
-    text: str           # title + tags joined — what the matcher consumes
+    tags: List[str]     # org tags (context only; not part of `text`)
+    text: str           # what the matcher consumes
 
     @classmethod
     def from_text(cls, raw: str, tags: Optional[List[str]] = None) -> "Query":
-        tags = tags or []
         title = normalize_text(raw)
-        joined = title
-        if tags:
-            joined = f"{title} ({', '.join(tags)})" if title else ", ".join(tags)
-        return cls(title=title, tags=tags, text=joined)
+        return cls(title=title, tags=tags or [], text=title)
 
 
 def _readable_from_target(target: str) -> str:
