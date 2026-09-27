@@ -5,15 +5,17 @@ Runs here (needs tcr + its ML deps); the NAS only needs the output + stdlib.
 
 labeller/bundle/  (gitignored — includes private tasks)
   datasets.json          [{key, display}] in registry order
-  tasks/<key>.jsonl      {id, title, body, lang, alts, icons[30], prov{icon: ["M3@1", …]}}
+  tasks/<key>.jsonl      {id, title, body, lang, alts, icons[30], more[70], prov{icon: ["M3@1", …]}}
                          alts = the title in the other languages of a translated item
   icons/<name>.png       non-discarded icons only
   search_index.json      {name: description text} for the lexical search box
 
 Candidates per task: a round-robin union of several matchers' rankings (diverse
 pool) plus uniformly random icons (a control for pool bias), shuffled with a
-per-task seed so every device shows the same grid. Existing candidates are
-reused on rebuild so a grid never changes under the labeller (--refresh to redo).
+per-task seed so every device shows the same grid. "More icons" extends it to
+~100 with the matchers' next-best icons and more random ones. Icons are distinct
+glyphs (aliases collapsed in tcr.data). Existing grids are reused on rebuild so
+what the labeller saw never changes (--refresh to redo).
 
 Run: python scripts/build_label_bundle.py [--datasets personal,realistic] [--refresh]
 """
@@ -42,17 +44,11 @@ BUNDLE = ROOT / "labeller" / "bundle"
 
 # (method, query uses body?) — the pool sources, in round-robin order.
 SOURCES = [("M3", False), ("M1", True), ("M2", True), ("B1", True)]
-N_METHOD = 24   # icons drawn from the matchers
-N_RANDOM = 6    # uniformly random icons
-DEPTH = 30      # how deep to read each matcher's ranking
-
-
-def blank_icons(names):
-    """Icons whose rendered PNG has no ink (a render failure): unlabelable, so never shown."""
-    import numpy as np
-    from PIL import Image
-    return {n for n in names
-            if not (np.asarray(Image.open(config.ICON_PNG_DIR / f"{n}.png").convert("L")) < 128).any()}
+N_METHOD = 24       # first grid: icons drawn from the matchers …
+N_RANDOM = 6        # … plus uniformly random icons (30 in total)
+N_MORE_METHOD = 56  # "More icons": the matchers' next-best icons …
+N_MORE_RANDOM = 14  # … plus more random ones (70 more, ~100 in total)
+DEPTH = 120         # how deep to read each matcher's ranking
 
 
 def _seed(*parts: str) -> int:
@@ -71,32 +67,46 @@ def alt_titles(rec):
     return out
 
 
-def candidates(rec, matchers, all_names):
+def rankings(rec, matchers):
     title, body = rec["title"], rec.get("body", "")
-    rankings = []
-    for key, with_body in SOURCES:
-        q = query_text(title, body, with_body=with_body)
-        rankings.append((key, [n for n, _ in matchers[key].rank(q, top_k=DEPTH)]))
+    return [(key, [n for n, _ in matchers[key].rank(query_text(title, body, with_body=wb), top_k=DEPTH)])
+            for key, wb in SOURCES]
 
-    prov = {}
-    picked = []
+
+def round_robin(ranked_lists, exclude, n):
+    """Interleave the matchers' rankings (rank 1 of each, then rank 2, …), skipping
+    `exclude`, until n unique icons. Provenance lists every method rank of each pick."""
+    prov, picked = {}, []
     for depth in range(DEPTH):
-        for key, ranked in rankings:
-            if depth < len(ranked):
-                name = ranked[depth]
-                prov.setdefault(name, []).append(f"{key}@{depth + 1}")
-                if name not in picked and len(picked) < N_METHOD:
-                    picked.append(name)
-    # prov lists every method that ranked a picked icon within DEPTH (pool analysis).
-    prov = {n: prov[n] for n in picked}
+        for key, ranked in ranked_lists:
+            if depth < len(ranked) and ranked[depth] not in exclude:
+                prov.setdefault(ranked[depth], []).append(f"{key}@{depth + 1}")
+                if ranked[depth] not in picked and len(picked) < n:
+                    picked.append(ranked[depth])
+    return picked, {n_: prov[n_] for n_ in picked}
 
-    rng = random.Random(_seed("cands", rec["id"]))
-    pool = [n for n in all_names if n not in prov]
-    for name in rng.sample(pool, N_RANDOM):
+
+def add_random(picked, prov, all_names, exclude, n, rng):
+    pool = [n_ for n_ in all_names if n_ not in prov and n_ not in exclude]
+    for name in rng.sample(pool, n):
         picked.append(name)
         prov[name] = ["random"]
     rng.shuffle(picked)
     return picked, prov
+
+
+def first_grid(ranked_lists, rec, all_names):
+    picked, prov = round_robin(ranked_lists, set(), N_METHOD)
+    return add_random(picked, prov, all_names, set(), N_RANDOM,
+                      random.Random(_seed("cands", rec["id"])))
+
+
+def more_grid(ranked_lists, rec, all_names, first):
+    """The matchers' next-best icons after the first grid, plus fresh random ones."""
+    shown = set(first)
+    picked, prov = round_robin(ranked_lists, shown, N_MORE_METHOD)
+    return add_random(picked, prov, all_names, shown, N_MORE_RANDOM,
+                      random.Random(_seed("more", rec["id"])))
 
 
 def main() -> None:
@@ -110,12 +120,10 @@ def main() -> None:
         keys = args.datasets.split(",")
         dsets = [DATASETS[k] for k in keys]
 
-    icons = load_icons()
-    blank = blank_icons([ic.name for ic in icons])
-    icons = tuple(ic for ic in icons if ic.name not in blank)
+    icons = load_icons()   # non-discarded, one per distinct glyph, no blank renders
     all_names = [ic.name for ic in icons]
-    print(f"{len(icons)} non-discarded icons ({len(blank)} blank renders skipped: {sorted(blank)}); "
-          f"building matchers {[k for k, _ in SOURCES]} …")
+    names = set(all_names)
+    print(f"{len(icons)} distinct icons; building matchers {[k for k, _ in SOURCES]} …")
     matchers = {key: build_method(key, icons) for key, _ in SOURCES}
 
     (BUNDLE / "tasks").mkdir(parents=True, exist_ok=True)
@@ -126,15 +134,24 @@ def main() -> None:
             old = {r["id"]: r for r in read_jsonl(out)}
         rows, reused, t0 = [], 0, time.time()
         for i, rec in enumerate(read_jsonl(ds.path)):
-            if rec["id"] in old and not blank & set(old[rec["id"]]["icons"]):
-                prev = old[rec["id"]]
-                icons_, prov = prev["icons"], prev["prov"]
+            prev = old.get(rec["id"])
+            # A grid is kept as long as all its icons still exist, so what the labeller
+            # already saw never changes; "more" is added to old grids when missing.
+            if prev and set(prev["icons"]) <= names and set(prev.get("more", [])) <= names \
+                    and prev.get("more"):
+                icons_, prov, more = prev["icons"], prev["prov"], prev["more"]
                 reused += 1
             else:
-                icons_, prov = candidates(rec, matchers, all_names)
+                ranked = rankings(rec, matchers)
+                if prev and set(prev["icons"]) <= names:
+                    icons_, prov = prev["icons"], prev["prov"]
+                else:
+                    icons_, prov = first_grid(ranked, rec, all_names)
+                more, more_prov = more_grid(ranked, rec, all_names, icons_)
+                prov = {**prov, **more_prov}
             rows.append({"id": rec["id"], "title": rec["title"], "body": rec.get("body", ""),
                          "lang": rec.get("lang", "en"), "alts": alt_titles(rec),
-                         "icons": icons_, "prov": prov})
+                         "icons": icons_, "more": more, "prov": prov})
             if (i + 1) % 250 == 0:
                 print(f"  {ds.key}: {i + 1} tasks ({time.time() - t0:.0f}s)")
         write_jsonl(out, rows)

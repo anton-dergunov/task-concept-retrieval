@@ -45,11 +45,11 @@ from tcr.llm import batched, complete_json  # noqa: E402
 from tcr.org_tasks import query_text  # noqa: E402
 from tcr.privacy import LeakageGate, js_divergence, nn_sims  # noqa: E402
 
-from build_public_expanded import MARKUP, SHAPES, weighted  # noqa: E402
+from build_public_expanded import MARKUP, SHAPES, SPEC_CODES, weighted  # noqa: E402
 from extract_personal import style_stats  # noqa: E402
 
 WORK = config.PRIVATE_DIR / "synth"
-CANDIDATES = DATASETS["personal_synth"].path          # data/private/personal_synth.jsonl
+CANDIDATES = config.PRIVATE_DIR / "personal_synth.jsonl"   # unreviewed; never committed
 PUBLIC_OUT = config.DATASETS_DIR / "personal_synth.jsonl"
 EXEMPLARS = config.DATASETS_DIR / "style_exemplars.jsonl"
 STYLE_STATS = config.PRIVATE_DIR / "style_stats.json"
@@ -345,7 +345,8 @@ def apply_gates(generated, private, emb, canaries, targets):
         per_c[g["cluster"]] += 1
         out.append({"id": f"syn-{key}", "dataset": "personal_synth", "title": g["title"],
                     "body": g["body"], "lang": "en",
-                    "meta": {"cluster": g["cluster"], "shape": g["shape"], "markup": g["markup"],
+                    "meta": {"cluster": g["cluster"], "shape": SPEC_CODES[g["shape"]],
+                             "markup": SPEC_CODES[g["markup"]],
                              "gen_model": g["gen_model"]}})
     stats = {"generated": len(seen), "rejected": len(rejected), "kept": len(out), "tau": gate.tau,
              "fired": dict(report), "rare_vocab": len(gate.rare), "private_grams": len(gate.grams)}
@@ -513,6 +514,7 @@ def write_audit_md(metrics, results) -> None:
 def cmd_publish(args) -> None:
     if not AUDIT_MD.exists():
         raise SystemExit("run `audit` first")
+    # Labels made while the set was still private, if any.
     labels_path = config.PRIVATE_DIR / "labels" / "personal_synth.jsonl"
     flagged = set()
     if labels_path.exists():

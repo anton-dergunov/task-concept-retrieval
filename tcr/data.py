@@ -67,11 +67,47 @@ def _catalog_index() -> Dict[str, dict]:
     return {entry["name"]: entry for entry in catalog}
 
 
-@lru_cache(maxsize=2)
-def load_icons(include_discarded: bool = False) -> tuple:
+@lru_cache(maxsize=1)
+def glyph_hashes() -> Dict[str, Optional[str]]:
+    """Pixel hash of every rendered icon; None for a blank render (no ink).
+
+    Material Symbols has many aliases (e.g. `alarm` / `access_alarm`) that draw the
+    exact same glyph; to the person looking at the agenda they are one icon.
+    """
+    import hashlib
+
+    import numpy as np
+    from PIL import Image
+    out: Dict[str, Optional[str]] = {}
+    for path in sorted(config.ICON_PNG_DIR.glob("*.png")):
+        a = np.asarray(Image.open(path).convert("L"))
+        out[path.stem] = hashlib.sha1(a.tobytes()).hexdigest() if (a < 128).any() else None
+    return out
+
+
+def _dedupe_glyphs(icons: List["IconDoc"]) -> List["IconDoc"]:
+    """Keep one icon per distinct glyph (highest usefulness, then popularity, then
+    shortest name) and drop blank renders."""
+    hashes = glyph_hashes()
+    best: Dict[str, IconDoc] = {}
+    for ic in icons:
+        h = hashes.get(ic.name)
+        if h is None:
+            continue
+        cur = best.get(h)
+        key = (ic.usefulness, ic.popularity, -len(ic.name))
+        if cur is None or key > (cur.usefulness, cur.popularity, -len(cur.name)):
+            best[h] = ic
+    keep = {ic.name for ic in best.values()}
+    return [ic for ic in icons if ic.name in keep]
+
+
+@lru_cache(maxsize=4)
+def load_icons(include_discarded: bool = False, dedupe: bool = True) -> tuple:
     """Return a tuple of IconDoc (tuple so it is hashable/cacheable).
 
-    Drops icons with discard=true unless include_discarded=True.
+    Drops icons with discard=true unless include_discarded=True, and (by default)
+    collapses glyph aliases and blank renders so every icon looks distinct.
     """
     cat = _catalog_index()
     icons: List[IconDoc] = []
@@ -95,7 +131,7 @@ def load_icons(include_discarded: bool = False) -> tuple:
                 reasoning=str(d.get("reasoning", "") or ""),
             )
         )
-    return tuple(icons)
+    return tuple(_dedupe_glyphs(icons) if dedupe else icons)
 
 
 def icons_by_name(include_discarded: bool = False) -> Dict[str, IconDoc]:

@@ -30,6 +30,13 @@ TOKEN_RE = re.compile(r"[^\W_]+")
 STATUSES = {"labelled", "none", "skip", "flagged", "cleared"}
 DONE = {"labelled", "none", "skip", "flagged"}  # "cleared" = selection undone
 ORDER_SEED = "labeller-order-v1"
+PWA_FILES = {
+    "manifest.webmanifest": ("application/manifest+json", "no-cache"),
+    "sw.js": ("text/javascript; charset=utf-8", "no-cache"),
+    "app-icon-192.png": ("image/png", "public, max-age=86400"),
+    "app-icon-512.png": ("image/png", "public, max-age=86400"),
+    "apple-touch-icon.png": ("image/png", "public, max-age=86400"),
+}
 
 
 def read_jsonl(path: Path) -> List[dict]:
@@ -161,8 +168,9 @@ class Store:
         return {"dataset": key, "pos": pos, "total": s["total"], "done": s["done"],
                 "task": {"id": t["id"], "title": t["title"], "body": t["body"], "lang": t["lang"],
                          "alts": t.get("alts", [])},
-                "icons": t["icons"],
-                "label": None if rec is None else {"status": rec["status"], "ranking": rec["ranking"]}}
+                "icons": t["icons"], "more": t.get("more", []),
+                "label": None if rec is None else {"status": rec["status"], "ranking": rec["ranking"],
+                                                   "expanded": rec.get("expanded", False)}}
 
     def save(self, payload: dict) -> dict:
         key = payload["dataset"]
@@ -174,13 +182,16 @@ class Store:
         if status not in STATUSES:
             raise ValueError("bad status")
         ranking = [n for n in payload.get("ranking", []) if isinstance(n, str) and NAME_RE.match(n)]
+        expanded = bool(payload.get("expanded"))
+        shown = task["icons"] + (task.get("more", []) if expanded else [])
         rec = {
             "task_id": tid,
             "status": status,
             "ranking": ranking,
-            "shown": task["icons"],                    # grid as displayed (shuffled order)
-            "prov": {n: task["prov"].get(n, ["search"]) for n in set(ranking) | set(task["icons"])},
-            "search_added": [n for n in ranking if n not in task["icons"]],
+            "expanded": expanded,                     # "More icons" was opened
+            "shown": shown,                           # grid as displayed (shuffled order)
+            "prov": {n: task["prov"].get(n, ["search"]) for n in set(ranking) | set(shown)},
+            "search_added": [n for n in ranking if n not in shown],
             "queries": payload.get("queries", [])[:50],
             "ms_spent": int(payload.get("ms_spent", 0)),
             "ts": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
@@ -223,6 +234,13 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         url = urlparse(self.path)
         qs = parse_qs(url.query)
+        # App shell for installing to the home screen: public (the manifest is fetched
+        # without cookies) and free of any task data.
+        if url.path.lstrip("/") in PWA_FILES:
+            name = url.path.lstrip("/")
+            ctype, cache = PWA_FILES[name]
+            return self._send(200, (HERE / "pwa" / name).read_bytes(), ctype,
+                              {"Cache-Control": cache})
         if not self._authorized(qs):
             return self._send(403, b"forbidden: open /?token=...", "text/plain")
         path = url.path

@@ -6,11 +6,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#ffffff">
 <title>Icon labelling</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="app-icon-192.png">
 <style>
 :root {
   --bg: #ffffff; --fg: #1d1d1f; --muted: #6e6e73; --line: #e5e5ea; --tile: #ffffff;
   --accent: #0a66d8; --accent-fg: #ffffff; --chip: #f2f2f7; --icon-filter: none;
-  --cell: 52px; --gap: 6px;
+  --cell: 52px; --gap: 6px; --title: 20px; --text: 17px;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -18,7 +21,7 @@
     --accent: #4c9dff; --accent-fg: #0b0b0c; --chip: #242426; --icon-filter: invert(1);
   }
 }
-@media (min-width: 700px) { :root { --cell: 76px; --gap: 10px; } }
+@media (min-width: 700px) { :root { --cell: 76px; --gap: 10px; --title: 25px; --text: 19px; } }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
   font: 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -44,13 +47,13 @@ header select { font: inherit; font-weight: 600; color: var(--fg); background: n
 #task { flex: none; max-height: 34dvh; overflow-y: auto; padding: 12px 16px 10px;
   border-bottom: 1px solid var(--line); }
 #task.expanded { max-height: 58dvh; }
-#title { font-size: 18px; font-weight: 650; margin: 0 0 6px; overflow-wrap: anywhere; }
-#alts { margin: -2px 0 6px; font-size: 15px; color: var(--muted); }
+#title { font-size: var(--title); line-height: 1.3; font-weight: 650; margin: 0 0 6px; overflow-wrap: anywhere; }
+#alts { margin: -2px 0 6px; font-size: calc(var(--text) - 1px); color: var(--muted); }
 #alts div { overflow-wrap: anywhere; }
 #alts b { font-size: 11px; font-weight: 700; letter-spacing: .04em; margin-right: 6px; }
 #flagBtn { font-size: 17px; line-height: 1; padding: 2px 4px; color: var(--muted); }
 #flagBtn.on { color: #d70015; }
-#body { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px; color: var(--fg); }
+#body { white-space: pre-wrap; overflow-wrap: anywhere; font-size: var(--text); line-height: 1.45; color: var(--fg); }
 #body.clamp { max-height: 6.9em; overflow: hidden;
   -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
 #more { color: var(--accent); font-size: 14px; margin-top: 4px; display: none; }
@@ -74,6 +77,8 @@ header select { font: inherit; font-weight: 600; color: var(--fg); background: n
   border-radius: 11px; background: var(--accent); color: var(--accent-fg); font-size: 13px; font-weight: 700;
   display: none; align-items: center; justify-content: center; }
 .tile.sel .badge { display: flex; }
+#moreBtn { grid-column: 1 / -1; padding: 12px; border-radius: 12px; background: var(--chip);
+  color: var(--accent); font-weight: 600; }
 #empty { grid-column: 1 / -1; color: var(--muted); text-align: center; padding: 24px 0; }
 
 footer { flex: none; display: flex; gap: 8px; padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
@@ -133,6 +138,7 @@ let queries = [];
 let results = null;  // search results, or null when showing candidates
 let shownAt = 0;
 let saveTimer = null;
+let expanded = false; // "More icons" opened for this task
 
 function toast(msg) {
   const t = $("toast"); t.textContent = msg; t.classList.add("show");
@@ -206,8 +212,9 @@ function renderTask() {
 }
 function renderGrid() {
   const grid = $("grid");
+  const base = expanded ? cur.icons.concat(cur.more || []) : cur.icons;
   const names = results !== null ? results
-    : cur.icons.concat(ranking.filter((n) => !cur.icons.includes(n)));
+    : base.concat(ranking.filter((n) => !base.includes(n)));
   grid.innerHTML = "";
   if (!names.length) {
     grid.innerHTML = `<div id="empty">${results !== null ? "No icons match" : ""}</div>`;
@@ -220,8 +227,18 @@ function renderGrid() {
     b.innerHTML = `<img src="icons/${n}.png" alt="" draggable="false" decoding="async"><span class="badge"></span>`;
     frag.appendChild(b);
   }
+  if (results === null && !expanded && (cur.more || []).length) {
+    const m = document.createElement("button");
+    m.id = "moreBtn"; m.textContent = `More icons (+${cur.more.length})`;
+    frag.appendChild(m);
+  }
   grid.appendChild(frag);
   paintSelection();
+}
+function showMore() {
+  expanded = true;
+  renderGrid();
+  if (status !== null) scheduleSave();  // record that the wider grid was seen
 }
 function paintSelection() {
   for (const b of $("grid").children) {
@@ -237,18 +254,20 @@ async function load(pos) {
   const q = pos === undefined || pos === null ? "" : `&pos=${pos}`;
   cur = await api(`api/task?dataset=${encodeURIComponent(cur ? cur.dataset : $("ds").value)}${q}`);
   ranking = cur.label ? cur.label.ranking.slice() : [];
+  expanded = !!(cur.label && cur.label.expanded);
   status = cur.label ? cur.label.status : null;
   queries = []; results = null; $("q").value = ""; $("clear").style.display = "none";
   shownAt = Date.now();
   renderHeader(); renderTask(); renderGrid();
   $("grid").scrollTop = 0;
-  prefetch(cur.pos + 1);
+  for (let k = 1; k <= 3; k++) prefetch(cur.pos + k);
 }
 async function prefetch(pos) {
   if (pos >= cur.total) return;
   try {
     const nxt = await api(`api/task?dataset=${encodeURIComponent(cur.dataset)}&pos=${pos}`);
-    for (const n of nxt.icons) { const i = new Image(); i.src = `icons/${n}.png`; }
+    // fetch() goes through the service worker, which keeps the glyphs on the device.
+    for (const n of nxt.icons) fetch(`icons/${n}.png`).catch(() => {});
   } catch (e) {}
 }
 function scheduleSave() { clearTimeout(saveTimer); saveTimer = setTimeout(save, 350); }
@@ -257,7 +276,7 @@ async function save() {
   saveTimer = null;
   if (!cur || status === null) return;
   const snapshot = { dataset: cur.dataset, task_id: cur.task.id, status, ranking: ranking.slice(),
-    queries: queries.slice(), ms_spent: Date.now() - shownAt,
+    queries: queries.slice(), expanded, ms_spent: Date.now() - shownAt,
     client: (navigator.userAgent.match(/iPad|iPhone|Android|Macintosh|Windows|Linux/) || [""])[0] };
   try {
     const s = await api("api/label", snapshot);
@@ -302,6 +321,7 @@ function clearSearch() { $("q").value = ""; onSearchInput(); }
 
 // --- wiring ---------------------------------------------------------------
 $("grid").addEventListener("click", (e) => {
+  if (e.target.closest("#moreBtn")) return showMore();
   const b = e.target.closest(".tile"); if (b) toggle(b.dataset.n);
 });
 $("next").onclick = next;
@@ -334,6 +354,10 @@ document.addEventListener("keydown", (e) => {
   else if (e.key === "/") { e.preventDefault(); $("q").focus(); }
 });
 document.addEventListener("visibilitychange", () => { if (document.hidden) flushSave(); });
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});  // needs HTTPS; optional
+}
 
 (async function init() {
   datasets = await api("api/datasets");

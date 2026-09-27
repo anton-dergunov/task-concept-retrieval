@@ -10,6 +10,9 @@ Synology NAS. Labels save on every tap, so you can close the page and continue o
   items (Public-*) show the title in all languages at once, so one label covers every version.
 - 30 candidate icons: 24 from several matchers (M3, M1, M2, B1) and 6 random ones, in a
   shuffled order. The order is fixed per task, so every device shows the same grid.
+  **More icons** at the end of the grid adds 70 more: the matchers' next-best icons and
+  another 14 random ones. Every icon is a distinct glyph; font aliases that draw the same
+  picture are collapsed.
 - **Tap** icons in order of preference: the badge shows the rank (1, 2, 3, …). **Tap again**
   to deselect; the remaining ranks renumber.
 - **Search** looks for icons by their descriptions (never by names). Icons you pick from
@@ -24,6 +27,13 @@ Synology NAS. Labels save on every tap, so you can close the page and continue o
   whatever you have labelled so far is always a uniform random sample.
 - Keys (desktop): ← / → to move between tasks, `/` to search, Esc to clear the search.
 - Deep link: `#ds=personal&pos=125`.
+
+## Install on the home screen
+
+Over HTTPS (Tailscale serve), use the browser's *Add to Home Screen* / *Install app*: the
+tool then opens full-screen like an app. Icons you've seen stay cached on the device, and
+the next three tasks' icons are fetched ahead, so moving on is instant. Over plain HTTP
+this caching and installing are unavailable, but everything else works.
 
 ## Build the bundle (on the Mac)
 
@@ -96,7 +106,8 @@ wins**. Each record contains:
 |---|---|
 | `status` | `labelled`, `none` (no good icon), `skip`, `flagged`, or `cleared` (selection undone) |
 | `ranking` | Selected icons, best first |
-| `shown` | The 30 candidates in the order displayed. Used to measure position bias (click position vs. rank) |
+| `expanded` | Whether "More icons" was opened |
+| `shown` | The candidates in the order displayed: 30, or ~100 when `expanded`. Used to measure position bias (click position vs. rank) |
 | `prov` | For each shown or selected icon: which matcher proposed it and at what rank, `random`, or `search`. Used to measure pool bias and per-method recall-of-pool |
 | `search_added` | Selected icons that came from search rather than the grid |
 | `queries` | Search strings used |

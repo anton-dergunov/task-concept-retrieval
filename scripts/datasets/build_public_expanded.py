@@ -65,6 +65,13 @@ MARKUP = [
 ]
 
 
+# Short codes stored in meta.shape / meta.markup (the prompt text above is for the LLM).
+SPEC_CODES = dict(zip([t for _, t in SHAPES],
+                      ["empty", "short", "medium", "long", "very_long", "list", "short_url"]))
+SPEC_CODES.update(zip([t for _, t in MARKUP],
+                      ["bold", "verbatim", "obsidian_link", "italic", "title_markup", "none"]))
+
+
 def weighted(rng, options):
     return rng.choices([o for _, o in options], weights=[w for w, _ in options])[0]
 
@@ -213,7 +220,8 @@ def main() -> None:
             "body": parallel[lang]["body"], "lang": lang,
             "meta": {"source": "mslatte", "source_id": r["meta"]["source_id"], "concept": r["title"],
                      "list": r["meta"]["list"], "place": r["meta"]["place"],
-                     "triage": scores[r["id"]], "shape": r["shape"], "markup": r["markup"],
+                     "triage": scores[r["id"]], "shape": SPEC_CODES[r["shape"]],
+                     "markup": SPEC_CODES[r["markup"]],
                      "parallel": parallel}})
     ds = DATASETS["public_expanded"]
     n = write_jsonl(ds.path, records)
