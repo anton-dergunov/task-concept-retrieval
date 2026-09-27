@@ -5,7 +5,8 @@ Runs here (needs tcr + its ML deps); the NAS only needs the output + stdlib.
 
 labeller/bundle/  (gitignored — includes private tasks)
   datasets.json          [{key, display}] in registry order
-  tasks/<key>.jsonl      {id, title, body, lang, icons[30], prov{icon: ["M3@1", …]}}
+  tasks/<key>.jsonl      {id, title, body, lang, alts, icons[30], prov{icon: ["M3@1", …]}}
+                         alts = the title in the other languages of a translated item
   icons/<name>.png       non-discarded icons only
   search_index.json      {name: description text} for the lexical search box
 
@@ -46,8 +47,28 @@ N_RANDOM = 6    # uniformly random icons
 DEPTH = 30      # how deep to read each matcher's ranking
 
 
+def blank_icons(names):
+    """Icons whose rendered PNG has no ink (a render failure): unlabelable, so never shown."""
+    import numpy as np
+    from PIL import Image
+    return {n for n in names
+            if not (np.asarray(Image.open(config.ICON_PNG_DIR / f"{n}.png").convert("L")) < 128).any()}
+
+
 def _seed(*parts: str) -> int:
     return int(hashlib.sha1("|".join(parts).encode("utf-8")).hexdigest()[:12], 16)
+
+
+def alt_titles(rec):
+    """Translations of the title (meta.parallel), shown together so one label covers all."""
+    par = rec.get("meta", {}).get("parallel") or {}
+    out = []
+    for lang in sorted(par):
+        if lang == rec.get("lang"):
+            continue
+        v = par[lang]
+        out.append({"lang": lang, "title": v["title"] if isinstance(v, dict) else v})
+    return out
 
 
 def candidates(rec, matchers, all_names):
@@ -90,8 +111,11 @@ def main() -> None:
         dsets = [DATASETS[k] for k in keys]
 
     icons = load_icons()
+    blank = blank_icons([ic.name for ic in icons])
+    icons = tuple(ic for ic in icons if ic.name not in blank)
     all_names = [ic.name for ic in icons]
-    print(f"{len(icons)} non-discarded icons; building matchers {[k for k, _ in SOURCES]} …")
+    print(f"{len(icons)} non-discarded icons ({len(blank)} blank renders skipped: {sorted(blank)}); "
+          f"building matchers {[k for k, _ in SOURCES]} …")
     matchers = {key: build_method(key, icons) for key, _ in SOURCES}
 
     (BUNDLE / "tasks").mkdir(parents=True, exist_ok=True)
@@ -102,14 +126,15 @@ def main() -> None:
             old = {r["id"]: r for r in read_jsonl(out)}
         rows, reused, t0 = [], 0, time.time()
         for i, rec in enumerate(read_jsonl(ds.path)):
-            if rec["id"] in old:
+            if rec["id"] in old and not blank & set(old[rec["id"]]["icons"]):
                 prev = old[rec["id"]]
                 icons_, prov = prev["icons"], prev["prov"]
                 reused += 1
             else:
                 icons_, prov = candidates(rec, matchers, all_names)
             rows.append({"id": rec["id"], "title": rec["title"], "body": rec.get("body", ""),
-                         "lang": rec.get("lang", "en"), "icons": icons_, "prov": prov})
+                         "lang": rec.get("lang", "en"), "alts": alt_titles(rec),
+                         "icons": icons_, "prov": prov})
             if (i + 1) % 250 == 0:
                 print(f"  {ds.key}: {i + 1} tasks ({time.time() - t0:.0f}s)")
         write_jsonl(out, rows)

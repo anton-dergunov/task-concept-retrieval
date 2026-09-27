@@ -1,0 +1,242 @@
+{
+  "config": {
+    "sample": 120,
+    "min_usefulness": 0.7,
+    "methods": [
+      "B0",
+      "B1",
+      "M1",
+      "M2",
+      "M3"
+    ],
+    "k": 10,
+    "seed": 0,
+    "multilingual_model": "intfloat/multilingual-e5-small",
+    "english_model": "BAAI/bge-small-en-v1.5",
+    "abstain_threshold": 3.6
+  },
+  "results": {
+    "B0": {
+      "precision_at_1": 0.03333333333333333,
+      "recall_at_10": 0.225,
+      "mrr": 0.08434854497354499,
+      "ndcg_at_10": 0.11746883146644899,
+      "gate_auroc": 0.8566,
+      "poor_match_suppression": 1.0,
+      "precision_at_coverage": {
+        "p@1_cov50": 0.0667,
+        "p@1_cov70": 0.0476,
+        "p@1_cov90": 0.037
+      },
+      "latency_p50_ms": 11.77,
+      "latency_p95_ms": 27.87,
+      "n_queries": 120
+    },
+    "B1": {
+      "precision_at_1": 0.058333333333333334,
+      "recall_at_10": 0.25833333333333336,
+      "mrr": 0.11492394179894178,
+      "ndcg_at_10": 0.14875874497806255,
+      "gate_auroc": 0.6092,
+      "poor_match_suppression": 1.0,
+      "precision_at_coverage": {
+        "p@1_cov50": 0.0833,
+        "p@1_cov70": 0.0595,
+        "p@1_cov90": 0.0648
+      },
+      "latency_p50_ms": 1.74,
+      "latency_p95_ms": 2.45,
+      "n_queries": 120
+    },
+    "M1": {
+      "precision_at_1": 0.058333333333333334,
+      "recall_at_10": 0.23333333333333334,
+      "mrr": 0.09482804232804232,
+      "ndcg_at_10": 0.12646009111692494,
+      "gate_auroc": 0.6291,
+      "poor_match_suppression": 1.0,
+      "precision_at_coverage": {
+        "p@1_cov50": 0.0667,
+        "p@1_cov70": 0.0714,
+        "p@1_cov90": 0.0648
+      },
+      "latency_p50_ms": 10.9,
+      "latency_p95_ms": 31.9,
+      "n_queries": 120
+    },
+    "M2": {
+      "precision_at_1": 0.0,
+      "recall_at_10": 0.058333333333333334,
+      "mrr": 0.01548611111111111,
+      "ndcg_at_10": 0.025635895266119098,
+      "gate_auroc": null,
+      "poor_match_suppression": 1.0,
+      "precision_at_coverage": {
+        "p@1_cov50": 0.0,
+        "p@1_cov70": 0.0,
+        "p@1_cov90": 0.0
+      },
+      "latency_p50_ms": 13.44,
+      "latency_p95_ms": 17.78,
+      "n_queries": 120
+    },
+    "M3": {
+      "precision_at_1": 0.06666666666666667,
+      "recall_at_10": 0.2833333333333333,
+      "mrr": 0.11832671957671954,
+      "ndcg_at_10": 0.15644715694103495,
+      "gate_auroc": 0.4899,
+      "poor_match_suppression": 1.0,
+      "precision_at_coverage": {
+        "p@1_cov50": 0.0833,
+        "p@1_cov70": 0.0595,
+        "p@1_cov90": 0.0556
+      },
+      "latency_p50_ms": 15.05,
+      "latency_p95_ms": 19.97,
+      "n_queries": 120
+    }
+  },
+  "multilingual_smoke": {
+    "M1": [
+      {
+        "query": "Caminar 8000 pasos al día",
+        "top": [
+          {
+            "name": "run_circle",
+            "score": 0.852
+          },
+          {
+            "name": "walk_bike",
+            "score": 0.85
+          },
+          {
+            "name": "directions_walk",
+            "score": 0.848
+          }
+        ]
+      },
+      {
+        "query": "Reservar cita con el dentista",
+        "top": [
+          {
+            "name": "oral_disease",
+            "score": 0.873
+          },
+          {
+            "name": "dentistry",
+            "score": 0.862
+          },
+          {
+            "name": "procedure",
+            "score": 0.861
+          }
+        ]
+      },
+      {
+        "query": "Купить продукты в магазине",
+        "top": [
+          {
+            "name": "grocery",
+            "score": 0.872
+          },
+          {
+            "name": "local_grocery_store",
+            "score": 0.87
+          },
+          {
+            "name": "shopping_bag",
+            "score": 0.865
+          }
+        ]
+      },
+      {
+        "query": "Прочитать главу книги",
+        "top": [
+          {
+            "name": "auto_stories",
+            "score": 0.848
+          },
+          {
+            "name": "book_ribbon",
+            "score": 0.844
+          },
+          {
+            "name": "book_6",
+            "score": 0.843
+          }
+        ]
+      }
+    ],
+    "M3": [
+      {
+        "query": "Caminar 8000 pasos al día",
+        "top": [
+          {
+            "name": "tools_installation_kit",
+            "score": 0.57
+          },
+          {
+            "name": "run_circle",
+            "score": 0.852
+          },
+          {
+            "name": "border_outer",
+            "score": 0.535
+          }
+        ]
+      },
+      {
+        "query": "Reservar cita con el dentista",
+        "top": [
+          {
+            "name": "explosion",
+            "score": 0.475
+          },
+          {
+            "name": "oral_disease",
+            "score": 0.873
+          },
+          {
+            "name": "prayer_times",
+            "score": 0.463
+          }
+        ]
+      },
+      {
+        "query": "Купить продукты в магазине",
+        "top": [
+          {
+            "name": "10k",
+            "score": 0.0
+          },
+          {
+            "name": "grocery",
+            "score": 0.872
+          },
+          {
+            "name": "photo_auto_merge",
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "query": "Прочитать главу книги",
+        "top": [
+          {
+            "name": "10k",
+            "score": 0.0
+          },
+          {
+            "name": "auto_stories",
+            "score": 0.848
+          },
+          {
+            "name": "photo_auto_merge",
+            "score": 0.0
+          }
+        ]
+      }
+    ]
+  }
+}

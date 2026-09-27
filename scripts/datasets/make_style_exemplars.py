@@ -31,11 +31,27 @@ from tcr.llm import complete_json  # noqa: E402
 OUT = config.DATASETS_DIR / "style_exemplars.jsonl"
 STYLE_STATS = config.PRIVATE_DIR / "style_stats.json"
 
-# Everyday areas for the exemplars; the prompt also forbids the reference topics.
-TOPICS = ["gardening", "cycling", "home repair", "cooking", "learning an instrument",
-          "astronomy", "car maintenance", "volunteering", "photography", "board games",
-          "birdwatching", "personal finance paperwork", "hiking trip planning",
-          "woodworking", "pet care", "local history"]
+# One slot per exemplar: an everyday topic (never the user's own) and a SHAPE, so the
+# few-shot set covers the whole range of the user's habits, not only the typical task.
+SLOTS = [
+    ("gardening", "en", "title only — the body is EMPTY"),
+    ("cycling", "en", "deliberately terse: 2–4 word title, one short body sentence"),
+    ("home repair", "en", "multi-line body: one lead sentence, then a '- ' bullet list of 3–5 items"),
+    ("cooking", "en", "title contains =verbatim= markup (e.g. a file or tool name)"),
+    ("learning an instrument", "en", "very long body, 1500–2200 characters, 2–4 paragraphs"),
+    ("astronomy", "en", "medium body ending with a bare URL alone on its last line"),
+    ("car maintenance", "en", "body with an org link that has a description: [[https://…][description]]"),
+    ("volunteering", "es", "written entirely in Spanish, medium body"),
+    ("photography", "ru", "written entirely in Russian, short body"),
+    ("board games", "en", "title contains *bold* markup on the key word"),
+    ("birdwatching", "en", "body uses /italic/ and ends with a [[obsidian:Note Title]] reference"),
+    ("personal finance paperwork", "en",
+     "body contains a small #+begin_src … #+end_src block (a shell command or a few lines of Python)"),
+    ("hiking trip planning", "en", "two short paragraphs separated by a blank line, with a bare URL"),
+    ("woodworking", "en", "title contains /italic/ markup; body uses =verbatim= for a measurement or part"),
+    ("pet care", "en", "short body with an [[obsidian:…]] link"),
+    ("local history", "en", "medium plain-prose body, no markup"),
+]
 
 SYSTEM = """You write fictional to-do tasks that imitate one person's WRITING STYLE while
 sharing none of their CONTENT. The reference tasks are private: never reuse their topics,
@@ -86,58 +102,69 @@ def pick_references(records, rng, k=8):
     return refs
 
 
-def build_prompt(stats, refs, n):
+def build_prompt(stats, refs, slots):
     fr = stats["feature_rates"]
     ref_block = "\n\n".join(f"TITLE: {r['title']}\nBODY:\n{r['body'] or '(empty)'}" for r in refs)
+    slot_block = "\n".join(f"{i + 1}. topic: {t}; language: {lang}; shape: {shape}"
+                           for i, (t, lang, shape) in enumerate(slots))
     return f"""Style statistics of the person's ~{stats['n_tasks']} tasks:
 - title length in words: median {stats['title_words']['median']}, 10th–90th percentile {stats['title_words']['p10']}–{stats['title_words']['p90']}
-- {100 - round(stats['share_empty_body'] * 100)}% of tasks have a body; body length in characters: median {stats['body_chars_nonempty']['median']}, 75th pct {stats['body_chars_nonempty']['p75']}, 90th pct {stats['body_chars_nonempty']['p90']}; usually one paragraph
-- share of tasks using: *bold* {fr['bold']:.0%}, =verbatim= {fr['verbatim']:.0%}, [[obsidian:Note Title]] links {fr['obsidian_link']:.0%}, bare URLs {fr['bare_url']:.0%}, /italic/ {fr['italic']:.0%}, lists {fr['list']:.0%}
-- markup is org-mode (not Markdown)
+- {100 - round(stats['share_empty_body'] * 100)}% of tasks have a body; body length in characters: median {stats['body_chars_nonempty']['median']}, 75th pct {stats['body_chars_nonempty']['p75']}, 90th pct {stats['body_chars_nonempty']['p90']}, max ~{stats['body_chars_nonempty']['max']}
+- share of tasks using: *bold* {fr['bold']:.0%}, =verbatim= {fr['verbatim']:.0%}, [[obsidian:Note Title]] links {fr['obsidian_link']:.0%}, bare URLs {fr['bare_url']:.0%}, /italic/ {fr['italic']:.0%}, lists {fr['list']:.0%}; markup appears in titles too
+- markup is org-mode (not Markdown); a bare URL usually sits alone on its own line
 
 Reference tasks (style only — private, do not reuse content):
 
 {ref_block}
 
-Write {n} new tasks, one per topic, on these topics: {", ".join(TOPICS[:n])}.
-Match the style: title length and phrasing, how the body explains motivation or the
-concrete next step, sentence rhythm, and markup/link habits at roughly the rates above.
-Body lengths should follow the distribution above (several short ~60–110 chars, a few
-~200–350, one or two ~450–650). Links: use [[obsidian:<Plausible Note Title>]] for
-internal notes and real, well-known public URLs (e.g. Wikipedia) for web links; the
-person usually puts a bare URL on its own line at the end of the body — do that in at
-least two tasks.
-English only. Return JSON: {{"tasks": [{{"topic", "title", "body"}}]}}."""
+Write exactly one task per slot below, in this order. Each slot fixes the topic, the
+language and a SHAPE the task must have. Otherwise match the person's style: title
+phrasing, how the body explains motivation or the concrete next step, sentence rhythm.
+Web links must be real, well-known public URLs (e.g. Wikipedia); obsidian links use a
+plausible note title. Non-English tasks must read as written by the same person
+natively in that language (not translated from English).
+
+{slot_block}
+
+Return JSON: {{"tasks": [{{"topic", "title", "body"}}]}} with body "" when it is empty."""
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--n", type=int, default=16)
     ap.add_argument("--model", default="opus")
     ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--tries", type=int, default=3, help="re-asks for slots that failed the leak check")
     args = ap.parse_args()
 
     private = read_jsonl(DATASETS["personal"].path)
     stats = json.loads(STYLE_STATS.read_text())
     refs = pick_references(private, random.Random(args.seed))
-    res = complete_json(build_prompt(stats, refs, args.n), system=SYSTEM, schema=SCHEMA,
-                        backend="claude-cli", models=[args.model], private=True,
-                        validate=lambda d: len(d.get("tasks", [])) >= args.n)
-
     private_grams, private_urls = set(), set()
     for r in private:
         private_grams |= ngrams(r["title"] + " " + r["body"])
         private_urls |= urls(r["body"])
-    out, rejected = [], 0
-    for i, t in enumerate(res["data"]["tasks"]):
-        text = t["title"] + " " + t["body"]
-        if ngrams(text) & private_grams or urls(text) & private_urls:
-            rejected += 1
-            continue
-        out.append({"id": f"sty-{i:02d}", "topic": t["topic"], "title": t["title"].strip(),
-                    "body": t["body"].strip(), "model": res["model"]})
+
+    done = {}
+    for attempt in range(args.tries):
+        todo = [i for i in range(len(SLOTS)) if i not in done]
+        if not todo:
+            break
+        slots = [SLOTS[i] for i in todo]
+        res = complete_json(build_prompt(stats, refs, slots), system=SYSTEM, schema=SCHEMA,
+                            backend="claude-cli", models=[args.model], private=True,
+                            tag=f"try{attempt}" if attempt else "",
+                            validate=lambda d: len(d.get("tasks", [])) == len(slots))
+        for i, t in zip(todo, res["data"]["tasks"]):
+            text = t["title"] + " " + t["body"]
+            if ngrams(text) & private_grams or urls(text) & private_urls:
+                print(f"  slot {i + 1} ({SLOTS[i][0]}): overlaps private text, re-asking")
+                continue
+            topic, lang, shape = SLOTS[i]
+            done[i] = {"id": f"sty-{i + 1:02d}", "topic": topic, "lang": lang, "shape": shape,
+                       "title": t["title"].strip(), "body": t["body"].strip(), "model": res["model"]}
+    out = [done[i] for i in sorted(done)]
     write_jsonl(OUT, out)
-    print(f"{len(out)} exemplars ({rejected} rejected for 5-gram overlap) -> {OUT}")
+    print(f"{len(out)}/{len(SLOTS)} exemplars -> {OUT}")
 
 
 if __name__ == "__main__":

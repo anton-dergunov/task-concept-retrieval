@@ -133,17 +133,29 @@ would look artificially good). They are **never** used as the held-out evaluatio
 
 ### 5.1 Sources
 
+**Evaluation datasets (built; labelled with the tool in §6.4).** All share one JSONL schema
+(`tcr/datasets.py`; licenses in `data/datasets/NOTICE.md`):
+
+| Dataset | Contents | Role |
+|---|---|---|
+| **Personal** (private, gitignored) | All ~2,950 of the author's real tasks: title + body, org markup kept | **Primary** in-domain eval. Never tuned on, never published |
+| **Realistic** | 623 tasks from the vendored `productivity-system` samples (titles, rarely bodies) | Public in-domain eval (a demo repo's data) |
+| **Personal-synth** | ~1,000 tasks generated from abstracted topics of Personal, audited for leakage (`design/anonymization.md`) | Public stand-in for Personal; used to measure eval-set fidelity |
+| **Public-short** | 600 real MS-LaTTE to-do titles + 225 MASSIVE EN/ES/RU items rewritten as tasks | Short-task regime, real phrasing, multilingual |
+| **Public-expanded** | 500 other MS-LaTTE concepts expanded into the author's style (title + body), EN/ES/RU | Long-task regime on public data. Secondary: LLM-written text |
+
+Translated items show all languages at once when labelled, so one label yields an item in
+every language (`meta.parallel`).
+
+**Training / tuning sources (not yet built):**
+
 | Source | What we extract | Role |
 |---|---|---|
-| **Vendored `samples/realistic`** | The existing ~22 org files / ~300 tasks, copied into `data/eval/realistic/` as a raw snapshot + parsed `tasks.jsonl` | In-domain held-out (small, trusted) |
-| **Anonymized personal extraction** | Synthetic tasks generated from abstracted topics of the user's ~2,950 real tasks | **Primary in-domain corpus** (realistic distribution) |
 | **wikiHow goal-step** (`tasksource/goal-step-wikihow`) | ~187k *goal* titles ("How to X" → imperative tasks) | Generic breadth, realistic phrasings |
-| **Google Taskmaster-1/2/3** (`google-research-datasets/taskmaster{1,2,3}`) | User goals / action items across restaurants, food, movies, hotels, flights, music, sports | Generic, domain variety |
+| **Google Taskmaster-1/2/3** | User goals / action items across domains | Generic, domain variety |
 | **SNIPS / ATIS / CLINC150** | Short imperative intent/reminder utterances | Generic, reminder-style phrasings |
-| **GitHub TODO/SATD corpora**: Tesoro (`NamCyan/tesoro`), SATDAUG, `yikun-li/satd-issue-tracker-data` | Real `TODO`/`FIXME` developer tasks | Technical-task domain |
-| **Public org-mode / todo.txt repos** | Mined task headlines | Generic, native task formatting |
-| **LLM synthesis** | Diverse tasks seeded by the anonymized real distribution | Coverage + targeted gaps; held out from training |
-| **Multilingual** | LLM-translated slice of the above into **Spanish + Russian** | Multilingual eval |
+| **GitHub TODO/SATD corpora**: Tesoro, SATDAUG, `yikun-li/satd-issue-tracker-data` | Real `TODO`/`FIXME` developer tasks | Technical-task domain |
+| **LLM synthesis** | Diverse tasks seeded by public skeletons | Coverage + targeted gaps; held out from eval |
 
 > License note: each external dataset's license is checked before any redistribution; we cite all
 > sources and, where redistribution is restricted, store only IDs/our-derived transforms or
@@ -169,9 +181,9 @@ list still leaks through quasi-identifiers. Protocol and literature: `design/ano
 
 ### 5.4 Splits & anti-overfit
 
-- **In-domain held-out** = vendored `realistic` snapshot **+** the anonymized personal extraction.
-- **Generic** = wikiHow / Taskmaster / SNIPS / TODO corpora / synthesis.
-- **Multilingual** = ES + RU.
+- **In-domain held-out** = Personal (private, primary) + Realistic + Personal-synth.
+- **Public general** = Public-short (short tasks) + Public-expanded (long tasks).
+- **Multilingual** = the ES + RU versions of Public-short and Public-expanded.
 - **Train/tune only on generic + synthesis.** Never tune on personal tasks.
 - **Report metrics per split** so we can see in-domain quality *and* generality separately —
   guarding against overfitting to the user's personal style. Category-stratified cross-validation

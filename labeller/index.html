@@ -45,6 +45,11 @@ header select { font: inherit; font-weight: 600; color: var(--fg); background: n
   border-bottom: 1px solid var(--line); }
 #task.expanded { max-height: 58dvh; }
 #title { font-size: 18px; font-weight: 650; margin: 0 0 6px; overflow-wrap: anywhere; }
+#alts { margin: -2px 0 6px; font-size: 15px; color: var(--muted); }
+#alts div { overflow-wrap: anywhere; }
+#alts b { font-size: 11px; font-weight: 700; letter-spacing: .04em; margin-right: 6px; }
+#flagBtn { font-size: 17px; line-height: 1; padding: 2px 4px; color: var(--muted); }
+#flagBtn.on { color: #d70015; }
 #body { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px; color: var(--fg); }
 #body.clamp { max-height: 6.9em; overflow: hidden;
   -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
@@ -88,15 +93,16 @@ footer button { padding: 11px 14px; border-radius: 12px; background: var(--chip)
   <select id="ds" aria-label="Dataset"></select>
   <span id="progress"></span>
   <span id="state"></span>
+  <button id="flagBtn" aria-label="Flag task for exclusion" title="Flag: exclude this task (broken, unlabelable)">⚑</button>
   <button id="menuBtn" aria-label="Menu">⋯</button>
   <div id="menu">
     <button data-act="open">Next unlabelled task</button>
     <button data-act="goto">Go to task #…</button>
-    <button data-act="flag">Flag task (exclude it)</button>
   </div>
 </header>
 <section id="task">
   <h1 id="title"></h1>
+  <div id="alts"></div>
   <div id="body"></div>
   <button id="more">more</button>
 </section>
@@ -180,9 +186,12 @@ function renderHeader() {
   const text = { labelled: "✓ saved", none: "✓ no icon", skip: "skipped", flagged: "⚑ flagged" }[status] || "";
   st.textContent = text; st.className = status === "labelled" || status === "none" ? "ok" : "";
   $("none").classList.toggle("on", status === "none");
+  $("flagBtn").classList.toggle("on", status === "flagged");
 }
 function renderTask() {
   $("title").innerHTML = orgToHtml(cur.task.title);
+  $("alts").innerHTML = (cur.task.alts || []).map((a) =>
+    `<div><b>${esc(a.lang.toUpperCase())}</b>${orgToHtml(a.title)}</div>`).join("");
   const body = $("body");
   body.innerHTML = orgToHtml(cur.task.body || "");
   body.classList.add("clamp");
@@ -307,13 +316,16 @@ $("q").addEventListener("input", onSearchInput);
 $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") $("q").blur(); if (e.key === "Escape") { clearSearch(); $("q").blur(); } });
 $("clear").onclick = clearSearch;
 $("ds").onchange = () => { flushSave(); store.set("ds", $("ds").value); cur = null; load(); };
+$("flagBtn").onclick = () => {
+  if (status === "flagged") { status = ranking.length ? "labelled" : "cleared"; renderHeader(); scheduleSave(); toast("Unflagged"); }
+  else setAndAdvance("flagged", "Flagged — excluded");
+};
 $("menuBtn").onclick = (e) => { e.stopPropagation(); $("menu").classList.toggle("open"); };
 document.addEventListener("click", () => $("menu").classList.remove("open"));
 $("menu").addEventListener("click", (e) => {
   const act = e.target.dataset.act;
   if (act === "open") load();
   if (act === "goto") { const n = parseInt(prompt(`Task number (1–${cur.total})`), 10); if (n > 0) load(n - 1); }
-  if (act === "flag") setAndAdvance("flagged", "Flagged");
 });
 document.addEventListener("keydown", (e) => {
   if (e.target === $("q")) return;

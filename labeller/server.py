@@ -159,7 +159,8 @@ class Store:
         rec = self.labels[key].get(t["id"])
         s = next(x for x in self.summary() if x["key"] == key)
         return {"dataset": key, "pos": pos, "total": s["total"], "done": s["done"],
-                "task": {"id": t["id"], "title": t["title"], "body": t["body"], "lang": t["lang"]},
+                "task": {"id": t["id"], "title": t["title"], "body": t["body"], "lang": t["lang"],
+                         "alts": t.get("alts", [])},
                 "icons": t["icons"],
                 "label": None if rec is None else {"status": rec["status"], "ranking": rec["ranking"]}}
 

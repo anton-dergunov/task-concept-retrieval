@@ -1,0 +1,121 @@
+{
+  "config": {
+    "sample": 150,
+    "min_usefulness": 0.6,
+    "methods": [
+      "B1",
+      "M3"
+    ],
+    "k": 10,
+    "seed": 0,
+    "multilingual_model": "intfloat/multilingual-e5-small",
+    "english_model": "BAAI/bge-small-en-v1.5",
+    "abstain_threshold": 3.6
+  },
+  "results": {
+    "B1": {
+      "precision_at_1": 0.06666666666666667,
+      "recall_at_10": 0.2733333333333333,
+      "mrr": 0.11892328042328043,
+      "ndcg_at_10": 0.1544886945705056,
+      "gate_auroc": 0.5288,
+      "poor_match_suppression": 1.0,
+      "precision_at_coverage": {
+        "p@1_cov50": 0.08,
+        "p@1_cov70": 0.0667,
+        "p@1_cov90": 0.0667
+      },
+      "latency_p50_ms": 1.67,
+      "latency_p95_ms": 2.38,
+      "n_queries": 150
+    },
+    "M3": {
+      "precision_at_1": 0.06,
+      "recall_at_10": 0.26,
+      "mrr": 0.11196296296296294,
+      "ndcg_at_10": 0.1463755158906329,
+      "gate_auroc": 0.6213,
+      "poor_match_suppression": 1.0,
+      "precision_at_coverage": {
+        "p@1_cov50": 0.08,
+        "p@1_cov70": 0.0762,
+        "p@1_cov90": 0.0667
+      },
+      "latency_p50_ms": 17.42,
+      "latency_p95_ms": 22.47,
+      "n_queries": 150
+    }
+  },
+  "multilingual_smoke": {
+    "M3": [
+      {
+        "query": "Caminar 8000 pasos al día",
+        "top": [
+          {
+            "name": "10k",
+            "score": 0.0
+          },
+          {
+            "name": "run_circle",
+            "score": 0.852
+          },
+          {
+            "name": "photo_auto_merge",
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "query": "Reservar cita con el dentista",
+        "top": [
+          {
+            "name": "explosion",
+            "score": 0.475
+          },
+          {
+            "name": "oral_disease",
+            "score": 0.873
+          },
+          {
+            "name": "prayer_times",
+            "score": 0.463
+          }
+        ]
+      },
+      {
+        "query": "Купить продукты в магазине",
+        "top": [
+          {
+            "name": "10k",
+            "score": 0.0
+          },
+          {
+            "name": "grocery",
+            "score": 0.872
+          },
+          {
+            "name": "photo_auto_merge",
+            "score": 0.0
+          }
+        ]
+      },
+      {
+        "query": "Прочитать главу книги",
+        "top": [
+          {
+            "name": "10k",
+            "score": 0.0
+          },
+          {
+            "name": "auto_stories",
+            "score": 0.848
+          },
+          {
+            "name": "photo_auto_merge",
+            "score": 0.0
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -27,7 +27,10 @@ class Dataset:
 DATASETS: Dict[str, Dataset] = {d.key: d for d in [
     Dataset("personal", "Personal", config.PRIVATE_DIR / "personal.jsonl", "per", private=True),
     Dataset("realistic", "Realistic", config.DATASETS_DIR / "realistic.jsonl", "rea"),
-    Dataset("personal_synth", "Personal-synth", config.DATASETS_DIR / "personal_synth.jsonl", "syn"),
+    # Candidates stay private until audited and reviewed; `synth_personal.py publish`
+    # then writes the public release to data/datasets/personal_synth.jsonl.
+    Dataset("personal_synth", "Personal-synth", config.PRIVATE_DIR / "personal_synth.jsonl", "syn",
+            private=True),
     Dataset("public_short", "Public-short", config.DATASETS_DIR / "public_short.jsonl", "pub"),
     Dataset("public_expanded", "Public-expanded", config.DATASETS_DIR / "public_expanded.jsonl", "exp"),
 ]}

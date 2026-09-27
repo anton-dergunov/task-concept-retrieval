@@ -6,7 +6,8 @@ Synology NAS. Labels save on every tap, so you can close the page and continue o
 
 ## How labelling works
 
-- One task at a time: its title and body, with long bodies collapsed behind "more".
+- One task at a time: its title and body, with long bodies collapsed behind "more". Translated
+  items (Public-*) show the title in all languages at once, so one label covers every version.
 - 30 candidate icons: 24 from several matchers (M3, M1, M2, B1) and 6 random ones, in a
   shuffled order. The order is fixed per task, so every device shows the same grid.
 - **Tap** icons in order of preference: the badge shows the rank (1, 2, 3, …). **Tap again**
@@ -14,8 +15,11 @@ Synology NAS. Labels save on every tap, so you can close the page and continue o
 - **Search** looks for icons by their descriptions (never by names). Icons you pick from
   search stay in the grid after you clear the search.
 - **No good icon** records an explicit negative, which the abstention gate needs.
-  **Next** with nothing selected records "skip" (unsure). **⋯ → Flag** excludes a broken
-  or leaking task.
+  **Next** with nothing selected records "skip" (unsure). **⚑** (top right) flags a task
+  for exclusion: garbled, too short to label, or leaking; tap it again to unflag.
+- **Personal-synth** tasks are publication candidates: flag anything that looks like a real
+  task of yours, a recognisable detail, or garbage. `python scripts/datasets/synth_personal.py
+  publish` then writes only the unflagged ones to the public dataset.
 - The dataset picker is in the top left. Tasks come in a fixed pseudo-random order, so
   whatever you have labelled so far is always a uniform random sample.
 - Keys (desktop): ← / → to move between tasks, `/` to search, Esc to clear the search.
@@ -54,11 +58,15 @@ python3 labeller/server.py            # http://127.0.0.1:8766/
    Triggered Task → Boot-up, running as your user:
    `cd /var/services/homes/<you>/labeller && python3 server.py --port 8766`.
 3. Expose it on your tailnet with HTTPS. HTTPS requires MagicDNS and HTTPS certificates to
-   be enabled in the Tailscale admin console. On DSM this needs `sudo`.
+   be enabled in the Tailscale admin console. On DSM this needs `sudo`. If another service
+   already owns `https://<nas-name>.<tailnet>.ts.net/` (port 443), give the labeller its own
+   HTTPS port instead of the root:
    ```bash
-   sudo tailscale serve --bg 8766
+   sudo tailscale serve status                                  # see what is already served
+   sudo tailscale serve --bg --https=8443 http://127.0.0.1:8766
    ```
-   Open `https://<nas-name>.<tailnet>.ts.net/` on any of your devices.
+   Open `https://<nas-name>.<tailnet>.ts.net:8443/` on any of your devices. Do not open
+   `…ts.net:8766` with `https://`: that port is the server's own plain-HTTP socket.
    Older Tailscale packages may not support `serve`. In that case, bind to the NAS's
    tailnet address and use plain HTTP:
    ```bash
