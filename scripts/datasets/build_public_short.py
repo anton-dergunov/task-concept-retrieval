@@ -41,6 +41,22 @@ LANGS = {"en": "en-US", "es": "es-ES", "ru": "ru-RU"}
 _JUNK_TITLES = {"to do", "todo", "list", "stuff", "things", "misc", "inbox", "to do list"}
 
 
+# MS-LaTTE list names are the tasks' natural parent heading ("groceries", "home depot",
+# "house projects"), except these generic ones.
+_UNINFORMATIVE_LISTS = {"default list", "to do", "todo", "to do list", "to-do", "to-do list",
+                        "today", "to do today", "things to do", "tasks", "inbox", "list",
+                        "my list", "reminders", "misc", "tomorrow", "this week", "stuff",
+                        "monday", "tuesday", "wednesday", "thursday", "friday", "saturday",
+                        "sunday", "weekend"}
+
+
+def list_parent(list_title: str):
+    t = re.sub(r"\s+", " ", list_title).strip()
+    if not t or t.casefold() in _UNINFORMATIVE_LISTS or not re.search(r"[a-z]{3}", t.casefold()):
+        return []
+    return [t[:1].upper() + t[1:]]
+
+
 def source_id(source: str, sid: str) -> str:
     return "pub-" + hashlib.sha1(f"{source}:{sid}".encode()).hexdigest()[:10]
 
@@ -97,7 +113,7 @@ def sample_mslatte(n: int, rng: random.Random):
     picked = picked[:n]
 
     out = [{"id": source_id("mslatte", r["ID"]), "dataset": "public_short", "title": t, "body": "",
-            "lang": "en", "meta": {"source": "mslatte", "source_id": r["ID"],
+            "parents": list_parent(r["ListTitle"]), "lang": "en", "meta": {"source": "mslatte", "source_id": r["ID"],
                                    "list": r["ListTitle"], "place": s}}
            for s, t, r in picked]
     print(f"MS-LaTTE: {len(pool)} clean titles in {len(strata)} strata -> {len(out)} sampled")

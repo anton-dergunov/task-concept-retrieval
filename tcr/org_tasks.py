@@ -11,6 +11,10 @@ lines and drawers.
 
 A task's body runs until the next heading of any level, so nested tasks become
 separate records and never leak into their parent's body.
+
+`parents` holds the titles of the task's ancestor headings (outermost first): the
+project or section a task sits under often carries its topic ("Music catalog support"
+› "Evaluate bids against my catalog rules"). The file name is not included.
 """
 
 from __future__ import annotations
@@ -20,7 +24,7 @@ import re
 import textwrap
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Iterator, List
+from typing import Iterator, List, Sequence
 
 from .org_query import TODO_KEYWORDS, _PRIORITY_RE, _TAGS_RE, normalize_text
 
@@ -47,14 +51,22 @@ class OrgTask:
     tags: List[str] = field(default_factory=list)
     keyword: str = "TODO"
     level: int = 1
+    parents: List[str] = field(default_factory=list)   # ancestor heading titles, outermost first
 
-    def query_text(self, with_body: bool = False, body_chars: int = 400) -> str:
-        return query_text(self.title, self.body, with_body, body_chars)
+    def query_text(self, with_body: bool = False, body_chars: int = 400,
+                   with_parent: bool = False) -> str:
+        return query_text(self.title, self.body, with_body, body_chars,
+                          self.parents if with_parent else ())
 
 
-def query_text(title: str, body: str = "", with_body: bool = False, body_chars: int = 400) -> str:
-    """Plain text for matchers: normalized title, optionally + a body prefix."""
+def query_text(title: str, body: str = "", with_body: bool = False, body_chars: int = 400,
+               parents: Sequence[str] = ()) -> str:
+    """Plain text for matchers: normalized title, optionally prefixed by the nearest
+    parent heading ("Music catalog support: Evaluate bids …") and/or + a body prefix."""
     title = normalize_text(title)
+    if parents:
+        parent = normalize_text(parents[-1])
+        title = f"{parent}: {title}" if parent else title
     if not with_body or not body:
         return title
     body = normalize_text(body.replace("\n", " "))[:body_chars]
@@ -101,24 +113,42 @@ def _clean_body(lines: List[str]) -> str:
     return re.sub(r"\n{3,}", "\n\n", text).strip()
 
 
+def _heading_title(rest: str) -> str:
+    """Clean title of ANY heading (task or not): no keyword, priority, cookies or tags."""
+    split = _split_heading(rest)
+    if split:
+        return split[1]
+    mtags = _TAGS_RE.search(rest)
+    if mtags:
+        rest = rest[: mtags.start()]
+    rest = _STATS_COOKIE_RE.sub("", _PRIORITY_RE.sub("", rest.strip()))
+    return re.sub(r"\s+", " ", rest).strip()
+
+
 def parse_org_tasks(text: str) -> List[OrgTask]:
     tasks: List[OrgTask] = []
-    current = None          # (level, keyword, title, tags) of the open task
+    current = None          # (level, keyword, title, tags, parents) of the open task
     body: List[str] = []
+    stack: List[tuple] = []  # (level, title) of the enclosing headings
 
     def flush():
         if current is not None:
-            level, keyword, title, tags = current
+            level, keyword, title, tags, parents = current
             tasks.append(OrgTask(title=title, body=_clean_body(body), tags=tags,
-                                 keyword=keyword, level=level))
+                                 keyword=keyword, level=level, parents=parents))
 
     for line in text.splitlines():
         m = _HEADING_RE.match(line)
         if m:
             flush()
             body = []
+            level = len(m.group(1))
+            while stack and stack[-1][0] >= level:
+                stack.pop()
+            parents = [t for _, t in stack if t]
             split = _split_heading(m.group(2))
-            current = (len(m.group(1)),) + split if split else None
+            current = (level,) + split + (parents,) if split else None
+            stack.append((level, _heading_title(m.group(2))))
             continue
         if current is not None:
             body.append(line)
@@ -152,7 +182,8 @@ def guess_lang(text: str) -> str:
     return "ru" if letters and cyr / len(letters) > 0.3 else "en"
 
 
-def to_records(tasks: List[OrgTask], dataset: str, prefix: str) -> List[dict]:
+def to_records(tasks: List[OrgTask], dataset: str, prefix: str,
+               with_parents: bool = True) -> List[dict]:
     """Dataset records in the shared schema, deduplicated by id (first wins)."""
     seen = set()
     records = []
@@ -161,6 +192,9 @@ def to_records(tasks: List[OrgTask], dataset: str, prefix: str) -> List[dict]:
         if tid in seen:
             continue
         seen.add(tid)
-        records.append({"id": tid, "dataset": dataset, "title": t.title, "body": t.body,
+        rec = {"id": tid, "dataset": dataset, "title": t.title, "body": t.body}
+        if with_parents:
+            rec["parents"] = t.parents
+        records.append({**rec,
                         "lang": guess_lang(t.title + " " + t.body), "meta": {"tags": t.tags}})
     return records

@@ -7,6 +7,12 @@ Constraints from CLAUDE.md apply throughout:
 - LLMs are for building data and judging only;
 - the matcher must be able to abstain.
 
+**Target behaviour.** A good icon is the glanceable reminder of what a task is about:
+central object → context/activity → meaningful action, never properties. Abstain if
+nothing fits. This is defined once in [icon-selection-principles.md](icon-selection-principles.md)
+and used verbatim by the labeller, the judge, the description prompt and the model's
+instruction prompt.
+
 ## 1. Roles of the datasets
 
 | Dataset | Role |
@@ -123,6 +129,19 @@ Two families. Model names are examples to verify at implementation time.
 - Adding vision to a text-only 2B LLM means training a projector (LLaVA-style) and is a
   project in itself. Start from a model that already has vision.
 
+**Model input.** The query is the task title plus its **nearest parent heading**
+("Music catalog support: Evaluate bids against my catalog rules"). The body is optional
+(first ~400 characters): the title says *what* the task is, the body mostly says *how*.
+Datasets carry `parents` where the source has them: org outline ancestors (Personal,
+Realistic) and informative MS-LaTTE list names (Public-short). "Title vs. title +
+parent vs. + body" is an ablation on dev. For an LLM-based reranker, the instruction
+prompt is the selection principles in short form, so fine-tuning starts from the intended
+behaviour rather than learning it from labels alone.
+
+**Graded targets.** Human ranks, judge grades, and v2 `example_tasks` (rank 1) vs.
+`context_tasks` (rank 2) are all graded, so train with a graded or listwise loss and
+evaluate with nDCG, which rewards getting the central subject first.
+
 **Recommended order:**
 
 1. text-only dual encoder, fine-tuned;
@@ -142,7 +161,11 @@ images:
 - one **contact-sheet image** with large printed numbers on each cell. This is cheaper, is
   a single image, and the ids are unambiguous.
 
-The judge returns graded relevance (0–3) per icon, plus "no good icon".
+The prompt includes the parent headings and the selection principles
+(icon-selection-principles.md): central subject first, context second, never properties,
+siblings distinguishable. The judge returns graded relevance (0–3) per icon: 3 = shows the
+central subject, 2 = shows the context or activity, 1 = partial, 0 = no. It also returns
+"no good icon".
 
 **How many icons per request.** APIs accept far more images than needed. The limit that
 matters is accuracy: small glyphs, numbering errors, and attention spread thin.

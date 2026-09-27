@@ -32,6 +32,12 @@ stays, but becomes more structured (§3).
 
 ## 2. Design principles
 
+0. **State the purpose, and use the selection principles.** The prompt opens with what the
+   icon is for: a glanceable reminder of the one thing a task is about. It then gives the
+   salience order from [icon-selection-principles.md](icon-selection-principles.md):
+   central object → context/activity → meaningful action → never properties.
+   Everything below is generated *through* that lens: examples are tasks whose **central
+   subject** this icon shows, not tasks that merely mention something related.
 1. **Describe before interpreting.** First record what is literally drawn, then what it
    means. This is chain-of-thought for vision; it is where the misreadings come from.
 2. **Separate the glyph from its meanings.** A base object plus modifiers (`+` = add or new,
@@ -75,16 +81,19 @@ stays, but becomes more structured (§3).
     "weigh luggage before a flight",
     "measure ingredients for baking"
   ],
-  "example_tasks": [                          // realistic titles, mixed length, mixed domains
+  "example_tasks": [                          // this icon shows the task's CENTRAL subject (rank-1 fit)
     "Weigh myself every Monday and log it in the spreadsheet",
     "Check the suitcase is under 23 kg before the airport run",
     "Buy a kitchen scale that can do grams precisely",
-    "Start tracking weight again after the holidays"
+    {"parent": "Home baking", "task": "Measure flour by weight instead of cups"}
   ],
-  "near_misses": [                            // hard negatives, each with the better concept
-    {"task": "Track the package delivery for the new scale", "better": "parcel / delivery truck"},
-    {"task": "Compare prices of three kitchen scales", "better": "price comparison / shopping"},
-    {"task": "Reply to the group chat about Saturday", "better": "chat bubble"}
+  "context_tasks": [                          // this icon fits as the CONTEXT (a good rank-2 answer)
+    {"task": "Log calories for the cutting phase", "central": "food / nutrition"}
+  ],
+  "near_misses": [                            // hard negatives: the concept is present, but not what the task is about
+    {"task": "Track the package delivery for the new scale", "better": "parcel / delivery truck", "trap": "shared object, other subject"},
+    {"task": "Buy a heavy-duty waterproof jacket", "better": "jacket / clothing", "trap": "property (heavy)"},
+    {"task": "Reply to the group chat about Saturday", "better": "chat bubble", "trap": "look-alike glyph"}
   ],
   "scores": {                                 // anchored 1–5 rubrics (below)
     "recognizability": 4,  // would most people read it the same way?
@@ -97,8 +106,16 @@ stays, but becomes more structured (§3).
 }
 ```
 
-- **Field sizes:** `readings` 1–4; `task_intents` 6–12; `example_tasks` 12–20;
-  `near_misses` 5–8.
+- **Field sizes:** `readings` 1–4; `task_intents` 6–12; `example_tasks` 12–20 (about a
+  quarter with a `parent` heading, where the parent supplies the subject a generic title
+  lacks); `context_tasks` 3–6; `near_misses` 5–8.
+- **Near-miss traps**, which follow the selection principles: the icon's concept appears
+  only as a **property** (a rain icon for "waterproof headlamp"); as a **generic verb**
+  (a check mark for "verify git sync"); as **shared vocabulary** with another subject; as a
+  **look-alike glyph**; or as the **parent's topic** when the title is specific and points
+  elsewhere.
+- **Graded positives:** `example_tasks` are rank-1 positives and `context_tasks` rank-2,
+  which gives graded training labels (fine-tuning-plan §4).
 - **Domain taxonomy (fixed):** work, career, learning, tech, health_fitness, finance,
   home, shopping, food, social_family, travel, hobbies, admin, communication, creative,
   outdoors. It gives facets for balanced example generation, per-domain evaluation and

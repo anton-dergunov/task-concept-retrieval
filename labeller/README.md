@@ -13,6 +13,10 @@ Synology NAS. Labels save on every tap, so you can close the page and continue o
   **More icons** at the end of the grid adds 70 more: the matchers' next-best icons and
   another 14 random ones. Every icon is a distinct glyph; font aliases that draw the same
   picture are collapsed.
+- **What to choose** follows [docs/icon-selection-principles.md](../docs/icon-selection-principles.md):
+  rank 1 shows the task's central object or subject, rank 2 its context or activity, and
+  properties (waterproof, urgent, small) are never the answer. When a task has a
+  parent heading (project, section, or list name), it follows the title in brackets.
 - **Tap** icons in order of preference: the badge shows the rank (1, 2, 3, …). **Tap again**
   to deselect; the remaining ranks renumber.
 - **Search** looks for icons by their descriptions (never by names). Icons you pick from

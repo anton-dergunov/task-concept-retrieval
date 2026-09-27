@@ -75,6 +75,15 @@ def test_ids_stable_and_dedup():
     assert "file" not in recs[0]
 
 
+def test_parents_are_ancestor_headings():
+    tasks = parse_org_tasks(FIXTURE)
+    assert tasks[0].parents == ["Section heading"]
+    assert tasks[1].parents == ["Section heading", "Read the *attention* paper"]  # nested task
+    assert tasks[2].parents == ["Section heading"]  # sibling of a non-task heading
+    recs = to_records(tasks, "personal", "per")
+    assert recs[1]["parents"] == tasks[1].parents
+
+
 def test_guess_lang():
     assert guess_lang("Buy milk") == "en"
     assert guess_lang("Купить молоко") == "ru"

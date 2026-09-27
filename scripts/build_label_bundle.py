@@ -43,7 +43,10 @@ from tcr.org_tasks import query_text  # noqa: E402
 BUNDLE = ROOT / "labeller" / "bundle"
 
 # (method, query uses body?) — the pool sources, in round-robin order.
-SOURCES = [("M3", False), ("M1", True), ("M2", True), ("B1", True)]
+# (label, matcher, query view) — the pool sources, in round-robin order. "parent"
+# prefixes the nearest parent heading, whose topic often matters most.
+SOURCES = [("M3", "M3", "title"), ("M1", "M1", "body"), ("M2", "M2", "body"),
+           ("B1", "B1", "body"), ("M1p", "M1", "parent")]
 N_METHOD = 24       # first grid: icons drawn from the matchers …
 N_RANDOM = 6        # … plus uniformly random icons (30 in total)
 N_MORE_METHOD = 56  # "More icons": the matchers' next-best icons …
@@ -68,9 +71,15 @@ def alt_titles(rec):
 
 
 def rankings(rec, matchers):
-    title, body = rec["title"], rec.get("body", "")
-    return [(key, [n for n, _ in matchers[key].rank(query_text(title, body, with_body=wb), top_k=DEPTH)])
-            for key, wb in SOURCES]
+    title, body, parents = rec["title"], rec.get("body", ""), rec.get("parents") or []
+    out = []
+    for label, key, view in SOURCES:
+        if view == "parent" and not parents:
+            continue   # would duplicate the title-only query
+        q = query_text(title, body, with_body=(view == "body"),
+                       parents=parents if view == "parent" else ())
+        out.append((label, [n for n, _ in matchers[key].rank(q, top_k=DEPTH)]))
+    return out
 
 
 def round_robin(ranked_lists, exclude, n):
@@ -123,8 +132,8 @@ def main() -> None:
     icons = load_icons()   # non-discarded, one per distinct glyph, no blank renders
     all_names = [ic.name for ic in icons]
     names = set(all_names)
-    print(f"{len(icons)} distinct icons; building matchers {[k for k, _ in SOURCES]} …")
-    matchers = {key: build_method(key, icons) for key, _ in SOURCES}
+    print(f"{len(icons)} distinct icons; building matchers {sorted({k for _, k, _ in SOURCES})} …")
+    matchers = {key: build_method(key, icons) for key in {k for _, k, _ in SOURCES}}
 
     (BUNDLE / "tasks").mkdir(parents=True, exist_ok=True)
     for ds in dsets:
@@ -150,7 +159,7 @@ def main() -> None:
                 more, more_prov = more_grid(ranked, rec, all_names, icons_)
                 prov = {**prov, **more_prov}
             rows.append({"id": rec["id"], "title": rec["title"], "body": rec.get("body", ""),
-                         "lang": rec.get("lang", "en"), "alts": alt_titles(rec),
+                         "parents": rec.get("parents") or [], "lang": rec.get("lang", "en"), "alts": alt_titles(rec),
                          "icons": icons_, "more": more, "prov": prov})
             if (i + 1) % 250 == 0:
                 print(f"  {ds.key}: {i + 1} tasks ({time.time() - t0:.0f}s)")

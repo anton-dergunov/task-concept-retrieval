@@ -53,7 +53,8 @@ and to render/identify the icon, never as a matching feature.)
 
 ## 2. Query representation: what we feed the matcher
 
-**Decision: the normalized task title.** The body is a *first-class experiment* rather than the
+**Decision: the normalized task title** (optionally prefixed by its nearest parent heading,
+under evaluation; see icon-selection-principles.md). The body is a *first-class experiment* rather than the
 default: 96% of the user's real tasks have a body (median ~90 chars, p90 ~560), but the public
 realistic samples almost never do, and bodies add noise and latency. Tags are **not** matched on:
 they say *when/where* a task can be done (`:online:`, `:tablet:`, `:easy:`), not what it is about.
