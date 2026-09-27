@@ -43,7 +43,7 @@ class IconDoc:
 
         `include_examples=False` excludes example_tasks — used by the bootstrap
         eval, which holds out example_tasks as queries and must not also index
-        them (see design/experimentation-strategy.md).
+        them (see docs/experimentation-strategy.md).
         """
         parts = [self.field_text("visual_concepts"), self.field_text("task_intents")]
         if include_examples:

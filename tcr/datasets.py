@@ -64,7 +64,7 @@ SPLIT_SEED = "split-v1"
 
 
 def split_of(task_id: str) -> str:
-    """Fixed 50/50 "dev" / "test" assignment by id hash (design/fine-tuning-plan.md §2).
+    """Fixed 50/50 "dev" / "test" assignment by id hash (docs/fine-tuning-plan.md §2).
 
     Independent of the labelling order (which uses a different hash), so any labelled
     prefix is split evenly. "test" is touched only for final numbers; "dev" is for

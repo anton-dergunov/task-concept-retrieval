@@ -6,7 +6,7 @@ above how the query matches the corpus overall — see methods/base.py), which i
 robust across encoders where absolute cosine is not. A `calibrate()` hook maps
 that signal to P(acceptable) via logistic regression once labels exist.
 
-See design/experimentation-strategy.md §7 and design/matching-methods.md.
+See docs/experimentation-strategy.md §7 and docs/matching-methods.md.
 """
 
 from __future__ import annotations

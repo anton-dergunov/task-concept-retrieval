@@ -5,7 +5,7 @@ the ranked top-k and a scale-robust *gate signal*: how many standard deviations
 the best icon stands above how the query matches the corpus overall. Absolute
 cosine is a poor confidence signal (e.g. multilingual-e5 compresses everything
 into ~0.8), but this standardized signal separates good matches from
-"nothing fits" across encoders. See design/matching-methods.md (abstention gate).
+"nothing fits" across encoders. See docs/matching-methods.md (abstention gate).
 """
 
 from __future__ import annotations

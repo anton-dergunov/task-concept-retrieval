@@ -9,7 +9,7 @@ shown to labellers or used as a matching feature.
 | `realistic.jsonl` | Tasks parsed from `data/eval/realistic/` | Generated, non-personal sample notes from [productivity-system](https://github.com/anton-dergunov/productivity-system); same author as this repo |
 | `public_short.jsonl` | Short real-world to-do titles, EN/ES/RU | MS-LaTTE and MASSIVE; see below |
 | `public_expanded.jsonl` | LLM-expanded versions of other MS-LaTTE / MASSIVE items, EN/ES/RU | Derived from MS-LaTTE and MASSIVE; see below |
-| `personal_synth.jsonl` | Synthetic tasks generated from abstracted topics of a private task list, after automated privacy audits and manual review | Original to this repo; see `design/anonymization.md` |
+| `personal_synth.jsonl` | Synthetic tasks generated from abstracted topics of a private task list, after automated privacy audits and manual review | Original to this repo; see `docs/anonymization.md` |
 
 ## MS-LaTTE
 

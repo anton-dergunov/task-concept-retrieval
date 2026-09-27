@@ -1,6 +1,6 @@
 """Matcher implementations and a registry/factory.
 
-Methods (see design/matching-methods.md):
+Methods (see docs/matching-methods.md):
   B0 - bge-small-en concatenated bi-encoder (current-approach replica)
   B1 - BM25 lexical baseline
   M1 - multilingual field-weighted bi-encoder + quality prior

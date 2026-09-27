@@ -140,7 +140,7 @@ would look artificially good). They are **never** used as the held-out evaluatio
 |---|---|---|
 | **Personal** (private, gitignored) | All ~2,950 of the author's real tasks: title + body, org markup kept | **Primary** in-domain eval. Never tuned on, never published |
 | **Realistic** | 623 tasks from the vendored `productivity-system` samples (titles, rarely bodies) | Public in-domain eval (a demo repo's data) |
-| **Personal-synth** | 1,506 tasks generated from abstracted topics of Personal (1,021 proportional + 485 rebalanced toward career and everyday life, `meta.origin`), audited for leakage (`design/anonymization.md`) | Public stand-in for Personal; the proportional subset measures eval-set fidelity |
+| **Personal-synth** | 1,506 tasks generated from abstracted topics of Personal (1,021 proportional + 485 rebalanced toward career and everyday life, `meta.origin`), audited for leakage (`docs/anonymization.md`) | Public stand-in for Personal; the proportional subset measures eval-set fidelity |
 | **Public-short** | 600 real MS-LaTTE to-do titles + 225 MASSIVE EN/ES/RU items rewritten as tasks | Short-task regime, real phrasing, multilingual |
 | **Public-expanded** | 500 other MS-LaTTE concepts expanded into the author's style (title + body), EN/ES/RU | Long-task regime on public data. Secondary: LLM-written text |
 
@@ -169,7 +169,7 @@ enter the repo. A separate public **Personal-synth** set is *generated*, not rew
 produced from abstracted topic skeletons of clustered private tasks plus aggregate style statistics,
 then pass automated leakage gates, a canary audit, an LLM attribute-inference attacker and a manual
 review before anything is committed. Per-item rewriting was rejected because a rewritten personal
-list still leaks through quasi-identifiers. Protocol and literature: `design/anonymization.md`.
+list still leaks through quasi-identifiers. Protocol and literature: `docs/anonymization.md`.
 
 ### 5.3 LLM choice per task (a decision rule, not one global model)
 

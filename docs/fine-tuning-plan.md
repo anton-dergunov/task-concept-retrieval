@@ -213,49 +213,21 @@ Output is billed at 6–8× the input rate, so it dominates the cost.
 
 ## 7. Icon description quality (v2 descriptions)
 
-The descriptions are the only matching signal, and they also drive the labelling tool's
-search. About 80% of them (3,422) came from **Gemini 3.1 Flash-Lite** on the free tier,
-494 are untagged early runs, and the rest came from 2.5 Flash-Lite / 2.5 Flash / 3.5 Flash.
+The descriptions are the only matching signal, and v1 has measurable problems:
 
-**Spot check** (10 random Flash-Lite icons re-described by 3.1 Pro with the same prompt,
-each judged against the glyph):
+- glyph misreadings (2 of 10 in a spot check vs. 3.1 Pro);
+- example tasks half as long as real titles and reused across icons;
+- generic, repeated negatives (35% of all negatives are 20 strings).
 
-- Flash-Lite **misread 2 of 10**: a bathroom scale read as a "speech bubble / chat"; a
-  settings-sliders glyph read as "comparison / alternatives";
-- it was weaker on 2 more: an electric meter read as a battery, and bones framed as
-  archaeology rather than a medical appointment;
-- it under-rated `icon_usefulness` on one more;
-- Pro was right or better on all 10.
-
-A ~20% misreading rate would mean several hundred misdescribed icons.
-
-**Plan: v2 descriptions, kept alongside v1** (`data/icon_descriptions_v2/`), so description
-quality becomes an experimental variable. "Does a stronger describer improve matching?" is
-itself a clean ablation.
-
-1. **Pilot first:** about 50 icons × {3 Flash, 3.5 Flash, 3.1 Pro}, judged against the
-   glyphs, to pick the cheapest model that reads glyphs reliably.
-2. **Improve the prompt while at it:**
-   - Ask first for a literal `depiction` field (what is drawn: objects, symbols, overlays
-     such as "+", "i" or a slash). Describing before interpreting reduces misreadings.
-   - Replace the ML-heavy example task titles with a mix across life areas (the synthetic
-     sets show how narrow the old examples were).
-   - Ask for `poor_matches` that look plausible but are wrong.
-3. **Describe each distinct glyph once** (3,486 non-discarded, plus the discarded ones if
-   re-judging `discard`) and copy the result to its aliases.
-4. **Cost:** input about 2k tokens and output about 2.5k tokens (JSON plus thinking) per
-   icon. For ~4k icons that is about $140 with 3.1 Pro, ~$100 with 3.5 Flash, and ~$35 with
-   3 Flash; batch halves each.
-
-**Order relative to labelling.** Regenerate **before** heavy labelling. Candidate pools
-and search are built from descriptions, so misdescribed icons are systematically missing
-from the pools. To keep the v1-vs-v2 comparison fair (pool bias), build the labelling pools
-from matchers over *both* description versions, plus the random icons and search already
-in place.
+The fix is a v2 schema and prompt (depiction → readings → examples → hard near-misses →
+anchored scores), a contrastive pass for look-alike glyphs, contamination guards, and a
+measurement plan (glyph-reading accuracy; extrinsic nDCG on dev with v1-vs-v2 pools;
+labelling efficiency). Details: [icon-descriptions-v2.md](icon-descriptions-v2.md).
 
 ## 8. Experiment order
 
-1. Regenerate icon descriptions (v2, §7) and rebuild the labelling pools over v1 + v2.
+1. Regenerate icon descriptions (v2, §7: pilot, then pass 1) and rebuild the labelling
+   pools over v1 + v2.
    Then label: about 400 Personal (200 dev / 200 test) first, then continue toward the
    targets in §3.
 2. Baselines on dev: B1, M1, M2, M3, plus zero-shot image towers (SigLIP 2 / jina-clip-v2).
@@ -265,4 +237,4 @@ in place.
 5. Add image features; try the VLM reranker; calibrate the abstention gate on dev.
 6. One final run on **test** for each dataset.
 7. Report **eval-set fidelity**: does the method ranking on Personal-synth (skeleton
-   subset) match the ranking on Personal? (design/anonymization.md §4)
+   subset) match the ranking on Personal? (docs/anonymization.md §4)

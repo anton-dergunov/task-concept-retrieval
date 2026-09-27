@@ -4,7 +4,7 @@ Real silver/gold labels arrive next round; this harness wires every metric so
 methods are comparable now. It is intentionally optimistic/biased (see below)
 and is for relative comparison + plumbing, not absolute numbers.
 
-Design (see design/experimentation-strategy.md §8 and the plan):
+Design (see docs/experimentation-strategy.md §8 and the plan):
   Positives (weak): sample icons, hold out ONE example_task each as a query with
     gold = that icon. Document-based methods (B0/B1/M1) are built WITHOUT
     example_tasks; M2 is built excluding exactly the held-out queries — so no

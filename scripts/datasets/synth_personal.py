@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Personal-synth (D3): a public stand-in for the private task list.
 
-Protocol (design/anonymization.md):
+Protocol (docs/anonymization.md):
   generate  1. plant canary tasks (random pseudo-words) into a working copy of D1
             2. embed locally (multilingual-e5) and cluster (agglomerative, Ward)
             3. drop clusters with < K_MIN tasks (k-anonymity spirit)

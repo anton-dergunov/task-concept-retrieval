@@ -6,7 +6,7 @@ projects/sections and are skipped (they never appear in the agenda).
 Normalization keeps the representation system-agnostic plain text: the title
 with markup and links cleaned up. Tags are kept aside but not matched on — they
 say *when/where* a task can be done, not what it is about.
-See design/experimentation-strategy.md §2.
+See docs/experimentation-strategy.md §2.
 """
 
 from __future__ import annotations
