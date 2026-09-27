@@ -180,10 +180,84 @@ set.
 - **Icon coverage:** at about 3 positives per task, 10k tasks give about 30k positives
   (~9 per icon on average, very skewed). Description-based scoring covers the tail.
 
-## 7. Experiment order
+**Model choice and cost** (checked 2026-09-27 against Google's published Gemini API
+prices; Vertex normally matches, but check the console before a large run).
 
-1. Label: about 400 Personal (200 dev / 200 test) first, then continue toward the targets
-   in §3.
+Per task:
+
+- **input** about 1,800 tokens: the contact sheet is about 1,100 tokens at high media
+  resolution (Gemini 3 counts about 280 / 560 / 1,120 tokens per image at low / medium /
+  high), plus about 700 tokens of instructions and task text;
+- **output** about 1,500 tokens: about 400 of JSON grades plus low-level thinking.
+
+Output is billed at 6–8× the input rate, so it dominates the cost.
+
+| Model (Vertex) | $/1M tokens in / out | 1,000 tasks, one pass | batch (−50%) |
+|---|---|---|---|
+| Gemini 3.1 Pro (preview) | 2.00 / 12.00 | ~$22 (up to ~$40 with long thinking) | ~$11–20 |
+| **Gemini 3.5 Flash** | 1.50 / 9.00 | **~$16** | **~$8** |
+| Gemini 3 Flash (preview) | 0.50 / 3.00 | ~$5 | ~$3 |
+| Gemini 3.1 Flash-Lite | 0.25 / 1.50 | ~$3 | ~$1.40 |
+
+- **Selection:** run 3.1 Pro, 3.5 Flash and 3 Flash on about 200 dev tasks (a few dollars
+  in total) and measure agreement with the human labels. Use the cheapest model within
+  about 2–3 points of the best for bulk judging; keep Pro for tasks where the permuted
+  runs disagree.
+- **Permutations:** three permuted passes triple the cost. With 3.5 Flash that is about $50
+  for 1,000 tasks, or about $25 in batch.
+- **Cheaper output:** ask only for the icons that fit (top 5 with grades, plus "no good
+  icon") instead of grading all 30, and use the lowest thinking level. Together these cut
+  output about 2–3×.
+- **Batch mode:** Vertex batch prediction returns within hours, which is fine for dataset
+  building.
+
+## 7. Icon description quality (v2 descriptions)
+
+The descriptions are the only matching signal, and they also drive the labelling tool's
+search. About 80% of them (3,422) came from **Gemini 3.1 Flash-Lite** on the free tier,
+494 are untagged early runs, and the rest came from 2.5 Flash-Lite / 2.5 Flash / 3.5 Flash.
+
+**Spot check** (10 random Flash-Lite icons re-described by 3.1 Pro with the same prompt,
+each judged against the glyph):
+
+- Flash-Lite **misread 2 of 10**: a bathroom scale read as a "speech bubble / chat"; a
+  settings-sliders glyph read as "comparison / alternatives";
+- it was weaker on 2 more: an electric meter read as a battery, and bones framed as
+  archaeology rather than a medical appointment;
+- it under-rated `icon_usefulness` on one more;
+- Pro was right or better on all 10.
+
+A ~20% misreading rate would mean several hundred misdescribed icons.
+
+**Plan: v2 descriptions, kept alongside v1** (`data/icon_descriptions_v2/`), so description
+quality becomes an experimental variable. "Does a stronger describer improve matching?" is
+itself a clean ablation.
+
+1. **Pilot first:** about 50 icons × {3 Flash, 3.5 Flash, 3.1 Pro}, judged against the
+   glyphs, to pick the cheapest model that reads glyphs reliably.
+2. **Improve the prompt while at it:**
+   - Ask first for a literal `depiction` field (what is drawn: objects, symbols, overlays
+     such as "+", "i" or a slash). Describing before interpreting reduces misreadings.
+   - Replace the ML-heavy example task titles with a mix across life areas (the synthetic
+     sets show how narrow the old examples were).
+   - Ask for `poor_matches` that look plausible but are wrong.
+3. **Describe each distinct glyph once** (3,486 non-discarded, plus the discarded ones if
+   re-judging `discard`) and copy the result to its aliases.
+4. **Cost:** input about 2k tokens and output about 2.5k tokens (JSON plus thinking) per
+   icon. For ~4k icons that is about $140 with 3.1 Pro, ~$100 with 3.5 Flash, and ~$35 with
+   3 Flash; batch halves each.
+
+**Order relative to labelling.** Regenerate **before** heavy labelling. Candidate pools
+and search are built from descriptions, so misdescribed icons are systematically missing
+from the pools. To keep the v1-vs-v2 comparison fair (pool bias), build the labelling pools
+from matchers over *both* description versions, plus the random icons and search already
+in place.
+
+## 8. Experiment order
+
+1. Regenerate icon descriptions (v2, §7) and rebuild the labelling pools over v1 + v2.
+   Then label: about 400 Personal (200 dev / 200 test) first, then continue toward the
+   targets in §3.
 2. Baselines on dev: B1, M1, M2, M3, plus zero-shot image towers (SigLIP 2 / jina-clip-v2).
 3. Judge calibration on dev (§6); pick the judge.
 4. Judge about 3k training-pool tasks; fine-tune the dual encoder; learning curve;
