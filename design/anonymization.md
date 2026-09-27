@@ -158,6 +158,38 @@ the pattern is reported here.
 - **From all three sets alike:** country of residence. The style exemplars carry British
   spelling, so the floor leaks it too.
 
+### Second run: rebalancing toward everyday life (2026-09-27)
+
+The proportional set is **82% ML study and side projects**: 67 of 87 usable clusters, as
+classified by Claude from the abstracted skeletons. That mirrors the private list faithfully,
+but as a benchmark of *personal* tasks it under-represents career and everyday life. The
+owner asked for ~500 more everyday tasks. `synth_personal.py oversample` added **485**:
+
+- **293 from the 19 non-ML skeletons** (career, life admin, general hobbies, health,
+  travel): square-root allocation, at most 20 per cluster. The one *distinctive hobby*
+  cluster is never oversampled.
+- **192 from 16 generic life-area skeletons** written from a fixed list of life areas,
+  with **no private input**: household admin, finances, appointments, family, workplace
+  admin, and so on.
+
+The new tasks pass the same gates, plus a near-duplicate filter (cosine > 0.95 to an
+accepted synthetic task, which fired 4 times). Every record has `meta.origin`
+(`skeleton` / `oversample` / `life_area`) and `meta.domain`, so the proportional subset
+(`origin == "skeleton"`) stays available for eval-set-fidelity measurements.
+
+Re-audit of the 1,506-task set:
+
+- canaries 0 / 30;
+- NN-similarity quantiles unchanged (q99 0.907 vs. holdout 0.930); DCR share 0.522;
+- topic JS divergence 0.211, up from 0.198: the intended, deliberate shift.
+
+**The generic life-area tasks act as chaff.** The attacker's guesses for relationship
+status and health conditions moved *away* from the truth, to confident but wrong profiles
+drawn from the invented everyday tasks. Its location guess also changed to a wrong region.
+Profession and hobbies are still inferred, as before. Diluting a released set with
+plausible, unrelated personal tasks is a cheap, measurable defence against
+attribute inference. It deserves a proper ablation: attacker accuracy vs. chaff ratio.
+
 **Open decision.** Topic-level attributes (profession, hobbies) are the utility–privacy
 frontier: removing them means changing the topic mix. The candidate mitigation is *topic
 substitution*: re-skin distinctive hobby clusters as other hobbies of the same broad kind,

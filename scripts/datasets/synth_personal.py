@@ -247,11 +247,11 @@ def prepare(rng, np_rng):
     return private, canaries, emb, skeletons, targets
 
 
-def generate_round(rnd, deficits, skeletons, rng, stats, exemplars, workers):
-    """Generate OVERGEN × deficit tasks per cluster (tag = round, so rounds differ)."""
+def generate_round(rnd, deficits, skeletons, rng, stats, exemplars, workers, overgen=None):
+    """Generate overgen × deficit tasks per cluster (tag = round, so rounds differ)."""
     jobs = []
     for c, need in sorted(deficits.items()):
-        n_gen = int(np.ceil(need * (OVERGEN if rnd == 0 else 2.0)))
+        n_gen = int(np.ceil(need * (overgen or (OVERGEN if rnd == 0 else 2.0))))
         specs = [(weighted(rng, SHAPES), weighted(rng, MARKUP)) for _ in range(n_gen)]
         specs = [(s, "no markup" if s.startswith("no body") else m) for s, m in specs]
         for k, chunk in enumerate(batched(specs, 12)):
@@ -385,6 +385,154 @@ def cmd_generate(args) -> None:
     write_jsonl(WORK / "rejected.jsonl", rejected)
     save(WORK / "gate_report.json", gstats)
     print(f"{len(out)} candidates -> {CANDIDATES}")
+
+
+# --- oversample: rebalance toward everyday life ---------------------------------------
+#
+# The skeleton-proportional set mirrors the private list, which is dominated by ML
+# study and side projects. For a benchmark of *personal* tasks, career and everyday
+# life are under-represented, so ~500 extra tasks are generated from (a) the existing
+# non-ML skeletons and (b) generic life-area skeletons written from scratch (no
+# private input). Distinctive hobby clusters are never oversampled: they identify the
+# owner. Every record carries meta.origin, so the proportional subset
+# (origin == "skeleton") stays available for fidelity measurements.
+
+DOMAIN_SYSTEM = """You classify abstract topic descriptions of to-do list clusters by life domain."""
+DOMAINS = ["ml_tech", "career", "life_admin", "health_fitness", "home", "social_family",
+           "travel", "hobby_general", "hobby_distinctive", "other"]
+DOMAIN_SCHEMA = {"type": "object", "properties": {"clusters": {"type": "array", "items": {
+    "type": "object", "properties": {"cluster": {"type": "integer"},
+                                     "domain": {"type": "string", "enum": DOMAINS}},
+    "required": ["cluster", "domain"]}}}, "required": ["clusters"]}
+
+LIFE_AREAS = [
+    "household admin and paperwork", "personal finance, budgeting and taxes",
+    "doctor, dentist and self-care appointments", "fitness and exercise routines",
+    "home maintenance and small repairs", "cooking, meal planning and groceries",
+    "family and friends: birthdays, gifts, calls, visits", "trip planning and travel logistics",
+    "career development and job search", "workplace admin: reviews, 1:1s, expenses, meetings",
+    "learning a foreign language", "reading and books", "digital housekeeping: backups, "
+    "passwords, subscriptions, phone cleanup", "shopping, orders and returns",
+    "volunteering and community", "everyday hobbies: gardening, running, board games, music",
+]
+AREA_SYSTEM = """You write abstract topic skeletons for a synthetic to-do list dataset. The
+skeletons describe what kinds of tasks an ordinary working adult keeps for a life area."""
+AREA_SCHEMA = {"type": "object", "properties": {"areas": {"type": "array", "items": {
+    "type": "object", "properties": {"label": {"type": "string"}, "description": {"type": "string"},
+                                     "task_patterns": {"type": "array", "items": {"type": "string"}}},
+    "required": ["label", "description", "task_patterns"]}}}, "required": ["areas"]}
+
+OVERSAMPLE_DOMAINS = {"career", "life_admin", "health_fitness", "home", "social_family",
+                      "travel", "hobby_general", "other"}
+OS_FROM_CLUSTERS = 300     # tasks from existing non-ML skeletons
+OS_FROM_AREAS = 200        # tasks from generic life-area skeletons
+OS_CAP_PER_CLUSTER = 20
+OS_DUP_SIM = 0.95          # reject a new task this close to an accepted synthetic one
+AREA_BASE = 1000           # cluster ids of life-area skeletons
+
+
+def classify_domains(usable):
+    items = "\n".join(f"{c}: {s['label']} — {s['description']}" for c, s in sorted(usable.items()))
+    res = complete_json("Classify each cluster into one domain: " + ", ".join(DOMAINS)
+                        + ". hobby_distinctive = an unusual, niche hobby that could single out its "
+                        "owner (e.g. a specific dance style or rare instrument); hobby_general = "
+                        "common hobbies.\n\n" + items + '\n\nReturn JSON {"clusters": [{"cluster", "domain"}]}.',
+                        system=DOMAIN_SYSTEM, schema=DOMAIN_SCHEMA, backend="claude-cli",
+                        models=[GEN_MODEL], private=True,
+                        validate=lambda d: {x["cluster"] for x in d["clusters"]} == set(usable))
+    return {x["cluster"]: x["domain"] for x in res["data"]["clusters"]}
+
+
+def life_area_skeletons():
+    res = complete_json("Write one skeleton per life area: " + "; ".join(LIFE_AREAS)
+                        + '. Each: "label" (2–5 words), "description" (2–3 sentences), "task_patterns" '
+                        '(6–8 generalized task patterns). Return JSON {"areas": [...]} in the same order.',
+                        system=AREA_SYSTEM, schema=AREA_SCHEMA, backend="claude-cli", models=[GEN_MODEL],
+                        validate=lambda d: len(d["areas"]) == len(LIFE_AREAS))
+    return {AREA_BASE + i: {**a, "identifying": False} for i, a in enumerate(res["data"]["areas"])}
+
+
+def cmd_oversample(args) -> None:
+    rng = random.Random(SEED + 500)
+    stats = load(STYLE_STATS)
+    exemplars = [e for e in read_jsonl(EXEMPLARS) if e["lang"] == "en"]
+    private, canaries, emb, skeletons, targets = prepare(rng, np.random.default_rng(SEED))
+    usable = {c: s for c, s in skeletons.items() if not s["identifying"]}
+
+    domains = classify_domains(usable)
+    save(WORK / "domains.json", domains)
+    print("cluster domains:", dict(Counter(domains.values())))
+    areas = life_area_skeletons()
+    save(WORK / "life_areas.json", areas)
+
+    pool = {c: targets[c] for c in usable if domains[c] in OVERSAMPLE_DOMAINS}
+    weight = {c: np.sqrt(n) for c, n in pool.items()}
+    total_w = sum(weight.values())
+    os_targets = {c: min(OS_CAP_PER_CLUSTER, max(1, round(OS_FROM_CLUSTERS * w / total_w)))
+                  for c, w in weight.items()}
+    per_area = OS_FROM_AREAS // len(areas)
+    os_targets.update({c: per_area for c in areas})
+    all_sk = {**usable, **areas}
+    print(f"oversampling {sum(os_targets.values())} tasks: {len(pool)} non-ML clusters + "
+          f"{len(areas)} life areas")
+
+    existing = read_jsonl(CANDIDATES)
+    for r in existing:
+        r["meta"].setdefault("origin", "skeleton")
+    os_path = WORK / "generated_oversample.jsonl"
+    generated = read_jsonl(os_path) if os_path.exists() else []
+    rnd = 100 + max((g["round"] - 100 + 1 for g in generated), default=0)
+    if not generated:
+        generated = generate_round(100, os_targets, all_sk, rng, stats, exemplars, args.workers,
+                                   overgen=1.5)
+        write_jsonl(os_path, generated)
+        rnd = 101
+    have = {r["id"] for r in existing}
+    kept_emb = emb_of(existing)
+    while True:
+        # Cap per cluster only after de-duplication (below), so duplicates never use up quota.
+        uncapped = {c: 10 ** 6 for c in os_targets}
+        out, rejected, gstats, _ = apply_gates(generated, private, emb, canaries, uncapped)
+        # Drop near-duplicates of already accepted synthetic tasks (oversampled clusters
+        # tend to repeat themselves), then recount deficits.
+        new, dups = [], 0
+        cand = [r for r in out if r["id"] not in have]
+        if cand:
+            ce = emb_of(cand)
+            acc = kept_emb
+            taken = Counter()
+            for r, e in zip(cand, ce):
+                c = r["meta"]["cluster"]
+                if taken[c] >= os_targets[c]:
+                    continue
+                if float((acc @ e).max()) > OS_DUP_SIM:
+                    dups += 1
+                    continue
+                new.append(r)
+                taken[c] += 1
+                acc = np.vstack([acc, e[None]])
+        per_c = Counter(r["meta"]["cluster"] for r in new)
+        deficits = {c: n - per_c[c] for c, n in os_targets.items() if per_c[c] < n}
+        print(f"after round {rnd - 1}: {len(new)} new kept; {gstats['rejected']} gated, {dups} near-dups; "
+              f"deficit {sum(deficits.values())}")
+        if not deficits or rnd > 100 + args.rounds:
+            break
+        generated += generate_round(rnd, deficits, all_sk, random.Random(SEED + rnd), stats,
+                                    exemplars, args.workers)
+        write_jsonl(os_path, generated)
+        rnd += 1
+
+    for r in new:
+        r["meta"]["origin"] = "life_area" if r["meta"]["cluster"] >= AREA_BASE else "oversample"
+        r["meta"]["domain"] = domains.get(r["meta"]["cluster"], "life_area")
+    for r in existing:
+        r["meta"]["domain"] = domains.get(r["meta"]["cluster"])
+    combined = existing + new
+    random.Random(SEED).shuffle(combined)
+    write_jsonl(CANDIDATES, combined)
+    save(WORK / "oversample_report.json", {"targets": sum(os_targets.values()), "kept": len(new),
+                                           "gates": gstats})
+    print(f"{len(existing)} existing + {len(new)} new = {len(combined)} candidates -> {CANDIDATES}")
 
 
 # --- audit -----------------------------------------------------------------------
@@ -534,11 +682,12 @@ def cmd_publish(args) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["generate", "audit", "publish"])
+    ap.add_argument("cmd", choices=["generate", "oversample", "audit", "publish"])
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--rounds", type=int, default=2, help="top-up rounds for clusters short of target")
     args = ap.parse_args()
-    {"generate": cmd_generate, "audit": cmd_audit, "publish": cmd_publish}[args.cmd](args)
+    {"generate": cmd_generate, "oversample": cmd_oversample, "audit": cmd_audit,
+     "publish": cmd_publish}[args.cmd](args)
 
 
 if __name__ == "__main__":

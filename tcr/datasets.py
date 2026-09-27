@@ -7,6 +7,7 @@ matched on (tags, provenance, translation group, original concept).
 
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import dataclass
 from pathlib import Path
@@ -57,3 +58,17 @@ def load(key: str) -> List[dict]:
 def available() -> List[Dataset]:
     """Datasets whose file exists locally, in registry order."""
     return [d for d in DATASETS.values() if d.path.exists()]
+
+
+SPLIT_SEED = "split-v1"
+
+
+def split_of(task_id: str) -> str:
+    """Fixed 50/50 "dev" / "test" assignment by id hash (design/fine-tuning-plan.md §2).
+
+    Independent of the labelling order (which uses a different hash), so any labelled
+    prefix is split evenly. "test" is touched only for final numbers; "dev" is for
+    tuning, gate calibration and judge calibration.
+    """
+    h = int(hashlib.sha1((SPLIT_SEED + task_id).encode("utf-8")).hexdigest()[:8], 16)
+    return "test" if h % 2 == 0 else "dev"

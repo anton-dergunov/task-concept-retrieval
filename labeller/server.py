@@ -30,6 +30,7 @@ TOKEN_RE = re.compile(r"[^\W_]+")
 STATUSES = {"labelled", "none", "skip", "flagged", "cleared"}
 DONE = {"labelled", "none", "skip", "flagged"}  # "cleared" = selection undone
 ORDER_SEED = "labeller-order-v1"
+SPLIT_SEED = "split-v1"
 PWA_FILES = {
     "manifest.webmanifest": ("application/manifest+json", "no-cache"),
     "sw.js": ("text/javascript; charset=utf-8", "no-cache"),
@@ -54,6 +55,25 @@ def stem(tok: str) -> str:
             base = tok[: -len(suf)]
             return base + "y" if suf == "ies" else base
     return tok
+
+
+def split_of(task_id: str) -> str:
+    """Same dev/test assignment as tcr.datasets.split_of (kept stdlib-only here)."""
+    h = int(hashlib.sha1((SPLIT_SEED + task_id).encode("utf-8")).hexdigest()[:8], 16)
+    return "test" if h % 2 == 0 else "dev"
+
+
+def labelling_order(rows: List[dict]) -> List[dict]:
+    """Fixed pseudo-random order that alternates test and dev tasks, so any labelled
+    prefix is a uniform sample split evenly between the two; adding tasks later does
+    not reshuffle the existing ones' relative order."""
+    key = lambda r: hashlib.sha1((ORDER_SEED + r["id"]).encode()).hexdigest()  # noqa: E731
+    test = sorted((r for r in rows if split_of(r["id"]) == "test"), key=key)
+    dev = sorted((r for r in rows if split_of(r["id"]) == "dev"), key=key)
+    out = []
+    for i in range(max(len(test), len(dev))):
+        out += [x[i] for x in (test, dev) if i < len(x)]
+    return out
 
 
 def tokenize(text: str) -> List[str]:
@@ -127,10 +147,7 @@ class Store:
         for d in self.datasets:
             key = d["key"]
             rows = read_jsonl(bundle / "tasks" / (key + ".jsonl"))
-            # Fixed pseudo-random order: any labelled prefix is a uniform sample,
-            # and adding tasks later does not reshuffle the existing ones.
-            rows.sort(key=lambda r: hashlib.sha1((ORDER_SEED + r["id"]).encode()).hexdigest())
-            self.tasks[key] = rows
+            self.tasks[key] = labelling_order(rows)
             latest = {}
             path = labels_dir / (key + ".jsonl")
             if path.exists():

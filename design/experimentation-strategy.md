@@ -140,7 +140,7 @@ would look artificially good). They are **never** used as the held-out evaluatio
 |---|---|---|
 | **Personal** (private, gitignored) | All ~2,950 of the author's real tasks: title + body, org markup kept | **Primary** in-domain eval. Never tuned on, never published |
 | **Realistic** | 623 tasks from the vendored `productivity-system` samples (titles, rarely bodies) | Public in-domain eval (a demo repo's data) |
-| **Personal-synth** | ~1,000 tasks generated from abstracted topics of Personal, audited for leakage (`design/anonymization.md`) | Public stand-in for Personal; used to measure eval-set fidelity |
+| **Personal-synth** | 1,506 tasks generated from abstracted topics of Personal (1,021 proportional + 485 rebalanced toward career and everyday life, `meta.origin`), audited for leakage (`design/anonymization.md`) | Public stand-in for Personal; the proportional subset measures eval-set fidelity |
 | **Public-short** | 600 real MS-LaTTE to-do titles + 225 MASSIVE EN/ES/RU items rewritten as tasks | Short-task regime, real phrasing, multilingual |
 | **Public-expanded** | 500 other MS-LaTTE concepts expanded into the author's style (title + body), EN/ES/RU | Long-task regime on public data. Secondary: LLM-written text |
 
