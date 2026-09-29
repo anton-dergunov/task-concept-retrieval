@@ -21,6 +21,8 @@ PRIVATE_DIR = DATA_DIR / "private"     # personal tasks + their labels (gitignor
 RAW_DIR = DATA_DIR / "raw"             # downloaded third-party corpora (gitignored)
 RESULTS_DIR = ROOT / "results"
 CACHE_DIR = ROOT / ".cache" / "tcr"  # embedding caches (gitignored)
+# Deployable bundle (scripts/export_bundle.py; method "M3x" scores with it).
+BUNDLE_DIR = Path(os.environ.get("TCR_BUNDLE", ROOT / ".cache" / "bundle"))
 
 # --- Models ------------------------------------------------------------------
 # Default encoder is multilingual: tasks may be English, Spanish, or Russian.

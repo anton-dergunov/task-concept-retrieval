@@ -6,6 +6,7 @@ Methods (see docs/matching-methods.md):
   M1 - multilingual field-weighted bi-encoder + quality prior
   M2 - nearest-example voting (task <-> example_tasks)
   M3 - hybrid: RRF of B1 + M1
+  M3x - an exported bundle (tcr/bundle.py) scored as the agenda runs it
 """
 
 from __future__ import annotations
@@ -40,9 +41,17 @@ _BUILDERS: Dict[str, Callable] = {
                           quality_weight=config.QUALITY_PRIOR_WEIGHT,
                           include_examples=inc, name="M1")],
         name="M3"),
+    "M3x": lambda icons, inc: _bundle_matcher(),
 }
 
-ALL_METHODS = ["B0", "B1", "M1", "M2", "M3"]
+
+def _bundle_matcher() -> Matcher:
+    # Imported lazily: onnxruntime/tokenizers are only needed for bundles.
+    from ..bundle import BundleMatcher
+    return BundleMatcher(config.BUNDLE_DIR)
+
+
+ALL_METHODS = ["B0", "B1", "M1", "M2", "M3", "M3x"]
 
 
 def build_method(key: str, icons: Sequence[IconDoc] = None, include_examples: bool = True) -> Matcher:

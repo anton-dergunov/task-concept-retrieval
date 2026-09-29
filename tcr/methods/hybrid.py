@@ -36,6 +36,12 @@ class HybridMatcher(Matcher):
             ranked, signal = m.rank_and_signal(query_text, top_k=pool)
             signals.append(signal)
             for rank, (name, score) in enumerate(ranked):
+                # A member ranks only what it actually matched. Without this, a
+                # query BM25 has no word for (any Russian or Spanish task) gets
+                # all-zero scores, argsort ranks icons alphabetically, and "10k"
+                # takes BM25's rank-1 vote, tying the dense top-1 and winning.
+                if score <= 0:
+                    break
                 rrf[name] += 1.0 / (self.rrf_k + rank + 1)
                 conf[name] = max(conf[name], float(score))
         if not rrf:
