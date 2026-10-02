@@ -1,6 +1,6 @@
 """Embedding index over icon documents with on-disk caching.
 
-Reuses the cache pattern from productivity-system/scripts/org_emoji_matcher.py:
+Reuses the cache pattern from agentic-org-planner/scripts/org_emoji_matcher.py:
 an .npz keyed on (icon names, model, view) so a stale cache is never silently
 mixed with a different vector space. Encoding 4k short docs takes a few seconds;
 caching makes repeat runs instant.

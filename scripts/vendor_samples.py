@@ -2,7 +2,7 @@
 """Vendor the realistic sample org files into this repo and build the
 "Realistic" task dataset (D2) from them.
 
-Source (read-only): productivity-system/samples/realistic/**/*.org
+Source (read-only): agentic-org-planner/samples/realistic/**/*.org
 Dest: data/eval/realistic/          raw .org snapshot (committed), mirrors the source
       data/datasets/realistic.jsonl  parsed tasks, shared dataset schema (committed)
 
@@ -24,7 +24,7 @@ sys.path.insert(0, str(ROOT))
 from tcr.datasets import DATASETS, write_jsonl  # noqa: E402
 from tcr.org_tasks import iter_org_files, parse_org_tasks, to_records  # noqa: E402
 
-DEFAULT_SRC = Path("/Users/anton/projects/products/productivity-system/samples/realistic")
+DEFAULT_SRC = Path("/Users/anton/projects/products/agentic-org-planner/samples/realistic")
 DEST_DIR = ROOT / "data" / "eval" / "realistic"
 
 

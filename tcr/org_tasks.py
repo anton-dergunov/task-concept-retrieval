@@ -38,7 +38,7 @@ _CLOCK_LINE_RE = re.compile(r"^\s*CLOCK:")
 _DRAWER_START_RE = re.compile(r"^\s*:[A-Za-z][\w-]*:\s*$")
 _DRAWER_END_RE = re.compile(r"^\s*:END:\s*$", re.IGNORECASE)
 
-# Mirrors productivity-system's ps-org-files.el: files the agenda never scans.
+# Mirrors agentic-org-planner's ps-org-files.el: files the agenda never scans.
 _EXCLUDED_FILE_RES = [re.compile(r"^init\.org$"), re.compile(r"^workspace\.org$"),
                       re.compile(r"conflicted copy")]
 _EXCLUDED_DIR_RES = [re.compile(r"^\."), re.compile(r"^Journal$"), re.compile(r"^Archive$")]

@@ -2,7 +2,7 @@
 
     python scripts/export_bundle.py --method M3 --out DIR [--check]
 
-DIR is typically productivity-system's `icons/task-matcher/`. With --check, the
+DIR is typically agentic-org-planner's `icons/task-matcher/`. With --check, the
 exported bundle is compared with the in-repo method (fp32 sentence-transformers)
 on the Realistic tasks: top-1 agreement, gate agreement, and latency.
 """

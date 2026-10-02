@@ -1,6 +1,6 @@
 """Deployable matcher bundles: export a method as standalone files, and score with one.
 
-The agenda (productivity-system) runs a matcher without this repository, without
+The agenda (agentic-org-planner) runs a matcher without this repository, without
 torch and without sentence-transformers: only onnxruntime + tokenizers + numpy.
 A *bundle* is everything that runner needs, precomputed here:
 
@@ -20,7 +20,7 @@ sides share one vector space. `BundleMatcher` scores through the same
 `HybridMatcher` code as M3, so the deployed artifact can be compared with M3
 directly (`scripts/export_bundle.py --check`).
 
-The runner in productivity-system (`scripts/org_task_icon_matcher.py`) mirrors
+The runner in agentic-org-planner (`scripts/org_task_icon_matcher.py`) mirrors
 `OnnxEncoder`, `compose_query` and the scoring here; keep them in step.
 """
 

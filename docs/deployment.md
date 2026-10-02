@@ -1,13 +1,13 @@
 # Deploying a matcher to the agenda
 
 How a method from this repository reaches the agenda in
-[productivity-system](https://github.com/anton-dergunov/productivity-system) without taking this repository, torch or
+[agentic-org-planner](https://github.com/anton-dergunov/agentic-org-planner) without taking this repository, torch or
 sentence-transformers with it.
 
 ## The bundle
 
 `scripts/export_bundle.py` writes a **bundle**: a directory of precomputed icon data plus
-a manifest. The agenda's runner (`scripts/org_task_icon_matcher.py` in productivity-system)
+a manifest. The agenda's runner (`scripts/org_task_icon_matcher.py` in agentic-org-planner)
 needs only `onnxruntime`, `tokenizers` and `numpy` to score with it.
 
 | File | Holds |
@@ -24,7 +24,7 @@ The M3 bundle is about 4 MB. The encoder is downloaded separately (235 MB).
 
 ```bash
 .venv/bin/python scripts/export_bundle.py --method M3 \
-    --out ../../products/productivity-system/icons/task-matcher --check
+    --out ../../products/agentic-org-planner/icons/task-matcher --check
 ```
 
 `--check` compares the bundle with the in-repo method on the Realistic tasks. `M3x` in
