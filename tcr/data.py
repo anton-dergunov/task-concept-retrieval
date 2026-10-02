@@ -136,3 +136,18 @@ def load_icons(include_discarded: bool = False, dedupe: bool = True) -> tuple:
 
 def icons_by_name(include_discarded: bool = False) -> Dict[str, IconDoc]:
     return {ic.name: ic for ic in load_icons(include_discarded)}
+
+
+def removed_by_hand(path=None) -> set:
+    """Icon names marked for removal in the manual review of the icon set (the
+    labeller's /curate page). The file is an event log: the latest event per icon wins.
+    Each name stands for its glyph, i.e. for all of its aliases too."""
+    path = path or config.CURATION_PATH
+    removed: set = set()
+    if path.exists():
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    rec = json.loads(line)
+                    (removed.add if rec["removed"] else removed.discard)(rec["icon"])
+    return removed

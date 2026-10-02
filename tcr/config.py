@@ -17,6 +17,7 @@ ICON_PNG_DIR = DATA_DIR / "icons"
 CATALOG_PATH = DATA_DIR / "material_symbols_catalog.json"
 EVAL_DIR = DATA_DIR / "eval"
 DATASETS_DIR = DATA_DIR / "datasets"   # public task datasets (committed)
+CURATION_PATH = DATA_DIR / "labels" / "icon_curation.jsonl"  # manual icon review (event log)
 PRIVATE_DIR = DATA_DIR / "private"     # personal tasks + their labels (gitignored)
 RAW_DIR = DATA_DIR / "raw"             # downloaded third-party corpora (gitignored)
 RESULTS_DIR = ROOT / "results"

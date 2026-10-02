@@ -5,6 +5,10 @@ Serves the single-page UI (index.html), the bundle built by
 scripts/build_label_bundle.py, and stores labels as an append-only event log,
 one file per dataset (labels/<dataset>.jsonl; the latest record per task wins).
 
+Also serves the review of the icon set itself (curate.html, at /curate) when the
+bundle has a curation.json (scripts/build_curation_bundle.py); its log is
+labels/icon_curation.jsonl (the latest event per icon wins).
+
 Run:  python3 server.py [--host 127.0.0.1] [--port 8766] [--bundle ./bundle]
                         [--labels ./labels] [--token SECRET]
 See README.md for NAS / Tailscale deployment.
@@ -31,6 +35,8 @@ STATUSES = {"labelled", "none", "skip", "flagged", "cleared"}
 DONE = {"labelled", "none", "skip", "flagged"}  # "cleared" = selection undone
 ORDER_SEED = "labeller-order-v1"
 SPLIT_SEED = "split-v1"
+CURATION_LOG = "icon_curation.jsonl"
+PAGES = {"/": "index.html", "/index.html": "index.html", "/curate": "curate.html"}
 PWA_FILES = {
     "manifest.webmanifest": ("application/manifest+json", "no-cache"),
     "sw.js": ("text/javascript; charset=utf-8", "no-cache"),
@@ -221,9 +227,51 @@ class Store:
         return next(x for x in self.summary() if x["key"] == key)
 
 
+class Curation:
+    """Review of the icon set itself: every distinct glyph is shown once, and a
+    marked glyph is to be removed from the set. Events are appended to
+    labels/icon_curation.jsonl; the latest event per icon wins."""
+
+    def __init__(self, bundle: Path, labels_dir: Path):
+        self.layout = json.loads((bundle / "curation.json").read_text(encoding="utf-8"))
+        self.names = set(self.layout["icons"])
+        labels_dir.mkdir(parents=True, exist_ok=True)
+        self.path = labels_dir / CURATION_LOG
+        self.lock = threading.Lock()
+        self.removed = set()
+        if self.path.exists():
+            for rec in read_jsonl(self.path):
+                self._apply(rec)
+
+    def _apply(self, rec: dict) -> None:
+        (self.removed.add if rec["removed"] else self.removed.discard)(rec["icon"])
+
+    def state(self) -> dict:
+        # Icons of an older bundle stay in the log but are not part of this grid.
+        return dict(self.layout, removed=sorted(self.removed & self.names))
+
+    def save(self, payload: dict) -> dict:
+        ts = time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        client = str(payload.get("client", ""))[:40]
+        recs = []
+        for e in payload["events"][:10000]:
+            if e["icon"] not in self.names:
+                raise KeyError("unknown icon")
+            recs.append({"icon": e["icon"], "removed": bool(e["removed"]),
+                         "bulk": bool(e.get("bulk")),   # set by "Remove all", not a single tap
+                         "ts": ts, "client": client})
+        with self.lock:
+            with open(str(self.path), "a", encoding="utf-8") as f:
+                for rec in recs:
+                    f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                    self._apply(rec)
+        return {"removed": len(self.removed & self.names)}
+
+
 class Handler(BaseHTTPRequestHandler):
-    store = None   # type: Store
-    token = None   # type: Optional[str]
+    store = None      # type: Store
+    curation = None   # type: Optional[Curation]
+    token = None      # type: Optional[str]
 
     def log_message(self, fmt, *args):
         pass
@@ -262,12 +310,16 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(403, b"forbidden: open /?token=...", "text/plain")
         path = url.path
         try:
-            if path in ("/", "/index.html"):
+            if path in PAGES:
                 extra = {"Cache-Control": "no-cache"}
                 if self.token and qs.get("token", [""])[0] == self.token:
                     extra["Set-Cookie"] = "lt=%s; Max-Age=31536000; Path=/; HttpOnly; SameSite=Strict" % self.token
-                body = (HERE / "index.html").read_bytes()
+                body = (HERE / PAGES[path]).read_bytes()
                 return self._send(200, body, "text/html; charset=utf-8", extra)
+            if path == "/api/curation":
+                if self.curation is None:
+                    return self._json({"error": "no curation bundle: run scripts/build_curation_bundle.py"}, 404)
+                return self._json(self.curation.state())
             if path == "/api/datasets":
                 return self._json(self.store.summary())
             if path == "/api/task":
@@ -279,13 +331,14 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/api/search":
                 q = qs.get("q", [""])[0][:200]
                 return self._json({"icons": self.store.search.query(q)})
-            if path.startswith("/icons/") and path.endswith(".png"):
-                name = path[len("/icons/"):-len(".png")]
-                p = self.store.bundle / "icons" / (name + ".png")
-                if not NAME_RE.match(name) or not p.is_file():
-                    return self._send(404, b"not found", "text/plain")
-                return self._send(200, p.read_bytes(), "image/png",
-                                  {"Cache-Control": "public, max-age=31536000, immutable"})
+            for folder in ("icons", "sprites"):
+                if path.startswith("/%s/" % folder) and path.endswith(".png"):
+                    name = path[len(folder) + 2:-len(".png")]
+                    p = self.store.bundle / folder / (name + ".png")
+                    if not NAME_RE.match(name) or not p.is_file():
+                        return self._send(404, b"not found", "text/plain")
+                    return self._send(200, p.read_bytes(), "image/png",
+                                      {"Cache-Control": "public, max-age=31536000, immutable"})
             return self._send(404, b"not found", "text/plain")
         except (ValueError, KeyError) as e:
             return self._json({"error": str(e)}, 400)
@@ -294,12 +347,14 @@ class Handler(BaseHTTPRequestHandler):
         url = urlparse(self.path)
         if not self._authorized(parse_qs(url.query)):
             return self._send(403, b"forbidden", "text/plain")
-        if url.path != "/api/label":
+        save = {"/api/label": self.store.save,
+                "/api/curation": self.curation and self.curation.save}.get(url.path)
+        if not save:
             return self._send(404, b"not found", "text/plain")
         try:
             n = int(self.headers.get("Content-Length", "0"))
             payload = json.loads(self.rfile.read(min(n, 1 << 20)).decode("utf-8"))
-            return self._json(self.store.save(payload))
+            return self._json(save(payload))
         except (ValueError, KeyError, TypeError) as e:
             return self._json({"error": str(e)}, 400)
 
@@ -317,6 +372,10 @@ def main() -> None:
     Handler.token = args.token
     for s in Handler.store.summary():
         print("  %-16s %5d / %d" % (s["display"], s["done"], s["total"]))
+    if (args.bundle / "curation.json").exists():
+        Handler.curation = Curation(args.bundle, args.labels)
+        print("  %-16s %5d marked of %d  (/curate)" % ("Icon review", len(Handler.curation.state()["removed"]),
+                                                      len(Handler.curation.names)))
     srv = ThreadingHTTPServer((args.host, args.port), Handler)
     print("Serving on http://%s:%d/" % (args.host, args.port))
     try:

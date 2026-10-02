@@ -221,7 +221,14 @@ icons:
 matcher on Personal and does not hurt Public-short. Report the test split once, at the
 end, for both versions: the v1 vs. v2 ablation is a result in itself.
 
-## 7. Order relative to labelling
+## 7. Order relative to curation and labelling
+
+**First, review the icon set by hand** (the labelling tool's `/curate` page; see
+[labeller/README.md](../labeller/README.md)). Every distinct glyph, including the ones v1
+discarded, is shown blind and the unusable ones are removed: property-only glyphs such as
+`1.5x` or a megapixel count, which v1 kept with usefulness 8 and 7. Pass 1 then skips the removed
+glyphs, and the result (`data/labels/icon_curation.jsonl`) is the human reference for
+`discard` and `task_fit` (§3): v1's `discard` is scored against it now, v2's later.
 
 Do the pilot and pass 1 **before** heavy labelling, then rebuild the labelling pools over
 v1 + v2 (§6, pool fairness). Pass 2 (contrast) can follow while labelling runs: the pools

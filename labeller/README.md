@@ -32,6 +32,50 @@ Synology NAS. Labels save on every tap, so you can close the page and continue o
 - Keys (desktop): ← / → to move between tasks, `/` to search, Esc to clear the search.
 - Deep link: `#ds=personal&pos=125`.
 
+## Reviewing the icon set
+
+A second page, `/curate` (also **⋯ → Review the icon set**), shows every distinct glyph at
+once (3,901: aliases are collapsed) so the ones that cannot label a task can be removed by
+hand. It includes the glyphs the v1 descriptions discarded, with nothing telling them apart,
+so the result also measures how good the model's `discard` is.
+
+- Look-alike glyphs sit together (ordered by image similarity, never by name), in numbered
+  groups.
+- **Tap** marks a glyph for removal; **tap again** undoes it. **Remove all** in a group
+  header marks the whole group (with Undo); then tap the ones to keep.
+- **Marked only** shows just the marked glyphs, for a final check. **S / M / L** changes the
+  tile size.
+- Every tap is saved. Without a connection the changes wait on the device and are sent when
+  it returns; the header shows `✓ saved` or the number unsaved.
+- **What to remove:** a glyph that can never be the subject of a task
+  ([icon-selection-principles](../docs/icon-selection-principles.md)):
+  - it shows only a property, quantity or setting (`1.5x`, a megapixel count, signal bars);
+  - it is interface chrome with no subject (chevrons, drag handles, layout toggles);
+  - it is only letters or digits;
+  - it cannot be read at a glance.
+
+  When in doubt, keep it: weak icons are down-weighted and the matcher can abstain.
+
+Build it once on the Mac (a few minutes: it embeds and clusters the glyphs), then deploy
+as usual:
+
+```bash
+python scripts/build_curation_bundle.py
+```
+
+The log is `labels/icon_curation.jsonl`: one line per change, `{icon, removed, bulk, ts,
+client}`, where the latest line per icon wins and `bulk` marks a **Remove all**.
+`python scripts/import_labels.py` copies it to `data/labels/` and prints the agreement with
+the model's `discard`.
+
+To use the laptop instead of the NAS, with the tablet on the same network:
+
+```bash
+python3 labeller/server.py --host 0.0.0.0 --token <secret>
+```
+
+and open `http://<laptop-name>.local:8766/curate?token=<secret>` on the tablet.
+
 ## Install on the home screen
 
 Over HTTPS (Tailscale serve), use the browser's *Add to Home Screen* / *Install app*: the

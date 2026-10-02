@@ -104,6 +104,7 @@ footer button { padding: 11px 14px; border-radius: 12px; background: var(--chip)
   <div id="menu">
     <button data-act="open">Next unlabelled task</button>
     <button data-act="goto">Go to task #…</button>
+    <button data-act="curate">Review the icon set</button>
   </div>
 </header>
 <section id="task">
@@ -350,6 +351,7 @@ $("menu").addEventListener("click", (e) => {
   const act = e.target.dataset.act;
   if (act === "open") load();
   if (act === "goto") { const n = parseInt(prompt(`Task number (1–${cur.total})`), 10); if (n > 0) load(n - 1); }
+  if (act === "curate") { flushSave(); location.href = "curate"; }
 });
 document.addEventListener("keydown", (e) => {
   if (e.target === $("q")) return;
