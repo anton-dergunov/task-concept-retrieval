@@ -35,26 +35,30 @@ Synology NAS. Labels save on every tap, so you can close the page and continue o
 ## Reviewing the icon set
 
 A second page, `/curate` (also **⋯ → Review the icon set**), shows every distinct glyph at
-once (3,901: aliases are collapsed) so the ones that cannot label a task can be removed by
-hand. It includes the glyphs the v1 descriptions discarded, with nothing telling them apart,
-so the result also measures how good the model's `discard` is.
+once (3,901: aliases are collapsed) so each can be given one of three levels by hand. It
+includes the glyphs the v1 descriptions discarded, with nothing telling them apart, so the
+result also measures how good the model's `discard` and `icon_usefulness` are.
+
+| Level | Meaning |
+|---|---|
+| **Reject** | Can never be the subject of a task ([icon-selection-principles](../docs/icon-selection-principles.md)): it shows only a property, quantity or setting (`1.5x`, a megapixel count, signal bars); it is interface chrome with no subject (chevrons, drag handles, layout toggles); it is only letters or digits; or it cannot be read at a glance. |
+| **Somewhat** | Readable, but narrow, generic or ambiguous: it would label few tasks, or fits mostly as the context of a task rather than its subject. |
+| **Useful** | A clear object or subject that ordinary tasks are about. |
 
 - Look-alike glyphs sit together (ordered by image similarity, never by name), in numbered
   groups.
-- **Tap** marks a glyph for removal; **tap again** undoes it. **Remove all** in a group
-  header marks the whole group (with Undo); then tap the ones to keep.
-- **Marked only** shows just the marked glyphs, for a final check. **S / M / L** changes the
-  tile size.
+- The three buttons under the header are the **brush**: the level a tap gives. **Tap** an
+  icon to give it that level; **tap again** to clear it. Tapping with another brush
+  changes the level. Each button shows how many icons have its level. On a keyboard,
+  `1` / `2` / `3` pick the brush.
+- **Rest → …** in a group header gives the brush's level to every icon of the group that
+  has none yet (with Undo). So tap the exceptions first, then finish the group with one tap.
+  Once a group is done the button becomes **Clear group**.
+- The header shows how many icons are **left** without a level. **Show** filters the grid
+  to one level or to the unlabelled icons; an icon you label while a filter is on stays in
+  place until the filter is chosen again. **S / M / L** changes the tile size.
 - Every tap is saved. Without a connection the changes wait on the device and are sent when
   it returns; the header shows `✓ saved` or the number unsaved.
-- **What to remove:** a glyph that can never be the subject of a task
-  ([icon-selection-principles](../docs/icon-selection-principles.md)):
-  - it shows only a property, quantity or setting (`1.5x`, a megapixel count, signal bars);
-  - it is interface chrome with no subject (chevrons, drag handles, layout toggles);
-  - it is only letters or digits;
-  - it cannot be read at a glance.
-
-  When in doubt, keep it: weak icons are down-weighted and the matcher can abstain.
 
 Build it once on the Mac (a few minutes: it embeds and clusters the glyphs), then deploy
 as usual:
@@ -63,10 +67,11 @@ as usual:
 python scripts/build_curation_bundle.py
 ```
 
-The log is `labels/icon_curation.jsonl`: one line per change, `{icon, removed, bulk, ts,
-client}`, where the latest line per icon wins and `bulk` marks a **Remove all**.
-`python scripts/import_labels.py` copies it to `data/labels/` and prints the agreement with
-the model's `discard`.
+The log is `labels/icon_curation.jsonl`: one line per change, `{icon, label, bulk, ts,
+client}`. `label` is `reject`, `somewhat`, `useful`, or `null` when the level was cleared;
+the latest line per icon wins, and `bulk` marks a change made by a group button rather than
+a single tap. `python scripts/import_labels.py` copies it to `data/labels/` and prints the
+levels against the model's `discard` and `icon_usefulness`.
 
 To use the laptop instead of the NAS, with the tablet on the same network:
 

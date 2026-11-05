@@ -6,7 +6,8 @@ ones to data/private/labels/<dataset>.jsonl (gitignored). Files are append-only
 event logs, so the server's copy is the source of truth and simply replaces ours.
 
 The icon review's log (icon_curation.jsonl) goes to data/labels/ as well (it holds
-icon names only), and is compared with the v1 descriptions' `discard`.
+icon names only), and its levels are compared with the v1 descriptions' `discard`
+and `icon_usefulness`.
 
 Run: python scripts/import_labels.py [labeller/labels]
 """
@@ -21,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from tcr import config  # noqa: E402
-from tcr.data import glyph_hashes, load_icons, removed_by_hand  # noqa: E402
+from tcr.data import CURATION_LABELS, glyph_hashes, icon_labels, load_icons  # noqa: E402
 from tcr.datasets import DATASETS  # noqa: E402
 
 
@@ -33,22 +34,31 @@ def copy_log(path: Path, dest: Path) -> None:
 
 
 def curation_audit() -> None:
-    """Human removals against the model's `discard`, one row per distinct glyph."""
+    """Human levels against the v1 descriptions' `discard` and `icon_usefulness`, one
+    count per distinct glyph."""
     hashes = glyph_hashes()
-    removed = {hashes.get(n) for n in removed_by_hand()}
+    human = {hashes.get(n): lab for n, lab in icon_labels().items()}
     kept_by_model = {hashes[ic.name] for ic in load_icons()}
-    glyphs = {hashes[ic.name] for ic in load_icons(include_discarded=True)}
-    cell = {(h, m): 0 for h in (True, False) for m in (True, False)}
-    for g in glyphs:
-        cell[(g in removed, g not in kept_by_model)] += 1
-    both, human_only, model_only = cell[(True, True)], cell[(True, False)], cell[(False, True)]
-    print(f"  removed by hand: {both + human_only} of {len(glyphs)} glyphs")
-    print(f"  {'':16}{'model discarded':>16}{'model kept':>12}")
-    print(f"  {'human removed':16}{both:16d}{human_only:12d}")
-    print(f"  {'human kept':16}{model_only:16d}{cell[(False, False)]:12d}")
-    if both + model_only and both + human_only:
-        print(f"  model discard vs. human: precision {both / (both + model_only):.2f}, "
-              f"recall {both / (both + human_only):.2f}")
+    cols = ("discard", "≤6", "7", "≥8")
+    rows = CURATION_LABELS + ("unlabelled",)
+    cell = {(r, c): 0 for r in rows for c in cols}
+    for ic in load_icons(include_discarded=True):
+        g, u = hashes[ic.name], round(ic.usefulness * 10)
+        col = "discard" if g not in kept_by_model else "≤6" if u <= 6 else "7" if u == 7 else "≥8"
+        cell[(human.get(g, "unlabelled"), col)] += 1
+    total = sum(cell.values())
+    done = total - sum(cell[("unlabelled", c)] for c in cols)
+    print(f"  labelled by hand: {done} of {total} glyphs")
+    print(f"  {'':12}" + "".join(f"{c:>9}" for c in cols) + "   (v1: discard, else icon_usefulness)")
+    for r in rows:
+        print(f"  {r:12}" + "".join(f"{cell[(r, c)]:9d}" for c in cols))
+    # The model's discard as a predictor of a human reject, over the labelled glyphs.
+    both = cell[("reject", "discard")]
+    rejected = sum(cell[("reject", c)] for c in cols)
+    discarded = sum(cell[(r, "discard")] for r in CURATION_LABELS)
+    if rejected and discarded:
+        print(f"  model discard vs. human reject: precision {both / discarded:.2f}, "
+              f"recall {both / rejected:.2f}")
 
 
 def main() -> None:

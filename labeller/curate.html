@@ -13,14 +13,18 @@
 :root {
   --bg: #ffffff; --fg: #1d1d1f; --muted: #6e6e73; --line: #e5e5ea; --tile: #ffffff;
   --accent: #0a66d8; --accent-fg: #ffffff; --chip: #f2f2f7;
-  --bad: #d70015; --bad-bg: #ffe5e7; --icon-filter: none; --icon-blend: multiply;
+  --reject: #d70015; --reject-bg: #ffe5e7; --somewhat: #b25000; --somewhat-bg: #ffefd2;
+  --useful: #1a7f37; --useful-bg: #dff5e4; --on-level: #ffffff;
+  --icon-filter: none; --icon-blend: multiply;
   --cell: 48px; --gap: 6px;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #111113; --fg: #f2f2f7; --muted: #98989f; --line: #2c2c2e; --tile: #1c1c1e;
     --accent: #4c9dff; --accent-fg: #0b0b0c; --chip: #242426;
-    --bad: #ff453a; --bad-bg: #4a1513; --icon-filter: invert(1); --icon-blend: screen;
+    --reject: #ff453a; --reject-bg: #4a1513; --somewhat: #ffb340; --somewhat-bg: #40300c;
+    --useful: #30d158; --useful-bg: #10361b; --on-level: #0b0b0c;
+    --icon-filter: invert(1); --icon-blend: screen;
   }
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -31,16 +35,30 @@ body { display: flex; flex-direction: column; height: 100dvh; overflow: hidden;
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer;
   touch-action: manipulation; }
 
-header { display: flex; align-items: center; gap: 10px; padding: 8px 16px;
-  border-bottom: 1px solid var(--line); font-size: 14px; color: var(--muted); flex: none; }
+header { display: flex; align-items: center; gap: 10px; padding: 8px 16px 0;
+  font-size: 14px; color: var(--muted); flex: none; }
 header a { color: var(--accent); text-decoration: none; white-space: nowrap; }
 #count { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   color: var(--fg); font-weight: 600; }
 #state { white-space: nowrap; }
-#state.bad { color: var(--bad); }
-header button { padding: 5px 10px; border-radius: 9px; background: var(--chip); color: var(--fg);
-  font-weight: 600; white-space: nowrap; }
-#only.on { background: var(--fg); color: var(--bg); }
+#state.bad { color: var(--reject); }
+header button, #show { padding: 5px 10px; border-radius: 9px; background: var(--chip); color: var(--fg);
+  font: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; border: 0; }
+
+/* The brush: the level a tap gives an icon. */
+#tools { display: flex; align-items: center; gap: 10px; padding: 8px 16px;
+  border-bottom: 1px solid var(--line); flex: none; }
+#brush { flex: 1; display: flex; gap: 6px; min-width: 0; }
+#brush button { flex: 1; min-width: 0; padding: 7px 6px; border-radius: 10px; background: var(--chip);
+  font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  border: 2px solid transparent; }
+#brush button b { font-weight: 500; opacity: .75; margin-left: 4px; }
+#brush [data-l="reject"] { color: var(--reject); }
+#brush [data-l="somewhat"] { color: var(--somewhat); }
+#brush [data-l="useful"] { color: var(--useful); }
+#brush [data-l="reject"].on { background: var(--reject); color: var(--on-level); }
+#brush [data-l="somewhat"].on { background: var(--somewhat); color: var(--on-level); }
+#brush [data-l="useful"].on { background: var(--useful); color: var(--on-level); }
 @media (max-width: 480px) { .wide { display: none; } }
 
 #all { flex: 1; overflow-y: auto; position: relative; padding: 0 16px calc(24px + env(safe-area-inset-bottom)); }
@@ -56,14 +74,22 @@ header button { padding: 5px 10px; border-radius: 9px; background: var(--chip); 
   background-size: calc(var(--cols) * 100%) calc(var(--rows) * 100%);
   background-position: var(--x) var(--y); }
 .live .t::before { filter: var(--icon-filter); mix-blend-mode: var(--icon-blend); }
-.t.rm { border: 2px solid var(--bad); background: var(--bad-bg); }
-.t.rm::before { opacity: .4; }
-.t.rm::after { content: ""; position: absolute; inset: 0; border-radius: 10px;
-  background: linear-gradient(to top right, transparent calc(50% - 1.5px), var(--bad) calc(50% - 1.5px),
-    var(--bad) calc(50% + 1.5px), transparent calc(50% + 1.5px)); }
-#all.only .t:not(.rm), #all.only .g.clean { display: none; }
+/* Each level has a colour and a mark of its own: a strike, a tilde, a tick. */
+.t.reject { border: 2px solid var(--reject); background: var(--reject-bg); }
+.t.reject::before { opacity: .4; }
+.t.reject::after { content: ""; position: absolute; inset: 0; border-radius: 10px;
+  background: linear-gradient(to top right, transparent calc(50% - 1.5px), var(--reject) calc(50% - 1.5px),
+    var(--reject) calc(50% + 1.5px), transparent calc(50% + 1.5px)); }
+.t.somewhat { border: 2px solid var(--somewhat); background: var(--somewhat-bg); }
+.t.useful { border: 2px solid var(--useful); background: var(--useful-bg); }
+.t.somewhat::after, .t.useful::after { position: absolute; top: 1px; right: 1px; width: 15px; height: 15px;
+  border-radius: 8px; color: var(--on-level); font-size: 11px; font-weight: 800; line-height: 15px;
+  text-align: center; }
+.t.somewhat::after { content: "~"; background: var(--somewhat); }
+.t.useful::after { content: "✓"; background: var(--useful); }
+.hide { display: none; }
 #empty { color: var(--muted); text-align: center; padding: 40px 0; display: none; }
-#all.only.clean #empty { display: block; }
+#all.none #empty { display: block; }
 
 #toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom));
   transform: translateX(-50%); display: flex; align-items: center; gap: 14px; background: var(--fg);
@@ -80,10 +106,23 @@ header button { padding: 5px 10px; border-radius: 9px; background: var(--chip); 
   <a href="./">‹ Tasks</a>
   <span id="count"></span>
   <span id="state"></span>
-  <button id="only" title="Show only the icons marked for removal">Marked only</button>
+  <select id="show" aria-label="Show">
+    <option value="">Show all</option>
+    <option value="unlabelled">Unlabelled</option>
+    <option value="reject">Reject</option>
+    <option value="somewhat">Somewhat</option>
+    <option value="useful">Useful</option>
+  </select>
   <button id="size" title="Tile size" aria-label="Tile size">S</button>
 </header>
-<main id="all"><div id="empty">Nothing is marked for removal.</div></main>
+<div id="tools">
+  <div id="brush" role="radiogroup" aria-label="Level a tap gives an icon">
+    <button data-l="reject" role="radio">✕ Reject<b></b></button>
+    <button data-l="somewhat" role="radio">~ Somewhat<b></b></button>
+    <button data-l="useful" role="radio">✓ Useful<b></b></button>
+  </div>
+</div>
+<main id="all"><div id="empty">No icons here.</div></main>
 <div id="toast"><span></span><button>Undo</button></div>
 <script>
 "use strict";
@@ -95,9 +134,13 @@ const store = {
 const fmt = (n) => n.toLocaleString("en-US");
 const CLIENT = (navigator.userAgent.match(/iPad|iPhone|Android|Macintosh|Windows|Linux/) || [""])[0];
 const SIZES = { S: 48, M: 64, L: 84 };
+const LEVELS = ["reject", "somewhat", "useful"];
+const NAMES = { reject: "Reject", somewhat: "Somewhat", useful: "Useful" };
 
 let lay = null;          // {build, cols, rows, per_sheet, icons, groups}
-let removed = new Set(); // icon names marked for removal
+let labels = new Map();  // icon name -> level; absent = not labelled yet
+let brush = "reject";    // the level a tap gives
+let show = "";           // filter: "", "unlabelled" or a level
 let tiles = [];          // tile element per icon, in display order
 let sections = [];       // section element per group
 let pending = [];        // events not yet confirmed by the server
@@ -155,25 +198,38 @@ function renderState() {
 }
 
 // --- rendering ------------------------------------------------------------
+const levelOf = (i) => labels.get(lay.icons[i]) || null;
 function renderCount() {
-  $("count").innerHTML = `${fmt(removed.size)} marked<span class="wide"> of ${fmt(lay.icons.length)}</span>`;
-  $("all").classList.toggle("clean", removed.size === 0);
+  const n = { reject: 0, somewhat: 0, useful: 0 };
+  for (const lab of labels.values()) n[lab]++;
+  for (const b of $("brush").children) b.lastElementChild.textContent = fmt(n[b.dataset.l]);
+  const left = lay.icons.length - labels.size;
+  $("count").innerHTML = `${fmt(left)} left<span class="wide"> of ${fmt(lay.icons.length)}</span>`;
 }
 function renderGroup(g) {
   const [start, size] = lay.groups[g];
-  let n = 0;
-  for (let i = start; i < start + size; i++) if (removed.has(lay.icons[i])) n++;
+  let left = 0;
+  for (let i = start; i < start + size; i++) if (!levelOf(i)) left++;
   const sec = sections[g];
-  sec.classList.toggle("clean", n === 0);
   sec.querySelector("span").textContent =
-    `Group ${g + 1} · ${fmt(size)} icons` + (n ? ` · ${fmt(n)} marked` : "");
-  sec.querySelector("button").textContent = n === size ? "Restore all" : "Remove all";
+    `Group ${g + 1} · ${fmt(size)} icons` + (left ? ` · ${fmt(left)} left` : " · done");
+  // One tap finishes a group: whatever is still unlabelled gets the brush's level.
+  sec.querySelector("button").textContent = left ? `Rest → ${NAMES[brush]}` : "Clear group";
 }
-function setMark(i, on) {
+function setLevel(i, level) {
   const name = lay.icons[i];
-  if (on) removed.add(name); else removed.delete(name);
-  tiles[i].classList.toggle("rm", on);
-  tiles[i].setAttribute("aria-pressed", on);
+  if (level) labels.set(name, level); else labels.delete(name);
+  tiles[i].classList.remove(...LEVELS);
+  if (level) tiles[i].classList.add(level);
+}
+function setBrush(level) {
+  brush = LEVELS.includes(level) ? level : "reject";
+  store.set("curate-brush", brush);
+  for (const b of $("brush").children) {
+    b.classList.toggle("on", b.dataset.l === brush);
+    b.setAttribute("aria-checked", b.dataset.l === brush);
+  }
+  if (lay) lay.groups.forEach((_, g) => renderGroup(g));
 }
 function build() {
   const pct = (k, n) => (n > 1 ? (k / (n - 1)) * 100 : 0) + "%";
@@ -195,7 +251,7 @@ function build() {
       b.className = "t s" + Math.floor(i / lay.per_sheet); b.dataset.i = i;
       b.style.setProperty("--x", pct(k % lay.cols, lay.cols));
       b.style.setProperty("--y", pct(Math.floor(k / lay.cols), lay.rows));
-      if (removed.has(lay.icons[i])) b.classList.add("rm");
+      if (levelOf(i)) b.classList.add(levelOf(i));
       tiles.push(b); grid.appendChild(b);
     }
     sections.push(sec); frag.appendChild(sec);
@@ -219,32 +275,34 @@ function warm(s, n) {
 }
 
 // --- state changes --------------------------------------------------------
+// A tap gives the icon the brush's level; a tap on an icon that already has it clears it.
 function toggle(i) {
-  const on = !removed.has(lay.icons[i]);
-  setMark(i, on);
+  const level = levelOf(i) === brush ? null : brush;
+  setLevel(i, level);
   renderGroup(groupOf(i)); renderCount();
-  queue([{ icon: lay.icons[i], removed: on }]);
+  queue([{ icon: lay.icons[i], label: level }]);
 }
 function groupOf(i) { return +tiles[i].closest(".g").dataset.g; }
 function toggleGroup(g) {
   const [start, size] = lay.groups[g];
   const idx = Array.from({ length: size }, (_, k) => start + k);
-  const before = idx.map((i) => removed.has(lay.icons[i]));
-  const on = !before.every(Boolean);   // "Restore all" only when everything is marked
-  const apply = (target) => {
+  const before = idx.map(levelOf);
+  const fill = before.includes(null);   // otherwise the group is done, and the button clears it
+  const level = brush;
+  const apply = (want) => {
     const events = [];
     idx.forEach((i, k) => {
-      const want = target === null ? before[k] : target;
-      if (removed.has(lay.icons[i]) !== want) {
-        setMark(i, want); events.push({ icon: lay.icons[i], removed: want, bulk: true });
+      if (levelOf(i) !== want[k]) {
+        setLevel(i, want[k]); events.push({ icon: lay.icons[i], label: want[k], bulk: true });
       }
     });
     renderGroup(g); renderCount();
     if (events.length) queue(events);
     return events.length;
   };
-  const n = apply(on);
-  toast(`${on ? "Marked" : "Restored"} ${fmt(n)} icons in group ${g + 1}`, () => apply(null));
+  const n = apply(before.map((b) => (fill ? b || level : null)));
+  toast(fill ? `${fmt(n)} icons in group ${g + 1} → ${NAMES[level]}` : `Cleared group ${g + 1} (${fmt(n)} icons)`,
+        () => apply(before));
 }
 
 // --- view: size, filter, resume -------------------------------------------
@@ -253,6 +311,28 @@ function setSize(key) {
   document.documentElement.style.setProperty("--cell", SIZES[key] + "px");
   document.documentElement.style.setProperty("--gap", (key === "S" ? 6 : 8) + "px");
   $("size").textContent = key; store.set("curate-size", key);
+}
+// The filter is a snapshot taken when it is chosen: an icon labelled while a filter is
+// on stays where it is, so the grid never shifts under the finger.
+function setShow(value) {
+  const all = $("all");
+  if (!show && value) setShow.place = topGroup();   // where to return to, in the full grid
+  show = value;
+  let any = false;
+  sections.forEach((sec, g) => {
+    const [start, size] = lay.groups[g];
+    let visible = 0;
+    for (let i = start; i < start + size; i++) {
+      const keep = !show || (levelOf(i) || "unlabelled") === show;
+      tiles[i].classList.toggle("hide", !keep);
+      if (keep) visible++;
+    }
+    sec.classList.toggle("hide", !visible);
+    any = any || visible > 0;
+  });
+  all.classList.toggle("none", !any);
+  if (show) all.scrollTop = 0;
+  else if (setShow.place) { const [g, off] = setShow.place; all.scrollTop = sections[g].offsetTop + off; }
 }
 function topGroup() {
   const all = $("all");
@@ -270,9 +350,7 @@ function keepPlace(change) {   // keep the same group on screen across a layout 
 let placeTimer = null;
 function rememberPlace() {
   clearTimeout(placeTimer);
-  placeTimer = setTimeout(() => {
-    if (!$("all").classList.contains("only")) store.set("curate-place", JSON.stringify(topGroup()));
-  }, 400);
+  placeTimer = setTimeout(() => { if (!show) store.set("curate-place", JSON.stringify(topGroup())); }, 400);
 }
 
 // --- wiring ---------------------------------------------------------------
@@ -281,18 +359,18 @@ $("all").addEventListener("click", (e) => {
   const b = e.target.closest("h2 button"); if (b) toggleGroup(+b.closest(".g").dataset.g);
 });
 $("all").addEventListener("scroll", rememberPlace, { passive: true });
+$("brush").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (b) setBrush(b.dataset.l);
+});
+$("show").onchange = () => setShow($("show").value);
 $("size").onclick = () => {
   const keys = Object.keys(SIZES);
   keepPlace(() => setSize(keys[(keys.indexOf($("size").textContent) + 1) % keys.length]));
 };
-$("only").onclick = () => {
-  const on = !$("all").classList.contains("only");
-  if (on) $("only").place = topGroup();   // where to return to, measured in the full grid
-  $("all").classList.toggle("only", on);
-  $("only").classList.toggle("on", on);
-  if (on) { $("all").scrollTop = 0; }
-  else { const [g, off] = $("only").place; $("all").scrollTop = sections[g].offsetTop + off; }
-};
+document.addEventListener("keydown", (e) => {   // desktop: 1 / 2 / 3 pick the brush
+  if (e.target === $("show") || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (LEVELS[+e.key - 1]) setBrush(LEVELS[+e.key - 1]);
+});
 window.addEventListener("online", flush);
 document.addEventListener("visibilitychange", () => { if (document.hidden) flush(); });
 
@@ -302,13 +380,17 @@ if ("serviceWorker" in navigator) {
 
 (async function init() {
   setSize(store.get("curate-size"));
-  const s = await api("api/curation");
-  lay = s; removed = new Set(s.removed);
+  setBrush(store.get("curate-brush"));
+  lay = await api("api/curation");
+  labels = new Map(Object.entries(lay.labels));
   // Changes a previous session could not send are replayed on top of the server's state.
+  // (Before the three levels existed, an event only said `removed`.)
   const known = new Set(lay.icons);
-  try { pending = JSON.parse(store.get("curate-pending") || "[]").filter((e) => known.has(e.icon)); }
-  catch (e) { pending = []; }
-  for (const e of pending) { if (e.removed) removed.add(e.icon); else removed.delete(e.icon); }
+  try {
+    pending = JSON.parse(store.get("curate-pending") || "[]").filter((e) => known.has(e.icon))
+      .map((e) => ("label" in e ? e : { icon: e.icon, label: e.removed ? "reject" : null, bulk: e.bulk }));
+  } catch (e) { pending = []; }
+  for (const e of pending) { if (e.label) labels.set(e.icon, e.label); else labels.delete(e.icon); }
   build();
   renderState(); flush();
   try {

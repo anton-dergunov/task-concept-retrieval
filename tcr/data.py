@@ -138,16 +138,33 @@ def icons_by_name(include_discarded: bool = False) -> Dict[str, IconDoc]:
     return {ic.name: ic for ic in load_icons(include_discarded)}
 
 
-def removed_by_hand(path=None) -> set:
-    """Icon names marked for removal in the manual review of the icon set (the
-    labeller's /curate page). The file is an event log: the latest event per icon wins.
-    Each name stands for its glyph, i.e. for all of its aliases too."""
+# Levels of the manual review of the icon set, worst to best.
+CURATION_LABELS = ("reject", "somewhat", "useful")
+
+
+def curation_label(rec: dict) -> Optional[str]:
+    """The level an event gives its icon, or None when it clears the level. Events
+    from before the three levels existed only say `removed`."""
+    if "label" in rec:
+        return rec["label"]
+    return "reject" if rec["removed"] else None
+
+
+def icon_labels(path=None) -> Dict[str, str]:
+    """{icon name: level} from the manual review of the icon set (the labeller's
+    /curate page); icons not reviewed yet are absent. The file is an event log: the
+    latest event per icon wins. Each name stands for its glyph, i.e. for all of its
+    aliases too."""
     path = path or config.CURATION_PATH
-    removed: set = set()
+    labels: Dict[str, str] = {}
     if path.exists():
         with open(path, "r", encoding="utf-8") as f:
             for line in f:
                 if line.strip():
                     rec = json.loads(line)
-                    (removed.add if rec["removed"] else removed.discard)(rec["icon"])
-    return removed
+                    label = curation_label(rec)
+                    if label is None:
+                        labels.pop(rec["icon"], None)
+                    else:
+                        labels[rec["icon"]] = label
+    return labels

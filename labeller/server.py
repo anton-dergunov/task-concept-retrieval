@@ -7,7 +7,7 @@ one file per dataset (labels/<dataset>.jsonl; the latest record per task wins).
 
 Also serves the review of the icon set itself (curate.html, at /curate) when the
 bundle has a curation.json (scripts/build_curation_bundle.py); its log is
-labels/icon_curation.jsonl (the latest event per icon wins).
+labels/icon_curation.jsonl (reject / somewhat / useful; the latest event per icon wins).
 
 Run:  python3 server.py [--host 127.0.0.1] [--port 8766] [--bundle ./bundle]
                         [--labels ./labels] [--token SECRET]
@@ -36,6 +36,7 @@ DONE = {"labelled", "none", "skip", "flagged"}  # "cleared" = selection undone
 ORDER_SEED = "labeller-order-v1"
 SPLIT_SEED = "split-v1"
 CURATION_LOG = "icon_curation.jsonl"
+CURATION_LABELS = ("reject", "somewhat", "useful")
 PAGES = {"/": "index.html", "/index.html": "index.html", "/curate": "curate.html"}
 PWA_FILES = {
     "manifest.webmanifest": ("application/manifest+json", "no-cache"),
@@ -227,10 +228,19 @@ class Store:
         return next(x for x in self.summary() if x["key"] == key)
 
 
+def curation_label(rec: dict) -> Optional[str]:
+    """The level an event gives its icon, or None when it clears the level.
+    (Same as tcr.data.curation_label, kept stdlib-only here.) Events from before
+    the three levels existed only say `removed`."""
+    if "label" in rec:
+        return rec["label"]
+    return "reject" if rec["removed"] else None
+
+
 class Curation:
-    """Review of the icon set itself: every distinct glyph is shown once, and a
-    marked glyph is to be removed from the set. Events are appended to
-    labels/icon_curation.jsonl; the latest event per icon wins."""
+    """Review of the icon set itself: every distinct glyph is shown once and given
+    one of CURATION_LABELS. Events are appended to labels/icon_curation.jsonl; the
+    latest event per icon wins, and a null label clears it."""
 
     def __init__(self, bundle: Path, labels_dir: Path):
         self.layout = json.loads((bundle / "curation.json").read_text(encoding="utf-8"))
@@ -238,17 +248,24 @@ class Curation:
         labels_dir.mkdir(parents=True, exist_ok=True)
         self.path = labels_dir / CURATION_LOG
         self.lock = threading.Lock()
-        self.removed = set()
+        self.labels = {}   # icon -> label
         if self.path.exists():
             for rec in read_jsonl(self.path):
                 self._apply(rec)
 
     def _apply(self, rec: dict) -> None:
-        (self.removed.add if rec["removed"] else self.removed.discard)(rec["icon"])
+        label = curation_label(rec)
+        if label is None:
+            self.labels.pop(rec["icon"], None)
+        else:
+            self.labels[rec["icon"]] = label
+
+    def _current(self) -> dict:
+        # Icons of an older bundle stay in the log but are not part of this grid.
+        return {n: lab for n, lab in self.labels.items() if n in self.names}
 
     def state(self) -> dict:
-        # Icons of an older bundle stay in the log but are not part of this grid.
-        return dict(self.layout, removed=sorted(self.removed & self.names))
+        return dict(self.layout, labels=self._current())
 
     def save(self, payload: dict) -> dict:
         ts = time.strftime("%Y-%m-%dT%H:%M:%S%z")
@@ -257,15 +274,18 @@ class Curation:
         for e in payload["events"][:10000]:
             if e["icon"] not in self.names:
                 raise KeyError("unknown icon")
-            recs.append({"icon": e["icon"], "removed": bool(e["removed"]),
-                         "bulk": bool(e.get("bulk")),   # set by "Remove all", not a single tap
+            label = curation_label(e)
+            if label is not None and label not in CURATION_LABELS:
+                raise ValueError("bad label")
+            recs.append({"icon": e["icon"], "label": label,
+                         "bulk": bool(e.get("bulk")),   # set by a group button, not a single tap
                          "ts": ts, "client": client})
         with self.lock:
             with open(str(self.path), "a", encoding="utf-8") as f:
                 for rec in recs:
                     f.write(json.dumps(rec, ensure_ascii=False) + "\n")
                     self._apply(rec)
-        return {"removed": len(self.removed & self.names)}
+        return dict(Counter(self._current().values()))
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -374,8 +394,8 @@ def main() -> None:
         print("  %-16s %5d / %d" % (s["display"], s["done"], s["total"]))
     if (args.bundle / "curation.json").exists():
         Handler.curation = Curation(args.bundle, args.labels)
-        print("  %-16s %5d marked of %d  (/curate)" % ("Icon review", len(Handler.curation.state()["removed"]),
-                                                      len(Handler.curation.names)))
+        print("  %-16s %5d / %d  (/curate)" % ("Icon review", len(Handler.curation.state()["labels"]),
+                                              len(Handler.curation.names)))
     srv = ThreadingHTTPServer((args.host, args.port), Handler)
     print("Serving on http://%s:%d/" % (args.host, args.port))
     try:
