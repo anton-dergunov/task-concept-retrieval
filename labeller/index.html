@@ -68,12 +68,15 @@ header select { font: inherit; font-weight: 600; color: var(--fg); background: n
   border: 1px solid var(--line); background: var(--chip); color: var(--fg); }
 #clear { color: var(--accent); font-size: 15px; display: none; }
 
-#grid { flex: 1; overflow-y: auto; padding: 4px 16px 12px; display: grid; align-content: start;
+#grid { position: relative; flex: 1; overflow-y: auto; padding: 4px 16px 12px; display: grid; align-content: start;
   grid-template-columns: repeat(auto-fill, minmax(var(--cell), 1fr)); gap: var(--gap); }
 .tile { position: relative; aspect-ratio: 1; background: var(--tile); border: 1px solid var(--line);
   border-radius: 12px; display: flex; align-items: center; justify-content: center; }
 .tile img { width: 72%; height: 72%; filter: var(--icon-filter); pointer-events: none; user-select: none; }
 .tile.sel { border: 2px solid var(--accent); }
+/* Picks sit at the front of the candidate grid in rank order; drag one to reorder. */
+#grid.cands .tile.sel { touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
+.tile.dragging { z-index: 5; cursor: grabbing; box-shadow: 0 8px 24px rgba(0,0,0,.25); opacity: .95; }
 .tile .badge { position: absolute; top: -6px; left: -6px; min-width: 22px; height: 22px; padding: 0 5px;
   border-radius: 11px; background: var(--accent); color: var(--accent-fg); font-size: 13px; font-weight: 700;
   display: none; align-items: center; justify-content: center; }
@@ -215,11 +218,16 @@ function renderTask() {
     $("more").textContent = "more";
   });
 }
-function renderGrid() {
+function renderGrid(animate = false) {
   const grid = $("grid");
   const base = expanded ? cur.icons.concat(cur.more || []) : cur.icons;
+  // Candidate view: the picks first, in rank order (search picks included), then the rest
+  // of the grid in its fixed order. Search results keep their own order.
   const names = results !== null ? results
-    : base.concat(ranking.filter((n) => !base.includes(n)));
+    : ranking.concat(base.filter((n) => !ranking.includes(n)));
+  grid.classList.toggle("cands", results === null);
+  const before = new Map();
+  if (animate) for (const b of grid.children) if (b.dataset.n) before.set(b.dataset.n, b.getBoundingClientRect());
   grid.innerHTML = "";
   if (!names.length) {
     grid.innerHTML = `<div id="empty">${results !== null ? "No icons match" : ""}</div>`;
@@ -239,6 +247,24 @@ function renderGrid() {
   }
   grid.appendChild(frag);
   paintSelection();
+  if (animate) flip(before);
+}
+// Slide each tile from where it was to where it is now, so a pick visibly moves.
+function flip(before) {
+  for (const b of $("grid").children) {
+    const r0 = before.get(b.dataset.n);
+    if (!r0) continue;
+    const r1 = b.getBoundingClientRect();
+    const dx = r0.left - r1.left, dy = r0.top - r1.top;
+    if (!dx && !dy) continue;
+    b.style.transition = "none";
+    b.style.transform = `translate(${dx}px, ${dy}px)`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      b.style.transition = "transform .2s ease";
+      b.style.transform = "";
+      b.addEventListener("transitionend", () => { b.style.transition = ""; }, { once: true });
+    }));
+  }
 }
 function showMore() {
   expanded = true;
@@ -294,7 +320,8 @@ function toggle(name) {
   if (k >= 0) ranking.splice(k, 1); else ranking.push(name);
   if (results !== null && k < 0 && $("q").value.trim()) rememberQuery($("q").value.trim());
   status = ranking.length ? "labelled" : (status === null ? null : "cleared");
-  paintSelection(); renderHeader(); scheduleSave();
+  if (results === null) renderGrid(true); else paintSelection();
+  renderHeader(); scheduleSave();
 }
 function rememberQuery(q) { if (queries[queries.length - 1] !== q) queries.push(q); }
 async function next() {
@@ -326,9 +353,71 @@ function clearSearch() { $("q").value = ""; onSearchInput(); }
 
 // --- wiring ---------------------------------------------------------------
 $("grid").addEventListener("click", (e) => {
+  if (Date.now() < suppressClickUntil) return;   // the click that ends a drag
   if (e.target.closest("#moreBtn")) return showMore();
   const b = e.target.closest(".tile"); if (b) toggle(b.dataset.n);
 });
+
+// --- reordering picks by dragging -------------------------------------------
+// A pick (front of the candidate grid) follows the pointer once it moves a few pixels;
+// passing over another pick swaps their places. Without movement it stays a tap.
+let drag = null;
+let suppressClickUntil = 0;
+$("grid").addEventListener("pointerdown", (e) => {
+  if (results !== null || (e.pointerType === "mouse" && e.button !== 0)) return;
+  const b = e.target.closest(".tile.sel");
+  if (!b) return;
+  drag = { el: b, id: e.pointerId, x0: e.clientX, y0: e.clientY, active: false, moved: false };
+});
+$("grid").addEventListener("pointermove", (e) => {
+  if (!drag || e.pointerId !== drag.id) return;
+  const grid = $("grid"), el = drag.el;
+  if (!drag.active) {
+    if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;
+    drag.active = true;
+    try { el.setPointerCapture(e.pointerId); } catch (err) {}
+    el.style.transition = "none";
+    el.classList.add("dragging");
+    const r = el.getBoundingClientRect();
+    drag.grabX = drag.x0 - r.left; drag.grabY = drag.y0 - r.top;
+  }
+  e.preventDefault();
+  // Swap with the pick whose slot is under the pointer. Slots come from layout
+  // (offsetLeft/Top), not the screen rect, so a tile still sliding after a swap
+  // cannot trigger a swap back.
+  const g0 = grid.getBoundingClientRect();
+  for (const s of grid.querySelectorAll(".tile.sel:not(.dragging)")) {
+    const left = g0.left - grid.scrollLeft + s.offsetLeft, top = g0.top - grid.scrollTop + s.offsetTop;
+    const r = { left, top, right: left + s.offsetWidth, bottom: top + s.offsetHeight };
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) continue;
+    const tiles = [...grid.children];
+    const before = new Map([[s.dataset.n, r]]);
+    grid.insertBefore(el, tiles.indexOf(el) < tiles.indexOf(s) ? s.nextSibling : s);
+    flip(before);
+    ranking = [...grid.querySelectorAll(".tile.sel")].map((t) => t.dataset.n);
+    paintSelection();
+    drag.moved = true;
+    break;
+  }
+  // Keep the dragged tile under the pointer wherever its layout slot now is.
+  const g = grid.getBoundingClientRect();
+  const x = e.clientX - g.left + grid.scrollLeft - drag.grabX - el.offsetLeft;
+  const y = e.clientY - g.top + grid.scrollTop - drag.grabY - el.offsetTop;
+  el.style.transform = `translate(${x}px, ${y}px)`;
+});
+function endDrag(e) {
+  if (!drag || (e && e.pointerId !== drag.id)) return;
+  const d = drag; drag = null;
+  if (!d.active) return;                    // a plain tap: the click handler toggles
+  suppressClickUntil = Date.now() + 400;
+  d.el.classList.remove("dragging");
+  d.el.style.transition = "transform .15s ease";
+  d.el.style.transform = "";
+  d.el.addEventListener("transitionend", () => { d.el.style.transition = ""; }, { once: true });
+  if (d.moved) { status = "labelled"; renderHeader(); scheduleSave(); }
+}
+$("grid").addEventListener("pointerup", endDrag);
+$("grid").addEventListener("pointercancel", endDrag);
 $("next").onclick = next;
 $("prev").onclick = () => { if (cur.pos > 0) load(cur.pos - 1); };
 $("none").onclick = () => setAndAdvance("none", "No good icon");

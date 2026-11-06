@@ -17,8 +17,10 @@ Synology NAS. Labels save on every tap, so you can close the page and continue o
   rank 1 shows the task's central object or subject, rank 2 its context or activity, and
   properties (waterproof, urgent, small) are never the answer. When a task has a
   parent heading (project, section, or list name), it follows the title in brackets.
-- **Tap** icons in order of preference: the badge shows the rank (1, 2, 3, …). **Tap again**
-  to deselect; the remaining ranks renumber.
+- **Tap** the good icons: each pick moves to the front of the grid, after the earlier picks,
+  and its badge shows its rank (1, 2, 3, …). **Drag** a pick to reorder (mouse or touch); the
+  ranks follow. **Tap again** to deselect: the icon returns to its place and the ranks
+  renumber. There is no limit on the number of picks.
 - **Search** looks for icons by their descriptions (never by names). Icons you pick from
   search stay in the grid after you clear the search.
 - **No good icon** records an explicit negative, which the abstention gate needs.
