@@ -222,6 +222,17 @@ def _strings(o):
             yield from _strings(v)
 
 
+def _parse_or_none(text: str):
+    """The JSON object in a response's text, or None."""
+    text = (text or "").strip()
+    if text.startswith("```"):
+        text = text.split("\n", 1)[-1].rsplit("```", 1)[0]
+    try:
+        return json.loads(text)
+    except ValueError:
+        return None
+
+
 def words(text: str) -> int:
     return len(str(text).split())
 
