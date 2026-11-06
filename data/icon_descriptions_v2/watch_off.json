@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round wristwatch with top and bottom straps",
+  "modifiers": [
+   "diagonal slash across the object"
+  ],
+  "composition": "single object in front view, crossed out by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "unpair or disconnect smartwatch",
+   "strength": "primary"
+  },
+  {
+   "meaning": "broken or dead wristwatch",
+   "strength": "primary"
+  },
+  {
+   "meaning": "take off watch or no wearables allowed",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "disable watch notifications or tracking",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the round face and straps could look like a crossed-out compass, life preserver, or alarm bell.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash across the object",
+   "meaning": "disconnected, disabled, broken, or prohibited"
+  }
+ ],
+ "domains": [
+  "tech",
+  "health_fitness",
+  "shopping",
+  "home",
+  "admin"
+ ],
+ "task_intents": [
+  "unpair old smartwatch from phone",
+  "fix broken wristwatch at jeweler",
+  "turn off smartwatch notifications",
+  "remove watch before medical scan",
+  "replace dead watch battery",
+  "stop wearing fitness tracker at night",
+  "factory reset old Apple Watch"
+ ],
+ "example_tasks": [
+  {
+   "task": "Unpair old Apple Watch",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix broken Seiko clasp",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Dead watch battery",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Factory reset before selling",
+   "parent": "Garmin Fenix 6",
+   "domain": "tech"
+  },
+  {
+   "task": "Stop wearing to bed",
+   "parent": "Fitbit Charge",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Turn off wrist notifications during deep work blocks",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Take dad's stopped mechanical watch to the repair shop on 5th",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Remove galaxy watch from Bluetooth devices before trading in phone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Leave smartwatches at home for the SAT exam Saturday",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Disconnect Strava sync from old broken sports watch",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Drop off at the jeweler",
+   "parent": "Grandpa's broken Omega watch",
+   "domain": "admin"
+  },
+  {
+   "task": "Cancel cellular plan on the kid's unused smartwatch",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Send back for warranty repair",
+   "parent": "Cracked Apple Watch Ultra",
+   "domain": "shopping"
+  },
+  {
+   "task": "Unlink my old Fitbit from the corporate wellness portal so it stops bugging me",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Remember to take off all watches and jewelry before Friday's MRI appointment at 2pm",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Try going a full week without wearing the fitness tracker to stop obsessing over sleep scores",
+   "parent": "",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Desvincular el Apple Watch viejo antes de venderlo",
+  "Llevar el reloj parado de abuelo al relojero del centro",
+  "Apagar las notificaciones del reloj durante las reuniones"
+ ],
+ "example_tasks_ru": [
+  "Отвязать старые смарт-часы от телефона перед продажей",
+  "Отнести сломанные часы Casio в мастерскую у метро",
+  "Отключить уведомления на часах на время отпуска"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy CR2032 coin cell for my dead Timex",
+   "central": "battery"
+  },
+  {
+   "task": "Pack small screwdriver set to take apart broken watch",
+   "central": "screwdriver"
+  },
+  {
+   "task": "Check exam rules on prohibited electronics and wearables",
+   "central": "exam rules document"
+  },
+  {
+   "task": "Order replacement leather strap for the watch with the torn band",
+   "central": "watch strap"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new Garmin running watch for marathon training",
+   "better": "wristwatch without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel Netflix subscription before renewal",
+   "better": "TV or subscription icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Turn off morning alarm for the holiday weekend",
+   "better": "alarm clock with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Track resting heart rate on Apple Watch for a month",
+   "better": "wristwatch or heart rate icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy a waterproof watch for swimming laps",
+   "better": "wristwatch without slash",
+   "trap": "property"
+  },
+  {
+   "task": "Check watch battery level before the long trail run",
+   "better": "wristwatch or battery icon",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a round wristwatch crossed out by a diagonal slash. It fits a narrow but real set of tasks around unpairing smartwatches, repairing broken watches, disabling wrist notifications, or leaving wearables off for exams or medical scans, though users must not confuse it with an intact watch icon or a crossed-out alarm clock.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5fe0aa897744181563c8897a796f83f39868c2ef",
+  "usage": {
+   "prompt": 3923,
+   "output": 1648,
+   "thoughts": 81,
+   "total": 5652
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

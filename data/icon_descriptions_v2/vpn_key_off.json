@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "horizontal key with circular bow and notched bit",
+  "modifiers": [
+   "diagonal strike-through slash"
+  ],
+  "composition": "single object, side view, crossed out from top-left to bottom-right"
+ },
+ "readings": [
+  {
+   "meaning": "revoke key / disable access / remove credentials",
+   "strength": "primary"
+  },
+  {
+   "meaning": "keyless entry / passwordless login",
+   "strength": "primary"
+  },
+  {
+   "meaning": "lost key / missing key / locked out",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "unencrypted / no authentication required",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the crossed-out circular bow on the left can resemble a hidden eye (visibility off) or a muted microphone/speaker.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal strike-through slash",
+   "meaning": "disabled, revoked, missing, or without (keyless)"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "home",
+  "admin",
+  "travel"
+ ],
+ "task_intents": [
+  "revoke compromised API or SSH keys",
+  "disable old user access credentials",
+  "install keyless smart lock at home",
+  "switch account to passwordless login",
+  "report lost house or car keys",
+  "remove former employee access tokens",
+  "deactivate lost hotel key card"
+ ],
+ "example_tasks": [
+  {
+   "task": "Revoke old AWS keys",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Deactivate spare key fob",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off password login",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clean up expired ones",
+   "parent": "API Keys",
+   "domain": "work"
+  },
+  {
+   "task": "Report lost mailbox key",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Delete the old deploy key from the GitHub repository settings",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable ssh root login with password on the home server",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel the lost gym key tag and ask for a barcode",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Remove the ex-contractor's pgp key from the team keyring",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Switch the Airbnb front door to keyless keypad entry before Friday",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check which ones are still active for departed staff",
+   "parent": "Office Keys & Badges",
+   "domain": "admin"
+  },
+  {
+   "task": "Order a keyless ignition bypass module for the 2014 Civic",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Ask the front desk to deauthorize our lost room key",
+   "parent": " Lisbon Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Revoke the leaked Stripe test secret key and remove it from the git history",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call the landlord about being locked out without the deadbolt key after work",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Make sure all staging service accounts have their legacy static keys disabled before audit",
+   "parent": "Q3 Security Review",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Revocar las claves SSH antiguas del servidor de producción",
+  "Dar de baja la tarjeta llave perdida del garaje comunitario",
+  "Cambiar la cerradura del apartamento a entrada sin llave con código"
+ ],
+ "example_tasks_ru": [
+  "Отозвать скомпрометированный API-ключ в консоли облака",
+  "Отключить вход по паролю и старым ключам на домашнем сервере",
+  "Заблокировать утерянный магнитный ключ от домофона в управляющей компании"
+ ],
+ "context_tasks": [
+  {
+   "task": "Offboard Sam from GitHub, Slack, and AWS",
+   "central": "person / user offboarding"
+  },
+  {
+   "task": "Set up passkeys on Google and Apple accounts",
+   "central": "passkey / biometric authentication"
+  },
+  {
+   "task": "Call a locksmith to open the jammed balcony door",
+   "central": "door / locksmith"
+  },
+  {
+   "task": "Rotate production database credentials after the incident",
+   "central": "database / credentials rotation"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cut two spare house keys at the hardware store",
+   "better": "key (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hide the spare front door key under the rosemary pot",
+   "better": "key or plant pot",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Fix the stuck spacebar key on the mechanical keyboard",
+   "better": "keyboard",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Hide password field text by default on the login form",
+   "better": "eye with slash (visibility off)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof key pouch for surfing",
+   "better": "key or pouch",
+   "trap": "property"
+  },
+  {
+   "task": "Check the answer key for chapter 4 practice problems",
+   "better": "checklist or book",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a key crossed out with a diagonal slash, representing revoked keys/credentials, disabled access, lost keys, or keyless entry. It fits a specific but realistic family of tech security (revoking API/SSH keys) and home/admin tasks (lost keys, keyless locks), though at tiny sizes the left ring and slash can briefly resemble a 'visibility off' eye icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "3491cd3eb6cec4ce3b118712d08bde3f7ccfe6de",
+  "usage": {
+   "prompt": 3922,
+   "output": 1695,
+   "thoughts": 0,
+   "total": 5617
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

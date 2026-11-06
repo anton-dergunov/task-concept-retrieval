@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "five ascending vertical signal bars with a horizontal split",
+  "modifiers": [
+   "exclamation mark in bottom-right corner",
+   "horizontal gap across the lower third of the bars"
+  ],
+  "composition": "five vertical bars increasing in height from left to right, split near the bottom, with an exclamation mark overlaid at bottom right"
+ },
+ "readings": [
+  {
+   "meaning": "cellular network error or mobile signal issue (dual SIM signal bars with alert)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no internet connection despite full signal",
+   "strength": "primary"
+  },
+  {
+   "meaning": "ascending bar chart or analytics metric with warning",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with a financial or business bar chart at a glance, or generic signal strength indicators without noticing the horizontal dual-SIM split and exclamation mark.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "error, no connection, warning, or attention required"
+  },
+  {
+   "modifier": "horizontal split creating a bottom row of dots/squares",
+   "meaning": "dual SIM indicator or secondary network status"
+  }
+ ],
+ "domains": [
+  "tech",
+  "communication",
+  "travel",
+  "home",
+  "admin",
+  "work"
+ ],
+ "task_intents": [
+  "troubleshoot mobile data connection issue",
+  "fix cellular reception in dead zone",
+  "configure dual SIM network settings",
+  "call carrier about service outage",
+  "resolve eSIM activation failure abroad",
+  "test cell booster signal strength",
+  "switch mobile carrier for better coverage"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix eSIM data error",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call Vodafone about outage",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Reset phone network settings",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check APN settings",
+   "parent": "Japan Travel SIM",
+   "domain": "travel"
+  },
+  {
+   "task": "Compare coverage maps",
+   "parent": "Switch Mobile Carrier",
+   "domain": "admin"
+  },
+  {
+   "task": "Figure out why secondary SIM shows bars but no data",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Install WeBoost cell signal repeater in the basement office",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ask T-Mobile support why roaming data failed in Toronto",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Test both SIM slots with a known working card",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Map dead zones across the warehouse floor for IT",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Enable Wi-Fi calling on Mum's phone before visiting cottage",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Call support line",
+   "parent": "Cell Service Outage",
+   "domain": "communication"
+  },
+  {
+   "task": "Restart the mast router",
+   "parent": "Cabin LTE Setup",
+   "domain": "home"
+  },
+  {
+   "task": "Switch work and personal numbers to dual eSIM before the roaming charges kick in",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "File FCC complaint about persistent dropped calls and dead data along the rural highway",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Check which carrier actually gets 5G inside the new basement apartment before signing contract",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Reclamar a Movistar por el corte de datos móviles",
+  "Configurar el APN de la segunda SIM para el viaje",
+  "Probar dónde hay mejor cobertura 4G en la casa del pueblo"
+ ],
+ "example_tasks_ru": [
+  "Позвонить в МТС по поводу пропажи мобильного интернета",
+  "Настроить передачу данных на второй сим-карте",
+  "Проверить приём сотового сигнала на даче с усилителем"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy prepaid Airalo eSIM for two weeks in Turkey",
+   "central": "SIM card"
+  },
+  {
+   "task": "Pay monthly AT&T wireless bill",
+   "central": "bill / invoice"
+  },
+  {
+   "task": "Mount directional Yagi antenna on the roof pole",
+   "central": "antenna"
+  },
+  {
+   "task": "Unlock old iPhone 13 for international SIM cards",
+   "central": "smartphone"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Plot Q3 sales growth on a bar chart for the board deck",
+   "better": "bar chart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call plumber urgently about the leaking radiator valve",
+   "better": "phone call or radiator",
+   "trap": "property"
+  },
+  {
+   "task": "Check why the living room Wi-Fi router keeps dropping out",
+   "better": "Wi-Fi router",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a waterproof dual-SIM phone for kayaking trips",
+   "better": "smartphone",
+   "trap": "property"
+  },
+  {
+   "task": "Order new SIM ejector pin from Amazon",
+   "better": "SIM card or pin tool",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check monthly data usage before billing cycle resets",
+   "better": "data gauge or bill",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is a system status-bar indicator showing dual-SIM cellular signal bars with a connection error exclamation mark. Because it represents a transient device state/chrome indicator rather than a concrete object or common action, and is easily confused with a segmented bar chart, it is poorly suited as a task icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "2380ac3a108759ded4c192e72c2f1e71ff2f8ec9",
+  "usage": {
+   "prompt": 3924,
+   "output": 1679,
+   "thoughts": 0,
+   "total": 5603
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

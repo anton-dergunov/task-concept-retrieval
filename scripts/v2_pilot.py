@@ -350,20 +350,14 @@ def length_bucket(t):
 def contamination(examples_by_cfg):
     """Per config: (exact normalized matches, near-duplicates at e5 cosine ≥ 0.95) of
     generated example tasks against every eval title. Counts only."""
-    evals = dv2.eval_titles()
-    banned = {dv2.norm(t) for t in evals}
-    out = {c: [sum(dv2.norm(t) in banned for t in ex), 0] for c, ex in examples_by_cfg.items()}
-    try:
-        from sentence_transformers import SentenceTransformer
-        model = SentenceTransformer(config.MULTILINGUAL_MODEL)
-        pre = config.query_prefix_for(config.MULTILINGUAL_MODEL)
-        E = model.encode([pre + t for t in evals], batch_size=128, normalize_embeddings=True)
-        for c, ex in examples_by_cfg.items():
-            if ex:
-                X = model.encode([pre + t for t in ex], batch_size=128, normalize_embeddings=True)
-                out[c][1] = int(((X @ E.T).max(axis=1) >= 0.95).sum())
-    except Exception as e:  # noqa: BLE001 — the exact check still stands
-        print(f"  (embedding check skipped: {e})")
+    out = {}
+    for c, ex in examples_by_cfg.items():
+        try:
+            exact, near = dv2.contamination_hits(ex)
+        except Exception as e:  # noqa: BLE001 — the exact check still stands
+            print(f"  (embedding check skipped: {e})")
+            exact, near = dv2.contamination_hits(ex, embed=False)
+        out[c] = [len(exact), len(near)]
     return out
 
 

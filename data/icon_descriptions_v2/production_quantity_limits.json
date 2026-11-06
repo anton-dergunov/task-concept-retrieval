@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "open-top shopping cart outline on two solid wheels",
+  "modifiers": [
+   "exclamation mark inside the cart basket"
+  ],
+  "composition": "side view of cart facing right with vertical exclamation mark centered in basket"
+ },
+ "readings": [
+  {
+   "meaning": "shopping issue, order problem, or payment failure",
+   "strength": "primary"
+  },
+  {
+   "meaning": "abandoned cart or pending checkout reminder",
+   "strength": "primary"
+  },
+  {
+   "meaning": "out-of-stock alert or price drop notification",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "urgent shopping or emergency supplies purchase",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the exclamation mark could be misread as a downward arrow (add to cart) or an item sitting inside the cart.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "alert, error, problem, or urgency related to a purchase or cart"
+  }
+ ],
+ "domains": [
+  "shopping",
+  "finance",
+  "tech",
+  "work",
+  "admin",
+  "home"
+ ],
+ "task_intents": [
+  "resolve online order or checkout issue",
+  "dispute wrong charge on store purchase",
+  "complete pending checkout before cart expires",
+  "set up stock or price alerts",
+  "fix e-commerce checkout error on site",
+  "follow up on missing order items"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix declined Amazon order payment",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Abandoned cart recovery flow",
+   "parent": "Shopify Store Launch",
+   "domain": "work"
+  },
+  {
+   "task": "Dispute double charge from Target",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check why Chewy autoship failed",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call customer service tomorrow",
+   "parent": "Missing IKEA Order",
+   "domain": "shopping"
+  },
+  {
+   "task": "Update expired card on pending Instacart grocery order before the delivery window closes",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Turn on back-in-stock alerts for the 27-inch LG monitor at Best Buy",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Report missing olive oil bottle and cracked jar from yesterday's Walmart delivery",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Debug why Stripe webhook fails when customers have a discount code in cart",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Finish checking out the campsite reservation cart before the 15-minute hold expires",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Cancel duplicate Etsy order before the seller prints the shipping label",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Approve the held purchase order",
+   "parent": "Lab Equipment Procurement",
+   "domain": "work"
+  },
+  {
+   "task": "Clear out saved items",
+   "parent": "Online Shopping Carts",
+   "domain": "shopping"
+  },
+  {
+   "task": "Email Bookshop support about why the checkout page keeps throwing a tax calculation error",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Verify whether the B&H backorder for the camera lens needs re-authorization on the Visa card",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Sort out the customs hold and unpaid duty fee on the shipment from the UK store",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Reclamar el cobro duplicado del pedido de Mercadona",
+  "Actualizar la tarjeta caducada en el pedido retenido de Amazon",
+  "Activar aviso de stock para las zapatillas en Zara"
+ ],
+ "example_tasks_ru": [
+  "Оспорить двойное списание за заказ на Ozon",
+  "Проверить почему зависла оплата корзины в Золотом Яблоке",
+  "Настроить уведомление о появлении видеокарты в DNS"
+ ],
+ "context_tasks": [
+  {
+   "task": "Call Chase fraud department to unblock card after declined electronics purchase",
+   "central": "phone call / bank card"
+  },
+  {
+   "task": "Take photos of shattered ceramic bowls for the refund claim",
+   "central": "damaged dishes / camera"
+  },
+  {
+   "task": "Measure hallway width before confirming the held sofa order",
+   "central": "tape measure / sofa"
+  },
+  {
+   "task": "Check pantry shelves to see what we actually ran out of before panic-buying",
+   "central": "pantry / groceries"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy milk, eggs, and sourdough bread on the way home",
+   "better": "plain shopping cart or grocery bag (no error/alert needed for routine shopping, urgency is just a property if any, or normal shopping without modifier) -> trap: lookalike_glyph",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Urgently buy a replacement charger for the MacBook before Tuesday's flight",
+   "better": "laptop charger or plug (urgency is a property, charger is the central object natively bought) ",
+   "trap": "property"
+  },
+  {
+   "task": "Buy a small waterproof rechargeable headlamp for trips",
+   "better": "headlamp (buy is a generic verb, the item itself is the subject of the task) ",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Fix the squeaky front wheel on our folding metal laundry cart",
+   "better": "hand truck / utility cart or wrench (literal physical cart repair, not e-commerce checkout alert) ",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order 500 matte business cards with the updated phone number",
+   "better": "business card / ID card (even under a 'Shopping Problems' or 'Urgent Orders' list, the specific item wins) ",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Download the new Mario Kart booster course pass on the Switch",
+   "better": "gamepad / racing flag (shared word 'kart/cart', completely different subject) ",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a shopping cart with an exclamation mark in the basket, clearly signaling an order problem, checkout failure, stock alert, or abandoned cart. It fits tasks centered on resolving purchase issues or e-commerce cart errors, though routine buying tasks should use the item's own icon or a plain cart.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "327595293bc5b76b403e7cfd7a841c46bc97118b",
+  "usage": {
+   "prompt": 3919,
+   "output": 1134,
+   "thoughts": 0,
+   "total": 5053
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

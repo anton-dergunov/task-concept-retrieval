@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "open-top tray or inbox bracket",
+  "modifiers": [
+   "centered vertical exclamation mark above the tray"
+  ],
+  "composition": "single tray base at bottom with large exclamation mark centered above it"
+ },
+ "readings": [
+  {
+   "meaning": "download error or failed download",
+   "strength": "primary"
+  },
+  {
+   "meaning": "urgent inbox item or important incoming drop",
+   "strength": "primary"
+  },
+  {
+   "meaning": "storage full or disk space warning",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "missing upload or import failure",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes it looks almost identical to a standard download or upload icon because the exclamation mark occupies the exact position of the usual vertical arrow shaft and tip.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "alert, error, failure, warning, or high urgency"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "finance"
+ ],
+ "task_intents": [
+  "fix failed file download or import",
+  "resolve inbox sync or storage error",
+  "clear urgent items in inbox tray",
+  "retry interrupted software update download",
+  "troubleshoot corrupted bank statement import",
+  "free up space for blocked downloads"
+ ],
+ "example_tasks": [
+  {
+   "task": "Retry failed macOS installer download",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix broken CSV bank import",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Stuck podcasts",
+   "parent": "Download Errors",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Check why Q3 tax PDFs failed",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Clear blocked attachments",
+   "parent": "Shared Inbox Alerts",
+   "domain": "work"
+  },
+  {
+   "task": "Re-download corrupted wedding photo archive before the link expires Friday",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Fix Nextcloud desktop sync errors on the external backup drive",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Resolve rejected invoice uploads in the vendor billing portal",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Look into the four flagged customer tickets",
+   "parent": "Urgent Triage Tray",
+   "domain": "work"
+  },
+  {
+   "task": "Clear disk full warning blocking offline map downloads for Utah trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check quarantine folder for blocked blood test results PDF",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Retry timed-out lecture video downloads",
+   "parent": "Offline Course Sync",
+   "domain": "learning"
+  },
+  {
+   "task": "Troubleshoot why the 4K drone footage transfer keeps failing halfway through on the NAS",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Unblock Chrome security warning preventing the printer driver package from saving to disk",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Fix the script that throws a checksum error whenever nightly database dumps are pulled",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Contact payroll support about the corrupted W-2 download that will not open in Acrobat",
+   "parent": "",
+   "domain": "career"
+  }
+ ],
+ "example_tasks_es": [
+  "Reintentar la descarga fallida del certificado digital de Hacienda",
+  "Liberar espacio en el móvil para desbloquear las descargas pendientes de Spotify",
+  "Solucionar el error al importar el extracto bancario en Excel"
+ ],
+ "example_tasks_ru": [
+  "Перекачать битый архив с фотографиями из облака",
+  "Разобраться, почему обрывается загрузка карт в навигаторе",
+  "Исправить ошибку импорта банковской выписки в 1С"
+ ],
+ "context_tasks": [
+  {
+   "task": "Clear 20 GB on the boot SSD so Xcode can finish installing",
+   "central": "hard drive / storage"
+  },
+  {
+   "task": "Switch router DNS to stop package manager timeouts",
+   "central": "router / network"
+  },
+  {
+   "task": "Ask Maria to re-send the unreadable zip file via WeTransfer",
+   "central": "message / email"
+  },
+  {
+   "task": "Empty the browser downloads folder of partial .crdownload files",
+   "central": "trash / folder"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Download offline train tickets for Saturday morning",
+   "better": "normal download icon (down arrow into tray) or train ticket icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload signed lease agreement to the tenant portal",
+   "better": "upload icon or contract document icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay overdue electric bill before Friday cutoff!",
+   "better": "bill/invoice or lightning bolt icon (urgency is a property, not a download error)",
+   "trap": "property"
+  },
+  {
+   "task": "Buy plastic desk inbox tray for incoming mail",
+   "better": "desk tray or mail icon without error exclamation",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Call fiber ISP billing department to dispute the $15 router fee",
+   "better": "phone call or bill icon (even if under an 'Internet Issues' parent list)",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check important emails from the mortgage broker",
+   "better": "envelope / email icon",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon replaces the standard arrow of a download/inbox tray with an exclamation mark, signaling a failed download, import error, or urgent inbox alert. While useful for troubleshooting broken transfers or blocked downloads, it is very narrow for general to-do lists and easily misread at small sizes as a normal download arrow.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "dff3574b3e1b1918dbceb037600e357d4bc90add",
+  "usage": {
+   "prompt": 3922,
+   "output": 1702,
+   "thoughts": 0,
+   "total": 5624
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

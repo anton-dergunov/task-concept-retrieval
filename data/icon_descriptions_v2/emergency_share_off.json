@@ -1,0 +1,230 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "map location pin with central dot",
+  "modifiers": [
+   "two concentric signal arcs above the pin",
+   "diagonal slash crossing from top-left to bottom-right"
+  ],
+  "composition": "single icon with top signal arcs and diagonal strike-through"
+ },
+ "readings": [
+  {
+   "meaning": "stop live location sharing or disable GPS tracking",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no GPS signal or offline location mode",
+   "strength": "primary"
+  },
+  {
+   "meaning": "turn off Bluetooth tracker, beacon, or AirTag",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "fix dead zone or lost positioning sensor",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the combined arcs and pin with a slash can look like a generic 'no Wi-Fi' icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "two concentric signal arcs above the pin",
+   "meaning": "live broadcast, GPS signal, or wireless tracking"
+  },
+  {
+   "modifier": "diagonal slash crossing from top-left to bottom-right",
+   "meaning": "disabled, turned off, blocked, or disconnected"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "social_family",
+  "home",
+  "work",
+  "outdoors",
+  "admin"
+ ],
+ "task_intents": [
+  "stop sharing live phone location",
+  "disable GPS tracking on device",
+  "turn off background location permissions",
+  "deactivate lost luggage tracker tag",
+  "troubleshoot missing GPS signal issue",
+  "download offline maps for dead zones",
+  "audit app location privacy settings"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off Find My sharing",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Disable AirTag in sold backpack",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Stop WhatsApp live location",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Revoke Instagram location access",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix Garmin GPS dropout",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Remove old Tile tracker from keys before giving them to the pet sitter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Strip EXIF GPS coordinates from the house photos before posting on Craigslist",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Switch off Google Maps timeline history on my work profile",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off fleet GPS transponder on the retired delivery van",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out why the dashcam loses satellite lock inside the downtown tunnel",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unpair the Apple AirTag from the luggage we are lending to Mark",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Test how the trail navigation app behaves with GPS radio completely disabled",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Go through every installed app on mom's phone and turn off always-on location tracking",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Audit permissions on iOS",
+   "parent": "Location Privacy Cleanup",
+   "domain": "tech"
+  },
+  {
+   "task": "Check battery drain settings",
+   "parent": "Disable Background GPS",
+   "domain": "tech"
+  },
+  {
+   "task": "Download region tiles before leaving",
+   "parent": "No-GPS Backcountry Hike",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Remove ex-partner from shared list",
+   "parent": "Live Location Sharing",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Dejar de compartir ubicación en tiempo real por WhatsApp",
+  "Desactivar el rastreo GPS en segundo plano para ahorrar batería",
+  "Desvincular el AirTag de la maleta antes de prestarla"
+ ],
+ "example_tasks_ru": [
+  "Отключить передачу геопозиции в реальном времени в Телеграме",
+  "Запретить приложениям доступ к GPS в фоновом режиме",
+  "Отвязать AirTag от старой связки ключей"
+ ],
+ "context_tasks": [
+  {
+   "task": "Lock down iPhone privacy settings before crossing the border",
+   "central": "phone privacy settings"
+  },
+  {
+   "task": "Pack paper topographic maps and compass for the canyon trek",
+   "central": "paper maps and compass"
+  },
+  {
+   "task": "Factory reset the old company iPad before returning it to IT",
+   "central": "company iPad"
+  },
+  {
+   "task": "Extend battery life on the hiking watch for the 50k ultra",
+   "central": "hiking watch battery"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call the ISP to fix the dead Wi-Fi router in the study",
+   "better": "wifi slash or router icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pin the new coffee shop address on our shared trip map",
+   "better": "map pin icon without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof GPS collar for the dog",
+   "better": "dog collar or active GPS pin icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Cancel the venue reservation for Saturday's party",
+   "better": "calendar cancel or building icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pack extra AA batteries for the Garmin handheld",
+   "better": "battery icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check the privacy policy draft for the new mobile release",
+   "better": "document or shield icon",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon combines a map pin, broadcast/signal arcs, and a diagonal slash, clearly representing disabled live location sharing, turned-off GPS tracking, or a lost GPS signal. It fits specific privacy, tracker-management, and offline-navigation tasks well, though at tiny sizes it can be confused with a 'no Wi-Fi' glyph.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ba8efe02dc285f3e6b0720f59236b1d6645e0bb6",
+  "usage": {
+   "prompt": 3924,
+   "output": 1791,
+   "thoughts": 156,
+   "total": 5871
+  },
+  "soft_problems": [
+   "example_tasks: 17 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

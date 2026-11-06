@@ -1,0 +1,220 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "clock face surrounded by a counter-clockwise circular arrow",
+  "modifiers": [
+   "cogwheel gear badge at bottom right"
+  ],
+  "composition": "single icon with bottom-right badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "backup and restore settings or automated backup configuration",
+   "strength": "primary"
+  },
+  {
+   "meaning": "history settings or activity log preferences",
+   "strength": "primary"
+  },
+  {
+   "meaning": "system restore or rollback configuration",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "cron job or scheduled automation settings",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with plain history/recents, time zone settings, or general scheduled task settings at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "counter-clockwise arrow around clock",
+   "meaning": "history, past activity, backup, restore, or rollback"
+  },
+  {
+   "modifier": "cogwheel gear",
+   "meaning": "settings, configuration, preferences, or automation"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "home"
+ ],
+ "task_intents": [
+  "configure automated backup schedule",
+  "change browser history retention settings",
+  "set up Time Machine backup preferences",
+  "revert system configuration to previous state",
+  "adjust log rotation and archive rules",
+  "turn off Google location history tracking",
+  "configure database point-in-time recovery",
+  "reset app preferences to factory defaults"
+ ],
+ "example_tasks": [
+  {
+   "task": "Time Machine backup settings",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off YouTube watch history",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Configure Postgres WAL archiving",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Set up auto-delete",
+   "parent": "Google Account Activity Controls",
+   "domain": "admin"
+  },
+  {
+   "task": "Change NAS snapshot schedule",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Exclude node_modules and build folders from daily Backblaze backup rules",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set Firefox to clear browsing and download history when closing",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Update retention period to 30 days",
+   "parent": "CloudWatch Log Settings",
+   "domain": "work"
+  },
+  {
+   "task": "Check why Windows System Restore point creation is disabled on C drive",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Change Home Assistant recorder purge_keep_days to 14 so the SD card survives",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Switch to hourly snapshots",
+   "parent": "Production DB Backup Config",
+   "domain": "work"
+  },
+  {
+   "task": "Limit zsh history file size and turn on duplicate command ignoring",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn on version history for the shared family budget spreadsheet",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Configure automatic weekly backups of the Minecraft server world to the external drive",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Adjust S3 lifecycle policy so old client backups move to Glacier after ninety days",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Review privacy defaults",
+   "parent": "Browser History & Cache",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Configurar cada cuánto se guarda la copia de seguridad de WhatsApp en Drive",
+  "Desactivar el historial de ubicaciones en los ajustes de la cuenta de Google",
+  "Ajustar retención de snapshots en el NAS de casa"
+ ],
+ "example_tasks_ru": [
+  "Настроить расписание резервного копирования Time Machine на внешний диск",
+  "Отключить сохранение истории поиска в настройках аккаунта Яндекса",
+  "Поменять глубину хранения логов на сервере до 14 дней"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a 4TB portable SSD for Time Machine backups",
+   "central": "external hard drive / SSD"
+  },
+  {
+   "task": "Write bash script to prune old Docker images every Sunday",
+   "central": "script / code"
+  },
+  {
+   "task": "Ask IT for restore permissions on the staging cluster",
+   "central": "colleague / message"
+  },
+  {
+   "task": "Recover accidentally deleted tax PDF from last month's backup",
+   "central": "PDF document / tax file"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Read book on the history of the Industrial Revolution",
+   "better": "book",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Set kitchen timer for 45 minutes while bread bakes",
+   "better": "timer / stopwatch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace worn timing belt and gears on the lawnmower",
+   "better": "lawnmower or mechanical gear",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new wall clock for the hallway",
+   "better": "clock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order replacement power cord for the backup server",
+   "better": "power cable / plug",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check when the last dentist appointment was",
+   "better": "tooth / dentist or calendar",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines the standard history/restore glyph (clock hands inside a counter-clockwise arrow) with a settings gear badge. It fits technical and admin tasks around configuring backups, retention policies, system restore, or activity history settings, though it can look like a general timer or schedule settings icon at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "cbbe66df86618ddf129820917720e8df999b6331",
+  "usage": {
+   "prompt": 3924,
+   "output": 1691,
+   "thoughts": 0,
+   "total": 5615
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

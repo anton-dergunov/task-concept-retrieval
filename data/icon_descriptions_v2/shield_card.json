@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined heraldic shield",
+  "modifiers": [
+   "small payment card with horizontal stripe in bottom-right corner"
+  ],
+  "composition": "shield outline interrupted at bottom-right by a credit card badge"
+ },
+ "readings": [
+  {
+   "meaning": "payment security, card protection, or fraud prevention",
+   "strength": "primary"
+  },
+  {
+   "meaning": "purchase protection or credit card insurance",
+   "strength": "primary"
+  },
+  {
+   "meaning": "virtual credit card or privacy card",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "security badge or access pass",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the credit card badge in the corner can look like a minus sign inside a box, a battery, or a generic calendar/window icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "credit card badge at bottom-right",
+   "meaning": "card payment, billing, or financial transaction tied to security/protection"
+  }
+ ],
+ "domains": [
+  "finance",
+  "shopping",
+  "travel",
+  "admin",
+  "tech",
+  "work"
+ ],
+ "task_intents": [
+  "freeze lost or stolen credit card",
+  "set up virtual card for subscription",
+  "enable credit card fraud alerts",
+  "file credit card purchase protection claim",
+  "check rental car coverage on card",
+  "review unauthorized credit card charges",
+  "turn on 3D Secure card verification",
+  "lock debit card before international trip"
+ ],
+ "example_tasks": [
+  {
+   "task": "Freeze lost Visa card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Enable Amex fraud alerts",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Create Privacy.com virtual card",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call bank",
+   "parent": "Card Fraud Claim",
+   "domain": "finance"
+  },
+  {
+   "task": "Check policy",
+   "parent": "Credit Card Travel Protection",
+   "domain": "travel"
+  },
+  {
+   "task": "Set up a single-use virtual card for the sketchy trial subscription",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Lock the joint debit card in the banking app before leaving",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Dispute the two weird $19 charges on the Chase Sapphire statement",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Print the primary rental car collision waiver from our Visa Infinite benefits",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Turn on SMS transaction verification for online card purchases over $50",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check PCI compliance requirements for storing customer card tokens",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Submit receipt",
+   "parent": "Card Purchase Protection",
+   "domain": "shopping"
+  },
+  {
+   "task": "Update spending limit",
+   "parent": "Virtual Cards",
+   "domain": "finance"
+  },
+  {
+   "task": "File a purchase protection claim with Mastercard for the cracked camera lens we bought last month",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Ask payroll whether the new commuter benefits debit card has chip-and-PIN security enabled",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Verify if our airline credit card covers delayed baggage expenses when booked with points",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Bloquear la tarjeta de débito perdida en la app del banco",
+  "Crear una tarjeta virtual de un solo uso para pagar la reserva del hostel",
+  "Reclamar al seguro de la Visa por el cargo duplicado del taller"
+ ],
+ "example_tasks_ru": [
+  "Заблокировать старую зарплатную карту через приложение",
+  "Выпустить виртуальную карту с лимитом для подписок",
+  "Оспорить списание за чужую поездку в поддержке банка"
+ ],
+ "context_tasks": [
+  {
+   "task": "Replace the gym membership billing info with a capped burner card",
+   "central": "gym membership"
+  },
+  {
+   "task": "Compare annual fees on travel cards with primary auto insurance",
+   "central": "rental car insurance"
+  },
+  {
+   "task": "Rotate Stripe webhook signing secrets for the checkout service",
+   "central": "API keys / webhook secrets"
+  },
+  {
+   "task": "Put a credit freeze on Equifax, Experian, and TransUnion",
+   "central": "credit bureau freeze"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay off the Mastercard balance before Friday",
+   "better": "plain credit card icon without shield",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Renew home contents insurance policy for next year",
+   "better": "house with shield icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy RFID-blocking leather wallet for dad's birthday",
+   "better": "wallet or gift icon",
+   "trap": "property"
+  },
+  {
+   "task": "Pick up visitor badge from the security desk",
+   "better": "ID badge with lanyard icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Remove old root certificates from the build server",
+   "better": "certificate or shield with minus icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order replacement hardware security keys for the engineering team",
+   "better": "key or USB security key icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a security shield with a small payment card badge, clearly conveying payment security, card fraud protection, card insurance benefits, or virtual cards. It fits personal finance, shopping, and travel tasks well, though at very small sizes the card stripe can resemble a minus sign in a box.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c00d41e85ab63c8d735af9e38e8cd9847fc67f50",
+  "usage": {
+   "prompt": 3922,
+   "output": 1683,
+   "thoughts": 196,
+   "total": 5801
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

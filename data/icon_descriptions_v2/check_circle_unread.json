@@ -1,0 +1,220 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "circle containing a centered checkmark",
+  "modifiers": [
+   "solid circular dot badge at top right"
+  ],
+  "composition": "single circular badge with interior checkmark and top-right cutout dot"
+ },
+ "readings": [
+  {
+   "meaning": "completed status or task check-off with unread notification",
+   "strength": "primary"
+  },
+  {
+   "meaning": "approval, confirmation, or verification pending review",
+   "strength": "primary"
+  },
+  {
+   "meaning": "habit check-in or daily streak tracker",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "quality assurance sign-off or compliance check",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Closely resembles a standard completed-task checkbox or the task app's own completion toggle, as well as a clock face at very small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "checkmark inside circle",
+   "meaning": "completed, verified, approved, or confirmed"
+  },
+  {
+   "modifier": "solid circular dot badge at top right",
+   "meaning": "unread notification, new update, or pending attention"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "tech",
+  "finance",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "approve pending requests in queue",
+  "confirm identity or account verification",
+  "sign off on quality assurance checklist",
+  "review newly completed team deliverables",
+  "complete daily habit check-in",
+  "verify compliance before release",
+  "acknowledge receipt of official notice"
+ ],
+ "example_tasks": [
+  {
+   "task": "Approve pending timesheets",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Confirm RSVP count",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Daily habit check-in",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Clear unread approvals",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "KYC verification step",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Sign off on the contractor's final milestone deliverables",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Confirm two-factor authentication setup on the new work laptop",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Approve the three pending expense reports in Ramp before Friday",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Complete the pre-op readiness checklist for Monday morning",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Finish the remaining items",
+   "parent": "Q3 Compliance Sign-Off",
+   "domain": "admin"
+  },
+  {
+   "task": "Go through today's queue",
+   "parent": "Vendor Approvals",
+   "domain": "work"
+  },
+  {
+   "task": "Submit the form before midnight",
+   "parent": "Tenant Background Verification",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off the noisy push alerts",
+   "parent": "Task App Notification Settings",
+   "domain": "tech"
+  },
+  {
+   "task": "Give final approval on the printer proofs so the shop can start the run",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Verify my identity with the notary link before the mortgage rate lock expires",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Run through the pre-departure safety checklist with everyone on board before leaving the slip",
+   "parent": "",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Aprobar las solicitudes de vacaciones pendientes del equipo",
+  "Completar la verificación de identidad en la cuenta del banco",
+  "Dar el visto bueno final al presupuesto de la reforma"
+ ],
+ "example_tasks_ru": [
+  "Подтвердить учётную запись на Госуслугах через банк",
+  "Согласовать зависшие заявки на закупку оборудования",
+  "Пройти предрейсовый чек-лист перед выездом на трассу"
+ ],
+ "context_tasks": [
+  {
+   "task": "Audit the onboarding checklist for new warehouse hires",
+   "central": "onboarding document / warehouse hires"
+  },
+  {
+   "task": "Fix the unread badge counter bug on the iOS home screen",
+   "central": "iOS app bug"
+  },
+  {
+   "task": "Set up automated Slack alerts when a build passes CI",
+   "central": "Slack / CI pipeline"
+  },
+  {
+   "task": "Write acceptance criteria for the checkout redesign ticket",
+   "central": "checkout redesign ticket"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check the tire pressure on the Subaru before driving north",
+   "better": "tire pressure gauge or car",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Verify that the basement sump pump still works",
+   "better": "water pump or house basement",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order a book of personal checks from the credit union",
+   "better": "bank checkbook",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Set the kitchen oven timer for 45 minutes",
+   "better": "clock or kitchen timer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a certified refurbished iPad Mini for the kids",
+   "better": "tablet / iPad",
+   "trap": "property"
+  },
+  {
+   "task": "Call the plumber about the radiator leak",
+   "better": "telephone or radiator",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "The icon depicts a generic completion checkmark inside a circle with a notification dot, which is UI status chrome rather than a concrete task subject. In a to-do list it clashes directly with the list's own completion checkboxes and encourages mis-tagging any task that begins with the generic verb 'check' or 'verify'.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "8b3e29408d556da60518e33e722665c25d3b6eb5",
+  "usage": {
+   "prompt": 3929,
+   "output": 1681,
+   "thoughts": 136,
+   "total": 5746
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

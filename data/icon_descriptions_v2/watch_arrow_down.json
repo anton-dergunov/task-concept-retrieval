@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round wristwatch with top and bottom strap lugs",
+  "modifiers": [
+   "downward arrow centered inside the dial"
+  ],
+  "composition": "single object, front view, centered"
+ },
+ "readings": [
+  {
+   "meaning": "smartwatch software update or download",
+   "strength": "primary"
+  },
+  {
+   "meaning": "sync data or workouts from a fitness watch",
+   "strength": "primary"
+  },
+  {
+   "meaning": "smartwatch or fitness tracker",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "install watch face or watch app",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the arrow inside the round bezel can look like a compass needle or a generic download button with decorative tabs.",
+ "modifier_semantics": [
+  {
+   "modifier": "downward arrow centered inside the dial",
+   "meaning": "download, install, update, or import onto the watch"
+  }
+ ],
+ "domains": [
+  "tech",
+  "health_fitness",
+  "outdoors",
+  "travel",
+  "work"
+ ],
+ "task_intents": [
+  "update smartwatch firmware or operating system",
+  "download offline maps to sports watch",
+  "load music or podcasts onto watch",
+  "install app on wearable device",
+  "sync GPX trail route to watch",
+  "download new watch face",
+  "export workout logs from fitness tracker"
+ ],
+ "example_tasks": [
+  {
+   "task": "Update watchOS overnight",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Garmin firmware update",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Load offline maps onto Suunto",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Install new watch faces",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Sync run data from watch",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Download the 50k GPX course file onto the Coros before Friday",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Put three long podcasts on the Apple Watch for phone-free runs",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Install the transit card and boarding pass on my watch",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pull the sleep and HRV logs off Dad's Fitbit for the cardiologist",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Test sideloading the latest wearable build onto the Galaxy Watch",
+   "parent": "Wear OS App Release",
+   "domain": "work"
+  },
+  {
+   "task": "Install the tide chart complication before the kayak trip",
+   "parent": "Garmin Fenix",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Download offline Spotify running playlist",
+   "parent": "Apple Watch",
+   "domain": "tech"
+  },
+  {
+   "task": "Check for the battery drain hotfix release",
+   "parent": "Smartwatch Maintenance",
+   "domain": "tech"
+  },
+  {
+   "task": "Load the structured Tuesday track intervals onto the Forerunner so I don't need pace notes",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Download the offline topographic maps for the Dolomites onto my watch while still on hotel Wi-Fi",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Restore the backup onto the replacement Apple Watch and verify that cellular activation carries over",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Actualizar el firmware del Garmin antes de la media maratón",
+  "Descargar la ruta GPX del sendero en el reloj",
+  "Pasar listas de Spotify al Apple Watch para correr sin móvil"
+ ],
+ "example_tasks_ru": [
+  "Обновить прошивку на часах Garmin перед забегом",
+  "Загрузить офлайн-карту маршрута в смарт-часы",
+  "Скачать музыку на часы для пробежки без телефона"
+ ],
+ "context_tasks": [
+  {
+   "task": "Clear old voice memos off the Apple Watch to free space for the OS update",
+   "central": "storage / voice memos"
+  },
+  {
+   "task": "Pair the Polar chest strap with the watch before intervals",
+   "central": "heart rate strap"
+  },
+  {
+   "task": "Put the watch on the puck at 50% so the overnight update actually runs",
+   "central": "charger"
+  },
+  {
+   "task": "Set up cellular plan for the kid's watch",
+   "central": "mobile plan / SIM"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Replace the cracked leather strap on my grandfather's Omega",
+   "better": "analog wristwatch without download arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download the marathon training plan PDF to my laptop",
+   "better": "document download or laptop icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Watch the downloaded flight safety video before Friday",
+   "better": "video play icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a waterproof watch for lap swimming",
+   "better": "plain wristwatch or swimming icon",
+   "trap": "property"
+  },
+  {
+   "task": "Order a nylon hook-and-loop band for summer runs",
+   "better": "shopping or watch strap icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check the compass bearing for the campsite trailhead",
+   "better": "compass icon",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a round wristwatch or smartwatch with a downward arrow on its face, signifying downloading to or updating a wearable device. It fits a narrow but very real set of tasks around updating smartwatch firmware, loading offline maps/music/routes onto a GPS sports watch, or syncing fitness data. It is distinct from a normal watch or clock because there are no clock hands, only a bold download arrow.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "93844f2638c8acb09d302de66cd9255384f636b9",
+  "usage": {
+   "prompt": 3920,
+   "output": 1688,
+   "thoughts": 0,
+   "total": 5608
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

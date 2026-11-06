@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "thick-lined heraldic shield outline",
+  "modifiers": [
+   "solid heart centered inside the shield"
+  ],
+  "composition": "single shield outline front view with centered heart symbol"
+ },
+ "readings": [
+  {
+   "meaning": "health insurance or medical coverage",
+   "strength": "primary"
+  },
+  {
+   "meaning": "life insurance policy",
+   "strength": "primary"
+  },
+  {
+   "meaning": "health protection, immunity, or preventive care",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "family safety or trust and safety",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a shield containing a cross (medical security/insurance) or a simple security shield at very small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "solid heart centered inside the shield",
+   "meaning": "health, life, well-being, or care being protected"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "finance",
+  "admin",
+  "social_family",
+  "travel",
+  "work"
+ ],
+ "task_intents": [
+  "enroll in health insurance plan",
+  "update life insurance beneficiaries",
+  "submit medical insurance claim",
+  "compare open enrollment coverage options",
+  "buy travel medical insurance policy",
+  "check deductible and out-of-pocket max",
+  "renew pet health insurance policy",
+  "verify in-network coverage for specialist"
+ ],
+ "example_tasks": [
+  {
+   "task": "Renew health insurance",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Cigna claim appeal",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Compare PPO vs HDHP",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Term life policy quote",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Download new BlueCross card",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Submit out-of-network physical therapy receipts to Aetna",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Add baby Leo to our family medical plan within 30 days",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Buy Schengen travel medical coverage for the October trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check if the dermatologist on Elm St is in-network",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Call HR about COBRA continuation pricing",
+   "parent": "Health Insurance",
+   "domain": "work"
+  },
+  {
+   "task": "Update primary and contingent beneficiaries on the 20-year policy",
+   "parent": "Life Insurance",
+   "domain": "finance"
+  },
+  {
+   "task": "Mail back signed spousal surcharge affidavit before Friday",
+   "parent": "Open Enrollment",
+   "domain": "admin"
+  },
+  {
+   "task": "Upload the itemized vet bill from Tuesday",
+   "parent": "Pet Insurance",
+   "domain": "admin"
+  },
+  {
+   "task": "Figure out whether the $1,500 deductible resets in January or on the policy anniversary date",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Compare dental and vision riders before the company open enrollment window closes on November 15",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Ask the billing office at St. Jude why the bloodwork wasn't billed through secondary coverage",
+   "parent": "",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Subir las facturas del pediatra al portal del seguro médico para el reembolso",
+  "Póliza de vida",
+  "Contratar seguro médico de viaje con cobertura de repatriación para Japón"
+ ],
+ "example_tasks_ru": [
+  "Оформить полис ДМС со стоматологией на следующий год",
+  "Страховка для шенгена",
+  "Позвонить в страховую по поводу гарантийного письма на МРТ колена"
+ ],
+ "context_tasks": [
+  {
+   "task": "Schedule annual biometric screening for the wellness discount",
+   "central": "medical test / blood draw"
+  },
+  {
+   "task": "Set up automatic monthly transfer to the HSA investment account",
+   "central": "bank account / money transfer"
+  },
+  {
+   "task": "Put emergency medical ID card in wallet behind driver's license",
+   "central": "ID card / wallet"
+  },
+  {
+   "task": "Get flu and tetanus booster shots at the pharmacy",
+   "central": "syringe / vaccination"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Schedule annual echocardiogram with the cardiologist",
+   "better": "heart with pulse line / stethoscope",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Renew auto insurance policy with Geico before the 1st",
+   "better": "car with shield",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Turn on two-factor authentication for my patient portal",
+   "better": "lock or security key",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a chest-strap heart rate monitor for marathon training",
+   "better": "heart rate monitor / running shoe",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pick up blood pressure medication at CVS",
+   "better": "pill bottle",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy heart-healthy olive oil and walnuts at Trader Joe's",
+   "better": "olive oil bottle / grocery bag",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A shield containing a heart is the standard visual metaphor for health insurance, life insurance, and medical coverage. It fits a common, well-defined cluster of personal admin and finance tasks (open enrollment, claims, policies, beneficiaries) while remaining distinct from a plain security shield or a standalone medical heart.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "08d6704e36ac60642e8841045fdac395ccc26189",
+  "usage": {
+   "prompt": 3925,
+   "output": 1684,
+   "thoughts": 91,
+   "total": 5700
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

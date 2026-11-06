@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined rectangular briefcase or suitcase with a top handle",
+  "modifiers": [
+   "solid black circular clock badge at bottom right"
+  ],
+  "composition": "single object in front view with a bottom-right corner overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "work hours, timesheet, or shift schedule",
+   "strength": "primary"
+  },
+  {
+   "meaning": "employment history or work experience",
+   "strength": "primary"
+  },
+  {
+   "meaning": "overtime, PTO, or time off from work",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "luggage storage, baggage delay, or travel schedule",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The base shape can be read either as an office briefcase (work/job) or a travel suitcase (luggage/trip), and at very small sizes the outline could resemble a camera body.",
+ "modifier_semantics": [
+  {
+   "modifier": "solid black circular clock badge at bottom right",
+   "meaning": "hours, schedule, time tracking, history, or waiting"
+  }
+ ],
+ "domains": [
+  "work",
+  "career",
+  "admin",
+  "finance",
+  "travel"
+ ],
+ "task_intents": [
+  "submit weekly timesheet for payroll",
+  "log billable client work hours",
+  "request paid time off dates",
+  "update work history on resume",
+  "swap upcoming work shift schedule",
+  "check overtime pay on payslip",
+  "book luggage storage before check-in",
+  "track freelance project hours"
+ ],
+ "example_tasks": [
+  {
+   "task": "Submit Friday timesheet",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Log billable hours for Acme",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Approve team overtime",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Fill in the 2019–2022 gap",
+   "parent": "Work History",
+   "domain": "career"
+  },
+  {
+   "task": "Send mine to payroll before noon",
+   "parent": "Timesheets",
+   "domain": "work"
+  },
+  {
+   "task": "Request half-day PTO for the dentist on the 14th",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Swap Tuesday late shift with Marco",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Export Toggl hours for the March client invoice",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Double-check the dates on the background check form",
+   "parent": "Employment History",
+   "domain": "career"
+  },
+  {
+   "task": "Book luggage storage at King's Cross for the 4-hour layover",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Ask HR whether unused comp time carries over into Q2",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Set summer flex-time core hours with my manager",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pick next month's on-call rotation slots",
+   "parent": "Shift Schedule",
+   "domain": "work"
+  },
+  {
+   "task": "Reconcile the 6.5 overtime hours from the server migration weekend against April's pay stub",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Collect exact start and end dates from my last three jobs for the mortgage application",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "File the delayed baggage claim with Lufthansa before the 21-day window closes",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Fichar las horas extra del sábado en el portal",
+  "Pedir el cambio del turno de tarde del jueves",
+  "Consigna de maletas en Atocha hasta las 18h"
+ ],
+ "example_tasks_ru": [
+  "Заполнить табель рабочего времени за март",
+  "Сверить даты стажа в трудовой книжке",
+  "Согласовать график дежурств на майские праздники"
+ ],
+ "context_tasks": [
+  {
+   "task": "Ask Sarah to cover my 4pm client demo while I'm out",
+   "central": "client demo / meeting"
+  },
+  {
+   "task": "Set up out-of-office auto-reply for next week",
+   "central": "email auto-reply"
+  },
+  {
+   "task": "Calculate hourly rate needed to hit $90k after taxes",
+   "central": "rate calculation / budget"
+  },
+  {
+   "task": "Buy a small padlock for the station left-luggage locker",
+   "central": "padlock"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a leather briefcase for the new job",
+   "better": "plain briefcase without clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack carry-on suitcase for the Berlin flight",
+   "better": "suitcase or luggage icon without clock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace battery in the kitchen wall clock",
+   "better": "plain clock or battery icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Draft the Q3 product roadmap slide deck",
+   "better": "presentation slides or chart icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Look for a part-time dog walker for Tuesdays",
+   "better": "dog or paw print icon",
+   "trap": "property"
+  },
+  {
+   "task": "Check when the leather messenger bag ships",
+   "better": "shipping box or delivery truck icon",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a briefcase/suitcase with a clock badge, clearly signaling work hours, timesheets, shift schedules, employment history, or timed luggage storage. It fits a solid set of recurring workplace and admin tasks (logging hours, submitting timesheets, scheduling shifts) while remaining distinct from a plain briefcase or plain clock.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "3c546a2a32e91c8cadc7020a32bdc4adfcc05d70",
+  "usage": {
+   "prompt": 3926,
+   "output": 1721,
+   "thoughts": 0,
+   "total": 5647
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

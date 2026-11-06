@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "ship or ferry boat on water with bus overlay",
+  "modifiers": [
+   "front-facing bus or train car in bottom-right corner",
+   "wavy water line at bottom left"
+  ],
+  "composition": "two overlapping front-view transport vehicles"
+ },
+ "readings": [
+  {
+   "meaning": "vehicle ferry or car/bus ferry",
+   "strength": "primary"
+  },
+  {
+   "meaning": "multimodal public transit (boat and bus/train)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "port shuttle or cruise transfer",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "freight shipping and ground transport",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the half-hidden ship bow can look like a crooked house or factory behind a bus, and the smaller vehicle could be read as either a bus, a train car, or a car.",
+ "modifier_semantics": [
+  {
+   "modifier": "front-facing bus or train car in bottom-right corner",
+   "meaning": "ground transit connection or vehicle transport aboard the ferry"
+  }
+ ],
+ "domains": [
+  "travel",
+  "admin",
+  "work",
+  "social_family",
+  "outdoors",
+  "finance"
+ ],
+ "task_intents": [
+  "book vehicle ferry ticket for trip",
+  "check boat and bus transfer schedule",
+  "arrange port shuttle to cruise terminal",
+  "buy multimodal public transit pass",
+  "plan island commute by ferry and bus",
+  "coordinate freight shipping and trucking",
+  "confirm vehicle boarding dimensions for ferry"
+ ],
+ "example_tasks": [
+  {
+   "task": "Book the car ferry",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Port shuttle reservation",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Ferry and bus pass",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check timings for Sunday",
+   "parent": "Island Ferry & Bus Commute",
+   "domain": "travel"
+  },
+  {
+   "task": "Print boarding passes",
+   "parent": "Calais Car Ferry Crossing",
+   "domain": "travel"
+  },
+  {
+   "task": "Reserve vehicle slot on the 7am Woods Hole ferry",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Look up bus connection from the ferry terminal to town",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Buy regional transit card that covers both harbor ferries and buses",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Measure roof rack height for the campervan ferry booking form",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Coordinate sea-and-road freight quote for the exhibition crates",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Send grandparents the shuttle bus details from the cruise pier",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Update license plate number",
+   "parent": "BC Ferries Vehicle Booking",
+   "domain": "admin"
+  },
+  {
+   "task": "Compare prices for taking the car",
+   "parent": " Sardinia Ferry Transfer",
+   "domain": "finance"
+  },
+  {
+   "task": "Check whether the Orkney ferry allows campervans on the late afternoon crossing in October",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out how long the bus transfer takes between Piraeus ferry port and Athens station",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Submit reimbursement receipt for the cross-sound vehicle ferry and terminal shuttle tickets from Tuesday",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Reservar plaza para el coche en el ferry a Baleares",
+  "Mirar combinación de autobús y barco para llegar a la isla",
+  "Comprar abono de transporte público que incluya el ferry y el bus"
+ ],
+ "example_tasks_ru": [
+  "Забронировать место для машины на пароме до Сахалина",
+  "Узнать расписание автобуса от паромной переправы до отеля",
+  "Оплатить билеты на паром и трансфер до порта"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack motion sickness pills for the crossing",
+   "central": "pills / medication"
+  },
+  {
+   "task": "Download offline podcasts for the long ferry and bus ride",
+   "central": "podcasts / headphones"
+  },
+  {
+   "task": "Buy snacks for the port waiting area",
+   "central": "snacks / food"
+  },
+  {
+   "task": "Put vehicle registration in the glovebox before boarding",
+   "central": "document / registration paper"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Rent a kayak at the harbor",
+   "better": "kayak or canoe",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Renew city bus pass for November",
+   "better": "single bus without ship",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book cabin on Caribbean cruise ship",
+   "better": "single cruise ship without bus",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check tire pressure before driving onto the ferry",
+   "better": "tire or pressure gauge",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy waterproof duffel bag for ferry deck",
+   "better": "duffel bag / luggage",
+   "trap": "property"
+  },
+  {
+   "task": "Pick up passports from the post office",
+   "better": "passport",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a ship on waves with a front-facing bus/vehicle, clearly denoting a vehicle ferry, port shuttle, or multimodal transit (boat + bus/train). It is very useful for travel and commuting tasks involving ferries with cars or bus connections, though slightly busy at small sizes compared to a plain ship or plain bus icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ce835900d0fe39db13d92f7822604811bc18a024",
+  "usage": {
+   "prompt": 3923,
+   "output": 1694,
+   "thoughts": 95,
+   "total": 5712
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

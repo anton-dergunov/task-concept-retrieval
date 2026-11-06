@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "perspective two-lane road with dashed center line",
+  "modifiers": [
+   "map pin marker at bottom left"
+  ],
+  "composition": "perspective road receding upward with a location pin overlaid on the lower left edge"
+ },
+ "readings": [
+  {
+   "meaning": "street address or roadside location",
+   "strength": "primary"
+  },
+  {
+   "meaning": "driving route, directions, or road trip stop",
+   "strength": "primary"
+  },
+  {
+   "meaning": "GPS navigation waypoint",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the dashed road lines next to the pin can resemble vertical barcode stripes or an exclamation mark next to a droplet.",
+ "modifier_semantics": [
+  {
+   "modifier": "map pin marker at bottom left",
+   "meaning": "specific location, address, or destination point along the road"
+  }
+ ],
+ "domains": [
+  "travel",
+  "outdoors",
+  "admin",
+  "home",
+  "work",
+  "social_family",
+  "tech"
+ ],
+ "task_intents": [
+  "plan stops along a road trip",
+  "look up driving directions to venue",
+  "save roadside attraction to map",
+  "update street address on file",
+  "set GPS waypoint for scenic drive",
+  "find rest stop halfway to destination",
+  "map out delivery route for driver"
+ ],
+ "example_tasks": [
+  {
+   "task": "Route 66 diner stops",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Look up driving directions",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Verify new street address",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Halfway meetup spot",
+   "parent": "Thanksgiving Drive",
+   "domain": "social_family"
+  },
+  {
+   "task": "Add overnight stops",
+   "parent": "Utah Road Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Pin the trailhead pullout on Google Maps before we lose cell service",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Find a decent dog-friendly rest area along I-95 in Virginia",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send exact highway exit and gate code to the septic tank driver",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check which scenic bypass avoids the downtown tunnel toll on Friday",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Sequence the eight client site visits along the northern corridor",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Download offline highway maps for the Blue Ridge Parkway stretch",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Confirm physical street address",
+   "parent": "Home Insurance Renewal",
+   "domain": "admin"
+  },
+  {
+   "task": "Pick lunch stop near exit 42",
+   "parent": "Saturday Soccer Away Game",
+   "domain": "social_family"
+  },
+  {
+   "task": "Map out all the quirky roadside fruit stands between Fresno and Bakersfield for Sunday",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out where the paved county road ends so we know where to park the trailer",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Submit the 911 rural driveway address application form to the county GIS office",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Marcar las paradas en la autopista hacia Valencia",
+  "Enviar la dirección exacta de la calle al transportista",
+  "Buscar qué salida de la ruta tiene área de descanso con sombra"
+ ],
+ "example_tasks_ru": [
+  "Отметить точки ночёвки вдоль трассы М-4",
+  "Уточнить точный уличный адрес склада для курьера",
+  "Скачать карту заправок и съездов по дороге в Карелию"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack snacks and audiobooks for the twelve-hour drive to Denver",
+   "central": "snacks and audiobooks"
+  },
+  {
+   "task": "Buy reflective house numbers for the mailbox post by the road",
+   "central": "house numbers"
+  },
+  {
+   "task": "Check tire pressure and oil level before the highway trip",
+   "central": "car maintenance"
+  },
+  {
+   "task": "Call the county public works department about the pothole on Elm Street",
+   "central": "phone call / pothole"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a road bike helmet with MIPS protection",
+   "better": "bicycle helmet",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Renew driver's license at the DMV before next month",
+   "better": "ID card / driver's license",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Book flight and hotel for the Chicago conference",
+   "better": "airplane or hotel",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Update product roadmap for Q3 engineering sprint",
+   "better": "gantt chart or project timeline",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check if the new running shoes are good for road running",
+   "better": "running shoe",
+   "trap": "property"
+  },
+  {
+   "task": "Track package delivery status from UPS",
+   "better": "parcel box / package",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines a perspective two-lane road with a location pin, making it immediately recognizable as a street address, driving route, or roadside stop. It fits tasks about planning road trips, mapping driving directions, or specifying street addresses, while being distinct from a plain map pin or a plain road.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "833ac96cfad297441611b02c79e4ddc5b76a6f03",
+  "usage": {
+   "prompt": 3927,
+   "output": 1651,
+   "thoughts": 100,
+   "total": 5678
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "calendar page outline with two top binding rings",
+  "modifiers": [
+   "right-pointing arrow entering at bottom left"
+  ],
+  "composition": "single object with bottom-left corner replaced by an inward arrow"
+ },
+ "readings": [
+  {
+   "meaning": "import to calendar / add schedule feed",
+   "strength": "primary"
+  },
+  {
+   "meaning": "reschedule / move event to a date",
+   "strength": "primary"
+  },
+  {
+   "meaning": "schedule appointment or booking",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "check-in date / start date",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with a plain calendar icon, a calendar export icon, or a 'next day / defer task' UI action button at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "right-pointing arrow entering the calendar",
+   "meaning": "import, insert into schedule, move to date, or check in"
+  }
+ ],
+ "domains": [
+  "admin",
+  "work",
+  "tech",
+  "travel",
+  "social_family",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "import events into digital calendar",
+  "sync external schedule with calendar",
+  "reschedule appointment to new date",
+  "block out dates on calendar",
+  "subscribe to shared calendar feed",
+  "put upcoming deadlines on calendar",
+  "move recurring meeting to another day"
+ ],
+ "example_tasks": [
+  {
+   "task": "Import school term dates",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Sync Flighty with Google Calendar",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Reschedule Thursday's standup",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Add ICS feed",
+   "parent": "Kids' Soccer Season",
+   "domain": "social_family"
+  },
+  {
+   "task": "Move to next month",
+   "parent": "Q3 Planning",
+   "domain": "work"
+  },
+  {
+   "task": "Import the Premier League fixture list into my personal iCal",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Put all 2026 public holidays and company shutdown days on the shared calendar",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Move the quarterly hygienist appointment from Friday morning to the following week",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Subscribe to the city trash and recycling pickup schedule in Apple Calendar",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Block off the two weeks in August before someone books meetings over them",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Transfer Mom's oncology clinic dates from the paper printout into the family calendar",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Set up CalDAV sync",
+   "parent": "Fastmail Migration",
+   "domain": "tech"
+  },
+  {
+   "task": "Push back by two weeks",
+   "parent": "Dentist & Ortho Appointments",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Import the conference talk schedule CSV into Outlook so my status shows busy all week",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Add every exam date and coursework deadline from the syllabus into Notion Calendar tonight",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Request early 11am check-in date and time with the Kyoto ryokan front desk",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Importar el calendario laboral de 2026 al móvil",
+  "Pasar la revisión del dentista para el mes que viene",
+  "Meter las fechas de exámenes de la convocatoria de junio en Google Calendar"
+ ],
+ "example_tasks_ru": [
+  "Импортировать расписание пар из файла в Google Календарь",
+  "Перенести созвон с дизайнером на следующий вторник",
+  "Внести график отпусков отдела в общий рабочий календарь"
+ ],
+ "context_tasks": [
+  {
+   "task": "Ask HR which floating holidays roll over into January",
+   "central": "HR message / vacation policy"
+  },
+  {
+   "task": "Download the .ics file from the airline confirmation email",
+   "central": "flight confirmation file"
+  },
+  {
+   "task": "Pick three weekends in October that work for the cabin trip",
+   "central": "cabin trip planning"
+  },
+  {
+   "task": "Confirm whether the venue has availability in late May",
+   "central": "venue booking"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a wall calendar with big squares for the kitchen",
+   "better": "plain calendar or shopping bag",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the credit card bill before the due date on the 15th",
+   "better": "credit card or bill payment",
+   "trap": "property"
+  },
+  {
+   "task": "Check next week's schedule before replying to Sarah",
+   "better": "message / reply icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Export last year's timesheet entries to a spreadsheet",
+   "better": "spreadsheet or file export icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy birthday gift for Leo",
+   "better": "gift box",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Book a table for four at Osteria Mozza on Friday night",
+   "better": "restaurant / cutlery icon",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a calendar with an inward-pointing arrow, representing importing events, adding to a schedule, or moving/rescheduling a date. While many tasks simply have a due date (which is a property and shouldn't use a calendar icon), tasks specifically about managing calendars, importing `.ics` feeds, or rescheduling appointments fit well.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "831904bc0fee4bc51b846c17ea1898e0370c5aeb",
+  "usage": {
+   "prompt": 3923,
+   "output": 1717,
+   "thoughts": 86,
+   "total": 5726
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

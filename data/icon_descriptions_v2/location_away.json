@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined house with pitched roof",
+  "modifiers": [
+   "person bust badge in bottom right corner"
+  ],
+  "composition": "house outline cut out at bottom right for overlapping person icon"
+ },
+ "readings": [
+  {
+   "meaning": "tenant, roommate, housemate, or resident",
+   "strength": "primary"
+  },
+  {
+   "meaning": "landlord, homeowner, or host",
+   "strength": "primary"
+  },
+  {
+   "meaning": "house guest, visitor, or house sitter",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "remote work or working from home",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "It is clear that it combines a house and a person, though whether the person is a landlord, tenant, guest, neighbor, or remote worker depends on context.",
+ "modifier_semantics": [
+  {
+   "modifier": "person bust badge",
+   "meaning": "person associated with the house: occupant, owner, guest, or resident"
+  }
+ ],
+ "domains": [
+  "home",
+  "social_family",
+  "finance",
+  "work",
+  "travel",
+  "admin"
+ ],
+ "task_intents": [
+  "contact landlord or property manager",
+  "split bills with roommate",
+  "prepare guest room for visitors",
+  "arrange house sitter for trip",
+  "screen prospective subletter or tenant",
+  "introduce self to new neighbors",
+  "set up work from home schedule",
+  "message Airbnb host before arrival"
+ ],
+ "example_tasks": [
+  {
+   "task": "Text landlord about radiator",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Find a reliable house sitter",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Interview third roommate candidate",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Sign the lease renewal",
+   "parent": "Tenant & Landlord",
+   "domain": "admin"
+  },
+  {
+   "task": "Leave spare keys",
+   "parent": "House Sitter",
+   "domain": "home"
+  },
+  {
+   "task": "Message the Airbnb host about checking in after midnight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Split the March electric and internet bills with Chloe",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Put fresh sheets on the sofa bed before Mom arrives",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Submit my Tuesday and Thursday remote work request to HR",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Ask the new neighbor downstairs if they got our misdelivered package",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Run reference check on the couple applying for the basement unit",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Send the wifi password and parking instructions",
+   "parent": "Weekend Guests",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check background report",
+   "parent": "Subletter Search",
+   "domain": "admin"
+  },
+  {
+   "task": "Write down the cat feeding routine and alarm code for the house sitter before Friday",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Draft a polite notice to the upstairs tenants about keeping laundry noise down after ten",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Update homeowner occupancy status on the city property tax portal before the April exemption deadline",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Llamar al casero por la humedad del baño",
+  "Dividir los gastos de luz y gas con mis compañeros de piso",
+  "Preparar la habitación de invitados antes de que lleguen los abuelos el viernes"
+ ],
+ "example_tasks_ru": [
+  "Перевести хозяйке квартиры за коммуналку",
+  "Попросить соседку поливать цветы на время отпуска",
+  "Согласовать график удалёнки из дома на следующий месяц с руководителем"
+ ],
+ "context_tasks": [
+  {
+   "task": "Order a second monitor for my home office desk",
+   "central": "monitor"
+  },
+  {
+   "task": "Bake banana bread for the new family next door",
+   "central": "bread / baking"
+  },
+  {
+   "task": "Cut an extra front door key for the dog walker",
+   "central": "key"
+  },
+  {
+   "task": "Buy a welcome doormat for the rental unit",
+   "central": "doormat"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Clean out the rain gutters before autumn starts",
+   "better": "plain house or roof icon (general home maintenance with no person focus)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update my personal contact profile in Slack",
+   "better": "single person / user profile icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a sturdy dog house for the backyard",
+   "better": "dog or pet house icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Compare homemade pasta sauce recipes",
+   "better": "cooking pot or pasta icon ('homemade' is just an attribute)",
+   "trap": "property"
+  },
+  {
+   "task": "Unpack the espresso machine",
+   "better": "coffee machine icon (even if under a 'Moving In' list)",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Host the team retrospective meeting on Friday",
+   "better": "meeting or video call icon ('host' here is a verb for running a meeting, not housing)",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly pairs a house outline with a person silhouette, making it an ideal cue for tasks involving people connected to a home: landlords, tenants, roommates, house guests, neighbors, house sitters, or working from home. It is visually distinct from a plain house icon (general chores) and a plain person icon (general contacts).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "fa4fb368feb8e6cd73b7caab8c388cf56f6426c5",
+  "usage": {
+   "prompt": 3924,
+   "output": 1694,
+   "thoughts": 0,
+   "total": 5618
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

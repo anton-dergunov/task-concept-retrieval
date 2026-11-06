@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "fan-shaped Wi-Fi signal wedge with only bottom bar filled",
+  "modifiers": [
+   "low fill level (1 of 3 bars)"
+  ],
+  "composition": "single centered geometric symbol"
+ },
+ "readings": [
+  {
+   "meaning": "weak Wi-Fi signal / poor wireless reception",
+   "strength": "primary"
+  },
+  {
+   "meaning": "Wi-Fi / wireless network",
+   "strength": "primary"
+  },
+  {
+   "meaning": "windshield wiper sweep / radar sector",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "It is a specific statusbar indicator for 1-bar Wi-Fi signal strength; in a task list it is indistinguishable in purpose from a standard full Wi-Fi icon, or might look like a baseball field / pie wedge.",
+ "modifier_semantics": [
+  {
+   "modifier": "only bottom tip filled",
+   "meaning": "low or weak signal strength (1 bar)"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "work",
+  "travel",
+  "admin"
+ ],
+ "task_intents": [
+  "fix weak Wi-Fi in a room",
+  "extend wireless coverage at home",
+  "troubleshoot poor internet reception",
+  "set up a Wi-Fi mesh node",
+  "configure home wireless network",
+  "change Wi-Fi password or SSID"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix bedroom Wi-Fi deadzone",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Guest Wi-Fi password",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test signal in backyard",
+   "parent": "Home Wi-Fi Upgrade",
+   "domain": "home"
+  },
+  {
+   "task": "Reboot upstairs access point",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Buy pocket Wi-Fi for Japan",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Move the Eero beacon halfway down the hall to fix the patio drop-offs",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Switch the 2.4GHz band to channel 6 so the baby monitor stops dropping",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Ask hotel front desk why the conference room Wi-Fi keeps kicking us off",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set up a separate IoT wireless network for the smart plugs and vacuum",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Order a longer coax cable to move the router out of the closet",
+   "parent": "Home Wi-Fi",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check which cafés near the Airbnb have reliable Wi-Fi for Friday's call",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call ISP about the evening throughput drops",
+   "parent": "Wi-Fi & Internet",
+   "domain": "admin"
+  },
+  {
+   "task": "Compare TP-Link Deco and Asus ZenWiFi prices",
+   "parent": "Mesh Wi-Fi Project",
+   "domain": "shopping"
+  },
+  {
+   "task": "Walk through all three floors with NetSpot on the laptop to map the dead zones",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Print a little QR code card for the guest Wi-Fi before mom and dad arrive",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Figure out why the garage camera only gets one bar of signal at night",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Poner un repetidor Wi-Fi en el pasillo porque al cuarto del fondo no llega señal",
+  "Cambiar la clave del Wi-Fi de invitados",
+  "Revisar por qué se corta el Wi-Fi en el estudio cada vez que llueve"
+ ],
+ "example_tasks_ru": [
+  "Поставить репитер в коридоре, чтобы Wi-Fi добивал до балкона",
+  "Пароль от гостевого вайфая",
+  "Переключить роутер на 5 ГГц и проверить скорость в спальне"
+ ],
+ "context_tasks": [
+  {
+   "task": "Reconnect the Brother printer to the new router",
+   "central": "printer"
+  },
+  {
+   "task": "Download offline maps before we lose signal in the canyon",
+   "central": "map"
+  },
+  {
+   "task": "Pay the monthly fiber bill before the 15th",
+   "central": "bill / payment"
+  },
+  {
+   "task": "Crimp RJ45 ends on the Ethernet run to the attic",
+   "central": "cable"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a small waterproof wireless speaker for the shower",
+   "better": "speaker",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the Sony headphones are charging",
+   "better": "headphones",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Replace the torn paper fan in the guest room",
+   "better": "hand fan",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the rear windshield wiper blade before winter",
+   "better": "car / wiper",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the electrician for running the living room conduit",
+   "better": "money / electrician",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Connect with Sarah on LinkedIn after the meetup",
+   "better": "person / message",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is a system status-bar indicator for 1-bar Wi-Fi signal strength (a quantity/state variant of a standard Wi-Fi icon). While recognizable as Wi-Fi, a signal-level gauge is UI chrome rather than a distinct task subject over a normal Wi-Fi icon, and the hollow wedge easily looks like a generic sector or fan.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "74aaa055d746d7baab2e4d887e7932b905b68da2",
+  "usage": {
+   "prompt": 3924,
+   "output": 1695,
+   "thoughts": 0,
+   "total": 5619
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

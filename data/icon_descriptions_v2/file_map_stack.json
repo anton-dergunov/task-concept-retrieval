@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "map location pin inside a rounded square frame",
+  "modifiers": [
+   "stacked L-shaped frame behind bottom-left"
+  ],
+  "composition": "stacked square cards with central location pin"
+ },
+ "readings": [
+  {
+   "meaning": "saved places or collection of locations",
+   "strength": "primary"
+  },
+  {
+   "meaning": "geotagged photos or photo album by location",
+   "strength": "primary"
+  },
+  {
+   "meaning": "multiple addresses or branches",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "map layers or location cards",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be read either as a list of saved map places or as a stack of geotagged photos.",
+ "modifier_semantics": [
+  {
+   "modifier": "stacked L-shaped frame behind bottom-left",
+   "meaning": "multiple items, collection, album, or batch"
+  }
+ ],
+ "domains": [
+  "travel",
+  "hobbies",
+  "tech",
+  "work",
+  "social_family",
+  "home",
+  "outdoors"
+ ],
+ "task_intents": [
+  "organize saved places on map",
+  "geotag photos from a trip",
+  "compile list of venue locations",
+  "clean up bookmarked map pins",
+  "strip location metadata from photos",
+  "curate neighborhood spots for guests",
+  "export saved locations to file",
+  "sort travel photos by place"
+ ],
+ "example_tasks": [
+  {
+   "task": "Clean up Google Maps pins",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Geotag the Dolomites film scans",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Saved ramen spots list",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Fix missing GPS tags",
+   "parent": "Lightroom Catalog",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Sort into regional folders",
+   "parent": "Saved Places",
+   "domain": "travel"
+  },
+  {
+   "task": "Pin all six potential ceremony venues on a shared map for Saturday",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Strip EXIF location data from the house photos before posting listing",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Export starred Lisbon cafes and viewpoints to an offline KML file",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Verify store addresses across all three regional directory listings",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Group iPhone camera roll bursts by neighborhood from the Berlin walk",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Send Dave my bookmarked wild swimming spots along the Wye",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Prune the dead links",
+   "parent": "Bookmarked Campsites",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Share the link with everyone",
+   "parent": "Kyoto Food Pins",
+   "domain": "travel"
+  },
+  {
+   "task": "Sync the Garmin waypoint coordinates with the DSLR raw files from the ridge walk",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Build a custom map of playgrounds, bakeries and rainy-day stops for when my sister visits",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Audit all forty-two franchise branch pins on Apple Business Connect before the summer campaign",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Geolocalizar las fotos analógicas del viaje a Menorca en Lightroom",
+  "Pasarle a Marta mi lista de sitios guardados en Oporto",
+  "Borrar la ubicación de las fotos antes de subirlas al foro"
+ ],
+ "example_tasks_ru": [
+  "Разобрать сохранённые метки кафе и музеев в Гугл Картах",
+  "Проставить геометки на плёночные сканы с Алтая",
+  "Собрать карту всех точек самовывоза для курьеров"
+ ],
+ "context_tasks": [
+  {
+   "task": "Turn off Precise Location for social media apps",
+   "central": "privacy settings"
+  },
+  {
+   "task": "Order a framed print of where we met",
+   "central": "framed print"
+  },
+  {
+   "task": "Pick a hotel within walking distance of the conference",
+   "central": "hotel"
+  },
+  {
+   "task": "Back up phone photos before wiping the device",
+   "central": "photo backup"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Look up the postcode for the dentist on High Street",
+   "better": "single map pin",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a wall map of Scotland with wooden pushpins",
+   "better": "folded map or pushpin",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Copy the billing address to the clipboard",
+   "better": "clipboard or copy icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book flights to the three European office locations",
+   "better": "airplane",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the restaurant is still at the old location",
+   "better": "restaurant or fork and knife",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a new SD card for the camera",
+   "better": "SD memory card",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a stacked-square frame (indicating multiple items, an album, or cards) with a central map pin. It fits tasks about managing collections of saved places, multiple locations, or geotagged photo albums, though it can be confused with a single location pin or a generic copy icon at tiny sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f2ab018290f868558d135c761d36ce273d8e10cc",
+  "usage": {
+   "prompt": 3925,
+   "output": 1676,
+   "thoughts": 0,
+   "total": 5601
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

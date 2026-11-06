@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front view of a transit bus with headlights and wheels",
+  "modifiers": [
+   "map location pin in the top-right corner"
+  ],
+  "composition": "single vehicle front view with upper-right badge cutout"
+ },
+ "readings": [
+  {
+   "meaning": "bus stop or bus station",
+   "strength": "primary"
+  },
+  {
+   "meaning": "bus route, transit directions, or shuttle pickup point",
+   "strength": "primary"
+  },
+  {
+   "meaning": "live bus tracking or transit arrival location",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a train or camper van icon with a location pin at very small sizes, though the wheels rather than rails mark it as a road vehicle.",
+ "modifier_semantics": [
+  {
+   "modifier": "map location pin",
+   "meaning": "stop, station, pickup spot, route, or geographic location"
+  }
+ ],
+ "domains": [
+  "travel",
+  "social_family",
+  "work",
+  "learning",
+  "admin",
+  "outdoors"
+ ],
+ "task_intents": [
+  "find the right bus stop",
+  "check shuttle pickup location",
+  "plan public transit commute route",
+  "confirm school bus stop assignment",
+  "look up intercity coach terminal",
+  "share tour bus meeting point",
+  "locate airport express bus bay"
+ ],
+ "example_tasks": [
+  {
+   "task": "FlixBus departure stop",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Confirm school bus stop",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check shuttle pickup spot",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pin the exact boarding bay",
+   "parent": "Madrid Coach Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Look up nearest night stop",
+   "parent": "City Bus Commute",
+   "domain": "admin"
+  },
+  {
+   "task": "Find which Victoria Coach Station gate the 07:40 bus leaves from",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send Leo's grandma the new corner for the afternoon bus drop-off",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check where the ski shuttle picks up outside the main train station",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Map the bus connection from the hostel to the trailhead parking lot",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Verify temporary stop relocation on 5th Ave during street paving",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Walk the route to the new campus shuttle stop before Monday class",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Double-check which terminal curb the hotel courtesy bus uses",
+   "parent": "Chicago Conference",
+   "domain": "work"
+  },
+  {
+   "task": "Add the return pickup address to the group chat",
+   "parent": "Winery Charter Bus",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check whether the 42 bus stops on the north or south side of Market Street",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Save offline map pins for both night bus stops near the concert venue in Berlin",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Ask the district transportation office to move our morning bus stop closer to Oak Lane",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Mirar en qué dársena de Méndez Álvaro sale el ALSA a Granada",
+  "Mandar la ubicación exacta de la parada del bus escolar al grupo de padres",
+  "Parada del autobús nocturno"
+ ],
+ "example_tasks_ru": [
+  "Уточнить остановку трансферного автобуса у северного выхода из аэропорта",
+  "Проверить, куда перенесли остановку 39-го маршрута из-за ремонта дороги",
+  "Точка посадки на экскурсионный автобус"
+ ],
+ "context_tasks": [
+  {
+   "task": "Top up the transit card with $30 before Monday's bus commute",
+   "central": "transit payment card"
+  },
+  {
+   "task": "Download the offline timetable PDF for the mountain bus line",
+   "central": "schedule document"
+  },
+  {
+   "task": "Pack motion sickness tablets for the winding coach ride to Oaxaca",
+   "central": "medication"
+  },
+  {
+   "task": "Buy two refundable tickets on the 6pm express bus to Boston",
+   "central": "bus ticket"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call the charter company to pay the deposit for the wedding bus",
+   "better": "phone or credit card payment",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Check which platform the Eurostar train departs from at St Pancras",
+   "better": "train with location pin or train station",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the CAN bus wiring harness behind the dashboard",
+   "better": "microchip or electrical wiring",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book an apartment within five minutes of a major bus stop",
+   "better": "house or apartment building",
+   "trap": "property"
+  },
+  {
+   "task": "Buy a new insulated lunchbox for the kids",
+   "better": "lunchbox or food container",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Order a replacement side mirror for the Volkswagen camper van",
+   "better": "camper van or car part",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines the front of a bus with a map location pin, directly representing a bus stop, coach station, shuttle pickup point, or bus route. It fits real-world tasks around commuting, school bus stops, and travel logistics, and is mainly at risk of confusion with train or van icons at tiny sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "63f3fce990616402dc21c7275033c5becc0414e3",
+  "usage": {
+   "prompt": 3924,
+   "output": 1707,
+   "thoughts": 98,
+   "total": 5729
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

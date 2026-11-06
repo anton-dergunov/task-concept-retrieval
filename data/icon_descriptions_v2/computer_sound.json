@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "laptop screen outline with horizontal base bar",
+  "modifiers": [
+   "two concentric curved signal arcs on right edge"
+  ],
+  "composition": "single object, front view, right side replaced by radiating arcs"
+ },
+ "readings": [
+  {
+   "meaning": "laptop Wi-Fi or wireless network connection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mobile hotspot or internet tethering to laptop",
+   "strength": "primary"
+  },
+  {
+   "meaning": "screen casting or wireless display from laptop",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "laptop audio or speaker output",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be read as laptop sound/speakers rather than wireless connectivity, or mistaken for a generic laptop icon at very small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "two concentric curved signal arcs on right edge",
+   "meaning": "wireless signal, Wi-Fi, hotspot, casting, or sound waves"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "home",
+  "travel",
+  "learning"
+ ],
+ "task_intents": [
+  "fix laptop Wi-Fi connection issues",
+  "set up mobile hotspot for laptop",
+  "cast laptop screen to living room TV",
+  "configure wireless network on computer",
+  "troubleshoot laptop Bluetooth or audio",
+  "connect work laptop to guest network",
+  "update wireless network adapter drivers"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix MacBook Wi-Fi drops",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test hotspot on ThinkPad",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Cast laptop to conference TV",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Update Intel wireless driver",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Forget old hotel networks",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Stop laptop from auto-joining the slow 2.4GHz band upstairs",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set up phone tethering on the Dell before the train trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Get AirPlay screen mirroring working from laptop to living room Apple TV",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Request MAC address whitelist for my laptop on campus Wi-Fi",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Check why the right laptop speaker crackles on video calls",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Install eduroam certificate profile before Monday morning lecture",
+   "parent": "Laptop Network Setup",
+   "domain": "learning"
+  },
+  {
+   "task": "Copy over the new WPA3 password from password manager",
+   "parent": "Laptop Wi-Fi",
+   "domain": "home"
+  },
+  {
+   "task": "Run ping test during the afternoon lag spike",
+   "parent": "Laptop Connectivity",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn on metered connection toggle so Windows Update doesn't eat data",
+   "parent": "Mobile Hotspot",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out why the work laptop loses Wi-Fi every time it wakes from sleep",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Test wireless screen sharing in the main boardroom before the client pitch on Thursday",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Conectar el portátil al Wi-Fi de la oficina nueva",
+  "Probar a duplicar la pantalla del MacBook en el televisor del salón",
+  "Revisar por qué se corta el internet en la laptop cuando cierro la tapa"
+ ],
+ "example_tasks_ru": [
+  "Настроить раздачу интернета с телефона на ноутбук перед поездом",
+  "Обновить драйвер Wi-Fi на рабочем ноутбуке",
+  "Проверить беспроводную трансляцию экрана с ноутбука на проектор в переговорке"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download offline maps and docs before the flight",
+   "central": "offline files / maps"
+  },
+  {
+   "task": "Check café Wi-Fi speeds near the coworking space",
+   "central": "café / location"
+  },
+  {
+   "task": "Buy a USB-C Ethernet adapter as backup for unstable wireless",
+   "central": "Ethernet adapter"
+  },
+  {
+   "task": "Upgrade mobile data plan to include 20GB of tethering",
+   "central": "mobile data plan"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a lightweight 14-inch laptop for uni",
+   "better": "plain laptop without signal waves",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reboot the main TP-Link Wi-Fi router in the hallway",
+   "better": "Wi-Fi router or plain Wi-Fi symbol",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a wireless ergonomic mouse for my desk",
+   "better": "computer mouse",
+   "trap": "property"
+  },
+  {
+   "task": "Listen to the new syntax.fm podcast episode on laptop",
+   "better": "headphones or podcast microphone",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order replacement thermal paste for CPU repaste",
+   "better": "CPU chip or screwdriver/repair tool",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check email on laptop before leaving",
+   "better": "envelope / email icon",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a laptop silhouette with radiating wireless or sound arcs on the right side. It fits tasks centered on laptop Wi-Fi, tethering/hotspots, wireless screen casting, or laptop audio troubleshooting, though it can be confused with a plain laptop icon at tiny sizes or a general Wi-Fi symbol.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "76f361fbf942bf99d6c840cbb1492b615361fd6b",
+  "usage": {
+   "prompt": 3919,
+   "output": 1707,
+   "thoughts": 84,
+   "total": 5710
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

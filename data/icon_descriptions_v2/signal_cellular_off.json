@@ -1,0 +1,207 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "right-angled triangle representing signal strength bars",
+  "modifiers": [
+   "diagonal slash line from top-left to bottom-right"
+  ],
+  "composition": "single geometric shape crossed out by a diagonal stroke"
+ },
+ "readings": [
+  {
+   "meaning": "no cellular signal / offline / network disconnected",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mobile data disabled / airplane mode",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "crossed-out ramp or slope",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Out of a phone status-bar context, it looks like an abstract crossed-out triangle, a set square ruler, or a muted speaker icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash line",
+   "meaning": "off, disabled, missing, or disconnected"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "home",
+  "work",
+  "outdoors"
+ ],
+ "task_intents": [
+  "troubleshoot lost cellular signal",
+  "prepare apps for offline use",
+  "test app behavior without internet",
+  "fix dead mobile reception zones",
+  "cancel mobile phone data plan",
+  "download offline maps before trip"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix phone no-service bug",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Offline Spotify playlists",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Test offline mode",
+   "parent": "iOS App Release",
+   "domain": "work"
+  },
+  {
+   "task": "Check basement dead zones",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Reset network settings",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Download offline Google Maps for the Scottish Highlands drive",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Call T-Mobile about zero reception inside the kitchen",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off roaming data before landing in Zurich",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Verify local cache syncs cleanly when network drops mid-upload",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Install WeBoost cell repeater in the cabin attic",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Cache trail maps",
+   "parent": "Yosemite Backpacking",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Check SIM card tray",
+   "parent": "Mom's iPhone No Signal",
+   "domain": "tech"
+  },
+  {
+   "task": "Switch off cellular data for high-usage background apps",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure Kindle books and boarding passes work without cell service at the gate",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Reproduce the checkout crash when cellular connection drops inside the elevator",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Write fallback error message for when the field tablet loses LTE signal",
+   "parent": "Warehouse Scanner App",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Descargar mapas sin conexión de Pirineos en OsmAnd",
+  "Reclamar a Movistar por la falta de cobertura en el garaje",
+  "Probar el guardado local de la app sin conexión de datos"
+ ],
+ "example_tasks_ru": [
+  "Скачать офлайн-карты Карелии в Organic Maps перед выездом",
+  "Проверить работу кассы при обрыве мобильной связи",
+  "Отключить передачу данных в роуминге на симке МТС"
+ ],
+ "context_tasks": [
+  {
+   "task": "Plan digital detox weekend at the cabin",
+   "central": "cabin / unplugging"
+  },
+  {
+   "task": "Pack Garmin inReach satellite communicator for canyon hike",
+   "central": "satellite communicator"
+  },
+  {
+   "task": "Set up Wi-Fi calling on new Pixel",
+   "central": "phone call / Wi-Fi"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay monthly Verizon cell phone bill",
+   "better": "invoice or credit card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Mute phone notifications during piano recital",
+   "better": "crossed-out bell or speaker",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a plastic 45-degree drafting triangle for geometry class",
+   "better": "ruler or drafting triangle without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof offline-capable GPS watch",
+   "better": "smartwatch",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the new router arrived",
+   "better": "package or Wi-Fi router",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Book window seats for the flight",
+   "better": "airplane or seat",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is a system status-bar indicator showing a cellular signal triangle with a slash ('no signal' or 'cellular data off'). Out of a phone OS context it looks like an abstract crossed-out triangle, and as a status indicator it rarely represents a concrete subject of a personal to-do item.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "94b50ae22b46f233838aab875e45bdc4b3664d3d",
+  "usage": {
+   "prompt": 3925,
+   "output": 1563,
+   "thoughts": 0,
+   "total": 5488
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

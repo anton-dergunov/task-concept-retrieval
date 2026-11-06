@@ -1,0 +1,212 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rectangular credit card with a horizontal magnetic stripe",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single object in front view, crossed out by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "cancel, block, or freeze a credit or debit card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "remove saved payment card or disable card payment",
+   "strength": "primary"
+  },
+  {
+   "meaning": "declined card, expired card, or cash-only payment",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, could be mistaken for a crossed-out browser window, calendar, or generic rectangular label.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "cancelled, blocked, disabled, or removed"
+  }
+ ],
+ "domains": [
+  "finance",
+  "admin",
+  "shopping",
+  "travel",
+  "work"
+ ],
+ "task_intents": [
+  "cancel an unused credit card",
+  "freeze a lost or stolen debit card",
+  "remove saved card from online account",
+  "shred expired bank cards",
+  "close old store credit card account",
+  "fix a declined card payment",
+  "disable contactless or international card transactions"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel Sapphire Preferred card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Freeze lost debit card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Shred expired Visa cards",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Remove card from PlayStation",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Close Macy's store card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Call Amex to close the Gold card before the annual fee posts",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Delete saved company card from the shared Uber business profile",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Lock the joint checking debit card in the banking app right away",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Unlink my backup Visa from the kids' iPad App Store account",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Deactivate departing contractor's Ramp virtual card by Friday at 5pm",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel the old airline card before the $95 renewal hits in May",
+   "parent": "Credit Card Churning",
+   "domain": "finance"
+  },
+  {
+   "task": "Call the fraud line",
+   "parent": "Stolen Wallet Cleanup",
+   "domain": "admin"
+  },
+  {
+   "task": "Cut up the old plastic",
+   "parent": "Closed Bank Accounts",
+   "domain": "finance"
+  },
+  {
+   "task": "Take mine off the account",
+   "parent": "Shared Streaming & Subscriptions",
+   "domain": "shopping"
+  },
+  {
+   "task": "Report the corporate Visa stolen and ask accounting to block any pending foreign charges",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off international magnetic-stripe transactions on my Wise debit card now that we're home",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Bloquear la tarjeta de débito perdida en la app del banco",
+  "Dar de baja la Visa Oro antes de que cobren la comisión anual",
+  "Borrar mi tarjeta guardada de la cuenta de Amazon de mis padres"
+ ],
+ "example_tasks_ru": [
+  "Заблокировать утерянную зарплатную карту в приложении банка",
+  "Закрыть старую кредитку Тинькофф до списания годового обслуживания",
+  "Отвязать банковскую карту от подписок в PlayStation Store"
+ ],
+ "context_tasks": [
+  {
+   "task": "Take out $200 in twenties for the cash-only taco stand and parking",
+   "central": "cash / banknotes"
+  },
+  {
+   "task": "Dispute the duplicate $84 charge from the hotel on last month's statement",
+   "central": "statement / dispute"
+  },
+  {
+   "task": "Do a 30-day no-spend challenge using only pantry food and existing gift balances",
+   "central": "budget / savings challenge"
+  },
+  {
+   "task": "Cancel Adobe Creative Cloud before the trial turns into a paid plan",
+   "central": "subscription / software"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay off the Chase credit card balance in full before Friday",
+   "better": "plain credit card without slash",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Apply for a 0% foreign transaction fee travel card before the Japan trip",
+   "better": "credit card with plus sign or plain credit card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check whether the replacement debit card arrived in the mail",
+   "better": "plain credit card or mailbox",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Disable browser pop-up windows on the testing laptop",
+   "better": "browser window with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book the cabin that doesn't require a credit card deposit",
+   "better": "cabin / house",
+   "trap": "property"
+  },
+  {
+   "task": "File the police report at the precinct for the insurance claim",
+   "better": "police badge or document",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a payment card with a magnetic stripe crossed out by a diagonal slash. It is an immediate, unmistakable fit for common personal finance and admin tasks like cancelling a credit card, freezing a lost debit card, or removing a saved payment method, though at tiny sizes the rectangle and stripe can slightly resemble a window header.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c5194209aaa7cc7481a477bc098b03e61678e444",
+  "usage": {
+   "prompt": 3924,
+   "output": 1695,
+   "thoughts": 58,
+   "total": 5677
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

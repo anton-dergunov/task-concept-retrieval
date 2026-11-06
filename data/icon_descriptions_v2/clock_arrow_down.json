@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round analog clock face with two hands",
+  "modifiers": [
+   "downward-pointing arrow on the right"
+  ],
+  "composition": "clock on the left paired with a vertical downward arrow on the right"
+ },
+ "readings": [
+  {
+   "meaning": "sort by time descending / newest or oldest first",
+   "strength": "primary"
+  },
+  {
+   "meaning": "reduce time / decrease duration or latency",
+   "strength": "primary"
+  },
+  {
+   "meaning": "time running out / countdown",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "download history or time logs",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "As a UI sort icon (sort by date/time), it can be confused with reducing duration, cutting screen time, or downloading time logs.",
+ "modifier_semantics": [
+  {
+   "modifier": "downward-pointing arrow on the right",
+   "meaning": "decrease, reduce, sort descending, or download"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "health_fitness",
+  "admin",
+  "home"
+ ],
+ "task_intents": [
+  "reduce daily screen time on phone",
+  "cut down meeting durations at work",
+  "lower page load and response time",
+  "shorten morning routine before commuting",
+  "download monthly timesheet hours for billing",
+  "improve 5k running pace and time"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cut down phone screen time",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Shorten weekly standup to 15m",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Download October timesheet logs",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Shave two minutes off 5k",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Reduce CI build duration",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Get cold start latency under 200ms on the payment service",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cut daily Instagram and TikTok limit down to 20 minutes",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Trim the onboarding presentation so it fits inside a 30-minute slot",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Streamline weekday morning routine to get out the door by 7:45",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set oven timer 5 minutes shorter for the second batch",
+   "parent": "Sourdough baking",
+   "domain": "food"
+  },
+  {
+   "task": "Drop rest intervals between heavy sets from 3 minutes to 90s",
+   "parent": "Gym program",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Default the activity feed to chronological order",
+   "parent": "App UI cleanup",
+   "domain": "tech"
+  },
+  {
+   "task": "Export all billable hours from Toggl before Friday",
+   "parent": "Monthly invoicing",
+   "domain": "finance"
+  },
+  {
+   "task": "Bring webpack production bundle build time down from four minutes to under ninety seconds",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cut average customer support first-response wait time in half before the Q4 review",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Shorten toddler afternoon nap by thirty minutes so bedtime stops drifting past nine o'clock",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Reducir el tiempo de pantalla diario en el móvil a menos de una hora",
+  "Acortar la reunión semanal del equipo a veinte minutos",
+  "Bajar mi tiempo en los 10 km por debajo de 50 minutos"
+ ],
+ "example_tasks_ru": [
+  "Сократить экранное время на телефоне до часа в день",
+  "Уменьшить время сборки проекта в CI до трех минут",
+  "Выгрузить часы из тайм-трекера за прошлый месяц"
+ ],
+ "context_tasks": [
+  {
+   "task": "Install Opal app to block social media at night",
+   "central": "phone app / blocker"
+  },
+  {
+   "task": "Add Redis caching layer to slow product catalog queries",
+   "central": "database / server"
+  },
+  {
+   "task": "Pack gym bag and lay out clothes the night before",
+   "central": "clothes / bag"
+  },
+  {
+   "task": "Switch from full-hour defaults to 25-minute slots in Google Calendar",
+   "central": "calendar"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new wall clock for the kitchen",
+   "better": "plain clock without arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay electric bill before the 5pm deadline",
+   "better": "bill / invoice or lightning bolt",
+   "trap": "property"
+  },
+  {
+   "task": "Check what time the pharmacy closes on Sundays",
+   "better": "pharmacy / medicine",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Download the new history podcast episode for the flight",
+   "better": "podcast / headphones",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a waterproof watch for swimming laps",
+   "better": "wristwatch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a mechanical kitchen timer for my desk",
+   "better": "timer / stopwatch",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "This is a UI control icon for sorting items by time/date in descending order, though literally it reads as 'reduce time' or 'download time logs'. Because it is primarily interface chrome for sorting rather than a concrete task subject, it has poor fit for most everyday to-do items except niche optimization or screen-time reduction tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "06f9c64f1e98b7ee3a0d977b3eb79c60f34834e5",
+  "usage": {
+   "prompt": 3926,
+   "output": 1699,
+   "thoughts": 0,
+   "total": 5625
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "isometric wireframe cube or shipping box",
+  "modifiers": [
+   "solid circular clock badge at bottom right"
+  ],
+  "composition": "isometric 3D cube with overlapping clock overlay in lower right corner"
+ },
+ "readings": [
+  {
+   "meaning": "scheduled delivery, pending shipment, or package arrival time",
+   "strength": "primary"
+  },
+  {
+   "meaning": "order history or past shipments",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "software package build time, cron job, or version history",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "3D rendering time or queued 3D print job",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The plain cube lacks tape strips on top, so it can read as either a physical shipping parcel, a software package/module, or a 3D model.",
+ "modifier_semantics": [
+  {
+   "modifier": "clock badge",
+   "meaning": "scheduled, pending, waiting, delivery window, or history"
+  }
+ ],
+ "domains": [
+  "shopping",
+  "home",
+  "work",
+  "admin",
+  "tech",
+  "hobbies"
+ ],
+ "task_intents": [
+  "schedule a package pickup or delivery",
+  "wait for a scheduled shipment window",
+  "track a delayed or pending parcel",
+  "reschedule a courier delivery time slot",
+  "review past order and shipment history",
+  "audit software package build times",
+  "queue a long 3D print job"
+ ],
+ "example_tasks": [
+  {
+   "task": "Track delayed Chewy box",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Schedule UPS return pickup",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Reschedule DHL delivery window",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check Friday afternoon window",
+   "parent": "Appliance Delivery",
+   "domain": "home"
+  },
+  {
+   "task": "Call about late parcel",
+   "parent": "Holiday Shipping",
+   "domain": "social_family"
+  },
+  {
+   "task": "Be home between 2 and 4 pm for the freight parcel",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Follow up on backordered espresso machine shipment from Seattle Coffee Gear",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Hold incoming FedEx packages at Walgreens during our week in Banff",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Schedule porch pickup with USPS for the three eBay boxes",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Audit npm package build times in the nightly CI pipeline",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Queue the 14-hour helmet print on the Bambu overnight",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Check customs clearance status on the DHL parcel from Tokyo",
+   "parent": "Order Tracking",
+   "domain": "shopping"
+  },
+  {
+   "task": "Pick morning slot before 11am",
+   "parent": "IKEA Delivery",
+   "domain": "home"
+  },
+  {
+   "task": "Move the recurring diaper subscription shipment back by two weeks so boxes stop piling up",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "File a lost package claim with carrier if the replacement router hasn't moved by Thursday",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Coordinate loading dock time slot with the freight courier for the trade show booth crates",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Reprogramar la entrega de Correos para el jueves por la tarde",
+  "Estar en casa de 10 a 14h esperando el paquete de Amazon",
+  "Reclamar el envío retrasado de los recambios de la bici"
+ ],
+ "example_tasks_ru": [
+  "Перенести курьерскую доставку из Ozon на вечер после 19:00",
+  "Проверить трек-номер застрявшей на таможне посылки с AliExpress",
+  "Заказать забор возвратной коробки курьером СДЭК на вторник"
+ ],
+ "context_tasks": [
+  {
+   "task": "Leave gate code in the courier instructions for tomorrow's drop-off",
+   "central": "gate code / note"
+  },
+  {
+   "task": "Clear space in the garage before the flat-pack cabinets arrive at noon",
+   "central": "garage / cabinets"
+  },
+  {
+   "task": "Tip the delivery drivers $20 each if they bring the boxes upstairs",
+   "central": "cash / tip"
+  },
+  {
+   "task": "Set up a temporary Docker registry cache to speed up CI builds",
+   "central": "server / cache"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy heavy-duty moving boxes and packing tape at U-Haul",
+   "better": "plain cardboard box without clock badge",
+   "trap": "property"
+  },
+  {
+   "task": "Solve the Rubik's cube in under two minutes",
+   "better": "3x3 gridded puzzle cube icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new alarm clock for the guest bedroom",
+   "better": "alarm clock icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Unpack the kitchen glassware boxes before Saturday",
+   "better": "open box icon (deadline is just a property)",
+   "trap": "property"
+  },
+  {
+   "task": "Put ice cubes in the cooler before we leave at 8am",
+   "better": "ice cube or snowflake icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a leather watch strap",
+   "better": "wristwatch icon (even under a 'Pending Orders' list)",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "An isometric cube or box paired with a clock badge clearly communicates a scheduled delivery, pending shipment, or package waiting on a time window. It fits a very common household and admin task family (tracking parcels, scheduling courier pickups, waiting for deliveries), and in tech contexts also fits software package build times or queued 3D jobs.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "32045d58397ce9144392656462753da0bd52b9be",
+  "usage": {
+   "prompt": 3925,
+   "output": 1760,
+   "thoughts": 0,
+   "total": 5685
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

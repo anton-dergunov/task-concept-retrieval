@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "stopwatch with top bar and angled side button",
+  "modifiers": [
+   "diagonal slash across the entire icon"
+  ],
+  "composition": "single circular object, front view, struck through"
+ },
+ "readings": [
+  {
+   "meaning": "timer off or disabled timer",
+   "strength": "primary"
+  },
+  {
+   "meaning": "turn off auto-sleep or screen timeout",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel countdown or scheduled delay",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "stop tracking time or untimed mode",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with alarm off (alarm clock with slash) or general 'unavailable/out of time' at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, cancelled, or no limit"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "work",
+  "health_fitness",
+  "learning",
+  "outdoors"
+ ],
+ "task_intents": [
+  "turn off appliance timer",
+  "disable screen or sleep timeout",
+  "cancel automatic shutoff setting",
+  "remove time limit on quiz",
+  "stop automatic irrigation schedule",
+  "disable parental screen time limit",
+  "do untimed practice session"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off oven timer",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Disable lawn sprinkler timer",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Clear coffee maker delay brew",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Kill the auto-shutdown script",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Stop Toggl timer",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off the living room lamp timer before the sitter arrives",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Disable sleep timeout on presentation laptop before Thursday's keynote",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Remove the 30-minute time limit on the practice exam in Canvas",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Shut off the holiday light timer plug in the garage",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel the auto-lock countdown on the front smart deadbolt for the party",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off iPad screen time limits for Leo during the road trip",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Disable idle session timeout in staging SSH config",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Figure out how to bypass the 2-hour auto-shutoff on the dehydrator for the jerky batch",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Turn off the automatic watering timer in the backyard before the three-day rainstorm hits",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Switch the space heater plug from the countdown timer back to a normal outlet",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Disable for the winter",
+   "parent": "Drip irrigation timer",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar el temporizador del riego automático porque va a llover toda la semana",
+  "Quitar el apagado automático del televisor del salón",
+  "Apagar temporizador del horno"
+ ],
+ "example_tasks_ru": [
+  "Отключить таймер автоотключения на ноутбуке перед презентацией",
+  "Сбросить отложенный старт на мультиварке",
+  "Выключить таймер полива на даче"
+ ],
+ "context_tasks": [
+  {
+   "task": "Run a 5k at conversational pace without checking the watch",
+   "central": "running"
+  },
+  {
+   "task": "Take an untimed LSAT logic games section to focus on accuracy",
+   "central": "exam practice"
+  },
+  {
+   "task": "Unplug the mechanical outlet timer from the aquarium light",
+   "central": "aquarium light"
+  },
+  {
+   "task": "Brew pour-over coffee by eyeballing the bloom instead of timing it",
+   "central": "coffee"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Turn off 6am weekday alarm for the holiday",
+   "better": "alarm clock with slash or bell off",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new digital kitchen timer with a loud beep",
+   "better": "stopwatch / timer (without slash)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace the broken mechanical timer switch on the bathroom exhaust fan",
+   "better": "fan or electrical switch",
+   "trap": "property"
+  },
+  {
+   "task": "Cancel dentist appointment on Thursday at 2pm",
+   "better": "calendar with cross or tooth",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check why the dryer stops before the timed cycle finishes",
+   "better": "tumble dryer",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy fresh AA batteries for the display",
+   "better": "battery",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a stopwatch or timer struck through with a diagonal slash, meaning 'timer off', 'disable timeout', or 'untimed'. While originally a camera/UI glyph for disabling a self-timer, in a task list it fits concrete tasks about turning off appliance timers, irrigation timers, or device sleep timeouts. It can be confused with turning off a morning wake-up alarm (alarm clock off).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "4f8815204ae9c18991e4e9b389d655670888cad4",
+  "usage": {
+   "prompt": 3917,
+   "output": 1674,
+   "thoughts": 0,
+   "total": 5591
+  },
+  "soft_problems": [
+   "example_tasks with parent: 1 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "water droplet outline",
+  "modifiers": [
+   "percent sign inside the droplet"
+  ],
+  "composition": "single object, front view, centered"
+ },
+ "readings": [
+  {
+   "meaning": "humidity or moisture percentage",
+   "strength": "primary"
+  },
+  {
+   "meaning": "humidifier or dehumidifier",
+   "strength": "primary"
+  },
+  {
+   "meaning": "hygrometer or moisture sensor",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "blood alcohol concentration or hydration level",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the percent sign inside the droplet might be misread as a slashed/disabled water icon or a generic discount tag.",
+ "modifier_semantics": [
+  {
+   "modifier": "percent sign",
+   "meaning": "percentage, relative level, or measurement of water/moisture (humidity)"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "hobbies",
+  "shopping",
+  "health_fitness",
+  "food"
+ ],
+ "task_intents": [
+  "check or adjust indoor humidity",
+  "clean or refill humidifier",
+  "empty basement dehumidifier bucket",
+  "calibrate cigar humidor hygrometer",
+  "pair smart temperature and humidity sensor",
+  "measure firewood or soil moisture content",
+  "buy dehumidifier or moisture absorbers"
+ ],
+ "example_tasks": [
+  {
+   "task": "Clean nursery humidifier",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Empty basement dehumidifier",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Buy DampRid buckets",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Order 69% Boveda packs",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Replace whole-house humidifier pad",
+   "parent": "HVAC Maintenance",
+   "domain": "home"
+  },
+  {
+   "task": "Calibrate the digital hygrometer with the salt test before loading the cabinet",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Descale the bedroom cool-mist humidifier with white vinegar before winter starts",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pair Aqara temperature and humidity sensors in the attic and crawlspace",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check moisture content of the stacked oak firewood with the pin meter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set greenhouse misting controller to keep relative humidity above seventy percent",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Hook up condensate drain hose to the crawlspace dehumidifier",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check relative humidity in the acoustic guitar room",
+   "parent": "Instruments",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Lower curing chamber setting to 75% for the pancetta",
+   "parent": "Charcuterie",
+   "domain": "food"
+  },
+  {
+   "task": "Order replacement wicking filters",
+   "parent": "Bedroom Humidifier",
+   "domain": "shopping"
+  },
+  {
+   "task": "Set up Home Assistant automation to turn on bathroom exhaust fan when humidity spikes",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check drywall moisture readings behind the shower wall before the tile installer arrives",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Vaciar el depósito del deshumidificador del sótano antes de que se llene",
+  "Limpiar el humidificador del cuarto del bebé con vinagre blanco",
+  "Comprar sobres Boveda del 65% para el humidor"
+ ],
+ "example_tasks_ru": [
+  "Почистить ультразвуковой увлажнитель воздуха в спальне от накипи",
+  "Заказать датчик влажности и температуры для теплицы",
+  "Проверить уровень влажности в гитарном кофре"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check for mold behind the basement drywall",
+   "central": "mold"
+  },
+  {
+   "task": "Mist the calathea and tropical ferns",
+   "central": "houseplants"
+  },
+  {
+   "task": "Season the new cedar cigar humidor",
+   "central": "humidor"
+  },
+  {
+   "task": "Seal the crawlspace vapor barrier with tape",
+   "central": "vapor barrier"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay quarterly municipal water bill online",
+   "better": "water droplet with dollar sign or bill",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy waterproof hiking boots for Scotland",
+   "better": "boot",
+   "trap": "property"
+  },
+  {
+   "task": "Check savings account interest rate",
+   "better": "percent sign or bank",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn off main water shutoff valve before leaving",
+   "better": "water droplet with slash or valve",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Donate blood at the Red Cross drive on Friday",
+   "better": "blood drop or medical cross",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order new 5-gallon jugs for the office cooler",
+   "better": "water jug or plain droplet",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 5
+ },
+ "discard": false,
+ "reasoning": "A water droplet containing a percent sign is the standard symbol for relative humidity and moisture control. It fits household and hobby tasks involving humidifiers, dehumidifiers, hygrometers, and moisture-sensitive storage (cigars, instruments, greenhouses), though it could be mistaken at tiny sizes for a slashed water-off icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "1673b985f479ba8a08b8e7e5ddcf1208b40f2b89",
+  "usage": {
+   "prompt": 3926,
+   "output": 940,
+   "thoughts": 0,
+   "total": 4866
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

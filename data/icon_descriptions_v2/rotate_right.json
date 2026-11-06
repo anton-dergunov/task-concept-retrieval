@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "clockwise circular arrow with dashed right half",
+  "modifiers": [
+   "dashed segments on right half"
+  ],
+  "composition": "single circular stroke with arrow tip at top"
+ },
+ "readings": [
+  {
+   "meaning": "rotate clockwise / spin",
+   "strength": "primary"
+  },
+  {
+   "meaning": "reload / refresh / restart",
+   "strength": "primary"
+  },
+  {
+   "meaning": "repeat / recurring cycle / renewal",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "restore / reset / recover",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Almost indistinguishable at list size from standard reload, refresh, redo, or rotate-right icons; the dashed segments on the right side carry no obvious distinction over a solid circular arrow.",
+ "modifier_semantics": [
+  {
+   "modifier": "dashed segments on right half",
+   "meaning": "in-progress cycle, step-by-step rotation, or partial progress"
+  }
+ ],
+ "domains": [
+  "tech",
+  "admin",
+  "home",
+  "work",
+  "finance",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "renew an expiring subscription or pass",
+  "restart or reboot a server or device",
+  "rotate tires or seasonal items",
+  "reset a password or factory configuration",
+  "repeat a recurring routine or cycle",
+  "restore a backup or previous state",
+  "refresh cached data or credentials"
+ ],
+ "example_tasks": [
+  {
+   "task": "Reboot home router",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Rotate mattress 180 degrees",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Renew Costco membership",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Factory reset old iPad",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Restart staging worker nodes",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Do the 6000-mile tire rotation before the mountains trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Renew passport at least six months before the October flight",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Roll over the maturing 6-month Treasury bill into a new one",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Rotate pantry canned goods so the 2024 dates sit in front",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Reset the garage keypad code after the contractors finish on Friday",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Refill the 90-day thyroid prescription through the clinic portal",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Restore the Postgres staging database from last night's snapshot",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check expiration dates and pay the annual fee online before the grace period ends",
+   "parent": "Annual Renewals",
+   "domain": "admin"
+  },
+  {
+   "task": "Flip all four corners and vacuum the box spring while the sheets wash",
+   "parent": "Seasonal Mattress Rotation",
+   "domain": "home"
+  },
+  {
+   "task": "Generate new secrets in Vault and redeploy the three consumer services",
+   "parent": "Q3 API Key Rotation",
+   "domain": "tech"
+  },
+  {
+   "task": "Wipe personal accounts, unpair Bluetooth, and run full system restore before trade-in",
+   "parent": "Old Phone Reset",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Renovar el seguro del coche antes del día 15",
+  "Reiniciar el módem de fibra si sigue cortándose el wifi",
+  "Rotar los neumáticos delanteros y traseros en el taller"
+ ],
+ "example_tasks_ru": [
+  "Перезагрузить домашний сервер после обновления ядра",
+  "Продлить полис ОСАГО до конца следующей недели",
+  "Перевернуть зимний матрас на летнюю сторону"
+ ],
+ "context_tasks": [
+  {
+   "task": "Set up weekly automatic Monday backups to Backblaze",
+   "central": "backup / cloud storage"
+  },
+  {
+   "task": "Switch closet from winter coats to spring jackets",
+   "central": "clothes / wardrobe"
+  },
+  {
+   "task": "Update credit card on file for all monthly subscriptions",
+   "central": "credit card"
+  },
+  {
+   "task": "Stretch hip flexors between every two Pomodoro work blocks",
+   "central": "stretching / timer"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Return the defective toaster to Target for a refund",
+   "better": "package return arrow or receipt",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Turn around the living room sofa to face the window",
+   "better": "sofa / furniture",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a rechargeable rotating electric scrubber for the bathroom tiles",
+   "better": "cleaning brush",
+   "trap": "property"
+  },
+  {
+   "task": "Set a 25-minute countdown timer for the sourdough bake",
+   "better": "stopwatch or clock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call the landlord to ask about the lease terms",
+   "better": "phone or contract document",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Sort plastic bottles and cardboard into the recycling bin",
+   "better": "three-arrow recycling triangle",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "A clockwise circular arrow with a dashed right half, read as rotate, reload/restart, renew, or repeat/cycle. It fits tasks centered on restarting devices, rotating items, or renewing recurring obligations, though specific object icons (passport, tire, router) usually beat an abstract action arrow and it closely resembles several other circular arrow glyphs.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b455b3a28b9f8aad5c7ae43779f5478c80fcf88a",
+  "usage": {
+   "prompt": 3921,
+   "output": 1377,
+   "thoughts": 0,
+   "total": 5298
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

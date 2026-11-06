@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "seated person silhouette in side profile facing left",
+  "modifiers": [
+   "large downward-pointing arrow at upper left"
+  ],
+  "composition": "side profile seated figure on right with large downward arrow at upper left"
+ },
+ "readings": [
+  {
+   "meaning": "car floor airflow / footwell heater vent",
+   "strength": "primary"
+  },
+  {
+   "meaning": "sit down / take a seat",
+   "strength": "primary"
+  },
+  {
+   "meaning": "passenger seat or airline seat selection",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "lower seat height or ergonomic adjustment",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Literally an automotive HVAC icon for directing air toward the floor/feet, but outside a car dashboard most viewers read it as sitting down, seat selection, or lowering a chair.",
+ "modifier_semantics": [
+  {
+   "modifier": "large downward-pointing arrow at upper left",
+   "meaning": "downward direction (air directed to floor/feet, or action of sitting down / lowering)"
+  }
+ ],
+ "domains": [
+  "travel",
+  "home",
+  "health_fitness",
+  "work",
+  "social_family",
+  "admin"
+ ],
+ "task_intents": [
+  "select or change flight seat",
+  "fix car footwell heater vent",
+  "adjust office chair seat height",
+  "assign wedding or dinner seating",
+  "take a seated posture break",
+  "reserve train or theater seats",
+  "check car cabin airflow actuator"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pick aisle seats for Denver",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Lower desk chair height",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Footwell vent stuck on cold",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Finalize table 4 placements",
+   "parent": "Seating Chart",
+   "domain": "social_family"
+  },
+  {
+   "task": "Book Eurostar seats together",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check why the Subaru heater only blows on the windshield and not the floor",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Grab two aisle seats in exit row 14 before check-in closes",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Readjust the Herman Miller seat pan depth and height for my knees",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Swap Aunt Clara and Mark so they aren't next to the speakers",
+   "parent": "Rehearsal Dinner Seating",
+   "domain": "social_family"
+  },
+  {
+   "task": "Replace clicking blend door actuator under the passenger footwell",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pay the $18 fee to lock in a window seat on the Lisbon leg",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Order replacement gas lift cylinder",
+   "parent": "Office Chair",
+   "domain": "work"
+  },
+  {
+   "task": "Check on Wednesday morning",
+   "parent": "BA Flight Seat Selection",
+   "domain": "travel"
+  },
+  {
+   "task": "Set up a 20-minute timer to sit down and rest my ankles between kitchen prep batches",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Move the front-row seats back two feet in the community room before the 7pm talk",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Call box office to move our subscription seats two rows down into the dress circle",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Elegir asientos de pasillo en el vuelo de Iberia a Madrid",
+  "Revisar por qué no sale aire caliente por los pies en el coche",
+  "Bajar la altura de la silla del escritorio para no cargar los hombros"
+ ],
+ "example_tasks_ru": [
+  "Выбрать места у окна в Сапсане до Санкт-Петербурга",
+  "Починить заслонку обдува ног в печке автомобиля",
+  "Опустить сиденье рабочего кресла и настроить подлокотники"
+ ],
+ "context_tasks": [
+  {
+   "task": "Vacuum road salt out of the front floor mats",
+   "central": "floor mats / vacuum"
+  },
+  {
+   "task": "Print name cards for the reception tables",
+   "central": "name cards"
+  },
+  {
+   "task": "Buy a lumbar pillow for long drives",
+   "central": "pillow / cushion"
+  },
+  {
+   "task": "Replace cabin air filter behind the glovebox",
+   "central": "air filter"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book flights to Tokyo for October",
+   "better": "airplane",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Download the PDF manual for the car heater",
+   "better": "file download / document",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a folding camping chair for the beach",
+   "better": "folding chair",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Stand up every 45 minutes while coding",
+   "better": "standing person",
+   "trap": "property"
+  },
+  {
+   "task": "Check in for tomorrow's United flight",
+   "better": "boarding pass / ticket",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Reupholster the four dining room chairs in green velvet",
+   "better": "dining chair / fabric",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Literally the automotive HVAC symbol for floor/footwell airflow (a seated passenger profile with a downward arrow), which in a general task list also reads naturally as choosing a seat, sitting down, or lowering seat height. It fits a modest set of tasks around flight/event seating, ergonomic chair adjustment, and car heater vents.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "9a3b29e2d1ae3dc1744f651ac6fdc59dbfdb3d22",
+  "usage": {
+   "prompt": 3925,
+   "output": 1705,
+   "thoughts": 0,
+   "total": 5630
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

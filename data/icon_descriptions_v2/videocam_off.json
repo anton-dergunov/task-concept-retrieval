@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "video camera or camcorder outline facing right",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single object in side profile crossed out by a diagonal bar"
+ },
+ "readings": [
+  {
+   "meaning": "camera off / video disabled / no video",
+   "strength": "primary"
+  },
+  {
+   "meaning": "broken webcam or security camera",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "cancelled video call or meeting",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "no filming or recording allowed",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Easy to overlook the slash at very small sizes and confuse it with a regular video camera icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, broken, cancelled, or prohibited"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "home",
+  "communication",
+  "admin"
+ ],
+ "task_intents": [
+  "fix broken webcam or security camera",
+  "disable camera permissions in settings",
+  "turn off auto-video in meeting apps",
+  "cancel a scheduled video call",
+  "cover or unplug indoor cameras",
+  "troubleshoot missing video feed"
+ ],
+ "example_tasks": [
+  {
+   "task": "Disable Zoom auto-camera on startup",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unplug living room indoor cam",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Stick privacy slider on laptop",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix black screen on OBS",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Cancel Thursday video catch-up",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Revoke browser camera permissions for random sites in Chrome",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Figure out why the Logitech webcam keeps disconnecting mid-call",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off driveway camera motion recording while painters are here",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Put Up \"No Filming\" signs at the backstage entrance",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Troubleshoot dead nursery monitor video feed before bedtime",
+   "parent": "Baby gear",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check why the rear dashcam stopped recording to the SD card",
+   "parent": "Car maintenance",
+   "domain": "admin"
+  },
+  {
+   "task": "Update driver",
+   "parent": "Broken webcam",
+   "domain": "tech"
+  },
+  {
+   "task": "Check power cable on the garage unit",
+   "parent": "Offline security cameras",
+   "domain": "home"
+  },
+  {
+   "task": "Set Teams and Meet defaults to join all meetings with video off by default",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Switch Friday's 1:1 with Priya from a video call to a walking phone chat",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Disable smart TV camera in the system menu and put black tape over the lens",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar la cámara por defecto al entrar a llamadas de Teams",
+  "Arreglar la webcam que se queda en negro en Discord",
+  "Poner tapa de privacidad en la cámara del portátil del trabajo"
+ ],
+ "example_tasks_ru": [
+  "Отключить автозапуск видео при входе в Zoom",
+  "Разобраться, почему не работает камера на домофоне",
+  "Отозвать доступ к камере у лишних приложений на телефоне"
+ ],
+ "context_tasks": [
+  {
+   "task": "Order 3-pack of thin adhesive webcam covers",
+   "central": "webcam cover / shopping"
+  },
+  {
+   "task": "Audit macOS privacy permissions for microphone and camera",
+   "central": "privacy / security settings"
+  },
+  {
+   "task": "Draft company policy on camera-optional Fridays",
+   "central": "policy document"
+  },
+  {
+   "task": "RMA defective Ring Floodlight Cam before warranty expires",
+   "central": "return / package"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Record product walkthrough video for the release notes",
+   "better": "video camera (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Join the client kickoff call with mute on",
+   "better": "muted microphone",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Cancel Netflix and Mubi subscriptions before renewal",
+   "better": "subscription / TV / credit card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book a windowless room for the projector demo",
+   "better": "projector / meeting room",
+   "trap": "property"
+  },
+  {
+   "task": "Buy SD card for the new camcorder",
+   "better": "SD memory card",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check security camera footage from Tuesday night",
+   "better": "video camera / CCTV",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a video camera crossed out by a diagonal slash, universally recognized as 'video off' or 'camera disabled'. While originally a UI toggle state, in a task manager it fits a specific niche of tasks around fixing a broken webcam/security camera, disabling camera permissions, or cancelling video calls. Must be distinguished from the unslashed video camera used for regular calls and filming.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "8604c325c476ec751e68db916a9341b683b13055",
+  "usage": {
+   "prompt": 3925,
+   "output": 1638,
+   "thoughts": 0,
+   "total": 5563
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

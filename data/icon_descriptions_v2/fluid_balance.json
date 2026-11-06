@@ -1,0 +1,210 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rectangular card with two text lines",
+  "modifiers": [
+   "fluid drip chamber with wavy liquid line and bottom tube in lower right"
+  ],
+  "composition": "card outline on left with large overlapping fluid chamber badge on lower right"
+ },
+ "readings": [
+  {
+   "meaning": "medical fluid chart, IV infusion record, or lab sample order",
+   "strength": "primary"
+  },
+  {
+   "meaning": "drink menu, wine list, or beverage card",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "urology or nephrology clinical note",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the fluid drip chamber with its curved bottom stem looks very much like a wine glass on a menu card, a microphone, or a magnifying glass.",
+ "modifier_semantics": [
+  {
+   "modifier": "fluid drip chamber with wavy liquid line and bottom tube",
+   "meaning": "intravenous infusion, medical fluid, liquid sample, or beverage"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "admin",
+  "food",
+  "social_family"
+ ],
+ "task_intents": [
+  "schedule an IV infusion appointment",
+  "review lab fluid test results",
+  "log daily fluid intake and output",
+  "request infusion prescription paperwork",
+  "finalize the wedding drink menu",
+  "drop off a urine sample"
+ ],
+ "example_tasks": [
+  {
+   "task": "Iron infusion paperwork",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Drop off urine sample",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Print the wine list",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Check pre-authorization status",
+   "parent": "Remicade Infusion",
+   "domain": "admin"
+  },
+  {
+   "task": "Log today's numbers",
+   "parent": "Dad's Fluid Balance Chart",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Send the updated IV hydration protocol to the home health nurse",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Pick up sterile collection cup and lab slip from Dr. Patel's office",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Proofread the laminated cocktail and wine card before sending to the printer",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Confirm prior authorization for next month's biologic infusion at the clinic",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Ask the vet whether we need more subcutaneous fluid bags and lines",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Upload the urinalysis lab report to the patient portal before Friday",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Ask caterer for non-alcoholic options",
+   "parent": "Reception Drink Menu",
+   "domain": "social_family"
+  },
+  {
+   "task": "Download the after-visit summary",
+   "parent": "Urology Appointment",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check that the discharge instructions include the daily fluid restriction limit for Grandpa",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Call the infusion center billing department to dispute the out-of-network facility charge",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Make sure the home care binder has the updated IV drip rate sheet",
+   "parent": "",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Llevar la orden médica para el análisis de orina en ayunas",
+  "Confirmar la autorización del seguro para la sesión de suero intravenoso",
+  "Imprimir la carta de vinos y cócteles para la cena del sábado"
+ ],
+ "example_tasks_ru": [
+  "Забрать направление на общий анализ мочи в поликлинике",
+  "Записать объём выпитой жидкости в дневник наблюдения для нефролога",
+  "Утвердить барную карту для банкета с менеджером ресторана"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack a warm cardigan and headphones for the three-hour infusion",
+   "central": "cardigan / headphones"
+  },
+  {
+   "task": "Buy 100ml plastic syringes for flushing the feeding tube",
+   "central": "syringe"
+  },
+  {
+   "task": "Order two cases of Pinot Noir for the rehearsal dinner",
+   "central": "wine bottles"
+  },
+  {
+   "task": "Drink a full liter of water before the kidney ultrasound",
+   "central": "water bottle"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a waterproof mattress protector for the guest bed",
+   "better": "bed / mattress",
+   "trap": "property"
+  },
+  {
+   "task": "Check brake fluid level before driving up to the mountains",
+   "better": "car / oil can",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Search the medical archive for my old vaccination card",
+   "better": "magnifying glass / vaccine syringe",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Record voice notes on the index cards for Monday's speech",
+   "better": "microphone",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the $45 copay credit card bill from the clinic",
+   "better": "credit card",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Review quarterly blood pressure readings in the app",
+   "better": "blood pressure cuff / heart",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon combines a clinical note or card with an IV drip chamber (or fluid sample cup), making it a niche match for medical infusion records, fluid balance charts, and urinalysis orders, while also visually resembling a beverage or wine menu card. At small sizes the drip chamber's curved bottom tube is easily mistaken for a wine glass, microphone, or magnifying glass.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "61aff351e61258bfc649a69994afcaa569b44cd1",
+  "usage": {
+   "prompt": 3924,
+   "output": 1692,
+   "thoughts": 332,
+   "total": 5948
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

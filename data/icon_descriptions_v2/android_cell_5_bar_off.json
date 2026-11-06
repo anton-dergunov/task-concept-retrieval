@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "five ascending vertical signal bars",
+  "modifiers": [
+   "diagonal slash crossing through the bars"
+  ],
+  "composition": "five vertical bars increasing in height from left to right, cut diagonally by a thick slash"
+ },
+ "readings": [
+  {
+   "meaning": "no cellular signal / offline / network disconnected",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mobile data disabled / airplane mode",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "stats or bar chart hidden / analytics disabled",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with a disabled bar chart or hidden statistics icon at a glance.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, unavailable, offline, or no connection"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "home",
+  "work",
+  "outdoors"
+ ],
+ "task_intents": [
+  "troubleshoot lost cellular signal",
+  "prepare apps for offline use",
+  "fix dead mobile reception zone",
+  "disable mobile data while roaming",
+  "test app behavior when offline",
+  "cancel unused mobile data plan"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix basement cell dead zone",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Test offline mode in staging",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off roaming before flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Call carrier about dropped signal",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Download offline trail maps",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Check why the cabin cellular booster keeps losing connection every evening",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Make sure playlists and podcasts work without cell service on the road",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Reproduce the sync crash when the phone drops from LTE to no service",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Disable cellular data on the kid's old iPhone so it only uses Wi-Fi",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set up a fallback banner for users with no network connectivity",
+   "parent": "Mobile App Redesign",
+   "domain": "work"
+  },
+  {
+   "task": "Check coverage map for the backcountry campsites",
+   "parent": "Yosemite Trip",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Complain to Vodafone about zero reception inside the kitchen",
+   "parent": "Home Admin",
+   "domain": "home"
+  },
+  {
+   "task": "Cache the boarding passes and hotel confirmations in case there is no signal",
+   "parent": "Japan Itinerary",
+   "domain": "travel"
+  },
+  {
+   "task": "Switch my spare SIM card to a zero-data plan before the billing cycle resets",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Verify that field technicians can still submit inspection forms when completely out of cell range",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out why my phone shows no bars after coming out of the subway tunnel",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Descargar los mapas sin conexión antes de salir a la montaña",
+  "Reclamar a Movistar por la falta de cobertura en el garaje",
+  "Desactivar los datos móviles en roaming antes de cruzar la frontera"
+ ],
+ "example_tasks_ru": [
+  "Проверить работу приложения без сотовой связи и интернета",
+  "Позвонить оператору по поводу пропадания сети на даче",
+  "Отключить мобильную передачу данных в роуминге перед вылетом"
+ ],
+ "context_tasks": [
+  {
+   "task": "Save offline copy of the cabin rental directions",
+   "central": "map / directions"
+  },
+  {
+   "task": "Download three audiobooks for the dead zones on Highway 1",
+   "central": "audiobooks"
+  },
+  {
+   "task": "Pack the Garmin inReach since there's zero cell reception in the canyon",
+   "central": "satellite communicator"
+  },
+  {
+   "task": "Export the client spreadsheet to PDF so I can read it on the plane",
+   "central": "spreadsheet / PDF"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Remove the bar chart from the Q3 board slide deck",
+   "better": "bar chart / presentation",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the monthly AT&T cell phone bill",
+   "better": "invoice / credit card / phone",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Restart the home Wi-Fi router in the hallway",
+   "better": "Wi-Fi router",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof offline GPS handheld for hiking",
+   "better": "GPS device",
+   "trap": "property"
+  },
+  {
+   "task": "Check the signal-to-noise ratio on the podcast mic",
+   "better": "microphone",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a new USB-C charging cable for my phone",
+   "better": "cable / plug",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 4
+ },
+ "discard": true,
+ "reasoning": "This icon shows cellular signal strength bars with a slash through them, representing a status UI indicator ('no signal' or 'offline') rather than a concrete task object. While it can occasionally fit tasks about fixing cell dead zones or preparing for offline travel, status-bar chrome like signal bars is mostly a device state and can also be mistaken for a disabled bar chart.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5d9f34b865132de41ba090e3c914e867d26379d3",
+  "usage": {
+   "prompt": 3917,
+   "output": 1646,
+   "thoughts": 0,
+   "total": 5563
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

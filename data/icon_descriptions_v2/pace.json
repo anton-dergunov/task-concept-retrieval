@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round analog clock face with two hands",
+  "modifiers": [
+   "solid dot in bottom-right gap of the outer ring"
+  ],
+  "composition": "single circular icon, front view, with a cutout and dot on the lower-right rim"
+ },
+ "readings": [
+  {
+   "meaning": "clock, time, or specific scheduled time",
+   "strength": "primary"
+  },
+  {
+   "meaning": "time-based reminder, alert, or overdue deadline",
+   "strength": "primary"
+  },
+  {
+   "meaning": "time tracking, hours log, or timesheet",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the dot in the lower-right rim blends into the circle, making it look like a plain clock icon, or the angled hand plus dot can read as a bent exclamation mark for an overdue alert.",
+ "modifier_semantics": [
+  {
+   "modifier": "solid dot on the lower-right rim",
+   "meaning": "notification, active reminder, or specific point in time"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "home",
+  "health_fitness",
+  "travel"
+ ],
+ "task_intents": [
+  "submit weekly timesheet and billable hours",
+  "adjust clocks for daylight saving time",
+  "replace battery in wall clock",
+  "set up recurring medication reminders",
+  "check opening hours before visiting",
+  "log project hours in time tracker",
+  "configure timezone settings across devices"
+ ],
+ "example_tasks": [
+  {
+   "task": "Submit Friday timesheet",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Kitchen wall clock battery",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Log billable hours",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check post office hours",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Wind grandfather clock",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set oven and microwave clocks back for daylight saving",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Backfill last week's Harvest hours for the Acme retainer",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Confirm holiday opening hours for the passport office",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Switch Garmin watch timezone before landing in Tokyo",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pick up a silent non-ticking bedside alarm clock",
+   "parent": "Bedroom",
+   "domain": "shopping"
+  },
+  {
+   "task": "Reconcile contractor time logs against the April invoice",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Take the antique mantel clock to the horologist",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Approve Q2 overtime entries before payroll cutoff",
+   "parent": "Timesheets",
+   "domain": "work"
+  },
+  {
+   "task": "Fix the drift on the dashboard clock in the Honda before our road trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set up daily 8pm phone reminder for evening thyroid dose so I stop forgetting",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Export March client hours from Toggl and send the CSV to accounting before noon",
+   "parent": "Time Tracking",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la pila del reloj de pared de la cocina",
+  "Cargar las horas facturables de esta semana en Toggl antes del viernes",
+  "Cambiar la hora del horno y del coche por el horario de invierno"
+ ],
+ "example_tasks_ru": [
+  "Заполнить табель рабочего времени за март",
+  "Поменять батарейку в настенных часах на кухне",
+  "Уточнить часы работы нотариуса в субботу перед поездкой"
+ ],
+ "context_tasks": [
+  {
+   "task": "Practice 25-minute Pomodoro sprints on the thesis draft",
+   "central": "thesis draft"
+  },
+  {
+   "task": "Fast for 12 hours before Tuesday's lipid panel blood draw",
+   "central": "blood draw"
+  },
+  {
+   "task": "Let sourdough bulk ferment for 4 hours at room temperature",
+   "central": "sourdough bread"
+  },
+  {
+   "task": "Check in online exactly 24 hours before the Lisbon flight",
+   "central": "flight"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a 15-minute sand timer for the kids' toothbrushing",
+   "better": "hourglass",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the overdue water bill before the late fee hits",
+   "better": "bill or water droplet with card",
+   "trap": "property"
+  },
+  {
+   "task": "Book a 30-minute dentist cleaning for next month",
+   "better": "tooth",
+   "trap": "property"
+  },
+  {
+   "task": "Watch the new Dune movie this weekend",
+   "better": "film clapperboard or tv",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order replacement leather strap for my Seiko diver",
+   "better": "wristwatch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule the quarterly team offsite on everyone's calendar",
+   "better": "calendar",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a clock face with a small notification dot integrated into the lower-right rim, making it fit tasks about physical clocks, opening hours, time tracking/timesheets, and timed reminders. It is slightly less distinctive than a standard clock because at small sizes the rim dot merges with the circle, and it shouldn't be overused for tasks that merely have a deadline or duration.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "bf4a06ebc78129e7e411081fba4243a296b23710",
+  "usage": {
+   "prompt": 3924,
+   "output": 1674,
+   "thoughts": 197,
+   "total": 5795
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

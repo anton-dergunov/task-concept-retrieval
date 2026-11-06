@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "circular stopwatch casing with top and side buttons",
+  "modifiers": [
+   "two vertical parallel bars (pause symbol) inside the dial"
+  ],
+  "composition": "single object, front view, centered"
+ },
+ "readings": [
+  {
+   "meaning": "pause timer or time tracker",
+   "strength": "primary"
+  },
+  {
+   "meaning": "timed break or rest interval",
+   "strength": "primary"
+  },
+  {
+   "meaning": "put recurring subscription or schedule on hold",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "Pomodoro or interval timer",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the two vertical bars inside the circle can look like an electrical outlet, a pig snout, or the Roman numeral II inside a badge.",
+ "modifier_semantics": [
+  {
+   "modifier": "two vertical parallel bars (pause symbol)",
+   "meaning": "pause, hold, suspend, or rest interval"
+  }
+ ],
+ "domains": [
+  "work",
+  "health_fitness",
+  "finance",
+  "home",
+  "tech",
+  "learning",
+  "admin"
+ ],
+ "task_intents": [
+  "pause billable time tracker",
+  "configure rest intervals for workout",
+  "put recurring membership on hold",
+  "take timed screen break",
+  "suspend automated job schedule",
+  "adjust Pomodoro break durations",
+  "freeze subscription while away"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pause Toggl timer",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Freeze gym membership",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Hold mail delivery",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Set up 90-second rest timer",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Configure break lengths",
+   "parent": "Pomodoro Setup",
+   "domain": "learning"
+  },
+  {
+   "task": "Put the HelloFresh box on hold for the two weeks in July",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Turn on auto-pause on the Garmin watch for red lights",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Suspend the nightly backup cron job during Saturday server migration",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pause Harvest tracking on the Acme retainer until the contract amendment lands",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Put lawn irrigation timer on rain delay until Friday",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pause for August trip",
+   "parent": "Subscriptions",
+   "domain": "finance"
+  },
+  {
+   "task": "Shorten between-set intervals to 60 seconds",
+   "parent": "Strength Block",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check whether pausing happens automatically when idle",
+   "parent": "Time Tracking App",
+   "domain": "work"
+  },
+  {
+   "task": "Set the Mac screen break reminder to lock the display for five minutes every hour",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Ask the physical therapist how long the rest hold between eccentric calf drops should be",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Freeze the Audible membership for ninety days so we stop piling up unused monthly credits",
+   "parent": "",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Pausar el temporizador de riego automático durante toda la semana de lluvias",
+  "Congelar la cuota del gimnasio en agosto",
+  "Programar descansos de 45 segundos entre series en la app del reloj"
+ ],
+ "example_tasks_ru": [
+  "Поставить абонемент в бассейн на паузу до конца командировки",
+  "Настроить автопаузу на велокомпьютере",
+  "Заморозить подписку на доставку рационов на время отпуска"
+ ],
+ "context_tasks": [
+  {
+   "task": "Stretch hip flexors during the afternoon Pomodoro break",
+   "central": "stretching / exercise"
+  },
+  {
+   "task": "Replace CR2032 battery in the kitchen magnetic timer",
+   "central": "battery"
+  },
+  {
+   "task": "Export last month's billable hours from Clockify to CSV",
+   "central": "spreadsheet / export"
+  },
+  {
+   "task": "Set a 20-minute sleep timer on the bedroom audiobook speaker",
+   "central": "speaker / audiobook"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a waterproof stopwatch for the high school swim meet",
+   "better": "plain stopwatch with clock hands (not paused)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pause the audiobook before going into the dentist's office",
+   "better": "headphones or audiobook icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Install a new 220V outlet behind the dryer",
+   "better": "electrical outlet / plug icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Quick 10-minute tidy of the entryway shoe rack",
+   "better": "shoes or broom icon",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the watchmaker for cleaning the vintage chronograph",
+   "better": "wristwatch or payment icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Send the client the invoice for Q2 tracked hours",
+   "better": "invoice / receipt icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines a stopwatch silhouette with a central pause symbol, representing pausing a timer, taking a timed rest interval, or putting a recurring schedule on hold. It fits specific time-tracking, interval-training, and subscription-hold tasks well, though at tiny sizes the two vertical bars inside a circle can briefly resemble a wall socket.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ab143f81082c3f82401b54c06531007564e0b7f6",
+  "usage": {
+   "prompt": 3924,
+   "output": 1699,
+   "thoughts": 142,
+   "total": 5765
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

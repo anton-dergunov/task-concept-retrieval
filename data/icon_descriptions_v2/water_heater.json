@@ -1,0 +1,222 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "vertical rectangular tank enclosure with rounded top corners",
+  "modifiers": [
+   "flame symbol inside upper section",
+   "horizontal wavy line across bottom section"
+  ],
+  "composition": "single object, front schematic view"
+ },
+ "readings": [
+  {
+   "meaning": "water heater or boiler",
+   "strength": "primary"
+  },
+  {
+   "meaning": "hot water system or central heating",
+   "strength": "primary"
+  },
+  {
+   "meaning": "fireplace or wood stove",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "sauna or steam room",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a fireplace, pellet stove, or generic heating unit at small sizes where the bottom wave looks like decorative trim rather than water.",
+ "modifier_semantics": [
+  {
+   "modifier": "flame symbol inside upper section",
+   "meaning": "heat, gas burner, or heating element"
+  },
+  {
+   "modifier": "horizontal wavy line across bottom section",
+   "meaning": "water or liquid level"
+  }
+ ],
+ "domains": [
+  "home",
+  "admin",
+  "finance",
+  "shopping",
+  "outdoors"
+ ],
+ "task_intents": [
+  "flush or drain the water heater",
+  "book annual gas boiler service",
+  "check pilot light on heater",
+  "adjust hot water tank temperature",
+  "replace sacrificial anode rod",
+  "bleed pressure from boiler loop",
+  "compare tankless water heater quotes",
+  "insulate basement hot water tank"
+ ],
+ "example_tasks": [
+  {
+   "task": "Flush the water heater",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Book annual boiler service",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Relight basement pilot light",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check pressure gauge",
+   "parent": "Combi Boiler",
+   "domain": "home"
+  },
+  {
+   "task": "Order replacement anode rod",
+   "parent": "Water Heater Maintenance",
+   "domain": "shopping"
+  },
+  {
+   "task": "Turn hot water tank down to vacation mode before leaving",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Drain a few gallons from the boiler drain valve to clear sediment",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Get three quotes for replacing the 50-gallon gas water heater",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Test the temperature and pressure relief valve on the cylinder",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Wrap the old hot water cylinder in an insulating jacket",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Winterize the camper water heater and bypass the tank",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Descale the heat exchanger with vinegar",
+   "parent": "Tankless Water Heater",
+   "domain": "home"
+  },
+  {
+   "task": "Upload the signed installation certificate for the warranty",
+   "parent": "New Boiler",
+   "domain": "admin"
+  },
+  {
+   "task": "Call the plumber about the banging noise coming from the water heater tank",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check whether our home insurance policy covers sudden hot water tank bursts",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Write down the serial number and install date from the sticker on the boiler",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Llamar al técnico para la revisión anual de la caldera de gas",
+  "Purgar el termo eléctrico del baño antes del invierno",
+  "Regular la temperatura del calentador de agua a 55 grados"
+ ],
+ "example_tasks_ru": [
+  "Промыть водонагреватель на даче и слить воду на зиму",
+  "Вызвать мастера для техобслуживания газового котла",
+  "Купить новый магниевый анод для бойлера"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a brass garden hose cap for the drain valve",
+   "central": "hose cap"
+  },
+  {
+   "task": "Clear boxes out of the airing cupboard before the engineer arrives",
+   "central": "boxes / closet"
+  },
+  {
+   "task": "Install a water leak sensor pan underneath the tank",
+   "central": "leak sensor"
+  },
+  {
+   "task": "Check carbon monoxide detector in the utility room",
+   "central": "carbon monoxide detector"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Descale the electric kettle with citric acid",
+   "better": "kettle",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the monthly natural gas bill",
+   "better": "bill or invoice with flame",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a hot water bottle for sore back",
+   "better": "rubber hot water bottle",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Sweep ash out of the living room wood stove",
+   "better": "fireplace or wood stove without water waves",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wash the delicates on the cold water setting",
+   "better": "washing machine",
+   "trap": "property"
+  },
+  {
+   "task": "Order a pack of long safety matches",
+   "better": "matches",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a tank enclosure, a flame, and a water wave, which is the standard symbol for a water heater or domestic boiler. It fits homeowner and maintenance tasks around boilers, hot water cylinders, and heating systems well, though at tiny sizes it might be mistaken for a fireplace.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b2f8c8ba56f20e070074cded83baebb4f3b70a56",
+  "usage": {
+   "prompt": 3928,
+   "output": 1662,
+   "thoughts": 0,
+   "total": 5590
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

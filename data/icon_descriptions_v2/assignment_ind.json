@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "square badge or frame with a top hanging loop containing a person bust silhouette",
+  "modifiers": [
+   "top hanging hole or clip loop"
+  ],
+  "composition": "single framed object, front view"
+ },
+ "readings": [
+  {
+   "meaning": "ID badge, employee pass, or credential",
+   "strength": "primary"
+  },
+  {
+   "meaning": "framed portrait or headshot photo",
+   "strength": "primary"
+  },
+  {
+   "meaning": "contact card or user profile",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "visitor pass or conference lanyard badge",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be read as either a clip-on ID badge or a picture frame hanging on a nail; at very small sizes it looks like a generic user profile avatar.",
+ "modifier_semantics": [
+  {
+   "modifier": "top loop with hole",
+   "meaning": "lanyard clip attachment or wall hanging loop"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "travel",
+  "career",
+  "home",
+  "learning",
+  "social_family"
+ ],
+ "task_intents": [
+  "pick up employee ID badge",
+  "renew building access card",
+  "print conference lanyard passes",
+  "take new passport or ID photo",
+  "hang framed family portrait",
+  "update professional headshot on profile",
+  "register visitor badge at security",
+  "replace lost student ID card"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pick up new office badge",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Renew expired press pass",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Hang grandma's portrait in hallway",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Get student ID card",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Order replacement lanyard clip",
+   "parent": "Work Badge",
+   "domain": "work"
+  },
+  {
+   "task": "Stop by security desk on ground floor to activate building access badge",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Print and laminate VIP passes for the Saturday booth volunteers",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Retake crooked headshot before the company directory locks on Friday",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Get 2x2 biometric photos taken at Walgreens for the visa application",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Request temporary contractor pass for the HVAC technician coming Tuesday",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Upload high-res speaker photo",
+   "parent": "PyCon Badge & Profile",
+   "domain": "career"
+  },
+  {
+   "task": "Pay the $15 replacement fee at the bursar's office",
+   "parent": "Campus ID Card",
+   "domain": "learning"
+  },
+  {
+   "task": "Pick out a walnut frame",
+   "parent": "Anniversary Portrait",
+   "domain": "social_family"
+  },
+  {
+   "task": "Return old magnetic keycard and lanyard to HR during the Friday exit interview",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pre-register guest badges for Mom and Dad at the hospital reception desk before visiting hours",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Submit marriage certificate and new photo to DMV to get updated state ID card",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Recoger la credencial de empleado en recepción antes del turno del lunes",
+  "Sacarse fotos tamaño carnet con fondo blanco para renovar el DNI",
+  "Imprimir las acreditaciones con código QR para los ponentes del congreso"
+ ],
+ "example_tasks_ru": [
+  "Оформить временный пропуск для курьера на посту охраны в БЦ",
+  "Сделать матовое фото 3х4 на новый студенческий билет",
+  "Забрать готовый бейдж участника на стойке регистрации выставки"
+ ],
+ "context_tasks": [
+  {
+   "task": "Complete Day 1 security onboarding checklist",
+   "central": "checklist"
+  },
+  {
+   "task": "Book studio session with photographer for LinkedIn refresh",
+   "central": "camera / photographer"
+  },
+  {
+   "task": "Pack booth supplies and lanyards for the Berlin trade show",
+   "central": "luggage / box"
+  },
+  {
+   "task": "Update emergency contact details in Workday",
+   "central": "contact book / form"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call John from the contacts list about the roof leak",
+   "better": "phone handset",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a heavy-duty retractable keychain reel for my belt",
+   "better": "key / carabiner",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Change password and two-factor authentication on user account",
+   "better": "lock or key",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sign the NDA at the front desk",
+   "better": "document with pen / signature",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Order 500 glossy business cards from Moo",
+   "better": "horizontal business card with text lines",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book badge-access-only meeting room for the quarterly review",
+   "better": "calendar or meeting room",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a person's bust inside a square frame with a top hanging loop, clearly reading as an ID badge, security pass, or framed portrait photo. It fits real-world tasks around office badges, conference passes, ID photos, and hanging portraits, while standing apart from a plain user icon due to the top clip hole.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "dd7311d347274b3d118402f5bac724012b78cd3b",
+  "usage": {
+   "prompt": 3928,
+   "output": 1694,
+   "thoughts": 0,
+   "total": 5622
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

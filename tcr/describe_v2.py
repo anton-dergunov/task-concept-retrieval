@@ -289,6 +289,40 @@ def eval_titles() -> List[str]:
     return out
 
 
+# --- Contamination guard (§4) -------------------------------------------------------
+
+GUARD_COSINE = 0.95
+
+
+@lru_cache(maxsize=1)
+def _eval_index():
+    """(normalized eval titles, their e5 embeddings). Personal stays on this machine."""
+    from .index import get_model
+    evals = eval_titles()
+    pre = config.query_prefix_for(config.MULTILINGUAL_MODEL)
+    E = get_model(config.MULTILINGUAL_MODEL).encode(
+        [pre + t for t in evals], batch_size=128, normalize_embeddings=True)
+    return frozenset(norm(t) for t in evals), E
+
+
+def contamination_hits(texts: Sequence[str], threshold: float = GUARD_COSINE,
+                       embed: bool = True) -> Tuple[set, set]:
+    """Indices of `texts` that equal an eval title after norm() (exact), and of those
+    within e5 cosine `threshold` of one (near; exact matches usually fall here too)."""
+    banned, E = _eval_index() if embed else (frozenset(norm(t) for t in eval_titles()), None)
+    exact = {i for i, t in enumerate(texts) if norm(t) in banned}
+    near = set()
+    if embed and len(texts):
+        from .index import get_model
+        pre = config.query_prefix_for(config.MULTILINGUAL_MODEL)
+        X = get_model(config.MULTILINGUAL_MODEL).encode(
+            [pre + t for t in texts], batch_size=256, normalize_embeddings=True)
+        for s in range(0, len(texts), 4096):
+            best = (X[s:s + 4096] @ E.T).max(axis=1)
+            near.update(int(s + i) for i in (best >= threshold).nonzero()[0])
+    return exact, near
+
+
 @lru_cache(maxsize=1)
 def reference_pool() -> Tuple[Tuple[str, ...], Tuple[str, ...]]:
     """(short, long) reference titles: MS-LaTTE titles that no public dataset uses, and

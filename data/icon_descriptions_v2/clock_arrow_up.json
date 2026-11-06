@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round analog clock face showing four o'clock",
+  "modifiers": [
+   "vertical upward arrow on the right"
+  ],
+  "composition": "clock on the left paired with an up arrow on the right"
+ },
+ "readings": [
+  {
+   "meaning": "extend time, deadline extension, or overtime",
+   "strength": "primary"
+  },
+  {
+   "meaning": "uptime or system availability",
+   "strength": "primary"
+  },
+  {
+   "meaning": "sort by time ascending or chronological order",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "clock in or start shift",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can represent a UI sort control (sort by newest/oldest), server uptime, overtime hours, or extending a time limit.",
+ "modifier_semantics": [
+  {
+   "modifier": "upward arrow",
+   "meaning": "increase, extend, up (as in uptime), or ascending order"
+  }
+ ],
+ "domains": [
+  "work",
+  "tech",
+  "admin",
+  "finance",
+  "learning",
+  "travel"
+ ],
+ "task_intents": [
+  "request an extension on a deadline",
+  "log overtime hours for payroll",
+  "monitor server uptime and availability",
+  "extend parking or rental duration",
+  "set clock forward for daylight saving",
+  "increase session timeout duration"
+ ],
+ "example_tasks": [
+  {
+   "task": "Log Saturday overtime hours",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Spring clocks forward tonight",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Extend parking meter via app",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Submit Friday numbers",
+   "parent": "Overtime & Timesheets",
+   "domain": "work"
+  },
+  {
+   "task": "Check monthly report",
+   "parent": "Production Uptime",
+   "domain": "tech"
+  },
+  {
+   "task": "Ask Prof. Miller for a 48-hour extension on the historiography paper",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "File IRS Form 4868 for automatic six-month tax filing extension",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Increase JWT session timeout from 15 minutes to 2 hours",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Request late checkout at 2pm from the hotel front desk",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Approve holiday overtime rates for the warehouse weekend crew",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Bump screen lock timeout to 10 minutes on the kitchen iPad",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Apply online before the 15th",
+   "parent": "Visa Extension",
+   "domain": "admin"
+  },
+  {
+   "task": "Verify 99.9% SLA target",
+   "parent": "Server Uptime Monitoring",
+   "domain": "tech"
+  },
+  {
+   "task": "Call Hertz to add two extra days to the Denver rental car reservation",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Configure UptimeRobot alerts for the staging and production API endpoints before launch",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Reconcile December overtime hours against ADP payroll export before the year-end close",
+   "parent": "",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Registrar las horas extra del fin de semana en el portal",
+  "Pedir prórroga para la entrega del proyecto final",
+  "Adelantar una hora el reloj del horno por el horario de verano"
+ ],
+ "example_tasks_ru": [
+  "Оформить сверхурочные часы за ночную смену в табеле",
+  "Настроить мониторинг аптайма для нового сервера",
+  "Продлить парковку через приложение еще на два часа"
+ ],
+ "context_tasks": [
+  {
+   "task": "Adjust oven and microwave clocks for Daylight Saving Time",
+   "central": "oven and microwave"
+  },
+  {
+   "task": "Renew library books online for another three weeks",
+   "central": "library books"
+  },
+  {
+   "task": "Pay extra $25 fee for late rental car return",
+   "central": "payment / rental car"
+  },
+  {
+   "task": "Update cron job schedule to run every four hours instead of two",
+   "central": "cron job / script"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new wall clock for the kitchen",
+   "better": "plain clock without arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a 15-foot heavy duty extension cord for the garage",
+   "better": "electrical plug or cable",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book a 30-minute dentist appointment before Friday",
+   "better": "tooth or calendar",
+   "trap": "property"
+  },
+  {
+   "task": "Set morning alarm for 5:30 AM for the airport run",
+   "better": "alarm clock with bells",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload time-lapse video of the sunrise to YouTube",
+   "better": "video camera or upload cloud",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order replacement watch strap",
+   "better": "wristwatch",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a clock face next to an upward arrow, representing increasing/extending time (extensions, overtime, timeouts, setting clocks forward) or system uptime. Although originally designed as a 'sort by time ascending' UI icon, it serves well for tasks centered on overtime, deadline extensions, and uptime monitoring.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "64f0687bfe43cc610ea7bc13951bf652b178d225",
+  "usage": {
+   "prompt": 3923,
+   "output": 1657,
+   "thoughts": 0,
+   "total": 5580
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

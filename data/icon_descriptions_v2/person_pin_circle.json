@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "map pin marker pointing downward",
+  "modifiers": [
+   "person head and shoulders silhouette inside the pin"
+  ],
+  "composition": "single object, centered front view with interior emblem"
+ },
+ "readings": [
+  {
+   "meaning": "person's location or live location sharing",
+   "strength": "primary"
+  },
+  {
+   "meaning": "contact address or home address of a person",
+   "strength": "primary"
+  },
+  {
+   "meaning": "in-person meetup point or check-in",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "local guide or on-site representative",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the shoulders and head inside the pin can merge and look like a standard generic map pin or a keyhole.",
+ "modifier_semantics": [
+  {
+   "modifier": "person head and shoulders silhouette inside the pin",
+   "meaning": "ties the geographic location specifically to a user, contact, or person's presence"
+  }
+ ],
+ "domains": [
+  "social_family",
+  "communication",
+  "travel",
+  "admin",
+  "tech",
+  "work"
+ ],
+ "task_intents": [
+  "share live location with family",
+  "update contact street address in book",
+  "set up family location tracking",
+  "send meetup pin to friends",
+  "check in at arrival point",
+  "verify client on-site address",
+  "update personal residence address on profile"
+ ],
+ "example_tasks": [
+  {
+   "task": "Share Find My with Mom",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Update Dan's new apartment address",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Turn off Life360 tracking",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Verify everybody's current street addresses",
+   "parent": "Holiday Card List",
+   "domain": "social_family"
+  },
+  {
+   "task": "Drop a pin for Sasha",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Add Grandma's nursing home address to the shared family contacts",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Send live WhatsApp location to the airport pickup driver",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check which field rep is closest to the Tacoma site",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Fix my home address in the payroll portal before Friday",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Set up Apple location sharing with Leo for his walk home",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Collect missing mailing addresses from the groomsmen",
+   "parent": "Wedding Invitations",
+   "domain": "social_family"
+  },
+  {
+   "task": "Pick a clear meetup corner outside Fenway Gate D",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Confirm on-site coordinator spot",
+   "parent": "Booth Setup",
+   "domain": "work"
+  },
+  {
+   "task": "Ask Maya to share her Google Maps pin once she parks near the trailhead",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Update emergency contact street addresses on the school enrollment form before Tuesday",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Audit which apps still have background access to my precise location on the phone",
+   "parent": "Privacy Cleanup",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Compartir mi ubicación en tiempo real con Laura al salir del trabajo",
+  "Actualizar la dirección postal de tía Carmen en la agenda",
+  "Mandar el pin del punto de encuentro al grupo de senderismo"
+ ],
+ "example_tasks_ru": [
+  "Отправить курьеру геолокацию у второго подъезда",
+  "Настроить семейный доступ к геопозиции для сына в телефоне",
+  "Обновить домашний адрес в анкете для отдела кадров"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy AirTags for the kids' backpacks",
+   "central": "tracker tag"
+  },
+  {
+   "task": "Mail birthday package to Aunt Maria in Austin",
+   "central": "package"
+  },
+  {
+   "task": "Book local walking tour guide in Lisbon",
+   "central": "tour guide"
+  },
+  {
+   "task": "Print return address labels for the move",
+   "central": "address labels"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Download offline Google Maps for northern Scotland",
+   "better": "map",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Upload new headshot to LinkedIn profile",
+   "better": "user avatar / portrait",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call the local plumber about the radiator leak",
+   "better": "phone or wrench",
+   "trap": "property"
+  },
+  {
+   "task": "Check where the package is in transit",
+   "better": "delivery truck or package",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Book a window seat on the train to Chicago",
+   "better": "train",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Replace the brass keyhole cover on the front door",
+   "better": "keyhole or lock",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines a map pin with a person silhouette, universally understood as a person's location, live location sharing, or a contact's street address. It fits real tasks around sharing pins, updating mailing addresses, and family location tracking, though at tiny sizes the interior figure could blur into a plain map pin.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "eea314b2311c1412027c6c9d8959c3cc43a1ce6e",
+  "usage": {
+   "prompt": 3922,
+   "output": 1652,
+   "thoughts": 97,
+   "total": 5671
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

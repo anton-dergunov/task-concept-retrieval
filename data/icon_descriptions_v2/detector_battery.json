@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "ceiling smoke detector above a horizontal low-battery symbol",
+  "modifiers": [
+   "partially depleted battery icon below"
+  ],
+  "composition": "two stacked objects in side view, detector on top and battery below"
+ },
+ "readings": [
+  {
+   "meaning": "smoke detector battery / low battery in smoke alarm",
+   "strength": "primary"
+  },
+  {
+   "meaning": "replace battery in ceiling sensor or CO detector",
+   "strength": "primary"
+  },
+  {
+   "meaning": "battery-powered smart home sensor maintenance",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the top ceiling-mounted detector can look like a flush-mount ceiling light fixture or a UFO-shaped bowl above a battery.",
+ "modifier_semantics": [
+  {
+   "modifier": "partially depleted battery icon below",
+   "meaning": "battery level, low battery, or battery replacement needed"
+  }
+ ],
+ "domains": [
+  "home",
+  "shopping",
+  "tech",
+  "admin"
+ ],
+ "task_intents": [
+  "replace smoke detector batteries",
+  "stop chirping ceiling smoke alarm",
+  "buy 9V batteries for alarms",
+  "check carbon monoxide detector battery",
+  "test home smoke and CO alarms",
+  "swap batteries in smart ceiling sensors",
+  "log annual fire alarm battery change"
+ ],
+ "example_tasks": [
+  {
+   "task": "Swap smoke detector batteries",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Fix chirping hallway alarm",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "9V batteries for upstairs detectors",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check basement CO detector charge",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Test all three bedrooms",
+   "parent": "Smoke Alarms",
+   "domain": "home"
+  },
+  {
+   "task": "Change the battery in the upstairs landing smoke alarm before tonight",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order a six-pack of 10-year lithium 9V batteries for the house alarms",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check why the Nest Protect in the kitchen says low battery in the app",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Do the daylight saving time battery swap on every smoke and CO unit",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Confirm with the tenant that the hallway detector batteries were replaced",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Grab the step stool and replace the dead battery",
+   "parent": "Fire Safety",
+   "domain": "home"
+  },
+  {
+   "task": "Pick up AA lithium packs at the hardware store",
+   "parent": "Nest Protect Maintenance",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check battery percentages in the dashboard before leaving for vacation",
+   "parent": "Ceiling Sensors",
+   "domain": "tech"
+  },
+  {
+   "task": "Replace the backup 9-volt battery in the hardwired smoke detector outside the kids' rooms",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Write the installation date on the new batteries with a Sharpie before putting the smoke alarms back up",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check all five smoke and carbon monoxide detectors at Mom's house and put fresh Duracells in each one",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la pila de 9V del detector de humo del pasillo que no para de pitar",
+  "Comprar pilas nuevas para las alarmas de incendio",
+  "Revisar la batería del detector de monóxido cerca de la caldera"
+ ],
+ "example_tasks_ru": [
+  "Поменять крону в пищащем датчике дыма в прихожей",
+  "Проверить заряд батареек во всех потолочных пожарных извещателях на даче",
+  "Купить батарейки для датчиков дыма"
+ ],
+ "context_tasks": [
+  {
+   "task": "Get the tall folding ladder out of the garage for the high ceiling",
+   "central": "ladder"
+  },
+  {
+   "task": "Vacuum dust out of the ceiling alarm vents while up on the stool",
+   "central": "vacuum / cleaning"
+  },
+  {
+   "task": "Download the landlord fire safety inspection checklist PDF",
+   "central": "checklist document"
+  },
+  {
+   "task": "Recycle the old 9V and AA batteries at the hardware store drop-off box",
+   "central": "battery recycling"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Charge my phone before heading to the airport",
+   "better": "smartphone with battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a fire extinguisher for under the kitchen sink",
+   "better": "fire extinguisher",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Install a new recessed LED light in the hallway ceiling",
+   "better": "ceiling light / lightbulb",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check car battery voltage with the multimeter before winter",
+   "better": "car battery",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a battery-powered camping lantern for the Adirondacks trip",
+   "better": "camping lantern",
+   "trap": "property"
+  },
+  {
+   "task": "Verify homeowner insurance discount for monitored fire alarms",
+   "better": "insurance policy / shield",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 5
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines a ceiling-mounted smoke/CO detector with a low-battery gauge underneath. While specific to a narrow household maintenance family, replacing chirping smoke alarm batteries is a classic recurring home task for which this glyph is an unmistakable match.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5eec3ff087e31e259b59993a2cdb651af5b9b375",
+  "usage": {
+   "prompt": 3923,
+   "output": 1663,
+   "thoughts": 98,
+   "total": 5684
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

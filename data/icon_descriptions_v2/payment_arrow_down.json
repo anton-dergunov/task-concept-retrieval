@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "paper banknote with center circle and corner details",
+  "modifiers": [
+   "downward pointing arrow below the banknote"
+  ],
+  "composition": "single horizontal object above a centered vertical arrow"
+ },
+ "readings": [
+  {
+   "meaning": "withdraw cash or take money out",
+   "strength": "primary"
+  },
+  {
+   "meaning": "incoming payment, refund, or cash deposit",
+   "strength": "primary"
+  },
+  {
+   "meaning": "lower cost, price drop, or reduce expenses",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "cash out earnings or payout",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The downward arrow can be read either as cash coming out of an ATM/account (withdrawal/payout) or money coming into the user's hand (deposit/refund), or as decreasing costs. At very small sizes the banknote can look like a camera or a ticket.",
+ "modifier_semantics": [
+  {
+   "modifier": "downward arrow",
+   "meaning": "withdraw, extract, receive, or decrease"
+  }
+ ],
+ "domains": [
+  "finance",
+  "shopping",
+  "travel",
+  "admin",
+  "work",
+  "home"
+ ],
+ "task_intents": [
+  "withdraw cash from an ATM",
+  "cash out balance from payment app",
+  "claim a refund or rebate",
+  "get small bills for tipping",
+  "collect reimbursement for expenses",
+  "transfer payout to bank account",
+  "take out foreign currency for trip",
+  "lower monthly household spending"
+ ],
+ "example_tasks": [
+  {
+   "task": "Get $60 cash for babysitter",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "ATM before farmer's market",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Cash out Venmo balance",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Grab twenties for tips",
+   "parent": "Mexico Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Submit the form",
+   "parent": "Dental insurance reimbursement",
+   "domain": "admin"
+  },
+  {
+   "task": "Withdraw 30,000 yen at the 7-Eleven ATM near the station",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Take out $200 in crisp bills for the wedding card",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Transfer the Etsy shop payout to checking before Friday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Claim the $45 mail-in rebate on the new dehumidifier",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Redeem credit card cashback rewards into the high-yield savings",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Stop by the credit union to get quarters and ones",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Follow up on the missing deposit",
+   "parent": "Security deposit refund",
+   "domain": "home"
+  },
+  {
+   "task": "Check if it cleared",
+   "parent": "Q3 expense payout",
+   "domain": "work"
+  },
+  {
+   "task": "Pull $150 cash from the fee-free ATM for the Craigslist dresser pickup tonight",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Make sure the airline ticket refund actually hits the visa statement before next billing cycle",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Get enough small bills from the bank on Thursday to pay the lawn guy",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Sacar 50 euros del cajero para el mercadillo del domingo",
+  "Reclamar la devolución de la fianza del piso antiguo",
+  "Pasar el saldo de Bizum y Wallapop a la cuenta del banco"
+ ],
+ "example_tasks_ru": [
+  "Снять наличку на рынок и чаевые курьеру",
+  "Вывести деньги с самозанятости на основную карту",
+  "Оформить возврат средств за отмененный билет на поезд"
+ ],
+ "context_tasks": [
+  {
+   "task": "Find which local ATMs don't charge foreign transaction fees",
+   "central": "ATM / bank"
+  },
+  {
+   "task": "Split the cash tip envelopes for the movers",
+   "central": "envelopes"
+  },
+  {
+   "task": "Negotiate the internet bill down to the promo rate",
+   "central": "internet / phone call"
+  },
+  {
+   "task": "Download PDF of December payroll payouts",
+   "central": "PDF document"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the plumber $180 for fixing the kitchen trap",
+   "better": "banknote with upward or outward arrow (pay / send money)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the old camera down from the closet shelf",
+   "better": "camera",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a cheap waterproof phone pouch for kayaking",
+   "better": "phone pouch",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the corner taco truck is cash-only",
+   "better": "taco / food truck",
+   "trap": "property"
+  },
+  {
+   "task": "Update the tax withholding form in Workday",
+   "better": "tax form / document",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a new debit card with a chip",
+   "better": "credit/debit card",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a banknote with a downward arrow, making it an intuitive symbol for withdrawing cash at an ATM, cashing out a balance, receiving a refund/payout, or lowering expenses. Its main ambiguity is directional (money coming out of an ATM vs. money coming in vs. paying out), and at tiny sizes the bill can slightly resemble a simple camera.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "90742bc68d80567054d31c6fae9b8795e8fb8d7d",
+  "usage": {
+   "prompt": 3923,
+   "output": 1717,
+   "thoughts": 0,
+   "total": 5640
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

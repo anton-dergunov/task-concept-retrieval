@@ -1,0 +1,220 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "wireless signal fan with three radiating arcs and a dot",
+  "modifiers": [
+   "closed padlock in the bottom-right corner"
+  ],
+  "composition": "single symbol with lower-right badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "Wi-Fi password or protected wireless network",
+   "strength": "primary"
+  },
+  {
+   "meaning": "network security or router encryption settings",
+   "strength": "primary"
+  },
+  {
+   "meaning": "locked or restricted internet access / parental controls",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "VPN or secure connection",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Easy to confuse with a plain Wi-Fi icon if the small padlock isn't noticed, or could mean either 'secure the network' or 'locked out of Wi-Fi'.",
+ "modifier_semantics": [
+  {
+   "modifier": "closed padlock",
+   "meaning": "password-protected, secured, encrypted, or locked access"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "work",
+  "travel",
+  "social_family",
+  "admin"
+ ],
+ "task_intents": [
+  "change home Wi-Fi password",
+  "enable WPA3 security on router",
+  "set up password-protected guest network",
+  "print Wi-Fi password for guests",
+  "lock down kids internet access",
+  "get hotel or lounge Wi-Fi password",
+  "update office wireless credentials",
+  "audit home network security settings"
+ ],
+ "example_tasks": [
+  {
+   "task": "Change Wi-Fi password",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Print guest Wi-Fi QR code",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Switch router from WPA2 to WPA3",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Get lounge Wi-Fi code",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Lock down IoT VLAN",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set up a separate password-protected guest network before Thanksgiving dinner",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Turn off WPS on the Archer router and set a stronger passphrase",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Text the Airbnb Wi-Fi password to Sarah and Mark",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Put a bedtime schedule lock on the kids' Wi-Fi profile",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Rotate the studio Wi-Fi password after the contractor finishes",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Write the basement Wi-Fi login on the chalkboard in the guest room",
+   "parent": "Houseguests",
+   "domain": "home"
+  },
+  {
+   "task": "Ask IT for the new 802.1X certificate for the corporate wireless network",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Update all the smart plugs and cameras after changing the main Wi-Fi passphrase",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Move the security cameras and doorbell onto an isolated wireless network with its own key",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Frame the little card with the network name and password for the hallway table",
+   "parent": "Airbnb Prep",
+   "domain": "admin"
+  },
+  {
+   "task": "Write down in 1Password",
+   "parent": "Home Wi-Fi Security",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la clave del Wi-Fi de casa y pasarla al grupo familiar",
+  "Configurar una red de invitados con contraseña aparte en el router Movistar",
+  "Activar WPA3 en el punto de acceso"
+ ],
+ "example_tasks_ru": [
+  "Сменить пароль от домашнего вайфая и переподключить пылесос",
+  "Настроить гостевую Wi-Fi сеть с отдельным паролем",
+  "Заблокировать детям доступ к Wi-Fi после 22:00 на роутере"
+ ],
+ "context_tasks": [
+  {
+   "task": "Reconnect the Brother laser printer after the password change",
+   "central": "printer"
+  },
+  {
+   "task": "Install Mullvad VPN on the travel laptop for hotel networks",
+   "central": "VPN / laptop"
+  },
+  {
+   "task": "Check which unknown devices are connected to the router",
+   "central": "router / devices"
+  },
+  {
+   "task": "Reboot the mesh nodes in the hallway",
+   "central": "mesh router"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call ISP to lower our monthly internet bill",
+   "better": "money or phone",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a smart deadbolt with Wi-Fi for the front door",
+   "better": "door lock",
+   "trap": "property"
+  },
+  {
+   "task": "Change master password for Bitwarden vault",
+   "better": "key or vault",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Run an ethernet cable from the study to the living room TV",
+   "better": "ethernet cable or plug",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Subscribe to five new podcasts in Overcast",
+   "better": "podcast or RSS icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if the internet is back up at the cabin",
+   "better": "plain Wi-Fi or router",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a standard Wi-Fi signal icon with a closed padlock badge, universally understood as a password-protected or secure wireless network. It fits tasks specifically about Wi-Fi passwords, guest network credentials, router encryption, or restricting wireless access, as well as general Wi-Fi setup tasks when no plain Wi-Fi icon is preferred.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "d8374eb4dbe79c2ed3247bd663ab8afef46f5f29",
+  "usage": {
+   "prompt": 3921,
+   "output": 1721,
+   "thoughts": 0,
+   "total": 5642
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

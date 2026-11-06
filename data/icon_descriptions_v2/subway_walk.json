@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front half of train with person walking right",
+  "modifiers": [
+   "walking person silhouette"
+  ],
+  "composition": "train front cut in half on left, walking figure on right"
+ },
+ "readings": [
+  {
+   "meaning": "transit transfer or walking from train station",
+   "strength": "primary"
+  },
+  {
+   "meaning": "commuting by train and foot",
+   "strength": "primary"
+  },
+  {
+   "meaning": "getting off the train / train arrival",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "public transit directions",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the half-train on the left can look like a stylized letter E or a vending machine behind a walking person.",
+ "modifier_semantics": [
+  {
+   "modifier": "walking person silhouette",
+   "meaning": "walking, transferring on foot, or disembarking from transit"
+  }
+ ],
+ "domains": [
+  "travel",
+  "work",
+  "social_family",
+  "admin",
+  "outdoors"
+ ],
+ "task_intents": [
+  "plan train and walking commute route",
+  "walk from train station to venue",
+  "transfer between subway lines on foot",
+  "meet someone arriving at train station",
+  "check walking distance from metro stop",
+  "commute to office via public transit",
+  "take train and walk to trailhead"
+ ],
+ "example_tasks": [
+  {
+   "task": "Morning commute route",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Walk from Penn Station",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Subway transfer at Fulton",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check station walking time",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Transit to new office",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Map out the walk from Paddington Station to the hotel",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Do a test run of the new train and walk commute",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Meet Aunt Clara at the platform exit and walk her home",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Take the Metro-North to Cold Spring and walk to the trailhead",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Check which station exit is closest to the dentist office",
+   "parent": "Transit & Commute",
+   "domain": "admin"
+  },
+  {
+   "task": "Save offline walking directions from the Shinkansen station",
+   "parent": "Japan Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Compare monthly pass options for the new hybrid schedule",
+   "parent": "Subway Commute",
+   "domain": "work"
+  },
+  {
+   "task": "Look up the pedestrian tunnel hours between the two terminals",
+   "parent": "Train Transfers",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out how long it takes to walk from the L train stop to the warehouse",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Write down the exact subway transfer steps and exit numbers for Mom's visit on Friday",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Download the regional rail schedule and trail map for Saturday's car-free hike in the Hudson Valley",
+   "parent": "",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Mirar qué salida del metro queda más cerca de la clínica",
+  "Ruta a pie desde la estación de Atocha hasta el hostal",
+  "Probar el nuevo trayecto en cercanías y caminata hasta la oficina nueva"
+ ],
+ "example_tasks_ru": [
+  "Посмотреть, какой выход из метро ближе к нотариусу",
+  "Пересадка с МЦК на метро по пешему переходу",
+  "Рассчитать время пешком от вокзала до отеля во Владимире"
+ ],
+ "context_tasks": [
+  {
+   "task": "Reload $40 onto the Clipper card before Monday morning",
+   "central": "transit card / payment"
+  },
+  {
+   "task": "Download three podcast episodes for the morning train ride",
+   "central": "podcast / headphones"
+  },
+  {
+   "task": "Buy waterproof walking shoes for the station commute",
+   "central": "shoes"
+  },
+  {
+   "task": "Pack folding umbrella in work backpack",
+   "central": "umbrella"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book Eurostar tickets from London to Paris",
+   "better": "train (alone, without walking person)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Go for a 30-minute brisk walk after lunch",
+   "better": "walking person (alone, without train)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Train the new intern on the billing software",
+   "better": "person teaching / laptop",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Look for apartments within walking distance of the metro",
+   "better": "house / apartment building",
+   "trap": "property"
+  },
+  {
+   "task": "Buy a warm wool coat for the winter commute",
+   "better": "coat / jacket",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check if the 8:15 train is running on time",
+   "better": "train with clock",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines the front profile of a train/subway car with a person walking away from it, clearly representing public transit commuting, station transfers, or walking from a station. It fits tasks centered on multimodal commuting, transit routing, or station-to-destination walks, though plain train or walking icons are better for pure rail bookings or exercise walks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ce70c4a10971c308d9dd5851dba21eeee3bdb170",
+  "usage": {
+   "prompt": 3924,
+   "output": 1686,
+   "thoughts": 0,
+   "total": 5610
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

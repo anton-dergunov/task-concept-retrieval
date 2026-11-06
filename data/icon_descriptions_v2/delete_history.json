@@ -1,0 +1,235 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "clock hands inside a counter-clockwise circular arrow",
+  "modifiers": [
+   "cross mark (X) in bottom right corner"
+  ],
+  "composition": "single symbol with bottom-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "clear or delete history / activity log",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel scheduled task or timer",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "failed backup or restore",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "disable version history or auto-backup",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, can be mistaken for a generic clock with an X (cancel appointment) or a plain history/restore icon if the X blends in.",
+ "modifier_semantics": [
+  {
+   "modifier": "counter-clockwise circular arrow around clock hands",
+   "meaning": "history, past activity, or restore/backup"
+  },
+  {
+   "modifier": "cross mark (X) in bottom right",
+   "meaning": "delete, clear, cancel, disable, or failed"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "finance"
+ ],
+ "task_intents": [
+  "clear browsing or search history",
+  "delete old backup snapshots",
+  "purge activity and audit logs",
+  "cancel scheduled recurring transfer",
+  "turn off location history tracking",
+  "clean up git commit history"
+ ],
+ "example_tasks": [
+  {
+   "task": "Clear browser history",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Wipe old Time Machine backups",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Purge server logs",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Delete watch history",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Turn off Google location tracking",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Clean up messy git history before merging the feature branch",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Delete old system restore points to free up disk space",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear search history on the shared living room iPad",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel the scheduled automatic transfer to the savings account",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Remove sensitive API keys from the repository commit history",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Purge customer activity logs older than ninety days for GDPR",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Disable clipboard history on the office Windows machine",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Wipe the last six months of entries",
+   "parent": "Browser Privacy",
+   "domain": "tech"
+  },
+  {
+   "task": "Delete everything older than January",
+   "parent": "Server Backups",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off auto-save for past queries",
+   "parent": "Account Privacy",
+   "domain": "admin"
+  },
+  {
+   "task": "Clean up the failed nightly jobs",
+   "parent": "Database Backups",
+   "domain": "tech"
+  },
+  {
+   "task": "Go through Google My Activity and delete all voice and audio recordings from last year",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Prune local Docker image history and dangling build cache so the SSD stops complaining",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Figure out why the automated nightly backup to the NAS keeps failing with an error",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Borrar el historial de navegación y las cookies del portátil del trabajo",
+  "Eliminar las copias de seguridad antiguas de iCloud para liberar espacio",
+  "Desactivar el historial de ubicaciones en la cuenta de Google antes del viaje"
+ ],
+ "example_tasks_ru": [
+  "Очистить историю браузера и кэш на домашнем ноутбуке",
+  "Удалить старые точки восстановления системы на диске C",
+  "Отключить сохранение истории поиска в аккаунте Яндекса"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check privacy settings before lending the laptop to cousin",
+   "central": "laptop / privacy settings"
+  },
+  {
+   "task": "Set up bleachbit on the media PC",
+   "central": "cleanup software"
+  },
+  {
+   "task": "Audit data retention policy for user logs",
+   "central": "policy document"
+  },
+  {
+   "task": "Fix broken cron job on the staging server",
+   "central": "server / script"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cancel dentist appointment on Thursday",
+   "better": "calendar with X",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Study for the European history exam",
+   "better": "book or scroll",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Restore database from yesterday's snapshot",
+   "better": "history / counter-clockwise clock without X",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn off the 6am alarm for the holiday",
+   "better": "alarm bell with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new wall clock for the kitchen",
+   "better": "plain clock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write postmortem for the failed deployment",
+   "better": "document or warning icon",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines the standard 'history/restore' symbol (clock hands inside a counter-clockwise arrow) with a 'delete/cancel' X badge. It fits tasks about clearing browsing/search history, purging old backups or logs, or troubleshooting failed backups, though it can be confused with canceling a scheduled time or alarm.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "dd0a30b69915782fe0827475f812a4924f4585e9",
+  "usage": {
+   "prompt": 3920,
+   "output": 992,
+   "thoughts": 0,
+   "total": 4912
+  },
+  "soft_problems": [
+   "example_tasks: 19 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

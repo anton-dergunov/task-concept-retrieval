@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "vertical bookmark ribbon outline with notched bottom",
+  "modifiers": [
+   "checkmark at top right corner"
+  ],
+  "composition": "single outline object with top-right modifier badge"
+ },
+ "readings": [
+  {
+   "meaning": "bookmarked item / saved link",
+   "strength": "primary"
+  },
+  {
+   "meaning": "reading list / read-later queue",
+   "strength": "primary"
+  },
+  {
+   "meaning": "bookmark manager or browser bookmarks",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "finished reading / reviewed saved item",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a plain checkbox or a tag/label icon at very small sizes, or redundant with the task's own completion checkbox.",
+ "modifier_semantics": [
+  {
+   "modifier": "checkmark at top right corner",
+   "meaning": "saved, confirmed, or completed bookmark/reading item"
+  }
+ ],
+ "domains": [
+  "tech",
+  "learning",
+  "work",
+  "hobbies",
+  "shopping",
+  "travel",
+  "food"
+ ],
+ "task_intents": [
+  "clean up browser bookmarks folder",
+  "triage read-later queue and saved articles",
+  "export bookmarks before switching browsers",
+  "bookmark required reference portals for project",
+  "go through saved recipes and links",
+  "organize saved posts on social media",
+  "Buy new physical bookmarks for reading"
+ ],
+ "example_tasks": [
+  {
+   "task": "Clean up browser bookmarks",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Empty Pocket reading list",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Sync Firefox bookmarks",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Delete dead links",
+   "parent": "Browser Bookmarks",
+   "domain": "tech"
+  },
+  {
+   "task": "Sort into topic folders",
+   "parent": "Saved Articles",
+   "domain": "learning"
+  },
+  {
+   "task": "Export Chrome bookmarks to HTML before wiping the old ThinkPad",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Go through saved Instagram dinner ideas and pick three for this week",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Triage the 40 open tabs into proper Raindrop bookmark collections",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Bookmark the new internal payroll, HR and benefits portals on work laptop",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clear out old gift ideas from the shopping bookmarks bar",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Pick a brass magnetic bookmark for Dad's birthday at the museum shop",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Archive the finished ones",
+   "parent": "Read-Later Queue",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Move the keepers to Obsidian",
+   "parent": "Bookmarked Threads",
+   "domain": "learning"
+  },
+  {
+   "task": "Consolidate scattered Kyoto hotel and ramen bookmarks into one shared Google Map before Friday",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Run a link checker on my dev reference bookmarks and prune all the 404s",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Review all the bookmarked Zillow listings with Maya and narrow down to five open houses",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Limpiar la barra de marcadores de Chrome y borrar enlaces rotos",
+  "Exportar los favoritos del navegador antes de formatear el portátil",
+  "Revisar los artículos guardados en Pocket de este mes"
+ ],
+ "example_tasks_ru": [
+  "Разобрать закладки в браузере и удалить битые ссылки",
+  "Экспортировать закладки из Firefox перед переустановкой системы",
+  "Просмотреть сохраненные посты с рецептами в Телеграме"
+ ],
+ "context_tasks": [
+  {
+   "task": "Read the longform piece on semiconductor supply chains",
+   "central": "article / reading"
+  },
+  {
+   "task": "Set up self-hosted Linkding container on the home server",
+   "central": "server / Docker container"
+  },
+  {
+   "task": "Laminate the pressed autumn leaves we collected with the kids",
+   "central": "pressed leaves / craft"
+  },
+  {
+   "task": "Import Safari reading list into Omnivore",
+   "central": "browser / app migration"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Finish reading chapter 7 of Designing Data-Intensive Applications",
+   "better": "open book",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check off the pre-flight packing checklist before heading to the airport",
+   "better": "checklist / clipboard with checkmarks",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book Mark's flight to Chicago for the Q3 sales kickoff",
+   "better": "airplane",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Save $500 from this month's paycheck into the emergency fund",
+   "better": "piggy bank or money",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Verify that the tax return was accepted by the IRS",
+   "better": "tax document or checkmark shield",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a wireless presenter remote for the keynote",
+   "better": "remote control / presentation screen",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a bookmark ribbon with a checkmark in the top-right corner, universally understood as a saved item, bookmark, or read-later entry. It fits tasks centered on managing browser bookmarks, triaging read-later queues, or buying/making physical bookmarks, though it can be confused with general book-reading or generic completion checkmarks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "9a6c7a1c0eebba798bef3319ae084987d9c2e8ee",
+  "usage": {
+   "prompt": 3927,
+   "output": 1695,
+   "thoughts": 85,
+   "total": 5707
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

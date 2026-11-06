@@ -1,0 +1,222 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front-facing car with flashing siren on roof",
+  "modifiers": [
+   "two radiating lines above roof siren",
+   "circular badge with checkmark on upper right"
+  ],
+  "composition": "single object, front view, with overlapping top-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "police clearance / background check verified",
+   "strength": "primary"
+  },
+  {
+   "meaning": "car alarm or vehicle security check",
+   "strength": "primary"
+  },
+  {
+   "meaning": "emergency vehicle inspection or dispatch ready",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "resolved traffic incident or police report",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be read either as a police/emergency vehicle with a completion check, or a regular passenger car with an active alarm being tested/verified; at small sizes the roof beacon could look like a taxi sign.",
+ "modifier_semantics": [
+  {
+   "modifier": "roof siren with radiating lines",
+   "meaning": "emergency vehicle, police, or active car alarm"
+  },
+  {
+   "modifier": "circular badge with checkmark",
+   "meaning": "verified, cleared, inspected, or approved"
+  }
+ ],
+ "domains": [
+  "admin",
+  "career",
+  "home",
+  "finance",
+  "work",
+  "travel"
+ ],
+ "task_intents": [
+  "obtain police clearance certificate",
+  "complete criminal background check",
+  "test car alarm system",
+  "verify vehicle security immobilizer",
+  "file and close police report",
+  "register neighborhood patrol check",
+  "inspect emergency fleet vehicle"
+ ],
+ "example_tasks": [
+  {
+   "task": "Get police clearance certificate",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Test Viper car alarm",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Submit criminal background check",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Pick up stamped report",
+   "parent": "Police Station",
+   "domain": "admin"
+  },
+  {
+   "task": "Confirm panic button works",
+   "parent": "Car Security",
+   "domain": "home"
+  },
+  {
+   "task": "Verify driving record clearance before starting the volunteer coaching role",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Request vacation house watch from the local sheriff department",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send the certified police report number to Geico claims adjuster",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check that the aftermarket immobilizer and siren trigger properly",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Complete daily rig readiness checklist before shift change",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Register VIN etching and anti-theft alarm for insurance discount",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Upload apostilled copy to portal",
+   "parent": "Police Clearance",
+   "domain": "admin"
+  },
+  {
+   "task": "Sign off on Tuesday night log",
+   "parent": "Neighborhood Patrol",
+   "domain": "work"
+  },
+  {
+   "task": "Get the salvaged Honda Civic inspected by state highway patrol for title clearance",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Download the approved Garda vetting form and forward it to the school board secretary",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Have the dealer confirm the recall fix on the factory anti-theft siren module",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Solicitar el certificado de antecedentes policiales para el visado",
+  "Probar la alarma del coche después de cambiar la batería",
+  "Recoger el atestado policial sellado para mandarlo a Mapfre"
+ ],
+ "example_tasks_ru": [
+  "Забрать готовую справку об отсутствии судимости в МФЦ",
+  "Проверить срабатывание автосигнализации StarLine с брелока",
+  "Оформить разрешение в ГИБДД на переоборудование автомобиля"
+ ],
+ "context_tasks": [
+  {
+   "task": "Replace CR2032 battery in the car alarm key fob",
+   "central": "battery / key fob"
+  },
+  {
+   "task": "Pay $28 fingerprinting fee for police background check",
+   "central": "payment / fingerprint"
+  },
+  {
+   "task": "Call non-emergency precinct line to follow up on stolen bike case",
+   "central": "phone call"
+  },
+  {
+   "task": "Notarize translator signature on the police clearance letter",
+   "central": "document / signature"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Take the Subaru in for its annual state emissions inspection",
+   "better": "regular car with checkmark or wrench (no roof siren)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Confirm Uber pickup from Terminal 2 on Friday night",
+   "better": "taxi or passenger car icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the tire pressure and oil level before driving to Tahoe",
+   "better": "car maintenance or tire gauge icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Listen to the new album by The Police on vinyl",
+   "better": "music note or vinyl record icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a louder 120dB waterproof siren for the boat",
+   "better": "siren/horn or boat icon",
+   "trap": "property"
+  },
+  {
+   "task": "Iron uniform shirts and polish boots for Monday shift",
+   "better": "shirt/uniform or iron icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a front-facing car with a flashing roof beacon and a checkmark badge. It fits specific real-world tasks like getting a police clearance/background check, filing a police report, VIN/patrol inspections, or testing a car alarm, though it can be confused with a taxi or regular car inspection at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "89b864cc40ecf96cc7200cf23b5afd498ee67d98",
+  "usage": {
+   "prompt": 3921,
+   "output": 1727,
+   "thoughts": 0,
+   "total": 5648
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

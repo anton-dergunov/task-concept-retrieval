@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rectangular card with horizontal magnetic stripe across top",
+  "modifiers": [
+   "circular clock badge at bottom right"
+  ],
+  "composition": "base object in front view with bottom-right corner overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "scheduled payment or autopay",
+   "strength": "primary"
+  },
+  {
+   "meaning": "payment history or past transactions",
+   "strength": "primary"
+  },
+  {
+   "meaning": "pending charge or delayed payment",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "expiring credit card or renewal",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the card might slightly resemble a browser window or calendar header, though the thick magnetic stripe usually clarifies it as a payment card.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular clock badge at bottom right",
+   "meaning": "scheduled, recurring, pending, or history"
+  }
+ ],
+ "domains": [
+  "finance",
+  "admin",
+  "home",
+  "shopping",
+  "work",
+  "tech"
+ ],
+ "task_intents": [
+  "set up automatic bill payment",
+  "schedule upcoming credit card payment",
+  "review past card transaction history",
+  "check pending bank card charges",
+  "update expiring credit card on file",
+  "cancel recurring subscription billing",
+  "pay monthly installment on time",
+  "change autopay draft date"
+ ],
+ "example_tasks": [
+  {
+   "task": "Set up electric bill autopay",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check pending Visa charges",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Schedule May rent transfer",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Update expiring debit card",
+   "parent": "Streaming Subscriptions",
+   "domain": "admin"
+  },
+  {
+   "task": "Switch to monthly billing",
+   "parent": "Gym Membership",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Move Chase autopay date to the 15th after payday",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check when the second Klarna installment for the boots clears",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Export Q3 corporate card transaction history for the accountant",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Put the water and trash bills on automatic card billing",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Swap out the card expiring in October on AWS",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Verify the hotel security deposit hold dropped off Amex",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Review the last six months of recurring card charges",
+   "parent": "Budget Cleanup",
+   "domain": "finance"
+  },
+  {
+   "task": "Schedule the property tax card payment for the morning of the 28th",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Make sure the pre-order charge for the lens goes onto the new card",
+   "parent": "Photography Gear",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Look back through March credit card statements to find when we paid the plumber",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set up a recurring monthly donation to the food bank on the rewards card",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Programar el pago automático de la tarjeta de crédito antes del viernes",
+  "Revisar cargos pendientes en la cuenta de débito",
+  "Actualizar la tarjeta que vence este mes en las suscripciones de música y nube"
+ ],
+ "example_tasks_ru": [
+  "Настроить автоплатеж за домашний интернет с зарплатной карты",
+  "Проверить историю операций по кредитке за прошлый месяц",
+  "Поменять привязанную карту с истекающим сроком действия во всех сервисах доставки"
+ ],
+ "context_tasks": [
+  {
+   "task": "Dispute double charge from the parking garage",
+   "central": "dispute or parking charge"
+  },
+  {
+   "task": "Pause Audible membership for three months",
+   "central": "audiobook subscription"
+  },
+  {
+   "task": "Call bank about the delayed refund from the airline",
+   "central": "phone call or airline refund"
+  },
+  {
+   "task": "Download PDF statements for the mortgage broker",
+   "central": "PDF document or mortgage"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the plumber in cash right at 2pm",
+   "better": "cash bills or wallet",
+   "trap": "property"
+  },
+  {
+   "task": "Order a replacement debit card with a new PIN",
+   "better": "plain credit card without clock",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Schedule my annual dental cleaning before benefits expire",
+   "better": "tooth or calendar",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Set the oven timer for the sourdough bake",
+   "better": "timer or bread",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call customer service to close the checking account",
+   "better": "phone receiver or bank building",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check the train schedule and buy a transit pass",
+   "better": "train or ticket",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a payment card with a clock badge, universally understood as scheduled payments (autopay), pending charges, payment history, or expiring cards. It fits a common and specific set of personal finance and admin tasks, clearly distinguished from a plain card by the time modifier.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "bb5af20f7de30274ffb1a5de14605887c5a7d032",
+  "usage": {
+   "prompt": 3926,
+   "output": 1633,
+   "thoughts": 0,
+   "total": 5559
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

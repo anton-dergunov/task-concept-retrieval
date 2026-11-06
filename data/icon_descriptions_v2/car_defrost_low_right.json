@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "seated person silhouette next to a windshield defroster symbol",
+  "modifiers": [
+   "downward arrow towards feet",
+   "windshield frame with two wavy heat lines"
+  ],
+  "composition": "side view of seated figure on right, defroster and down arrow on left"
+ },
+ "readings": [
+  {
+   "meaning": "car climate control / windshield defroster and footwell airflow",
+   "strength": "primary"
+  },
+  {
+   "meaning": "car heater / HVAC system",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cabin air vent / blower motor",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Specialized automotive dashboard symbol (defrost + floor airflow mode); at small sizes the windshield arch and wavy lines look like an abstract box or shower head above an arrow.",
+ "modifier_semantics": [
+  {
+   "modifier": "windshield frame with wavy lines",
+   "meaning": "windshield defrost / defog"
+  },
+  {
+   "modifier": "downward arrow",
+   "meaning": "airflow directed to floor / footwell"
+  }
+ ],
+ "domains": [
+  "home",
+  "shopping",
+  "travel",
+  "tech"
+ ],
+ "task_intents": [
+  "fix car heater or defroster",
+  "replace cabin air filter",
+  "diagnose HVAC blend door actuator",
+  "check footwell heat vent airflow",
+  "repair windshield defogger blower",
+  "flush heater core before winter"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix car defroster",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check footwell heat vents",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order blend door actuator",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Replace cabin air filter",
+   "parent": "Subaru Maintenance",
+   "domain": "home"
+  },
+  {
+   "task": "Test heater before road trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out why the windshield defogger only blows cold air",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Swap out the clicking mode door actuator behind the glovebox",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Vacuum pine needles out of the blower motor housing",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Buy a new blower motor resistor at AutoZone on the way home",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Flush the heater core hoses with the garden attachment",
+   "parent": "Winterizing the Civic",
+   "domain": "home"
+  },
+  {
+   "task": "Ask mechanic to check why airflow is stuck on defrost",
+   "parent": "Car Service",
+   "domain": "home"
+  },
+  {
+   "task": "Recalibrate the HVAC dampers using the OBD2 scanner app",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear the clogged AC evaporator drain tube soaking the passenger side floor mat",
+   "parent": "Car Climate Control",
+   "domain": "home"
+  },
+  {
+   "task": "Watch the YouTube tutorial on reaching the driver side footwell vent flap without pulling the dash",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check the 15A fuse for the climate control panel before paying for a diagnostic",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Wipe down the inside of the windshield with anti-fog treatment before the mountain drive",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar el filtro de habitáculo antes del invierno",
+  "Revisar por qué no sale aire caliente por las rejillas de los pies",
+  "Llevar el coche al taller para arreglar el desempañador del parabrisas"
+ ],
+ "example_tasks_ru": [
+  "Заменить салонный фильтр в машине",
+  "Проверить заслонку печки обдува лобового стекла и ног",
+  "Промыть радиатор печки перед зимними морозами"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy activated carbon cabin filter for the Mazda",
+   "central": "air filter"
+  },
+  {
+   "task": "Pack ice scraper and defogger spray in the trunk",
+   "central": "ice scraper / spray"
+  },
+  {
+   "task": "Check coolant level in the expansion tank",
+   "central": "coolant / car"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Defrost chicken thighs for dinner tonight",
+   "better": "chicken / meat / snowflake",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Defrost the upright chest freezer in the garage",
+   "better": "freezer / snowflake",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Fix the broken ergonomic office chair lever",
+   "better": "office chair",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book window seat on the flight to Chicago",
+   "better": "airplane seat / ticket",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the glass shop for the windshield chip repair",
+   "better": "credit card / car windshield",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Call the dealership about the heated seat recall",
+   "better": "phone / car seat",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "This is the standard automotive dashboard glyph for the defrost-and-floor airflow mode (windshield defroster symbol above a downward arrow next to a seated passenger). It fits narrow car HVAC, defroster, or cabin heater repair tasks, though outside a dashboard context it can look like a puzzling combination of a person sitting and an arrow.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "202d0e45dc76a59d3aab427e95da27554b806932",
+  "usage": {
+   "prompt": 3925,
+   "output": 1643,
+   "thoughts": 0,
+   "total": 5568
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

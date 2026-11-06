@@ -1,0 +1,202 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "video camera outline facing right",
+  "modifiers": [
+   "bouncing V-shaped arrow pointing up-left inside body"
+  ],
+  "composition": "single object in profile with an interior directional arrow"
+ },
+ "readings": [
+  {
+   "meaning": "missed video call",
+   "strength": "primary"
+  },
+  {
+   "meaning": "return a video call / call back on video",
+   "strength": "primary"
+  },
+  {
+   "meaning": "bounced or failed video connection",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the interior bouncing arrow can look like a checkmark (verified video) or a chart line inside a screen.",
+ "modifier_semantics": [
+  {
+   "modifier": "bouncing V-shaped arrow pointing up-left inside body",
+   "meaning": "missed call, bounced connection, or call back"
+  }
+ ],
+ "domains": [
+  "communication",
+  "work",
+  "social_family",
+  "health_fitness",
+  "learning"
+ ],
+ "task_intents": [
+  "return a missed video call",
+  "follow up on missed FaceTime",
+  "reschedule a missed Zoom meeting",
+  "call someone back on video",
+  "apologize for missing video chat",
+  "check missed video call notifications"
+ ],
+ "example_tasks": [
+  {
+   "task": "FaceTime Mom back",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Return Dave's Zoom call",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call Elena back on WhatsApp",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Reschedule missed telehealth visit",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Follow up with London team",
+   "parent": "Missed Video Calls",
+   "domain": "work"
+  },
+  {
+   "task": "Call Grandma back on FaceTime before the kids go to bed",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Apologize to the Spanish tutor for missing our afternoon Skype session",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Ping Marcus about the Google Meet call I missed during lunch",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Rebook the video consult with Dr. Patel that dropped earlier",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Try calling Sarah on Zoom again now that Wi-Fi is back",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Message the contractor back",
+   "parent": "Missed FaceTime Calls",
+   "domain": "home"
+  },
+  {
+   "task": "Check what Leo wanted",
+   "parent": "Missed Video Chats",
+   "domain": "social_family"
+  },
+  {
+   "task": "Send a new calendar invite",
+   "parent": "Skipped Zoom Syncs",
+   "domain": "work"
+  },
+  {
+   "task": "Call my sister back on FaceTime to see the puppy she picked up today",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Message the design lead to reschedule the Teams video call I slept right through",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Return the recruiting coordinator's video call before five o'clock so we don't lose momentum",
+   "parent": "",
+   "domain": "career"
+  }
+ ],
+ "example_tasks_es": [
+  "Devolverle la videollamada a mamá por WhatsApp",
+  "Reprogramar la consulta por videollamada con el dermatólogo que perdí hoy",
+  "Escribirle a Javier por la llamada de Zoom perdida"
+ ],
+ "example_tasks_ru": [
+  "Перезвонить маме по видеосвязи в WhatsApp",
+  "Извиниться перед репетитором за пропущенный созвон в Зуме и перенести урок",
+  "Ответить на пропущенный видеозвонок от курьера"
+ ],
+ "context_tasks": [
+  {
+   "task": "Watch the recording of the all-hands meeting I missed this morning",
+   "central": "video recording"
+  },
+  {
+   "task": "Fix the webcam permission bug that made me miss the client call",
+   "central": "webcam settings"
+  },
+  {
+   "task": "Read the meeting notes from the product sync I couldn't join",
+   "central": "meeting notes"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call the plumber back about the leaking radiator",
+   "better": "missed phone call (telephone handset with bounce arrow)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Join the 3pm weekly video standup with engineering",
+   "better": "plain video camera or calendar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Verify that the exported wedding video plays without glitches",
+   "better": "video with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a ring light for my desk before Monday's video interviews",
+   "better": "ring light or lamp",
+   "trap": "property"
+  },
+  {
+   "task": "Update credit card on the Zoom account",
+   "better": "credit card",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a standard video camera silhouette with the universal 'missed call' bouncing arrow. It fits tasks about returning a missed video call (FaceTime, Zoom, WhatsApp) or rescheduling a skipped video meeting, though at small sizes the V-shaped arrow can resemble a checkmark.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "97fc052dab837f8b249922f472f6a2f88495c815",
+  "usage": {
+   "prompt": 3923,
+   "output": 1578,
+   "thoughts": 0,
+   "total": 5501
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": "missed_video_call"
+ }
+}

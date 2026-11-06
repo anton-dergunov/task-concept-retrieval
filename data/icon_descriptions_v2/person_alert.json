@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined bust of a person with circular head and shoulders",
+  "modifiers": [
+   "exclamation mark to the upper right"
+  ],
+  "composition": "single object, front view, with modifier on the right"
+ },
+ "readings": [
+  {
+   "meaning": "account alert, security warning, or user profile issue",
+   "strength": "primary"
+  },
+  {
+   "meaning": "important contact or urgent person-related matter",
+   "strength": "primary"
+  },
+  {
+   "meaning": "report or flag a user, contractor, or employee",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "emergency contact or next of kin",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the exclamation mark might look like the lowercase letter 'i' (user info) or a vertical bar.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "alert, warning, error, urgent action required, or report"
+  }
+ ],
+ "domains": [
+  "tech",
+  "admin",
+  "work",
+  "finance",
+  "social_family",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "resolve account security warning or lockout",
+  "update emergency contact information",
+  "report suspicious user or spam profile",
+  "handle urgent employee or client issue",
+  "verify identity on locked online account",
+  "warn family member or contact urgently",
+  "address background check or HR flag"
+ ],
+ "example_tasks": [
+  {
+   "task": "Apple ID security alert",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Emergency contacts sheet",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Flagged user accounts",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Fix locked PayPal profile",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Report impersonator account",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear the identity verification hold on my Vanguard login",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Add Mom as primary emergency contact on the clinic portal",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Deal with the unverified login warning on the shared AWS root user",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Follow up with HR about the missing background check clearance for Dan",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check the three accounts that triggered chargeback warnings this morning",
+   "parent": "Customer Support Queue",
+   "domain": "work"
+  },
+  {
+   "task": "Update Sarah's cell number after she got a new SIM",
+   "parent": "Emergency Contacts",
+   "domain": "social_family"
+  },
+  {
+   "task": "Review the compromise notice from Have I Been Pwned",
+   "parent": "Account Security",
+   "domain": "tech"
+  },
+  {
+   "task": "Send the formal PIP warning letter before Friday",
+   "parent": "Personnel Issues",
+   "domain": "work"
+  },
+  {
+   "task": "Submit passport scan to lift the temporary suspension on my Wise personal profile",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Report the fake Instagram profile pretending to be our studio to Meta support",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call the tenant who is two months behind on rent before starting the notice process",
+   "parent": "",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Resolver la alerta de inicio de sesión sospechoso en mi cuenta de Google",
+  "Actualizar el contacto de emergencia en la ficha médica del colegio",
+  "Denunciar perfil falso que está escribiendo a nuestros clientes"
+ ],
+ "example_tasks_ru": [
+  "Разобраться с блокировкой личного кабинета на Госуслугах",
+  "Обновить экстренные контакты в медкарте",
+  "Пожаловаться на спам-аккаунт в рабочей группе"
+ ],
+ "context_tasks": [
+  {
+   "task": "Rotate compromised API keys for the staging user",
+   "central": "key / password"
+  },
+  {
+   "task": "Print wallet card with ICE phone numbers and blood type",
+   "central": "card / medical info"
+  },
+  {
+   "task": "Freeze credit at Equifax after the SSN leak notice",
+   "central": "credit / lock"
+  },
+  {
+   "task": "Document late arrivals for the contractor review meeting",
+   "central": "notes / clock"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call Dave urgently about the server outage",
+   "better": "phone",
+   "trap": "property"
+  },
+  {
+   "task": "Edit my LinkedIn bio and profile photo",
+   "better": "person / user profile (without exclamation mark)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Create new guest account for the intern",
+   "better": "person with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check who has admin access to the billing portal",
+   "better": "user with shield or key",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a medical alert bracelet for Grandpa",
+   "better": "medical bracelet / wristwatch / medical cross",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Download 1099 tax form from the Gusto portal",
+   "better": "tax document / file",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a standard user/person bust paired with an exclamation mark, clearly communicating an account alert, user issue, emergency contact, or flagged profile. It fits specific real-world tasks around resolving account lockouts, security alerts, HR/moderation issues, and emergency contacts, though it must not be overused for any merely 'urgent' task involving a person.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c4f629fae0f1ae768b673ae52f6957905bbfb025",
+  "usage": {
+   "prompt": 3920,
+   "output": 1676,
+   "thoughts": 0,
+   "total": 5596
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

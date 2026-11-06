@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front of a bus with a smaller train in front",
+  "modifiers": [
+   "smaller front-facing train on tracks at bottom right"
+  ],
+  "composition": "two overlapping vehicles, front view"
+ },
+ "readings": [
+  {
+   "meaning": "public transit / bus and train",
+   "strength": "primary"
+  },
+  {
+   "meaning": "commute / multimodal travel",
+   "strength": "primary"
+  },
+  {
+   "meaning": "transit pass or fare card",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "transfer between bus and rail",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the smaller train badge can look like a lock or a robot face next to a bus.",
+ "modifier_semantics": [
+  {
+   "modifier": "smaller front-facing train on tracks at bottom right",
+   "meaning": "combines bus and rail to signify public transit as a whole or transferring between modes"
+  }
+ ],
+ "domains": [
+  "travel",
+  "finance",
+  "work",
+  "admin",
+  "social_family"
+ ],
+ "task_intents": [
+  "top up public transit pass",
+  "plan bus and train route",
+  "renew monthly commuter pass",
+  "submit transit expense reimbursement",
+  "look up airport transit connection",
+  "buy multi-day city transit card",
+  "enroll in pre-tax commuter benefit",
+  "check holiday public transit schedule"
+ ],
+ "example_tasks": [
+  {
+   "task": "top up Oyster card",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "renew monthly transit pass",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Clipper card auto-reload",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check timetable changes",
+   "parent": "Daily Commute",
+   "domain": "work"
+  },
+  {
+   "task": "Download offline map",
+   "parent": "Tokyo Public Transit",
+   "domain": "travel"
+  },
+  {
+   "task": "Enroll before Friday cutoff",
+   "parent": "Commuter Benefits",
+   "domain": "finance"
+  },
+  {
+   "task": "Figure out bus-to-train transfer from Stansted to King's Cross",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Buy 72-hour Berlin WelcomeCard for zones AB before leaving",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Apply for senior reduced-fare transit card for Mum",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Submit October MetroCard receipts to WageWorks for reimbursement",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Look up last night bus connection from the central station",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Compare monthly rail-plus-bus pass vs pay-as-you-go for the new office",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Add digital Suica card to Apple Wallet and load 3000 yen",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set up pre-tax payroll deduction of $130 for the regional transit pass",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Write down step-by-step subway and bus directions from the station for Grandma's visit",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check if the regional day pass covers both the local bus and the commuter train",
+   "parent": "Munich Weekend",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Recargar la tarjeta SUBE antes del lunes",
+  "Renovar el abono transporte mensual de la zona B1",
+  "Mirar combinación de cercanías y autobús para llegar al hospital mañana"
+ ],
+ "example_tasks_ru": [
+  "Пополнить «Тройку» на месяц",
+  "Оформить льготный проездной на автобус и метро для мамы",
+  "Посмотреть расписание электрички и пересадку на автобус до дачи"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download three audiobooks for the morning commute",
+   "central": "audiobooks / headphones"
+  },
+  {
+   "task": "Buy compact folding umbrella that fits in my commuter bag",
+   "central": "umbrella"
+  },
+  {
+   "task": "Pack snacks and water bottle for the train and bus ride",
+   "central": "snacks / water bottle"
+  },
+  {
+   "task": "Cancel car insurance once we switch to public transit only",
+   "central": "car insurance / document"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book Eurostar seat from London to Paris",
+   "better": "single train icon (high-speed rail only, not multimodal bus+train)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Charter a 50-seater coach for the school field trip",
+   "better": "single bus icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Train the new summer interns on the ticketing system",
+   "better": "person teaching / presentation icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Find an apartment within a 10-minute walk of public transit",
+   "better": "house or apartment building icon",
+   "trap": "property"
+  },
+  {
+   "task": "Buy noise-cancelling headphones",
+   "better": "headphones icon (even under a 'Daily Commute' list)",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Configure CAN bus communication on the microcontroller",
+   "better": "microchip / circuit icon",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a bus combined with a smaller train on tracks, the universal symbol for multimodal public transit. It fits everyday tasks around transit passes, commuter benefits, and bus-rail routes, while remaining distinct from single-mode bus or train icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e40d567b2527a0077660657ff74282d9a7d5aa09",
+  "usage": {
+   "prompt": 3923,
+   "output": 1706,
+   "thoughts": 0,
+   "total": 5629
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

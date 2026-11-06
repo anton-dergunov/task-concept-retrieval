@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "six-petaled flower blossom above two curved leaves",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single object, front view, crossed out by diagonal bar"
+ },
+ "readings": [
+  {
+   "meaning": "weeds, dead plants, or unwanted garden growth to remove",
+   "strength": "primary"
+  },
+  {
+   "meaning": "pollen allergy or hay fever protection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel or skip flower delivery / no-flowers policy",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "camera macro mode off",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Originally a camera UI glyph for 'macro mode off', which most people outside photography settings read as 'weeding', 'remove dead plants', or 'allergy / no pollen'.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "remove, avoid, disable, or prohibited"
+  }
+ ],
+ "domains": [
+  "home",
+  "outdoors",
+  "health_fitness",
+  "shopping",
+  "admin",
+  "hobbies"
+ ],
+ "task_intents": [
+  "pull weeds from garden beds",
+  "deadhead spent flower blooms",
+  "clear dead houseplants from pots",
+  "manage seasonal pollen allergies",
+  "cancel recurring flower subscription",
+  "request no flowers for event",
+  "remove toxic plants for pets"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pull driveway weeds",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Deadhead the roses",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel Bouqs subscription",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Toss dead balcony annuals",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Clear out the front bed",
+   "parent": "Spring Weeding",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Dig up the dandelions along the south fence line",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Give away the lilies before the new kitten arrives",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Refill cetirizine and nasal spray before ragweed season peaks",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Snip off all the brown hydrangea heads before frost",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Add 'in lieu of flowers, donate to hospice' to obituary draft",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Order backup inhaler",
+   "parent": "Pollen Allergy Prep",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Do the gravel path by the shed",
+   "parent": "Yard Weeding",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Check hospital ward rules",
+   "parent": "No-Flowers Policy",
+   "domain": "admin"
+  },
+  {
+   "task": "Clear out all the frost-killed marigolds and zinnias from the cedar window boxes",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pull the creeping charlie out of the strawberry patch before it goes to seed",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Pause the biweekly florist delivery for July while we are away in Montana",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Arrancar las malas hierbas del camino de entrada",
+  "Podar las flores secas de los geranios del balcón",
+  "Cancelar la suscripción mensual de ramos de flores"
+ ],
+ "example_tasks_ru": [
+  "Прополоть сорняки вдоль садовой дорожки",
+  "Убрать засохшие однолетники с балконных ящиков",
+  "Купить таблетки от сезонной аллергии на пыльцу"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy kneeling pad and hori-hori knife for weeding",
+   "central": "gardening tool / knife"
+  },
+  {
+   "task": "Book allergist appointment for spring pollen panel",
+   "central": "doctor / appointment"
+  },
+  {
+   "task": "Spray vinegar solution on the patio cracks",
+   "central": "spray bottle"
+  },
+  {
+   "task": "Put on HEPA filter refills for hay fever season",
+   "central": "air filter"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Plant tulip bulbs along the front walk",
+   "better": "plain flower or seedling without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy unscented laundry detergent for sensitive skin",
+   "better": "laundry detergent bottle or washing machine",
+   "trap": "property"
+  },
+  {
+   "task": "Order a birthday bouquet for Mom",
+   "better": "flower bouquet without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bag the yard waste into kraft paper sacks",
+   "better": "trash bag or leaf bin",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check whether the new rental allows balcony planters",
+   "better": "document / lease or apartment",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy unbleached all-purpose flour for pizza dough",
+   "better": "flour sack or baking icon",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A flower crossed out by a diagonal slash literally denotes 'no flowers' (or 'macro mode off' in camera interfaces). In a to-do list it fits tasks about weeding, deadheading or removing dead/toxic plants, pollen allergies, and cancelling flower deliveries; it must be distinguished from the unslashed flower used for planting or buying blooms.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "94794b5cf8f8af1f295e1fa189cf7f21b7f111d2",
+  "usage": {
+   "prompt": 3924,
+   "output": 1674,
+   "thoughts": 176,
+   "total": 5774
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

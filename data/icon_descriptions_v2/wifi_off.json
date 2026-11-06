@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "wireless signal symbol with dot and two arcs",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single symbol crossed out by a diagonal bar"
+ },
+ "readings": [
+  {
+   "meaning": "no Wi-Fi / Wi-Fi disabled / disconnected",
+   "strength": "primary"
+  },
+  {
+   "meaning": "offline mode / no internet connection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "internet outage / broken wireless network",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "digital detox / disconnect from internet",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Distinguishable from a plain Wi-Fi icon only by the diagonal slash, which remains clear even at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, disconnected, offline, or broken"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "work",
+  "travel",
+  "admin",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "fix broken Wi-Fi connection",
+  "cancel home internet service",
+  "disable wireless radio on router",
+  "set up offline mode on devices",
+  "troubleshoot dead Wi-Fi zones",
+  "report internet outage to ISP",
+  "disconnect devices for digital detox",
+  "test app behavior while offline"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix bedroom Wi-Fi dead spot",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel Comcast internet account",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Turn off guest Wi-Fi",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test offline mode",
+   "parent": "Mobile App Release",
+   "domain": "work"
+  },
+  {
+   "task": "Call ISP",
+   "parent": "Home Wi-Fi Outage",
+   "domain": "home"
+  },
+  {
+   "task": "Disable 2.4GHz wireless band on the Asus router",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Figure out why laptop keeps dropping Wi-Fi after sleep",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set up a nightly Wi-Fi shutoff schedule for kids' tablets",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Enable offline access for Google Docs before the cabin trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Do a full 48-hour offline weekend without turning router on",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Turn off Wi-Fi calling on work phone before roaming",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check all three floors",
+   "parent": "Office Wi-Fi Dead Zones",
+   "domain": "work"
+  },
+  {
+   "task": "Pack essentials",
+   "parent": "Off-grid Offline Cabin Retreat",
+   "domain": "travel"
+  },
+  {
+   "task": "Check if printer works over USB with its wireless radio completely disabled",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Write fallback error screen for when the app loses internet connection mid-checkout",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Switch smart TV to wired ethernet and turn off its built-in Wi-Fi",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Llamar a Movistar por el corte de Wi-Fi en casa",
+  "Desactivar el Wi-Fi de invitados del router después de la fiesta",
+  "Probar el modo sin conexión de la app antes de subir al avión"
+ ],
+ "example_tasks_ru": [
+  "Позвонить провайдеру из-за пропавшего дома вайфая",
+  "Отключить гостевую сеть Wi-Fi на роутере",
+  "Проверить работу приложения в офлайн-режиме без интернета"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download offline maps of Dolomites before the flight",
+   "central": "maps"
+  },
+  {
+   "task": "Save five long articles to read on the plane without internet",
+   "central": "articles / reading"
+  },
+  {
+   "task": "Download Spotify playlists for the road trip through dead zones",
+   "central": "music / playlists"
+  },
+  {
+   "task": "Return rented cable modem to Xfinity store after cancelling service",
+   "central": "modem / package return"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Change home Wi-Fi password and share with housemates",
+   "better": "Wi-Fi symbol (without slash) or key",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof offline GPS handheld for backcountry hiking",
+   "better": "GPS device / compass",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the Wi-Fi works in the garden studio",
+   "better": "Wi-Fi symbol (without slash)",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Turn off contactless tap-to-pay on debit card",
+   "better": "credit card or contactless symbol",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up board games for the cabin",
+   "better": "board game / dice",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Unsubscribe from RSS feeds I never read",
+   "better": "RSS feed icon",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 5
+ },
+ "discard": false,
+ "reasoning": "A universally recognized crossed-out Wi-Fi symbol meaning no wireless connection, offline mode, or disabling Wi-Fi. It fits a focused set of tasks around troubleshooting internet outages, turning off wireless networks, cancelling ISP service, or preparing for offline work/travel, and must be distinguished from a normal active Wi-Fi icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ef21fcd8ae0c63764d29e09aeddf2f9dfc6478d6",
+  "usage": {
+   "prompt": 3926,
+   "output": 1697,
+   "thoughts": 0,
+   "total": 5623
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

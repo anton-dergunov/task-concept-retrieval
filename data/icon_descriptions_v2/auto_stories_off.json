@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "open book with turning page on the right",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single object, front view, crossed out by diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "remove book / drop from reading list / stop reading",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel library hold or book subscription",
+   "strength": "primary"
+  },
+  {
+   "meaning": "closed-book exam or studying without notes",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "disable reader view or e-book sync",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the turning page plus diagonal slash can look like an open map with a route line or a broken brochure.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "off, disabled, cancelled, removed, or prohibited"
+  }
+ ],
+ "domains": [
+  "learning",
+  "hobbies",
+  "home",
+  "admin",
+  "tech",
+  "finance"
+ ],
+ "task_intents": [
+  "cull unread books from bookshelf",
+  "cancel library hold or reservation",
+  "remove title from reading list",
+  "cancel book club or audiobook subscription",
+  "practice recall with closed book",
+  "disable automatic reader view in browser",
+  "return or donate unwanted books"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cull bedroom bookshelf",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel Audible membership",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Drop boring sci-fi novel",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Cancel overdue library holds",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Clear out Goodreads want-to-read",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Pull out ten paperbacks we will never read again",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel county library hold on Dune before it ships",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Turn off Safari automatic reader view for local news site",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Do the pharmacology practice quiz strictly closed-book this time",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Box up the old college textbooks for the charity shop",
+   "parent": "Bookshelf Declutter",
+   "domain": "home"
+  },
+  {
+   "task": "Delete finished PDFs and samples",
+   "parent": "Kindle Cleanup",
+   "domain": "tech"
+  },
+  {
+   "task": "Skip next month's pick",
+   "parent": "Book Club",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Pause monthly billing before the 15th",
+   "parent": "Scribd Subscription",
+   "domain": "finance"
+  },
+  {
+   "task": "Go through the kids' picture book bin and pull out everything they have outgrown",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Remove all the impulse-added business books from my Kobo wishlist before the sale",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Practice reciting the three organic chemistry mechanisms from memory without opening the study guide",
+   "parent": "",
+   "domain": "learning"
+  }
+ ],
+ "example_tasks_es": [
+  "Expurgar la estantería del salón y sacar las novelas que no voy a releer",
+  "Cancelar la reserva de la biblioteca antes de que caduque el plazo",
+  "Hacer el simulacro del examen de derecho a libro cerrado"
+ ],
+ "example_tasks_ru": [
+  "Отменить подписку на Букмейт до списания денег",
+  "Убрать из списка чтения книги, которые уже неинтересны",
+  "Разобрать книжный шкаф и отложить прочитанные романы для дачи"
+ ],
+ "context_tasks": [
+  {
+   "task": "Drop off two bags of old hardcovers at the Little Free Library",
+   "central": "donation drop-off / box of books"
+  },
+  {
+   "task": "Set up a screen-free and no-reading rest day for eye strain recovery",
+   "central": "eyes / rest"
+  },
+  {
+   "task": "Turn off Kindle whispersync before lending the tablet to Leo",
+   "central": "e-reader / sync settings"
+  },
+  {
+   "task": "Opt out of printed course pack at the campus bookstore",
+   "central": "receipt / refund"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Read two chapters of The Idiot before bed",
+   "better": "open book without a slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel hotel booking in Granada before the free cancellation window ends",
+   "better": "hotel or bed icon with slash / calendar cancel",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy an unabridged edition of Count of Monte Cristo",
+   "better": "plain book icon",
+   "trap": "property"
+  },
+  {
+   "task": "Check why my library card PIN is not working online",
+   "better": "ID card or key/lock icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order replacement power cord for the reading lamp",
+   "better": "lamp or power cable icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Fold the paper road map back into the glovebox",
+   "better": "folded map icon",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts an open book with a turning page crossed out by a diagonal slash. While a plain open book is far more common for reading tasks, the slashed variant fits tasks about culling bookshelves, dropping books from a reading list, cancelling book subscriptions or library holds, and closed-book study. At tiny sizes the turning page and slash can slightly crowd the center and resemble a folded map.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5aebf62334c18aa5d337608a7d85e6b8b372b717",
+  "usage": {
+   "prompt": 3923,
+   "output": 1710,
+   "thoughts": 137,
+   "total": 5770
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

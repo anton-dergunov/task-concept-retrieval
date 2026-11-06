@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined telephone handset angled from top-left to bottom-right",
+  "modifiers": [
+   "three horizontal bars stacked in upper right"
+  ],
+  "composition": "single object with upper-right list badge"
+ },
+ "readings": [
+  {
+   "meaning": "call log or call history",
+   "strength": "primary"
+  },
+  {
+   "meaning": "call list or people to phone",
+   "strength": "primary"
+  },
+  {
+   "meaning": "phone call notes, script, or transcript",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "telephone directory or contact list",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the three bars can look like sound waves or a generic phone call icon, or be read as a phone menu.",
+ "modifier_semantics": [
+  {
+   "modifier": "three horizontal bars",
+   "meaning": "list, log, notes, or text lines"
+  }
+ ],
+ "domains": [
+  "communication",
+  "work",
+  "admin",
+  "social_family",
+  "home",
+  "finance"
+ ],
+ "task_intents": [
+  "work through a call list",
+  "review recent call log history",
+  "write notes from a phone call",
+  "update household emergency phone list",
+  "prepare talking points for phone call",
+  "export call records for billing",
+  "clean up phone contact directory",
+  "read automated voicemail transcripts"
+ ],
+ "example_tasks": [
+  {
+   "task": "fridge emergency phone list",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "cold call list for Tuesday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "pull October call log",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "clear old missed call log",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "print updated babysitter numbers",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check who called from the 415 area code yesterday afternoon",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Type up notes from the call with the roofing adjuster",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Jot down talking points before phoning the mortgage broker",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Export cell phone call records from March for tax deduction",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Go through the RSVP call list for Grandma's 80th",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Laminate the neighborhood phone tree sheet",
+   "parent": "Emergency Prep",
+   "domain": "home"
+  },
+  {
+   "task": "Follow up with the remaining six leads",
+   "parent": "Q3 Outbound Call List",
+   "domain": "work"
+  },
+  {
+   "task": "Verify the timestamps on Tuesday's incoming calls",
+   "parent": "Phone Bill Dispute",
+   "domain": "admin"
+  },
+  {
+   "task": "Clean up duplicate entries and old landlines",
+   "parent": "Family Phone Directory",
+   "domain": "social_family"
+  },
+  {
+   "task": "Write out a clear bulleted script for calling the airline about our cancelled Lisbon flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Cross-check the Verizon call log against my billable client hours for the last two weeks",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Imprimir la lista de teléfonos de emergencia para dejar pegada en la nevera",
+  "Revisar el registro de llamadas perdidas del teléfono de la oficina",
+  "Anotar los puntos clave antes de llamar al seguro del coche"
+ ],
+ "example_tasks_ru": [
+  "Выписать из журнала звонков все разговоры с клиентом за сентябрь",
+  "Составить список вопросов перед звонком в налоговую",
+  "Обновить список телефонов экстренных служб на даче"
+ ],
+ "context_tasks": [
+  {
+   "task": "Call the three plumbers on the shortlist for water heater quotes",
+   "central": "plumber / water heater"
+  },
+  {
+   "task": "Ask Mom for Aunt Elena's new landline number",
+   "central": "family contact"
+  },
+  {
+   "task": "Dispute roaming charges on the monthly mobile statement",
+   "central": "invoice / bill"
+  },
+  {
+   "task": "Set up voicemail transcription on work iPhone",
+   "central": "smartphone settings"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call Dr. Patel to reschedule my physical",
+   "better": "plain telephone handset or medical icon (single call, not a call list or log)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a braided USB-C charging cable for my phone",
+   "better": "charging cable or smartphone icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check the grocery list before leaving work",
+   "better": "shopping list or cart icon (not phone-related)",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order a cordless landline handset with caller ID screen",
+   "better": "cordless phone or shopping icon (caller ID log is only a feature)",
+   "trap": "property"
+  },
+  {
+   "task": "Book the restaurant room for the team dinner",
+   "better": "restaurant or calendar icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Listen to the three new episodes of the history podcast on my phone",
+   "better": "headphones or podcast icon",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a telephone handset with three horizontal text/list lines, clearly signifying a call log, call list, phone directory, or call notes. It fits tasks about working through a list of calls, writing talking points or notes for a call, or checking call history, though at tiny sizes it can be confused with a plain phone call icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5d14afe20ae83d63e6153d1cd2f316e76eb45816",
+  "usage": {
+   "prompt": 3927,
+   "output": 1708,
+   "thoughts": 86,
+   "total": 5721
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

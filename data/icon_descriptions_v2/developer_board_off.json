@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "square microchip or SIM card with inner grid and pins",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single object with diagonal strike-through"
+ },
+ "readings": [
+  {
+   "meaning": "no SIM card / disabled eSIM or mobile plan",
+   "strength": "primary"
+  },
+  {
+   "meaning": "hardware chip error / disabled processor",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "broken window or solar panel",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the inner 2x2 grid looks like a four-pane window with external shutters or hinges, or a small calendar/spreadsheet with tabs.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "missing, disabled, deactivated, or broken"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "finance",
+  "admin",
+  "communication"
+ ],
+ "task_intents": [
+  "cancel old mobile phone SIM plan",
+  "deactivate unused eSIM profile on phone",
+  "fix no SIM card detected error",
+  "remove physical SIM before selling phone",
+  "disable onboard hardware chip in BIOS",
+  "troubleshoot faulty microcontroller on circuit board"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel Mint Mobile SIM",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Delete old travel eSIMs",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix 'No SIM' error",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pull SIM before trade-in",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Disable integrated GPU chip",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Take the physical SIM card out of the old Pixel 6",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Deactivate the lost iPad cellular data SIM on the AT&T portal",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Clean tarnished contact pads on the SIM so it stops dropping out",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off the European roaming eSIM line before landing in Newark",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Cancel the extra data-only SIM we got for the car hotspot",
+   "parent": "Monthly Bills",
+   "domain": "finance"
+  },
+  {
+   "task": "Call T-Mobile about why the replacement SIM still says unprovisioned",
+   "parent": "Phone Upgrade",
+   "domain": "communication"
+  },
+  {
+   "task": "Bypass the dead audio chip on the motherboard using a USB DAC",
+   "parent": "PC Build",
+   "domain": "tech"
+  },
+  {
+   "task": "Remove the expired Airalo Japan eSIM profile from settings to clean up the menu",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Make sure Dad's old flip phone SIM is fully deactivated so they stop billing us",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Swap out the fried stepper driver chip on the 3D printer controller board",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Wipe and pull the SIM tray before boxing up the iPhone for Swappa",
+   "parent": "Decluttering",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Dar de baja la tarjeta SIM prepago del viaje a Colombia",
+  "Sacar la SIM física del móvil viejo antes de venderlo",
+  "Borrar los perfiles de eSIM antiguos que ya no funcionan"
+ ],
+ "example_tasks_ru": [
+  "Заблокировать старую сим-карту МТС после смены номера",
+  "Вытащить симку из старого телефона перед продажей на Авито",
+  "Отключить неиспользуемую eSIM в настройках айфона"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack the little metal SIM ejector pin in the carry-on",
+   "central": "pin / tool"
+  },
+  {
+   "task": "Write down the IMEI and ICCID numbers before calling support",
+   "central": "numbers / note"
+  },
+  {
+   "task": "Put a SIM PIN lock on the main phone line",
+   "central": "lock / security"
+  },
+  {
+   "task": "Check if the carrier unlocked the handset for foreign cards",
+   "central": "phone / unlock"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a local prepaid eSIM at the Lisbon airport",
+   "better": "SIM card without slash",
+   "trap": "property"
+  },
+  {
+   "task": "Wash the four-pane window above the kitchen sink",
+   "better": "window",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a bag of tortilla chips for game night",
+   "better": "snack / chips",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check how much mobile data is left this month",
+   "better": "data / gauge",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pay the monthly Verizon cell phone bill",
+   "better": "bill / receipt",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Remove the old spiral notebook from my backpack",
+   "better": "notebook",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a microchip or SIM card contact pad with three side pins and a diagonal slash indicating 'no SIM', 'disabled chip', or 'memory error'. While useful for specific tasks like canceling a mobile line, removing a SIM card before selling a phone, or troubleshooting hardware, it is visually ambiguous at small sizes and easily mistaken for a crossed-out window or tabbed notebook.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "daafc21cfac226fd0e6603fb2c6118e9d63f9450",
+  "usage": {
+   "prompt": 3918,
+   "output": 1664,
+   "thoughts": 0,
+   "total": 5582
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

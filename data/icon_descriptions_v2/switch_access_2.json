@@ -1,0 +1,222 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "solid bracket frame and dashed corner frame with arrow",
+  "modifiers": [
+   "right-pointing arrow",
+   "dashed corner brackets"
+  ],
+  "composition": "two side-by-side rectangular frames linked by a horizontal arrow pointing right"
+ },
+ "readings": [
+  {
+   "meaning": "move item or selection to another place",
+   "strength": "primary"
+  },
+  {
+   "meaning": "export or migrate data out",
+   "strength": "primary"
+  },
+  {
+   "meaning": "extend display or move window to another screen",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "log out or exit",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes it looks like a generic logout/sign-out icon or a fullscreen/crop icon, and its abstract UI nature makes it unclear what real-world object is being moved.",
+ "modifier_semantics": [
+  {
+   "modifier": "right-pointing arrow",
+   "meaning": "transfer, move, or export from left to right"
+  },
+  {
+   "modifier": "dashed corner brackets",
+   "meaning": "target placeholder, destination area, or selection zone"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "home",
+  "creative",
+  "finance"
+ ],
+ "task_intents": [
+  "migrate files to a new drive",
+  "export data to external storage",
+  "transfer photos off phone",
+  "move virtual machines to new host",
+  "shift funds between bank accounts",
+  "relocate boxes to the storage unit",
+  "move domain to another registrar"
+ ],
+ "example_tasks": [
+  {
+   "task": "Migrate blog to Astro",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Export Q3 ledger CSV",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Move domain off GoDaddy",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Transfer ISA to Vanguard",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Shift winter bins upstairs",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Move raw wedding footage from SD cards onto the NAS",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Transfer old 1Password vault items into the family shared vault",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Export all Notion workspace pages as markdown before cancelling plan",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Move staging database over to the new Frankfurt region server",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Shift the $4,000 emergency buffer into the high-yield savings account",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Do the last three legacy client tables",
+   "parent": "Database Migration",
+   "domain": "tech"
+  },
+  {
+   "task": "Finish the 2019–2021 folders before Friday",
+   "parent": "Photo Library Transfer",
+   "domain": "creative"
+  },
+  {
+   "task": "Run the final batch and verify row counts",
+   "parent": "CRM Data Export",
+   "domain": "work"
+  },
+  {
+   "task": "Everything left on the bottom shelf",
+   "parent": "Garage to Shed Move",
+   "domain": "home"
+  },
+  {
+   "task": "Move the remaining Lightroom catalogs from the spinning drive onto the new 2TB NVMe",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Transfer all recurring utility direct debits from the old joint account before closing it",
+   "parent": "",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Migrar el correo del dominio propio a ProtonMail antes de la renovación",
+  "Pasar las fotos del viaje de Lisboa al disco duro externo",
+  "Exportar movimientos bancarios del trimestre para la gestoría"
+ ],
+ "example_tasks_ru": [
+  "Перенести базу паролей из старого менеджера в Bitwarden",
+  "Выгрузить архив переписки и файлы из рабочего Slack до пятницы",
+  "Перекинуть исходники видео с флешки на домашний сервер"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy 20 medium double-walled cardboard boxes for the flat move",
+   "central": "cardboard box"
+  },
+  {
+   "task": "Compare USB-C SSD transfer speeds before ordering a backup drive",
+   "central": "hard drive"
+  },
+  {
+   "task": "Call removal van company to confirm parking permit for Saturday",
+   "central": "moving truck"
+  },
+  {
+   "task": "Sign the pension transfer authority form and post it back",
+   "central": "document"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Log out of Netflix on the Airbnb TV before checkout",
+   "better": "TV or door logout icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book an airport transfer from Split to the ferry terminal",
+   "better": "car or shuttle van",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Iron the heat-transfer vinyl patch onto the running jersey",
+   "better": "t-shirt or iron",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a portable camping stove for the weekend trip",
+   "better": "camp stove",
+   "trap": "property"
+  },
+  {
+   "task": "Crop the team headshots to 1:1 square aspect ratio",
+   "better": "crop frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call landlord to hand back the spare set of keys",
+   "better": "key",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is an abstract UI chrome glyph (move selection/frame to placeholder, or move between screens) with no concrete real-world object. At list size it is easily confused with a logout/exit icon or a crop/fullscreen tool, and tasks about moving or exporting are almost always better served by the object being moved (files, database, boxes, money) or a clearer truck/folder/database icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ee6c711bc4ffc746c46ee67dfe66ec56d7a46114",
+  "usage": {
+   "prompt": 3923,
+   "output": 1736,
+   "thoughts": 0,
+   "total": 5659
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,220 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rounded rectangular card with a horizontal stripe along the bottom",
+  "modifiers": [
+   "plus or cross symbol on the upper right"
+  ],
+  "composition": "single object, front view, outlined in bold black lines"
+ },
+ "readings": [
+  {
+   "meaning": "health insurance card or medical card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "add a new payment card or credit card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "Flexible Spending Account (FSA) or Health Savings Account (HSA) card",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "first aid kit or medical box",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The plus symbol inside the card can be read either as a medical cross (health insurance/HSA card) or as an 'add' action on a credit/payment card (note that the stripe is at the bottom rather than the top like a standard magnetic stripe).",
+ "modifier_semantics": [
+  {
+   "modifier": "plus or cross symbol",
+   "meaning": "medical/health or add/new"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "finance",
+  "admin",
+  "travel",
+  "shopping",
+  "tech"
+ ],
+ "task_intents": [
+  "order replacement health insurance card",
+  "add new credit card to wallet",
+  "activate HSA or FSA debit card",
+  "apply for European Health Insurance Card",
+  "update payment card on file",
+  "upload insurance card photo to portal",
+  "check remaining balance on FSA card",
+  "register new bank card in app"
+ ],
+ "example_tasks": [
+  {
+   "task": "New BlueCross card",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Activate HSA debit card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Order replacement EHIC before flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Add backup Visa to Apple Pay",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Print temporary dental insurance card",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Upload front and back of new Aetna card to patient portal",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Call WageWorks to unblock the commuter and FSA card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Put the updated vision plan card into my everyday wallet",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Add the new joint credit card to our shared Amazon account",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Request an extra dependent card on the health plan for Maya",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check which pharmacy items qualify before the FSA card expires in March",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Take a photo of the new Cigna card and send it to the physical therapist's office",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Add the no-foreign-fee Mastercard to Uber and airline apps before leaving on Friday",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send scan to HR",
+   "parent": "Health Insurance Renewal",
+   "domain": "admin"
+  },
+  {
+   "task": "Call the number on the back",
+   "parent": "New HSA Card",
+   "domain": "finance"
+  },
+  {
+   "task": "Update across all recurring subscriptions",
+   "parent": "Replacement Credit Card",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Renovar la tarjeta sanitaria europea antes del viaje a Italia",
+  "Añadir la nueva tarjeta del banco a Google Pay",
+  "Llevar el carnet de la mutua a la consulta del dermatólogo"
+ ],
+ "example_tasks_ru": [
+  "Оформить новый полис ОМС в пластиковом виде через МФЦ",
+  "Привязать новую карту Мир к приложению такси",
+  "Сфотографировать карточку ДМС для клиники"
+ ],
+ "context_tasks": [
+  {
+   "task": "Reimburse contact lenses from the FSA account",
+   "central": "contact lenses / receipt"
+  },
+  {
+   "task": "Book annual physical with an in-network GP",
+   "central": "doctor appointment"
+  },
+  {
+   "task": "Switch open enrollment tier to the high-deductible HSA plan",
+   "central": "insurance document / form"
+  },
+  {
+   "task": "Dispute duplicate copay charge from urgent care",
+   "central": "medical bill / invoice"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Restock band-aids and ibuprofen in the car first aid kit",
+   "better": "first aid kit / briefcase with cross",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay off the Visa statement balance before the 15th",
+   "better": "plain credit card or bill payment icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a birthday card for Clara on the way home",
+   "better": "greeting card / envelope",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Install the new graphics card in the desktop PC",
+   "better": "GPU / computer hardware component",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book dentist cleaning for Tuesday morning",
+   "better": "tooth",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Order a waterproof badge holder for work ID",
+   "better": "ID badge with lanyard",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 4,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a rectangular card with a bottom stripe and a plus/cross symbol on the right, naturally reading as either a health insurance/medical card (HSA/FSA/EHIC) or adding a new payment card. It fits real-world tasks involving medical cards, insurance enrollment, and adding payment methods, though its dual medical vs. 'add card' reading creates moderate ambiguity.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "db12d1df50e8803669072d8ad03e3276de2e8f0c",
+  "usage": {
+   "prompt": 3924,
+   "output": 1725,
+   "thoughts": 0,
+   "total": 5649
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

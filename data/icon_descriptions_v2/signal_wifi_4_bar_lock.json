@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "hollow fan-shaped Wi-Fi signal wedge",
+  "modifiers": [
+   "solid padlock badge in bottom right corner"
+  ],
+  "composition": "single outlined wedge with bottom-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "secured Wi-Fi network or Wi-Fi password",
+   "strength": "primary"
+  },
+  {
+   "meaning": "weak or zero signal strength on a locked Wi-Fi network",
+   "strength": "primary"
+  },
+  {
+   "meaning": "wireless network security settings",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Because the wedge is empty rather than filled or banded with arcs, it is an OS status-bar indicator for zero signal strength on a locked Wi-Fi network, easily confused with a standard secured Wi-Fi icon or a radar sweep.",
+ "modifier_semantics": [
+  {
+   "modifier": "padlock badge",
+   "meaning": "locked, password-protected, or encrypted"
+  },
+  {
+   "modifier": "empty interior of wedge",
+   "meaning": "zero signal strength or disconnected state"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "work",
+  "travel",
+  "admin"
+ ],
+ "task_intents": [
+  "change home Wi-Fi password",
+  "set up guest Wi-Fi network",
+  "enable WPA3 encryption on router",
+  "share Wi-Fi login with guests",
+  "secure wireless home network",
+  "troubleshoot weak locked Wi-Fi signal",
+  "print QR code for Wi-Fi access"
+ ],
+ "example_tasks": [
+  {
+   "task": "Change Wi-Fi password",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Lock guest Wi-Fi",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Get hotel Wi-Fi code",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Enable WPA3 on router",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Update password",
+   "parent": "Home Wi-Fi",
+   "domain": "home"
+  },
+  {
+   "task": "Print a framed QR code for the guest Wi-Fi password",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ask IT for the new encrypted office wireless network key",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Switch the Asus router security mode from WPA2 to WPA3",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Text the Airbnb houseguests the Wi-Fi network name and passcode",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Put the IoT smart plugs onto a separate locked VLAN",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check encryption settings",
+   "parent": "Office Wireless Network",
+   "domain": "work"
+  },
+  {
+   "task": "Write down the login details for the sitter",
+   "parent": "Home Wi-Fi",
+   "domain": "home"
+  },
+  {
+   "task": "Rotate the studio Wi-Fi passphrase and update it in the shared team 1Password vault",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Set up a password-protected 2.4GHz band just for the garage door opener and thermostat",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Find out why the locked lounge Wi-Fi drops to zero bars in the back bedroom",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Reconnect the living room Apple TV, kitchen printer, and both kindles after the change",
+   "parent": "Wi-Fi Security Upgrade",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la contraseña del Wi-Fi de casa",
+  "Configurar WPA3 en el router de Movistar para proteger la red inalámbrica",
+  "Imprimir un cartelito con el código QR del Wi-Fi para el cuarto de invitados"
+ ],
+ "example_tasks_ru": [
+  "Сменить пароль от домашнего вайфая",
+  "Настроить гостевую сеть Wi-Fi с отдельным паролем на роутере Keenetic",
+  "Узнать у администратора отеля пароль от закрытой сети на ресепшене"
+ ],
+ "context_tasks": [
+  {
+   "task": "Update Bitwarden master password",
+   "central": "password vault / key"
+  },
+  {
+   "task": "Mount the second Eero mesh node in the upstairs hallway",
+   "central": "router / mesh hardware"
+  },
+  {
+   "task": "Pay the monthly fiber internet bill before Friday",
+   "central": "bill / payment"
+  },
+  {
+   "task": "Configure Mullvad VPN on the travel laptop",
+   "central": "VPN / shield"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a Wi-Fi enabled bathroom scale",
+   "better": "bathroom scale",
+   "trap": "property"
+  },
+  {
+   "task": "Replace the broken combination padlock on the garden shed",
+   "better": "padlock",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Bake a slice of deep-dish pizza for lunch",
+   "better": "pizza slice",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call ISP billing support to dispute the router rental fee",
+   "better": "phone call or invoice",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check if the internet connection is working before the webinar",
+   "better": "standard full Wi-Fi arcs or globe",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order a folding hand fan for the summer concert",
+   "better": "hand fan",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is a system status-bar indicator showing zero signal bars (an empty wedge) on a locked Wi-Fi network, rather than a standard concentric-arc Wi-Fi symbol. Because it represents a specific device signal state (0 of 4 bars, locked) and the hollow wedge is less recognizable out of status-bar context than standard Wi-Fi arcs, a normal Wi-Fi or router icon is always preferable for tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "683290683172f6a47f9a6929154a4fb86714be43",
+  "usage": {
+   "prompt": 3930,
+   "output": 1741,
+   "thoughts": 0,
+   "total": 5671
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

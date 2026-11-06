@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "circle containing a horizontal minus bar",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single geometric symbol crossed out by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "Do Not Disturb off / unmute notifications",
+   "strength": "primary"
+  },
+  {
+   "meaning": "unblock or allow access",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "no entry / prohibited / cancel",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "A circle with a minus sign is already the symbol for 'do not enter', 'remove', or 'Do Not Disturb'; adding a slash over it creates a confusing double negative that looks identical to a plain prohibition sign at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash from top-left to bottom-right",
+   "meaning": "disabled, off, negated, or cancelled"
+  }
+ ],
+ "domains": [
+  "tech",
+  "communication",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "turn off do not disturb mode",
+  "disable phone focus or quiet hours",
+  "unblock a contact or email sender",
+  "remove website from block list",
+  "re-enable notifications before important call",
+  "fix missed alerts from DND setting"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off Do Not Disturb",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unblock plumber's phone number",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Disable quiet hours tonight",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Whitelist school notifications",
+   "parent": "Phone Settings",
+   "domain": "communication"
+  },
+  {
+   "task": "Check focus status",
+   "parent": "Do Not Disturb",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off Do Not Disturb before the on-call shift starts at midnight",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Remove automatic evening Do Not Disturb schedule on my work phone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unblock Mom's secondary email address in the spam and block filter",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Disable Do Not Disturb during the weekend so delivery drivers can ring",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Take the staging server IP off the firewall deny list",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off driving focus mode auto-reply before lending the car",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Allow calls from unknown numbers while waiting for the clinic callback",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Stop the bedtime routine from turning on Do Not Disturb on Friday nights",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure Do Not Disturb is completely disabled on the tablet before the live webinar",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Remove the vendor domain from our email blocklist so their invoices stop getting rejected",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Update weekend schedule",
+   "parent": "Do Not Disturb Settings",
+   "domain": "tech"
+  },
+  {
+   "task": "Exceptions for family",
+   "parent": "Do Not Disturb",
+   "domain": "communication"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar el modo No molestar antes de la guardia de esta noche",
+  "Desbloquear el número de la mensajería en los ajustes del teléfono",
+  "Quitar la programación automática de No molestar los fines de semana"
+ ],
+ "example_tasks_ru": [
+  "Отключить режим «Не беспокоить» перед началом ночного дежурства",
+  "Разблокировать номер курьера в настройках телефона до доставки",
+  "Убрать расписание тихого режима на выходные дни"
+ ],
+ "context_tasks": [
+  {
+   "task": "Let emergency contacts bypass phone silence rules",
+   "central": "emergency contacts"
+  },
+  {
+   "task": "Test why Slack notifications aren't coming through on mobile",
+   "central": "Slack notifications"
+  },
+  {
+   "task": "Configure PagerDuty override for high-severity alerts",
+   "central": "PagerDuty alerts"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Turn on Do Not Disturb for the afternoon writing block",
+   "better": "circle with minus (Do Not Disturb on) or moon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel the gym membership before the 1st",
+   "better": "gym dumbbell or contract with cross",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Remove old paint cans from the garage",
+   "better": "paint can or trash bin",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Appeal the parking ticket from Tuesday",
+   "better": "car or parking ticket",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new silent wall clock for the bedroom",
+   "better": "wall clock",
+   "trap": "property"
+  },
+  {
+   "task": "Order a 'Do Not Enter' sign for the storage room door",
+   "better": "signboard or door",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "The icon shows a circled minus sign (the Material symbol for Do Not Disturb or 'remove') crossed out by a diagonal slash, meaning 'Do Not Disturb off'. As a double-negative UI state toggle that is nearly indistinguishable from a standard prohibition sign at list size, it is too ambiguous and state-specific to serve as a reliable task icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b4a07cd725af3f557723548c397703403d47fb78",
+  "usage": {
+   "prompt": 3919,
+   "output": 992,
+   "thoughts": 0,
+   "total": 4911
+  },
+  "soft_problems": [
+   "example_tasks: 17 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": "do_not_disturb_off"
+ }
+}

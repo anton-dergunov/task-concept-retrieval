@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "house outline containing three stacked horizontal wavy lines",
+  "modifiers": [
+   "three horizontal wavy lines inside"
+  ],
+  "composition": "single enclosed outline, front view"
+ },
+ "readings": [
+  {
+   "meaning": "indoor air quality / home ventilation / HVAC",
+   "strength": "primary"
+  },
+  {
+   "meaning": "home heating / climate control / sauna",
+   "strength": "primary"
+  },
+  {
+   "meaning": "flooded house / basement water damage",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "indoor pool / bathhouse / spa",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The three wavy lines can be read as air/breeze (ventilation, air purifier), heat/steam (heating, sauna), or water waves (flooding, indoor pool).",
+ "modifier_semantics": [
+  {
+   "modifier": "three horizontal wavy lines inside",
+   "meaning": "air flow, heat, steam, or water inside the building"
+  }
+ ],
+ "domains": [
+  "home",
+  "health_fitness",
+  "shopping",
+  "admin",
+  "tech",
+  "travel"
+ ],
+ "task_intents": [
+  "replace home HVAC air filters",
+  "service furnace or air conditioning",
+  "check indoor air quality monitor",
+  "book sauna or bathhouse session",
+  "clean air purifier and vents",
+  "inspect basement for water flooding",
+  "configure smart home climate schedule"
+ ],
+ "example_tasks": [
+  {
+   "task": "Change furnace filter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Clean HEPA air purifiers",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Book barrel sauna slot",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check basement radon monitor",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order 20x25x1 MERV 13 filters",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Schedule annual HVAC tune-up before the June heatwave",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Vacuum dust out of the bathroom exhaust fan grille",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pair the Airthings sensor with Home Assistant on the Pi",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Renew flood insurance policy with FEMA before May 12",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Reserve two passes for the Russian banya on Saturday",
+   "parent": "Weekend Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Bleed the upstairs radiators so the guest room heats evenly",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call someone for an estimate",
+   "parent": "Attic ventilation",
+   "domain": "home"
+  },
+  {
+   "task": "Compare replacement carbon pre-filters",
+   "parent": "Coway Air Purifier",
+   "domain": "shopping"
+  },
+  {
+   "task": "Wipe down the cedar benches",
+   "parent": "Sauna maintenance",
+   "domain": "home"
+  },
+  {
+   "task": "Open the crawlspace vents on the south side once overnight lows stay above freezing",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set the Ecobee comfort profile to run the circulation fan twenty minutes every hour",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Limpiar los filtros del aire acondicionado del salón antes de julio",
+  "Revisar el deshumidificador del sótano y vaciar el depósito",
+  "Llamar al técnico de la caldera para la revisión anual de gas"
+ ],
+ "example_tasks_ru": [
+  "Почистить фильтры приточной вентиляции и бризера в спальне",
+  "Забронировать баню на дровах на субботу для всей компании",
+  "Проверить тягу в вытяжке на кухне и в ванной"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pay the $185 invoice from Larsen Heating & Cooling",
+   "central": "invoice / payment"
+  },
+  {
+   "task": "Put fresh eucalyptus oil bottle in the sauna bucket",
+   "central": "essential oil bottle"
+  },
+  {
+   "task": "Take photos of the warped baseboards for the flood claim",
+   "central": "camera / photos"
+  },
+  {
+   "task": "Find the PDF manual for the heat recovery ventilator",
+   "central": "document / manual"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check the marine wave forecast before kayaking at Half Moon Bay",
+   "better": "ocean waves or kayak",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof cover for the patio sofa",
+   "better": "sofa / furniture cover",
+   "trap": "property"
+  },
+  {
+   "task": "Air out the wool blankets on the balcony railing",
+   "better": "blanket / laundry",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Sign the lease addendum",
+   "better": "signature / contract document",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check if the bathroom window is closed before leaving",
+   "better": "window",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Defrost the upright freezer in the garage",
+   "better": "freezer / snowflake",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A house outline enclosing three wavy lines is the standard smart-home symbol for indoor air quality, home ventilation/HVAC, or heating/sauna. It maps cleanly to common household chores around filters, vents, heating, air purifiers, and moisture/flooding, though the wavy lines can be read as either air, heat, or water.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c69d94f88496d0aa790e792022b2eb1f30152ee4",
+  "usage": {
+   "prompt": 3925,
+   "output": 1670,
+   "thoughts": 0,
+   "total": 5595
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "checkmark above a flat horizontal line",
+  "modifiers": [
+   "horizontal base line below checkmark"
+  ],
+  "composition": "centered symbol, checkmark stacked over an underline"
+ },
+ "readings": [
+  {
+   "meaning": "download complete / downloaded file",
+   "strength": "primary"
+  },
+  {
+   "meaning": "verified or approved entry on a form line",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "saved offline / stored locally",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "completed / done",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be mistaken for a generic checkmark (which duplicates the to-do checkbox itself) or for a download arrow if glanced at quickly.",
+ "modifier_semantics": [
+  {
+   "modifier": "horizontal base line below checkmark",
+   "meaning": "tray or destination surface indicating download/saving, or a blank line on a form"
+  }
+ ],
+ "domains": [
+  "tech",
+  "admin",
+  "work",
+  "travel",
+  "learning",
+  "finance"
+ ],
+ "task_intents": [
+  "download files for offline use",
+  "verify downloaded backup archives",
+  "save media locally before trip",
+  "approve final sign-off items",
+  "fetch tax statements and receipts",
+  "install offline maps and guides",
+  "confirm completed compliance checklist"
+ ],
+ "example_tasks": [
+  {
+   "task": "Download offline maps for Oaxaca",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Grab 2025 W-2 PDFs",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Verify local NAS backup",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Get all lectures offline",
+   "parent": "Flight to Tokyo",
+   "domain": "learning"
+  },
+  {
+   "task": "Sign off on final deliverables",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Save Spotify playlists and three audiobooks to phone before boarding",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pull all twelve monthly bank statements from Chase into tax folder",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Make sure the macOS installer finished downloading onto the thumb drive",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check that all lab results saved properly to the health folder",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Approve the contractor's milestone completion form for the bathroom tile",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Fetch the high-res wedding photos before the gallery link expires",
+   "parent": "Wedding Admin",
+   "domain": "admin"
+  },
+  {
+   "task": "Confirm every dataset zip unpacked cleanly without checksum errors",
+   "parent": "ML Pipeline",
+   "domain": "tech"
+  },
+  {
+   "task": "Keep local copies of the Spanish grammar PDFs on the iPad",
+   "parent": "Spanish B2",
+   "domain": "learning"
+  },
+  {
+   "task": "Download the full archive of Google Photos takeouts before canceling the extra two terabyte storage plan",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pull signed copies of the lease renewal and walk-through checklist from the tenant portal onto my laptop",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Save offline episodes of Hardcore History and three long-form articles to read on the train without wifi",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Descargar los mapas sin conexión de Pirineos antes de salir el viernes",
+  "Bajar todos los recibos de luz y gas del portal en PDF",
+  "Confirmar que la copia de seguridad del disco externo terminó sin errores"
+ ],
+ "example_tasks_ru": [
+  "Скачать офлайн-карты Грузии и билеты в память телефона перед вылетом",
+  "Выгрузить все выписки по счёту ИП за прошлый квартал из интернет-банка",
+  "Проверить, что архив семейных фото полностью скачался из облака на диск"
+ ],
+ "context_tasks": [
+  {
+   "task": "Clean out 40GB of old installers from the Downloads folder",
+   "central": "folder / trash"
+  },
+  {
+   "task": "Buy a 2TB portable SSD for keeping offline backups",
+   "central": "hard drive / SSD"
+  },
+  {
+   "task": "Switch flight movie rentals to download over Wi-Fi only",
+   "central": "Wi-Fi / video"
+  },
+  {
+   "task": "Notarize the signed approval page at the UPS store",
+   "central": "document / stamp"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check tire pressure before driving up to Tahoe",
+   "better": "tire pressure gauge or car",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Check if the sourdough starter is bubbly enough to bake",
+   "better": "bread / jar",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy pre-approved TSA locks for the checked suitcases",
+   "better": "padlock or suitcase",
+   "trap": "property"
+  },
+  {
+   "task": "Upload the edited podcast episode to Libsyn",
+   "better": "upload arrow or microphone",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write a check to the landscaper for November mowing",
+   "better": "bank check / money",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Ask Sarah to bring the HDMI adapter for the projector",
+   "better": "cable / projector (under 'Download Festival Trip')",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "Shows a checkmark over a horizontal base line, the standard UI glyph for 'download complete' or 'saved offline', and secondarily 'approved/verified on a line'. It fits tasks about downloading files for offline use or final verification, though in a task list any checkmark icon risks blending in with the completion checkboxes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "4a685826dc6bf4feea2b8bec639fe7971887f129",
+  "usage": {
+   "prompt": 3921,
+   "output": 1713,
+   "thoughts": 100,
+   "total": 5734
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": "download_done"
+ }
+}

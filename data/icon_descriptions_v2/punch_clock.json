@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "briefcase or rectangular case with top handle",
+  "modifiers": [
+   "circular clock face with two hands inside"
+  ],
+  "composition": "single object, front view, centered"
+ },
+ "readings": [
+  {
+   "meaning": "work hours, time tracking, or timesheet",
+   "strength": "primary"
+  },
+  {
+   "meaning": "punch clock, time clock, or shift schedule",
+   "strength": "primary"
+  },
+  {
+   "meaning": "table clock, bedside alarm clock, or kitchen timer",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "time lock safe or timed padlock",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Looks simultaneously like a briefcase with a clock on it (work hours), a chunky square padlock with a timer, a portable table clock with a handle, or a Polaroid/box camera where the clock resembles a lens at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "clock face inside",
+   "meaning": "time, duration, schedule, or hours logged"
+  }
+ ],
+ "domains": [
+  "work",
+  "career",
+  "finance",
+  "admin",
+  "home",
+  "shopping"
+ ],
+ "task_intents": [
+  "submit weekly timesheet for payroll",
+  "track billable client hours",
+  "check or swap work shift schedule",
+  "log overtime hours worked",
+  "fix or replace bedside alarm clock",
+  "configure time-tracking software or app",
+  "set up time-lock container for phone"
+ ],
+ "example_tasks": [
+  {
+   "task": "Submit Friday timesheet",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Log billable hours for Acme",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "New batteries for bedside clock",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Send the updated numbers to HR",
+   "parent": "Timesheets & Payroll",
+   "domain": "work"
+  },
+  {
+   "task": "Check next week's shift schedule",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Fix the missed Tuesday punch in the time clock portal",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Export Toggl hours from November and attach them to the invoice",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Ask manager to approve the four hours of weekend overtime",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Buy a non-ticking analog alarm clock for the bedroom",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Compare Harvest and Clockify before we pick one for the team",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Finish the reconciliation before the 5pm cutoff",
+   "parent": "Monthly Time Tracking",
+   "domain": "admin"
+  },
+  {
+   "task": "Review the new rules on flex-time and core working hours",
+   "parent": "Company Policy",
+   "domain": "career"
+  },
+  {
+   "task": "Put snacks in the Kitchen Safe time-lock container until Saturday",
+   "parent": "Diet & Habits",
+   "domain": "home"
+  },
+  {
+   "task": "Round up all the scattered sticky notes with client hours and enter them into Harvest",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Talk to payroll about why my holiday shift hours didn't show up on the stub",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Set the living room mantel clock back one hour after daylight saving time ends",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Enviar la hoja de horas trabajadas antes del viernes a mediodía",
+  "Registrar en Clockify las tres horas del proyecto de diseño",
+  "Cambiarle la pila al reloj despertador de la mesita"
+ ],
+ "example_tasks_ru": [
+  "Заполнить табель рабочего времени за октябрь",
+  "Внести часы по клиентскому проекту в трекер до вечера пятницы",
+  "Купить настольные часы без громкого тиканья в спальню"
+ ],
+ "context_tasks": [
+  {
+   "task": "Write Python script to parse CSV exports from Toggl",
+   "central": "code / script"
+  },
+  {
+   "task": "Email Sarah about swapping our Thursday afternoon shifts",
+   "central": "email"
+  },
+  {
+   "task": "Calculate Q3 contractor payout rate from logged hours",
+   "central": "calculator / money"
+  },
+  {
+   "task": "Set up a daily 8pm screen-time lock on the iPad",
+   "central": "tablet / iPad"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pack the leather briefcase for the Chicago client trip",
+   "better": "briefcase without clock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean the front lens on the old Polaroid camera",
+   "better": "camera",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a heavy-duty combination padlock for the storage locker",
+   "better": "padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule a 30-minute quick sync with the design lead",
+   "better": "calendar or meeting",
+   "trap": "property"
+  },
+  {
+   "task": "Check the status of the background job on the server",
+   "better": "server or terminal",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order a new power adapter for my work laptop",
+   "better": "power plug or laptop",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a rectangular case/briefcase silhouette with a central clock face, clearly signifying work hours, timesheets, shift schedules, or a portable table clock. It fits common admin and freelance tasks around logging billable hours and payroll, though at very small sizes the circle-in-rectangle shape can resemble a box camera or padlock.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "578627be1827442d0b711dbe7eef1fe82f15594c",
+  "usage": {
+   "prompt": 3923,
+   "output": 1704,
+   "thoughts": 0,
+   "total": 5627
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

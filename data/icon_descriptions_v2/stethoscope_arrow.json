@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "stethoscope earpieces and curved tubing",
+  "modifiers": [
+   "right-pointing arrow at lower right"
+  ],
+  "composition": "flat outline stethoscope on left with chestpiece replaced by an outward arrow"
+ },
+ "readings": [
+  {
+   "meaning": "medical referral or specialist referral",
+   "strength": "primary"
+  },
+  {
+   "meaning": "go to the doctor / clinic visit",
+   "strength": "primary"
+  },
+  {
+   "meaning": "transfer medical records or change doctors",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "export diagnostic log or send health data",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Without the circular chestpiece of a standard stethoscope, the top loop can faintly resemble headphones or calipers at very small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "right-pointing arrow",
+   "meaning": "referral, forward, transfer out, or go to"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "admin",
+  "social_family",
+  "finance",
+  "work",
+  "tech"
+ ],
+ "task_intents": [
+  "request referral to medical specialist",
+  "transfer medical records to new clinic",
+  "forward patient chart to colleague",
+  "head out to doctor appointment",
+  "switch primary care physicians",
+  "send health forms to school",
+  "submit prior authorization for specialist",
+  "export system diagnostic report"
+ ],
+ "example_tasks": [
+  {
+   "task": "Dermatology referral from Dr. Patel",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Transfer dental records downtown",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Send immunization chart to camp",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Forward lab results",
+   "parent": "Knee Surgery Prep",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Call clinic front desk",
+   "parent": "Pediatrician Switch",
+   "domain": "social_family"
+  },
+  {
+   "task": "Ask GP for an orthopedic referral for the nagging shoulder pain",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Have old clinic release and send my X-rays to the new dentist",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Verify HMO referral went through before Friday's rheumatology consult",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Send Leo's updated allergy action plan over to the school nurse",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Forward the outpatient cardiology discharge packet to Dr. Kim's office",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Export crash diagnostics and send the bundle to upstream support",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Sign the release form",
+   "parent": "Medical Records Transfer",
+   "domain": "admin"
+  },
+  {
+   "task": "Check network approval status",
+   "parent": "Endocrinologist Referral",
+   "domain": "finance"
+  },
+  {
+   "task": "Get primary care doctor to refer Mom to the memory clinic at St. Jude's",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Move our family prescriptions and patient files over to the clinic near the new house",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Complete the specialist referral paperwork for the afternoon clinic patients before signing off today",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Pedir al médico de cabecera el volante para el dermatólogo",
+  "Solicitar el traslado de mi historial clínico al nuevo centro de salud",
+  "Enviar el informe pediátrico actualizado a la guardería"
+ ],
+ "example_tasks_ru": [
+  "Взять у терапевта направление к эндокринологу на следующей неделе",
+  "Забрать медицинскую карту из старой поликлиники для перевода",
+  "Отправить результаты обследования лечащему врачу в клинику"
+ ],
+ "context_tasks": [
+  {
+   "task": "Fax the signed HIPAA release form to Mercy Hospital",
+   "central": "fax / document"
+  },
+  {
+   "task": "Find an in-network physical therapist within ten miles",
+   "central": "physical therapy / search"
+  },
+  {
+   "task": "Appeal insurance denial for the out-of-network specialist visit",
+   "central": "insurance appeal / money"
+  },
+  {
+   "task": "Update new address with the state health insurance exchange",
+   "central": "address / insurance"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a Littmann Classic III stethoscope for clinical rotations",
+   "better": "plain stethoscope without arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the frayed cable on my wired studio headphones",
+   "better": "headphones",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Submit employee referral for Sarah in the engineering portal",
+   "better": "person with arrow / badge",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check if the new ergonomic office chair has medical-grade lumbar support",
+   "better": "office chair",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the $45 copay invoice on the clinic website",
+   "better": "credit card or bill",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Diagnose why the garage door sensor keeps blinking red",
+   "better": "garage door or wrench",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a stethoscope with an outward-pointing arrow in place of the chestpiece, clearly signaling a medical referral, transferring medical records, or heading to a doctor. It fits a concrete slice of healthcare and admin tasks well, though without the round chestpiece it is slightly less immediate than a standard stethoscope.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "43ccac919bcc6034c85b6f1e3976f73decfa6d1c",
+  "usage": {
+   "prompt": 3921,
+   "output": 1689,
+   "thoughts": 89,
+   "total": 5699
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

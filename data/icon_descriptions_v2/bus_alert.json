@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front view of a transit bus",
+  "modifiers": [
+   "large circular badge with exclamation mark"
+  ],
+  "composition": "single object front view with upper-right overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "bus service alert, delay, or disruption",
+   "strength": "primary"
+  },
+  {
+   "meaning": "public transit advisory or detour",
+   "strength": "primary"
+  },
+  {
+   "meaning": "school bus warning or late notice",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "bus maintenance issue or breakdown",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the front of the bus can resemble a train, subway car, or camper van.",
+ "modifier_semantics": [
+  {
+   "modifier": "large circular badge with exclamation mark",
+   "meaning": "alert, warning, disruption, delay, or urgent issue"
+  }
+ ],
+ "domains": [
+  "travel",
+  "social_family",
+  "admin",
+  "work",
+  "communication"
+ ],
+ "task_intents": [
+  "check bus route service alerts",
+  "find detour around closed bus stop",
+  "report problem with school bus",
+  "set up transit delay notifications",
+  "handle cancelled intercity coach ticket",
+  "check holiday public transit disruptions"
+ ],
+ "example_tasks": [
+  {
+   "task": "Bus detour notice",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check route 44 alerts",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "School bus delay",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Morning commute",
+   "parent": "Transit strike backup plan",
+   "domain": "work"
+  },
+  {
+   "task": "Call district about late buses",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Read the metro bus reroute notice for this weekend",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Claim refund for cancelled FlixBus to Boston",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Turn on push alerts for the #12 crosstown bus",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Check if snow route is active for the 7am express bus",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Report broken AC and late arrival on shuttle bus",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check weekend closures",
+   "parent": "City bus pass & routes",
+   "domain": "travel"
+  },
+  {
+   "task": "Update emergency contacts",
+   "parent": "School bus notifications",
+   "domain": "social_family"
+  },
+  {
+   "task": "Send note to team",
+   "parent": "Company shuttle outage",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out which stop replaces Pine & 5th during the street fair bus detour",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Call Greyhound customer service about the four-hour delay on our return trip from Chicago",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check the regional transit alert page before leaving so we don't get stuck downtown",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Revisar avisos de desvío del autobús 27 por las obras",
+  "Reclamar el billete de ALSA cancelado por la huelga",
+  "Activar alertas del transporte escolar para los días de lluvia"
+ ],
+ "example_tasks_ru": [
+  "Посмотреть изменения маршрута автобуса №42 из-за ремонта дороги",
+  "Позвонить диспетчеру по поводу постоянных опозданий школьного автобуса",
+  "Проверить предупреждения об отмене пригородных автобусов на праздники"
+ ],
+ "context_tasks": [
+  {
+   "task": "Leave 20 minutes early because of the parade reroute",
+   "central": "commute timing"
+  },
+  {
+   "task": "Pack extra snacks in case the coach gets stuck in border traffic",
+   "central": "snacks"
+  },
+  {
+   "task": "Email the client that I might be late due to transit disruptions",
+   "central": "email to client"
+  },
+  {
+   "task": "Find a rideshare buddy for Tuesday's transit strike",
+   "central": "rideshare"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Reload $40 onto my monthly bus pass before Monday",
+   "better": "bus or transit card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book two window seats on the overnight bus to Montreal",
+   "better": "bus or ticket",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Urgent: pay the charter bus deposit by 5pm today",
+   "better": "payment or bus (without alert badge for deadline urgency alone, or invoice icon) — urgency is a task property",
+   "trap": "property"
+  },
+  {
+   "task": "Check the regular weekday timetable for the airport shuttle",
+   "better": "bus with clock / schedule",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Subway line 2 service suspension notice",
+   "better": "train / subway with alert badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a paper map of the city at the terminal",
+   "better": "map",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly shows the front of a bus paired with a prominent exclamation mark badge, signifying a bus alert, transit disruption, delay, or detour. While narrower than a plain bus icon, it fits real tasks around checking route advisories, handling cancelled coach tickets, or dealing with school bus delays. At very small sizes the vehicle front could be confused with a train or tram.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "dfd99e92e975503c01199080a3b3a77399891d90",
+  "usage": {
+   "prompt": 3926,
+   "output": 987,
+   "thoughts": 0,
+   "total": 4913
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

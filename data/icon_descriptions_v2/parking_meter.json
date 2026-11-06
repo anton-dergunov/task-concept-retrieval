@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "half of a car next to a parking meter",
+  "modifiers": [],
+  "composition": "side-by-side objects, front view"
+ },
+ "readings": [
+  {
+   "meaning": "paid parking / parking meter",
+   "strength": "primary"
+  },
+  {
+   "meaning": "car parking / parking spot",
+   "strength": "primary"
+  },
+  {
+   "meaning": "EV charging station",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "drive-thru speaker box",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the parking meter could be mistaken for a residential mailbox, an EV charging bollard, or a drive-thru intercom post next to a car.",
+ "modifier_semantics": [],
+ "domains": [
+  "travel",
+  "admin",
+  "finance",
+  "home",
+  "work",
+  "shopping"
+ ],
+ "task_intents": [
+  "pay for street parking or meter",
+  "renew residential or work parking permit",
+  "book long-term airport or station parking",
+  "contest or pay a parking ticket",
+  "rent a monthly garage spot",
+  "set up mobile parking payment app",
+  "move parked car before street cleaning"
+ ],
+ "example_tasks": [
+  {
+   "task": "Renew residential parking permit",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Pay the expired meter ticket",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Book long-term airport parking",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Compare monthly rates nearby",
+   "parent": "Downtown Garage Spot",
+   "domain": "finance"
+  },
+  {
+   "task": "Return the visitor pass",
+   "parent": "Apartment Parking",
+   "domain": "home"
+  },
+  {
+   "task": "Add new license plate to the ParkMobile app before driving into the city",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Move the Honda off Oak Street before Thursday 8am street sweeping",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Reserve a pre-paid spot near the stadium for Saturday night",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Keep a roll of quarters in the glovebox for the old downtown meters",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Appeal the $65 citation from the broken pay-and-display machine on 4th Ave",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Ask building management for an extra garage fob for the second car",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Update credit card on file",
+   "parent": "City Parking App",
+   "domain": "finance"
+  },
+  {
+   "task": "Submit the receipt to HR",
+   "parent": "Client Visit Parking",
+   "domain": "work"
+  },
+  {
+   "task": "Check which zone number covers the clinic street so we don't overpay on the meter",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Find out if the hotel charges nightly for the underground lot or has free street spots",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Cancel the monthly commuter lot subscription at the train station before the first of May",
+   "parent": "",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Pagar la multa del parquímetro antes de que venza el descuento por pronto pago",
+  "Renovar la tarjeta de residente de la zona verde del ayuntamiento",
+  "Reservar plaza en el parking de larga estancia del aeropuerto"
+ ],
+ "example_tasks_ru": [
+  "Оплатить парковку через приложение Моспаркинг до конца бесплатных минут",
+  "Оформить резидентное парковочное разрешение через Госуслуги на новый год",
+  "Продлить аренду машиноместа в подземном паркинге на май"
+ ],
+ "context_tasks": [
+  {
+   "task": "Sweep broken glass and dry leaves out of our carport stall",
+   "central": "broom / cleaning"
+  },
+  {
+   "task": "Install motion sensor floodlight above the driveway",
+   "central": "light / lamp"
+  },
+  {
+   "task": "Replace the dead CR2032 battery in the garage door clicker",
+   "central": "battery / remote control"
+  },
+  {
+   "task": "Drop a map pin where we left the rental car near the beach",
+   "central": "map pin / location"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Take the kids to the dog park after school",
+   "better": "park trees or dog",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book campsites in Yellowstone National Park for July",
+   "better": "tent or mountain",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Have the mechanic adjust the loose parking brake cable",
+   "better": "wrench / car repair",
+   "trap": "property"
+  },
+  {
+   "task": "Send a photo of the electric meter reading to the utility company",
+   "better": "electric gauge / lightning bolt",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pick up dry cleaning from the shop with free parking",
+   "better": "coat hanger / shirt",
+   "trap": "property"
+  },
+  {
+   "task": "Plug the Tesla into the Supercharger on the way home",
+   "better": "EV charging station with plug",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wash the windshield and vacuum the floor mats",
+   "better": "car wash / sponge",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts the front half of a car beside a classic coin-operated parking meter. It is a strong, specific fit for everyday tasks involving metered parking, permits, garage rentals, airport lots, and parking tickets, though at very small sizes the meter could briefly resemble a mailbox or EV charger.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "179729d83849d94638286692963b8576c4e82a7c",
+  "usage": {
+   "prompt": 3921,
+   "output": 1695,
+   "thoughts": 0,
+   "total": 5616
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

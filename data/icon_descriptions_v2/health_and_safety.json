@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "heraldic shield outline with pointed bottom",
+  "modifiers": [
+   "thick equal-armed cross or plus sign centered inside"
+  ],
+  "composition": "single object with centered interior glyph, front view"
+ },
+ "readings": [
+  {
+   "meaning": "health insurance or medical coverage",
+   "strength": "primary"
+  },
+  {
+   "meaning": "health protection, immunity, or safety",
+   "strength": "primary"
+  },
+  {
+   "meaning": "add security rule or enable protection",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "Swiss or Red Cross style emergency aid",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The interior cross reads either as a medical cross (health insurance/safety) or as a plus sign (add security/new firewall rule).",
+ "modifier_semantics": [
+  {
+   "modifier": "thick centered cross / plus sign",
+   "meaning": "medical/health (cross) or add/new (plus)"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "finance",
+  "admin",
+  "travel",
+  "tech",
+  "work"
+ ],
+ "task_intents": [
+  "enroll in health insurance plan",
+  "submit medical insurance reimbursement claim",
+  "buy travel medical coverage for trip",
+  "compare dental and vision plans",
+  "add new firewall security rule",
+  "update beneficiaries on health policy",
+  "check out-of-pocket deductible status",
+  "download digital insurance card"
+ ],
+ "example_tasks": [
+  {
+   "task": "Submit physical therapy claim",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Compare bronze vs silver plans",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Print new BlueCross cards",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Call broker before Friday",
+   "parent": "Health Insurance",
+   "domain": "admin"
+  },
+  {
+   "task": "Upload itemized receipt",
+   "parent": "Medical Claims",
+   "domain": "finance"
+  },
+  {
+   "task": "Pick open enrollment medical plan before the November 15 HR deadline",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Buy Schengen travel medical insurance covering at least thirty thousand euros",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Appeal denied out-of-network anesthesia claim from the September knee surgery",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check if the new dermatologist is in network with Aetna",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Add newborn to family health coverage within the thirty-day window",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Add a new inbound firewall rule for the staging server",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Download PDF summary of benefits for the 2026 calendar year",
+   "parent": "Open Enrollment",
+   "domain": "work"
+  },
+  {
+   "task": "Verify whether the deductible resets in January or on the policy anniversary",
+   "parent": "Dental Coverage",
+   "domain": "finance"
+  },
+  {
+   "task": "Figure out whether COBRA or a marketplace plan is cheaper for the two-month gap between jobs",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Ask HR why the employer HSA contribution hasn't shown up on the last two paystubs",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Get a letter of medical necessity from Dr. Patel so insurance covers the custom orthotics",
+   "parent": "",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Subir las facturas del dentista a la app del seguro médico para el reembolso",
+  "Contratar seguro médico de viaje con cobertura de repatriación para las dos semanas en Japón",
+  "Pedir autorización previa a Sanitas para la resonancia"
+ ],
+ "example_tasks_ru": [
+  "Оформить полис ДМС со стоматологией через корпоративный портал до конца недели",
+  "Купить медицинскую страховку для визы на время поездки в Альпы",
+  "Позвонить в страховую по поводу направления на анализы"
+ ],
+ "context_tasks": [
+  {
+   "task": "Restock sterile gauze and ibuprofen in the car emergency kit",
+   "central": "first aid kit"
+  },
+  {
+   "task": "Book annual flu and COVID booster shots at the pharmacy",
+   "central": "vaccine / syringe"
+  },
+  {
+   "task": "Complete mandatory workplace OSHA safety training module",
+   "central": "training course"
+  },
+  {
+   "task": "Install Bitdefender on Mom's new Windows laptop",
+   "central": "laptop / software"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Schedule six-month dental cleaning and X-rays with Dr. Kim",
+   "better": "tooth",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Pick up amoxicillin prescription at Walgreens before 7pm",
+   "better": "pill / capsule",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Shop around for a cheaper six-month auto insurance quote on the Civic",
+   "better": "car with shield",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a waterproof mattress protector for the guest bed",
+   "better": "bed / mattress",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check that all backup drives are encrypted and safe before travelling",
+   "better": "hard drive / lock",
+   "trap": "property"
+  },
+  {
+   "task": "Rotate the master password in 1Password and save the emergency kit",
+   "better": "key / padlock",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A shield containing a bold medical cross universally signals health insurance, medical coverage, or health protection, and secondarily 'add security rule' in tech contexts. It fits common life-admin tasks around open enrollment, claims, and travel medical policies, though it must be distinguished from general medical care (doctor, pills) and other types of insurance (car, home).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "37c593be0401a00515eac192cd748de323b4f850",
+  "usage": {
+   "prompt": 3926,
+   "output": 1725,
+   "thoughts": 116,
+   "total": 5767
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

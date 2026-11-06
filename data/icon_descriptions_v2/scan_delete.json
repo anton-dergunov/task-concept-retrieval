@@ -1,0 +1,232 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "blank document page with folded top-right corner",
+  "modifiers": [
+   "X cross mark in bottom-right corner"
+  ],
+  "composition": "single outlined document with bottom-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "delete file or document",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel or void document",
+   "strength": "primary"
+  },
+  {
+   "meaning": "missing or invalid document",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "discard paperwork or shred pages",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the X mark could be confused with a rotated plus sign (add file).",
+ "modifier_semantics": [
+  {
+   "modifier": "X cross mark in bottom-right corner",
+   "meaning": "delete, remove, cancel, invalid, or reject"
+  }
+ ],
+ "domains": [
+  "tech",
+  "admin",
+  "work",
+  "finance",
+  "home"
+ ],
+ "task_intents": [
+  "delete old files from storage",
+  "shred outdated financial paperwork",
+  "cancel a pending contract or form",
+  "remove sensitive documents from drive",
+  "clear out duplicate PDF downloads",
+  "void an incorrect invoice"
+ ],
+ "example_tasks": [
+  {
+   "task": "Delete old tax PDFs",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Shred expired bank statements",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Purge temp files",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Void invoice #1042",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clear downloads folder",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Remove outdated lease drafts from the shared Google Drive",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Delete duplicate resume versions from desktop before applying",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Toss out the old appliance manuals for things we sold",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel the submitted reimbursement form for the March trip",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Wipe sensitive client spreadsheets off the borrowed laptop",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Shred the pile of old medical Explanation of Benefits papers",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Remove obsolete API documentation pages from the team wiki",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Go through the filing cabinet and throw away utility bills older than seven years",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Delete the huge unedited video export files from Dropbox to free up space",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Request removal of the accidentally uploaded draft PDF from the public committee portal",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Clean up the old drafts",
+   "parent": "Q3 Grant Proposal",
+   "domain": "work"
+  },
+  {
+   "task": "Get rid of the duplicates",
+   "parent": "Tax Documents",
+   "domain": "finance"
+  },
+  {
+   "task": "Purge everything from before 2021",
+   "parent": "Digital Filing Cabinet",
+   "domain": "admin"
+  },
+  {
+   "task": "Shred the sensitive pages",
+   "parent": "Home Office Declutter",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Borrar los borradores viejos de la declaración de la renta",
+  "Triturar los extractos bancarios antiguos del cajón",
+  "Eliminar los archivos PDF duplicados de la carpeta de descargas"
+ ],
+ "example_tasks_ru": [
+  "Удалить старые черновики договора из общей папки",
+  "Уничтожить просроченные квитанции ЖКХ шредером",
+  "Очистить папку загрузок от ненужных PDF-файлов"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a crosscut paper shredder for the study",
+   "central": "paper shredder"
+  },
+  {
+   "task": "Empty the recycling bin next to the desk",
+   "central": "recycling bin"
+  },
+  {
+   "task": "Write a bash script to auto-purge log files every Sunday",
+   "central": "script"
+  },
+  {
+   "task": "Downgrade Dropbox plan after clearing out old files",
+   "central": "Dropbox subscription"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Create a new Google Doc for the meeting notes",
+   "better": "document with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel Netflix subscription before renewal date",
+   "better": "TV or subscription cancel icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Delete blurry photos from camera roll",
+   "better": "image with X or trash can",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new 2TB external hard drive",
+   "better": "hard drive",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Review the non-disclosure agreement for errors",
+   "better": "document with magnifier or eye",
+   "trap": "property"
+  },
+  {
+   "task": "Empty the kitchen trash before leaving for the weekend",
+   "better": "trash can",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a document or file with an 'X' badge, universally understood as deleting, removing, canceling, or shredding a document or digital file. It fits many common digital cleanup and paperwork decluttering tasks, though at tiny sizes the 'X' must be distinguished from a '+' (new file).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "6a313ec392e9823a99c1a5ac1dc104317d0afeee",
+  "usage": {
+   "prompt": 3925,
+   "output": 961,
+   "thoughts": 0,
+   "total": 4886
+  },
+  "soft_problems": [
+   "example_tasks: 19 != 16"
+  ],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "domed siren or emergency beacon light on a base",
+  "modifiers": [
+   "circular badge at bottom right containing an up-right diagonal arrow"
+  ],
+  "composition": "single object in front profile with a corner overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "open or go to alert / incident / emergency",
+   "strength": "primary"
+  },
+  {
+   "meaning": "escalate or forward an urgent issue or alarm",
+   "strength": "primary"
+  },
+  {
+   "meaning": "trigger or launch an alarm or emergency protocol",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "external link to status page or monitoring alert",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the siren dome and base can look like an open padlock, a cloche/food cover, a bell, or a gravestone.",
+ "modifier_semantics": [
+  {
+   "modifier": "up-right diagonal arrow in solid circle",
+   "meaning": "open, go to, launch, external link, or escalate"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "home",
+  "admin",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "escalate critical incident to on-call",
+  "open monitoring alert in dashboard",
+  "trigger emergency notification broadcast",
+  "Test home security siren system",
+  "forward urgent safety report",
+  "review active PagerDuty incident link",
+  "set up severe weather alert forwarding"
+ ],
+ "example_tasks": [
+  {
+   "task": "Escalate P1 payment outage",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test basement leak siren",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check PagerDuty alert rules",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Update emergency alert contacts",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Trigger drill notification",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Route high-CPU Datadog alarms straight to the platform Slack channel",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Register our cell numbers on the county wildfire evacuation warning portal",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Hook the garage carbon monoxide detector up to the phone push alert",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Send the allergy anaphylaxis action plan over to the school nurse",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Verify escalation path for weekend database incidents",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Open the live status page link and check what is still degraded",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check battery backup on the hallway smoke and strobe alarm",
+   "parent": "Home Safety & Alarms",
+   "domain": "home"
+  },
+  {
+   "task": "Review the last three false positives from Tuesday night",
+   "parent": "On-Call Alerting",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure the escalation policy skips people who are on PTO",
+   "parent": "Incident Response",
+   "domain": "work"
+  },
+  {
+   "task": "Sign up for the city winter storm siren and text broadcasts before December",
+   "parent": "Emergency Preparedness",
+   "domain": "admin"
+  },
+  {
+   "task": "Wire the staging error-rate monitor so critical spikes page the secondary engineer after ten minutes",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Escalar la alerta caída del servidor de pagos al equipo de guardia",
+  "Probar la sirena de la alarma de humo del pasillo",
+  "Activar los avisos de emergencia meteorológica en el móvil de mamá"
+ ],
+ "example_tasks_ru": [
+  "Настроить пересылку критических алертов Grafana в рабочий чат",
+  "Проверить сирену домашней охранной сигнализации перед отъездом",
+  "Эскалировать инцидент с задержкой выгрузки на дежурного инженера"
+ ],
+ "context_tasks": [
+  {
+   "task": "Write postmortem notes for Tuesday night's outage",
+   "central": "document / postmortem notes"
+  },
+  {
+   "task": "Swap the 9V battery in the hallway detector",
+   "central": "battery"
+  },
+  {
+   "task": "Pack the go-bag flashlight and radio",
+   "central": "flashlight or backpack"
+  },
+  {
+   "task": "Call ADT about the false trigger fee on the bill",
+   "central": "phone call or bill"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Set a 6:30am wake-up alarm for the airport run",
+   "better": "alarm clock",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new padlock for the garden shed door",
+   "better": "padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Finish the urgent tax filing before Friday",
+   "better": "tax form or document",
+   "trap": "property"
+  },
+  {
+   "task": "Order a glass dome cloche for the cheese board",
+   "better": "cloche or tableware",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check on the deployment",
+   "better": "rocket or server deployment",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Book CPR recertification class for next month",
+   "better": "medical cross or heart",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon shows an emergency siren or beacon light with an 'open/external/escalate' arrow badge. It fits tasks about incident escalation, monitoring alerts, and home or public safety alarms, though the half-covered dome and base can resemble a padlock at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b1e32270ab790b255768ae701150d2886f0f076e",
+  "usage": {
+   "prompt": 3920,
+   "output": 1683,
+   "thoughts": 0,
+   "total": 5603
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

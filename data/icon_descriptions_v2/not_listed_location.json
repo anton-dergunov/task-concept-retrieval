@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "teardrop map location pin outline",
+  "modifiers": [
+   "centered question mark inside the pin"
+  ],
+  "composition": "single object with centered interior glyph, front view"
+ },
+ "readings": [
+  {
+   "meaning": "unknown, undecided, or missing location / address",
+   "strength": "primary"
+  },
+  {
+   "meaning": "choose a destination or pick a venue",
+   "strength": "primary"
+  },
+  {
+   "meaning": "tourist information point or visitor center",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "lost item whereabouts or tracking query",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the question mark can blur into the standard circular hole of a regular map pin.",
+ "modifier_semantics": [
+  {
+   "modifier": "question mark",
+   "meaning": "unknown, undecided, query, or information needed"
+  }
+ ],
+ "domains": [
+  "travel",
+  "social_family",
+  "work",
+  "admin",
+  "outdoors",
+  "home",
+  "shopping"
+ ],
+ "task_intents": [
+  "decide on a travel destination",
+  "choose a venue for an event",
+  "find out an unknown street address",
+  "locate where an item is kept",
+  "confirm meeting spot with group",
+  "visit local tourist information booth",
+  "pick a neighborhood to live in"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pick wedding reception venue",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Where is the spare key?",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "October long weekend destination",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Find out polling station address",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Compare options on the shortlist",
+   "parent": "Summer Vacation Destination",
+   "domain": "travel"
+  },
+  {
+   "task": "Ask Dave which trailhead we're meeting at on Saturday morning",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Figure out where the popup market relocated after the square closed",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Choose between Lisbon and Porto for the five-day autumn break",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Track down the actual street address for Grandma's old farmhouse",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Stop by the visitor center near the ferry terminal for trail maps",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Vote on the final three contenders",
+   "parent": "Q3 Offsite Venue",
+   "domain": "work"
+  },
+  {
+   "task": "Ask HR which building the Tuesday onboarding session is in",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check with the organizers",
+   "parent": "Race Packet Pickup Location",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Narrow down which neighborhood we actually want to rent in before calling agents",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Find out where the county moved the hazardous waste drop-off site this year",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Get the exact suite number and floor before heading downtown on Thursday",
+   "parent": "Notary Appointment Address",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Elegir el destino para el puente de noviembre",
+  "Preguntar a Marta en qué restaurante es la cena del viernes",
+  "Averiguar la dirección exacta del almacén de recogida de paquetes"
+ ],
+ "example_tasks_ru": [
+  "Выбрать место для празднования дня рождения",
+  "Уточнить адрес новой клиники перед записью на вторник",
+  "Решить, куда поедем с палатками на майские праздники"
+ ],
+ "context_tasks": [
+  {
+   "task": "Poll the team in Slack on whether they prefer Chicago or Austin",
+   "central": "poll / message"
+  },
+  {
+   "task": "Check the lease binder to see which storage locker number is ours",
+   "central": "lease binder"
+  },
+  {
+   "task": "Enable Find My network on the new AirTags before the trip",
+   "central": "tracker tag"
+  },
+  {
+   "task": "Spreadsheet comparing tax rates across the three states we might move to",
+   "central": "spreadsheet"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Drive to the Denver passport agency at 8am",
+   "better": "standard map pin or car (the location is already known)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write the FAQ page for the new checkout flow",
+   "better": "plain question mark or help icon (not about a physical place)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book the flights once we settle on a destination",
+   "better": "airplane (flights are the central object; undecided destination is a condition)",
+   "trap": "property"
+  },
+  {
+   "task": "Find out where the memory leak is happening in the worker thread",
+   "better": "bug or code icon ('where' is metaphorical inside software)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the $500 deposit for the banquet hall",
+   "better": "money or credit card (Under 'Reception Venue Hunt', but this task is a payment)",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check if the hotel has free parking",
+   "better": "hotel or parking icon (querying a feature of a place, not the location itself)",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A map pin containing a question mark clearly communicates an unknown, undecided, or queried location. It fits real tasks about choosing a travel destination or event venue, finding a missing address, or visiting an info point, though at tiny sizes it can resemble a standard hollow map pin.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "cd4d6d32e9134d372eff1467723c488f6ee6c588",
+  "usage": {
+   "prompt": 3919,
+   "output": 1713,
+   "thoughts": 0,
+   "total": 5632
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

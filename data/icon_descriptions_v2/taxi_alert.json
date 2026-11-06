@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front view of a taxi cab with roof sign",
+  "modifiers": [
+   "solid black circle with white exclamation mark in upper right"
+  ],
+  "composition": "single vehicle front view with large circular alert badge overlapping upper right"
+ },
+ "readings": [
+  {
+   "meaning": "taxi or rideshare alert, issue, or urgent booking",
+   "strength": "primary"
+  },
+  {
+   "meaning": "car trouble, breakdown, or vehicle warning light",
+   "strength": "primary"
+  },
+  {
+   "meaning": "urgent airport transfer or cab reminder",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "traffic incident or emergency vehicle notice",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the small roof sign is easily missed or blends into the badge cutout, making it look like a regular car with an alert badge rather than specifically a taxi.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark in circle badge",
+   "meaning": "alert, problem, warning, issue, or urgent attention needed"
+  }
+ ],
+ "domains": [
+  "travel",
+  "admin",
+  "finance",
+  "home",
+  "work"
+ ],
+ "task_intents": [
+  "dispute overcharged taxi or rideshare fare",
+  "report lost item left in cab",
+  "diagnose car dashboard warning light",
+  "fix urgent vehicle breakdown issue",
+  "confirm critical early morning airport cab",
+  "resolve rideshare account or driver issue",
+  "handle car recall or safety notice"
+ ],
+ "example_tasks": [
+  {
+   "task": "Dispute Uber overcharge",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check engine light",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Report lost phone to Lyft",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix car battery warning",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call cab company",
+   "parent": "Lost Wallet",
+   "domain": "admin"
+  },
+  {
+   "task": "Contest the $45 airport surcharge on Tuesday's taxi receipt",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Follow up with Curb support about the double-billed ride",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Take the Civic in for the airbag safety recall",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Rebook the cancelled 4am taxi to Heathrow Terminal 5",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Ask mechanic why the oil pressure light keeps flickering",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "File a complaint with the city taxi commission",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Submit receipts for the emergency cab home",
+   "parent": "Work Expenses",
+   "domain": "work"
+  },
+  {
+   "task": "Sort out payment failure",
+   "parent": "Uber Account",
+   "domain": "finance"
+  },
+  {
+   "task": "Get the diagnostic code read at AutoZone before driving upstate",
+   "parent": "Honda Maintenance",
+   "domain": "home"
+  },
+  {
+   "task": "Call Yellow Cab dispatch to see if anyone turned in a black umbrella",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out why the hybrid system warning popped up on the dashboard this morning",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Reclamar el cobro doble del taxi al aeropuerto",
+  "Llevar el coche al taller por el testigo del motor",
+  "Llamar a la parada de taxis por la mochila olvidada"
+ ],
+ "example_tasks_ru": [
+  "Оспорить списание за отменённую поездку в Яндекс Такси",
+  "Заехать на сервис из-за горящего чека на приборке",
+  "Позвонить в диспетчерскую такси по поводу забытых ключей"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy an OBD2 scanner to read dashboard fault codes",
+   "central": "OBD2 scanner"
+  },
+  {
+   "task": "Pack flare kit and jumper cables in the trunk",
+   "central": "emergency kit"
+  },
+  {
+   "task": "Download offline map in case the cab driver takes a detour",
+   "central": "map"
+  },
+  {
+   "task": "Get cash for the taxi driver just in case the terminal is broken",
+   "central": "cash"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book a taxi to the train station for Friday",
+   "better": "plain taxi icon without exclamation mark",
+   "trap": "property"
+  },
+  {
+   "task": "Check Uber rating",
+   "better": "star rating or plain taxi icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pay annual car tax before the deadline",
+   "better": "tax document or money icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new car battery",
+   "better": "car battery icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Renew roadside assistance membership",
+   "better": "tow truck or shield icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule routine 60,000-mile car service",
+   "better": "car with wrench icon",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon depicts the front of a taxi cab (indicated by the roof light) overlaid with a prominent exclamation mark badge, though at small sizes it easily reads as a generic car with an alert. It fits tasks centered on rideshare/taxi issues (fare disputes, lost items, urgent bookings) or vehicle warnings (check engine light, breakdowns). It should not be used for routine taxi bookings or standard car maintenance where no problem or alert is involved.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "9dc35c2d1717872fc4aa4ce312d73ee14b54e556",
+  "usage": {
+   "prompt": 3924,
+   "output": 990,
+   "thoughts": 0,
+   "total": 4914
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

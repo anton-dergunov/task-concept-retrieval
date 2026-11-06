@@ -1,0 +1,229 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined person bust with circular head and curved shoulders",
+  "modifiers": [
+   "thick vertical rounded bar at upper right"
+  ],
+  "composition": "person silhouette centered-left with vertical pill badge on upper right"
+ },
+ "readings": [
+  {
+   "meaning": "user alert, urgent contact, or person needing attention",
+   "strength": "primary"
+  },
+  {
+   "meaning": "single person, solo participant, or user #1",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "user status or profile indicator",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The vertical bar lacks a bottom dot, so it sits ambiguously between an exclamation mark (alert), the digit 1 (one person), and a status pill; at small sizes it can also resemble a person next to a microphone or phone handset.",
+ "modifier_semantics": [
+  {
+   "modifier": "thick vertical rounded bar at upper right",
+   "meaning": "alert/attention marker, or count of one / active status"
+  }
+ ],
+ "domains": [
+  "communication",
+  "social_family",
+  "work",
+  "admin",
+  "tech"
+ ],
+ "task_intents": [
+  "follow up urgently with a contact",
+  "resolve an account or profile alert",
+  "check in on a family member",
+  "handle a flagged client or user",
+  "update personal profile or status",
+  "assign a single owner to task",
+  "respond to someone waiting on me"
+ ],
+ "example_tasks": [
+  {
+   "task": "Follow up with Marcus urgently",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Unblock Sarah's locked account",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check on Grandma after appointment",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "VIP client escalation",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Fix expired identity verification",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Reply to landlord before he calls again",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call back the contractor waiting on tile choice",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Resolve flagged user report in admin queue",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Reach out to Uncle Bob about Sunday dinner",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Assign single DRI for the migration cutover",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Update emergency contact person on clinic portal",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Clear overdue verification warning on Wise profile",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Get back to Lena before Friday so she can lock in her flights",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Sort out why my contractor profile shows a compliance hold in Deel",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Touch base with the one remaining reference who has not replied yet",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Send details before noon",
+   "parent": "Urgent Client Follow-ups",
+   "domain": "work"
+  },
+  {
+   "task": "Update phone number",
+   "parent": "Emergency Contacts",
+   "domain": "admin"
+  },
+  {
+   "task": "Check status",
+   "parent": "Flagged User Accounts",
+   "domain": "tech"
+  },
+  {
+   "task": "Call back tonight",
+   "parent": "Mom",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Responder urgente a Javier sobre el contrato",
+  "Revisar aviso pendiente en mi perfil de usuario",
+  "Llamar a la tía Carmen para ver cómo sigue"
+ ],
+ "example_tasks_ru": [
+  "Срочно ответить Дмитрию по поводу сметы",
+  "Проверить предупреждение в личном кабинете",
+  "Позвонить дедушке вечером узнать самочувствие"
+ ],
+ "context_tasks": [
+  {
+   "task": "Draft apology email to angry customer",
+   "central": "email"
+  },
+  {
+   "task": "Upload new passport scan for account verification",
+   "central": "passport"
+  },
+  {
+   "task": "Buy thank-you gift for solo babysitter",
+   "central": "gift"
+  },
+  {
+   "task": "Prepare agenda for 1-on-1 with Alex",
+   "central": "agenda document"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Add new teammate to Slack workspace",
+   "better": "user with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Record solo podcast episode intro",
+   "better": "microphone",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay urgent electricity bill before shutoff",
+   "better": "invoice or lightning bolt",
+   "trap": "property"
+  },
+  {
+   "task": "Check team headcount spreadsheet for Q3",
+   "better": "spreadsheet or group of people",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Book flight to Berlin for client meeting",
+   "better": "airplane",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Delete inactive guest user from router",
+   "better": "user with minus or trash",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "Wait - let's check example_tasks count! Must be EXACTLY 16.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "d9b4281ef17611e139f577ab5a75974c6a9241e4",
+  "usage": {
+   "prompt": 3923,
+   "output": 1642,
+   "thoughts": 198,
+   "total": 5763
+  },
+  "soft_problems": [
+   "example_tasks: 19 != 16"
+  ],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round stopwatch outline with top crown and side button",
+  "modifiers": [
+   "bold digit 5 centered inside the dial"
+  ],
+  "composition": "single object, front view, centered numeral inside circular frame"
+ },
+ "readings": [
+  {
+   "meaning": "5-second or 5-minute countdown timer setting",
+   "strength": "primary"
+  },
+  {
+   "meaning": "stopwatch or kitchen timer",
+   "strength": "primary"
+  },
+  {
+   "meaning": "quick 5-minute task or short interval",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "It is a camera self-timer UI toggle (5s delay) rather than a real-world object, and the number 5 is easily confused with a generic stopwatch or a 3/6/8 at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "bold digit 5 centered inside the dial",
+   "meaning": "specific duration or countdown delay of 5 units (seconds or minutes)"
+  }
+ ],
+ "domains": [
+  "home",
+  "shopping",
+  "health_fitness",
+  "food",
+  "work",
+  "tech"
+ ],
+ "task_intents": [
+  "buy or replace a kitchen timer",
+  "fix or configure a countdown timer",
+  "time workout intervals with a stopwatch",
+  "set up a Pomodoro timer workflow",
+  "calibrate darkroom or photography self-timer",
+  "knock out a quick five-minute chore"
+ ],
+ "example_tasks": [
+  {
+   "task": "new magnetic kitchen timer",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "5-minute plank interval test",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Swap battery in stopwatch",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "visual timer for kids",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "test camera 5s self-timer",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Buy a mechanical twist timer that sticks to the fridge door",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Set up a 5-minute break countdown on my work laptop",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pack the digital coach stopwatch in the track meet bag",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Find out why the oven timer beeps once and stops",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order a 5-minute sand hourglass for board game turns",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Order two spare CR2032 batteries",
+   "parent": "Track Coach Stopwatch",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Compare tactile models on Amazon",
+   "parent": "Kitchen Timer Replacement",
+   "domain": "shopping"
+  },
+  {
+   "task": "Fix the rattle inside the button",
+   "parent": "Espresso Shot Timer",
+   "domain": "food"
+  },
+  {
+   "task": "Enable desktop notifications in settings",
+   "parent": "Pomodoro Timer App",
+   "domain": "work"
+  },
+  {
+   "task": "Get a waterproof countdown timer for the shower so the teenager stops using all the hot water",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Program the interval gym timer for 5-minute warmups and 90-second rest blocks before Tuesday's class",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check whether the vintage darkroom enlarger timer still holds an accurate five-second exposure count",
+   "parent": "",
+   "domain": "creative"
+  }
+ ],
+ "example_tasks_es": [
+  "Comprar un temporizador magnético para el horno",
+  "Cambiarle la pila al cronómetro de atletismo antes del sábado",
+  "Configurar el temporizador de intervalos de 5 minutos para la rutina de boxeo"
+ ],
+ "example_tasks_ru": [
+  "Купить механический таймер на кухню",
+  "Настроить пятиминутный таймер разминки в приложении для тренировок",
+  "Заменить батарейку в секундомере перед школьными соревнованиями по плаванию"
+ ],
+ "context_tasks": [
+  {
+   "task": "Steep the oolong tea leaves for exactly 5 minutes",
+   "central": "tea"
+  },
+  {
+   "task": "Take group family photo on the tripod using the 5-second delay",
+   "central": "camera / photo"
+  },
+  {
+   "task": "Soft-boil six eggs for ramen night",
+   "central": "eggs"
+  },
+  {
+   "task": "Practice 5-minute lightning pitch deck before Thursday's demo",
+   "central": "presentation / pitch"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Reply to Sarah's email (only takes 5 minutes)",
+   "better": "email / envelope",
+   "trap": "property"
+  },
+  {
+   "task": "Catch the 5 o'clock train to Chicago",
+   "better": "train",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pick up my watch from the jeweler at 5pm",
+   "better": "wristwatch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy 5 apples for the pie",
+   "better": "apple",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the $55 parking ticket online",
+   "better": "receipt / fine / car",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check how long the roast has left in the oven",
+   "better": "roast / oven",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This glyph is a camera UI control for a 5-second self-timer delay—a specific numeric setting rather than a task subject. In a task list, a plain stopwatch without the '5' covers timer tasks better, while tasks that merely take 5 minutes should show their actual subject.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "346c85cdc468b4f386419efc01eff63d2881ce95",
+  "usage": {
+   "prompt": 3924,
+   "output": 1716,
+   "thoughts": 136,
+   "total": 5776
+  },
+  "soft_problems": [
+   "example_tasks: 17 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

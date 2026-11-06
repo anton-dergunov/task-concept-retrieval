@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "heraldic shield outline with pointed top and bottom",
+  "modifiers": [
+   "centered bold exclamation mark inside shield"
+  ],
+  "composition": "single object, front view, centered modifier"
+ },
+ "readings": [
+  {
+   "meaning": "security alert, vulnerability, or data breach",
+   "strength": "primary"
+  },
+  {
+   "meaning": "fraud warning or identity theft alert",
+   "strength": "primary"
+  },
+  {
+   "meaning": "insurance claim, coverage dispute, or policy lapse",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "safety hazard or protection failure",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a generic warning sign (triangle with exclamation mark) or an information badge (if the inverted exclamation mark is misread as an 'i' at tiny sizes).",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "alert, warning, urgent issue, or compromised status"
+  }
+ ],
+ "domains": [
+  "tech",
+  "finance",
+  "admin",
+  "work",
+  "home"
+ ],
+ "task_intents": [
+  "resolve compromised account security alert",
+  "patch critical software vulnerability",
+  "place fraud alert on credit bureaus",
+  "respond to suspicious login warning",
+  "fix expired SSL certificate warning",
+  "handle lapsed insurance policy notice",
+  "investigate home alarm system fault",
+  "review flagged antivirus quarantine items"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix Dependabot vulnerability alerts",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Place credit freeze after breach",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Investigate Google suspicious login warning",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear antivirus quarantine warnings",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Review flagged transactions",
+   "parent": "Fraud Alert",
+   "domain": "finance"
+  },
+  {
+   "task": "Rotate all API keys exposed in the public repo yesterday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Change passwords flagged as leaked in Apple Passwords security checkup",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call State Farm about the lapsed coverage notice on the Honda",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Patch the high-severity CVE in our production Nginx container",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check why the SimpliSafe base station keeps flashing a trouble light",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call Equifax support line today",
+   "parent": "Identity Theft Recovery",
+   "domain": "finance"
+  },
+  {
+   "task": "Triage open high-priority findings",
+   "parent": "Q3 Security Audit",
+   "domain": "work"
+  },
+  {
+   "task": "Send the signed affidavit to the bank",
+   "parent": "Card Compromise",
+   "domain": "finance"
+  },
+  {
+   "task": "Dispute the two unauthorized Wise transfers from Tuesday and lock the debit card immediately",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Renew the expired Let's Encrypt certificate on the staging server before testers get blocked",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Report the phishing email pretending to be from HR to the infosec team",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar las contraseñas marcadas como filtradas en el gestor de Chrome",
+  "Llamar al banco por el aviso de cargo sospechoso en la tarjeta Visa",
+  "Corregir las vulnerabilidades críticas detectadas por Snyk en el repositorio"
+ ],
+ "example_tasks_ru": [
+  "Сменить пароли после уведомления об утечке базы данных магазина",
+  "Обновить сертификат безопасности на сайте, чтобы убрать предупреждение браузера",
+  "Позвонить в Сбер по поводу заблокированной из-за подозрительной операции карты"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a YubiKey 5C Nano for two-factor authentication",
+   "central": "security key / USB token"
+  },
+  {
+   "task": "Shred old tax returns and bank statements from 2017",
+   "central": "paper shredder / documents"
+  },
+  {
+   "task": "Replace backup battery in the hallway smoke and carbon monoxide detector",
+   "central": "battery / smoke detector"
+  },
+  {
+   "task": "Write post-mortem document for Friday's DDoS incident",
+   "central": "document / report"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a waterproof and shockproof case for the new iPad",
+   "better": "tablet case",
+   "trap": "property"
+  },
+  {
+   "task": "Verify that the garage door is locked before heading to the airport",
+   "better": "garage door or padlock",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Clean the plastic face shield from the woodworking shop",
+   "better": "safety mask / visor",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check the engine oil pressure warning light on the dashboard",
+   "better": "car / oil can warning",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order catering for the team lunch",
+   "better": "food / catering",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Set up a Roth IRA for long-term financial security",
+   "better": "piggy bank / investment chart",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a shield with an exclamation mark inside, universally understood as a security warning, vulnerability, breach, or fraud alert. It fits well for tasks involving compromised passwords, software vulnerabilities, credit freezes, and alarm faults, though it must be distinguished from a plain shield (general protection/insurance) or a triangular hazard sign.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a50dd3276364ea8179de852b0bcf95e7d527f9cb",
+  "usage": {
+   "prompt": 3923,
+   "output": 1705,
+   "thoughts": 73,
+   "total": 5701
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

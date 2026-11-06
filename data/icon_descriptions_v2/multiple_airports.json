@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "map location pin containing an upward-pointing airplane silhouette",
+  "modifiers": [
+   "airplane inside pin",
+   "curved offset line along right side"
+  ],
+  "composition": "map pin on left with a parallel curved arc on the right signaling stack or signal"
+ },
+ "readings": [
+  {
+   "meaning": "airport location, terminal, or flight tracking",
+   "strength": "primary"
+  },
+  {
+   "meaning": "multiple travel destinations or multi-airport itinerary",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "live flight radar or airtag at airport",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The curved line on the right could be read as a radio signal wave (tracking/radar) or as a second stacked map pin behind the first (multiple airports or destinations).",
+ "modifier_semantics": [
+  {
+   "modifier": "airplane inside pin",
+   "meaning": "airport, air travel destination, or flight location"
+  },
+  {
+   "modifier": "curved offset line along right side",
+   "meaning": "live tracking signal or multiple stacked locations"
+  }
+ ],
+ "domains": [
+  "travel",
+  "social_family",
+  "work",
+  "tech",
+  "admin"
+ ],
+ "task_intents": [
+  "find airport terminal and gate location",
+  "track incoming flight arrival status",
+  "plan airport pickup or dropoff",
+  "save airport map for offline use",
+  "compare nearby regional airports for trip",
+  "set up luggage tracker before flight",
+  "navigate between connecting airport terminals",
+  "share live flight tracking link"
+ ],
+ "example_tasks": [
+  {
+   "task": "Track Mom's flight from Denver",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Save Heathrow Terminal 5 map",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check cell phone lot location",
+   "parent": "Airport Pickup",
+   "domain": "social_family"
+  },
+  {
+   "task": "Download Flightradar24 before Tuesday",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pin both Tokyo airports",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Look up which terminal Delta flies out of at JFK",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send live flight tracker link to the client in Chicago",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check distance from hotel to both Milan airports before booking",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Confirm which arrivals curb has the Uber pickup zone",
+   "parent": "LAX Layover",
+   "domain": "travel"
+  },
+  {
+   "task": "Verify whether Newark or LaGuardia is faster from Midtown at 5pm",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pair new AirTag and put it inside checked suitcase",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Share arrival gate and baggage claim carousel number with dad",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Map out the transfer route from Orly to Charles de Gaulle",
+   "parent": "Paris Connection",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out how long the shuttle takes between the economy lot and Terminal B",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set up flight alerts for BA 283 so we leave for the airport on time",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check if the regional airport near Asheville reopened after the storm",
+   "parent": "November Conference",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Ver a qué terminal de Barajas llega el vuelo de Laura",
+  "Seguir el vuelo IB6845 en tiempo real antes de salir hacia el aeropuerto",
+  "Guardar en el mapa los dos aeropuertos de Buenos Aires para no confundirnos"
+ ],
+ "example_tasks_ru": [
+  "Посмотреть, в какой терминал Шереметьево прилетает рейс из Сочи",
+  "Отследить самолёт родителей по флайтрадару перед выездом",
+  "Отметить на карте зону посадки такси у аэропорта Пулково"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pre-book long-term parking near Terminal 2",
+   "central": "parking / car"
+  },
+  {
+   "task": "Check Priority Pass lounge hours in Concourse C",
+   "central": "lounge / armchairs"
+  },
+  {
+   "task": "Buy duty-free gin at the airport before boarding",
+   "central": "bottle / shopping bag"
+  },
+  {
+   "task": "Exchange leftover yen at the airport kiosk",
+   "central": "currency exchange"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Turn phone on airplane mode before takeoff",
+   "better": "airplane mode toggle or phone with airplane",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy neck pillow for the 11-hour flight",
+   "better": "neck pillow or shopping bag",
+   "trap": "property"
+  },
+  {
+   "task": "Renew passport before the Europe trip",
+   "better": "passport booklet",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check in online 24 hours before flight and download boarding pass",
+   "better": "boarding pass / ticket",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Drop pin at the trailhead parking lot",
+   "better": "standard map pin or hiking trail icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Weigh checked suitcase so it stays under 23 kg",
+   "better": "luggage / suitcase or scale",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a map pin with an airplane inside and an adjacent curved arc, immediately evoking an airport location, flight tracking, or multiple air travel stops. It fits real-world tasks around navigating airports, picking people up from flights, and tracking arrivals, though the right-hand arc is slightly ambiguous between a radar wave and a stacked pin.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "eb5339445ac256c240643d055e93a9f38fedef8f",
+  "usage": {
+   "prompt": 3926,
+   "output": 1743,
+   "thoughts": 0,
+   "total": 5669
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

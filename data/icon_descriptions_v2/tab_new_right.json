@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rounded square frame containing a centered plus sign",
+  "modifiers": [
+   "centered plus sign",
+   "right-pointing arrow at bottom right corner"
+  ],
+  "composition": "single square glyph with inner cross and bottom-right corner overlay"
+ },
+ "readings": [
+  {
+   "meaning": "add and proceed, insert next, or export new item",
+   "strength": "primary"
+  },
+  {
+   "meaning": "medical referral, hospital discharge, or clinic transfer",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "create shortcut or send new entry",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Reads either as generic UI chrome for 'add and go forward' or as a hospital/first-aid cross box with an outbound arrow (medical referral or discharge).",
+ "modifier_semantics": [
+  {
+   "modifier": "centered plus sign",
+   "meaning": "add, create new, or medical/health cross"
+  },
+  {
+   "modifier": "right-pointing arrow at bottom right corner",
+   "meaning": "send, export, forward, or transfer out"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "tech",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "request specialist medical referral from clinic",
+  "complete hospital discharge paperwork",
+  "transfer medical records to new doctor",
+  "add new records and export batch",
+  "implement create-and-continue button in form",
+  "forward newly created ticket to team"
+ ],
+ "example_tasks": [
+  {
+   "task": "dermatologist referral letter",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Dad's hospital discharge forms",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "add and next button",
+   "parent": "Checkout Redesign",
+   "domain": "tech"
+  },
+  {
+   "task": "physical therapy referral",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "transfer clinic file",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Ask GP to send the knee specialist referral over to St. Jude's",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Wire up the 'Save and Continue' action on the onboarding modal",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pick up discharge summary from the nurse's station before noon",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Forward the newly created vendor onboarding packet to accounting",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Send immunization record transfer request to the new pediatrician",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Paperwork for moving clinics",
+   "parent": "Dental Care",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Export newly added SKU rows to the warehouse staging sheet",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Request the formal referral code from insurance before Tuesday's MRI appointment",
+   "parent": "Knee Surgery",
+   "domain": "admin"
+  },
+  {
+   "task": "Build the quick-add shortcut that immediately opens the created issue in a new view",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure the outpatient clinic forwards Mom's post-op instructions to her regular doctor",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Set up automated rule to route any newly created support ticket straight to tier two",
+   "parent": "Helpdesk Ops",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Pedir el volante de derivación para el traumatólogo en el centro de salud",
+  "Recoger el informe de alta hospitalaria de la abuela",
+  "Programar el botón de crear y continuar en el formulario de registro"
+ ],
+ "example_tasks_ru": [
+  "Взять у терапевта направление к эндокринологу",
+  "Забрать выписной эпикриз из больницы до пятницы",
+  "Настроить кнопку «Создать и перейти» в карточке заказа"
+ ],
+ "context_tasks": [
+  {
+   "task": "Call insurance about out-of-network specialist coverage",
+   "central": "phone call / insurance"
+  },
+  {
+   "task": "Pack bag for bringing Dad home from the ward",
+   "central": "bag / luggage"
+  },
+  {
+   "task": "Keyboard shortcut for fast item entry in the backlog",
+   "central": "keyboard"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Restock ibuprofen and gauze in the car first-aid kit",
+   "better": "first-aid kit / medical briefcase",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add olive oil and garlic to the grocery list",
+   "better": "shopping cart / grocery list",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Calculate additional tax withholding for next quarter",
+   "better": "calculator / tax document",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new external monitor for the home office",
+   "better": "monitor / display",
+   "trap": "property"
+  },
+  {
+   "task": "Book flights to Zurich for the autumn conference",
+   "better": "airplane",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the pharmacy co-pay invoice online",
+   "better": "credit card / receipt",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "The icon is an abstract UI action glyph showing a plus-in-a-box with a right arrow ('add and proceed' or 'create and export'), which has no concrete physical subject for a to-do list. Even if interpreted secondarily as a medical cross with an outbound arrow (referral/discharge), it is too ambiguous and easily confused with generic 'add' or 'first aid' icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "aa23555e27a1a7afdecc6e9ec8e79222c5846543",
+  "usage": {
+   "prompt": 3920,
+   "output": 1679,
+   "thoughts": 392,
+   "total": 5991
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

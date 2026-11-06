@@ -1,0 +1,221 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "open hand palm up with a cuff on the left",
+  "modifiers": [
+   "checkmark above the palm",
+   "diagonal slash across the whole icon"
+  ],
+  "composition": "side view of hand with checkmark above, crossed out by diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "unapprove, revoke approval, or reject",
+   "strength": "primary"
+  },
+  {
+   "meaning": "decline an offer or request",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel a handover, delivery, or acceptance",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "disallow permissions or revoke access",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the crossed-out palm looks like a muted speaker cone or a broken shoe outline, and the mix of a positive checkmark with a negative slash is contradictory and hard to parse quickly.",
+ "modifier_semantics": [
+  {
+   "modifier": "checkmark",
+   "meaning": "approved, accepted, or verified"
+  },
+  {
+   "modifier": "diagonal slash",
+   "meaning": "negated, revoked, disabled, or refused"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "finance",
+  "tech",
+  "shopping"
+ ],
+ "task_intents": [
+  "reject a pending request or proposal",
+  "revoke previously granted approval",
+  "decline an offer or quote",
+  "refuse a damaged delivery",
+  "deny access or user permissions",
+  "withdraw consent or authorization",
+  "cancel a scheduled handover"
+ ],
+ "example_tasks": [
+  {
+   "task": "Reject the plumber's quote",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Decline job offer politely",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Revoke contractor repo access",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Refuse delivery of dented fridge",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Deny expense report #408",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Turn down the lowball offer on the civic",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Unapprove the draft blog post before Friday's newsletter run",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Withdraw photo release consent at the kids' soccer club",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Reject the kitchen cabinet variations from the builder",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Revoke third-party app permissions on my Google account",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Send a polite pass on the speaking engagement in November",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Dispute and reject the auto-renewal charge from Adobe",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Clear out the three stalled PRs that failed security review",
+   "parent": "Release Approval Queue",
+   "domain": "tech"
+  },
+  {
+   "task": "Send back the ones missing VAT receipts from the Berlin trip",
+   "parent": "Expense Approvals",
+   "domain": "finance"
+  },
+  {
+   "task": "Mark the two out-of-scope items before the noon call",
+   "parent": "Vendor Sign-offs",
+   "domain": "work"
+  },
+  {
+   "task": "Reply to the two out-of-budget quotes from yesterday",
+   "parent": "Roofing Bids",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Rechazar el presupuesto del chapista por caro",
+  "Revocar el permiso de débito automático del gimnasio",
+  "No aceptar el paquete de Correo si la caja viene abierta"
+ ],
+ "example_tasks_ru": [
+  "Отклонить заявку на отпуск в закрытый период",
+  "Отозвать согласие на обработку данных в банке",
+  "Отказаться от приёмки дивана, если снова привезут с браком"
+ ],
+ "context_tasks": [
+  {
+   "task": "Write back to the agency explaining why we passed on their pitch",
+   "central": "email / message"
+  },
+  {
+   "task": "Check the return policy if we refuse the courier at the door",
+   "central": "return policy document"
+  },
+  {
+   "task": "Audit which former freelancers still have write access to Notion",
+   "central": "user list / permissions"
+  },
+  {
+   "task": "Draft the rejection template for junior designer applicants",
+   "central": "document template"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Approve Q3 marketing budget before Friday",
+   "better": "hand with checkmark (without slash) or plain checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mute the living room TV during the call",
+   "better": "muted speaker icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy non-approved carry-on bag for testing",
+   "better": "suitcase / bag icon",
+   "trap": "property"
+  },
+  {
+   "task": "Check whether the permit was rejected by the city",
+   "better": "document / permit icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Wash hands before kneading the sourdough",
+   "better": "hands with soap / water icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Call the bank to ask about the mortgage timeline",
+   "better": "phone icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon shows an outstretched hand beneath a checkmark, crossed out by a diagonal slash, meaning 'unapprove', 'reject', or 'revoke acceptance'. While it fits tasks about declining offers, rejecting requests, or revoking permissions, the diagonal slash obscures the hand and clashes visually with the checkmark, making it look like a muted speaker at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "43f759e62c8d9bbed4a1cbf3f37f78c73ee4ea65",
+  "usage": {
+   "prompt": 3921,
+   "output": 1699,
+   "thoughts": 0,
+   "total": 5620
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,210 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "a speaker box and a pair of over-ear headphones",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "two overlapping objects in front view cut by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "audio output disabled / no sound devices",
+   "strength": "primary"
+  },
+  {
+   "meaning": "disconnect headphones and speakers",
+   "strength": "primary"
+  },
+  {
+   "meaning": "broken or missing audio equipment",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "quiet zone / no loud audio or headphones allowed",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the slashed speaker box and headphones break into disconnected strokes that resemble a broken document, a slashed padlock, or an unreadable abstract symbol.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, disconnected, muted, or prohibited"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "home",
+  "admin"
+ ],
+ "task_intents": [
+  "fix missing audio output device",
+  "disable computer speakers and headphones",
+  "troubleshoot disconnected Bluetooth audio gear",
+  "unplug desk speakers and headset",
+  "enforce no-headphones rule during exam",
+  "mute all external sound outputs"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix missing audio devices error",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unplug speakers and headset",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Disable onboard sound outputs",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Reinstall Realtek driver",
+   "parent": "No Audio Output Device Installed",
+   "domain": "tech"
+  },
+  {
+   "task": "Check front panel header cable",
+   "parent": "Speakers and Headphones Not Detected",
+   "domain": "tech"
+  },
+  {
+   "task": "Figure out why Windows 11 lost both my desktop speakers and Sony headphones",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disconnect all Bluetooth headphones and smart speakers from the old iPad before selling",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off automatic audio switching between the monitor speakers and wireless headset",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pack away the bookshelf speakers and studio headphones before the painters arrive",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Update proctoring rules to ban headphones and external speakers during the certification test",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Disable unused HDMI monitor audio and virtual headphone devices in Device Manager",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Stop Zoom from routing call sound to disconnected speakers or turned-off headphones",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Reset PulseAudio config",
+   "parent": "Linux Sound Output Broken",
+   "domain": "tech"
+  },
+  {
+   "task": "Test motherboard jack",
+   "parent": "Dead Headphone and Speaker Ports",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix the bug where unplugging the USB DAC leaves macOS with no audio output devices at all",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear out the drawer of broken earbuds, blown PC speakers, and frayed headphone cables",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Solucionar el error de Windows cuando no detecta ni los altavoces ni los auriculares",
+  "Desconectar los altavoces del escritorio y guardar los cascos antes de mudar la oficina",
+  "Deshabilitar las salidas de audio no utilizadas en el panel de control de sonido"
+ ],
+ "example_tasks_ru": [
+  "Исправить ошибку отсутствия устройств вывода звука после обновления драйвера на ПК",
+  "Отключить колонки и беспроводные наушники от старого ноутбука перед продажей",
+  "Проверить, почему передняя панель корпуса перестала видеть и наушники, и акустику"
+ ],
+ "context_tasks": [
+  {
+   "task": "Edit the tutorial video with captions so it works without speakers or headphones",
+   "central": "video captions"
+  },
+  {
+   "task": "Set up visual doorbell alerts for when my headphones and speakers are off",
+   "central": "doorbell alerts"
+  },
+  {
+   "task": "Practice the presentation slides silently while the room audio system is down",
+   "central": "presentation slides"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy new noise-cancelling headphones for the flight to Tokyo",
+   "better": "headphones (without slash)",
+   "trap": "property"
+  },
+  {
+   "task": "Set up the new bookshelf speakers in the living room",
+   "better": "speaker (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check whether the Bluetooth speaker battery is charged",
+   "better": "speaker or battery",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order replacement velour ear pads for the Sennheiser HD600",
+   "better": "headphones",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Mute microphone during the all-hands town hall",
+   "better": "slashed microphone",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Unlock the back gate before the meter reader arrives",
+   "better": "unlocked padlock",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon combines a rectangular speaker box and over-ear headphones crossed out by a diagonal slash, representing disabled or disconnected audio output devices. Because the slash breaks up two already compact shapes, the glyph is visually cluttered at list size and only fits a narrow set of audio-troubleshooting or device-disabling tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "1695ec95c91992afeb020a6ee64ff5d2e276c3d6",
+  "usage": {
+   "prompt": 3924,
+   "output": 1664,
+   "thoughts": 132,
+   "total": 5720
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

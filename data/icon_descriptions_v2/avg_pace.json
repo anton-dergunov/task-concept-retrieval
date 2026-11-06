@@ -1,0 +1,223 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "dial or clock face with single hand pointing upper-left",
+  "modifiers": [
+   "solid left half-circle rim",
+   "five dots forming right half-circle rim"
+  ],
+  "composition": "single circular gauge, front view"
+ },
+ "readings": [
+  {
+   "meaning": "countdown timer or kitchen timer",
+   "strength": "primary"
+  },
+  {
+   "meaning": "self-timer or delay setting (e.g. camera, appliance)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "time limit, duration, or Pomodoro interval",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "speedometer or rotary control knob",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with a generic clock, a loading spinner, a volume/dimmer knob, or a camera self-timer setting icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "half-dotted, half-solid circle",
+   "meaning": "elapsed vs remaining time, or ticking countdown steps"
+  }
+ ],
+ "domains": [
+  "home",
+  "food",
+  "work",
+  "tech",
+  "health_fitness",
+  "shopping"
+ ],
+ "task_intents": [
+  "buy or replace a physical timer",
+  "configure a smart plug timer",
+  "set up an irrigation timer",
+  "fix a broken appliance timer",
+  "set up a Pomodoro work timer",
+  "program an oven delay-start timer",
+  "adjust stairway light shutoff delay"
+ ],
+ "example_tasks": [
+  {
+   "task": "New magnetic kitchen timer",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Fix dryer timer knob",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Buy visual timer for kids",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Set up Pomodoro app",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Replace CR2032 battery",
+   "parent": "Hose bib timer",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Program the outdoor plug timer so the patio string lights turn off at midnight",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Read the manual on how the oven delay-start timer actually works",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Shorten the hallway motion sensor shutoff delay from ten minutes to two",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Configure screen time limits and daily app timers on Leo's tablet",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set up a 20-20-20 break timer on the work laptop for eye strain",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Test the 10-second self-timer and tripod release before the family portrait on Sunday",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Order a mechanical darkroom timer that ticks loudly enough to hear in the shed",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Swap to winter schedule",
+   "parent": "Pool pump timer",
+   "domain": "home"
+  },
+  {
+   "task": "Check why it keeps resetting at noon",
+   "parent": "Sprinkler timer",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Compare the 60-minute Time Timer against cheaper visual countdown clocks for the study desk",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Unstick the jammed dial on the toaster oven",
+   "parent": "Kitchen timers & controls",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Comprar un temporizador magnético para la cocina",
+  "Programar el temporizador del riego automático antes de irnos de viaje",
+  "Ajustar el tiempo de apagado automático de la luz de la escalera"
+ ],
+ "example_tasks_ru": [
+  "Купить механический таймер для духовки",
+  "Настроить таймер автополива в теплице на шесть утра",
+  "Поменять батарейку в розеточном таймере для аквариума"
+ ],
+ "context_tasks": [
+  {
+   "task": "Descale the espresso machine for 20 minutes per cycle",
+   "central": "espresso machine"
+  },
+  {
+   "task": "Practice 5-minute lightning talk with slides",
+   "central": "presentation / talk"
+  },
+  {
+   "task": "Hold plank for 90 seconds every morning",
+   "central": "plank exercise"
+  },
+  {
+   "task": "Steep cold brew batch for 14 hours before filtering",
+   "central": "cold brew coffee"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Take roast out of the oven in 45 minutes",
+   "better": "roast / oven",
+   "trap": "property"
+  },
+  {
+   "task": "Buy a vintage brass wall clock for the dining room",
+   "better": "wall clock (two hands, full circle)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check tyre pressure gauge before driving to Bristol",
+   "better": "pressure gauge / tyre",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Finish tax return before the April 15 deadline",
+   "better": "tax form / calendar",
+   "trap": "property"
+  },
+  {
+   "task": "Submit weekly timesheet to payroll",
+   "better": "timesheet / document",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order replacement dimmer knob for the living room lamp",
+   "better": "lamp / dimmer switch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy waterproof digital watch for lap swimming",
+   "better": "wristwatch",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The half-solid, half-dotted circle with a single pointer is the standard Material glyph for a countdown timer or self-timer. It fits tasks centered on physical or digital timers (kitchen timers, plug/irrigation timers, Pomodoro apps, shutoff delays), though it should not be used merely because a task mentions a duration or deadline.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "3180d159e7aeb627f8c9d0e98e0272fb0c9108dd",
+  "usage": {
+   "prompt": 3917,
+   "output": 1755,
+   "thoughts": 0,
+   "total": 5672
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "floppy disk save icon with top rectangle and center circle",
+  "modifiers": [
+   "circular clock badge in bottom right corner"
+  ],
+  "composition": "single object front view with lower-right badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "scheduled backup or automatic backup",
+   "strength": "primary"
+  },
+  {
+   "meaning": "auto-save or periodic save setting",
+   "strength": "primary"
+  },
+  {
+   "meaning": "version history or restore point",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "save for later or pending save",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the partially occluded center hub of the floppy disk next to the clock can look like a camera lens or a generic file with a timer.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular clock badge in bottom right corner",
+   "meaning": "scheduled, automatic, periodic, or historical versions"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "creative",
+  "admin",
+  "home"
+ ],
+ "task_intents": [
+  "set up scheduled computer backups",
+  "configure auto-save interval in software",
+  "verify nightly database backup schedule",
+  "restore file from version history",
+  "create system restore point before update",
+  "enable hourly Time Machine snapshots",
+  "check automated cloud backup logs"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn on Time Machine",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set Blender autosave to 2min",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Check nightly NAS logs",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Fix cron job timing",
+   "parent": "Server Backups",
+   "domain": "tech"
+  },
+  {
+   "task": "Test Friday restore point",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Schedule weekly family photo backup to the external SSD drive",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Shorten the auto-save interval in Premiere before cutting the wedding reel",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Make sure Postgres automated snapshots run at 3am UTC instead of noon",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Create a Windows system restore point before installing the new GPU drivers",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Switch the accounting folder to daily version history retention for audit season",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Move the scheduled run to Sunday morning so it stops lagging",
+   "parent": "MacBook Time Machine",
+   "domain": "tech"
+  },
+  {
+   "task": "Check why last night's run failed on the living room PC",
+   "parent": "Backblaze Automatic Backup",
+   "domain": "home"
+  },
+  {
+   "task": "Prune old snapshots older than ninety days to free up space",
+   "parent": "Proxmox Backup Schedule",
+   "domain": "tech"
+  },
+  {
+   "task": "Set up Borgmatic timer on the home server so Obsidian notes back up every night",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Roll the shared budget spreadsheet back to Tuesday's saved version before the broken macro ran",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Change Scrivener automatic backup settings to keep the last twenty-five dated zip files on Dropbox",
+   "parent": "",
+   "domain": "creative"
+  }
+ ],
+ "example_tasks_es": [
+  "Programar la copia de seguridad automática del Mac cada noche a las dos",
+  "Bajar el intervalo de autoguardado en AutoCAD a cinco minutos para no perder cambios",
+  "Crear punto de restauración del sistema antes de actualizar los drivers"
+ ],
+ "example_tasks_ru": [
+  "Настроить еженощный бэкап базы данных на резервный сервер в три часа ночи",
+  "Проверить автосохранение проекта в DaVinci Resolve после вчерашнего вылета",
+  "Откатить таблицу расходов к сохраненной версии за прошлый вторник"
+ ],
+ "context_tasks": [
+  {
+   "task": "Clean out the scratch disk so Premiere autosaves stop throwing full-disk warnings",
+   "central": "hard drive / storage"
+  },
+  {
+   "task": "Plug the 4TB Seagate drive back into the router for tonight's Time Machine run",
+   "central": "external hard drive"
+  },
+  {
+   "task": "Ask IT how long archived project snapshots are kept on the server",
+   "central": "message / colleague"
+  },
+  {
+   "task": "Update credit card on Backblaze before the monthly backup renewal fails",
+   "central": "credit card"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a pack of 3.5-inch floppy disks on eBay for the retro synth",
+   "better": "plain floppy disk or shopping cart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Save $500 a month toward the summer trip to Japan",
+   "better": "piggy bank or money",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Save time on weekday mornings by prepping oats the night before",
+   "better": "bowl / food prep",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a new UPS battery for the NAS server",
+   "better": "battery / power supply",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Export the final podcast episode to MP3 with fast-save enabled",
+   "better": "microphone / audio file",
+   "trap": "property"
+  },
+  {
+   "task": "Check how much time is left on the parking meter downstairs",
+   "better": "clock / parking meter",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a classic floppy disk ('save' or 'backup') with a clock badge ('scheduled', 'automatic', or 'history'). It fits tasks about configuring scheduled backups, auto-save intervals, and version history restores, though it is narrower than a general save or backup icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "1f69249c713d1eae2e356694408f0ec68de9247e",
+  "usage": {
+   "prompt": 3921,
+   "output": 1744,
+   "thoughts": 168,
+   "total": 5833
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "partially filled cellular signal triangle with small wifi arcs",
+  "modifiers": [
+   "small wifi symbol at top left",
+   "partially empty bar on the right"
+  ],
+  "composition": "combined status bar glyph, flat profile"
+ },
+ "readings": [
+  {
+   "meaning": "Wi-Fi calling or combined cellular and wireless network connection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mobile hotspot or tethering",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "network connectivity or internet signal",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "As an OS status-bar indicator showing specific signal strength (3 out of 4 bars), it is easily confused with a plain Wi-Fi or plain cellular icon at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "small wifi symbol at top left",
+   "meaning": "wireless network or Wi-Fi calling"
+  },
+  {
+   "modifier": "partially empty bar on the right",
+   "meaning": "medium-high signal strength (3 of 4 bars)"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "travel",
+  "admin",
+  "finance"
+ ],
+ "task_intents": [
+  "enable Wi-Fi calling on phone",
+  "set up mobile hotspot for travel",
+  "troubleshoot weak cell reception at home",
+  "switch mobile carrier or data plan",
+  "configure router fallback to cellular data",
+  "test network signal in basement office"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn on Wi-Fi calling",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test hotspot before train trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix basement dead zone",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Compare eSIM data plans",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Set up backup LTE modem",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Enable Wi-Fi calling on mom's iPhone so calls stop dropping",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check whether our T-Mobile plan includes international tethering in Italy",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Move the mesh node closer to the back patio window",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call Verizon about the terrible reception inside the new apartment",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Update emergency E911 address",
+   "parent": "Wi-Fi Calling",
+   "domain": "admin"
+  },
+  {
+   "task": "Change password before sharing",
+   "parent": "Mobile Hotspot",
+   "domain": "tech"
+  },
+  {
+   "task": "Run speed test in every room",
+   "parent": "Home Network",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel the extra data line",
+   "parent": "Cell & Internet",
+   "domain": "finance"
+  },
+  {
+   "task": "Configure the dual-WAN router to fail over to the LTE stick when fiber drops",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Walk the cabin property with both phones to see which carrier actually gets bars",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Switch the work laptop off the metered phone hotspot before running the big update",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Activar las llamadas por Wi-Fi en el móvil antes de ir al pueblo",
+  "Comprobar cuántos gigas de compartir internet incluye la tarifa de Pepephone",
+  "Poner el repetidor en el pasillo para que llegue señal al despacho"
+ ],
+ "example_tasks_ru": [
+  "Включить звонки по Wi-Fi на телефоне, чтобы ловило в цоколе",
+  "Проверить лимит раздачи интернета по тарифу перед поездкой на дачу",
+  "Настроить автоматическое переключение роутера на резервный 4G-модем"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download offline maps for the canyon hike where there is no reception",
+   "central": "map"
+  },
+  {
+   "task": "Pay the monthly fiber and mobile bundle bill",
+   "central": "bill / payment"
+  },
+  {
+   "task": "Buy a prepaid tourist SIM card at the Lisbon airport",
+   "central": "SIM card"
+  },
+  {
+   "task": "Mount the external LTE antenna on the RV roof",
+   "central": "antenna / RV"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a small waterproof wireless speaker for the shower",
+   "better": "speaker",
+   "trap": "property"
+  },
+  {
+   "task": "Check why the podcast app keeps buffering on the commute",
+   "better": "podcast / headphones",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Practice hand signals for the group cycling ride on Sunday",
+   "better": "bicycle / hand",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Measure the roof slope with a carpenter's square",
+   "better": "ruler / set square",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the portable battery bank in the carry-on",
+   "better": "battery / power bank",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is a system status-bar indicator showing a specific signal level (3 out of 4 cellular bars combined with Wi-Fi) rather than a clean subject noun. Because it encodes a UI state/quantity and is nearly indistinguishable from plain Wi-Fi or cellular icons in a task list, it should be discarded in favor of a simple Wi-Fi or router icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b0b0cffd898f248c533da81968ffe05ee815f58f",
+  "usage": {
+   "prompt": 3922,
+   "output": 1651,
+   "thoughts": 0,
+   "total": 5573
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

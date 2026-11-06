@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round stopwatch casing with top crown and side button",
+  "modifiers": [
+   "number 10 inside dial"
+  ],
+  "composition": "single object, front view, centered numeral inside circle"
+ },
+ "readings": [
+  {
+   "meaning": "10-second or 10-minute timer / countdown",
+   "strength": "primary"
+  },
+  {
+   "meaning": "stopwatch / interval timer",
+   "strength": "primary"
+  },
+  {
+   "meaning": "camera 10-second self-timer",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "quick 10-minute task or session",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The number 10 is a specific duration setting (commonly camera self-timer UI), making it less general than a plain stopwatch with hands.",
+ "modifier_semantics": [
+  {
+   "modifier": "number 10 inside dial",
+   "meaning": "duration of 10 seconds or 10 minutes"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "home",
+  "food",
+  "learning",
+  "work",
+  "hobbies"
+ ],
+ "task_intents": [
+  "buy or replace a kitchen timer",
+  "set up interval timer for workout",
+  "time a cooking or brewing step",
+  "run a timed practice test",
+  "replace batteries in digital stopwatch",
+  "test camera self-timer before trip"
+ ],
+ "example_tasks": [
+  {
+   "task": "Buy magnetic kitchen timer",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Replace stopwatch battery",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Fix stuck button on timer",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Download Tabata interval timer app",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Pack coach's stopwatch for meet",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Test the 10-second self-timer on the tripod before family portraits",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Set up 10-minute visual countdown timer on the classroom projector",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Order a waterproof lanyard stopwatch for Saturday morning swim timing",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Calibrate the darkroom enlarger timer against a phone stopwatch",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Find a quiet visual timer for the kids' homework desk",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Configure Pomodoro timer intervals to 25 and 10 minutes",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check why the oven countdown buzzer stopped making noise",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pick up a cheap clip-on digital stopwatch for keeping track of rest intervals at the gym",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Put fresh AAA batteries in the magnetic timer stuck to the side of the fridge",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Program the multi-stage interval timer on my watch for tomorrow's track repeats and cooldown",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Borrow a second backup stopwatch",
+   "parent": "Saturday Track Meet",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Comprar un temporizador magnético para la cocina",
+  "Cambiar la pila del cronómetro de natación antes del sábado",
+  "Configurar el temporizador de intervalos para las series de pista"
+ ],
+ "example_tasks_ru": [
+  "Купить магнитный кухонный таймер на холодильник",
+  "Поменять батарейку в секундомере перед соревнованиями",
+  "Настроить таймер автоспуска на камере для общего фото"
+ ],
+ "context_tasks": [
+  {
+   "task": "10-minute core circuit on the living room mat",
+   "central": "exercise / workout"
+  },
+  {
+   "task": "Boil soft-boiled eggs for exactly 6 minutes",
+   "central": "eggs / cooking"
+  },
+  {
+   "task": "Speed-clean the kitchen counter for 10 minutes before bed",
+   "central": "cleaning"
+  },
+  {
+   "task": "Do a timed 10-minute freewriting warm-up in notebook",
+   "central": "writing"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Do a quick 10-minute French vocabulary review on the train",
+   "better": "language / flashcards / book",
+   "trap": "property"
+  },
+  {
+   "task": "Hold a 10-minute standup meeting with the backend team",
+   "better": "people / meeting",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the $10 late fee on the library account",
+   "better": "money / receipt",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Take watch to the jeweler for a new leather strap",
+   "better": "wristwatch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the furnace pressure gauge in the basement",
+   "better": "pressure gauge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy 10 boxes of tile for the bathroom floor",
+   "better": "tiles / box",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "This is a camera UI control for a 10-second self-timer (or a 10-second media skip/countdown setting). Because it encodes a specific numeric setting ('10') rather than a general stopwatch, using it for tasks would encourage matching on task duration (a property, like '10-minute tidy'), while a plain stopwatch icon serves actual timer/stopwatch tasks much better.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f48aa4ea0381617da86c221a393657d7d0dff7fb",
+  "usage": {
+   "prompt": 3927,
+   "output": 1708,
+   "thoughts": 0,
+   "total": 5635
+  },
+  "soft_problems": [
+   "example_tasks with parent: 1 != 4"
+  ],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

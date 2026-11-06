@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "upright empty battery outline with top terminal nub",
+  "modifiers": [
+   "x mark badge at bottom right"
+  ],
+  "composition": "single object with corner badge"
+ },
+ "readings": [
+  {
+   "meaning": "dead, faulty, or depleted battery",
+   "strength": "primary"
+  },
+  {
+   "meaning": "remove or dispose of battery",
+   "strength": "primary"
+  },
+  {
+   "meaning": "replace battery",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "battery missing or error",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the upright cylinder outline could briefly resemble a pill bottle or clipboard with an X.",
+ "modifier_semantics": [
+  {
+   "modifier": "x mark badge at bottom right",
+   "meaning": "dead, broken, missing, remove, or dispose"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "admin",
+  "travel",
+  "hobbies",
+  "outdoors"
+ ],
+ "task_intents": [
+  "recycle old dead household batteries",
+  "replace dead battery in device",
+  "remove batteries before long storage",
+  "fix phone battery drain problem",
+  "dispose of swollen lithium battery",
+  "swap out dying car battery",
+  "check smoke detector dead batteries"
+ ],
+ "example_tasks": [
+  {
+   "task": "Recycle dead AA batteries",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Replace hallway smoke alarm battery",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Swap key fob CR2032 cell",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Take old UPS battery",
+   "parent": "E-waste drop-off",
+   "domain": "tech"
+  },
+  {
+   "task": "Pull batteries before winter",
+   "parent": "Camping lanterns",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Drop the jar of dead batteries at the hardware store bin",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Take the swollen MacBook battery to the hazardous waste depot",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Change the dying 9V battery in the basement carbon monoxide detector",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Remove alkaline batteries from vintage film cameras before putting them in storage",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Book Genius Bar appointment for degraded iPhone battery replacement",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test the weak car battery before the January freeze hits",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Clean corroded terminals and pull the leaked AA out",
+   "parent": "TV remote",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off background battery usage for rogue apps",
+   "parent": "Phone settings",
+   "domain": "tech"
+  },
+  {
+   "task": "Pull the dead marine battery out of the boat and return it for the core deposit",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Go through the kids toy bin and take out any corroded or dead batteries",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Replace the backup battery in the garage keypad before we leave for the trip",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Llevar las pilas gastadas al punto limpio del barrio",
+  "Cambiar la pila botón CR2032 de la llave del coche",
+  "Sacar la batería hinchada del portátil viejo antes de que dé problemas"
+ ],
+ "example_tasks_ru": [
+  "Сдать накопившиеся севшие батарейки в контейнер во ВкусВилле",
+  "Поменять севшую крону в кухонных весах",
+  "Вынуть аккумуляторы из гирлянд и фонариков перед уборкой на антресоли"
+ ],
+ "context_tasks": [
+  {
+   "task": "Tape the terminals on old lithium packs before recycling day",
+   "central": "tape"
+  },
+  {
+   "task": "Scrub white battery acid crust out of the flashlight barrel with vinegar",
+   "central": "flashlight"
+  },
+  {
+   "task": "Warranty claim for drill pack that refuses to hold a charge",
+   "central": "warranty claim"
+  },
+  {
+   "task": "Look up municipal drop-off hours for household hazardous waste and batteries",
+   "central": "drop-off hours"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a 24-pack of rechargeable Eneloop AA batteries",
+   "better": "full or charging battery, or shopping cart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plug in the camera batteries the night before the shoot",
+   "better": "battery with lightning bolt (charging)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a cordless battery-powered hedge trimmer for the front yard",
+   "better": "hedge trimmer or gardening shears",
+   "trap": "property"
+  },
+  {
+   "task": "Order a waterproof case for the spare drone batteries",
+   "better": "protective case or drone",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Practice the drum battery cadences with the marching band",
+   "better": "snare drum or drumsticks",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check why the porch motion light keeps flickering at night",
+   "better": "lightbulb",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows an empty upright battery outline with an X badge in the lower right corner, universally read as a dead, faulty, or removed battery. It fits concrete household, tech, and car maintenance tasks around recycling dead cells, replacing depleted batteries, or removing batteries prior to storage. It is clearly distinct from charging or full battery icons due to the empty body and prominent X mark.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b38bee9290324049810667536750c0b7d93d2ce9",
+  "usage": {
+   "prompt": 3926,
+   "output": 1690,
+   "thoughts": 0,
+   "total": 5616
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

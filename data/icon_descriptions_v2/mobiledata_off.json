@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two vertical arrows pointing up and down",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "centered pair of opposite vertical arrows crossed by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "mobile data off / cellular data disabled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no data connection / network outage",
+   "strength": "primary"
+  },
+  {
+   "meaning": "offline mode / data transfer disabled",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "sync disabled / no upload or download",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with sorting arrows, elevator directions, or general two-way traffic signs with a prohibition slash if the viewer is unfamiliar with smartphone status icons.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, disconnected, or blocked"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "work",
+  "finance"
+ ],
+ "task_intents": [
+  "turn off mobile data before flight",
+  "troubleshoot broken cellular data connection",
+  "test app behavior in offline mode",
+  "disable background data for heavy apps",
+  "cut off roaming data abroad",
+  "fix phone not connecting to data",
+  "restrict cellular data on kids tablet"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off cellular data",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix broken mobile data",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable background data usage",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test offline mode thoroughly",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check carrier settings update",
+   "parent": "Phone Data Outage",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable cellular data roaming before crossing the Swiss border on Friday",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out why my Pixel loses mobile data after leaving Wi-Fi",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Block cellular data access for video streaming apps on Leo's phone",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Verify the field inspection form saves entries when cellular data drops",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pause automatic cloud photo backups over mobile data to stop overage charges",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Call T-Mobile support about the sudden loss of data service",
+   "parent": "No Mobile Data",
+   "domain": "tech"
+  },
+  {
+   "task": "Write error handling for requests that fail when data is turned off",
+   "parent": "Offline Mode",
+   "domain": "work"
+  },
+  {
+   "task": "Switch off SIM data before boarding the ferry to Victoria",
+   "parent": "Roaming & Data Settings",
+   "domain": "travel"
+  },
+  {
+   "task": "Show Mom how to turn off mobile data on her Samsung before her cruise leaves",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Reproduce the checkout crash that happens when the user loses cellular data mid-payment in the app",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Reset the APN configuration on my old iPhone so the prepaid SIM stops dropping data",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar los datos móviles antes de aterrizar en Suiza",
+  "Arreglar el fallo de conexión de datos en el móvil de mamá",
+  "Probar que la aplicación guarde los pedidos cuando se cortan los datos móviles"
+ ],
+ "example_tasks_ru": [
+  "Отключить мобильные данные перед вылетом в Турцию",
+  "Разобраться, почему телефон перестает ловить мобильный интернет после метро",
+  "Проверить работу приложения курьера при полном отключении передачи данных на точке"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download offline Google Maps for northern Scotland before we lose reception",
+   "central": "map"
+  },
+  {
+   "task": "Save boarding passes and hotel PDFs to the phone wallet for the flight",
+   "central": "boarding pass"
+  },
+  {
+   "task": "Switch to the cheaper 2GB prepaid plan since I barely use mobile internet",
+   "central": "phone bill"
+  },
+  {
+   "task": "Buy a local eSIM at Narita airport so we have navigation on the train",
+   "central": "SIM card"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a waterproof offline trail map of the Dolomites",
+   "better": "paper map",
+   "trap": "property"
+  },
+  {
+   "task": "Check why the basement Wi-Fi router keeps rebooting every night",
+   "better": "Wi-Fi router",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Sort the Q3 sales spreadsheet by revenue descending and export it",
+   "better": "spreadsheet or sort list",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call the building manager about the out-of-order freight elevator",
+   "better": "elevator",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the portable power bank and charging cables",
+   "better": "battery / power bank",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Review the monthly data analytics report for the marketing team",
+   "better": "chart / analytics",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon depicts the standard mobile UI symbol for cellular data (up and down transfer arrows) crossed out by a diagonal slash, meaning mobile data off or no data connection. While primarily a status indicator, it fits tasks about disabling cellular data for travel, restricting background data, testing offline mode in software, or troubleshooting a broken mobile data connection. Out of context, the two opposite arrows can be mistaken for sort order or elevator arrows.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "42e07367f7451ca7e9b90a211bd6842dec33b225",
+  "usage": {
+   "prompt": 3927,
+   "output": 1722,
+   "thoughts": 670,
+   "total": 6319
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

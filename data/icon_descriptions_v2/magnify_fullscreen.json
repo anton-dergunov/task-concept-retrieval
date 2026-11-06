@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "horizontal rounded rectangle outline",
+  "modifiers": [
+   "plus sign inside on the right half"
+  ],
+  "composition": "single rectangular frame containing an off-center plus sign"
+ },
+ "readings": [
+  {
+   "meaning": "health insurance card or medical ID card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "add new slide, card, or frame",
+   "strength": "primary"
+  },
+  {
+   "meaning": "first aid kit or medical box",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "open new window or tab",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Because it is just a rectangle with an off-center cross/plus, it sits ambiguously between a medical/insurance card, a UI 'add slide/card' button, and a handleless first-aid box.",
+ "modifier_semantics": [
+  {
+   "modifier": "plus sign inside on the right half",
+   "meaning": "medical cross (health/insurance) or add/new item"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "admin",
+  "travel",
+  "work",
+  "finance"
+ ],
+ "task_intents": [
+  "replace lost health insurance card",
+  "order European Health Insurance Card",
+  "upload front of medical card",
+  "add new slide to presentation",
+  "carry medical ID in wallet",
+  "update insurance member card details",
+  "check expiry on EHIC card"
+ ],
+ "example_tasks": [
+  {
+   "task": "Order new EHIC card",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Laminate Medicare card",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Print temporary dental card",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Add Q3 summary slide",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Request replacement",
+   "parent": "BlueCross Health Card",
+   "domain": "admin"
+  },
+  {
+   "task": "Send photo of front and back",
+   "parent": "Health Insurance Card",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Put the new Cigna member card into my wallet before Tuesday's appointment",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Apply for the UK Global Health Insurance Card before the Spain trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Scan both sides of Leo's pediatric insurance card for school registration",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Call Kaiser to get a plastic card mailed to the new apartment",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Insert an architecture diagram slide right after the problem statement",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check whether my old provincial health card expired last month",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Save PDF copy to phone wallet",
+   "parent": "Dental Insurance Card",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Update policy group number",
+   "parent": "Medical ID Card",
+   "domain": "finance"
+  },
+  {
+   "task": "Download the printable prescription discount card from the insurer portal and keep it in the glovebox",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Make sure everyone in the family has their European health card packed in their carry-on bag",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Renovar la tarjeta sanitaria europea antes de volar a Roma",
+  "Llevar la tarjeta del seguro médico a la clínica dental",
+  "Hacer foto a la credencial de la mutua por ambas caras"
+ ],
+ "example_tasks_ru": [
+  "Забрать новый полис ОМС в страховой компании",
+  "Сфотографировать медицинскую карту для записи к врачу",
+  "Добавить слайд с выводами в конец презентации"
+ ],
+ "context_tasks": [
+  {
+   "task": "Fill out new patient intake forms for the dermatologist",
+   "central": "medical form / clipboard"
+  },
+  {
+   "task": "Submit out-of-network physical therapy receipt for reimbursement",
+   "central": "receipt / invoice"
+  },
+  {
+   "task": "Restock ibuprofen and bandages in the bathroom cabinet",
+   "central": "first aid kit / pills"
+  },
+  {
+   "task": "Compare bronze and silver copay plans during open enrollment",
+   "central": "health insurance comparison"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Activate new Visa credit card in the banking app",
+   "better": "credit card with chip and magnetic stripe",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book annual teeth cleaning with Dr. Patel",
+   "better": "tooth icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy a small waterproof first aid kit for the hiking pack",
+   "better": "first aid briefcase with top handle and centered cross",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add extra RAM to the home server",
+   "better": "RAM stick or computer chip",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Frame the postcard from grandma",
+   "better": "picture frame with mountains/sun or postcard",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the monthly health insurance premium",
+   "better": "money / bill payment icon",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon shows a simple rectangular card outline with a plus/cross on the right side, reading either as a health insurance/medical ID card or a UI action to add a card/slide. While somewhat abstract and easily confused with generic UI chrome or a first-aid box, it serves nicely for tasks specifically about medical/health cards or adding presentation slides.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "0211a050fb9c585812ebe8372af6a3734dd9f6ae",
+  "usage": {
+   "prompt": 3924,
+   "output": 1686,
+   "thoughts": 76,
+   "total": 5686
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

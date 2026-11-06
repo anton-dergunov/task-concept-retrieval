@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "user bust silhouette with circular head and curved shoulders",
+  "modifiers": [
+   "isometric 3D cube badge at bottom right"
+  ],
+  "composition": "person outline on left with a cutout cube badge on lower right"
+ },
+ "readings": [
+  {
+   "meaning": "courier, delivery person, or recipient of a package",
+   "strength": "primary"
+  },
+  {
+   "meaning": "product owner, product manager, or vendor",
+   "strength": "primary"
+  },
+  {
+   "meaning": "3D artist, modeler, or developer working with packages/modules",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "personal inventory or user-owned assets",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the isometric cube badge can resemble a hexagonal settings gear or nut next to the user silhouette.",
+ "modifier_semantics": [
+  {
+   "modifier": "isometric 3D cube badge",
+   "meaning": "package, parcel, product, 3D object, or software module associated with the person"
+  }
+ ],
+ "domains": [
+  "shopping",
+  "work",
+  "home",
+  "tech",
+  "creative",
+  "admin"
+ ],
+ "task_intents": [
+  "meet courier for package delivery",
+  "hand off parcel to recipient",
+  "sync with product owner on roadmap",
+  "contact seller about shipped order",
+  "hire freelance 3D character artist",
+  "assign equipment to team member",
+  "tip delivery driver for heavy boxes",
+  "transfer npm package ownership to maintainer"
+ ],
+ "example_tasks": [
+  {
+   "task": "Tip the UPS driver",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Message Etsy seller about shipping",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Sync with product owner",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Leave instructions for courier",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check portfolio on ArtStation",
+   "parent": "Freelance 3D Modeler",
+   "domain": "creative"
+  },
+  {
+   "task": "Ask the DHL guy to leave parcels inside the porch box",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Wait downstairs for the IKEA delivery crew between 2 and 4",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Transfer npm package maintainer rights to Sarah before Friday",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Review backlog priorities with the new product manager",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Ask neighbor if she took in our chewy.com box",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Get signature from the warehouse receiver on the bill of lading",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Send reference sketches and polycount budget",
+   "parent": "3D Character Artist",
+   "domain": "creative"
+  },
+  {
+   "task": "Update door code in Amazon delivery instructions",
+   "parent": "Couriers & Drop-offs",
+   "domain": "home"
+  },
+  {
+   "task": "Clarify acceptance criteria for the checkout flow",
+   "parent": "Product Owner Sync",
+   "domain": "work"
+  },
+  {
+   "task": "Give the FedEx driver the signed customs release form for the synthesizer",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Find out who owns the legacy billing module before we deprecate the endpoint",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Dejarle propina al repartidor de Seur por subir el sofá",
+  "Revisar el backlog del trimestre con el product owner",
+  "Avisar al conserje que hoy llega un paquete a mi nombre"
+ ],
+ "example_tasks_ru": [
+  "Встретить курьера СДЭК у шлагбаума до шести вечера",
+  "Обсудить приоритеты спринта с продакт-оунером",
+  "Написать продавцу на Авито насчёт отправки коробки"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy holiday gift cards for our regular mail carrier and UPS guy",
+   "central": "gift cards"
+  },
+  {
+   "task": "Check which apartments still haven't picked up their parcels from the lobby",
+   "central": "apartment list"
+  },
+  {
+   "task": "Draft job description for a senior technical product manager",
+   "central": "job description document"
+  },
+  {
+   "task": "Log all company equipment currently checked out to remote contractors",
+   "central": "equipment spreadsheet"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy bubble wrap and packing tape for the return box",
+   "better": "cardboard box or tape roll",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Change my account password and two-factor settings",
+   "better": "user with gear icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Print return shipping label for the boots",
+   "better": "shipping label or printer",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Unpack the kitchen boxes in the new apartment",
+   "better": "open cardboard box",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order a 3D-printed headphone stand for my desk",
+   "better": "headphones or 3D printer",
+   "trap": "property"
+  },
+  {
+   "task": "Render final turntable animation in Blender",
+   "better": "3D cube or film clapper",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon combines a person silhouette with a 3D cube/box badge, making it a strong visual fit for tasks involving a courier, delivery recipient, seller, product owner, or 3D artist. At small sizes the hexagon-shaped cube could be mistaken for a user-settings gear icon, and plain package tasks without a person component are better served by a standalone box icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b4d562b5d63a2391a3b6c183b79b4093bd3578c7",
+  "usage": {
+   "prompt": 3921,
+   "output": 1693,
+   "thoughts": 0,
+   "total": 5614
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

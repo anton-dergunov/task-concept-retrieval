@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two-lane road in perspective with dashed center line",
+  "modifiers": [
+   "map pin in bottom-right corner"
+  ],
+  "composition": "single object in perspective with bottom-right overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "driving route or road trip stop",
+   "strength": "primary"
+  },
+  {
+   "meaning": "street address or roadside location",
+   "strength": "primary"
+  },
+  {
+   "meaning": "GPS navigation or driving directions",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "street view or road checkpoint",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the converging road lines can look like a ladder or the letter A next to a droplet.",
+ "modifier_semantics": [
+  {
+   "modifier": "map pin in bottom-right corner",
+   "meaning": "specific location, address, or waypoint along a road"
+  }
+ ],
+ "domains": [
+  "travel",
+  "outdoors",
+  "admin",
+  "work",
+  "home",
+  "social_family",
+  "tech"
+ ],
+ "task_intents": [
+  "plan driving route for trip",
+  "save roadside stop on map",
+  "look up street address",
+  "download offline GPS driving directions",
+  "report pothole location on highway",
+  "choose scenic highway for drive",
+  "update street address on forms",
+  "share meeting point along highway"
+ ],
+ "example_tasks": [
+  {
+   "task": "Route 66 overnight stops",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Drop pin for trailhead",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Check alternate highway route",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Confirm new street address",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Map out first leg",
+   "parent": "Pacific Coast Highway Drive",
+   "domain": "travel"
+  },
+  {
+   "task": "Pin the rest areas along I-95 before we leave",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send the exact roadside pullout coordinates to the survey crew",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Report the deep pothole on Elm Street to city maintenance",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Download offline driving directions through the mountain pass in OsmAnd",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pick a halfway town on I-80 to meet mom",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Save the detour around the bridge closure",
+   "parent": " Thanksgiving Drive",
+   "domain": "travel"
+  },
+  {
+   "task": "Double-check which exit we need",
+   "parent": "Blue Ridge Parkway Trip",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Verify the warehouse delivery entrance on Google Street View",
+   "parent": "New Vendor Onboarding",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out whether taking US-101 or I-5 adds more time with Friday traffic",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Mark the exact milepost where the gravel forestry road branches off towards the cabin",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Update our physical street address with the county assessor so tax notices arrive properly",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Marcar las paradas en la autopista AP-7 para el viaje a Valencia",
+  "Descargar la ruta en coche sin conexión antes de cruzar la sierra",
+  "Revisar en Street View dónde está exactamente la entrada del parking"
+ ],
+ "example_tasks_ru": [
+  "Отметить на карте точки ночёвок вдоль Чуйского тракта",
+  "Построить маршрут объезда платного участка по трассе М-4",
+  "Скинуть геометку съезда с шоссе к даче для курьера"
+ ],
+ "context_tasks": [
+  {
+   "task": "Book a pet-friendly motel right off I-40 near Albuquerque",
+   "central": "motel / hotel"
+  },
+  {
+   "task": "Buy a dashboard phone mount for GPS navigation",
+   "central": "phone mount"
+  },
+  {
+   "task": "Pack a paper road atlas in the glovebox",
+   "central": "book / map"
+  },
+  {
+   "task": "Pay the electronic highway toll invoice from last weekend",
+   "central": "payment / toll"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Take the car in for its 60,000-mile service before the road trip",
+   "better": "car with wrench / car maintenance",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy road running shoes with better arch support",
+   "better": "running shoe",
+   "trap": "property"
+  },
+  {
+   "task": "Draft the Q3 product roadmap for the engineering team",
+   "better": "project timeline / gantt chart",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Put the tall A-frame ladder back in the garage",
+   "better": "ladder",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Track the UPS package that is on the road to our house",
+   "better": "parcel / delivery box",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check whether the new router supports address reservation",
+   "better": "router / network",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a perspective two-lane road with a location pin, clearly communicating a driving route, highway waypoint, or street address. It fits road trip planning, navigation, and roadside location tasks well, distinguishing them from generic map pins or cars.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ba6e17c6680e7811627e233236205f82779fa135",
+  "usage": {
+   "prompt": 3924,
+   "output": 1683,
+   "thoughts": 119,
+   "total": 5726
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

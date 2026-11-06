@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "teardrop map location pin outline",
+  "modifiers": [
+   "exclamation mark inside the pin"
+  ],
+  "composition": "single object, front view, centered modifier inside"
+ },
+ "readings": [
+  {
+   "meaning": "location alert, hazard on map, or road closure",
+   "strength": "primary"
+  },
+  {
+   "meaning": "wrong address or missing location error",
+   "strength": "primary"
+  },
+  {
+   "meaning": "important destination or urgent errand stop",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "emergency meeting point or evacuation zone",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the exclamation dot blends with the stem, making it look like a standard location pin or an inverted water drop.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "alert, warning, error, hazard, or urgent attention required"
+  }
+ ],
+ "domains": [
+  "travel",
+  "outdoors",
+  "home",
+  "admin",
+  "tech",
+  "shopping",
+  "work"
+ ],
+ "task_intents": [
+  "report road hazard or pothole location",
+  "fix wrong delivery address on account",
+  "check travel advisories and closure zones",
+  "mark family emergency evacuation meeting point",
+  "resolve missing GPS coordinates on map",
+  "verify restricted parking zone before trip",
+  "flag dangerous intersection to city council"
+ ],
+ "example_tasks": [
+  {
+   "task": "Report pothole on Elm St",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Fix wrong shipping address",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Trail closure map check",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Update before Friday dispatch",
+   "parent": "Wrong Delivery Addresses",
+   "domain": "work"
+  },
+  {
+   "task": "Confirm with everyone tonight",
+   "parent": "Wildfire Evacuation Point",
+   "domain": "home"
+  },
+  {
+   "task": "Check I-70 chain law and pass closures before leaving Denver",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix misplaced Google Maps pin for our storefront entrance",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Look up flood zone map for the creek parcel",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Mark downed bridge on the shared backcountry GPX track",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Debug GPS location permission error on the iOS build",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Send the exact coordinates to the county crew",
+   "parent": "Neighborhood Hazard Reports",
+   "domain": "admin"
+  },
+  {
+   "task": "Review restricted airspace and no-fly zones near the stadium",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Verify the updated pin on the courier portal",
+   "parent": "Lost Package Address Issue",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check State Department travel warnings for the border region before booking the bus",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Report the blind curve and missing guardrail at Mile 14 to county highways",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Correct the billing and delivery street number on the pharmacy profile before next refill",
+   "parent": "",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Reportar el bache enorme de la esquina en la app del municipio",
+  "Corregir la dirección de envío equivocada en el pedido de Amazon",
+  "Revisar el mapa de cortes de ruta por nieve antes de salir a Bariloche"
+ ],
+ "example_tasks_ru": [
+  "Исправить неверный адрес доставки в профиле курьерской службы",
+  "Проверить карту перекрытия дорог перед воскресным марафоном",
+  "Отметить опасный участок тропы с камнепадом в навигационном приложении"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack emergency flares and tow strap for the mountain pass",
+   "central": "emergency car gear"
+  },
+  {
+   "task": "Call FedEx support about the misrouted box",
+   "central": "phone call / package"
+  },
+  {
+   "task": "Take photos of the sunken sidewalk slab on Oak Ave",
+   "central": "camera / photo"
+  },
+  {
+   "task": "Buy bear spray before hiking the closed-off ridge",
+   "central": "bear spray"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "URGENT: book hotel in Rome tonight",
+   "better": "hotel or bed",
+   "trap": "property"
+  },
+  {
+   "task": "Save our new apartment address in contacts",
+   "better": "standard map pin or address book",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check why the server threw a critical alert at 3am",
+   "better": "warning triangle or server",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pick up dry cleaning on the way home",
+   "better": "shirt or hanger",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy new hiking boots with good ankle support",
+   "better": "hiking boot",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Measure water pressure at the basement spigot",
+   "better": "water drop or gauge",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a map pin containing an exclamation mark, signaling a location-based alert, hazard, closure, or address error. It fits a specific but practical family of tasks around reporting local hazards, checking travel closures, or fixing wrong delivery pins, though it must not be misused merely to mark a normal location task as 'urgent'.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "0f7ae505b52b635508b57dc8c078e24635c3589a",
+  "usage": {
+   "prompt": 3920,
+   "output": 1678,
+   "thoughts": 0,
+   "total": 5598
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

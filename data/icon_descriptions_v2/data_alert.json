@@ -1,0 +1,210 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "three stacked horizontal bars resembling a list or menu",
+  "modifiers": [
+   "large solid circle with an exclamation mark inside at upper right"
+  ],
+  "composition": "three horizontal stripes at bottom left with a circular alert badge cutting into the top two stripes"
+ },
+ "readings": [
+  {
+   "meaning": "error log or system alert list",
+   "strength": "primary"
+  },
+  {
+   "meaning": "urgent notification or unread message queue",
+   "strength": "primary"
+  },
+  {
+   "meaning": "overdue tasks or priority backlog",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "menu or settings warning",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the three bars can read as a stack of coins or server blades with an alert, or as a generic hamburger menu.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular badge with exclamation mark",
+   "meaning": "warning, error, urgent attention needed, or unread notification"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "finance"
+ ],
+ "task_intents": [
+  "triage production error log entries",
+  "clear unread system notifications",
+  "review flagged items in queue",
+  "fix warnings in build output",
+  "resolve overdue items on checklist",
+  "investigate server alert history"
+ ],
+ "example_tasks": [
+  {
+   "task": "check Sentry error logs",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "clear flagged queue items",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "triage PagerDuty alerts",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Review today's warnings",
+   "parent": "Server Maintenance",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear out the backlog",
+   "parent": "Overdue Admin",
+   "domain": "admin"
+  },
+  {
+   "task": "Go through the critical errors from last night's batch job",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Resolve the three flagged transactions on the Visa statement",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Look into the compiler warnings in the auth module",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Dismiss stale notifications in the Home Assistant dashboard",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Audit the failed webhook deliveries list in Stripe",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check why the NAS keeps throwing disk health warnings",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Sort through the high-priority bug reports before standup",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Handle the flagged entries",
+   "parent": "Q3 Bookkeeping",
+   "domain": "finance"
+  },
+  {
+   "task": "Export the full list of 500 errors from CloudWatch for the postmortem doc",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Go through the municipal code violation notices and highlight what needs a permit",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Clean up the noisy alert rules so the on-call log stays readable",
+   "parent": "DevOps",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Revisar el registro de errores del servidor de producción",
+  "Limpiar las notificaciones pendientes en la consola",
+  "Atender incidencias urgentes de la lista de soporte"
+ ],
+ "example_tasks_ru": [
+  "Разобрать лог ошибок после ночного деплоя",
+  "Проверить список критических уведомлений в панели",
+  "Закрыть просроченные пункты по отчёту"
+ ],
+ "context_tasks": [
+  {
+   "task": "Mute noisy Slack channels during on-call shift",
+   "central": "Slack channels / chat"
+  },
+  {
+   "task": "Write postmortem for Tuesday's outage",
+   "central": "postmortem document"
+  },
+  {
+   "task": "Update credit card on file so billing alerts stop",
+   "central": "credit card"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "URGENT: buy dog food on the way home",
+   "better": "dog or pet food bag",
+   "trap": "property"
+  },
+  {
+   "task": "Make a packing list for Lisbon",
+   "better": "plain checklist or suitcase",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the restaurant menu for gluten-free options",
+   "better": "restaurant menu with fork/knife",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Count stack of poker chips from Friday night",
+   "better": "coins or casino chip",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call the plumber right now about the leak",
+   "better": "phone or wrench/pipe",
+   "trap": "property"
+  },
+  {
+   "task": "Order replacement HEPA filter",
+   "better": "air filter or fan",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "Shows three stacked list/menu bars with a prominent exclamation badge, reading as an error log, alert queue, or list with warnings. It fits tech and admin tasks centered on triaging logs, notifications, or flagged items, though it must not be used merely to mark any ordinary task as 'urgent'.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "535e89647d0ffe2747fb60d607224d294ac7e64a",
+  "usage": {
+   "prompt": 3926,
+   "output": 1572,
+   "thoughts": 0,
+   "total": 5498
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

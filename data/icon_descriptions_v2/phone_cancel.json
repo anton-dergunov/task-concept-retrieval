@@ -1,0 +1,220 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined telephone handset angled diagonally",
+  "modifiers": [
+   "x mark in top right corner"
+  ],
+  "composition": "single object at an angle with upper-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "missed call, rejected call, or blocked phone number",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel phone service or disconnect landline",
+   "strength": "primary"
+  },
+  {
+   "meaning": "do not call list or stop telemarketing calls",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "phone line down or no phone service",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the X mark can look like a plus sign (add call) or an asterisk.",
+ "modifier_semantics": [
+  {
+   "modifier": "x mark in top right corner",
+   "meaning": "missed, rejected, blocked, cancelled, or disconnected"
+  }
+ ],
+ "domains": [
+  "communication",
+  "admin",
+  "work",
+  "tech",
+  "home",
+  "finance"
+ ],
+ "task_intents": [
+  "return a missed phone call",
+  "block spam or robocall numbers",
+  "cancel a phone plan or line",
+  "register on do not call list",
+  "cancel a scheduled phone call",
+  "fix a dead phone line",
+  "remove old phone number from account",
+  "turn off phone call forwarding"
+ ],
+ "example_tasks": [
+  {
+   "task": "Block spam callers on mom's phone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel AT&T landline",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Return missed call from Dr. Patel",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Register cell on Do Not Call",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Clear missed call log",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Call back the roofing contractor I missed while in the shower",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel 3pm intro phone call with the recruiter from Stripe",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Disconnect the old fax and phone line in the back office",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Set up silence unknown callers on grandma's iPhone before more scammers call",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Remove old home phone number from Vanguard and Chase security settings",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Call Verizon to drop the extra tablet line we never use",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check why the office VoIP phones are dropping incoming calls after two rings",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Complain to FCC about the fake warranty robocalls still getting through the spam filter",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Ask them to stop calling",
+   "parent": "Alumni donation drive",
+   "domain": "admin"
+  },
+  {
+   "task": "Port out and close account",
+   "parent": "T-Mobile family plan",
+   "domain": "finance"
+  },
+  {
+   "task": "Follow up with everyone from Tuesday",
+   "parent": "Missed client calls",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Dar de baja la línea fija de Movistar de la casa del pueblo",
+  "Apuntar el móvil nuevo en la Lista Robinson para que dejen de llamar",
+  "Devolver la llamada perdida del taller mecánico"
+ ],
+ "example_tasks_ru": [
+  "Отключить домашний телефон Ростелеком у бабушки",
+  "Перезвонить курьеру по пропущенному вызову",
+  "Заблокировать спам-номера микрозаймов в настройках телефона"
+ ],
+ "context_tasks": [
+  {
+   "task": "Install Robokiller app on dad's phone",
+   "central": "app / smartphone"
+  },
+  {
+   "task": "Mail back the rented cable modem and VoIP adapter after cancelling",
+   "central": "package / modem"
+  },
+  {
+   "task": "Update contact card with my new cell and mark the old number inactive",
+   "central": "address book / contact card"
+  },
+  {
+   "task": "Review monthly phone bill for unexpected disconnect fees",
+   "central": "bill / invoice"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call dentist to reschedule Tuesday cleaning",
+   "better": "regular phone handset without X (active call) or tooth",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add new salesperson to the support call rotation",
+   "better": "phone handset with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new shockproof case for my iPhone 15",
+   "better": "smartphone case or smartphone",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Cancel Netflix subscription before it renews on the 12th",
+   "better": "TV / streaming icon or subscription cancel icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pay final Verizon bill of $48.20",
+   "better": "credit card or bill / invoice",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Set up hands-free phone mount in the Subaru",
+   "better": "car or smartphone mount",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a classic telephone handset with an 'X' badge in the upper right, universally understood as a missed, rejected, blocked, or cancelled phone call/line. It fits specific tasks around returning missed calls, blocking spam callers, or cancelling phone service, though it can be confused with a regular phone icon or 'add call' (+) at tiny sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "dd7982c0a03b3857576dc922d89f36108e285c07",
+  "usage": {
+   "prompt": 3928,
+   "output": 1699,
+   "thoughts": 0,
+   "total": 5627
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

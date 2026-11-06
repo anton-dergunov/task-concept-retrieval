@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front-facing passenger car with circular headlights and windshield",
+  "modifiers": [
+   "six-toothed cogwheel gear at upper right"
+  ],
+  "composition": "single object front view with corner badge"
+ },
+ "readings": [
+  {
+   "meaning": "car maintenance, servicing, or auto repair",
+   "strength": "primary"
+  },
+  {
+   "meaning": "vehicle settings or car computer configuration",
+   "strength": "primary"
+  },
+  {
+   "meaning": "auto parts or car engine components",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the gear could be misread as a sun over a car (road trip / summer drive).",
+ "modifier_semantics": [
+  {
+   "modifier": "six-toothed cogwheel gear at upper right",
+   "meaning": "maintenance, mechanical repair, or configuration settings"
+  }
+ ],
+ "domains": [
+  "home",
+  "travel",
+  "finance",
+  "shopping",
+  "tech",
+  "admin",
+  "hobbies"
+ ],
+ "task_intents": [
+  "schedule routine car maintenance service",
+  "change engine oil and filter",
+  "take vehicle to auto mechanic",
+  "replace worn out car parts",
+  "configure vehicle dashboard and infotainment settings",
+  "inspect car before long road trip",
+  "troubleshoot check engine dashboard light",
+  "order replacement parts for car"
+ ],
+ "example_tasks": [
+  {
+   "task": "Oil change for the Civic",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Drop Subaru at mechanic",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check tire pressure and coolant",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Book 60k mile service",
+   "parent": "Car Maintenance",
+   "domain": "home"
+  },
+  {
+   "task": "Fix squeaky front brakes",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order replacement cabin air filter and wiper blades for the Mazda",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Figure out why the check engine light came on yesterday",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set up driver seat memory profiles and Bluetooth in the new car",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Swap winter tires back to all-seasons before the April drive",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Compare quotes from two local garages for the timing belt job",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Tune the carburetor on the 1978 Triumph",
+   "parent": "Garage project",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Update navigation firmware and turn off lane-keep beep",
+   "parent": "Outback",
+   "domain": "tech"
+  },
+  {
+   "task": "Pick up the van from the shop before they close at five",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Flush brake fluid and check pads all around before towing the camper up north",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Ask Dave which OBD2 scanner he uses to clear fault codes on his Volkswagen",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Go through the glovebox receipts and log all repairs from this year into the spreadsheet",
+   "parent": "Car Maintenance",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Llevar el coche al taller para la revisión de los 40.000 km",
+  "Cambiar las pastillas de freno y el aceite antes del puente",
+  "Pedir presupuesto para arreglar el embrague del Golf"
+ ],
+ "example_tasks_ru": [
+  "Записаться на шиномонтаж и поменять масло в двигателе",
+  "Отвезти машину в сервис — стучит передняя подвеска",
+  "Купить воздушный и салонный фильтры для ТО"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a 10mm socket wrench and jack stands",
+   "central": "tools / wrench"
+  },
+  {
+   "task": "Set aside $150 a month in the auto repair sinking fund",
+   "central": "money / savings"
+  },
+  {
+   "task": "Watch video on how to replace a headlight bulb on a 2017 Corolla",
+   "central": "video / tutorial"
+  },
+  {
+   "task": "Put the jumper cables and tow strap back in the trunk",
+   "central": "cables / emergency kit"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Renew car insurance policy before the 15th",
+   "better": "shield or document with car",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Wash and vacuum the car inside and out",
+   "better": "car wash / car with sparkles or water drops",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Rent a compact car in Denver for the ski trip",
+   "better": "plain car or car with key",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the gear shifter cable on my commuter bicycle",
+   "better": "bicycle",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Turn off auto-play in Netflix settings",
+   "better": "gear / settings or TV",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check parking spot number at the airport garage",
+   "better": "parking sign (P)",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 5,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a front-facing car with a gear badge, universally understood as car maintenance, auto repair, or vehicle settings. Car servicing and repairs are among the most common recurring household tasks, making this a high-fit, distinctive icon distinct from a plain driving/car glyph.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "d9b6ef4025bbbc62d9d07f2429f0b37ed0d0bb6d",
+  "usage": {
+   "prompt": 3923,
+   "output": 1671,
+   "thoughts": 0,
+   "total": 5594
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

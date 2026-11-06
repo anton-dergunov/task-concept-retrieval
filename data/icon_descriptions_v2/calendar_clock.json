@@ -1,0 +1,224 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined calendar page with two top binding tabs",
+  "modifiers": [
+   "filled circular clock face badge at bottom right"
+  ],
+  "composition": "single object with corner overlay badge, front view"
+ },
+ "readings": [
+  {
+   "meaning": "schedule, timetable, or appointment time",
+   "strength": "primary"
+  },
+  {
+   "meaning": "date and time",
+   "strength": "primary"
+  },
+  {
+   "meaning": "reschedule or postpone an event",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "availability or booking slot",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Easy to confuse with generic calendar icons, event icons, or reminder/alarm icons in the same set.",
+ "modifier_semantics": [
+  {
+   "modifier": "filled circular clock face badge at bottom right",
+   "meaning": "specific time of day, scheduling, or time-based availability"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "social_family",
+  "health_fitness",
+  "learning",
+  "travel",
+  "tech"
+ ],
+ "task_intents": [
+  "plan weekly or monthly schedule",
+  "coordinate meeting times across timezones",
+  "set up booking availability slots",
+  "reschedule conflicting appointments",
+  "draft shift rota for staff",
+  "block focus hours on calendar",
+  "sync family calendars for the month",
+  "pick a date and time"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fall exam timetable",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Update Calendly availability hours",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "August shift rota",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Sync shared family calendar",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Fill out the Doodle poll",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Block out deep-work mornings on Google Calendar for next month",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Find a time that works with London and Tokyo offices",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Sort out the summer custody schedule with Mark before Friday",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Move Tuesday's physio appointment to a late afternoon slot",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Switch Google Calendar to CEST before the Berlin trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Print the fridge timetable for the kids' after-school clubs",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Draft the day-by-day conference agenda with speaker time slots",
+   "parent": "Q3 User Summit",
+   "domain": "work"
+  },
+  {
+   "task": "Compare options and lock in the final dates",
+   "parent": "Team Offsite Schedule",
+   "domain": "work"
+  },
+  {
+   "task": "Check everyone's free evenings for the next three weeks",
+   "parent": "D&D Campaign Scheduling",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Import the `.ics` feed so changes show up automatically",
+   "parent": "University Timetable",
+   "domain": "tech"
+  },
+  {
+   "task": "Sit down on Sunday night and map out every evening of the week",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Cuadrar los turnos de agosto con el resto del equipo",
+  "Actualizar mis horas disponibles en Calendly para entrevistas",
+  "Imprimir el horario de clases y actividades extraescolares para la nevera"
+ ],
+ "example_tasks_ru": [
+  "Составить график дежурств на майские праздники",
+  "Сверить расписание кружков детей и развезти по дням недели",
+  "Освободить утренние слоты в календаре под код-ревью"
+ ],
+ "context_tasks": [
+  {
+   "task": "Set up cron job for nightly database backup",
+   "central": "database backup / server"
+  },
+  {
+   "task": "Program the living room thermostat weekday hours",
+   "central": "thermostat"
+  },
+  {
+   "task": "Configure automatic dark mode at sunset",
+   "central": "display / dark mode"
+  },
+  {
+   "task": "Put the bins out on alternating Wednesday nights",
+   "central": "trash bin"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book six-month dental checkup before Friday",
+   "better": "tooth / dentist",
+   "trap": "property"
+  },
+  {
+   "task": "Schedule annual boiler servicing with British Gas",
+   "better": "boiler / wrench / flame",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a wall calendar with national parks photos for grandma",
+   "better": "plain calendar or gift",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace battery in the kitchen wall clock",
+   "better": "clock or battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay quarterly estimated taxes before the April 15 deadline",
+   "better": "tax / money / document",
+   "trap": "property"
+  },
+  {
+   "task": "Order vegan catering for the Tuesday 10am workshop",
+   "better": "food / catering",
+   "trap": "property"
+  },
+  {
+   "task": "Book the main auditorium for the opening keynote",
+   "better": "stage / building / podium",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon combines a calendar page with a clock badge, universally understood as date-and-time, scheduling, timetables, or availability. It fits tasks whose actual subject is a schedule, timetable, rota, or calendar management, though it must not be overused on any ordinary task that merely has a deadline or uses the verb 'schedule' (where the object being scheduled should take priority).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e92934d208c35f34073841ce7411b4d832296d71",
+  "usage": {
+   "prompt": 3921,
+   "output": 1720,
+   "thoughts": 0,
+   "total": 5641
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "heraldic shield outline",
+  "modifiers": [
+   "bold X cross centered inside"
+  ],
+  "composition": "single object with centered symbol, front view"
+ },
+ "readings": [
+  {
+   "meaning": "security disabled, unprotected, or security error",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel insurance or warranty coverage",
+   "strength": "primary"
+  },
+  {
+   "meaning": "turn off firewall, antivirus, or ad blocker",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "security vulnerability or breach",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the X inside the shield could be misread as a medical cross (+ rotated) or a generic emblem on a crest.",
+ "modifier_semantics": [
+  {
+   "modifier": "bold X cross inside",
+   "meaning": "disabled, cancelled, failed, or unprotected state"
+  }
+ ],
+ "domains": [
+  "tech",
+  "finance",
+  "admin",
+  "home",
+  "work"
+ ],
+ "task_intents": [
+  "cancel an insurance policy",
+  "disable firewall or antivirus temporarily",
+  "fix an unprotected security warning",
+  "revoke access or security clearance",
+  "turn off ad blocker for site",
+  "terminate extended warranty coverage",
+  "resolve SSL or security failure"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel old renter's insurance",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Turn off Windows Defender",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Drop collision coverage on Civic",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Disarm alarm for painters",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Whitelist payroll portal in uBlock",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel the AppleCare+ monthly plan on the old iPad",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Disable firewall on port 8080 for local testing",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix the 'Not Secure' SSL warning on the staging site",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Terminate pet insurance policy with Trupanion before the renewal date",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Call ADT to cancel home monitoring before the contract auto-renews",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Temporarily turn off Gatekeeper to open the unsigned audio plugin",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Revoke VPN certificate and security clearance for the departed contractor",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Send written notice to State Farm to cancel the umbrella policy before the first",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Pause the Norton subscription on Mom's laptop so it stops blocking her printer",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Patch the unauthenticated API endpoint flagged as critical in yesterday's pentest report",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call them to cancel before Friday",
+   "parent": "Car Insurance",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Dar de baja el seguro del coche antiguo antes del viernes",
+  "Desactivar el cortafuegos para probar el servidor local",
+  "Cancelar la póliza de hogar con Mapfre y pedir el extorno"
+ ],
+ "example_tasks_ru": [
+  "Отключить антивирус перед установкой драйвера",
+  "Расторгнуть договор КАСКО и вернуть остаток премии",
+  "Исправить ошибку недействительного SSL-сертификата на сайте"
+ ],
+ "context_tasks": [
+  {
+   "task": "Mail back the signed cancellation form to Geico",
+   "central": "letter / mail"
+  },
+  {
+   "task": "Check final credit card statement to make sure McAfee stopped charging",
+   "central": "credit card / statement"
+  },
+  {
+   "task": "Export firewall rules before wiping the router",
+   "central": "router / file export"
+  },
+  {
+   "task": "Read the fine print on early termination fees for the alarm contract",
+   "central": "contract document"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Renew home insurance policy for next year",
+   "better": "shield with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Install Bitdefender on the new desktop",
+   "better": "plain shield or shield with plus/check",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy mouthguard and shin guards for soccer",
+   "better": "sports gear / soccer ball",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Download the PDF receipt",
+   "better": "document / receipt icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Delete unencrypted backup files from the thumb drive",
+   "better": "trash can or USB drive",
+   "trap": "property"
+  },
+  {
+   "task": "Check whether our travel card covers rental car damage",
+   "better": "car or credit card",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A shield with an X clearly communicates disabled security, unprotected status, or cancelling protection/insurance. It fits specific tasks like turning off a firewall/antivirus, fixing a security failure, or cancelling an insurance policy, and is distinct from positive security icons (plain shield or shield with a checkmark).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "4e2583e280a12176697f3b0227f94735fedc21fe",
+  "usage": {
+   "prompt": 3925,
+   "output": 1606,
+   "thoughts": 0,
+   "total": 5531
+  },
+  "soft_problems": [
+   "example_tasks with parent: 1 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

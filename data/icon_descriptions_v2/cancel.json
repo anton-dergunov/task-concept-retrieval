@@ -1,0 +1,233 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "diagonal cross or X mark inside a circle",
+  "modifiers": [
+   "enclosing circle"
+  ],
+  "composition": "centered X inside a circular outline"
+ },
+ "readings": [
+  {
+   "meaning": "cancel, abort, or terminate",
+   "strength": "primary"
+  },
+  {
+   "meaning": "close, dismiss, or clear",
+   "strength": "primary"
+  },
+  {
+   "meaning": "error, failure, or invalid status",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "reject, decline, or say no",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "As a pure UI action glyph, it looks like a button to delete or cancel the to-do item itself rather than representing the topic of the task; also visually close to a rotated plus-in-circle.",
+ "modifier_semantics": [
+  {
+   "modifier": "enclosing circle",
+   "meaning": "status badge or action button boundary"
+  }
+ ],
+ "domains": [
+  "finance",
+  "admin",
+  "work",
+  "tech",
+  "shopping"
+ ],
+ "task_intents": [
+  "cancel recurring subscription before renewal",
+  "terminate an old service contract",
+  "close an unused account permanently",
+  "decline an invitation or proposal",
+  "revoke access permissions for former user",
+  "abort a failing software deployment",
+  "opt out of marketing lists"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel Adobe Creative Cloud",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Close old Wells Fargo account",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Opt out of credit prescreening",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Revoke contractor GitHub access",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Kill the stagnant feature branch",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel the free trial of Paramount+ before Thursday's billing cycle",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Terminate the lawn care service contract before the spring auto-renewal",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Decline the speaking invitation for the October conference in Chicago",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Stop the recurring monthly transfer to the old savings account",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Cancel duplicate Amazon Subscribe & Save order for dishwasher pods",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Withdraw application for the senior product role at Acme",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Discontinue the legacy v1 API endpoints after the client migration",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call the gym on 5th Street to cancel membership before the annual fee hits on Friday",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Send formal notice to terminate the coworking desk lease at the end of next month",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel the backup hotel reservation in Kyoto now that the ryokan is confirmed for April",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Hulu and Disney+ bundle",
+   "parent": "Subscriptions to cancel",
+   "domain": "finance"
+  },
+  {
+   "task": "New York Times digital access",
+   "parent": "Subscriptions to cancel",
+   "domain": "finance"
+  },
+  {
+   "task": "Former intern accounts",
+   "parent": "Access revocations",
+   "domain": "tech"
+  },
+  {
+   "task": "Vendor proposals out of budget",
+   "parent": "Rejections to send",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Dar de baja el seguro del coche antiguo antes del día 15",
+  "Cancelar la suscripción de prueba de Filmin",
+  "Cerrar la cuenta compartida del banco que ya no usamos"
+ ],
+ "example_tasks_ru": [
+  "Отменить подписку на Яндекс Плюс до списания",
+  "Закрыть старую кредитку в Тинькофф",
+  "Отказаться от брони отеля в Сочи"
+ ],
+ "context_tasks": [
+  {
+   "task": "Review failed nightly build logs",
+   "central": "build logs"
+  },
+  {
+   "task": "List all monthly charges we can cut this quarter",
+   "central": "budget / expenses"
+  },
+  {
+   "task": "Draft polite rejection email template for applicants",
+   "central": "email template"
+  },
+  {
+   "task": "Check refund policy for non-refundable airline tickets",
+   "central": "airline tickets"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cancel dentist appointment on Tuesday",
+   "better": "tooth or calendar with cross",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Cancel flight to Denver",
+   "better": "airplane",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Fix cross-site scripting bug in login form",
+   "better": "bug or code brackets",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy Phillips head screwdriver",
+   "better": "screwdriver",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add new user to the workspace",
+   "better": "plus in circle or user plus",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book hotel with free cancellation",
+   "better": "hotel bed",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "A circled X is universal UI chrome for 'close', 'delete', or 'clear'. Next to a task in a to-do list it looks like a button to delete or cancel the task itself rather than representing the task's subject, and even for cancellation tasks the specific object being cancelled (flight, card, gym, app) is almost always a better cue.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f7ed35da38a0e72acd7a51fd85f9496afaad883c",
+  "usage": {
+   "prompt": 3924,
+   "output": 1725,
+   "thoughts": 0,
+   "total": 5649
+  },
+  "soft_problems": [
+   "example_tasks: 19 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

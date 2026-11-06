@@ -1,0 +1,221 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rectangular card with a horizontal magnetic stripe near the top",
+  "modifiers": [
+   "plus sign in bottom right corner"
+  ],
+  "composition": "single object, front view, with corner badge"
+ },
+ "readings": [
+  {
+   "meaning": "add credit or debit card / new payment method",
+   "strength": "primary"
+  },
+  {
+   "meaning": "apply for a new bank card or credit card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "top up or add funds to a prepaid or transit card",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "add a new browser window or UI panel",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the card's magnetic stripe can look like a window title bar, making it resemble an 'add window' or 'new tab' icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "plus sign",
+   "meaning": "add, create new, top up, or link"
+  }
+ ],
+ "domains": [
+  "finance",
+  "shopping",
+  "admin",
+  "travel",
+  "tech"
+ ],
+ "task_intents": [
+  "add a new payment method",
+  "apply for a credit card",
+  "link debit card to digital wallet",
+  "top up a prepaid transit card",
+  "order a replacement bank card",
+  "issue a new corporate expense card",
+  "set up a virtual card number"
+ ],
+ "example_tasks": [
+  {
+   "task": "Add new Visa to Apple Pay",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Order replacement debit card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Top up Clipper card",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Link Amex to Amazon account",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Request virtual card for trial",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Apply for a no-foreign-transaction-fee credit card before the Japan trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Put the new Chase card on the utilities autopay",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Issue a corporate Brex card for the new marketing hire",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Add Mom as an authorized user on the grocery rewards card",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Open a separate joint debit card just for shared household bills",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Enter the updated expiration date and CVV in Spotify and Netflix",
+   "parent": "New Debit Card",
+   "domain": "admin"
+  },
+  {
+   "task": "Activate via the mobile app and set the four-digit PIN",
+   "parent": "Schwab ATM Card",
+   "domain": "finance"
+  },
+  {
+   "task": "Finish the online application before the 80k bonus offer expires",
+   "parent": "Sapphire Preferred",
+   "domain": "finance"
+  },
+  {
+   "task": "Load $50 onto the commuter pass for next month's train rides",
+   "parent": "Transit Pass",
+   "domain": "travel"
+  },
+  {
+   "task": "Generate a single-use Privacy.com card with a $20 limit for the sketchy vendor site",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Switch the AWS billing profile over to the new business mastercard before the first of the month",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Vincular la nueva tarjeta de débito a Mercado Pago",
+  "Recargar 20 euros en la tarjeta del metro antes del lunes",
+  "Solicitar una tarjeta adicional del banco para los gastos de la casa"
+ ],
+ "example_tasks_ru": [
+  "Привязать новую карту Мир к Госуслугам и такси",
+  "Заказать перевыпуск зарплатной карты в приложении банка",
+  "Пополнить Тройку на месяц вперёд"
+ ],
+ "context_tasks": [
+  {
+   "task": "Update expired billing details across all streaming subscriptions",
+   "central": "subscriptions"
+  },
+  {
+   "task": "Set up Apple Pay on the new iPhone",
+   "central": "phone / digital wallet"
+  },
+  {
+   "task": "Reconcile this month's new card charges in YNAB",
+   "central": "budget / expenses"
+  },
+  {
+   "task": "Set up a Stripe checkout page for the landing site",
+   "central": "website / checkout"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cancel the lost Visa card and freeze the account",
+   "better": "credit card with a slash, minus, or lock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay off the monthly credit card balance in full",
+   "better": "plain credit card or checkmark on card",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Add 30 new vocabulary flashcards to the Anki deck",
+   "better": "study flashcards or index cards",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a birthday card for Grandpa at the stationery shop",
+   "better": "greeting card or envelope",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a box of 200 matte business cards before the conference",
+   "better": "contact / ID card with person silhouette",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book the hotel room that gives 5x points on the new card",
+   "better": "hotel or bed",
+   "trap": "property"
+  },
+  {
+   "task": "Call the airline to change the return flight date",
+   "better": "airplane or phone",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly shows a magnetic-stripe payment card with a plus sign in the lower right corner, universally read as adding, linking, applying for, or topping up a credit/debit/transit card. It fits common personal finance, shopping, and admin tasks well, though at very small sizes it could briefly resemble an 'add browser window' glyph.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "4e804e846a29d471cd9936d2e72bc89ce84d5337",
+  "usage": {
+   "prompt": 3921,
+   "output": 1764,
+   "thoughts": 0,
+   "total": 5685
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

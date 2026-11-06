@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "stopwatch outline with top and side push buttons",
+  "modifiers": [
+   "heartbeat or pulse waveform line across the center"
+  ],
+  "composition": "single object, front view, with internal waveform"
+ },
+ "readings": [
+  {
+   "meaning": "heart rate monitor / pulse rate / BPM",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cardio workout / HIIT interval training",
+   "strength": "primary"
+  },
+  {
+   "meaning": "system performance / latency / uptime monitoring",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "medical vital signs check / stress test",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the inner pulse line may look like a crack in a clock face or a generic speedometer needle.",
+ "modifier_semantics": [
+  {
+   "modifier": "heartbeat or pulse waveform line across the center",
+   "meaning": "heart rate, pulse, cardio activity, or live system telemetry"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "tech",
+  "shopping",
+  "outdoors"
+ ],
+ "task_intents": [
+  "measure resting heart rate",
+  "do timed cardio interval workout",
+  "recalibrate heart rate training zones",
+  "buy a chest strap monitor",
+  "schedule a cardiac stress test",
+  "check server response time metrics",
+  "log recovery pulse after running"
+ ],
+ "example_tasks": [
+  {
+   "task": "30 min Zone 2 cardio",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Measure resting heart rate",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Tabata sprints on rower",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Recalibrate Garmin HR zones",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check API latency spikes",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Take morning resting pulse for five days before the cardiology appointment",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Run a 20-minute lactate threshold test on the track",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Replace the CR2032 battery in the Polar H10 chest strap",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Set up 1-minute ping health checks for the production database",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Compare optical armband vs chest strap heart rate monitors",
+   "parent": "Gear to buy",
+   "domain": "shopping"
+  },
+  {
+   "task": "Log Tuesday evening session",
+   "parent": "Cardio Conditioning",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Adjust alert thresholds for p99 response time",
+   "parent": "Server Uptime & Telemetry",
+   "domain": "tech"
+  },
+  {
+   "task": "Book the treadmill appointment at the clinic",
+   "parent": "Cardiac Stress Test",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Do four 4-minute Norwegian 4x4 intervals at 90% max heart rate on the bike",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check how fast heart rate drops one minute after finishing the hill repeats",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Benchmark cold-start execution time and memory spikes on the new worker nodes",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Medir las pulsaciones en reposo al despertar",
+  "Hacer 25 minutos de HIIT manteniendo la zona 4 de frecuencia cardíaca",
+  "Cambiar la pila de la banda pectoral Garmin antes del domingo"
+ ],
+ "example_tasks_ru": [
+  "Замерить пульс в покое утром",
+  "Пробежать интервалы 8х400 м с контролем пульсовых зон",
+  "Настроить мониторинг времени отклика и пинга боевого сервера"
+ ],
+ "context_tasks": [
+  {
+   "task": "Wash the salty chest strap elastic band by hand",
+   "central": "laundry / washing"
+  },
+  {
+   "task": "Download the FIT file from Tuesday's track intervals",
+   "central": "file download"
+  },
+  {
+   "task": "Shave chest hair spot so the ECG electrodes stick properly",
+   "central": "razor / grooming"
+  },
+  {
+   "task": "Pay the copay bill for the Holter monitor rental",
+   "central": "payment / bill"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Boil eggs for 6 minutes",
+   "better": "plain kitchen timer or egg",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take blood pressure cuff reading",
+   "better": "blood pressure cuff or heart",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a waterproof watch for swimming",
+   "better": "wristwatch",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the staging server is still alive",
+   "better": "server rack",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pack running shoes and electrolyte gels",
+   "better": "running shoe",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Renew gym membership before the monthly billing date",
+   "better": "dumbbell or credit card",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a stopwatch with an ECG pulse wave, directly representing heart rate (beats per minute), timed cardio/HIIT workouts, or system performance/latency monitoring. It is highly effective for fitness tracking and DevOps telemetry tasks, though at very small sizes it could be confused with a standard stopwatch or gauge.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "29ec29860c05a92cc47c74b7f19ca3ffeeaf98ac",
+  "usage": {
+   "prompt": 3931,
+   "output": 1669,
+   "thoughts": 0,
+   "total": 5600
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

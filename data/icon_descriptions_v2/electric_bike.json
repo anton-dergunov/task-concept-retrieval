@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "bicycle in side profile facing right",
+  "modifiers": [
+   "horizontal lightning bolt below the wheels"
+  ],
+  "composition": "single object in side profile with a modifier glyph underneath"
+ },
+ "readings": [
+  {
+   "meaning": "electric bike / e-bike",
+   "strength": "primary"
+  },
+  {
+   "meaning": "e-bike charging or battery",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "bike-share electric bicycle",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the lightning bolt underneath may be missed, making it look like a regular bicycle.",
+ "modifier_semantics": [
+  {
+   "modifier": "horizontal lightning bolt below the wheels",
+   "meaning": "electric powered or battery-assisted"
+  }
+ ],
+ "domains": [
+  "travel",
+  "outdoors",
+  "shopping",
+  "home",
+  "finance",
+  "admin",
+  "health_fitness",
+  "hobbies"
+ ],
+ "task_intents": [
+  "charge the e-bike battery",
+  "buy or compare electric bikes",
+  "service or repair an e-bike",
+  "rent a city e-bike",
+  "register an e-bike or rebate",
+  "adjust e-bike brakes or tires",
+  "commute by electric bicycle"
+ ],
+ "example_tasks": [
+  {
+   "task": "Plug in the e-bike",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "E-bike tune-up before spring",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Compare Aventon vs Rad Power",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Book Saturday test ride",
+   "parent": "Cargo e-bike",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check tire pressure before Monday",
+   "parent": "E-bike commute",
+   "domain": "travel"
+  },
+  {
+   "task": "Submit state rebate paperwork for the new commuter e-bike",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Bring the Bosch battery inside before the overnight freeze hits",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Find out why the pedal assist keeps cutting out on hills",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Reserve two electric bikes in Girona for the wine country day",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Record the frame serial number on Project 529",
+   "parent": "RadWagon e-bike",
+   "domain": "admin"
+  },
+  {
+   "task": "Ask shop to bleed the hydraulic disc brakes",
+   "parent": "Tern e-bike",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel the monthly Citi Bike e-bike pass before it renews",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "See if our homeowner policy covers theft of a Class 3 electric bike outside",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Do a test run to the daycare on the cargo e-bike with both kids",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Order replacement brake pads for the heavy haul e-bike before the hills get wet",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Figure out where to mount the spare battery on the downtube without rubbing cables",
+   "parent": "",
+   "domain": "hobbies"
+  }
+ ],
+ "example_tasks_es": [
+  "Poner a cargar la batería de la bici eléctrica antes de mañana",
+  "Revisar las subvenciones del ayuntamiento para comprar una e-bike",
+  "Llevar la bicicleta eléctrica al taller por el fallo del motor Bosch"
+ ],
+ "example_tasks_ru": [
+  "Поставить аккумулятор электровелосипеда на зарядку на ночь",
+  "Сравнить мотор-колесо и кареточный мотор перед покупкой электровелосипеда",
+  "Заменить тормозные колодки на курьерском электровелосипеде"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a heavy-duty U-lock rated for e-bikes",
+   "central": "bike lock"
+  },
+  {
+   "task": "Install a 20A outlet in the shed for the e-bike charger",
+   "central": "electrical outlet"
+  },
+  {
+   "task": "Order a MIPS helmet certified for Class 3 e-bike speeds",
+   "central": "bicycle helmet"
+  },
+  {
+   "task": "Pick up waterproof panniers for the e-bike commute",
+   "central": "bags / panniers"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "True the rear wheel on the road bike",
+   "better": "regular bicycle (without lightning bolt)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Renew the registration on the Vespa",
+   "better": "motor scooter / moped",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Tighten the belt on the Peloton in the basement",
+   "better": "stationary exercise bike",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace the broken deck latch on the Ninebot scooter",
+   "better": "electric kick scooter",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the monthly electric bill before Friday",
+   "better": "lightning bolt or bill/invoice",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy reflective rain jacket for dark rides",
+   "better": "jacket / coat",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a bicycle with a lightning bolt beneath it, the standard symbol for an electric bicycle (e-bike). It fits real-world tasks around charging, buying, maintaining, insuring, or renting e-bikes, and is only slightly at risk of being confused with a standard bicycle if the bolt is overlooked at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "d528e47bc9680cac8a405e86b6ff84312f659186",
+  "usage": {
+   "prompt": 3926,
+   "output": 1688,
+   "thoughts": 0,
+   "total": 5614
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

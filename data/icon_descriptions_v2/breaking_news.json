@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "horizontal rectangular card with three horizontal text lines",
+  "modifiers": [
+   "exclamation mark on the left side inside the card"
+  ],
+  "composition": "single bordered rectangular box containing an exclamation mark beside three stacked bars"
+ },
+ "readings": [
+  {
+   "meaning": "error log, system alert message, or warning notice",
+   "strength": "primary"
+  },
+  {
+   "meaning": "important announcement, bulletin, or notice board item",
+   "strength": "primary"
+  },
+  {
+   "meaning": "urgent details card or incident report",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "toast notification or pop-up alert dialog",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be mistaken for a generic contact card, ID badge, or layout template at very small sizes if the exclamation mark blurs into a profile silhouette.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "alert, warning, error, important notice, or urgent attention"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "communication",
+  "home",
+  "finance"
+ ],
+ "task_intents": [
+  "investigate system error log messages",
+  "post an important community notice",
+  "draft an incident report summary",
+  "configure alert notification banner UI",
+  "respond to an official warning notice",
+  "review critical server crash logs",
+  "send an urgent announcement to tenants"
+ ],
+ "example_tasks": [
+  {
+   "task": "Check Sentry error logs",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Post HOA parking notice",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "File workplace incident report",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Read IRS delinquency notice",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Draft outage postmortem summary",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pin the water shutoff notice next to the building elevator",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Design the inline error toast component for failed checkout forms",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Pull the nginx crash log from last night's 502 spike",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Send urgent allergen recall bulletin to all parent email lists",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Appeal the city code violation notice about the front hedge",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Clear false-positive security alerts from the CloudWatch dashboard",
+   "parent": "Production Monitoring",
+   "domain": "tech"
+  },
+  {
+   "task": "Review yesterday's entries",
+   "parent": "Server Error Logs",
+   "domain": "tech"
+  },
+  {
+   "task": "Translate into Spanish and print 20 copies",
+   "parent": "Tenant Eviction & Late Rent Notices",
+   "domain": "admin"
+  },
+  {
+   "task": "Update formatting and severity colors",
+   "parent": "App Alert Banners",
+   "domain": "creative"
+  },
+  {
+   "task": "Write up the formal safety incident report for the slipped ladder in warehouse B",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check the recall notice from Toyota to see if our 2019 RAV4 VIN is affected",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Revisar los registros de errores del servidor de pagos tras la caída",
+  "Colgar el aviso de corte de agua en el portal de la comunidad",
+  "Contestar a la notificación de recargo de la Agencia Tributaria"
+ ],
+ "example_tasks_ru": [
+  "Проверить логи ошибок в Kibana после ночного релиза",
+  "Повесить объявление об отключении горячей воды в подъезде",
+  "Сверстать плашку предупреждения о технических работах на сайте"
+ ],
+ "context_tasks": [
+  {
+   "task": "Fix the null pointer exception in the billing webhook",
+   "central": "code bug / webhook"
+  },
+  {
+   "task": "Pay the $65 street sweeping ticket before the late fee kicks in",
+   "central": "parking ticket / payment"
+  },
+  {
+   "task": "Replace the recalled Kidde smoke detector in the hallway",
+   "central": "smoke detector"
+  },
+  {
+   "task": "Add Slack webhook integration for failed GitHub Actions builds",
+   "central": "Slack / webhook integration"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy milk and eggs urgently before dinner",
+   "better": "shopping cart or milk carton",
+   "trap": "property"
+  },
+  {
+   "task": "Update my driver's license address at the DMV",
+   "better": "ID card with person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the grocery list on the fridge",
+   "better": "checklist or shopping list",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Give two weeks notice to my manager on Monday",
+   "better": "resignation letter or person talking",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace the dead AA batteries in the carbon monoxide alarm",
+   "better": "battery",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Order 200 matte business cards from Moo",
+   "better": "business card with contact icon",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a bordered card or screen containing an exclamation mark alongside lines of text, strongly conveying an error log, warning notice, alert banner, or urgent bulletin. It fits tasks centered on reviewing logs, handling official notices, or designing alert UI, though care must be taken not to misuse it as a generic 'urgent' priority marker on unrelated tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b891aa7066bcbcc39724d7981ec201c73c21e551",
+  "usage": {
+   "prompt": 3924,
+   "output": 1683,
+   "thoughts": 0,
+   "total": 5607
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

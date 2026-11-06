@@ -1,0 +1,221 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "thermometer with two scale ticks",
+  "modifiers": [
+   "large counter-clockwise circular arrow arcing over the top"
+  ],
+  "composition": "circular arrow framing a thermometer badge in the bottom-right"
+ },
+ "readings": [
+  {
+   "meaning": "reset thermostat or restore default temperature",
+   "strength": "primary"
+  },
+  {
+   "meaning": "thermostat schedule or recurring temperature cycle",
+   "strength": "primary"
+  },
+  {
+   "meaning": "temperature history or log",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "adjust or lower heating/cooling setting",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the thermometer bulb can look like a keyhole or padlock, making the icon resemble a security reset.",
+ "modifier_semantics": [
+  {
+   "modifier": "counter-clockwise circular arrow",
+   "meaning": "reset, restore, repeat, cycle, or history"
+  },
+  {
+   "modifier": "two horizontal tick marks",
+   "meaning": "temperature scale or measurement levels"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "food",
+  "hobbies",
+  "health_fitness",
+  "work"
+ ],
+ "task_intents": [
+  "reset smart thermostat to default schedule",
+  "switch seasonal heating and cooling program",
+  "recalibrate oven or fridge thermostat",
+  "restore normal room temperature after trip",
+  "log daily body or basal temperature",
+  "cycle aquarium or greenhouse heater settings",
+  "factory reset digital meat thermometer"
+ ],
+ "example_tasks": [
+  {
+   "task": "Reset Nest thermostat",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Switch to winter heating schedule",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Recalibrate meat thermometer",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Turn heat back up",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Restore factory settings",
+   "parent": "Hallway Thermostat",
+   "domain": "home"
+  },
+  {
+   "task": "Set Ecobee back to normal weekday hours after the holiday",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Put the wine fridge back to 55°F after chilling white bottles",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Program overnight setback on the upstairs heat pump",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Recalibrate the 3D printer hotend PID loop after nozzle swap",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Check weekly cold-chain log for the vaccine refrigerator",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clear old guest overrides",
+   "parent": "Smart Thermostat",
+   "domain": "tech"
+  },
+  {
+   "task": "Update morning warm-up times",
+   "parent": "HVAC Schedule",
+   "domain": "home"
+  },
+  {
+   "task": "Log this week's morning readings",
+   "parent": "Basal Temperature Tracking",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Take the furnace off vacation hold before our flight lands on Sunday night",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Reset the fermentation chamber controller to 68 degrees for the new ale batch",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Switch the greenhouse thermostat from summer venting back to night frost protection mode",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Reiniciar el termostato del salón al horario de invierno",
+  "Volver a poner la nevera a 4 °C después de la fiesta",
+  "Calibrar la sonda de temperatura del horno en agua con hielo"
+ ],
+ "example_tasks_ru": [
+  "Сбросить настройки термостата тёплого пола в ванной",
+  "Вернуть обычную температуру котла после отъезда гостей",
+  "Переключить климат-контроль в теплице на ночной режим"
+ ],
+ "context_tasks": [
+  {
+   "task": "Replace AA batteries in the hallway thermostat before winter",
+   "central": "battery"
+  },
+  {
+   "task": "bleed upstairs radiators",
+   "central": "radiator"
+  },
+  {
+   "task": "Swap the 16x25 furnace air filter in the basement",
+   "central": "air filter"
+  },
+  {
+   "task": "Call HVAC tech about the noisy compressor outside",
+   "central": "phone call / HVAC unit"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a washable cold-water delicates laundry bag",
+   "better": "laundry bag",
+   "trap": "property"
+  },
+  {
+   "task": "Check outside temperature before tomorrow's long run",
+   "better": "weather / running",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Reset router password in the admin panel",
+   "better": "router or password lock reset",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Warm up with 10 minutes of dynamic stretching",
+   "better": "stretching person",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the January gas and heating bill online",
+   "better": "bill / payment",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Order insulated hot-and-cold travel mug for commuter train",
+   "better": "travel mug",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a thermometer with a counter-clockwise reset/cycle arrow, clearly representing resetting a thermostat, changing a heating/cooling schedule, or reviewing temperature history. It fits home HVAC and appliance temperature tasks well, though at tiny sizes the thermometer bulb can mildly resemble a keyhole.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "3214a2e5d945adb1f8cd94d4583f49143b734c20",
+  "usage": {
+   "prompt": 3920,
+   "output": 1663,
+   "thoughts": 90,
+   "total": 5673
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

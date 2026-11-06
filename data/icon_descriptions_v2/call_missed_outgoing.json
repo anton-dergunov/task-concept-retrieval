@@ -1,0 +1,221 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "diagonal line going down-right then bending up-right into arrowhead",
+  "modifiers": [],
+  "composition": "single V-shaped angled arrow pointing up-right"
+ },
+ "readings": [
+  {
+   "meaning": "missed outgoing call or bounced message",
+   "strength": "primary"
+  },
+  {
+   "meaning": "rebound, recovery, or bounce back",
+   "strength": "primary"
+  },
+  {
+   "meaning": "checkmark with an arrow tip",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "reroute or redirect path",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Easily mistaken for a standard checkmark at small sizes, or confused with a generic trending-up chart arrow.",
+ "modifier_semantics": [],
+ "domains": [
+  "communication",
+  "work",
+  "finance",
+  "tech",
+  "admin"
+ ],
+ "task_intents": [
+  "follow up on missed outgoing call",
+  "handle bounced email addresses",
+  "retry failed outbound connection",
+  "track market dip and recovery",
+  "reroute deflected customer inquiry",
+  "resend returned mail or package"
+ ],
+ "example_tasks": [
+  {
+   "task": "Clean up bounced newsletter emails",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Retry unanswered call to landlord",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check bounce rate on landing page",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Resend returned wedding invitation",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Try calling Dr. Patel again",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Clear hard bounces from the Mailchimp subscriber list before Friday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Follow up with the roofing contractor who didn't pick up",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Investigate why outbound webhook requests are bouncing back from staging",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Buy the index dip if the market rebounds tomorrow morning",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Call the airline back after getting disconnected on hold",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Update aunt Clara's email address since the holiday card bounced",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Review the analytics report on visitor bounce rates for the new blog",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Export all bounced addresses from the Q3 campaign and verify them with sales",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call the county clerk's office back at 2pm since nobody answered before lunch",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Set up automatic retry logic for failed outbound API calls in the payment service",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Try the alternate number",
+   "parent": "Unanswered Calls",
+   "domain": "communication"
+  },
+  {
+   "task": "Prune invalid addresses",
+   "parent": "Email Bounces",
+   "domain": "work"
+  },
+  {
+   "task": "Compare mobile vs desktop",
+   "parent": "Website Bounce Rate",
+   "domain": "tech"
+  },
+  {
+   "task": "Leave a voicemail this time",
+   "parent": "Missed Outgoing Calls",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Limpiar los correos rebotados de la lista de suscriptores del boletín",
+  "Volver a llamar al taller mecánico porque no contestaron por la mañana",
+  "Revisar la tasa de rebote de la página de inicio tras el rediseño"
+ ],
+ "example_tasks_ru": [
+  "Удалить вернувшиеся адреса из базы рассылки после вчерашней кампании",
+  "Перезвонить в клинику, так как утром никто не взял трубку",
+  "Проверить показатель отказов на новой посадочной странице"
+ ],
+ "context_tasks": [
+  {
+   "task": "Fix the broken signup form causing visitors to leave immediately",
+   "central": "form"
+  },
+  {
+   "task": "Configure SPF and DKIM records so our messages stop getting rejected",
+   "central": "DNS records"
+  },
+  {
+   "task": "Rebalance portfolio after the tech sector recovery",
+   "central": "portfolio"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call mom about Thanksgiving dinner plans",
+   "better": "phone receiver",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Mark the tax filing task as completed",
+   "better": "checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Rent a bouncy castle for Leo's sixth birthday party",
+   "better": "bouncy castle or party balloon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy dryer sheets to reduce static cling",
+   "better": "laundry or dryer",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Review quarterly revenue growth chart for the board deck",
+   "better": "line chart with upward trend",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a new basketball with good bounce for the driveway",
+   "better": "basketball",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "The icon is an abstract V-shaped arrow (used in UI sets for 'missed outgoing call' or 'bounce') without a phone or object to ground its meaning. At list size it looks nearly identical to a checkmark or a generic chart arrow, making it too ambiguous to serve as a reliable task subject cue.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e470c6a65dd4066a5784118ea08e1a8e60486114",
+  "usage": {
+   "prompt": 3924,
+   "output": 1654,
+   "thoughts": 62,
+   "total": 5640
+  },
+  "soft_problems": [
+   "example_tasks: 19 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "seven vertical bars of varying widths forming a barcode",
+  "modifiers": [],
+  "composition": "single object, front view"
+ },
+ "readings": [
+  {
+   "meaning": "barcode / UPC / EAN code",
+   "strength": "primary"
+  },
+  {
+   "meaning": "scan product or return label",
+   "strength": "primary"
+  },
+  {
+   "meaning": "inventory / SKU / serial number",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "checkout / price check",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, could slightly resemble a bookshelf, fence pickets, or audio equalizer bars, though the varying bar widths and spacing make a barcode clear.",
+ "modifier_semantics": [],
+ "domains": [
+  "shopping",
+  "work",
+  "admin",
+  "tech",
+  "home",
+  "health_fitness",
+  "hobbies",
+  "finance"
+ ],
+ "task_intents": [
+  "scan product barcode into app",
+  "print return barcode for package",
+  "register UPC codes for inventory",
+  "look up ISBN barcode of books",
+  "generate SKU barcodes for products",
+  "scan food barcodes for macro tracking",
+  "save digital membership card barcode",
+  "verify serial number and barcode"
+ ],
+ "example_tasks": [
+  {
+   "task": "Print Amazon return barcode",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Buy GS1 UPC barcodes",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Fix smudged barcode labels",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Test USB scanner upstairs",
+   "parent": "Warehouse Barcode System",
+   "domain": "tech"
+  },
+  {
+   "task": "Order new thermal roll",
+   "parent": "Barcode Label Printer",
+   "domain": "shopping"
+  },
+  {
+   "task": "Screenshot the UPS drop-off barcode before driving to the store",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Scan all hardcover ISBN barcodes into Libib before boxing them",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Scan pantry barcodes into Cronometer for next week's meal prep",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Add gym keytag barcode to Apple Wallet so I stop forgetting it",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Generate Code 128 barcodes for the new ceramic mug SKUs",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Catalog vinyl collection by scanning sleeve barcodes into Discogs",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Send high-res vector file to the box designer",
+   "parent": "EAN-13 Packaging Barcodes",
+   "domain": "work"
+  },
+  {
+   "task": "Check why two items throw an invalid checksum error",
+   "parent": "POS Barcode Import",
+   "domain": "tech"
+  },
+  {
+   "task": "Cut the original UPC barcode off the router box and mail it in for the rebate",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Stick laminated asset tag barcodes onto all twelve studio laptops before the summer interns arrive",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Verify that the barcode on the back cover of the zine scans properly at the register",
+   "parent": "",
+   "domain": "hobbies"
+  }
+ ],
+ "example_tasks_es": [
+  "Imprimir el código de barras de Correos para devolver las botas",
+  "Escanear los códigos EAN de las cajas del almacén con el lector láser",
+  "Generar códigos de barras para las etiquetas de la nueva colección de camisetas"
+ ],
+ "example_tasks_ru": [
+  "Показывать штрихкод из приложения Ozon в пункте выдачи",
+  "Распечатать наклейки со штрихкодами для поставки на Wildberries",
+  "Отсканировать штрихкод со старой квитанции ЖКХ в банковском приложении"
+ ],
+ "context_tasks": [
+  {
+   "task": "Do year-end stock count in the back storage room",
+   "central": "inventory boxes"
+  },
+  {
+   "task": "Drop off the wrong-size jeans at Whole Foods counter",
+   "central": "return package / jeans"
+  },
+  {
+   "task": "Use self-checkout at Target for the quick grocery run",
+   "central": "shopping cart / checkout"
+  },
+  {
+   "task": "Label plastic storage bins in the garage with their contents",
+   "central": "storage bins / label"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Scan signed mortgage contract to PDF and email to the lawyer",
+   "better": "document scanner / PDF document",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Put a QR code for the guest Wi-Fi in a little frame in the hallway",
+   "better": "QR code (2D matrix square)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule knee MRI scan at the imaging clinic on Tuesday",
+   "better": "medical imaging / hospital",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace three broken wooden slats on the backyard fence",
+   "better": "fence",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the plumber's invoice for the kitchen sink repair",
+   "better": "invoice / money / wrench",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy a barcode-printable thermal Transfer printer from Brother",
+   "better": "printer",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 5
+ },
+ "discard": false,
+ "reasoning": "A universally recognizable 1D linear barcode composed of vertical black stripes of varying thickness. It fits tasks centered on product UPC/EAN/ISBN codes, return drop-off codes, inventory labeling, and item scanning, and is distinct from 2D QR codes or document scanners.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c29a185e3bcf16cb4e9a52d3012e6b5b396cfb23",
+  "usage": {
+   "prompt": 3925,
+   "output": 1672,
+   "thoughts": 112,
+   "total": 5709
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

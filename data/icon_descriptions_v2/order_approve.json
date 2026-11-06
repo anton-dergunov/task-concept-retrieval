@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "paper receipt with jagged bottom edge and three text lines",
+  "modifiers": [
+   "circular badge with checkmark at bottom right"
+  ],
+  "composition": "single object in front view with corner overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "paid bill, invoice, or receipt",
+   "strength": "primary"
+  },
+  {
+   "meaning": "verified or approved expense receipt",
+   "strength": "primary"
+  },
+  {
+   "meaning": "order confirmation or proof of purchase",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "completed checklist or document",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the jagged bottom edge of the receipt may blend in, making it look like a generic document, note, or checklist with a checkmark.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular badge with checkmark",
+   "meaning": "paid, verified, approved, or confirmed"
+  }
+ ],
+ "domains": [
+  "finance",
+  "admin",
+  "work",
+  "shopping",
+  "home",
+  "travel",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "pay a utility bill or invoice",
+  "verify receipt against bank statement",
+  "submit expense receipts for reimbursement",
+  "confirm payment of monthly bills",
+  "approve contractor or vendor invoice",
+  "file proof of purchase for warranty",
+  "reconcile store receipts with budget",
+  "upload medical receipt to HSA"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pay electric bill",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Approve designer invoice",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Submit hotel receipts",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Match against Amex statement",
+   "parent": "October Receipts",
+   "domain": "finance"
+  },
+  {
+   "task": "Upload to Concur",
+   "parent": "Chicago Trip Expenses",
+   "domain": "work"
+  },
+  {
+   "task": "Pay the $140 plumber invoice before the late fee kicks in",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check Whole Foods receipt for double-scanned olive oil",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "File paid property tax bill in the 2025 binder",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Send proof of payment to the landlord for November rent",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Confirm out-of-network physical therapy receipt cleared HSA",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Scan new dishwasher receipt for the five-year warranty registration",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Mark Q3 freelance invoices as paid in QuickBooks",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Archive paid ones in folder",
+   "parent": "Household Bills",
+   "domain": "admin"
+  },
+  {
+   "task": "Verify every line item before paying",
+   "parent": "Hospital Billing",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Go through the shoebox of paper receipts and match every one against the Visa statement",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Attach itemized dining receipts over $25 to the client project expense report before Friday cutoff",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Pagar la factura de la luz antes del viernes",
+  "Subir los recibos del viaje a Madrid al portal de gastos",
+  "Comprobar que el ticket del supermercado no tenga cargos duplicados"
+ ],
+ "example_tasks_ru": [
+  "Оплатить квитанцию за капремонт и воду",
+  "Сверить чеки из строймагазина с банковской выпиской",
+  "Отправить в бухгалтерию оплаченные счета от подрядчика"
+ ],
+ "context_tasks": [
+  {
+   "task": "Set up autopay on the water utility portal",
+   "central": "autopay setting"
+  },
+  {
+   "task": "Call dentist billing office about the extra $45 code",
+   "central": "phone call"
+  },
+  {
+   "task": "Buy thermal paper rolls for the shop receipt printer",
+   "central": "paper rolls"
+  },
+  {
+   "task": "Create a shared folder in Google Drive for tax deductions",
+   "central": "folder"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check the chicken tortilla soup recipe for cilantro",
+   "better": "recipe book or cooking pot",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check off the packing list before leaving for the airport",
+   "better": "checklist or luggage",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if the living room window is locked",
+   "better": "window or lock",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a new wallet with a separate receipt pocket",
+   "better": "wallet",
+   "trap": "property"
+  },
+  {
+   "task": "Call Bob in accounting about the tax audit",
+   "better": "phone call",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Sign the apartment lease renewal PDF",
+   "better": "contract document with signature",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 5,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The jagged bottom edge clearly identifies the document as a paper receipt or bill, while the checkmark badge indicates paying, verifying, or approving it. It is an excellent match for common everyday tasks around paying bills, reconciling receipts, and submitting expenses, though at tiny sizes it can resemble a generic document with a checkmark.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "decb13cbbba4cc2f775f64e9bde178ac7cf74357",
+  "usage": {
+   "prompt": 3924,
+   "output": 1647,
+   "thoughts": 0,
+   "total": 5571
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

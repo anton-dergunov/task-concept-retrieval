@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "four-blade fan or propeller in outline",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single centered object crossed out by a diagonal bar"
+ },
+ "readings": [
+  {
+   "meaning": "fan off, disabled ventilation, or broken fan",
+   "strength": "primary"
+  },
+  {
+   "meaning": "turn off cooling or air conditioning",
+   "strength": "primary"
+  },
+  {
+   "meaning": "silent fan mode or fanless hardware",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "no flower or plant (if misread as petals at small sizeValue) ",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the four curved blades can be mistaken for a four-leaf clover, a flower with four petals, or a pinwheel with a slash through it.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "off, disabled, broken, or prohibited"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "travel",
+  "work"
+ ],
+ "task_intents": [
+  "fix a broken household fan",
+  "turn off HVAC or ventilation",
+  "diagnose non-spinning PC cooling fan",
+  "winterize and cover AC fans",
+  "switch device to fanless mode",
+  "stop noisy bathroom exhaust fan"
+ ],
+ "example_tasks": [
+  {
+   "task": "Broken bathroom exhaust fan",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Fix stuck GPU fan",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unplug attic fan for winter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Replace dead case fan",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable noisy rack fan",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call landlord about the bedroom ceiling fan not spinning at all",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Put the insulated winter cover over the outside AC condenser unit",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Figure out why the radiator fan in the Civic isn't kicking on",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Turn off the whole-house ventilation system before the wildfire smoke blows in",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order a passive heatsink so we can run the media server fanless",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check the fuse for the camper van roof vent that stopped working",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set BIOS fan curve to zero RPM when under 50 degrees",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Order a replacement motor for the range hood blower that died on Thanksgiving",
+   "parent": "Kitchen Renovation",
+   "domain": "home"
+  },
+  {
+   "task": "Check the thermal paste since the cooler stopped spinning last night",
+   "parent": "Home Lab Server",
+   "domain": "tech"
+  },
+  {
+   "task": "Take apart the seized bilge blower and see if salt corroded the wiring",
+   "parent": "Boat Maintenance",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Disconnect the old wall extractor in the darkroom before sealing the brickwork",
+   "parent": "Studio Remodel",
+   "domain": "creative"
+  }
+ ],
+ "example_tasks_es": [
+  "Arreglar el extractor del baño que dejó de girar",
+  "Desconectar el ventilador del ático por el invierno",
+  "Cambiar el ventilador roto de la tarjeta gráfica"
+ ],
+ "example_tasks_ru": [
+  "Починить неработающую вытяжку в ванной",
+  "Отключить вентилятор охлаждения на зиму",
+  "Заменить заклинивший кулер в системном блоке"
+ ],
+ "context_tasks": [
+  {
+   "task": "Clean dust bunnies out of the PC case",
+   "central": "dust / PC case"
+  },
+  {
+   "task": "Buy a quieter bathroom light and exhaust combo unit",
+   "central": "shopping / light fixture"
+  },
+  {
+   "task": "Check server room temperatures over the long weekend",
+   "central": "thermometer / temperature"
+  },
+  {
+   "task": "Tape plastic sheeting over the drafty laundry room vent",
+   "central": "plastic sheeting / window"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Clean the greasy blades on the kitchen range hood fan",
+   "better": "fan (without slash) or sponge",
+   "trap": "property"
+  },
+  {
+   "task": "Buy a new box fan for the guest bedroom",
+   "better": "fan (without slash) or shopping cart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick four-leaf clovers with the kids in the backyard",
+   "better": "clover / leaf",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel OnlyFans subscription before it renews on Friday",
+   "better": "credit card or subscription cancel icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check if the air conditioning is still running in the office",
+   "better": "fan or snowflake (without slash, since action is generic check) ",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy AA batteries for the ceiling fan remote",
+   "better": "battery",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a four-bladed fan or propeller crossed out with a diagonal slash, indicating a fan that is turned off, disabled, or broken. While somewhat specific, it fits real tasks around fixing broken household exhaust/ceiling fans, diagnosing dead PC cooling fans, or shutting down ventilation for winter.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "eceecd89398aca2f8622e640a5cb0e532dcbec49",
+  "usage": {
+   "prompt": 3919,
+   "output": 984,
+   "thoughts": 0,
+   "total": 4903
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

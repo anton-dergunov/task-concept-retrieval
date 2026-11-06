@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "black silhouette of an airplane pointing straight upward",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single top-down silhouette crossed out by a diagonal bar"
+ },
+ "readings": [
+  {
+   "meaning": "cancelled flight or cancel flight",
+   "strength": "primary"
+  },
+  {
+   "meaning": "airplane mode off",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no flying / flight restriction / grounded",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can mean either cancelling a real flight or turning off airplane mode on a phone; the upright airplane silhouette is standard for both.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "cancelled, disabled, off, or prohibited"
+  }
+ ],
+ "domains": [
+  "travel",
+  "finance",
+  "admin",
+  "tech",
+  "work",
+  "outdoors"
+ ],
+ "task_intents": [
+  "cancel a booked flight reservation",
+  "claim compensation for a cancelled flight",
+  "rebook after an airline flight cancellation",
+  "get a refund for cancelled airfare",
+  "turn off airplane mode on device",
+  "check no-fly zone map for drone",
+  "plan a trip without flying"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel the Denver flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "United cancellation refund",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Turn off airplane mode",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Rebook cancelled Lisbon leg",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Submit EU261 claim",
+   "parent": "Cancelled Berlin Flight",
+   "domain": "admin"
+  },
+  {
+   "task": "Cancel the return ticket from Chicago before the 24-hour window closes",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "File EU261 compensation form for the cancelled Lufthansa flight to Munich",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Call Delta to get miles back from the cancelled October trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check FAA no-fly zones around the state park before packing the drone",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Fix old iPad stuck in airplane mode after the update",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Upload the airline cancellation notice",
+   "parent": "Chase Travel Insurance Claim",
+   "domain": "admin"
+  },
+  {
+   "task": "Notify the client in Zurich",
+   "parent": "Cancelled Flight Contingency",
+   "domain": "work"
+  },
+  {
+   "task": "Call the hotel in Madrid",
+   "parent": "Cancelled Iberia Flight",
+   "domain": "travel"
+  },
+  {
+   "task": "Cancel my Southwest flight to Phoenix and make sure the travel credit hits the account",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send the airline cancellation confirmation to Allianz so they reimburse the non-refundable hotel night",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Ask HR whether the no-fly policy for domestic client visits still applies next quarter",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Cancelar el vuelo a Mallorca antes del viernes",
+  "Reclamar la indemnización a Iberia por el vuelo cancelado de anoche",
+  "Revisar el mapa de zonas de exclusión aérea antes de volar el dron"
+ ],
+ "example_tasks_ru": [
+  "Отменить рейс в Сочи и вернуть мили на счёт",
+  "Отправить в страховую справку об отмене рейса Аэрофлота",
+  "Выключить авиарежим на старом планшете и проверить синхронизацию"
+ ],
+ "context_tasks": [
+  {
+   "task": "Book the overnight train to Amsterdam instead of flying",
+   "central": "train"
+  },
+  {
+   "task": "Ask Dr. Patel for a fit-to-fly note after the ear infection clears",
+   "central": "medical note / doctor"
+  },
+  {
+   "task": "Claim the extra hotel night on the corporate card after getting stranded at O'Hare",
+   "central": "hotel / expense"
+  },
+  {
+   "task": "Pack extra toddler snacks in case the connection gets grounded again",
+   "central": "snacks"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check in for tomorrow morning's British Airways flight to Heathrow",
+   "better": "airplane (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download offline podcasts before putting my phone in airplane mode",
+   "better": "headphones or podcast icon",
+   "trap": "property"
+  },
+  {
+   "task": "Cancel the Hertz rental car at the Denver airport",
+   "better": "car with slash or rental car",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check if the flight from Seattle is delayed",
+   "better": "airplane with clock",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Book a new hotel near the train station",
+   "better": "bed / hotel",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy a no-fly mesh net for the kitchen fruit bowl",
+   "better": "insect / fruit bowl",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows an upward-pointing airplane crossed out by a diagonal slash, universally read as 'cancelled flight', 'no flying', or 'airplane mode off'. It fits specific travel admin tasks around cancelling tickets, handling flight cancellations, or drone no-fly zones, though at tiny sizes the slash must be distinguished from a plain airplane icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "8607842bd80f75b72e604d8e68963917f44aa459",
+  "usage": {
+   "prompt": 3924,
+   "output": 1655,
+   "thoughts": 0,
+   "total": 5579
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

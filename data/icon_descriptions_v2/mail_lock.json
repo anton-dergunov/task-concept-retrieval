@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rectangular mail envelope outline with closed flap",
+  "modifiers": [
+   "closed padlock badge at bottom right"
+  ],
+  "composition": "single object in front view with corner badge"
+ },
+ "readings": [
+  {
+   "meaning": "encrypted or secure email",
+   "strength": "primary"
+  },
+  {
+   "meaning": "email account security and password protection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "private or confidential message",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "locked mailbox or restricted mail access",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the padlock badge can look like a briefcase or shopping bag next to an envelope, or be overlooked as a generic email icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "closed padlock badge at bottom right",
+   "meaning": "security, encryption, privacy, password protection, or locked access"
+  }
+ ],
+ "domains": [
+  "tech",
+  "communication",
+  "work",
+  "admin",
+  "finance"
+ ],
+ "task_intents": [
+  "set up encrypted email service",
+  "change email account password",
+  "enable two-factor authentication on email",
+  "configure PGP or S/MIME keys",
+  "send confidential document via secure mail",
+  "lock down compromised email inbox",
+  "update mail server TLS certificates",
+  "audit email privacy and forwarding rules"
+ ],
+ "example_tasks": [
+  {
+   "task": "Change Gmail password",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set up ProtonMail account",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Renew expired PGP key",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Lock down old Yahoo inbox",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Turn on 2FA",
+   "parent": "Email Security",
+   "domain": "tech"
+  },
+  {
+   "task": "Send the signed NDA over encrypted email to legal",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Configure S/MIME certificate in Apple Mail on the new laptop",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Enable hardware security key login for primary Fastmail account",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check forwarding rules and revoke old app passwords in Outlook",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Use the bank's secure message portal to send SSN form",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Set up DMARC, DKIM and SPF records on custom domain",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Export recovery codes",
+   "parent": "ProtonMail Migration",
+   "domain": "admin"
+  },
+  {
+   "task": "Compare annual plans",
+   "parent": "Encrypted Email Providers",
+   "domain": "finance"
+  },
+  {
+   "task": "Clean up third-party OAuth access",
+   "parent": "Gmail Privacy Audit",
+   "domain": "tech"
+  },
+  {
+   "task": "Move sensitive tax correspondence off regular Gmail onto our Tuta encrypted mailbox before April",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Verify fingerprint for Sarah's new public GPG key before emailing the Q4 board packet",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Activar la verificación en dos pasos en la cuenta de Gmail",
+  "Configurar el certificado S/MIME para firmar los correos del despacho",
+  "Cambiar contraseña de Outlook"
+ ],
+ "example_tasks_ru": [
+  "Настроить двухфакторную аутентификацию на рабочей почте",
+  "Перенести личную переписку в защищённый ящик ProtonMail",
+  "Обновить PGP-ключ для почты"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy two YubiKeys for locking down our mail accounts",
+   "central": "hardware security key (YubiKey)"
+  },
+  {
+   "task": "Call IT helpdesk to unlock my suspended Exchange inbox",
+   "central": "phone call"
+  },
+  {
+   "task": "Read guide on self-hosting a private mail server with Postfix",
+   "central": "reading / guide"
+  },
+  {
+   "task": "Pay yearly invoice for Tuta encrypted mailbox",
+   "central": "payment / invoice"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Email the landlord about the broken gate lock",
+   "better": "plain envelope or gate/lock (regular email about a physical lock)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new brass padlock for the roadside mailbox",
+   "better": "physical mailbox or padlock",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Send a quick thank-you email to Mom after dinner",
+   "better": "plain envelope (ordinary unencrypted email)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update 1Password master password and emergency kit",
+   "better": "padlock or key (password manager, not email)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Email the accountant the password-protected Excel spreadsheet",
+   "better": "spreadsheet or file with lock (the attachment is locked, not the email)",
+   "trap": "property"
+  },
+  {
+   "task": "Draft press release announcing our new security audit",
+   "better": "document / megaphone",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines a mail envelope with a closed padlock badge, universally signaling encrypted email, secure messaging, or email account security. While narrower than a plain envelope, it fits a distinct and concrete family of tech, admin, and work tasks around securing inboxes, 2FA, PGP/S/MIME, and confidential messages.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "90d12befb77bf5cced8a997deecf1d1cc1b10b04",
+  "usage": {
+   "prompt": 3921,
+   "output": 1668,
+   "thoughts": 0,
+   "total": 5589
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

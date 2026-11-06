@@ -1,0 +1,232 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "analog speedometer or gauge dial with needle and baseline",
+  "modifiers": [
+   "diagonal slash across the entire icon"
+  ],
+  "composition": "single circular gauge, front view, crossed out by diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "cruise control off / speed control disabled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "speed limit off / no speed limit / unthrottled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "performance monitoring or dashboard disabled",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "broken speedometer or faulty gauge",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the crossed-out dial with a diagonal needle and horizontal bar strongly resembles a 'no time / timer off' clock icon or a generic prohibition sign with an unrecognizable interior.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "off, disabled, unlimited, or broken"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "travel",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "remove bandwidth or download speed limit",
+  "fix broken car speedometer or gauge",
+  "troubleshoot cruise control not working",
+  "disable rate limiting on API",
+  "turn off CPU or network throttling",
+  "remove parental speed limiter on car"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix broken speedometer cable",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off qBittorrent speed cap",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cruise control not engaging",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Disable API rate limiting",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Remove governor on golf cart",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Check why the boost gauge on the Civic stopped reading",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Uncap Steam download bandwidth before installing the new expansion tonight",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off Ford MyKey speed limiter on the spare key fob",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Remove network throttling profile in Chrome DevTools after testing",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Ask mechanic why cruise control shuts off randomly on the highway",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Disable thermal throttling in BIOS to test the new cooler",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Replace the dead pressure gauge on the basement boiler tank",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call ISP to get the temporary data speed cap lifted from our home fiber plan",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Figure out why the e-bike speed limiter keeps kicking in below twenty miles per hour",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Take the truck in before inspection because the dash speedometer needle is stuck at zero",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check the fuse box first",
+   "parent": "Car cruise control dead",
+   "domain": "home"
+  },
+  {
+   "task": "Disable for the weekend migration",
+   "parent": "Backup bandwidth throttling",
+   "domain": "work"
+  },
+  {
+   "task": "Order replacement cluster unit",
+   "parent": "Broken boat speedometer",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Whitelist the load-testing IP",
+   "parent": "API rate limit rules",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Arreglar el velocímetro roto de la moto antes de la ITV",
+  "Quitar el límite de velocidad de descarga en Steam",
+  "Revisar por qué no funciona el control de crucero en autopista"
+ ],
+ "example_tasks_ru": [
+  "Отключить ограничение скорости загрузки в торрент-клиенте",
+  "Проверить, почему перестал работать спидометр на приборной панели",
+  "Снять лимит запросов к API для тестового стенда"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check brake switch sensor on the pedal assembly",
+   "central": "brake sensor"
+  },
+  {
+   "task": "Run overnight offsite NAS backup at full bandwidth",
+   "central": "backup"
+  },
+  {
+   "task": "Plan Autobahn route between Munich and Stuttgart",
+   "central": "route / map"
+  },
+  {
+   "task": "Upgrade mobile plan so hotspot stops throttling mid-month",
+   "central": "mobile plan"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Run a fast internet speed test on the new router",
+   "better": "speedometer / gauge (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn off the 6am weekday alarm",
+   "better": "alarm clock with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the speeding ticket from the camera on Route 9",
+   "better": "ticket / fine / receipt",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Quickly review the quarterly sales dashboard",
+   "better": "chart / document",
+   "trap": "property"
+  },
+  {
+   "task": "Check tire pressure before the long highway drive",
+   "better": "tire / pressure gauge (without slash)",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order new winter wiper blades",
+   "better": "windshield wipers / car",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon shows a simple circular gauge or speedometer with a diagonal slash through it, representing 'speed/cruise control off', 'no speed limit / unthrottled', or a broken gauge. Because the slash obscures the left side of the dial, it is hard to read at small sizes and easily confused with a crossed-out clock or timer, making it useful only for a narrow set of vehicle gauge or network-throttling tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ab7fe3d4632adc1d6afd43e86ea104b53865e137",
+  "usage": {
+   "prompt": 3924,
+   "output": 1779,
+   "thoughts": 0,
+   "total": 5703
+  },
+  "soft_problems": [
+   "example_tasks: 19 != 16"
+  ],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

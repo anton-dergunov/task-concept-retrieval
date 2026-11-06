@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "horizontal battery casing with filled inner charge block",
+  "modifiers": [
+   "exclamation mark on the right side cutting into the battery"
+  ],
+  "composition": "horizontal battery icon truncated on the right by an exclamation mark"
+ },
+ "readings": [
+  {
+   "meaning": "battery warning, dead battery, or battery fault",
+   "strength": "primary"
+  },
+  {
+   "meaning": "replace or recharge depleted battery urgently",
+   "strength": "primary"
+  },
+  {
+   "meaning": "power bank or portable charger issue",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Because the right terminal cap of the battery is cut off by the exclamation mark, at small sizes it can look like a generic rounded button, tag, or smartphone lying sideways with an alert badge.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "warning, fault, low level, urgent replacement needed"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "shopping",
+  "outdoors",
+  "travel",
+  "work"
+ ],
+ "task_intents": [
+  "replace dead battery in device",
+  "charge depleted battery pack before trip",
+  "check swollen or faulty laptop battery",
+  "buy replacement coin cell batteries",
+  "recycle old dead household batteries",
+  "troubleshoot fast phone battery drain",
+  "test car battery voltage before winter"
+ ],
+ "example_tasks": [
+  {
+   "task": "Smoke alarm battery chirping",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Replace key fob CR2032",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Charge Anker power bank",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Drop off dead AAs",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check MacBook cycle count",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Book Apple Store appointment for swollen iPhone 13 battery",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pick up a 4-pack of 9V batteries for the hallway detectors",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Top up both Canon LP-E6NH camera batteries before Saturday's shoot",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Test the Honda's 12V battery with the multimeter before the freeze",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order a replacement Makita 18V pack that actually holds a charge",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Swap the dead AAA cells in the kitchen scale",
+   "parent": "Kitchen maintenance",
+   "domain": "home"
+  },
+  {
+   "task": "Order a new OEM replacement from iFixit",
+   "parent": "ThinkPad battery health warning",
+   "domain": "tech"
+  },
+  {
+   "task": "Put all three spares on the dual charger overnight",
+   "parent": "Drone batteries",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Take the box of corroded alkalines to the hardware store drop-off",
+   "parent": "Battery recycling",
+   "domain": "home"
+  },
+  {
+   "task": "Figure out why the Garmin watch battery is dying in six hours with GPS off",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Pull the rechargeable AAAs out of the headlamps so they don't leak over the winter",
+   "parent": "",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la pila CR2032 del mando del garaje que ya no llega desde la calle",
+  "Llevar el bote de pilas gastadas al punto limpio del supermercado",
+  "Cargar la batería externa antes del viaje en tren a Madrid"
+ ],
+ "example_tasks_ru": [
+  "Заменить пищащую крону в датчике дыма в прихожей",
+  "Зарядить оба аккумулятора для шуруповёрта перед выходными на даче",
+  "Сдать коробку старых пальчиковых батареек в контейнер во ВкусВилле"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack the NOCO jump starter in the trunk before driving up to Vermont",
+   "central": "car jump starter"
+  },
+  {
+   "task": "Turn off background app refresh on iPad to stop standby drain",
+   "central": "tablet settings"
+  },
+  {
+   "task": "Unplug the UPS beeping in the closet and order a replacement lead-acid cartridge",
+   "central": "UPS backup power unit"
+  },
+  {
+   "task": "Put the trickle charger on the motorcycle for the winter",
+   "central": "motorcycle"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a small cordless battery-powered leaf blower for the patio",
+   "better": "leaf blower",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the monthly electric utility bill before the late fee hits",
+   "better": "invoice or lightning bolt",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check why the credit card charge from yesterday shows up twice",
+   "better": "credit card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Practice drums with the jazz trio for two hours on Thursday",
+   "better": "drum kit",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pick up a new leather wallet with an RFID blocking lining",
+   "better": "wallet",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Install the new smart thermostat on the living room wall",
+   "better": "thermostat",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 4,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "Shows a horizontal battery truncated on the right by an exclamation point, indicating a low, dead, or faulty battery. It fits concrete everyday tasks about charging packs, replacing household cells, or fixing device battery issues, though the cut-off right terminal makes it slightly harder to recognize at a glance than a full battery outline.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5d1dec4f207a64c1c88e19491080f4e97ecafd9e",
+  "usage": {
+   "prompt": 3925,
+   "output": 1712,
+   "thoughts": 55,
+   "total": 5692
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

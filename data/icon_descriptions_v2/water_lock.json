@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "closed padlock with central dot keyhole",
+  "modifiers": [
+   "water droplet badge at bottom right"
+  ],
+  "composition": "single object, front view, with bottom-right badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "weatherproof or waterproof padlock",
+   "strength": "primary"
+  },
+  {
+   "meaning": "water shutoff valve lock or meter lock",
+   "strength": "primary"
+  },
+  {
+   "meaning": "lubricate or oil a lock",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "data leak or security breach",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the droplet badge could be mistaken for a location pin or generic notification dot next to a lock, or the combination might be read as a smart humidifier/water lock feature on an appliance.",
+ "modifier_semantics": [
+  {
+   "modifier": "water droplet badge at bottom right",
+   "meaning": "water, weatherproofing, liquid, lubrication, or leak"
+  }
+ ],
+ "domains": [
+  "home",
+  "outdoors",
+  "tech",
+  "shopping",
+  "admin"
+ ],
+ "task_intents": [
+  "buy weatherproof padlock for outdoor gate",
+  "lubricate sticky door lock cylinder",
+  "lock outdoor water spigot or shutoff",
+  "check accounts after password leak",
+  "winterize outdoor locks before freeze",
+  "replace rusted shed padlock"
+ ],
+ "example_tasks": [
+  {
+   "task": "Oil the sticky front door lock",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Weatherproof padlock for shed",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Lock the outside hose bib",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check curb stop water lock",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order marine padlock",
+   "parent": "Boat Maintenance",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Spray graphite or dry lube into the garage padlock before it freezes solid",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Buy a shrouded weatherproof padlock for the side yard chain",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Put a lock on the outdoor water spigot so passersby stop using it",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Rotate compromised API keys from the vendor data leak",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Change passwords flagged in the latest credential leak report",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pick up a brass marine-grade padlock for the dock storage box",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Check the serial number on ours",
+   "parent": "Water meter lock",
+   "domain": "admin"
+  },
+  {
+   "task": "Buy replacement at hardware store",
+   "parent": "Rusted gate padlock",
+   "domain": "shopping"
+  },
+  {
+   "task": "Apply de-icer and lubricant to the car door locks before theJanuary cold snap hits",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call the city water department to unlock the main meter valve at the curb",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Test all three keys after spraying",
+   "parent": "Lubricate patio locks",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Comprar un candado impermeable para la puerta del jardín",
+  "Echar lubricante en la cerradura de la entrada que se traba",
+  "Poner candado a la llave de agua exterior"
+ ],
+ "example_tasks_ru": [
+  "Купить влагозащищенный навесной замок на калитку",
+  "Смазать заедающий замок на входной двери перед морозами",
+  "Повесить замок на уличный водопроводный кран на даче"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a small bottle of Houdini lock lube at Ace",
+   "central": "lubricant spray bottle"
+  },
+  {
+   "task": "Wrap the backflow preventer cage before the freeze",
+   "central": "pipe insulation cover"
+  },
+  {
+   "task": "Run HaveIBeenPwned check on family email addresses",
+   "central": "email / security audit"
+  },
+  {
+   "task": "Turn off the main water shutoff valve in the basement",
+   "central": "water valve / plumbing"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a small waterproof rechargeable headlamp for trips",
+   "better": "headlamp",
+   "trap": "property"
+  },
+  {
+   "task": "Change the master password on 1Password",
+   "better": "plain padlock or key",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the slow drip under the kitchen sink trap",
+   "better": "pipe or faucet with droplet",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Lock in the catering headcount with the venue",
+   "better": "calendar or checklist",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a heavy-duty U-lock for the commuter bike",
+   "better": "bike lock / plain padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the rusted hinges on the garden gate",
+   "better": "gate or hinge",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a standard closed padlock with a liquid droplet badge, most naturally suggesting a weatherproof/outdoor padlock, a water utility lock, lubricating a lock, or a security data leak. While visually distinct, the intersection of 'lock' and 'water/drop' only fits a narrow set of concrete household and security tasks, and at small sizes it is easily confused with a standard padlock.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "2a92664d416d1919c64c35107f61e2ce0a3a32f3",
+  "usage": {
+   "prompt": 3918,
+   "output": 1678,
+   "thoughts": 0,
+   "total": 5596
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

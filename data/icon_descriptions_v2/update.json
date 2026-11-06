@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "clock face with two hands inside a circular arrow",
+  "modifiers": [
+   "clockwise circular arrow outline"
+  ],
+  "composition": "single glyph, centered front view"
+ },
+ "readings": [
+  {
+   "meaning": "reschedule, postpone, snooze, or move forward in time",
+   "strength": "primary"
+  },
+  {
+   "meaning": "recurring schedule, routine, or periodic update",
+   "strength": "primary"
+  },
+  {
+   "meaning": "time history, activity log, or backup restore",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "daylight saving time clock adjustment",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Closely resembles the standard counter-clockwise 'history/restore' icon, and at small sizes the arrow direction is barely distinguishable from a plain clock or a reverse-time icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "clockwise circular arrow outline",
+   "meaning": "advancing time, repeating on a cycle, or updating/refreshing a schedule"
+  }
+ ],
+ "domains": [
+  "admin",
+  "work",
+  "tech",
+  "home",
+  "finance"
+ ],
+ "task_intents": [
+  "postpone or reschedule an upcoming appointment",
+  "set up a recurring automated schedule",
+  "adjust clocks for daylight saving time",
+  "review activity history or time logs",
+  "configure periodic backup or sync intervals",
+  "extend a deadline or renewal timer"
+ ],
+ "example_tasks": [
+  {
+   "task": "Set kitchen clocks forward",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Reschedule Tuesday's dentist cleaning",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Audit Q3 billable hours log",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Push back plumber visit",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Update cron job intervals",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Move the 1-on-1 with Sarah to next Thursday afternoon",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Change automatic savings transfer from weekly to every second Friday",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Switch thermostat programmable schedule over to winter heating hours",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Postpone car service until after the holiday road trip",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check oven and microwave after the daylight saving switch",
+   "parent": "Spring Time Change",
+   "domain": "home"
+  },
+  {
+   "task": "Verify last night's incremental run finished without errors",
+   "parent": "Time Machine Backups",
+   "domain": "tech"
+  },
+  {
+   "task": "Fill in missing Thursday and Friday entries before noon",
+   "parent": "Weekly Timesheet",
+   "domain": "work"
+  },
+  {
+   "task": "Submit the form to request a two-week extension",
+   "parent": "Tax Filing Deadline",
+   "domain": "finance"
+  },
+  {
+   "task": "Push all milestone dates in the project plan forward by two weeks after client delay",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Reconfigure the nightly database snapshot job so it runs at 3am instead of midnight",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Export the full six-month call and message history log from the carrier portal before switching",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Adelantar una hora el reloj del horno y el del coche el domingo",
+  "Reprogramar la cita de la ITV para la segunda semana de noviembre",
+  "Cambiar la frecuencia de la copia de seguridad automática a cada seis horas"
+ ],
+ "example_tasks_ru": [
+  "Перенести встречу со стоматологом со вторника на следующую пятницу",
+  "Настроить расписание ночного резервного копирования базы данных на сервере",
+  "Проверить историю входов в аккаунт и завершить старые сессии"
+ ],
+ "context_tasks": [
+  {
+   "task": "Water the Peace Lily on a strict 10-day cycle",
+   "central": "houseplant"
+  },
+  {
+   "task": "Replace furnace air filter every 90 days",
+   "central": "air filter"
+  },
+  {
+   "task": "Take evening blood pressure pill at 8pm sharp",
+   "central": "pill / medication"
+  },
+  {
+   "task": "Rotate car tires every 10,000 km",
+   "central": "car tire"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a vintage brass wall clock for the hallway",
+   "better": "analog wall clock without arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Prepare slides for the 30-minute quarterly business review",
+   "better": "presentation slides or chart",
+   "trap": "property"
+  },
+  {
+   "task": "Read 'A Brief History of Time' by Stephen Hawking",
+   "better": "book",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order replacement watch strap for my Seiko automatic",
+   "better": "wristwatch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update contact details in the HR portal",
+   "better": "user profile / contact card",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pack running shoes for the morning workout",
+   "better": "running shoe",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "Shows clock hands inside a clockwise circular arrow, representing rescheduling, advancing time, recurring schedules, or time logs/history. It fits tasks explicitly about shifting schedules, automated intervals, or time tracking, though it is easily confused with a plain clock or the counter-clockwise history/restore icon and should not be used merely because a task has a due time.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "167f08b3d306917625c791ee9631ccfb48697aaa",
+  "usage": {
+   "prompt": 3921,
+   "output": 1694,
+   "thoughts": 0,
+   "total": 5615
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "hollow heraldic shield outline",
+  "modifiers": [
+   "solid circle with a white plus sign at bottom right"
+  ],
+  "composition": "single object, front view, with corner badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "add security or enable protection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "add or enroll in insurance policy",
+   "strength": "primary"
+  },
+  {
+   "meaning": "health insurance or medical coverage",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "register extended warranty or protection plan",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The plus badge can be read either as 'add/new' (new policy, add security) or as a medical cross (health insurance).",
+ "modifier_semantics": [
+  {
+   "modifier": "plus sign in circle badge",
+   "meaning": "add, create new, enable, or medical/health"
+  }
+ ],
+ "domains": [
+  "tech",
+  "finance",
+  "admin",
+  "health_fitness",
+  "home",
+  "travel"
+ ],
+ "task_intents": [
+  "add new insurance policy or rider",
+  "enable account two-factor security protection",
+  "enroll in health insurance plan",
+  "register product warranty or coverage",
+  "add firewall rule or antivirus protection",
+  "buy travel medical insurance for trip",
+  "add dependent to insurance coverage"
+ ],
+ "example_tasks": [
+  {
+   "task": "AppleCare+ for new MacBook",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Enroll in dental insurance",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Add 2FA to GitHub",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Compare quotes from three brokers",
+   "parent": "Home Insurance",
+   "domain": "finance"
+  },
+  {
+   "task": "Upload signed beneficiary form",
+   "parent": "Life Insurance",
+   "domain": "admin"
+  },
+  {
+   "task": "Add Clara as a covered driver on the Progressive auto policy",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Turn on advanced data protection for iCloud backups on all devices",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Buy Schengen travel medical insurance covering at least 30,000 euros",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Register the five-year motor warranty for the Bosch dishwasher online",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Add an scheduled jewelry rider to the renters policy before moving",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Install and configure CrowdStrike endpoint protection on the new contractor laptop",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Submit open enrollment selections for the HDHP health plan before Friday",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Finish the mandatory annual training module",
+   "parent": "Cybersecurity",
+   "domain": "work"
+  },
+  {
+   "task": "Add an inbound firewall rule allowing port 5432 only from the staging subnet",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Add supplemental umbrella liability coverage to our existing homeowner policy before the pool opens",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Set up a hardware security key as a backup second factor for the primary Google account",
+   "parent": "Account Security",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Contratar seguro médico de viaje para las dos semanas en Japón",
+  "Activar la verificación en dos pasos en la cuenta del banco",
+  "Añadir a Sofía en la póliza del seguro del coche"
+ ],
+ "example_tasks_ru": [
+  "Оформить полис ОСАГО на новый год без переплаты",
+  "Подключить двухфакторную аутентификацию в Госуслугах",
+  "Прикрепить ребёнка к полису ДМС от работы"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download the PDF receipt for the Allianz travel policy",
+   "central": "receipt / PDF document"
+  },
+  {
+   "task": "Call Geico agent about the windshield deductible",
+   "central": "phone call"
+  },
+  {
+   "task": "Buy two YubiKey 5C NFC keys during the sale",
+   "central": "hardware key / USB token"
+  },
+  {
+   "task": "Pay the semi-annual state farm auto premium",
+   "central": "payment"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cancel the old pet insurance policy with Trupanion",
+   "better": "shield with minus or cross/slash badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof and shock-resistant case for the iPad",
+   "better": "tablet case",
+   "trap": "property"
+  },
+  {
+   "task": "Make sure the basement window locks are secure before leaving",
+   "better": "lock or window",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a medieval wooden shield for Leo's Halloween costume",
+   "better": "costume mask or plain shield without plus badge",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book annual physical exam with Dr. Patel",
+   "better": "stethoscope or doctor",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Apply sunscreen before the afternoon hike",
+   "better": "sun or lotion bottle",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A shield with a plus badge clearly signifies adding security protection, enrolling in an insurance policy, or health coverage. It fits a common set of personal admin, finance, and tech tasks, though the plus badge can occasionally blur with a medical cross or be confused with other badged shields (like shield-check) at tiny sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "80a8748b379a7a2f9011f6f069cade40cb1d3366",
+  "usage": {
+   "prompt": 3927,
+   "output": 1687,
+   "thoughts": 84,
+   "total": 5698
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

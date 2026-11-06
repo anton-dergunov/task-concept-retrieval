@@ -1,0 +1,220 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "scalloped verification seal badge with inner checkmark",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single central badge cut through by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "unverified status or revoked verification badge",
+   "strength": "primary"
+  },
+  {
+   "meaning": "expired, invalid, or revoked security certificate (SSL/TLS)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "failed quality check, invalid seal, or uncertified item",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "warranty voided or accreditation lost",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the inner checkmark is obscured by the slash, making it look like a crossed-out gear (settings disabled) or a crossed-out sun (auto-brightness off).",
+ "modifier_semantics": [
+  {
+   "modifier": "inner checkmark",
+   "meaning": "verified, approved, certified"
+  },
+  {
+   "modifier": "diagonal slash",
+   "meaning": "revoked, invalid, expired, disabled, or unverified"
+  }
+ ],
+ "domains": [
+  "tech",
+  "admin",
+  "work",
+  "finance",
+  "career"
+ ],
+ "task_intents": [
+  "revoke expired SSL security certificate",
+  "fix unverified domain or email status",
+  "remove verification badge from account",
+  "handle lapsed professional license or certification",
+  "investigate untrusted root certificate warning",
+  "cancel paid account verification subscription",
+  "audit uncertified vendors or suppliers"
+ ],
+ "example_tasks": [
+  {
+   "task": "Revoke old staging SSL cert",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel blue check subscription",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Unverified sender warning on Mailgun",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Lapsed notary commission",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Clear untrusted certificate error",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix the broken Let's Encrypt auto-renewal on the analytics subdomain",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Appeal the revoked verification badge on our company Instagram page",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Purge unverified trial signups older than thirty days from Postgres",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Follow up with Stripe about why our business verification failed",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check if opening the bottom case actually voids the laptop warranty",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check which contractors have expired food handler permits before Friday",
+   "parent": "Catering Prep",
+   "domain": "food"
+  },
+  {
+   "task": "Update production server list",
+   "parent": "Expired SSL Certificates",
+   "domain": "tech"
+  },
+  {
+   "task": "Send reminder emails to users",
+   "parent": "Unverified Accounts Cleanup",
+   "domain": "admin"
+  },
+  {
+   "task": "Pay the reinstatement fee",
+   "parent": "Lapsed CPA License",
+   "domain": "career"
+  },
+  {
+   "task": "Replace the revoked Apple Developer signing certificate before the TestFlight build expires tonight",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Find out why our Google Business profile lost its verified status after the address change",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Revocar el certificado SSL antiguo del servidor de pruebas",
+  "Solucionar el error de dominio no verificado en Resend",
+  "Cancelar la suscripción de verificación en X antes del cobro mensual"
+ ],
+ "example_tasks_ru": [
+  "Отозвать скомпрометированный SSL-сертификат на старом домене",
+  "Разобраться, почему слетела верификация кабинета в Яндекс Бизнесе",
+  "Удалить неподтвержденные аккаунты пользователей за прошлый месяц"
+ ],
+ "context_tasks": [
+  {
+   "task": "Generate new CSR and private key on nginx",
+   "central": "key / server"
+  },
+  {
+   "task": "Upload utility bill PDF for identity check",
+   "central": "document / ID card"
+  },
+  {
+   "task": "Add TXT record in Cloudflare DNS for domain ownership",
+   "central": "DNS / domain"
+  },
+  {
+   "task": "Book CEU exam to restore expired nursing credential",
+   "central": "exam / medical license"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Verify domain ownership in Google Search Console",
+   "better": "verified badge without slash",
+   "trap": "property"
+  },
+  {
+   "task": "Turn off automatic screen brightness on the iPad",
+   "better": "sun / brightness icon with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Disable background app settings on Android",
+   "better": "gear / settings icon with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Frame my AWS Solutions Architect certificate for the office wall",
+   "better": "diploma / framed certificate",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Double check that the back door is locked before leaving",
+   "better": "lock / door",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Email support for a refund on the last invoice",
+   "better": "receipt / refund",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a scalloped verification seal (badge with checkmark) crossed out by a diagonal slash, representing unverified status, revoked verification, or an expired/invalid security certificate. It fits specific technical and administrative tasks around SSL certificates, account verification issues, and lapsed credentials, though at small sizes the slash obscures the inner checkmark and makes it easy to confuse with a crossed-out gear or brightness icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a22bc04670f60b87e6bb0b77944215567fd37396",
+  "usage": {
+   "prompt": 3918,
+   "output": 1716,
+   "thoughts": 117,
+   "total": 5751
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,235 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "receipt with horizontal text lines and serrated bottom edge",
+  "modifiers": [
+   "circular badge in bottom-right corner with two vertical pause bars"
+  ],
+  "composition": "single object front view with lower-right circular overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "pause subscription or recurring billing",
+   "strength": "primary"
+  },
+  {
+   "meaning": "put invoice or payment on hold",
+   "strength": "primary"
+  },
+  {
+   "meaning": "freeze membership or utility account while away",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "suspend automated order or standing bill",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the pause bars inside the dark circle could look like a power outlet, a pig snout (piggy bank), or the Roman numeral II.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular badge with two vertical bars (pause symbol)",
+   "meaning": "pause, suspend, freeze, or temporarily hold"
+  }
+ ],
+ "domains": [
+  "finance",
+  "admin",
+  "shopping",
+  "home",
+  "work",
+  "health_fitness",
+  "tech"
+ ],
+ "task_intents": [
+  "pause a recurring subscription or membership",
+  "put monthly billing on temporary hold",
+  "suspend autopay on an invoice",
+  "freeze gym or club account payments",
+  "hold vendor invoice pending dispute resolution",
+  "pause regular delivery subscription box",
+  "suspend cloud service billing temporarily"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pause Netflix for summer",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Freeze gym membership billing",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Hold Acme vendor invoice",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pause coffee bean subscription",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Suspend lawn care billing",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Put the meal kit billing on hold until mid-September",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Pause Adobe Creative Cloud monthly charge for two months",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Ask landlord to hold the parking spot charge while away",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Freeze Peloton app subscription until knee is healed",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Put contractor invoice #408 on hold until roof leak stops",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pause the Sunday newspaper delivery and billing for August",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Put April retainer billing on hold until contract is signed",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Put the monthly cat litter auto-ship and billing on hold before our trip",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Call fiber internet provider to put account on vacation billing hold for three months",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Suspend recurring billing on the staging AWS account until the client approves phase two",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pause for two months",
+   "parent": "Audible Subscription",
+   "domain": "finance"
+  },
+  {
+   "task": "Put on vacation hold",
+   "parent": "Utility Bills",
+   "domain": "home"
+  },
+  {
+   "task": "Hold payment until resolved",
+   "parent": "Q3 Vendor Invoices",
+   "domain": "work"
+  },
+  {
+   "task": "Freeze until November",
+   "parent": "Climbing Gym Membership",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Pausar la suscripción del gimnasio durante el mes de agosto",
+  "Poner en espera el cobro automático de la factura del gas",
+  "Congelar por dos meses la cuota de la caja de café"
+ ],
+ "example_tasks_ru": [
+  "Поставить на паузу подписку на Яндекс Плюс до осени",
+  "Заморозить абонемент в бассейн и ежемесячное списание на время отпуска",
+  "Приостановить оплату счёта от подрядчика до исправления акта"
+ ],
+ "context_tasks": [
+  {
+   "task": "Audit all recurring subscriptions to see which ones to pause",
+   "central": "subscriptions list / budget"
+  },
+  {
+   "task": "Email accounting about the disputed freight charges on the held invoice",
+   "central": "email / accounting"
+  },
+  {
+   "task": "Check hospital itemized bill before putting autopay on hold",
+   "central": "hospital bill"
+  },
+  {
+   "task": "Read cancellation and pause terms in the coworking contract",
+   "central": "contract"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the electricity bill before Friday",
+   "better": "receipt with checkmark or credit card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Cancel Hulu subscription permanently",
+   "better": "receipt with cross or slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pause the washing machine cycle before leaving the house",
+   "better": "washing machine or pause button",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Keep paper receipts from the hardware store for tax deductions",
+   "better": "plain receipt or folder",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Download the PDF invoice for the new monitor",
+   "better": "computer monitor or plain receipt",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy a dual-voltage travel adapter for the Europe trip",
+   "better": "power plug / adapter",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines a serrated-edge receipt or bill with a pause badge, making it a strong, literal fit for pausing recurring subscriptions, freezing memberships, or putting invoices on hold. It is specific and useful across personal finance, household admin, and work billing, with only minor risk of the small pause badge resembling a power plug at tiny sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "3ba230dfac7867cea3bfce5f779d0fbb1a6c6e56",
+  "usage": {
+   "prompt": 3920,
+   "output": 1785,
+   "thoughts": 101,
+   "total": 5806
+  },
+  "soft_problems": [
+   "example_tasks: 19 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

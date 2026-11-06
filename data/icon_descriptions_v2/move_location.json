@@ -1,0 +1,222 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "map location pin containing a person bust silhouette",
+  "modifiers": [
+   "right-pointing arrow exiting the lower right side"
+  ],
+  "composition": "central pin outline broken on lower right with outward arrow badge"
+ },
+ "readings": [
+  {
+   "meaning": "share live location or send current coordinates",
+   "strength": "primary"
+  },
+  {
+   "meaning": "move out, relocate, or change residential address",
+   "strength": "primary"
+  },
+  {
+   "meaning": "check out of a place or leave a venue",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "transfer or reassign a person to another location",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be read as either sharing one's location outward or physically leaving/checking out of a location; at very small sizes the inner person bust may blur into a generic bullseye.",
+ "modifier_semantics": [
+  {
+   "modifier": "person silhouette inside pin",
+   "meaning": "personal location, user address, or individual's presence at a place"
+  },
+  {
+   "modifier": "outward right-pointing arrow",
+   "meaning": "share, send out, export, depart, or move away from"
+  }
+ ],
+ "domains": [
+  "communication",
+  "travel",
+  "home",
+  "admin",
+  "social_family",
+  "work",
+  "tech"
+ ],
+ "task_intents": [
+  "share live location with family",
+  "send meeting point pin to friends",
+  "update forwarding address for move",
+  "check out of hotel or rental",
+  "notify landlord of move-out date",
+  "transfer employee to another branch",
+  "export saved places from map app"
+ ],
+ "example_tasks": [
+  {
+   "task": "Share Find My location",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Hotel check-out by 11am",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send trailhead pin to Mark",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "USPS change of address",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Drop pin for festival camp",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Turn on Google Maps location sharing with Mum before the drive",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Submit branch transfer request for the Seattle office",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Send exact picnic spot coordinates to the group chat",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Export saved places from Google Maps before deleting old account",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Email 30-day move-out notice to the property manager",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Text the Airbnb host when we have vacated the flat",
+   "parent": "Lisbon Weekend",
+   "domain": "travel"
+  },
+  {
+   "task": "Update bank and electoral roll",
+   "parent": "Moving out of Oak St",
+   "domain": "admin"
+  },
+  {
+   "task": "Set up for the kids' phones",
+   "parent": "Family Location Sharing",
+   "domain": "tech"
+  },
+  {
+   "task": "Confirm with reception before 10",
+   "parent": "Resort Check-Out",
+   "domain": "travel"
+  },
+  {
+   "task": "Send live Strava beacon link to Sarah before starting the long ridge run",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Fill out municipal deregistration form at the Bürgeramt before leaving Berlin for good",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Mandar ubicación en tiempo real por WhatsApp a mamá al salir",
+  "Hacer el check-out del hostal antes de las diez",
+  "Tramitar el cambio de domicilio en el padrón municipal"
+ ],
+ "example_tasks_ru": [
+  "Скинуть геолокацию ребятам в телеграм, когда найдём поляну",
+  "Выписаться из старой квартиры через Госуслуги",
+  "Выехать из отеля до расчетного часа в полдень"
+ ],
+ "context_tasks": [
+  {
+   "task": "Hand back both sets of flat keys to the letting agent",
+   "central": "keys"
+  },
+  {
+   "task": "Pay final balance on the minibar bill at the front desk",
+   "central": "bill / payment"
+  },
+  {
+   "task": "Book moving van for the 28th",
+   "central": "moving van / truck"
+  },
+  {
+   "task": "Check battery drain from background GPS tracking on iPhone",
+   "central": "battery / smartphone"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Find a local dentist accepting new patients near the new flat",
+   "better": "tooth / dentist",
+   "trap": "property"
+  },
+  {
+   "task": "Check where the parcel is stuck in transit",
+   "better": "package / box",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Log out of Netflix on the Airbnb television",
+   "better": "TV or user logout door",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Share the Q3 marketing slide deck with external agencies",
+   "better": "presentation slides",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy bubble wrap and heavy-duty tape",
+   "better": "packing tape / box",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check in for Friday's flight to Madrid",
+   "better": "airplane / boarding pass",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines a map pin, a person silhouette, and an outward arrow, which directly signals sharing one's location, moving/changing address, or checking out of a venue. While somewhat specialized, these are real, concrete tasks in travel, communication, and home admin. It could occasionally be confused with a plain map pin or a generic user-logout icon at very small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e2f4a0aee7764d3b3463597e832bc089ba4e33b9",
+  "usage": {
+   "prompt": 3923,
+   "output": 1743,
+   "thoughts": 0,
+   "total": 5666
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

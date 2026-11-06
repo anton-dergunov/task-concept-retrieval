@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "house outline with a gable roof",
+  "modifiers": [
+   "radio tower antenna with two concentric signal waves in bottom right"
+  ],
+  "composition": "single object with overlapping bottom-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "smart home / home automation / connected home",
+   "strength": "primary"
+  },
+  {
+   "meaning": "home Wi-Fi / home wireless network / mesh router",
+   "strength": "primary"
+  },
+  {
+   "meaning": "home internet service / broadband ISP",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "remote work / telecommuting from home",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the antenna badge can look like a keyhole or a person standing next to a house, or be confused with a plain Wi-Fi fan icon on a house.",
+ "modifier_semantics": [
+  {
+   "modifier": "radio antenna with concentric signal arcs",
+   "meaning": "wireless connection, broadcast signal, Wi-Fi, or smart-home connectivity"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "finance",
+  "shopping",
+  "admin",
+  "work"
+ ],
+ "task_intents": [
+  "set up home Wi-Fi network",
+  "configure smart home hub or automation",
+  "troubleshoot dead zones in house Wi-Fi",
+  "switch home internet service provider",
+  "pay monthly home internet bill",
+  "pair smart devices to home network",
+  "change guest Wi-Fi password",
+  "install mesh router nodes upstairs"
+ ],
+ "example_tasks": [
+  {
+   "task": "Reboot the main router",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "New guest Wi-Fi password",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order second Eero node",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Compare fiber plans",
+   "parent": "Home Internet",
+   "domain": "finance"
+  },
+  {
+   "task": "Update hub firmware",
+   "parent": "Smart Home",
+   "domain": "tech"
+  },
+  {
+   "task": "Set up Home Assistant on the old Raspberry Pi in the closet",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call ISP to negotiate the monthly fiber rate back down to $55",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Move the mesh extender out of the kitchen so the patio gets signal",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Put all the cheap IoT plugs onto a separate 2.4GHz network",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Print a QR code card for the guest network before family visits",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Schedule technician installation window for Tuesday morning",
+   "parent": "Apartment Wi-Fi Setup",
+   "domain": "admin"
+  },
+  {
+   "task": "Document all static IP assignments in a note",
+   "parent": "Home Network",
+   "domain": "tech"
+  },
+  {
+   "task": "Send the gigabit internet receipt to HR for my monthly work-from-home stipend",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out why the Zigbee bridge keeps dropping connection to the hallway motion sensors every night",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Run a speed test in the attic office before Monday's all-hands presentation on Zoom",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Return the rented cable modem to the Xfinity store and keep the drop-off receipt",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la contraseña del Wi-Fi de invitados antes de la cena del sábado",
+  "Llamar a Movistar para dar de baja la fibra del piso viejo",
+  "Conectar el repetidor en el pasillo para que llegue señal al dormitorio"
+ ],
+ "example_tasks_ru": [
+  "Оплатить домашний интернет за ноябрь",
+  "Настроить гостевую сеть Wi-Fi на роутере",
+  "Подключить датчик протечки к хабу умного дома в ванной"
+ ],
+ "context_tasks": [
+  {
+   "task": "Install smart dimmer switches in the dining room",
+   "central": "light switch / dimmer"
+  },
+  {
+   "task": "Pair the new robot vacuum with the phone app",
+   "central": "robot vacuum"
+  },
+  {
+   "task": "Mount the wireless doorbell camera by the front porch",
+   "central": "doorbell camera"
+  },
+  {
+   "task": "Set the Nest thermostat schedule for winter mornings",
+   "central": "thermostat"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a waterproof Bluetooth speaker for the backyard",
+   "better": "speaker",
+   "trap": "property"
+  },
+  {
+   "task": "Listen to the new episode of the home renovation podcast",
+   "better": "podcast / headphones",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if we are home on Friday for the package delivery",
+   "better": "package / calendar",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Replace AA batteries in the bedroom smoke detector",
+   "better": "battery or smoke detector",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Clean the gutters on the garage roof before the storm",
+   "better": "house / roof / ladder",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Unlock the front door for the dog walker at noon",
+   "better": "key / lock / door",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a house outline combined with a broadcasting antenna, clearly representing home Wi-Fi, home internet, or a smart/connected home. It fits real household tasks around routers, ISP bills, and home automation hubs, though the antenna badge looks very similar to a podcast icon when viewed out of context.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "59f1d8b932b9593fbe1705cd83846dc3816af9f4",
+  "usage": {
+   "prompt": 3923,
+   "output": 1691,
+   "thoughts": 0,
+   "total": 5614
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

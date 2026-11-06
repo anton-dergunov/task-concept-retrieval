@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "map location pin with central dot",
+  "modifiers": [
+   "clockwise circular arrow surrounding the pin"
+  ],
+  "composition": "centered pin inside an open clockwise loop arrow"
+ },
+ "readings": [
+  {
+   "meaning": "update or refresh location / change address",
+   "strength": "primary"
+  },
+  {
+   "meaning": "location history / timeline of visited places",
+   "strength": "primary"
+  },
+  {
+   "meaning": "relocate / move to a new place",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "reroute / return trip / round-trip navigation",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be read either as refreshing/updating a current address or as reviewing past location history (like Google Maps Timeline).",
+ "modifier_semantics": [
+  {
+   "modifier": "clockwise circular arrow surrounding the pin",
+   "meaning": "update, refresh, change, repeat, or history/cycle"
+  }
+ ],
+ "domains": [
+  "admin",
+  "home",
+  "tech",
+  "travel",
+  "work",
+  "shopping",
+  "outdoors"
+ ],
+ "task_intents": [
+  "update mailing address on accounts",
+  "export or clean up location history",
+  "change saved home or work pin",
+  "reroute delivery to another address",
+  "file official change of address",
+  "relocate office or storage unit",
+  "refresh GPS position or map cache"
+ ],
+ "example_tasks": [
+  {
+   "task": "Update USPS forwarding address",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Export Google Maps timeline",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Change default Amazon delivery pin",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Do the bank and insurer",
+   "parent": "Address Changes After Move",
+   "domain": "admin"
+  },
+  {
+   "task": "Turn off auto-delete before December",
+   "parent": "Google Location History",
+   "domain": "tech"
+  },
+  {
+   "task": "Switch the car insurance garaging address to the new flat",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Move the Google Business pin to the corner entrance on 4th",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Reroute the DHL parcel to the locker by the station",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Reset home location in Apple Maps and Tesla nav",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Re-plot the loop around Kinder Scout to avoid the closed bridge",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Check July mileage log against phone GPS history for expense claim",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Send the new studio address to the wholesale courier list",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Update the clinic and pharmacy",
+   "parent": "Moving House Admin",
+   "domain": "home"
+  },
+  {
+   "task": "Backup JSON to NAS",
+   "parent": "Timeline & Location History",
+   "domain": "tech"
+  },
+  {
+   "task": "Update our billing and shipping address on Vanguard, HMRC, and the council tax portal",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Go through last summer's Sicily location history to find the name of that trattoria in Noto",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar el domicilio fiscal en la web de la Agencia Tributaria",
+  "Exportar el historial de ubicaciones de Google Maps antes del cambio",
+  "Actualizar la dirección de envío por defecto en Mercado Libre y el banco"
+ ],
+ "example_tasks_ru": [
+  "Поменять адрес доставки по умолчанию в Озоне и Яндекс Лавке",
+  "Обновить точку входа в мастерскую на Яндекс Картах и в 2ГИС",
+  "Выгрузить историю местоположений из Гугл Карт за прошлый год"
+ ],
+ "context_tasks": [
+  {
+   "task": "Order 40 printed change-of-address postcards for family",
+   "central": "postcards / mail"
+  },
+  {
+   "task": "Fix GPS drift on the Garmin watch before Saturday's long run",
+   "central": "smartwatch"
+  },
+  {
+   "task": "Write a script to parse Timeline JSON into a CSV of cities",
+   "central": "code / script"
+  },
+  {
+   "task": "Call DVLA about the wrong postcode on the V5C logbook",
+   "central": "phone call / vehicle registration document"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pin the trattoria in Trastevere on the shared Rome map",
+   "better": "plain map pin or map",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book the removal van for the 14th",
+   "better": "moving truck / van",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Turn on background location access for Find My",
+   "better": "settings gear or plain location arrow",
+   "trap": "property"
+  },
+  {
+   "task": "Check where the plumber's shop is before driving over",
+   "better": "map pin",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy 30 double-walled moving boxes and tape",
+   "better": "cardboard box",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Update macOS on the work laptop tonight",
+   "better": "laptop or software update arrow",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A map pin inside a clockwise circular arrow clearly combines location/address with updating, changing, or history/timeline. It fits real tasks around changing addresses when moving, updating map pins or delivery locations, and managing GPS location history, while remaining visually distinct from a plain map pin.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "cf921b5b07b61606b7f3017a2c56a21463b84a85",
+  "usage": {
+   "prompt": 3924,
+   "output": 1694,
+   "thoughts": 0,
+   "total": 5618
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

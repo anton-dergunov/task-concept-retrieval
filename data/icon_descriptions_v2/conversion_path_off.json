@@ -1,0 +1,207 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "S-shaped path connecting two dots",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single route diagram crossed out by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "no route / routing disabled / offline navigation",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancelled trip / blocked itinerary / detour closed",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "disconnected path or broken workflow",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Because the diagonal slash slices directly through the two endpoint circles, at small sizes it looks like a medical staff (Rod of Asclepius), a percentage sign, an ampersand, or an abstract squiggle.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, unavailable, offline, or cancelled"
+  }
+ ],
+ "domains": [
+  "travel",
+  "tech",
+  "outdoors",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "cancel planned travel route",
+  "disable automatic routing in app",
+  "remove detour from trip itinerary",
+  "turn off background location tracking",
+  "reroute around closed highway pass",
+  "fix broken navigation path in software"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel coastal drive route",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Turn off auto-rerouting in Waze",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Scrap the Blue Ridge Parkway detour",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Disable dynamic routing on office router",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Drop the northern trail leg",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Remove the ferry crossing from our Saturday driving itinerary",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check which mountain passes are closed for winter before leaving",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Turn off commute route suggestions on the lock screen",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cut the downtown stop out of tomorrow's delivery run",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Test how the mobile app handles a No Route Found error",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Download offline maps for Utah where cell routing fails",
+   "parent": "Southwest Road Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Update the error state when two nodes have no valid path",
+   "parent": "Graph Editor UI",
+   "domain": "tech"
+  },
+  {
+   "task": "Verify the backup trail in case the river bridge is out",
+   "parent": "Mt. Hood Hike",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Notify drivers about the blocked interstate exit near warehouse B",
+   "parent": "Fleet Operations",
+   "domain": "work"
+  },
+  {
+   "task": "Remove the old bus line from the laminated family emergency sheet",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Stop Google Maps from routing through the unpaved toll road near the cabin",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar el recálculo automático de ruta en el GPS del coche",
+  "Descartar el desvío por la carretera de la costa por obras",
+  "Probar el mensaje de error cuando no hay ruta disponible sin conexión"
+ ],
+ "example_tasks_ru": [
+  "Отключить автоматическое перестроение маршрута в навигаторе",
+  "Убрать заезд в центр города из субботнего маршрута доставки",
+  "Проверить работу приложения при отсутствии маршрута между точками"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack paper road atlas in the glovebox for dead zones",
+   "central": "road atlas / map"
+  },
+  {
+   "task": "Call ranger station about washed-out timber bridge",
+   "central": "phone call / bridge"
+  },
+  {
+   "task": "Refund train tickets for the cancelled Alpine leg",
+   "central": "tickets / refund"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Plan driving route from Denver to Moab",
+   "better": "unslashed route or map icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Renew medical insurance policy before Friday",
+   "better": "medical cross or caduceus icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reboot the home Wi-Fi router in the hallway",
+   "better": "wireless router hardware box icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy non-slip hiking boots for unreadable trails",
+   "better": "hiking boot icon",
+   "trap": "property"
+  },
+  {
+   "task": "Book hotel in Seattle",
+   "better": "bed or hotel building icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check whether we still need the toll transponder",
+   "better": "car or toll gate icon",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "The icon depicts a two-point S-curve route crossed out by a diagonal slash (route off / no route), which is a software UI state indicator rather than a concrete task subject. Worse, the slash cuts directly through the two endpoint circles, making the glyph look like a medical snake-and-staff or an abstract symbol at list icon sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c0dd3c71b15e39f34befc1a6de54d534c5adaeee",
+  "usage": {
+   "prompt": 3916,
+   "output": 1603,
+   "thoughts": 199,
+   "total": 5718
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

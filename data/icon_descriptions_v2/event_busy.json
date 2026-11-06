@@ -1,0 +1,222 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "calendar page with two top binding rings",
+  "modifiers": [
+   "large X mark in the center"
+  ],
+  "composition": "single object, front view, centered"
+ },
+ "readings": [
+  {
+   "meaning": "cancel appointment, event, or reservation",
+   "strength": "primary"
+  },
+  {
+   "meaning": "block out date or mark unavailable",
+   "strength": "primary"
+  },
+  {
+   "meaning": "delete or remove calendar event",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "missed deadline or expired date",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be read either as cancelling a scheduled event or as marking a specific target day on a calendar (like crossing off days).",
+ "modifier_semantics": [
+  {
+   "modifier": "large X mark in the center",
+   "meaning": "cancel, delete, block, or unavailable"
+  }
+ ],
+ "domains": [
+  "admin",
+  "work",
+  "health_fitness",
+  "social_family",
+  "travel",
+  "home"
+ ],
+ "task_intents": [
+  "cancel scheduled appointment or booking",
+  "remove recurring meeting from calendar",
+  "block out vacation days on schedule",
+  "decline meeting invitation on calendar",
+  "call office to cancel reservation",
+  "clear Friday afternoon on work calendar",
+  "mark blackout dates for summer trip"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel Tuesday dentist appointment",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Block off Christmas week",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Delete obsolete sprint retro series",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call to cancel Friday's reservation",
+   "parent": "Anniversary Dinner",
+   "domain": "social_family"
+  },
+  {
+   "task": "Clear out old reminders",
+   "parent": "Shared Family Calendar",
+   "domain": "admin"
+  },
+  {
+   "task": "Cancel the dermatologist follow-up on the 14th before the 24-hour fee kicks in",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Block out April 10-18 as unavailable on the studio booking sheet",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Decline Thursday's vendor demo and take it off my calendar",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel the Saturday dog grooming slot at Petco",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Submit blackout dates for June",
+   "parent": "Summer Roster",
+   "domain": "work"
+  },
+  {
+   "task": "Remove all the tentative holds",
+   "parent": "Q3 Conference Schedule",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel our OpenTable booking at Balthazar for Saturday night",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Cancel the HVAC tune-up visit scheduled for next Monday morning",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Take the recurring biweekly 1-on-1 with Marcus off the Google Calendar now that he switched teams",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call Dr. Patel's receptionist to cancel Leo's 3pm orthodontist checkup next Wednesday",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Cancel the backup hotel booking in Kyoto before the free cancellation window closes on Friday",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Cancelar la cita con el oftalmólogo del jueves por la tarde",
+  "Bloquear los días de puente de mayo en la agenda del equipo",
+  "Anular la reserva de la pista de pádel del domingo"
+ ],
+ "example_tasks_ru": [
+  "Отменить запись к стоматологу на пятницу утром",
+  "Удалить еженедельный созвон по старому проекту из календаря",
+  "Закрыть слоты для записи на время отпуска в августе"
+ ],
+ "context_tasks": [
+  {
+   "task": "Unsubscribe from Netflix before the next billing date on the 28th",
+   "central": "subscription / TV"
+  },
+  {
+   "task": "Request full refund for the cancelled flight to Chicago",
+   "central": "flight / refund"
+  },
+  {
+   "task": "Email Sarah that I can't make it to her housewarming party",
+   "central": "email / message"
+  },
+  {
+   "task": "Pause biweekly coffee bean delivery while we are away in July",
+   "central": "coffee delivery"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book annual physical exam for next month",
+   "better": "calendar with plus or medical cross",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reschedule Tuesday's haircut to Thursday afternoon",
+   "better": "calendar with arrows or clock",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the overdue electric bill from last month",
+   "better": "bill, invoice, or lightning bolt",
+   "trap": "property"
+  },
+  {
+   "task": "Check my schedule for next week",
+   "better": "plain calendar",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Cancel Adobe Creative Cloud subscription",
+   "better": "credit card or subscription icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy snacks and drinks for the cancelled-show rewatch party",
+   "better": "shopping cart or snacks",
+   "trap": "property"
+  },
+  {
+   "task": "Send apology flowers to the client",
+   "better": "flowers or gift",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 5
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a calendar with a prominent X mark, universally understood as cancelling an event, deleting a calendar entry, or blocking off dates. It fits common life and work tasks involving cancelling appointments or reservations, while remaining distinct from plain or 'add event' calendar icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5d07007bc371ae171f76c64cdae8f6f0490502b2",
+  "usage": {
+   "prompt": 3922,
+   "output": 1729,
+   "thoughts": 0,
+   "total": 5651
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

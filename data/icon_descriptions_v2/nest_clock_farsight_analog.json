@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round analog clock face with two hands and four tick marks",
+  "modifiers": [],
+  "composition": "single object, front view"
+ },
+ "readings": [
+  {
+   "meaning": "clock or wall clock",
+   "strength": "primary"
+  },
+  {
+   "meaning": "time tracking, working hours, or timesheet",
+   "strength": "primary"
+  },
+  {
+   "meaning": "schedule, opening hours, or time slot",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "daylight saving time or time zone adjustment",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Very similar to simpler clock icons without tick marks; distinguished from wristwatch icons by the lack of a strap and from alarm clocks by the lack of bells.",
+ "modifier_semantics": [],
+ "domains": [
+  "home",
+  "work",
+  "admin",
+  "shopping",
+  "hobbies",
+  "travel"
+ ],
+ "task_intents": [
+  "buy or hang a wall clock",
+  "change batteries in household clocks",
+  "adjust clocks for daylight saving",
+  "submit weekly timesheet or hours",
+  "repair or wind mechanical clock",
+  "check business opening hours",
+  "coordinate meeting across time zones",
+  "audit personal time log"
+ ],
+ "example_tasks": [
+  {
+   "task": "Submit Friday timesheet",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Wind grandfather clock",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Kitchen wall clock battery",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Log billable hours",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Update store opening hours",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Change oven and microwave clocks back one hour for daylight saving",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Find a quiet non-ticking analog wall clock for the guest bedroom",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Reconcile Toggl time entries with Jira tickets before billing closes",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Take the antique cuckoo clock to the horologist on Elm Street",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Check holiday operating hours for the post office and pharmacy",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Figure out the time zone overlap between Tokyo, Berlin, and Denver",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Approve contractor overtime hours in Harvest before payroll runs on Wednesday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Oil the movement and regulate the pendulum on the mantle clock so it stops running fast",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Center it above the doorframe",
+   "parent": "New Wall Clock",
+   "domain": "home"
+  },
+  {
+   "task": "Fill in missing Thursday blocks",
+   "parent": "Monthly Timesheet",
+   "domain": "work"
+  },
+  {
+   "task": "Update Google Business profile for Easter",
+   "parent": "Shop Opening Hours",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la hora del reloj del horno y del coche por el horario de invierno",
+  "Imputar las horas de consultoría de esta semana en el portal antes del viernes",
+  "Ponerle una pila AA nueva al reloj de pared de la cocina"
+ ],
+ "example_tasks_ru": [
+  "Повесить настенные часы над кухонным столом",
+  "Заполнить табель рабочего времени за ноябрь до пятницы",
+  "Отнести старые настенные часы с боем в мастерскую на чистку механизма"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a pack of AA batteries for the wall clock",
+   "central": "battery"
+  },
+  {
+   "task": "Audit screen time usage for the past month",
+   "central": "smartphone / screen"
+  },
+  {
+   "task": "Set up a Pomodoro timer workflow for exam prep",
+   "central": "timer / study"
+  },
+  {
+   "task": "Try a 16:8 intermittent fasting window for two weeks",
+   "central": "food / fasting"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the electricity bill on time before the 15th",
+   "better": "invoice or lightning bolt",
+   "trap": "property"
+  },
+  {
+   "task": "Pick up dry cleaning at 5pm",
+   "better": "shirt on hanger",
+   "trap": "property"
+  },
+  {
+   "task": "Replace the leather strap on my Seiko wristwatch",
+   "better": "wristwatch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set a 6am alarm for the airport taxi",
+   "better": "alarm clock with bells",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the weather forecast for what time the rain starts",
+   "better": "rain cloud",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Write thank-you cards for the wedding gifts",
+   "better": "envelope or greeting card",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "Shows a clear analog clock face with four quarter-hour tick marks and hands set to about 4:00. Best suited for tasks literally about household clocks, logging work hours/timesheets, opening hours, or time-zone adjustments, though it should not be overused for any task that merely has a due time.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "64dc59c0662c16f2bdc6f46be3435a8339739745",
+  "usage": {
+   "prompt": 3928,
+   "output": 1607,
+   "thoughts": 0,
+   "total": 5535
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

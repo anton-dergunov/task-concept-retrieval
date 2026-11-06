@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "seated person in profile facing left",
+  "modifiers": [
+   "horizontal arrow pointing right toward face",
+   "vertical arrow pointing down toward feet"
+  ],
+  "composition": "side-by-side profile symbol, automotive dashboard style"
+ },
+ "readings": [
+  {
+   "meaning": "car climate control bi-level airflow (face and feet vents)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "vehicle air conditioning, HVAC, or cabin ventilation",
+   "strength": "primary"
+  },
+  {
+   "meaning": "ergonomic seating position or posture adjustment",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Outside an automotive context, viewers may misread the arrows as directions for standing up/sitting down or moving a chair.",
+ "modifier_semantics": [
+  {
+   "modifier": "arrow pointing right toward head",
+   "meaning": "airflow directed to upper body / dashboard face vents"
+  },
+  {
+   "modifier": "arrow pointing down toward feet",
+   "meaning": "airflow directed to floor / footwell vents"
+  }
+ ],
+ "domains": [
+  "home",
+  "shopping",
+  "travel",
+  "admin",
+  "tech"
+ ],
+ "task_intents": [
+  "replace car cabin air filter",
+  "service vehicle air conditioning system",
+  "fix stuck dashboard air vents",
+  "recharge car A/C refrigerant",
+  "clean smelly car HVAC ducts",
+  "troubleshoot footwell heater airflow",
+  "check cabin climate control before roadtrip"
+ ],
+ "example_tasks": [
+  {
+   "task": "Replace cabin air filter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Recharge Civic A/C refrigerant",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Fix rattle in dashboard vent",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order charcoal filter on RockAuto",
+   "parent": "Car HVAC maintenance",
+   "domain": "shopping"
+  },
+  {
+   "task": "Book diagnostic for Monday",
+   "parent": "Broken car A/C",
+   "domain": "admin"
+  },
+  {
+   "task": "Check why the footwell heater blows cold air on the driver side",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Spray Lysol through the fresh air intake to kill the mildew smell",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Vacuum pine needles out of the blower motor housing behind glovebox",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Test heater and defroster before the January ski trip to Vermont",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Buy a can of R-134a and a pressure gauge at AutoZone",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Look up fuse diagram for the dead climate control fan",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Compare quotes from two local mechanics",
+   "parent": "Subaru A/C compressor replacement",
+   "domain": "admin"
+  },
+  {
+   "task": "Watch tutorial on getting BEHR unit out",
+   "parent": "Blend door actuator click",
+   "domain": "tech"
+  },
+  {
+   "task": "Replace the ticking blend door actuator behind the center console before summer traffic starts",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ask the shop to check for a slow freon leak in the evaporator core",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Figure out why the climate control stays stuck on the face vents instead of switching",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar el filtro de polen del habitáculo antes del verano",
+  "Recargar el gas del aire acondicionado del coche",
+  "Revisar por qué no sale aire caliente por las rejillas de los pies"
+ ],
+ "example_tasks_ru": [
+  "Поменять угольный салонный фильтр перед весной",
+  "Заправить кондиционер в машине фреоном",
+  "Починить заслонку печки, дует только в лицо"
+ ],
+ "context_tasks": [
+  {
+   "task": "Clip the magnetic phone mount onto the center dashboard louver",
+   "central": "phone mount"
+  },
+  {
+   "task": "Pick up new cedar air freshener clips for the car vents",
+   "central": "air freshener"
+  },
+  {
+   "task": "Full pre-summer roadtrip inspection on the Outback",
+   "central": "car inspection"
+  },
+  {
+   "task": "Detail the interior dashboard with a small soft boar-hair brush",
+   "central": "cleaning brush"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new ergonomic mesh office chair for my home desk",
+   "better": "office chair",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reserve window seats on the return flight from Denver",
+   "better": "airplane seat",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call HVAC technician to service the attic heat pump",
+   "better": "house thermostat or radiator",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Rent a compact car with good air conditioning for the August trip to Seville",
+   "better": "rental car",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the $450 credit card bill from the auto shop",
+   "better": "credit card or receipt",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check cabin temperature in the baby monitor app",
+   "better": "thermometer or baby monitor",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "This is the standard ISO automotive symbol for bi-level cabin airflow (directing air to the upper body and feet). While it is technically a specific car climate-control setting, it serves well as a recognizable emblem for vehicle A/C, heater, cabin air filter, and ventilation maintenance tasks, though non-drivers might mistake it for a generic seating or posture icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "7fc33ab7b2da281363b8f7132f3bb94ac2022ffb",
+  "usage": {
+   "prompt": 3921,
+   "output": 1703,
+   "thoughts": 0,
+   "total": 5624
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

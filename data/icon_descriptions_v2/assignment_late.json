@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "square clipboard or hanging sign with top hole",
+  "modifiers": [
+   "centered exclamation mark"
+  ],
+  "composition": "single framed object, front view, with symbol inside"
+ },
+ "readings": [
+  {
+   "meaning": "important task, assignment, or urgent notice",
+   "strength": "primary"
+  },
+  {
+   "meaning": "incident report, inspection issue, or compliance alert",
+   "strength": "primary"
+  },
+  {
+   "meaning": "posted warning sign or bulletin notice",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "overdue or late work item",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Because it is square rather than vertical, it can be read as a hanging wall sign, price tag, or generic alert box instead of a clipboard.",
+ "modifier_semantics": [
+  {
+   "modifier": "centered exclamation mark",
+   "meaning": "alert, warning, error, overdue, or high priority"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "home",
+  "tech",
+  "health_fitness",
+  "finance"
+ ],
+ "task_intents": [
+  "file an incident or safety report",
+  "resolve a flagged audit or inspection finding",
+  "post a warning sign or notice",
+  "follow up on an overdue assignment",
+  "respond to an official compliance notice",
+  "log a critical issue or discrepancy",
+  "review mandatory rules and disclaimers"
+ ],
+ "example_tasks": [
+  {
+   "task": "File workplace incident report",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "HOA violation notice",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Post allergy notice in breakroom",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Print and laminate",
+   "parent": "Shop Safety Signs",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Finish the root cause section",
+   "parent": "Q3 Outage Postmortem",
+   "domain": "tech"
+  },
+  {
+   "task": "Write up the near-miss report for the warehouse forklift bump on Tuesday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Answer the city code enforcement notice about the overhanging alley tree",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Hang the wet paint sign on the porch railing before leaves stick",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Clear the three flagged findings from last week's kitchen health inspection",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Submit the adverse reaction form for the new blood pressure pills",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Appeal the late-filing penalty notice from the state franchise tax board",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Send to landlord with photos",
+   "parent": "Balcony Railing Hazard Report",
+   "domain": "admin"
+  },
+  {
+   "task": "Sign off on open items",
+   "parent": "Lab Safety Audit",
+   "domain": "learning"
+  },
+  {
+   "task": "Fill out the landlord's move-in damage checklist so we don't get blamed for the carpet stain",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Put a bold notice on the basement freezer door telling people not to unplug that outlet",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Respond to the registrar's academic hold notice before spring course registration locks on Friday morning",
+   "parent": "",
+   "domain": "learning"
+  }
+ ],
+ "example_tasks_es": [
+  "Presentar el parte de incidencia por la caída en el almacén",
+  "Colgar el cartel de aviso de suelo recién encerado en el portal",
+  "Contestar al requerimiento del ayuntamiento sobre la obra de la fachada"
+ ],
+ "example_tasks_ru": [
+  "Заполнить акт о протечке крыши для управляющей компании",
+  "Повесить табличку с предупреждением о злой собаке на калитку",
+  "Устранить три замечания из предписания пожарной инспекции до пятницы"
+ ],
+ "context_tasks": [
+  {
+   "task": "Take photos of the cracked drywall for the insurance claim",
+   "central": "camera / photos"
+  },
+  {
+   "task": "Buy zip ties to hang the no-parking signs on the chain-link fence",
+   "central": "zip ties / hardware"
+  },
+  {
+   "task": "Call the fire marshal to clarify item 4 on the inspection report",
+   "central": "phone call"
+  },
+  {
+   "task": "Walk the jobsite with Dave before the OSHA inspector gets here",
+   "central": "hardhat / inspection walk"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new wooden clipboard for the coach",
+   "better": "plain clipboard without exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Urgent: buy milk and eggs on the way home",
+   "better": "milk carton or grocery bag",
+   "trap": "property"
+  },
+  {
+   "task": "Important: call Mom back tonight",
+   "better": "phone",
+   "trap": "property"
+  },
+  {
+   "task": "Check the car dashboard warning light",
+   "better": "car or check-engine icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order replacement HEPA filters for the fume extractors",
+   "better": "air filter or fan",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Double-check the guest list before sending invitations",
+   "better": "people list or envelope",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon shows a square clipboard or hanging sign with an exclamation mark inside, representing an incident report, inspection finding, official notice, or posted warning sign. It fits tasks centered on filing reports, answering compliance notices, or putting up warning signs, though users might misapply it to any task that simply feels 'important' (a property).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "96784d9f3d10765323b12f3339cebd8847370b3e",
+  "usage": {
+   "prompt": 3922,
+   "output": 1707,
+   "thoughts": 0,
+   "total": 5629
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

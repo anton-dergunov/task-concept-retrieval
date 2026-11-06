@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "SIM card or SD card outline with cut top-left corner",
+  "modifiers": [
+   "diagonal slash line from top-left to bottom-right"
+  ],
+  "composition": "single object in outline, front view, crossed out by diagonal slash"
+ },
+ "readings": [
+  {
+   "meaning": "no SIM card / remove or cancel SIM card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no SD card / remove or eject memory card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "missing or corrupted file / document",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Without interior contact pads or a folded-corner flap, the notched rectangle looks identically like a SIM card, an SD memory card, or a minimalist document page with a cut corner.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "absent, disabled, removed, cancelled, or error"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "communication",
+  "finance",
+  "hobbies",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "remove SIM card before selling phone",
+  "cancel prepaid SIM plan",
+  "fix no SIM card detected error",
+  "take SD card out of camera",
+  "deactivate old mobile SIM card",
+  "troubleshoot unreadable memory card",
+  "switch from physical SIM to eSIM"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pop out old SIM",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel T-Mobile prepaid SIM",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Eject dashcam microSD card",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pull card before returning rental",
+   "parent": "Camera Gear",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Deactivate lost iPad cellular card",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Take the European tourist SIM out of the Pixel before landing home",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix 'No SIM installed' error popping up on mom's iPhone 12",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pull the SIM and microSD out of the cracked Galaxy S10",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable physical SIM slot after converting work number to eSIM",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Throw away expired Vodafone SIM cards sitting in the desk drawer",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Remove before shipping to buyer",
+   "parent": "Selling Old iPhone",
+   "domain": "finance"
+  },
+  {
+   "task": "Check why it says no card inserted",
+   "parent": "Trail Camera",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Cancel the spare data-only SIM card we used for the road trip hotspot",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Clean the brass contacts on the SIM to stop the signal from dropping out",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Set up the kids' hand-me-down Android phone to work on Wi-Fi only with no SIM",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call support to deactivate stolen card",
+   "parent": "Mobile Plan",
+   "domain": "communication"
+  }
+ ],
+ "example_tasks_es": [
+  "Sacar la tarjeta SIM del móvil viejo antes de venderlo en Wallapop",
+  "Dar de baja la SIM prepago de Orange del viaje",
+  "Arreglar el fallo de tarjeta SD no reconocida en la cámara"
+ ],
+ "example_tasks_ru": [
+  "Вытащить симку из старого телефона перед продажей",
+  "Заблокировать потерянную сим-карту МТС",
+  "Разобраться почему регистратор пишет «нет карты памяти»"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack the little metal ejector pin in the carry-on pouch",
+   "central": "SIM ejector pin"
+  },
+  {
+   "task": "Wipe personal data and factory reset the Pixel 6 for trade-in",
+   "central": "phone reset"
+  },
+  {
+   "task": "Switch cellular plan over to an eSIM QR code before flying",
+   "central": "eSIM QR code"
+  },
+  {
+   "task": "Copy dashcam clips onto the laptop before formatting the card",
+   "central": "video clips"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a 10GB local SIM card at Narita airport arrival hall",
+   "better": "SIM card without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a 256GB SanDisk Extreme microSD card for the Switch",
+   "better": "SD memory card without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Delete the corrupted tax return PDF from the shared drive",
+   "better": "document or file with slash or trash can",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn on airplane mode during the transatlantic flight",
+   "better": "airplane",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy an unlocked SIM-free iPhone 15 for grandma",
+   "better": "smartphone",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the monthly AT&T wireless bill before Friday",
+   "better": "invoice or credit card",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The notched rectangle with a diagonal slash represents 'no SIM card' or 'no SD card' (or removing/deactivating one). It fits specific tech, travel, and phone-handover tasks like removing a SIM before selling a phone or troubleshooting a missing card error, though the bare outline without contact pads can be confused with a crossed-out document page.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "002dae4d25d67b215c76bbfd21c28c4676dcea6c",
+  "usage": {
+   "prompt": 3925,
+   "output": 1707,
+   "thoughts": 0,
+   "total": 5632
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "flashing siren dome light on a flat base",
+  "modifiers": [
+   "five radiating light rays"
+  ],
+  "composition": "single object, front view, radiating lines above and around"
+ },
+ "readings": [
+  {
+   "meaning": "emergency siren or alarm light",
+   "strength": "primary"
+  },
+  {
+   "meaning": "emergency, crisis, or incident response",
+   "strength": "primary"
+  },
+  {
+   "meaning": "home security or smoke/carbon monoxide alarm",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "police or emergency services",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the trapezoid dome and rays could vaguely resemble a sunrise over a hill or a glowing button.",
+ "modifier_semantics": [
+  {
+   "modifier": "five radiating light rays",
+   "meaning": "flashing, sounding, active alert"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "work",
+  "admin",
+  "health_fitness",
+  "social_family"
+ ],
+ "task_intents": [
+  "test smoke and carbon monoxide alarms",
+  "maintain home security alarm system",
+  "update family emergency evacuation plan",
+  "configure server incident alert thresholds",
+  "handle on-call production outage incident",
+  "register municipal burglar alarm permit",
+  "prepare household emergency contact sheet",
+  "conduct workplace fire drill"
+ ],
+ "example_tasks": [
+  {
+   "task": "Test hallway smoke detector",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "PagerDuty escalation policy",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "SimpliSafe keypad batteries",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Replace 9V backup batteries",
+   "parent": "Home Alarms",
+   "domain": "home"
+  },
+  {
+   "task": "Update contact numbers on fridge",
+   "parent": "Emergency Prep",
+   "domain": "social_family"
+  },
+  {
+   "task": "Stop the basement carbon monoxide detector from chirping every thirty seconds",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Renew annual city burglar alarm permit before the $50 fine kicks in",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Write postmortem for Tuesday night's SEV-1 checkout outage",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Walk the kids through our fire escape plan and street meeting spot",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Silence noisy Datadog memory alerts on the staging cluster",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call ADT to cancel monitoring before the contract auto-renews in May",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Swap the Friday night shift",
+   "parent": "On-Call Rotation",
+   "domain": "work"
+  },
+  {
+   "task": "Draft customer status page template",
+   "parent": "Incident Response",
+   "domain": "work"
+  },
+  {
+   "task": "Mount the new Kidde dual-sensor alarm outside the upstairs bedrooms and test the siren",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Figure out why the garage door sensor keeps triggering a false alarm at 3am",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Give the dog sitter the disarm code and the password for the monitoring company",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la pila del detector de humo del pasillo que no para de pitar",
+  "Llamar a Securitas Direct para dar de baja la alarma del local",
+  "Revisar las alertas críticas de Prometheus antes de entrar en guardia el viernes"
+ ],
+ "example_tasks_ru": [
+  "Поменять крону в датчике дыма в прихожей",
+  "Проверить срабатывание пожарной сигнализации на складе перед проверкой МЧС",
+  "Настроить алерты в Grafana на падение воркеров очереди"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check expiration date on the kitchen fire extinguisher",
+   "central": "fire extinguisher"
+  },
+  {
+   "task": "Restock ibuprofen, gauze, and burn gel in the hall closet",
+   "central": "first aid kit"
+  },
+  {
+   "task": "Put three gallons of bottled water and a crank radio in the basement",
+   "central": "emergency supplies"
+  },
+  {
+   "task": "Move $500 into the rainy-day high-yield savings account",
+   "central": "money / savings"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Set 5:30am alarm for tomorrow's flight to Denver",
+   "better": "alarm clock",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay urgent overdue water bill before shutoff",
+   "better": "water drop or bill/invoice",
+   "trap": "property"
+  },
+  {
+   "task": "Buy AA batteries for the flashlight",
+   "better": "battery or flashlight",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Turn off marketing push notifications in the banking app",
+   "better": "notification bell",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Install sunrise wake-up light on the nightstand",
+   "better": "sun or bedside lamp",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check why the car's check-engine light came on",
+   "better": "car or engine",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 5
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a flashing emergency siren or beacon. It fits tasks centered on physical alarms (smoke detectors, home security systems), emergency preparedness, and technical incident/alert management, though it must not be misused merely to mark an unrelated task as 'urgent' (a property) or for morning wake-up alarms (alarm clock).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e7b458f162e796e3e96a82c7f57026f9098511a6",
+  "usage": {
+   "prompt": 3923,
+   "output": 1695,
+   "thoughts": 0,
+   "total": 5618
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

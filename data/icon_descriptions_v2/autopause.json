@@ -1,0 +1,222 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two vertical parallel bars inside a circular arrow",
+  "modifiers": [
+   "dashed upper circular arc",
+   "clockwise bottom arrow"
+  ],
+  "composition": "centered pause symbol surrounded by a partially dashed clockwise circular arrow"
+ },
+ "readings": [
+  {
+   "meaning": "pause timer or countdown",
+   "strength": "primary"
+  },
+  {
+   "meaning": "pause recurring schedule or subscription",
+   "strength": "primary"
+  },
+  {
+   "meaning": "pause background sync or download",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "time-out or break interval",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a plain pause button, a reset/replay button, or a generic loading/progress indicator at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "dashed upper circular arc",
+   "meaning": "ongoing progress, countdown, or time elapsed"
+  },
+  {
+   "modifier": "clockwise bottom arrow",
+   "meaning": "cycle, repetition, or timer completion"
+  }
+ ],
+ "domains": [
+  "admin",
+  "finance",
+  "tech",
+  "health_fitness",
+  "work",
+  "home"
+ ],
+ "task_intents": [
+  "pause a recurring subscription temporarily",
+  "put automatic deliveries on hold",
+  "suspend a scheduled job or backup",
+  "freeze gym or club membership",
+  "take a planned break between intervals",
+  "hold mail delivery during vacation",
+  "pause automated ad campaigns"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pause mail delivery",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Freeze Equinox membership",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Hold coffee bean subscription",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Suspend nightly cron jobs",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Skip August box",
+   "parent": "Subscriptions",
+   "domain": "finance"
+  },
+  {
+   "task": "Pause the automated savings transfer until next month's paycheck clears",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Put cat litter auto-ship on hold while we have three extra bags",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Pause Google Ads spend for the holiday weekend",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Temporarily disable Time Machine hourly backups during video rendering",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set a 60-second rest timer between heavy squat sets",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Put lawn mowing service on hold for July drought",
+   "parent": "Yard Maintenance",
+   "domain": "home"
+  },
+  {
+   "task": "Halt recurring donations to old charity before annual card renewal",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Put on hold for two weeks",
+   "parent": "HelloFresh Meal Kit",
+   "domain": "food"
+  },
+  {
+   "task": "Pause all outgoing newsletter sequences while we fix the broken tracking links in HubSpot",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Put Audible membership on a 90-day billing hiatus so I can finish my backlog",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Suspend for the summer",
+   "parent": "Weekly Cleaners",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Pausar la suscripción del gimnasio durante el mes de agosto",
+  "Detener temporalmente las entregas automáticas de pienso para el perro",
+  "Poner en pausa las copias de seguridad automáticas en la nube"
+ ],
+ "example_tasks_ru": [
+  "Приостановить подписку на Яндекс Плюс до осени",
+  "Заморозить абонемент в фитнес-клуб на время отпуска",
+  "Поставить на паузу автоплатеж за домашний интернет"
+ ],
+ "context_tasks": [
+  {
+   "task": "Configure Pomodoro rest intervals to 10 minutes",
+   "central": "Pomodoro timer"
+  },
+  {
+   "task": "Audit all monthly recurring charges on the Amex card",
+   "central": "credit card charges"
+  },
+  {
+   "task": "Check why the database sync job hung halfway through",
+   "central": "database sync"
+  },
+  {
+   "task": "Add a rest day to the marathon training block",
+   "central": "training schedule"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cancel Netflix account permanently",
+   "better": "cancel / cross or trash icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a kitchen timer for baking sourdough",
+   "better": "stopwatch or kitchen timer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Renew passport before October trip",
+   "better": "passport",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update credit card on Spotify subscription",
+   "better": "credit card",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Watch the paused documentary on Mubi",
+   "better": "film / video",
+   "trap": "property"
+  },
+  {
+   "task": "Check uptime of the production server",
+   "better": "server",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a central pause symbol with a segmented circular arrow representing a cycle, timer, or ongoing process. It fits tasks centered on temporarily pausing a recurring subscription, automatic delivery, or scheduled job, though it is somewhat UI-specific and could be confused with a generic timer or replay button.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a67194743546916c2f17da7b179da46c6d36938c",
+  "usage": {
+   "prompt": 3926,
+   "output": 1643,
+   "thoughts": 0,
+   "total": 5569
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

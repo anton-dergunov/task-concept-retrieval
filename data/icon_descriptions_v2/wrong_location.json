@@ -1,0 +1,238 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "teardrop map location pin outline with center dot",
+  "modifiers": [
+   "diagonal X cross in upper right corner"
+  ],
+  "composition": "single object, front view, cut out at top right for modifier"
+ },
+ "readings": [
+  {
+   "meaning": "remove or delete a saved location or address",
+   "strength": "primary"
+  },
+  {
+   "meaning": "wrong, invalid, or closed location",
+   "strength": "primary"
+  },
+  {
+   "meaning": "disable location services or GPS tracking",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "skip or cancel a planned stop or destination",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the diagonal X can be mistaken for a plus sign (add location) or an asterisk.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal X cross",
+   "meaning": "remove, delete, cancel, invalid, or disabled"
+  }
+ ],
+ "domains": [
+  "travel",
+  "tech",
+  "admin",
+  "shopping",
+  "work",
+  "social_family"
+ ],
+ "task_intents": [
+  "remove old address from account",
+  "delete saved pin from map",
+  "drop a stop from itinerary",
+  "disable app location tracking permissions",
+  "report permanently closed place on map",
+  "clear location history in settings"
+ ],
+ "example_tasks": [
+  {
+   "task": "Delete old apartment address",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Remove closed cafe pin",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Drop Toledo stop",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Clear saved GPS waypoints",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Unpin old office location",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Remove the Oak Street billing address from our Amazon account",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Turn off background location tracking for the weather app",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Report the permanently closed dry cleaner on Google Maps",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Cut the detour to Carson City from Saturday's driving route",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Delete our former warehouse pin from the delivery driver map",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Remove my home address from public domain WHOIS records",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear old saved destinations out of the car navigation system",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Take the closed trailhead off our shared group hiking map before Saturday morning",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Remove the outdated shipping address from Stripe before the next subscription box renews",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Delete all the temporary apartment hunting pins from my saved city map list",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Scratch the third vineyard stop from the Napa itinerary so we are not rushing",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Delete the old ones",
+   "parent": "Saved Map Places",
+   "domain": "travel"
+  },
+  {
+   "task": "Remove previous rental",
+   "parent": "Shipping Addresses",
+   "domain": "shopping"
+  },
+  {
+   "task": "Revoke permissions for sketchy apps",
+   "parent": "Phone Location Privacy",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear out last year's spots",
+   "parent": "Garmin Waypoints",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Borrar la dirección antigua de mi cuenta de Amazon",
+  "Quitar la parada de Zaragoza de la ruta del sábado",
+  "Eliminar los sitios cerrados de mi lista de Google Maps"
+ ],
+ "example_tasks_ru": [
+  "Удалить старый адрес доставки из профиля Ozon",
+  "Убрать заезд в Тверь из маршрута поездки",
+  "Отключить доступ к геопозиции для лишних приложений"
+ ],
+ "context_tasks": [
+  {
+   "task": "Update privacy settings on the new iPhone",
+   "central": "phone privacy settings"
+  },
+  {
+   "task": "Clean up the shared road trip Google Doc",
+   "central": "road trip document"
+  },
+  {
+   "task": "Audit app permissions on the kids' tablets",
+   "central": "tablet permissions"
+  },
+  {
+   "task": "Shorten day three of the Scotland driving loop",
+   "central": "driving itinerary"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Add the new dentist's office to my saved places",
+   "better": "map pin with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the address for Friday's dinner reservation",
+   "better": "plain map pin",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Cancel the hotel reservation in Chicago",
+   "better": "hotel or bed with X",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Find an offline map app that works without cell signal",
+   "better": "folded map or phone",
+   "trap": "property"
+  },
+  {
+   "task": "Book the ferry tickets for the Greek islands",
+   "better": "ferry boat or ticket",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Pin the tax forms to the corkboard",
+   "better": "pushpin or thumbtack",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly shows a standard map location pin with an 'X' badge in the top right, meaning remove/delete a location, invalid address, or disable location tracking. It fits a narrow but real set of tasks around deleting old addresses, pruning stops from a route, or turning off GPS permissions, though at tiny sizes the 'X' could be misread as a '+'.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e0220463ea2c13f6d0d8b0ffa2bdefa75c5d6258",
+  "usage": {
+   "prompt": 3921,
+   "output": 1004,
+   "thoughts": 0,
+   "total": 4925
+  },
+  "soft_problems": [
+   "example_tasks: 20 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

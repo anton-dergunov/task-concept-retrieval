@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "table grid of rectangular cells in columns and rows",
+  "modifiers": [
+   "checkmark in bottom right corner"
+  ],
+  "composition": "single object, front view, cut away at bottom right for badge"
+ },
+ "readings": [
+  {
+   "meaning": "spreadsheet or table verified / completed",
+   "strength": "primary"
+  },
+  {
+   "meaning": "spreadsheet, data table, or grid",
+   "strength": "primary"
+  },
+  {
+   "meaning": "schedule, timetable, or roster confirmed",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "database table validation",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the cutout table with four cells on top and open bars below can look like a stylized apartment building, window pane, or a weird monogram of P and E.",
+ "modifier_semantics": [
+  {
+   "modifier": "checkmark in bottom right corner",
+   "meaning": "completed, verified, approved, or valid"
+  }
+ ],
+ "domains": [
+  "work",
+  "finance",
+  "admin",
+  "tech",
+  "learning",
+  "home",
+  "social_family"
+ ],
+ "task_intents": [
+  "verify spreadsheet formulas and totals",
+  "update budget tracker spreadsheet",
+  "finalize shift schedule table",
+  "audit data table for errors",
+  "reconcile expense sheet entries",
+  "approve seating chart grid",
+  "validate database table schema",
+  "fill out comparison matrix"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix broken VLOOKUP in budget.xlsx",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Update wedding RSVP spreadsheet",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Verify Q3 commission table",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clean up CSV import columns",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Gradebook spreadsheet check",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Double-check all sum formulas in the 2025 tax deduction sheet",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Fill in the remaining rows of the vendor comparison matrix",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Approve April nurse rotation timetable before posting to the ward",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Reconcile shared roommate utilities Google Sheet for March",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Validate foreign key constraints on the new orders table",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Spot-check the 50 rows of transcribed lab measurements",
+   "parent": "Thesis Data",
+   "domain": "learning"
+  },
+  {
+   "task": "Add March readings",
+   "parent": "Home Energy Spreadsheet",
+   "domain": "home"
+  },
+  {
+   "task": "Lock cells and share view-only link",
+   "parent": "2026 Headcount Tracker Sheet",
+   "domain": "work"
+  },
+  {
+   "task": "Check totals against receipts",
+   "parent": "Trip Expense Sheet",
+   "domain": "finance"
+  },
+  {
+   "task": "Audit the amortization schedule spreadsheet against the bank's latest principal balance statement",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Make sure every dietary restriction is marked in the reunion seating chart sheet",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Revisar las fórmulas de la hoja de gastos compartidos en Excel",
+  "Cuadrar tabla de turnos de mayo",
+  "Completar la matriz comparativa de hipotecas antes de llamar al banco"
+ ],
+ "example_tasks_ru": [
+  "Сверить итоговые суммы в таблице семейного бюджета за март",
+  "Заполнить гугл-таблицу с расписанием дежурств",
+  "Проверить таблицу размеров перед заказом формы на команду"
+ ],
+ "context_tasks": [
+  {
+   "task": "Export Stripe payouts to CSV for the accountant",
+   "central": "Stripe payouts / export"
+  },
+  {
+   "task": "Learn pivot tables and INDEX/MATCH before Monday's interview",
+   "central": "interview prep / course"
+  },
+  {
+   "task": "Send the finalized conference room booking schedule to reception",
+   "central": "email / message"
+  },
+  {
+   "task": "Collect shirt sizes from everyone on the softball roster",
+   "central": "shirt sizes / survey"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Sand and oil the oak dining room table before Thanksgiving",
+   "better": "furniture table",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book a table for four at Osteria Mozza for Friday at 8",
+   "better": "restaurant / cutlery",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Wash thelinen sheets and pillowcases in hot water",
+   "better": "bed / laundry",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace the cracked glass pane in the garage window",
+   "better": "window",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Verify passport expiration date before booking flights",
+   "better": "passport",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Call the mortgage broker to ask about closing fees",
+   "better": "phone call",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 4,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "Shows a data table or spreadsheet grid with a checkmark badge in the lower right. It fits tasks centered on spreadsheets, data tables, trackers, and schedules—especially verifying, reconciling, or completing them—though at small sizes the truncated 2x4 grid looks somewhat like a window pane or block letter.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "39b069952c77e4904cecb5dd7946877802789417",
+  "usage": {
+   "prompt": 3923,
+   "output": 1660,
+   "thoughts": 0,
+   "total": 5583
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

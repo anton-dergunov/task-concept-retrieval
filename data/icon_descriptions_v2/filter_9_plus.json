@@ -1,0 +1,224 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two stacked rounded squares with 9+ inside the front one",
+  "modifiers": [
+   "digit 9",
+   "plus sign",
+   "stacked layer behind"
+  ],
+  "composition": "offset stacked square frames, front view"
+ },
+ "readings": [
+  {
+   "meaning": "more than nine open tabs or items",
+   "strength": "primary"
+  },
+  {
+   "meaning": "unread notification count over nine",
+   "strength": "primary"
+  },
+  {
+   "meaning": "age rating 9 and older",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "multiple photo burst or album count",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be read as a browser tab counter, a notification badge, a photo stack count, or a children's age rating label (9+).",
+ "modifier_semantics": [
+  {
+   "modifier": "digit 9",
+   "meaning": "quantity of nine"
+  },
+  {
+   "modifier": "plus sign",
+   "meaning": "more than or exceeding the shown count"
+  },
+  {
+   "modifier": "stacked layer behind",
+   "meaning": "multiple items, tabs, or pages"
+  }
+ ],
+ "domains": [
+  "tech",
+  "admin",
+  "shopping",
+  "social_family"
+ ],
+ "task_intents": [
+  "close excess open browser tabs",
+  "clear unread notification backlog",
+  "bookmark and close research tabs",
+  "check age rating for kids media",
+  "implement badge overflow counter in UI",
+  "cull burst photos in camera roll"
+ ],
+ "example_tasks": [
+  {
+   "task": "Clean up browser tabs",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Bookmark open recipes",
+   "parent": "Browser Tab Overload",
+   "domain": "food"
+  },
+  {
+   "task": "Clear phone notification badges",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Sort through saved links",
+   "parent": "Open Safari Tabs",
+   "domain": "admin"
+  },
+  {
+   "task": "Save articles to Pocket",
+   "parent": "Phone Browser Tabs",
+   "domain": "learning"
+  },
+  {
+   "task": "Go through the 50+ open Chrome tabs before restarting the laptop",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check which board games in the closet are rated 9+ for Leo's party",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Fix the unread badge counter so counts over nine show 9+",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Export all open hotel comparison tabs into one shared spreadsheet",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Close old Jira tickets still sitting in my pinned window",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pick a Lego set rated 9+ for Maya's ninth birthday",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Archive the dozen open tax-form tabs once the return is filed",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Compare the four remaining options",
+   "parent": "Open Car Insurance Tabs",
+   "domain": "finance"
+  },
+  {
+   "task": "Install OneTab extension on the work MacBook to stop Chrome eating all the RAM",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Verify App Store age rating questionnaire answers so the game stays listed as 9+",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Go through the hundred open tabs on my phone and close everything from last month",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Cerrar las decenas de pestañas abiertas en Chrome antes de reiniciar el portátil",
+  "Buscar un juego de mesa recomendado para mayores de 9 años para el cumple de Lucas",
+  "Guardar en marcadores las pestañas de vuelos y hoteles que tengo abiertas en el móvil"
+ ],
+ "example_tasks_ru": [
+  "Разобрать и закрыть накопившиеся вкладки в браузере на телефоне",
+  "Проверить возрастное ограничение 9+ на коробке с конструктором перед покупкой",
+  "Починить отображение счётчика уведомлений 9+ в шапке мобильного приложения"
+ ],
+ "context_tasks": [
+  {
+   "task": "Free up memory on slow MacBook",
+   "central": "laptop"
+  },
+  {
+   "task": "Buy birthday gift for nine-year-old nephew",
+   "central": "gift"
+  },
+  {
+   "task": "Turn off annoying red app badges on iPhone",
+   "central": "phone settings"
+  },
+  {
+   "task": "Organize burst photos from the soccer match",
+   "central": "photos"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book flight for 9am tomorrow",
+   "better": "airplane or clock",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Invite 9+ people to the backyard barbecue",
+   "better": "people or grill",
+   "trap": "property"
+  },
+  {
+   "task": "Buy 9-volt batteries for the smoke detectors",
+   "better": "battery",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Review 9 pull requests before standup",
+   "better": "code branch or pull request",
+   "trap": "property"
+  },
+  {
+   "task": "Add new calculator app to home screen",
+   "better": "calculator",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the $99 annual cloud storage invoice",
+   "better": "invoice or credit card",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 1,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is a UI counter badge indicating 'more than 9 items or open tabs' (stacked squares with '9+'). Because it represents a quantity/overflow state and interface chrome rather than a concrete real-world object or action, it almost never serves as the central subject of a to-do task.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "441f68560df202a83afac65b872a87058dc2c4f1",
+  "usage": {
+   "prompt": 3919,
+   "output": 1713,
+   "thoughts": 75,
+   "total": 5707
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

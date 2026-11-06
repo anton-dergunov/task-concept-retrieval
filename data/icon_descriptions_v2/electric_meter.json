@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round utility meter with horizontal readout window and two bottom pipes",
+  "modifiers": [
+   "lightning bolt symbol inside the face"
+  ],
+  "composition": "single object, front view"
+ },
+ "readings": [
+  {
+   "meaning": "electric meter / electricity usage",
+   "strength": "primary"
+  },
+  {
+   "meaning": "electricity bill / utility account",
+   "strength": "primary"
+  },
+  {
+   "meaning": "smart meter or home power monitoring",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "electrical power / charger",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes it can look like an upside-down wall plug, a round Japanese postbox, or a generic badge with a T and lightning bolt.",
+ "modifier_semantics": [
+  {
+   "modifier": "lightning bolt symbol inside the face",
+   "meaning": "electricity or electrical power (distinguishing it from gas or water meters)"
+  }
+ ],
+ "domains": [
+  "home",
+  "finance",
+  "admin",
+  "tech"
+ ],
+ "task_intents": [
+  "submit electricity meter reading",
+  "pay monthly electric utility bill",
+  "schedule smart meter installation",
+  "compare home electricity tariff rates",
+  "check power consumption on meter",
+  "transfer electric utility for move",
+  "inspect outdoor electric meter box",
+  "log kilowatt-hour usage for reimbursement"
+ ],
+ "example_tasks": [
+  {
+   "task": "Submit electric meter reading",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pay ConEd electricity bill",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Photo of day/night kWh counters",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Unlock basement meter cupboard",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Compare fixed electricity tariffs",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Call utility company to book the smart meter upgrade before Friday",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Send final electric meter reading to the landlord before handing over keys",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check why February kWh usage spiked so much compared to January",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Pair the Zigbee pulse sensor with the main electric meter for Home Assistant",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear overgrown ivy off the outside electric meter cabinet so the reader can see it",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Switch home electricity plan to the off-peak EV overnight tariff before next billing cycle",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Take a timestamped photo of both electric meters on move-in day for the lease file",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Send reading before the 25th",
+   "parent": "Electricity & Utilities",
+   "domain": "admin"
+  },
+  {
+   "task": "Set up direct debit",
+   "parent": "Power Bill",
+   "domain": "finance"
+  },
+  {
+   "task": "Replace rusted box padlock",
+   "parent": "Basement Electric Meter",
+   "domain": "home"
+  },
+  {
+   "task": "Download last 12 months CSV",
+   "parent": "Smart Meter Energy Audit",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Mandar lectura del contador de luz antes del día 20",
+  "Cambiar titularidad del contrato de electricidad del piso nuevo",
+  "Revisar por qué subió tanto el recibo de la CFE este bimestre"
+ ],
+ "example_tasks_ru": [
+  "Передать показания электросчётчика в Мосэнергосбыт до 25 числа",
+  "Оплатить счёт за электричество по дневному и ночному тарифу",
+  "Подать заявку на замену старого счётчика электроэнергии в щитке"
+ ],
+ "context_tasks": [
+  {
+   "task": "Calculate home office deduction share for utility bills",
+   "central": "tax return / spreadsheet"
+  },
+  {
+   "task": "Call electrician about flickering kitchen recessed lights",
+   "central": "ceiling light / electrician"
+  },
+  {
+   "task": "Plug dehumidifier into a smart energy-monitoring socket",
+   "central": "smart plug / dehumidifier"
+  },
+  {
+   "task": "Buy spare AA batteries for the flashlight in the breaker cupboard",
+   "central": "batteries / flashlight"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Submit cold and hot water meter readings",
+   "better": "water meter or water droplet",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a 10-meter braided USB-C charging cable",
+   "better": "USB cable",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new electric toothbrush head",
+   "better": "toothbrush",
+   "trap": "property"
+  },
+  {
+   "task": "Top up the city parking meter before 2pm",
+   "better": "parking sign or car",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pack the European two-pin power plug adapter",
+   "better": "power plug / travel adapter",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the plumber's invoice for the boiler valve",
+   "better": "invoice / plumbing",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a round utility meter with a horizontal counter slot, bottom conduits, and a lightning bolt indicating electricity. It fits recurring household and admin tasks around reading the electric meter, tracking kWh consumption, and paying electricity bills, though at small sizes it can resemble a round wall socket or plug.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "354fcd3f293a23aa6358aecfc0d132e5296ff28d",
+  "usage": {
+   "prompt": 3923,
+   "output": 1661,
+   "thoughts": 0,
+   "total": 5584
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "circular compass dial with a diamond pointer needle",
+  "modifiers": [
+   "diagonal strike-through slash from top-left to bottom-right"
+  ],
+  "composition": "single circular icon crossed out by a diagonal bar"
+ },
+ "readings": [
+  {
+   "meaning": "location services or GPS disabled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "compass off or uncalibrated",
+   "strength": "primary"
+  },
+  {
+   "meaning": "offline browsing or Safari blocked",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "lost direction or no navigation",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the crossed-out compass resembles a generic 'no/prohibited' sign or a crossed-out clock/timer.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, blocked, or unavailable"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "outdoors",
+  "admin"
+ ],
+ "task_intents": [
+  "turn off phone location tracking",
+  "revoke app GPS permissions",
+  "troubleshoot broken compass sensor",
+  "prepare for navigation without GPS",
+  "disable Safari web browser",
+  "audit location privacy settings"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off location services",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable precise GPS for Instagram",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Block Safari in Screen Time",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Fix broken car compass",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Audit which apps have background location access on my phone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Practice dead reckoning on the ridge trail without checking GPS",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Turn off geotagging on camera photos before selling gear",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Troubleshoot why the drone compass keeps failing pre-flight calibration",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Strip GPS metadata from the field survey photos before uploading",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out why Android Auto loses navigation signal inside the tunnel",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Switch off live location sharing in family group chat",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Revoke permissions for sketchy apps",
+   "parent": "Phone Privacy Audit",
+   "domain": "tech"
+  },
+  {
+   "task": "Test fallback when user denies permission",
+   "parent": "Map App QA",
+   "domain": "work"
+  },
+  {
+   "task": "Check settings before crossing the border",
+   "parent": "Phone Privacy Audit",
+   "domain": "travel"
+  },
+  {
+   "task": "Replace the cracked dash unit",
+   "parent": "Boat Navigation",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Download paper backup maps for the Boundary Waters trip in case GPS dies",
+   "parent": "",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar la ubicación precisa en las apps de redes sociales",
+  "Practicar orientación en el monte sin usar el GPS del móvil",
+  "Restringir el acceso a Safari en el iPad de los niños"
+ ],
+ "example_tasks_ru": [
+  "Отключить геолокацию для лишних приложений на телефоне",
+  "Убрать геометки из фотографий перед публикацией в сеть",
+  "Починить неработающий магнитный компас в катере"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a laminated topographic map of the Dolomites",
+   "central": "topographic map"
+  },
+  {
+   "task": "Check battery drain on old iPhone",
+   "central": "battery"
+  },
+  {
+   "task": "Download offline maps of Kyoto before the flight",
+   "central": "offline map"
+  },
+  {
+   "task": "Pack backup whistle and mirror for backcountry hike",
+   "central": "whistle and mirror"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a Suunto sighting compass for the orienteering course",
+   "better": "compass (without slash for disabled state; buying an active tool uses the unmodified compass icon, whereas the slash means off or broken) ",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel the summer road trip to Utah",
+   "better": "car or map with slash",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Turn off alarm for Monday morning",
+   "better": "alarm clock with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update hiking waypoints on the Garmin handheld",
+   "better": "GPS pin or waypoint",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Find a waterproof case for the boat compass",
+   "better": "protective case",
+   "trap": "property"
+  },
+  {
+   "task": "Check compass heading for the garden bed",
+   "better": "compass",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon shows a circular compass with a diagonal slash through it, meaning compass off, navigation unavailable, or location/browser disabled. It fits a narrow but real set of privacy, tech-troubleshooting, and GPS-free orienteering tasks, though at small sizes the split needle inside the circle can look like a generic prohibition sign or crossed-out clock.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5d282bae3b0a5f9569a03049a3402d7e35f543b6",
+  "usage": {
+   "prompt": 3926,
+   "output": 931,
+   "thoughts": 0,
+   "total": 4857
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

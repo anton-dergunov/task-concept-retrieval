@@ -1,0 +1,223 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "domed emergency siren light on a rectangular base",
+  "modifiers": [
+   "circular badge with a checkmark in the bottom-right corner"
+  ],
+  "composition": "single object in front profile with a corner overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "alarm system tested, armed, or verified",
+   "strength": "primary"
+  },
+  {
+   "meaning": "incident or alert resolved and cleared",
+   "strength": "primary"
+  },
+  {
+   "meaning": "emergency readiness check",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "cloche or food cover with checkmark",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Without light rays, the rounded dome on a base can be mistaken for a padlock shackle, a food cloche, or a bell at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "checkmark circle badge",
+   "meaning": "verified, tested, armed, enabled, or resolved"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "work",
+  "admin",
+  "travel"
+ ],
+ "task_intents": [
+  "test home security alarm system",
+  "verify smoke and carbon monoxide detectors",
+  "resolve active server alert in PagerDuty",
+  "confirm burglar alarm is armed",
+  "complete monthly emergency drill check",
+  "clear false alarm with monitoring company",
+  "audit on-call alerting rules"
+ ],
+ "example_tasks": [
+  {
+   "task": "test smoke alarms",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "arm shop security system",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "acknowledge PagerDuty incident",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "verify basement CO detector",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "check panic button battery",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Run the monthly test on the hallway and kitchen smoke detectors",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Confirm SimpliSafe sensors are online before we leave for the airport",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Close out the resolved memory leak alert in Datadog",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Verify the warehouse strobe siren triggers when the back door opens",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call ADT to confirm the false alarm waiver was processed",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Do the quarterly walk-through of the building fire alarm pull stations",
+   "parent": "Office Safety",
+   "domain": "work"
+  },
+  {
+   "task": "Check all window contacts and motion sensors",
+   "parent": "Home Security",
+   "domain": "home"
+  },
+  {
+   "task": "Review and sign off on noisy rules before my shift starts",
+   "parent": "On-Call Rotation",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure the keypad code works for the cat sitter",
+   "parent": "House Alarm",
+   "domain": "home"
+  },
+  {
+   "task": "Press test buttons on all six Kidde smoke alarms and log which ones chirp",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Verify that the Prometheus disk-space alert actually pages the secondary on-call engineer on Slack",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Confirm with the fire marshal that the new strobe beacon in corridor B passed inspection",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Probar las alarmas de humo del pasillo y la cocina",
+  "Confirmar que la alarma de Securitas quede conectada antes de salir de viaje",
+  "Cerrar la alerta resuelta de latencia en el panel de Grafana"
+ ],
+ "example_tasks_ru": [
+  "Проверить датчики дыма и угарного газа перед зимой",
+  "Поставить дачу на пультовую охрану перед отъездом в город",
+  "Закрыть решённый критический алерт по базе данных в PagerDuty"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy three 9V lithium batteries for the upstairs smoke detectors",
+   "central": "battery"
+  },
+  {
+   "task": "Write the postmortem document for Tuesday's billing outage",
+   "central": "document"
+  },
+  {
+   "task": "Pay the annual city alarm permit renewal fee",
+   "central": "payment"
+  },
+  {
+   "task": "Mount the new Ring keypad by the garage door",
+   "central": "keypad"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Set a 5:30am wake-up alarm for the early flight",
+   "better": "alarm clock",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Lock the shed padlock before dark",
+   "better": "padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a glass dome cloche for the cheese board",
+   "better": "serving dome / cloche",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check urgent emails from the client",
+   "better": "envelope / email",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the monthly ADT invoice by credit card",
+   "better": "credit card / bill",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Verify that the backup script finished without errors",
+   "better": "terminal / script",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a domed emergency siren/beacon light with a checkmark badge, fitting tasks about testing smoke detectors, arming home security alarms, or resolving IT on-call alerts. Without radiating light lines, the dome is somewhat ambiguous at small sizes and can resemble a padlock shackle or a bell.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "9f6986bbec97e7dadcde175a64b1db6851025dfe",
+  "usage": {
+   "prompt": 3922,
+   "output": 1680,
+   "thoughts": 0,
+   "total": 5602
+  },
+  "soft_problems": [
+   "example_tasks: 17 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

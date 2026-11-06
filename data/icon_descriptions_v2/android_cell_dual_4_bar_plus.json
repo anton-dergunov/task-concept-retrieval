@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "four ascending vertical signal bars split horizontally",
+  "modifiers": [
+   "plus sign in bottom right corner",
+   "horizontal gap dividing the bars into top and bottom segments"
+  ],
+  "composition": "ascending bars from left to right with a plus badge cutout at lower right"
+ },
+ "readings": [
+  {
+   "meaning": "add cellular network or mobile data plan",
+   "strength": "primary"
+  },
+  {
+   "meaning": "dual-SIM signal strength indicator with plus",
+   "strength": "primary"
+  },
+  {
+   "meaning": "boost cell reception or signal",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "add bar chart series or metric",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Looks like a stacked bar chart with an add button, or a generic Android system status bar icon for dual-SIM / Carrier Aggregation rather than a real-world object.",
+ "modifier_semantics": [
+  {
+   "modifier": "plus sign in bottom right corner",
+   "meaning": "add, new, enable, or boost"
+  },
+  {
+   "modifier": "horizontal split across bars",
+   "meaning": "dual-SIM or secondary network line"
+  }
+ ],
+ "domains": [
+  "tech",
+  "communication",
+  "travel",
+  "admin",
+  "finance"
+ ],
+ "task_intents": [
+  "add travel eSIM to phone",
+  "top up prepaid mobile data",
+  "install cellular signal booster",
+  "add second line to phone plan",
+  "enable roaming data for trip",
+  "compare mobile carrier plans"
+ ],
+ "example_tasks": [
+  {
+   "task": "Buy Airalo eSIM",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Top up prepaid data",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Add second SIM card",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Activate roaming before flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Order cell booster",
+   "parent": "Cabin Setup",
+   "domain": "home"
+  },
+  {
+   "task": "Add kids' lines to the family mobile plan before school starts",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Set up work number as secondary eSIM on personal iPhone",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Buy 10GB data pass for the week in Portugal",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Switch backup SIM to a cheaper pay-as-you-go carrier",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Mount the WeBoost antenna on the roof pole",
+   "parent": "Cell Reception",
+   "domain": "home"
+  },
+  {
+   "task": "Compare Mint and US Mobile multi-line rates",
+   "parent": "Mobile Plan",
+   "domain": "finance"
+  },
+  {
+   "task": "Get PUK code from support",
+   "parent": "Work SIM",
+   "domain": "tech"
+  },
+  {
+   "task": "Check if our T-Mobile plan includes free high-speed data in Switzerland",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Add a data-only SIM for the iPad before the long road trip",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call Vodafone to enable international roaming on both numbers before Friday",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Test cell signal in the basement office with the new repeater plugged in",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Comprar eSIM de datos para el viaje a Japón",
+  "Recargar saldo del chip prepago de mi mamá",
+  "Añadir línea adicional al plan familiar de Movistar"
+ ],
+ "example_tasks_ru": [
+  "Купить туристическую eSIM для поездки в Турцию",
+  "Пополнить баланс второй сим-карты до конца месяца",
+  "Подключить пакет дополнительного интернета на дачный модем"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download offline maps for the canyon hike in case there's no reception",
+   "central": "map"
+  },
+  {
+   "task": "Port old phone number over to Google Fi",
+   "central": "phone number"
+  },
+  {
+   "task": "Pay monthly AT&T wireless bill",
+   "central": "bill"
+  },
+  {
+   "task": "Buy unlocked Pixel 8 for dual-SIM travel use",
+   "central": "smartphone"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Add new slide with quarterly revenue bar chart",
+   "better": "bar chart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check why kitchen Wi-Fi keeps dropping",
+   "better": "wifi router",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Call Verizon about billing error on last statement",
+   "better": "phone call",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a waterproof LTE smartwatch for running",
+   "better": "smartwatch",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the invoice for the new iPhone",
+   "better": "receipt",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "This glyph is an OS status-bar indicator for dual-SIM cellular signal strength with a plus badge. Because signal bars represent a system status property rather than a concrete subject, and the split-bar design is easily confused with a bar chart, it should be discarded.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b629b0a4349bbd114a99e3505cb238dc0818c5e1",
+  "usage": {
+   "prompt": 3922,
+   "output": 909,
+   "thoughts": 173,
+   "total": 5004
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

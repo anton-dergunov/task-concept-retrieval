@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "horizontal battery frame with solid inner fill",
+  "modifiers": [
+   "question mark cutout on the right side"
+  ],
+  "composition": "single horizontal object with right-side badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "unknown battery status or battery troubleshooting",
+   "strength": "primary"
+  },
+  {
+   "meaning": "check battery health, capacity, or type",
+   "strength": "primary"
+  },
+  {
+   "meaning": "unidentified power source or mysterious battery drain",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Because the right terminal nub is obscured by the question mark cutout, the left side looks like a generic rounded rectangle, button, or progress bar at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "question mark",
+   "meaning": "unknown, diagnose, troubleshoot, or find out which type"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "shopping",
+  "travel",
+  "hobbies",
+  "outdoors"
+ ],
+ "task_intents": [
+  "diagnose mysterious device battery drain",
+  "find out which battery size fits",
+  "check laptop battery health and cycles",
+  "test car battery voltage with multimeter",
+  "troubleshoot why battery is not recognized",
+  "identify replacement battery model for tool",
+  "figure out power bank capacity rules"
+ ],
+ "example_tasks": [
+  {
+   "task": "Check MacBook battery cycle count",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test dead AAAs with voltmeter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Garage keyfob coin cell size?",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Diagnose overnight drain",
+   "parent": "Pixel 7",
+   "domain": "tech"
+  },
+  {
+   "task": "Check voltage before winter",
+   "parent": "Miata maintenance",
+   "domain": "home"
+  },
+  {
+   "task": "Find out why the Dyson dies after four minutes on max mode",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check which button cell the kitchen scale takes before going to hardware store",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Figure out why ThinkPad says battery not detected after BIOS update",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Look up airline Wh limit for the Anker power bank in carry-on",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Test whether the old Nikon EN-EL14 still holds a charge for Saturday",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "See which app is eating 40% of iPhone battery in the background",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check if the Casio watch needs a CR2016 or SR626SW",
+   "parent": "Watch repairs",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Ask marina mechanic why the deep-cycle house battery won't hold 12V",
+   "parent": "Boat prep",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Run coconutBattery on the old Air to see if the pack is worth replacing",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Find out if the Bosch 18V green packs fit the new blue cordless drill",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Measure parasitic draw on the Subaru battery with the clamp meter this weekend",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Ver qué pila de botón lleva la llave del coche",
+  "Comprobar con el multímetro si la batería de la moto sigue viva",
+  "Averiguar por qué el móvil se descarga solo por la noche"
+ ],
+ "example_tasks_ru": [
+  "Проверить мультиметром старые аккумуляторы 18650",
+  "Узнать, какая таблетка стоит в кухонных весах",
+  "Разобраться, почему ноутбук пишет «батарея не обнаружена»"
+ ],
+ "context_tasks": [
+  {
+   "task": "Borrow neighbor's multimeter for the weekend",
+   "central": "multimeter"
+  },
+  {
+   "task": "Book Genius Bar appointment for swollen iPhone pack",
+   "central": "appointment / phone"
+  },
+  {
+   "task": "Drop off mystery bag of old cells at Best Buy recycling bin",
+   "central": "recycling"
+  },
+  {
+   "task": "Buy CR2032 4-pack at pharmacy",
+   "central": "shopping / coin cell"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Plug in the baby monitor before bed",
+   "better": "charging battery or power plug",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a small rechargeable headlamp for camping",
+   "better": "headlamp",
+   "trap": "property"
+  },
+  {
+   "task": "Check whether the front door is locked",
+   "better": "door lock",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Add a help tooltip to the submit button",
+   "better": "button or question mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Practice drum rudiments with the battery section",
+   "better": "drums",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order replacement thermal paste for the laptop",
+   "better": "CPU or syringe",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon shows a horizontal battery whose right terminal is obscured by a question mark, representing unknown battery status, battery diagnostics, or figuring out which battery a device takes. It fits troubleshooting battery drain or checking battery health, though cutting off the terminal nub makes the battery silhouette less obvious at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "34e962b4cfa64b66600a2e271d8b3f6b7a4efdef",
+  "usage": {
+   "prompt": 3921,
+   "output": 1661,
+   "thoughts": 192,
+   "total": 5774
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "square document or list box with three horizontal lines",
+  "modifiers": [
+   "circular clock badge in bottom-right corner"
+  ],
+  "composition": "single bordered square with text lines, overlaid by a clock badge at bottom right"
+ },
+ "readings": [
+  {
+   "meaning": "timesheet, time log, or work hours record",
+   "strength": "primary"
+  },
+  {
+   "meaning": "schedule, agenda, or itinerary",
+   "strength": "primary"
+  },
+  {
+   "meaning": "activity log, changelog, or history",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "waitlist or pending queue",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with a generic document, a calendar, or a scheduled post/note icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "clock badge in bottom-right corner",
+   "meaning": "time tracking, schedule, history, or pending status"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "travel",
+  "tech",
+  "health_fitness",
+  "social_family"
+ ],
+ "task_intents": [
+  "submit weekly work timesheet",
+  "log billable client hours",
+  "draft event schedule or agenda",
+  "check server activity logs",
+  "create daily trip itinerary",
+  "review medication dosing schedule",
+  "fill out contractor timecard",
+  "write release changelog notes"
+ ],
+ "example_tasks": [
+  {
+   "task": "Submit Friday timesheet",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Wedding day timeline",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Fill out Harvest hours",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Approve contractor timecards",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Print conference agenda",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Log billable hours for the Acme redesign before Friday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Write the v2.4 changelog for tomorrow's release",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Draft day-by-day Kyoto itinerary with train times",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Put together the feeding and nap schedule for the sitter",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check daycare waitlist position for September",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Export audit log from AWS CloudTrail for compliance",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Send April shifts",
+   "parent": "Cafe Staff",
+   "domain": "work"
+  },
+  {
+   "task": "Fix missing Tuesday entry",
+   "parent": "Timesheets",
+   "domain": "work"
+  },
+  {
+   "task": "Track post-op antibiotic and painkiller dosing times on a sheet",
+   "parent": "Knee Surgery Recovery",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Reconcile consultant hours against the retainers before invoicing on the 30th",
+   "parent": "Month-End Close",
+   "domain": "admin"
+  },
+  {
+   "task": "Finalize the Saturday stage running order with set lengths for all five bands",
+   "parent": "",
+   "domain": "creative"
+  }
+ ],
+ "example_tasks_es": [
+  "Enviar la hoja de horas de marzo antes del cierre",
+  "Armar el cronograma del taller del sábado con tiempos por bloque",
+  "Imprimir horario de tomas de pastillas para la abuela"
+ ],
+ "example_tasks_ru": [
+  "Заполнить табель рабочего времени за вторую половину мая",
+  "Составить поминутный тайминг свадьбы для ведущего и фотографа",
+  "Проверить логи сервера после ночного деплоя"
+ ],
+ "context_tasks": [
+  {
+   "task": "Ask HR about overtime pay rate",
+   "central": "HR / pay rate"
+  },
+  {
+   "task": "Rotate nginx log files to free up disk space",
+   "central": "server / disk space"
+  },
+  {
+   "task": "Set up Toggl reminders on phone",
+   "central": "reminder / phone"
+  },
+  {
+   "task": "Set up cron job for nightly database dump",
+   "central": "database / automation"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the overdue water bill before Friday",
+   "better": "bill / invoice or water drop",
+   "trap": "property"
+  },
+  {
+   "task": "Schedule dentist appointment for next month",
+   "better": "tooth / dentist or calendar",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy split firewood logs for the cabin",
+   "better": "wood / campfire",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace battery in the kitchen wall clock",
+   "better": "clock or battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Renew passport before the 6-month cutoff",
+   "better": "passport",
+   "trap": "property"
+  },
+  {
+   "task": "Book Shinkansen tickets from Tokyo to Osaka",
+   "better": "train / ticket",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "Shows a lined document or list box combined with a clock badge, which naturally represents a timesheet, schedule, agenda, or activity log. It fits well for common work and personal tasks like logging hours, writing itineraries, or checking logs, though it overlaps somewhat with calendar and generic document icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f4dc155637ea0f0e8489a97f29ea7a70de61f26d",
+  "usage": {
+   "prompt": 3928,
+   "output": 1621,
+   "thoughts": 0,
+   "total": 5549
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

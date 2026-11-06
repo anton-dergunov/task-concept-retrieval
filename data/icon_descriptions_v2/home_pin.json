@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "teardrop map location pin outline",
+  "modifiers": [
+   "solid house silhouette with doorway inside the pin"
+  ],
+  "composition": "centered map marker enclosing a small house icon"
+ },
+ "readings": [
+  {
+   "meaning": "home address or residential location",
+   "strength": "primary"
+  },
+  {
+   "meaning": "vacation rental, hotel, or lodging location",
+   "strength": "primary"
+  },
+  {
+   "meaning": "real estate property or open house location",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "saved home waypoint on a map",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the inner house can blur into a generic dot or keyhole, making it look like a standard map pin.",
+ "modifier_semantics": [
+  {
+   "modifier": "solid house silhouette with doorway inside the pin",
+   "meaning": "specifies that the pinned location is a home, residence, or lodging"
+  }
+ ],
+ "domains": [
+  "home",
+  "admin",
+  "travel",
+  "finance",
+  "social_family",
+  "shopping",
+  "tech"
+ ],
+ "task_intents": [
+  "update residential address after moving",
+  "save Airbnb or lodging location",
+  "share home directions with guests",
+  "map out open house viewings",
+  "verify shipping or billing address",
+  "register proof of residence",
+  "set home location in navigation app"
+ ],
+ "example_tasks": [
+  {
+   "task": "USPS change of address",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Update billing address",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Map Sunday open houses",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pin the Oaxaca Airbnb",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send directions to Aunt Clara",
+   "parent": "Housewarming Party",
+   "domain": "social_family"
+  },
+  {
+   "task": "Update default delivery address on Amazon and Chewy before Friday",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Drop a pin for the cabin entrance before cell service drops",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix the misplaced driveway marker for our house on Apple Maps",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check commute times from the three Maple Street listings to downtown",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Print two proofs of residency for the DMV Real ID appointment",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Update with the bank and HR",
+   "parent": "New Apartment Address",
+   "domain": "admin"
+  },
+  {
+   "task": "Compare neighborhood walkability scores for both finalists",
+   "parent": "House Hunting",
+   "domain": "home"
+  },
+  {
+   "task": "Double-check the street number with the host",
+   "parent": "Lisbon Vacation Rental",
+   "domain": "travel"
+  },
+  {
+   "task": "Send our new street address and gate code to the dog walker before Monday morning",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Verify that the county assessor has our current mailing address for the autumn tax bill",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Save the exact GPS coordinates for all four rural guesthouses in Offline Maps before flying",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Empadronarse en el ayuntamiento con el nuevo contrato de alquiler",
+  "Guardar la ubicación de la casa rural en Google Maps antes de salir",
+  "Cambiar la dirección de envío predeterminada en todas las tiendas online"
+ ],
+ "example_tasks_ru": [
+  "Оформить временную регистрацию по новому адресу через Госуслуги",
+  "Скинуть курьеру точную геометку подъезда и код домофона",
+  "Сохранить на карте все квартиры для просмотра в субботу"
+ ],
+ "context_tasks": [
+  {
+   "task": "Order brass house numbers for the front porch",
+   "central": "house numbers"
+  },
+  {
+   "task": "Book moving truck for the 14th",
+   "central": "moving truck"
+  },
+  {
+   "task": "Message the Airbnb host about early check-in",
+   "central": "message / communication"
+  },
+  {
+   "task": "Sign the lease renewal PDF",
+   "central": "contract / signature"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Clean the gutters before the autumn rain starts",
+   "better": "plain house or roof icon (general home maintenance, not about location or address)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Work from home on Wednesday",
+   "better": "laptop or desk icon (home is a location modifier for working)",
+   "trap": "property"
+  },
+  {
+   "task": "Pin the trailhead parking lot on Gaia GPS",
+   "better": "standard map pin or hiking trail icon (outdoor waypoint, not a residence)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new welcome mat for the front door",
+   "better": "shopping bag or doormat icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Address the performance issue in the checkout service",
+   "better": "bug or code icon ('address' is used as a verb meaning tackle/fix, not a street address)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check if the living room paint has dried",
+   "better": "paint roller or paintbrush icon",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines a map location pin with a house silhouette, making it the unmistakable symbol for a home address, residential location, property listing, or vacation rental waypoint. It fits common life tasks around moving, updating billing/shipping addresses, house hunting, and saving lodging locations, though it should be distinguished from general household chores (which suit a plain house icon) or non-residential map waypoints.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "2c758262b37d2170a54b137edfda2301933dc870",
+  "usage": {
+   "prompt": 3926,
+   "output": 1716,
+   "thoughts": 123,
+   "total": 5765
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

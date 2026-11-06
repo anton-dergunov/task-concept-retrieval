@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "paper scroll or receipt with two lines and curled bottom",
+  "modifiers": [
+   "X mark badge in bottom right corner"
+  ],
+  "composition": "single object with bottom-right overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "cancel or void invoice, bill, or receipt",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel subscription, contract, or order",
+   "strength": "primary"
+  },
+  {
+   "meaning": "delete document, script, or log",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "dispute or reject a charge on a statement",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The curled paper can read as a receipt, an invoice, a contract scroll, or a software script file; at small sizes it looks like a generic delete-file icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "X mark badge in bottom right corner",
+   "meaning": "cancel, void, reject, or delete"
+  }
+ ],
+ "domains": [
+  "finance",
+  "admin",
+  "shopping",
+  "work",
+  "home",
+  "tech"
+ ],
+ "task_intents": [
+  "void an incorrect invoice or receipt",
+  "cancel a recurring subscription or service",
+  "dispute a wrong bill or charge",
+  "cancel an online shopping order",
+  "terminate a contract or lease agreement",
+  "shred or purge old receipts",
+  "remove an obsolete script or log"
+ ],
+ "example_tasks": [
+  {
+   "task": "Void duplicate invoice #1084",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel Paramount+ before trial ends",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Cancel backordered Wayfair rug order",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Shred 2018 tax receipts",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Cancel the pest control contract",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call Xfinity to dispute the $50 router rental fee on March bill",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Void the misprinted catering receipt in Square before nightly closeout",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel Adobe Creative Cloud annual plan before it auto-renews on Friday",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Reject the contractor quote with the wrong square footage for the deck",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Delete deprecated bash deployment script from the staging repo",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Send 30-day written notice to terminate the storage unit lease",
+   "parent": "Moving out",
+   "domain": "admin"
+  },
+  {
+   "task": "Call billing department to get the out-of-network lab invoice waived",
+   "parent": "Medical bills",
+   "domain": "finance"
+  },
+  {
+   "task": "Go through the kitchen drawer and toss faded thermal receipts from last year",
+   "parent": "Spring declutter",
+   "domain": "home"
+  },
+  {
+   "task": "Cancel the duplicate wholesale coffee bean purchase order before the roaster ships it",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "File chargeback with Chase for the gym membership that kept billing after cancellation",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Clear out the rejected expense reports sitting in the Concur drafts queue before Friday",
+   "parent": "Q3 Bookkeeping",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Anular la factura duplicada del proveedor en el sistema",
+  "Dar de baja el seguro dental antes de la renovación anual",
+  "Cancelar el pedido de los auriculares en Amazon antes de que salga"
+ ],
+ "example_tasks_ru": [
+  "Аннулировать ошибочный счёт №412 в 1С",
+  "Отменить подписку на Яндекс Плюс до списания",
+  "Оспорить двойное списание по чеку из супермаркета"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check which streaming subscriptions we don't watch anymore",
+   "central": "subscriptions audit"
+  },
+  {
+   "task": "Draft polite cancellation email template for retainers",
+   "central": "email template"
+  },
+  {
+   "task": "Download final PDF statements before closing the checking account",
+   "central": "bank account"
+  },
+  {
+   "task": "Review return window on the winter boots receipt",
+   "central": "boots return"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the water bill before Tuesday",
+   "better": "receipt with checkmark or dollar sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Scan Home Depot receipts for warranty folder",
+   "better": "plain receipt without X mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy paper rolls for the thermal receipt printer",
+   "better": "printer or paper roll",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Cancel dentist appointment for Thursday afternoon",
+   "better": "calendar with X mark or tooth",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order paperless billing for electric utility",
+   "better": "electricity bolt or envelope",
+   "trap": "property"
+  },
+  {
+   "task": "Update credit card expiration date on Netflix",
+   "better": "credit card",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a curled paper receipt or scroll with an X badge in the corner, clearly communicating cancelling, voiding, or rejecting a bill, invoice, order, subscription, or contract. It fits a common family of financial and administrative tasks, though it can be confused with generic file-deletion icons at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e9087169706f555a8123fd80cdf4d4a654e6b724",
+  "usage": {
+   "prompt": 3927,
+   "output": 1683,
+   "thoughts": 77,
+   "total": 5687
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

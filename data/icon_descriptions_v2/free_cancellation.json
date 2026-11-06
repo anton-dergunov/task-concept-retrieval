@@ -1,0 +1,221 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "calendar page with two top binding tabs",
+  "modifiers": [
+   "X mark inside page",
+   "checkmark at bottom-right corner"
+  ],
+  "composition": "single object, front view, with interior mark and corner badge"
+ },
+ "readings": [
+  {
+   "meaning": "confirm cancellation or reschedule an appointment",
+   "strength": "primary"
+  },
+  {
+   "meaning": "check availability or poll dates (yes/no)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "review and clean up calendar schedule",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "confirm a marked date or deadline",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Combining both an X and a checkmark on a calendar is self-contradictory at a glance—it can look like either a confirmed cancellation, a date poll (available vs. unavailable), or a marked calendar day being verified.",
+ "modifier_semantics": [
+  {
+   "modifier": "X mark inside page",
+   "meaning": "cancelled event, blocked date, or marked day on a calendar"
+  },
+  {
+   "modifier": "checkmark at bottom-right corner",
+   "meaning": "confirmed, verified, or completed"
+  }
+ ],
+ "domains": [
+  "admin",
+  "work",
+  "health_fitness",
+  "social_family",
+  "travel"
+ ],
+ "task_intents": [
+  "confirm cancellation of an appointment",
+  "reschedule a conflicting meeting",
+  "reply to a date availability poll",
+  "audit and clean up calendar",
+  "decline conflicting calendar invites",
+  "verify blocked-out vacation dates",
+  "confirm new date for postponed event"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel Tuesday dentist slot",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Fill out June Doodle poll",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Clear old holds from calendar",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Confirm Thursday morning works",
+   "parent": "Podiatrist Appointment",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Decline overlapping afternoon invites",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Move Friday haircut to next Wednesday afternoon",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Make sure the cancelled hotel dates are actually released",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Vote on which weekend in August works for everyone",
+   "parent": "Cabin Trip",
+   "domain": "social_family"
+  },
+  {
+   "task": "Block out PTO days in the shared team calendar",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Confirm cancellation of the recurring Saturday tennis court booking",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Reschedule the HVAC tune-up to a day someone is home",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Send final yes/no on the proposed March workshop dates",
+   "parent": "Q1 Planning",
+   "domain": "work"
+  },
+  {
+   "task": "Pick the replacement date",
+   "parent": "Postponed Dinner with Maya",
+   "domain": "social_family"
+  },
+  {
+   "task": "Go through next week's calendar and decline every meeting that conflicts with the launch",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call the clinic back to confirm we moved the allergy shot to the 14th",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Double-check that the blackout dates for the Thanksgiving trip are approved in the system",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Confirmar la cancelación de la cita con el dentista del jueves",
+  "Responder a la encuesta de fechas para la cena del equipo",
+  "Limpiar eventos cancelados del calendario compartido"
+ ],
+ "example_tasks_ru": [
+  "Подтвердить отмену записи к стоматологу на вторник",
+  "Отметить подходящие даты в опросе по отпуску",
+  "Перенести пятничный созвон на следующую неделю"
+ ],
+ "context_tasks": [
+  {
+   "task": "Ask Maya if we can push our coffee catch-up to Thursday",
+   "central": "person / message"
+  },
+  {
+   "task": "Check refund policy for cancelling the campsite reservation",
+   "central": "campsite / refund"
+  },
+  {
+   "task": "Email the landlord about rescheduling the boiler inspection",
+   "central": "email / boiler"
+  },
+  {
+   "task": "Update out-of-office auto-reply with the new return date",
+   "central": "email auto-reply"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a wall calendar for the kitchen before January",
+   "better": "plain calendar or shopping bag",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay electric bill before the due date on the 15th",
+   "better": "bill / invoice or lightning bolt",
+   "trap": "property"
+  },
+  {
+   "task": "Cancel Netflix subscription before it renews",
+   "better": "TV / streaming or credit card with X",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check off completed items on the packing checklist",
+   "better": "checklist / clipboard with checkmarks",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order birthday cake for Saturday's party",
+   "better": "birthday cake",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Verify the quarterly tax numbers with the accountant",
+   "better": "calculator or tax document",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon shows a calendar page with an 'X' inside and a checkmark at the bottom right. It fits tasks about confirming a cancellation, rescheduling an appointment, or responding to date availability polls (yes/no), though having both an X and a check makes it slightly ambiguous alongside simpler calendar-check or calendar-X icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "67207f17e99a2fa6fe715674b96d3fcde5c8f192",
+  "usage": {
+   "prompt": 3918,
+   "output": 1739,
+   "thoughts": 0,
+   "total": 5657
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,220 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front view of a car inside a square frame",
+  "modifiers": [
+   "circular checkmark badge in bottom-right corner"
+  ],
+  "composition": "framed front-facing vehicle with overlapping bottom-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "vehicle inspection or car safety check",
+   "strength": "primary"
+  },
+  {
+   "meaning": "reserved parking spot or garage space confirmed",
+   "strength": "primary"
+  },
+  {
+   "meaning": "car registration, insurance, or rental approved",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "garage door closed and secured",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The surrounding square frame can read either as a physical garage/parking stall or simply a bounding box around a car icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular checkmark badge in bottom-right corner",
+   "meaning": "inspected, verified, reserved, or completed"
+  }
+ ],
+ "domains": [
+  "admin",
+  "travel",
+  "home",
+  "finance",
+  "work",
+  "shopping"
+ ],
+ "task_intents": [
+  "complete annual state vehicle inspection",
+  "pass car emissions and smog test",
+  "confirm airport or hotel parking reservation",
+  "verify rental car booking before trip",
+  "check pre-purchase used car inspection report",
+  "confirm garage door is locked up",
+  "renew vehicle registration after passing smog",
+  "finish pre-trip car safety checklist"
+ ],
+ "example_tasks": [
+  {
+   "task": "state car inspection",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "smog check for Civic",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "confirm airport parking spot",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "pre-purchase mechanic inspection",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "check garage before leaving",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Take the Subaru in for its annual safety and emissions inspection",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Confirm overnight garage parking reservation at the downtown Chicago hotel",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Get independent mechanic to sign off on the used Mazda3",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Verify company fleet vehicle inspection logs are up to date",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Book the monthly covered parking space near the new office",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Schedule lease-end vehicle inspection before turning the Volkswagen back in",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Book Friday morning appointment",
+   "parent": "State Vehicle Inspection",
+   "domain": "admin"
+  },
+  {
+   "task": "Print confirmation voucher for the gate",
+   "parent": "Airport Long-Term Parking",
+   "domain": "travel"
+  },
+  {
+   "task": "Run through the winter road-readiness checklist on the Outback before driving to Vermont",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Make sure the HOA approved our second assigned underground garage stall for November",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check off fluid levels, tire tread, and spare pressure before the Friday departure",
+   "parent": "Road Trip Car Prep",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Pasar la ITV del coche antes de que caduque a fin de mes",
+  "Confirmar la plaza de aparcamiento cubierta en el hotel de San Sebastián",
+  "Verificación técnica vehicular"
+ ],
+ "example_tasks_ru": [
+  "Пройти техосмотр и получить диагностическую карту на машину",
+  "Подтвердить бронь парковочного места в подземном паркинге у аэропорта",
+  "Предпродажная проверка авто"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pay the $35 fee at the DMV kiosk",
+   "central": "payment / money"
+  },
+  {
+   "task": "Install the smart sensor on the overhead garage door rail",
+   "central": "sensor / hardware"
+  },
+  {
+   "task": "Put the new registration sticker on the windshield",
+   "central": "sticker / document"
+  },
+  {
+   "task": "Call Dave's Auto about the failed O2 sensor",
+   "central": "phone call"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Wash and vacuum the car before picking up mom",
+   "better": "car wash / car with bubbles",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace frayed serpentine belt on the Honda",
+   "better": "car repair / wrench and car",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check how much the Uber to the terminal will cost",
+   "better": "taxi / price tag",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Sweep out the leaves and sawdust in the garage",
+   "better": "broom / cleaning",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy a car-approved hard-sided travel crate for the dog",
+   "better": "pet carrier / dog",
+   "trap": "property"
+  },
+  {
+   "task": "Check train schedule to Boston",
+   "better": "train / clock",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a front-facing car inside a square enclosure (suggesting a garage or inspection bay) with a checkmark badge. It fits common real-life tasks like annual vehicle/smog inspections, pre-trip car checks, and confirming parking or garage reservations, while remaining distinct from plain car or car-repair icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "8a43a714aca6f947deff0ad9b38fa2074364ac32",
+  "usage": {
+   "prompt": 3926,
+   "output": 1659,
+   "thoughts": 115,
+   "total": 5700
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

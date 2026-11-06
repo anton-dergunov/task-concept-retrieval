@@ -1,0 +1,220 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "document page with folded top-right corner",
+  "modifiers": [
+   "horizontal bar bisecting the page across the middle"
+  ],
+  "composition": "single object split horizontally by a wide bar, front view"
+ },
+ "readings": [
+  {
+   "meaning": "scan document / document scanner",
+   "strength": "primary"
+  },
+  {
+   "meaning": "page break / split document",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "shred or cut paper",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be read Either as a scanner beam passing over a page or as a page break / document split indicator in a word processor.",
+ "modifier_semantics": [
+  {
+   "modifier": "horizontal bar across middle",
+   "meaning": "scanning beam or page split line"
+  }
+ ],
+ "domains": [
+  "admin",
+  "work",
+  "finance",
+  "home",
+  "learning",
+  "tech",
+  "travel",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "scan paper documents to PDF",
+  "digitize receipts and paper records",
+  "set up or fix document scanner",
+  "split a PDF into separate pages",
+  "insert page breaks in manuscript",
+  "scan signed forms for submission",
+  "archive old family documents digitally"
+ ],
+ "example_tasks": [
+  {
+   "task": "Scan signed lease agreement",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Scan 2024 medical receipts",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Clean scanner glass",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Do the stack from the shoebox",
+   "parent": "Receipt scanning",
+   "domain": "finance"
+  },
+  {
+   "task": "Install Brother ADS-1700W drivers",
+   "parent": "Paperless office",
+   "domain": "tech"
+  },
+  {
+   "task": "Scan both sides of passport and driver's license before the visa appointment",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Digitize grandma's handwritten recipe cards at 300 dpi",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Split the 80-page closing packet PDF into individual signed exhibits",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Scan kids' immunization records for the summer camp portal",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Fix bad page breaks before the tables in the thesis draft",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Run the quarterly tax vouchers through the sheet-fed scanner",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Batch-scan the annotated lecture handouts into searchable PDFs",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Upload the PDFs to the shared folder",
+   "parent": "Scanning old tax returns",
+   "domain": "admin"
+  },
+  {
+   "task": "Scan the notarized power of attorney and save a copy in the vault",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Turn on OCR and straighten crooked pages in ScanSnap Home before filing",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Feed the remaining folders from the bottom filing cabinet drawer through the Fujitsu",
+   "parent": "Document scanning backlog",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Escanear el DNI por las dos caras para el banco",
+  "Pasar por el escáner las facturas del trimestre antes del viernes",
+  "Dividir el PDF de la escritura en archivos separados"
+ ],
+ "example_tasks_ru": [
+  "Отсканировать подписанный акт для бухгалтерии",
+  "Настроить сетевой сканер МФУ на новом ноутбуке",
+  "Оцифровать старые справки и гарантийные талоны в PDF"
+ ],
+ "context_tasks": [
+  {
+   "task": "Submit HSA reimbursement claim with itemised pharmacy receipts",
+   "central": "HSA reimbursement / medical receipts"
+  },
+  {
+   "task": "Empty the physical inbox tray on the desk",
+   "central": "inbox tray"
+  },
+  {
+   "task": "Back up the paperless archive folder to the NAS",
+   "central": "backup / NAS"
+  },
+  {
+   "task": "Format chapter headings in the handbook before exporting",
+   "central": "book / typography"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Schedule MRI scan for left knee at the imaging center",
+   "better": "medical imaging / hospital / knee",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Scan the QR code on the return label at the drop-off kiosk",
+   "better": "QR code / barcode",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Run `nmap` port scan against the home router from outside",
+   "better": "network / security shield / terminal",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Quickly scan through the Q3 board deck before the 2pm call",
+   "better": "presentation slides",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Print 5 copies of the scanned birth certificate",
+   "better": "printer",
+   "trap": "property"
+  },
+  {
+   "task": "Buy a 3-pack of banker boxes at Staples",
+   "better": "storage box / shopping",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Delete the obsolete draft file from Google Drive",
+   "better": "document with minus or trash can",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a document page bisected horizontally by a solid bar, standard iconography for scanning a document (or splitting a page). It fits well for common administrative tasks like scanning receipts, signed forms, and IDs, or splitting PDFs, though it could occasionally be confused with a page-break or 'remove file' (minus) icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e32125e58399bbe792424d6b0251d492cf20a690",
+  "usage": {
+   "prompt": 3923,
+   "output": 1711,
+   "thoughts": 0,
+   "total": 5634
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

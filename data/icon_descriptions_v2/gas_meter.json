@@ -1,0 +1,221 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rounded rectangular bag with two top ports and droplet",
+  "modifiers": [
+   "liquid droplet symbol inside",
+   "horizontal bar label above droplet"
+  ],
+  "composition": "single object, front view"
+ },
+ "readings": [
+  {
+   "meaning": "IV bag / intravenous drip",
+   "strength": "primary"
+  },
+  {
+   "meaning": "blood bag / blood donation",
+   "strength": "primary"
+  },
+  {
+   "meaning": "medical fluid / hydration pouch",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "hot water bottle",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be mistaken for a hot water bottle, a camping water bladder, or a battery/fuel canister with a liquid icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "liquid droplet symbol inside",
+   "meaning": "blood, saline, or medical fluid"
+  },
+  {
+   "modifier": "horizontal bar label above droplet",
+   "meaning": "fill line or medical label"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "social_family",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "donate blood at local clinic",
+  "schedule intravenous iron infusion",
+  "check home IV fluid supply",
+  "volunteer at community blood drive",
+  "pick up saline bags from pharmacy",
+  "fast before morning blood work"
+ ],
+ "example_tasks": [
+  {
+   "task": "Donate blood on Friday",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Book iron infusion appointment",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check donor eligibility wait days",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Order subcutaneous fluid bags for old cat from the vet",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pick up six 1000ml Ringer's lactate bags from compounding pharmacy",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Schedule platelet donation at Red Cross center on 4th Ave",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Set up home IV antibiotic pole before nurse arrives at 3pm",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Submit reimbursement claim for outpatient IV hydration therapy session",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Remind team to sign up for the company blood drive next Tuesday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Log batch numbers of transfused units into patient chart before shift ends",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pack iron-rich snack and donor card in backpack for tomorrow morning's blood donation",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Call hematology clinic to ask how long the first Rituximab infusion takes and whether I can drive home",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Verify insurance prior authorization for monthly IVIG infusions before the January cycle starts",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Book 10am slot",
+   "parent": "Red Cross Blood Donation",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Drink two extra glasses of water",
+   "parent": "Red Cross Blood Donation",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Restock saline pouches and needles",
+   "parent": "Cat Kidney Care",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Donar sangre en el hospital clínico antes del viernes",
+  "Recoger suero fisiológico en la farmacia para los lavados",
+  "Confirmar cita para la infusión de hierro intravenoso"
+ ],
+ "example_tasks_ru": [
+  "Сдать кровь в центре переливания во вторник утром",
+  "Купить три пакета физраствора для капельницы коту",
+  "Записаться на внутривенную капельницу с железом"
+ ],
+ "context_tasks": [
+  {
+   "task": "Take iron supplement every other morning with orange juice",
+   "central": "pill / supplement"
+  },
+  {
+   "task": "Apply numbing cream to elbow crease an hour before clinic",
+   "central": "ointment tube"
+  },
+  {
+   "task": "Eat a salty meal before heading to the donor center",
+   "central": "meal / food"
+  },
+  {
+   "task": "Find Red Cross donor ID card in desk drawer",
+   "central": "ID card"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Prick finger to test fasting blood glucose before breakfast",
+   "better": "single blood drop or glucometer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean blood stain out of the white cotton pillowcase",
+   "better": "shirt / laundry / washing machine",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a rubber hot water bottle for winter bed warming",
+   "better": "hot water bottle with ribbed texture and flared stopper",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Refill 2L CamelBak hydration bladder before Saturday's trail run",
+   "better": "water bottle or backpack",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check blood pressure with arm cuff before taking morning meds",
+   "better": "blood pressure cuff / heart monitor",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy orange juice and cookies for the post-donation recovery table",
+   "better": "juice carton / cookies",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Depicts a medical fluid or blood bag with top tubing ports, a label line, and a central droplet. It fits tasks around blood or plasma donation, IV infusions, and medical fluid administration (including pet subcut fluids), though it is somewhat niche for everyday to-do lists and can slightly resemble a hot water bottle.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "d3dace4ef8f18a34e7214978d68a2680a0a65097",
+  "usage": {
+   "prompt": 3927,
+   "output": 1009,
+   "thoughts": 0,
+   "total": 4936
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

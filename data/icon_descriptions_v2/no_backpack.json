@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "shopping bag or calendar page with two top tabs",
+  "modifiers": [
+   "diagonal slash through the whole object"
+  ],
+  "composition": "single object, front view, crossed out with a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "no shopping / no-buy challenge / out of stock",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no events / cancelled schedule / unavailable date",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "no luggage / bag prohibited / dead 9V battery",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Very high ambiguity: the base shape with two top prongs and a center horizontal bar could be a shopping bag, a clipboard, a calendar page, a backpack, or a 9V battery.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, cancelled, prohibited, empty, or none"
+  }
+ ],
+ "domains": [
+  "shopping",
+  "finance",
+  "admin",
+  "travel",
+  "home"
+ ],
+ "task_intents": [
+  "cancel scheduled calendar event",
+  "stick to a no-buy month",
+  "remove unavailable item from cart",
+  "block off no-meeting day",
+  "replace dead 9V smoke alarm battery",
+  "stop impulse online shopping",
+  "check stadium bag policy restrictions"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel Friday dentist appointment",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Log no-spend day in budget",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Swap dead 9V in hallway",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Block out no-meeting Wednesday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Unsubscribe from retail promo emails",
+   "parent": "No-Buy July",
+   "domain": "shopping"
+  },
+  {
+   "task": "Clear out all cancelled recurring meetings from the team calendar",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Remove out-of-stock tiles from the bathroom renovation order",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Delete saved credit cards from browser before the spending freeze starts",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Take the dead 9-volt batteries from the garage to hazardous waste drop-off",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Mark blackout dates for the summer cabin rental on the shared calendar",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check which items were cancelled from the grocery pickup order",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Update rules for the month",
+   "parent": "Low-Buy Challenge",
+   "domain": "finance"
+  },
+  {
+   "task": "Set up a strict thirty-day waiting list for any non-essential clothes or gear",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Notify the caterer and venue that the November fundraising gala is officially called off",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Verify stadium no-bag policy before driving down to the concert on Saturday night",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Review the exceptions list",
+   "parent": "Spending Freeze",
+   "domain": "finance"
+  },
+  {
+   "task": "Tell everyone on the thread",
+   "parent": "Cancelled Camping Trip",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Anotar día sin gastos en la app del presupuesto",
+  "Cancelar la reserva del restaurante para el sábado por la noche",
+  "Sacar las pilas de 9V gastadas del detector de humo"
+ ],
+ "example_tasks_ru": [
+  "Отменить запись к стоматологу на четверг",
+  "Вычеркнуть отсутствующие товары из списка покупок",
+  "Поставить блок на встречи в календаре на пятницу"
+ ],
+ "context_tasks": [
+  {
+   "task": "Move everything to the small coat pockets since bags aren't allowed at the arena",
+   "central": "coat pockets / concert items"
+  },
+  {
+   "task": "Mend ripped seam on the winter parka instead of buying a new one",
+   "central": "winter parka"
+  },
+  {
+   "task": "Ask Sarah if she wants the non-refundable train tickets since our trip is off",
+   "central": "train tickets"
+  },
+  {
+   "task": "Find a substitute for the out-of-stock cardamom pods in the curry recipe",
+   "central": "cardamom pods"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new canvas tote bag for the farmers market",
+   "better": "shopping bag (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule quarterly roadmap planning session with the engineering leads",
+   "better": "calendar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a 4-pack of rechargeable 9V batteries for the guitar pedals",
+   "better": "battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if the corner pharmacy is closed on bank holidays",
+   "better": "pharmacy / store",
+   "trap": "property"
+  },
+  {
+   "task": "Call the airline to ask about the cancelled flight refund",
+   "better": "phone / airplane",
+   "trap": "property"
+  },
+  {
+   "task": "Read library books sitting on the nightstand",
+   "better": "book",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon shows a vertical rounded rectangle with two top tabs and a horizontal center line, crossed out by a diagonal slash. Because theslash obscures the interior, the base object is hard to identify at a glance—it reads variously as 'no shopping bag', 'cancelled calendar event', or 'dead 9V battery'. It can serve tasks about spending freezes, cancelled events, or bag restrictions, but its high visual ambiguity makes it weak.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f44135f3a571af8509feca231991668132aac0f2",
+  "usage": {
+   "prompt": 3923,
+   "output": 1729,
+   "thoughts": 0,
+   "total": 5652
+  },
+  "soft_problems": [
+   "example_tasks: 17 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

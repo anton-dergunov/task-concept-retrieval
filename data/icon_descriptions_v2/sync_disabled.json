@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two curved arrows forming a counter-clockwise circle",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "centered circular arrows crossed out by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "sync disabled, offline, or out of sync",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel auto-renewal or stop recurring subscription",
+   "strength": "primary"
+  },
+  {
+   "meaning": "disable automatic refresh or background updates",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "non-repeating or one-time event",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be read either as a technical sync failure/off state or as canceling a recurring cycle like a subscription auto-renewal; at tiny sizes it may look like a generic prohibition sign.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, turned off, broken, or canceled"
+  }
+ ],
+ "domains": [
+  "tech",
+  "finance",
+  "admin",
+  "shopping",
+  "work"
+ ],
+ "task_intents": [
+  "turn off automatic cloud synchronization",
+  "fix broken calendar or contact sync",
+  "cancel subscription auto-renewal before billing date",
+  "stop recurring monthly delivery or order",
+  "disable background app refresh on phone",
+  "unlink synced folders between devices",
+  "troubleshoot offline database replication error"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off iCloud Photo sync",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel NYT auto-renewal",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Stop Chewy cat litter autoship",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Fix broken Garmin Strava sync",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Unlink Dropbox work folder",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Disable auto-renew on the domain names we aren't keeping",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Figure out why Fastmail contacts stopped syncing to Mom's iPad",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Turn off background app refresh before the roaming trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pause the recurring roast subscription while we're away in July",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Stop car insurance policy from auto-renewing with Geico next month",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check which ones are still on",
+   "parent": "Subscription Auto-Renewals",
+   "domain": "finance"
+  },
+  {
+   "task": "Fix the conflict on the desktop",
+   "parent": "Obsidian Vault Sync Issues",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off before Friday billing",
+   "parent": "Adobe Creative Cloud Renewal",
+   "domain": "creative"
+  },
+  {
+   "task": "Clear stuck queue on staging",
+   "parent": "CRM Sync Failures",
+   "domain": "work"
+  },
+  {
+   "task": "Make sure Apple TV+ doesn't auto-renew after the three-month free trial ends on the 14th",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Exclude the raw video renders directory from Backblaze continuous sync so it stops choking the upload",
+   "parent": "",
+   "domain": "creative"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar la renovación automática de Amazon Prime antes del viernes",
+  "Arreglar el fallo de sincronización del calendario con el móvil",
+  "Pausar el envío periódico de pienso para el perro"
+ ],
+ "example_tasks_ru": [
+  "Отключить автопродление подписки Яндекс Плюс до конца месяца",
+  "Починить отвалившуюся синхронизацию заметок между телефоном и ноутбуком",
+  "Выключить автообновление тяжёлых приложений по мобильной сети в роуминге"
+ ],
+ "context_tasks": [
+  {
+   "task": "Export local backup of notes before wiping the unsynced phone",
+   "central": "backup / notes"
+  },
+  {
+   "task": "Download offline maps of the Dolomites for no-sync mode",
+   "central": "map"
+  },
+  {
+   "task": "Audit credit card statement for forgotten recurring charges",
+   "central": "credit card / statement"
+  },
+  {
+   "task": "Switch password manager to local-only vault over Wi-Fi",
+   "central": "password / vault"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Sync Kindle highlights to Readwise",
+   "better": "sync arrows without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the broken toaster to the recycling center",
+   "better": "recycling symbol or toaster",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check whether the backup drive is still working",
+   "better": "hard drive",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a non-renewable prepaid SIM card at the airport",
+   "better": "SIM card",
+   "trap": "property"
+  },
+  {
+   "task": "Update credit card expiration date on Netflix",
+   "better": "credit card",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Lip-sync battle song selection for Saturday's party",
+   "better": "microphone or music note",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts circular sync/repeat arrows crossed out by a slash, universally understood as 'sync off / broken sync' or 'do not auto-renew / stop recurring cycle'. It fits common everyday tasks like canceling subscription auto-renewals, stopping autoship orders, disabling cloud sync, and fixing sync failures, though it can be confused with plain sync arrows at very small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "656378353754d5d9719672b8fb3005168ffc0827",
+  "usage": {
+   "prompt": 3926,
+   "output": 1705,
+   "thoughts": 136,
+   "total": 5767
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

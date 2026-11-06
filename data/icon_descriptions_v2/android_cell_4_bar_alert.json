@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "four ascending vertical signal strength bars",
+  "modifiers": [
+   "small exclamation mark cutting into the bottom of the fourth bar"
+  ],
+  "composition": "row of ascending vertical bars with lower-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "cellular signal error or no mobile connection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "poor cell reception or dead zone",
+   "strength": "primary"
+  },
+  {
+   "meaning": "bar chart with warning or anomaly",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the exclamation mark blends into the fourth bar, making it look like standard signal bars or a simple bar chart.",
+ "modifier_semantics": [
+  {
+   "modifier": "small exclamation mark cutting into the bottom of the fourth bar",
+   "meaning": "error, warning, no data connection, or signal problem"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "communication",
+  "travel",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "troubleshoot mobile data connection",
+  "fix poor cell signal at home",
+  "report network outage to carrier",
+  "set up cellular signal booster",
+  "resolve SIM card registration issue",
+  "activate roaming data for trip"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix 5G dead spot upstairs",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Reset cellular network settings",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call T-Mobile about dropped calls",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Order cell booster",
+   "parent": "Cabin Setup",
+   "domain": "home"
+  },
+  {
+   "task": "Check APN settings",
+   "parent": "Travel eSIM",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out why my phone has bars but no mobile data",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Report the recurring neighborhood cell tower outage to Verizon support",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Turn on Wi-Fi calling so calls stop dropping in the basement",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Test cell reception in all corners of the new apartment",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Swap physical SIM to eSIM to fix no-service alerts",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check coverage map for campsites along Highway 395",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Get IT to provision the backup LTE failover modem",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Call AT&T before Friday",
+   "parent": "Cell Reception Issue",
+   "domain": "communication"
+  },
+  {
+   "task": "Try the alternate carrier profile",
+   "parent": "Mobile Data Dropouts",
+   "domain": "tech"
+  },
+  {
+   "task": "Mount the external WeBoost directional antenna on the roof pole pointing toward the ridge tower",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ask the landlord whether other tenants in the building have zero cell reception inside",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Compare Visible and US Mobile coverage maps before porting both family lines over next month",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Reclamar a Movistar por la falta de cobertura móvil en el garaje",
+  "Reiniciar ajustes de red móvil para recuperar los datos",
+  "Activar llamadas por Wi-Fi por la mala señal en casa"
+ ],
+ "example_tasks_ru": [
+  "Позвонить в МТС по поводу пропадающей сотовой связи на даче",
+  "Проверить настройки точки доступа APN для мобильного интернета",
+  "Установить усилитель сотового сигнала в подвале"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download offline maps of the national park before losing service",
+   "central": "map"
+  },
+  {
+   "task": "Pay overdue phone bill to restore cellular service",
+   "central": "bill / payment"
+  },
+  {
+   "task": "Buy a Garmin inReach satellite messenger for zero-coverage hikes",
+   "central": "satellite communicator"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Reboot the living room Wi-Fi router",
+   "better": "Wi-Fi symbol or router",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the broken y-axis on the Q3 revenue bar chart",
+   "better": "bar chart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof case with good signal pass-through for the phone",
+   "better": "phone case",
+   "trap": "property"
+  },
+  {
+   "task": "Install Signal on mom's new iPhone",
+   "better": "chat bubble / messaging app",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check the monthly cell phone invoice for roaming fees",
+   "better": "invoice / receipt",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pack the portable battery bank",
+   "better": "battery / power bank",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "This is a system status-bar indicator showing cellular signal bars with an error/warning exclamation point. While it can represent troubleshooting mobile reception, signal bars are primarily OS status chrome rather than a concrete task object, and at small sizes it is easily confused with a bar chart or standard signal icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f2695b9f97064ce37d367c41f060b6faee05c929",
+  "usage": {
+   "prompt": 3922,
+   "output": 1625,
+   "thoughts": 0,
+   "total": 5547
+  },
+  "soft_problems": [
+   "example_tasks: 17 != 16"
+  ],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

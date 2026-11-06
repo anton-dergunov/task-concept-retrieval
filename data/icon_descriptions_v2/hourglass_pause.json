@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "empty hourglass outline with flat top and bottom bars",
+  "modifiers": [
+   "circular badge at bottom right containing two vertical pause bars"
+  ],
+  "composition": "single object, front view, with bottom-right badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "paused timer or suspended countdown",
+   "strength": "primary"
+  },
+  {
+   "meaning": "subscription, account, or service on hold",
+   "strength": "primary"
+  },
+  {
+   "meaning": "postponed deadline or frozen waiting period",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "break or timeout during timed work",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the two vertical bars in the badge can look like a power plug outlet or the Roman numeral II.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular badge with two vertical pause bars",
+   "meaning": "paused, on hold, suspended, or temporarily stopped"
+  }
+ ],
+ "domains": [
+  "admin",
+  "finance",
+  "work",
+  "tech",
+  "health_fitness",
+  "learning"
+ ],
+ "task_intents": [
+  "put a subscription or membership on hold",
+  "freeze a recurring billing cycle temporarily",
+  "pause an automated countdown or job",
+  "request an extension or freeze on a deadline",
+  "defer a waiting period or trial",
+  "configure timeout and pause rules"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pause gym membership",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Freeze Audible account",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Hold mail delivery",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Put October box on hold",
+   "parent": "HelloFresh Subscription",
+   "domain": "food"
+  },
+  {
+   "task": "Request 30-day freeze",
+   "parent": "Equinox Membership",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Pause ClassPass billing for July while traveling in Europe",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Put the kitchen remodel permit application on hold until spring",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Suspend automated deployment pipeline timers during the database migration",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Ask registrar about taking a one-semester leave of absence",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Freeze my credit files at Equifax, Experian, and TransUnion",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Pause New York Times home delivery for the two-week cabin trip",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Configure auto-pause on Garmin watch for cycling stops",
+   "parent": "Bike Setup",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Turn on Pomodoro break reminders",
+   "parent": "Deep Work Routine",
+   "domain": "work"
+  },
+  {
+   "task": "Call the municipal water utility to temporarily suspend billing while the house is vacant",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Submit the formal request to pause the grant funding clock during parental leave",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Set up SLA timer pause rules in Jira for tickets waiting on customer reply",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Pausar la cuota del gimnasio durante el mes de agosto",
+  "Congelar la suscripción de café mientras estamos fuera de casa",
+  "Pedir una excedencia temporal en el trabajo para el próximo trimestre"
+ ],
+ "example_tasks_ru": [
+  "Поставить абонемент в фитнес-клуб на паузу до осени",
+  "Заморозить подписку на Яндекс Плюс на время отпуска в горах",
+  "Приостановить начисление платы за домашний интернет на дачный сезон"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check how many freeze days are left on the climbing gym pass",
+   "central": "gym pass"
+  },
+  {
+   "task": "Write email to client explaining why the project timeline is on hold",
+   "central": "email"
+  },
+  {
+   "task": "Download offline audiobooks before pausing the monthly subscription",
+   "central": "audiobooks"
+  },
+  {
+   "task": "Pay the $10 monthly maintenance fee to keep the cell plan suspended",
+   "central": "payment"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a 3-minute brass sand timer for brewing loose leaf tea",
+   "better": "plain hourglass without pause badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pause the living room TV podcast and help unload groceries",
+   "better": "media player or groceries icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Wait for the 24-hour epoxy resin coat to cure completely",
+   "better": "plain hourglass or clock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel Netflix subscription permanently before the next billing date",
+   "better": "slash or cross cancellation icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check how much time is left on the parking meter",
+   "better": "parking meter or clock",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a new kitchen timer with a loud magnetic alarm",
+   "better": "kitchen timer or bell",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon depicts an hourglass with a pause badge in the bottom-right corner, clearly communicating paused time, a suspended countdown, or putting something on hold. It fits tasks about freezing subscriptions, holding memberships, or pausing timers and SLAs, though it must be distinguished from a plain hourglass (waiting/timers) or a cancellation slash.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ace5bf62b20e400d1301a6af55d9b17d7d965035",
+  "usage": {
+   "prompt": 3922,
+   "output": 1001,
+   "thoughts": 0,
+   "total": 4923
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

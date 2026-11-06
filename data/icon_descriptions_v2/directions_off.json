@@ -1,0 +1,207 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "tilted rounded square containing an N-shaped NFC symbol",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single diamond-tilted emblem bisected by a diagonal strikethrough line"
+ },
+ "readings": [
+  {
+   "meaning": "NFC disabled or contactless communication turned off",
+   "strength": "primary"
+  },
+  {
+   "meaning": "broken or non-working tap-to-pay / contactless reader",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "no screen rotation or locked orientation",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Because the diagonal slash cuts directly through the middle of the inner N-shaped loop, at small sizes it looks like an abstract tilted rectangle with random fragments or a screen-rotation lock icon rather than the NFC emblem.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, turned off, blocked, or not working"
+  }
+ ],
+ "domains": [
+  "tech",
+  "finance",
+  "shopping",
+  "admin",
+  "work"
+ ],
+ "task_intents": [
+  "disable NFC on mobile device",
+  "fix broken contactless tap payment",
+  "troubleshoot NFC reader not scanning",
+  "turn off tap to pay",
+  "replace defective RFID blocking sleeve",
+  "debug NFC tag read failure"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off NFC on phone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix broken tap-to-pay on Pixel",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Disable contactless on debit card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "NFC reader not working",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Buy RFID blocking card sleeves",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Call bank to disable tap-to-pay on the joint Visa card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Troubleshoot why the office badge scanner stopped reading NFC fobs",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off NFC and unused radios on old backup Android",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Replace cracked Square terminal that no longer accepts contactless taps",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": " Order a shielded passport holder that blocks unauthorized RFID skimming",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check settings on Grandma's phone",
+   "parent": "Disable NFC & Contactless",
+   "domain": "social_family"
+  },
+  {
+   "task": "Test after latest iOS update",
+   "parent": "Apple Pay NFC Failure Bug",
+   "domain": "tech"
+  },
+  {
+   "task": "File support ticket with vendor",
+   "parent": "Dead Countertop NFC Terminal",
+   "domain": "work"
+  },
+  {
+   "task": "Compare slim leather options online",
+   "parent": "RFID-Blocking Wallet Upgrade",
+   "domain": "shopping"
+  },
+  {
+   "task": "Figure out why my phone stopped reading YubiKey over NFC after the case swap",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Ask the bank for a replacement debit card without contactless tap enabled by default",
+   "parent": "",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar el NFC del móvil viejo para ahorrar batería",
+  "Llamar al banco para bloquear el pago sin contacto de la tarjeta",
+  "Arreglar el lector NFC del datáfono que no detecta tarjetas"
+ ],
+ "example_tasks_ru": [
+  "Отключить NFC на старом телефоне",
+  "Починить неработающую бесконтактную оплату на смартфоне",
+  "Купить чехол с защитой от считывания банковских карт"
+ ],
+ "context_tasks": [
+  {
+   "task": "Harden privacy settings on travel burner phone before crossing the border",
+   "central": "phone security settings"
+  },
+  {
+   "task": "Put up a 'cash or chip-and-PIN only, no tap' sign at the register",
+   "central": "register sign"
+  },
+  {
+   "task": "Switch keycard entry system back to PIN codes while the reader is down",
+   "central": "door keypad"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Set up Apple Pay on the new iPhone",
+   "better": "contactless payment or credit card icon (enabled, without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Program NFC sticker tags for the laundry room timer",
+   "better": "NFC icon without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Lock screen auto-rotation before reading in bed",
+   "better": "screen rotation lock icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new leather wallet that happens to have RFID blocking",
+   "better": "wallet icon",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the coffee shop takes contactless",
+   "better": "coffee cup or contactless payment icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order replacement SIM card for the pixel",
+   "better": "SIM card icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon depicts the tilted NFC emblem crossed out with a diagonal slash, meaning NFC disabled, contactless off, or tap-to-pay broken. It fits a narrow slice of tasks around disabling contactless payments, RFID blocking, or troubleshooting broken NFC readers, though at small sizes the slash obscures the inner N-loop and makes it easy to confuse with a screen-rotation toggle.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "6cca6bfa07fe29efe49604d9f5af3d2a2e08cd0e",
+  "usage": {
+   "prompt": 3926,
+   "output": 1644,
+   "thoughts": 351,
+   "total": 5921
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

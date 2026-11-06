@@ -1,0 +1,212 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "circle with diagonal pointer inside a rounded square",
+  "modifiers": [],
+  "composition": "single square-framed dial, front view"
+ },
+ "readings": [
+  {
+   "meaning": "rotary dial or control knob (dimmer switch, volume knob, thermostat)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "kitchen timer or countdown timer",
+   "strength": "primary"
+  },
+  {
+   "meaning": "safe or vault door with combination dial",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "pressure gauge, meter, or bathroom scale dial",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes it looks like a washing machine, a speaker box, an app icon for a clock, or a camera lens.",
+ "modifier_semantics": [],
+ "domains": [
+  "home",
+  "tech",
+  "shopping",
+  "finance",
+  "food",
+  "hobbies"
+ ],
+ "task_intents": [
+  "install or replace wall dimmer switch",
+  "program smart thermostat heating schedule",
+  "buy mechanical kitchen or Pomodoro timer",
+  "store important documents in home safe",
+  "replace missing knob on stove or amp",
+  "record utility meter reading for bill",
+  "calibrate analog gauge or barometer"
+ ],
+ "example_tasks": [
+  {
+   "task": "install dining room dimmer",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "buy magnetic kitchen timer",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "set winter thermostat schedule",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "change safe combination",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "submit gas meter reading",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Swap the buzzing Lutron rotary dimmer in the hallway for an LED-compatible one",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order replacement aluminum volume knob for the vintage Marantz receiver",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Put the passports, birth certificates, and spare car key into the fireproof safe",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Pick up a physical Time Timer for the kids' homework desk",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Pair the new Ecobee thermostat with HomeKit and set away temperatures",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Superglue the cracked plastic temperature dial on the toaster oven",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check the basement boiler pressure gauge and top up the loop to 1.5 bar",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Replace the stripped burner control knob on the Wolf range before Thanksgiving dinner",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Wire the living room gang box and snap on the new faceplate",
+   "parent": "Smart Dimmer Upgrade",
+   "domain": "home"
+  },
+  {
+   "task": "Write down the three-number code and keep a copy at Mom's house",
+   "parent": "Home Safe",
+   "domain": "finance"
+  },
+  {
+   "task": "Turn it down to 55 degrees before leaving for the airport on Friday",
+   "parent": "Hallway Thermostat",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Instalar el regulador de luz giratorio en el salón",
+  "Subir la lectura del contador de agua a la web de la compañía",
+  "Guardar las escrituras del piso y los pasaportes en la caja fuerte"
+ ],
+ "example_tasks_ru": [
+  "Поменять сломанный диммер в спальне на новый под светодиодные лампы",
+  "Передать показания счётчиков воды и электричества до 25 числа",
+  "Настроить расписание на комнатном термостате на зиму"
+ ],
+ "context_tasks": [
+  {
+   "task": "Bake the sourdough boule for 20 minutes covered and 25 uncovered",
+   "central": "bread / oven"
+  },
+  {
+   "task": "Try 45-minute Pomodoro sprints for the tax prep afternoon",
+   "central": "focused work / taxes"
+  },
+  {
+   "task": "Clean the sticky grease off the stove front panel",
+   "central": "stove / cleaning"
+  },
+  {
+   "task": "Bleed the bedroom radiators if the upstairs stays cold",
+   "central": "radiator"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Move the laundry from the washer to the dryer before heading out",
+   "better": "washing machine with door details and detergent drawer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the vintage Seiko watch to the jeweler for a new battery",
+   "better": "wristwatch with straps",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a warm dimmable bulb for the bedside lamp",
+   "better": "lightbulb",
+   "trap": "property"
+  },
+  {
+   "task": "Check how much time is left on the parking meter",
+   "better": "car or parking sign",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Set up the center channel speaker under the TV",
+   "better": "speaker cone",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call the HVAC company to book the annual furnace tune-up",
+   "better": "phone or furnace flame/fan",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a round dial or pointer knob inside a square housing, fitting wall dimmer switches, thermostats, kitchen timers, utility meters, and small safes. Because the geometry is very minimal (a circle and tick inside a rounded square), it is easily confused with a timer app icon, washing machine, or speaker.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a75de063f118150098d84669cb2c3b67038e05e6",
+  "usage": {
+   "prompt": 3922,
+   "output": 1668,
+   "thoughts": 0,
+   "total": 5590
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "three vertical bars of ascending height",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single icon, front view with diagonal strike-through"
+ },
+ "readings": [
+  {
+   "meaning": "no cell signal / offline / cellular network disabled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "analytics disabled / opt out of data tracking",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "bar chart / statistics hidden or unavailable",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be read either as cellular signal bars with a slash (offline/no signal) or a bar chart with a slash (no analytics/tracking off); at very small sizes it looks like a stylized letter N or abstract lines.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, unavailable, or blocked"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "communication",
+  "work",
+  "outdoors",
+  "home"
+ ],
+ "task_intents": [
+  "troubleshoot dropped cellular signal at home",
+  "opt out of app usage analytics",
+  "set up offline maps for trip",
+  "disable mobile data before international flight",
+  "test app behavior in offline mode",
+  "cancel mobile data plan on tablet",
+  "report cell dead zone to carrier"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off roaming data",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix basement cell dead zone",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Disable telemetry in VS Code",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test offline mode",
+   "parent": "Mobile App Release",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel iPad cellular line",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Call Verizon about zero reception in the back bedroom",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Switch off usage tracking and diagnostics on the new iPhone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure Spotify playlists work with no cell signal",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pause the SIM plan on the spare phone for winter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Remove Google Analytics script from the personal blog",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Verify form submissions queue up when offline",
+   "parent": "Field Inspector App",
+   "domain": "work"
+  },
+  {
+   "task": "Check which trail sections have zero cell coverage",
+   "parent": "Yosemite Backpacking",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Turn off cellular data for high-bandwidth apps before we cross the border into Canada",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Configure the analytics dashboard to stop recording hits from our own office IP addresses",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Set up a carrier signal booster in the cabin so phones stop dropping to SOS",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Make sure all family phones have roaming disabled before boarding the flight to Tokyo",
+   "parent": "Japan Trip",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar los datos móviles antes de cruzar la frontera a Andorra",
+  "Reclamar a Movistar por la falta de cobertura en el garaje",
+  "Probar que la app guarde los pedidos sin conexión a red"
+ ],
+ "example_tasks_ru": [
+  "Отключить мобильную передачу данных в роуминге перед вылетом",
+  "Проверить работу приложения в режиме без сети",
+  "Отключить сбор аналитики и телеметрии в настройках Windows"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download offline maps of the Dolomites for the hike",
+   "central": "map"
+  },
+  {
+   "task": "Save boarding passes to Apple Wallet in case airport cell service fails",
+   "central": "boarding pass"
+  },
+  {
+   "task": "Pack the Garmin InReach satellite communicator for the no-signal zones",
+   "central": "satellite communicator"
+  },
+  {
+   "task": "Download three audiobooks before the long flight",
+   "central": "audiobooks"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the monthly AT&T cell phone bill",
+   "better": "credit card or bill",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Prepare the quarterly sales bar chart for Monday's deck",
+   "better": "bar chart (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy an waterproof offline trail map of the White Mountains",
+   "better": "map",
+   "trap": "property"
+  },
+  {
+   "task": "Mute phone notifications during the piano recital",
+   "better": "bell with slash / mute",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check why the home Wi-Fi router keeps rebooting",
+   "better": "wifi router",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a prepaid eSIM for the Europe trip",
+   "better": "SIM card",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "The icon shows three ascending signal/chart bars crossed out by a diagonal slash, representing 'no cellular signal' or 'analytics/stats disabled'. It is a system status indicator rather than a concrete task subject, and its three vertical bars cut by a diagonal line easily blur into an abstract shape or a stylized 'N' at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "52857a8bb342c402846812e7b3392d09cbddc81b",
+  "usage": {
+   "prompt": 3924,
+   "output": 1654,
+   "thoughts": 0,
+   "total": 5578
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

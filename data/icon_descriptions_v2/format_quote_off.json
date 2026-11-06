@@ -1,0 +1,207 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "A pair of open scissors or a route with map pins",
+  "modifiers": [
+   "diagonal slash through the icon"
+  ],
+  "composition": "single glyph crossed out by a diagonal bar from top-left to bottom-right"
+ },
+ "readings": [
+  {
+   "meaning": "Route disabled / no route / directions unavailable",
+   "strength": "primary"
+  },
+  {
+   "meaning": "Location tracking or trip path turned off",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "Cut / scissors disabled",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Heavily sliced by the diagonal bar so the left pin and path look like a pair of scissors handles or a stylized letter R next to a map pin.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, blocked, or unavailable"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "admin",
+  "work",
+  "social_family"
+ ],
+ "task_intents": [
+  "turn off location history tracking",
+  "disable GPS route recording",
+  "revoke app location permissions",
+  "clear saved navigation routes",
+  "stop sharing live trip route",
+  "handle unavailable transit routes"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off Google timeline",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable Strava route sharing",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Clear saved Waze drives",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Stop live location sharing",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Audit iPhone settings",
+   "parent": "Location Privacy",
+   "domain": "tech"
+  },
+  {
+   "task": "Pause timeline history on the shared family iPad before the trip",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Revoke always-on GPS route permissions for delivery apps I never use",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Hide start and end points on public cycling maps",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Fix the fallback screen when no transit route is found",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Remove old commute addresses and frequent routes from car nav unit",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check all third-party permissions",
+   "parent": "Stop GPS Tracking",
+   "domain": "tech"
+  },
+  {
+   "task": "Update the winter detour notice",
+   "parent": "Closed Trail Routes",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Verify offline behavior in airplane mode",
+   "parent": "No-Route Error State",
+   "domain": "work"
+  },
+  {
+   "task": "Scrub EXIF GPS coordinates and route breadcrumbs from the vacation photos before uploading",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Turn off automatic trip logging in the insurance dongle app after policy renewal",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Configure the fleet tracker to stop recording driver routes outside of paid shift hours",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar el historial de ubicaciones y rutas en la cuenta de Google",
+  "Ocultar el punto de inicio y fin de mis rutas en Strava",
+  "Borrar las rutas guardadas del navegador del coche antes de venderlo"
+ ],
+ "example_tasks_ru": [
+  "Отключить сохранение истории маршрутов в Яндекс Картах",
+  "Скрыть домашний адрес на треках пробежек в приложении",
+  "Проверить экран ошибки при отсутствии маршрута в навигаторе"
+ ],
+ "context_tasks": [
+  {
+   "task": "Lock down phone privacy settings before attending the protest",
+   "central": "phone privacy settings"
+  },
+  {
+   "task": "Factory reset the Garmin watch before shipping it to the buyer",
+   "central": "Garmin watch"
+  },
+  {
+   "task": "Post trail closure signs at the north parking lot",
+   "central": "signs"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Plan the driving route from Denver to Moab with scenic stops",
+   "better": "route / map pins (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy new fabric scissors for the sewing table",
+   "better": "scissors",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure the new Wi-Fi router in the living room",
+   "better": "network router",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book a hotel that isn't right on the main truck route",
+   "better": "hotel / bed",
+   "trap": "property"
+  },
+  {
+   "task": "Check why the map app is draining battery",
+   "better": "battery",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a physical paper road atlas at the bookstore",
+   "better": "map / book",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 1,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "The diagonal slash cuts directly through the middle of the route-and-pins glyph, obliterating the connecting path and leaving two disconnected shapes that resemble a half-scissor and a map pin. Because it is nearly unreadable at a glance and represents an uncommon negative UI state ('route disabled'), it should be discarded.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "97775cf696d5a7a6d472fc45e2fb11c485b71f67",
+  "usage": {
+   "prompt": 3923,
+   "output": 1578,
+   "thoughts": 0,
+   "total": 5501
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

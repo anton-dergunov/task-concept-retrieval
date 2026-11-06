@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "pointing hand with extended index finger",
+  "modifiers": [
+   "liquid droplet in top-left corner"
+  ],
+  "composition": "pointing hand gesture in lower right with a droplet badge in upper left"
+ },
+ "readings": [
+  {
+   "meaning": "fingerstick blood glucose test or finger prick",
+   "strength": "primary"
+  },
+  {
+   "meaning": "wet touch, moisture or water sensitivity",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "hand sanitizer, hand lotion or topical skin care",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "color picker or eyedropper touch tool",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Combines a standard touch/tap hand gesture with a generic drop, so without context it reads equally as a finger-prick blood test, hand sanitizer/lotion, or a wet-screen touch setting.",
+ "modifier_semantics": [
+  {
+   "modifier": "liquid droplet in top-left corner",
+   "meaning": "blood drop, water/moisture, lotion, or color sample associated with the finger"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "shopping",
+  "home",
+  "tech",
+  "creative"
+ ],
+ "task_intents": [
+  "check blood sugar with finger prick",
+  "log fasting blood glucose reading",
+  "refill lancets and test strips",
+  "apply hand cream or sanitizer",
+  "test touchscreen with wet fingers",
+  "pick color sample on screen"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fasting finger-prick glucose check",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Buy 30G lancets",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Refill purse hand sanitizer",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Apply cuticle oil before bed",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Pack extra test strips",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Prick finger and log post-dinner glucose reading two hours after eating",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Order two boxes of Accu-Chek Aviva test strips before Friday",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Calibrate the CGM sensor against a manual fingerstick blood reading",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Put thick unscented hand cream by the kitchen sink for winter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Do the home dried-blood-spot finger-prick vitamin D test and mail it",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check if the bike phone mount touchscreen still works with wet fingers",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Compare two morning fingerstick readings to see why the old glucometer drifts",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Morning fasting reading",
+   "parent": "Blood Sugar Log",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Export last 90 days for Dr. Patel",
+   "parent": "Glucometer & Strips",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Top up the entryway pump bottle",
+   "parent": "Hand Sanitizer",
+   "domain": "home"
+  },
+  {
+   "task": "Order replacement lancet drums",
+   "parent": "Diabetes Kit",
+   "domain": "shopping"
+  }
+ ],
+ "example_tasks_es": [
+  "Medir la glucosa en ayunas con pinchazo en el dedo antes del desayuno",
+  "Comprar dos cajas de tiras reactivas y lancetas en la farmacia",
+  "Rellenar el bote pequeño de gel hidroalcohólico de la mochila"
+ ],
+ "example_tasks_ru": [
+  "Измерить сахар в крови глюкометром натощак и записать в дневник",
+  "Купить ланцеты и тест-полоски для домашнего глюкометра",
+  "Положить жирный крем для рук на тумбочку у кровати"
+ ],
+ "context_tasks": [
+  {
+   "task": "Empty the yellow sharps container at the pharmacy drop-off",
+   "central": "sharps container"
+  },
+  {
+   "task": "Pack a 60ml alcohol gel bottle in the carry-on toiletry bag",
+   "central": "toiletry bag"
+  },
+  {
+   "task": "Replace CR2032 battery in the OneTouch Verio meter",
+   "central": "battery"
+  },
+  {
+   "task": "Sample the exact hex code from the client's scanned brochure",
+   "central": "color swatch"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Donate whole blood at the Red Cross center on Thursday",
+   "better": "blood bag or blood drop with cross",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Drink 2 liters of water every day this week",
+   "better": "water bottle or glass of water",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof touchscreen case for the kayak trip",
+   "better": "phone case or kayak",
+   "trap": "property"
+  },
+  {
+   "task": "Tap the transit card at the station kiosk to load $30",
+   "better": "transit card or contactless payment icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the dripping kitchen faucet before the plumber comes",
+   "better": "faucet",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book quarterly HbA1c lab appointment with the nurse",
+   "better": "calendar or clinic icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a pointing index finger next to a liquid droplet, which fits finger-prick blood tests (glucose monitoring, lancets), hand sanitizer or hand lotion tasks, and wet-touch settings. Because the drop and touch gesture are separate elements, it can be confused with generic water/hydration icons or simple tap/click actions.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f77a9cfd90ea9ab2384dbd3973dc1d8f3e3bfb2d",
+  "usage": {
+   "prompt": 3920,
+   "output": 1746,
+   "thoughts": 0,
+   "total": 5666
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

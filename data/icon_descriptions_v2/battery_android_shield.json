@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "horizontal rounded rectangular outline open on the right",
+  "modifiers": [
+   "half-shaded shield badge on the right"
+  ],
+  "composition": "landscape frame cutout with large shield overlay on right side"
+ },
+ "readings": [
+  {
+   "meaning": "shield / security / protection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "device or screen protection (warranty, insurance, firewall)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "card or account security / fraud protection",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "hard Drive or battery protection / safe storage",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The base rectangle has no details inside (no magnetic stripe, battery terminal, or screen bezel), making it ambiguous whether it represents a credit card, a screen/tablet, a battery, or a generic box.",
+ "modifier_semantics": [
+  {
+   "modifier": "half-shaded shield badge on the right",
+   "meaning": "security, protection, insurance, or privacy"
+  }
+ ],
+ "domains": [
+  "tech",
+  "finance",
+  "admin",
+  "shopping",
+  "home"
+ ],
+ "task_intents": [
+  "buy device protection or AppleCare plan",
+  "enable fraud alerts on bank card",
+  "set up firewall or endpoint security",
+  "file warranty claim for broken device",
+  "freeze credit card or credit report",
+  "install tempered glass screen protector",
+  "review equipment insurance policy coverage"
+ ],
+ "example_tasks": [
+  {
+   "task": "Add AppleCare+ before window closes",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn on Visa purchase alerts",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Order tempered glass screen protector",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Compare annual fees and deductibles",
+   "parent": "Phone Insurance",
+   "domain": "finance"
+  },
+  {
+   "task": "Check if still active",
+   "parent": "Laptop Extended Warranty",
+   "domain": "admin"
+  },
+  {
+   "task": "Set a $200 transaction limit and lock international swipe on the Chase debit card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Register the new OLED TV serial number for the three-year protection plan",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Put a credit freeze on Equifax and TransUnion before the weekend",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Turn on BitLocker encryption on the spare Windows tablet",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check whether the Amex purchase protection covers the cracked iPad screen",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Generate virtual card numbers for the streaming trials so they cannot auto-bill",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Enable MDM screen lock policy",
+   "parent": "Company Devices",
+   "domain": "work"
+  },
+  {
+   "task": "Download the policy PDF for the archive",
+   "parent": "Gadget Insurance",
+   "domain": "admin"
+  },
+  {
+   "task": "Submit the SquareTrade claim with photos of the shattered back glass and the original receipt",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Cancel the $11 monthly Verizon device protection plan on the old line we barely use",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Set up a separate VLAN firewall rule so the smart TV cannot see the NAS",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Activar el seguro de protección de compras de la tarjeta antes del viaje",
+  "Ponerle el protector de pantalla de vidrio templado a la tablet de los niños",
+  "Dar de baja el seguro mensual del móvil viejo en Movistar"
+ ],
+ "example_tasks_ru": [
+  "Оформить расширенную гарантию на новый монитор до конца месяца",
+  "Установить лимит на онлайн-покупки и защиту от списаний по карте Тинькофф",
+  "Наклеить защитное стекло на планшет перед поездкой"
+ ],
+ "context_tasks": [
+  {
+   "task": "Call bank fraud department about the $49 charge from London",
+   "central": "phone call"
+  },
+  {
+   "task": "Scan receipt for the dishwasher extended warranty folder",
+   "central": "receipt / scanner"
+  },
+  {
+   "task": "Read fine print on accidental damage coverage",
+   "central": "document / contract"
+  },
+  {
+   "task": "Update router firmware for the CVE security patch",
+   "central": "router"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a waterproof hard case for the camera",
+   "better": "camera case or camera",
+   "trap": "property"
+  },
+  {
+   "task": "Verify that the external SSD backup finished cleanly",
+   "better": "hard drive / SSD",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pay the quarterly homeowners insurance bill",
+   "better": "house with shield or bill/invoice",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Charge the spare power bank before the flight",
+   "better": "battery / power bank",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a RFID-blocking leather wallet for dad",
+   "better": "wallet",
+   "trap": "property"
+  },
+  {
+   "task": "Mail the signed notarized affidavit to the claims adjuster",
+   "better": "envelope / mail",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon shows an unadorned horizontal rounded rectangle with a large shield cutting into its right side. Because the rectangle lacks internal markings (unlike a credit card with a stripe or a battery with a terminal), it reads somewhat generically as protected hardware, screen/device warranty, or card security, making it useful for warranty, device protection, and fraud-lock tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f7701223001fce36175b51c4859a53a5f396ebf6",
+  "usage": {
+   "prompt": 3924,
+   "output": 1699,
+   "thoughts": 0,
+   "total": 5623
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

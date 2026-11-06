@@ -1,0 +1,222 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front-facing car inside a rounded square frame",
+  "modifiers": [
+   "paper money banknote badge in bottom right corner"
+  ],
+  "composition": "framed object cut off at bottom-right by a banknote overlay"
+ },
+ "readings": [
+  {
+   "meaning": "paid parking, parking fee, or toll",
+   "strength": "primary"
+  },
+  {
+   "meaning": "car expense, auto loan, or vehicle payment",
+   "strength": "primary"
+  },
+  {
+   "meaning": "car rental or vehicle purchase",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "drive-thru ATM or cash-only toll booth",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The outer square frame makes the car look like a parking sign or toll booth, while the banknote suggests either paying a parking/toll fee or a general car payment.",
+ "modifier_semantics": [
+  {
+   "modifier": "rounded square frame around car",
+   "meaning": "parking zone, garage, or toll booth sign"
+  },
+  {
+   "modifier": "banknote badge in bottom right",
+   "meaning": "payment, fee, cash, cost, or expense"
+  }
+ ],
+ "domains": [
+  "finance",
+  "travel",
+  "admin",
+  "home",
+  "work",
+  "shopping"
+ ],
+ "task_intents": [
+  "pay monthly car loan installment",
+  "renew resident street parking permit",
+  "load money onto highway toll transponder",
+  "pay overdue downtown parking ticket",
+  "submit work mileage and parking reimbursement",
+  "set aside cash for airport parking",
+  "compare quarterly auto insurance premiums",
+  "pay annual vehicle registration renewal fee"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pay parking ticket",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Top up E-ZPass toll account",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Subaru monthly loan payment",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Renew Zone 4 parking permit",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pay before the 15th",
+   "parent": "Honda Civic Loan",
+   "domain": "finance"
+  },
+  {
+   "task": "Grab $20 cash for the stadium lot on Saturday",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Dispute the $65 meter violation from Tuesday on Oak St",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Prebook long-term economy lot at Terminal B for Thanksgiving",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pay six-month GEICO auto policy before the grace period ends",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Keep the dashboard receipts for Concur",
+   "parent": "Client Visit Parking",
+   "domain": "work"
+  },
+  {
+   "task": "Check why the bridge toll was billed twice",
+   "parent": "Road Trip Budget",
+   "domain": "travel"
+  },
+  {
+   "task": "Send $85 to landlord for the underground garage spot",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Compare weekly rates",
+   "parent": "Airport Parking",
+   "domain": "travel"
+  },
+  {
+   "task": "Pay the outstanding Illinois Tollway invoice online before they tack on late fees",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Figure out how much extra it costs to pay off the auto loan early",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Put a roll of quarters and small bills in the glovebox for cash-only meters",
+   "parent": "",
+   "domain": "shopping"
+  }
+ ],
+ "example_tasks_es": [
+  "Recargar el saldo del TAG para la autopista antes del viernes",
+  "Pagar el parquímetro o renovar la tarjeta de residente SER",
+  "Transferir la cuota mensual del seguro del coche"
+ ],
+ "example_tasks_ru": [
+  "Оплатить резидентское парковочное разрешение на следующий год",
+  "Пополнить транспондер Автодор перед поездкой на юг",
+  "Внести ежемесячный платёж по автокредиту до 20 числа"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download ParkMobile app before driving into the city",
+   "central": "mobile app"
+  },
+  {
+   "task": "Move the transponder velcro strip behind the rearview mirror",
+   "central": "transponder device"
+  },
+  {
+   "task": "Call credit union to lower interest rate on the Outback",
+   "central": "phone call"
+  },
+  {
+   "task": "Print proof of residence for the city clerk",
+   "central": "printed document"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Vacuum dog hair out of the back seat",
+   "better": "car wash or cleaning icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Schedule 60,000-mile timing belt and water pump service",
+   "better": "car with wrench / mechanic icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Withdraw $100 in twenties from the credit union ATM",
+   "better": "ATM or cash withdrawal icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy new Bosch wiper blades before the rainy week",
+   "better": "windshield wipers or car part icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check tire pressure on all four wheels plus the spare",
+   "better": "tire or pressure gauge icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Find a free street spot near the restaurant",
+   "better": "parking P sign without money",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a framed car with a banknote badge, clearly combining vehicle/parking with money or payment. It fits common real-life tasks like paying parking fees, highway tolls, car loans, and vehicle registration, though at tiny sizes the cropped car inside the square requires a second look.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "0b841174066c1a7c00dda33d8709c3db1bbebb98",
+  "usage": {
+   "prompt": 3928,
+   "output": 1726,
+   "thoughts": 0,
+   "total": 5654
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "downward pointing arrow inside a circle",
+  "modifiers": [
+   "half-dashed circular ring (solid on left, dashed on right)"
+  ],
+  "composition": "centered arrow surrounded by a partially segmented circular ring"
+ },
+ "readings": [
+  {
+   "meaning": "download / downloading in progress",
+   "strength": "primary"
+  },
+  {
+   "meaning": "software update / install",
+   "strength": "primary"
+  },
+  {
+   "meaning": "save offline / fetch data",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "pending download / queued transfer",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the dashed right half looks like a plain circle with a down arrow, or could be confused with a drop/scroll-down UI button.",
+ "modifier_semantics": [
+  {
+   "modifier": "half-dashed circular ring",
+   "meaning": "in progress, partial completion, pending, or queued state"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "finance",
+  "travel",
+  "learning",
+  "hobbies",
+  "admin"
+ ],
+ "task_intents": [
+  "download files or documents offline",
+  "install pending software or firmware updates",
+  "fetch statements or tax records",
+  "save maps and media for travel",
+  "pull data exports or backups",
+  "clear out the downloads folder",
+  "grab offline installers before trip"
+ ],
+ "example_tasks": [
+  {
+   "task": "Download offline maps for Iceland",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Grab the 2025 W-2 PDFs",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Install macOS Sequoia point update",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pull latest database dump locally",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clear out ~/Downloads folder",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Download all 12 months of Chase checking statements as CSV",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Save three audiobooks and the history podcast episodes before heading to the airport",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Grab the raw wedding photos from the photographer's gallery before the link expires Friday",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Download lecture slides and problem sets for weeks 4 through 6 on Canvas",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Fetch the new BIOS firmware image onto a FAT32 thumb drive",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pull the full Google Takeout archive onto the external NAS drive",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Get the STL files for the gridfinity drawer bins from Printables",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Get the high-res logos",
+   "parent": "Brand assets download",
+   "domain": "work"
+  },
+  {
+   "task": "Do the router and NAS",
+   "parent": "Pending firmware updates",
+   "domain": "tech"
+  },
+  {
+   "task": "Save the Japanese phrasebook pack",
+   "parent": "Offline downloads for flight",
+   "domain": "travel"
+  },
+  {
+   "task": "Grab Q3 and Q4 receipts",
+   "parent": "Tax document downloads",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Descargar los mapas sin conexión de Pirineos en Organic Maps antes de salir",
+  "Bajar los certificados de retenciones de la web de la Agencia Tributaria",
+  "Vaciar y ordenar la carpeta de Descargas del portátil"
+ ],
+ "example_tasks_ru": [
+  "Скачать офлайн-карты Грузии и Армении в телефон перед поездкой",
+  "Загрузить архив семейных фото с Яндекс Диска на внешний жёсткий диск",
+  "Установить накопительное обновление прошивки на домашний роутер"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check MD5 checksum of the Ubuntu ISO image",
+   "central": "disk image / checksum verification"
+  },
+  {
+   "task": "Upgrade qBittorrent and configure port forwarding",
+   "central": "BitTorrent client / network config"
+  },
+  {
+   "task": "Buy a 2TB portable SSD for offline media backups",
+   "central": "external SSD drive"
+  },
+  {
+   "task": "Switch home fiber plan to the 500 Mbps tier",
+   "central": "internet service / router"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cut monthly grocery spending down by $150",
+   "better": "trending down chart or shopping cart with minus",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the Christmas decorations boxes down to the basement",
+   "better": "storage box or stairs",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Print the downloaded boarding passes for tomorrow's flight",
+   "better": "printer or boarding pass / ticket",
+   "trap": "property"
+  },
+  {
+   "task": "Read the downloaded PDF paper on transformer architectures",
+   "better": "document / book / glasses",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the server backup job ran last night",
+   "better": "server or database with checkmark",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Renew the domain name before Tuesday",
+   "better": "globe / domain / calendar",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "A downward arrow inside a half-dashed circle is the standard UI glyph for downloading, fetching offline content, or a pending software update. It fits concrete action tasks centered on downloading files, statements, offline maps, or installing updates, though at small sizes it blends in with plain circled down-arrow icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "526641ce939d0fc1eef6f9210f09944889c5fe60",
+  "usage": {
+   "prompt": 3927,
+   "output": 1692,
+   "thoughts": 0,
+   "total": 5619
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

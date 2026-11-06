@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rounded square containing a right-pointing solid play triangle",
+  "modifiers": [
+   "L-shaped corner line behind bottom-left indicating a stacked second square"
+  ],
+  "composition": "two stacked rounded squares with a play symbol in the front one"
+ },
+ "readings": [
+  {
+   "meaning": "video library, playlist, or collection of videos",
+   "strength": "primary"
+  },
+  {
+   "meaning": "watch videos, TV series, or course lectures",
+   "strength": "primary"
+  },
+  {
+   "meaning": "YouTube channel or subscriptions",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "media files or clips",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Almost identical to a standard single video play icon if the stacked corner line isn't noticed, or could be read as slideshow presentation.",
+ "modifier_semantics": [
+  {
+   "modifier": "stacked rear card edge",
+   "meaning": "multiple items, collection, library, series, or playlist"
+  }
+ ],
+ "domains": [
+  "hobbies",
+  "learning",
+  "creative",
+  "tech",
+  "work",
+  "social_family",
+  "home"
+ ],
+ "task_intents": [
+  "watch a video series or course",
+  "organize video library or clips",
+  "curate a YouTube playlist",
+  "finish watching TV show episodes",
+  "back up recorded family videos",
+  "edit and export video clips",
+  "catch up on saved watch-later videos",
+  "review recorded lecture videos"
+ ],
+ "example_tasks": [
+  {
+   "task": "Clear out YouTube Watch Later",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Sort wedding video clips",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Finish Severance season 1",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Watch MIT 18.06 lectures 4-7",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Pick next two episodes",
+   "parent": "Watchlist",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Download the rest of the Kubernetes tutorial videos before the flight",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Make a playlist of drywall patching videos for Saturday",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Back up all the old Hi8 family tapes after digitizing",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Trim and rename the B-roll clips from the Berlin trip",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Watch the three onboarding recordings from product team",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clean up duplicate MP4 files on the NAS media folder",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Delete the ones we already saw",
+   "parent": "Saved Documentaries",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Export rough cuts for chapters 2 and 3",
+   "parent": "YouTube Channel",
+   "domain": "creative"
+  },
+  {
+   "task": "Go through the 2023 folder and tag everything",
+   "parent": "Home Videos",
+   "domain": "social_family"
+  },
+  {
+   "task": "Put together a 10-minute compilation of Leo's first year clips for the grandparents",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Go through the saved physiotherapy exercise videos and keep only the shoulder ones",
+   "parent": "",
+   "domain": "learning"
+  }
+ ],
+ "example_tasks_es": [
+  "Terminar de ver los videos del curso de Figma antes del viernes",
+  "Organizar los clips del viaje a Oaxaca en una carpeta compartida",
+  "Vaciar la lista de Ver más tarde en YouTube"
+ ],
+ "example_tasks_ru": [
+  "Досмотреть лекции по алгоритмам с третьего по шестой модуль",
+  "Разобрать видео с утренника и скинуть бабушке в семейный чат",
+  "Почистить плейлист «Посмотреть позже» на Ютубе"
+ ],
+ "context_tasks": [
+  {
+   "task": "Cancel Netflix and Apple TV before the renewal on the 14th",
+   "central": "subscription / payment"
+  },
+  {
+   "task": "Buy a 4TB external SSD for the raw footage archive",
+   "central": "hard drive / SSD"
+  },
+  {
+   "task": "Fix Plex server buffering on the living room TV",
+   "central": "server / TV"
+  },
+  {
+   "task": "Write script for the third tutorial in the series",
+   "central": "script / document"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy HDMI cable for the video monitor",
+   "better": "cable or monitor icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Call mom on FaceTime tonight",
+   "better": "video call camera with phone/person icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Mount the security camera over the garage door",
+   "better": "CCTV security camera icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Make Spotify playlist for the road trip",
+   "better": "music note or headphones playlist icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book tickets for Dune at the IMAX on Friday",
+   "better": "movie ticket or cinema clapperboard icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the stock footage invoice for April",
+   "better": "invoice or money icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A play button inside stacked squares is the standard icon for a video library, playlist, or collection of clips (familiar from YouTube's Library/Subscriptions tab). It fits tasks about watching a series/course, curating playlists, or managing video files, though at a quick glance it blends with a single video play icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "dc0797659205698969986f43db7e59bbb59eb376",
+  "usage": {
+   "prompt": 3917,
+   "output": 1715,
+   "thoughts": 0,
+   "total": 5632
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round alarm clock with two top bells",
+  "modifiers": [
+   "checkmark inside the face instead of hands"
+  ],
+  "composition": "single centered object, front view"
+ },
+ "readings": [
+  {
+   "meaning": "alarm set / active alarm",
+   "strength": "primary"
+  },
+  {
+   "meaning": "reminder set / scheduled alert",
+   "strength": "primary"
+  },
+  {
+   "meaning": "alarm clock",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "timer or countdown ready",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the checkmark can look like clock hands at 10:10, making it indistinguishable from a plain alarm clock.",
+ "modifier_semantics": [
+  {
+   "modifier": "checkmark inside clock face",
+   "meaning": "enabled, set, confirmed, or completed alarm/reminder"
+  }
+ ],
+ "domains": [
+  "home",
+  "travel",
+  "health_fitness",
+  "work",
+  "tech",
+  "admin",
+  "shopping"
+ ],
+ "task_intents": [
+  "set a wake-up alarm",
+  "configure daily medication reminders",
+  "replace or buy an alarm clock",
+  "test or verify a scheduled alert",
+  "adjust morning wake-up schedule",
+  "set up recurring phone alarms"
+ ],
+ "example_tasks": [
+  {
+   "task": "Set 4:45am flight alarm",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Buy sunrise alarm clock",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Turn on weekday alarms",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Change battery in bedside clock",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set pill reminder on phone",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Double-check morning alarms on both phones before the airport shuttle comes",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set up a daily 9pm alarm for thyroid medication",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Move the loud twin-bell alarm clock across the bedroom",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Configure a backup wake-up alarm on the old iPad",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Switch the 6am workout alarm to vibrate only on the watch",
+   "parent": "Morning Routine",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Order the Hatch Restore 2 before the bedroom sale ends",
+   "parent": "Alarm Clock Upgrade",
+   "domain": "shopping"
+  },
+  {
+   "task": "Fix why Do Not Disturb keeps silencing the 7am wake-up chime",
+   "parent": "Phone Alarms",
+   "domain": "tech"
+  },
+  {
+   "task": "Test the 5am backup tone volume",
+   "parent": "Early Flight Alarms",
+   "domain": "travel"
+  },
+  {
+   "task": "Set three staggered alarms for Tuesday so we do not miss the Tokyo call",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clear out all the random one-off timers and old wake-up alarms cluttering the Clock app",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set a recurring Friday 4pm reminder alarm to submit timesheets before logging off for the weekend",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Poner la alarma a las 5:15 para llegar al tren de Atocha",
+  "Cambiar las pilas del despertador de la mesita",
+  "Configurar alarma diaria en el móvil para las gotas de los ojos"
+ ],
+ "example_tasks_ru": [
+  "Поставить будильник на 5:30 перед выездом в аэропорт",
+  "Купить световой будильник в спальню на зиму",
+  "Настроить ежедневное напоминание о приёме витаминов на 20:00"
+ ],
+ "context_tasks": [
+  {
+   "task": "Shift wake-up time back by 15 minutes each day this week",
+   "central": "sleep schedule"
+  },
+  {
+   "task": "Take levothyroxine 30 minutes before breakfast every morning",
+   "central": "medication / pill"
+  },
+  {
+   "task": "Pack nightstand charger and watch stand for the hotel",
+   "central": "charger"
+  },
+  {
+   "task": "Plan a screen-free first 20 minutes after waking up",
+   "central": "morning routine"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Replace 9V batteries in the hallway smoke alarms",
+   "better": "smoke detector or fire symbol",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Call ADT to update the home security alarm passcode",
+   "better": "shield or keypad security icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Finish the quarterly tax filing before the midnight deadline",
+   "better": "tax form or document",
+   "trap": "property"
+  },
+  {
+   "task": "Check whether the dentist appointment was confirmed for Thursday",
+   "better": "tooth or calendar",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a mechanical kitchen timer for baking sourdough",
+   "better": "kitchen timer / stopwatch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Brew a pot of coffee as soon as I get up",
+   "better": "coffee cup or mug",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a classic twin-bell alarm clock with a checkmark on the dial, clearly conveying 'alarm set', 'wake-up alarm', or 'reminder enabled'. It fits real tasks about setting wake-up alarms, configuring recurring reminders, or buying/fixing an alarm clock, though it sits next to plain alarm clock and stopwatch icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "58f144f3db87a881c533593abaa07532982e74fd",
+  "usage": {
+   "prompt": 3929,
+   "output": 1699,
+   "thoughts": 0,
+   "total": 5628
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

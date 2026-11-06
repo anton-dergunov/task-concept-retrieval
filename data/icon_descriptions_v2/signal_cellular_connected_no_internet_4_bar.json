@@ -1,0 +1,202 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "filled right-angled triangle representing cellular signal strength",
+  "modifiers": [
+   "exclamation mark cutout at bottom right"
+  ],
+  "composition": "single status glyph with lower-right badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "cellular network error or no internet connection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mobile signal issue or outage",
+   "strength": "primary"
+  },
+  {
+   "meaning": "steep ramp or incline hazard",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Out of a phone status bar context, the solid black right triangle looks like a geometric ramp, wedge, or drafting set square with an alert.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "error, warning, no internet access, or connection problem"
+  }
+ ],
+ "domains": [
+  "tech",
+  "communication",
+  "admin",
+  "home",
+  "travel"
+ ],
+ "task_intents": [
+  "troubleshoot mobile data connection",
+  "report cellular network outage to carrier",
+  "fix SIM card registration error",
+  "configure APN settings for roaming",
+  "boost poor cell reception at home",
+  "resolve no service alert on phone"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix mobile data outage",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call T-Mobile about dead zone",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Reset network settings",
+   "parent": "iPhone cellular issues",
+   "domain": "tech"
+  },
+  {
+   "task": "Check coverage map",
+   "parent": "Cell reception in cabin",
+   "domain": "travel"
+  },
+  {
+   "task": "SIM card error on pixel",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Figure out why cellular data drops every time we enter the basement",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Update APN settings so roaming data actually works across the border",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Ask carrier support why the LTE triangle shows an exclamation mark",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Install a 4G signal repeater in the attic for better reception",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Switch from eSIM back to physical SIM to stop the connection drops",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Complain to Vodafone about three days of no signal on our street",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Order replacement SIM",
+   "parent": "Dad's phone no service bug",
+   "domain": "shopping"
+  },
+  {
+   "task": "Test both bands",
+   "parent": "Mobile network troubleshooting",
+   "domain": "tech"
+  },
+  {
+   "task": "Claim bill credit from AT&T for the two-day cellular outage across our zip code",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Swap the backup SIM into the field tablet before driving out to the canyon",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check if the unpaid roaming balance is why my mobile data stopped working",
+   "parent": "",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Reclamar a Movistar por el corte de señal móvil en el barrio",
+  "Configurar el APN manualmente porque los datos móviles dan error",
+  "Cambiar la tarjeta SIM que deja el teléfono sin cobertura"
+ ],
+ "example_tasks_ru": [
+  "Позвонить в МТС по поводу пропадающей сотовой связи на даче",
+  "Сбросить настройки сети из-за ошибки мобильного интернета",
+  "Купить усилитель сотового сигнала для подвального офиса"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pay overdue phone bill to restore cellular service",
+   "central": "bill payment"
+  },
+  {
+   "task": "Download offline maps before hiking into the no-coverage valley",
+   "central": "map"
+  },
+  {
+   "task": "Buy a prepaid local SIM card at the airport kiosk",
+   "central": "SIM card"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Restart the living room Wi-Fi router",
+   "better": "wifi router or wifi symbol",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a rubber doorstop wedge for the hallway",
+   "better": "door wedge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upgrade to a cheaper monthly mobile plan",
+   "better": "money or invoice",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check that the baby monitor has strong range in the garden",
+   "better": "baby monitor",
+   "trap": "property"
+  },
+  {
+   "task": "Replace cracked screen on my smartphone",
+   "better": "smartphone",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "This is an OS status-bar indicator (specifically Android's cellular signal triangle with a warning exclamation mark), representing a system state rather than a concrete object or activity. Outside a device status bar it looks like an abstract triangle with an exclamation mark, and tasks about fixing phone reception are better served by a phone or antenna icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "23052ee109baa5b756f91bae2ab7b97711105cc0",
+  "usage": {
+   "prompt": 3926,
+   "output": 1530,
+   "thoughts": 0,
+   "total": 5456
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

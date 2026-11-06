@@ -1,0 +1,207 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "right-angled triangle signal bar filled on the left",
+  "modifiers": [
+   "vertical fill level at forty percent"
+  ],
+  "composition": "single geometric status indicator, flat side view"
+ },
+ "readings": [
+  {
+   "meaning": "weak cellular or network signal strength",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mobile reception or connectivity status",
+   "strength": "primary"
+  },
+  {
+   "meaning": "drafting set square or geometry triangle",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "ramp, slope, or incline",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Easily mistaken for a generic geometry triangle, a ramp, or a volume wedge; nearly indistinguishable from other partial signal-strength levels at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "partial black fill on left side",
+   "meaning": "low or partial level (around 2 out of 5 bars of signal)"
+  }
+ ],
+ "domains": [
+  "tech",
+  "communication",
+  "home",
+  "travel"
+ ],
+ "task_intents": [
+  "troubleshoot weak cell reception at home",
+  "check mobile network coverage before trip",
+  "install cellular signal booster in attic",
+  "switch mobile carrier for better reception",
+  "test signal strength in basement office",
+  "report dead zone to mobile provider"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix basement cell reception",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Buy 5G signal booster",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check carrier coverage map",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Enable Wi-Fi calling on phone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test reception in the cabin",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Walk around the property with field test mode on to map dead zones",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Mount the directional WeBoost antenna on the south gable pole",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Compare Verizon and AT&T reception at the new campsite before Friday",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Call T-Mobile support about dropped calls and two-bar LTE in our zip code",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Switch SIM back to physical card to see if reception improves",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check which network has decent coverage along Highway 395",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Return the repeater kit if it doesn't add at least two bars downstairs",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Find out why my phone drops to one bar every time I enter the kitchen",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Order coax cable",
+   "parent": "Cell Booster Install",
+   "domain": "home"
+  },
+  {
+   "task": "Test both upstairs bedrooms",
+   "parent": "Home Mobile Reception",
+   "domain": "tech"
+  },
+  {
+   "task": "Ask neighbors what they use",
+   "parent": "Fix Weak Cell Signal",
+   "domain": "communication"
+  }
+ ],
+ "example_tasks_es": [
+  "Comprobar la cobertura móvil en la casa rural antes de reservar",
+  "Instalar un repetidor de señal 4G en el sótano",
+  "Llamar a Movistar por los problemas de baja señal en el despacho"
+ ],
+ "example_tasks_ru": [
+  "Проверить покрытие сотовой связи на даче у разных операторов",
+  "Установить усилитель сотового сигнала под крышей",
+  "Позвонить в МТС по поводу слабой сети в квартире"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pick up a prepaid eSIM for the Scottish Highlands trip",
+   "central": "SIM card"
+  },
+  {
+   "task": "Pack the Garmin InReach in case there's no cell service on the ridge",
+   "central": "satellite communicator"
+  },
+  {
+   "task": "Download offline trail maps for the no-coverage section",
+   "central": "map"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the monthly cell phone bill before the 15th",
+   "better": "invoice or credit card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a wooden wheelchair ramp for the front step",
+   "better": "wheelchair ramp",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack plastic set square and protractor for geometry exam",
+   "better": "drafting triangle ruler with markings",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reboot the living room Wi-Fi router",
+   "better": "wifi arcs or router box",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Upgrade phone plan to unlimited data",
+   "better": "smartphone",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is a system status-bar glyph showing a specific partial level of cellular signal strength (around 1-2 bars). It represents a state/quantity from Android UI chrome rather than a clear task subject, and out of status-bar context it looks like an abstract half-filled triangle or drafting square.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "7f09a1503601dcefd2e2b3db465af9e894490157",
+  "usage": {
+   "prompt": 3925,
+   "output": 1571,
+   "thoughts": 0,
+   "total": 5496
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "map location pin marker with center dot",
+  "modifiers": [
+   "two concentric curved signal waves above the pin"
+  ],
+  "composition": "single object with overhead waves, centered front view"
+ },
+ "readings": [
+  {
+   "meaning": "smart tracker tag / Bluetooth beacon (AirTag, Tile)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "live location sharing / GPS tracking",
+   "strength": "primary"
+  },
+  {
+   "meaning": "Wi-Fi hotspot location / public Wi-Fi spot",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "check-in or proximity geofence trigger",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the pin and waves can blur into a plain Wi-Fi symbol or a lightbulb.",
+ "modifier_semantics": [
+  {
+   "modifier": "two concentric curved signal waves above the pin",
+   "meaning": "wireless broadcast, live tracking signal, or hotspot connectivity"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "social_family",
+  "shopping",
+  "outdoors",
+  "home",
+  "work"
+ ],
+ "task_intents": [
+  "attach smart tracker to luggage",
+  "share live location with family",
+  "replace battery in Bluetooth tag",
+  "set up geofence home automation",
+  "find cafes with good Wi-Fi",
+  "enable GPS tracking on phone",
+  "configure office Bluetooth beacons",
+  "check satellite beacon subscription"
+ ],
+ "example_tasks": [
+  {
+   "task": "Replace CR2032 in bike AirTag",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn on Find My sharing",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Four-pack of AirTags for luggage",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Order replacement batteries",
+   "parent": "Tile Trackers",
+   "domain": "shopping"
+  },
+  {
+   "task": "Pair the spare key ring",
+   "parent": "AirTags",
+   "domain": "tech"
+  },
+  {
+   "task": "Put a Tile slim tracker inside the camera bag before flying to Rome",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Share live location on WhatsApp with Sarah when leaving the station",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Set up geofence trigger so the hallway lights come on when arriving home",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Map out free Wi-Fi hotspots near the campsite in Cornwall",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Activate Garmin inReach satellite tracking plan for the August trek",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Check why Mom's Life360 location keeps freezing at the grocery store",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Test proximity range in the main lobby",
+   "parent": "Museum BLE Beacons",
+   "domain": "work"
+  },
+  {
+   "task": "Switch everyone over from Google Maps",
+   "parent": "Family Location Sharing",
+   "domain": "social_family"
+  },
+  {
+   "task": "Sew the waterproof AirTag holder onto Barnaby's harness before the weekend walk on the moors",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Revoke temporary location sharing permissions from the delivery app and third-party weather widgets on iPhone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Register the new GPS pet tracker IMEI number on the portal and set safe zones",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Meter un AirTag en la maleta facturada antes de salir al aeropuerto",
+  "Cambiar la pila del localizador GPS del collar de Toby",
+  "Compartir ubicación en tiempo real con el grupo de ciclismo el domingo"
+ ],
+ "example_tasks_ru": [
+  "Поменять батарейку CR2032 в брелоке AirTag на связке ключей",
+  "Настроить геолокацию в приложении, чтобы видеть, когда сын дошел до школы",
+  "Спрятать GPS-маячок под сиденье велосипеда перед началом сезона"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack the black hardshell suitcase for Berlin",
+   "central": "suitcase"
+  },
+  {
+   "task": "Order a new leather collar for the puppy",
+   "central": "dog collar"
+  },
+  {
+   "task": "Cut a spare set of front door keys",
+   "central": "keys"
+  },
+  {
+   "task": "Reset the home mesh router password",
+   "central": "router"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the monthly fiber internet bill before Friday",
+   "better": "invoice or router icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Look up the street address for the new dentist on the map",
+   "better": "plain map or plain location pin without waves",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Listen to the latest episode of the history podcast",
+   "better": "headphones or microphone icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof GPS running watch for marathon training",
+   "better": "smartwatch icon",
+   "trap": "property"
+  },
+  {
+   "task": "Update credit card on file for the annual subscription",
+   "better": "credit card icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check where the Amazon package is in the tracking portal",
+   "better": "parcel box or delivery truck icon",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a map location pin with wireless signal waves, clearly signifying live location broadcasting, GPS/Bluetooth tracking tags (like AirTags or Tiles), geofencing, or Wi-Fi hotspots. It fits specific tasks around item trackers, family location sharing, and finding connectivity spots, though it could occasionally be confused with a plain map pin or a generic Wi-Fi symbol at very small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "6d00310ce039f26adfe48d04971adcc47359cb55",
+  "usage": {
+   "prompt": 3924,
+   "output": 1746,
+   "thoughts": 0,
+   "total": 5670
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

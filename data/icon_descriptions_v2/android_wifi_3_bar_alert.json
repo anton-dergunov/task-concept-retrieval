@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "wireless signal symbol with two arcs and bottom dot",
+  "modifiers": [
+   "exclamation mark in bottom right corner"
+  ],
+  "composition": "single symbol, front view, with bottom-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "Wi-Fi problem / internet outage / network error",
+   "strength": "primary"
+  },
+  {
+   "meaning": "troubleshoot wireless connection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "weak Wi-Fi signal / dead zone",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "Wi-Fi / wireless network (general)",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the exclamation mark might blend into the arcs, making it look like a standard Wi-Fi icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "error, outage, warning, or problem requiring attention"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "work",
+  "admin",
+  "travel"
+ ],
+ "task_intents": [
+  "fix broken home Wi-Fi connection",
+  "troubleshoot unstable internet signal",
+  "call ISP about network outage",
+  "eliminate wireless dead zones in house",
+  "debug office network drop-offs",
+  "reset router to restore internet",
+  "resolve captive portal login issue"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix upstairs Wi-Fi dead zone",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Troubleshoot flaky internet",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call ISP about dropouts",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Reboot downstairs mesh node",
+   "parent": "Home Wi-Fi Issues",
+   "domain": "home"
+  },
+  {
+   "task": "Check DNS settings",
+   "parent": "Internet Outage",
+   "domain": "tech"
+  },
+  {
+   "task": "Figure out why the 5GHz band keeps disappearing on the router",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Complain to hotel front desk about the broken room Wi-Fi",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Stop the backyard security camera from dropping off the wireless network",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Test signal strength in the basement office before Monday's calls",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Ask IT why the conference room wireless keeps kicking people off",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Switch the channel on the router to avoid neighbor interference",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Log ticket with Comcast",
+   "parent": "Frequent Internet Drops",
+   "domain": "admin"
+  },
+  {
+   "task": "Run packet loss test for 20 minutes",
+   "parent": "Unstable Wi-Fi",
+   "domain": "tech"
+  },
+  {
+   "task": "Move the access point out of the hallway closet so the signal reaches the kitchen",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Find out why my laptop says connected without internet every time it wakes from sleep",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Get a refund from the airline for the inflight Wi-Fi pass that never worked",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Llamar a Movistar por los cortes de Wi-Fi en el salón",
+  "Arreglar la señal inalámbrica en el dormitorio del fondo",
+  "Reiniciar el punto de acceso que da error de red"
+ ],
+ "example_tasks_ru": [
+  "Позвонить провайдеру из-за постоянных обрывов вайфая вечером",
+  "Починить пропадающий Wi-Fi в дальней комнате",
+  "Разобраться, почему ноутбук пишет «без доступа к интернету»"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a TP-Link mesh extender for the upstairs hallway",
+   "central": "mesh extender / router hardware"
+  },
+  {
+   "task": "Crimp a new RJ45 connector onto the frayed ethernet cable",
+   "central": "ethernet cable"
+  },
+  {
+   "task": "Pay overdue fiber internet bill before they throttle us",
+   "central": "bill / payment"
+  },
+  {
+   "task": "Reconnect the smart thermostat to the home network",
+   "central": "thermostat"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a waterproof Wi-Fi speaker for the patio",
+   "better": "speaker",
+   "trap": "property"
+  },
+  {
+   "task": "Listen to the new episode of the Reply All podcast",
+   "better": "podcast / headphones",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check whether the new printer has wireless support",
+   "better": "printer",
+   "trap": "property"
+  },
+  {
+   "task": "Tap credit card at the contactless terminal",
+   "better": "credit card / contactless payment",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Network with other product managers at the mixer",
+   "better": "people / handshake",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Return the rented cable modem to the UPS store",
+   "better": "package / shipping box",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a Wi-Fi symbol with an exclamation mark badge, universally understood as a wireless network error, internet outage, or weak connection. It fits real-world tasks around troubleshooting home or office Wi-Fi, fixing dead zones, or contacting an ISP about connection drops, while remaining distinct from a normal Wi-Fi or RSS/contactless icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e5b831a9dbcd765183891d84d6d4e5d52a0b33d4",
+  "usage": {
+   "prompt": 3922,
+   "output": 1672,
+   "thoughts": 148,
+   "total": 5742
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

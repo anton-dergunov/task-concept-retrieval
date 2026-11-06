@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "domed siren or emergency beacon light on a base",
+  "modifiers": [
+   "question mark inside solid circle badge at bottom right"
+  ],
+  "composition": "single object in front profile with bottom-right circular badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "unknown alert, alarm inquiry, or investigating why an alarm triggered",
+   "strength": "primary"
+  },
+  {
+   "meaning": "emergency help, crisis FAQ, or incident response questions",
+   "strength": "primary"
+  },
+  {
+   "meaning": "unverified incident or questionable emergency status",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "bell jar or cloche with question mark",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Without light rays, the rounded dome on a flat base can be mistaken for a padlock shackle, a bell jar, or a reception desk bell at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "question mark inside solid circle badge at bottom right",
+   "meaning": "inquiry, unknown status, help, or troubleshooting why something happened"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "work",
+  "admin",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "find out why alarm went off",
+  "investigate mysterious system alert in logs",
+  "ask security about false alarm policy",
+  "check what triggered the house siren",
+  "review unexplained on-call incident alerts",
+  "clarify emergency procedures with building manager",
+  "troubleshoot random smoke detector beeping"
+ ],
+ "example_tasks": [
+  {
+   "task": "Why did alarm go off?",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Unexplained PagerDuty alert",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Mystery siren last night",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ask landlord about fire alarm",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Find out what tripped it",
+   "parent": "Home Security System",
+   "domain": "home"
+  },
+  {
+   "task": "Figure out why the basement carbon monoxide detector chirped twice at 3am",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ask ADT support why the back door sensor triggered a false alarm",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check Datadog logs to see what set off the staging memory alert",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Email safety officer with questions about the new evacuation siren drill",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Look up what the three-short-beeps code means on the garage keypad",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ask the neighbors if they know why the street siren was wailing",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check why it went off yesterday",
+   "parent": "Burglar Alarm",
+   "domain": "home"
+  },
+  {
+   "task": "Clarify who is on the call tree",
+   "parent": "Incident Response",
+   "domain": "work"
+  },
+  {
+   "task": "Write down questions for the pediatrician",
+   "parent": "Allergy Emergency Plan",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Find out why the warehouse motion alarm kept tripping over the holiday weekend without any entry",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Ask the HOA board whether the hallway smoke alarm false triggers are covered by maintenance",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Averiguar por qué sonó la alarma del garaje anoche sin motivo aparente",
+  "Preguntar al administrador qué significa el pitido intermitente del detector de humo",
+  "Investigar alerta desconocida en producción"
+ ],
+ "example_tasks_ru": [
+  "Выяснить, почему ночью сработала дачная сигнализация",
+  "Узнать у охраны причину ложной тревоги на складе",
+  "Разобраться с непонятным алертом в Графане"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download the PDF manual for the Kidde smoke and CO alarm",
+   "central": "PDF manual / document"
+  },
+  {
+   "task": "Call the non-emergency police line to ask about alarm permit renewals",
+   "central": "phone call"
+  },
+  {
+   "task": "Buy a 9V lithium battery to stop the hallway detector from chirping",
+   "central": "battery"
+  },
+  {
+   "task": "Update the Confluence runbook for unknown severity-2 alerts",
+   "central": "documentation / runbook"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Install a new wireless siren in the upstairs hallway",
+   "better": "plain siren or plus-badged siren (no question mark)",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Mute the noisy server alerts during the database migration window",
+   "better": "siren or bell with slash / mute symbol",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Forgot the combination to the gym locker padlock",
+   "better": "padlock with question mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a glass cloche for the sourdough boule",
+   "better": "cloche / baking dome",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the annual $45 false alarm fine to the city",
+   "better": "money / bill / payment icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy an emergency weather radio with a flashing beacon",
+   "better": "radio",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon depicts an emergency siren or beacon light with a question-mark badge, representing an unknown alert, false-alarm investigation, or emergency help inquiry. It fits a narrow niche of troubleshooting home security alarms or on-call tech alerts, and at small sizes the unlit dome can look somewhat like a padlock shackle or bell jar.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "848198aa6344965ad4c1ea9df3e0af830b7c6595",
+  "usage": {
+   "prompt": 3922,
+   "output": 1737,
+   "thoughts": 145,
+   "total": 5804
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

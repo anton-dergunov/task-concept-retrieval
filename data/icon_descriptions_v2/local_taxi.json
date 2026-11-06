@@ -1,0 +1,209 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front view of a car with a roof sign",
+  "modifiers": [],
+  "composition": "single object, symmetrical front view"
+ },
+ "readings": [
+  {
+   "meaning": "taxi / cab",
+   "strength": "primary"
+  },
+  {
+   "meaning": "rideshare / Uber / Lyft",
+   "strength": "primary"
+  },
+  {
+   "meaning": "police car or car with roof box",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "airport transfer / shuttle",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the roof sign makes it look very similar to a police car with a light bar or a regular car with a roof cargo box.",
+ "modifier_semantics": [],
+ "domains": [
+  "travel",
+  "finance",
+  "work",
+  "social_family",
+  "admin"
+ ],
+ "task_intents": [
+  "book a taxi to the airport",
+  "schedule an early morning rideshare",
+  "submit cab receipts for reimbursement",
+  "arrange airport pickup for guests",
+  "compare taxi and shuttle fares",
+  "call local cab dispatch number",
+  "tip the rideshare driver in app"
+ ],
+ "example_tasks": [
+  {
+   "task": "Book taxi to Heathrow",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Schedule 4am Uber XL",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Save local cab number",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pre-book for 5:15am",
+   "parent": "Airport Taxi",
+   "domain": "travel"
+  },
+  {
+   "task": "Upload receipts to Concur",
+   "parent": "Client Cab Fares",
+   "domain": "finance"
+  },
+  {
+   "task": "Arrange a cab home for Grandma after the wedding reception",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Claim back the three yellow cab rides from Chicago conference",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check if FreeNow or Bolt works better in Lisbon",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Split the late-night Lyft home with Marcus on Venmo",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Order a six-seater minicab to Victoria Station with space for strollers",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Renew medical transport voucher for Dad's Tuesday dialysis rides",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Confirm fixed-rate fare to the port",
+   "parent": "Rome Airport Transfer",
+   "domain": "travel"
+  },
+  {
+   "task": "Switch payment method to corporate card",
+   "parent": "Uber & Lyft",
+   "domain": "work"
+  },
+  {
+   "task": "Call Radio Taxis to ask if anybody handed in a black umbrella last night",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Reserve a wheelchair-accessible taxi from Penn Station to the hotel before Friday afternoon rush hour",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Write down the hotel address in Japanese characters to show the taxi driver in Kyoto",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Pedir un Cabify al aeropuerto para mañana a las cinco de la mañana",
+  "Guardar los recibos del taxi para pasarlos en la nota de gastos",
+  "Reservar radiotaxi con silla infantil para ir a Atocha"
+ ],
+ "example_tasks_ru": [
+  "Заказать Яндекс Такси с детским креслом в Шереметьево к четырём утра",
+  "Скинуть Ане половину за вчерашнее такси до дома",
+  "Привязать корпоративную карту в приложении такси перед командировкой"
+ ],
+ "context_tasks": [
+  {
+   "task": "Withdraw 50 euros in small bills because local cabs don't take cards",
+   "central": "cash / banknotes"
+  },
+  {
+   "task": "Pack the inflatable booster seat for city Uber rides",
+   "central": "child car seat"
+  },
+  {
+   "task": "Look up what time we need to leave the hotel to catch the 8am flight",
+   "central": "clock / schedule"
+  },
+  {
+   "task": "Buy a local SIM at arrivals so we can hail a ride from the terminal",
+   "central": "SIM card"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Take my car in for the 60,000-mile oil change and tire rotation",
+   "better": "regular car or wrench",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the speeding ticket from the highway patrol",
+   "better": "police car or fine ticket",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Finish filing state and federal income tax returns before April 15",
+   "better": "tax form / document with percent sign",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Mount the Thule roof cargo box before driving to the mountains",
+   "better": "car with luggage rack",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check Uber Eats order status for tonight's Thai dinner",
+   "better": "takeout food bag or delivery scooter",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Renew passport before booking the Tokyo airport transfer",
+   "better": "passport",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts the front of a car with a roof sign, universally recognized as a taxi or cab. It is well-suited for travel and expense tasks involving taxis, rideshares (Uber/Lyft), and airport transfers, though at tiny sizes it can slightly resemble a regular car or police vehicle.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a3b35855ff46059ce2f36d41f25c2da958c31ede",
+  "usage": {
+   "prompt": 3931,
+   "output": 1664,
+   "thoughts": 117,
+   "total": 5712
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

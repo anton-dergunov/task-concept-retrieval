@@ -1,0 +1,212 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined fluffy cloud with flat bottom",
+  "modifiers": [
+   "vertical exclamation mark centered inside the cloud"
+  ],
+  "composition": "single object with centered internal symbol"
+ },
+ "readings": [
+  {
+   "meaning": "cloud storage error, sync failure, or full cloud quota alert",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cloud service outage, server alert, or deployment warning",
+   "strength": "primary"
+  },
+  {
+   "meaning": "severe weather alert or storm warning",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the exclamation point inside the cloud might look like a downward arrow (cloud download).",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "alert, warning, error, failed state, or quota limit reached"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "home",
+  "outdoors",
+  "travel"
+ ],
+ "task_intents": [
+  "fix cloud backup or sync error",
+  "free up full cloud storage space",
+  "resolve server or cloud deployment alert",
+  "troubleshoot failed cloud upload",
+  "check severe weather warning before trip",
+  "configure cloud infrastructure monitoring alerts"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix iCloud backup error",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Google Drive storage full",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Dropbox sync conflict on laptop",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clear out old videos",
+   "parent": "iCloud Storage Full",
+   "domain": "tech"
+  },
+  {
+   "task": "Check why NAS nightly backup failed",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Resolve AWS CloudWatch high CPU alarm on staging",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Free up 15 GB on OneDrive before mail stops working",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Reconnect broken Backblaze backup on mom's iMac",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check National Weather Service winter storm advisory for Friday's drive",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Investigate stuck Nextcloud photo upload queue from phone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Acknowledge pager alerts",
+   "parent": "Cloud Infrastructure",
+   "domain": "work"
+  },
+  {
+   "task": "Delete duplicate RAW folders",
+   "parent": "Dropbox Quota Warning",
+   "domain": "creative"
+  },
+  {
+   "task": "Review triage runbook",
+   "parent": "Production Cloud Outage",
+   "domain": "work"
+  },
+  {
+   "task": "Sort out the 28 unsynced conflicted copies in the shared tax folder before Friday",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Figure out why Google Photos stopped backing up camera roll after the iOS update",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check mountain weather warnings and wind chill forecast before packing for the ridge hike",
+   "parent": "",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Liberar espacio en iCloud porque ya no hace copia del teléfono",
+  "Resolver error de sincronización en la carpeta compartida de Dropbox",
+  "Revisar alerta meteorológica por tormenta antes de salir a la ruta"
+ ],
+ "example_tasks_ru": [
+  "Разобраться, почему не проходит резервное копирование в iCloud",
+  "Почистить Яндекс.Диск, закончилось место",
+  "Проверить штормовое предупреждение на выходные перед выездом"
+ ],
+ "context_tasks": [
+  {
+   "task": "Update expired Visa card for 2TB iCloud plan",
+   "central": "credit card / payment"
+  },
+  {
+   "task": "Export old family videos to external SSD to clear cloud warning",
+   "central": "external hard drive / video files"
+  },
+  {
+   "task": "Bring patio cushions inside before the storm warning hits",
+   "central": "patio furniture / cushions"
+  },
+  {
+   "task": "Post status page update for customers about the cloud outage",
+   "central": "announcement / status message"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Download tax PDFs from cloud drive",
+   "better": "cloud with downward arrow or PDF document",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload wedding photos to Google Drive",
+   "better": "cloud with upward arrow or photos",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay monthly AWS cloud bill",
+   "better": "invoice, receipt, or credit card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy an urgent birthday gift for Maya",
+   "better": "gift box",
+   "trap": "property"
+  },
+  {
+   "task": "Email support about billing address",
+   "better": "envelope / email",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check tomorrow's weather before the picnic",
+   "better": "sun behind cloud (normal weather icon without alert)",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a cloud outline containing an exclamation mark, universally understood in software as a cloud sync error, storage full warning, or service outage (and secondarily a severe weather alert). It fits tasks specifically about fixing broken backups, resolving sync conflicts, freeing up full cloud storage, or handling server alarms, though at tiny sizes the exclamation mark can resemble a download arrow.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "6ce0980d58041a0c5da0bf642f83c2a37f337179",
+  "usage": {
+   "prompt": 3921,
+   "output": 1626,
+   "thoughts": 0,
+   "total": 5547
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

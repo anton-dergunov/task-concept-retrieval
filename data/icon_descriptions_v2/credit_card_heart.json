@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "credit or payment card with magnetic stripe",
+  "modifiers": [
+   "solid heart badge in bottom right corner"
+  ],
+  "composition": "single object in front view with a cutout badge at bottom right"
+ },
+ "readings": [
+  {
+   "meaning": "charitable donation or giving by card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "gift card or loyalty rewards card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "favorite or default payment method",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "health insurance or HSA/FSA card",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be read as a browser window or calendar header with a heart if the magnetic stripe is mistaken for a title bar at very small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "heart badge",
+   "meaning": "charity/donation, gift, loyalty/rewards, health, or favorite/preferred"
+  }
+ ],
+ "domains": [
+  "finance",
+  "shopping",
+  "social_family",
+  "health_fitness",
+  "admin"
+ ],
+ "task_intents": [
+  "donate to a charity or fundraiser",
+  "buy or redeem a gift card",
+  "set default or favorite payment card",
+  "manage loyalty or rewards card points",
+  "use HSA or FSA medical card",
+  "set up recurring monthly charitable giving",
+  "order replacement health insurance card",
+  "sponsor a friend's charity run"
+ ],
+ "example_tasks": [
+  {
+   "task": "Donate $50 to food bank",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Sephora gift card for Maya",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check HSA card balance",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Redeem coffee loyalty points",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Sponsor Sam's charity 10K",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Set the new Visa as default card on Amazon and Apple Pay",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Use up the remaining $18 on that Target gift card",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Set up a $25 monthly recurring donation to Doctors Without Borders",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Activate the replacement FSA debit card before Tuesday's dental appointment",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Register grocery store loyalty card online so the fuel points count",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pick up before Saturday party",
+   "parent": "Teacher Appreciation Gift Cards",
+   "domain": "social_family"
+  },
+  {
+   "task": "Gather receipts for tax deduction",
+   "parent": "Charitable Donations",
+   "domain": "finance"
+  },
+  {
+   "task": "Order replacement for wallet",
+   "parent": "Health Insurance & HSA Cards",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check which ones expire this month",
+   "parent": "Store Loyalty & Rewards Cards",
+   "domain": "shopping"
+  },
+  {
+   "task": "Chip in $40 toward the group REI gift card for Mark's retirement before Friday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Submit the Wikipedia and public radio year-end donations before December 31 for the employer match",
+   "parent": "",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Comprar tarjeta de regalo de Zara para el cumple de Lucía",
+  "Hacer la donación anual a Cruz Roja antes de fin de año",
+  "Activar la tarjeta de puntos de la farmacia en la web"
+ ],
+ "example_tasks_ru": [
+  "Купить подарочную карту в Золотое Яблоко для сестры",
+  "Перевести ежемесячное пожертвование в приют для собак",
+  "Сделать новую карту основной для автоплатежей"
+ ],
+ "context_tasks": [
+  {
+   "task": "Sign up for the organ donor registry when renewing license",
+   "central": "organ donor card / ID card"
+  },
+  {
+   "task": "Update Patreon tier for the history podcast",
+   "central": "creator subscription / podcast"
+  },
+  {
+   "task": "Submit contact lens receipt for FSA reimbursement",
+   "central": "receipt / contact lenses"
+  },
+  {
+   "task": "Pick three charities for our wedding registry",
+   "central": "wedding registry"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay off the Chase credit card balance before the statement closes",
+   "better": "plain credit card without heart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write a heartfelt birthday card for Mom",
+   "better": "greeting card / envelope with heart",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book cardiology checkup with Dr. Patel",
+   "better": "medical heart / stethoscope",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bag up old winter coats to donate to Goodwill",
+   "better": "clothing / donation box",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Schedule blood donation appointment at the Red Cross center",
+   "better": "blood drop / syringe",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Call the plumber about the basement leak",
+   "better": "wrench / pipe / phone",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A payment card paired with a heart badge clearly represents gift cards, loyalty/rewards cards, charitable donations by card, favorite payment methods, or health spending (HSA/FSA) cards. These are all frequent, concrete personal tasks across finance, shopping, and health, and the heart clearly distinguishes it from a generic credit card icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ad8124b2a8f035fd9ce305bd68d962ab1d5f20ab",
+  "usage": {
+   "prompt": 3920,
+   "output": 1691,
+   "thoughts": 0,
+   "total": 5611
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

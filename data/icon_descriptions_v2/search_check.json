@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "magnifying glass with angled handle pointing bottom-right",
+  "modifiers": [
+   "checkmark inside the circular lens"
+  ],
+  "composition": "single object with centered internal glyph"
+ },
+ "readings": [
+  {
+   "meaning": "inspection, audit, or quality check",
+   "strength": "primary"
+  },
+  {
+   "meaning": "verification, fact-checking, or background check",
+   "strength": "primary"
+  },
+  {
+   "meaning": "proofreading or detailed review",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "search complete or found item",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a plain search/magnifying glass icon at very small sizes, or a zoom-in icon if the checkmark is misread as a plus sign.",
+ "modifier_semantics": [
+  {
+   "modifier": "checkmark inside lens",
+   "meaning": "verified, passed inspection, approved, or checked"
+  }
+ ],
+ "domains": [
+  "work",
+  "home",
+  "finance",
+  "admin",
+  "tech",
+  "learning",
+  "career"
+ ],
+ "task_intents": [
+  "schedule or perform an inspection",
+  "conduct an audit or compliance check",
+  "verify facts, credentials, or references",
+  "proofread a document for errors",
+  "run quality assurance testing",
+  "perform a background or credit check",
+  "complete a move-out walkthrough"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pre-purchase inspection",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Fact-check chapters 4 and 5",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "QA test checkout flow",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Walk through with checklist",
+   "parent": "Apartment Move-Out",
+   "domain": "home"
+  },
+  {
+   "task": "Book the termite and roof inspection before the contingency expires Friday",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Run background check on the two shortlisted nanny candidates",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Audit Q3 expense receipts against the corporate card statement",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Proofread the final PDF of the annual report before sending to print",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Verify contractor license number and insurance status on the state board site",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Do a full accessibility audit on the new onboarding screens",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call all three references from the second-round candidate",
+   "parent": "Hiring Senior Designer",
+   "domain": "career"
+  },
+  {
+   "task": "Go over the citations one last time",
+   "parent": "Master's Thesis",
+   "domain": "learning"
+  },
+  {
+   "task": "Sign off on the staging build",
+   "parent": "Release 2.4 QA",
+   "domain": "tech"
+  },
+  {
+   "task": "Go through the rental car with a flashlight and mark every scratch on the inspection sheet",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Double-check every footnote and citation format against the Chicago Manual before submitting the manuscript",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Hire an independent home inspector to check the foundation and electrical panel before making an offer",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Pasar la ITV del coche antes de que caduque el mes que viene",
+  "Auditar las facturas del tercer trimestre con la gestoría",
+  "Revisar las referencias de los candidatos para el puesto de diseño"
+ ],
+ "example_tasks_ru": [
+  "Провести ревизию остатков на складе перед концом квартала",
+  "Вычитать верстку буклета на опечатки перед отправкой в типографию",
+  "Заказать независимую экспертизу квартиры перед подписанием акта приемки"
+ ],
+ "context_tasks": [
+  {
+   "task": "Gather 2024 tax receipts and invoices for the accountant",
+   "central": "receipts / tax documents"
+  },
+  {
+   "task": "Patch the drywall holes in the hallway before the landlord walkthrough",
+   "central": "wall repair / spackle"
+  },
+  {
+   "task": "Pull Equifax and TransUnion credit reports to look for errors",
+   "central": "credit report / document"
+  },
+  {
+   "task": "Fix the broken handrail on the deck before the city inspector comes",
+   "central": "stairs / handrail"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check if the pharmacy has my prescription ready",
+   "better": "pill / pharmacy bottle",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Review slides for tomorrow's client pitch",
+   "better": "presentation slides",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Clean the brass magnifying glass on grandpa's desk",
+   "better": "plain magnifying glass or cleaning cloth",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Zoom in on the backyard survey map to check the fence line",
+   "better": "map or fence",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a certified refurbished monitor for the home office",
+   "better": "computer monitor",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the $450 invoice to the home inspector",
+   "better": "money / invoice / payment",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A magnifying glass with a checkmark inside clearly communicates inspection, verification, auditing, QA, or fact-checking. While generic 'check' or 'review' tasks should use the icon of the object being checked, this icon is a strong fit when the inspection, audit, or verification process itself is the central subject of the task.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b54bca56c977014c5d67e849bfe4727af445ebe6",
+  "usage": {
+   "prompt": 3921,
+   "output": 1703,
+   "thoughts": 0,
+   "total": 5624
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "analog clock face showing four-thirty",
+  "modifiers": [
+   "pill-shaped badge with three horizontal dots at bottom right"
+  ],
+  "composition": "single object with bottom-right corner overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "more time options / schedule settings",
+   "strength": "primary"
+  },
+  {
+   "meaning": "pending / waiting / in progress",
+   "strength": "primary"
+  },
+  {
+   "meaning": "typing or delayed message / scheduled chat",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "timesheet details or time log menu",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The pill badge with three dots can be read as a UI 'more options' button, a typing indicator bubble, a password input field, or an ellipsis meaning 'waiting/pending'.",
+ "modifier_semantics": [
+  {
+   "modifier": "pill-shaped badge with three horizontal dots",
+   "meaning": "more options, details, pending status, or typing indicator"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "tech",
+  "communication",
+  "home"
+ ],
+ "task_intents": [
+  "configure time tracking or schedule settings",
+  "follow up on pending time-sensitive items",
+  "adjust recurring reminder or snooze options",
+  "review detailed billable hours in timesheet",
+  "schedule delayed messages or follow-up pings",
+  "change timezone and working hours preferences"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix Harvest timesheet categories",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Waitlist status for swim lessons",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Tweak Pomodoro timer intervals",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Snooze settings on alarm app",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check pending passport renewal time",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Adjust working hours and timezone in Google Calendar settings",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Set up scheduled send times for Monday client emails",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Fill in missing project codes on last week's Toggl entries",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check how long the warranty claim has been sitting in pending",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Reconfigure smart thermostat weekday schedule slots for winter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Update overtime calculation rules",
+   "parent": "Payroll Setup",
+   "domain": "finance"
+  },
+  {
+   "task": "Change default reminder lead times",
+   "parent": "Calendar Cleanup",
+   "domain": "admin"
+  },
+  {
+   "task": "Review custom interval options",
+   "parent": "HIIT Timer App",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check what's still waiting on approval",
+   "parent": "Q3 Contractor Hours",
+   "domain": "work"
+  },
+  {
+   "task": "Customize quiet hours and notification delay windows on the work Slack profile",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Audit all cron job execution intervals and timeout thresholds on the staging server",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Ajustar las opciones del temporizador y pausas en la app de estudio",
+  "Revisar las horas pendientes de aprobación en el portal de recursos humanos",
+  "Configurar el horario de silencio y respuestas automáticas en WhatsApp Business"
+ ],
+ "example_tasks_ru": [
+  "Настроить интервалы автосохранения и тайм-аута сессии в админке",
+  "Проверить статус зависших заявок с истекающим сроком ожидания",
+  "Заполнить детализацию рабочих часов по клиентским задачам за пятницу"
+ ],
+ "context_tasks": [
+  {
+   "task": "Export Toggl CSV for March",
+   "central": "spreadsheet / CSV file"
+  },
+  {
+   "task": "Ping landlord if no reply by Thursday",
+   "central": "message / landlord"
+  },
+  {
+   "task": "Set oven delay start for sourdough bake",
+   "central": "oven / bread"
+  },
+  {
+   "task": "Hold off on paying invoice until delivery arrives",
+   "central": "invoice / payment"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new wall clock for the kitchen",
+   "better": "plain clock without ellipsis badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace battery in my Casio watch",
+   "better": "wristwatch or battery",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book 4:30 dentist appointment for Leo",
+   "better": "tooth / dentist or calendar",
+   "trap": "property"
+  },
+  {
+   "task": "Reply to Sarah's three unread texts",
+   "better": "chat bubble / message",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order new power strip with surge protection",
+   "better": "power strip / electrical plug",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Send invoice to Acme Corp",
+   "better": "invoice / document with dollar sign",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a clock with an ellipsis ('more' / 'pending') badge, fitting tasks about time settings, timesheet details, scheduled messages, or waiting/pending statuses. However, in a small task list it is easily confused with a plain clock icon, and the ellipsis badge is an abstract UI metaphor rather than a concrete object.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c4cc76cc1e2d7ca81eb5117761abdb498b7a5d05",
+  "usage": {
+   "prompt": 3922,
+   "output": 1656,
+   "thoughts": 0,
+   "total": 5578
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

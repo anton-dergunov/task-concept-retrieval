@@ -1,0 +1,209 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "a hypodermic syringe with plunger, barrel tick marks, and needle",
+  "modifiers": [],
+  "composition": "single object tilted diagonally from top-left to bottom-right"
+ },
+ "readings": [
+  {
+   "meaning": "syringe, injection, or medical shot",
+   "strength": "primary"
+  },
+  {
+   "meaning": "vaccination or immunization",
+   "strength": "primary"
+  },
+  {
+   "meaning": "blood draw or lab test",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "injectable medication (e.g., insulin, allergy shot, pet meds, B12, IVF, GLP-1, botox, thermal paste syringe, marinade injector, ink refill syringe, epoxy syringe, etc. - keep to medical/syringe mainly) - let's say 'injectable medication or insulin'",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the diagonal shape could slightly resemble a color dropper, pipette, or chisel, though the plunger and flange keep it distinct.",
+ "modifier_semantics": [],
+ "domains": [
+  "health_fitness",
+  "social_family",
+  "travel",
+  "shopping",
+  "home",
+  "admin"
+ ],
+ "task_intents": [
+  "book or get a vaccine",
+  "administer daily insulin or medication",
+  "take pet for annual vaccinations",
+  "get a blood draw at lab",
+  "order replacement syringes or needles",
+  "check travel immunization requirements"
+ ],
+ "example_tasks": [
+  {
+   "task": "Flu shot at CVS",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Morning insulin for Barnaby",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order 1ml tuberculin syringes",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Tetanus booster",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Log Tuesday B12 dose",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Schedule the kids' back-to-school immunizations with Dr. Patel",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Get yellow fever and typhoid shots before the Colombia trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Drop off full sharps container at the pharmacy kiosk",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pick up cat's rabies booster certificate from the vet clinic",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Fast after midnight for tomorrow's morning lipid panel blood draw",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Switch Humira pen from fridge to counter thirty minutes early",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Ask nurse whether shingles dose two needs a separate appointment",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Book the 4pm slot on Friday",
+   "parent": "Flu & COVID Boosters",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check what the clinic requires six weeks before departure",
+   "parent": "Kenya Vaccinations",
+   "domain": "travel"
+  },
+  {
+   "task": "Refill needles and alcohol swabs before the box runs out",
+   "parent": "Cat Diabetes Care",
+   "domain": "shopping"
+  },
+  {
+   "task": "Set a recurring 9pm phone alarm so we stop missing evening hormone injections during cycle two",
+   "parent": "IVF Protocol",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Vacuna antirrábica de Toby en el veterinario",
+  "Pedir cita en el centro de vacunación internacional para la fiebre amarilla",
+  "Comprar agujas de insulina de 4 mm y toallitas de alcohol en la farmacia"
+ ],
+ "example_tasks_ru": [
+  "Сделать прививку от гриппа в поликлинике",
+  "Купить инсулиновые шприцы на 1 мл для кота",
+  "Сдать кровь из вены натощак в Инвитро до девяти утра"
+ ],
+ "context_tasks": [
+  {
+   "task": "Print out the yellow WHO immunization booklet for border control",
+   "central": "document / booklet"
+  },
+  {
+   "task": "Buy a small insulated cooler pouch for keeping insulin cold on the flight",
+   "central": "cooler bag / pouch"
+  },
+  {
+   "task": "Apply numbing lidocaine cream to arm an hour before the lab visit",
+   "central": "cream / ointment"
+  },
+  {
+   "task": "Check if health insurance covers the new RSV immunization out of network",
+   "central": "insurance / billing"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Take 500mg amoxicillin pill with breakfast",
+   "better": "pill or capsule",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule annual physical exam with Dr. Nguyen",
+   "better": "stethoscope or doctor",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Take a shot of espresso before the morning run",
+   "better": "coffee cup",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Send passport renewal headshot to the print shop",
+   "better": "camera or portrait photo",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Implement dependency injection in the payment service module",
+   "better": "code brackets",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pick up prescription cough syrup from Walgreens",
+   "better": "medicine bottle",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 5
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a medical syringe with graduation marks and a needle. It is immediately recognizable and fits a common, concrete set of life tasks around vaccinations, injectable medications (like insulin, B12, or pet meds), and blood draws.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5eaddd2b514d41572e88f7e97b7cfbbb23a14942",
+  "usage": {
+   "prompt": 3923,
+   "output": 1015,
+   "thoughts": 0,
+   "total": 4938
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

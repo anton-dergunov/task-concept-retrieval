@@ -1,0 +1,212 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "downward pointing arrow above a solid circular dot",
+  "modifiers": [
+   "solid circular dot below arrow tip"
+  ],
+  "composition": "centered vertical alignment of arrow pointing down at a dot"
+ },
+ "readings": [
+  {
+   "meaning": "arrival / destination point / drop-off",
+   "strength": "primary"
+  },
+  {
+   "meaning": "download / save to device",
+   "strength": "primary"
+  },
+  {
+   "meaning": "exclamation mark / alert",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "insert / place here / pin point",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes it looks strongly like a stylized exclamation mark or a generic download icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "solid circular dot below arrow tip",
+   "meaning": "target point, destination, or arrival node"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "download files for offline use",
+  "confirm arrival or drop-off point",
+  "save backup archive locally",
+  "pull data from remote server",
+  "check in at destination point",
+  "fetch installers and packages"
+ ],
+ "example_tasks": [
+  {
+   "task": "Download offline maps",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Grab tax PDFs",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Confirm drop-off spot",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pull latest database dump",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Save lecture recordings",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Get the Q3 bank statements onto the external drive",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Download the offline episodes before heading to the airport",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set the exact shuttle drop-off pin for Friday morning",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Grab the raw wedding photos from the photographer's link before it expires",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Fetch the new printer driver package from the support page",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pull down all signed contracts from DocuSign into the client folder",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Save all the kids' school immunization PDFs to my phone before registration opens tomorrow",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Download the full high-res topo maps for the Dolomites trail while we still have hotel wifi",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Confirm the exact courier drop-off point at the back loading dock with the warehouse manager",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check the terminal",
+   "parent": "Airport Arrival",
+   "domain": "travel"
+  },
+  {
+   "task": "Grab the remaining ones before Friday",
+   "parent": "Offline Downloads",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Descargar los mapas sin conexión de Islandia antes del vuelo",
+  "Bajar los recibos de la luz del portal en PDF",
+  "Confirmar el punto exacto de llegada del autobús en la estación"
+ ],
+ "example_tasks_ru": [
+  "Скачать офлайн-карты Грузии перед вылетом",
+  "Выгрузить архив фотографий с облака на жёсткий диск",
+  "Уточнить точку высадки у северного входа вокзала"
+ ],
+ "context_tasks": [
+  {
+   "task": "Clean out old installers in the Downloads folder",
+   "central": "folder / cleanup"
+  },
+  {
+   "task": "Message the driver our arrival gate",
+   "central": "message"
+  },
+  {
+   "task": "Free up 20GB on the laptop for the video dump",
+   "central": "storage / hard drive"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Listen to the downloaded audiobook on the commute",
+   "better": "headphones or audiobook",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the update finished",
+   "better": "refresh or system update",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Mark urgent tasks with an exclamation point",
+   "better": "exclamation mark / alert",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Drop off dry cleaning on the way home",
+   "better": "shirt or hanger",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new router for faster download speeds",
+   "better": "wifi router",
+   "trap": "property"
+  },
+  {
+   "task": "Book the hotel near the train station",
+   "better": "bed / hotel",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This abstract UI glyph (an arrow pointing down to a dot, used in icon sets for 'arrow-to-dot', 'arrival', or 'download') has no concrete object and looks very much like an exclamation mark at list size. For downloading or location tasks, a standard tray download icon or map pin is far clearer.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "aa40ee2a8631275483ae31e9ad2ccb9056139dcd",
+  "usage": {
+   "prompt": 3924,
+   "output": 1561,
+   "thoughts": 0,
+   "total": 5485
+  },
+  "soft_problems": [
+   "example_tasks with parent: 2 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

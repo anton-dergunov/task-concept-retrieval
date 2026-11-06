@@ -1,0 +1,212 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "empty right-angled signal strength triangle outline",
+  "modifiers": [
+   "cross mark in bottom right corner"
+  ],
+  "composition": "single geometric symbol with a bottom-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "no cellular signal / offline / no network connection",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mobile data disabled / SIM error",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "geometry right triangle with error",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be mistaken for a geometry or drafting set-square tool, or a volume mute icon if confused with a speaker wedge.",
+ "modifier_semantics": [
+  {
+   "modifier": "cross mark in bottom right corner",
+   "meaning": "disconnected, disabled, absent, or failed"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "communication",
+  "home",
+  "outdoors",
+  "admin"
+ ],
+ "task_intents": [
+  "troubleshoot lost cellular network connection",
+  "prepare apps for offline travel use",
+  "cancel mobile phone service plan",
+  "fix dead cell signal at home",
+  "test app behavior in offline mode",
+  "report network outage to carrier"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix SIM no-service bug",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call Verizon about dead zone",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Download offline maps for Patagonia",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Cancel old T-Mobile data line",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Test offline mode",
+   "parent": "iOS App Release",
+   "domain": "tech"
+  },
+  {
+   "task": "Check why the basement has zero reception after switching carriers",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off roaming and cellular data before the ferry leaves",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Install a cell signal booster in the cabin before winter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Save boarding passes and hotel confirmations for no-signal areas",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Preload playlists and podcasts",
+   "parent": "Backcountry Camping Trip",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Switch the kids' old tablet to offline-only and pull the SIM",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call customer support",
+   "parent": "Cell Service Outage",
+   "domain": "communication"
+  },
+  {
+   "task": "Verify what appears on the checkout screen",
+   "parent": "Offline Mode QA",
+   "domain": "tech"
+  },
+  {
+   "task": "Figure out why my phone drops to no service every time I enter the garage",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure all trail maps and emergency contacts work without cell reception in the canyon",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Set up graceful fallback caching when the field tablet loses cellular connectivity during inspections",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Reclamar a Movistar por la falta de cobertura en el pueblo",
+  "Descargar los mapas sin conexión antes de cruzar la frontera",
+  "Probar cómo responde la app cuando se pierde la señal móvil"
+ ],
+ "example_tasks_ru": [
+  "Скачать офлайн-карты Алтая на случай отсутствия связи",
+  "Позвонить оператору по поводу пропавшей сети на даче",
+  "Отключить мобильную передачу данных перед вылетом в роуминг"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack Garmin inReach satellite communicator for the dead-zone hike",
+   "central": "satellite communicator"
+  },
+  {
+   "task": "Download Spanish dictionary for the flight",
+   "central": "dictionary / language"
+  },
+  {
+   "task": "Swap physical SIM to eSIM at the airport",
+   "central": "SIM card"
+  },
+  {
+   "task": "Enable Wi-Fi calling in phone settings",
+   "central": "phone call / Wi-Fi"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a plastic right-triangle ruler for geometry class",
+   "better": "ruler / set-square",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mute phone notifications during the recital",
+   "better": "bell with slash / mute speaker",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay monthly AT&T wireless bill",
+   "better": "receipt / credit card / money",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy an offline-capable e-reader for the beach",
+   "better": "e-reader / book",
+   "trap": "property"
+  },
+  {
+   "task": "Replace cracked iPhone screen",
+   "better": "smartphone",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check router Wi-Fi password",
+   "better": "Wi-Fi symbol / router",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "This is a system status-bar indicator for 'no cellular signal' (an empty signal wedge with an X), which is OS interface chrome representing a device state rather than a concrete task object. Outside a phone status bar it is easily misread as a geometric triangle or drafting tool, and very few real to-do items have 'no cell signal' as their central subject.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "79b3822cddab75648c2798a0d1f6d22c1836684c",
+  "usage": {
+   "prompt": 3920,
+   "output": 1625,
+   "thoughts": 0,
+   "total": 5545
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

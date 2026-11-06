@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "person lying in a single bed viewed from above",
+  "modifiers": [
+   "medical cross on the blanket",
+   "right-pointing arrow beside the bed"
+  ],
+  "composition": "overhead view of bed on the left with outward arrow on the right"
+ },
+ "readings": [
+  {
+   "meaning": "hospital discharge / leaving inpatient care",
+   "strength": "primary"
+  },
+  {
+   "meaning": "patient transfer or moving a hospital bed",
+   "strength": "primary"
+  },
+  {
+   "meaning": "outpatient transition or home recovery after hospitalization",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the top-down bed with a circle and cross resembles a game controller, a smart doorbell, or a contact card with an export arrow.",
+ "modifier_semantics": [
+  {
+   "modifier": "medical cross on the blanket",
+   "meaning": "hospital, medical care, or inpatient status"
+  },
+  {
+   "modifier": "right-pointing arrow beside the bed",
+   "meaning": "discharge, exit, checkout, or transfer out"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "social_family",
+  "admin",
+  "home",
+  "work"
+ ],
+ "task_intents": [
+  "pick up discharged relative from hospital",
+  "complete hospital discharge paperwork and billing",
+  "prepare home for post-surgery recovery",
+  "transfer patient to rehabilitation facility",
+  "review discharge medication instructions with nurse",
+  "arrange medical transport home from ward",
+  "check out of maternity ward"
+ ],
+ "example_tasks": [
+  {
+   "task": "Hospital discharge paperwork",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Bring dad home from St. Mary's",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Discharge summary review",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Morning ward discharges",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Sign release forms",
+   "parent": "Knee Surgery Recovery",
+   "domain": "admin"
+  },
+  {
+   "task": "Pick up mom from the surgical ward before 11am checkout",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Coordinate transfer from ICU to the step-down rehab clinic",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Get the discharge prescriptions filled at the hospital pharmacy before leaving",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Set up the downstairs guest bed before he comes home from the hospital",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Confirm non-emergency ambulance transport for granddad's move to the nursing home",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Collect itemized billing statement at the admissions desk on the way out",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Pack loose clothes and slip-on shoes",
+   "parent": "Hospital Discharge",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Wait for the floor nurse to remove the IV cannula",
+   "parent": "Hospital Discharge",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Ask the attending physician for the signed return-to-work clearance letter before discharge",
+   "parent": "Appendectomy",
+   "domain": "work"
+  },
+  {
+   "task": "Go over the wound care and red-flag symptoms sheet with the discharge coordinator before leaving",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Bring the infant car seat up to the post-partum room so they let us check out",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Recoger el informe de alta hospitalaria en planta",
+  "Llevar a abuela a casa cuando le den el alta mañana",
+  "Preparar la habitación de abajo antes de que salga de la clínica"
+ ],
+ "example_tasks_ru": [
+  "Забрать выписной эпикриз у лечащего врача перед уходом",
+  "Встретить жену с роддома на выписке в пятницу",
+  "Перевезти дедушку из городской больницы в реабилитационный центр"
+ ],
+ "context_tasks": [
+  {
+   "task": "Rent a folding wheelchair for the ride home from the clinic",
+   "central": "wheelchair"
+  },
+  {
+   "task": "Stock the freezer with easy soups for the first week out of the hospital",
+   "central": "soup / food"
+  },
+  {
+   "task": "Install grab bars in the shower before her discharge date",
+   "central": "shower grab bars"
+  },
+  {
+   "task": "Submit the inpatient stay receipts to the supplemental insurer",
+   "central": "insurance claim / receipts"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check into the surgical admissions desk by 6am fasting",
+   "better": "hospital admission / bed with inward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change the sheets on the guest bed before company arrives",
+   "better": "regular bed",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Export my contacts list from the old phone to a vCard file",
+   "better": "address book / contact card export",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pair the wireless D-pad controller with the living room Apple TV",
+   "better": "gamepad / controller",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof mattress protector for the hospital-grade adjustable bed",
+   "better": "mattress cover / bedding",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the $450 ambulance co-pay bill online",
+   "better": "bill / ambulance",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a top-down view of a person in a bed marked with a medical cross and an outward-pointing arrow, representing hospital discharge or patient transfer out. It fits tasks around leaving inpatient care, picking up a discharged relative, or transitioning to home recovery, though at small sizes the upright rectangle with a circle and cross can be mistaken for a game controller, intercom, or contact card export icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "5abd635d740ce30599670a6ca849eb4469f940df",
+  "usage": {
+   "prompt": 3917,
+   "output": 1769,
+   "thoughts": 0,
+   "total": 5686
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

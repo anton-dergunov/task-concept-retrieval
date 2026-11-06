@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined hourglass or sand timer",
+  "modifiers": [
+   "downward arrow on the right"
+  ],
+  "composition": "side-by-side object and vertical arrow"
+ },
+ "readings": [
+  {
+   "meaning": "reduce time or shorten duration",
+   "strength": "primary"
+  },
+  {
+   "meaning": "countdown or time running out",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cut screen time or time spent",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "sort by duration descending",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be read as a UI sort control (sort by time or age) rather than reducing duration, or confused with a plain hourglass at very small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "downward arrow on the right",
+   "meaning": "decrease, reduce, count down, or descending order"
+  }
+ ],
+ "domains": [
+  "work",
+  "tech",
+  "health_fitness",
+  "home",
+  "hobbies",
+  "learning",
+  "admin"
+ ],
+ "task_intents": [
+  "reduce daily phone screen time",
+  "shorten recurring team meeting durations",
+  "cut down software build time",
+  "decrease customer support wait time",
+  "shave minutes off 5k run",
+  "set up a countdown timer",
+  "trim video or talk length"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cut daily screen time",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Shorten morning standup",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Reduce CI build duration",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Lower 5k lap time",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Drop iPhone limit to 1h",
+   "parent": "Screen Time Detox",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Trim the conference talk rehearsal down from 35 minutes to under 25",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Get cold boot time on the media server under twenty seconds",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Shave ten minutes off the morning school drop-off routine before winter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Cut the weekly all-hands from an hour to 30 minutes",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Bring average ticket first-response wait time below four hours",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Block social apps after 9pm",
+   "parent": "Reduce Screen Time",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Cache node_modules between runs",
+   "parent": "Shorten Deploy Time",
+   "domain": "tech"
+  },
+  {
+   "task": "Switch to 25-minute defaults in Google Calendar",
+   "parent": "Meeting Duration Diet",
+   "domain": "work"
+  },
+  {
+   "task": "Cut the webpack production bundle build from eight minutes down to under two",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Get my Rubik's cube average solve time under forty-five seconds before the meetup",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Reduce evening Doomscrolling on Instagram and Reddit to thirty minutes max per day",
+   "parent": "",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Reducir el tiempo de pantalla diario en el móvil a menos de una hora",
+  "Acortar la reunión diaria del equipo a quince minutos",
+  "Bajar mi tiempo de 10k por debajo de cincuenta minutos"
+ ],
+ "example_tasks_ru": [
+  "Сократить экранное время на телефоне до часа в день",
+  "Уменьшить время сборки проекта в CI до трех минут",
+  "Урезать утреннюю планерку с получаса до пятнадцати минут"
+ ],
+ "context_tasks": [
+  {
+   "task": "Prep dough the night before so breakfast takes less time",
+   "central": "dough / breakfast"
+  },
+  {
+   "task": "Turn off phone notifications during deep work blocks",
+   "central": "phone notifications"
+  },
+  {
+   "task": "Buy a pressure cooker to speed up weeknight stews",
+   "central": "pressure cooker"
+  },
+  {
+   "task": "Delete TikTok from iPad for a month",
+   "central": "TikTok app"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a 3-minute brass sand timer for brewing tea",
+   "better": "plain hourglass or tea icon (no downward arrow modifier)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Quick 5-minute bathroom sink wipe down",
+   "better": "sink or cleaning sponge icon",
+   "trap": "property"
+  },
+  {
+   "task": "Download time-tracking CSV from Toggl",
+   "better": "download or spreadsheet icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check how much time is left on the parking meter",
+   "better": "parking meter or car icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy blue-light glasses for late coding sessions",
+   "better": "glasses icon (even if under a 'Screen Time' project)",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Extend the library book loan for another two weeks",
+   "better": "book icon or hourglass with upward/plus modifier",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines an hourglass (time/duration) with a downward arrow (decrease/reduce or countdown). While it also resembles a 'sort by duration' UI button, it fits a real niche of personal and work tasks focused on reducing screen time, shortening meeting lengths, or cutting down build and wait times.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "6601f7de5cc89cc0ea68ca4de12fe9244aedfc5a",
+  "usage": {
+   "prompt": 3924,
+   "output": 1707,
+   "thoughts": 131,
+   "total": 5762
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

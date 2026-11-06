@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "top bracket or vent opening with three downward arrows",
+  "modifiers": [
+   "three downward arrows"
+  ],
+  "composition": "top arch open at bottom with three staggered vertical arrows pointing down"
+ },
+ "readings": [
+  {
+   "meaning": "air vent, exhaust hood, or downward airflow",
+   "strength": "primary"
+  },
+  {
+   "meaning": "batch download or bulk export from container",
+   "strength": "primary"
+  },
+  {
+   "meaning": "shower head or downward water spray",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "distribute or push updates down to multiple targets",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "looks like either a car/home AC air vent indicator, a range hood exhaust icon, or an inverted bulk-upload/batch-download symbol",
+ "modifier_semantics": [
+  {
+   "modifier": "three downward arrows",
+   "meaning": "multiple streams flowing downward, airflow, or batch downloading"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "clean kitchen range hood exhaust filter",
+  "check HVAC ceiling air vents",
+  "batch download files from cloud",
+  "export all records from database",
+  "fix weak airflow in bathroom vent",
+  "pull latest data backups locally",
+  "descale shower head spray nozzles"
+ ],
+ "example_tasks": [
+  {
+   "task": "Clean stove range hood filter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Batch download 2024 tax PDFs",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Vacuum dusty ceiling air vents",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pull all photos from iCloud",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Replace charcoal filter mesh",
+   "parent": "Kitchen exhaust hood",
+   "domain": "home"
+  },
+  {
+   "task": "Degrease the stainless baffles inside the over-range vent hood",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Bulk export all client invoices from Stripe before Friday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check why the upstairs bedroom AC register has almost no airflow",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Download the full archive of raw wedding photos before link expires",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Open the damper in the basement ductwork for winter heating",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Grab all 14 lecture recordings",
+   "parent": "Course downloads",
+   "domain": "learning"
+  },
+  {
+   "task": "Check noise on high fan speed",
+   "parent": "Bathroom exhaust fan",
+   "domain": "home"
+  },
+  {
+   "task": "Run the script to pull the last three months",
+   "parent": "Server log backups",
+   "domain": "tech"
+  },
+  {
+   "task": "Soak the clogged metal grease screens from the kitchen extractor hood in hot soapy water",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Batch download all quarterly bank statements from Chase and BofA into the local tax folder",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Measure the ceiling air return grille in the hallway so we order the right filter size",
+   "parent": "",
+   "domain": "shopping"
+  }
+ ],
+ "example_tasks_es": [
+  "Desengrasar los filtros metálicos de la campana extractora de la cocina",
+  "Descargar en bloque todas las facturas del trimestre pasado desde el portal",
+  "Limpiar las rejillas de ventilación del aire acondicionado del salón"
+ ],
+ "example_tasks_ru": [
+  "Отмыть жировые решетки кухонной вытяжки в посудомойке",
+  "Массово скачать все архивы фотографий с Яндекс Диска на внешний диск",
+  "Проверить тягу в вентиляционной решетке в ванной комнате"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy 20x25x1 MERV 11 pleated furnace filters",
+   "central": "air filter"
+  },
+  {
+   "task": "Free up 50GB on external SSD before pulling raw video files",
+   "central": "hard drive"
+  },
+  {
+   "task": "Call HVAC tech about rattling sound in attic duct",
+   "central": "phone call / technician"
+  },
+  {
+   "task": "Install aria2c for parallel file grabbing",
+   "central": "software tool"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Download the new Spotify update on my phone",
+   "better": "single download arrow or phone icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the signed lease PDF to the tenant portal",
+   "better": "upload arrow pointing up into bracket",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a breathable mesh running shirt for summer",
+   "better": "t-shirt or running shoe icon",
+   "trap": "property"
+  },
+  {
+   "task": "Vent to Sarah over coffee about the project reorg",
+   "better": "coffee cup or speech bubbles",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the $180 HVAC maintenance invoice",
+   "better": "credit card, money, or invoice icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check the weather forecast for high winds tomorrow",
+   "better": "wind gusts or weather cloud icon",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "Shows an open bottom bracket at the top with three arrows pointing downward out of it. It naturally reads either as downward airflow from a ceiling vent / range hood or as a batch download / multi-item export from a container, making it useful for HVAC/ventilation chores and bulk downloading tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "57cac1fc9863903e8e0efed32ce99e5079293702",
+  "usage": {
+   "prompt": 3925,
+   "output": 1685,
+   "thoughts": 0,
+   "total": 5610
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

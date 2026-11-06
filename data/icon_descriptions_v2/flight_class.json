@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "passenger seat profile facing right with a cabin window",
+  "modifiers": [
+   "horizontal bar beneath seat"
+  ],
+  "composition": "side profile of seat and window"
+ },
+ "readings": [
+  {
+   "meaning": "window seat (airplane or train seat selection/booking task_intent: book or select a seat on a flight or train, or airline seat assignment/upgrade/repair",
+   "strength": "primary"
+  },
+  {
+   "meaning": "airplane or train passenger cabin / economy or business class seating",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "car seat or vehicle upholstery",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the L-shaped seat profile and oval window can look like the letters 'L' and 'O' or the number '10' above an underline.",
+ "modifier_semantics": [
+  {
+   "modifier": "vertical rounded rectangle on upper right",
+   "meaning": "cabin window (airplane or train), indicating a window seat"
+  },
+  {
+   "modifier": "horizontal bar under seat",
+   "meaning": "seat base or floor rail"
+  }
+ ],
+ "domains": [
+  "travel",
+  "shopping",
+  "home",
+  "admin"
+ ],
+ "task_intents": [
+  "select or change flight seat assignment",
+  "book window seat on train",
+  "upgrade airline seat before departure",
+  "buy travel cushion for plane seat",
+  "clean or repair vehicle passenger seat",
+  "reserve seats together for family trip"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pick flight seats",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Reserve window seat to Chicago",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Upgrade seat on Tokyo flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check seat map again",
+   "parent": "BA 284 to London",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix driver seat lumbar lever",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pay the extra $38 for an exit row window seat on the red-eye",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Move our seats together before check-in opens on Thursday morning",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Book quiet coach window seat on the 08:15 Eurostar to Paris",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Switch from middle to aisle or window if anything opens up",
+   "parent": "Delta flight to Denver",
+   "domain": "travel"
+  },
+  {
+   "task": "Order inflatable memory foam seat cushion for the 14-hour flight",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Vacuum crumbs out of the back passenger seats before road trip",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Claim refund for paid seat selection after airline equipment swap",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Compare SeatGuru layout for the 777-300ER so we don't get a misaligned window",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Call Amtrak to move grandma to a lower-level seat near the restroom",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Double check that both kids are assigned seats next to an adult on the return leg",
+   "parent": "Summer Italy Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Pick seats on the regional jet leg before only the back row is left",
+   "parent": "Q3 Client Onsite",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Elegir asiento de ventanilla en el AVE a Madrid",
+  "Cambiar asientos del vuelo de Iberia para sentarnos juntos",
+  "Reclamar el cobro doble por la selección de asiento en Ryanair"
+ ],
+ "example_tasks_ru": [
+  "Выбрать место у окна на рейс до Сочи",
+  "Поменять места в Сапсане на вагон без животных",
+  "Докупить место с увеличенным пространством для ног на обратный перелёт"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check in for Lufthansa flight 454 at 23:00",
+   "central": "online flight check-in / boarding pass"
+  },
+  {
+   "task": "Buy gel neck pillow for the overnight bus",
+   "central": "neck pillow"
+  },
+  {
+   "task": "Download offline movies for the 11-hour flight",
+   "central": "movies / tablet"
+  },
+  {
+   "task": "Pack dramamine in carry-on bag",
+   "central": "medication / carry-on"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Clean the exterior bedroom windows before winter",
+   "better": "house window frame with panes",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Install rear-facing infant car seat in the Subaru",
+   "better": "baby / child safety seat",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Reupholster the six dining room chairs",
+   "better": "four-legged dining chair",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update Windows 11 on the home laptop",
+   "better": "computer / OS logo",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book round-trip flights to Lisbon for October",
+   "better": "airplane",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check whether the train to Zurich has a dining car",
+   "better": "train / dining utensils",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a side profile of a reclined passenger seat next to a rounded vertical cabin window, the standard symbol for an airplane or train seat (specifically a window seat). It fits tasks around selecting, upgrading, or managing transit seats, though at very small sizes the geometry can briefly resemble the characters 'L0' with an underline.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "655f1aa3ca3e5b116defb338c5423ef9b32756fe",
+  "usage": {
+   "prompt": 3924,
+   "output": 1045,
+   "thoughts": 0,
+   "total": 4969
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "vertical parallel bars of varying widths like a barcode",
+  "modifiers": [
+   "four L-shaped corner viewfinder brackets"
+  ],
+  "composition": "centered barcode surrounded by a four-corner rectangular scanning frame"
+ },
+ "readings": [
+  {
+   "meaning": "barcode or UPC code",
+   "strength": "primary"
+  },
+  {
+   "meaning": "scan a barcode or product label",
+   "strength": "primary"
+  },
+  {
+   "meaning": "product inventory, SKU, or price lookup",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a plain barcode icon without brackets, a QR code scanner, or a generic document scanner at very small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "four L-shaped corner viewfinder brackets",
+   "meaning": "camera viewfinder or scanning action"
+  }
+ ],
+ "domains": [
+  "shopping",
+  "work",
+  "home",
+  "tech",
+  "health_fitness",
+  "admin",
+  "hobbies",
+  "finance"
+ ],
+ "task_intents": [
+  "scan product barcodes into an app",
+  "print barcode labels for inventory",
+  "register UPC codes for new products",
+  "scan books or media into catalog",
+  "scan food barcodes for nutrition tracking",
+  "set up or fix barcode scanner",
+  "scan return barcode at drop-off counter"
+ ],
+ "example_tasks": [
+  {
+   "task": "Scan Amazon return barcode",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Print new SKU barcodes",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Buy GS1 UPC barcodes",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Test USB barcode scanner",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Label bins with barcodes",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Scan all hardcover books on the living room shelves into Libib",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Scan pantry staples into Cronometer before starting the new macro split",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Cut out UPC barcodes from cereal boxes for the school fundraiser",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Generate EAN-13 barcodes for the three new hot sauce flavors",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pair the Bluetooth barcode scanner with the iPad register before Saturday's market",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Do the shelves in aisle 3",
+   "parent": "Warehouse Barcode Audit",
+   "domain": "work"
+  },
+  {
+   "task": "Finish the boxed sets in the closet",
+   "parent": "Discogs Barcode Scanning",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Fix the crooked ones on the ceramic mugs",
+   "parent": "Product Barcode Labels",
+   "domain": "work"
+  },
+  {
+   "task": "Add the Code 128 font to the template",
+   "parent": "Barcode Label Setup",
+   "domain": "tech"
+  },
+  {
+   "task": "Scan every receipt and UPC from the appliance purchase to submit the manufacturer rebate form",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check why the Zebra handheld scanner isn't reading the glossy barcodes on the small pouches",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Escanear el código de barras de la devolución en Correos",
+  "Imprimir las etiquetas con código de barras para el inventario de la tienda",
+  "Escanea los productos de la cena en MyFitnessPal"
+ ],
+ "example_tasks_ru": [
+  "Отсканировать штрихкоды со всех квитанций ЖКХ в банковском приложении",
+  "Распечатать штрихкоды для поставки на Wildberries",
+  "Настроить ручной сканер штрихкодов на кассе"
+ ],
+ "context_tasks": [
+  {
+   "task": "Take the mismatched curtain rods back to Target with the receipt barcode",
+   "central": "curtain rods / return package"
+  },
+  {
+   "task": "Count remaining winter hoodies in the back room",
+   "central": "hoodies / inventory"
+  },
+  {
+   "task": "Log all meals and snacks for a full week",
+   "central": "food diary / nutrition"
+  },
+  {
+   "task": "Catalog the garage tool bins into HomeBox",
+   "central": "storage bins / tools"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Make a QR code for the guest Wi-Fi password in the hallway",
+   "better": "QR code (2D square matrix)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Scan the signed lease agreement to PDF and email it to the landlord",
+   "better": "document scanner or PDF document",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Schedule the knee MRI scan at the imaging clinic",
+   "better": "medical / hospital / MRI icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Install new vertical blinds in the sliding glass doorway",
+   "better": "window / blinds icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a roll of 2x1 thermal stickers for the Dymo printer",
+   "better": "printer or label roll",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check the unit prices on olive oil at Costco",
+   "better": "price tag or olive oil bottle",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a 1D barcode inside four viewfinder brackets, universally understood as a barcode or barcode scanning. It fits specific tasks around retail inventory, shipping returns, cataloging media collections, and nutrition logging, though it shares space with plain barcode and QR code icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a424101fe065bedf4e8a09ad31a669fa77001c61",
+  "usage": {
+   "prompt": 3926,
+   "output": 1679,
+   "thoughts": 0,
+   "total": 5605
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

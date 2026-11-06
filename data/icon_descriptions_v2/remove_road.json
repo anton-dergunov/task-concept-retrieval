@@ -1,0 +1,204 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two solid vertical lines flanking a dashed center line",
+  "modifiers": [
+   "x mark in bottom right corner"
+  ],
+  "composition": "top-down road lane symbol with a badge in the bottom-right"
+ },
+ "readings": [
+  {
+   "meaning": "road closed / street closure / detour",
+   "strength": "primary"
+  },
+  {
+   "meaning": "lane keeping assist off / lane departure disabled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "remove column / delete vertical divider",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the parallel vertical lines look like a barcode, pause symbol, or abstract UI divider rather than a road.",
+ "modifier_semantics": [
+  {
+   "modifier": "x mark",
+   "meaning": "closed, blocked, disabled, or removed"
+  }
+ ],
+ "domains": [
+  "travel",
+  "admin",
+  "home",
+  "work",
+  "tech"
+ ],
+ "task_intents": [
+  "check road closures before driving",
+  "apply for street closure permit",
+  "plan detour around blocked highway",
+  "disable lane assist in car settings",
+  "report blocked street to city",
+  "notify neighbors of driveway blockage"
+ ],
+ "example_tasks": [
+  {
+   "task": "Check I-70 road closures",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Block party street permit",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Turn off lane assist permanently",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Find detour around Main St",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Report blocked alley",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call city public works about the cul-de-sac closure next Tuesday",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Map alternate school drop-off route while Oak Ave is torn up",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Warn moving truck company about the bridge closure on Route 9",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Figure out how to disable aggressive lane-keep beep in the rental Subaru",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check mountain pass closure status before packing the ski car",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Submit traffic control and lane closure plan to the county engineer",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Print signs for the marathon street closures and tape them to posts",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Ask the HOA board when the back gate road will reopen after repaving",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check DOT website on Friday morning",
+   "parent": "Tahoe Winter Drive",
+   "domain": "travel"
+  },
+  {
+   "task": "Get neighbor signatures for the city petition",
+   "parent": "Summer Block Party Street Closure",
+   "domain": "social_family"
+  },
+  {
+   "task": "Send updated delivery map to the concrete supplier",
+   "parent": "Front Road Trenching Closure",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Revisar cortes de calles por la maratón del domingo",
+  "Solicitar permiso municipal para cortar la calle durante la mudanza",
+  "Desactivar el asistente de cambio de carril en la configuración del coche"
+ ],
+ "example_tasks_ru": [
+  "Проверить перекрытия дорог в центре перед поездкой на вокзал",
+  "Отключить систему удержания в полосе в бортовом компьютере",
+  "Согласовать перекрытие проезда на время разгрузки крана"
+ ],
+ "context_tasks": [
+  {
+   "task": "Rent orange cones and barricades for the neighborhood street fair",
+   "central": "traffic cone / barricade"
+  },
+  {
+   "task": "Download offline maps for the detour through the canyon",
+   "central": "map"
+  },
+  {
+   "task": "Take the Subaru in to calibrate the windshield lane camera",
+   "central": "car / camera"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Scan invalid barcodes in the warehouse inventory",
+   "better": "barcode with x or scanner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book flights and rental car for the Route 66 road trip",
+   "better": "car or airplane",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Fix the broken zipper on my winter parka",
+   "better": "jacket or zipper",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy snow chains in case the pass requires traction devices",
+   "better": "tire chains or snow tire",
+   "trap": "property"
+  },
+  {
+   "task": "Order folding tables and chairs for the block party",
+   "better": "table / chair",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a top-down road lane marking (solid outer lines, dashed center line) with an 'X' badge, representing a road/lane closure or disabling a vehicle's lane-keeping system. However, without perspective or context, the three vertical lines are very abstract and easily mistaken for a barcode, pause symbol, or table column control.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "fc738fc8e2d347888d26f6249b91c2cbb808eb75",
+  "usage": {
+   "prompt": 3927,
+   "output": 1553,
+   "thoughts": 0,
+   "total": 5480
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

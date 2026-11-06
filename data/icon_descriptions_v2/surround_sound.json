@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rounded rectangular frame containing a circle flanked by curved arcs",
+  "modifiers": [
+   "curved signal arcs on left and right"
+  ],
+  "composition": "single icon, centered inside a landscape rectangular frame"
+ },
+ "readings": [
+  {
+   "meaning": "center-weighted metering (camera exposure mode)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "motion sensor / presence detector",
+   "strength": "primary"
+  },
+  {
+   "meaning": "live stream / broadcast screen",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "smart doorbell / intercom chime",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Standard camera metering symbol, but outside photography UI it strongly resembles a wall-mounted motion sensor, wireless transmitter, or paper banknote.",
+ "modifier_semantics": [
+  {
+   "modifier": "curved signal arcs on left and right",
+   "meaning": "radiating signal, sensing zone, or center-weighted brackets"
+  }
+ ],
+ "domains": [
+  "hobbies",
+  "creative",
+  "tech",
+  "home",
+  "work"
+ ],
+ "task_intents": [
+  "install motion sensor in hallway",
+  "replace battery in presence sensor",
+  "configure camera metering mode",
+  "set up live stream broadcast",
+  "test smart home occupancy sensor",
+  "practice center-weighted exposure metering",
+  "mount wireless doorbell chime box"
+ ],
+ "example_tasks": [
+  {
+   "task": "Hallway motion sensor battery",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pair Zigbee presence sensor",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Test camera metering modes",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Swap out the dead CR2450",
+   "parent": "Garage Motion Sensor",
+   "domain": "home"
+  },
+  {
+   "task": "Adjust sensitivity in Home Assistant",
+   "parent": "Bathroom Occupancy Sensor",
+   "domain": "tech"
+  },
+  {
+   "task": "Mount Aqara mmWave sensor under the kitchen cabinet",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Assign custom button C2 to toggle center-weighted metering",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Compare spot vs center-weighted metering on backlit portraits",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Set up Twitch live stream scene in OBS",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Wire 24V power to the wall intercom unit",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check livestream audio levels before the town hall",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Stick command strips on the backplate",
+   "parent": "Stairwell Motion Detector",
+   "domain": "home"
+  },
+  {
+   "task": "Move it higher up the corner",
+   "parent": "Driveway Motion Sensor",
+   "domain": "home"
+  },
+  {
+   "task": "Angle the patio motion detector down so neighbourhood cats stop triggering the floodlight",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Shoot a test roll on the Nikon FM2 using only the center-weighted meter",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Configure HomeKit automation to turn off basement lights ten minutes after the sensor clears",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la pila del sensor de movimiento del pasillo",
+  "Probar la medición ponderada al centro en la Sony A7",
+  "Ajustar la sensibilidad del detector de presencia del garaje para que no salte con el perro"
+ ],
+ "example_tasks_ru": [
+  "Заменить батарейку в датчике движения в прихожей",
+  "Настроить центровзвешенный замер экспозиции на камере",
+  "Приклеить датчик присутствия Aqara под полку на кухне и привязать к Яндекс Станции"
+ ],
+ "context_tasks": [
+  {
+   "task": "Order 5-pack of CR2450 coin cells for the hallway sensors",
+   "central": "battery"
+  },
+  {
+   "task": "Run flat USB-C cable along the doorframe for the mmWave radar",
+   "central": "cable"
+  },
+  {
+   "task": "Read manual section on exposure compensation and metering",
+   "central": "manual / book"
+  },
+  {
+   "task": "Clean lens contacts on the 50mm prime",
+   "central": "camera lens"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Withdraw $200 cash from the ATM for the flea market",
+   "better": "banknote / dollar bill",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy motion-activated solar floodlight for the shed",
+   "better": "floodlight / lamp",
+   "trap": "property"
+  },
+  {
+   "task": "Send the security camera footage from Tuesday night to the HOA",
+   "better": "security camera / video file",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Submit electric meter reading before the 25th",
+   "better": "utility meter / gauge",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Set up new Wi-Fi router in the living room",
+   "better": "router / wifi symbol",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order replacement brass screws for the mounting bracket",
+   "better": "screw / hardware",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "Literally the standard photography glyph for center-weighted average metering (a circle between two parentheses inside a viewfinder frame), which general users also read as a wall-mounted motion sensor or wireless broadcasting screen. It fits specific photography, smart-home sensor, or streaming tasks, though at small sizes it can be confused with a banknote or generic Wi-Fi hotspot icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "8497d870c65e1371abca672d909c6943b696b5a9",
+  "usage": {
+   "prompt": 3923,
+   "output": 1690,
+   "thoughts": 0,
+   "total": 5613
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

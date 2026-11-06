@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "empty hourglass or sand timer outline",
+  "modifiers": [
+   "circular badge with checkmark at bottom right"
+  ],
+  "composition": "single object in front profile with lower-right corner badge overlay"
+ },
+ "readings": [
+  {
+   "meaning": "timer completed / countdown finished",
+   "strength": "primary"
+  },
+  {
+   "meaning": "time tracking or logged hours approved",
+   "strength": "primary"
+  },
+  {
+   "meaning": "screen time limit or app usage quota set",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "waiting period or hold expired",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a generic completed task status icon or a plain hourglass/waiting icon if the badge isn't distinguished from the timer concept.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular badge with checkmark",
+   "meaning": "completed, verified, approved, or enabled"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "tech",
+  "home",
+  "social_family",
+  "learning",
+  "finance"
+ ],
+ "task_intents": [
+  "approve weekly logged billable hours",
+  "verify screen time limits on devices",
+  "submit completed timesheet for payroll",
+  "check whether waiting period has elapsed",
+  "confirm Pomodoro timer settings in app",
+  "buy sand timer for board games",
+  "audit time tracking entries for client"
+ ],
+ "example_tasks": [
+  {
+   "task": "Approve contractor timesheets",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "3-minute egg timer",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Submit Toggl hours",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Review and sign off",
+   "parent": "Biweekly Timesheets",
+   "domain": "admin"
+  },
+  {
+   "task": "Order replacement 2-minute sand timer",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Turn on 45-minute daily limit for YouTube on Leo's iPad",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Verify that the 90-day probation period is officially marked complete",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Reconcile Harvest time logs against October retainer before invoicing",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Confirm the 48-hour escrow hold has cleared with the bank",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Test whether oven auto-shutoff timer actually cuts power when done",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set up 25/5 intervals",
+   "parent": "Pomodoro Study Routine",
+   "domain": "learning"
+  },
+  {
+   "task": "Enable downtime rules",
+   "parent": "Kids' Screen Time",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix missing Friday entries",
+   "parent": "Harvest Time Tracking",
+   "domain": "work"
+  },
+  {
+   "task": "Double-check that all billable design hours from last sprint are locked and approved",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Make sure the 14-day cooling-off period on the solar contract has passed without issues",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Configure automatic session timeout to 15 minutes of inactivity on the staging portal",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Aprobar las horas registradas del equipo en Clockify antes del viernes",
+  "Activar el límite de tiempo en pantalla de una hora para TikTok",
+  "Comprar reloj de arena de 3 minutos para cepillarse los dientes"
+ ],
+ "example_tasks_ru": [
+  "Подтвердить отработанные часы фрилансеров в табеле за ноябрь",
+  "Настроить лимит экранного времени на планшете сына",
+  "Песочные часы на 5 минут для заваривания чая"
+ ],
+ "context_tasks": [
+  {
+   "task": "Take sourdough loaf out of the Dutch oven after 20 minutes covered",
+   "central": "bread / oven"
+  },
+  {
+   "task": "Rinse bleach off bathroom grout once the 15-minute dwell time is up",
+   "central": "bathroom cleaning"
+  },
+  {
+   "task": "Do two 25-minute focused blocks on constitutional law flashcards",
+   "central": "flashcards / study"
+  },
+  {
+   "task": "Hold plank for a full 2 minutes without dropping knees",
+   "central": "plank exercise"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Quick 10-minute tidy of the living room before guests arrive",
+   "better": "broom or sofa",
+   "trap": "property"
+  },
+  {
+   "task": "Buy a new mechanical wristwatch with a leather strap",
+   "better": "wristwatch",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace the cracked wine glasses before Thanksgiving dinner",
+   "better": "wine glass",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check train departure times for Saturday morning trip to Bath",
+   "better": "train",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Email Sarah the updated tax residency certificate",
+   "better": "certificate / email",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Pay overdue water bill before the late fee kicks in tomorrow",
+   "better": "bill / water drop",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows an hourglass with a checkmark badge, representing completed timers, approved time tracking/timesheets, screen time limits, or elapsed waiting periods. It fits a clear niche of time-logging and timer tasks, though users must be careful not to apply it to any task that merely mentions a duration or deadline.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "523030190f3de84ad71047af0310f4181db796ea",
+  "usage": {
+   "prompt": 3921,
+   "output": 1694,
+   "thoughts": 0,
+   "total": 5615
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

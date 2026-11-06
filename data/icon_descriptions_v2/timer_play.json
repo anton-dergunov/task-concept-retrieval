@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "stopwatch casing with top button and angled side lug",
+  "modifiers": [
+   "right-pointing solid play triangle inside face"
+  ],
+  "composition": "single circular object, front view, play symbol centered inside"
+ },
+ "readings": [
+  {
+   "meaning": "start timer or stopwatch",
+   "strength": "primary"
+  },
+  {
+   "meaning": "time tracking or billable hours session",
+   "strength": "primary"
+  },
+  {
+   "meaning": "timed workout or interval session (HIIT, Pomodoro, speedrun, timed test, cooking timer) ",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "stopwatch or kitchen timer device",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be mistaken for a generic video play button if the top stopwatch buttons are overlooked at very small sizes, or confused with a plain stopwatch icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "right-pointing solid play triangle inside face",
+   "meaning": "start, run, active session, or resume timing"
+  }
+ ],
+ "domains": [
+  "work",
+  "learning",
+  "health_fitness",
+  "food",
+  "tech",
+  "hobbies"
+ ],
+ "task_intents": [
+  "set up time tracking for work",
+  "start a timed study test",
+  "do a timed interval workout",
+  "buy or fix a stopwatch",
+  "measure duration or speed of something",
+  "practice a presentation under a time limit"
+ ],
+ "example_tasks": [
+  {
+   "task": "Toggl setup for Q3",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Buy waterproof coach stopwatch",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "25-minute Pomodoro sprint on intro",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Export June billable hours",
+   "parent": "Time Tracking",
+   "domain": "work"
+  },
+  {
+   "task": "New battery for track timer",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Time the full 15-slide investor pitch from cold start to final Q&A",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Do four 40-second plank intervals with 20-second rests between sets",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Run a strictly timed 35-minute LSAT logic games section without pausing",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Set up Clockify project tags for the new retainer client",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clock how long the cold-start boot actually takes after BIOS update",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clean sticky lap button",
+   "parent": "Track Coaching",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Switch clients to Harvest",
+   "parent": "Billable Hours",
+   "domain": "work"
+  },
+  {
+   "task": "Check accuracy against phone",
+   "parent": "Kitchen Timer",
+   "domain": "food"
+  },
+  {
+   "task": "Measure exact pull time and yield on the morning espresso shots this week",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Record baseline 400m and 800m split times at the high school track before Saturday",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Audit last week's Harvest timers to make sure all support tickets got logged properly",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Cronometrar el discurso de defensa de tesis para no pasar de 20 minutos",
+  "Configurar Toggl en el móvil para registrar las horas del cliente nuevo",
+  "Hacer 5 series de abdominales de 45 segundos con cronómetro"
+ ],
+ "example_tasks_ru": [
+  "Засечь точное время заваривания улуна проливами",
+  "Настроить трекер рабочего времени для нового проекта на фрилансе",
+  "Прорешать пробный вариант ЕГЭ строго по таймеру за 3 часа 55 минут"
+ ],
+ "context_tasks": [
+  {
+   "task": "Bake sourdough loaves at 450F for 20 minutes covered then 25 uncovered",
+   "central": "bread / baking"
+  },
+  {
+   "task": "Soft-boil half a dozen eggs for ramen",
+   "central": "eggs"
+  },
+  {
+   "task": "Practice 5-minute lightning talk on database indexing",
+   "central": "presentation"
+  },
+  {
+   "task": "Steep cold brew batch for 16 hours before filtering",
+   "central": "coffee"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Watch the recorded onboarding video before Friday",
+   "better": "play button / video",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay overtime wages to warehouse staff",
+   "better": "money / payroll",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a vintage mechanical pocket watch at the flea market",
+   "better": "watch / clock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Quick 10-minute tidy up of the living room",
+   "better": "broom / cleaning",
+   "trap": "property"
+  },
+  {
+   "task": "Schedule dentist appointment for 2:30 PM",
+   "better": "calendar / tooth",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order replacement chest strap for heart rate monitor",
+   "better": "heart rate monitor",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines a stopwatch silhouette with a central play triangle, universally understood as 'start timer', 'stopwatch', or 'time tracking'. It fits tasks about time-tracking tools (Toggl, Harvest), timed practice/exams, interval workouts, and physical timers, though at tiny sizes it shares visual elements with both a standard stopwatch and a media play button.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "461eeea92ace8478ae3b764b174ea0916f81b341",
+  "usage": {
+   "prompt": 3923,
+   "output": 1024,
+   "thoughts": 0,
+   "total": 4947
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

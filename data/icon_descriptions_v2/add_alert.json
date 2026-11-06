@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined bell with top loop and bottom clapper",
+  "modifiers": [
+   "plus sign inside the bell body"
+  ],
+  "composition": "single object, front view, centered modifier inside"
+ },
+ "readings": [
+  {
+   "meaning": "add notification or reminder",
+   "strength": "primary"
+  },
+  {
+   "meaning": "set new alarm or alert",
+   "strength": "primary"
+  },
+  {
+   "meaning": "medical alert or emergency siren",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "subscribe to updates or alerts",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The plus sign inside the bell can be read either as 'add/create a notification' or as a medical cross on an emergency siren/light.",
+ "modifier_semantics": [
+  {
+   "modifier": "plus sign",
+   "meaning": "add, create new, enable, or medical cross"
+  }
+ ],
+ "domains": [
+  "tech",
+  "admin",
+  "finance",
+  "health_fitness",
+  "work",
+  "shopping",
+  "travel"
+ ],
+ "task_intents": [
+  "set up new reminder or alert",
+  "enable push notifications in app",
+  "configure price drop or stock alert",
+  "schedule recurring medication alarm on phone",
+  "add calendar alert for upcoming deadline",
+  "create monitoring alert for server uptime",
+  "register for emergency or weather alerts"
+ ],
+ "example_tasks": [
+  {
+   "task": "Set 5:30am flight alarm",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Add pill reminder on watch",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Turn on bank SMS alerts",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Configure for CPU spikes",
+   "parent": "Datadog Alerts",
+   "domain": "tech"
+  },
+  {
+   "task": "Enable for school closures",
+   "parent": "County SMS Notifications",
+   "domain": "admin"
+  },
+  {
+   "task": "Set a Google Flights price alert for the October Tokyo trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Add a recurring 30-day reminder to swap the furnace filter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Create a CamelCamelCamel stock alert for the OLED Switch",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Set up a PagerDuty alert for failed checkout webhook calls",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Enable low-balance push notifications on the joint checking account",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Add two-week warning before passport expiration date in calendar",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Set up for Grandma's evening blood pressure meds",
+   "parent": "Phone Alarms",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Add Slack webhook channel for high-priority tickets",
+   "parent": "On-Call Alerting",
+   "domain": "work"
+  },
+  {
+   "task": "Create an automated email alert whenever credit card utilization goes above thirty percent",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Set up a daily 8pm phone reminder to log toddler inhaler doses in the tracker",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Add an instock notification on Rogue Fitness for the 20kg calibrated steel plates",
+   "parent": "",
+   "domain": "shopping"
+  }
+ ],
+ "example_tasks_es": [
+  "Poner alarma a las 4:45 para el tren a Atocha",
+  "Activar avisos de cobro en la app del BBVA",
+  "Crear alerta en Idealista para pisos con terraza en Chamberí"
+ ],
+ "example_tasks_ru": [
+  "Поставить напоминание за 3 дня до сдачи показаний счётчиков",
+  "Настроить пуш-уведомления о списаниях по карте Тинькофф",
+  "Добавить будильник на 7:15 для приёма антибиотиков"
+ ],
+ "context_tasks": [
+  {
+   "task": "Register phone number with city reverse-911 emergency system",
+   "central": "phone number / emergency registration"
+  },
+  {
+   "task": "Test the new medical alert pendant with Mom's landline",
+   "central": "medical alert pendant"
+  },
+  {
+   "task": "Triage noisy Prometheus rules before my on-call shift starts",
+   "central": "monitoring rules"
+  },
+  {
+   "task": "Subscribe to library hold pickup texts",
+   "central": "library holds"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Mute all Slack notifications during deep work blocks",
+   "better": "bell with a slash (bell-off)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Wire up the new Ring doorbell transformer at the front porch",
+   "better": "doorbell button or house door",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a brass handlebar bell for Leo's commuter bike",
+   "better": "bicycle or plain bell without plus",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace 9V battery in the hallway smoke alarm",
+   "better": "smoke detector or battery",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Remind Dave to bring the folding chairs on Saturday",
+   "better": "chat bubble or phone call",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Restock band-aids and antiseptic wipes in the car first aid kit",
+   "better": "first aid kit / medical cross box",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a notification bell with a plus sign inside, universally understood as adding a reminder, alarm, or alert notification. It fits concrete tasks about setting up alerts (price drops, server monitoring, bank notifications, pill alarms), though the centered cross can occasionally suggest a medical alert.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "4bb34bffb6bf59c5374537e686de6c61d0e91e97",
+  "usage": {
+   "prompt": 3925,
+   "output": 1713,
+   "thoughts": 0,
+   "total": 5638
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

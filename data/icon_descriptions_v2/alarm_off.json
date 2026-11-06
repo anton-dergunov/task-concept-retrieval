@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "circular alarm clock with two top angled bars",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single object, front view, struck through by diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "alarm off or disabled alarm",
+   "strength": "primary"
+  },
+  {
+   "meaning": "timer off or cancel timer",
+   "strength": "primary"
+  },
+  {
+   "meaning": "sleep in or no wake-up alarm",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "remove reminder or unschedule",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the diagonal slash hides the clock hands and merges with the left alarm bell, making it look slightly like a generic prohibition sign or a crossed-out stopwatch.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash from top-left to bottom-right",
+   "meaning": "disabled, turned off, cancelled, or muted"
+  }
+ ],
+ "domains": [
+  "home",
+  "health_fitness",
+  "travel",
+  "tech",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "turn off morning wake-up alarm",
+  "disable recurring phone alarm before holiday",
+  "clear old unused alarms on phone",
+  "mute bedroom alarm clock for weekend",
+  "cancel scheduled timer or reminder",
+  "turn off guest room alarm clock",
+  "disable smart speaker morning routine alarm"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off 6am alarm",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Disable weekday phone alarms",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Delete old alarms",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Unplug guest room clock",
+   "parent": "Morning Alarms",
+   "domain": "home"
+  },
+  {
+   "task": "Switch off for Monday",
+   "parent": "Wake-up Alarm",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Turn off the 5:30am gym alarm before the bank holiday",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Clear out the forty random one-off alarms cluttering the Clock app",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable Echo Dot bedroom alarm so it doesn't wake the house sitters",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check that the hotel bedside radio alarm isn't set for 5am by the last guest",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Cancel the daily standup alert on my watch while on PTO",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Skip tomorrow morning",
+   "parent": "6am Running Alarm",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Pause for school break",
+   "parent": "Kids' Wake-up Alarms",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off all recurring work alarms on both phones before flying out to Lisbon tonight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out how to permanently disable the loud beep on the kitchen oven timer",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Stop the sunrise alarm lamp from turning on at 6:15 every Saturday and Sunday morning",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Make sure my old iPad in the drawer has all its morning alarms switched off",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Apagar la alarma de las 6:30 para el puente del viernes",
+  "Borrar las cincuenta alarmas viejas acumuladas en el reloj del móvil",
+  "Desactivar el despertador de Alexa antes de irnos de vacaciones"
+ ],
+ "example_tasks_ru": [
+  "Выключить будильник на 7 утра перед майскими праздниками",
+  "Удалить десятки старых ненужных будильников в телефоне",
+  "Отключить утренний будильник на умной колонке в детской на каникулы"
+ ],
+ "context_tasks": [
+  {
+   "task": "Set up PTO auto-responder and pause Slack notifications for next week",
+   "central": "vacation preparation / out of office"
+  },
+  {
+   "task": "Sleep in until 9am on Saturday to catch up on rest after the deadline",
+   "central": "sleep / recovery"
+  },
+  {
+   "task": "Configure Apple Watch Sleep Focus schedule for weekends",
+   "central": "smartwatch settings"
+  },
+  {
+   "task": "Quiet the bedroom down for the night shift recovery day",
+   "central": "bedroom environment"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Set an alarm for 4:15am to catch the early airport shuttle",
+   "better": "alarm clock (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a silent non-ticking bedside analog clock for the bedroom",
+   "better": "clock / shopping",
+   "trap": "property"
+  },
+  {
+   "task": "Disarm the home security alarm system before the cleaners arrive at 10",
+   "better": "shield or security keypad",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace the 9V battery in the hallway smoke alarm that keeps chirping",
+   "better": "smoke detector or battery",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check how much time is left on the parking meter",
+   "better": "stopwatch or parking meter",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pack the charging cable for my bedside travel clock",
+   "better": "cable / charger",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts an alarm clock struck through with a diagonal slash, universally understood as turning off or disabling an alarm or timer. While narrow, it fits real, common tasks like turning off weekday wake-up alarms before a holiday or clearing old phone alarms, and must be distinguished from setting an alarm or dealing with security/smoke alarms.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "4c7580fc14c3a3cde47971ce8f1510a061648e45",
+  "usage": {
+   "prompt": 3921,
+   "output": 1755,
+   "thoughts": 91,
+   "total": 5767
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,210 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rounded square outline with an X cross inside",
+  "modifiers": [
+   "centered X cross",
+   "right-pointing arrow at bottom right corner"
+  ],
+  "composition": "single geometric symbol with bottom-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "export or forward cancelled or rejected items",
+   "strength": "primary"
+  },
+  {
+   "meaning": "close and exit or leave without saving",
+   "strength": "primary"
+  },
+  {
+   "meaning": "move out failed or invalid entries",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "checkbox cancel and proceed",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "An abstract UI action glyph combining a cancel/close box with an export/next arrow; easily confused with generic close, delete, or log-out icons, and in a task list it strongly resembles a cancelled checkbox.",
+ "modifier_semantics": [
+  {
+   "modifier": "centered X cross",
+   "meaning": "close, cancel, reject, failed, or invalid"
+  },
+  {
+   "modifier": "right-pointing arrow at bottom right corner",
+   "meaning": "export, send out, move forward, or exit"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "finance"
+ ],
+ "task_intents": [
+  "export failed records to file",
+  "move rejected items out of queue",
+  "handle close-and-exit UI state",
+  "forward cancelled orders to billing",
+  "extract invalid rows from dataset",
+  "route failed webhook events elsewhere"
+ ],
+ "example_tasks": [
+  {
+   "task": "Export failed stripe charges",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Dump rejected CSV rows",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Forward cancelled bookings list",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Send out bounced emails report",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pull invalid SKUs out",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Move failed background jobs into the dead-letter queue for inspection",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Export all cancelled subscriptions from Q3 for the churn spreadsheet",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Wire up the discard-and-exit button on the modal dialog",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Send list of declined credit card renewals to account managers",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Extract rejected insurance claims into a separate folder for appeal",
+   "parent": "Medical Bills",
+   "domain": "admin"
+  },
+  {
+   "task": "Check why the close-and-redirect flow hangs on Safari",
+   "parent": "Checkout Redesign",
+   "domain": "tech"
+  },
+  {
+   "task": "Send the final count to the caterer",
+   "parent": "Cancelled RSVPs",
+   "domain": "social_family"
+  },
+  {
+   "task": "Clean up the old logs",
+   "parent": "Failed Export Jobs",
+   "domain": "tech"
+  },
+  {
+   "task": "Export the rows that failed schema validation during last night's customer import run",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Forward all rejected expense receipts from the Berlin trip back to the contractors",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Make sure closing the onboarding wizard without saving redirects cleanly to the dashboard",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Exportar las filas con errores de validación del archivo de clientes",
+  "Enviar la lista de pedidos cancelados al almacén",
+  "Corregir el botón de cerrar y salir sin guardar en el formulario"
+ ],
+ "example_tasks_ru": [
+  "Выгрузить отклонённые заявки в отдельный CSV-файл",
+  "Переслать список отменённых броней администратору отеля",
+  "Починить переход при закрытии окна без сохранения"
+ ],
+ "context_tasks": [
+  {
+   "task": "Write unit tests for dead-letter queue routing",
+   "central": "unit tests"
+  },
+  {
+   "task": "Ask Sarah why her script drops rejected rows silently",
+   "central": "Sarah / script"
+  },
+  {
+   "task": "Document the modal close behavior in the design system",
+   "central": "documentation"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cancel Netflix subscription before Friday",
+   "better": "TV / streaming or credit card with slash",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Close the old checking account at Chase",
+   "better": "bank building",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Export Q4 tax transactions to CSV",
+   "better": "spreadsheet or file export icon without X",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the broken toaster out to the trash",
+   "better": "toaster or trash bin",
+   "trap": "property"
+  },
+  {
+   "task": "Email the venue about the deposit",
+   "better": "envelope / email",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 1,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is an abstract UI chrome glyph (an X-box with an outward arrow) with no clear real-world object meaning. In a to-do list it looks like a cancelled checkbox rather than a task subject, and almost any real task about cancelling, closing, or exporting is better served by an icon of the thing being cancelled or exported.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "0952be29e4a7dad210743995fdbbf7ae751d92c7",
+  "usage": {
+   "prompt": 3921,
+   "output": 1606,
+   "thoughts": 0,
+   "total": 5527
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "charging station kiosk with a lightning bolt and plug cord",
+  "modifiers": [
+   "lightning bolt symbol",
+   "two-prong electrical plug"
+  ],
+  "composition": "single object, front view, cord and plug extending to the right"
+ },
+ "readings": [
+  {
+   "meaning": "electric vehicle charging station or EV charger",
+   "strength": "primary"
+  },
+  {
+   "meaning": "charging an electric car or vehicle",
+   "strength": "primary"
+  },
+  {
+   "meaning": "home wallbox EV charger",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Closely resembles a standard gasoline fuel pump at small sizes if the plug prongs and lightning bolt are missed.",
+ "modifier_semantics": [
+  {
+   "modifier": "lightning bolt symbol",
+   "meaning": "electricity or battery charging"
+  },
+  {
+   "modifier": "two-prong electrical plug",
+   "meaning": "electric power rather than liquid fuel"
+  }
+ ],
+ "domains": [
+  "travel",
+  "home",
+  "finance",
+  "shopping",
+  "admin",
+  "work"
+ ],
+ "task_intents": [
+  "charge electric car at station",
+  "install home EV wall charger",
+  "plan charging stops for trip",
+  "apply for EV charger rebate",
+  "buy charging adapter or cable",
+  "set up charging network account",
+  "repair garage charging port"
+ ],
+ "example_tasks": [
+  {
+   "task": "Charge the Leaf overnight",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order NACS to CCS1 adapter",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Call electrician",
+   "parent": "Garage Wallbox Install",
+   "domain": "home"
+  },
+  {
+   "task": "Submit utility rebate paperwork",
+   "parent": "EV Charger",
+   "domain": "finance"
+  },
+  {
+   "task": "Top up battery before trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Map out fast-charging stops along I-5 for the drive to Portland",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set off-peak charging schedule in the car to start after 11pm",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Get three quotes for a 50-amp NEMA 14-50 outlet in the garage",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Compare ChargePoint Home Flex vs Grizzl-E for winter weather",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Update expired Visa card in the Electrify America and EVgo apps",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Ask HOA board about installing a shared pedestal in the visitor lot",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Mount cable holster on the stud",
+   "parent": "Home EV Charger",
+   "domain": "home"
+  },
+  {
+   "task": "Export Q3 kWh logs for expense report",
+   "parent": "Company EV Charging",
+   "domain": "work"
+  },
+  {
+   "task": "Stop at the Baker Supercharger for twenty minutes to reach Vegas with 30% buffer",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "File city electrical permit and utility load calculation worksheet for the 48A hardwired wallbox",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Test the mobile connector on the 240V dryer outlet at the cabin before winter",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Pedir presupuesto para instalar el cargador Wallbox en la plaza de garaje",
+  "Planificar las paradas de carga rápida en la ruta a Valencia con ABRP",
+  "Solicitar la ayuda del Plan MOVES III para el punto de recarga"
+ ],
+ "example_tasks_ru": [
+  "Зарядить электромобиль до 80% перед поездкой на дачу",
+  "Купить переходник Type 2 — CCS для быстрых зарядок на трассе",
+  "Согласовать с УК установку зарядной станции на паркинге"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download PlugShare and ABRP before the road trip",
+   "central": "phone apps"
+  },
+  {
+   "task": "Switch home electric plan to time-of-use rate for the new EV",
+   "central": "electricity bill / utility plan"
+  },
+  {
+   "task": "Reserve a hotel in Moab that has free Level 2 destination charging",
+   "central": "hotel booking"
+  },
+  {
+   "task": "Keep a heavy padlock in the frunk for the J1772 adapter",
+   "central": "padlock"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Fill up the rental car with regular unleaded before returning it to Hertz",
+   "better": "gas pump (without electric plug)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a braided USB-C fast charger cable for my nightstand",
+   "better": "phone charger or USB cable",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Dispute the double charge from the parking garage on my Amex statement",
+   "better": "credit card or receipt",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a small waterproof rechargeable headlamp for camping",
+   "better": "headlamp",
+   "trap": "property"
+  },
+  {
+   "task": "Rotate tires and top off washer fluid",
+   "better": "car or tire",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check whether the campsite has 30-amp RV hookups",
+   "better": "camper / RV or electrical outlet",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts an electric vehicle charging station (a fuel-pump silhouette combined with a lightning bolt and an electrical plug on the hose). It is the exact match for tasks about charging an EV, planning charging stops, or installing a home wallbox, though at tiny sizes it can briefly be confused with a regular gas pump.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "bfdc7e5a956395fc84b465f0df66a0543c4d6cb7",
+  "usage": {
+   "prompt": 3926,
+   "output": 1711,
+   "thoughts": 0,
+   "total": 5637
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": "ev_station"
+ }
+}

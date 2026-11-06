@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "contactless radio wave arcs inside a circle",
+  "modifiers": [
+   "diagonal strike-through slash"
+  ],
+  "composition": "single circular badge crossed out diagonally"
+ },
+ "readings": [
+  {
+   "meaning": "contactless payment disabled or not accepted",
+   "strength": "primary"
+  },
+  {
+   "meaning": "NFC off or broken",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no Wi-Fi or wireless signal",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "mute sound or speaker off",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the diagonal slash obscures the inner arcs, making it easy to confuse with a generic 'no Wi-Fi', 'mute', or 'prohibited' symbol.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal strike-through slash",
+   "meaning": "disabled, turned off, broken, or not allowed"
+  }
+ ],
+ "domains": [
+  "finance",
+  "tech",
+  "travel",
+  "shopping",
+  "admin"
+ ],
+ "task_intents": [
+  "disable contactless payment on bank card",
+  "replace debit card with broken tap-to-pay",
+  "turn off NFC on phone",
+  "fix Apple Pay or Google Wallet",
+  "withdraw cash for cash-only places",
+  "order RFID-blocking wallet or sleeves"
+ ],
+ "example_tasks": [
+  {
+   "task": "Disable card tap limit",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Fix broken Apple Pay",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "RFID sleeves for passports",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Turn off kids' debit tap",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Call bank",
+   "parent": "Broken Contactless Card",
+   "domain": "finance"
+  },
+  {
+   "task": "Order replacement Visa because tap-to-pay stopped working at grocery checkouts",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Debug why NFC reader fails when scanning transit cards",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Switch off contactless in banking app before lending card",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Print 'No Tap / Chip Only' sign for Saturday booth",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Test after OS update",
+   "parent": "Phone NFC Issues",
+   "domain": "tech"
+  },
+  {
+   "task": "Check settings in Chase app",
+   "parent": "Disable Contactless",
+   "domain": "finance"
+  },
+  {
+   "task": "Buy shielded cardholder",
+   "parent": "RFID / Contactless Protection",
+   "domain": "shopping"
+  },
+  {
+   "task": "Grab $60 cash from the ATM since the taco truck's tap reader is down",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Figure out why my Pixel won't tap at the subway turnstile anymore without unlocking",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Call credit union to turn off tap-to-pay completely on the joint household checking card",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Remind Square support that our terminal drops contactless cards after every firmware update",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar el pago sin contacto en la tarjeta del banco",
+  "Pedir duplicado de la Visa porque no funciona el contactless",
+  "Comprar cartera con bloqueo RFID antes del viaje"
+ ],
+ "example_tasks_ru": [
+  "Отключить бесконтактную оплату по детской карте в приложении",
+  "Разобраться, почему перестал работать NFC на телефоне после обновления",
+  "Заменить банковскую карту с неработающим чипом оплаты касанием"
+ ],
+ "context_tasks": [
+  {
+   "task": "Withdraw €100 in small bills for Berlin bakeries",
+   "central": "cash / banknotes"
+  },
+  {
+   "task": "Pack physical credit cards in case phone battery dies",
+   "central": "credit card"
+  },
+  {
+   "task": "Audit privacy and radio settings on new Android phone",
+   "central": "smartphone settings"
+  },
+  {
+   "task": "Order backup chip-and-PIN reader for craft fair",
+   "central": "card terminal"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay electric bill online before Friday",
+   "better": "credit card or bill invoice",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Set up Apple Pay on new iPhone",
+   "better": "contactless symbol WITHOUT slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix garage Wi-Fi dead zone",
+   "better": "Wi-Fi router or Wi-Fi off icon (vertical arcs)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a minimalist leather wallet that happens to be RFID-blocking",
+   "better": "wallet",
+   "trap": "property"
+  },
+  {
+   "task": "Silence phone notifications during piano recital",
+   "better": "bell with slash or mute speaker",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update budget spreadsheet with weekend spending",
+   "better": "spreadsheet or calculator",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon depicts the sideways radio-wave arcs of the contactless payment / NFC emblem inside a circle, crossed out by a diagonal slash. It fits a narrow niche of tasks around broken tap-to-pay cards, disabling NFC/contactless features, or RFID blocking, though at list size it is easily confused with Wi-Fi-off or mute-sound icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "495459fcfba7a1a273946e16cd0b23f48f8ee376",
+  "usage": {
+   "prompt": 3925,
+   "output": 1657,
+   "thoughts": 0,
+   "total": 5582
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

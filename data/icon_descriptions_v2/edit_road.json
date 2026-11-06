@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "vertical road segment with solid edges and dashed center line",
+  "modifiers": [
+   "diagonal pencil in bottom-right corner"
+  ],
+  "composition": "top-down road symbol with lower-right edit badge"
+ },
+ "readings": [
+  {
+   "meaning": "edit road or update map data",
+   "strength": "primary"
+  },
+  {
+   "meaning": "plan or customize a driving route",
+   "strength": "primary"
+  },
+  {
+   "meaning": "roadwork, street repair, or driveway paving",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "log driving mileage or trip itinerary",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the vertical solid and dashed bars can look like a barcode, pause symbol, or table column border adjustment.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal pencil in bottom-right corner",
+   "meaning": "edit, customize, draw, or log"
+  }
+ ],
+ "domains": [
+  "travel",
+  "outdoors",
+  "home",
+  "work",
+  "admin",
+  "tech"
+ ],
+ "task_intents": [
+  "plan a custom driving route",
+  "edit road segments on map",
+  "reroute trip around highway closures",
+  "schedule driveway or street repairs",
+  "report missing street on map",
+  "trace scenic backroads for trip",
+  "log business driving mileage"
+ ],
+ "example_tasks": [
+  {
+   "task": "Map out Blue Ridge route",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix driveway gravel ruts",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Submit cul-de-sac to OpenStreetMap",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Redraw delivery zone boundaries",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Reroute around I-80 closure",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Add the new subdivision streets to our local GIS layer",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Draft scenic coastal bypass for the Oregon drive next month",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Report the unpaved forest service road status on Gaia GPS",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "File city request to repaint faded crosswalk lines on Oak",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Adjust morning commute route to skip the bridge toll",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Sketch where the new gravel turnaround goes by the barn",
+   "parent": "Driveway Repaving",
+   "domain": "home"
+  },
+  {
+   "task": "Update day three stops to stay off the interstate",
+   "parent": "Southwest Road Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Check which mountain passes are still gravel",
+   "parent": "Colorado Scenic Drive",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Fix the one-way tags near the train station",
+   "parent": "OpenStreetMap Edits",
+   "domain": "tech"
+  },
+  {
+   "task": "Rework the second day driving leg so we avoid the mountain pass after dark",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Send the county engineer our marked-up survey of where the lane shoulder is crumbling",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Trazar la ruta alternativa por carretera secundaria para evitar el peaje de la AP-7",
+  "Reportar el cambio de sentido en nuestra calle en Google Maps",
+  "Marcar los baches del camino de entrada que hay que rellenar con grava"
+ ],
+ "example_tasks_ru": [
+  "Проложить маршрут в объезд ремонта на трассе М-4",
+  "Отметить новый шлагбаум и грунтовку в Народной карте",
+  "Записать пробег по рабочим поездкам за октябрь"
+ ],
+ "context_tasks": [
+  {
+   "task": "Get three quotes for hot-mix asphalt sealing before October",
+   "central": "asphalt / driveway"
+  },
+  {
+   "task": "Download offline state maps to the Garmin before leaving",
+   "central": "GPS device / map"
+  },
+  {
+   "task": "Check tire pressure and oil before the long highway leg",
+   "central": "car maintenance"
+  },
+  {
+   "task": "Buy reflective driveway markers before the first snowplow run",
+   "central": "reflector stakes"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book the rental car for the Amalfi Coast trip",
+   "better": "car",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Adjust column widths in the Q3 budget spreadsheet",
+   "better": "table columns",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Edit the barcode labels for the warehouse bins",
+   "better": "barcode",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the cooler and camp chairs for the road trip",
+   "better": "cooler or luggage",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy road bike tires with better puncture protection",
+   "better": "bicycle tire",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check if the street parking permit was approved",
+   "better": "parking sign or permit document",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a top-down two-lane road segment combined with an edit pencil, directly representing map road editing, custom route planning, or street/driveway work. While useful for road-trip routing and GIS/mapping tasks, the three vertical bars can resemble a barcode or column divider at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "3bee422103c8d3e38da17b4628646784aa5ace83",
+  "usage": {
+   "prompt": 3924,
+   "output": 1667,
+   "thoughts": 186,
+   "total": 5777
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

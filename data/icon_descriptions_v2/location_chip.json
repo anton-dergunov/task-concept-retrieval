@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "horizontal stadium-shaped oval outline containing a map pin",
+  "modifiers": [
+   "map pin centered inside"
+  ],
+  "composition": "centered map pin inside a thick horizontal pill or track outline"
+ },
+ "readings": [
+  {
+   "meaning": "running track or stadium location",
+   "strength": "primary"
+  },
+  {
+   "meaning": "Bluetooth item tracker or smart tag (AirTag, Tile)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "geofence, location zone, or pill button with location",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "VR headset with virtual tour / location marker",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes it looks like an eye, a generic location button, a toggle switch, or a keyhole inside a plate; the oval outline can read as either an athletic track, a smart tracker fob, or a UI pill.",
+ "modifier_semantics": [
+  {
+   "modifier": "map pin centered inside",
+   "meaning": "location, tracking, or specific place"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "tech",
+  "travel",
+  "home",
+  "outdoors",
+  "shopping"
+ ],
+ "task_intents": [
+  "find a nearby running track",
+  "replace battery in smart tracker",
+  "attach location tag to luggage",
+  "set up geofence home automation",
+  "check stadium public lap hours",
+  "track lost keys or bag"
+ ],
+ "example_tasks": [
+  {
+   "task": "New CR2032 for bike AirTag",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Find a 400m public track",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Tile tracker for dad's keys",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Check open hours before Tuesday",
+   "parent": "High school running track",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Pair the new ones",
+   "parent": "Luggage AirTags",
+   "domain": "travel"
+  },
+  {
+   "task": "Slip a location tag into the camera bag lining before flying",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix the HomeKit geofence radius so the porch lights trigger earlier",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Scout which local stadium track has lights on after 7pm",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Move the dog collar tracker to the winter harness",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Share suitcase tracker locations with Maya in Find My",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Test the boundary alert when leaving the driveway",
+   "parent": "Geofence automations",
+   "domain": "tech"
+  },
+  {
+   "task": "Order silicone keyrings for the three remaining tags",
+   "parent": "Smart trackers",
+   "domain": "shopping"
+  },
+  {
+   "task": "Look up whether the college oval track is open to community runners on weekends",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Swap the dead battery in the glovebox Tile before the road trip up north",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set up a location-based reminder zone around the hardware store on 5th Ave",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Measure the exact lane 4 distance at the park oval on satellite map",
+   "parent": "",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la pila del AirTag de la mochila",
+  "Buscar una pista de atletismo pública cerca del trabajo para las series del jueves",
+  "Configurar la geocerca de la calefacción para que se encienda al salir de la oficina"
+ ],
+ "example_tasks_ru": [
+  "Поменять батарейку в брелоке-трекере от ключей",
+  "Узнать расписание свободного входа на школьный стадион для пробежек",
+  "Кинуть метку AirTag в чехол с горными лыжами перед сдачей в багаж"
+ ],
+ "context_tasks": [
+  {
+   "task": "Do 6x800m intervals at 5k pace on Tuesday morning",
+   "central": "running / intervals"
+  },
+  {
+   "task": "Pack the two checked suitcases for Lisbon",
+   "central": "suitcase / luggage"
+  },
+  {
+   "task": "Spare house keys for the pet sitter",
+   "central": "keys"
+  },
+  {
+   "task": "Thermostat away-mode schedule",
+   "central": "thermostat"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book eye exam with Dr. Patel for new contact prescription",
+   "better": "eye or glasses",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take daily probiotic capsule before breakfast",
+   "better": "pill / capsule",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Track monthly grocery spending in the spreadsheet",
+   "better": "spreadsheet or chart",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Clean the sliding patio door track with a stiff brush",
+   "better": "door or brush",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a waterproof GPS watch for trail running",
+   "better": "smartwatch",
+   "trap": "property"
+  },
+  {
+   "task": "Buy new spiked shoes for the 1500m meet",
+   "better": "running shoe",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon shows a map pin inside a stadium/oval outline, representing either an athletic track location, a geofence/location pill, or a physical smart tracker fob (like a Tile or AirTag). Because the outer capsule is abstract, it is somewhat ambiguous and can easily be mistaken for an eye at small sizes, limiting it to niche location-tracking or stadium tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "32c67e7f02efbcfff0bd78b639aea18b68a61d7a",
+  "usage": {
+   "prompt": 3924,
+   "output": 1721,
+   "thoughts": 0,
+   "total": 5645
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

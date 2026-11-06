@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "calendar page with two top binding tabs",
+  "modifiers": [
+   "counterclockwise circular arrow in bottom right corner"
+  ],
+  "composition": "single object with corner badge"
+ },
+ "readings": [
+  {
+   "meaning": "reschedule or change date",
+   "strength": "primary"
+  },
+  {
+   "meaning": "recurring schedule or repeat event",
+   "strength": "primary"
+  },
+  {
+   "meaning": "past events or calendar history",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "sync or refresh calendar",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a generic calendar icon, a calendar sync icon (two arrows), or a snooze/postpone icon (clockwise arrow).",
+ "modifier_semantics": [
+  {
+   "modifier": "counterclockwise circular arrow",
+   "meaning": "revert, repeat, reschedule, refresh, or history"
+  }
+ ],
+ "domains": [
+  "admin",
+  "work",
+  "health_fitness",
+  "social_family",
+  "tech",
+  "home"
+ ],
+ "task_intents": [
+  "reschedule an existing appointment",
+  "set up recurring calendar events",
+  "sync shared calendar feeds",
+  "restore deleted calendar entries",
+  "review past appointment history",
+  "reset weekly schedule routine",
+  "move conflicting meeting dates"
+ ],
+ "example_tasks": [
+  {
+   "task": "Reschedule Friday's client demo",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Reset weekly meal prep schedule",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Sync Google and Apple calendars",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix broken iCal feed",
+   "parent": "Family Calendar",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear out old repeats",
+   "parent": "Work Calendar",
+   "domain": "admin"
+  },
+  {
+   "task": "Move the 6-month dental cleaning to a Tuesday afternoon in November",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Set up recurring biweekly trash and recycling reminders on the family calendar",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check appointment history to see when the last tetanus booster actually was",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Roll back the team sprint schedule to Monday mornings instead of Wednesdays",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Re-book the missed physical therapy session before the referral expires this month",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Update all recurring 1-on-1 invites for the new winter time zone shift",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Compare school holiday dates",
+   "parent": "2026 Schedule",
+   "domain": "social_family"
+  },
+  {
+   "task": "Color-code everyone's shifts",
+   "parent": "Shared Calendar",
+   "domain": "social_family"
+  },
+  {
+   "task": "Push the anniversary dinner reservation back a week so both kids can babysit the dog",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Audit the last six months of calendar blocks to see where deep work time went",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Restore the accidentally deleted summer camp dates from the backup ICS file on my laptop",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Reprogramar la cita del oculista para la próxima semana",
+  "Sincronizar el calendario de turnos con el móvil de Marta",
+  "Revisar el historial de citas médicas del año pasado para el seguro"
+ ],
+ "example_tasks_ru": [
+  "Перенести запись к стоматологу на следующий четверг",
+  "Настроить повторяющиеся напоминания в семейном календаре",
+  "Синхронизировать рабочий календарь в телефоне после обновления"
+ ],
+ "context_tasks": [
+  {
+   "task": "Call Dr. Patel's office to move the blood test",
+   "central": "phone call / blood test"
+  },
+  {
+   "task": "Cancel recurring gym membership before the 1st",
+   "central": "gym membership / subscription"
+  },
+  {
+   "task": "Set up automatic monthly rent transfer",
+   "central": "bank transfer / rent"
+  },
+  {
+   "task": "Rebuild the morning routine around 6am wakeups",
+   "central": "morning routine / alarm"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new wall calendar with big squares for the kitchen",
+   "better": "plain calendar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reschedule flight to Chicago on United app",
+   "better": "airplane",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Renew annual car registration before the 30th",
+   "better": "car or document",
+   "trap": "property"
+  },
+  {
+   "task": "Return overdue library books on Tuesday",
+   "better": "book",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order birthday cake for Leo's party",
+   "better": "cake",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check browser history for that recipe link",
+   "better": "clock with counterclockwise arrow / browser",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a standard calendar outline with a counterclockwise circular arrow in the bottom-right corner, clearly signaling rescheduling, recurring events, calendar syncing, or date history. It is a strong fit for administrative tasks about moving appointments, managing recurring schedules, or fixing calendar feeds, though for specific events (flights, haircuts) the event's own object is usually a better choice.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "09bd84e3e0aec989df3ec2ef8fe195adf64a8f05",
+  "usage": {
+   "prompt": 3924,
+   "output": 1671,
+   "thoughts": 0,
+   "total": 5595
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

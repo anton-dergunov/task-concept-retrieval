@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "half flame and half snowflake divided diagonally",
+  "modifiers": [
+   "diagonal split"
+  ],
+  "composition": "split composite symbol, upper-left flame, lower-right snowflake"
+ },
+ "readings": [
+  {
+   "meaning": "HVAC, heating and cooling, climate control",
+   "strength": "primary"
+  },
+  {
+   "meaning": "heat pump or dual-mode air conditioner",
+   "strength": "primary"
+  },
+  {
+   "meaning": "thermostat or temperature regulation",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "hot and cold contrast therapy (sauna and ice bath)",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the diagonal line of the snowflake can look like a 'disabled' slash striking through a flame (no fire).",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal split",
+   "meaning": "dual function combining heating (flame) and cooling (snowflake)"
+  }
+ ],
+ "domains": [
+  "home",
+  "shopping",
+  "finance",
+  "health_fitness",
+  "tech"
+ ],
+ "task_intents": [
+  "schedule annual HVAC maintenance visit",
+  "service or replace home heat pump",
+  "configure smart thermostat heating cooling schedules",
+  "compare quotes for mini-split installation",
+  "replace furnace and AC air filters",
+  "do sauna and cold plunge session",
+  "troubleshoot car climate control system"
+ ],
+ "example_tasks": [
+  {
+   "task": "Book fall HVAC tune-up",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Clean mini-split filters",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Sauna and ice plunge",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Order 16x25x1 MERV 11 filters",
+   "parent": "HVAC Maintenance",
+   "domain": "shopping"
+  },
+  {
+   "task": "Compare all three quotes",
+   "parent": "Heat Pump Installation",
+   "domain": "finance"
+  },
+  {
+   "task": "Set up Ecobee auto heat-cool changeover thresholds for spring",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Submit state rebate paperwork for the new ductless heat pump",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Hose down the outdoor condenser coils before summer hits",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ask mechanic why the Subaru climate control only blows lukewarm",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Buy reusable hot-and-cold gel pack for ankle",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Balance basement and upstairs damper levers for winter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call technician about the rattling noise",
+   "parent": "Home HVAC",
+   "domain": "home"
+  },
+  {
+   "task": "Renew annual service contract",
+   "parent": "Heating & Cooling",
+   "domain": "finance"
+  },
+  {
+   "task": "Bleed the bedroom radiators and test the attic heat pump before the first freeze",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Figure out why the HomeKit climate automation keeps switching to cooling mode at 6am",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Alternate 15 minutes of heat and 15 minutes of ice on lower back tonight",
+   "parent": "",
+   "domain": "health_fitness"
+  }
+ ],
+ "example_tasks_es": [
+  "Limpiar los filtros del aire acondicionado frío-calor antes del verano",
+  "Pedir tres presupuestos para instalar aerotermia en casa",
+  "Revisar la presión del circuito de climatización"
+ ],
+ "example_tasks_ru": [
+  "Почистить фильтры сплит-системы перед началом сезона",
+  "Вызвать мастера для диагностики климат-контроля в машине",
+  "Контрастный душ 10 минут после пробежки"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check attic insulation R-value before upgrading the system",
+   "central": "insulation"
+  },
+  {
+   "task": "Seal leaky living room window frames with silicone caulk",
+   "central": "window"
+  },
+  {
+   "task": "Replace dead AA batteries in the hallway wall thermostat",
+   "central": "batteries"
+  },
+  {
+   "task": "Cover outdoor compressor unit with breathable tarp for winter",
+   "central": "tarp / cover"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy an insulated flask that keeps drinks hot or cold for 12 hours",
+   "better": "thermos / bottle",
+   "trap": "property"
+  },
+  {
+   "task": "Defrost the upright chest freezer in the garage",
+   "better": "snowflake / freezer",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check local campfire restrictions before the weekend trip",
+   "better": "flame with slash (no fire)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Stack two cords of seasoned oak firewood under the shed",
+   "better": "fire / logs",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Send signed electrical permit application to city hall",
+   "better": "document / permit",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check the weather forecast for Saturday's hike",
+   "better": "sun and cloud",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The half-flame, half-snowflake glyph is the standard symbol for HVAC, heat pumps, and climate control (heating and cooling). It fits home maintenance, smart thermostat setup, and hot/cold therapy tasks well, though at tiny sizes the diagonal snowflake spine can resemble a 'no fire' slash.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "d999ad124acc082b657bfafb7423b772a81836df",
+  "usage": {
+   "prompt": 3923,
+   "output": 1667,
+   "thoughts": 0,
+   "total": 5590
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

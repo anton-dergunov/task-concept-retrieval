@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "vertical antenna or transmitter radiating concentric signal waves left and right",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single central glyph crossed out by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "no signal / offline / cellular or hotspot disabled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "stop broadcasting / livestream off",
+   "strength": "primary"
+  },
+  {
+   "meaning": "digital detox / disconnect from internet",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "radio or Wi-Fi outage",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with a crossed-out Wi-Fi icon (which usually points upward in a fan rather than radiating horizontally from a mast) or a muted microphone at very small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, disconnected, or unavailable"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "home",
+  "work",
+  "health_fitness",
+  "outdoors",
+  "creative"
+ ],
+ "task_intents": [
+  "troubleshoot internet or cellular signal outage",
+  "turn off mobile hotspot or roaming",
+  "prepare devices for offline travel mode",
+  "do a weekend digital detox offline",
+  "shut down live stream or broadcast",
+  "fix dead zones in home wireless",
+  "disable radio transmitters on equipment"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off data roaming",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Fix basement signal dead zone",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Unplug guest hotspot router",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Sunday full offline detox",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Disable auto-join on phone",
+   "parent": "International Flight Prep",
+   "domain": "travel"
+  },
+  {
+   "task": "Call ISP about the recurring evening internet drop in the office",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Test how the field survey app behaves with zero cell reception",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Shut down the OBS test broadcast stream before leaving the studio",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Turn off Bluetooth and cellular radios on the spare tablet",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Map out the trail sections that have no cell coverage",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Configure automatic fallback for when the warehouse loses wireless connection",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Make sure all background sync is killed before boarding",
+   "parent": "Offline Mode Checklist",
+   "domain": "travel"
+  },
+  {
+   "task": "Verify local caching works properly",
+   "parent": "No-Signal App Testing",
+   "domain": "tech"
+  },
+  {
+   "task": "Put phones in the Faraday pouch at 8pm",
+   "parent": "Screen-Free Weekend",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Switch both phones to airplane mode before crossing the border to avoid carrier charges",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Document the manual paper-ticket procedure for the cashier staff when the store internet goes down",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar el punto de acceso móvil antes de salir del país",
+  "Reportar la caída de señal en la planta baja a soporte técnico",
+  "Domingo sin conexión ni pantallas en casa"
+ ],
+ "example_tasks_ru": [
+  "Отключить точку доступа и роуминг перед вылетом",
+  "Проверить работу навигатора без сотовой связи в лесу",
+  "Убрать телефоны и устроить день без интернета"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download offline maps of the Dolomites for the hike",
+   "central": "map"
+  },
+  {
+   "task": "Save three podcast episodes locally for the subway commute",
+   "central": "podcast / headphones"
+  },
+  {
+   "task": "Pack a paper copy of the hotel address in case we have no data",
+   "central": "document / paper"
+  },
+  {
+   "task": "Buy a physical SIM card at the airport kiosk",
+   "central": "SIM card"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Order new Wi-Fi mesh router for the upstairs hallway",
+   "better": "wifi router (active, not crossed out)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel monthly Spotify subscription before renewal",
+   "better": "music / subscription cancel",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy an offline-capable e-reader for the beach",
+   "better": "e-reader / book",
+   "trap": "property"
+  },
+  {
+   "task": "Mute microphone during the all-hands town hall",
+   "better": "muted microphone",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check why the podcast audio sounds muffled",
+   "better": "waveform / headphones",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pack board games and cards for the cabin",
+   "better": "board game / dice",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a radio/hotspot antenna with concentric signal waves crossed out by a diagonal slash, meaning 'no signal', 'offline', 'hotspot off', or 'broadcast stopped'. It fits tasks about troubleshooting outages, disabling roaming/hotspots for travel, testing offline functionality, or unplugging for a digital detox. It is distinct from standard upward-fanning Wi-Fi icons, though closely related in meaning.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "311a0e70db5ab911fa6e007bd2b6f5d2a0000576",
+  "usage": {
+   "prompt": 3925,
+   "output": 1688,
+   "thoughts": 0,
+   "total": 5613
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rectangular speech bubble with a bottom-left pointer tail",
+  "modifiers": [
+   "right-pointing play triangle inside the bubble"
+  ],
+  "composition": "single outlined speech bubble containing a centered solid triangle"
+ },
+ "readings": [
+  {
+   "meaning": "video message, async screen recording, or Loom clip",
+   "strength": "primary"
+  },
+  {
+   "meaning": "voice note or audio message in chat",
+   "strength": "primary"
+  },
+  {
+   "meaning": "voicemail or recorded message",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "video comment or media chat thread",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the bottom-left pointer tail can be overlooked, making it look like a standard video player or YouTube logo.",
+ "modifier_semantics": [
+  {
+   "modifier": "right-pointing play triangle inside the bubble",
+   "meaning": "playable audio or video recording within a message"
+  }
+ ],
+ "domains": [
+  "communication",
+  "work",
+  "social_family",
+  "tech",
+  "learning",
+  "creative"
+ ],
+ "task_intents": [
+  "send a video message or walkthrough",
+  "listen to pending voice notes",
+  "record an async video update",
+  "check and clear old voicemails",
+  "reply to a Marco Polo video",
+  "leave video feedback on a draft",
+  "send a birthday video greeting"
+ ],
+ "example_tasks": [
+  {
+   "task": "Watch Sarah's Marco Polo",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Record Loom for design handoff",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clear out full voicemail box",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Listen to Elena's WhatsApp audio",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Send Friday team update",
+   "parent": "Async Looms",
+   "domain": "work"
+  },
+  {
+   "task": "Reply to the three long voice notes from cousin Leo on Telegram",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Record a 3-minute screen walkthrough of the staging bug for backend",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Send Spanish tutor a voice message practicing the past subjunctive",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Film a quick happy birthday video message for Grandpa's 80th",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Listen to the clinic's voicemail about next week's blood test prep",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Leave timestamped video comments on the rough cut in Frame.io",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Catch up on sister's clips",
+   "parent": "Marco Polo",
+   "domain": "social_family"
+  },
+  {
+   "task": "Update my voicemail greeting before going off-grid in Utah next week",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Record a short Loom explaining the Q3 budget spreadsheet changes so we can skip the meeting",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Listen to the contractor's voice message about the bathroom tile delay and text back measurements",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Send a quick video thank-you message to every donor who chipped in over a hundred dollars",
+   "parent": "Fundraiser Follow-ups",
+   "domain": "communication"
+  }
+ ],
+ "example_tasks_es": [
+  "Escuchar los tres audios largos de mamá en WhatsApp",
+  "Grabar un Loom rápido explicando el fallo en la pasarela de pago",
+  "Mandar videomensaje de felicitación a Javi por su ascenso"
+ ],
+ "example_tasks_ru": [
+  "Прослушать голосовые от прораба в Телеграме",
+  "Записать короткий кружочек ребятам из похода",
+  "Отправить клиенту скринкаст с разбором макета вместо созвона"
+ ],
+ "context_tasks": [
+  {
+   "task": "Install Loom Chrome extension on the new work laptop",
+   "central": "browser extension / software installation"
+  },
+  {
+   "task": "Fix microphone permissions in WhatsApp so voice notes record properly",
+   "central": "microphone / app settings"
+  },
+  {
+   "task": "Write bullet points before recording the product demo clip",
+   "central": "notes / script"
+  },
+  {
+   "task": "Cancel annual Marco Polo Plus subscription before renewal",
+   "central": "subscription / payment"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Join live Zoom call with the Amsterdam team at 10am",
+   "better": "video camera or headset icon (live call, not recorded message)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Watch the new 2-hour Dune documentary on YouTube tonight",
+   "better": "TV, movie clapperboard, or plain video player without speech bubble",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Text the landlord back about the leaky radiator valve",
+   "better": "plain speech bubble with text lines or dots",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a USB lapel microphone for clearer Loom recordings",
+   "better": "microphone icon",
+   "trap": "property"
+  },
+  {
+   "task": "Check the release schedule for the client tutorial series",
+   "better": "calendar icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pay the annual invoice for our Vimeo team account",
+   "better": "credit card or invoice icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a chat bubble with a play button, clearly signifying a playable message such as an async video walkthrough (Loom, Marco Polo), a voice note, or a voicemail. It fits modern communication and remote-work tasks very well, though at small sizes the bubble's corner tail can be missed and mistaken for a plain video player.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a187b0ab0b8f51133a938be23c0604fb6c20ce54",
+  "usage": {
+   "prompt": 3918,
+   "output": 1743,
+   "thoughts": 0,
+   "total": 5661
+  },
+  "soft_problems": [
+   "example_tasks with parent: 3 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

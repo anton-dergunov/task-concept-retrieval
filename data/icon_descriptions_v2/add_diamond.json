@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rounded diamond frame with a centered plus cross inside",
+  "modifiers": [
+   "plus cross inside frame"
+  ],
+  "composition": "single geometric symbol, front view"
+ },
+ "readings": [
+  {
+   "meaning": "first aid, medical clinic, or health emergency",
+   "strength": "primary"
+  },
+  {
+   "meaning": "road intersection or crossroads warning sign",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "BPMN parallel gateway or flowchart decision node",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "add milestone or new item",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Simultaneously looks like a medical cross badge, a US-style diamond road sign for a four-way intersection, a BPMN parallel gateway symbol, and a generic 'add' button.",
+ "modifier_semantics": [
+  {
+   "modifier": "plus cross inside frame",
+   "meaning": "medical aid, intersection, parallel branch, or addition"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "home",
+  "outdoors",
+  "travel",
+  "work",
+  "learning"
+ ],
+ "task_intents": [
+  "restock home first aid kit",
+  "visit urgent care or clinic",
+  "study road signs for driving test",
+  "pack medical supplies for trip",
+  "diagram workflow parallel gateways",
+  "add project milestone to roadmap"
+ ],
+ "example_tasks": [
+  {
+   "task": "Restock first aid kit",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Urgent care walk-in",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Camping medical pouch",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Check expiration dates",
+   "parent": "First Aid Kit",
+   "domain": "home"
+  },
+  {
+   "task": "Pack for the road trip",
+   "parent": "Emergency Medical Supplies",
+   "domain": "travel"
+  },
+  {
+   "task": "Put fresh gauze, antiseptic wipes, and athletic tape in the car trunk",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Register for the Saturday wilderness first responder refresher course",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Memorize the yellow diamond intersection signs before the permit test",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Fix the parallel gateway logic in the order fulfillment BPMN diagram",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Find out which walk-in clinic near the hotel takes our travel insurance",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Mount the white medical box on the inside of the workshop cabinet door",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order replacement sterile eye wash pods",
+   "parent": "First Aid & Safety",
+   "domain": "shopping"
+  },
+  {
+   "task": "Review flashcard deck tonight",
+   "parent": "Driver's Ed Road Signs",
+   "domain": "learning"
+  },
+  {
+   "task": "Replace the dried-out hydrocortisone cream and fabric bandages in the hiking pack before Saturday",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Report the overgrown hedge blocking the four-way intersection sign at Oak and 4th Street",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Add the Q3 compliance milestones to the shared release schedule before Friday's planning call",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Revisar las fechas de caducidad del botiquín de primeros auxilios",
+  "Llevar el botiquín pequeño en la mochila para la ruta del domingo",
+  "Repasar las señales de intersección y prioridad para el examen teórico de conducir"
+ ],
+ "example_tasks_ru": [
+  "Собрать дорожную аптечку перед поездкой на море",
+  "Докупить бинты, пластырь и антисептик в домашнюю аптечку",
+  "Исправить параллельные шлюзы на схеме бизнес-процесса в Camunda"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy waterproof blister plasters and ibuprofen for the trek",
+   "central": "plasters and pills"
+  },
+  {
+   "task": "Schedule annual workplace safety and CPR training for the warehouse crew",
+   "central": "CPR training"
+  },
+  {
+   "task": "Add tweezers and tick remover to the dog's hiking bag",
+   "central": "tweezers"
+  },
+  {
+   "task": "Practice four-way stop right-of-way rules with Leo in the empty lot",
+   "central": "driving practice"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pick up daily blood pressure pills from the pharmacy",
+   "better": "pill or capsule",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book six-month dental cleaning with Dr. Patel",
+   "better": "tooth",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Add milk and eggs to the grocery list",
+   "better": "shopping cart or milk carton",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Solve ten geometry problems on rhombus area",
+   "better": "ruler or math symbols",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a medical-grade air purifier for the bedroom",
+   "better": "air purifier or fan",
+   "trap": "property"
+  },
+  {
+   "task": "Take temperature and log fever before bed",
+   "better": "thermometer",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "A plus sign inside a diamond is read primarily as a first-aid or medical symbol, and secondarily as a crossroads warning sign, a BPMN parallel gateway, or an 'add milestone' icon. It fits tasks around first-aid kits, clinics, road-sign study, and process diagrams, though it competes with clearer medical and plus-button icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "03cf242efe0fac98f1f098081db72724bcd89f81",
+  "usage": {
+   "prompt": 3916,
+   "output": 1702,
+   "thoughts": 128,
+   "total": 5746
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

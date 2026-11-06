@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "square-bodied jar or bottle with flat cap",
+  "modifiers": [
+   "bold cross or plus sign inside the body"
+  ],
+  "composition": "single object, front view, centered"
+ },
+ "readings": [
+  {
+   "meaning": "medicine bottle, pill jar, or prescription medication",
+   "strength": "primary"
+  },
+  {
+   "meaning": "vitamin or supplement container",
+   "strength": "primary"
+  },
+  {
+   "meaning": "pharmacy or dispensary",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "add to jar or archive container",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be read as a generic storage jar with an 'add' plus sign, or a battery with a plus terminal at very small sizes, though the flat cap strongly cues a pill bottle.",
+ "modifier_semantics": [
+  {
+   "modifier": "cross inside body",
+   "meaning": "medical, health, pharmacy, or first aid"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "shopping",
+  "home",
+  "social_family",
+  "travel"
+ ],
+ "task_intents": [
+  "refill prescription medication at pharmacy",
+  "take daily vitamins or supplements",
+  "sort weekly pill organizer box",
+  "buy over-the-counter pain relievers",
+  "dispose of expired medicine bottles",
+  "pack medications for upcoming trip",
+  "give pet its monthly medication"
+ ],
+ "example_tasks": [
+  {
+   "task": "Refill levothyroxine prescription",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Vitamin D3 drops",
+   "parent": "Pharmacy run",
+   "domain": "shopping"
+  },
+  {
+   "task": "Take evening magnesium glycinate",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check expiration dates",
+   "parent": "Medicine cabinet",
+   "domain": "home"
+  },
+  {
+   "task": "Ibuprofen and children's fever reducer",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Pick up Mom's blood pressure pills from Walgreens before 6pm",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Order another bottle of fish oil capsules before this one runs out",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Fill out the mail-order pharmacy form for a 90-day supply",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Give Barnaby his flea and tick chewable with dinner tonight",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pack enough allergy meds and inhalers for ten days in Japan",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set up Sunday night reminder to load the 7-day pill organizer",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Switch from brand name to generic statin",
+   "parent": "Prescriptions",
+   "domain": "finance"
+  },
+  {
+   "task": "Morning dose before breakfast",
+   "parent": "Antibiotics course",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Bag up all the old expired prescriptions in the bathroom drawer for pharmacy take-back",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ask the pharmacist whether the new antibiotic interacts with my daily iron supplement",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Print doctor's letter and keep prescription bottles in original packaging for customs",
+   "parent": "Lisbon flight",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Recoger el omeprazol de la abuela en la farmacia de guardia",
+  "Tomar el antibiótico cada 8 horas con comida",
+  "Comprar bote de magnesio y vitamina C"
+ ],
+ "example_tasks_ru": [
+  "Забрать рецепт на антибиотики из аптеки у дома",
+  "Выпить курс витамина Д до конца месяца",
+  "Проверить сроки годности в домашней аптечке и выбросить старое"
+ ],
+ "context_tasks": [
+  {
+   "task": "Set alarm for 8am and 8pm doses",
+   "central": "alarm clock"
+  },
+  {
+   "task": "Download CVS app to track refills",
+   "central": "phone app"
+  },
+  {
+   "task": "Install child safety lock on the bathroom cabinet",
+   "central": "lock"
+  },
+  {
+   "task": "Submit pharmacy receipts to HSA for reimbursement",
+   "central": "receipt / money"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book annual physical with Dr. Patel",
+   "better": "doctor / stethoscope / calendar",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy Mason jars for pickling cucumbers",
+   "better": "food jar / canning jar without medical cross",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add new item to kitchen pantry inventory",
+   "better": "plus / list / pantry",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Restock band-aids and antiseptic wipes in the car first-aid kit",
+   "better": "first-aid kit box / bandage",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy medicated shampoo for dry scalp",
+   "better": "shampoo bottle / toiletries",
+   "trap": "property"
+  },
+  {
+   "task": "Schedule flu shot at the pharmacy",
+   "better": "syringe / vaccine",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 5,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a pill bottle or medicine jar (wide-mouth container with a flat cap and a medical cross on the label). It is an ideal, high-frequency icon for tasks involving prescriptions, vitamins, supplements, pharmacy runs, and taking daily medication, only slightly overlapping with generic first-aid or pill-capsule icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "786b25dbffd9549f728e99faae08a035eb586c80",
+  "usage": {
+   "prompt": 3918,
+   "output": 1680,
+   "thoughts": 0,
+   "total": 5598
+  },
+  "soft_problems": [
+   "example_tasks with parent: 5 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front view of a transit bus with headlights",
+  "modifiers": [
+   "circular clock badge in top right"
+  ],
+  "composition": "single object front view with large corner badge"
+ },
+ "readings": [
+  {
+   "meaning": "bus schedule or transit timetable",
+   "strength": "primary"
+  },
+  {
+   "meaning": "bus departure or arrival time",
+   "strength": "primary"
+  },
+  {
+   "meaning": "scheduled bus trip or commute",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "bus delay or waiting time",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a train or subway schedule icon at small sizes because the front profile of a bus and a rail car look very similar without tracks.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular clock badge in top right",
+   "meaning": "schedule, timetable, departure time, or duration"
+  }
+ ],
+ "domains": [
+  "travel",
+  "work",
+  "social_family",
+  "learning",
+  "admin"
+ ],
+ "task_intents": [
+  "check local bus schedule",
+  "look up shuttle departure times",
+  "catch the morning commuter bus",
+  "plan public transit commute timing",
+  "confirm school bus pickup time",
+  "verify last night bus home",
+  "print airport express timetable"
+ ],
+ "example_tasks": [
+  {
+   "task": "42 bus timetable",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check Sunday shuttle times",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Catch the 7:15 express",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Confirm school bus drop-off",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Look up holiday schedule",
+   "parent": "City Bus Commute",
+   "domain": "work"
+  },
+  {
+   "task": "Print the winter timetable for the 14B before Monday morning",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Find out when the last night bus leaves the main terminal",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check if the campus shuttle runs every twenty minutes during finals",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "See what time the FlixBus actually gets into Victoria Coach Station",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Write down the return departure times",
+   "parent": "Airport Shuttle",
+   "domain": "travel"
+  },
+  {
+   "task": "Confirm morning pickup window with the district office",
+   "parent": "Kids School Bus",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check whether the 8:10 coach to Bristol connects with the ferry",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set an alarm for ten minutes before the afternoon bus arrives",
+   "parent": "Daily Bus Routine",
+   "domain": "admin"
+  },
+  {
+   "task": "Look up the earliest National Express coach that gets to Heathrow before six",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check the revised weekend bus timetable so we do not miss the museum slot",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Compare the 6:40 and 7:05 commuter bus arrival times at the downtown depot",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Mirar el horario del autobús nocturno N12 para volver el sábado",
+  "Confirmar a qué hora pasa el micro escolar por la esquina",
+  "Horarios del ALSA a Granada"
+ ],
+ "example_tasks_ru": [
+  "Посмотреть расписание 400-го автобуса до Зеленограда на выходные",
+  "Узнать время отправления последнего шаттла от аэропорта",
+  "Расписание школьного автобуса"
+ ],
+ "context_tasks": [
+  {
+   "task": "Top up the transit card with twenty dollars before Monday's commute",
+   "central": "transit card"
+  },
+  {
+   "task": "Download an audiobook for the four-hour Greyhound ride",
+   "central": "audiobook"
+  },
+  {
+   "task": "Pack Dramamine in the daypack for the mountain coach trip",
+   "central": "medication"
+  },
+  {
+   "task": "Call the depot lost and found about the umbrella left on route 9",
+   "central": "umbrella"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check the Eurostar departure times from St Pancras",
+   "better": "train with clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a monthly bus pass at the kiosk",
+   "better": "ticket or pass",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Fix the CAN bus timing issue on the microcontroller board",
+   "better": "microchip or circuit board",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Wash the camper van before the weekend trip",
+   "better": "van or camper",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack snacks and water bottles for the coach journey",
+   "better": "food or water bottle",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Book a window seat on the bus to Boston",
+   "better": "plain bus or ticket",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines the front of a bus with a clock badge, immediately signaling bus schedules, transit timetables, or timed bus departures. It fits common travel, commuting, and school-run tasks well, though at tiny sizes the bus front can slightly resemble a train car.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "9b9c54c953d7e4502e9017c25d1af1cd60daf550",
+  "usage": {
+   "prompt": 3922,
+   "output": 1653,
+   "thoughts": 58,
+   "total": 5633
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

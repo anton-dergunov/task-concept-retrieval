@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "four ascending vertical signal strength bars split horizontally",
+  "modifiers": [
+   "exclamation mark on bottom right",
+   "horizontal split line across bars"
+  ],
+  "composition": "four ascending vertical bars with horizontal gap and bottom-right exclamation mark"
+ },
+ "readings": [
+  {
+   "meaning": "cellular network issue or dual SIM signal warning",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mobile data connection error or weak reception",
+   "strength": "primary"
+  },
+  {
+   "meaning": "chart or progress warning",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The horizontal split (representing dual SIM signal in Android UI) makes the bars look like a stacked bar chart or abstract equalizer, and at small sizes the exclamation mark merges into the fourth bar.",
+ "modifier_semantics": [
+  {
+   "modifier": "exclamation mark",
+   "meaning": "error, warning, problem, or no connection"
+  },
+  {
+   "modifier": "horizontal split across bars",
+   "meaning": "dual SIM or two separate signal channels"
+  }
+ ],
+ "domains": [
+  "tech",
+  "communication",
+  "travel",
+  "admin",
+  "work"
+ ],
+ "task_intents": [
+  "fix mobile cellular network issue",
+  "troubleshoot SIM card signal drop",
+  "call carrier about dead zones",
+  "resolve dual SIM roaming error",
+  "check mobile reception at cabin",
+  "report cell tower outage"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix SIM card error",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Dead zone in basement",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "No cell service issue",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Call carrier",
+   "parent": "Phone Signal Problems",
+   "domain": "admin"
+  },
+  {
+   "task": "Swap SIM tray",
+   "parent": "Cellular Reception",
+   "domain": "tech"
+  },
+  {
+   "task": "Call T-Mobile about the dropped bars on my secondary work eSIM",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Test cell reception at the new campsite before committing to working remotely",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Figure out why dual SIM data keeps failing when switching networks",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Report the neighborhood cellular outage on the carrier status page",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Reset network settings on Mom's phone to fix the no-signal warning",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check which mobile operator actually gets bars inside the thick-walled lab",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Order a 4G signal booster for the metal-roofed workshop",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Compare rural coverage maps before buying a prepaid SIM for the hike",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Ask IT to provision a new corporate eSIM because the current one shows an error",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Document all the cellular dead spots along the delivery route for the dispatch team",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Switch the backup data SIM to a different slot to see if reception improves",
+   "parent": "Mobile Network Troubleshooting",
+   "domain": "tech"
+  },
+  {
+   "task": "Update carrier settings",
+   "parent": "Dual SIM Error",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Reclamar a Movistar por los cortes de señal en la línea secundaria",
+  "Reiniciar la configuración de red móvil porque sale el aviso de sin servicio",
+  "Comprobar qué compañía tiene cobertura 4G dentro de la casa del pueblo"
+ ],
+ "example_tasks_ru": [
+  "Позвонить оператору по поводу пропадающей сети на второй сим-карте",
+  "Проверить уровень мобильного сигнала на даче перед поездкой на выходные",
+  "Перевыпустить рабочую eSIM из-за постоянной ошибки подключения к сети"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy an external directional antenna for the LTE router",
+   "central": "antenna"
+  },
+  {
+   "task": "Pay overdue mobile phone bill to restore suspended service",
+   "central": "bill / payment"
+  },
+  {
+   "task": "Download offline trail maps in case there is no reception",
+   "central": "map"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Review quarterly sales growth bar chart before the board meeting",
+   "better": "bar chart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mark the server migration task as high priority with three exclamation points",
+   "better": "exclamation mark / flag",
+   "trap": "property"
+  },
+  {
+   "task": "Fix the Wi-Fi router dropping connections in the bedroom",
+   "better": "Wi-Fi icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check signal strength of the baby monitor in the backyard",
+   "better": "baby monitor / radio waves",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a new iPhone case that doesn't block the antenna bands",
+   "better": "phone case",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "This is an OS status-bar indicator (specifically Android's dual-SIM signal bars with an exclamation mark for no data/connection). As a UI status/signal-bars glyph, it is mainly interface chrome representing a system state rather than a concrete task object, though it can occasionally fit narrow cellular troubleshooting tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "64690d27e2b2685504a561fe45b25bdd584e6f93",
+  "usage": {
+   "prompt": 3924,
+   "output": 966,
+   "thoughts": 0,
+   "total": 4890
+  },
+  "soft_problems": [
+   "example_tasks: 17 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

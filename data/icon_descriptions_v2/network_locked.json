@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "hollow right-triangle cellular signal strength wedge",
+  "modifiers": [
+   "closed padlock in bottom right corner"
+  ],
+  "composition": "triangle outline with lower-right corner cutout holding a small solid padlock"
+ },
+ "readings": [
+  {
+   "meaning": "locked cellular network or carrier-locked SIM",
+   "strength": "primary"
+  },
+  {
+   "meaning": "secured mobile data connection or VPN over cellular",
+   "strength": "primary"
+  },
+  {
+   "meaning": "SIM PIN lock or cellular access restriction",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "Zero-bar locked signal status indicator",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Outside of an Android status bar, the empty right triangle looks like a drafting set square, a ramp, or a geometric slope symbol with a lock.",
+ "modifier_semantics": [
+  {
+   "modifier": "closed padlock in bottom right corner",
+   "meaning": "locked, carrier-restricted, PIN-protected, or encrypted"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "admin",
+  "communication",
+  "finance"
+ ],
+ "task_intents": [
+  "unlock phone from mobile carrier",
+  "set up SIM card PIN lock",
+  "request carrier unlock code before trip",
+  "restrict cellular data roaming on phone",
+  "configure encrypted APN on mobile network",
+  "lock eSIM profile with security code"
+ ],
+ "example_tasks": [
+  {
+   "task": "SIM PIN lock",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unlock Pixel from T-Mobile",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Lock down kid's mobile data",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call carrier before Friday",
+   "parent": "Phone Carrier Unlock",
+   "domain": "admin"
+  },
+  {
+   "task": "Test foreign card in slot",
+   "parent": "SIM Lock Check",
+   "domain": "travel"
+  },
+  {
+   "task": "Request IMEI network unlock from AT&T before the Japan trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set a 6-digit SIM PIN on both phones against port-out scams",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Put a port freeze and account lock on our Verizon cellular line",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check whether the refurbished iPhone 13 is still carrier-locked to Bell",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Lock mobile data tethering on the field tablets with an MDM policy",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pay off remaining $84 device balance so carrier unlocks the eSIM",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Write the PUK recovery code inside the passport wallet",
+   "parent": "SIM Card Security",
+   "domain": "travel"
+  },
+  {
+   "task": "Remove the old carrier lock on Mom's phone before switching to Mint",
+   "parent": "Family Mobile Plan",
+   "domain": "communication"
+  },
+  {
+   "task": "Submit the military deployment unlock form so my phone takes a local German SIM",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Enable SIM lock and change the default 1111 PIN on the backup LTE router",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Verify all four lines on the T-Mobile account have SIM swap protection turned on",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Pedir a Movistar el código de liberación por IMEI del móvil antiguo",
+  "Activar el bloqueo de PIN de la tarjeta SIM y guardar el PUK en Bitwarden",
+  "Bloquear datos móviles en itinerancia antes de cruzar a Andorra"
+ ],
+ "example_tasks_ru": [
+  "Поставить PIN-код на симку МТС от перевыпуска мошенниками",
+  "Отвязать привезённый из США айфон от оператора AT&T",
+  "Заблокировать передачу сотовых данных в роуминге перед вылетом в Стамбул"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a 10GB Airalo eSIM for two weeks in Portugal",
+   "central": "eSIM card"
+  },
+  {
+   "task": "Switch family cellular plan from postpaid to a cheaper MVNO",
+   "central": "mobile phone plan"
+  },
+  {
+   "task": "Install WireGuard VPN profile for untrusted mobile networks",
+   "central": "VPN shield"
+  },
+  {
+   "task": "Fix dead cellular reception in the basement office",
+   "central": "signal booster antenna"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Change the WPA3 password on the home Wi-Fi router",
+   "better": "Wi-Fi arcs with lock or router",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a carpenter's speed square for cutting rafters",
+   "better": "framing square tool",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy an unlocked Pixel 8a on Swappa",
+   "better": "smartphone",
+   "trap": "property"
+  },
+  {
+   "task": "Check why phone has zero bars at the cabin",
+   "better": "phone or antenna tower",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a new brass padlock for the backyard shed",
+   "better": "padlock",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pack the European plug adapter in carry-on",
+   "better": "power plug adapter",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "This is a system status-bar indicator showing an empty cellular signal wedge with a padlock (zero-bar locked mobile network). As UI status chrome representing a device state rather than a concrete object, it reads poorly out of context—often looking like a geometric triangle or ramp with a lock—and fits only rare SIM/carrier-lock tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ca48b8280c8416f1f83badf71081f9e3f86340f2",
+  "usage": {
+   "prompt": 3923,
+   "output": 1727,
+   "thoughts": 0,
+   "total": 5650
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

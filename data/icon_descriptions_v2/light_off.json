@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "lightbulb with rounded glass and screw base",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single object, front view, struck through by diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "lights off / turn off lighting",
+   "strength": "primary"
+  },
+  {
+   "meaning": "broken or burnt-out lightbulb",
+   "strength": "primary"
+  },
+  {
+   "meaning": "power outage / blackout",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "disable hints or tips",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the lightbulb base and slash could briefly look like a muted microphone or a disabled location pin.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "off, disabled, broken, or absent"
+  }
+ ],
+ "domains": [
+  "home",
+  "tech",
+  "travel",
+  "admin",
+  "work"
+ ],
+ "task_intents": [
+  "replace burnt-out lightbulb at home",
+  "turn off lights before leaving",
+  "Automate turning off smart lights",
+  "report street light outage",
+  "prepare for scheduled power outage",
+  "fix broken lamp fixture",
+  "disable app hints and tips"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix dead porch light",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Hallway bulb burned out",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Kill studio lights after shoot",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Report dark streetlight on Elm",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Unplug holiday string lights",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Change the blown halogen bulb above the kitchen sink",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set HomeAssistant routine to turn all downstairs lights off at midnight",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check which breaker tripped the garage lighting circuit",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Disable pop-up onboarding tips in the new dashboard build",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off aquarium lamp timer while away for the weekend",
+   "parent": "Holiday checklist",
+   "domain": "travel"
+  },
+  {
+   "task": "Replace the flickering tube in the basement workshop",
+   "parent": "House maintenance",
+   "domain": "home"
+  },
+  {
+   "task": "Double-check all office lights before locking up Friday",
+   "parent": "Studio closing",
+   "domain": "work"
+  },
+  {
+   "task": "Take the dead CFL bulbs to the hardware store recycling bin",
+   "parent": "Errands",
+   "domain": "home"
+  },
+  {
+   "task": "Call the landlord about the stairwell fixture that went out again last night",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Figure out why the Hue bridge keeps failing to turn off the bedroom lamp",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Charge the backup batteries before Friday's planned utility blackout on our block",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar el foco fundido del baño",
+  "Apagar todas las luces del jardín antes de salir de viaje",
+  "Avisar al ayuntamiento de la farola apagada frente al portal"
+ ],
+ "example_tasks_ru": [
+  "Поменять перегоревшую лампочку в прихожей",
+  "Настроить автовыключение света в коридоре после полуночи",
+  "Позвонить в УК насчёт неработающего фонаря у подъезда"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy blackout curtains for the baby's nursery",
+   "central": "curtains"
+  },
+  {
+   "task": "Stock up on AA batteries and candles for storm season",
+   "central": "batteries and candles"
+  },
+  {
+   "task": "Install dimmer switch in the dining room",
+   "central": "switch"
+  },
+  {
+   "task": "Switch electric supplier to a cheaper night tariff",
+   "central": "electricity bill / contract"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy warm white E27 LED bulbs at IKEA",
+   "better": "unslashed lightbulb (buying new working bulbs, not turning off or broken)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Brainstorm gift ideas for dad's 60th",
+   "better": "lit lightbulb (ideas/brainstorming)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the monthly ConEd electric bill",
+   "better": "invoice or lightning bolt with currency",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pack a lightweight rain jacket for Scotland",
+   "better": "jacket",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a non-glare matte screen protector",
+   "better": "screen / monitor",
+   "trap": "property"
+  },
+  {
+   "task": "Mute notifications during deep work block",
+   "better": "slashed bell",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A clear lightbulb struck through with a diagonal slash immediately reads as lights off, a burnt-out bulb, or a lighting outage. It fits household maintenance tasks (replacing dead bulbs, fixing fixtures), smart-home automation for turning lights off, and leaving-home checklists, though the unslashed lightbulb covers a broader range of general lighting and idea tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "2275065688835ef28fbd515ebe33bc2f7b5ed3f4",
+  "usage": {
+   "prompt": 3925,
+   "output": 1640,
+   "thoughts": 0,
+   "total": 5565
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

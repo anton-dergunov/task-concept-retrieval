@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "condenser microphone on a curved stand",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single object, front view, struck through by diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "muted microphone / mic off",
+   "strength": "primary"
+  },
+  {
+   "meaning": "broken or disconnected microphone",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "voice permissions or listening disabled",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "silence or vocal rest",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Distinguishable from a regular microphone only by the diagonal slash; distinct from speaker-mute (which uses a loudspeaker cone).",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "muted, disabled, broken, or off"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "home",
+  "communication",
+  "creative",
+  "health_fitness"
+ ],
+ "task_intents": [
+  "fix broken or non-working microphone",
+  "disable voice assistant listening on devices",
+  "revoke microphone permissions for apps",
+  "set up hardware mute button or hotkey",
+  "configure auto-mute on joining video calls",
+  "observe vocal rest and avoid speaking"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix muted Yeti mic",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off Siri listening",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Strict vocal rest day",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check Windows privacy settings",
+   "parent": "Headset mic not working",
+   "domain": "tech"
+  },
+  {
+   "task": "Flip the physical switch",
+   "parent": "Smart speaker privacy",
+   "domain": "home"
+  },
+  {
+   "task": "Disable always-listening voice assistant on the living room Echo Dot",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set Zoom and Teams to mute my mic by default",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Revoke microphone access for random games on kids iPad",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Map a global push-to-mute hotkey on the Stream Deck",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Troubleshoot why AirPods mic cuts out halfway through phone calls",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Solder replacement mute switch onto the broken boom arm cable",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Reinstall Realtek audio driver",
+   "parent": "Laptop mic dead",
+   "domain": "tech"
+  },
+  {
+   "task": "Test the inline mute toggle before the board presentation",
+   "parent": "Work Headset",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out why Discord shows my audio input as disabled after waking the PC",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Go through Android app permissions and strip microphone access from everything except phone and WhatsApp",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unplug the smart TV voice remote mic before setting up the guest bedroom Wi-Fi",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar el micrófono del televisor Samsung por privacidad",
+  "Arreglar micro de los auriculares que no detecta la voz",
+  "Configurar Meet para entrar siempre silenciado a las reuniones"
+ ],
+ "example_tasks_ru": [
+  "Отключить доступ к микрофону у подозрительных приложений на телефоне",
+  "Починить неработающий микрофон на наушниках перед созвоном",
+  "Настроить кнопку быстрого отключения микрофона в OBS"
+ ],
+ "context_tasks": [
+  {
+   "task": "Audit privacy permissions on the new Pixel phone",
+   "central": "phone privacy settings"
+  },
+  {
+   "task": "Listen in on the Q3 town hall webinar while commuting",
+   "central": "webinar"
+  },
+  {
+   "task": "Order a USB foot pedal for push-to-talk in Discord",
+   "central": "USB foot pedal"
+  },
+  {
+   "task": "Drink warm honey tea and rest throat before Friday's gig",
+   "central": "tea / throat care"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Record voiceover for the onboarding tutorial video",
+   "better": "active microphone (unslashed)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mute the group chat notifications on WhatsApp for the weekend",
+   "better": "bell with slash (muted notifications)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Mute TV volume during commercials",
+   "better": "speaker with slash (muted audio output)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a USB headset with a flip-to-mute boom arm",
+   "better": "headset",
+   "trap": "property"
+  },
+  {
+   "task": "Order a foam pop filter and shock mount on Amazon",
+   "better": "microphone accessory / shopping",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check audio levels on the podcast intro track",
+   "better": "waveform or headphones",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "A universally recognized icon for a muted, disabled, or non-working microphone. While originally a UI state toggle, in a task list it cleanly represents tasks about troubleshooting dead mics, locking down voice/listening privacy permissions, or configuring mute controls, though it must not be confused with an active microphone (recording) or muted speaker (sound output).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "ef786c23311523c0ed491da649655492e9b16eb7",
+  "usage": {
+   "prompt": 3923,
+   "output": 1664,
+   "thoughts": 0,
+   "total": 5587
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

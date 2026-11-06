@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rounded square outline containing an X mark",
+  "modifiers": [
+   "X mark centered inside square"
+  ],
+  "composition": "single geometric badge, front view"
+ },
+ "readings": [
+  {
+   "meaning": "cancel / close / abort",
+   "strength": "primary"
+  },
+  {
+   "meaning": "rejected / failed / declined checkbox",
+   "strength": "primary"
+  },
+  {
+   "meaning": "delete / remove / clear",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "ballot box marked with X (vote)",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Strongly resembles a task status checkbox (canceled or skipped task) right next to the app's actual completion checkbox, or a window close button.",
+ "modifier_semantics": [
+  {
+   "modifier": "X mark",
+   "meaning": "cancel, reject, close, or mark as not done"
+  }
+ ],
+ "domains": [
+  "admin",
+  "finance",
+  "shopping",
+  "work",
+  "tech"
+ ],
+ "task_intents": [
+  "cancel a recurring subscription service",
+  "terminate a membership or contract",
+  "abort or revoke a pending request",
+  "decline an invitation or offer",
+  "close an unused account permanently",
+  "opt out of marketing lists"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel Adobe Creative Cloud",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Close old Wells Fargo account",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Opt out of credit offers",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Call before the 15th",
+   "parent": "Subscriptions to Cancel",
+   "domain": "finance"
+  },
+  {
+   "task": "Decline the panel invite",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel Planet Fitness membership in person before annual fee hits",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Withdraw application for the senior product role at Stripe",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Cancel the backordered sofa from West Elm and get deposit back",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Revoke old OAuth app permissions on GitHub and Google accounts",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off auto-renewal on the New York Times digital access",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Send the polite rejection email to the second roofing contractor",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Do the streaming ones tonight",
+   "parent": "Subscriptions to Cancel",
+   "domain": "finance"
+  },
+  {
+   "task": "Check if we need 30 days notice",
+   "parent": "Lease Termination",
+   "domain": "home"
+  },
+  {
+   "task": "Clear out the remaining ones from Q3",
+   "parent": "Rejected Vendor Bids",
+   "domain": "work"
+  },
+  {
+   "task": "Cancel the non-refundable hotel booking in Zurich and ask if they can waive the fee",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Close the old joint checking account at Chase once the last utility auto-pay clears",
+   "parent": "",
+   "domain": "finance"
+  }
+ ],
+ "example_tasks_es": [
+  "Dar de baja el seguro del coche antiguo antes del viernes",
+  "Cancelar la suscripción de prueba de Apple TV+",
+  "Cerrar la cuenta bancaria de Santander que ya no usamos"
+ ],
+ "example_tasks_ru": [
+  "Отменить подписку на Яндекс Плюс до списания",
+  "Закрыть старую кредитку в Тинькофф",
+  "Отказаться от брони отеля в Сочи"
+ ],
+ "context_tasks": [
+  {
+   "task": "Audit monthly recurring charges on the Amex statement",
+   "central": "credit card statement"
+  },
+  {
+   "task": "Draft sunsetting plan for the legacy v1 API",
+   "central": "API / sunset plan"
+  },
+  {
+   "task": "Review failed build logs from last night's deploy",
+   "central": "build logs"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Fix the close button alignment on the modal dialog",
+   "better": "UI layout / code icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy tic-tac-toe board for the coffee table",
+   "better": "board game icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download invoice for the cancelled flight to Berlin",
+   "better": "receipt / airplane icon",
+   "trap": "property"
+  },
+  {
+   "task": "Multiply the recipe quantities by 4 for Saturday's dinner",
+   "better": "cooking / calculator icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Vote in the municipal school board election on Tuesday",
+   "better": "ballot box with slot icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Archive the Slack channel",
+   "better": "chat / archive box icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "A square box with an X inside is universally read as UI chrome (a window close button or a canceled/failed checkbox state in a to-do list). Placed beside a task in a task manager, it looks like the task's completion status rather than its subject, though it can weakly cue cancellation tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "be4d69b19fb093f7f9445fa6e154dc0e1601ba08",
+  "usage": {
+   "prompt": 3930,
+   "output": 1587,
+   "thoughts": 0,
+   "total": 5517
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

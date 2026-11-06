@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "three-by-three grid of solid black circles",
+  "modifiers": [
+   "circular badge with exclamation mark at top right"
+  ],
+  "composition": "grid of dots partially occluded by an upper-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "app notification, update, or alert",
+   "strength": "primary"
+  },
+  {
+   "meaning": "keypad, PIN code, or dialpad warning",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "app launcher or software outage",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The 3x3 dot grid is standard UI chrome for an app launcher or a numeric keypad; with the alert badge it looks like an interface notification state rather than a concrete physical object.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular badge with exclamation mark",
+   "meaning": "alert, error, pending update, or attention required"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "update phone apps with pending alerts",
+  "clear notification badges on home screen",
+  "fix broken keypad on garage door",
+  "troubleshoot crashing mobile application",
+  "reset forgotten PIN code on keypad",
+  "review app permission warnings on phone",
+  "resolve workspace app integration error"
+ ],
+ "example_tasks": [
+  {
+   "task": "Update outdated phone apps",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Clear home screen badges",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix garage keypad error",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check pending updates",
+   "parent": "iPhone Maintenance",
+   "domain": "tech"
+  },
+  {
+   "task": "Replace battery",
+   "parent": "Front Door Keypad",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off red notification badges for work apps before vacation starts",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out why the banking app keeps showing a security alert",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Reset the blinking master code on the back door smart keypad",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Install the three critical app updates waiting in the Play Store",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Troubleshoot the dialpad error on the office VoIP desk phone",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check which background app is throwing permission warnings every morning",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Investigate warning light",
+   "parent": "Alarm System Keypad",
+   "domain": "home"
+  },
+  {
+   "task": "Resolve login error",
+   "parent": "Company App Portal",
+   "domain": "work"
+  },
+  {
+   "task": "Clean out the forty unread app notifications cluttering the tablet home screen before the flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Call building management about the lobby intercom keypad rejecting our four-digit delivery PIN code",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Patch the broken app launcher widget on the shared family iPad so the kids can open games",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Actualizar las aplicaciones pendientes en el móvil antes del viaje",
+  "Quitar los globos de aviso rojos de las apps del trabajo",
+  "Arreglar el teclado numérico de la alarma que parpadea con error"
+ ],
+ "example_tasks_ru": [
+  "Обновить приложения на телефоне с висящими уведомлениями",
+  "Сбросить ошибку на кодовой панели домофона у подъезда",
+  "Отключить красные значки уведомлений на иконках рабочих программ"
+ ],
+ "context_tasks": [
+  {
+   "task": "Delete unused mobile games from phone",
+   "central": "mobile games / trash"
+  },
+  {
+   "task": "Change 4-digit gate entry code for dog walker",
+   "central": "lock / PIN code"
+  },
+  {
+   "task": "Silence Slack notifications during deep work blocks",
+   "central": "bell / mute"
+  },
+  {
+   "task": "Organize phone home screen into folders",
+   "central": "smartphone / folder"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "URGENT: Buy groceries for tonight's dinner",
+   "better": "shopping cart or grocery bag",
+   "trap": "property"
+  },
+  {
+   "task": "Check December calendar for holiday conflicts",
+   "better": "calendar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Dial customer service about internet bill",
+   "better": "phone handset",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy chocolate chip cookies for the bake sale",
+   "better": "cookie",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sign the NDA PDF in the mobile app",
+   "better": "document / signature",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check all items on the camping packing list",
+   "better": "checklist",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "The icon is a 3x3 dot grid (a generic UI chrome icon for an app launcher or keypad) combined with an alert badge. At small sizes it reads as abstract dots or a generic UI error state rather than a recognizable physical object or common task subject.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a71d9ed242c9c90cecb49007d82c129b63cdd760",
+  "usage": {
+   "prompt": 3921,
+   "output": 1601,
+   "thoughts": 0,
+   "total": 5522
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

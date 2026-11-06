@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "three vertical lines with middle dashed like a road",
+  "modifiers": [
+   "plus sign in bottom right corner"
+  ],
+  "composition": "top-down two-lane road markings with bottom-right plus badge"
+ },
+ "readings": [
+  {
+   "meaning": "add road, street, or route",
+   "strength": "primary"
+  },
+  {
+   "meaning": "road, highway, or traffic lane",
+   "strength": "primary"
+  },
+  {
+   "meaning": "insert column or vertical border divider",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "add barcode or vertical stripe",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Very abstract at small sizes; easily mistaken for a spreadsheet column/border tool, barcode, or pause/menu lines rather than a road.",
+ "modifier_semantics": [
+  {
+   "modifier": "plus sign in bottom right corner",
+   "meaning": "add, create, or insert a new road, route, or column"
+  }
+ ],
+ "domains": [
+  "travel",
+  "outdoors",
+  "home",
+  "admin",
+  "tech"
+ ],
+ "task_intents": [
+  "add missing street to map",
+  "plan scenic driving route",
+  "report unmarked road or lane",
+  "seal or repair asphalt driveway",
+  "log new mileage route",
+  "submit new trail or road edit"
+ ],
+ "example_tasks": [
+  {
+   "task": "Submit missing cul-de-sac to Google Maps",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "New scenic bypass route",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Driveway asphalt extension quote",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Map out the gravel forest service roads",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Add toll road detour",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Draw the new subdivision streets in OpenStreetMap before Friday",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Petition city council for a protected bike lane on Elm",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Add the back-road alternate route in case I-70 closes",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Measure the shared access lane for gravel resurfacing",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Log the newly paved county road into the cycling route planner",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "File a request with Apple Maps to add our private lane",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Compare contractors for widening the turnout at the end of the driveway",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Plot the coastal highway stops between Astoria and Newport for day two",
+   "parent": "Oregon Road Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Check county permit rules before pouring the extra parking pad",
+   "parent": "Driveway & Access Road",
+   "domain": "home"
+  },
+  {
+   "task": "Trace the unmapped logging roads from satellite view before we lose cell service",
+   "parent": "Overlanding Weekend",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Verify street names and one-way tags on the newly opened downtown connector",
+   "parent": "OpenStreetMap Edits",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Enviar la calle nueva de la urbanización a Google Maps",
+  "Añadir ruta alternativa sin peajes para el viaje a Asturias",
+  "Pedir presupuesto para asfaltar el camino de entrada a la finca"
+ ],
+ "example_tasks_ru": [
+  "Добавить новую подъездную дорогу к СНТ на Яндекс Карты",
+  "Проложить запасной маршрут в объезд платной трассы М-4",
+  "Заказать асфальтную крошку для расширения проезда у участка"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy reflective markers for the edge of the driveway",
+   "central": "reflective markers"
+  },
+  {
+   "task": "Download offline maps for the Patagonia highway drive",
+   "central": "map"
+  },
+  {
+   "task": "Pay the electronic highway toll invoice from last weekend",
+   "central": "receipt or payment"
+  },
+  {
+   "task": "Pack emergency flares in the trunk before the winter drive",
+   "central": "emergency flare or car"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Insert a new column for Q3 projections in the budget sheet",
+   "better": "table or spreadsheet column",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Generate SKU barcodes for the new ceramic mugs",
+   "better": "barcode",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy road running shoes with extra cushioning",
+   "better": "running shoe",
+   "trap": "property"
+  },
+  {
+   "task": "Read Cormac McCarthy's The Road before book club",
+   "better": "book",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book the hotel in Barstow for the first night",
+   "better": "hotel or bed",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check tire pressure before hitting the highway",
+   "better": "car tire or pressure gauge",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a top-down two-lane road (solid outer lines, dashed center line) with a plus sign in the lower right ('add road'). It fits tasks about mapping missing streets, planning driving routes, or driveway/road work, though its minimal geometric lines are easily mistaken for spreadsheet borders or a barcode at small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "cefa8cc008a45ff5d7c00ae005553b62f033172d",
+  "usage": {
+   "prompt": 3922,
+   "output": 1658,
+   "thoughts": 458,
+   "total": 6038
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

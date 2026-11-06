@@ -1,0 +1,220 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined shield with a solid dot inside",
+  "modifiers": [
+   "solid circle with a horizontal minus sign in bottom right"
+  ],
+  "composition": "single object, front view, with bottom-right corner badge"
+ },
+ "readings": [
+  {
+   "meaning": "remove or revoke admin / moderator permission",
+   "strength": "primary"
+  },
+  {
+   "meaning": "disable security, privacy or protection setting",
+   "strength": "primary"
+  },
+  {
+   "meaning": "block user or revoke account access",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "cancel insurance or warranty coverage",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The inner dot is the remnant of a person silhouetteInside a shield (admin/privacy icon) whose shoulders are cut off by the minus badge; at small sizes it looks like a keyhole or camera lens inside a shield.",
+ "modifier_semantics": [
+  {
+   "modifier": "circle with horizontal minus bar",
+   "meaning": "remove, revoke, disable, or block"
+  },
+  {
+   "modifier": "central dot inside shield",
+   "meaning": "user/person head (admin or privacy) or keyhole"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "finance",
+  "home"
+ ],
+ "task_intents": [
+  "revoke user admin or moderator privileges",
+  "remove former employee access permissions",
+  "disable firewall or antivirus protection temporarily",
+  "turn off two-factor authentication for account",
+  "cancel redundant insurance or warranty policy",
+  "remove someone from trusted contacts list",
+  "unblock or deauthorize device on network"
+ ],
+ "example_tasks": [
+  {
+   "task": "Revoke Dan's GitHub admin rights",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel old renter's insurance",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Disable Windows Defender on build box",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Remove ex-treasurer from bank signatory list",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Drop collision coverage on the Civic",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Take departed contractor off AWS IAM admin group",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off parental controls on Leo's iPad for summer",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Deauthorize old MacBook from Apple ID trusted devices",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Strip moderator badge from inactive Discord helpers",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Remove alarm company emergency dispatch authorization before moving out",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Revoke OAuth access for sketchy third-party calendar apps on Google account",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel AppleCare+ monthly renewal on the cracked iPhone 12 we traded in",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Take Sarah off the list",
+   "parent": "Server Admin Permissions",
+   "domain": "work"
+  },
+  {
+   "task": "Clean up departed interns",
+   "parent": "VPN & Security Access",
+   "domain": "tech"
+  },
+  {
+   "task": "Drop the extra rider before renewal",
+   "parent": "Home Insurance",
+   "domain": "finance"
+  },
+  {
+   "task": "Turn it off for the contractor visit",
+   "parent": "Smart Home Security",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Revocar permisos de administrador a los becarios que terminaron en junio",
+  "Dar de baja el seguro de robo de la bici vieja",
+  "Desactivar el firewall temporalmente para probar el puerto local"
+ ],
+ "example_tasks_ru": [
+  "Отозвать права администратора у уволившегося подрядчика в GitLab",
+  "Отключить антивирус на время установки старого драйвера",
+  "Отменить автопродление КАСКО на проданную машину"
+ ],
+ "context_tasks": [
+  {
+   "task": "Audit who still has production database credentials",
+   "central": "database credentials"
+  },
+  {
+   "task": "Offboard Marcus before Friday 5pm",
+   "central": "employee offboarding"
+  },
+  {
+   "task": "Compare quotes to replace State Farm policy",
+   "central": "insurance quotes"
+  },
+  {
+   "task": "Whitelist the office IP on staging server",
+   "central": "IP address"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Grant admin access to the new DevOps lead",
+   "better": "shield with a plus badge or user-shield",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Renew annual cybersecurity awareness training",
+   "better": "shield with a checkmark or graduation cap",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a privacy screen protector for work laptop",
+   "better": "laptop or screen",
+   "trap": "property"
+  },
+  {
+   "task": "Check home security cameras before leaving for airport",
+   "better": "security camera",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pay the $450 invoice for the penetration test",
+   "better": "invoice or credit card",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Delete unused user accounts from Postgres",
+   "better": "user with minus badge or trash can",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon shows a shield with an inner dot (originally a user head inside a shield for admin/privacy, truncated by the badge) and a minus circle badge. It fits tasks about revoking admin permissions, disabling security features, or cancelling protection/insurance, though the truncated inner person leaves an odd floating dot that looks like a keyhole.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e8aa67bb557eb14ea7e5b92f05552c9392674052",
+  "usage": {
+   "prompt": 3925,
+   "output": 1693,
+   "thoughts": 0,
+   "total": 5618
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

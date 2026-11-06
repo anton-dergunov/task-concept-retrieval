@@ -1,0 +1,237 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "Wi-Fi signal wedge half-filled from bottom",
+  "modifiers": [
+   "half-filled lower section",
+   "outlined upper band"
+  ],
+  "composition": "single geometric wedge, centered"
+ },
+ "readings": [
+  {
+   "meaning": "Wi-Fi / wireless network",
+   "strength": "primary"
+  },
+  {
+   "meaning": "medium or weak Wi-Fi signal",
+   "strength": "primary"
+  },
+  {
+   "meaning": "internet connection",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "windshield wiper sweep",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "A specific signal-strength indicator (2 or 3 bars) from a mobile OS status bar, virtually indistinguishable from a generic Wi-Fi icon in a task list.",
+ "modifier_semantics": [
+  {
+   "modifier": "half-filled lower section",
+   "meaning": "partial or medium signal strength"
+  },
+  {
+   "modifier": "outlined upper band",
+   "meaning": "unfilled capacity or weaker signal"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "work",
+  "travel",
+  "admin"
+ ],
+ "task_intents": [
+  "fix home Wi-Fi dead zones",
+  "set up wireless router",
+  "pay monthly internet bill",
+  "change guest Wi-Fi password",
+  "buy mesh Wi-Fi extender",
+  "troubleshoot slow wireless connection"
+ ],
+ "example_tasks": [
+  {
+   "task": "Reset router",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Guest Wi-Fi password",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call ISP about outages",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Order mesh extenders",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Pay fiber internet bill",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Move the router out of the hallway closet for better signal",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Switch laptops over to the 5GHz band in the office",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check if the rental cabin has decent Wi-Fi for Zoom",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Print a QR code card for the guest wireless network",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Update firmware on the Asus router before the weekend",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Download offline maps before we lose signal in the mountains",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Return the Comcast rental modem to the UPS store",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Run a speed test in the basement bedroom to see if the repeater works",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call Spectrum to negotiate the monthly internet rate back down to the promo price",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Configure the kids' tablets to disconnect from the home Wi-Fi after eight o'clock",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Set up the upstairs access point",
+   "parent": "Home Network",
+   "domain": "tech"
+  },
+  {
+   "task": "Change the admin password",
+   "parent": "Apartment Wi-Fi",
+   "domain": "tech"
+  },
+  {
+   "task": "Compare monthly plans",
+   "parent": "Home Internet",
+   "domain": "finance"
+  },
+  {
+   "task": "Buy a longer ethernet cable",
+   "parent": "Wi-Fi Setup",
+   "domain": "shopping"
+  }
+ ],
+ "example_tasks_es": [
+  "Cambiar la clave del Wi-Fi de invitados",
+  "Llamar a Movistar por los cortes de internet en el estudio",
+  "Comprar un repetidor de señal para la terraza"
+ ],
+ "example_tasks_ru": [
+  "Поменять пароль от домашнего вайфая",
+  "Оплатить домашний интернет за октябрь",
+  "Настроить роутер на даче до приезда гостей"
+ ],
+ "context_tasks": [
+  {
+   "task": "Mount the Eero node on the living room wall",
+   "central": "mesh router device"
+  },
+  {
+   "task": "Set up smart plug in the garage",
+   "central": "smart plug"
+  },
+  {
+   "task": "Work from the corner cafe on Tuesday morning",
+   "central": "cafe / laptop"
+  },
+  {
+   "task": "Buy a prepaid SIM card at Lisbon airport",
+   "central": "SIM card"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a Wi-Fi enabled meat thermometer for the smoker",
+   "better": "thermometer",
+   "trap": "property"
+  },
+  {
+   "task": "Replace the rear windshield wiper blade on the Subaru",
+   "better": "car / wiper blade",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check connection with the new client after the pitch",
+   "better": "handshake / person",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order a 15m Cat6 ethernet cable for the gaming PC",
+   "better": "cable / plug",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Fold the paper hand fan for the costume",
+   "better": "hand fan",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Verify that all cloud backups finished overnight",
+   "better": "cloud",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is an OS status-bar indicator showing a specific Wi-Fi signal strength level (half full) rather than a general Wi-Fi symbol. Because it encodes a transient state/quantity and is redundant with a standard Wi-Fi icon, it is UI chrome and should be discarded.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c0213bec802f358d70ba516a09d18ab6397b07b1",
+  "usage": {
+   "prompt": 3921,
+   "output": 968,
+   "thoughts": 0,
+   "total": 4889
+  },
+  "soft_problems": [
+   "example_tasks: 19 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

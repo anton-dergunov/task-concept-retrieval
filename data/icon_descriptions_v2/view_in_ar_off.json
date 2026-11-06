@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "isometric wireframe cube inside four viewfinder corner brackets",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "centered object framed by four corners, crossed out by a diagonal bar"
+ },
+ "readings": [
+  {
+   "meaning": "augmented reality (AR) disabled or unavailable",
+   "strength": "primary"
+  },
+  {
+   "meaning": "3D view or 3D object scanning turned off",
+   "strength": "primary"
+  },
+  {
+   "meaning": "missing 3D model or broken 3D asset",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "package or box scan failed",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the slashed cube inside corner brackets looks like a generic broken image, QR code off, or no-package symbol.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, unavailable, or hidden"
+  },
+  {
+   "modifier": "four corner brackets",
+   "meaning": "camera viewfinder, scanning, or augmented reality frame"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "creative",
+  "shopping"
+ ],
+ "task_intents": [
+  "disable augmented reality preview in app",
+  "implement fallback for devices without AR",
+  "hide 3D model viewer on mobile",
+  "fix broken 3D asset preview",
+  "turn off camera 3D scanning mode",
+  "remove AR try-on feature from store"
+ ],
+ "example_tasks": [
+  {
+   "task": "Disable AR preview mode",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off 3D view",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Remove ARcore dependency",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Hide 3D room planner",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Test non-AR fallback screen",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Add graceful fallback when WebXR is unsupported on older browsers",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Strip unused 3D model viewer from the lightweight build",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off automatic 3D object capture in the scanning app",
+   "parent": "",
+   "domain": "creative"
+  },
+  {
+   "task": "Disable furniture AR placement on product pages without glTF files",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Fix crash when user denies camera permission for AR view",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check layout with 3D off",
+   "parent": "Product Page Redesign",
+   "domain": "work"
+  },
+  {
+   "task": "Disable on older iPads",
+   "parent": "AR Try-On Feature",
+   "domain": "tech"
+  },
+  {
+   "task": "Design the empty state",
+   "parent": "Missing 3D Models",
+   "domain": "creative"
+  },
+  {
+   "task": "Update user settings toggle",
+   "parent": "AR Camera Permissions",
+   "domain": "tech"
+  },
+  {
+   "task": "Show flat 2D floorplan image whenever the 3D WebGL viewer fails to initialize",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Block AR view-in-room button on desktop browsers that do not support Quick Look",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar la vista en realidad aumentada para móviles antiguos",
+  "Ocultar el visor 3D cuando el producto no tenga modelo",
+  "Probar la pantalla alternativa sin cámara AR"
+ ],
+ "example_tasks_ru": [
+  "Отключить режим AR-просмотра в настройках приложения",
+  "Скрыть 3D-превью для товаров без трехмерной модели",
+  "Проверить заглушку при отключенной камере в WebXR"
+ ],
+ "context_tasks": [
+  {
+   "task": "Log analytics event when AR session fails to start",
+   "central": "analytics log"
+  },
+  {
+   "task": "Write error message copy for unsupported 3D devices",
+   "central": "error text"
+  },
+  {
+   "task": "Battery drain test with 3D scanning disabled",
+   "central": "battery"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Model the low-poly wooden crate in Blender",
+   "better": "3D cube (unslashed)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Scan the return QR code at the UPS dropoff",
+   "better": "QR code inside viewfinder",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel the monthly subscription box before renewal",
+   "better": "cardboard parcel box",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy unframed canvas prints for the hallway",
+   "better": "picture frame",
+   "trap": "property"
+  },
+  {
+   "task": "Send invoice to the client",
+   "better": "invoice document",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check why the kitchen delivery box hasn't arrived",
+   "better": "delivery truck or parcel",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "The icon depicts a 3D cube in a viewfinder with a slash through it, which is a UI state toggle meaning 'AR off' or '3D view disabled'. Because it represents an interface state rather than a concrete real-world object or common task subject, and is hard to parse at small sizes, it is rarely useful as a to-do list icon outside niche AR development tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "905b97dd2638422e9a0c67d8828306d14a515558",
+  "usage": {
+   "prompt": 3925,
+   "output": 1653,
+   "thoughts": 0,
+   "total": 5578
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

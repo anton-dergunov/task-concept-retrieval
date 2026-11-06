@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rectangular multi-story building with four windows and door",
+  "modifiers": [
+   "right-pointing arrow exiting to the right"
+  ],
+  "composition": "building on left in front view, arrow pointing away to right"
+ },
+ "readings": [
+  {
+   "meaning": "leave building / exit office / check out of hotel",
+   "strength": "primary"
+  },
+  {
+   "meaning": "move out of apartment or office",
+   "strength": "primary"
+  },
+  {
+   "meaning": "out of office / off-site / remote work",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "evacuation or fire drill",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a generic 'sign out / log out' door icon at very small sizes, though the four window panes mark it as a whole building.",
+ "modifier_semantics": [
+  {
+   "modifier": "right-pointing arrow",
+   "meaning": "leaving, exiting, moving out, departing, or outbound"
+  }
+ ],
+ "domains": [
+  "work",
+  "home",
+  "travel",
+  "admin",
+  "career"
+ ],
+ "task_intents": [
+  "check out of hotel or rental",
+  "move out of apartment or flat",
+  "vacate office space before lease ends",
+  "set up out-of-office status",
+  "leave office early for appointment",
+  "conduct building evacuation drill",
+  "return keys upon moving out",
+  "relocate company to new premises"
+ ],
+ "example_tasks": [
+  {
+   "task": "Hotel checkout by 11am",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set out-of-office auto-reply",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Final walkthrough with landlord",
+   "parent": "Moving out of Elm St",
+   "domain": "home"
+  },
+  {
+   "task": "Leave office by 3:30 sharp",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Hand back fob at reception",
+   "parent": "Office move-out",
+   "domain": "admin"
+  },
+  {
+   "task": "Check out of the Kyoto ryokan before the luggage courier arrives",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Clear out desk drawers and locker before Friday's last day",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Give 60-day notice to vacate the 4th-floor studio",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Run Q3 fire evacuation drill with floor wardens",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Take meter readings before handing over the flat keys",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Submit notice to terminate the WeWork coworking membership",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Book end-of-tenancy cleaners",
+   "parent": "Flat move-out",
+   "domain": "home"
+  },
+  {
+   "task": "Settle minibars and incidentals at front desk",
+   "parent": "Hotel checkout",
+   "domain": "travel"
+  },
+  {
+   "task": "Empty the storage cage in the basement before our lease expires on the 30th",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Update Slack status and calendar blocks for next week's out-of-office days",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Photograph every room's walls and floors right after the movers load the last box",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Hacer el check-out del hotel antes de las 11 y dejar las maletas en consigna",
+  "Entregar las llaves del piso al casero tras vaciar el trastero",
+  "Activar respuesta automática fuera de la oficina"
+ ],
+ "example_tasks_ru": [
+  "Выселиться из отеля до 12:00 и сдать ключ-карту на ресепшен",
+  "Поставить автоответчик «нет на месте» на время отпуска",
+  "Освободить старый офис до конца месяца"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack fragile kitchenware into dish barrels",
+   "central": "boxes / packing"
+  },
+  {
+   "task": "Forward mail via USPS to the new address",
+   "central": "mail / envelope"
+  },
+  {
+   "task": "Request security deposit refund from property manager",
+   "central": "money / refund"
+  },
+  {
+   "task": "Coordinate with external client for off-site workshop",
+   "central": "meeting / workshop"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Sign the lease for our new downtown office space",
+   "better": "contract / signature or building with inward arrow",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Log out of all shared studio iPads before the break",
+   "better": "door with exit arrow (logout glyph) or tablet",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check office supply inventory before ordering toner",
+   "better": "printer toner or clipboard",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy weatherproof outdoor extension cord for the balcony",
+   "better": "extension cord / plug",
+   "trap": "property"
+  },
+  {
+   "task": "Cancel broadband and electricity accounts",
+   "better": "wifi router or lightning bolt",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Hire a removal van for Saturday morning",
+   "better": "moving truck / van",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a multi-story building with an arrow pointing outward to the right, universally reading as leaving a building, moving out of an apartment/office, hotel check-out, or out-of-office status. It fits concrete relocation, travel check-out, and workplace departure tasks well, though at tiny sizes it should be distinguished from a simple door-exit (log out) glyph.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "660d170bc63d4288d0d90274c79fa48876f44c10",
+  "usage": {
+   "prompt": 3924,
+   "output": 1738,
+   "thoughts": 0,
+   "total": 5662
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": "moving_ministry"
+ }
+}

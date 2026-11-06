@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "closed padlock outline with arched shackle",
+  "modifiers": [
+   "filled circular clock badge in bottom-right corner"
+  ],
+  "composition": "single object with bottom-right corner overlay"
+ },
+ "readings": [
+  {
+   "meaning": "auto-lock timeout or scheduled lock",
+   "strength": "primary"
+  },
+  {
+   "meaning": "temporary access, expiring password, or session timeout",
+   "strength": "primary"
+  },
+  {
+   "meaning": "time-locked savings or freeze period",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "parental screen-time lock or downtime schedule",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Without a keyhole on the padlock body, the base outline can resemble a shopping bag or handbag with a clock badge (scheduled order or store hours) at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "clock badge",
+   "meaning": "scheduled, timed, expiring, timeout, or history"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "finance",
+  "admin",
+  "work",
+  "social_family"
+ ],
+ "task_intents": [
+  "set auto-lock timer on device",
+  "configure smart door lock schedule",
+  "rotate expiring passwords or tokens",
+  "set screen time downtime lock",
+  "generate temporary guest access code",
+  "shorten session timeout in settings",
+  "check CD lock-in maturity date",
+  "schedule temporary credit freeze lift"
+ ],
+ "example_tasks": [
+  {
+   "task": "Smart lock night schedule",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Shorten laptop auto-lock timeout",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Temp PIN for pet sitter",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Extend Leo's iPad bedtime",
+   "parent": "Parental Controls & Screen Time",
+   "domain": "social_family"
+  },
+  {
+   "task": "Check 90-day expiration rules",
+   "parent": "Okta Password Policy",
+   "domain": "work"
+  },
+  {
+   "task": "Set front door August lock to auto-lock after 3 minutes",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Generate 48-hour guest keypad code for the Airbnb cleaners",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Renew expiring SSH keys and personal access tokens before Friday",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Schedule 24-hour Equifax credit freeze lift for mortgage pull",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Change phone screen lock delay from 5 minutes to 30 seconds",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Move emergency buffer into 6-month locked treasury bill",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Turn on weekend morning rule",
+   "parent": "Kids' App Time Limits",
+   "domain": "social_family"
+  },
+  {
+   "task": "Test 15-minute idle threshold on staging",
+   "parent": "Web App Session Timeout",
+   "domain": "work"
+  },
+  {
+   "task": "Set up timed kitchen safe lock so I stop eating chips after 9pm",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Configure AWS IAM temporary role credentials to expire after two hours instead of twelve",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Program the chicken coop door timer to lock 30 minutes after sunset in winter",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Programar el bloqueo automático de la puerta a las 23:00",
+  "Crear código temporal de la cerradura para el fontanero el martes",
+  "Bajar el tiempo de bloqueo de pantalla del móvil a 1 minuto"
+ ],
+ "example_tasks_ru": [
+  "Настроить автоблокировку экрана ноутбука через 5 минут простоя",
+  "Выпустить временный пропуск для курьера на субботу с 10 до 14",
+  "Поставить родительский лимит времени на планшете сына после 21:00"
+ ],
+ "context_tasks": [
+  {
+   "task": "Write down the 1Password master passphrase for the fire safe",
+   "central": "password / master key"
+  },
+  {
+   "task": "Audit who still has admin access to the shared Google Drive",
+   "central": "user permissions"
+  },
+  {
+   "task": "Install 2FA authenticator app on the new Pixel",
+   "central": "smartphone / authenticator app"
+  },
+  {
+   "task": "Replace AA batteries in the Schlage keypad deadbolt",
+   "central": "batteries"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a heavy-duty combination padlock for the gym locker",
+   "better": "plain padlock without clock",
+   "trap": "property"
+  },
+  {
+   "task": "Pick up click-and-collect grocery order at 5pm",
+   "better": "shopping bag with clock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix deadlock bug in the payment worker queue",
+   "better": "bug or code brackets",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Lock in flight prices for Thanksgiving before Tuesday",
+   "better": "airplane or ticket",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy 9V batteries for the backup terminal",
+   "better": "battery",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check security camera footage from last night",
+   "better": "security camera / CCTV",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a padlock outline paired with a clock badge, naturally signifying timed security concepts like auto-lock timeouts, scheduled smart locks, expiring credentials, temporary access codes, or parental screen-time locks. Because the padlock body lacks a keyhole, it can look like a shopping bag with a clock at very small sizes.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "86df386fcf1bb559413d9e4093541fc5524b2b08",
+  "usage": {
+   "prompt": 3924,
+   "output": 1730,
+   "thoughts": 0,
+   "total": 5654
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

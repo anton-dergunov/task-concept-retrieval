@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "vertical smartphone with side button",
+  "modifiers": [
+   "open padlock centered on the screen"
+  ],
+  "composition": "single object in front view with centered interior symbol"
+ },
+ "readings": [
+  {
+   "meaning": "unlocked phone or carrier unlocking",
+   "strength": "primary"
+  },
+  {
+   "meaning": "phone screen lock, passcode, or device access",
+   "strength": "primary"
+  },
+  {
+   "meaning": "bootloader unlock or rooting a mobile device",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "smart lock or mobile access key app",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the open shackle can be missed, making it look like a locked phone or a briefcase/shopping bag icon on a screen.",
+ "modifier_semantics": [
+  {
+   "modifier": "open padlock",
+   "meaning": "unlocked, unrestricted, accessible, or security removed"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "shopping",
+  "admin",
+  "home",
+  "social_family"
+ ],
+ "task_intents": [
+  "unlock phone from mobile carrier",
+  "remove screen passcode on old phone",
+  "reset forgotten phone lock code",
+  "buy factory unlocked smartphone for travel",
+  "unlock bootloader on Android device",
+  "set up smart Unlock on phone",
+  "give family member phone passcode"
+ ],
+ "example_tasks": [
+  {
+   "task": "Carrier unlock old iPhone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Remove PIN from spare Pixel",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "SIM unlock request for T-Mobile",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Submit the IMEI form",
+   "parent": "Carrier Unlock",
+   "domain": "admin"
+  },
+  {
+   "task": "Check status after 48 hours",
+   "parent": "Unlocking Old Phone",
+   "domain": "tech"
+  },
+  {
+   "task": "Call AT&T to get the SIM unlock code before flying to Lisbon",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Turn off screen lock on the old tablet so the kids can play",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Unlock the bootloader on the OnePlus 9 before flashing LineageOS",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure Dad's old Samsung is unlocked before listing it on Swappa",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Set up Smart Lock so my phone stays unlocked when connected to home Wi-Fi",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Write down the emergency phone passcodes for the house sitter",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Test with a foreign SIM card",
+   "parent": "Phone Unlock for Japan Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Reset the forgotten screen lock on Grandma's Motorola without wiping her photos",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Look for a factory unlocked dual-SIM phone under $300 for the South America trip",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Ask IT to lift the MDM screen lock policy on my retired work handset",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Wait 72 hours for Xiaomi account permission to go through",
+   "parent": "Bootloader Unlock",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Liberar el iPhone viejo con Movistar para usar eSIM en el viaje",
+  "Quitar el bloqueo de pantalla de la tablet que usamos en la cocina",
+  "Desbloquear el bootloader del Redmi antes de instalar la ROM"
+ ],
+ "example_tasks_ru": [
+  "Отвязать старый айфон от оператора перед продажей на Авито",
+  "Снять пароль экрана со старого телефона бабушки",
+  "Разблокировать загрузчик на Xiaomi через Mi Unlock"
+ ],
+ "context_tasks": [
+  {
+   "task": "Set up August smart lock app on Maya's phone",
+   "central": "smart door lock"
+  },
+  {
+   "task": "Approve 2FA login prompt on mobile",
+   "central": "two-factor authentication"
+  },
+  {
+   "task": "Enable Face ID for banking app",
+   "central": "biometric face scan"
+  },
+  {
+   "task": "Wipe old Android before trading it in",
+   "central": "phone reset / erase"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Unlock the back gate before the meter reader comes",
+   "better": "padlock or gate",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Lock DOWN lost iPhone via Find My",
+   "better": "phone with closed padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new silicone case for my unlocked Pixel 8",
+   "better": "phone case",
+   "trap": "property"
+  },
+  {
+   "task": "Check phone bill for roaming charges",
+   "better": "receipt or invoice",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Replace cracked screen on the kids' unlocked iPad",
+   "better": "broken screen or repair tool",
+   "trap": "property"
+  },
+  {
+   "task": "Order a local prepaid eSIM for Italy",
+   "better": "SIM card",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a smartphone with an open padlock on the screen, directly representing unlocking a phone (carrier SIM unlock, screen passcode removal, or bootloader unlock). It fits a real, specific set of tech and travel preparation tasks, though it could be confused at tiny sizes with a locked phone icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "be0ae01a1a8b5e5062772bb2a835413f781c218c",
+  "usage": {
+   "prompt": 3923,
+   "output": 1674,
+   "thoughts": 0,
+   "total": 5597
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

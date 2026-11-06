@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rectangular briefcase or suitcase with a top handle",
+  "modifiers": [
+   "diagonal strike-through slash from top-left to bottom-right"
+  ],
+  "composition": "single outlined object crossed out by a diagonal bar, front view"
+ },
+ "readings": [
+  {
+   "meaning": "off work, time off, PTO, vacation, or leave of absence",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no luggage, carry-on banned, or travel without bags",
+   "strength": "primary"
+  },
+  {
+   "meaning": "unemployment, quitting a job, retirement, or sabbatical",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "work profile disabled or personal/non-work mode",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes it can be confused with a crossed-out camera icon (no photos) because the top handle looks like a camera viewfinder hump.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, prohibited, absent, or cancelled"
+  }
+ ],
+ "domains": [
+  "work",
+  "career",
+  "travel",
+  "admin",
+  "tech"
+ ],
+ "task_intents": [
+  "request paid time off from work",
+  "plan a sabbatical or career break",
+  "set up out-of-office status and responder",
+  "resign from job or give notice",
+  "file for unemployment benefits",
+  "pack light without checked luggage",
+  "turn off work profile on phone",
+  "block calendar for upcoming vacation days"
+ ],
+ "example_tasks": [
+  {
+   "task": "Request PTO for August",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn off work profile",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unempleo claim biweekly certification",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Submit dates in Workday",
+   "parent": "Thanksgiving PTO",
+   "domain": "work"
+  },
+  {
+   "task": "Get HR sign-off",
+   "parent": "Sabbatical Planning",
+   "domain": "career"
+  },
+  {
+   "task": "Log my four floating holidays before the end of Q3",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Set out-of-office auto-reply and hand off open tickets to Sam",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Draft two-weeks notice letter for Sarah before Friday afternoon",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Check Ryanair personal-item dimensions so we pay zero baggage fees",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Block out Christmas week on the shared engineering team calendar",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Schedule Android work apps to pause automatically at 6pm daily",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Upload last two pay stubs to the state portal",
+   "parent": "Unemployment Benefits",
+   "domain": "admin"
+  },
+  {
+   "task": "Confirm coverage with the night shift lead",
+   "parent": "Maternity Leave",
+   "domain": "work"
+  },
+  {
+   "task": "Calculate how many accrued vacation days carry over into next calendar year vs expire",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "File parental leave paperwork with Lincoln Financial at least thirty days before due date",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Cancel checked bag add-on on the EasyJet booking since we are only taking backpacks",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Pedir los días de asuntos propios antes de que acabe noviembre",
+  "Configurar la respuesta automática de fuera de la oficina en Outlook",
+  "Sellar el paro en la web del SEPE el lunes día 12"
+ ],
+ "example_tasks_ru": [
+  "Написать заявление на отпуск без сохранения зарплаты на три дня",
+  "Отключить рабочий профиль на телефоне на время майских праздников",
+  "Оформить билеты в Калининград по безбагажному тарифу"
+ ],
+ "context_tasks": [
+  {
+   "task": "Calculate how much COBRA health insurance costs between jobs",
+   "central": "health insurance / money"
+  },
+  {
+   "task": "Roll over old 401k into Vanguard IRA after leaving the company",
+   "central": "retirement account / finance"
+  },
+  {
+   "task": "Fit five days of clothes into a 25L backpack for the weekend flight",
+   "central": "backpack / packing"
+  },
+  {
+   "task": "Ask payroll why my sick leave balance didn't update on the payslip",
+   "central": "payslip / payroll"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new hard-shell carry-on suitcase before the Tokyo trip",
+   "better": "suitcase or briefcase (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check whether the museum allows cameras inside the exhibition hall",
+   "better": "crossed-out camera",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update my portfolio website with the three latest freelance projects",
+   "better": "briefcase or website globe",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book flights to Lisbon for the June vacation",
+   "better": "airplane",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Find a non-business casual linen shirt for the summer party",
+   "better": "shirt",
+   "trap": "property"
+  },
+  {
+   "task": "Check my remaining PTO balance in BambooHR",
+   "better": "calendar or clock",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a briefcase or suitcase crossed out with a diagonal slash, which naturally represents time off work (PTO, leave, sabbatical, out-of-office, quitting/unemployment, pausing a work profile) or luggage-free travel. It fits a focused set of real tasks around taking leave and disconnecting from work, though at very small sizes its silhouette resembles a crossed-out camera.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "7b24a34374293146e3423ee5c2843e678a5b9bdb",
+  "usage": {
+   "prompt": 3917,
+   "output": 1750,
+   "thoughts": 0,
+   "total": 5667
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,223 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "circle with diagonal slash from top-left to bottom-right",
+  "modifiers": [
+   "diagonal slash inside circle"
+  ],
+  "composition": "single centered symbol, flat front view"
+ },
+ "readings": [
+  {
+   "meaning": "prohibition, ban, or forbidden",
+   "strength": "primary"
+  },
+  {
+   "meaning": "block, deny, or restrict access",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel, abort, or opt out",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "quit or stop a habit",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with the mathematical empty set symbol (which slashes top-right to bottom-left) or a generic 'none/disabled' UI state.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "negation, prohibition, blocking, or cancellation"
+  }
+ ],
+ "domains": [
+  "admin",
+  "tech",
+  "finance",
+  "health_fitness",
+  "communication",
+  "work",
+  "home"
+ ],
+ "task_intents": [
+  "block spam numbers or accounts",
+  "ban abusive users or IPs",
+  "cancel recurring service or membership",
+  "opt out of marketing lists",
+  "quit an unhealthy daily habit",
+  "restrict access to specific websites",
+  "put a stop payment on check"
+ ],
+ "example_tasks": [
+  {
+   "task": "Block spam callers",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Opt out of Equifax prescreened offers",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Cancel Adobe Creative Cloud before Tuesday",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Ban the scraping IP range",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Do the remaining three",
+   "parent": "Subscriptions to cancel",
+   "domain": "finance"
+  },
+  {
+   "task": "Add our landline to the national Do Not Call registry",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Block social media domains on the work laptop during mornings",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Update the list for Q3",
+   "parent": "Blocked vendor accounts",
+   "domain": "work"
+  },
+  {
+   "task": "Revoke third-party app permissions on my old Google account",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Go the whole month of November without any refined sugar",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Review appeals from yesterday",
+   "parent": "Forum user bans",
+   "domain": "communication"
+  },
+  {
+   "task": "File the paperwork with HR",
+   "parent": "Opt-out of supplemental insurance",
+   "domain": "admin"
+  },
+  {
+   "task": "Blacklist the three domain names sending phishing emails to finance",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Put a permanent freeze on all three credit bureaus before Friday",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Ask the landlord whether pets are strictly forbidden in the lease agreement",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Set up router rules to block adult and gambling sites on the kids' tablets",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Dar de baja el seguro adicional de la tarjeta antes de fin de mes",
+  "Inscribir mi número móvil en la Lista Robinson para dejar de recibir llamadas comerciales",
+  "Bloquear las direcciones IP que están atacando el servidor de correo"
+ ],
+ "example_tasks_ru": [
+  "Заблокировать спам-номера в настройках телефона бабушки",
+  "Отключить все платные подписки и автопродления на старом аккаунте",
+  "Внести недобросовестного поставщика в чёрный список компании"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a 'No Soliciting' sign for the front porch",
+   "central": "sign / placard"
+  },
+  {
+   "task": "Install a browser ad-blocker extension on Firefox",
+   "central": "browser extension / shield"
+  },
+  {
+   "task": "Throw out expired allergy medication from the cabinet",
+   "central": "pills / medication"
+  },
+  {
+   "task": "Cut out late-night coffee after 4pm",
+   "central": "coffee cup"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cancel dentist appointment for Thursday afternoon",
+   "better": "tooth or calendar with cross",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Cancel flight to Chicago and request voucher",
+   "better": "airplane",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy non-dairy milk for the weekend guests",
+   "better": "milk carton",
+   "trap": "property"
+  },
+  {
+   "task": "Sand down the wooden butcher block in the kitchen",
+   "better": "cutting board / kitchen counter",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Walk three blocks to the hardware store for screws",
+   "better": "screws or hardware store",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check if the bathroom drain is blocked again",
+   "better": "plumbing pipe or sink",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order new brake pads for the bike",
+   "better": "bicycle",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 3,
+  "distinctiveness": 5
+ },
+ "discard": false,
+ "reasoning": "The universal prohibition sign (circle with a diagonal slash) is instantly recognizable for banning, blocking, opting out, or cancelling abstract services and habits. However, when cancelling or avoiding a concrete object with its own visual representation (like a flight, dentist appointment, or coffee), the specific object's icon is a much better fit.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "678432df19e2bb14d3959c00afc6406fbd1629d7",
+  "usage": {
+   "prompt": 3922,
+   "output": 1692,
+   "thoughts": 274,
+   "total": 5888
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": "block"
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "front-facing ship on water with a smaller train beside it",
+  "modifiers": [
+   "smaller front-facing train in lower right corner",
+   "wavy water line beneath the ship"
+  ],
+  "composition": "two overlapping front-view vehicles, ship on the left and train in the lower right foreground"
+ },
+ "readings": [
+  {
+   "meaning": "public transit, multimodal transport, or commuter connections",
+   "strength": "primary"
+  },
+  {
+   "meaning": "ferry and rail connection or SailRail ticket",
+   "strength": "primary"
+  },
+  {
+   "meaning": "freight shipping and rail logistics",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "ground and sea travel",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the overlapping hulls and train cab can crowd together and look like a damaged or jagged ship icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "smaller front-facing train in lower right corner",
+   "meaning": "combines rail with water transport to indicate public transit, multimodal travel, or ferry-to-train transfers"
+  }
+ ],
+ "domains": [
+  "travel",
+  "admin",
+  "finance",
+  "work",
+  "social_family"
+ ],
+ "task_intents": [
+  "book combined ferry and train ticket",
+  "renew monthly public transit pass",
+  "plan multimodal trip itinerary",
+  "check ferry to train transfer times",
+  "submit commuter transit benefit claim",
+  "compare sea and rail freight rates",
+  "load money onto transit card"
+ ],
+ "example_tasks": [
+  {
+   "task": "Top up Clipper card",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Book SailRail to Dublin",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Renew monthly transit pass",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check timetable for Friday",
+   "parent": "Ferry & Train Commute",
+   "domain": "travel"
+  },
+  {
+   "task": "Compare rates for Q3",
+   "parent": "Sea-Rail Freight Logistics",
+   "domain": "work"
+  },
+  {
+   "task": "Buy combined train and ferry tickets to Hoek van Holland",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Set up pre-tax commuter benefits deductions in payroll portal",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Check transfer window between Bremerton ferry dock and Sounder train",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Download offline regional transit maps for the Greek islands trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Submit October ferry and rail receipts for client travel reimbursement",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Apply for senior discount pass on regional ferries and rail",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Reserve luggage space",
+   "parent": "Sicily Train & Ferry Route",
+   "domain": "travel"
+  },
+  {
+   "task": "Update payment card",
+   "parent": "Regional Transit Account",
+   "domain": "admin"
+  },
+  {
+   "task": "Figure out whether the Swiss Travel Pass covers both the lake steamers and mountain trains",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Ask logistics broker for intermodal sea-to-rail quote from Ningbo port to the Chicago depot",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Coordinate with Maya on which train to catch at Dover Priory right after the ferry docks",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Recargar la tarjeta de transporte público antes del lunes",
+  "Reservar el billete combinado de tren y ferry a Mallorca",
+  "Comprobar cuánto tiempo hay para pasar del puerto a la estación de Cercanías"
+ ],
+ "example_tasks_ru": [
+  "Пополнить карту «Тройка» на следующий месяц",
+  "Купить единый билет поезд плюс паром до Калининграда",
+  "Проверить стыковку электрички и речного трамвая на субботу"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pack Dramamine and headphones for the morning commute",
+   "central": "pills / headphones"
+  },
+  {
+   "task": "Buy a folding bike allowed on peak-hour trains and ferries",
+   "central": "bicycle"
+  },
+  {
+   "task": "Listen to two chapters of the audiobook on the transit ride in",
+   "central": "audiobook"
+  },
+  {
+   "task": "Pick up dry cleaning near the ferry terminal station",
+   "central": "clothes / hanger"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book cabin on the overnight ferry to Helsinki",
+   "better": "single ship / ferry",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reserve quiet-car seats on the Eurostar to Paris",
+   "better": "single train",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Glue the smokestack onto the wooden toy boat and train set",
+   "better": "glue / toy",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Train the new deckhands on emergency bilge pump procedures",
+   "better": "people / training",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Renew passport before booking the cross-channel trip",
+   "better": "passport",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Buy a transit-friendly leakproof coffee mug",
+   "better": "coffee mug",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a ship on waves paired with a smaller train in the corner, representing multimodal public transit, ferry-rail connections, or intermodal shipping. It fits tasks about transit passes, combined rail-and-sea tickets, and commuter planning, though single-mode trips are better served by a plain train or ship icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "6b48294810c34841819b85e359c9c4c630db4e77",
+  "usage": {
+   "prompt": 3922,
+   "output": 1695,
+   "thoughts": 0,
+   "total": 5617
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

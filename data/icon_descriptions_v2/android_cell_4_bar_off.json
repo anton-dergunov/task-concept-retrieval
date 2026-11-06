@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "four vertical bars of ascending height from left to right",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "row of ascending vertical bars bisected by a diagonal strike-through line"
+ },
+ "readings": [
+  {
+   "meaning": "no cellular signal / offline / mobile data disabled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "analytics disabled / no statistics / hide chart",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "network outage / connection lost",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be read either as cellular signal bars turned off or as a bar chart / analytics graph disabled; at very small sizes it can also resemble a broken fence or generic crossed-out lines.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, off, unavailable, or disconnected"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "communication",
+  "work",
+  "home",
+  "outdoors"
+ ],
+ "task_intents": [
+  "troubleshoot lost cellular signal on phone",
+  "turn off mobile data before roaming",
+  "prepare apps for offline travel use",
+  "disable analytics tracking in app settings",
+  "report cell reception dead zone to carrier",
+  "test web app behavior while offline",
+  "fix basement mobile signal dead spot"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off cellular data",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Fix phone no-service bug",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable roaming before takeoff",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Test offline mode",
+   "parent": "iOS App Release",
+   "domain": "work"
+  },
+  {
+   "task": "Check dead zones on trail",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Call T-Mobile about dropping signal in the back bedroom",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Turn off background cellular data for heavy video apps",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure Spotify and maps work without cell reception",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Disable usage statistics collection in the telemetry settings panel",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Map out which rooms in the cabin have zero bars",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Reproduce the sync crash when connectivity drops mid-upload",
+   "parent": "Mobile QA",
+   "domain": "work"
+  },
+  {
+   "task": "Switch both phones to offline mode before crossing the border",
+   "parent": "Switzerland Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Verify what users see when the chart has no data",
+   "parent": "Dashboard Redesign",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out why my SIM shows no service every time I leave Wi-Fi",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Set up fallback caching so the field form saves entries with zero cell reception",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Ask neighbors if their AT&T reception also died after Tuesday's storm in the valley",
+   "parent": "",
+   "domain": "communication"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar los datos móviles antes de aterrizar en Suiza",
+  "Reclamar a Movistar por la falta de cobertura en el garaje",
+  "Probar que la app guarde los formularios sin señal de red"
+ ],
+ "example_tasks_ru": [
+  "Отключить мобильную передачу данных перед вылетом в роуминг",
+  "Проверить работу навигатора без сотовой связи в горах",
+  "Разобраться, почему телефон теряет сеть в лифте и подвале"
+ ],
+ "context_tasks": [
+  {
+   "task": "Download offline maps of the Dolomites onto Garmin and phone",
+   "central": "map"
+  },
+  {
+   "task": "Buy a weBoost cell signal booster kit for the basement office",
+   "central": "signal booster antenna"
+  },
+  {
+   "task": "Pack paper boarding passes and hotel address in case we have no data",
+   "central": "boarding pass / document"
+  },
+  {
+   "task": "Switch phone to airplane mode during the meditation retreat",
+   "central": "airplane"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Build the Q3 revenue bar chart for Friday's board deck",
+   "better": "bar chart without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof offline-capable GPS watch for ultramarathons",
+   "better": "smartwatch / GPS watch",
+   "trap": "property"
+  },
+  {
+   "task": "Check how much mobile data I have left this billing cycle",
+   "better": "signal bars or data usage gauge without slash",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Replace the broken wooden pickets on the backyard fence",
+   "better": "fence",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel my monthly SIM plan with Vodafone",
+   "better": "SIM card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pack extra AA batteries for the walkie-talkies",
+   "better": "battery",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "The icon depicts four ascending signal or chart bars crossed out by a diagonal slash, indicating 'no cellular signal', 'offline', or 'chart/analytics disabled'. Because signal bars primarily represent a device status or connectivity state rather than a concrete task object, it has narrow utility in a to-do list outside occasional troubleshooting or offline-prep tasks, and is easily confused with a disabled bar chart.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "37c834249b56e97532abda263c168a4a0eb4928c",
+  "usage": {
+   "prompt": 3925,
+   "output": 1686,
+   "thoughts": 362,
+   "total": 5973
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

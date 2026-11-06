@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two stacked horizontal server units with status dots",
+  "modifiers": [
+   "large solid lightning bolt on the right"
+  ],
+  "composition": "stacked server blades on the left paired with a vertical lightning bolt on the right"
+ },
+ "readings": [
+  {
+   "meaning": "server power supply or UPS battery backup",
+   "strength": "primary"
+  },
+  {
+   "meaning": "high-speed storage, NVMe drive, or fast server",
+   "strength": "primary"
+  },
+  {
+   "meaning": "server power outage or electrical fault",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "serverless computing or instant cloud deployment",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the truncated server bars next to the thick bolt can look like a bulleted list with a flash icon or an abstract battery level indicator.",
+ "modifier_semantics": [
+  {
+   "modifier": "large solid lightning bolt on the right",
+   "meaning": "electrical power, backup energy, or high speed"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "home",
+  "shopping",
+  "finance"
+ ],
+ "task_intents": [
+  "connect NAS to UPS battery backup",
+  "test server rack power failover",
+  "replace dead battery in homelab UPS",
+  "measure home server electricity usage",
+  "upgrade slow hard drives to fast SSDs",
+  "configure graceful shutdown on power loss",
+  "buy redundant power supply for server"
+ ],
+ "example_tasks": [
+  {
+   "task": "New UPS for Synology",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Test server power failover",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check rack power draw",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Order replacement SLA batteries",
+   "parent": "Homelab UPS",
+   "domain": "shopping"
+  },
+  {
+   "task": "Configure NUT daemon shutdown",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Plug the closet NAS and router into the battery-backed outlets on the CyberPower unit",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Calculate how much the basement server rack is actually adding to our monthly electric bill",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Swap the dual power supplies in rack 3 to separate circuit breakers",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Migrate the sluggish Postgres database volume onto the fast NVMe storage pool",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Enable wake-on-LAN and AC power recovery in the BIOS of the media server",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Unplug the backup server to see if the APC battery still holds a load",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Check the USB cable between the UPS and the Proxmox host",
+   "parent": "Home Server Power",
+   "domain": "tech"
+  },
+  {
+   "task": "Compare prices on 1500VA sine-wave models before the winter storms hit",
+   "parent": "NAS Battery Backup",
+   "domain": "shopping"
+  },
+  {
+   "task": "Write the post-mortem for Tuesday's rack outage",
+   "parent": "Data Center Power",
+   "domain": "work"
+  },
+  {
+   "task": "Set up a nutritional or NUT server script so the NAS spins down safely before the battery dies",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Replace the noisy 750W PSU in the storage box with a quieter Platinum-rated unit this weekend",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Conectar el NAS del salón al SAI para que no se apague con los cortes de luz",
+  "Cambiar la batería del UPS del rack",
+  "Medir el consumo eléctrico real del servidor casero con el enchufe inteligente"
+ ],
+ "example_tasks_ru": [
+  "Подключить домашний NAS к бесперебойнику",
+  "Проверить автовыключение сервера при отключении электричества в щитке",
+  "Купить новый блок питания для старого файлового сервера"
+ ],
+ "context_tasks": [
+  {
+   "task": "Recycle the two swollen lead-acid batteries from the server room at the hazardous waste drop-off",
+   "central": "lead-acid batteries / recycling"
+  },
+  {
+   "task": "Label every black power cord behind the homelab shelf so I stop unplugging the wrong box",
+   "central": "cables / labels"
+  },
+  {
+   "task": "Call the electrician about installing a dedicated 20A circuit in the server closet",
+   "central": "electrician / phone call"
+  },
+  {
+   "task": "Vacuum the dust out of the PSU fan filter on the bottom of the tower",
+   "central": "cleaning / dust"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pay the monthly electric bill before Friday",
+   "better": "invoice or bill with lightning bolt",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a fast USB-C wall charger for my phone",
+   "better": "power plug or battery charging icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Back up family photos to the external hard drive",
+   "better": "hard drive or photos icon without lightning bolt",
+   "trap": "property"
+  },
+  {
+   "task": "Check why the website is loading slowly today",
+   "better": "globe or speedometer icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order a 10-foot ethernet cable for the NAS",
+   "better": "network cable or ethernet port icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Put fresh AA batteries in the TV remote",
+   "better": "standard battery cylinder icon",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly combines stacked server/storage units with a prominent lightning bolt, making it a strong, specific symbol for server power, UPS battery backups, PSU maintenance, or high-speed storage in IT and homelab tasks. While somewhat niche, it easily distinguishes server-related electrical tasks from general household power or plain storage tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b0ab48ae1413c7085bbc64aca914697344366849",
+  "usage": {
+   "prompt": 3920,
+   "output": 1765,
+   "thoughts": 98,
+   "total": 5783
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

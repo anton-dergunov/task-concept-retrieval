@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "map location pin with central dot",
+  "modifiers": [
+   "plus sign in upper right"
+  ],
+  "composition": "single object with upper-right badge"
+ },
+ "readings": [
+  {
+   "meaning": "add or save a location, address, or map pin",
+   "strength": "primary"
+  },
+  {
+   "meaning": "new destination, stop, or venue",
+   "strength": "primary"
+  },
+  {
+   "meaning": "medical clinic or pharmacy location",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "The plus sign can be read either as 'add a new location' or as a medical cross indicating a clinic, hospital, or pharmacy location.",
+ "modifier_semantics": [
+  {
+   "modifier": "plus sign",
+   "meaning": "add, new, save, or medical cross"
+  }
+ ],
+ "domains": [
+  "travel",
+  "outdoors",
+  "tech",
+  "admin",
+  "shopping",
+  "work",
+  "social_family"
+ ],
+ "task_intents": [
+  "save a new address or location",
+  "add a stop to a route",
+  "pin a spot on a map",
+  "register a new business location",
+  "bookmark places to visit on trip",
+  "enter a new shipping address",
+  "mark a campsite or trailhead coordinate"
+ ],
+ "example_tasks": [
+  {
+   "task": "Save new office address",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Pin the secret swimming hole",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Add bakery stops",
+   "parent": "Lyon Weekend Map",
+   "domain": "travel"
+  },
+  {
+   "task": "Drop pin for parking spot",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Enter Mum's new address",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Add our new warehouse address to the Google Business profile",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Save the trailhead GPS coordinates in Gaia before we lose signal",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Bookmark all the vintage shops near Shoreditch on Google Maps",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Add the new apartment as default shipping address on Amazon",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Program the pediatrician's new clinic address into the car nav",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Submit the missing coffee shop location to OpenStreetMap",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check the scenic overlooks to add",
+   "parent": "Blue Ridge Parkway Route",
+   "domain": "travel"
+  },
+  {
+   "task": "Add the backup ceremony venue",
+   "parent": "Wedding Guest Map",
+   "domain": "social_family"
+  },
+  {
+   "task": "Put all six recommended ramen joints onto our shared Tokyo custom map before Friday",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Add the two charging station stops along I-5 to the trip planner in the car",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Finish adding the remaining dispersed campsites from the forum thread before downloading offline layers",
+   "parent": "Utah Backcountry GPS",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Guardar la nueva dirección de la oficina en Google Maps",
+  "Añadir las paradas de carga al itinerario en coche por el norte",
+  "Marcar en el mapa compartido los restaurantes recomendados en Oaxaca"
+ ],
+ "example_tasks_ru": [
+  "Добавить новый адрес доставки в личном кабинете Ozon",
+  "Отметить на карте все смотровые площадки по дороге на Алтай",
+  "Сохранить координаты родника в навигатор перед выходом на маршрут"
+ ],
+ "context_tasks": [
+  {
+   "task": "Ask Dave which exit we take for the cabin",
+   "central": "message / person"
+  },
+  {
+   "task": "Print the driving directions to the cabin in case phones die",
+   "central": "printer / document"
+  },
+  {
+   "task": "Find a 24-hour urgent care near the hotel",
+   "central": "medical clinic"
+  },
+  {
+   "task": "Look up the zip code for the tax form",
+   "central": "tax form"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book the flights to Lisbon before prices jump",
+   "better": "airplane",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pack the folding paper road atlas in the glovebox",
+   "better": "folded map",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn off location tracking on the new phone",
+   "better": "location pin with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a local SIM card at the airport arrival hall",
+   "better": "SIM card",
+   "trap": "property"
+  },
+  {
+   "task": "Renew the car registration before the end of the month",
+   "better": "car or document",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Confirm the restaurant reservation for eight people on Saturday",
+   "better": "restaurant / cutlery",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a standard map pin with a plus badge in the top right. It is a strong, clear fit for tasks about saving a new address, pinning spots on a map, or adding stops to a route, though it occasionally overlaps with plain map-pin icons or medical location markers.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "2e4316e86c4e8384e4f24fae3f3e482d7ea5f3c0",
+  "usage": {
+   "prompt": 3922,
+   "output": 1625,
+   "thoughts": 0,
+   "total": 5547
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

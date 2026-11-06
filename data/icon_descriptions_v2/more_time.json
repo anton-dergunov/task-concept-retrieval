@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "round analog clock face with two hands",
+  "modifiers": [
+   "plus sign in upper right interrupting the circle"
+  ],
+  "composition": "single circular object, front view, with corner badge"
+ },
+ "readings": [
+  {
+   "meaning": "add time / log hours / timesheet entry",
+   "strength": "primary"
+  },
+  {
+   "meaning": "extend time / overtime / deadline extension",
+   "strength": "primary"
+  },
+  {
+   "meaning": "set new alarm / schedule new reminder",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "extra shift / additional work hours",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused with a generic clock or alarm icon at small sizes if the plus badge is overlooked.",
+ "modifier_semantics": [
+  {
+   "modifier": "plus sign",
+   "meaning": "add, log, extend, or create new time entry"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "finance",
+  "learning",
+  "home",
+  "tech"
+ ],
+ "task_intents": [
+  "log billable hours on timesheet",
+  "request a deadline extension",
+  "submit overtime hours for payroll",
+  "top up parking meter time",
+  "set a new alarm or timer",
+  "pick up an extra work shift",
+  "add extra screen time for kids",
+  "track volunteer or flight hours"
+ ],
+ "example_tasks": [
+  {
+   "task": "Log Friday's billable hours",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Submit April overtime sheet",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Add 5:30am flight alarm",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Enter yesterday's entries",
+   "parent": "Harvest Timesheet",
+   "domain": "work"
+  },
+  {
+   "task": "Ask Prof. Miller for extension",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Top up the ParkMobile meter before 2pm",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Claim the extra Sunday shift on the roster",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "File Form 4868 for six-month tax filing extension",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Approve Leo's 30 minutes of extra iPad screen time",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Record the 4 hours spent at the food bank",
+   "parent": "Community Service Hours",
+   "domain": "admin"
+  },
+  {
+   "task": "Add a second watering schedule to the Rachio timer",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Put in the weekend on-call hours before payroll closes",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Update the spreadsheet from last week",
+   "parent": "Freelance Time Tracking",
+   "domain": "work"
+  },
+  {
+   "task": "Fill out the paper logbook",
+   "parent": "Driver's Ed Supervised Hours",
+   "domain": "learning"
+  },
+  {
+   "task": "Backfill the missing Toggl entries for the Acme migration before invoicing on Friday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Request a 48-hour extension on the building permit review from the city clerk's office",
+   "parent": "",
+   "domain": "home"
+  }
+ ],
+ "example_tasks_es": [
+  "Registrar las horas extras del sábado en el portal de nómina",
+  "Pedir prórroga para la entrega de la tesis",
+  "Añadir media hora más al parquímetro con la app"
+ ],
+ "example_tasks_ru": [
+  "Внести сверхурочные часы за март в табель",
+  "Поставить новый будильник на 6:15 утра для поезда",
+  "Продлить платную парковку через приложение ещё на час"
+ ],
+ "context_tasks": [
+  {
+   "task": "Pay the overtime invoice from the electrician",
+   "central": "invoice / payment"
+  },
+  {
+   "task": "Install Toggl Track browser extension in Chrome",
+   "central": "browser extension / software"
+  },
+  {
+   "task": "Email HR about the missing holiday hours on my paystub",
+   "central": "email / paystub"
+  },
+  {
+   "task": "Download the printable babysitter hours log PDF",
+   "central": "PDF document"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy a new wall clock for the kitchen",
+   "better": "plain clock without plus",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace CR2032 battery in my Casio watch",
+   "better": "wristwatch or battery",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Cook the pork shoulder for 8 hours on low",
+   "better": "slow cooker or meat",
+   "trap": "property"
+  },
+  {
+   "task": "Buy a 10-foot outdoor extension cord for the trimmer",
+   "better": "extension cord / plug",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Schedule dentist checkup for next Tuesday at 10am",
+   "better": "tooth / dentist or calendar",
+   "trap": "property"
+  },
+  {
+   "task": "Send the signed W-9 to accounting",
+   "better": "tax form / document signature",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a clock face combined with a plus sign, clearly indicating adding time, logging hours, overtime, or requesting an extension. It fits tasks centered on timesheets, billing hours, extending parking or deadlines, and adding alarms, while remaining distinct from a plain clock.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f4e8d43afe3707f756d0d3251c73b3f0e269943d",
+  "usage": {
+   "prompt": 3924,
+   "output": 1664,
+   "thoughts": 0,
+   "total": 5588
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

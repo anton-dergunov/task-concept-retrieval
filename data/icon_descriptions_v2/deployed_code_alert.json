@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "isometric cube or cardboard box outline",
+  "modifiers": [
+   "solid circle badge with exclamation mark at bottom right"
+  ],
+  "composition": "isometric box with corner overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "missing, delayed, or damaged package delivery",
+   "strength": "primary"
+  },
+  {
+   "meaning": "software package error, broken dependency, or build warning",
+   "strength": "primary"
+  },
+  {
+   "meaning": "urgent shipment or priority parcel",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "low inventory or out-of-stock item alert",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Because the cube lacks internal vertical edges or tape flaps, it reads equally as a physical shipping parcel and an abstract software package or 3D module.",
+ "modifier_semantics": [
+  {
+   "modifier": "circle badge with exclamation mark",
+   "meaning": "alert, problem, error, missing status, or urgent attention needed"
+  }
+ ],
+ "domains": [
+  "shopping",
+  "home",
+  "tech",
+  "work",
+  "admin",
+  "finance"
+ ],
+ "task_intents": [
+  "report missing or stolen package delivery",
+  "claim refund for damaged parcel",
+  "resolve customs hold on shipment",
+  "fix broken software package dependency",
+  "track down delayed mail order",
+  "follow up on lost freight shipment",
+  "patch vulnerable npm or pip package",
+  "reorder out-of-stock warehouse supplies"
+ ],
+ "example_tasks": [
+  {
+   "task": "Report missing Amazon parcel",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Fix broken npm package",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Call FedEx about delay",
+   "parent": "Lost Shipment",
+   "domain": "admin"
+  },
+  {
+   "task": "Take photos of crushed corner",
+   "parent": "Damaged Ikea Delivery",
+   "domain": "home"
+  },
+  {
+   "task": "Send invoice to customs",
+   "parent": "Stuck DHL Parcel",
+   "domain": "admin"
+  },
+  {
+   "task": "File a claim with USPS for the shattered ceramic mug shipment",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Ask the downstairs neighbors if our chewy box landed on their porch",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Resolve the dependency conflict in the auth package before Friday's release",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Follow up with supplier about the three short-shipped cartons of labels",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Dispute charge for the winter coat that never arrived from Berlin",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Upgrade deprecated bundler package causing warnings in the CI build pipeline",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check locker code at the post office before they return the parcel",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Escalate the support ticket before the 30-day window closes",
+   "parent": "Missing eBay Package",
+   "domain": "shopping"
+  },
+  {
+   "task": "Send photos of the water-damaged textbook box to the publisher for a free replacement",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Clear the unpaid import duty on the camera lens shipment stuck at Heathrow customs",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Pin the broken Python library to version 2.4 until the upstream maintainer pushes a hotfix",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Reclamar a Correos por el paquete retenido en aduanas desde el martes",
+  "Mandar fotos de la caja rota al vendedor para pedir el reembolso",
+  "Corregir el error de dependencias en el paquete de autenticación"
+ ],
+ "example_tasks_ru": [
+  "Позвонить в СДЭК по поводу застрявшей в сортировочном центре посылки",
+  "Сфотографировать помятую коробку и составить акт при курьере",
+  "Исправить ошибку сборки из-за устаревшего пакета в репозитории"
+ ],
+ "context_tasks": [
+  {
+   "task": "Check porch camera footage from Tuesday afternoon",
+   "central": "security camera footage"
+  },
+  {
+   "task": "Install locking parcel drop box by the front gate",
+   "central": "mailbox / drop box"
+  },
+  {
+   "task": "Audit `package.json` for critical security advisories",
+   "central": "security audit / code file"
+  },
+  {
+   "task": "Print return shipping label for the wrong-size boots",
+   "central": "shipping label / printer"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy heavy-duty moving boxes for the garage",
+   "better": "plain cardboard box without exclamation badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order fragile glass ornaments for the tree",
+   "better": "Christmas ornament or wine glass",
+   "trap": "property"
+  },
+  {
+   "task": "Review the new employee compensation package",
+   "better": "document or money / salary icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check whether the coffee beans were delivered",
+   "better": "plain package or coffee beans",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy bubble wrap and packing tape at Staples",
+   "better": "tape roll or shopping cart",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Unpack the kitchen boxes into the upper cabinets",
+   "better": "open box without alert badge",
+   "trap": "lookalike_glyph"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "An isometric box or cube with an exclamation-point badge clearly communicates a problem with a physical parcel (lost, delayed, damaged, stuck in customs) or a software package error. Both are frequent, high-priority real-world tasks where the alert badge distinguishes an issue to resolve from routine shipping or packing.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e2c0fd9d2deb5b026bc70f13de269f8e2cb8b284",
+  "usage": {
+   "prompt": 3924,
+   "output": 1722,
+   "thoughts": 127,
+   "total": 5773
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

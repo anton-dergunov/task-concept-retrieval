@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two vertical parallel bars inside a broken circle",
+  "modifiers": [
+   "circular progress ring with top-left gap and dot"
+  ],
+  "composition": "centered pause symbol enclosed by a circular track with a dot in the break"
+ },
+ "readings": [
+  {
+   "meaning": "pause timer or countdown",
+   "strength": "primary"
+  },
+  {
+   "meaning": "pause subscription or recurring service",
+   "strength": "primary"
+  },
+  {
+   "meaning": "put project or activity on hold",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "take a break or rest interval",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the outer ring with the dot looks almost identical to a standard circular pause button or an electrical power outlet.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular progress ring with top-left gap and dot",
+   "meaning": "ongoing time, progress, or active cycle being interrupted"
+  }
+ ],
+ "domains": [
+  "admin",
+  "finance",
+  "work",
+  "health_fitness",
+  "tech",
+  "home"
+ ],
+ "task_intents": [
+  "pause a recurring subscription temporarily",
+  "put a current project on hold",
+  "freeze gym or club membership",
+  "suspend automatic deliveries while away",
+  "schedule a rest break between intervals",
+  "halt background sync or backups",
+  "defer loan or bill payments"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pause HelloFresh box",
+   "parent": "",
+   "domain": "food"
+  },
+  {
+   "task": "Freeze climbing gym membership",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Suspend mail delivery",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "August coffee beans",
+   "parent": "Subscriptions to Pause",
+   "domain": "shopping"
+  },
+  {
+   "task": "Audible account for two months",
+   "parent": "Put on Hold",
+   "domain": "finance"
+  },
+  {
+   "task": "Pause the newspaper delivery while we are in Portugal",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Put the kitchen remodel contractor search on hold until spring",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pause Google Ads campaign before the monthly budget resets Friday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Temporarily freeze Patreon billing for the three podcasts I'm behind on",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Set up automatic fifteen-minute screen breaks on the work laptop",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Pause Time Machine hourly backups while rendering the wedding video",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Biweekly lawn mowing service during the August drought",
+   "parent": "Pause Services",
+   "domain": "home"
+  },
+  {
+   "task": "Legacy mobile app refactor until Q3 staffing is decided",
+   "parent": "On Hold",
+   "domain": "work"
+  },
+  {
+   "task": "Call the student loan servicer to ask about putting payments on forbearance until November",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Pause the cat litter auto-ship on Chewy because we still have three unopened boxes",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Ask HR how to pause commuter transit pre-tax deductions while working from home next month",
+   "parent": "",
+   "domain": "career"
+  }
+ ],
+ "example_tasks_es": [
+  "Pausar la cuota del gimnasio durante agosto",
+  "Congelar la suscripción de café en grano mientras estamos de viaje",
+  "Poner en pausa las campañas de anuncios antes del cierre del trimestre"
+ ],
+ "example_tasks_ru": [
+  "Заморозить абонемент в фитнес-клуб на время отпуска",
+  "Поставить на паузу доставку воды до конца августа",
+  "Приостановить автоплатёж за облачное хранилище на пару месяцев"
+ ],
+ "context_tasks": [
+  {
+   "task": "Fix the sticking pause button on the living room Apple TV remote",
+   "central": "remote control"
+  },
+  {
+   "task": "Configure Pomodoro timer intervals in the menu bar app",
+   "central": "Pomodoro timer"
+  },
+  {
+   "task": "Review all monthly recurring charges on the Chase card",
+   "central": "credit card charges"
+  },
+  {
+   "task": "Take a week off running to let the shin splints calm down",
+   "central": "running / leg injury"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cancel Netflix subscription for good",
+   "better": "cancel / cross mark or trash",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a European two-pin plug adapter for the hairdryer",
+   "better": "electrical plug / outlet",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set a 45-minute oven timer for the sourdough loaf",
+   "better": "stopwatch / kitchen timer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check which annual subscriptions renew next month",
+   "better": "calendar or credit card",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Ask the landlord to replace the broken kitchen faucet",
+   "better": "faucet / tap",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Download offline podcasts for the long layover",
+   "better": "podcasts / headphones",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a pause symbol enclosed in a timer or progress ring. While originally a media or timer UI control, in a task manager it is genuinely useful for tasks about pausing subscriptions, freezing memberships, or putting projects and deliveries on hold, though it looks very similar to a plain pause button.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c7d16db89a2103e2e3763c9e9b3b5453cc99da62",
+  "usage": {
+   "prompt": 3922,
+   "output": 1676,
+   "thoughts": 125,
+   "total": 5723
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": "motion_photos_paused"
+ }
+}

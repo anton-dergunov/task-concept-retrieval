@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "paper receipt or invoice with serrated bottom edge and three text lines",
+  "modifiers": [
+   "circular badge at bottom right with right-pointing play triangle"
+  ],
+  "composition": "single front-facing receipt with overlapping circular badge at lower right"
+ },
+ "readings": [
+  {
+   "meaning": "process or run invoices and receipts",
+   "strength": "primary"
+  },
+  {
+   "meaning": "active subscription or recurring bill",
+   "strength": "primary"
+  },
+  {
+   "meaning": "start billing or initiate payment cycle",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "video script or playlist cue sheet",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes the serrated bottom edge can be overlooked, making it look like a generic text document or playlist with a play button.",
+ "modifier_semantics": [
+  {
+   "modifier": "circular play button badge",
+   "meaning": "start, run, process, automate, or media playback"
+  }
+ ],
+ "domains": [
+  "finance",
+  "work",
+  "admin",
+  "home",
+  "shopping",
+  "tech"
+ ],
+ "task_intents": [
+  "process pending client invoices",
+  "run monthly billing cycle",
+  "resume paused streaming subscription",
+  "automate recurring utility bill payment",
+  "submit batch of expense receipts",
+  "start subscription billing for customer",
+  "execute scheduled invoice run",
+  "turn on autopay for bill"
+ ],
+ "example_tasks": [
+  {
+   "task": "Run October client invoices",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Unpause Mubi subscription",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Process Chicago trip receipts",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Start autopay for water bill",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Batch-send Q3 retainer bills",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Kick off the monthly Stripe billing run for enterprise accounts",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Turn recurring billing back on for the gym membership",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Run the OCR receipt scanner batch on my desk pile",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Reactivate AppleCare monthly plan on the iPad before Friday",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Trigger automated invoice generation in FreshBooks for September hours",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Do the end-of-month batch before noon",
+   "parent": "Client Invoicing",
+   "domain": "work"
+  },
+  {
+   "task": "Switch the remaining two over to automatic monthly charge",
+   "parent": "Household Bills & Receipts",
+   "domain": "finance"
+  },
+  {
+   "task": "Resume the paused ones we actually use in winter",
+   "parent": "Streaming Subscriptions",
+   "domain": "home"
+  },
+  {
+   "task": "Process everything left in the shoebox from August",
+   "parent": "Expense Receipts",
+   "domain": "admin"
+  },
+  {
+   "task": "Set the electric and gas bills to auto-draft on the 5th of every month",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Run the reimbursement batch for the Berlin conference receipts before finance closes the quarter",
+   "parent": "",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Activar el pago automático de la factura de la luz",
+  "Lanzar la facturación mensual de los clientes de consultoría",
+  "Reanudar la suscripción de Filmin para el fin de semana"
+ ],
+ "example_tasks_ru": [
+  "Запустить автоплатёж за домашний интернет и ТВ",
+  "Провести пачку чеков за командировку в Казань через бухгалтерию",
+  "Возобновить подписку на Яндекс Плюс до конца месяца"
+ ],
+ "context_tasks": [
+  {
+   "task": "Ask Nora which cost code to use on the hotel receipt",
+   "central": "person / message"
+  },
+  {
+   "task": "Fix webhook timeout when Stripe subscription renews",
+   "central": "bug / webhook code"
+  },
+  {
+   "task": "Buy thermal paper rolls for the receipt printer",
+   "central": "paper rolls"
+  },
+  {
+   "task": "Update credit card expiring next month on recurring bills",
+   "central": "credit card"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Cancel Adobe Creative Cloud subscription before renewal",
+   "better": "receipt with slash or cross badge",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Make playlists for the road trip to Vermont",
+   "better": "music note list with play button",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if the plumber sent an itemized receipt",
+   "better": "plain receipt without play badge",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Watch the tutorial video on how to file self-employed taxes",
+   "better": "video player or screen with play triangle",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a new cordless drill and keep the receipt for warranty",
+   "better": "cordless drill",
+   "trap": "property"
+  },
+  {
+   "task": "Call landlord about the mistake on the water bill",
+   "better": "phone handset",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon combines a serrated-edge receipt or invoice with a play button badge, naturally signifying running a billing cycle, processing receipts/invoices, or activating a recurring bill/subscription. It fits finance and freelance billing workflows well, though at tiny sizes it could be mistaken for a generic text playlist or media queue.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a19245dbe28e1c47b7f21a639bd6a2e39ad122bd",
+  "usage": {
+   "prompt": 3933,
+   "output": 1668,
+   "thoughts": 202,
+   "total": 5803
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

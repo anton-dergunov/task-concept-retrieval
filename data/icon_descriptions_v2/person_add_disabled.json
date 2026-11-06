@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "outlined bust of a person with head and shoulders",
+  "modifiers": [
+   "plus sign on the right",
+   "diagonal slash crossing through the person"
+  ],
+  "composition": "single icon with side badge and diagonal strike-through"
+ },
+ "readings": [
+  {
+   "meaning": "disable user registration or new sign-ups",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel pending friend request or invitation",
+   "strength": "primary"
+  },
+  {
+   "meaning": "block someone from following or joining",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "freeze hiring or stop adding new members",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Confusing combination of contradictory modifiers (+ for add, slash for remove/disable); easily mistaken for simple 'remove user' (person with minus or slash) at a glance.",
+ "modifier_semantics": [
+  {
+   "modifier": "plus sign on the right",
+   "meaning": "add, invite, or register a new person"
+  },
+  {
+   "modifier": "diagonal slash crossing through the person",
+   "meaning": "disabled, blocked, cancelled, or not allowed"
+  }
+ ],
+ "domains": [
+  "tech",
+  "admin",
+  "work",
+  "social_family",
+  "communication"
+ ],
+ "task_intents": [
+  "disable public user registration on website",
+  "turn off friend requests in privacy settings",
+  "revoke pending team invitations",
+  "close event registration to new guests",
+  "freeze hiring for open roles",
+  "block new followers on social media",
+  "restrict guest sign-ups on shared wifi"
+ ],
+ "example_tasks": [
+  {
+   "task": "Turn off public sign-ups",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Revoke pending Slack invites",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Close RSVP form tonight",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Disable friend requests on Discord",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Stop accepting new clients",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Block self-registration on the staging WordPress site before Friday",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel the three unanswered guest invitations in Google Calendar",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Cap book club membership at twelve and close the link",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Lock the family photo album so strangers cannot request access",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Pause new volunteer onboarding until the background check backlog clears",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Change Instagram account to private and reject spam follow requests",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Turn off allow anyone to join link on the Zoom recurring meeting",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Configure Keycloak realm settings so unverified visitors cannot create new accounts on their own",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Tell HR to put a hiring freeze on the two junior developer requisitions for Q3",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Check the auth config",
+   "parent": "Disable Public Account Creation",
+   "domain": "tech"
+  },
+  {
+   "task": "Update the portal settings",
+   "parent": "Close Fall Soccer Registration",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Desactivar el registro de nuevos usuarios en el panel de administración",
+  "Cancelar las invitaciones pendientes del grupo de WhatsApp del colegio",
+  "Bloquear solicitudes de amistad de desconocidos en Facebook"
+ ],
+ "example_tasks_ru": [
+  "Закрыть регистрацию новых участников на субботний вебинар",
+  "Отменить зависшие приглашения в рабочем пространстве Notion",
+  "Запретить добавление в друзья в настройках приватности ВК"
+ ],
+ "context_tasks": [
+  {
+   "task": "Audit privacy settings across all kids' gaming accounts",
+   "central": "privacy / shield"
+  },
+  {
+   "task": "Clean up inactive seats before the annual SaaS renewal",
+   "central": "subscription / billing"
+  },
+  {
+   "task": "Finalize headcount numbers for the wedding caterer",
+   "central": "guest list / catering"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Invite Sarah to the shared grocery list",
+   "better": "person with plus sign (add user, without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Delete my old Twitter account permanently",
+   "better": "person with minus or trash can (delete user)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call the new plumber about the leaky sink",
+   "better": "phone or wrench (plumber / repair)",
+   "trap": "property"
+  },
+  {
+   "task": "Write postmortem on yesterday's registration outage",
+   "better": "document / report",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Email the landlord to renew the lease",
+   "better": "envelope / contract",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check who joined the team channel this week",
+   "better": "group of people / list",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon shows a user profile with a plus sign (add/invite user) crossed out by a diagonal slash (disabled/blocked). It specifically fits tasks about disabling sign-ups, closing registration, blocking friend requests, or revoking invitations, though the simultaneous '+' and '/' modifiers can be visually contradictory and confused with simple 'add user' or 'remove user' icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "9b93ea0d52ecd7661c97f37f3b1449ea867a0652",
+  "usage": {
+   "prompt": 3922,
+   "output": 1677,
+   "thoughts": 0,
+   "total": 5599
+  },
+  "soft_problems": [
+   "example_tasks with parent: 2 != 4"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

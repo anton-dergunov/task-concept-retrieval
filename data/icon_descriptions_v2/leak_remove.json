@@ -1,0 +1,214 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two opposing pairs of curved signal arcs",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "symmetrical opposing quarter-circle wave arcs bisected by a diagonal strike-through line"
+ },
+ "readings": [
+  {
+   "meaning": "sensors off or wireless signal disabled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no connection or offline mode",
+   "strength": "primary"
+  },
+  {
+   "meaning": "contactless or NFC disabled",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "surgical stitches or suture scar",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Without a recognizable device or center dot, the crossed-out opposing arcs easily look like surgical stitches, a centipede, a fern leaf, or railroad tracks at small sizes, and are easily confused with Wi-Fi off or hotspot off icons.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, turned off, blocked, or disconnected"
+  }
+ ],
+ "domains": [
+  "tech",
+  "home",
+  "work",
+  "travel"
+ ],
+ "task_intents": [
+  "disable device sensors for privacy",
+  "troubleshoot dead wireless sensor connection",
+  "turn off NFC and contactless radio",
+  "test app behavior in offline mode",
+  "fix disconnected smart home motion sensor",
+  "disable background telemetry and tracking"
+ ],
+ "example_tasks": [
+  {
+   "task": "Fix offline hallway sensor",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off phone NFC",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Disable background motion sensors",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Replace dead garage door sensor",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Test offline mode fallback",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Reconnect the basement leak detector that dropped off the Zigbee mesh",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Add developer tile to kill all phone sensors before the flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Debug why the wearable heart rate sensor stops transmitting after sleep",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off ultra-wideband and nearby device scanning on work tablet",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check which attic temperature nodes went offline during the freeze",
+   "parent": "Smart Home Sensors",
+   "domain": "home"
+  },
+  {
+   "task": "Pair the living room unit again",
+   "parent": "Disconnected Sensors",
+   "domain": "home"
+  },
+  {
+   "task": "Verify error message when radio is disabled",
+   "parent": "NFC & Contactless QA",
+   "domain": "work"
+  },
+  {
+   "task": "Audit permissions on the new build",
+   "parent": "Sensor Privacy Settings",
+   "domain": "tech"
+  },
+  {
+   "task": "Make sure the field tablets still log GPS points when all wireless radios are disabled",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Figure out why the patio weather station loses signal to the indoor display every night",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Disable passive keyless entry signal on both car fobs before parking at the airport",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Revisar por qué el sensor de la puerta del garaje aparece sin conexión",
+  "Desactivar los sensores y el NFC del teléfono antes del viaje",
+  "Probar cómo responde la aplicación cuando se pierde la señal del sensor"
+ ],
+ "example_tasks_ru": [
+  "Проверить, почему датчик протечки в ванной потерял связь с хабом",
+  "Отключить датчики и беспроводные модули на рабочем планшете",
+  "Протестировать работу приложения при отключённых датчиках устройства"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy CR2032 batteries for the dead window sensors",
+   "central": "battery"
+  },
+  {
+   "task": "Order a Faraday pouch for the spare car key fob",
+   "central": "key fob or pouch"
+  },
+  {
+   "task": "Book dermatologist to take out the forearm stitches on Friday",
+   "central": "medical appointment or bandage"
+  },
+  {
+   "task": "Download offline maps of the Dolomites before losing cell service",
+   "central": "map"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Call ISP to cancel our home internet plan before moving",
+   "better": "Wi-Fi or router icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof wireless meat thermometer for the smoker",
+   "better": "thermometer",
+   "trap": "property"
+  },
+  {
+   "task": "Check whether the router firmware update fixed the 5GHz drop",
+   "better": "router or Wi-Fi icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Take the dog to the vet to get her stitches removed",
+   "better": "dog or veterinary cross",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a 10m braided Ethernet cable for the office desk",
+   "better": "Ethernet cable or plug",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Sense-check the Q3 hiring numbers with finance",
+   "better": "spreadsheet or chart",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "This is an abstract system-toggle glyph (Material 'sensors_off' showing opposing signal arcs with a slash) that represents a device setting state rather than a concrete object or common task subject. At list size the opposing arcs intersected by a diagonal line look like surgical stitches or a plant stem, making it too ambiguous for glanceable task recognition.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "7f0f370e4d039aaba0e08e290fc0cbae16da8bda",
+  "usage": {
+   "prompt": 3926,
+   "output": 1687,
+   "thoughts": 144,
+   "total": 5757
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

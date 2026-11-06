@@ -1,0 +1,216 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "rolling suitcase with top handle and vertical ribs",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single upright object crossed out by a diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "no luggage or baggage not allowed",
+   "strength": "primary"
+  },
+  {
+   "meaning": "lost or missing luggage",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cancel trip or travel restriction",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "travel light without checked bags",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the ribbed suitcase with a slash can look like a crossed-out trash can (delete disabled) or a crossed-out battery.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash from top-left to bottom-right",
+   "meaning": "prohibited, missing, cancelled, or excluded"
+  }
+ ],
+ "domains": [
+  "travel",
+  "admin",
+  "finance",
+  "shopping",
+  "home"
+ ],
+ "task_intents": [
+  "report lost luggage to airline",
+  "claim compensation for missing bag",
+  "remove checked baggage from booking",
+  "cancel upcoming trip and bookings",
+  "pack light without a suitcase",
+  "get rid of broken old suitcase",
+  "check stadium bag policy restrictions"
+ ],
+ "example_tasks": [
+  {
+   "task": "Report lost suitcase to Lufthansa",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Cancel checked bag on Ryanair",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "File delayed baggage claim",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Toss cracked roller suitcase",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call airline baggage tracing desk",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Submit receipts for clothes bought while our luggage was missing",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Remove the extra checked suitcase from the return flight booking",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check stadium no-bag policy before heading to the Friday concert",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Donate the heavy old hardshell roller bag we never use",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Follow up with WorldTracer on the missing black Samsonite bag",
+   "parent": "Lisbon Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Upload PIR number and item list",
+   "parent": "Lost Luggage Claim",
+   "domain": "admin"
+  },
+  {
+   "task": "Call Amex travel insurance department",
+   "parent": "Missing Baggage",
+   "domain": "finance"
+  },
+  {
+   "task": "Switch to personal-item-only fare",
+   "parent": "Weekend Flights",
+   "domain": "travel"
+  },
+  {
+   "task": "Pare down packing list so we can travel for five days without a roller bag",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Find out where to store backpacks since the museum strictly forbids any wheeled luggage inside",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Get written confirmation from the airline that our lost suitcase is officially declared irretrievable",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Reclamar a Iberia por la maleta perdida en la escala de Madrid",
+  "Quitar el equipaje facturado de la reserva de Vueling",
+  "Llevar la maleta rota con la rueda suelta al punto limpio"
+ ],
+ "example_tasks_ru": [
+  "Подать заявление о розыске пропавшего чемодана в аэропорту",
+  "Отменить докупленный багаж на обратный рейс",
+  "Отправить чеки в страховую за вещи, купленные из-за потери багажа"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy a 30L backpack that fits under the seat so I never check bags",
+   "central": "backpack"
+  },
+  {
+   "task": "Put AirTags inside all our travel bags before the holidays",
+   "central": "tracker tag"
+  },
+  {
+   "task": "Book left-luggage locker at King's Cross station for the afternoon",
+   "central": "locker"
+  },
+  {
+   "task": "Replace the toiletries that were inside the lost bag",
+   "central": "toiletries"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Pack the big suitcase for two weeks in Japan",
+   "better": "suitcase without slash",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a new carry-on roller bag with spinner wheels",
+   "better": "suitcase without slash",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Take the kitchen trash bin out to the curb before 7am",
+   "better": "trash can",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book direct flight to Rome",
+   "better": "airplane",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Find a lightweight bagless vacuum cleaner for the stairs",
+   "better": "vacuum cleaner",
+   "trap": "property"
+  },
+  {
+   "task": "Weigh the suitcases with the hand scale before leaving for the airport",
+   "better": "luggage or scale",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a wheeled suitcase with a diagonal prohibition slash, representing no luggage, lost baggage, or removing checked bags from a trip. While niche compared to a plain suitcase, it fits tasks about lost-baggage claims, baggage restrictions, and carry-on/no-bag travel. At tiny sizes, the vertical ribs and top handle can resemble a crossed-out trash bin.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "b65a311bdb50928d6cdb96652841ef86849cf27d",
+  "usage": {
+   "prompt": 3920,
+   "output": 1680,
+   "thoughts": 83,
+   "total": 5683
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

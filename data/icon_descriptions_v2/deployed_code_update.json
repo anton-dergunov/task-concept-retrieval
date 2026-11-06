@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "isometric outline cube or closed box",
+  "modifiers": [
+   "circular badge at bottom right containing a downward-pointing arrow"
+  ],
+  "composition": "isometric box with bottom-right overlay badge"
+ },
+ "readings": [
+  {
+   "meaning": "incoming package, parcel delivery, or picking up an order",
+   "strength": "primary"
+  },
+  {
+   "meaning": "install software package, download dependency, or update module",
+   "strength": "primary"
+  },
+  {
+   "meaning": "archive items, store in boxes, or put away into storage",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "download 3D model or compressed archive file",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be read either as a physical cardboard parcel being received/stored or as a digital software package/archive being downloaded and installed.",
+ "modifier_semantics": [
+  {
+   "modifier": "downward arrow in circle",
+   "meaning": "download, install, receive, incoming, or put down into storage"
+  }
+ ],
+ "domains": [
+  "shopping",
+  "tech",
+  "home",
+  "work",
+  "admin",
+  "hobbies"
+ ],
+ "task_intents": [
+  "pick up delivered parcel from locker",
+  "install software package or library",
+  "receive incoming shipment at home",
+  "download compressed archive or installer",
+  "pack seasonal items into storage boxes",
+  "import 3D asset into project",
+  "unbox and inspect delivered order",
+  "bring storage bins down from attic"
+ ],
+ "example_tasks": [
+  {
+   "task": "Grab Amazon parcel from locker",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "npm install updated auth package",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Bring in Chewy box",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Pick up before Friday",
+   "parent": "Post Office & Parcels",
+   "domain": "admin"
+  },
+  {
+   "task": "Sign for the DHL express shipment before noon",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Download the offline map packages for the Utah road trip",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pack winter coats into vacuum boxes under the bed",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Install Homebrew packages on the new MacBook",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Receive freight pallet of exhibition brochures at loading dock",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Download STL miniature files from Patreon before the month ends",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Upgrade all outdated dependencies",
+   "parent": "Backend Repo Maintenance",
+   "domain": "tech"
+  },
+  {
+   "task": "Check front porch after 4pm",
+   "parent": "Incoming Deliveries",
+   "domain": "shopping"
+  },
+  {
+   "task": "Collect the Ikea click-and-collect boxes from customer pickup counter on the way home",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Download the full quarterly accounting archive zip before they close our vendor portal account",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Pull the PyTorch wheel packages onto the air-gapped workstation while on office ethernet",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Put all the labeled tax binders into the basement bin for good",
+   "parent": "Home Archiving",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Recoger el paquete de Correos antes de que cierren el sábado",
+  "Instalar los paquetes de Python que faltan en el entorno virtual",
+  "Bajar las cajas de ropa de verano al trastero"
+ ],
+ "example_tasks_ru": [
+  "Забрать посылку из постамата Ozon по дороге с работы",
+  "Скачать архив с исходниками проекта до отключения сервера",
+  "Убрать зимнюю обувь в коробки на нижнюю полку гардеробной"
+ ],
+ "context_tasks": [
+  {
+   "task": "Give building gate code to the FedEx courier",
+   "central": "gate code / message"
+  },
+  {
+   "task": "Clear space on the garage floor for the incoming patio furniture boxes",
+   "central": "garage floor"
+  },
+  {
+   "task": "Check disk space before pulling the Docker images",
+   "central": "disk space"
+  },
+  {
+   "task": "Buy heavy-duty packing tape for the basement storage bins",
+   "central": "packing tape"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Drop off the Zappos return box at UPS",
+   "better": "box with upward or outgoing arrow (ship / send package)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a box of dishwasher tablets",
+   "better": "dishwasher or cleaning tablets",
+   "trap": "property"
+  },
+  {
+   "task": "Download the signed lease PDF from the tenant portal",
+   "better": "document / file with download arrow",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Install the new bathroom faucet",
+   "better": "faucet or wrench",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Call customer service about missing refund",
+   "better": "phone call",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Play Jackbox with friends on Friday night",
+   "better": "game controller or party icon",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a 3D cube or box paired with a downward arrow badge, universally understood as either receiving/storing a physical package or downloading/installing a software package. It fits common everyday tasks like picking up parcels, packing things into storage, and installing software dependencies, while remaining distinct from outgoing shipment icons (up arrow) or plain box icons.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "045cab46a18eac21e94d571cec59b757dd367e97",
+  "usage": {
+   "prompt": 3925,
+   "output": 1692,
+   "thoughts": 0,
+   "total": 5617
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

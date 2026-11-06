@@ -1,0 +1,219 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "document page with dog-eared top-right corner",
+  "modifiers": [
+   "magnifying glass overlaid inside bottom-right"
+  ],
+  "composition": "single outlined document with inset magnifier cutting into bottom-right edge"
+ },
+ "readings": [
+  {
+   "meaning": "search or find a document or file",
+   "strength": "primary"
+  },
+  {
+   "meaning": "review, inspect, or audit a document",
+   "strength": "primary"
+  },
+  {
+   "meaning": "document preview or print preview",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "research paper or case study investigation",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes, the slanted top-right corner and centered circle can resemble a SIM card or SD memory card with a circular contact pad.",
+ "modifier_semantics": [
+  {
+   "modifier": "magnifying glass",
+   "meaning": "search, find, inspect, review, or preview"
+  }
+ ],
+ "domains": [
+  "admin",
+  "work",
+  "finance",
+  "learning",
+  "tech",
+  "home",
+  "career"
+ ],
+ "task_intents": [
+  "locate a missing document or record",
+  "proofread or inspect a contract closely",
+  "audit financial statements or tax filings",
+  "search files for specific clause or data",
+  "review a draft paper or report",
+  "dig up old certificates or paperwork",
+  "verify details in official records",
+  "fact-check a manuscript before submission"
+ ],
+ "example_tasks": [
+  {
+   "task": "Find 2021 W-2 PDF",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Proofread lease renewal addendum",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Locate car title paperwork",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check Section 4 citations",
+   "parent": "Thesis Manuscript Review",
+   "domain": "learning"
+  },
+  {
+   "task": "Read the fine print",
+   "parent": "Solar Panel Contract",
+   "domain": "home"
+  },
+  {
+   "task": "Track down the signed NDA from the Acme onboarding folder",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Go over the home inspection report for roof and foundation notes",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Search old medical PDFs for the exact date of my tetanus booster",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Audit Q3 expense report receipts against the exported card statement",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Comb through the HOA bylaws about fence height limits",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Look for typos in the final two-page resume PDF",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Verify termination notice period",
+   "parent": "Vendor SLA Audit",
+   "domain": "work"
+  },
+  {
+   "task": "Spot-check OCR output on Chapter 3",
+   "parent": "Digitized Archive Docs",
+   "domain": "tech"
+  },
+  {
+   "task": "Dig through the filing cabinet in the study to find the original birth certificates",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Review the redlined severance agreement from HR before talking to the employment lawyer",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Search the server log dump file for the first timeout error before the crash",
+   "parent": "",
+   "domain": "tech"
+  }
+ ],
+ "example_tasks_es": [
+  "Buscar la escritura del piso en la carpeta del despacho",
+  "Revisar con lupa las cláusulas de penalización del contrato de alquiler",
+  "Encontrar el PDF de la declaración de la renta de 2022"
+ ],
+ "example_tasks_ru": [
+  "Найти скан загранпаспорта в облаке",
+  "Внимательно вычитать договор подряда перед подписанием",
+  "Проверить смету по ремонту ванной на скрытые доплаты"
+ ],
+ "context_tasks": [
+  {
+   "task": "Highlight disputed line items on the hospital bill",
+   "central": "hospital bill / medical invoice"
+  },
+  {
+   "task": "Ask the notary whether page 3 needs a separate initial",
+   "central": "notary / signature"
+  },
+  {
+   "task": "Compare two contractor quotes for the deck rebuild",
+   "central": "price quotes / comparison"
+  },
+  {
+   "task": "Call the county clerk about the missing deed page",
+   "central": "phone call"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Sign and mail the tax return to the IRS",
+   "better": "signature or envelope icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a 128GB microSD card for the dashcam",
+   "better": "SD memory card icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Swap the eSIM to a local carrier at Lisbon airport",
+   "better": "SIM card icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a magnifying lamp for the soldering bench",
+   "better": "magnifying glass or desk lamp icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy archival acid-free document sleeves",
+   "better": "shopping or folder box icon",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the notary $45 via Venmo",
+   "better": "payment or money icon",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a document page combined with a magnifying glass, universally understood as searching for a file or closely reviewing/auditing paperwork. It fits common admin, legal, financial, and work tasks where locating or inspecting a document is the point. At tiny sizes the cut corner can briefly suggest a SIM card, so it works best when paired with file or paperwork tasks.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "652d2ccb071837eee92615c8ccc6fd8a42c0102c",
+  "usage": {
+   "prompt": 3923,
+   "output": 1701,
+   "thoughts": 0,
+   "total": 5624
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

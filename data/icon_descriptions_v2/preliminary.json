@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "circle containing a checkmark above three horizontal dots",
+  "modifiers": [
+   "three horizontal dots below the checkmark"
+  ],
+  "composition": "centered circular badge with stacked symbols inside"
+ },
+ "readings": [
+  {
+   "meaning": "pending approval, verification in progress, or partial completion",
+   "strength": "primary"
+  },
+  {
+   "meaning": "task or checklist item with more options or details",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "two-factor authentication or passcode verification",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Looks like a generic completed-task checkbox or UI status badge; at small sizes the three dots blur into an underline, making it indistinguishable from a plain circled checkmark.",
+ "modifier_semantics": [
+  {
+   "modifier": "checkmark",
+   "meaning": "verified, approved, or completed"
+  },
+  {
+   "modifier": "three horizontal dots (ellipsis)",
+   "meaning": "in progress, pending, more options, or passcode digits"
+  }
+ ],
+ "domains": [
+  "work",
+  "admin",
+  "tech",
+  "finance"
+ ],
+ "task_intents": [
+  "follow up on pending approval",
+  "verify account identity status",
+  "complete multi-step verification process",
+  "review checklist before final sign-off",
+  "check status of submitted application",
+  "set up two-factor authentication"
+ ],
+ "example_tasks": [
+  {
+   "task": "2FA setup for bank",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Pending expense approvals",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Verify domain ownership",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check background check status",
+   "parent": "",
+   "domain": "career"
+  },
+  {
+   "task": "Pre-flight checklist review",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Follow up on pending building permit approval with city hall",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Complete identity verification on the brokerage account before Friday",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Approve the three remaining vendor invoices in Bill.com",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Confirm all guests who haven't replied to the wedding RSVP",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Finish the remaining steps of the Apple ID security checkup",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Wait for insurance pre-authorization before booking the MRI appointment",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check if the notarized residency forms were accepted by the school",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Sign off on the final contractor punch list before releasing the last payment",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Go through every item on the closing checklist with the title company",
+   "parent": "House Purchase",
+   "domain": "finance"
+  },
+  {
+   "task": "Chase the two remaining sign-offs from legal and security before launch",
+   "parent": "Q3 Release",
+   "domain": "work"
+  },
+  {
+   "task": "Finish the pending verification steps so payouts aren't held up next month",
+   "parent": "Stripe Account",
+   "domain": "admin"
+  },
+  {
+   "task": "Review the last few unconfirmed items with Sarah before Tuesday",
+   "parent": "Onboarding Checklist",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Completar la verificación de identidad en la cuenta del banco",
+  "Revisar las aprobaciones pendientes de gastos del equipo",
+  "Confirmar que el seguro médico autorizó la resonancia"
+ ],
+ "example_tasks_ru": [
+  "Пройти двухфакторную верификацию в госуслугах",
+  "Проверить статус одобрения заявки на визу",
+  "Дождаться подтверждения брони от хозяина квартиры"
+ ],
+ "context_tasks": [
+  {
+   "task": "Upload utility bill PDF for address verification",
+   "central": "document / bill"
+  },
+  {
+   "task": "Call HR about the background check delay",
+   "central": "phone call"
+  },
+  {
+   "task": "Move authenticator codes to the new phone",
+   "central": "smartphone / security key"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check tire pressure before driving to Denver",
+   "better": "tire pressure gauge or car",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Check on grandma after her dentist appointment",
+   "better": "phone or person",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy verified organic olive oil from the Greek market",
+   "better": "olive oil bottle",
+   "trap": "property"
+  },
+  {
+   "task": "Write a check to the plumber for the water heater",
+   "better": "bank check / money",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order new password book for mom's desk",
+   "better": "notebook or lock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Print the signed lease agreement for the landlord",
+   "better": "printer or contract document",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 2,
+  "task_fit": 2,
+  "distinctiveness": 2
+ },
+ "discard": true,
+ "reasoning": "The icon shows a circled checkmark with an ellipsis underneath, representing an abstract UI status ('pending verification' or 'completed with options') rather than a concrete task subject. In a to-do list it clashes directly with the task completion checkbox chrome and offers no specific visual cue for what a task is about.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "da7951319d59303674f48d47c00815499f5dd22a",
+  "usage": {
+   "prompt": 3923,
+   "output": 1622,
+   "thoughts": 0,
+   "total": 5545
+  },
+  "soft_problems": [
+   "example_tasks: 17 != 16"
+  ],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

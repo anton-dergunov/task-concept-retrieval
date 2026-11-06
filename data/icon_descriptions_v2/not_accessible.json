@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "person seated in a wheelchair facing right",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single side-profile figure crossed out by diagonal line"
+ },
+ "readings": [
+  {
+   "meaning": "not wheelchair accessible / accessibility disabled",
+   "strength": "primary"
+  },
+  {
+   "meaning": "inaccessible entrance, route, or facility",
+   "strength": "primary"
+  },
+  {
+   "meaning": "accessibility features turned off",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "return or discontinue use of a wheelchair",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be confused with a regular wheelchair accessibility icon if the slash isn't noticed, or mistaken for a person sliding down a ramp or wearing a seatbelt at very small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "not, disabled, unavailable, or prohibited"
+  }
+ ],
+ "domains": [
+  "travel",
+  "home",
+  "tech",
+  "admin",
+  "work",
+  "health_fitness",
+  "social_family"
+ ],
+ "task_intents": [
+  "report broken wheelchair ramp or lift",
+  "warn guests about lack of step-free access",
+  "turn off device accessibility features",
+  "return rented wheelchair after recovery",
+  "find alternative to inaccessible venue",
+  "document accessibility barriers in building",
+  "post sign for out-of-order accessible entrance"
+ ],
+ "example_tasks": [
+  {
+   "task": "Return rented wheelchair",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Turn off VoiceOver",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Inaccessible venue alternatives",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Report blocked ramp",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Disable accessibility shortcuts",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Update event page to note the basement bar has no elevator",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Warn Aunt Linda about the steep front steps before Sunday dinner",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Log all non-compliant doorways on the second floor for the audit",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Post temporary sign that the west wheelchair lift is out of service",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Check which metro stations on line 4 lack step-free access",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Drop off the borrowed transport chair at the medical supply lending closet",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Check hotel booking",
+   "parent": "Step-free Rome trip",
+   "domain": "travel"
+  },
+  {
+   "task": "List front porch barriers",
+   "parent": "Aging-in-place remodel",
+   "domain": "home"
+  },
+  {
+   "task": "File complaint with city transit about the broken elevator at 34th St station",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Test how the checkout flow behaves when screen reader support is completely turned off",
+   "parent": "QA testing",
+   "domain": "tech"
+  },
+  {
+   "task": "Draft email to management regarding the locked handicap entrance on the north side",
+   "parent": "Office accessibility",
+   "domain": "work"
+  }
+ ],
+ "example_tasks_es": [
+  "Devolver la silla de ruedas prestada a la Cruz Roja el viernes",
+  "Avisar a los invitados que el local no tiene rampa ni ascensor",
+  "Desactivar los atajos de accesibilidad del teléfono"
+ ],
+ "example_tasks_ru": [
+  "Сдать взятую напрокат инвалидную коляску обратно в салон",
+  "Отключить функции специального доступа в настройках планшета",
+  "Пожаловаться в УК на неработающий подъемник для колясок в подъезде"
+ ],
+ "context_tasks": [
+  {
+   "task": "Call repair tech for the lobby platform lift",
+   "central": "phone call / lift repair"
+  },
+  {
+   "task": "Measure front steps for a portable threshold ramp",
+   "central": "measuring tape / ramp"
+  },
+  {
+   "task": "Move heavy planters blocking the sidewalk curb cut",
+   "central": "planters"
+  },
+  {
+   "task": "Sell Grandma's old folding walker and transfer chair",
+   "central": "selling / money"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book wheelchair assistance at Heathrow for Mom's flight",
+   "better": "wheelchair (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Renew disabled parking placard at the DMV before May",
+   "better": "wheelchair or parking icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the squeaky wheel on the office desk chair",
+   "better": "office chair or wrench",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a folding camp chair that doesn't sink in sand",
+   "better": "camping chair",
+   "trap": "property"
+  },
+  {
+   "task": "Order grab bars for the guest shower",
+   "better": "shower or grab bar",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check if the museum has complimentary wheelchairs",
+   "better": "wheelchair (without slash)",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 2,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a wheelchair user crossed out with a diagonal slash, universally meaning 'not wheelchair accessible' or 'accessibility disabled'. While very recognizable, it fits a narrow niche of to-do tasks—mostly reporting barriers, noting lack of step-free access, turning off tech accessibility settings, or returning a wheelchair—and must not be confused with the positive wheelchair icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "063d112c7a6885eb6fac30f0a2bd873634a21685",
+  "usage": {
+   "prompt": 3925,
+   "output": 1699,
+   "thoughts": 0,
+   "total": 5624
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

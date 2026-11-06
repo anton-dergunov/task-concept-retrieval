@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "house outline with window and door",
+  "modifiers": [
+   "two repeating right-side roof-and-wall contours behind it"
+  ],
+  "composition": "row of overlapping house profiles moving right"
+ },
+ "readings": [
+  {
+   "meaning": "neighborhood, street, or row of houses",
+   "strength": "primary"
+  },
+  {
+   "meaning": "multiple properties, real estate portfolio, or housing units",
+   "strength": "primary"
+  },
+  {
+   "meaning": "HOA, subdivision, or community association",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "comparing homes or house hunting",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes the trailing house outlines can look like motion lines or pages stacked behind a home icon.",
+ "modifier_semantics": [
+  {
+   "modifier": "two repeating right-side roof-and-wall contours behind it",
+   "meaning": "plural / multiple homes / row of buildings / neighborhood"
+  }
+ ],
+ "domains": [
+  "home",
+  "finance",
+  "admin",
+  "social_family",
+  "travel",
+  "work"
+ ],
+ "task_intents": [
+  "compare houses on a shortlist",
+  "pay HOA or neighborhood dues",
+  "manage multiple rental properties",
+  "talk to neighbors on the street",
+  "research neighborhoods before moving",
+  "schedule open house viewings",
+  "review subdivision covenants and rules",
+  "organize a block or street event"
+ ],
+ "example_tasks": [
+  {
+   "task": "Quarterly HOA dues",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Shortlist three neighborhoods in Portland",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Oakridge townhouse viewings",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Neighborhood watch signup",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Compare the four finalists",
+   "parent": "House Hunting",
+   "domain": "home"
+  },
+  {
+   "task": "Walk around the Maplewood subdivision at dusk to see how quiet it is",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Drop off block party flyers at the six houses on our cul-de-sac",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Update rent roll spreadsheet for the three duplexes on Elm Street",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Read through the architectural guidelines from the homeowners association before ordering siding",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Ask the neighbors on both sides about splitting the fence repair",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Compare Vacation Rentals in Oaxaca",
+   "parent": "Mexico Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Pull comparable sales from the last six months on our block",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Send annual renewal notices",
+   "parent": "Rental Properties",
+   "domain": "admin"
+  },
+  {
+   "task": "Check agenda and proxy form",
+   "parent": "HOA Board Meeting",
+   "domain": "admin"
+  },
+  {
+   "task": "Drive through the two school districts on Saturday morning to compare the neighborhoods in person",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Collect signatures from at least ten households on the street for the speed bump petition",
+   "parent": "",
+   "domain": "social_family"
+  }
+ ],
+ "example_tasks_es": [
+  "Pagar la cuota mensual de la comunidad de vecinos",
+  "Comparar las tres casas que vimos en Coyoacán el sábado",
+  "Preguntar a los vecinos de la cuadra si alguien vio al gato"
+ ],
+ "example_tasks_ru": [
+  "Оплатить взнос в ТСЖ за третий квартал",
+  "Сравнить три варианта таунхаусов в посёлке перед повторным просмотром",
+  "Обойти соседей по улице насчёт общего шлагбаума"
+ ],
+ "context_tasks": [
+  {
+   "task": "Book gutter cleaning for both rental houses before November",
+   "central": "gutters / roof maintenance"
+  },
+  {
+   "task": "Bake banana bread for the new neighbors in 42B",
+   "central": "banana bread / baking"
+  },
+  {
+   "task": "Take photos of the street trees for the HOA landscaping committee",
+   "central": "camera / trees"
+  },
+  {
+   "task": "File insurance policies for all three investment properties in one binder",
+   "central": "insurance document / binder"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Fix the leaky kitchen faucet at home",
+   "better": "faucet or wrench (or single house)",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Call the mortgage broker to lock in the 30-year rate",
+   "better": "phone or percentage / bank",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Clean out the garage this weekend",
+   "better": "single house or garage / broom",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a weatherproof outdoor doormat for the front porch",
+   "better": "doormat / shopping",
+   "trap": "property"
+  },
+  {
+   "task": "Check Zillow for any updates",
+   "better": "magnifying glass / search",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Order cardboard moving boxes and packing tape",
+   "better": "cardboard box",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon depicts a house backed by two repeating house outlines in a row, clearly signaling multiple homes, a street/neighborhood, an HOA, or comparing properties rather than a single home. It fits real-estate hunting, managing multiple rentals, and neighborhood/HOA tasks well, though careless scanners might treat it as a plain home icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "815347b787320751d546e53f5269dd02faf6090d",
+  "usage": {
+   "prompt": 3920,
+   "output": 1685,
+   "thoughts": 0,
+   "total": 5605
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,211 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "silhouette of an airplane tilted nose-down",
+  "modifiers": [
+   "horizontal bar underneath representing ground or runway"
+  ],
+  "composition": "side profile, airplane angled down to the right above a horizontal baseline"
+ },
+ "readings": [
+  {
+   "meaning": "flight landing or airport arrivals",
+   "strength": "primary"
+  },
+  {
+   "meaning": "return flight or arriving at destination",
+   "strength": "primary"
+  },
+  {
+   "meaning": "air travel or airport",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be confused at a quick glance with the airplane takeoff/departures icon, which differs only in the upward tilt of the plane.",
+ "modifier_semantics": [
+  {
+   "modifier": "horizontal bar underneath combined with downward tilt",
+   "meaning": "landing on the runway / arrival"
+  }
+ ],
+ "domains": [
+  "travel",
+  "social_family",
+  "work",
+  "admin"
+ ],
+ "task_intents": [
+  "pick someone up at airport arrivals",
+  "track incoming flight landing time",
+  "book airport transfer from arrival terminal",
+  "confirm return flight landing details",
+  "prepare for arrival at destination airport",
+  "check baggage claim and arrival gate",
+  "coordinate ride home after flight lands"
+ ],
+ "example_tasks": [
+  {
+   "task": "Pick up Mum at Heathrow",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Track BA284 landing time",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check Terminal 3 arrivals board",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Book shuttle from arrival gate",
+   "parent": "Lisbon Trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Confirm driver name at pickup",
+   "parent": "Tokyo Arrival",
+   "domain": "work"
+  },
+  {
+   "task": "Meet Carlos at JFK international arrivals outside customs with the winter coats",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Fill out the electronic customs and arrival declaration before landing in Auckland",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Text the Airbnb host our landing time once we touch down in Rome",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Pre-book the express train from Narita arrivals into Shinjuku for Tuesday evening",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Coordinate airport pickup for the Berlin speakers landing on the 4pm Lufthansa flight",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Check which terminal the red-eye from Seattle lands at on Sunday morning",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Wait at short-stay parking until sister texts from baggage claim",
+   "parent": "Airport Pickup",
+   "domain": "social_family"
+  },
+  {
+   "task": "Send flight number and scheduled arrival time to the conference hotel concierge",
+   "parent": " Munich Summit",
+   "domain": "work"
+  },
+  {
+   "task": "Look up where therideshare pickup zone is outside Boston Logan Terminal E arrivals",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Buy a local eSIM QR code to activate as soon as the plane lands in Seoul",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Arrange a late-night cab home from Gatwick South after the 11:40pm flight lands",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Recoger a mis abuelos en la terminal T4 de llegadas de Barajas",
+  "Rastrear la hora de aterrizaje del vuelo de Iberia desde Buenos Aires",
+  "Completar el formulario de migración antes de aterrizar en Bogotá"
+ ],
+ "example_tasks_ru": [
+  "Встретить брата в зоне прилёта Шереметьево B в 22:30",
+  "Проверить время посадки рейса из Стамбула на табло",
+  "Заказать такси ко времени прилёта во Внуково"
+ ],
+ "context_tasks": [
+  {
+   "task": "Withdraw 10,000 yen in cash at the airport ATM after clearing customs",
+   "central": "cash / ATM"
+  },
+  {
+   "task": "Buy a bouquet of yellow tulips on the way to meet Anna at arrivals",
+   "central": "flowers"
+  },
+  {
+   "task": "Pick up the reserved rental car keys at the terminal counter",
+   "central": "car / keys"
+  },
+  {
+   "task": "Keep passport and return ticket handy for the border officer",
+   "central": "passport"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check in online 24 hours before departure and choose an aisle seat",
+   "better": "airplane takeoff / departure or boarding pass",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Rebuild the landing page hero section with the new product screenshots",
+   "better": "web page / browser layout",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Sweep and repaint the upstairs stair landing before the guests arrive",
+   "better": "stairs / paintbrush",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pack a TSA-approved clear toiletry bag for the carry-on",
+   "better": "luggage / toiletry bag",
+   "trap": "property"
+  },
+  {
+   "task": "Renew my expired passport before booking the summer flights",
+   "better": "passport",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check credit card statement for the refunded airline baggage fee",
+   "better": "credit card / receipt",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 5,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows the standard airport pictogram for flight arrivals (an airplane angled nose-down toward a runway line). It is ideal for tasks about landing, arriving at a destination, airport pickups, and post-landing logistics, though at tiny sizes it must be distinguished from the nose-up takeoff/departure icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "a026408eee69436598afd6056cd6714ccd22bf72",
+  "usage": {
+   "prompt": 3919,
+   "output": 1706,
+   "thoughts": 0,
+   "total": 5625
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

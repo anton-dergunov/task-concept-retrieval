@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "over-ear headset with rectangular earcups and microphone boom",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single object, front view, crossed out"
+ },
+ "readings": [
+  {
+   "meaning": "headset off / broken headset / disconnect headset",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mute headset / disable audio and mic",
+   "strength": "primary"
+  },
+  {
+   "meaning": "offline customer support / unavailable agent",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "no headphones / audio off",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At small sizes, the bottom-mounted microphone boom merges with the diagonal slash, making the bottom right look like a downward-right arrow or a deformed padlock shackle.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, disconnected, muted, broken, or unavailable"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "communication",
+  "shopping",
+  "hobbies"
+ ],
+ "task_intents": [
+  "fix broken headset or microphone",
+  "unpair or disconnect Bluetooth headset",
+  "troubleshoot headset audio or mic issues",
+  "turn off headset support hours",
+  "return or replace defective headset",
+  "disable headset device in sound settings"
+ ],
+ "example_tasks": [
+  {
+   "task": "fix broken gaming headset",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "unpair old Bluetooth headset",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "RMA dead office headset",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "troubleshoot mic not working",
+   "parent": " Gaming Headset",
+   "domain": "tech"
+  },
+  {
+   "task": "send back the defective unit",
+   "parent": "Work Headset",
+   "domain": "shopping"
+  },
+  {
+   "task": "Figure out why the USB headset keeps disconnecting during Zoom calls",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Disable hands-free telephony on Windows so the headset audio stops dropping",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Warranty claim for the cracked headband and dead left earcup",
+   "parent": "Sony Headset",
+   "domain": "shopping"
+  },
+  {
+   "task": "Turn off live phone support queue for the holiday weekend",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Stop Discord from auto-switching to the unplugged virtual headset device",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Check why the boom mic stays muted even when flipped down",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Pack up the broken call-center headsets for electronics recycling on Friday",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clean the corroded contact pins on the base station",
+   "parent": "Wireless Headset",
+   "domain": "home"
+  },
+  {
+   "task": "Take the HyperX headset apart and resolder the loose wire inside the right cup",
+   "parent": "",
+   "domain": "hobbies"
+  },
+  {
+   "task": "Set up an auto-responder for when the support desk phone line is offline",
+   "parent": "",
+   "domain": "communication"
+  },
+  {
+   "task": "Remove the five dead Bluetooth headsets from my phone's paired devices list before travelling",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Arreglar los cascos con micrófono que no se escuchan del lado izquierdo",
+  "Desvincular los auriculares Bluetooth viejos del portátil del trabajo",
+  "Tramitar la garantía del headset inalámbrico que dejó de cargar"
+ ],
+ "example_tasks_ru": [
+  "Починить сломанную гарнитуру перед вечерним созвоном в Дискорде",
+  "Отключить профиль Hands-Free у Bluetooth-гарнитуры в настройках звука Windows",
+  "Сдать неработающую офисную гарнитуру обратно в магазин по гарантии"
+ ],
+ "context_tasks": [
+  {
+   "task": "Configure push-to-talk keybind so my mic stays muted by default",
+   "central": "microphone / keybind"
+  },
+  {
+   "task": "Update Realtek audio drivers to fix the jack detection bug",
+   "central": "audio drivers"
+  },
+  {
+   "task": "Buy a 3.5mm splitter cable for the PC front panel",
+   "central": "splitter cable"
+  },
+  {
+   "task": "Post holiday closure hours on the helpdesk portal",
+   "central": "helpdesk schedule"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Buy new wireless noise-canceling headphones for the flight",
+   "better": "headphones (without slash or mic, or shopping bag + headphones)\\n",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mute my microphone during the all-hands town hall",
+   "better": "muted microphone icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Call customer support about the double-charged invoice",
+   "better": "headset (unslashed) or phone call icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Listen to the downloaded audiobooks offline on the train",
+   "better": "headphones or audiobook icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order replacement foam ear pads from Amazon",
+   "better": "ear pads / shopping package (under Headset parent, specific noun wins over broken headset)\\n",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Check if the headset battery is charged before the 9am standup",
+   "better": "battery / charging icon or regular headset",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "The icon shows an over-ear headset with a bottom mic boom crossed out by a diagonal slash. While a plain headset or headphones icon is much more common for general audio, gear, or support tasks, this slashed variant specifically fits troubleshooting broken/disconnected headsets, disabling headset audio profiles, or taking phone support offline. At small sizes, the slash and bottom mic boom collide visually, making it slightly harder to parse than a standard headphones-off icon.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "7a502c513727318bebdb124085236a5b4236ea64",
+  "usage": {
+   "prompt": 3924,
+   "output": 1068,
+   "thoughts": 0,
+   "total": 4992
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "solid map location pin with circular center hole",
+  "modifiers": [
+   "enclosing ring solid on left and dashed on right"
+  ],
+  "composition": "centered pin inside a half-solid, half-segmented circular ring"
+ },
+ "readings": [
+  {
+   "meaning": "live location sharing or real-time GPS tracking",
+   "strength": "primary"
+  },
+  {
+   "meaning": "geofence, location radius, or proximity zone",
+   "strength": "primary"
+  },
+  {
+   "meaning": "find my device or luggage tracker",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "location permissions or temporary check-in",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "At very small sizes it can look like a plain map pin inside a circle, a target reticle, or a clock/timer around a pin.",
+ "modifier_semantics": [
+  {
+   "modifier": "enclosing ring solid on left and dashed on right",
+   "meaning": "active, temporary, live-updating status, or a boundary radius around a location"
+  }
+ ],
+ "domains": [
+  "tech",
+  "travel",
+  "social_family",
+  "home",
+  "outdoors",
+  "work",
+  "shopping"
+ ],
+ "task_intents": [
+  "share live location with family",
+  "set up home geofence automation",
+  "track checked luggage with AirTag",
+  "configure GPS tracker on bike",
+  "audit app location tracking permissions",
+  "adjust delivery radius for store",
+  "check pet GPS collar battery"
+ ],
+ "example_tasks": [
+  {
+   "task": "Share live location with Sarah",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Swap battery in suitcase AirTag",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Test home arrival radius",
+   "parent": "Home Assistant Geofencing",
+   "domain": "home"
+  },
+  {
+   "task": "Turn off background tracking",
+   "parent": "Phone Privacy Audit",
+   "domain": "tech"
+  },
+  {
+   "task": "Activate Garmin inReach tracking",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Set up a 200m geofence so the porch light turns on at dusk",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Put the spare Tile tracker inside the camera bag before flying to Lisbon",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Check why Mom's phone stops updating her location in Find My",
+   "parent": "",
+   "domain": "social_family"
+  },
+  {
+   "task": "Shrink the local Google Ads targeting radius around the shop to five miles",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Hide a Knog Scout tracker under the gravel bike bottle cage",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Switch courier apps from always-on GPS to while-using-the-app only",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Renew the monthly cellular plan",
+   "parent": "Dog Tractive GPS Collar",
+   "domain": "home"
+  },
+  {
+   "task": "Send link to the group chat",
+   "parent": "Marathon Live Runner Tracking",
+   "domain": "social_family"
+  },
+  {
+   "task": "Order a four-pack of Apple AirTags and two keyring holders before the summer road trip",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Fix the thermostat away-mode automation so it checks both of our phones leaving the zone",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Send our live WhatsApp location to the Airbnb host thirty minutes before we reach Naples",
+   "parent": "",
+   "domain": "travel"
+  }
+ ],
+ "example_tasks_es": [
+  "Compartir ubicación en tiempo real por WhatsApp con mamá al salir del aeropuerto",
+  "Cambiar la pila CR2032 del AirTag de la mochila de viaje",
+  "Configurar la geocerca de Casa para que abra el garaje al llegar"
+ ],
+ "example_tasks_ru": [
+  "Поделиться геопозицией в Телеграме с курьером у второго шлагбаума",
+  "Настроить геозону вокруг дома для автоматического включения котла",
+  "Положить AirTag в чемодан перед вылетом в Стамбул"
+ ],
+ "context_tasks": [
+  {
+   "task": "Write the privacy policy section explaining how the app uses background GPS",
+   "central": "privacy policy document"
+  },
+  {
+   "task": "Charge the Garmin watch before Sunday's trail ultramarathon",
+   "central": "smartwatch / battery"
+  },
+  {
+   "task": "Meet the seller at the metro entrance to pick up the used lens",
+   "central": "camera lens or meeting"
+  },
+  {
+   "task": "Create a shortcut that texts my ETA when I leave the office",
+   "central": "text message / ETA"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Book a window seat on the train to Edinburgh",
+   "better": "train",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Look up the street address for the new pediatric dentist",
+   "better": "tooth or plain map pin",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Track monthly grocery spending in the spreadsheet",
+   "better": "spreadsheet or budget chart",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Set a 25-minute Pomodoro timer for clearing inbox",
+   "better": "stopwatch or timer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof phone pouch for kayaking",
+   "better": "phone pouch or kayak",
+   "trap": "property"
+  },
+  {
+   "task": "Check where the tax forms are stored in the filing cabinet",
+   "better": "folder or filing cabinet",
+   "trap": "generic_verb"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 4,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon shows a map pin enclosed in a half-solid, half-dashed ring, the standard symbol for live location sharing, GPS tracking, and geofencing. It fits concrete tasks about AirTags, pet/bike trackers, smart-home geofences, and sharing real-time location, while remaining distinct from a static map pin, though at tiny sizes the segmented ring could resemble a timer or target.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "f0992caf90458157eea4d0d7170f8be18be66a29",
+  "usage": {
+   "prompt": 3922,
+   "output": 1773,
+   "thoughts": 248,
+   "total": 5943
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:47Z",
+  "alias_of": null
+ }
+}

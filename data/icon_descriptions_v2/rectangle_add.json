@@ -1,0 +1,217 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "horizontal rounded rectangle outline",
+  "modifiers": [
+   "centered plus sign inside"
+  ],
+  "composition": "single framed symbol, front view"
+ },
+ "readings": [
+  {
+   "meaning": "first aid kit or medical care",
+   "strength": "primary"
+  },
+  {
+   "meaning": "health insurance card",
+   "strength": "primary"
+  },
+  {
+   "meaning": "Swiss flag or Switzerland",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "add new card or slide",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Lacks a handle to clearly be a first-aid box, so it can be read as a health insurance card, a Swiss flag (though rectangular rather than square), or a generic UI button for 'add item/slide'.",
+ "modifier_semantics": [
+  {
+   "modifier": "centered plus sign inside",
+   "meaning": "medical cross, health, or addition/new"
+  }
+ ],
+ "domains": [
+  "health_fitness",
+  "travel",
+  "admin",
+  "home",
+  "shopping",
+  "outdoors"
+ ],
+ "task_intents": [
+  "restock home first aid kit",
+  "replace expired items in med kit",
+  "pack travel medical kit",
+  "order new health insurance card",
+  "check urgent care copay on card",
+  "plan trip to Switzerland",
+  "create new presentation slide"
+ ],
+ "example_tasks": [
+  {
+   "task": "restock car first aid kit",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "find BlueCross card",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "pack hiking med kit",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "check expiry dates",
+   "parent": "First aid box",
+   "domain": "home"
+  },
+  {
+   "task": "order replacement card",
+   "parent": "Health insurance",
+   "domain": "admin"
+  },
+  {
+   "task": "Check what our out-of-network urgent care copay actually is",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Put hydrocortisone and tweezers back in the bathroom med box",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Buy sterile gauze pads and waterproof tape before the camping trip",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Send a photo of the front and back of my medical card",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Make a tiny blister and painkiller pouch for the daypack",
+   "parent": "",
+   "domain": "outdoors"
+  },
+  {
+   "task": "Book the scenic train from Zermatt to St. Moritz",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Add a summary slide at the end",
+   "parent": "Q3 board deck",
+   "domain": "work"
+  },
+  {
+   "task": "Swap the currency in wallet",
+   "parent": "Switzerland trip",
+   "domain": "travel"
+  },
+  {
+   "task": "Go through the white plastic medical box under the sink and toss dried-out ointment tubes",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Call member services on the back of the health card to ask about physical therapy coverage",
+   "parent": "",
+   "domain": "health_fitness"
+  },
+  {
+   "task": "Assemble a proper field trauma kit for the glovebox with a tourniquet and trauma shears",
+   "parent": "",
+   "domain": "outdoors"
+  }
+ ],
+ "example_tasks_es": [
+  "Revisar qué cosas han caducado en el botiquín del baño",
+  "Llevar la tarjeta sanitaria al centro de salud para renovar recetas",
+  "Comprar vendas y suero fisiológico para el botiquín del coche"
+ ],
+ "example_tasks_ru": [
+  "Доложить пластыри и бинт в домашнюю аптечку",
+  "Найти полис ОМС перед записью к терапевту",
+  "Собрать дорожную аптечку в отпуск с ребёнком"
+ ],
+ "context_tasks": [
+  {
+   "task": "Buy children's ibuprofen and digital thermometer",
+   "central": "medicine / thermometer"
+  },
+  {
+   "task": "Schedule annual skin check with dermatologist",
+   "central": "doctor appointment"
+  },
+  {
+   "task": "Download offline map of Zurich",
+   "central": "map"
+  },
+  {
+   "task": "Submit out-of-pocket dental receipt for reimbursement",
+   "central": "receipt / money"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Add new credit card to Apple Pay",
+   "better": "credit card with chip/stripe",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up amoxicillin prescription at Walgreens",
+   "better": "pill bottle or capsule",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Charge the battery on the DSLR camera",
+   "better": "battery with plus/minus",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book dentist appointment for crown prep",
+   "better": "tooth",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Calculate total expenses from the hospital stay",
+   "better": "calculator or math symbols",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a waterproof case for the action camera",
+   "better": "camera",
+   "trap": "property"
+  }
+ ],
+ "scores": {
+  "recognizability": 3,
+  "task_fit": 4,
+  "distinctiveness": 3
+ },
+ "discard": false,
+ "reasoning": "A horizontal rectangle containing a bold plus/cross reads primarily as a medical symbol (a first-aid box without its handle, or a health insurance card) and secondarily as the Swiss flag or an 'add card/slide' UI action. It fits well for tasks around first-aid supplies, medical cards, or general healthcare, though a briefcase with a handle and cross is clearer for a kit.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "366e40053ecde2289d0c3add51b52665bbb779dd",
+  "usage": {
+   "prompt": 3923,
+   "output": 968,
+   "thoughts": 0,
+   "total": 4891
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}

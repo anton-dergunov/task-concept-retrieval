@@ -1,0 +1,212 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "two stacked cylindrical discs representing a database",
+  "modifiers": [
+   "diagonal slash from top-left to bottom-right"
+  ],
+  "composition": "single cylindrical stack with diagonal strike-through"
+ },
+ "readings": [
+  {
+   "meaning": "database offline, disconnected, or deleted",
+   "strength": "primary"
+  },
+  {
+   "meaning": "clear data, purge storage, or wipe cache",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no coins, cashless, or zero fee",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Can be read as either a database cylinder with a slash (offline/drop database) or a stack of coins with a slash (no cash/no coins), especially outside technical contexts.",
+ "modifier_semantics": [
+  {
+   "modifier": "diagonal slash",
+   "meaning": "disabled, disconnected, deleted, or prohibited"
+  }
+ ],
+ "domains": [
+  "tech",
+  "work",
+  "admin",
+  "home",
+  "finance"
+ ],
+ "task_intents": [
+  "drop or delete a database instance",
+  "decommission legacy data storage servers",
+  "clear local application data and cache",
+  "disconnect app from production database",
+  "test offline mode without database connection",
+  "purge old records from storage",
+  "disable automatic data logging"
+ ],
+ "example_tasks": [
+  {
+   "task": "Drop staging Postgres database",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Wipe local SQLite cache",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Decommission old MySQL instance",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Purge all customer PII",
+   "parent": "Database Decommissioning",
+   "domain": "admin"
+  },
+  {
+   "task": "Shut down RDS read replica",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Delete the leftover test databases on DigitalOcean before next billing cycle",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Disconnect the reporting script from the live production database",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Clear out Plex media database cache on the home NAS",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Revoke access credentials for contractors",
+   "parent": "Legacy Database Shutdown",
+   "domain": "admin"
+  },
+  {
+   "task": "Verify final snapshot before deletion",
+   "parent": "MongoDB Teardown",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn off InfluxDB logging on the Raspberry Pi weather station",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Update connection strings to remove fallback",
+   "parent": "Old SQL Server Retirement",
+   "domain": "work"
+  },
+  {
+   "task": "Simulate a complete database outage in staging to see if the queue holds up",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Purge three years of raw telemetry tables from the analytics warehouse to stop overage charges",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Wipe the corrupted Calibre library database and rebuild metadata from the folder structure",
+   "parent": "",
+   "domain": "home"
+  },
+  {
+   "task": "Ensure GDPR right-to-erasure script actually removes user rows from all backup shards",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Eliminar la base de datos de pruebas en AWS antes del viernes",
+  "Borrar la caché de datos locales de la aplicación móvil",
+  "Desconectar el servidor antiguo de la base de datos de clientes"
+ ],
+ "example_tasks_ru": [
+  "Удалить тестовую базу данных PostgreSQL после релиза",
+  "Очистить локальное хранилище данных в браузере",
+  "Отключить старый сервис от продакшн-базы"
+ ],
+ "context_tasks": [
+  {
+   "task": "Write runbook for handling Redis connection failures",
+   "central": "runbook / documentation"
+  },
+  {
+   "task": "Email clients about Saturday night database maintenance downtime",
+   "central": "email / announcement"
+  },
+  {
+   "task": "Check AWS bill after deleting unused RDS volumes",
+   "central": "bill / invoice"
+  },
+  {
+   "task": "Put a 'No cash or coins accepted' sign by the register",
+   "central": "sign / notice"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Back up the production Postgres database to S3",
+   "better": "plain database cylinder without slash, or database with backup arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Roll stack of quarters and dimes for the bank deposit",
+   "better": "stack of coins without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a stateless offline password manager",
+   "better": "key or lock icon",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the analytics database has new entries",
+   "better": "plain database cylinder",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Cancel monthly data plan on the spare iPad",
+   "better": "SIM card or mobile signal icon with slash",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Schedule team postmortem meeting on Zoom",
+   "better": "video call or calendar icon (even under a 'Database Outage' project)",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "Shows a standard stacked-cylinder database glyph struck through with a diagonal slash, clearly indicating deleting, disconnecting, or disabling a database or data storage. It fits technical and sysadmin tasks about dropping databases, purging data, or handling database outages, though non-technical users might occasionally mistake the cylinder stack for coins.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "e181e5d56ccbe4dd39289b42fd2eca86ed2ab228",
+  "usage": {
+   "prompt": 3929,
+   "output": 1644,
+   "thoughts": 135,
+   "total": 5708
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": null
+ }
+}

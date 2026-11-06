@@ -1,0 +1,215 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "circle outline containing a centered horizontal minus bar",
+  "modifiers": [
+   "horizontal minus bar inside circle"
+  ],
+  "composition": "single geometric symbol, centered front view"
+ },
+ "readings": [
+  {
+   "meaning": "remove, subtract, or delete",
+   "strength": "primary"
+  },
+  {
+   "meaning": "do not disturb or busy status",
+   "strength": "primary"
+  },
+  {
+   "meaning": "no entry or restricted access sign",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "cancel or unsubscribe",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Reads as a generic UI remove/subtract button, a 'do not disturb' status badge, or a 'no entry' road sign depending on context.",
+ "modifier_semantics": [
+  {
+   "modifier": "horizontal minus bar inside circle",
+   "meaning": "subtraction, removal, negation, or restriction"
+  }
+ ],
+ "domains": [
+  "admin",
+  "finance",
+  "tech",
+  "work",
+  "learning"
+ ],
+ "task_intents": [
+  "cancel unused recurring subscriptions",
+  "remove old accounts or memberships",
+  "set up do not disturb schedule",
+  "deduct expenses from monthly budget",
+  "revoke user access permissions",
+  "study road prohibition and no-entry signs"
+ ],
+ "example_tasks": [
+  {
+   "task": "Cancel Adobe subscription",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Revoke ex-contractor GitHub access",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Turn on Do Not Disturb",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Drop Tuesday evening class",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Hulu and Paramount+",
+   "parent": "Subscriptions to Cancel",
+   "domain": "finance"
+  },
+  {
+   "task": "Remove old landline number from two-factor authentication accounts",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Configure phone Do Not Disturb automation for deep work mornings",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Unsubscribe from retail promotional lists cluttering the main inbox",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Take my name off the HOA social committee roster",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Memorize no-entry and restricted zone signs before driving test",
+   "parent": "",
+   "domain": "learning"
+  },
+  {
+   "task": "Old gym membership before the 1st",
+   "parent": "Cancel & Unsubscribe",
+   "domain": "finance"
+  },
+  {
+   "task": "Former interns on Slack and Notion",
+   "parent": "Access Removal",
+   "domain": "work"
+  },
+  {
+   "task": "Quiet hours after 9pm on weekdays",
+   "parent": "Do Not Disturb Settings",
+   "domain": "tech"
+  },
+  {
+   "task": "Cancel the duplicate cloud storage plan before the annual renewal hits next Friday",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Remove deprecated feature flags from the production config after the v2 rollout settles",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Opt out of paper bank statements and marketing mailers across all three checking accounts",
+   "parent": "",
+   "domain": "admin"
+  }
+ ],
+ "example_tasks_es": [
+  "Dar de baja la suscripción del gimnasio antes de fin de mes",
+  "Configurar el modo No molestar en el móvil para las reuniones",
+  "Revocar permisos de acceso de los antiguos proveedores en Drive"
+ ],
+ "example_tasks_ru": [
+  "Отменить платную подписку на стриминговый сервис до списания",
+  "Настроить режим «Не беспокоить» на телефоне после 22:00",
+  "Удалить старые учётные записи уволенных сотрудников из системы"
+ ],
+ "context_tasks": [
+  {
+   "task": "Audit monthly credit card statement for recurring charges to cut",
+   "central": "credit card statement"
+  },
+  {
+   "task": "Put a 'No Soliciting' sign on the front porch",
+   "central": "sign"
+  },
+  {
+   "task": "Block spam callers on grandma's iPhone",
+   "central": "phone"
+  },
+  {
+   "task": "Clean up unused apps on the home screen",
+   "central": "smartphone apps"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Remove wallpaper in the downstairs hallway",
+   "better": "paint scraper or wallpaper",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Delete blurry photos from the vacation album",
+   "better": "photo / image",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a flathead screwdriver for the cabinet hinges",
+   "better": "screwdriver",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the negative terminal cable on the car battery",
+   "better": "car battery",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Call dentist to cancel Thursday's cleaning appointment",
+   "better": "tooth / dentist or phone",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Ask landlord for a refund on the overcharged utility bill",
+   "better": "receipt / money",
+   "trap": "parent_topic"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 2,
+  "distinctiveness": 3
+ },
+ "discard": true,
+ "reasoning": "A minus sign inside a circle is an abstract UI control for removal, subtraction, or 'do not disturb' status rather than a concrete task subject. Nearly any real-world task involving removing or cancelling something is better represented by the object being removed (e.g., a subscription, app, or appointment).",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "c570eeda88cb1a049d808b435c970ccf6732b0e4",
+  "usage": {
+   "prompt": 3922,
+   "output": 1624,
+   "thoughts": 402,
+   "total": 5948
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:45Z",
+  "alias_of": "remove_circle_outline"
+ }
+}

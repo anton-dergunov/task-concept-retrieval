@@ -1,0 +1,213 @@
+{
+ "schema_version": 2,
+ "depiction": {
+  "primary_object": "smartphone outline with side power button",
+  "modifiers": [
+   "checkmark centered on the screen"
+  ],
+  "composition": "single object, front view"
+ },
+ "readings": [
+  {
+   "meaning": "mobile verification / two-factor authentication",
+   "strength": "primary"
+  },
+  {
+   "meaning": "smartphone setup complete or phone ready",
+   "strength": "primary"
+  },
+  {
+   "meaning": "mobile check-in (flight, hotel, event ticket, banking approval, Apple Pay confirmation, task app on phone, device checkup/diagnostics, phone settings verified, etc.)",
+   "strength": "secondary"
+  }
+ ],
+ "ambiguity": "Could be mistaken for a generic smartphone, a smartwatch case without straps, or a battery/clipboard with a checkmark at small sizes.",
+ "modifier_semantics": [
+  {
+   "modifier": "checkmark centered on the screen",
+   "meaning": "verified, approved, completed, or checked-in on mobile"
+  }
+ ],
+ "domains": [
+  "tech",
+  "admin",
+  "travel",
+  "finance",
+  "work",
+  "shopping"
+ ],
+ "task_intents": [
+  "set up mobile two-factor authentication",
+  "complete mobile flight check-in",
+  "verify phone number on account",
+  "approve banking login on phone",
+  "run diagnostics on smartphone",
+  "confirm mobile ticket or pass",
+  "finish new phone setup"
+ ],
+ "example_tasks": [
+  {
+   "task": "Set up 2FA on phone",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Mobile check-in for flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Verify phone number",
+   "parent": "Bank Account",
+   "domain": "finance"
+  },
+  {
+   "task": "Finish iPhone setup",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Approve login on authenticator",
+   "parent": "Work IT",
+   "domain": "work"
+  },
+  {
+   "task": "Move Google Authenticator codes over to the new Pixel before wiping the old one",
+   "parent": "",
+   "domain": "tech"
+  },
+  {
+   "task": "Check in on the Ryanair app 24 hours before the Lisbon flight",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Activate the banking app push approvals on Mom's new Samsung phone",
+   "parent": "",
+   "domain": "finance"
+  },
+  {
+   "task": "Run the trade-in diagnostics check on my old phone before mailing it in",
+   "parent": "",
+   "domain": "shopping"
+  },
+  {
+   "task": "Verify the recovery phone number on both personal and work Gmail accounts",
+   "parent": "",
+   "domain": "admin"
+  },
+  {
+   "task": "Download the boarding passes to Apple Wallet after online check-in opens",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Confirm everything transferred properly to the new phone",
+   "parent": "Phone Upgrade",
+   "domain": "tech"
+  },
+  {
+   "task": "Test the Duo push prompt on the backup phone",
+   "parent": "Security Audit",
+   "domain": "work"
+  },
+  {
+   "task": "Enroll the new handset in the company MDM portal so Slack and email get approved",
+   "parent": "",
+   "domain": "work"
+  },
+  {
+   "task": "Complete the eSIM activation steps on the carrier app before landing in Tokyo on Tuesday",
+   "parent": "",
+   "domain": "travel"
+  },
+  {
+   "task": "Go through the pre-sale checklist on the old iPhone 13 and sign out of iCloud",
+   "parent": "",
+   "domain": "shopping"
+  }
+ ],
+ "example_tasks_es": [
+  "Hacer el check-in en el móvil para el vuelo a Bilbao",
+  "Activar la verificación en dos pasos en la app del banco",
+  "Comprobar que todo funciona en el móvil nuevo antes de borrar el viejo"
+ ],
+ "example_tasks_ru": [
+  "Пройти мобильную регистрацию на рейс в Сочи",
+  "Настроить двухфакторную аутентификацию в Госуслугах на телефоне",
+  "Проверить старый айфон по чек-листу перед продажей на Авито"
+ ],
+ "context_tasks": [
+  {
+   "task": "Save the backup recovery codes in 1Password",
+   "central": "backup codes / password manager"
+  },
+  {
+   "task": "Order a tempered glass screen protector for the new Pixel",
+   "central": "screen protector"
+  },
+  {
+   "task": "Call carrier support to unlock the IMEI",
+   "central": "phone call / carrier"
+  },
+  {
+   "task": "Clean out old screenshots from the camera roll",
+   "central": "photos / gallery"
+  }
+ ],
+ "near_misses": [
+  {
+   "task": "Check missed calls from the landlord",
+   "better": "phone handset with missed call arrow",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a waterproof phone pouch for kayaking",
+   "better": "waterproof pouch or kayak",
+   "trap": "property"
+  },
+  {
+   "task": "Pay the monthly T-Mobile bill",
+   "better": "invoice or credit card",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Compare iPhone 16 vs Pixel 9 camera specs",
+   "better": "camera or smartphone without checkmark",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Tick off the grocery list on my phone",
+   "better": "shopping list or grocery cart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the cracked screen on Dad's phone",
+   "better": "broken smartphone or repair wrench",
+   "trap": "shared_vocabulary"
+  }
+ ],
+ "scores": {
+  "recognizability": 4,
+  "task_fit": 3,
+  "distinctiveness": 4
+ },
+ "discard": false,
+ "reasoning": "The icon clearly depicts a smartphone with a side button and a large checkmark on its screen. It fits tasks centered on mobile verification (2FA, authenticator apps), mobile check-in, or completing phone setup/diagnostics, though for ordinary phone tasks a plain smartphone or handset icon is more direct.",
+ "_meta": {
+  "model": "gemini-4-argon",
+  "prompt_version": "v2.0",
+  "pass": "describe",
+  "mode": "batch",
+  "glyph": "2e3052fcfe3c0eb1e3e37cafd9caceb79c343a96",
+  "usage": {
+   "prompt": 3921,
+   "output": 994,
+   "thoughts": 0,
+   "total": 4915
+  },
+  "soft_problems": [],
+  "created": "2026-11-06T02:55:46Z",
+  "alias_of": null
+ }
+}
