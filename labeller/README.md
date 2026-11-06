@@ -8,8 +8,8 @@ Synology NAS. Labels save on every tap, so you can close the page and continue o
 
 - One task at a time: its title and body, with long bodies collapsed behind "more". Translated
   items (Public-*) show the title in all languages at once, so one label covers every version.
-- 30 candidate icons: 24 from several matchers (M3, M1, M2, B1) and 6 random ones, in a
-  shuffled order. The order is fixed per task, so every device shows the same grid.
+- 30 candidate icons: 24 from several matchers (M3, M1, M2, B1), each run on both icon
+  description versions (v1 and v2), and 6 random ones, in a shuffled order. The order is fixed per task, so every device shows the same grid.
   **More icons** at the end of the grid adds 70 more: the matchers' next-best icons and
   another 14 random ones. Every icon is a distinct glyph; font aliases that draw the same
   picture are collapsed.

@@ -246,14 +246,33 @@ dev labels. Details: [icon-descriptions.md](icon-descriptions.md).
 
 ## 8. Experiment order
 
-1. ~~Regenerate icon descriptions (v2, §7)~~ (done 2026-11-06). Rebuild the labelling
-   pools over v1 + v2 (`scripts/build_label_bundle.py --refresh`), then label: about 400
-   Personal (200 dev / 200 test) first, then continue toward the targets in §3.
-2. Baselines on dev: B1, M1, M2, M3, plus zero-shot image towers (SigLIP 2 / jina-clip-v2).
-3. Judge calibration on dev (§6); pick the judge.
-4. Judge about 3k training-pool tasks; fine-tune the dual encoder; learning curve;
-   then 10k if it keeps improving.
-5. Add image features; try the VLM reranker; calibrate the abstention gate on dev.
-6. One final run on **test** for each dataset.
-7. Report **eval-set fidelity**: does the method ranking on Personal-synth (skeleton
+Human dev labels are the bottleneck: almost every decision waits on them. So labelling
+starts first, and work that needs no labels runs alongside it.
+
+1. ~~Regenerate the icon descriptions (v2, §7)~~ (done 2026-11-06). The labelling pools
+   were rebuilt over v1 + v2 the same day.
+2. **Label** about 400 Personal tasks (200 dev / 200 test) first, then continue toward the
+   targets in §3. The first 200 dev labels already decide v1 vs v2 and give the first real
+   baseline numbers.
+3. **Meanwhile, work that needs no labels** (hand-off for a separate session:
+   [next-label-free-work.md](next-label-free-work.md)):
+   - build the unlabelled training task pools (§4, item 2), disjoint from every eval set;
+   - a first fine-tune of the multilingual dual encoder on the free signal in v2 (§4, item 1):
+     example tasks (EN, ES, RU) as rank-1 positives, context tasks as rank-2, near-misses
+     as hard negatives. It tests the training pipeline early; only dev labels can judge
+     it, because the bootstrap eval uses the same examples;
+   - zero-shot image-tower baselines (SigLIP 2 / jina-clip-v2) and their fusion with M1;
+   - the LLM-judge harness (§6), smoke-tested on public tasks, ready to calibrate.
+4. **With ~200 dev labels:** v1 vs v2 (icon-descriptions.md §7); baselines B1, M1, M2, M3,
+   the image towers and the step-3 fine-tune on dev; judge calibration (§6), pick the
+   judge.
+5. **Judge about 3k training-pool tasks**; fine-tune the dual encoder on judge labels +
+   v2's free signal; learning curve; then 10k if it keeps improving. This is the step
+   most likely to produce the best fast model.
+6. **Add image features; try the VLM reranker** and distil it into the dual encoder if
+   it wins; fit the usefulness prior and calibrate the abstention gate on dev ("no good
+   icon" labels).
+7. One final run on **test** for each dataset; export the winner as a bundle for the
+   agenda ([deployment.md](deployment.md)).
+8. Report **eval-set fidelity**: does the method ranking on Personal-synth (skeleton
    subset) match the ranking on Personal? (docs/anonymization.md §4)
