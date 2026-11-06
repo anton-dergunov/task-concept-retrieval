@@ -1,6 +1,6 @@
 """The v2 icon-description request: prompt, response schema, validation, references.
 
-docs/icon-descriptions-v2.md §3–5. Shared by the model pilot (scripts/v2_pilot.py)
+docs/icon-descriptions.md §3–5. Shared by the model pilot (scripts/v2_pilot.py)
 and, later, the full pass 1. Hard rule (CLAUDE.md): the request never contains an
 icon's name, tags or categories; the glyph image is the only source of truth. The
 name is used here only to locate the glyph.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Model pilot for the v2 icon descriptions (docs/icon-descriptions-v2.md §5, step 1).
+"""Model pilot for the v2 icon descriptions (docs/icon-descriptions.md §5.2).
 
 Which single Gemini model should describe all ~3,600 glyphs? The same v2 request
 (tcr/describe_v2.py) goes to every model config for a stratified sample of glyphs;
@@ -67,7 +67,7 @@ PRICES = {
 # The glyphs pass 1 will describe: every distinct glyph except the human rejects.
 PASS1_GLYPHS = 3621
 
-# v1 misreadings found in the spot check (docs/icon-descriptions-v2.md §1).
+# v1 misreadings found in the spot check (docs/icon-descriptions.md §1).
 KNOWN = ("monitor_weight", "tune", "electric_meter", "skeleton")
 STRATA = {"useful": 16, "unsure": 24, "reject": 6}   # with KNOWN: 50 glyphs
 

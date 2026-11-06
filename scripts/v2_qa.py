@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Pass 3 of the v2 icon descriptions: blind QA of glyph readings, v1 vs v2
-(docs/icon-descriptions-v2.md §5 step 4 and §6 "glyph-reading accuracy").
+(docs/icon-descriptions.md §5.5 and §6.1).
 
 Two samples, judged together, blind (v1 and v2 shown as slots A/B in an order
 shuffled per glyph, in one common format):

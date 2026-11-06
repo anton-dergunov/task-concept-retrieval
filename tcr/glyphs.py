@@ -3,7 +3,7 @@
 Purely visual: nothing here reads an icon's name, tags or description — the name
 only locates the PNG. Used to lay out the icon review grid so that near-identical
 glyphs sit together (scripts/build_curation_bundle.py), and meant for the
-"contrast" pass of the v2 descriptions (docs/icon-descriptions-v2.md §5).
+"contrast" pass of the v2 descriptions (docs/icon-descriptions.md §5.4).
 """
 
 from __future__ import annotations

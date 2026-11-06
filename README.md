@@ -48,9 +48,10 @@ The abstention gate, the other methods under consideration and the reasoning beh
 
 ## Data
 
-The icon descriptions (`data/icon_descriptions/`, one JSON per icon) are the only matching
-signal. How the first generation was produced, what is measurably wrong with it, and the design
-of the second generation are in [docs/icon-descriptions-v2.md](docs/icon-descriptions-v2.md).
+The icon descriptions are the only matching signal: v1 (`data/icon_descriptions/`) and v2
+(`data/icon_descriptions_v2/`), one JSON per icon, selected with `TCR_DESC=v1|v2`. How each was
+produced, what was wrong with v1, and how v2 compares are in
+[docs/icon-descriptions.md](docs/icon-descriptions.md).
 
 Task datasets, all in one JSONL schema (`data/datasets/`, licences in
 [NOTICE.md](data/datasets/NOTICE.md)):

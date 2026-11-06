@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Contamination guard for the v2 icon descriptions (docs/icon-descriptions-v2.md §4).
+"""Contamination guard for the v2 icon descriptions (docs/icon-descriptions.md §4).
 
 Drops every generated task string that equals an eval title (after normalization) or
 lies within e5 cosine 0.95 of one, from data/icon_descriptions_v2/*.json (aliases

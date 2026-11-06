@@ -236,23 +236,19 @@ Output is billed at 6–8× the input rate, so it dominates the cost.
 
 ## 7. Icon description quality (v2 descriptions)
 
-The descriptions are the only matching signal, and v1 has measurable problems:
-
-- glyph misreadings (2 of 10 in a spot check vs. 3.1 Pro);
-- example tasks half as long as real titles and reused across icons;
-- generic, repeated negatives (35% of all negatives are 20 strings).
-
-The fix is a v2 schema and prompt (depiction → readings → examples → hard near-misses →
-anchored scores), a contrastive pass for look-alike glyphs, contamination guards, and a
-measurement plan (glyph-reading accuracy; extrinsic nDCG on dev with v1-vs-v2 pools;
-labelling efficiency). Details: [icon-descriptions-v2.md](icon-descriptions-v2.md).
+The descriptions are the only matching signal, and v1 had measurable problems: glyph
+misreadings, short example tasks reused across icons, and generic repeated negatives.
+v2 (done 2026-11-06) fixes these with a new schema and prompt (depiction → readings →
+examples → hard near-misses → anchored scores), a contrast pass over look-alike glyphs,
+a blind QA pass and a contamination guard. In a blind check of 200 random glyphs, v1 was
+wrong or partly right on 27% and v2 on 0.5%. Whether v2 also matches better is decided on
+dev labels. Details: [icon-descriptions.md](icon-descriptions.md).
 
 ## 8. Experiment order
 
-1. Regenerate icon descriptions (v2, §7: pilot, then pass 1) and rebuild the labelling
-   pools over v1 + v2.
-   Then label: about 400 Personal (200 dev / 200 test) first, then continue toward the
-   targets in §3.
+1. ~~Regenerate icon descriptions (v2, §7)~~ (done 2026-11-06). Rebuild the labelling
+   pools over v1 + v2 (`scripts/build_label_bundle.py --refresh`), then label: about 400
+   Personal (200 dev / 200 test) first, then continue toward the targets in §3.
 2. Baselines on dev: B1, M1, M2, M3, plus zero-shot image towers (SigLIP 2 / jina-clip-v2).
 3. Judge calibration on dev (§6); pick the judge.
 4. Judge about 3k training-pool tasks; fine-tune the dual encoder; learning curve;

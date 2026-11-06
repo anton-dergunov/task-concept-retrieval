@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Statistics of the v2 icon descriptions next to v1 (docs/icon-descriptions-v2.md §6).
+"""Statistics of the v2 icon descriptions next to v1 (docs/icon-descriptions.md §6).
 
 One description per distinct glyph (font aliases collapsed). The text statistics are over
 each version's KEPT glyphs (discard = false):

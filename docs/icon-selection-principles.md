@@ -5,7 +5,7 @@ by:
 
 - the human labeller (the labelling tool);
 - the LLM judge (fine-tuning-plan §6);
-- the icon-description prompt (icon-descriptions-v2 §3–4);
+- the icon-description prompt (icon-descriptions.md §3–4);
 - the instruction prompt of any LLM-based model we fine-tune (fine-tuning-plan §5).
 
 ## Purpose

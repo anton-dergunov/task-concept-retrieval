@@ -13,7 +13,7 @@ labeller/bundle/  (gitignored — includes private tasks)
 Candidates per task: a round-robin union of several matchers' rankings (diverse
 pool) plus uniformly random icons (a control for pool bias), shuffled with a
 per-task seed so every device shows the same grid. Every matcher runs on both
-description versions (v1 and v2; docs/icon-descriptions-v2.md §6, pool fairness):
+description versions (v1 and v2; docs/icon-descriptions.md §7, pool fairness):
 provenance says which version proposed an icon ("M3.v2@1"), so each version's
 recall of the labels can be measured; the icon set is the union of both versions'
 kept icons. "More icons" extends it to

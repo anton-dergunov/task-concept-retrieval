@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Pass 2 of the v2 icon descriptions: contrast among look-alikes, with Gemini 4 Argon
-as one Vertex AI batch job (docs/icon-descriptions-v2.md §5).
+as one Vertex AI batch job (docs/icon-descriptions.md §5.4).
 
 Look-alike groups come from image embeddings of the rendered glyphs only
 (tcr/glyphs.py `lookalike_groups`, CLIP cosine ≥ THRESHOLD, groups of 2–8), over the

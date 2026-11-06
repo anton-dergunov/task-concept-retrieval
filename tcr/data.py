@@ -1,6 +1,6 @@
 """Load icon descriptions + catalog into a usable corpus.
 
-Two description versions (docs/icon-descriptions-v2.md): v1 in
+Two description versions (docs/icon-descriptions.md): v1 in
 data/icon_descriptions/, v2 in data/icon_descriptions_v2/. `load_icons(version=…)`
 picks one (default `config.DESC_VERSION`, env TCR_DESC); both map onto the same
 IconDoc field views, so every matcher runs on either.
@@ -169,7 +169,7 @@ def _v1_doc(name: str, d: dict, meta: dict):
 
 
 def _v2_doc(name: str, d: dict, meta: dict):
-    """Map a v2 description onto the IconDoc views (docs/icon-descriptions-v2.md §3)."""
+    """Map a v2 description onto the IconDoc views (docs/icon-descriptions.md §3.2)."""
     dep = d.get("depiction") or {}
     sc = d.get("scores") or {}
     examples = [f"{e['parent']}: {e['task']}" if str(e.get("parent", "")).strip() else e["task"]

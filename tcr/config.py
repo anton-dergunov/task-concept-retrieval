@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 ICON_DESC_DIR = DATA_DIR / "icon_descriptions"         # v1
-ICON_DESC_V2_DIR = DATA_DIR / "icon_descriptions_v2"   # v2 (docs/icon-descriptions-v2.md)
+ICON_DESC_V2_DIR = DATA_DIR / "icon_descriptions_v2"   # v2 (docs/icon-descriptions.md)
 # Which descriptions the matchers use by default: "v1" or "v2".
 DESC_VERSION = os.environ.get("TCR_DESC", "v1")
 ICON_PNG_DIR = DATA_DIR / "icons"

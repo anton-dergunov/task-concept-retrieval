@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Pass 1 of the v2 icon descriptions: describe every kept glyph with Gemini 4 Argon,
-as one Vertex AI batch job (docs/icon-descriptions-v2.md §5).
+as one Vertex AI batch job (docs/icon-descriptions.md §5.3).
 
 Which glyphs: every distinct glyph (font aliases collapsed) except the ones rejected
 in the manual review (data/labels/icon_curation.jsonl), v1-discarded ones included.
