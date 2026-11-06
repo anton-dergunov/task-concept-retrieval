@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "video tutorial or screen recording",
+   "meaning": "screen recording or video tutorial file",
    "strength": "secondary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "May be confused with a standalone video camera icon or a generic document icon at very small sizes.",
+ "ambiguity": "May be confused with a standalone video camera icon or a generic document icon at very small sizes, though completely distinct from the square escalator sign.",
  "modifier_semantics": [
   {
    "modifier": "solid video camera silhouette inside page",
@@ -158,8 +158,18 @@
  ],
  "near_misses": [
   {
+   "task": "Schedule annual maintenance for the concourse escalator",
+   "better": "escalator belt in a square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Adjust the noise gate threshold ramp on the vocal track",
+   "better": "threshold ramp / filter curve in a square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Charge the Sony camcorder batteries before the recital",
-   "better": "battery or video camera",
+   "better": "battery or standalone video camera",
    "trap": "shared_vocabulary"
   },
   {
@@ -174,24 +184,19 @@
   },
   {
    "task": "Sign the talent release form for the promotional video",
-   "better": "document with signature / pen",
+   "better": "document with signature or pen",
    "trap": "property"
   },
   {
    "task": "Buy a ring light for recording better talking-head videos",
-   "better": "light / lamp",
+   "better": "ring light or lamp",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Read the PDF documentation for the video encoder",
-   "better": "PDF / text document",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon clearly combines a folded-corner file outline with a video camera glyph, universally understood as a video file or recording. It fits tasks centered on handling, exporting, converting, uploading, or watching video files across creative, work, tech, and personal domains. It is distinct from a standalone camera (which implies filming or hardware/video calls) though at tiny sizes the outer page frame makes it look similar to other file-type icons.",
@@ -209,6 +214,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video file or recorded clip",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video tutorial or screen recording",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "movie or film file",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "May be confused with a standalone video camera icon or a generic document icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Charge the Sony camcorder batteries before the recital",
+     "better": "battery or video camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Join the 10am Zoom video call with the design team",
+     "better": "video call / webcam",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book tickets for the new Dune movie on Friday night",
+     "better": "movie ticket or clapperboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the talent release form for the promotional video",
+     "better": "document with signature / pen",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a ring light for recording better talking-head videos",
+     "better": "light / lamp",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Read the PDF documentation for the video encoder",
+     "better": "PDF / text document",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "escalator"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 1077,
+    "thoughts": 59,
+    "total": 5185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "Shows a vertical document page with a folded top-right corner containing a solid video camera silhouette, representing a video file rather than a square escalator sign."
 }

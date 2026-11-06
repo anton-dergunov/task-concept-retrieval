@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "home storage, shelving, or attic organization",
+   "meaning": "home remodeling or renovation",
    "strength": "secondary"
   },
   {
-   "meaning": "house or home (general)",
+   "meaning": "multi-room home organization or storage",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The staggered rectangular compartments inside the house can be read either as exterior bricks/siding or as an interior cross-section of rooms or storage shelves.",
+ "ambiguity": "Can be confused at a glance with the garage icon because both place horizontal rectangular panels inside the same pitched-roof silhouette, and the staggered cells can read as either exterior bricks or interior rooms.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -155,34 +155,39 @@
  ],
  "near_misses": [
   {
+   "task": "Lubricate the squeaky rollers on the overhead garage door",
+   "better": "garage with two-panel door",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Move winter tires into the self-storage locker",
+   "better": "garage or storage unit",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy Lego Architecture set for nephew's birthday",
-   "better": "toy brick / gift",
+   "better": "toy brick or gift",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Unbrick old router with TFTP recovery",
-   "better": "router / network device",
+   "better": "router or network device",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pay monthly mortgage before the 5th",
-   "better": "bank / money / calendar",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Book a brick cottage in the Cotswolds for July",
-   "better": "luggage / bed / calendar",
+   "better": "luggage or bed",
    "trap": "property"
   },
   {
    "task": "Order new toaster for the kitchen",
-   "better": "toaster / kitchen appliance",
+   "better": "toaster or kitchen appliance",
    "trap": "parent_topic"
   },
   {
-   "task": "Format spreadsheet cells into a 2x2 grid",
-   "better": "table / grid",
-   "trap": "lookalike_glyph"
+   "task": "Pay monthly mortgage before the 5th",
+   "better": "bank or money",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -206,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "brickwork, masonry, or home construction",
+     "strength": "primary"
+    },
+    {
+     "meaning": "house rooms, floor plan, or interior layout",
+     "strength": "primary"
+    },
+    {
+     "meaning": "home storage, shelving, or attic organization",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "house or home (general)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The staggered rectangular compartments inside the house can be read either as exterior bricks/siding or as an interior cross-section of rooms or storage shelves.",
+   "near_misses": [
+    {
+     "task": "Buy Lego Architecture set for nephew's birthday",
+     "better": "toy brick / gift",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Unbrick old router with TFTP recovery",
+     "better": "router / network device",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay monthly mortgage before the 5th",
+     "better": "bank / money / calendar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a brick cottage in the Cotswolds for July",
+     "better": "luggage / bed / calendar",
+     "trap": "property"
+    },
+    {
+     "task": "Order new toaster for the kitchen",
+     "better": "toaster / kitchen appliance",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Format spreadsheet cells into a 2x2 grid",
+     "better": "table / grid",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "garage_home"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 1101,
+    "thoughts": 140,
+    "total": 5290
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Shows a closed house outline divided into an attic triangle and four staggered rectangular cells across the full width, indicating masonry, construction, or an interior room layout rather than a centered garage door."
 }

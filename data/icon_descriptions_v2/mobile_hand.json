@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "screen time or phone habit",
+   "meaning": "right-handed phone grip or one-handed ergonomics",
    "strength": "secondary"
   },
   {
-   "meaning": "one-handed phone accessibility or ergonomics",
+   "meaning": "screen time or phone habit",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the thumb reaching across can look like a checkmark badge in the bottom-right corner of the phone.",
+ "ambiguity": "Virtually interchangeable with its mirror-image icon of a smartphone held in the left hand for any general mobile task; the rectangular body with a top dot also echoes the speaker cabinet in the speaker-and-headphones icon.",
  "modifier_semantics": [
   {
    "modifier": "hand holding phone with thumb on screen",
@@ -162,40 +162,40 @@
  ],
  "near_misses": [
   {
-   "task": "Call the plumber about the leaking kitchen sink",
-   "better": "phone handset / call icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Verify my phone number on the airline account",
-   "better": "checkmark / verification shield icon",
+   "task": "Test left-handed UI reachability on the mobile app",
+   "better": "smartphone held in left hand with thumb on bottom-left",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Set up the bookshelf speakers and studio headphones in the office",
+   "better": "speaker and headphones audio equipment icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call the plumber about the leaking kitchen sink",
+   "better": "telephone handset call icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Buy a mobile tool cart for the garage workshop",
-   "better": "tool cart / toolbox icon",
+   "better": "tool cart or toolbox icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Replace the cracked glass screen protector",
-   "better": "broken screen / repair icon",
+   "better": "broken screen or repair icon",
    "trap": "parent_topic"
   },
   {
    "task": "Check the weather forecast on my phone before hiking",
-   "better": "weather / cloud and sun icon",
+   "better": "weather cloud and sun icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Pick up a waterproof pouch for kayaking",
-   "better": "kayak / dry bag icon",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a smartphone being held and used with one hand, making it ideal for tasks centered on mobile device setup, screen-time habits, mobile UX testing, or phone accessories. At small sizes, the thumb angled across the bottom of the screen can easily be misread as a checkmark badge on a phone.",
@@ -213,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone or mobile phone usage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "using a mobile app or phone task",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen time or phone habit",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "one-handed phone accessibility or ergonomics",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the thumb reaching across can look like a checkmark badge in the bottom-right corner of the phone.",
+   "near_misses": [
+    {
+     "task": "Call the plumber about the leaking kitchen sink",
+     "better": "phone handset / call icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Verify my phone number on the airline account",
+     "better": "checkmark / verification shield icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a mobile tool cart for the garage workshop",
+     "better": "tool cart / toolbox icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the cracked glass screen protector",
+     "better": "broken screen / repair icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the weather forecast on my phone before hiking",
+     "better": "weather / cloud and sun icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up a waterproof pouch for kayaking",
+     "better": "kayak / dry bag icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "media_output",
+   "mobile_hand_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5437,
+    "output": 1586,
+    "thoughts": 0,
+    "total": 7023
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "Shows a vertical smartphone with a top camera dot held by a right hand on the right edge with the thumb reaching left, making it a horizontal mirror image of the left-handed smartphone icon and practically interchangeable for general phone tasks."
 }

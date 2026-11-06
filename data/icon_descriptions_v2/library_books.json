@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "multiple notes, articles, or documents",
+   "meaning": "multiple notes, articles, or stack of text cards",
    "strength": "primary"
   },
   {
-   "meaning": "copy or duplicate text/document",
+   "meaning": "copy, duplicate, or clone text/document",
    "strength": "primary"
   },
   {
-   "meaning": "study flashcards or index cards",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "pages or blog posts",
+   "meaning": "batch of posts, templates, or flashcards",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as a collection of notes/articles or as the UI action 'copy/duplicate text', and strongly resembles generic document or clipboard icons.",
+ "ambiguity": "Shares the exact foreground square and three-line pattern with the single rounded-square note icon, so the L-shaped backing line is the sole visual cue separating plural/copy from singular.",
  "modifier_semantics": [
   {
    "modifier": "overlapping bottom-left L-shaped corner of a second card behind",
@@ -161,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Draft a short release note for version 2.4",
+   "better": "single rounded-square note with three text lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "File the signed contractor agreement in the legal folder",
+   "better": "tabbed file folder with two text lines",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a spare copy of Dune for Mark's birthday",
    "better": "book or gift",
    "trap": "shared_vocabulary"
@@ -179,22 +185,12 @@
    "task": "Check the liner notes on the new vinyl",
    "better": "vinyl record",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Pay the quarterly homeowner association dues",
-   "better": "money or invoice",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order 500 matte business cards with the new logo",
-   "better": "business card / ID card",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a square note card with lines of text stacked over a second card, clearly conveying either multiple notes/articles/flashcards or duplicating/copying documents. It fits many everyday tasks around organizing notes, photocopying paperwork, and studying, though it competes closely with standard single-document and clipboard icons.",
@@ -214,6 +210,100 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple notes, articles, or documents",
+     "strength": "primary"
+    },
+    {
+     "meaning": "copy or duplicate text/document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "study flashcards or index cards",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pages or blog posts",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as a collection of notes/articles or as the UI action 'copy/duplicate text', and strongly resembles generic document or clipboard icons.",
+   "near_misses": [
+    {
+     "task": "Buy a spare copy of Dune for Mark's birthday",
+     "better": "book or gift",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send a thank-you note to Aunt Clara",
+     "better": "envelope or greeting card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Copy the spare house key at the hardware store",
+     "better": "key",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check the liner notes on the new vinyl",
+     "better": "vinyl record",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the quarterly homeowner association dues",
+     "better": "money or invoice",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order 500 matte business cards with the new logo",
+     "better": "business card / ID card",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "description",
+   "feed",
+   "text_snippet",
+   "chrome_reader_mode",
+   "article",
+   "source",
+   "text_ad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12132,
+    "output": 4025,
+    "thoughts": 352,
+    "total": 16509
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "The only icon with a second overlapping L-shaped border behind the bottom-left of the rounded square text card, signifying multiple notes/cards or copying/duplicating text rather than a single document."
 }

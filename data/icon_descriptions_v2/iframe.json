@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "web page or application window",
+   "meaning": "picture-in-picture or floating video player inside a browser window",
    "strength": "primary"
   },
   {
-   "meaning": "picture-in-picture or floating video player",
+   "meaning": "web page or application window with an embedded widget or modal",
    "strength": "primary"
   },
   {
-   "meaning": "UI modal, pop-up dialog, or banner widget",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "credit card or mailing envelope with address window",
+   "meaning": "credit card with magnetic stripe and signature box, or windowed billing envelope",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a generic browser window, a credit card with a signature box, a windowed mailing envelope, or an abstract UI layout toggle.",
+ "ambiguity": "Virtually interchangeable at list size with the uniform-border screen with a top-right inset rectangle; also easily mistaken for a credit card back or a windowed mailing envelope.",
  "modifier_semantics": [
   {
    "modifier": "smaller outlined rectangle inside on the right",
@@ -158,23 +154,28 @@
  ],
  "near_misses": [
   {
+   "task": "Enable picture-in-picture overlay on the smart TV display",
+   "better": "screen with uniform border and top-right inset rectangle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy Forever stamps and mail the vacation postcards",
+   "better": "rectangular card with uniform border and top-right stamp box",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order 500 windowed envelopes for billing statements",
    "better": "envelope / mail",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Activate new Visa debit card before travelling",
-   "better": "credit card",
+   "better": "credit card with chip",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Wash the living room windows before guests arrive",
    "better": "house window / cleaning",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a display frame for the studio poster",
-   "better": "picture frame",
    "trap": "shared_vocabulary"
   },
   {
@@ -209,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "web page or application window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "picture-in-picture or floating video player",
+     "strength": "primary"
+    },
+    {
+     "meaning": "UI modal, pop-up dialog, or banner widget",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "credit card or mailing envelope with address window",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a generic browser window, a credit card with a signature box, a windowed mailing envelope, or an abstract UI layout toggle.",
+   "near_misses": [
+    {
+     "task": "Order 500 windowed envelopes for billing statements",
+     "better": "envelope / mail",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Activate new Visa debit card before travelling",
+     "better": "credit card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wash the living room windows before guests arrive",
+     "better": "house window / cleaning",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a display frame for the studio poster",
+     "better": "picture frame",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay annual domain renewal invoice on Namecheap",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Open a Roth IRA account at Vanguard",
+     "better": "bank / finance",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "picture_in_picture"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4083,
+    "output": 698,
+    "thoughts": 144,
+    "total": 4925
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Has a thick solid top bar like a browser window header or magnetic stripe, with the smaller inset rectangle centered vertically on the right side rather than tucked into the top-right corner."
 }

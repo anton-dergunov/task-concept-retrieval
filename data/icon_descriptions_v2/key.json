@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Interchangeable with the square-bitted skeleton key for nearly all physical and digital key tasks; only distinct if specifically referring to a modern serrated cylinder key versus an antique warded key.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -148,13 +148,19 @@
   {
    "task": "Write down the lockbox code for the cat sitter",
    "central": "lockbox code"
-  },
-  {
-   "task": "Enable two-factor authentication on main email account",
-   "central": "two-factor authentication"
   }
  ],
  "near_misses": [
+  {
+   "task": "Find an antique brass skeleton key for the vintage wardrobe lock",
+   "better": "single-bit skeleton or warded key",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Oil the mortise lock and test the old square-bit cabinet key",
+   "better": "single-bit skeleton or warded key",
+   "trap": "lookalike_glyph"
+  },
   {
    "task": "Practice C major and G minor scales on the piano keys",
    "better": "piano / musical keyboard",
@@ -179,22 +185,12 @@
    "task": "Add map legend and color key to the choropleth chart",
    "better": "map / chart",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a heavy-duty U-lock for the commuter bike",
-   "better": "padlock / bike lock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a new soldering iron for repairing the keyboard switch",
-   "better": "soldering iron",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic physical key in side profile. It is universally recognizable and directly fits both physical key tasks (duplicating house keys, returning apartment keys, car fobs) and digital credential tasks (passwords, SSH/API keys, license keys, YubiKeys).",
@@ -212,6 +208,101 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "physical key (house key, car key, spare key)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "password, passkey, or login credentials",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cryptographic key, SSH key, API key, or license key",
+     "strength": "primary"
+    },
+    {
+     "meaning": "access, permissions, or security",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Practice C major and G minor scales on the piano keys",
+     "better": "piano / musical keyboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pry off stuck spacebar keycap and clean under it",
+     "better": "computer keyboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book snorkeling tour in Key West for April",
+     "better": "island / snorkel / travel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Draft Q3 key results for the engineering team",
+     "better": "target / goal / document",
+     "trap": "property"
+    },
+    {
+     "task": "Add map legend and color key to the choropleth chart",
+     "better": "map / chart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a heavy-duty U-lock for the commuter bike",
+     "better": "padlock / bike lock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new soldering iron for repairing the keyboard switch",
+     "better": "soldering iron",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "vpn_key"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4055,
+    "output": 1183,
+    "thoughts": 0,
+    "total": 5238
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Shows a modern serrated pin-tumbler key with a pointed tip and two jagged triangular teeth, as opposed to the square-tipped, single-bit skeleton key; the two are functionally interchangeable in meaning for almost all tasks."
 }

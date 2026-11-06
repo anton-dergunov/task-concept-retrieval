@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "storage drawer or desk organizer",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "archive box or filing tray",
+   "meaning": "storage drawer, desk organizer, or filing tray",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a physical drawer, hard drive bay, or generic UI container at small sizes.",
+ "ambiguity": "Easily confused with the two stacked multiple-inbox icons, differing only by the absence of the L-shaped backing line.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -158,19 +154,24 @@
  ],
  "near_misses": [
   {
+   "task": "Merge work and personal accounts into a unified inbox",
+   "better": "stacked multiple inbox trays",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Design custom graphics for the presentation deck",
+   "better": "stacked frames with paintbrush",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Send out the monthly company newsletter",
-   "better": "paper plane / send icon",
+   "better": "paper plane or outgoing mail icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check if the package arrived in the mailbox outside",
-   "better": "postbox / package icon",
+   "better": "postbox or package icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Back up photos to the external hard drive",
-   "better": "hard drive icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Call the landlord from the number in my email",
@@ -179,19 +180,14 @@
   },
   {
    "task": "Review the attached PDF contract from legal",
-   "better": "document / PDF icon",
+   "better": "document or PDF icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Download the tax forms from the portal",
-   "better": "download arrow icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a standard inbox tray (a square box with a semi-circular thumb cutout on the front shelf). It is universally recognized for email inboxes, GTD task triage, and physical desk trays or drawers, though it shares visual structure with download/upload tray variants.",
@@ -211,6 +207,96 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "inbox or incoming items tray",
+     "strength": "primary"
+    },
+    {
+     "meaning": "email inbox or messages",
+     "strength": "primary"
+    },
+    {
+     "meaning": "storage drawer or desk organizer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "archive box or filing tray",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a physical drawer, hard drive bay, or generic UI container at small sizes.",
+   "near_misses": [
+    {
+     "task": "Send out the monthly company newsletter",
+     "better": "paper plane / send icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the package arrived in the mailbox outside",
+     "better": "postbox / package icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Back up photos to the external hard drive",
+     "better": "hard drive icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the landlord from the number in my email",
+     "better": "phone icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Review the attached PDF contract from legal",
+     "better": "document / PDF icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Download the tax forms from the portal",
+     "better": "download arrow icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "slide_library",
+   "all_inbox",
+   "stacked_inbox"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6675,
+    "output": 1949,
+    "thoughts": 0,
+    "total": 8624
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "A single square inbox tray with a curved front cutout and no stacked L-shaped corner behind it, representing a single inbox or tray rather than multiple accounts or unified queues."
 }

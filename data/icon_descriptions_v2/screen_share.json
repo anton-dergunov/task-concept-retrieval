@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "screen sharing or presenting from a computer",
+   "meaning": "screen sharing or presenting from a laptop",
    "strength": "primary"
   },
   {
-   "meaning": "casting or mirroring laptop display to another screen",
+   "meaning": "exporting, transferring, or forwarding data from a computer",
    "strength": "primary"
   },
   {
-   "meaning": "transferring or exporting data from a laptop",
+   "meaning": "casting or mirroring a laptop display to another device",
    "strength": "secondary"
   },
   {
-   "meaning": "remote desktop access or port forwarding",
+   "meaning": "remote desktop redirection or port forwarding",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic laptop icon, a browser forward action, or file export at small sizes.",
+ "ambiguity": "Overlaps in meaning with the laptop with an upward arrow and the monitor with an upward arrow from the base when used as a video-call screen-share button.",
  "modifier_semantics": [
   {
    "modifier": "curved right-pointing arrow",
@@ -160,14 +160,19 @@
  ],
  "near_misses": [
   {
+   "task": "Install the macOS system update on my work laptop",
+   "better": "laptop with a straight upward arrow inside the screen",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch the conference room TV input to HDMI 2",
+   "better": "monitor with an upward arrow entering from the stand base",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Forward the laptop repair invoice to accounting",
    "better": "email forward or invoice icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new 14-inch laptop for college",
-   "better": "plain laptop icon without arrow",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Return the company MacBook to IT on Friday",
@@ -176,7 +181,7 @@
   },
   {
    "task": "Send the updated slide deck to Sarah",
-   "better": "presentation slides or send/paper-plane icon",
+   "better": "presentation slides or paper-plane send icon",
    "trap": "generic_verb"
   },
   {
@@ -193,7 +198,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a laptop with a share/forward arrow on its screen, the standard glyph for screen sharing, wireless casting, or live demos. It fits a specific but common cluster of tech and remote-work tasks (configuring screen share permissions, casting to a TV, live presenting), though at tiny sizes it can be mistaken for a generic laptop.",
@@ -211,6 +216,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "screen sharing or presenting from a computer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "casting or mirroring laptop display to another screen",
+     "strength": "primary"
+    },
+    {
+     "meaning": "transferring or exporting data from a laptop",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "remote desktop access or port forwarding",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic laptop icon, a browser forward action, or file export at small sizes.",
+   "near_misses": [
+    {
+     "task": "Forward the laptop repair invoice to accounting",
+     "better": "email forward or invoice icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new 14-inch laptop for college",
+     "better": "plain laptop icon without arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return the company MacBook to IT on Friday",
+     "better": "package return or plain laptop icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the updated slide deck to Sarah",
+     "better": "presentation slides or send/paper-plane icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a webcam privacy slider",
+     "better": "webcam or camera icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick a lightweight laptop that supports dual external displays",
+     "better": "plain laptop or monitor icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "computer_arrow_up",
+   "open_jam"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5425,
+    "output": 1634,
+    "thoughts": 146,
+    "total": 7205
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "Unlike the straight upward arrows in the other two icons, this laptop contains a curved right-turning share/forward arrow inside its closed screen bezel, emphasizing sharing or exporting from a laptop."
 }

@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles generic edit/pencil icons, and at very small sizes the pocket clip could make it look slightly like a paperclip or a thermometer.",
+ "ambiguity": "Completely distinct from the slashed diamond icons in this set, though at tiny sizes its narrow diagonal body and clip can slightly resemble a paperclip or generic pencil/edit glyph.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off turn-by-turn voice navigation in the car",
+   "better": "slashed diamond sign with turn arrow (directions off)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Remove broken hyperlinks from the landing page",
+   "better": "slashed interlocked link loops (unlink)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update my email signature with the new phone number",
    "better": "email / at-sign",
    "trap": "shared_vocabulary"
@@ -172,29 +182,19 @@
   },
   {
    "task": "Edit the lighting on the portrait photos from Saturday",
-   "better": "photo / sliders",
+   "better": "photo / adjustment sliders",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Reattach the loose metal clip on my backpack strap",
-   "better": "backpack / buckle",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a hardcover dotted notebook for bullet journaling",
    "better": "notebook",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Order a hand-lettered wooden welcome sign for the porch",
-   "better": "wooden sign / placard",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a pen with a pocket clip, angled diagonally. It fits both physical stationery tasks (buying pens, refilling ink, stylus maintenance) and key actions centered on a pen (signing documents, writing drafts or cards), though it overlaps slightly with pencil/edit icons.",
@@ -214,6 +214,98 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pen / writing instrument / stationery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "write / draft / compose",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sign / signature / endorse",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "stylus / digital pen",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles generic edit/pencil icons, and at very small sizes the pocket clip could make it look slightly like a paperclip or a thermometer.",
+   "near_misses": [
+    {
+     "task": "Update my email signature with the new phone number",
+     "better": "email / at-sign",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean out the pig pen before the rain starts",
+     "better": "pig / fence",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Edit the lighting on the portrait photos from Saturday",
+     "better": "photo / sliders",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Reattach the loose metal clip on my backpack strap",
+     "better": "backpack / buckle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a hardcover dotted notebook for bullet journaling",
+     "better": "notebook",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a hand-lettered wooden welcome sign for the porch",
+     "better": "wooden sign / placard",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "directions_alt_off",
+   "directions_off",
+   "nearby_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6763,
+    "output": 1993,
+    "thoughts": 1140,
+    "total": 9896,
+    "seconds": 50.07,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:58:28Z"
+  }
+ },
+ "distinguishing": "Unlike the three slashed diamond icons in this group, this is an unslashed ballpoint pen with a pocket clip angled toward the bottom-left, representing a pen, writing, or signing."
 }

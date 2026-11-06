@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can look like an abstract ornamental cross, a flower, or a generic four-way move/alignment cursor.",
+ "ambiguity": "At small list sizes, easily mistaken for the D-pad icons with one button filled (up, down, left, or right pressed), or an ornamental cross or four-way move cursor.",
  "modifier_semantics": [],
  "domains": [
   "hobbies",
@@ -148,13 +148,18 @@
  ],
  "near_misses": [
   {
-   "task": "Check compass directions for the ridge trail",
-   "better": "compass",
+   "task": "Fix the unresponsive up button on the arcade stick",
+   "better": "D-pad with top button filled",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Move the sofa four inches toward the window",
-   "better": "sofa / furniture",
+   "task": "Bind weapon swap to D-pad right in controller settings",
+   "better": "D-pad with right button filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check compass directions for the ridge trail",
+   "better": "compass",
    "trap": "lookalike_glyph"
   },
   {
@@ -171,17 +176,12 @@
    "task": "Pay the electricity bill for the game room",
    "better": "bill / invoice",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a first-aid kit with a red cross for the car",
-   "better": "first-aid kit / medical cross",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a four-way directional pad (D-pad) with pentagon buttons pointing inward, strongly associated with PlayStation and video game controllers. It fits tasks about gamepads, button mapping, controller repair, and console gaming, though someone unfamiliar with gaming might read it as an abstract cross or four-way navigation symbol.",
@@ -199,6 +199,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "games"
- }
+  "alias_of": "games",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "directional pad (D-pad) / game controller buttons",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video gaming / console games",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remote control navigation / four-way control",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can look like an abstract ornamental cross, a flower, or a generic four-way move/alignment cursor.",
+   "near_misses": [
+    {
+     "task": "Check compass directions for the ridge trail",
+     "better": "compass",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Move the sofa four inches toward the window",
+     "better": "sofa / furniture",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Print driving directions to the cabin in Vermont",
+     "better": "map / route",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Play board games with the kids after dinner",
+     "better": "board game / dice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the electricity bill for the game room",
+     "better": "bill / invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a first-aid kit with a red cross for the car",
+     "better": "first-aid kit / medical cross",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "gamepad_up",
+   "gamepad_down",
+   "gamepad_left",
+   "gamepad_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8076,
+    "output": 2572,
+    "thoughts": 0,
+    "total": 10648
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "All four inward-pointing buttons are outlined with none filled solid, showing a neutral, unpressed directional pad; for general gaming tasks, it is the cleanest default though visually nearly identical to the directional variants at small sizes."
 }

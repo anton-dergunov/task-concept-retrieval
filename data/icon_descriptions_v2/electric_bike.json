@@ -13,15 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "e-bike charging or battery",
+   "meaning": "e-bike charging or battery maintenance",
    "strength": "secondary"
   },
   {
-   "meaning": "bike-share electric bicycle",
+   "meaning": "electric bike-share rental",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the lightning bolt underneath may be missed, making it look like a regular bicycle.",
+ "ambiguity": "Can be mistaken for the plain bicycle without a lightning bolt at small list sizes, or used by mistake for a standard pedal bike task.",
  "modifier_semantics": [
   {
    "modifier": "horizontal lightning bolt below the wheels",
@@ -160,7 +160,12 @@
  "near_misses": [
   {
    "task": "True the rear wheel on the road bike",
-   "better": "regular bicycle (without lightning bolt)",
+   "better": "plain bicycle without lightning bolt",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Teach Leo to ride his pedal bike without training wheels",
+   "better": "plain bicycle without lightning bolt",
    "trap": "lookalike_glyph"
   },
   {
@@ -172,11 +177,6 @@
    "task": "Tighten the belt on the Peloton in the basement",
    "better": "stationary exercise bike",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the broken deck latch on the Ninebot scooter",
-   "better": "electric kick scooter",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly electric bill before Friday",
@@ -210,6 +210,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "electric bike / e-bike",
+     "strength": "primary"
+    },
+    {
+     "meaning": "e-bike charging or battery",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "bike-share electric bicycle",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the lightning bolt underneath may be missed, making it look like a regular bicycle.",
+   "near_misses": [
+    {
+     "task": "True the rear wheel on the road bike",
+     "better": "regular bicycle (without lightning bolt)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew the registration on the Vespa",
+     "better": "motor scooter / moped",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Tighten the belt on the Peloton in the basement",
+     "better": "stationary exercise bike",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the broken deck latch on the Ninebot scooter",
+     "better": "electric kick scooter",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly electric bill before Friday",
+     "better": "lightning bolt or bill/invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy reflective rain jacket for dark rides",
+     "better": "jacket / coat",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pedal_bike"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4001,
+    "output": 990,
+    "thoughts": 0,
+    "total": 4991
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:56Z"
+  }
+ },
+ "distinguishing": "This icon adds a horizontal lightning bolt beneath the bicycle wheels, designating an electric bike (e-bike) rather than a standard non-motorized bicycle."
 }

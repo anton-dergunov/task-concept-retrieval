@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "audio mixer, equalizer, or faders",
+   "meaning": "settings, adjustments, or preferences",
    "strength": "primary"
   },
   {
-   "meaning": "settings, adjustments, or preferences",
+   "meaning": "audio mixer, faders, or two-channel controls",
    "strength": "primary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the T-shaped slider segments can look like two opposing crosses or candlestick chart bars.",
+ "ambiguity": "Virtually interchangeable in meaning with the three-vertical-slider icon; also at small sizes, the two T-shaped slider segments can look like two opposing crosses or candlestick chart bars.",
  "modifier_semantics": [],
  "domains": [
   "creative",
@@ -148,6 +148,21 @@
  ],
  "near_misses": [
   {
+   "task": "EQ the low, mid, and high frequencies on the master track",
+   "better": "three-band equalizer sliders",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up the 3-channel audio mixer for the podcast",
+   "better": "three-channel mixer sliders",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Compare candlestick charts for NVDA before market open",
+   "better": "stock chart",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a bag of sliders and buns for the barbecue",
    "better": "burger",
    "trap": "shared_vocabulary"
@@ -156,11 +171,6 @@
    "task": "Grease the sliding glass door track on the patio",
    "better": "door",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Compare candlestick charts for NVDA before market open",
-   "better": "stock chart",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order an adjustable standing desk converter for home office",
@@ -181,7 +191,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts two vertical faders/sliders, universally recognized as an audio mixer, equalizer, or settings adjustments. It is a strong fit for audio engineering, music production, and device configuration tasks, though it competes with three-slider variants and gear icons for general settings.",
@@ -199,6 +209,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "audio mixer, equalizer, or faders",
+     "strength": "primary"
+    },
+    {
+     "meaning": "settings, adjustments, or preferences",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tuning or calibration controls",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the T-shaped slider segments can look like two opposing crosses or candlestick chart bars.",
+   "near_misses": [
+    {
+     "task": "Buy a bag of sliders and buns for the barbecue",
+     "better": "burger",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Grease the sliding glass door track on the patio",
+     "better": "door",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Compare candlestick charts for NVDA before market open",
+     "better": "stock chart",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order an adjustable standing desk converter for home office",
+     "better": "desk",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the sound engineer's invoice for mastering the album",
+     "better": "invoice / money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Adjust the seat height on the road bike",
+     "better": "bicycle",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "instant_mix"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4013,
+    "output": 649,
+    "thoughts": 0,
+    "total": 4662
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Shows two vertical slider tracks instead of three, making it functionally interchangeable with the three-slider version for general settings or controls, though slightly less evocative of a multi-band audio equalizer."
 }

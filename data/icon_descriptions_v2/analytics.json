@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "bar chart, statistics, or data analytics",
+   "meaning": "data analytics, insights, or statistics dashboard",
    "strength": "primary"
   },
   {
-   "meaning": "stacked bar chart or segmented metrics",
+   "meaning": "stacked bar chart, segmented metrics, or growth report",
    "strength": "primary"
   },
   {
-   "meaning": "signal strength or cellular reception indicator",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "growth, progress, or performance report",
+   "meaning": "upward trend or performance metrics",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the gap in the middle bar makes it look like an exclamation mark or a lowercase 'i' placed between two vertical bars, or like a cellular signal indicator.",
+ "ambiguity": "Nearly interchangeable with the closed-frame solid bar chart for general chart or stats tasks, and easily confused with the plus-badged bar chart at a glance.",
  "modifier_semantics": [
   {
    "modifier": "horizontal gap splitting the middle bar into two segments",
@@ -167,6 +163,16 @@
  ],
  "near_misses": [
   {
+   "task": "Add a new revenue chart widget to the Notion dashboard",
+   "better": "bar chart in a square frame with a plus sign in the top-right corner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the final vote tally on the team lunch poll",
+   "better": "plain bar chart with three solid uneven bars in a square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call T-Mobile about weak cell signal in the basement",
    "better": "phone or cellular antenna icon",
    "trap": "lookalike_glyph"
@@ -187,11 +193,6 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a high-performance blender for smoothies",
-   "better": "blender icon",
-   "trap": "property"
-  },
-  {
    "task": "Book conference room for the analytics team lunch",
    "better": "restaurant / lunch icon",
    "trap": "parent_topic"
@@ -200,7 +201,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon shows three ascending vertical bars inside a rounded square, with the middle bar split into two stacked segments. It clearly represents charts, metrics, data analytics, and statistical reports across work, finance, tech, and personal tracking, though it is somewhat interchangeable with other bar-chart glyphs and mildly resembles signal bars.",
@@ -218,6 +219,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bar chart, statistics, or data analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stacked bar chart or segmented metrics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "signal strength or cellular reception indicator",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "growth, progress, or performance report",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the gap in the middle bar makes it look like an exclamation mark or a lowercase 'i' placed between two vertical bars, or like a cellular signal indicator.",
+   "near_misses": [
+    {
+     "task": "Call T-Mobile about weak cell signal in the basement",
+     "better": "phone or cellular antenna icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a data-only eSIM for the Japan trip",
+     "better": "SIM card icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up 3 chocolate bars for the hike",
+     "better": "chocolate bar icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Track package delivery from DHL",
+     "better": "package / box icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a high-performance blender for smoothies",
+     "better": "blender icon",
+     "trap": "property"
+    },
+    {
+     "task": "Book conference room for the analytics team lunch",
+     "better": "restaurant / lunch icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "addchart",
+   "assessment"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5457,
+    "output": 1742,
+    "thoughts": 246,
+    "total": 7445
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Shows three ascending bars (short, medium, tall) inside a closed square with the middle bar split into two segments (resembling a stacked bar or an 'i' for insights), whereas the other closed-frame icon has three solid uneven bars and the third has a plus badge; in practice it is nearly interchangeable with the solid bar chart for general analytics."
 }

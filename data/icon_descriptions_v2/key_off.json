@@ -9,19 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "hidden, invisible, or privacy mode",
+   "meaning": "hidden, invisible, or visibility off (read as a crossed-out stylized eye)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "revoke key, disable access, or passwordless login (read as a crossed-out flat-blade key)",
    "strength": "primary"
   },
   {
    "meaning": "vision impairment, blindness, or low-vision accessibility",
-   "strength": "primary"
+   "strength": "secondary"
   },
   {
-   "meaning": "do not show, spoiler, or muted visual",
+   "meaning": "do not show, spoiler, or privacy mode",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the left side is circular and the right side is angular, at small sizes it can be mistaken for a crossed-out key, whistle, or sideways location pin rather than an eye.",
+ "ambiguity": "Extremely easy to confuse with the crossed-out notched key because the left circular bow/iris and diagonal slash are identical; only the right tip differs (pointed bevel vs downward key teeth). Also easily misread as a crossed-out eye.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -157,9 +161,19 @@
  ],
  "near_misses": [
   {
+   "task": "Revoke old SSH API keys on GitHub",
+   "better": "crossed-out notched key icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Deactivate lost hotel keycard at the front desk",
+   "better": "crossed-out notched key icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book annual dilated eye exam with Dr. Patel",
    "better": "open eye or glasses icon",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Order two boxes of daily contact lenses",
@@ -167,14 +181,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Measure the living room window for blackout Roller blinds",
-   "better": "window blinds / curtains icon",
+   "task": "Measure the living room window for blackout roller blinds",
+   "better": "window blinds or curtains icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Make a spare front door key at the hardware store",
-   "better": "key icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a private journal with a lock for Maya",
@@ -182,15 +191,15 @@
    "trap": "property"
   },
   {
-   "task": "Pay the annual subscription for 1Password",
-   "better": "credit card or password vault icon",
-   "trap": "parent_topic"
+   "task": "Review privacy settings on social media accounts",
+   "better": "shield or settings gear icon",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts an asymmetrical stylized eye crossed out by a diagonal slash, representing hidden visibility, privacy, or low-vision accessibility. It fits tasks about hiding information, redacting documents, tightening privacy settings, or supporting visually impaired users, though its geometric shape is less immediately recognizable than a standard almond-shaped eye-off icon and can resemble a crossed-out key at small sizes.",
@@ -208,6 +217,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hidden, invisible, or privacy mode",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vision impairment, blindness, or low-vision accessibility",
+     "strength": "primary"
+    },
+    {
+     "meaning": "do not show, spoiler, or muted visual",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the left side is circular and the right side is angular, at small sizes it can be mistaken for a crossed-out key, whistle, or sideways location pin rather than an eye.",
+   "near_misses": [
+    {
+     "task": "Book annual dilated eye exam with Dr. Patel",
+     "better": "open eye or glasses icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order two boxes of daily contact lenses",
+     "better": "eye or contact lens icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Measure the living room window for blackout Roller blinds",
+     "better": "window blinds / curtains icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Make a spare front door key at the hardware store",
+     "better": "key icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a private journal with a lock for Maya",
+     "better": "notebook or padlock icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the annual subscription for 1Password",
+     "better": "credit card or password vault icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "vpn_key_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4085,
+    "output": 1223,
+    "thoughts": 0,
+    "total": 5308
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "Both icons share an almost identical crossed-out circular left half, making this icon look like a crossed-out eye or whistle, though it actually depicts a crossed-out modern bevel-tipped key (without hanging teeth) rather than the notched skeleton key in the other icon."
 }

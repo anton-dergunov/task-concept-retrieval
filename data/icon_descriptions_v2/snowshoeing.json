@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "walking / pedestrian activity",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cross-country skiing without poles",
+   "meaning": "cross-country skiing / ski touring",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the snowshoes on the feet can look like oversized clown shoes, scuba fins, short skis, or simply a regular walking pedestrian icon.",
+ "ambiguity": "Because the upper body matches the running figure identically, at small sizes it is easily mistaken for a general running or walking person if the curved snowshoes on the feet go unnoticed.",
  "modifier_semantics": [],
  "domains": [
   "outdoors",
@@ -154,13 +150,18 @@
  ],
  "near_misses": [
   {
-   "task": "Walk 10,000 steps around the neighborhood after dinner",
-   "better": "regular walking person / footprints",
+   "task": "Go for a 5k morning run around the park",
+   "better": "running person without snowshoes",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Hot-wax the downhill skis before the Whistler trip",
-   "better": "skier / skis",
+   "task": "Do sprint intervals at the high school track",
+   "better": "running person without snowshoes",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Walk 10,000 steps around the neighborhood after dinner",
+   "better": "regular walking person / footprints",
    "trap": "lookalike_glyph"
   },
   {
@@ -169,14 +170,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Brush the matts out of the Snowshoe cat's coat",
+   "task": "Brush the mats out of the Snowshoe cat's coat",
    "better": "cat",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book the rental car in Denver",
-   "better": "car",
-   "trap": "parent_topic"
   },
   {
    "task": "Buy snow boots with good ice grip",
@@ -187,7 +183,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a walking stick figure wearing upturned snowshoes on both feet. It is a specific fit for snowshoeing trips and snowshoe gear tasks, though at list size the footwear is easily overlooked, making it look almost identical to a standard walking pedestrian icon.",
@@ -207,6 +203,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "snowshoeing / snowshoes",
+     "strength": "primary"
+    },
+    {
+     "meaning": "winter hiking / trekking in snow",
+     "strength": "primary"
+    },
+    {
+     "meaning": "walking / pedestrian activity",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cross-country skiing without poles",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the snowshoes on the feet can look like oversized clown shoes, scuba fins, short skis, or simply a regular walking pedestrian icon.",
+   "near_misses": [
+    {
+     "task": "Walk 10,000 steps around the neighborhood after dinner",
+     "better": "regular walking person / footprints",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hot-wax the downhill skis before the Whistler trip",
+     "better": "skier / skis",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack silicone swim fins for the snorkeling excursion",
+     "better": "diving fins / snorkel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Brush the matts out of the Snowshoe cat's coat",
+     "better": "cat",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the rental car in Denver",
+     "better": "car",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy snow boots with good ice grip",
+     "better": "winter boot",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "directions_run"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4054,
+    "output": 1047,
+    "thoughts": 0,
+    "total": 5101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:35Z"
+  }
+ },
+ "distinguishing": "Unlike the plain running figure, this figure has thick, upturned snowshoes (or short skis) attached to the bottoms of both feet and a lower back-leg angle."
 }

@@ -12,10 +12,10 @@
   },
   {
    "meaning": "poll or survey results",
-   "strength": "secondary"
+   "strength": "primary"
   },
   {
-   "meaning": "leaderboard / podium ranking",
+   "meaning": "leaderboard / 1st-2nd-3rd podium ranking",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as a 1st-2nd-3rd place podium, a poll icon, or an audio equalizer depending on context; also resembles vertical alignment or column layout icons.",
+ "ambiguity": "Nearly identical to the short-tall-medium three-bar icon (just left-right flipped on the outer bars) and interchangeable with the other non-monotonic bar chart icons.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -155,7 +155,12 @@
  "near_misses": [
   {
    "task": "Check cellular signal reception in the basement",
-   "better": "ascending signal bars",
+   "better": "strictly ascending signal bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plot the quarterly revenue on an x-y axis chart",
+   "better": "four-bar chart with a bottom horizontal baseline axis",
    "trap": "lookalike_glyph"
   },
   {
@@ -165,7 +170,7 @@
   },
   {
    "task": "Adjust bass and treble on the living room receiver",
-   "better": "sliders / equalizer knobs",
+   "better": "sliders with knobs / speaker",
    "trap": "lookalike_glyph"
   },
   {
@@ -187,7 +192,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Three vertical bars of unequal heights universally signify a bar chart, statistics, analytics, or poll results. It fits many common tasks around reporting, data analysis, metrics, and surveys, though it shares visual similarity with other chart icons and podium or equalizer glyphs.",
@@ -205,6 +210,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bar chart / statistics / analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "poll or survey results",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "leaderboard / podium ranking",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audio equalizer levels",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as a 1st-2nd-3rd place podium, a poll icon, or an audio equalizer depending on context; also resembles vertical alignment or column layout icons.",
+   "near_misses": [
+    {
+     "task": "Check cellular signal reception in the basement",
+     "better": "ascending signal bars",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy three chocolate bars for the hike",
+     "better": "chocolate bar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Adjust bass and treble on the living room receiver",
+     "better": "sliders / equalizer knobs",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a table at the new wine bar downtown",
+     "better": "wine glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the PDF to the external auditor",
+     "better": "envelope / email",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a statistically tested bike helmet",
+     "better": "helmet",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bar_chart_4_bars",
+   "grouped_bar_chart",
+   "equalizer",
+   "signal_cellular_alt",
+   "android_cell_4_bar",
+   "android_cell_5_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10730,
+    "output": 3931,
+    "thoughts": 361,
+    "total": 15022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Shows three evenly spaced vertical bars without a baseline in a medium-tall-short order; virtually interchangeable with its mirror-image short-tall-medium twin for general chart, poll, or podium tasks."
 }

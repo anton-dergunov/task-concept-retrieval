@@ -12,7 +12,10 @@ from pathlib import Path
 # --- Paths -------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
-ICON_DESC_DIR = DATA_DIR / "icon_descriptions"
+ICON_DESC_DIR = DATA_DIR / "icon_descriptions"         # v1
+ICON_DESC_V2_DIR = DATA_DIR / "icon_descriptions_v2"   # v2 (docs/icon-descriptions-v2.md)
+# Which descriptions the matchers use by default: "v1" or "v2".
+DESC_VERSION = os.environ.get("TCR_DESC", "v1")
 ICON_PNG_DIR = DATA_DIR / "icons"
 CATALOG_PATH = DATA_DIR / "material_symbols_catalog.json"
 EVAL_DIR = DATA_DIR / "eval"
@@ -37,13 +40,26 @@ ENGLISH_MODEL = os.environ.get("TCR_EN_MODEL", "BAAI/bge-small-en-v1.5")
 QUALITY_PRIOR_WEIGHT = float(os.environ.get("TCR_QUALITY_WEIGHT", "0.05"))
 
 # --- Field weights for the field-weighted bi-encoder (M1) --------------------
-# Keys must match IconDoc field-view names.
+# Keys must match IconDoc field-view names. v1 mixes what is drawn with what it
+# means in visual_concepts; v2 splits them into visual_concepts (depiction) and
+# readings, and the readings carry the meaning.
 FIELD_WEIGHTS = {
     "visual_concepts": 0.5,
     "task_intents": 1.0,
     "example_tasks": 1.0,
     "reasoning": 0.3,
 }
+FIELD_WEIGHTS_V2 = {
+    "visual_concepts": 0.5,
+    "readings": 1.0,
+    "task_intents": 1.0,
+    "example_tasks": 1.0,
+    "reasoning": 0.3,
+}
+
+
+def field_weights(version: str = None) -> dict:
+    return FIELD_WEIGHTS_V2 if (version or DESC_VERSION) == "v2" else FIELD_WEIGHTS
 
 # --- Abstention --------------------------------------------------------------
 # Minimum *standardized confidence* (z-score: how many std-devs the top icon

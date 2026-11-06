@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "battery / batteries",
+   "meaning": "battery / half-charged battery (approx. 50%)",
    "strength": "primary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could briefly resemble a water bottle or small medicine bottle at tiny sizes, though the rectangular top terminal and half-filled interior strongly indicate a battery.",
+ "ambiguity": "Virtually identical to the 50% and 60% battery icons and interchangeable with all other battery fill levels in a to-do list; can also resemble a bottle with a tall white label.",
  "modifier_semantics": [
   {
    "modifier": "half-full charge level",
@@ -158,6 +158,21 @@
  ],
  "near_misses": [
   {
+   "task": "Unplug the camera batteries once they are 100% fully charged",
+   "better": "solid full battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cap EV charging at 80% or 90% for daily commuting",
+   "better": "mostly full (80-90%) battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wash out the stainless steel insulated water bottle",
+   "better": "water bottle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small battery-powered milk frother for the office",
    "better": "milk frother / whisk",
    "trap": "property"
@@ -173,25 +188,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Wash out the stainless steel insulated water bottle",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a 4-port Anker wall adapter for the nightstand",
    "better": "power plug / wall adapter",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Practice drums with the jazz battery section on Thursday",
-   "better": "drum / musical note",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an upright cylindrical battery at half charge. While a half-full indicator serves as status chrome in an OS bar, in a task list it is the standard visual shorthand for tasks about buying, charging, replacing, or recycling batteries and power banks. It differs from full, empty, or charging-bolt battery variants only by fill level.",
@@ -209,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "battery_3_bar"
- }
+  "alias_of": "battery_3_bar",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / power bank / battery life",
+     "strength": "primary"
+    },
+    {
+     "meaning": "energy / stamina",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could briefly resemble a water bottle or small medicine bottle at tiny sizes, though the rectangular top terminal and half-filled interior strongly indicate a battery.",
+   "near_misses": [
+    {
+     "task": "Buy a small battery-powered milk frother for the office",
+     "better": "milk frother / whisk",
+     "trap": "property"
+    },
+    {
+     "task": "Jump start the Honda Civic and trickle-charge the 12V lead-acid battery",
+     "better": "car battery (two terminals) or car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before the 15th",
+     "better": "lightning bolt or bill/invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wash out the stainless steel insulated water bottle",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 4-port Anker wall adapter for the nightstand",
+     "better": "power plug / wall adapter",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Practice drums with the jazz battery section on Thursday",
+     "better": "drum / musical note",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_full",
+   "battery_vert_050",
+   "battery_4_bar",
+   "battery_5_bar",
+   "battery_6_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9321,
+    "output": 3291,
+    "thoughts": 0,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Has the tallest white rectangular cutout in the upper half (filled roughly 45-50% from the bottom), making it nearly indistinguishable from the 50% and 60% filled batteries and functionally interchangeable with all partial-charge battery icons."
 }

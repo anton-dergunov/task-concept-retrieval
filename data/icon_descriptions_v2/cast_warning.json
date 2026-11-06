@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "urgent live broadcast or RSS alert",
+   "meaning": "urgent live broadcast or streaming alert",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the bottom-left waves look like a generic Wi-Fi or RSS feed symbol, making it easy to confuse with a general internet outage or feed error icon.",
+ "ambiguity": "At small list sizes, the exclamation mark in the top-right badge looks very similar to the screen-cast icon with a two-bar pause badge, and the corner signal waves can be mistaken for a generic Wi-Fi or RSS outage icon.",
  "modifier_semantics": [
   {
    "modifier": "filled circle with exclamation mark",
@@ -158,9 +158,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new Chromecast with Google TV for the guest bedroom",
-   "better": "cast icon without error badge, or shopping bag / streaming dongle",
-   "trap": "property"
+   "task": "Put Netflix streaming membership on hold for the summer",
+   "better": "screen cast icon with pause badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pause screen mirroring before opening private presenter notes",
+   "better": "screen cast icon with pause badge",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Call ISP about the home Wi-Fi dropping out every evening",
@@ -168,9 +173,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Fix broken RSS feed parser on the company blog",
-   "better": "RSS feed icon",
-   "trap": "lookalike_glyph"
+   "task": "Buy a new Chromecast with Google TV for the guest bedroom",
+   "better": "cast icon without error badge, or shopping bag",
+   "trap": "property"
   },
   {
    "task": "Finish casting actors for the student short film by Friday",
@@ -191,7 +196,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly combines the standard Google Cast / wireless screen-sharing glyph with an alert badge, making it specific to troubleshooting wireless display, Chromecast, or AirPlay issues. While narrow in scope, fixing a broken TV cast or conference room screen-share is a real, recurring tech/home task, though at tiny sizes the corner waves can be mistaken for Wi-Fi or RSS.",
@@ -209,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "screen casting or wireless display error / troubleshooting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Chromecast or AirPlay connection problem",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Wi-Fi or streaming signal issue on TV",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "urgent live broadcast or RSS alert",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the bottom-left waves look like a generic Wi-Fi or RSS feed symbol, making it easy to confuse with a general internet outage or feed error icon.",
+   "near_misses": [
+    {
+     "task": "Buy a new Chromecast with Google TV for the guest bedroom",
+     "better": "cast icon without error badge, or shopping bag / streaming dongle",
+     "trap": "property"
+    },
+    {
+     "task": "Call ISP about the home Wi-Fi dropping out every evening",
+     "better": "Wi-Fi symbol with exclamation mark",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix broken RSS feed parser on the company blog",
+     "better": "RSS feed icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Finish casting actors for the student short film by Friday",
+     "better": "clapperboard or theater masks",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the living room TV is turned off",
+     "better": "television icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order replacement remote for the Apple TV",
+     "better": "remote control icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cast_pause"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4148,
+    "output": 1174,
+    "thoughts": 0,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Shows an exclamation mark inside the top-right circular badge on the screen-cast frame, indicating a casting error, broken stream, or connection warning rather than a paused stream (which has two vertical pause bars in the badge)."
 }

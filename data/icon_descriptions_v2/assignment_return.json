@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "previous task, item, or assignment",
+   "meaning": "return or send back an order, package, or assignment",
    "strength": "primary"
   },
   {
-   "meaning": "return or send back an order or clipboard item",
+   "meaning": "previous task, item, or step in a workflow",
    "strength": "primary"
   },
   {
-   "meaning": "revert or undo a task or change",
+   "meaning": "revert, roll back, or undo a task or change",
    "strength": "secondary"
   },
   {
-   "meaning": "move task to backlog or earlier stage",
+   "meaning": "move task back to backlog or earlier board column",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like a generic 'back' button inside a clipboard or hanging sign; the square proportions make it less recognizable as a standard clipboard and easily confused with a shopping bag, tag, or UI navigation button.",
+ "ambiguity": "Shares the identical square clipboard frame with the downward-arrow clipboard icon, and at a glance both look like generic boxed arrow buttons, shopping bags, or hanging signs.",
  "modifier_semantics": [
   {
    "modifier": "left-pointing arrow centered inside the board",
@@ -159,8 +159,18 @@
  ],
  "near_misses": [
   {
+   "task": "Download the monthly task report from the project board",
+   "better": "square clipboard with a downward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Import the CSV task list into the planner",
+   "better": "square clipboard with a downward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy new wooden clipboards for the warehouse crew",
-   "better": "plain clipboard without arrow",
+   "better": "plain clipboard without an arrow",
    "trap": "lookalike_glyph"
   },
   {
@@ -175,24 +185,19 @@
   },
   {
    "task": "Check back on the sourdough starter after four hours",
-   "better": "bread or timer",
+   "better": "bread loaf or timer",
    "trap": "generic_verb"
   },
   {
    "task": "Strengthen lower back with deadlifts and hyperextensions",
    "better": "dumbbell or spine",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Hang the new directional sign in the hallway",
-   "better": "signpost",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a square clipboard or hanging board with a left-pointing arrow inside, suggesting 'previous task/assignment', 'return item/order', or 'revert/move back to backlog'. Because of its square shape and prominent arrow, it reads mostly like UI navigation chrome ('previous page/item') rather than a concrete real-world object, giving it weak task fit outside of returns and workflow rollbacks.",
@@ -210,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "previous task, item, or assignment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "return or send back an order or clipboard item",
+     "strength": "primary"
+    },
+    {
+     "meaning": "revert or undo a task or change",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "move task to backlog or earlier stage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like a generic 'back' button inside a clipboard or hanging sign; the square proportions make it less recognizable as a standard clipboard and easily confused with a shopping bag, tag, or UI navigation button.",
+   "near_misses": [
+    {
+     "task": "Buy new wooden clipboards for the warehouse crew",
+     "better": "plain clipboard without arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book return flight from Lisbon to London",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "File state tax return before April 15",
+     "better": "tax form or calculator",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check back on the sourdough starter after four hours",
+     "better": "bread or timer",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Strengthen lower back with deadlifts and hyperextensions",
+     "better": "dumbbell or spine",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hang the new directional sign in the hallway",
+     "better": "signpost",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "assignment_returned"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 1127,
+    "thoughts": 0,
+    "total": 5186
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Shows a left-pointing arrow centered inside the square clipboard frame (signifying back, previous, return, or revert), whereas the look-alike has a downward-pointing arrow (signifying download, import, or paste)."
 }

@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Distinguishable from a plain Wi-Fi icon only by the diagonal slash, which remains clear even at small sizes.",
+ "ambiguity": "Completely interchangeable with the other slashed Wi-Fi icon that hides the inner arc's right side; also only distinguishable from an active Wi-Fi icon by the diagonal slash.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -163,39 +163,39 @@
  "near_misses": [
   {
    "task": "Change home Wi-Fi password and share with housemates",
-   "better": "Wi-Fi symbol (without slash) or key",
+   "better": "active unslashed Wi-Fi symbol or key icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a waterproof offline GPS handheld for backcountry hiking",
-   "better": "GPS device / compass",
+   "better": "GPS device / compass icon",
    "trap": "property"
   },
   {
    "task": "Check if the Wi-Fi works in the garden studio",
-   "better": "Wi-Fi symbol (without slash)",
+   "better": "active unslashed Wi-Fi symbol",
    "trap": "generic_verb"
   },
   {
    "task": "Turn off contactless tap-to-pay on debit card",
-   "better": "credit card or contactless symbol",
+   "better": "credit card or contactless payment symbol",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pick up board games for the cabin",
-   "better": "board game / dice",
+   "task": "Pick up board games for the off-grid cabin",
+   "better": "board game / dice icon",
    "trap": "parent_topic"
   },
   {
-   "task": "Unsubscribe from RSS feeds I never read",
-   "better": "RSS feed icon",
-   "trap": "lookalike_glyph"
+   "task": "Switch home internet provider to a cheaper fiber plan",
+   "better": "active unslashed Wi-Fi symbol or router icon",
+   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognized crossed-out Wi-Fi symbol meaning no wireless connection, offline mode, or disabling Wi-Fi. It fits a focused set of tasks around troubleshooting internet outages, turning off wireless networks, cancelling ISP service, or preparing for offline work/travel, and must be distinguished from a normal active Wi-Fi icon.",
@@ -213,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no Wi-Fi / Wi-Fi disabled / disconnected",
+     "strength": "primary"
+    },
+    {
+     "meaning": "offline mode / no internet connection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "internet outage / broken wireless network",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "digital detox / disconnect from internet",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Distinguishable from a plain Wi-Fi icon only by the diagonal slash, which remains clear even at small sizes.",
+   "near_misses": [
+    {
+     "task": "Change home Wi-Fi password and share with housemates",
+     "better": "Wi-Fi symbol (without slash) or key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof offline GPS handheld for backcountry hiking",
+     "better": "GPS device / compass",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the Wi-Fi works in the garden studio",
+     "better": "Wi-Fi symbol (without slash)",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Turn off contactless tap-to-pay on debit card",
+     "better": "credit card or contactless symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up board games for the cabin",
+     "better": "board game / dice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Unsubscribe from RSS feeds I never read",
+     "better": "RSS feed icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_3_bar_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4084,
+    "output": 1119,
+    "thoughts": 94,
+    "total": 5297
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:44Z"
+  }
+ },
+ "distinguishing": "Visually, the steeper ~45-degree slash leaves the right ends of both signal arcs clearly visible above the line, unlike the other slashed Wi-Fi icon where only the outer arc appears above the slash; in meaning, the two icons are completely interchangeable."
 }

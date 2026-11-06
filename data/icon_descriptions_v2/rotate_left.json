@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "reset, restore, or revert to previous state",
+   "meaning": "reset, restore, or revert to a previous state",
    "strength": "primary"
   },
   {
@@ -18,15 +18,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "undo, roll back, or reverse",
+   "meaning": "rotate counter-clockwise or step backward incrementally",
    "strength": "secondary"
   },
   {
-   "meaning": "rotate counterclockwise or repeat",
+   "meaning": "undo, roll back, or reverse",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks very similar to generic refresh, replay, rotate-left, or history icons, making it hard to distinguish from other circular arrows at small sizes.",
+ "ambiguity": "Nearly indistinguishable at glanceable sizes from the counter-clockwise arrow split into two solid arcs, as well as standard refresh, undo, or replay icons.",
  "modifier_semantics": [
   {
    "modifier": "counterclockwise arrow",
@@ -165,6 +165,16 @@
  ],
  "near_misses": [
   {
+   "task": "Factory-reset the old iPad before selling it",
+   "better": "solid-arc counter-clockwise reset arrow or tablet icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Restart the home Wi-Fi router to fix the connection drop",
+   "better": "solid-arc counter-clockwise restart arrow or router icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a refurbished Dyson vacuum",
    "better": "vacuum cleaner",
    "trap": "property"
@@ -180,17 +190,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Set up automatic monthly transfer to savings",
-   "better": "bank / money transfer",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Take glass jars to the recycling bin",
-   "better": "recycling symbol / bin",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a new USB drive for backups",
+   "task": "Buy a new USB drive for system backups",
    "better": "USB flash drive",
    "trap": "parent_topic"
   }
@@ -216,6 +216,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "reset, restore, or revert to previous state",
+     "strength": "primary"
+    },
+    {
+     "meaning": "restart, reboot, or reload",
+     "strength": "primary"
+    },
+    {
+     "meaning": "undo, roll back, or reverse",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rotate counterclockwise or repeat",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks very similar to generic refresh, replay, rotate-left, or history icons, making it hard to distinguish from other circular arrows at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a refurbished Dyson vacuum",
+     "better": "vacuum cleaner",
+     "trap": "property"
+    },
+    {
+     "task": "Review last quarter's tax return",
+     "better": "tax document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Return Amazon packages at Whole Foods",
+     "better": "parcel box with return arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take glass jars to the recycling bin",
+     "better": "recycling symbol / bin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new USB drive for backups",
+     "better": "USB flash drive",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "restart_alt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 810,
+    "thoughts": 329,
+    "total": 5188
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:56Z"
+  }
+ },
+ "distinguishing": "The left half of the circular shaft is broken into three dashed segments rather than a single solid arc, giving a slight sense of incremental steps, fading trail, or rotation, though it is largely interchangeable with the solid-arc version."
 }

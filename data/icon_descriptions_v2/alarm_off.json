@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "alarm off or disabled alarm",
+   "meaning": "alarm off or disable wake-up alarm",
    "strength": "primary"
   },
   {
-   "meaning": "timer off or cancel timer",
-   "strength": "primary"
-  },
-  {
-   "meaning": "sleep in or no wake-up alarm",
+   "meaning": "sleep in or no morning alarm",
    "strength": "secondary"
   },
   {
-   "meaning": "remove reminder or unschedule",
+   "meaning": "mute recurring time alert or reminder",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the diagonal slash hides the clock hands and merges with the left alarm bell, making it look slightly like a generic prohibition sign or a crossed-out stopwatch.",
+ "ambiguity": "Highly confusable with the slashed stopwatch when tasks mention timers vs. alarms, and because the diagonal slash cuts directly through the left alarm bell, it also resembles the plain slashed circle at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash from top-left to bottom-right",
@@ -161,13 +157,23 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off the 30-minute sleep timer on the bedroom TV",
+   "better": "slashed stopwatch with top center button",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Block spam phone numbers on my mobile carrier account",
+   "better": "plain slashed circle (prohibition sign) or phone with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Set an alarm for 4:15am to catch the early airport shuttle",
-   "better": "alarm clock (without slash)",
+   "better": "unslashed alarm clock",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a silent non-ticking bedside analog clock for the bedroom",
-   "better": "clock / shopping",
+   "better": "unslashed clock",
    "trap": "property"
   },
   {
@@ -182,19 +188,19 @@
   },
   {
    "task": "Check how much time is left on the parking meter",
-   "better": "stopwatch or parking meter",
+   "better": "unslashed stopwatch or parking meter",
    "trap": "generic_verb"
   },
   {
    "task": "Pack the charging cable for my bedside travel clock",
-   "better": "cable / charger",
+   "better": "cable or charger",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an alarm clock struck through with a diagonal slash, universally understood as turning off or disabling an alarm or timer. While narrow, it fits real, common tasks like turning off weekday wake-up alarms before a holiday or clearing old phone alarms, and must be distinguished from setting an alarm or dealing with security/smoke alarms.",
@@ -212,6 +218,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "alarm off or disabled alarm",
+     "strength": "primary"
+    },
+    {
+     "meaning": "timer off or cancel timer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sleep in or no wake-up alarm",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "remove reminder or unschedule",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the diagonal slash hides the clock hands and merges with the left alarm bell, making it look slightly like a generic prohibition sign or a crossed-out stopwatch.",
+   "near_misses": [
+    {
+     "task": "Set an alarm for 4:15am to catch the early airport shuttle",
+     "better": "alarm clock (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a silent non-ticking bedside analog clock for the bedroom",
+     "better": "clock / shopping",
+     "trap": "property"
+    },
+    {
+     "task": "Disarm the home security alarm system before the cleaners arrive at 10",
+     "better": "shield or security keypad",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the 9V battery in the hallway smoke alarm that keeps chirping",
+     "better": "smoke detector or battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check how much time is left on the parking meter",
+     "better": "stopwatch or parking meter",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pack the charging cable for my bedside travel clock",
+     "better": "cable / charger",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hide_source",
+   "timer_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5445,
+    "output": 1290,
+    "thoughts": 0,
+    "total": 6735
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:29Z"
+  }
+ },
+ "distinguishing": "It has two angled alarm-bell bars on the upper-left and upper-right shoulders of the slashed circle (with no center top button or inner hand), representing turning off a scheduled wake-up alarm rather than a countdown timer or a generic ban."
 }

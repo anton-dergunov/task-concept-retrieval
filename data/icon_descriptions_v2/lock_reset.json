@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "relock, auto-lock, or restore security settings",
+   "meaning": "change PIN or lock combination",
    "strength": "secondary"
   },
   {
-   "meaning": "change PIN or lock combination",
+   "meaning": "relock, auto-lock, or restore security settings",
    "strength": "secondary"
   }
  ],
- "ambiguity": "ORIGINALLY the Material Design 'screen_lock_rotation' UI icon, in a task list it strongly reads as resetting a password, rotating security credentials, or changing a lock code; also easily confused with a clockwise lock-refresh icon.",
+ "ambiguity": "At a quick glance, the outer circular arrow and small closed padlock can be confused with the open padlock in a plain circle, or with a generic undo/refresh arrow.",
  "modifier_semantics": [
   {
    "modifier": "counterclockwise circular arrow",
@@ -160,8 +160,18 @@
  ],
  "near_misses": [
   {
+   "task": "Unfreeze Equifax and TransUnion credit reports before applying for the mortgage",
+   "better": "open padlock inside a circle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Request carrier unlock for the old iPhone before traveling abroad",
+   "better": "open padlock inside a circle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a heavy-duty U-lock for the commuter bike",
-   "better": "plain padlock or bike lock without reset arrow",
+   "better": "plain closed padlock or bike lock without reset arrow",
    "trap": "lookalike_glyph"
   },
   {
@@ -171,7 +181,7 @@
   },
   {
    "task": "Factory reset the old router before donating it",
-   "better": "router with reset arrow",
+   "better": "router",
    "trap": "generic_verb"
   },
   {
@@ -181,13 +191,8 @@
   },
   {
    "task": "Order two YubiKey hardware keys for backup",
-   "better": "USB security key or shopping cart",
+   "better": "USB security key",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Turn on automatic nightly backups to the NAS",
-   "better": "cloud/drive with sync or clock arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "password reset or credential rotation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen rotation lock (orientation lock)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "relock, auto-lock, or restore security settings",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "change PIN or lock combination",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "ORIGINALLY the Material Design 'screen_lock_rotation' UI icon, in a task list it strongly reads as resetting a password, rotating security credentials, or changing a lock code; also easily confused with a clockwise lock-refresh icon.",
+   "near_misses": [
+    {
+     "task": "Buy a heavy-duty U-lock for the commuter bike",
+     "better": "plain padlock or bike lock without reset arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Rotate the winter tires on the Subaru before the frost",
+     "better": "car tire or wheel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Factory reset the old router before donating it",
+     "better": "router with reset arrow",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Send the encrypted tax PDF to the accountant",
+     "better": "document or email",
+     "trap": "property"
+    },
+    {
+     "task": "Order two YubiKey hardware keys for backup",
+     "better": "USB security key or shopping cart",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Turn on automatic nightly backups to the NAS",
+     "better": "cloud/drive with sync or clock arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "lock_open_circle"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4099,
+    "output": 1124,
+    "thoughts": 108,
+    "total": 5331
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:56Z"
+  }
+ },
+ "distinguishing": "Shows a closed padlock surrounded by a counterclockwise circular arrow (not a solid ring around an open padlock), indicating password reset, credential rotation, or screen orientation lock."
 }

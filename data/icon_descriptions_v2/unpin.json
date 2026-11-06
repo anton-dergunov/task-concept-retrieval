@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "Take down from noticeboard or wall",
+   "meaning": "take down from noticeboard or wall",
    "strength": "secondary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the crossed-out geometric pin shape can resemble a slashed-out wine glass, lantern, or abstract symbol.",
+ "ambiguity": "At small sizes, the flared body and neck cut by a diagonal slash closely resemble the slashed laboratory flask, except for the vertical pin spike protruding at the bottom.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -156,8 +156,18 @@
  ],
  "near_misses": [
   {
+   "task": "Disable experimental beta features in the browser settings",
+   "better": "slashed laboratory flask",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch to chemical-free laundry detergent for baby clothes",
+   "better": "slashed laboratory flask or laundry detergent bottle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy brass thumbtacks for the world map in the study",
-   "better": "regular pushpin without slash, or shopping cart",
+   "better": "intact pushpin without a slash",
    "trap": "lookalike_glyph"
   },
   {
@@ -171,25 +181,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pin the trouser hems before running them through the sewing machine",
-   "better": "sewing needle and thread or trousers",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Check the pinned Wi-Fi password in the Airbnb welcome message",
    "better": "Wi-Fi symbol or key",
    "trap": "property"
-  },
-  {
-   "task": "Order a replacement rolling pin for making pie crust",
-   "better": "rolling pin",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a pushpin or thumbtack crossed out with a diagonal slash, universally understood in digital interfaces as 'unpin' and literally as removing tacks from a board. While specific, it fits real cleanup tasks across messaging apps, browsers, social profiles, and physical bulletin boards.",
@@ -207,6 +207,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "keep_off"
- }
+  "alias_of": "keep_off",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unpin / remove pin / unstick",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Take down from noticeboard or wall",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "clear pinned items or shortcuts",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the crossed-out geometric pin shape can resemble a slashed-out wine glass, lantern, or abstract symbol.",
+   "near_misses": [
+    {
+     "task": "Buy brass thumbtacks for the world map in the study",
+     "better": "regular pushpin without slash, or shopping cart",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Change the 4-digit PIN on the debit card at the ATM",
+     "better": "keypad, lock, or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drop a location pin for the campsite entrance and send to Mark",
+     "better": "map marker teardrop pin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pin the trouser hems before running them through the sewing machine",
+     "better": "sewing needle and thread or trousers",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the pinned Wi-Fi password in the Airbnb welcome message",
+     "better": "Wi-Fi symbol or key",
+     "trap": "property"
+    },
+    {
+     "task": "Order a replacement rolling pin for making pie crust",
+     "better": "rolling pin",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "science_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4135,
+    "output": 1073,
+    "thoughts": 109,
+    "total": 5317
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "Unlike the slashed conical flask, this icon has a sharp vertical spike pointing down from the middle of its flat base and square corners on its top rim, depicting a crossed-out pushpin for unpinning items."
 }

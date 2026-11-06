@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "write a message or text",
+   "meaning": "write, compose, or draft a message or reply",
    "strength": "primary"
   },
   {
-   "meaning": "leave a comment, review, or feedback",
+   "meaning": "write a review, comment, or feedback",
    "strength": "primary"
   },
   {
-   "meaning": "edit a comment or annotation",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "draft a reply",
+   "meaning": "edit an existing comment or annotation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the pencil inside the bubble can look like an eraser or a generic diagonal slash or attachment clip.",
+ "ambiguity": "Shares the exact outer frame of the left-tailed speech bubbles; at small sizes the tilted pencil can blur into text lines or look like a paperclip attachment inside a chat bubble.",
  "modifier_semantics": [
   {
    "modifier": "tilted pencil writing a short horizontal line inside",
@@ -175,33 +171,33 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new box of mechanical pencils for sketching",
-   "better": "pencil",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Call mom to wish her happy birthday",
-   "better": "phone receiver",
+   "task": "Read the unread text messages from the contractor",
+   "better": "speech bubble with plain text lines",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Sign the lease renewal PDF and send it back",
-   "better": "signature / contract",
-   "trap": "generic_verb"
+   "task": "Send the bulleted list of questions to the vendor",
+   "better": "speech bubble with bulleted list inside",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Read the comments on the zoning proposal",
-   "better": "speech bubble / eyeglasses",
+   "task": "Buy a new box of mechanical pencils for sketching",
+   "better": "pencil (without speech bubble)",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Sign the lease renewal PDF and send it back",
+   "better": "contract or signature pen",
    "trap": "generic_verb"
   },
   {
    "task": "Fix the typo in the main website header",
-   "better": "website / browser",
+   "better": "browser window or code icon",
    "trap": "parent_topic"
   },
   {
    "task": "Switch phone plan to one with unlimited texting",
-   "better": "sim card / mobile phone",
+   "better": "SIM card or mobile phone",
    "trap": "property"
   }
  ],
@@ -228,6 +224,98 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "write a message or text",
+     "strength": "primary"
+    },
+    {
+     "meaning": "leave a comment, review, or feedback",
+     "strength": "primary"
+    },
+    {
+     "meaning": "edit a comment or annotation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "draft a reply",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the pencil inside the bubble can look like an eraser or a generic diagonal slash or attachment clip.",
+   "near_misses": [
+    {
+     "task": "Buy a new box of mechanical pencils for sketching",
+     "better": "pencil",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call mom to wish her happy birthday",
+     "better": "phone receiver",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sign the lease renewal PDF and send it back",
+     "better": "signature / contract",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Read the comments on the zoning proposal",
+     "better": "speech bubble / eyeglasses",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the typo in the main website header",
+     "better": "website / browser",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Switch phone plan to one with unlimited texting",
+     "better": "sim card / mobile phone",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "card_membership",
+   "tooltip_2",
+   "chat",
+   "comment",
+   "speaker_notes"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9326,
+    "output": 2907,
+    "thoughts": 0,
+    "total": 12233
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Replaces the horizontal text lines inside the left-tailed speech bubble with a tilted pencil drawing a short line, specifically cueing composing, drafting, or editing a message or review."
 }

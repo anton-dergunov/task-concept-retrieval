@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "car floor airflow / footwell heater vent",
+   "meaning": "seat selection, reservation, or sitting down",
    "strength": "primary"
   },
   {
-   "meaning": "sit down / take a seat",
+   "meaning": "car climate control floor or footwell airflow",
    "strength": "primary"
   },
   {
-   "meaning": "passenger seat or airline seat selection",
+   "meaning": "lower seat height or ergonomic chair adjustment",
    "strength": "secondary"
   },
   {
-   "meaning": "lower seat height or ergonomic adjustment",
+   "meaning": "passenger or vehicle occupant",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Literally an automotive HVAC icon for directing air toward the floor/feet, but outside a car dashboard most viewers read it as sitting down, seat selection, or lowering a chair.",
+ "ambiguity": "Completely interchangeable with the right-facing seated person with a downward arrow (its exact horizontal mirror image); outside a car dashboard, viewers read it as sitting down or choosing a seat rather than floor-vent airflow.",
  "modifier_semantics": [
   {
    "modifier": "large downward-pointing arrow at upper left",
@@ -161,14 +161,19 @@
  ],
  "near_misses": [
   {
-   "task": "Book flights to Tokyo for October",
-   "better": "airplane",
-   "trap": "parent_topic"
+   "task": "Adjust right-facing passenger seat lumbar and height",
+   "better": "right-facing seated person with downward arrow (if orientation is matched literally)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Download the PDF manual for the car heater",
-   "better": "file download / document",
+   "better": "file download arrow or document",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book flights to Tokyo for October",
+   "better": "airplane",
+   "trap": "parent_topic"
   },
   {
    "task": "Buy a folding camping chair for the beach",
@@ -182,19 +187,19 @@
   },
   {
    "task": "Check in for tomorrow's United flight",
-   "better": "boarding pass / ticket",
+   "better": "boarding pass or ticket",
    "trap": "generic_verb"
   },
   {
    "task": "Reupholster the four dining room chairs in green velvet",
-   "better": "dining chair / fabric",
+   "better": "dining chair",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Literally the automotive HVAC symbol for floor/footwell airflow (a seated passenger profile with a downward arrow), which in a general task list also reads naturally as choosing a seat, sitting down, or lowering seat height. It fits a modest set of tasks around flight/event seating, ergonomic chair adjustment, and car heater vents.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car floor airflow / footwell heater vent",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sit down / take a seat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "passenger seat or airline seat selection",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "lower seat height or ergonomic adjustment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Literally an automotive HVAC icon for directing air toward the floor/feet, but outside a car dashboard most viewers read it as sitting down, seat selection, or lowering a chair.",
+   "near_misses": [
+    {
+     "task": "Book flights to Tokyo for October",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Download the PDF manual for the car heater",
+     "better": "file download / document",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a folding camping chair for the beach",
+     "better": "folding chair",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Stand up every 45 minutes while coding",
+     "better": "standing person",
+     "trap": "property"
+    },
+    {
+     "task": "Check in for tomorrow's United flight",
+     "better": "boarding pass / ticket",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Reupholster the four dining room chairs in green velvet",
+     "better": "dining chair / fabric",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_fan_low_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4038,
+    "output": 1138,
+    "thoughts": 0,
+    "total": 5176
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "The seated person faces left with the downward arrow on the upper left; it is an exact horizontal mirror image of the right-facing seated person with a downward arrow, and the two icons are completely interchangeable in meaning."
 }

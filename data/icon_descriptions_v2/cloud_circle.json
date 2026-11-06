@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to an unbordered cloud icon; at small sizes the enclosing circle adds visual weight without adding distinct meaning.",
+ "ambiguity": "Visually and semantically interchangeable with the other encircled cloud outline icon; at small list sizes, the heavy outer circle also crowds the cloud shape so it can look like a generic badge or coin.",
  "modifier_semantics": [
   {
    "modifier": "enclosing circular ring",
@@ -186,12 +186,17 @@
    "task": "Knead the brioche dough for 15 minutes until smooth",
    "better": "bread or mixing bowl",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Dry clean the grey wool fedora before the wedding",
+   "better": "hat",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear cloud outline inside a circle, universally recognized as cloud storage/computing or weather. It fits common tasks around cloud backups, storage cleanup, and hosting bills, though it competes closely with an unbordered cloud icon.",
@@ -209,6 +214,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cloud storage, cloud backup, or online sync",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cloud computing or hosting infrastructure",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weather, overcast sky, or meteorology",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to an unbordered cloud icon; at small sizes the enclosing circle adds visual weight without adding distinct meaning.",
+   "near_misses": [
+    {
+     "task": "Order women's On Cloud 5 running shoes in size 8.5",
+     "better": "running shoe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy cloud bread ingredients — eggs, cream cheese, cream of tartar",
+     "better": "bread or grocery basket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wash the white cloud-shaped bath mat from the kids' bathroom",
+     "better": "laundry / washing machine",
+     "trap": "property"
+    },
+    {
+     "task": "Check why the pool water looks cloudy after shocking it",
+     "better": "swimming pool or water droplet",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly credit card bill for the AWS account",
+     "better": "credit card or invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Knead the brioche dough for 15 minutes until smooth",
+     "better": "bread or mixing bowl",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nest_farsight_weather"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4050,
+    "output": 1009,
+    "thoughts": 66,
+    "total": 5125
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "Shows a slightly wider outlined cloud inside a circle with vertical inner bump walls, making it completely interchangeable in meaning with the slightly narrower encircled cloud."
 }

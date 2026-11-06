@@ -77,7 +77,7 @@ def main() -> None:
     args = ap.parse_args()
 
     # One name per distinct glyph, discarded ones included, blank renders dropped.
-    names = [ic.name for ic in load_icons(include_discarded=True)]
+    names = [ic.name for ic in load_icons(include_discarded=True, version="v1")]
     BUNDLE.mkdir(parents=True, exist_ok=True)
     icons, groups = layout(names, args.model, args.groups, args.refresh)
 

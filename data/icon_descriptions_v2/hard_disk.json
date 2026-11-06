@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "hard drive or external storage disk",
+   "meaning": "hard disk drive (HDD) / external storage drive",
    "strength": "primary"
   },
   {
-   "meaning": "speaker or bookshelf audio monitor",
+   "meaning": "bookshelf speaker / studio audio monitor",
    "strength": "primary"
   },
   {
-   "meaning": "passport or official booklet with emblem",
+   "meaning": "video doorbell / intercom unit",
    "strength": "secondary"
   },
   {
-   "meaning": "smart doorbell or intercom unit",
+   "meaning": "passport or booklet with circular emblem",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly ambiguous between a hard drive (platter and indicator light), a speaker cabinet (woofer cone and bass port), and a passport cover (emblem and title bar), especially at small list sizes.",
+ "ambiguity": "Mistakable for the arch-topped tabletop security camera icon, and inherently ambiguous between a computer hard drive (platter and slot) and an audio speaker (woofer cone and bass port).",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set up the baby monitor camera in the nursery",
+   "better": "arch-topped tabletop camera with corner indicator dot and solid base",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Angle the indoor security camera toward the front door",
+   "better": "arch-topped tabletop camera with corner indicator dot and solid base",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Take the scenic drive along Highway 1 to Big Sur",
    "better": "car or winding road",
    "trap": "shared_vocabulary"
@@ -169,11 +179,6 @@
    "task": "Email the keynote speaker about her hotel booking",
    "better": "person at podium or email envelope",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Verify that the nightly server backup completed",
-   "better": "cloud with checkmark or server rack",
-   "trap": "generic_verb"
   },
   {
    "task": "Buy a shockproof carrying case with EVA foam",
@@ -207,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hard drive or external storage disk",
+     "strength": "primary"
+    },
+    {
+     "meaning": "speaker or bookshelf audio monitor",
+     "strength": "primary"
+    },
+    {
+     "meaning": "passport or official booklet with emblem",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smart doorbell or intercom unit",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly ambiguous between a hard drive (platter and indicator light), a speaker cabinet (woofer cone and bass port), and a passport cover (emblem and title bar), especially at small list sizes.",
+   "near_misses": [
+    {
+     "task": "Take the scenic drive along Highway 1 to Big Sur",
+     "better": "car or winding road",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Organize the shared Google Drive folder for Q3",
+     "better": "cloud folder",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the keynote speaker about her hotel booking",
+     "better": "person at podium or email envelope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Verify that the nightly server backup completed",
+     "better": "cloud with checkmark or server rack",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a shockproof carrying case with EVA foam",
+     "better": "zippered case or bag",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the annual cloud storage invoice",
+     "better": "receipt or credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "assistant_device"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4069,
+    "output": 1124,
+    "thoughts": 141,
+    "total": 5334
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:28Z"
+  }
+ },
+ "distinguishing": "Has a symmetrical vertical rectangular frame, a thicker donut ring (platter or woofer cone) with a small center hole, and a centered horizontal bar at the bottom, representing a hard drive or speaker cabinet rather than the arch-topped tabletop camera on a solid base."
 }

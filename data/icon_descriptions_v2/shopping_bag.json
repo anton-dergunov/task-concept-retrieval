@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "shopping bag / tote bag",
+   "meaning": "shopping bag or tote bag",
    "strength": "primary"
   },
   {
-   "meaning": "shopping / retail errand / purchase",
+   "meaning": "shopping, retail errand, or purchase",
    "strength": "primary"
   },
   {
-   "meaning": "gift bag / carryout bag",
+   "meaning": "gift bag or carryout bag",
    "strength": "secondary"
   },
   {
-   "meaning": "handbag / purse",
+   "meaning": "handbag or purse",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the square body and arched top handle can closely resemble a padlock.",
+ "ambiguity": "Functionally interchangeable with the wider shopping bag with a front U-loop handle; at very small sizes, the square body and arched top handle also closely resemble a padlock.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -156,13 +156,13 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp / flashlight",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Change the master password on the family 1Password vault",
    "better": "padlock / key",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the leather handbag to the cobbler to fix the front strap loop",
+   "better": "wide handbag / purse with front U-shaped handle loop",
    "trap": "lookalike_glyph"
   },
   {
@@ -189,7 +189,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A simple outline of a square tote or shopping bag with an arched handle floating slightly inside the top edge. It is the standard icon for general shopping errands, retail order pickups, or literal tote and gift bags, though the generic verb 'buy' on a specific item should use that item's icon instead. At tiny sizes its silhouette is close to a padlock.",
@@ -207,6 +207,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shopping bag / tote bag",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shopping / retail errand / purchase",
+     "strength": "primary"
+    },
+    {
+     "meaning": "gift bag / carryout bag",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "handbag / purse",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the square body and arched top handle can closely resemble a padlock.",
+   "near_misses": [
+    {
+     "task": "Change the master password on the family 1Password vault",
+     "better": "padlock / key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 20-pound bag of lump charcoal for the smoker",
+     "better": "grill / fire",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $35 checked bag fee for the Denver flight",
+     "better": "suitcase / luggage",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up 2% milk and a dozen eggs",
+     "better": "milk carton / eggs",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Put a fresh trash bag in the kitchen bin",
+     "better": "trash can / bin",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "local_mall"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4001,
+    "output": 1083,
+    "thoughts": 173,
+    "total": 5257
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:10Z"
+  }
+ },
+ "distinguishing": "Shows a taller, squarer bag with a single top arch handle whose two ends extend vertically inside the bag's top edge, rather than a wider bag with a drooping U-shaped front loop; the two icons are functionally interchangeable for shopping and tote bags."
 }

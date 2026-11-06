@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "travel documents, customs declaration, or visa application",
+   "meaning": "international travel documents, customs declaration, or visa checklist",
    "strength": "primary"
   },
   {
-   "meaning": "international report, global policy, or public assignment",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "web server log or online checklist",
+   "meaning": "global report, international policy, or public web log",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the stylized continent shapes inside the globe badge can look like a yin-yang symbol, a recycling icon, or a cookie.",
+ "ambiguity": "Shares the identical clipboard base and round corner badge footprint with the plus-badge clipboard; at small list sizes, the white continent shapes inside the dark circle can blur and be confused with the plus badge or a yin-yang symbol.",
  "modifier_semantics": [
   {
    "modifier": "earth globe badge",
@@ -161,14 +157,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a wooden clipboard for the warehouse floor",
-   "better": "plain clipboard without globe badge",
+   "task": "Print a current list of prescriptions and dosages for the travel wallet",
+   "better": "clipboard with capsule pill badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Start a new grocery checklist for Thanksgiving dinner",
+   "better": "clipboard with plus sign badge",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Order a desk globe for Leo's bedroom",
    "better": "standalone earth globe",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Check flight prices to Tokyo",
@@ -212,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "online form, web survey, or internet registration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "travel documents, customs declaration, or visa application",
+     "strength": "primary"
+    },
+    {
+     "meaning": "international report, global policy, or public assignment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "web server log or online checklist",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the stylized continent shapes inside the globe badge can look like a yin-yang symbol, a recycling icon, or a cookie.",
+   "near_misses": [
+    {
+     "task": "Buy a wooden clipboard for the warehouse floor",
+     "better": "plain clipboard without globe badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a desk globe for Leo's bedroom",
+     "better": "standalone earth globe",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check flight prices to Tokyo",
+     "better": "airplane",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy global roaming data pass for the trip",
+     "better": "SIM card or mobile signal",
+     "trap": "property"
+    },
+    {
+     "task": "Renew passport before it expires in November",
+     "better": "passport booklet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book hotel near the embassy",
+     "better": "hotel bed or building",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "prescriptions",
+   "assignment_add"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5406,
+    "output": 1026,
+    "thoughts": 124,
+    "total": 6556
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Unlike the clipboards with a capsule pill badge or a plus-sign badge, this clipboard has a circular earth globe showing continents in the bottom-right corner, pointing to online web forms, international documents, or travel checklists."
 }

@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "bone / orthopedic health / skeleton",
+   "meaning": "bone / femur / orthopedic health / skeleton",
    "strength": "primary"
   },
   {
-   "meaning": "dog treat / pet chew / dog care",
+   "meaning": "dog bone / pet chew treat / dog care",
    "strength": "primary"
-  },
-  {
-   "meaning": "bone broth / marrow / butcher bones for cooking",
-   "strength": "secondary"
   },
   {
    "meaning": "anatomy / paleontology / fossils",
    "strength": "secondary"
+  },
+  {
+   "meaning": "bone broth / marrow / butcher bones",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the vertical bone shape could briefly resemble a dumbbell, an apple core, or a pillar.",
+ "ambiguity": "Nearly interchangeable in meaning with the flat-topped vertical bone, and at tiny sizes both can briefly resemble a vertical dumbbell or apple core.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -153,6 +153,16 @@
  ],
  "near_misses": [
   {
+   "task": "Simmer cross-cut beef marrow bones for pho stock",
+   "better": "flat-topped cut bone / soup pot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Physical therapy exercises for tibial plateau fracture",
+   "better": "flat-topped shinbone (tibia)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new bone-colored linen tablecloth for the dining room",
    "better": "tablecloth / dining table",
    "trap": "property"
@@ -168,17 +178,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Do 3 sets of 12 dumbbell goblet squats at the gym",
-   "better": "dumbbell",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Outline the bare bones of the Q3 pitch deck before Friday",
    "better": "presentation slide",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book groomer for nail trim and bath",
+   "task": "Book groomer for dog nail trim and bath",
    "better": "dog / scissors",
    "trap": "parent_topic"
   }
@@ -186,7 +191,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an anatomical bone oriented vertically. It is an immediate, unmistakable cue for tasks involving dog treats/pet care, orthopedic health and bone scans, cooking bone broth, or studying skeletal anatomy. At tiny sizes its vertical shaft and flared ends could slightly resemble a standing dumbbell.",
@@ -204,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bone / orthopedic health / skeleton",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dog treat / pet chew / dog care",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bone broth / marrow / butcher bones for cooking",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "anatomy / paleontology / fossils",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the vertical bone shape could briefly resemble a dumbbell, an apple core, or a pillar.",
+   "near_misses": [
+    {
+     "task": "Buy a new bone-colored linen tablecloth for the dining room",
+     "better": "tablecloth / dining table",
+     "trap": "property"
+    },
+    {
+     "task": "Order bone-in pork chops from the butcher counter",
+     "better": "meat / pork chop",
+     "trap": "property"
+    },
+    {
+     "task": "Compare Sony and Shokz bone conduction headphones for running",
+     "better": "headphones",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Do 3 sets of 12 dumbbell goblet squats at the gym",
+     "better": "dumbbell",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Outline the bare bones of the Q3 pitch deck before Friday",
+     "better": "presentation slide",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book groomer for nail trim and bath",
+     "better": "dog / scissors",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "tibia"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4088,
+    "output": 1115,
+    "thoughts": 176,
+    "total": 5379
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Has a two-lobed top end with an asymmetrical anatomical crease inside the upper-left lobe, reading clearly as a whole femur or classic dog bone rather than the flat-topped bone."
 }

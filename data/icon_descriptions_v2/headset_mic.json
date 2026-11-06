@@ -17,13 +17,9 @@
   {
    "meaning": "voice call or online meeting",
    "strength": "secondary"
-  },
-  {
-   "meaning": "headphones or audio gear",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with plain listening headphones if the bottom microphone boom is missed at small sizes.",
+ "ambiguity": "Can be confused with plain listening headphones without a microphone if the bottom microphone boom is overlooked at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -156,7 +152,17 @@
  "near_misses": [
   {
    "task": "Listen to the new Hardcore History podcast episode on the train",
-   "better": "headphones without microphone or podcast icon",
+   "better": "headphones without microphone",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack noise-canceling headphones for the long-haul flight",
+   "better": "headphones without microphone",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy child ear defenders for the airshow",
+   "better": "headphones without microphone (ear protectors)",
    "trap": "lookalike_glyph"
   },
   {
@@ -170,19 +176,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy child ear defenders for the airshow",
-   "better": "ear protectors / headphones without mic",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Download the invoice PDF from the billing portal",
+   "task": "Download the invoice PDF from the support portal",
    "better": "invoice or document icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Pay the knee brace support invoice",
-   "better": "medical brace or bill icon",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -206,6 +202,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "customer support, helpdesk, or call center",
+     "strength": "primary"
+    },
+    {
+     "meaning": "headset with microphone (for calls or gaming)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "voice call or online meeting",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "headphones or audio gear",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with plain listening headphones if the bottom microphone boom is missed at small sizes.",
+   "near_misses": [
+    {
+     "task": "Listen to the new Hardcore History podcast episode on the train",
+     "better": "headphones without microphone or podcast icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Mum to wish her happy birthday",
+     "better": "telephone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Record voiceover narration on the condenser mic",
+     "better": "standalone studio microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy child ear defenders for the airshow",
+     "better": "ear protectors / headphones without mic",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download the invoice PDF from the billing portal",
+     "better": "invoice or document icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the knee brace support invoice",
+     "better": "medical brace or bill icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "headphones"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4031,
+    "output": 960,
+    "thoughts": 0,
+    "total": 4991
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "Has an L-shaped microphone boom extending from the bottom of the right earcup toward the center, indicating a two-way communication headset, customer support, or voice calls rather than passive audio listening."
 }

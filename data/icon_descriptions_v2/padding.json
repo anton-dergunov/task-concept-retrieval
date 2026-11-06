@@ -11,19 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "stove or oven with three control knobs",
+   "meaning": "stove or oven front with three control knobs",
    "strength": "secondary"
   },
   {
-   "meaning": "three-dot more options menu button",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "calendar page with three binder holes",
+   "meaning": "three-dot more-options menu button",
    "strength": "secondary"
   }
  ],
- "ambiguity": "It is an abstract square with three dots at the top; without a divider line below the dots, it sits ambiguously between a macOS-style window frame, a kitchen stove front, a punch-hole notepad, and a UI 'more' button.",
+ "ambiguity": "Without a horizontal title-bar line, it sits ambiguously between a browser window, a minimalist stove front, and the bathroom scale icon that groups the three dots inside a black circle.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -161,19 +157,24 @@
  ],
  "near_misses": [
   {
+   "task": "Log morning body weight and body fat percentage",
+   "better": "square bathroom scale with a circular dial at top center",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the Childproof covers on the nursery wall sockets",
+   "better": "wall outlet plate with a circular socket",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Wash the living room windows before Sunday",
-   "better": "four-pane glass window with curtains or sill",
+   "better": "four-pane glass house window",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Fix the hut-to-hut dates before the booking window opens",
+   "task": "Book the mountain huts as soon as the reservation window opens",
    "better": "calendar",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new board game with wooden dice for family night",
-   "better": "six-sided die with pips in standard layout",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Open the tax PDF in a new window and print page 3",
@@ -182,11 +183,11 @@
   },
   {
    "task": "Buy a window-mounted bird feeder for the kitchen",
-   "better": "bird",
+   "better": "bird or bird feeder",
    "trap": "property"
   },
   {
-   "task": "Update the billing credit card for the hosting account",
+   "task": "Update the billing credit card in the web portal",
    "better": "credit card",
    "trap": "parent_topic"
   }
@@ -194,7 +195,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows a rounded square with three dots along the top inside edge, representing a simplified macOS-style application/browser window or a minimal kitchen oven front. Because it lacks a title-bar divider line or oven door window, it is quite abstract and easily confused with a UI 'more options' button or a three-hole notepad.",
@@ -214,6 +215,94 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "browser window or application frame",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stove or oven with three control knobs",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "three-dot more options menu button",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "calendar page with three binder holes",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "It is an abstract square with three dots at the top; without a divider line below the dots, it sits ambiguously between a macOS-style window frame, a kitchen stove front, a punch-hole notepad, and a UI 'more' button.",
+   "near_misses": [
+    {
+     "task": "Wash the living room windows before Sunday",
+     "better": "four-pane glass window with curtains or sill",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the hut-to-hut dates before the booking window opens",
+     "better": "calendar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new board game with wooden dice for family night",
+     "better": "six-sided die with pips in standard layout",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Open the tax PDF in a new window and print page 3",
+     "better": "printer or document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a window-mounted bird feeder for the kitchen",
+     "better": "bird",
+     "trap": "property"
+    },
+    {
+     "task": "Update the billing credit card for the hosting account",
+     "better": "credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "monitor_weight"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4170,
+    "output": 1116,
+    "thoughts": 145,
+    "total": 5431
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:14Z"
+  }
+ },
+ "distinguishing": "Places three separate black dots directly across the upper third of the square without a surrounding circle, reading as window control buttons or stove knobs rather than a circular scale dial."
 }

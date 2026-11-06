@@ -77,3 +77,45 @@ def lookalike_order(matrix: np.ndarray, n_groups: int) -> Tuple[List[int], List[
             groups.append((start, pos - start))
             start = pos
     return order, groups
+
+
+def lookalike_groups(matrix: np.ndarray, threshold: float, max_size: int = 8,
+                     min_size: int = 2) -> List[List[int]]:
+    """Groups of look-alike glyphs for the v2 contrast pass: rows whose average-linkage
+    cluster stays within cosine distance 1 − `threshold`. A cluster larger than
+    `max_size` is split with Ward into parts of at most `max_size`; clusters smaller
+    than `min_size` (glyphs without a look-alike) are left out. Returns lists of row
+    indices, each group in look-alike order, groups ordered by first row."""
+    from scipy.cluster.hierarchy import fcluster, linkage, leaves_list, optimal_leaf_ordering
+    from scipy.spatial.distance import pdist
+
+    dist = pdist(matrix, "cosine")
+    labels = fcluster(linkage(dist, "average"), 1 - threshold, "distance")
+    clusters: dict = {}
+    for i, lab in enumerate(labels):
+        clusters.setdefault(int(lab), []).append(i)
+
+    def split(rows: List[int]) -> List[List[int]]:
+        if len(rows) <= max_size:
+            return [rows]
+        sub = matrix[rows]
+        d = pdist(sub, "euclidean")
+        tree = linkage(d, "ward")
+        k = 2
+        while True:
+            lab = fcluster(tree, k, "maxclust")
+            parts = [[rows[j] for j in range(len(rows)) if lab[j] == c] for c in sorted(set(lab))]
+            if max(len(p) for p in parts) <= max_size or k >= len(rows):
+                break
+            k += 1
+        return [q for p in parts for q in split(p)]
+
+    groups = []
+    for rows in clusters.values():
+        for g in split(rows):
+            if len(g) >= min_size:
+                if len(g) > 2:   # neighbours next to each other within a group
+                    d = pdist(matrix[g], "euclidean")
+                    g = [g[j] for j in leaves_list(optimal_leaf_ordering(linkage(d, "average"), d))]
+                groups.append(g)
+    return sorted(groups, key=min)

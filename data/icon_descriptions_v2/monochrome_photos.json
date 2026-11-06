@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "camera / photography",
-   "strength": "secondary"
-  },
-  {
    "meaning": "color inversion / dark mode camera setting",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it reads simply as a generic camera icon, or the split could be mistaken for a decorative two-tone style rather than a monochrome/contrast indicator.",
+ "ambiguity": "At small sizes the vertical half-black half-white split can be misread as a decorative two-tone fill on a plain photo camera.",
  "modifier_semantics": [
   {
    "modifier": "vertical half-black half-white split inversion",
@@ -161,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pack the digital camera for the weekend trip",
+   "better": "plain photo camera",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Transfer RAW photos from the camera to the iPad over Wi-Fi",
+   "better": "wireless camera with signal arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a black-and-white laser printer for the home office",
    "better": "printer",
    "trap": "property"
@@ -171,11 +177,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Switch the dashboard UI to high-contrast dark mode",
-   "better": "display / contrast slider or moon icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Review the photographer's contract and pay the 50% deposit",
    "better": "contract / payment",
    "trap": "generic_verb"
@@ -183,11 +184,6 @@
   {
    "task": "Book train tickets to Berlin for the street photo workshop",
    "better": "train ticket",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Pack the tripod and spare SD cards in carry-on",
-   "better": "tripod / memory card",
    "trap": "parent_topic"
   }
  ],
@@ -212,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "black-and-white photography / monochrome filter",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo editing / contrast adjustment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera / photography",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "color inversion / dark mode camera setting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it reads simply as a generic camera icon, or the split could be mistaken for a decorative two-tone style rather than a monochrome/contrast indicator.",
+   "near_misses": [
+    {
+     "task": "Buy a black-and-white laser printer for the home office",
+     "better": "printer",
+     "trap": "property"
+    },
+    {
+     "task": "Check security camera feed from the driveway",
+     "better": "security / CCTV camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Switch the dashboard UI to high-contrast dark mode",
+     "better": "display / contrast slider or moon icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Review the photographer's contract and pay the 50% deposit",
+     "better": "contract / payment",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book train tickets to Berlin for the street photo workshop",
+     "better": "train ticket",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pack the tripod and spare SD cards in carry-on",
+     "better": "tripod / memory card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "camera_alt",
+   "linked_camera"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5398,
+    "output": 1081,
+    "thoughts": 140,
+    "total": 6619
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Unlike the plain outlined camera or the camera with wireless signal arcs, this camera is split vertically into a solid black left half and an outlined white right half with an inverted lens, indicating black-and-white photography, contrast adjustment, or photo editing."
 }

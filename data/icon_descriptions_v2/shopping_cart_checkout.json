@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "checkout or complete online cart order",
+   "meaning": "proceed to checkout or finalize online cart order",
    "strength": "primary"
   },
   {
-   "meaning": "shopping cart or general online shopping",
-   "strength": "primary"
-  },
-  {
-   "meaning": "ecommerce checkout flow or payment step",
+   "meaning": "e-commerce checkout flow or order submission",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a plain shopping cart or 'add to cart' icon at small sizes if the arrow direction isn't distinguished from a plus or downward arrow.",
+ "ambiguity": "Easy to confuse at a glance with the shopping cart with a plus sign (add to cart) or the plain shopping cart.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow inside the cart basket",
@@ -157,9 +153,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp or flashlight",
-   "trap": "generic_verb"
+   "task": "Add paper towels and dishwasher pods to the shared grocery cart",
+   "better": "shopping cart with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up groceries at the supermarket on the way home",
+   "better": "plain closed-top shopping cart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the payment error blocking our online furniture order",
+   "better": "shopping cart with an exclamation mark",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Order replacement HEPA filters for the bedroom air purifier",
@@ -175,22 +181,12 @@
    "task": "Return the oversized winter coat at the UPS drop-off",
    "better": "coat or return package box",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Put the reusable shopping bags back in the car trunk",
-   "better": "tote bag or car",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Move the folding baby stroller into the front hall closet",
-   "better": "baby stroller",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a shopping cart with a forward-pointing arrow inside, universally understood as 'proceed to checkout' or completing an online cart order. It fits tasks centered on checking out a cart, placing a bulk/grocery order, or working on an ecommerce checkout flow, though tasks to buy a single specific item should use that item's icon instead.",
@@ -208,6 +204,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "checkout or complete online cart order",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shopping cart or general online shopping",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ecommerce checkout flow or payment step",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain shopping cart or 'add to cart' icon at small sizes if the arrow direction isn't distinguished from a plus or downward arrow.",
+   "near_misses": [
+    {
+     "task": "Order replacement HEPA filters for the bedroom air purifier",
+     "better": "air filter or fan",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the squeaky wheel on the garden utility cart",
+     "better": "wheelbarrow or garden cart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Return the oversized winter coat at the UPS drop-off",
+     "better": "coat or return package box",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Put the reusable shopping bags back in the car trunk",
+     "better": "tote bag or car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Move the folding baby stroller into the front hall closet",
+     "better": "baby stroller",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "production_quantity_limits",
+   "add_shopping_cart",
+   "remove_shopping_cart",
+   "shopping_cart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8105,
+    "output": 2466,
+    "thoughts": 0,
+    "total": 10571
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "An open-top shopping cart with a right-pointing arrow inside the basket, representing proceeding to checkout or submitting an order rather than adding or browsing."
 }

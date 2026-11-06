@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "disable or clear clipboard / paste blocked",
+   "meaning": "clear clipboard, paste disabled, or no copy-paste",
    "strength": "primary"
   },
   {
-   "meaning": "unassigned or cancelled task / no checklist",
+   "meaning": "unassigned task, no checklist, or cancelled assignment",
    "strength": "secondary"
   },
   {
-   "meaning": "paperless / no forms required",
+   "meaning": "paperless or no forms required",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the top clip can look like a camera lens or a padlock loop, making it resemble a 'no photo' or 'unlocked/no lock' icon.",
+ "ambiguity": "At small sizes, it is easily mistaken for the crossed-out briefcase/suitcase icon (when the top clip with a hole blurs into a handle) or a crossed-out camera icon.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash across the entire icon",
@@ -160,24 +160,29 @@
  ],
  "near_misses": [
   {
+   "task": "Submit PTO request for the week after Thanksgiving",
+   "better": "crossed-out briefcase (off work / time off)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the airline's no-carry-on baggage policy for basic economy",
+   "better": "crossed-out suitcase / briefcase",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put up no-photography signs in the gallery",
+   "better": "crossed-out camera",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy two metal clipboards for the warehouse inventory count",
    "better": "clipboard (without slash)",
    "trap": "generic_verb"
   },
   {
    "task": "Copy the API key from the dashboard into the .env file",
-   "better": "clipboard or key",
+   "better": "clipboard (without slash) or key",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a tube of wallpaper paste for the hallway",
-   "better": "paint roller or glue",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Put up no-photography signs in the gallery",
-   "better": "camera with slash",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Email Sarah the list of unassigned bugs",
@@ -193,7 +198,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a clipboard struck through with a diagonal slash, standard UI shorthand for 'paste disabled', 'no clipboard access', or 'unassigned task'. It fits a narrow but real set of technical and administrative tasks around disabling shared clipboards, fixing broken copy-paste, or retiring paper checklists. At very small sizes the top clip could be mistaken for a camera lens ('no photos').",
@@ -213,6 +218,90 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "disable or clear clipboard / paste blocked",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unassigned or cancelled task / no checklist",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "paperless / no forms required",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the top clip can look like a camera lens or a padlock loop, making it resemble a 'no photo' or 'unlocked/no lock' icon.",
+   "near_misses": [
+    {
+     "task": "Buy two metal clipboards for the warehouse inventory count",
+     "better": "clipboard (without slash)",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Copy the API key from the dashboard into the .env file",
+     "better": "clipboard or key",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a tube of wallpaper paste for the hallway",
+     "better": "paint roller or glue",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put up no-photography signs in the gallery",
+     "better": "camera with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Email Sarah the list of unassigned bugs",
+     "better": "email / envelope",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a clip-on book light that doesn't leave marks",
+     "better": "book light / lamp",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "work_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4101,
+    "output": 835,
+    "thoughts": 0,
+    "total": 4936
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Unlike the wider, horizontal crossed-out briefcase with an open rectangular handle, this is a taller portrait rectangle with a solid top clip containing a small circular hole, representing a crossed-out clipboard."
 }

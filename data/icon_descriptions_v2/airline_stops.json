@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the two curved stems rising from a flat base look like a sprouting plant, fountain, or tiny palm tree.",
+ "ambiguity": "At small sizes, the two curved stems rising from a flat base look like a sprouting plant, fountain, or tiny palm tree; less likely to be confused with the straight downward download arrow.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,19 +152,24 @@
  ],
  "near_misses": [
   {
-   "task": "Rent inflatable bounce house for Leo's 6th birthday",
-   "better": "castle or party balloon",
-   "trap": "shared_vocabulary"
+   "task": "Download the Q3 financial statements from the bank portal",
+   "better": "downward arrow over a horizontal bar (download)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy dryer sheets with fewer perfumes",
-   "better": "laundry / washing machine",
-   "trap": "shared_vocabulary"
+   "task": "Save the offline map installer to laptop before the flight",
+   "better": "downward arrow over a horizontal bar (download)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Repot the small palm plant in the hallway",
    "better": "potted plant",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Rent inflatable bounce house for Leo's 6th birthday",
+   "better": "castle or party balloon",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Bounce mixdown of track 4 to WAV",
@@ -180,17 +185,12 @@
    "task": "Buy new shock-absorbing running shoes",
    "better": "running shoe",
    "trap": "property"
-  },
-  {
-   "task": "Renew SSL certificate on Namecheap",
-   "better": "lock or certificate",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon shows an arrow arcing down onto a flat bar and rebounding upward to the right, literally depicting a bounce, deflection, or redirect. It fits technical and administrative tasks around URL redirects, mail forwarding, and bounced emails or payments, though at list size its silhouette can easily be mistaken for a sprouting plant.",
@@ -208,6 +208,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bounce, rebound, or ricochet",
+     "strength": "primary"
+    },
+    {
+     "meaning": "redirect, deflect, or forward",
+     "strength": "primary"
+    },
+    {
+     "meaning": "email bounce or website bounce rate",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "skip or jump to next step",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the two curved stems rising from a flat base look like a sprouting plant, fountain, or tiny palm tree.",
+   "near_misses": [
+    {
+     "task": "Rent inflatable bounce house for Leo's 6th birthday",
+     "better": "castle or party balloon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy dryer sheets with fewer perfumes",
+     "better": "laundry / washing machine",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Repot the small palm plant in the hallway",
+     "better": "potted plant",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Bounce mixdown of track 4 to WAV",
+     "better": "audio waveform or music note",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reply to Sarah's email about the offsite",
+     "better": "envelope or reply arrow",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy new shock-absorbing running shoes",
+     "better": "running shoe",
+     "trap": "property"
+    },
+    {
+     "task": "Renew SSL certificate on Namecheap",
+     "better": "lock or certificate",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "download_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4066,
+    "output": 1142,
+    "thoughts": 0,
+    "total": 5208
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Shows a single-line curved arrow arcing down to touch a short bottom bar and rebounding up to the right (bounce/redirect), whereas the look-alike is a thick hollow straight arrow pointing straight down onto a bar (download)."
 }

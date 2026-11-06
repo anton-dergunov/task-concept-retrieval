@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "location, place, or address",
+   "meaning": "single location, place, or address",
    "strength": "primary"
   },
   {
-   "meaning": "map pin or saved point of interest",
+   "meaning": "map pin, check-in, or point of interest",
    "strength": "primary"
   },
   {
-   "meaning": "check-in, destination, or venue",
+   "meaning": "single geotagged photo or location tile",
    "strength": "secondary"
   },
   {
-   "meaning": "geotag or bounded area",
+   "meaning": "geofence or bounded area",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable in meaning from a standalone map pin without the square border.",
+ "ambiguity": "Nearly interchangeable in meaning with the landscape rectangular-framed map pin, and easily confused with the stacked square-framed map pin when the backing line is overlooked.",
  "modifier_semantics": [
   {
    "modifier": "rounded square border enclosing the pin",
@@ -163,6 +163,16 @@
  ],
  "near_misses": [
   {
+   "task": "Organize our vacation photos into albums by city",
+   "better": "stacked square frames with map pin",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mount the widescreen GPS navigator on the dashboard",
+   "better": "landscape rectangular frame with map pin",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy sewing pins and a magnetic pincushion",
    "better": "sewing needle or safety pin",
    "trap": "shared_vocabulary"
@@ -183,11 +193,6 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Mount cork pinboard above the study desk",
-   "better": "thumbtack / pushpin",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Track how many miles I run this week",
    "better": "running shoe or runner",
    "trap": "generic_verb"
@@ -196,7 +201,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a standard teardrop map pin inside a rounded square frame, universally understood as a location, address, venue, or saved map point. It fits many real-world tasks around addresses, venues, and trip mapping, though it overlaps heavily with unframed map-pin icons.",
@@ -214,6 +219,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "location, place, or address",
+     "strength": "primary"
+    },
+    {
+     "meaning": "map pin or saved point of interest",
+     "strength": "primary"
+    },
+    {
+     "meaning": "check-in, destination, or venue",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "geotag or bounded area",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable in meaning from a standalone map pin without the square border.",
+   "near_misses": [
+    {
+     "task": "Buy sewing pins and a magnetic pincushion",
+     "better": "sewing needle or safety pin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reset 4-digit debit card PIN at the ATM",
+     "better": "keypad or credit card with lock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check local weather before the Saturday hike",
+     "better": "sun and cloud weather icon",
+     "trap": "property"
+    },
+    {
+     "task": "Book window seat on the train to Munich",
+     "better": "train",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Mount cork pinboard above the study desk",
+     "better": "thumbtack / pushpin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Track how many miles I run this week",
+     "better": "running shoe or runner",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_map_stack",
+   "universal_local"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5389,
+    "output": 1039,
+    "thoughts": 210,
+    "total": 6638
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:53Z"
+  }
+ },
+ "distinguishing": "Encloses the map pin in a single 1:1 square frame with no stacked backing layer and a narrower aspect ratio than the landscape rectangle, representing a single place, geotag tile, or venue."
 }

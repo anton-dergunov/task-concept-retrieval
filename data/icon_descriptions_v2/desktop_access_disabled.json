@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "no screen time / digital detox / unplug from devices",
+   "meaning": "no screen time / digital detox / unplug from displays",
    "strength": "primary"
   },
   {
-   "meaning": "broken, dead, or disconnected monitor or TV",
+   "meaning": "broken, dead, or disconnected desktop monitor or TV",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can denote either a lifestyle habit (avoiding screens/TV) or a technical hardware issue (a monitor with no signal or a disconnected display).",
+ "ambiguity": "Virtually interchangeable with the slashed monitors with a wide chamfered base or a flush block base, and easily confused at list size with the slashed laptop.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -162,18 +162,28 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a 27-inch 4K monitor for the home office",
-   "better": "computer monitor (without slash)",
+   "task": "Turn off webcam video before joining the team standup",
+   "better": "video camera with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Block pop-up windows in Chrome settings",
+   "better": "browser window with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Decommission old MacBook Pro and wipe hard drive",
+   "better": "laptop with slash",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Cancel Netflix subscription before renewal on the 15th",
-   "better": "subscription / credit card or video icon",
+   "better": "subscription or credit card icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Order anti-glare matte screen protector for work monitor",
-   "better": "monitor or shield",
+   "better": "intact monitor or shield",
    "trap": "property"
   },
   {
@@ -182,20 +192,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Check why the MacBook won't connect to office Wi-Fi",
-   "better": "Wi-Fi off / disconnected",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Screen tenant applications for the basement apartment",
-   "better": "application form / person check",
+   "better": "application form or person check",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a monitor or TV with a diagonal slash through it. While born as a UI toggle for 'stop screen sharing' or 'display off', in a personal task list it maps well to two distinct real-life task families: cutting down screen time (digital detox, screen-free rules) and dealing with a dead or disconnected monitor.",
@@ -213,6 +218,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no screen time / digital detox / unplug from devices",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken, dead, or disconnected monitor or TV",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disable external display or stop screen sharing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "headless computer or server without monitor",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can denote either a lifestyle habit (avoiding screens/TV) or a technical hardware issue (a monitor with no signal or a disconnected display).",
+   "near_misses": [
+    {
+     "task": "Buy a 27-inch 4K monitor for the home office",
+     "better": "computer monitor (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel Netflix subscription before renewal on the 15th",
+     "better": "subscription / credit card or video icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order anti-glare matte screen protector for work monitor",
+     "better": "monitor or shield",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a paper notebook for the digital detox weekend",
+     "better": "notebook",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the MacBook won't connect to office Wi-Fi",
+     "better": "Wi-Fi off / disconnected",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Screen tenant applications for the basement apartment",
+     "better": "application form / person check",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mimo_disconnect",
+   "sync_saved_locally_off",
+   "domain_verification_off",
+   "videocam_off",
+   "folder_off",
+   "web_asset_off",
+   "tv_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12219,
+    "output": 3998,
+    "thoughts": 0,
+    "total": 16217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Shows a monitor with a distinct narrow neck between the screen and a flat pedestal foot, making it virtually interchangeable in meaning with the other two slashed monitor/TV icons that have flush or chamfered bases."
 }

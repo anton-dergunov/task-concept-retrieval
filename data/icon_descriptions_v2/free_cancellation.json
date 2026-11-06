@@ -10,23 +10,23 @@
  },
  "readings": [
   {
+   "meaning": "check availability, poll dates (yes/no), or resolve schedule conflicts",
+   "strength": "primary"
+  },
+  {
    "meaning": "confirm cancellation or reschedule an appointment",
    "strength": "primary"
   },
   {
-   "meaning": "check availability or poll dates (yes/no)",
-   "strength": "primary"
-  },
-  {
-   "meaning": "review and clean up calendar schedule",
+   "meaning": "confirm a marked date or deadline on the calendar",
    "strength": "secondary"
   },
   {
-   "meaning": "confirm a marked date or deadline",
+   "meaning": "audit and clean up calendar events",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Combining both an X and a checkmark on a calendar is self-contradictory at a glance—it can look like either a confirmed cancellation, a date poll (available vs. unavailable), or a marked calendar day being verified.",
+ "ambiguity": "Combining an X and a checkmark on a calendar is visually busy and easily mistaken for the simpler calendar with only a corner checkmark, or misread as a purely canceled event.",
  "modifier_semantics": [
   {
    "modifier": "X mark inside page",
@@ -165,19 +165,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a wall calendar for the kitchen before January",
-   "better": "plain calendar or shopping bag",
-   "trap": "shared_vocabulary"
+   "task": "Confirm dinner reservation at Osteria for Friday night",
+   "better": "blank calendar with a corner checkmark (no X inside) or restaurant utensils",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay electric bill before the due date on the 15th",
-   "better": "bill / invoice or lightning bolt",
-   "trap": "property"
-  },
-  {
-   "task": "Cancel Netflix subscription before it renews",
-   "better": "TV / streaming or credit card with X",
-   "trap": "shared_vocabulary"
+   "task": "Accept the calendar invite for Monday's project kickoff",
+   "better": "blank calendar with a corner checkmark (no X inside)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Check off completed items on the packing checklist",
@@ -185,14 +180,24 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Order birthday cake for Saturday's party",
-   "better": "birthday cake",
-   "trap": "parent_topic"
+   "task": "Pay electric bill before the due date on the 15th",
+   "better": "bill / invoice or lightning bolt",
+   "trap": "property"
+  },
+  {
+   "task": "Cancel Netflix subscription before it renews next month",
+   "better": "TV / streaming or credit card with X",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Verify the quarterly tax numbers with the accountant",
    "better": "calculator or tax document",
    "trap": "generic_verb"
+  },
+  {
+   "task": "Order birthday cake for Saturday's party",
+   "better": "birthday cake",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -216,6 +221,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "confirm cancellation or reschedule an appointment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "check availability or poll dates (yes/no)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "review and clean up calendar schedule",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "confirm a marked date or deadline",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Combining both an X and a checkmark on a calendar is self-contradictory at a glance—it can look like either a confirmed cancellation, a date poll (available vs. unavailable), or a marked calendar day being verified.",
+   "near_misses": [
+    {
+     "task": "Buy a wall calendar for the kitchen before January",
+     "better": "plain calendar or shopping bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay electric bill before the due date on the 15th",
+     "better": "bill / invoice or lightning bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Cancel Netflix subscription before it renews",
+     "better": "TV / streaming or credit card with X",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check off completed items on the packing checklist",
+     "better": "checklist / clipboard with checkmarks",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order birthday cake for Saturday's party",
+     "better": "birthday cake",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify the quarterly tax numbers with the accountant",
+     "better": "calculator or tax document",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "calendar_check"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4129,
+    "output": 1180,
+    "thoughts": 0,
+    "total": 5309
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "Adds a bold X mark inside the calendar page alongside the bottom-right checkmark, representing polling availability (yes/no dates), resolving schedule conflicts, or confirming a cancellation/marked date."
 }

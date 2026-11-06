@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "download",
+   "meaning": "download file or data",
    "strength": "primary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "move to bottom or align bottom",
+   "meaning": "align to bottom or move to bottom",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic 'scroll to bottom' or 'align bottom' UI button, though in a task list it universally reads as download.",
+ "ambiguity": "Virtually interchangeable with the downward arrow pointing into an open tray for download tasks; only distinct if used literally for aligning to a bottom line vs placing into an inbox tray.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -162,6 +162,21 @@
  ],
  "near_misses": [
   {
+   "task": "Sort incoming invoices in the accounting inbox tray",
+   "better": "downward arrow into an open-top tray or inbox icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unpack delivered parts into the receiving bin",
+   "better": "downward arrow into an open-top tray or box icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the signed tax return to the accountant's portal",
+   "better": "upload icon (upward arrow)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Listen to the downloaded podcast episodes on the commute",
    "better": "headphones or microphone",
    "trap": "property"
@@ -172,19 +187,9 @@
    "trap": "property"
   },
   {
-   "task": "Upload the signed tax return to the accountant's portal",
-   "better": "upload icon (upward arrow)",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Carry the winter coats down to the basement storage",
    "better": "box or coat",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Print the shipping label I downloaded yesterday",
-   "better": "printer or package",
-   "trap": "property"
   },
   {
    "task": "Buy an external SSD for large downloads",
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A downward arrow pointing to a horizontal bar is the universal symbol for downloading or saving locally. It is a great action icon when the whole point of a task is pulling files, statements, installers, or archives before a link expires or a connection drops, though when a specific object like a map or audiobook dominates the title, that object's icon is even better.",
@@ -215,6 +220,94 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download",
+     "strength": "primary"
+    },
+    {
+     "meaning": "save to device or local storage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "import or install",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "move to bottom or align bottom",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic 'scroll to bottom' or 'align bottom' UI button, though in a task list it universally reads as download.",
+   "near_misses": [
+    {
+     "task": "Listen to the downloaded podcast episodes on the commute",
+     "better": "headphones or microphone",
+     "trap": "property"
+    },
+    {
+     "task": "Read the downloaded IMF report on inflation",
+     "better": "document or book",
+     "trap": "property"
+    },
+    {
+     "task": "Upload the signed tax return to the accountant's portal",
+     "better": "upload icon (upward arrow)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Carry the winter coats down to the basement storage",
+     "better": "box or coat",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Print the shipping label I downloaded yesterday",
+     "better": "printer or package",
+     "trap": "property"
+    },
+    {
+     "task": "Buy an external SSD for large downloads",
+     "better": "hard drive",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_download"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4032,
+    "output": 835,
+    "thoughts": 0,
+    "total": 4867
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:21Z"
+  }
+ },
+ "distinguishing": "Has a flat horizontal bar underneath the downward arrow instead of an upturned tray; both are interchangeable as standard download icons, though the flat bar can also read as a bottom boundary or baseline."
 }

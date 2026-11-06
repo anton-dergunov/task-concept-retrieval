@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles an image or landscape photo icon (mountains inside a square frame), especially without a sun/circle dot.",
+ "ambiguity": "Completely interchangeable in meaning with the rounded-square line chart icon; also closely resembles a landscape photo icon (mountains inside a square picture frame, without a sun dot) or a cracked tile.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -156,39 +156,39 @@
  "near_misses": [
   {
    "task": "Hang the framed mountain print in the hallway",
-   "better": "picture frame / image",
+   "better": "landscape picture frame with sun and mountains",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book cardiologist for annual ECG checkup",
+   "better": "heart with ECG pulse line",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the cracked ceramic tile in the entryway",
+   "better": "broken square tile",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Make homemade chicken stock from the freezer bones",
-   "better": "cooking pot / soup",
+   "better": "cooking pot / soup bowl",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check if the bathroom grout is still holding up",
-   "better": "bathroom tiles / home repair",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Book cardiologist for annual ECG checkup",
-   "better": "heart / ECG pulse",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update my backup phone number and email",
+   "task": "Update my backup phone number on my brokerage account",
    "better": "phone / contact card",
    "trap": "parent_topic"
   },
   {
    "task": "Buy a high-performance blender for smoothies",
-   "better": "blender / kitchen appliance",
+   "better": "kitchen blender",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a jagged rising polyline enclosed in a square box, universally read as a line chart, analytics graph, or stock market trend. It fits tasks around investing, metrics, and data visualization well, though the enclosing box makes it easy to confuse with a landscape photo/image icon or several other chart variants.",
@@ -206,6 +206,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "line chart, graph, or analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stock market, investments, or financial trend",
+     "strength": "primary"
+    },
+    {
+     "meaning": "performance metrics or statistics",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "framed mountain picture or photo placeholder",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles an image or landscape photo icon (mountains inside a square frame), especially without a sun/circle dot.",
+   "near_misses": [
+    {
+     "task": "Hang the framed mountain print in the hallway",
+     "better": "picture frame / image",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Make homemade chicken stock from the freezer bones",
+     "better": "cooking pot / soup",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the bathroom grout is still holding up",
+     "better": "bathroom tiles / home repair",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book cardiologist for annual ECG checkup",
+     "better": "heart / ECG pulse",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my backup phone number and email",
+     "better": "phone / contact card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a high-performance blender for smoothies",
+     "better": "blender / kitchen appliance",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "drive_fusiontable"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4046,
+    "output": 739,
+    "thoughts": 0,
+    "total": 4785
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "This icon has sharp 90-degree outer corners on its square frame, whereas the other icon has rounded corners; in meaning, the two icons are completely interchangeable."
 }

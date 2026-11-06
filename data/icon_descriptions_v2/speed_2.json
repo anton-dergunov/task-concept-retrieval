@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "speedometer / gauge / meter",
+   "meaning": "low reading, slow speed, or low pressure on a gauge",
    "strength": "primary"
   },
   {
-   "meaning": "performance / speed / bandwidth",
+   "meaning": "speedometer, gauge, or meter",
    "strength": "primary"
   },
   {
-   "meaning": "dashboard / metrics",
+   "meaning": "throttled bandwidth, lag, or underperformance",
    "strength": "secondary"
   },
   {
-   "meaning": "pressure gauge / tire pressure",
+   "meaning": "tire pressure or boiler pressure gauge",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to other gauge or speedometer icons that differ only in needle angle (low vs medium vs high), and at tiny sizes can resemble a kitchen timer or bathroom scale dial.",
+ "ambiguity": "Easily confused with the 11 o'clock low-medium gauge at small sizes, and interchangeable with all three sibling gauges when used as a generic meter or dashboard icon.",
  "modifier_semantics": [
   {
    "modifier": "needle pointing toward the low left side",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Run gigabit fiber speed test to verify maximum download rate",
+   "better": "gauge with needle pointing far right (high speed)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Optimize landing page to hit a 95+ Lighthouse performance score",
+   "better": "gauge with needle pointing right (high performance)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay speeding ticket online before late fee kicks in",
    "better": "receipt or fine ticket",
    "trap": "shared_vocabulary"
@@ -185,17 +195,12 @@
    "task": "Schedule annual employee performance reviews with the team",
    "better": "people or calendar",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Switch DNS servers on the main router to Cloudflare",
-   "better": "router or network",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Clearly depicts a dial gauge or speedometer with the needle toward the low end. It fits concrete tasks about physical gauges and meters (tire pressure, boiler pressure, utility meters) as well as internet speed tests and software performance checks, though it is easily confused with medium- or high-needle gauge variants in the same icon set.",
@@ -213,6 +218,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "speedometer / gauge / meter",
+     "strength": "primary"
+    },
+    {
+     "meaning": "performance / speed / bandwidth",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dashboard / metrics",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pressure gauge / tire pressure",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to other gauge or speedometer icons that differ only in needle angle (low vs medium vs high), and at tiny sizes can resemble a kitchen timer or bathroom scale dial.",
+   "near_misses": [
+    {
+     "task": "Pay speeding ticket online before late fee kicks in",
+     "better": "receipt or fine ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Quick 15-minute tidy of the living room before guests arrive",
+     "better": "broom or sparkle",
+     "trap": "property"
+    },
+    {
+     "task": "Buy 8-gauge speaker wire for the living room receiver",
+     "better": "cable or speaker",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set kitchen timer for 45 minutes once the sourdough goes in",
+     "better": "stopwatch or kitchen timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule annual employee performance reviews with the team",
+     "better": "people or calendar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Switch DNS servers on the main router to Cloudflare",
+     "better": "router or network",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speed_3",
+   "speed_4",
+   "speed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6734,
+    "output": 2400,
+    "thoughts": 231,
+    "total": 9365
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "The needle points farthest to the left (around 10 o'clock) of all four gauges, indicating a low reading, slow speed, or low pressure, whereas the others point closer to vertical (11 o'clock, 1 o'clock) or far right (2 o'clock)."
 }

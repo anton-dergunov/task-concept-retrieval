@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "battery charging / charge battery",
+   "meaning": "charging battery / recharge a device",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "rechargeable battery / battery replacement",
+   "meaning": "EV or e-bike charging",
    "strength": "secondary"
   },
   {
-   "meaning": "EV or e-bike charging",
+   "meaning": "rechargeable battery / battery replacement",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to other partial-fill charging battery status icons (50%, 60%, 80%, 90%) used for OS status bars rather than distinct task subjects.",
+ "ambiguity": "Completely interchangeable with the 45%-filled and 60%-filled horizontal charging battery icons; the minor difference in fill width is unnoticeable at list size and conveys the exact same meaning.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt",
@@ -166,13 +166,13 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping trips",
-   "better": "headlamp / flashlight",
-   "trap": "property"
-  },
-  {
    "task": "Dispute the double charge from the hotel on my Visa statement",
    "better": "credit card / receipt",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Practice drums for the battery audition next Tuesday",
+   "better": "drum / music",
    "trap": "shared_vocabulary"
   },
   {
@@ -181,17 +181,12 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Practice drums for the battery audition next Tuesday",
-   "better": "drum / music",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Check why the kitchen outlet near the kettle tripped the breaker",
    "better": "electrical outlet / plug",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Order a waterproof hard case with foam cutouts for the flights",
+   "task": "Order a waterproof hard case with foam cutouts for the drone batteries",
    "better": "briefcase / hard case",
    "trap": "parent_topic"
   }
@@ -199,7 +194,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Clearly depicts a battery with a lightning bolt indicating charging or rechargeable power. It works well for tasks involving charging device batteries, power banks, or replacing batteries, though in an icon set it is visually redundant with other battery fill-level variants.",
@@ -217,6 +212,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 2
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery charging / charge battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / portable charger",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rechargeable battery / battery replacement",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "EV or e-bike charging",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to other partial-fill charging battery status icons (50%, 60%, 80%, 90%) used for OS status bars rather than distinct task subjects.",
+   "near_misses": [
+    {
+     "task": "Dispute the double charge from the hotel on my Visa statement",
+     "better": "credit card / receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly electricity bill before the 15th",
+     "better": "invoice / utility bill",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Practice drums for the battery audition next Tuesday",
+     "better": "drum / music",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check why the kitchen outlet near the kettle tripped the breaker",
+     "better": "electrical outlet / plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a waterproof hard case with foam cutouts for the flights",
+     "better": "briefcase / hard case",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_50_2",
+   "battery_charging_60_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5379,
+    "output": 1595,
+    "thoughts": 118,
+    "total": 7092
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Shows the widest interior fill bar (roughly 70–75% full), leaving only a narrow white gap before the lightning bolt, though in meaning it is completely interchangeable with the 45%-filled and 60%-filled charging battery icons."
 }

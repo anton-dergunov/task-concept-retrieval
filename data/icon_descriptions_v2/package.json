@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the top tape tab resembles a bookmark ribbon inside a square book or app icon.",
+ "ambiguity": "At small sizes, the notched tape strip at the top looks like an upside-down chevron or bookmark ribbon inside a square frame, but it lacks the bottom mountain peaks of the photo icons.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -155,13 +155,18 @@
  ],
  "near_misses": [
   {
-   "task": "Bookmark the customs tariff table in browser",
-   "better": "bookmark ribbon",
+   "task": "Select and frame family photos for the hallway gallery wall",
+   "better": "framed mountain picture with sun",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Wrap Maya's birthday present with ribbon",
-   "better": "gift box with bow",
+   "task": "Invert colors on the scanned film negatives",
+   "better": "vertically split black-and-white contrast square",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bookmark the customs tariff table in the browser",
+   "better": "standalone bookmark ribbon",
    "trap": "lookalike_glyph"
   },
   {
@@ -171,24 +176,19 @@
   },
   {
    "task": "Pick up boxed lunches for the client workshop",
-   "better": "lunch / food container",
+   "better": "lunch or food container",
    "trap": "property"
   },
   {
    "task": "Unpack the quarterly budget assumptions with Sarah",
-   "better": "spreadsheet or budget",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Compare health insurance package options for 2026",
-   "better": "health insurance / medical shield",
+   "better": "spreadsheet or budget chart",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a sealed cardboard parcel with packing tape down the top center and a small address label at the bottom left. It is an ideal, high-frequency icon for tasks involving deliveries, returns, postal shipments, moving boxes, and software packages. At tiny sizes the serrated tape tab can slightly resemble a bookmark ribbon.",
@@ -206,6 +206,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "package, parcel, or shipment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "moving box or storage container",
+     "strength": "primary"
+    },
+    {
+     "meaning": "online order or delivery",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "software package or archive",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the top tape tab resembles a bookmark ribbon inside a square book or app icon.",
+   "near_misses": [
+    {
+     "task": "Bookmark the customs tariff table in browser",
+     "better": "bookmark ribbon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wrap Maya's birthday present with ribbon",
+     "better": "gift box with bow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order new running shoes online",
+     "better": "running shoe",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up boxed lunches for the client workshop",
+     "better": "lunch / food container",
+     "trap": "property"
+    },
+    {
+     "task": "Unpack the quarterly budget assumptions with Sarah",
+     "better": "spreadsheet or budget",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Compare health insurance package options for 2026",
+     "better": "health insurance / medical shield",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "filter_b_and_w",
+   "satellite",
+   "imagesmode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6706,
+    "output": 2114,
+    "thoughts": 207,
+    "total": 9027
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:30Z"
+  }
+ },
+ "distinguishing": "Unlike the picture-frame icons in this group, this rounded square has a notched strip of packing tape hanging from the top edge and a small rectangular shipping label at the bottom-left, depicting a sealed cardboard box or parcel."
 }

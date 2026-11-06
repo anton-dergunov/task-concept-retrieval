@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "unlock / open lock",
+   "meaning": "unlock / open lock / unfreeze",
    "strength": "primary"
   },
   {
-   "meaning": "grant access / unrestrict / unfreeze",
+   "meaning": "grant access / unrestrict / make public",
    "strength": "primary"
-  },
-  {
-   "meaning": "physical padlock or lock mechanism",
-   "strength": "secondary"
   },
   {
    "meaning": "decrypt / remove password protection",
    "strength": "secondary"
+  },
+  {
+   "meaning": "open physical padlock",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a closed padlock at very small sizes if the open right side of the shackle isn't noticed.",
+ "ambiguity": "Interchangeable in meaning with the open padlock whose shackle stays over the body, though far less likely to be misread as a closed padlock at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "open shackle",
@@ -162,14 +162,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy an unlocked Pixel 8a for Mom's birthday",
-   "better": "smartphone",
-   "trap": "property"
-  },
-  {
    "task": "Lock the chicken coop before dark",
    "better": "closed padlock",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set iPad screen-time downtime lock for 8pm",
+   "better": "padlock with clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Revoke ex-contractor's user account permissions",
+   "better": "padlock with person badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy an unlocked Pixel 8a for Mom's birthday",
+   "better": "smartphone",
+   "trap": "property"
   },
   {
    "task": "Make sure all basement windows are locked before leaving for airport",
@@ -177,13 +187,8 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Pick up brown leather handbag from shoe repair shop",
-   "better": "handbag / shopping bag",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Update 2FA backup codes in Bitwarden",
-   "better": "shield or key or closed lock",
+   "better": "closed padlock or key",
    "trap": "parent_topic"
   },
   {
@@ -213,6 +218,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unlock / open lock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "grant access / unrestrict / unfreeze",
+     "strength": "primary"
+    },
+    {
+     "meaning": "physical padlock or lock mechanism",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "decrypt / remove password protection",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a closed padlock at very small sizes if the open right side of the shackle isn't noticed.",
+   "near_misses": [
+    {
+     "task": "Buy an unlocked Pixel 8a for Mom's birthday",
+     "better": "smartphone",
+     "trap": "property"
+    },
+    {
+     "task": "Lock the chicken coop before dark",
+     "better": "closed padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Make sure all basement windows are locked before leaving for airport",
+     "better": "window or closed padlock",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up brown leather handbag from shoe repair shop",
+     "better": "handbag / shopping bag",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update 2FA backup codes in Bitwarden",
+     "better": "shield or key or closed lock",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book canal boat tour through the Hiram M. Chittenden Locks",
+     "better": "boat / ship",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "water_lock",
+   "lock_open",
+   "lock",
+   "lock_person",
+   "lock_clock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9438,
+    "output": 1901,
+    "thoughts": 210,
+    "total": 11549
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "The shackle is swung completely out to the right of the padlock body, making the unlocked state immediately unmistakable at a glance; in meaning it is interchangeable with the lifted-shackle open padlock."
 }

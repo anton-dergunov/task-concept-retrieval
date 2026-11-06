@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "edit or write a document",
+   "meaning": "write, draft, or edit a document or text file",
    "strength": "primary"
   },
   {
-   "meaning": "sign a contract or form",
+   "meaning": "sign a contract, form, or agreement",
    "strength": "primary"
   },
   {
-   "meaning": "draft, essay, report, or written note",
+   "meaning": "fill out paperwork or an application",
    "strength": "secondary"
   },
   {
-   "meaning": "fill out paperwork or application",
+   "meaning": "revise an essay, report, or written note",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Close to generic note-taking, compose, or edit icons that use a square box instead of a dog-eared page.",
+ "ambiguity": "Can be confused with the folder with a pencil at small sizes because both are rectangular outlines paired with the exact same bottom-right pencil modifier.",
  "modifier_semantics": [
   {
    "modifier": "small tilted pencil in bottom-right corner",
@@ -163,8 +163,18 @@
  ],
  "near_misses": [
   {
+   "task": "Rename the shared client folders on Google Drive",
+   "better": "folder with pencil",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reorganize and relabel the tax receipt folders by year",
+   "better": "folder with pencil",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a pack of HB pencils and a sharpener for Ella's school bag",
-   "better": "pencil / stationery",
+   "better": "pencil or stationery",
    "trap": "shared_vocabulary"
   },
   {
@@ -179,17 +189,17 @@
   },
   {
    "task": "Edit the color grading on the wedding highlight reel",
-   "better": "video / film",
+   "better": "video or film",
    "trap": "generic_verb"
   },
   {
    "task": "Book flights to Berlin for the writers' workshop",
-   "better": "airplane / flight",
+   "better": "airplane or flight",
    "trap": "parent_topic"
   },
   {
    "task": "Mail the signed tax return at the post office before 5pm",
-   "better": "envelope / mail",
+   "better": "envelope or mail",
    "trap": "property"
   }
  ],
@@ -214,6 +224,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "edit or write a document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sign a contract or form",
+     "strength": "primary"
+    },
+    {
+     "meaning": "draft, essay, report, or written note",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "fill out paperwork or application",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Close to generic note-taking, compose, or edit icons that use a square box instead of a dog-eared page.",
+   "near_misses": [
+    {
+     "task": "Buy a pack of HB pencils and a sharpener for Ella's school bag",
+     "better": "pencil / stationery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Load more A4 printer paper into the bottom tray",
+     "better": "printer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update credit card billing address on Netflix",
+     "better": "credit card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Edit the color grading on the wedding highlight reel",
+     "better": "video / film",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book flights to Berlin for the writers' workshop",
+     "better": "airplane / flight",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Mail the signed tax return at the post office before 5pm",
+     "better": "envelope / mail",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bookmark_manager"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4057,
+    "output": 691,
+    "thoughts": 0,
+    "total": 4748
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:45Z"
+  }
+ },
+ "distinguishing": "Shows a vertical portrait page with a dog-eared top-right corner alongside the bottom-right pencil, representing writing, editing, or signing an individual document or form rather than a folder."
 }

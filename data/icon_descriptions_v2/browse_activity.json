@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "system monitoring, computer diagnostics, or performance metrics",
+   "meaning": "computer diagnostics, laptop health check, or system performance monitoring",
    "strength": "primary"
   },
   {
-   "meaning": "telemedicine, digital health portal, or vital signs monitor",
+   "meaning": "telemedicine portal, digital health software, or electronic medical records on a computer",
    "strength": "primary"
   },
   {
-   "meaning": "computer health check or laptop troubleshooting",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "data analytics dashboard or live activity tracker",
+   "meaning": "server uptime dashboard or live activity tracker on a workstation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as tech/server diagnostics (system health) or medical/health software (patient vitals on a screen), and at very small sizes resembles a generic laptop with a line chart.",
+ "ambiguity": "Easily confused at a glance with the standalone rectangular frame split by a pulse waveform, especially when a task mentions 'monitoring' or 'health check' without specifying whether it is a computer system or a medical ECG/vital signs readout.",
  "modifier_semantics": [
   {
    "modifier": "pulse or heartbeat waveform line across the screen",
@@ -161,13 +157,23 @@
  ],
  "near_misses": [
   {
+   "task": "Schedule annual ECG and cardiac stress test at the clinic",
+   "better": "rectangular frame split by a pulse waveform (ECG / heart rate monitor)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Calibrate the lab oscilloscope before the electronics lab",
+   "better": "rectangular frame split by a pulse waveform (oscilloscope / signal display)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new 14-inch MacBook Pro for work",
    "better": "plain laptop computer without pulse line",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Measure resting heart rate right after waking up",
-   "better": "heart with pulse line or stethoscope",
+   "better": "heart with pulse line or rectangular ECG monitor frame",
    "trap": "shared_vocabulary"
   },
   {
@@ -176,25 +182,20 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Check stock market volatility on the S&P 500",
-   "better": "candlestick or stock trend chart",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a medical-grade power strip for the home office",
    "better": "power strip or electrical plug",
    "trap": "property"
   },
   {
    "task": "Replace the cracked keyboard keycap on the Dell",
-   "better": "keyboard",
+   "better": "computer keyboard",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a laptop displaying a pulse/ECG waveform, making it a strong visual cue for system diagnostics, server/activity monitoring, and digital health portals. It is distinct from a plain laptop, though it straddles two domains (IT system health vs. medical telemetry) and could resemble a financial line chart on a screen at very small sizes.",
@@ -214,6 +215,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "system monitoring, computer diagnostics, or performance metrics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "telemedicine, digital health portal, or vital signs monitor",
+     "strength": "primary"
+    },
+    {
+     "meaning": "computer health check or laptop troubleshooting",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "data analytics dashboard or live activity tracker",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as tech/server diagnostics (system health) or medical/health software (patient vitals on a screen), and at very small sizes resembles a generic laptop with a line chart.",
+   "near_misses": [
+    {
+     "task": "Buy a new 14-inch MacBook Pro for work",
+     "better": "plain laptop computer without pulse line",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Measure resting heart rate right after waking up",
+     "better": "heart with pulse line or stethoscope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Monitor toddler's fever every four hours",
+     "better": "thermometer",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check stock market volatility on the S&P 500",
+     "better": "candlestick or stock trend chart",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a medical-grade power strip for the home office",
+     "better": "power strip or electrical plug",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the cracked keyboard keycap on the Dell",
+     "better": "keyboard",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "monitor_heart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4112,
+    "output": 1161,
+    "thoughts": 0,
+    "total": 5273
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Shows a full laptop computer (closed rectangular screen frame over a wide horizontal keyboard base) with the pulse waveform enclosed inside the screen, representing computer/laptop diagnostics or software-based monitoring rather than a standalone medical monitor or raw pulse readout."
 }

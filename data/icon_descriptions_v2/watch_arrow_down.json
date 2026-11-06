@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "smartwatch software update or download",
+   "meaning": "smartwatch software update, firmware install, or app download",
    "strength": "primary"
   },
   {
-   "meaning": "sync data or workouts from a fitness watch",
+   "meaning": "download offline music, maps, or workouts to a fitness watch",
    "strength": "primary"
   },
   {
-   "meaning": "smartwatch or fitness tracker",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "install watch face or watch app",
+   "meaning": "import health or activity data from a wearable device",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the arrow inside the round bezel can look like a compass needle or a generic download button with decorative tabs.",
+ "ambiguity": "Easy to confuse at a glance with the checkmark watch or rightward-arrow watch because all three share the exact same watch casing and strap silhouette.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow centered inside the dial",
@@ -160,8 +156,13 @@
  ],
  "near_misses": [
   {
-   "task": "Replace the cracked leather strap on my grandfather's Omega",
-   "better": "analog wristwatch without download arrow",
+   "task": "Confirm my Apple Watch is paired and hitting the daily move goal",
+   "better": "wristwatch with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Export last week's marathon splits from my watch to Strava",
+   "better": "wristwatch with rightward arrow",
    "trap": "lookalike_glyph"
   },
   {
@@ -183,17 +184,12 @@
    "task": "Order a nylon hook-and-loop band for summer runs",
    "better": "shopping or watch strap icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check the compass bearing for the campsite trailhead",
-   "better": "compass icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a round wristwatch or smartwatch with a downward arrow on its face, signifying downloading to or updating a wearable device. It fits a narrow but very real set of tasks around updating smartwatch firmware, loading offline maps/music/routes onto a GPS sports watch, or syncing fitness data. It is distinct from a normal watch or clock because there are no clock hands, only a bold download arrow.",
@@ -211,6 +207,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartwatch software update or download",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sync data or workouts from a fitness watch",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smartwatch or fitness tracker",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "install watch face or watch app",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the arrow inside the round bezel can look like a compass needle or a generic download button with decorative tabs.",
+   "near_misses": [
+    {
+     "task": "Replace the cracked leather strap on my grandfather's Omega",
+     "better": "analog wristwatch without download arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download the marathon training plan PDF to my laptop",
+     "better": "document download or laptop icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Watch the downloaded flight safety video before Friday",
+     "better": "video play icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a waterproof watch for lap swimming",
+     "better": "plain wristwatch or swimming icon",
+     "trap": "property"
+    },
+    {
+     "task": "Order a nylon hook-and-loop band for summer runs",
+     "better": "shopping or watch strap icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the compass bearing for the campsite trailhead",
+     "better": "compass icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "watch_check",
+   "watch_arrow"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5458,
+    "output": 1495,
+    "thoughts": 92,
+    "total": 7045
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:14Z"
+  }
+ },
+ "distinguishing": "Shows a downward-pointing arrow inside the watch dial instead of a checkmark or right-pointing arrow, specifically indicating downloading firmware, apps, or offline media onto a smartwatch."
 }

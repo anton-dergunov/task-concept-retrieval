@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "log out / sign out",
+   "meaning": "log out or sign out of an account",
    "strength": "primary"
   },
   {
-   "meaning": "export / extract data",
+   "meaning": "exit, leave, or check out",
    "strength": "primary"
   },
   {
-   "meaning": "exit / leave / check out",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "move out / offboard",
+   "meaning": "offboard or move out",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Often confused with 'log in', 'import', 'share', or 'external link' icons depending on the UI convention.",
+ "ambiguity": "Can be confused with the speech bubble with a right-pointing arrow if the bubble's tail is overlooked, or with the open-top tray with a bent arrow when used loosely for 'export'.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow exiting the rectangle",
@@ -160,40 +156,40 @@
  ],
  "near_misses": [
   {
-   "task": "Log in to the new HR portal and set up 2FA",
-   "better": "log in / arrow entering box",
+   "task": "Forward the client's Slack message to the engineering channel",
+   "better": "speech bubble with right-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Share the photo album link with the family group",
+   "better": "open-top tray with bent right-pointing arrow (share icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download the monthly bank statement PDF",
+   "better": "document with downward arrow over bar (file download icon)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Send the exported tax PDF to Maria",
-   "better": "email / paper plane",
+   "better": "email envelope or paper plane",
    "trap": "property"
   },
   {
    "task": "Buy exit signs for the basement stairwell",
-   "better": "shopping cart / sign",
+   "better": "shopping cart or running-person exit sign",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Share the project folder with the external agency",
-   "better": "share icon / folder",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check out that new ramen place on 5th Ave",
-   "better": "ramen bowl / restaurant",
+   "better": "ramen bowl or restaurant fork and knife",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Clean the oven and defrost the freezer",
-   "better": "oven / cleaning spray",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an arrow exiting a rectangular frame, universally recognized in interfaces as 'log out', 'sign out', 'export', or 'exit'. While it is originally a UI action glyph, it fits well for real-world and digital tasks centered on logging out of shared devices, exporting data archives, or checking out.",
@@ -211,6 +207,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "log out / sign out",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export / extract data",
+     "strength": "primary"
+    },
+    {
+     "meaning": "exit / leave / check out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "move out / offboard",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Often confused with 'log in', 'import', 'share', or 'external link' icons depending on the UI convention.",
+   "near_misses": [
+    {
+     "task": "Log in to the new HR portal and set up 2FA",
+     "better": "log in / arrow entering box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send the exported tax PDF to Maria",
+     "better": "email / paper plane",
+     "trap": "property"
+    },
+    {
+     "task": "Buy exit signs for the basement stairwell",
+     "better": "shopping cart / sign",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Share the project folder with the external agency",
+     "better": "share icon / folder",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check out that new ramen place on 5th Ave",
+     "better": "ramen bowl / restaurant",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the oven and defrost the freezer",
+     "better": "oven / cleaning spray",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_save",
+   "chat_paste_go_2",
+   "share_windows"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6704,
+    "output": 2099,
+    "thoughts": 165,
+    "total": 8968
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "Shows a vertical doorway-like rectangle closed on top, left, and bottom with a straight horizontal arrow exiting right through the middle of the right wall, the standard convention for logging out or exiting."
 }

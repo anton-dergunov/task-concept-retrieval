@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "video clip, story, reel, or short media playback",
+   "meaning": "multi-part story, reel, or segmented video chapters",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "motion photo, live clip, or animated preview",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "start or resume a timed session or routine",
+   "meaning": "general video or media playback",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a standard circular play button at small sizes when the three small gaps in the outer ring become hard to see.",
+ "ambiguity": "At small sizes the three tiny gaps in the ring are barely visible, making it virtually interchangeable with the solid circled play button and the half-dashed play button.",
  "modifier_semantics": [
   {
    "modifier": "three-segment outer ring",
@@ -161,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Watch the full feature-length documentary on Netflix",
+   "better": "plain solid circled play button",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the high-frame-rate slow-motion clip of the water droplet",
+   "better": "play button in a half-dashed circle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy tickets for the Friday 8pm screening at the Castro Theatre",
    "better": "ticket",
    "trap": "shared_vocabulary"
@@ -169,11 +175,6 @@
    "task": "Play board games with Sam and Priya on Thursday night",
    "better": "board game or dice",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Set kitchen timer for 45 minutes while the sourdough bakes",
-   "better": "timer or stopwatch",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Start the dishwasher before going to bed",
@@ -194,7 +195,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a play triangle inside a three-part segmented ring, immediately evoking video playback, multi-part video courses, or social media stories/reels. It fits common tasks around watching tutorials, editing short clips, or posting stories, though at small sizes it can blend in with a plain circular play button.",
@@ -212,6 +213,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video clip, story, reel, or short media playback",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video course progress, playlist, or multi-part lecture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "motion photo, live clip, or animated preview",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "start or resume a timed session or routine",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a standard circular play button at small sizes when the three small gaps in the outer ring become hard to see.",
+   "near_misses": [
+    {
+     "task": "Buy tickets for the Friday 8pm screening at the Castro Theatre",
+     "better": "ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Play board games with Sam and Priya on Thursday night",
+     "better": "board game or dice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set kitchen timer for 45 minutes while the sourdough bakes",
+     "better": "timer or stopwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Start the dishwasher before going to bed",
+     "better": "dishwasher",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the annual Vimeo Pro invoice on the company card",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a waterproof action camera for the kayaking trip",
+     "better": "camera",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "motion_play",
+   "play_circle",
+   "slow_motion_video"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6779,
+    "output": 1381,
+    "thoughts": 0,
+    "total": 8160
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "The outer circle is split into three equal curved segments by three small gaps (at 12, 4, and 8 o'clock), suggesting multi-part stories, chapters, or segmented media."
 }

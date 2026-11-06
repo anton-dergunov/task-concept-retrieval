@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "sadness, bad mood, unhappiness, or depression",
+   "meaning": "sadness, unhappiness, low mood, or depression",
    "strength": "primary"
   },
   {
@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "pain, discomfort, or feeling unwell",
+   "meaning": "disappointment, regret, or bad news",
    "strength": "secondary"
   },
   {
-   "meaning": "regret, disappointment, or bad news",
+   "meaning": "pain, discomfort, or feeling unwell",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with other negative-emotion faces (angry, worried, sick) or generic mood tracker icons at very small sizes, though the simple frown is very clear.",
+ "ambiguity": "Easily mistaken at small sizes for the open-mouthed frowning face (which shows acute shock, horror, or severe distress rather than a standard closed-mouth frown).",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -144,15 +144,21 @@
    "central": "desk lamp"
   },
   {
-   "task": "Refill sertraline prescription at the pharmacy before Friday",
-   "central": "pill bottle or medication"
-  },
-  {
    "task": "Read chapter 4 of Feeling Good before Tuesday's session",
    "central": "book"
   }
  ],
  "near_misses": [
+  {
+   "task": "Practice grounding exercises for panic attack and acute anxiety",
+   "better": "shocked or distressed face with open semicircular mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Review 1-star outraged customer escalations from outage",
+   "better": "shocked or distressed face with open semicircular mouth",
+   "trap": "lookalike_glyph"
+  },
   {
    "task": "Fix the sad-looking drooping monstera in the hallway",
    "better": "potted plant",
@@ -162,16 +168,6 @@
    "task": "Watch Inside Out 2 with the kids on Friday night",
    "better": "movie clapperboard or TV",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check if the support team resolved the open tickets",
-   "better": "support ticket or headset",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Replace the cracked bowling ball before league night",
-   "better": "bowling ball",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book a 50-minute video call with my therapist for next Thursday",
@@ -187,7 +183,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic frowning face emoticon. It is universally recognizable and fits tasks centered on mood tracking, mental health/sadness, customer complaints, and negative feedback, though concrete objects usually take priority over emotions in general to-do lists.",
@@ -205,6 +201,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sadness, bad mood, unhappiness, or depression",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dissatisfaction, complaint, or negative customer feedback",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pain, discomfort, or feeling unwell",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "regret, disappointment, or bad news",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with other negative-emotion faces (angry, worried, sick) or generic mood tracker icons at very small sizes, though the simple frown is very clear.",
+   "near_misses": [
+    {
+     "task": "Fix the sad-looking drooping monstera in the hallway",
+     "better": "potted plant",
+     "trap": "property"
+    },
+    {
+     "task": "Watch Inside Out 2 with the kids on Friday night",
+     "better": "movie clapperboard or TV",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the support team resolved the open tickets",
+     "better": "support ticket or headset",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace the cracked bowling ball before league night",
+     "better": "bowling ball",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a 50-minute video call with my therapist for next Thursday",
+     "better": "video call or calendar",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Return the disappointing blender to Target for a refund",
+     "better": "blender or return package",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mood_bad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 1112,
+    "thoughts": 0,
+    "total": 5185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "This face has a simple downward-curving stroke for a closed frowning mouth (classic sad face), rather than the solid filled semicircular open mouth of the shocked/distressed face."
 }

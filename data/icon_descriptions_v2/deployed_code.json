@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "3D object, model, or 3D printing",
+   "meaning": "3D object, 3D model, or 3D printing",
    "strength": "primary"
   },
   {
-   "meaning": "box, package, or parcel",
+   "meaning": "cube, block, or 3D geometry",
    "strength": "primary"
   },
   {
-   "meaning": "software package, module, or container",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cube or geometry",
+   "meaning": "software module, container, or abstract component",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as an abstract 3D model/software module or as a physical shipping box, though a shipping box usually has a tape seam line on the top face.",
+ "ambiguity": "Easily mistaken for the cardboard package box with a tape seam across the top face, especially at small sizes or in software contexts where both cubes and boxes represent packages.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Drop off the Amazon return parcel at the UPS store",
+   "better": "cardboard package box with top tape seam",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Tape up the remaining moving boxes in the garage",
+   "better": "cardboard package box with top tape seam",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a bag of ice cubes on the way to the barbecue",
    "better": "ice / snowflake",
    "trap": "shared_vocabulary"
@@ -170,25 +176,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a new brass nozzle and silicone sock from AliExpress",
+   "task": "Order a new brass nozzle and silicone sock for the Ender 3",
    "better": "nozzle / shopping cart",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Cancel the monthly meal kit box subscription before renewal",
-   "better": "food / subscription",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Review the holiday package options for Lisbon",
-   "better": "airplane / suitcase",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A clean isometric cube that universally represents 3D modeling/printing, software packages, or physical boxes/parcels. It fits many concrete tasks across tech, maker hobbies, shopping deliveries, and home packing, though a dedicated parcel icon with a tape seam is slightly more specific for shipping.",
@@ -206,6 +202,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "3D object, model, or 3D printing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "box, package, or parcel",
+     "strength": "primary"
+    },
+    {
+     "meaning": "software package, module, or container",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cube or geometry",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as an abstract 3D model/software module or as a physical shipping box, though a shipping box usually has a tape seam line on the top face.",
+   "near_misses": [
+    {
+     "task": "Buy a bag of ice cubes on the way to the barbecue",
+     "better": "ice / snowflake",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cut the butternut squash into 1-inch cubes for roasting",
+     "better": "squash / knife",
+     "trap": "property"
+    },
+    {
+     "task": "Reserve the corner glass cubicle for Tuesday's interviews",
+     "better": "office desk / meeting room",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a new brass nozzle and silicone sock from AliExpress",
+     "better": "nozzle / shopping cart",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Cancel the monthly meal kit box subscription before renewal",
+     "better": "food / subscription",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the holiday package options for Lisbon",
+     "better": "airplane / suitcase",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "package_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4071,
+    "output": 1062,
+    "thoughts": 89,
+    "total": 5222
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "Shows a plain isometric cube with three blank faces and no top seam line, representing a geometric cube, 3D model, or abstract block rather than a taped cardboard shipping box."
 }

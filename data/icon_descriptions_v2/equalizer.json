@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "bar chart or graph",
-   "strength": "primary"
-  },
-  {
-   "meaning": "statistics, analytics, or metrics",
+   "meaning": "bar chart / statistics / analytics",
    "strength": "primary"
   },
   {
    "meaning": "poll or survey results",
+   "strength": "primary"
+  },
+  {
+   "meaning": "leaderboard / podium ranking",
    "strength": "secondary"
   },
   {
-   "meaning": "leaderboard or podium ranking",
+   "meaning": "audio equalizer levels",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with an audio equalizer, volume bars, cellular signal bars (though those usually ascend left-to-right), or a Kanban board column icon.",
+ "ambiguity": "Interchangeable with the medium-tall-short three-bar icon (only the outer two bars swap heights) and with the other bar chart icons in the group.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -154,7 +154,17 @@
  ],
  "near_misses": [
   {
-   "task": "Buy 3 bars of 85% dark chocolate for theブラウニー recipe",
+   "task": "Call T-Mobile about having zero signal bars in the basement",
+   "better": "strictly ascending cellular signal bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add a horizontal baseline to the sales bar chart",
+   "better": "four-bar chart with a bottom horizontal baseline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy 3 bars of 85% dark chocolate for the brownie recipe",
    "better": "chocolate bar",
    "trap": "shared_vocabulary"
   },
@@ -162,11 +172,6 @@
    "task": "Book a table at the rooftop bar for Sarah's birthday drinks",
    "better": "cocktail glass",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Call T-Mobile about having zero signal bars in the basement",
-   "better": "cellular signal / phone",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Mount the steel pull-up bar in the garage doorway",
@@ -192,7 +197,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts three vertical bars of different heights, universally recognized as a bar chart, statistics, or analytics. It fits many common tasks across work, finance, tech, and education involving charts, metrics, and data analysis, though it shares visual similarity with audio equalizers and cellular signal bars.",
@@ -210,6 +215,104 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bar chart or graph",
+     "strength": "primary"
+    },
+    {
+     "meaning": "statistics, analytics, or metrics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "poll or survey results",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "leaderboard or podium ranking",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with an audio equalizer, volume bars, cellular signal bars (though those usually ascend left-to-right), or a Kanban board column icon.",
+   "near_misses": [
+    {
+     "task": "Buy 3 bars of 85% dark chocolate for theブラウニー recipe",
+     "better": "chocolate bar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a table at the rooftop bar for Sarah's birthday drinks",
+     "better": "cocktail glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call T-Mobile about having zero signal bars in the basement",
+     "better": "cellular signal / phone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Mount the steel pull-up bar in the garage doorway",
+     "better": "pull-up bar / gym equipment",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $450 annual state bar association dues",
+     "better": "scales of justice / payment",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email Legal to sign the data processing addendum",
+     "better": "contract / signature",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up a statistically significant sample of soil from the south bed",
+     "better": "soil / garden",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bar_chart_4_bars",
+   "grouped_bar_chart",
+   "bar_chart",
+   "signal_cellular_alt",
+   "android_cell_4_bar",
+   "android_cell_5_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10730,
+    "output": 3931,
+    "thoughts": 361,
+    "total": 15022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Shows three evenly spaced vertical bars without a baseline in a short-tall-medium order; a left-right mirror of the medium-tall-short three-bar icon and interchangeable with it in meaning."
 }

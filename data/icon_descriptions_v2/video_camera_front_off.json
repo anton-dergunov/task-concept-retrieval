@@ -26,7 +26,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the person silhouette inside the camera frame is partially obscured by the diagonal slash, making it look almost identical to a standard 'video off' icon without a person.",
+ "ambiguity": "Nearly identical at a glance to the slashed video camera containing a microphone, as the diagonal slash cuts straight through the inner silhouette in both icons.",
  "modifier_semantics": [
   {
    "modifier": "person silhouette inside frame",
@@ -165,8 +165,13 @@
  ],
  "near_misses": [
   {
-   "task": "Hop on a quick FaceTime with Mum after dinner",
-   "better": "video call / active video camera with person",
+   "task": "Revoke both camera and microphone permissions for the browser",
+   "better": "slashed video camera containing a microphone",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Enforce no-photography policy at the venue",
+   "better": "slashed photo camera",
    "trap": "lookalike_glyph"
   },
   {
@@ -186,19 +191,14 @@
   },
   {
    "task": "Check which coworkers still haven't RSVPed to the Zoom invite",
-   "better": "calendar invite / people",
+   "better": "calendar invite",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Delete the old screen recordings from the Downloads folder",
-   "better": "trash / video file",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a video camera containing a person silhouette with a diagonal slash through it, standardly read as 'camera off', 'disable webcam', or 'cancel video call'. While originally a UI state toggle, in a to-do list it fits tasks about cancelling video meetings, fixing a dead webcam, or locking down camera privacy settings. At small sizes the interior person silhouette blurs into the slash, making it look just like a plain slashed video camera.",
@@ -216,6 +216,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera off / video disabled on a video call",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel or decline a video call / online meeting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken, blocked, or disconnected webcam",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "webcam privacy / disable camera access",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the person silhouette inside the camera frame is partially obscured by the diagonal slash, making it look almost identical to a standard 'video off' icon without a person.",
+   "near_misses": [
+    {
+     "task": "Hop on a quick FaceTime with Mum after dinner",
+     "better": "video call / active video camera with person",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 1080p webcam with a built-in privacy shutter",
+     "better": "webcam / camera",
+     "trap": "property"
+    },
+    {
+     "task": "Mute microphone by default when joining large town halls",
+     "better": "slashed microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Test the new ring light angle before the client presentation",
+     "better": "ring light / lamp",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check which coworkers still haven't RSVPed to the Zoom invite",
+     "better": "calendar invite / people",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Delete the old screen recordings from the Downloads folder",
+     "better": "trash / video file",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_hand_off",
+   "file_copy_off",
+   "privacy",
+   "no_photography",
+   "preview_off",
+   "ad_group_off",
+   "ad_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12129,
+    "output": 3883,
+    "thoughts": 0,
+    "total": 16012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "A slashed camcorder with a triangular lens cone on the right and a person's head-and-shoulders silhouette inside the body, unlike the identical camcorder containing a microphone."
 }

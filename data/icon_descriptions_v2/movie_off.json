@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "cancel or disable movie/video streaming",
+   "meaning": "cancel or disable movie / video streaming",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the striped top bar of the clapperboard mixed with the diagonal slash can resemble a crossed-out calendar, folder, or mail envelope.",
+ "ambiguity": "At small sizes, the single crossed-out rectangle with a patterned top bar can be mistaken for the crossed-out browser windows or a crossed-out calendar page.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash from top-left to bottom-right",
@@ -162,14 +162,19 @@
  ],
  "near_misses": [
   {
-   "task": "Watch the director's cut of Blade Runner tonight",
-   "better": "plain film clapperboard or play button (without slash)",
-   "trap": "shared_vocabulary"
+   "task": "Turn on the browser pop-up blocker for untrusted sites",
+   "better": "crossed-out overlapping browser windows",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a wooden clapperboard prop for the studio shelf",
-   "better": "plain film clapperboard (without slash)",
+   "task": "Leave the heavy backpack at the museum coat check",
+   "better": "crossed-out backpack or bag",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Watch the director's cut of Blade Runner tonight",
+   "better": "plain film clapperboard or play button without slash",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Join the Zoom meeting with my camera turned off",
@@ -213,6 +218,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cancel or disable movie/video streaming",
+     "strength": "primary"
+    },
+    {
+     "meaning": "delete, cut, or omit video clip or scene",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel cinema tickets or film shoot",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "no filming or video recording allowed",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the striped top bar of the clapperboard mixed with the diagonal slash can resemble a crossed-out calendar, folder, or mail envelope.",
+   "near_misses": [
+    {
+     "task": "Watch the director's cut of Blade Runner tonight",
+     "better": "plain film clapperboard or play button (without slash)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a wooden clapperboard prop for the studio shelf",
+     "better": "plain film clapperboard (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Join the Zoom meeting with my camera turned off",
+     "better": "video camera or webcam with a slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy non-glare matte screen protector for editing monitor",
+     "better": "monitor or screen icon",
+     "trap": "property"
+    },
+    {
+     "task": "Order replacement lavalier mic windscreens",
+     "better": "microphone icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the video export failed at 90%",
+     "better": "warning or video file icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "no_backpack",
+   "select_window_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5463,
+    "output": 1286,
+    "thoughts": 0,
+    "total": 6749
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "It shows a single landscape rectangle topped with diagonal clapper stripes and a slash, representing cancelled movies, video editing cuts, or disabled video playback rather than browser windows or a bag."
 }

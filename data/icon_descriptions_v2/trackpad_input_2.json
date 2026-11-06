@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "trackpad / touchpad",
+   "meaning": "two-finger scroll or right-click trackpad gesture",
    "strength": "primary"
   },
   {
-   "meaning": "touchscreen / multi-touch gesture",
+   "meaning": "trackpad or touchpad",
    "strength": "primary"
   },
   {
-   "meaning": "tablet / interactive display",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "two-finger scroll or tap",
+   "meaning": "touchscreen or multi-touch display",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the two extended fingers can look like vertical bars or a chart next to a rectangle, or be confused with a single-finger click/tap icon.",
+ "ambiguity": "Easily confused at small sizes with the single-finger tap screen icon and the three-finger multi-touch pad icon.",
  "modifier_semantics": [
   {
    "modifier": "two-finger hand gesture",
@@ -160,9 +156,19 @@
  ],
  "near_misses": [
   {
+   "task": "Configure three-finger swipe for Mission Control on MacBook",
+   "better": "touchpad with three-finger hand gesture",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test single-tap button targets on the kiosk screen",
+   "better": "touchscreen with single pointing finger",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy wireless ergonomic mouse for office",
    "better": "computer mouse",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Order touchscreen winter gloves for running",
@@ -171,29 +177,19 @@
   },
   {
    "task": "Get in touch with Sarah about the lease renewal",
-   "better": "message / phone call",
+   "better": "message bubble or phone call",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Select 20 best photos from the Croatia trip for the album",
-   "better": "photos / image gallery",
+   "better": "photos or image gallery",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Replace cracked iPad screen at repair shop",
-   "better": "tablet / iPad",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy AA batteries for the wireless peripherals",
-   "better": "battery",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a two-finger multi-touch gesture on a rectangular pad or screen, which is the standard visual for a laptop trackpad/touchpad or touchscreen gesture settings. It fits a narrow but real family of tasks around configuring, fixing, cleaning, or buying trackpads and touch displays. It is distinct from single-finger tap icons because of the two raised fingers.",
@@ -211,6 +207,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "trackpad / touchpad",
+     "strength": "primary"
+    },
+    {
+     "meaning": "touchscreen / multi-touch gesture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tablet / interactive display",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "two-finger scroll or tap",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the two extended fingers can look like vertical bars or a chart next to a rectangle, or be confused with a single-finger click/tap icon.",
+   "near_misses": [
+    {
+     "task": "Buy wireless ergonomic mouse for office",
+     "better": "computer mouse",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order touchscreen winter gloves for running",
+     "better": "gloves",
+     "trap": "property"
+    },
+    {
+     "task": "Get in touch with Sarah about the lease renewal",
+     "better": "message / phone call",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Select 20 best photos from the Croatia trip for the album",
+     "better": "photos / image gallery",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace cracked iPad screen at repair shop",
+     "better": "tablet / iPad",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy AA batteries for the wireless peripherals",
+     "better": "battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "trackpad_input_3",
+   "trackpad_input"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5304,
+    "output": 1473,
+    "thoughts": 158,
+    "total": 6935
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "Two fingers (index and middle) are extended upward while the ring and pinky fingers remain curled down, distinguishing it as a two-finger scroll or secondary-click gesture compared to the three-finger and single-finger versions."
 }

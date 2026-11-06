@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "toolbox / hardware box",
+   "meaning": "toolbox / hardware box / repairs",
    "strength": "primary"
   },
   {
-   "meaning": "briefcase / work / business",
+   "meaning": "latched briefcase / work / business",
    "strength": "primary"
   },
   {
-   "meaning": "suitcase / luggage / travel bag",
+   "meaning": "tackle box / utility storage case",
    "strength": "secondary"
   },
   {
-   "meaning": "tackle box or storage case",
+   "meaning": "hard-shell suitcase / luggage",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable from a classic double-latch briefcase or a hard-shell suitcase at small sizes; the rounded top edges lean toward toolbox or tackle box, while the flat bottom and dual clasps are shared with briefcases.",
+ "ambiguity": "Can be mistaken for the unlatched soft bag or briefcase when scanning quickly for luggage or office icons.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,14 +154,19 @@
  ],
  "near_misses": [
   {
+   "task": "Pack the weekender duffel bag for the road trip",
+   "better": "soft travel bag / carry-on bag",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bring reusable canvas tote bags to the farmers market",
+   "better": "tote / shopping bag",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Install the JetBrains Toolbox app on the new MacBook",
    "better": "laptop or software installer icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check if the hotel room has a safe for the passport",
-   "better": "safe / lockbox icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Restock ibuprofen and bandages in the first aid kit",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "toolbox / hardware box",
+     "strength": "primary"
+    },
+    {
+     "meaning": "briefcase / work / business",
+     "strength": "primary"
+    },
+    {
+     "meaning": "suitcase / luggage / travel bag",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tackle box or storage case",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable from a classic double-latch briefcase or a hard-shell suitcase at small sizes; the rounded top edges lean toward toolbox or tackle box, while the flat bottom and dual clasps are shared with briefcases.",
+   "near_misses": [
+    {
+     "task": "Install the JetBrains Toolbox app on the new MacBook",
+     "better": "laptop or software installer icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the hotel room has a safe for the passport",
+     "better": "safe / lockbox icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Restock ibuprofen and bandages in the first aid kit",
+     "better": "first aid box with cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new cordless impact driver",
+     "better": "power drill icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up a suitcase-style portable record player for Nina",
+     "better": "turntable / record icon",
+     "trap": "property"
+    },
+    {
+     "task": "Work on the Q3 marketing budget spreadsheet",
+     "better": "spreadsheet / table icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "card_travel"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4104,
+    "output": 1046,
+    "thoughts": 99,
+    "total": 5249
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:39Z"
+  }
+ },
+ "distinguishing": "Has square bottom corners, a handle resting strictly on the top lid, and a middle seam with two vertical clasps, reading as a hard-sided latched toolbox, tackle box, or classic briefcase rather than a soft bag."
 }

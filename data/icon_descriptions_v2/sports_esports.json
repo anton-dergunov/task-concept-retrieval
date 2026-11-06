@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Completely interchangeable with the four-button video game controller for any gaming or controller task.",
  "modifier_semantics": [],
  "domains": [
   "hobbies",
@@ -171,7 +171,12 @@
   },
   {
    "task": "Practice calibrating the DJI drone controller in the park",
-   "better": "drone",
+   "better": "drone or RC transmitter with antennas",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Remap the four diamond face buttons on the PlayStation DualSense controller",
+   "better": "video game controller with four buttons in a diamond",
    "trap": "lookalike_glyph"
   },
   {
@@ -188,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognizable gamepad icon representing video game controllers, consoles, and gaming tasks. It fits hardware upkeep, buying or managing games, and leisure gaming sessions, though board games and sports 'games' belong to other icons.",
@@ -208,6 +213,90 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video game controller / gamepad",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video gaming / console games",
+     "strength": "primary"
+    },
+    {
+     "meaning": "play / leisure entertainment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Bring Catan and Ticket to Ride to board game night",
+     "better": "dice or board game pawn",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Get four tickets for Saturday's baseball game",
+     "better": "baseball or ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change CR2032 battery in the garage door remote control",
+     "better": "remote control or garage",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice calibrating the DJI drone controller in the park",
+     "better": "drone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Assemble the new ergonomic gaming chair for the study",
+     "better": "office chair",
+     "trap": "property"
+    },
+    {
+     "task": "Order a quieter mechanical keyboard and mousepad",
+     "better": "keyboard",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "stadia_controller"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4003,
+    "output": 1088,
+    "thoughts": 0,
+    "total": 5091
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Shows two round action buttons arranged diagonally and sharp-cornered D-pad arms, though in meaning it is completely interchangeable with the four-button gamepad."
 }

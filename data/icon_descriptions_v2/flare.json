@@ -7,15 +7,15 @@
  },
  "readings": [
   {
+   "meaning": "brightness, high brightness, or screen exposure",
+   "strength": "primary"
+  },
+  {
    "meaning": "sun, sunlight, or sunny weather",
    "strength": "primary"
   },
   {
-   "meaning": "brightness, light level, or screen exposure",
-   "strength": "primary"
-  },
-  {
-   "meaning": "daytime, morning, or summer",
+   "meaning": "daytime, morning routine, or summer",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Long cardinal rays make it slightly resemble a target crosshair or a gear at tiny sizes, and it is nearly identical to other sun/brightness glyphs in the set.",
+ "ambiguity": "Interchangeable with the hollow-ring sun icons for general sun, weather, and daytime tasks; at tiny sizes its long cardinal rays also slightly resemble a target crosshair.",
  "modifier_semantics": [],
  "domains": [
   "outdoors",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Dim the nursery monitor screen to low brightness before bedtime",
+   "better": "hollow sun with short stubby rays (low brightness)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Lubricate the rear derailleur gear on the commuter bike",
+   "better": "gear / cogwheel icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the Sunday paper delivery invoice",
    "better": "newspaper or bill/receipt icon",
    "trap": "shared_vocabulary"
@@ -172,10 +182,10 @@
   {
    "task": "Replace burnt-out E27 bulb in the hallway ceiling fixture",
    "better": "lightbulb icon",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
-   "task": "Book flights to Málaga for the July holiday",
+   "task": "Book flights to Málaga for the July summer holiday",
    "better": "airplane icon",
    "trap": "parent_topic"
   },
@@ -183,11 +193,6 @@
    "task": "Paint the kids' playroom a bright yellow",
    "better": "paint roller or palette icon",
    "trap": "property"
-  },
-  {
-   "task": "Lubricate the rear derailleur gear on the commuter bike",
-   "better": "gear / cog or bicycle icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -211,6 +216,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sun, sunlight, or sunny weather",
+     "strength": "primary"
+    },
+    {
+     "meaning": "brightness, light level, or screen exposure",
+     "strength": "primary"
+    },
+    {
+     "meaning": "daytime, morning, or summer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "light theme or day mode in user interfaces",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Long cardinal rays make it slightly resemble a target crosshair or a gear at tiny sizes, and it is nearly identical to other sun/brightness glyphs in the set.",
+   "near_misses": [
+    {
+     "task": "Pay the Sunday paper delivery invoice",
+     "better": "newspaper or bill/receipt icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a light waterproof shell jacket for trail running",
+     "better": "jacket / coat icon",
+     "trap": "property"
+    },
+    {
+     "task": "Replace burnt-out E27 bulb in the hallway ceiling fixture",
+     "better": "lightbulb icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights to Málaga for the July holiday",
+     "better": "airplane icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Paint the kids' playroom a bright yellow",
+     "better": "paint roller or palette icon",
+     "trap": "property"
+    },
+    {
+     "task": "Lubricate the rear derailleur gear on the commuter bike",
+     "better": "gear / cog or bicycle icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sunny",
+   "light_mode",
+   "wb_sunny"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6663,
+    "output": 2133,
+    "thoughts": 242,
+    "total": 9038
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Has a solid filled central dot and alternating long cardinal rays and short diagonal rays, unlike the three hollow-ring sun icons with uniform rays; in meaning it is largely interchangeable with them for sun, daytime, or brightness tasks, though it leans slightly toward maximum screen brightness or intense glare."
 }

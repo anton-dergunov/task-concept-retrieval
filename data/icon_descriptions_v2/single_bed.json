@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "bed, mattress, or bedroom furniture",
+   "meaning": "bed, double bed, mattress, bedroom furniture",
    "strength": "primary"
   },
   {
-   "meaning": "hotel room, lodging, or overnight stay",
+   "meaning": "loveseat, compact two-seater sofa, living room couch",
    "strength": "primary"
   },
   {
-   "meaning": "sofa, loveseat, or living room couch",
+   "meaning": "hotel room, lodging, overnight stay",
    "strength": "secondary"
   },
   {
-   "meaning": "sleep or rest",
+   "meaning": "sleep, rest",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as either a front-facing bed with two pillows on a headboard or a small two-cushion sofa/loveseat; at very small sizes the silhouette slightly resembles the front of a car.",
+ "ambiguity": "Almost indistinguishable from the wider two-pillow bed/sofa icon except by side-by-side comparison of width, and equally ambiguous between a front-facing bed with headboard pillows and a small two-cushion sofa; at tiny sizes it can also resemble the front of a car.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,40 +154,45 @@
  ],
  "near_misses": [
   {
+   "task": "Order a king-size mattress topper and wide headboard",
+   "better": "wider king/double bed icon with rectangular pillows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wash the car windshield and headlights before the road trip",
+   "better": "car icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Rent a flatbed truck from U-Haul to move the lumber",
-   "better": "truck",
+   "better": "truck icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Clear dead leaves out of the raised garden bed",
-   "better": "plant or sprout",
+   "better": "plant or sprout icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Wash the car windshield and headlights before the road trip",
-   "better": "car",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a quiet bedside alarm clock with a physical snooze button",
-   "better": "alarm clock",
+   "better": "alarm clock icon",
    "trap": "property"
   },
   {
    "task": "Check credit card statement for the Marriott refund",
-   "better": "credit card or receipt",
+   "better": "credit card or receipt icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Paint the baseboards satin white",
-   "better": "paint roller or brush",
+   "task": "Paint the bedroom baseboards satin white",
+   "better": "paint roller or brush icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a front-facing double bed with two pillows (or a small two-seater sofa). It fits many common household tasks around bedding, mattresses, furniture shopping, sleep routines, and booking hotel accommodations, though its front-view silhouette can occasionally blur the line between a bed and a loveseat.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bed, mattress, or bedroom furniture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hotel room, lodging, or overnight stay",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sofa, loveseat, or living room couch",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sleep or rest",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as either a front-facing bed with two pillows on a headboard or a small two-cushion sofa/loveseat; at very small sizes the silhouette slightly resembles the front of a car.",
+   "near_misses": [
+    {
+     "task": "Rent a flatbed truck from U-Haul to move the lumber",
+     "better": "truck",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clear dead leaves out of the raised garden bed",
+     "better": "plant or sprout",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wash the car windshield and headlights before the road trip",
+     "better": "car",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a quiet bedside alarm clock with a physical snooze button",
+     "better": "alarm clock",
+     "trap": "property"
+    },
+    {
+     "task": "Check credit card statement for the Marriott refund",
+     "better": "credit card or receipt",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Paint the baseboards satin white",
+     "better": "paint roller or brush",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "king_bed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4078,
+    "output": 1190,
+    "thoughts": 271,
+    "total": 5539
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "More compact, narrower horizontal frame with two square pillow/cushion cutouts rather than wide rectangles, reading slightly more like a loveseat or compact double bed, though practically interchangeable with the wider version at list size."
 }

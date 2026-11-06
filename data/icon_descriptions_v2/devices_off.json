@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the smartphone with its camera dot can look like a door with a peephole or a small speaker tower next to a monitor.",
+ "ambiguity": "At small sizes, the rectangular screen and phone outlines cut by the slash can resemble the nested square outlines of the slashed NFC icon, or look like a monitor next to a small speaker tower.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -176,6 +176,16 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off NFC contactless payments on Android phone while traveling",
+   "better": "slashed concentric squares NFC icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Disable tap-to-pay on debit card in banking app",
+   "better": "slashed concentric squares NFC icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new USB-C cable to connect phone to laptop",
    "better": "USB cable",
    "trap": "shared_vocabulary"
@@ -191,16 +201,6 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Repair cracked iPhone screen at the mall",
-   "better": "smartphone",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a wooden kitchen cookbook stand",
-   "better": "book stand",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Cancel monthly mobile data plan with carrier",
    "better": "SIM card or bill",
    "trap": "shared_vocabulary"
@@ -209,7 +209,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a laptop and a smartphone crossed out by a diagonal slash, representing either unlinking/disconnecting devices or taking a screen-free digital detox. While somewhat niche, it fits both technical device-management tasks and lifestyle screen-time reduction tasks well, though at very small sizes the geometry is slightly busy.",
@@ -229,6 +229,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "phonelink_off"
- }
+  "alias_of": "phonelink_off",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "digital detox, no screens, or screen-free time",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disconnect or unlink phone and computer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "offline mode or devices disabled",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cross-device sync turned off",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the smartphone with its camera dot can look like a door with a peephole or a small speaker tower next to a monitor.",
+   "near_misses": [
+    {
+     "task": "Buy a new USB-C cable to connect phone to laptop",
+     "better": "USB cable",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download offline maps for the Patagonia trek",
+     "better": "map",
+     "trap": "property"
+    },
+    {
+     "task": "Check laptop battery health before the flight",
+     "better": "laptop or battery",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Repair cracked iPhone screen at the mall",
+     "better": "smartphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a wooden kitchen cookbook stand",
+     "better": "book stand",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Cancel monthly mobile data plan with carrier",
+     "better": "SIM card or bill",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nfc_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4066,
+    "output": 1063,
+    "thoughts": 165,
+    "total": 5294
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "Shows two separate devices—a computer screen with a flat base bar on the left and a vertical smartphone with a camera dot on the right—struck through with a slash, rather than concentric nested squares."
 }

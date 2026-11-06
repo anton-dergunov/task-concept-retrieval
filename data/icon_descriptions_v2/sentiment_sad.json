@@ -11,19 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "stress, anxiety, or emotional burnout",
+   "meaning": "dissatisfaction, complaint, or negative feedback rating",
    "strength": "primary"
   },
   {
-   "meaning": "dissatisfaction, complaint, or negative feedback",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "grief, bereavement, or sympathy",
+   "meaning": "grief, disappointment, or unhappiness",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles generic sad or crying emoticons, so it blurs the line between clinical mood tracking, personal grief, and customer dissatisfaction.",
+ "ambiguity": "Can be confused at a glance with the two open-mouthed distressed/tired faces because all three share the same circular head and slanted closed eyes.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -153,40 +149,40 @@
  ],
  "near_misses": [
   {
-   "task": "Watch Inside Out 2 with the kids on Friday night",
-   "better": "movie clapperboard or TV",
-   "trap": "shared_vocabulary"
+   "task": "Record daytime sleepiness and yawning episodes for sleep study",
+   "better": "tired face with an open oval mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Practice soothing techniques for toddler's crying tantrums",
+   "better": "wailing face with an open kidney-shaped mouth",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Fix the sad-looking monstera plant in the hallway",
-   "better": "potted plant",
+   "better": "potted plant icon",
    "trap": "property"
   },
   {
    "task": "Pay the $180 invoice for Tuesday's therapy session",
-   "better": "credit card or money",
+   "better": "credit card or money icon",
    "trap": "parent_topic"
   },
   {
-   "task": "Add custom emoji reactions to the team Slack workspace",
-   "better": "smiley face or chat bubble",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check whether the refund for the bad hotel stay cleared",
-   "better": "bank or receipt",
+   "better": "bank or receipt icon",
    "trap": "generic_verb"
   },
   {
    "task": "Read The Anatomy of Melancholy for book club",
-   "better": "book",
+   "better": "book icon",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a distressed, sad, or frowning face with downcast eyes. It fits tasks centered on mental health, mood and depression tracking, grief support, or handling dissatisfied customer complaints, though it can overlap with other sad or crying face icons.",
@@ -204,6 +200,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sadness, depression, or low mood",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stress, anxiety, or emotional burnout",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dissatisfaction, complaint, or negative feedback",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "grief, bereavement, or sympathy",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles generic sad or crying emoticons, so it blurs the line between clinical mood tracking, personal grief, and customer dissatisfaction.",
+   "near_misses": [
+    {
+     "task": "Watch Inside Out 2 with the kids on Friday night",
+     "better": "movie clapperboard or TV",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the sad-looking monstera plant in the hallway",
+     "better": "potted plant",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $180 invoice for Tuesday's therapy session",
+     "better": "credit card or money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Add custom emoji reactions to the team Slack workspace",
+     "better": "smiley face or chat bubble",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check whether the refund for the bad hotel stay cleared",
+     "better": "bank or receipt",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Read The Anatomy of Melancholy for book club",
+     "better": "book",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_worried",
+   "sentiment_frustrated"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5404,
+    "output": 1500,
+    "thoughts": 108,
+    "total": 7012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Has a closed, single-stroke deep downward-arc frown instead of a hollow open mouth, making it read clearly as sadness, low mood, or a negative rating rather than yawning or wailing."
 }

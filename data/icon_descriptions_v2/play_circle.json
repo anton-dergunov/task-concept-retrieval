@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "play button / media playback",
+   "meaning": "play button / general video or media playback",
    "strength": "primary"
   },
   {
-   "meaning": "video, tutorial, or recorded lecture",
+   "meaning": "watch a video, tutorial, or recorded lecture",
    "strength": "primary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "audio or podcast episode",
+   "meaning": "listen to an audio track or podcast episode",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a right-arrow navigation button or an expand/collapse disclosure triangle in a list.",
+ "ambiguity": "Easily confused at list size with the other three circled play buttons (with a dot, three segments, or a half-dashed ring), which only differ by small breaks in the outer ring.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Resume the half-finished training module from where I left off",
+   "better": "play button with a progress dot on the ring",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Watch the slow-motion replay of the sprint finish",
+   "better": "play button in a half-dashed circle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy tickets for the school play on Friday",
    "better": "theater masks or ticket",
    "trap": "shared_vocabulary"
@@ -178,17 +188,12 @@
    "task": "Buy a new HDMI cable for the Blu-ray player",
    "better": "cable / plug",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Forward the meeting invite to the design team",
-   "better": "share / forward arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The circled right-pointing triangle is universally recognized as the media play button. It is a strong, glanceable icon for tasks centered on watching videos, tutorials, lectures, or recordings, though it must be kept distinct from theatrical 'plays', playing music/games, or generic 'start' actions.",
@@ -206,6 +211,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "play button / media playback",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video, tutorial, or recorded lecture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "start, run, or execute a process",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audio or podcast episode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a right-arrow navigation button or an expand/collapse disclosure triangle in a list.",
+   "near_misses": [
+    {
+     "task": "Buy tickets for the school play on Friday",
+     "better": "theater masks or ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule a playdate with Noah's mom at the park",
+     "better": "children or playground",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice playing the C# minor prelude without looking at the sheet",
+     "better": "piano or musical note",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Start the sourdough starter feeding schedule",
+     "better": "bread or jar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new HDMI cable for the Blu-ray player",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Forward the meeting invite to the design team",
+     "better": "share / forward arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "motion_play",
+   "sound_sampler",
+   "slow_motion_video"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6779,
+    "output": 1381,
+    "thoughts": 0,
+    "total": 8160
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "The outer circle is a continuous, unbroken solid ring with no dots, gaps, or dashes, making it the standard universal play button."
 }

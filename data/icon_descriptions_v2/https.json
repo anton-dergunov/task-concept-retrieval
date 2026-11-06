@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "padlock / physical lock",
+   "meaning": "padlock / physical lock / lock up",
    "strength": "primary"
   },
   {
-   "meaning": "password / account security / authentication",
+   "meaning": "security / encryption / password protection",
    "strength": "primary"
   },
   {
-   "meaning": "privacy / permissions / access control",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "lock up / secure property",
+   "meaning": "freeze credit or lock settings",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, could slightly resemble a shopping bag or handbag with a handle, though the arched shackle and center dot strongly read as a padlock.",
+ "ambiguity": "Easily confused at small sizes with the open padlock that has only a tiny gap under the left shackle leg.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -171,40 +167,45 @@
  ],
  "near_misses": [
   {
+   "task": "Unfreeze TransUnion credit report before car loan check",
+   "better": "open padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reset personal account privacy settings on Instagram",
+   "better": "padlock with person badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set scheduled auto-lock on the smart front deadbolt",
+   "better": "padlock with clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Make a spare copy of the house key at the hardware store",
    "better": "key",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Lock in mortgage interest rate with the lender before Friday",
-   "better": "percentage / house / bank",
+   "better": "percentage or bank",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a waterproof lockable document box for birth certificates",
-   "better": "safe / file box",
+   "better": "safe or file box",
    "trap": "property"
   },
   {
-   "task": "Pack leather tote bag for the weekend trip",
-   "better": "handbag / luggage",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the annual renewal invoice for 1Password family plan",
-   "better": "receipt / credit card",
+   "better": "receipt or credit card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Fix caps lock key sticking on the mechanical keyboard",
-   "better": "keyboard",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A classic closed padlock outline with a central dot keyhole. Universally recognized for both physical locks (padlocks, deadbolts, locking up a house/shed) and digital security (passwords, 2FA, privacy, credit freezes). Wait out for physical keys (which have their own key icon) and metaphorical uses like 'lock in a rate'.",
@@ -224,6 +225,98 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "lock"
- }
+  "alias_of": "lock",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "padlock / physical lock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "password / account security / authentication",
+     "strength": "primary"
+    },
+    {
+     "meaning": "privacy / permissions / access control",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "lock up / secure property",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, could slightly resemble a shopping bag or handbag with a handle, though the arched shackle and center dot strongly read as a padlock.",
+   "near_misses": [
+    {
+     "task": "Make a spare copy of the house key at the hardware store",
+     "better": "key",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Lock in mortgage interest rate with the lender before Friday",
+     "better": "percentage / house / bank",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a waterproof lockable document box for birth certificates",
+     "better": "safe / file box",
+     "trap": "property"
+    },
+    {
+     "task": "Pack leather tote bag for the weekend trip",
+     "better": "handbag / luggage",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the annual renewal invoice for 1Password family plan",
+     "better": "receipt / credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix caps lock key sticking on the mechanical keyboard",
+     "better": "keyboard",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "lock_open_right",
+   "water_lock",
+   "lock_open",
+   "lock_person",
+   "lock_clock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9438,
+    "output": 1901,
+    "thoughts": 210,
+    "total": 11549
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "The only plain closed padlock with a central keyhole and no corner badge, representing a standard physical lock or general locking and security."
 }

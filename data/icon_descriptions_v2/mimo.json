@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "computer monitor / desktop display",
+   "meaning": "computer monitor or desktop display",
    "strength": "primary"
   },
   {
-   "meaning": "television / TV screen",
+   "meaning": "television or TV set",
    "strength": "primary"
   },
   {
-   "meaning": "desktop computer / PC",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "watch video / screen time",
+   "meaning": "desktop computer or PC",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be interpreted as either a desktop computer monitor or a flat-screen television on a stand; at very small sizes, the wide base might slightly resemble a laptop hinge.",
+ "ambiguity": "Nearly interchangeable with the T-stand monitors and the thick-chin desktop monitor; at very small sizes, the wide low base can also approach the silhouette of the open laptops.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -156,28 +152,28 @@
  ],
  "near_misses": [
   {
+   "task": "Pack laptop and charger in backpack for Berlin flight",
+   "better": "laptop computer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wipe and factory-reset the old iMac before selling it",
+   "better": "all-in-one desktop computer with thick chin bezel",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Monitor heart rate during threshold runs this week",
-   "better": "heart rate / pulse icon",
+   "better": "heart rate or pulse icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Set up baby monitor in the nursery before guests arrive",
-   "better": "baby / camera / audio monitor icon",
+   "better": "baby or nursery camera icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace cracked glass screen on iPhone 13",
-   "better": "smartphone icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pack laptop and charger in backpack for Berlin flight",
-   "better": "laptop icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Download screen-free bedtime audiobooks for the kids",
-   "better": "headphones / audiobook icon",
+   "better": "headphones or audiobook icon",
    "trap": "property"
   },
   {
@@ -189,7 +185,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a classic flat-panel display or monitor on a stand. It is a very common, concrete subject for tech, home office, and entertainment hardware tasks, though it shares visual ground with generic TV and desktop PC icons.",
@@ -207,6 +203,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "monitor"
- }
+  "alias_of": "monitor",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "computer monitor / desktop display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "television / TV screen",
+     "strength": "primary"
+    },
+    {
+     "meaning": "desktop computer / PC",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "watch video / screen time",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be interpreted as either a desktop computer monitor or a flat-screen television on a stand; at very small sizes, the wide base might slightly resemble a laptop hinge.",
+   "near_misses": [
+    {
+     "task": "Monitor heart rate during threshold runs this week",
+     "better": "heart rate / pulse icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up baby monitor in the nursery before guests arrive",
+     "better": "baby / camera / audio monitor icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace cracked glass screen on iPhone 13",
+     "better": "smartphone icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack laptop and charger in backpack for Berlin flight",
+     "better": "laptop icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download screen-free bedtime audiobooks for the kids",
+     "better": "headphones / audiobook icon",
+     "trap": "property"
+    },
+    {
+     "task": "Buy ergonomic mechanical keyboard with brown switches",
+     "better": "keyboard icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "jamboard_kiosk",
+   "desktop_windows",
+   "desktop_mac",
+   "laptop_mac",
+   "laptop_windows",
+   "laptop_chromebook"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10537,
+    "output": 3307,
+    "thoughts": 0,
+    "total": 13844
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "Features a neckless, chunky trapezoidal base directly beneath a uniform thin-bezel screen, making it slightly more TV-like or compact than the T-stand monitors, though largely interchangeable with them."
 }

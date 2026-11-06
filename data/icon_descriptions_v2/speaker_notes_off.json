@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "disable comments or mute chat",
+   "meaning": "hide speaker notes or disable presentation annotations",
    "strength": "primary"
   },
   {
-   "meaning": "hide speaker notes or annotations",
+   "meaning": "disable bulleted comments or mute chat",
    "strength": "primary"
   },
   {
    "meaning": "turn off message notifications",
    "strength": "secondary"
-  },
-  {
-   "meaning": "no feedback or unlistened messages",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the internal dots and lines can blur together with the slash, making it look like a generic crossed-out document, credit card, or subtitles-off icon.",
+ "ambiguity": "Easily confused with the slashed speech bubble with three plain text lines (comments off) or the slashed rectangular screens with text bars (subtitles off) when viewed at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash from top-left to bottom-right",
@@ -181,23 +177,23 @@
  ],
  "near_misses": [
   {
-   "task": "Reply to Sarah's comment on the Google Doc",
-   "better": "speech bubble with lines (without slash)",
+   "task": "Disable comments on the YouTube product launch video",
+   "better": "slashed speech bubble with three horizontal text lines and bottom-right tail",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Turn off closed captions on the TV in the guest room",
-   "better": "subtitles/CC off icon",
+   "task": "Turn off closed captions on the guest room TV",
+   "better": "slashed rectangular screen with bottom text bars (subtitles off)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Cancel the outdated debit card from my old bank",
-   "better": "credit card with slash",
+   "better": "slashed credit card with solid horizontal magnetic stripe",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Write speaker notes for the Q3 roadmap presentation",
-   "better": "presentation slide or notes icon",
+   "better": "presentation slide or speaker notes bubble without a slash",
    "trap": "shared_vocabulary"
   },
   {
@@ -207,13 +203,8 @@
   },
   {
    "task": "Review the PR and leave feedback on the new API endpoints",
-   "better": "code review or comment bubble",
+   "better": "code review or unslashed comment bubble",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Draft the community moderation guidelines PDF",
-   "better": "document or shield",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -239,6 +230,103 @@
    "example_tasks: 20 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "disable comments or mute chat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hide speaker notes or annotations",
+     "strength": "primary"
+    },
+    {
+     "meaning": "turn off message notifications",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "no feedback or unlistened messages",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the internal dots and lines can blur together with the slash, making it look like a generic crossed-out document, credit card, or subtitles-off icon.",
+   "near_misses": [
+    {
+     "task": "Reply to Sarah's comment on the Google Doc",
+     "better": "speech bubble with lines (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn off closed captions on the TV in the guest room",
+     "better": "subtitles/CC off icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel the outdated debit card from my old bank",
+     "better": "credit card with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write speaker notes for the Q3 roadmap presentation",
+     "better": "presentation slide or notes icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a silent mechanical keyboard for the shared office",
+     "better": "keyboard",
+     "trap": "property"
+    },
+    {
+     "task": "Review the PR and leave feedback on the new API endpoints",
+     "better": "code review or comment bubble",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Draft the community moderation guidelines PDF",
+     "better": "document or shield",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "credit_card_off",
+   "stack_off",
+   "subtitles_off",
+   "text_ad_off",
+   "comments_disabled"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9498,
+    "output": 3020,
+    "thoughts": 0,
+    "total": 12518
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Unlike the other icons, this speech bubble has a pointed tail on the bottom-left and contains two bullet dots on the left paired with two horizontal lines on the right, specifically representing speaker notes rather than general comments or subtitles."
 }

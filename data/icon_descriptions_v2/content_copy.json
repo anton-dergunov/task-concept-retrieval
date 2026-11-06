@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "multiple pages or documents",
+   "meaning": "multiple pages, cards, or slides",
    "strength": "primary"
   },
   {
-   "meaning": "photocopy or xerox",
+   "meaning": "switch mobile app tabs or browser windows",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be seen as UI chrome for 'copy to clipboard' or 'switch browser tabs' rather than physical paper copies or document duplication.",
+ "ambiguity": "Nearly interchangeable with the overlapping outlined squares (differing only in portrait vs. square aspect ratio), and easily confused with the folded-corner document stack when used for paperwork.",
  "modifier_semantics": [
   {
    "modifier": "second offset rectangle outline behind the main rectangle",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Print two copies of the boarding pass",
+   "better": "stacked documents with folded corner or printer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Flatten the background layers in the Photoshop file",
+   "better": "overlapping solid and outlined squares (layer order icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Make a spare copy of the front door key at the hardware store",
    "better": "key",
    "trap": "shared_vocabulary"
@@ -177,16 +187,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Replace the cracked screen protector on my iPad",
-   "better": "tablet",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Send the signed PDF to the accountant",
-   "better": "send / email or PDF document",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Pick up black toner cartridge from Office Depot",
    "better": "printer or toner cartridge",
    "trap": "parent_topic"
@@ -195,7 +195,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts two overlapping vertical rectangles, universally recognized in interfaces as 'copy', 'duplicate', or 'multiple pages'. While it originates as UI chrome for clipboard copy, it fits real-world tasks centered on photocopying documents, duplicating templates, or preparing multi-page packets, though it can be confused with a generic blank document or tablet icon.",
@@ -213,6 +213,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "copy or duplicate",
+     "strength": "primary"
+    },
+    {
+     "meaning": "multiple pages or documents",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photocopy or xerox",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "templates or batch items",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be seen as UI chrome for 'copy to clipboard' or 'switch browser tabs' rather than physical paper copies or document duplication.",
+   "near_misses": [
+    {
+     "task": "Make a spare copy of the front door key at the hardware store",
+     "better": "key",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write website hero copy for the summer product launch",
+     "better": "text document or pen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a secondhand copy of Dune in hardcover",
+     "better": "book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the cracked screen protector on my iPad",
+     "better": "tablet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send the signed PDF to the accountant",
+     "better": "send / email or PDF document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up black toner cartridge from Office Depot",
+     "better": "printer or toner cartridge",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shadow",
+   "filter_none",
+   "file_copy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6644,
+    "output": 1988,
+    "thoughts": 0,
+    "total": 8632
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "This icon shows a tall portrait rectangle in front of a detached L-shaped corner, making it virtually interchangeable with the square version for generic 'copy/duplicate' tasks, though its vertical proportions lean slightly more toward pages or cards."
 }

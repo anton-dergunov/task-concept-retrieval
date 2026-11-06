@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "multi-line chart / comparison graph / analytics",
+   "meaning": "multi-line chart / diverging comparison graph / analytics",
    "strength": "primary"
   },
   {
-   "meaning": "stock market / financial trends",
+   "meaning": "stock market / financial trends / data comparison",
    "strength": "primary"
   },
   {
-   "meaning": "approximate / tilde / water waves",
+   "meaning": "approximate math symbol / water waves",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the two angular lines can be mistaken for the 'approximately equal' math symbol (≈), water waves, or the Aquarius zodiac glyph.",
+ "ambiguity": "Virtually interchangeable with the two parallel rising zigzag trend lines for any multi-series chart or analytics task; at small sizes, its flatter horizontal posture also looks like the 'approximately equal' symbol (≈), water waves, or the Aquarius glyph.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -150,8 +150,13 @@
  ],
  "near_misses": [
   {
+   "task": "Plot two parallel upward trend channels on the trading chart",
+   "better": "two parallel rising zigzag lines",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check tide times for Saturday's beach trip",
-   "better": "water waves / ocean",
+   "better": "curved water waves / ocean",
    "trap": "lookalike_glyph"
   },
   {
@@ -183,7 +188,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts two stacked, jagged polylines representing a multi-line chart or trend comparison. It fits tasks involving data visualization, analytics, and tracking metrics or finances over time, though without axes it can resemble waves or an 'approximately equal' symbol at small sizes.",
@@ -201,6 +206,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multi-line chart / comparison graph / analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stock market / financial trends",
+     "strength": "primary"
+    },
+    {
+     "meaning": "approximate / tilde / water waves",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the two angular lines can be mistaken for the 'approximately equal' math symbol (≈), water waves, or the Aquarius zodiac glyph.",
+   "near_misses": [
+    {
+     "task": "Check tide times for Saturday's beach trip",
+     "better": "water waves / ocean",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book cardiac stress test and ECG at the clinic",
+     "better": "heart / pulse monitor",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the variable-rate water bill before Tuesday",
+     "better": "bill / invoice / water drop",
+     "trap": "property"
+    },
+    {
+     "task": "Track FedEx package from B&H Photo",
+     "better": "package / box",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy chicken stock and mirepoix for Sunday soup",
+     "better": "soup pot / carton",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email Sarah the NDA for the analytics contractor",
+     "better": "contract / email",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "stacked_line_chart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4081,
+    "output": 824,
+    "thoughts": 0,
+    "total": 4905
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Unlike the two strictly parallel rising zigzags, these two jagged lines diverge toward the right (the top line rises while the bottom line dips and levels off) and have vertically sheared ends, though both icons are largely interchangeable as multi-line trend charts."
 }

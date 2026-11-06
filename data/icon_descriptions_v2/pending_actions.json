@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "timesheet, time log, or work hours report",
+   "meaning": "activity log, inspection record, or time log",
    "strength": "primary"
   },
   {
-   "meaning": "clipboard history or recent copies",
+   "meaning": "clipboard history or recently copied items",
    "strength": "primary"
   },
   {
-   "meaning": "scheduled task, shift roster, or pending order",
+   "meaning": "scheduled task, pending order, or waiting list",
    "strength": "secondary"
   },
   {
-   "meaning": "inspection log or periodic checkup record",
+   "meaning": "timesheet or logged billable hours on a form",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the top clip can look like a handbag handle or padlock shackle, and the whole icon blends with calendar-clock or document-history icons.",
+ "ambiguity": "At small sizes, the top clip with its center hole can be confused with the top handle of the briefcase with a clock badge, and both icons overlap when representing timesheets or work logs.",
  "modifier_semantics": [
   {
    "modifier": "clock badge",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Update employment history on LinkedIn profile",
+   "better": "briefcase with clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Store carry-on bag at the station left-luggage counter for 3 hours",
+   "better": "briefcase or suitcase with clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order 10 wooden clipboards for the Saturday workshop",
    "better": "plain clipboard without clock badge",
    "trap": "lookalike_glyph"
@@ -169,11 +179,6 @@
    "task": "Replace the battery in the kitchen wall clock",
    "better": "wall clock or battery",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Reschedule dentist appointment to next Thursday afternoon",
-   "better": "calendar or tooth",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check if the tax return was accepted by the IRS",
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a clipboard with a clock badge, making it a strong visual match for timesheets, time logs, work rosters, and computer clipboard history. It fits routine admin and work tasks well, though it is only slightly differentiated from plain clipboard or calendar-schedule icons.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "timesheet, time log, or work hours report",
+     "strength": "primary"
+    },
+    {
+     "meaning": "clipboard history or recent copies",
+     "strength": "primary"
+    },
+    {
+     "meaning": "scheduled task, shift roster, or pending order",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "inspection log or periodic checkup record",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the top clip can look like a handbag handle or padlock shackle, and the whole icon blends with calendar-clock or document-history icons.",
+   "near_misses": [
+    {
+     "task": "Order 10 wooden clipboards for the Saturday workshop",
+     "better": "plain clipboard without clock badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the battery in the kitchen wall clock",
+     "better": "wall clock or battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reschedule dentist appointment to next Thursday afternoon",
+     "better": "calendar or tooth",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the tax return was accepted by the IRS",
+     "better": "tax document or government building",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Quick 15-minute tidy of the garage workbench",
+     "better": "broom or workbench tools",
+     "trap": "property"
+    },
+    {
+     "task": "Call payroll about the missing direct deposit",
+     "better": "phone or bank transfer",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "work_history"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4114,
+    "output": 1188,
+    "thoughts": 225,
+    "total": 5527
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:25Z"
+  }
+ },
+ "distinguishing": "Unlike the landscape briefcase with an outlined top handle, this has a taller board with a solid clamping clip and circular hanging hole at the top, making it a clipboard with a clock badge (logs, task or order history, clipboard history) rather than work shifts or luggage."
 }

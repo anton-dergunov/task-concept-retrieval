@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "neutral face / expressionless / meh",
+   "meaning": "neutral mood, 'meh', or average rating",
    "strength": "primary"
   },
   {
-   "meaning": "mood / emotion tracking",
+   "meaning": "mood tracking or sentiment survey",
    "strength": "primary"
   },
   {
-   "meaning": "satisfaction rating / sentiment survey",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "boredom / apathy / poker face",
+   "meaning": "boredom, apathy, or expressionless state",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the eyes and mouth can slightly resemble a round 3-prong electrical outlet or socket.",
+ "ambiguity": "Closely resembles the arch-eyed flat-mouth face, and at small list sizes its dot eyes and bar mouth can blur into the simple line-smile face.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -154,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Add a positive smiley reaction to the welcome message",
+   "better": "smiley face with dot eyes and a curved smile",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Practice stoic emotional detachment during negotiations",
+   "better": "face with arched closed eyes and a flat mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Replace the round 220V wall socket in the hallway",
    "better": "electrical outlet / plug",
    "trap": "lookalike_glyph"
@@ -169,16 +175,6 @@
    "trap": "property"
   },
   {
-   "task": "Wash my face and put on night moisturizer",
-   "better": "skincare bottle / face washing",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay the $140 invoice for last week's session",
-   "better": "invoice / payment",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Check how the team feels about switching to Tuesday standups",
    "better": "team / calendar",
    "trap": "generic_verb"
@@ -187,7 +183,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a classic neutral or straight-faced emoticon (circle with two dot eyes and a flat horizontal mouth). It fits tasks centered on mood tracking, emotional check-ins, therapy logs, and customer sentiment or emoji rating systems, though it is narrower than a general happy smiley and could faintly resemble a round electrical socket at tiny sizes.",
@@ -205,6 +201,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "neutral face / expressionless / meh",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mood / emotion tracking",
+     "strength": "primary"
+    },
+    {
+     "meaning": "satisfaction rating / sentiment survey",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "boredom / apathy / poker face",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the eyes and mouth can slightly resemble a round 3-prong electrical outlet or socket.",
+   "near_misses": [
+    {
+     "task": "Replace the round 220V wall socket in the hallway",
+     "better": "electrical outlet / plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Shift the lawnmower gearbox into neutral before storage",
+     "better": "gearbox / lawnmower",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy neutral-toned beige throw pillows for the sofa",
+     "better": "pillow / cushion",
+     "trap": "property"
+    },
+    {
+     "task": "Wash my face and put on night moisturizer",
+     "better": "skincare bottle / face washing",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $140 invoice for last week's session",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check how the team feels about switching to Tuesday standups",
+     "better": "team / calendar",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_content",
+   "insert_emoticon",
+   "sentiment_satisfied_alt",
+   "sentiment_calm",
+   "child_care",
+   "sentiment_very_satisfied"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10675,
+    "output": 3460,
+    "thoughts": 0,
+    "total": 14135
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "Features round dot eyes paired with a straight horizontal bar mouth, representing a standard neutral, 'meh', or mid-scale rating face as opposed to the smiling faces or the arch-eyed flat face."
 }

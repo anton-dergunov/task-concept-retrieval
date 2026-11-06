@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Highly abstract geometric pattern; at small sizes it looks like a generic loading spinner, flower, or gear.",
+ "ambiguity": "At small sizes it can be glanced as one of the four-circle gamepad button icons, or mistaken for a flower or gear.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Remap the right face button on the console controller",
+   "better": "four gamepad buttons in a diamond with the right circle filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean sticky soda out of the bottom controller action button",
+   "better": "four gamepad buttons in a diamond with the bottom circle filled",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Load the dishwasher before going to bed",
    "better": "dishwasher or plates",
    "trap": "shared_vocabulary"
@@ -167,16 +177,6 @@
    "trap": "property"
   },
   {
-   "task": "Adjust the bicycle derailleur gears so the chain stops skipping",
-   "better": "gear cog or bicycle",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Water the flowerbed along the front walkway",
-   "better": "flower or watering can",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Renew the SSL certificate for the load balancer",
    "better": "lock or certificate",
    "trap": "parent_topic"
@@ -185,7 +185,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon shows six small hollow circles arranged in a ring, which reads primarily as an abstract loading spinner, a node cluster, or small circular hardware like bearings and washers. Because it is an abstract geometric pattern without an immediately obvious everyday noun, its recognizability and task fit are low, though it can serve tech cluster tasks or hardware/bearing maintenance.",
@@ -203,6 +203,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "loading spinner or progress indicator",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cluster of nodes or distributed network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ball bearings, washers, or o-rings",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "revolver cylinder or six-chamber pattern",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Highly abstract geometric pattern; at small sizes it looks like a generic loading spinner, flower, or gear.",
+   "near_misses": [
+    {
+     "task": "Load the dishwasher before going to bed",
+     "better": "dishwasher or plates",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the weather radar for the weekend hike",
+     "better": "cloud or sun",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a six-pack of craft IPA for Friday night",
+     "better": "beer bottles or cans",
+     "trap": "property"
+    },
+    {
+     "task": "Adjust the bicycle derailleur gears so the chain stops skipping",
+     "better": "gear cog or bicycle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Water the flowerbed along the front walkway",
+     "better": "flower or watering can",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew the SSL certificate for the load balancer",
+     "better": "lock or certificate",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "gamepad_circle_right",
+   "gamepad_circle_left",
+   "gamepad_circle_down",
+   "gamepad_circle_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8107,
+    "output": 2567,
+    "thoughts": 233,
+    "total": 10907
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "Shows six hollow rings arranged in a circle with none filled, representing a loading spinner or six-node cluster rather than the four-circle diamond gamepad button layout with one filled circle seen in the other four icons."
 }

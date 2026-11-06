@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery or batteries",
+   "meaning": "half-charged battery (50%) or medium battery level",
    "strength": "primary"
   },
   {
-   "meaning": "charging, recharge, or power bank",
+   "meaning": "battery, batteries, or power bank",
    "strength": "primary"
   },
   {
-   "meaning": "battery level, capacity, or battery health",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "personal energy or stamina",
+   "meaning": "battery storage voltage or capacity check",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable at list scale from other battery fill-level icons (25%, 50%, 75%).",
+ "ambiguity": "Interchangeable with the ~40% and ~60% filled battery icons unless measured side-by-side.",
  "modifier_semantics": [
   {
    "modifier": "half-filled interior block",
@@ -89,11 +85,6 @@
    "task": "Book an Apple Store appointment for iPhone battery replacement",
    "parent": "",
    "domain": "tech"
-  },
-  {
-   "task": "Test the car battery voltage with the multimeter before winter",
-   "parent": "",
-   "domain": "home"
   },
   {
    "task": "Put the Eneloop AAAs in the charger before Friday",
@@ -161,19 +152,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp or flashlight",
-   "trap": "property"
+   "task": "Charge my phone immediately because the battery is critically low",
+   "better": "critically low ~15% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the 100% charged spare camera batteries",
+   "better": "fully charged 100% battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a battery-powered lawn edger for the front path",
    "better": "lawn edger or garden tool",
    "trap": "property"
-  },
-  {
-   "task": "Pay the monthly electric utility bill before the 15th",
-   "better": "invoice, bolt, or money",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Consult defense lawyer about the assault and battery misdemeanor charge",
@@ -194,7 +185,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognizable horizontal battery icon showing roughly a 50% charge. It is the ideal icon for everyday tasks about buying, charging, testing, replacing, or recycling batteries and power banks, though it shares its silhouette with other battery-level indicator variants.",
@@ -212,6 +203,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1,
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery or batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging, recharge, or power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery level, capacity, or battery health",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy or stamina",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable at list scale from other battery fill-level icons (25%, 50%, 75%).",
+   "near_misses": [
+    {
+     "task": "Buy a battery-powered lawn edger for the front path",
+     "better": "lawn edger or garden tool",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before the 15th",
+     "better": "invoice, bolt, or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Consult defense lawyer about the assault and battery misdemeanor charge",
+     "better": "gavel or legal document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Complete the cognitive test battery for the ADHD evaluation",
+     "better": "clipboard or brain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new soldering iron for the battery pack build",
+     "better": "soldering iron",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_1",
+   "battery_android_frame_2",
+   "battery_android_frame_3",
+   "battery_android_frame_5",
+   "battery_android_frame_6",
+   "battery_android_frame_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10606,
+    "output": 3427,
+    "thoughts": 0,
+    "total": 14033
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The interior black rectangle fills almost exactly half (~50%) of the battery cavity, though it is practically interchangeable with the ~40% and ~60% battery icons."
 }

@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can look like a stepped line chart, a digital step signal, or an escalator symbol without arrows.",
+ "ambiguity": "Virtually interchangeable with the two-riser three-tread staircase icon; can also look like a stepped line chart or an escalator symbol without arrows.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Plot the unit step function response in MATLAB for lab 4",
+   "better": "two-riser step waveform or line chart icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Outline the 3-tier pricing structure for the enterprise plan",
+   "better": "three-tread stepped levels icon or pricing table",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Write step-by-step onboarding instructions for the new interns",
    "better": "numbered list / checklist document",
    "trap": "shared_vocabulary"
@@ -166,12 +176,7 @@
   {
    "task": "Bring the folding stepladder up from the garage to reach the smoke detector",
    "better": "ladder",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Plot the step function response in MATLAB for lab 4",
-   "better": "line chart / graph",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a 12V to 5V step-down converter for the dashcam wire",
@@ -187,7 +192,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear profile of a four-step staircase ascending to the right. It is the exact icon for household chores and carpentry on stairs or steps, as well as stair-climbing workouts, though care must be taken not to confuse literal stairs with 'steps' in a process or daily walking step counts.",
@@ -207,6 +212,90 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "stairs / staircase / steps",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stair climbing / flights climbed (fitness)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "levels / step-by-step progression / escalation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can look like a stepped line chart, a digital step signal, or an escalator symbol without arrows.",
+   "near_misses": [
+    {
+     "task": "Write step-by-step onboarding instructions for the new interns",
+     "better": "numbered list / checklist document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hit 10,000 steps every day this week",
+     "better": "footprints / walking shoe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Bring the folding stepladder up from the garage to reach the smoke detector",
+     "better": "ladder",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Plot the step function response in MATLAB for lab 4",
+     "better": "line chart / graph",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a 12V to 5V step-down converter for the dashcam wire",
+     "better": "circuit chip / electronics",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the electrician about the 3-way switch at the bottom of the stairs",
+     "better": "light switch / phone call",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "stairs_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4085,
+    "output": 740,
+    "thoughts": 126,
+    "total": 4951
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Drawn with four treads and four risers ending in a vertical riser at the top right, making it read more unmistakably as a physical staircase than the two-riser version, though the two are largely interchangeable for stair-related tasks."
 }

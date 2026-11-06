@@ -17,9 +17,13 @@
   {
    "meaning": "gambling or casino games",
    "strength": "secondary"
+  },
+  {
+   "meaning": "die roll or value of 3",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Interchangeable with other single die face icons (1-6 pips); at tiny sizes could look like a diagonal ellipsis or menu button inside a square.",
+ "ambiguity": "Interchangeable with the four-pip and five-pip die faces for general board game, gambling, or randomness tasks; at tiny sizes it can also look like a diagonal ellipsis or menu button inside a square.",
  "modifier_semantics": [],
  "domains": [
   "hobbies",
@@ -150,14 +154,19 @@
  ],
  "near_misses": [
   {
+   "task": "Practice scoring Fives in Yahtzee",
+   "better": "die face showing five pips",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Teach the kids to recognize a roll of 4 on the die",
+   "better": "die face showing four pips",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Dice four yellow onions and celery for the soup base",
    "better": "knife or onion",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Clean the lint trap on the front-loading washing machine",
-   "better": "washing machine",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Play thirty minutes of ranked matches on the PS5",
@@ -165,7 +174,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order two pepperoni pizzas for the group",
+   "task": "Order two pepperoni pizzas for the board game group",
    "better": "pizza slice",
    "trap": "parent_topic"
   },
@@ -183,7 +192,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the 3-pip face of a standard six-sided die. It is a natural, recognizable symbol for board games, tabletop RPGs, dice accessories, and tasks involving randomness or probability, though it shares its meaning with other die-face icons (1 to 6 pips).",
@@ -201,6 +210,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "dice or tabletop board game",
+     "strength": "primary"
+    },
+    {
+     "meaning": "randomness, probability, or chance",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "gambling or casino games",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Interchangeable with other single die face icons (1-6 pips); at tiny sizes could look like a diagonal ellipsis or menu button inside a square.",
+   "near_misses": [
+    {
+     "task": "Dice four yellow onions and celery for the soup base",
+     "better": "knife or onion",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the lint trap on the front-loading washing machine",
+     "better": "washing machine",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Play thirty minutes of ranked matches on the PS5",
+     "better": "gamepad controller",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order two pepperoni pizzas for the group",
+     "better": "pizza slice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the weather before taking the board games out to the patio",
+     "better": "weather / cloud and sun",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Read a random chapter from the history book before bed",
+     "better": "book",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "casino",
+   "background_dot_large"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5363,
+    "output": 1626,
+    "thoughts": 0,
+    "total": 6989
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "Shows three diagonal pips on the square die face instead of four corner pips or five pips in a quincunx; practically interchangeable with the other die faces as a general symbol for dice or board games."
 }

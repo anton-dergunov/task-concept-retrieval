@@ -9,19 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "road closed / street closure / detour",
+   "meaning": "road closed, street closure, or detour",
    "strength": "primary"
   },
   {
-   "meaning": "lane keeping assist off / lane departure disabled",
+   "meaning": "remove road, route, or lane",
    "strength": "primary"
   },
   {
-   "meaning": "remove column / delete vertical divider",
+   "meaning": "lane keeping assist off or disabled",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "delete column or vertical divider",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the parallel vertical lines look like a barcode, pause symbol, or abstract UI divider rather than a road.",
+ "ambiguity": "At small list sizes, the diagonal X badge looks almost identical to the upright plus badge on the road-with-plus icon; the vertical lines can also be mistaken for a barcode or abstract divider.",
  "modifier_semantics": [
   {
    "modifier": "x mark",
@@ -151,8 +155,18 @@
  ],
  "near_misses": [
   {
+   "task": "Add a scenic coastal route stop to the road trip itinerary",
+   "better": "road with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Submit the civil engineering proposal for the new highway lane",
+   "better": "road with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Scan invalid barcodes in the warehouse inventory",
-   "better": "barcode with x or scanner",
+   "better": "barcode with an X or barcode scanner",
    "trap": "lookalike_glyph"
   },
   {
@@ -161,25 +175,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Fix the broken zipper on my winter parka",
-   "better": "jacket or zipper",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy snow chains in case the pass requires traction devices",
    "better": "tire chains or snow tire",
    "trap": "property"
   },
   {
-   "task": "Order folding tables and chairs for the block party",
-   "better": "table / chair",
+   "task": "Order folding tables and chairs for the street block party",
+   "better": "table or chair",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a top-down road lane marking (solid outer lines, dashed center line) with an 'X' badge, representing a road/lane closure or disabling a vehicle's lane-keeping system. However, without perspective or context, the three vertical lines are very abstract and easily mistaken for a barcode, pause symbol, or table column control.",
@@ -199,6 +208,85 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "road closed / street closure / detour",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lane keeping assist off / lane departure disabled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remove column / delete vertical divider",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the parallel vertical lines look like a barcode, pause symbol, or abstract UI divider rather than a road.",
+   "near_misses": [
+    {
+     "task": "Scan invalid barcodes in the warehouse inventory",
+     "better": "barcode with x or scanner",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights and rental car for the Route 66 road trip",
+     "better": "car or airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the broken zipper on my winter parka",
+     "better": "jacket or zipper",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy snow chains in case the pass requires traction devices",
+     "better": "tire chains or snow tire",
+     "trap": "property"
+    },
+    {
+     "task": "Order folding tables and chairs for the block party",
+     "better": "table / chair",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "add_road"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4031,
+    "output": 1067,
+    "thoughts": 0,
+    "total": 5098
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:08Z"
+  }
+ },
+ "distinguishing": "Has a diagonal X mark in the bottom-right corner instead of an upright plus sign (+), meaning road closed, detour, or removing a lane/column rather than adding one."
 }

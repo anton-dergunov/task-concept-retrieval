@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "power on/off or standby",
+   "meaning": "power on/off or standby switch",
    "strength": "primary"
   },
   {
-   "meaning": "shut down, reboot, or restart device",
+   "meaning": "shut down, reboot, or restart a device",
    "strength": "primary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "power button or switch",
+   "meaning": "digital detox or unplugging",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Completely interchangeable with the round-capped power symbol; both depict the exact same standby/power button glyph.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -170,7 +170,12 @@
   {
    "task": "Pack the 20000mAh USB-C power bank in carry-on bag",
    "better": "battery or portable charger",
-   "trap": "shared_vocabulary"
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up a 25-minute Pomodoro timer for deep work",
+   "better": "stopwatch or timer",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Check whether the router firmware update finished installing",
@@ -179,14 +184,14 @@
   },
   {
    "task": "Mount the new surge protector under the standing desk",
-   "better": "power strip / outlet",
+   "better": "power strip or electrical outlet",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The standard IEC power/standby symbol is universally recognized and unmistakable at any size. It fits tasks centered on powering down, rebooting, configuring sleep/standby states, fixing power switches, or managing household electricity.",
@@ -204,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "power on/off or standby",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shut down, reboot, or restart device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "electricity or power supply",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "power button or switch",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Draft power of attorney forms for mom with the notary",
+     "better": "legal document or gavel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add 20 minutes of power walking to morning routine",
+     "better": "walking person or shoe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a lightweight battery-powered hedge trimmer for the front bushes",
+     "better": "hedge trimmer or garden shears",
+     "trap": "property"
+    },
+    {
+     "task": "Pack the 20000mAh USB-C power bank in carry-on bag",
+     "better": "battery or portable charger",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check whether the router firmware update finished installing",
+     "better": "router or firmware update arrow",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Mount the new surge protector under the standing desk",
+     "better": "power strip / outlet",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mode_off_on"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 654,
+    "thoughts": 96,
+    "total": 4785
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "Drawn with flat, square-cut stroke ends rather than rounded ends, though the two power symbols are completely interchangeable in meaning."
 }

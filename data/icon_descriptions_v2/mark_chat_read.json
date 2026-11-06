@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "message read / replied to / confirmed",
+   "meaning": "resolve comment or feedback thread",
    "strength": "primary"
   },
   {
-   "meaning": "resolve comment or feedback thread",
+   "meaning": "message read, replied to, or confirmed",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Similar to plain chat/message bubble icons or checkbox/todo icons at very small sizes.",
+ "ambiguity": "At small sizes, the rectangular bubble and checkmark can be mistaken for the monitor screen with a right-pointing chevron, or for a generic chat bubble or checkbox.",
  "modifier_semantics": [
   {
    "modifier": "checkmark at bottom-right corner",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Connect laptop to the external monitor for the presentation",
+   "better": "monitor with right-pointing chevron / external display",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cast the training video to the conference room TV",
+   "better": "monitor with right-pointing chevron / screen sharing",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check voicemail messages from the clinic",
    "better": "voicemail / phone",
    "trap": "generic_verb"
@@ -168,11 +178,6 @@
    "task": "Verify the bank transfer went through",
    "better": "bank / money transfer",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Buy a new monitor for the home office",
-   "better": "monitor / display",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Write a speech for the best man toast",
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "message read / replied to / confirmed",
+     "strength": "primary"
+    },
+    {
+     "meaning": "resolve comment or feedback thread",
+     "strength": "primary"
+    },
+    {
+     "meaning": "send confirmation message or RSVP",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "approve comment or moderation queue",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Similar to plain chat/message bubble icons or checkbox/todo icons at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Check voicemail messages from the clinic",
+     "better": "voicemail / phone",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Verify the bank transfer went through",
+     "better": "bank / money transfer",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new monitor for the home office",
+     "better": "monitor / display",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write a speech for the best man toast",
+     "better": "microphone / podium",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the restaurant for the client feedback session",
+     "better": "restaurant / cutlery",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick an approved car seat for the toddler",
+     "better": "car seat / baby",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "tv_next"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 1093,
+    "thoughts": 0,
+    "total": 5152
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "This icon shows a rectangular speech bubble with a pointed tail at the bottom-left and a checkmark in the bottom-right corner, representing resolved comments or confirmed messages rather than a computer monitor with a chevron."
 }

@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "south-west direction or down-left arrow",
+   "meaning": "down-left or southwest direction",
    "strength": "primary"
   },
   {
@@ -15,15 +15,15 @@
    "strength": "secondary"
   },
   {
-   "meaning": "minimize, collapse, or shrink",
+   "meaning": "decrease, drop, or downward trend",
    "strength": "secondary"
   },
   {
-   "meaning": "decrease or downward trend",
+   "meaning": "collapse or minimize window",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Pure directional UI arrow with no inherent real-world object; easily confused with download, import, incoming call, or minimize window controls.",
+ "ambiguity": "Completely interchangeable in meaning with the thinner down-left arrow; as a pure directional UI arrow with no real-world object, it is also easily confused with download, import, incoming call, or minimize window controls.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -156,6 +156,11 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Log incoming client calls in the CRM spreadsheet",
+   "better": "phone handset with incoming arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Send back the scratched cast iron skillet",
    "better": "return arrow or package",
    "trap": "shared_vocabulary"
@@ -184,7 +189,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 1,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": true,
  "reasoning": "This is a generic geometric UI arrow pointing down and left (south-west) with no real-world object or clear task subject. Outside of abstract ideas like 'incoming' or 'import' (which are better served by tray or box icons), a bare diagonal arrow is pure interface chrome and not useful as a glanceable task reminder.",
@@ -202,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "south-west direction or down-left arrow",
+     "strength": "primary"
+    },
+    {
+     "meaning": "incoming item, import, or receive",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "minimize, collapse, or shrink",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "decrease or downward trend",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Pure directional UI arrow with no inherent real-world object; easily confused with download, import, incoming call, or minimize window controls.",
+   "near_misses": [
+    {
+     "task": "Download offline maps of Scotland before Friday",
+     "better": "map or download arrow with tray",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send back the scratched cast iron skillet",
+     "better": "return arrow or package",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy low-sodium soy sauce at the Asian market",
+     "better": "bottle or shopping cart",
+     "trap": "property"
+    },
+    {
+     "task": "Check why the website was down this morning",
+     "better": "server or alert symbol",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order bubble wrap and packing tape",
+     "better": "tape roll or packing supplies",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Follow up on the declined reimbursement request",
+     "better": "receipt or money",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "call_received"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 763,
+    "thoughts": 0,
+    "total": 4812
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:44Z"
+  }
+ },
+ "distinguishing": "Drawn with a heavier, chunkier stroke weight and a slightly more compact shaft, this icon is semantically interchangeable with the thinner down-left arrow."
 }

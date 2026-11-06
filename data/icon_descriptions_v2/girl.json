@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "woman / female person",
+   "meaning": "woman / female person (mother, wife, daughter, sister)",
    "strength": "primary"
   },
   {
@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "mother / wife / daughter / girl",
+   "meaning": "women's health / gynecology",
    "strength": "secondary"
   },
   {
-   "meaning": "women's clothing or health",
+   "meaning": "dress / women's clothing",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the triangular body with rectangular base can resemble an upward arrow with a dot above it or a stylized pine tree.",
+ "ambiguity": "Completely interchangeable with the other two female figure silhouettes in this group; at very small sizes, the triangular dress and rectangular base can also resemble an upward arrow beneath a dot or a stylized pine tree.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -41,11 +41,6 @@
   "update emergency contact for daughter"
  ],
  "example_tasks": [
-  {
-   "task": "Call Mom back",
-   "parent": "",
-   "domain": "social_family"
-  },
   {
    "task": "Gynecologist annual checkup",
    "parent": "",
@@ -134,12 +129,10 @@
  ],
  "example_tasks_es": [
   "Pedir cita con la ginecóloga para la revisión anual",
-  "Llamar a mamá para ver cómo salió de la consulta",
-  "Comprar el regalo de cumpleaños para mi hermana"
+  "Llamar a mamá para ver cómo salió de la consulta"
  ],
  "example_tasks_ru": [
   "Записаться к гинекологу на плановый осмотр в четверг",
-  "Позвонить маме и узнать результаты анализов",
   "Повесить новую табличку на женский туалет в офисе"
  ],
  "context_tasks": [
@@ -182,6 +175,11 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Move the priority task to the top of the backlog",
+   "better": "upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Try the new women's multivitamin brand",
    "better": "pill bottle",
    "trap": "property"
@@ -195,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "This is the standard universal pictogram for a woman or women's restroom. In a to-do list it fits tasks centered on a female family member, women's health appointments, women's groups, or restroom facilities, though at tiny sizes the triangular skirt and legs can briefly look like a pine tree or upward arrow.",
@@ -215,6 +213,99 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1,
+    "example_tasks_es": 1,
+    "example_tasks_ru": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "woman / female person",
+     "strength": "primary"
+    },
+    {
+     "meaning": "women's restroom / toilet",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mother / wife / daughter / girl",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "women's clothing or health",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the triangular body with rectangular base can resemble an upward arrow with a dot above it or a stylized pine tree.",
+   "near_misses": [
+    {
+     "task": "Return the floral summer dress to Zara",
+     "better": "dress on hanger",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a haircut and blow-dry for Friday",
+     "better": "scissors and comb",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Unclog the upstairs toilet",
+     "better": "toilet bowl",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Plant two dwarf spruce trees by the driveway",
+     "better": "pine tree",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Try the new women's multivitamin brand",
+     "better": "pill bottle",
+     "trap": "property"
+    },
+    {
+     "task": "Upload new profile photo to the company directory",
+     "better": "user avatar in circle",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "woman_2",
+   "woman"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5353,
+    "output": 1576,
+    "thoughts": 131,
+    "total": 7060
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "Visually slightly smaller with a narrower skirt and shorter, wider leg block than the other two female pictograms, but completely interchangeable with them in meaning."
 }

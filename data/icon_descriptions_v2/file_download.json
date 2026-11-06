@@ -11,7 +11,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "import or save locally",
+   "meaning": "import or save into a folder or drive",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with an inbox icon or a generic downward direction arrow at very small sizes.",
+ "ambiguity": "Virtually interchangeable with the downward arrow over a flat horizontal line for download tasks; also resembles an inbox tray or an upload icon if the arrow direction is misread.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,6 +155,21 @@
  ],
  "near_misses": [
   {
+   "task": "Snap the footer graphic to the bottom baseline of the poster layout",
+   "better": "downward arrow to a flat horizontal line (align bottom / to baseline)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add a jump-to-bottom button to the chat window UI",
+   "better": "downward arrow to a flat horizontal line (scroll to bottom)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the signed tax return to the accountant's portal",
+   "better": "upload icon (upward arrow from tray)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Listen to the new Hardcore History podcast episode on the walk",
    "better": "headphones or podcast icon",
    "trap": "property"
@@ -165,11 +180,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Upload the signed tax return to the accountant's portal",
-   "better": "upload icon (upward arrow from tray)",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Read the downloaded PDF report on Q4 semiconductor supply",
    "better": "document or reading icon",
    "trap": "property"
@@ -178,17 +188,12 @@
    "task": "Pay the fiber internet bill so our download speed isn't throttled",
    "better": "bill / payment or router icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Put the heavy winter storage bins down in the basement",
-   "better": "storage box icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The downward arrow pointing into a tray is the universal symbol for downloading, saving locally, or importing files. It fits tasks where the action of downloading or managing the Downloads folder is the central point, though tasks focused on a specific noun (like watching a movie or reading a book) are better served by that object's icon.",
@@ -206,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download file or data",
+     "strength": "primary"
+    },
+    {
+     "meaning": "import or save locally",
+     "strength": "primary"
+    },
+    {
+     "meaning": "install software or update",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "inbox or incoming item",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with an inbox icon or a generic downward direction arrow at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Listen to the new Hardcore History podcast episode on the walk",
+     "better": "headphones or podcast icon",
+     "trap": "property"
+    },
+    {
+     "task": "Install the new dishwasher in the kitchen",
+     "better": "dishwasher or wrench icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upload the signed tax return to the accountant's portal",
+     "better": "upload icon (upward arrow from tray)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Read the downloaded PDF report on Q4 semiconductor supply",
+     "better": "document or reading icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the fiber internet bill so our download speed isn't throttled",
+     "better": "bill / payment or router icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put the heavy winter storage bins down in the basement",
+     "better": "storage box icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "vertical_align_bottom"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4032,
+    "output": 835,
+    "thoughts": 0,
+    "total": 4867
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:21Z"
+  }
+ },
+ "distinguishing": "Has an upturned U-shaped tray at the bottom rather than a flat horizontal bar, though both icons are virtually interchangeable as standard download symbols (with the tray slightly leaning toward an inbox or container)."
 }

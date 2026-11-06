@@ -9,11 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "invert colors off / color inversion disabled",
-   "strength": "primary"
-  },
-  {
-   "meaning": "no water / shut off water / dry",
+   "meaning": "invert colors off / disable color inversion",
    "strength": "primary"
   },
   {
@@ -21,11 +17,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "blur off / opacity disabled",
+   "meaning": "shut off water / no water / dry",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Originally the Material Design 'invert_colors_off' glyph (a half-black, half-white drop with a slash), most non-designers read it simply as a crossed-out water drop ('no water', 'water shutoff', 'waterproofing', or 'dehumidify').",
+ "ambiguity": "Very easily mistaken for the plain outlined crossed-out water droplet ('no water' or 'dehumidify') by everyday users who do not recognize the half-black, half-white drop convention for color inversion.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -164,40 +160,40 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Shut off the outdoor garden water valve before winter freeze",
+   "better": "hollow outlined droplet with slash (water off)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay quarterly water and sewer bill",
-   "better": "bill or plain water drop",
-   "trap": "shared_vocabulary"
+   "task": "Empty the basement dehumidifier bucket",
+   "better": "hollow outlined droplet with slash (dry / no moisture)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Water the ferns on the back porch",
-   "better": "plain water drop or watering can",
+   "better": "plain water droplet or watering can",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Order black printer ink cartridges",
-   "better": "printer or ink cartridge",
-   "trap": "lookalike_glyph"
+   "task": "Pay quarterly water and sewer bill",
+   "better": "bill or invoice",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pick paint colors for the guest bedroom",
+   "better": "paint palette or paint roller",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Check humidity levels in the guitar room",
    "better": "hygrometer or guitar",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Pick paint colors for the guest bedroom",
-   "better": "paint palette or roller",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a half-filled droplet crossed out by a diagonal slash, which represents either 'invert colors off / no color' in UI contexts or 'no water / water shutoff / keep dry' in physical tasks. While somewhat specialized, it serves real household tasks like shutting off water valves, winterizing plumbing, dehumidifying, and grayscale conversion.",
@@ -215,6 +211,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "invert colors off / color inversion disabled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no water / shut off water / dry",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no color / grayscale / desaturate",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "blur off / opacity disabled",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Originally the Material Design 'invert_colors_off' glyph (a half-black, half-white drop with a slash), most non-designers read it simply as a crossed-out water drop ('no water', 'water shutoff', 'waterproofing', or 'dehumidify').",
+   "near_misses": [
+    {
+     "task": "Pay quarterly water and sewer bill",
+     "better": "bill or plain water drop",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Water the ferns on the back porch",
+     "better": "plain water drop or watering can",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order black printer ink cartridges",
+     "better": "printer or ink cartridge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check humidity levels in the guitar room",
+     "better": "hygrometer or guitar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick paint colors for the guest bedroom",
+     "better": "paint palette or roller",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "format_color_reset"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4053,
+    "output": 1014,
+    "thoughts": 112,
+    "total": 5179
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:42Z"
+  }
+ },
+ "distinguishing": "Unlike the completely hollow outlined droplet for no water, the right half of this crossed-out droplet's interior is filled solid black while the left half is empty, representing 'invert colors off' or disabled color/contrast."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "search, find, or look up",
+   "meaning": "preview, inspect, or examine a view, window, or canvas",
    "strength": "primary"
   },
   {
-   "meaning": "preview, inspect, or review a page/document",
+   "meaning": "search, find, or look up an item",
    "strength": "primary"
   },
   {
-   "meaning": "research or investigate a topic",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "audit or quality check",
+   "meaning": "audit, review, or quality-check a layout",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The plain square base is abstract and can look like a generic app window, canvas, or checkbox with a magnifier rather than a specific document.",
+ "ambiguity": "Can be mistaken for the dog-eared document with a bottom-right magnifier, and its plain square base looks like an abstract app window, box, or checkbox rather than a paper page.",
  "modifier_semantics": [
   {
    "modifier": "magnifying glass",
@@ -162,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Track down the missing signed lease agreement PDF",
+   "better": "dog-eared document with magnifying glass",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Proofread the employment contract for typos",
+   "better": "dog-eared document with magnifying glass",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check on the sourdough starter before bed",
    "better": "bread / jar",
    "trap": "generic_verb"
@@ -175,16 +181,6 @@
    "task": "Buy a clip-on magnifying lamp for soldering",
    "better": "desk lamp",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Frame the botanical prints for the hallway",
-   "better": "picture frame",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book the hotel in Kyoto",
-   "better": "bed / hotel",
-   "trap": "parent_topic"
   },
   {
    "task": "Order a smudge-resistant screen protector for the iPad",
@@ -213,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "search, find, or look up",
+     "strength": "primary"
+    },
+    {
+     "meaning": "preview, inspect, or review a page/document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "research or investigate a topic",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audit or quality check",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The plain square base is abstract and can look like a generic app window, canvas, or checkbox with a magnifier rather than a specific document.",
+   "near_misses": [
+    {
+     "task": "Check on the sourdough starter before bed",
+     "better": "bread / jar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Review the new espresso grinder after a week of use",
+     "better": "coffee grinder",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a clip-on magnifying lamp for soldering",
+     "better": "desk lamp",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Frame the botanical prints for the hallway",
+     "better": "picture frame",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the hotel in Kyoto",
+     "better": "bed / hotel",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a smudge-resistant screen protector for the iPad",
+     "better": "tablet / screen",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "document_search"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4015,
+    "output": 988,
+    "thoughts": 98,
+    "total": 5101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:26Z"
+  }
+ },
+ "distinguishing": "Shows an unfoldable square frame or window outline with the magnifying glass at the top-right corner, suggesting previewing a view, canvas, or UI window rather than a dog-eared text document."
 }

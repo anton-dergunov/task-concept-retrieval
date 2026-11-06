@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "retro television set",
+   "meaning": "retro television set with tuning dials",
    "strength": "secondary"
   },
   {
-   "meaning": "handheld game console or media device",
+   "meaning": "reheating food or quick kitchen prep",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as a microwave oven, a toaster oven, or an old-style CRT television with side tuning dials, especially at small sizes.",
+ "ambiguity": "Can be read as a microwave oven, a toaster oven, or an old CRT television; at very small sizes its boxy outline with interior shapes could briefly resemble a safe or a wallet with a side clasp.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -153,27 +153,27 @@
  ],
  "near_misses": [
   {
+   "task": "Put $60 cash into my leather billfold for the flea market",
+   "better": "wallet with snap clasp",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Back up the project files to an external drive before reformatting",
+   "better": "floppy disk / save icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy microwave-safe glass lunch containers with snap lids",
    "better": "food container / lunchbox",
    "trap": "property"
   },
   {
-   "task": "Watch the three-part documentary on the old living room TV",
-   "better": "television with antenna or stand",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Configure the Ubiquiti point-to-point microwave link between the barn and house",
+   "task": "Configure the point-to-point microwave link between the barn and house",
    "better": "antenna / wireless dish",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Roast the Thanksgiving turkey in the main oven at 325 degrees",
-   "better": "full-size kitchen stove / range oven",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Call the electrician to install a dedicated 20-amp outlet",
+   "task": "Call the electrician to install a dedicated 20-amp kitchen outlet",
    "better": "electrical plug / outlet",
    "trap": "parent_topic"
   },
@@ -204,6 +204,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "microwave oven",
+     "strength": "primary"
+    },
+    {
+     "meaning": "toaster oven or small countertop oven",
+     "strength": "primary"
+    },
+    {
+     "meaning": "retro television set",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "handheld game console or media device",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as a microwave oven, a toaster oven, or an old-style CRT television with side tuning dials, especially at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy microwave-safe glass lunch containers with snap lids",
+     "better": "food container / lunchbox",
+     "trap": "property"
+    },
+    {
+     "task": "Watch the three-part documentary on the old living room TV",
+     "better": "television with antenna or stand",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Configure the Ubiquiti point-to-point microwave link between the barn and house",
+     "better": "antenna / wireless dish",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Roast the Thanksgiving turkey in the main oven at 325 degrees",
+     "better": "full-size kitchen stove / range oven",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the electrician to install a dedicated 20-amp outlet",
+     "better": "electrical plug / outlet",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the leftovers in the fridge are still good",
+     "better": "refrigerator / food container",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "account_balance_wallet",
+   "save"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5429,
+    "output": 1575,
+    "thoughts": 136,
+    "total": 7140
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "Wider horizontal rectangle featuring an inner square viewing window on the left and a vertical column of three round knobs on the right, depicting a microwave or countertop oven rather than a wallet or floppy disk."
 }

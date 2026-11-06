@@ -17,13 +17,9 @@
   {
    "meaning": "45-minute timer or three-quarter hour interval",
    "strength": "secondary"
-  },
-  {
-   "meaning": "cloud cover (broken clouds, 6/8 to 7/8 sky cover meteorological symbol)",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Reads interchangeably as a 75% completion indicator, a minimal pie chart, or a 45-minute countdown timer depending on surrounding UI.",
+ "ambiguity": "Can be confused at a quick glance with the half-filled circle when both are used as generic progress indicators, or mistaken for a pie chart vs. a timer.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -152,6 +148,16 @@
  ],
  "near_misses": [
   {
+   "task": "Implement dark mode toggle in the app settings",
+   "better": "half-filled circle for dark/light mode or contrast",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Adjust image contrast on the product photos",
+   "better": "half-filled circle for contrast adjustment",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Bake a cherry pie for Sunday dinner",
    "better": "pie / pastry",
    "trap": "shared_vocabulary"
@@ -167,25 +173,15 @@
    "trap": "property"
   },
   {
-   "task": "Buy a new wall clock for the kitchen",
-   "better": "clock with hands",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check progress on the bathroom tile installation",
    "better": "tiles / bathroom",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Email Sarah the updated copy for slide 12",
-   "better": "email / message",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The glyph shows a circle filled three-quarters black, which primarily reads as a 75% progress ring or a minimal pie chart. While rarely used as a task subject on its own, it fits tasks centered on proportional breakdowns, asset allocation, or pie charts, though it is easily confused with status indicators or a 45-minute clock face.",
@@ -203,6 +199,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "three-quarters progress or 75% completion status",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pie chart or data breakdown",
+     "strength": "primary"
+    },
+    {
+     "meaning": "45-minute timer or three-quarter hour interval",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cloud cover (broken clouds, 6/8 to 7/8 sky cover meteorological symbol)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Reads interchangeably as a 75% completion indicator, a minimal pie chart, or a 45-minute countdown timer depending on surrounding UI.",
+   "near_misses": [
+    {
+     "task": "Bake a cherry pie for Sunday dinner",
+     "better": "pie / pastry",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a quarter roll from the bank for laundry",
+     "better": "coins",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wait until the battery is at least 75% charged before leaving",
+     "better": "battery",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new wall clock for the kitchen",
+     "better": "clock with hands",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check progress on the bathroom tile installation",
+     "better": "tiles / bathroom",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email Sarah the updated copy for slide 12",
+     "better": "email / message",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "contrast"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4061,
+    "output": 1025,
+    "thoughts": 0,
+    "total": 5086
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "Filled three-quarters black with only the top-left quadrant open, representing a pie chart, 75% progress, or a three-quarter time interval rather than a 50/50 split for contrast or dark mode."
 }

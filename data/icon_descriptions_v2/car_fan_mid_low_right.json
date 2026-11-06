@@ -10,19 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "car climate control bi-level airflow (face and feet vents)",
+   "meaning": "car climate control bi-level airflow (face and footwell vents) or general cabin HVAC",
    "strength": "primary"
   },
   {
-   "meaning": "vehicle air conditioning, HVAC, or cabin ventilation",
+   "meaning": "vehicle heating, ventilation, and air conditioning service",
    "strength": "primary"
   },
   {
-   "meaning": "ergonomic seating position or posture adjustment",
+   "meaning": "ergonomic seating position or chair adjustment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Outside an automotive context, viewers may misread the arrows as directions for standing up/sitting down or moving a chair.",
+ "ambiguity": "Virtually identical in meaning to the right-facing seated figure with two arrows (differing only in horizontal orientation), and easy to confuse with the single-arrow face-vent icon.",
  "modifier_semantics": [
   {
    "modifier": "arrow pointing right toward head",
@@ -161,13 +161,13 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new ergonomic mesh office chair for my home desk",
-   "better": "office chair",
+   "task": "Replace broken louvers on the dashboard face vent",
+   "better": "seated figure with a single arrow aimed only at the upper body",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Reserve window seats on the return flight from Denver",
-   "better": "airplane seat",
+   "task": "Buy a new ergonomic mesh office chair for my home desk",
+   "better": "office chair",
    "trap": "lookalike_glyph"
   },
   {
@@ -194,7 +194,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "This is the standard ISO automotive symbol for bi-level cabin airflow (directing air to the upper body and feet). While it is technically a specific car climate-control setting, it serves well as a recognizable emblem for vehicle A/C, heater, cabin air filter, and ventilation maintenance tasks, though non-drivers might mistake it for a generic seating or posture icon.",
@@ -212,6 +212,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car climate control bi-level airflow (face and feet vents)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vehicle air conditioning, HVAC, or cabin ventilation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ergonomic seating position or posture adjustment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Outside an automotive context, viewers may misread the arrows as directions for standing up/sitting down or moving a chair.",
+   "near_misses": [
+    {
+     "task": "Buy a new ergonomic mesh office chair for my home desk",
+     "better": "office chair",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Reserve window seats on the return flight from Denver",
+     "better": "airplane seat",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call HVAC technician to service the attic heat pump",
+     "better": "house thermostat or radiator",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Rent a compact car with good air conditioning for the August trip to Seville",
+     "better": "rental car",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $450 credit card bill from the auto shop",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check cabin temperature in the baby monitor app",
+     "better": "thermometer or baby monitor",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_fan_mid_left",
+   "car_fan_low_mid_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5472,
+    "output": 1079,
+    "thoughts": 177,
+    "total": 6728
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "Shows a left-facing seated person with two arrows (toward the upper body and down toward the feet); it is a horizontal mirror image of the right-facing two-arrow icon and is completely interchangeable with it in meaning."
 }

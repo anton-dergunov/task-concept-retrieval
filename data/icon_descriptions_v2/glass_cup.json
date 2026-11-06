@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "drinking glass, tumbler, or shot glass",
+   "meaning": "empty drinking glass, tumbler, or glassware",
    "strength": "primary"
   },
   {
-   "meaning": "drink water or hydration",
+   "meaning": "shot glass or whiskey rocks glass",
    "strength": "primary"
   },
   {
-   "meaning": "beverage or cocktail",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "trash bin or planter pot",
+   "meaning": "drink or barware",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with an open trash bin, bucket, or flower pot at small sizes due to the simple trapezoidal silhouette.",
+ "ambiguity": "Can be mistaken for the low-water glass at tiny sizes if the straight base line is misread as a liquid level, or for a small wastebasket or planter pot.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -153,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Drink 8 glasses of water throughout the workday",
+   "better": "glass of water with wavy liquid line",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take evening medication with a full glass of water",
+   "better": "glass filled high with wavy liquid line",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pick up new reading glasses from the optometrist",
    "better": "eyeglasses",
    "trap": "shared_vocabulary"
@@ -171,22 +177,12 @@
    "task": "Empty the bathroom trash bin before Tuesday pickup",
    "better": "trash can",
    "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the quarterly city water and sewer bill",
-   "better": "invoice or water drop with dollar sign",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a bag of lemons and ginger root",
-   "better": "lemon",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a simple tapered tumbler or shot glass with a heavy base. It is well-suited for tasks involving daily water intake/hydration, glassware shopping or cleaning, and bar preparation, though at tiny sizes its stark trapezoid shape could slightly resemble a wastebasket or planter.",
@@ -204,6 +200,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "drinking glass, tumbler, or shot glass",
+     "strength": "primary"
+    },
+    {
+     "meaning": "drink water or hydration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "beverage or cocktail",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "trash bin or planter pot",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with an open trash bin, bucket, or flower pot at small sizes due to the simple trapezoidal silhouette.",
+   "near_misses": [
+    {
+     "task": "Pick up new reading glasses from the optometrist",
+     "better": "eyeglasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call auto glass shop to fix the windshield crack",
+     "better": "car windshield",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a glass baking dish with a lid",
+     "better": "casserole dish",
+     "trap": "property"
+    },
+    {
+     "task": "Empty the bathroom trash bin before Tuesday pickup",
+     "better": "trash can",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the quarterly city water and sewer bill",
+     "better": "invoice or water drop with dollar sign",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a bag of lemons and ginger root",
+     "better": "lemon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "water_loss",
+   "water_medium",
+   "water_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6652,
+    "output": 1188,
+    "thoughts": 0,
+    "total": 7840
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:10Z"
+  }
+ },
+ "distinguishing": "Has a straight horizontal line near the bottom instead of a wavy line, depicting the thick solid glass base of an empty tumbler or shot glass rather than liquid."
 }

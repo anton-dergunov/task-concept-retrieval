@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "group of people, team, or community",
+   "meaning": "group of people, team, or generic user group",
    "strength": "primary"
   },
   {
@@ -18,15 +18,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "in-person meeting, gathering, or family",
+   "meaning": "shared account, roles, or contact list",
    "strength": "secondary"
   },
   {
-   "meaning": "user group, roles, or shared contacts",
+   "meaning": "in-person meeting, gathering, or club",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles standard two-person or solid three-person group icons; the hollow vs solid fill distinction is subtle at small sizes.",
+ "ambiguity": "At list size it is nearly interchangeable with the three-person group icon with varied hairstyles; both read simply as a group of three people unless the task specifically calls for diversity or individual characters.",
  "modifier_semantics": [
   {
    "modifier": "hollow central figure with solid side figures",
@@ -164,6 +164,16 @@
  ],
  "near_misses": [
   {
+   "task": "Review the diversity and inclusion hiring guidelines",
+   "better": "three people with distinct hairstyles",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cast actors for the three diverse lead roles in the community play",
+   "better": "three people with distinct hairstyles",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Mom and Dad about Sunday dinner",
    "better": "phone receiver",
    "trap": "generic_verb"
@@ -179,25 +189,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Update my personal profile picture on LinkedIn",
-   "better": "single person avatar",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Group the kitchen renovation receipts by vendor",
    "better": "receipt or folder",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order three pawn miniatures for the D&D board",
-   "better": "chess pawn or game piece",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a group of three people with the center figure highlighted, making it universally recognizable for tasks about teams, groups, committees, guest lists, or family gatherings. Its distinctiveness is moderate because many icon sets include multiple two-person and three-person group variants.",
@@ -215,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "group of people, team, or community",
+     "strength": "primary"
+    },
+    {
+     "meaning": "team leader, host, or central contact with members",
+     "strength": "primary"
+    },
+    {
+     "meaning": "in-person meeting, gathering, or family",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "user group, roles, or shared contacts",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles standard two-person or solid three-person group icons; the hollow vs solid fill distinction is subtle at small sizes.",
+   "near_misses": [
+    {
+     "task": "Call Mom and Dad about Sunday dinner",
+     "better": "phone receiver",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a 6-person tent for the summer camping trip",
+     "better": "camping tent",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $45 annual membership fee for the cycling club",
+     "better": "credit card or money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Update my personal profile picture on LinkedIn",
+     "better": "single person avatar",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Group the kitchen renovation receipts by vendor",
+     "better": "receipt or folder",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order three pawn miniatures for the D&D board",
+     "better": "chess pawn or game piece",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "groups_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4077,
+    "output": 1060,
+    "thoughts": 0,
+    "total": 5137
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "All three figures have plain, uniform circular heads without hair, making this a generic group or user-account team icon, whereas the look-alike gives each figure a distinct hairstyle to suggest diversity or specific individuals."
 }

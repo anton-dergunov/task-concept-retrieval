@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "speedometer or gauge",
+   "meaning": "speedometer, gauge, or meter (general or medium-high reading)",
    "strength": "primary"
   },
   {
@@ -15,7 +15,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "meter or pressure dial",
+   "meaning": "pressure dial or utility meter",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a kitchen timer, barometer, or weighing scale dial at very small sizes, or with other speedometer variants that have tick marks.",
+ "ambiguity": "Almost indistinguishable at small sizes from the sibling gauges with needles at 10 o'clock, 11 o'clock, and especially 2 o'clock.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -132,8 +132,7 @@
  ],
  "example_tasks_ru": [
   "Передать показания счётчиков воды до 25 числа",
-  "Проверить скорость интернета в дальней комнате",
-  "Подкачать шины и сверить манометр"
+  "Проверить скорость интернета в дальней комнате"
  ],
  "context_tasks": [
   {
@@ -155,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Troubleshoot low water pressure in the upstairs shower",
+   "better": "gauge with needle pointing far left (low reading)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Max out CPU clock speed for the rendering benchmark",
+   "better": "gauge with needle pointing far right (high/max reading)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Make a quick 15-minute pasta dinner",
    "better": "pasta / plate",
    "trap": "property"
@@ -167,11 +176,6 @@
   {
    "task": "Set a 20-minute timer for the sourdough bake",
    "better": "stopwatch / kitchen timer",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Weigh myself before breakfast",
-   "better": "bathroom scale",
    "trap": "lookalike_glyph"
   },
   {
@@ -188,7 +192,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear semicircular dial gauge with an upward-pointing needle, universally recognized as a speedometer, pressure gauge, meter, or performance indicator. It fits concrete tasks about internet speed tests, utility meter readings, pressure gauges, web performance benchmarks, and credit scores. It should not be used for tasks that merely have 'fast' or 'quick' as an adjective.",
@@ -206,6 +210,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_ru": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "speedometer or gauge",
+     "strength": "primary"
+    },
+    {
+     "meaning": "performance, speed, or benchmark",
+     "strength": "primary"
+    },
+    {
+     "meaning": "meter or pressure dial",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "credit score or rating",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a kitchen timer, barometer, or weighing scale dial at very small sizes, or with other speedometer variants that have tick marks.",
+   "near_misses": [
+    {
+     "task": "Make a quick 15-minute pasta dinner",
+     "better": "pasta / plate",
+     "trap": "property"
+    },
+    {
+     "task": "Pay speeding ticket from the A14 camera",
+     "better": "receipt / fine / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set a 20-minute timer for the sourdough bake",
+     "better": "stopwatch / kitchen timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Weigh myself before breakfast",
+     "better": "bathroom scale",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order new winter tires for the Volvo",
+     "better": "tire / wheel",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Measure the alcove for the new bookshelf",
+     "better": "tape measure / ruler",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speed_3",
+   "speed",
+   "speed_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6734,
+    "output": 2400,
+    "thoughts": 231,
+    "total": 9365
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "The needle points slightly right of vertical (around 1 o'clock, medium-high position), between the two left-leaning gauges and the far-right (2 o'clock) gauge, though for general gauge or performance tasks all four are largely interchangeable."
 }

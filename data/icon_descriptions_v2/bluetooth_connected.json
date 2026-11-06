@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "Bluetooth connected / paired device",
+   "meaning": "active Bluetooth connection or paired device status",
    "strength": "primary"
   },
   {
@@ -18,11 +18,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "Bluetooth dongle or adapter",
+   "meaning": "Bluetooth adapter or dongle",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Barely distinguishable from the plain Bluetooth symbol in a task list; the flanking dots (meaning connected) add no distinct task-level meaning.",
+ "ambiguity": "Readily mistaken for the plain Bluetooth icon or the Bluetooth icon with three dots below, and the UI status distinction ('connected' vs 'on' vs 'searching') rarely matters for a to-do item.",
  "modifier_semantics": [
   {
    "modifier": "two flanking dots",
@@ -158,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Open Bluetooth settings and scan for new nearby devices",
+   "better": "Bluetooth symbol with three dots underneath (searching/options menu/ellipsis) or gear",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a replacement Bluetooth PCIe card for the workstation",
+   "better": "plain Bluetooth symbol or computer hardware",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small waterproof Bluetooth speaker for the shower",
    "better": "speaker",
    "trap": "property"
@@ -168,18 +178,8 @@
    "trap": "property"
   },
   {
-   "task": "Replace the AAA batteries in the Bluetooth keyboard",
-   "better": "keyboard or battery",
-   "trap": "property"
-  },
-  {
-   "task": "Switch the guest Wi-Fi router to the 5 GHz channel",
-   "better": "Wi-Fi / router",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Return the defective earbuds to Best Buy before Saturday",
-   "better": "earbuds / package return",
+   "task": "Return the defective wireless earbuds to Best Buy before Saturday",
+   "better": "earbuds or package return",
    "trap": "parent_topic"
   },
   {
@@ -191,7 +191,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon is the universally recognized Bluetooth rune flanked by two dots indicating an active connection. It fits tasks centered on Bluetooth pairing, troubleshooting, or adapters, though for specific peripherals (headphones, speaker, mouse) an icon of the device itself is better.",
@@ -209,6 +209,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Bluetooth connected / paired device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Bluetooth wireless connectivity or pairing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Bluetooth dongle or adapter",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Barely distinguishable from the plain Bluetooth symbol in a task list; the flanking dots (meaning connected) add no distinct task-level meaning.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof Bluetooth speaker for the shower",
+     "better": "speaker",
+     "trap": "property"
+    },
+    {
+     "task": "Pack the Bluetooth mouse and charger in the laptop bag",
+     "better": "computer mouse",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the AAA batteries in the Bluetooth keyboard",
+     "better": "keyboard or battery",
+     "trap": "property"
+    },
+    {
+     "task": "Switch the guest Wi-Fi router to the 5 GHz channel",
+     "better": "Wi-Fi / router",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return the defective earbuds to Best Buy before Saturday",
+     "better": "earbuds / package return",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Schedule teeth cleaning and check on that sore back molar",
+     "better": "tooth",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_bluetooth",
+   "bluetooth"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5281,
+    "output": 904,
+    "thoughts": 0,
+    "total": 6185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Flanks the Bluetooth rune with one dot on the left and one on the right—the standard OS status-bar indicator for an active connection—though for task planning it is virtually interchangeable with the plain and ellipsis variants."
 }

@@ -19,13 +19,9 @@
   {
    "meaning": "extend time or add extra time",
    "strength": "secondary"
-  },
-  {
-   "meaning": "medical emergency or urgent care",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "The plus sign inside the circle can be misread as a medical cross at a glance, or confused with a plain alarm clock icon when the plus replaces the clock hands.",
+ "ambiguity": "Shares the exact circled-plus body with the plain circled plus / medical cross icon, so at a quick glance the central cross can be misread as medical or generic 'add' if the two top bells aren't noticed.",
  "modifier_semantics": [
   {
    "modifier": "plus sign centered inside the clock face",
@@ -160,9 +156,19 @@
  ],
  "near_misses": [
   {
-   "task": "Wake up at 6am every day this week",
-   "better": "sunrise or bed",
-   "trap": "shared_vocabulary"
+   "task": "Restock the car first-aid kit with bandages",
+   "better": "plain circled plus or medical cross",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Practice two-digit addition flashcards with Leo",
+   "better": "plain circled plus sign or calculator",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book urgent care appointment for sore throat",
+   "better": "plain circled plus or stethoscope",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Call the home security company about the false alarm",
@@ -170,30 +176,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book urgent care appointment for sore throat",
-   "better": "medical cross or stethoscope",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check how long the roast takes at 375 degrees",
    "better": "oven or roast meat",
    "trap": "generic_verb"
   },
   {
-   "task": "Pay the urgente overdue electricity bill today",
+   "task": "Pay the overdue electricity bill today",
    "better": "invoice or lightning bolt",
    "trap": "property"
-  },
-  {
-   "task": "Pack noise-canceling earplugs for the hostel",
-   "better": "earplugs or headphones",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly shows an alarm clock shell with a plus sign in place of the hands, meaning 'add/set an alarm' or 'alarm clock'. It fits tasks specifically about setting alarms, reminders, or buying an alarm clock, though it is only moderately distinct from a standard alarm clock icon and can briefly look like a medical cross.",
@@ -211,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add or set an alarm",
+     "strength": "primary"
+    },
+    {
+     "meaning": "new reminder or timer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "extend time or add extra time",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "medical emergency or urgent care",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The plus sign inside the circle can be misread as a medical cross at a glance, or confused with a plain alarm clock icon when the plus replaces the clock hands.",
+   "near_misses": [
+    {
+     "task": "Wake up at 6am every day this week",
+     "better": "sunrise or bed",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the home security company about the false alarm",
+     "better": "shield or siren",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book urgent care appointment for sore throat",
+     "better": "medical cross or stethoscope",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check how long the roast takes at 375 degrees",
+     "better": "oven or roast meat",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the urgente overdue electricity bill today",
+     "better": "invoice or lightning bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Pack noise-canceling earplugs for the hostel",
+     "better": "earplugs or headphones",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "add_circle_outline"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4051,
+    "output": 1004,
+    "thoughts": 0,
+    "total": 5055
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Has two angled alarm bells above the circular outline, turning the circled plus sign into an alarm clock for adding an alarm, setting a timer, or extending time."
 }

@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles an address book, dictionary, or passport icon if they lack cover markings.",
+ "ambiguity": "Essentially interchangeable in meaning with the book with an extended right/bottom fold, though this one more clearly reads as a single hardcover book rather than a folded periodical or multi-volume set.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pick up the Sunday newspaper from the driveway",
+   "better": "folded newspaper or book with extended right edge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Compile the three-volume project binder for the audit",
+   "better": "multi-layer book with extended right cover",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book flights to Lisbon for October",
    "better": "airplane",
    "trap": "shared_vocabulary"
@@ -169,11 +179,6 @@
    "task": "Reconcile March bookkeeping entries in QuickBooks",
    "better": "ledger / calculator",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Renew my passport before the six-month validity window",
-   "better": "passport with globe",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a bottle of cabernet to bring to book club",
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Clearly depicts a closed hardcover book with spine and pages. Ideal for tasks involving reading, books, libraries, manuals, textbooks, and journaling, though in English text matching it must be distinguished from the verb 'to book' (reservations).",
@@ -212,6 +217,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "book or reading material",
+     "strength": "primary"
+    },
+    {
+     "meaning": "notebook, journal, or diary",
+     "strength": "primary"
+    },
+    {
+     "meaning": "manual, textbook, or documentation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "library or study",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles an address book, dictionary, or passport icon if they lack cover markings.",
+   "near_misses": [
+    {
+     "task": "Book flights to Lisbon for October",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a table for four at Osteria Mozza",
+     "better": "restaurant / cutlery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reconcile March bookkeeping entries in QuickBooks",
+     "better": "ledger / calculator",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a bottle of cabernet to bring to book club",
+     "better": "wine bottle",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Read the electricity meter in the basement and submit numbers",
+     "better": "gauge / utility meter",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order book-shaped ceramic flower vase for the mantelpiece",
+     "better": "flower vase",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "book_4"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4030,
+    "output": 1144,
+    "thoughts": 0,
+    "total": 5174
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Shows a single closed book with a curved page-edge indentation on the bottom right, whereas the other icon has an offset right-hand line making it look like a folded newspaper or multiple books."
 }

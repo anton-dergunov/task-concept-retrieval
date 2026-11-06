@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "video game controller D-pad / directional pad (right pressed)",
+   "meaning": "D-pad right button pressed / rightward directional input",
    "strength": "primary"
   },
   {
-   "meaning": "gaming / video games",
+   "meaning": "video game controller / gaming",
    "strength": "primary"
   },
   {
-   "meaning": "remote control navigation buttons",
+   "meaning": "remote control navigation buttons (right)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, can be mistaken for a generic crosshair, a medical or decorative cross, or a four-way move/pan cursor.",
+ "ambiguity": "At small list sizes, easily mistaken for the neutral four-way D-pad or the D-pads with up, down, or left pressed.",
  "modifier_semantics": [
   {
    "modifier": "solid fill on right button",
@@ -155,29 +155,29 @@
  ],
  "near_misses": [
   {
+   "task": "Repair the sticking left directional button on the Joy-Con",
+   "better": "D-pad with left button filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Program the down button on the universal remote",
+   "better": "D-pad with bottom button filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test all four directional buttons on the refurbished gamepad",
+   "better": "neutral D-pad with all four buttons outlined",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Turn right onto Oak Street after the hardware store",
    "better": "right turn arrow or map pin",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Restock band-aids and antiseptic wipes in the first aid kit",
-   "better": "medical cross or first aid kit",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Cancel PlayStation Plus yearly subscription before renewal date",
    "better": "credit card or subscription renewal",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check the compass bearing for the north ridge trail",
-   "better": "compass",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a game-ready leather softball glove for spring league",
-   "better": "baseball glove or softball",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Move the heavy bookshelf to the right wall of the study",
@@ -188,7 +188,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a classic four-button segmented directional pad (D-pad) with the right button highlighted, universally recognizable to anyone familiar with PlayStation or retro game controllers. While strictly a UI/input glyph showing 'D-pad right', in a task planner it serves well as a concrete icon for controller maintenance, input configuration, or general gaming tasks, though full gamepad silhouettes are more common.",
@@ -206,6 +206,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video game controller D-pad / directional pad (right pressed)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "gaming / video games",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remote control navigation buttons",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, can be mistaken for a generic crosshair, a medical or decorative cross, or a four-way move/pan cursor.",
+   "near_misses": [
+    {
+     "task": "Turn right onto Oak Street after the hardware store",
+     "better": "right turn arrow or map pin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Restock band-aids and antiseptic wipes in the first aid kit",
+     "better": "medical cross or first aid kit",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel PlayStation Plus yearly subscription before renewal date",
+     "better": "credit card or subscription renewal",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the compass bearing for the north ridge trail",
+     "better": "compass",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a game-ready leather softball glove for spring league",
+     "better": "baseball glove or softball",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Move the heavy bookshelf to the right wall of the study",
+     "better": "bookshelf or furniture",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "gamepad_up",
+   "gamepad_down",
+   "gamepad_left",
+   "games"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8076,
+    "output": 2572,
+    "thoughts": 0,
+    "total": 10648
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "The right button of the four-way directional pad is solid black while the top, bottom, and left buttons are outlined, indicating the 'right' direction is pressed; for general gaming tasks, it is virtually interchangeable with the others."
 }

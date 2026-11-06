@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "hotel or city real estate",
+   "meaning": "hotel or commercial real estate",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Distinguishable as a multi-unit or commercial building, though interchangeable with other generic office, apartment, or hotel icons.",
+ "ambiguity": "At small sizes it can be confused with the building-with-plus icon if the bottom-right corner badge is overlooked.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Add the new regional branch office to the company directory",
+   "better": "building with plus sign (add building / new office)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check in at the downtown hospital admitting desk",
+   "better": "building with plus/cross sign (hospital or clinic)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Install Microsoft Office on the new laptop",
    "better": "software / laptop",
    "trap": "shared_vocabulary"
@@ -170,22 +180,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Clean the home office desk and shred old receipts",
-   "better": "desk / shredder",
-   "trap": "property"
-  },
-  {
    "task": "Order a new ergonomic office chair",
    "better": "office chair",
    "trap": "property"
   },
   {
-   "task": "Mail tax return at the post office",
-   "better": "envelope / mailbox",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy snacks and soda for the Friday team happy hour",
+   "task": "Buy snacks and soda for the Friday team happy hour at work",
    "better": "drinks / snacks",
    "trap": "parent_topic"
   }
@@ -211,6 +211,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "office building or workplace",
+     "strength": "primary"
+    },
+    {
+     "meaning": "company, business, or corporation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "apartment building, condo, or HOA",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "hotel or city real estate",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Distinguishable as a multi-unit or commercial building, though interchangeable with other generic office, apartment, or hotel icons.",
+   "near_misses": [
+    {
+     "task": "Install Microsoft Office on the new laptop",
+     "better": "software / laptop",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a Lego Creator modular building set for Leo",
+     "better": "toy brick / gift",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Start building the cedar planter boxes in the backyard",
+     "better": "hammer / planter",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the home office desk and shred old receipts",
+     "better": "desk / shredder",
+     "trap": "property"
+    },
+    {
+     "task": "Order a new ergonomic office chair",
+     "better": "office chair",
+     "trap": "property"
+    },
+    {
+     "task": "Mail tax return at the post office",
+     "better": "envelope / mailbox",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy snacks and soda for the Friday team happy hour",
+     "better": "drinks / snacks",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "domain_add"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4070,
+    "output": 1129,
+    "thoughts": 134,
+    "total": 5333
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Shows the complete two-wing multi-story building with an intact bottom-right corner and no badge, representing an existing office, apartment building, or company in general rather than adding a new property or visiting a hospital."
 }

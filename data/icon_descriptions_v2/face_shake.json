@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "head rotation / neck stretching or mobility",
+   "meaning": "3D face scan, Face ID setup, or head tracking / spatial audio",
    "strength": "primary"
   },
   {
-   "meaning": "3D face scan / Face ID setup (turning head side to side)",
+   "meaning": "head rotation or neck stretching / mobility",
    "strength": "primary"
   },
   {
-   "meaning": "switch user account / change profile",
+   "meaning": "switch user account or change profile",
    "strength": "secondary"
   },
   {
-   "meaning": "panoramic selfie / 360 avatar rotation",
+   "meaning": "panoramic selfie or 360 avatar rotation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the curved arrow beneath the head looks like shoulders, a collar, or a smiling mouth underneath the face.",
+ "ambiguity": "At small sizes, the curved arrow beneath the head can look like shoulders or a collar, making it easy to mistake for the plain round face icon used for a child or generic user avatar.",
  "modifier_semantics": [
   {
    "modifier": "curved double-headed arrow underneath",
@@ -159,23 +159,23 @@
  ],
  "near_misses": [
   {
+   "task": "Pick up kids from daycare at 4:30",
+   "better": "round face with bangs without rotation arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update my user profile bio and avatar",
+   "better": "round face with bangs without rotation arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Apply hydrating face mask before bed",
+   "better": "round face with bangs without rotation arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book haircut with Marco for Friday afternoon",
    "better": "scissors or barber pole",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update LinkedIn profile headshot photo",
-   "better": "user avatar in frame or camera",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pick up kids from daycare at 4:30",
-   "better": "child or family icon without rotation arrow",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Schedule annual dental checkup and cleaning",
-   "better": "tooth",
    "trap": "lookalike_glyph"
   },
   {
@@ -184,7 +184,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pick up prescription muscle relaxers at CVS",
+   "task": "Pick up prescription muscle relaxers for stiff neck at CVS",
    "better": "pill bottle",
    "trap": "parent_topic"
   }
@@ -210,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "head rotation / neck stretching or mobility",
+     "strength": "primary"
+    },
+    {
+     "meaning": "3D face scan / Face ID setup (turning head side to side)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "switch user account / change profile",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "panoramic selfie / 360 avatar rotation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the curved arrow beneath the head looks like shoulders, a collar, or a smiling mouth underneath the face.",
+   "near_misses": [
+    {
+     "task": "Book haircut with Marco for Friday afternoon",
+     "better": "scissors or barber pole",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update LinkedIn profile headshot photo",
+     "better": "user avatar in frame or camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up kids from daycare at 4:30",
+     "better": "child or family icon without rotation arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule annual dental checkup and cleaning",
+     "better": "tooth",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn over the compost pile in the backyard",
+     "better": "shovel or compost bin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up prescription muscle relaxers at CVS",
+     "better": "pill bottle",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "face"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4054,
+    "output": 1097,
+    "thoughts": 0,
+    "total": 5151
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "Adds a curved double-headed arrow beneath the round face, indicating head rotation, 3D face scanning, head-tracking audio, or switching user profiles rather than a static person or child."
 }

@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "hands-free or voice-only input (no keyboard)",
+   "meaning": "hands-free or voice-only workflow (no keyboard)",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the grid of keys inside the rectangle can look like a calendar or spreadsheet crossed out, though the wide bottom spacebar distinguishes it as a keyboard.",
+ "ambiguity": "Easily confused at a glance with the slashed keyboard that has a padlock badge in the bottom-right corner, and at very small sizes the grid of keys can slightly resemble a crossed-out calendar.",
  "modifier_semantics": [
   {
    "modifier": "diagonal strike-through slash",
@@ -160,40 +160,45 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off KeyboardCleanTool input lock after wiping keys",
+   "better": "slashed keyboard with padlock badge in bottom-right corner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unlock child safety keyboard lock on living room PC",
+   "better": "slashed keyboard with padlock badge in bottom-right corner",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Clean crumbs out of my mechanical keyboard with compressed air",
-   "better": "plain keyboard (not crossed out)",
+   "better": "plain keyboard without slash",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a quiet low-profile wireless keyboard for the office",
-   "better": "plain keyboard",
+   "better": "plain keyboard without slash",
    "trap": "property"
   },
   {
    "task": "Practice 20 minutes of touch typing on Monkeytype without looking down",
-   "better": "plain keyboard",
+   "better": "plain keyboard without slash",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Cancel December calendar availability for team meetings",
-   "better": "calendar with slash or X",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a braided coiled USB-C cable from Mechcables",
-   "better": "USB cable",
+   "better": "USB cable icon",
    "trap": "parent_topic"
   },
   {
    "task": "Check why the piano keyboard sustain pedal is squeaking",
-   "better": "musical piano keys",
+   "better": "musical piano keys icon",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a computer keyboard crossed out with a diagonal slash, indicating a disabled, disconnected, hidden, or broken keyboard. While originally a UI glyph for hiding an on-screen keyboard, it fits a real niche of tasks around troubleshooting unresponsive keyboards, disabling built-in laptop keys, suppressing virtual keyboards in software development, or taking no-typing ergonomic breaks. It should not be used for general keyboard tasks (buying, cleaning, typing), which belong to the unslashed keyboard icon.",
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "keyboard disabled, disconnected, or broken",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hide on-screen keyboard / no typing input",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hands-free or voice-only input (no keyboard)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "take a break from typing / ergonomics rest",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the grid of keys inside the rectangle can look like a calendar or spreadsheet crossed out, though the wide bottom spacebar distinguishes it as a keyboard.",
+   "near_misses": [
+    {
+     "task": "Clean crumbs out of my mechanical keyboard with compressed air",
+     "better": "plain keyboard (not crossed out)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a quiet low-profile wireless keyboard for the office",
+     "better": "plain keyboard",
+     "trap": "property"
+    },
+    {
+     "task": "Practice 20 minutes of touch typing on Monkeytype without looking down",
+     "better": "plain keyboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel December calendar availability for team meetings",
+     "better": "calendar with slash or X",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a braided coiled USB-C cable from Mechcables",
+     "better": "USB cable",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the piano keyboard sustain pedal is squeaking",
+     "better": "musical piano keys",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "keyboard_lock_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4110,
+    "output": 1141,
+    "thoughts": 118,
+    "total": 5369
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:27Z"
+  }
+ },
+ "distinguishing": "This icon shows only a keyboard with a diagonal slash and no corner badge, representing a disabled, disconnected, or hidden keyboard rather than unlocking a keyboard lock."
 }

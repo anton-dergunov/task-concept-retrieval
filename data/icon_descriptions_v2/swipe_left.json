@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "swipe left gesture",
+   "meaning": "one-finger swipe left or flick left gesture",
    "strength": "primary"
   },
   {
-   "meaning": "touchscreen gesture or mobile interaction",
+   "meaning": "touchscreen gesture or mobile UI interaction",
    "strength": "primary"
   },
   {
-   "meaning": "undo action or navigate back",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "turn page or flip backward",
+   "meaning": "swipe back or dismiss card action",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as a touchscreen swipe-left gesture or as an undo/revert action, and closely resembles swipe-right or rotate-hand icons.",
+ "ambiguity": "Easily mistaken for the two-finger swipe-left icon at small sizes, or confused with the one-finger swipe-right and bidirectional swipe icons when glancing.",
  "modifier_semantics": [
   {
    "modifier": "curved left-pointing arrow",
@@ -158,19 +154,19 @@
  ],
  "near_misses": [
   {
-   "task": "Swipe badge access at the new office building",
-   "better": "ID badge or keycard",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Roll back production database migration to previous snapshot",
-   "better": "database with undo/revert arrow",
+   "task": "Set up two-finger swipe-left undo gesture on iPad",
+   "better": "two-finger swipe left icon",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Return borrowed folding chairs to the neighbor on the left",
-   "better": "chair",
-   "trap": "property"
+   "task": "Test one-finger swipe-right to accept ride requests in driver app",
+   "better": "one-finger swipe right icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Swipe badge access at the new office building",
+   "better": "ID badge or keycard",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy touchscreen-friendly winter gloves for biking",
@@ -191,7 +187,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a hand gesture swiping left (or counter-clockwise). It is a strong, literal fit for UI/UX design, mobile development, and device configuration tasks specifically about touch or trackpad swipe gestures, though such tasks are limited to a niche tech/design domain.",
@@ -209,6 +205,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "swipe left gesture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "touchscreen gesture or mobile interaction",
+     "strength": "primary"
+    },
+    {
+     "meaning": "undo action or navigate back",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "turn page or flip backward",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as a touchscreen swipe-left gesture or as an undo/revert action, and closely resembles swipe-right or rotate-hand icons.",
+   "near_misses": [
+    {
+     "task": "Swipe badge access at the new office building",
+     "better": "ID badge or keycard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Roll back production database migration to previous snapshot",
+     "better": "database with undo/revert arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return borrowed folding chairs to the neighbor on the left",
+     "better": "chair",
+     "trap": "property"
+    },
+    {
+     "task": "Buy touchscreen-friendly winter gloves for biking",
+     "better": "gloves",
+     "trap": "property"
+    },
+    {
+     "task": "Pay credit card bill from the swipe terminal at the shop",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write release notes for v2.4",
+     "better": "document or release notes",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "swipe_left_2",
+   "swipe_right_2",
+   "swipe_right",
+   "swipe"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7990,
+    "output": 2437,
+    "thoughts": 0,
+    "total": 10427
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:08Z"
+  }
+ },
+ "distinguishing": "Shows a single extended index finger beneath a curved arrow pointing left, representing a one-finger swipe left or flick back rather than a two-finger, rightward, or bidirectional gesture."
 }

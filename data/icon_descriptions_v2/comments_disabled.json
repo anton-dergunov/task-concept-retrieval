@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "comments disabled or muted",
+   "meaning": "disable comments or turn off discussion thread",
    "strength": "primary"
   },
   {
-   "meaning": "chat or messaging turned off",
+   "meaning": "mute chat or turn off messaging",
    "strength": "primary"
   },
   {
-   "meaning": "subtitles or captions off",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "unsubscribe or stop message notifications",
+   "meaning": "turn off message notifications",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with captions/subtitles off or a generic 'no document/notes' icon at small sizes because the speech bubble tail on the bottom right is clipped near the slash.",
+ "ambiguity": "Because the diagonal slash cuts right below the bottom-right corner, the small pointed tail looks like the continuation of a rectangular frame, making this icon very easy to confuse with the three-line slashed subtitle box or the bottom-left-tailed speaker notes bubble.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -176,40 +172,40 @@
  ],
  "near_misses": [
   {
-   "task": "Reply to Sarah's comment on the Q3 budget draft",
-   "better": "speech bubble / comment (without slash)",
+   "task": "Turn off closed captions on the Netflix app",
+   "better": "slashed tailless rectangular screen with segmented text lines (subtitles off)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Cancel the monthly Slack Pro subscription",
-   "better": "credit card or subscription cancel icon",
+   "task": "Hide speaker notes during the Zoom screen share",
+   "better": "slashed speech bubble with bottom-left tail, two dots, and two lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel the monthly Slack Pro credit card billing",
+   "better": "slashed credit card with solid magnetic stripe",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reply to Sarah's comment on the Q3 budget draft",
+   "better": "speech bubble without slash",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Write an unspoken rulebook for the shared kitchen",
-   "better": "document / book",
+   "better": "document or book",
    "trap": "property"
   },
   {
    "task": "Check why the customer chat widget isn't loading on Safari",
-   "better": "bug / wrench / chat bubble",
+   "better": "bug, wrench, or unslashed chat bubble",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Buy noise-cancelling headphones for the open office",
-   "better": "headphones",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Add Spanish subtitles to the onboarding video",
-   "better": "closed captions / subtitles icon (without slash)",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a speech/comment bubble with text lines crossed out by a diagonal slash, meaning 'comments disabled', 'mute chat', or 'no messaging'. While primarily a UI toggle state, it fits real tasks around muting noisy group chats, turning off blog/video comments, locking threads, or opting out of SMS spam.",
@@ -229,6 +225,98 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "comments disabled or muted",
+     "strength": "primary"
+    },
+    {
+     "meaning": "chat or messaging turned off",
+     "strength": "primary"
+    },
+    {
+     "meaning": "subtitles or captions off",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "unsubscribe or stop message notifications",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with captions/subtitles off or a generic 'no document/notes' icon at small sizes because the speech bubble tail on the bottom right is clipped near the slash.",
+   "near_misses": [
+    {
+     "task": "Reply to Sarah's comment on the Q3 budget draft",
+     "better": "speech bubble / comment (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel the monthly Slack Pro subscription",
+     "better": "credit card or subscription cancel icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write an unspoken rulebook for the shared kitchen",
+     "better": "document / book",
+     "trap": "property"
+    },
+    {
+     "task": "Check why the customer chat widget isn't loading on Safari",
+     "better": "bug / wrench / chat bubble",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy noise-cancelling headphones for the open office",
+     "better": "headphones",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Add Spanish subtitles to the onboarding video",
+     "better": "closed captions / subtitles icon (without slash)",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speaker_notes_off",
+   "credit_card_off",
+   "stack_off",
+   "subtitles_off",
+   "text_ad_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9498,
+    "output": 3020,
+    "thoughts": 0,
+    "total": 12518
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Has a pointed speech-bubble tail at the bottom-right corner (just above the slash) and three solid, unbroken horizontal text lines inside, setting it apart from the tailless segmented-line subtitle boxes and the bottom-left-tailed speaker notes bubble with dots."
 }

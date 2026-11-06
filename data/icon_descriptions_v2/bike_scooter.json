@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "handcycle or wheelchair front bike attachment",
+   "meaning": "wheelchair front bike / handcycle attachment",
    "strength": "primary"
   },
   {
-   "meaning": "bicycle trailer, cargo bike, or rickshaw",
+   "meaning": "cargo bike / stroller-cycle / bicycle trailer attachment",
    "strength": "primary"
   },
   {
-   "meaning": "walk-behind lawn mower, tiller, or snowblower",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "stroller or mobility scooter",
+   "meaning": "walk-behind tiller / garden machine",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The two-part silhouette is hard to parse at a glance and can look like a broken bicycle, a garden tiller, a wheelchair attachment, or a bike trailer depending on context.",
+ "ambiguity": "Its two unequal wheels can be mistaken at a quick glance for the riding tractor or lawnmower, and the split silhouette itself is ambiguous between an adaptive wheelchair cycle attachment, a convertible stroller-bike, and a walk-behind yard tool.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -154,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Mow the back two acres on the riding lawnmower",
+   "better": "riding lawnmower / garden tractor",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change the hydraulic fluid on the compact farm tractor",
+   "better": "tractor",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Tune up my road bike derailleurs before the century ride",
    "better": "standard two-wheeled bicycle",
    "trap": "lookalike_glyph"
@@ -164,22 +170,17 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a waterproof cover for the patio chairs",
-   "better": "patio chair or protective cover",
-   "trap": "property"
-  },
-  {
    "task": "Check the tire pressure on the boat trailer before towing to the lake",
    "better": "boat on a car trailer",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pack helmets and sunscreen",
+   "task": "Pack bike helmets and sunscreen for the family ride",
    "better": "bike helmet",
    "trap": "parent_topic"
   },
   {
-   "task": "Verify the serial number on the wheelchair frame for insurance",
+   "task": "Verify the serial number on the standard wheelchair frame for insurance",
    "better": "standard wheelchair",
    "trap": "generic_verb"
   }
@@ -187,7 +188,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a specialized two-wheeled contraption combining a bicycle front fork/wheel with a smaller-wheeled rear frame, resembling a clip-on wheelchair handbike, a bicycle trailer, or a walk-behind garden tiller. While usable for tasks involving adaptive cycling gear or bike trailers, its awkward split geometry is hard to identify at small sizes and is easily confused with a regular bicycle or stroller.",
@@ -205,6 +206,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "handcycle or wheelchair front bike attachment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bicycle trailer, cargo bike, or rickshaw",
+     "strength": "primary"
+    },
+    {
+     "meaning": "walk-behind lawn mower, tiller, or snowblower",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "stroller or mobility scooter",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The two-part silhouette is hard to parse at a glance and can look like a broken bicycle, a garden tiller, a wheelchair attachment, or a bike trailer depending on context.",
+   "near_misses": [
+    {
+     "task": "Tune up my road bike derailleurs before the century ride",
+     "better": "standard two-wheeled bicycle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Watch the new movie trailer with Sam after dinner",
+     "better": "film clapperboard or video play button",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a waterproof cover for the patio chairs",
+     "better": "patio chair or protective cover",
+     "trap": "property"
+    },
+    {
+     "task": "Check the tire pressure on the boat trailer before towing to the lake",
+     "better": "boat on a car trailer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack helmets and sunscreen",
+     "better": "bike helmet",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify the serial number on the wheelchair frame for insurance",
+     "better": "standard wheelchair",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "agriculture"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 1146,
+    "thoughts": 245,
+    "total": 5464
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "Shows a two-part frame with a small rear wheel and upright push-handle on the left coupled by two horizontal bars to a larger front bicycle fork and wheel on the right, lacking the seat, boxy hood, and steering wheel of the riding tractor."
 }

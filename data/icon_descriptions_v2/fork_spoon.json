@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost unmistakable, though practically identical in function to fork-and-knife icons.",
+ "ambiguity": "Semantically interchangeable with the three-utensil fork-spoon-knife icon for almost any food, meal, or silverware task.",
  "modifier_semantics": [],
  "domains": [
   "food",
@@ -156,6 +156,21 @@
  ],
  "near_misses": [
   {
+   "task": "Polish the full 24-piece silverware set including the butter knives before Thanksgiving",
+   "better": "full cutlery set with fork, spoon, and knife",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order replacement steak knives for the dining table",
+   "better": "fork, spoon, and knife / table knife",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sharpen the 8-inch chef knife on the whetstone",
+   "better": "kitchen knife",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Fork the upstream repository and open a pull request for the fix",
    "better": "git branch / code fork",
    "trap": "shared_vocabulary"
@@ -169,27 +184,12 @@
    "task": "Buy food-grade mineral oil for the wooden cutting board",
    "better": "bottle / cutting board",
    "trap": "property"
-  },
-  {
-   "task": "Sharpen the 8-inch chef knife on the whetstone",
-   "better": "kitchen knife",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Call the plumber about the leaking garbage disposal",
-   "better": "phone / wrench / sink",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Bake sourdough loaves for Saturday morning",
-   "better": "bread loaf",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A simple, universally recognized silhouette of a fork and spoon side by side. It is the standard icon for dining out, restaurant reservations, meal planning, catering, and literal cutlery or silverware tasks, sharing territory only with fork-and-knife icons.",
@@ -207,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "meal, dining, or restaurant",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cutlery, silverware, or eating utensils",
+     "strength": "primary"
+    },
+    {
+     "meaning": "food, lunch, or dinner",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "catering or meal service",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost unmistakable, though practically identical in function to fork-and-knife icons.",
+   "near_misses": [
+    {
+     "task": "Fork the upstream repository and open a pull request for the fix",
+     "better": "git branch / code fork",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the front fork seals on the mountain bike for oil leaks",
+     "better": "bicycle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy food-grade mineral oil for the wooden cutting board",
+     "better": "bottle / cutting board",
+     "trap": "property"
+    },
+    {
+     "task": "Sharpen the 8-inch chef knife on the whetstone",
+     "better": "kitchen knife",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the plumber about the leaking garbage disposal",
+     "better": "phone / wrench / sink",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Bake sourdough loaves for Saturday morning",
+     "better": "bread loaf",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "flatware"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 642,
+    "thoughts": 0,
+    "total": 4677
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Shows only two utensils (a fork and a spoon) with no knife, though it is semantically interchangeable with the three-piece fork-spoon-knife icon for dining and meals."
 }

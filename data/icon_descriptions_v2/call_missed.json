@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "missed call (incoming call that bounced)",
+   "meaning": "missed incoming call (call that bounced back)",
    "strength": "primary"
   },
   {
-   "meaning": "bounce / rebound / deflection",
+   "meaning": "bounce back / rebound / revert",
    "strength": "secondary"
   },
   {
-   "meaning": "return or revert back",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "checkmark with an arrow",
+   "meaning": "deflect or reject back to sender",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly resembles a backwards checkmark or a generic UI directional arrow if the viewer is not familiar with phone call log icons.",
+ "ambiguity": "Near-interchangeable at a glance with the right-pointing bouncing arrow if the user does not notice the left-vs-right direction; also resembles a backwards checkmark.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -45,11 +41,6 @@
    "task": "Return missed call from Dr. Patel",
    "parent": "",
    "domain": "communication"
-  },
-  {
-   "task": "Call back mom",
-   "parent": "",
-   "domain": "social_family"
   },
   {
    "task": "Clear missed calls list",
@@ -148,14 +139,24 @@
  ],
  "near_misses": [
   {
-   "task": "Schedule a call with the tax accountant for Tuesday",
-   "better": "phone receiver",
-   "trap": "shared_vocabulary"
+   "task": "Follow up on unanswered outgoing sales calls",
+   "better": "bouncing arrow pointing up-right (missed outgoing call)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plan Q3 revenue rebound strategy after dip",
+   "better": "bouncing arrow pointing up-right (rebound forward)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Check off completed items on the packing list",
    "better": "checkmark",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule a call with the tax accountant for Tuesday",
+   "better": "phone receiver",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Return the defective toaster to Target",
@@ -166,22 +167,12 @@
    "task": "Buy a mini trampoline for the kids to bounce on",
    "better": "trampoline",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Send the signed contract PDF to the landlord",
-   "better": "document with signature",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Check why the Wi-Fi keeps dropping in the bedroom",
-   "better": "wifi symbol",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "This V-shaped bouncing arrow is the standard Android/Material icon for a missed call (and occasionally bounce/rebound). While a phone handset is clearer for general calls, this glyph specifically fits tasks about returning missed calls or handling bounced messages, though out of context some users may mistake it for a checkmark or abstract directional arrow.",
@@ -199,6 +190,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "missed call (incoming call that bounced)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bounce / rebound / deflection",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "return or revert back",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "checkmark with an arrow",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly resembles a backwards checkmark or a generic UI directional arrow if the viewer is not familiar with phone call log icons.",
+   "near_misses": [
+    {
+     "task": "Schedule a call with the tax accountant for Tuesday",
+     "better": "phone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check off completed items on the packing list",
+     "better": "checkmark",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return the defective toaster to Target",
+     "better": "package with return arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a mini trampoline for the kids to bounce on",
+     "better": "trampoline",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the signed contract PDF to the landlord",
+     "better": "document with signature",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the Wi-Fi keeps dropping in the bedroom",
+     "better": "wifi symbol",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "call_missed_outgoing"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4022,
+    "output": 1020,
+    "thoughts": 147,
+    "total": 5189
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "The V-shaped arrow travels from top-right down and bounces up-left (arrowhead on the left), representing a standard incoming missed call or a backward bounce, whereas its mirror image bounces up-right."
 }

@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a clipboard-import icon (arrow pointing inward) or a generic share/export document icon at small sizes.",
+ "ambiguity": "Can be mistaken at a glance for the clipboard with a checkmark at the bottom right when both are rendered small, or confused with a clipboard-import icon (arrow pointing inward).",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow exiting bottom right corner",
@@ -162,19 +162,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy 4 wooden clipboards and pens for the registration table",
-   "better": "plain clipboard without arrow (or shopping cart)",
+   "task": "Complete the move-out apartment inspection checklist",
+   "better": "clipboard with checkmark in bottom right",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Check off daily habits before bed",
-   "better": "clipboard with checkmark",
-   "trap": "generic_verb"
+   "task": "Sign off on the quarterly safety audit form",
+   "better": "clipboard with checkmark in bottom right",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Import tasks from Asana into Linear",
    "better": "clipboard with inward-pointing arrow",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check off daily habits before bed",
+   "better": "clipboard with checkmark in bottom right",
+   "trap": "generic_verb"
   },
   {
    "task": "Buy clipboard-friendly legal pads for the site visit",
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows a clipboard with an outward-pointing arrow at the bottom right, representing submitting a form/checklist, exporting tasks, handing off a log, or pasting from the clipboard. It fits administrative, work, and tech tasks centered on sending out forms or lists, though at small sizes it can be confused with a plain clipboard or an import-to-clipboard icon.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "export task list, form, or clipboard contents",
+     "strength": "primary"
+    },
+    {
+     "meaning": "submit or hand off checklist, report, or assignment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "paste from clipboard",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "delegate or forward a task",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a clipboard-import icon (arrow pointing inward) or a generic share/export document icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy 4 wooden clipboards and pens for the registration table",
+     "better": "plain clipboard without arrow (or shopping cart)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check off daily habits before bed",
+     "better": "clipboard with checkmark",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Import tasks from Asana into Linear",
+     "better": "clipboard with inward-pointing arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy clipboard-friendly legal pads for the site visit",
+     "better": "notepad / paper pad",
+     "trap": "property"
+    },
+    {
+     "task": "Order replacement brass clips",
+     "better": "metal clip / hardware",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Paste wallpapers in the guest hallway",
+     "better": "paint roller / wallpaper roll",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "inventory"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4048,
+    "output": 1092,
+    "thoughts": 0,
+    "total": 5140
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "Shows a right-pointing arrow exiting the bottom-right corner of the clipboard (exporting, submitting, or handing off), rather than a checkmark in the bottom-right corner (completion, inspection, or audit)."
 }

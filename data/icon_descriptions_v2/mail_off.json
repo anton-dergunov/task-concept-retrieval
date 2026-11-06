@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "unsubscribe from emails or newsletters",
+   "meaning": "disable email notifications or mute inbox",
    "strength": "primary"
   },
   {
-   "meaning": "block spam or turn off email notifications",
+   "meaning": "unsubscribe from emails or block spam",
    "strength": "primary"
   },
   {
-   "meaning": "undelivered, bounced, or disabled email",
+   "meaning": "undeliverable or bounced email",
    "strength": "secondary"
   },
   {
-   "meaning": "opt out of paper mail or junk mail",
+   "meaning": "opt out of physical junk mail",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the diagonal slash blends with the left half of the envelope flap, making it look like a broken rectangle or an arrow pointing top-right inside a box.",
+ "ambiguity": "Overlaps in meaning with the envelope with a minus-circle badge when used for unsubscribing or blocking senders; at tiny sizes the slash cuts the flap so it resembles an arrow pointing top-right in a box.",
  "modifier_semantics": [
   {
    "modifier": "diagonal strike-through slash",
@@ -162,8 +162,18 @@
  ],
  "near_misses": [
   {
+   "task": "Delete old promotional emails from the archive folder",
+   "better": "envelope with minus badge or trash can icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Forward the flight itinerary email to my partner",
+   "better": "envelope with right-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Send the signed lease agreement back to the landlord by email",
-   "better": "plain envelope or send paper plane icon",
+   "better": "plain envelope or envelope with right-pointing arrow",
    "trap": "shared_vocabulary"
   },
   {
@@ -177,19 +187,9 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Export the quarterly slide deck to full-screen presentation mode",
-   "better": "expand arrow in box icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the annual Fastmail renewal invoice on the visa card",
+   "task": "Pay the annual Fastmail renewal invoice on the Visa card",
    "better": "credit card or invoice icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Mute the family group chat on WhatsApp for the weekend",
-   "better": "crossed-out speech bubble or muted bell icon",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -213,6 +213,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unsubscribe from emails or newsletters",
+     "strength": "primary"
+    },
+    {
+     "meaning": "block spam or turn off email notifications",
+     "strength": "primary"
+    },
+    {
+     "meaning": "undelivered, bounced, or disabled email",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "opt out of paper mail or junk mail",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the diagonal slash blends with the left half of the envelope flap, making it look like a broken rectangle or an arrow pointing top-right inside a box.",
+   "near_misses": [
+    {
+     "task": "Send the signed lease agreement back to the landlord by email",
+     "better": "plain envelope or send paper plane icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a box of security envelopes without the plastic window",
+     "better": "plain envelope or shopping cart icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check my inbox for the flight confirmation code",
+     "better": "plain envelope or plane ticket icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Export the quarterly slide deck to full-screen presentation mode",
+     "better": "expand arrow in box icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the annual Fastmail renewal invoice on the visa card",
+     "better": "credit card or invoice icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Mute the family group chat on WhatsApp for the weekend",
+     "better": "crossed-out speech bubble or muted bell icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "attach_email",
+   "stacked_email",
+   "mail",
+   "unsubscribe",
+   "mark_email_read",
+   "forward_to_inbox",
+   "outgoing_mail"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12060,
+    "output": 2435,
+    "thoughts": 63,
+    "total": 14558
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "A full diagonal slash strikes through the entire envelope from top-left to bottom-right, meaning disabled, blocked, or unsubscribed mail rather than a corner badge action."
 }

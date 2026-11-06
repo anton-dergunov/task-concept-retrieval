@@ -15,7 +15,7 @@
    "strength": "secondary"
   },
   {
-   "meaning": "outgoing call, transfer, or export",
+   "meaning": "outgoing transfer, export, or send out",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a surrounding box or phone handset, a bare diagonal arrow is generic UI chrome and could mean external link, expand, export, outgoing, or upward growth.",
+ "ambiguity": "Visually and semantically interchangeable with the other diagonal up-right arrow with a larger arrowhead; without a surrounding box or tray, a bare diagonal arrow is generic UI chrome that could mean external link, expand, export, or upward growth.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,9 +152,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new mechanical keyboard with dedicated arrow keys",
-   "better": "keyboard",
-   "trap": "shared_vocabulary"
+   "task": "Fix broken external links on the product landing page",
+   "better": "box with arrow pointing out of top-right corner, or interchangeable with the other diagonal up-right arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check stock market index performance after the Fed announcement",
+   "better": "zigzag line chart with upward trend arrow",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Order carbon arrows for Sunday archery practice",
@@ -162,30 +167,25 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Upload the signed tax forms to the accountant's portal",
-   "better": "upload cloud or tray with up arrow",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check stock market index performance after the Fed announcement",
-   "better": "line chart with trend line",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Share the family vacation photo album with grandma",
-   "better": "share icon",
-   "trap": "lookalike_glyph"
+   "better": "photo album or share node icon",
+   "trap": "generic_verb"
   },
   {
-   "task": "Book flights to the Pacific Northwest for August",
-   "better": "airplane",
+   "task": "Prepare Q3 high-growth hiring plan for engineering",
+   "better": "people or briefcase icon",
    "trap": "property"
+  },
+  {
+   "task": "Update redirect URLs in the SEO migration spreadsheet",
+   "better": "spreadsheet or chain link icon",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": true,
  "reasoning": "A bare northeast diagonal arrow is standard UI chrome for opening an external link or expanding a view, rather than a concrete task subject. While it can loosely suggest external links, exports, or upward trends, specialized icons (chain link, export tray, trend chart, phone handset with arrow) are much clearer and less ambiguous for actual to-do items.",
@@ -203,6 +203,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "external link or open in new tab",
+     "strength": "primary"
+    },
+    {
+     "meaning": "upward trend, growth, or increase",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "outgoing call, transfer, or export",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "northeast direction",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a surrounding box or phone handset, a bare diagonal arrow is generic UI chrome and could mean external link, expand, export, outgoing, or upward growth.",
+   "near_misses": [
+    {
+     "task": "Buy a new mechanical keyboard with dedicated arrow keys",
+     "better": "keyboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order carbon arrows for Sunday archery practice",
+     "better": "bow and arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upload the signed tax forms to the accountant's portal",
+     "better": "upload cloud or tray with up arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check stock market index performance after the Fed announcement",
+     "better": "line chart with trend line",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Share the family vacation photo album with grandma",
+     "better": "share icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights to the Pacific Northwest for August",
+     "better": "airplane",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arrow_outward"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4047,
+    "output": 1086,
+    "thoughts": 0,
+    "total": 5133
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:31Z"
+  }
+ },
+ "distinguishing": "This diagonal up-right arrow has a slightly longer diagonal shaft and shorter arrowhead wings, but is completely interchangeable in meaning with the wider-headed diagonal up-right arrow."
 }

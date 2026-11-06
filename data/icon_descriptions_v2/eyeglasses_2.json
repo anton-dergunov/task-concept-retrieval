@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "eyeglasses / spectacles / eyewear",
+   "meaning": "eyeglasses / spectacles / prescription eyewear",
    "strength": "primary"
   },
   {
@@ -17,13 +17,9 @@
   {
    "meaning": "reading / proofreading / studying",
    "strength": "secondary"
-  },
-  {
-   "meaning": "smart glasses / VR or AR eyewear",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with sunglasses if not contrasted against a dark-lens variant, or associated with a browser incognito/reading list icon.",
+ "ambiguity": "Could be confused with the eyeglasses with an audio-wave badge if the user overlooks the badge when tagging smart/audio glasses, or with sunglasses if not contrasted against a dark-lens variant.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -43,11 +39,6 @@
   "proofread or read documents carefully"
  ],
  "example_tasks": [
-  {
-   "task": "Pick up new glasses",
-   "parent": "",
-   "domain": "shopping"
-  },
   {
    "task": "Tighten loose right temple screw",
    "parent": "Eyeglasses",
@@ -154,9 +145,14 @@
  ],
  "near_misses": [
   {
-   "task": "Wash the crystal wine glasses by hand before the dinner party",
-   "better": "wine glass / stemware",
-   "trap": "shared_vocabulary"
+   "task": "Pair my new Ray-Ban Meta smart glasses with my phone's Bluetooth audio",
+   "better": "eyeglasses with three vertical audio wave bars at bottom right",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn on text-to-speech voice reader for the long PDF report",
+   "better": "eyeglasses with three vertical audio wave bars at bottom right",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy polarized sunglasses for the beach trip in July",
@@ -164,9 +160,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Order safety goggles for the woodworking shop",
-   "better": "protective safety goggles",
-   "trap": "lookalike_glyph"
+   "task": "Wash the crystal wine glasses by hand before the dinner party",
+   "better": "wine glass / stemware",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Look over the Q3 budget spreadsheet before Tuesday's meeting",
@@ -187,7 +183,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a pair of thick-rimmed eyeglasses with clear lenses. It is immediately recognizable and fits tasks about buying, repairing, or picking up glasses, optometry appointments, and secondary reading/review contexts, while being distinct from dark-lens sunglasses or drinking glasses.",
@@ -205,6 +201,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "eyeglasses / spectacles / eyewear",
+     "strength": "primary"
+    },
+    {
+     "meaning": "optometry / eye exam / vision care",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reading / proofreading / studying",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smart glasses / VR or AR eyewear",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with sunglasses if not contrasted against a dark-lens variant, or associated with a browser incognito/reading list icon.",
+   "near_misses": [
+    {
+     "task": "Wash the crystal wine glasses by hand before the dinner party",
+     "better": "wine glass / stemware",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy polarized sunglasses for the beach trip in July",
+     "better": "sunglasses with dark lenses",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order safety goggles for the woodworking shop",
+     "better": "protective safety goggles",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Look over the Q3 budget spreadsheet before Tuesday's meeting",
+     "better": "spreadsheet / table",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the $140 credit card balance from the optometrist visit",
+     "better": "credit card / payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Get a glare-free screen protector for the iPad",
+     "better": "tablet / screen",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "eyeglasses_2_sound"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4060,
+    "output": 772,
+    "thoughts": 0,
+    "total": 4832
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Shows two complete, unmodified eyeglass rims with no badge, representing ordinary eyeglasses, vision care, or reading rather than audio/smart glasses."
 }

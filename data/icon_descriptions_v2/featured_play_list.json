@@ -15,15 +15,15 @@
    "strength": "secondary"
   },
   {
-   "meaning": "presentation slide or UI card component",
+   "meaning": "mailing label or postcard",
    "strength": "secondary"
   },
   {
-   "meaning": "mailing label or postcard",
+   "meaning": "UI card component",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very generic shape; easily confused with a credit card, a presentation slide, a browser window, a text box, or a shipping label.",
+ "ambiguity": "Easily confused with generic card icons, or at a quick glance with the three-panel slide deck icon, though it lacks the vertical sidebars and centered title lines.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -156,13 +156,18 @@
  ],
  "near_misses": [
   {
-   "task": "Pay off the Chase Sapphire credit card balance",
-   "better": "credit card with magnetic stripe or chip",
-   "trap": "shared_vocabulary"
+   "task": "Format the title slide for tomorrow's keynote deck",
+   "better": "presentation slide with side panels and centered text",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a birthday card for Mom",
-   "better": "folded greeting card or gift",
+   "task": "Fix the homepage image carousel on mobile",
+   "better": "three-panel carousel or slideshow widget",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay off the Chase Sapphire credit card balance",
+   "better": "credit card with magnetic stripe or chip",
    "trap": "shared_vocabulary"
   },
   {
@@ -176,11 +181,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check if the hotel room accepts debit cards",
-   "better": "hotel or payment icon",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Update my email signature",
    "better": "email envelope or @ symbol",
    "trap": "parent_topic"
@@ -189,7 +189,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a simple horizontal card with two lines of text, representing an index card, flashcard, business card, label, or UI card. While useful for tasks involving note cards, study flashcards, or business cards, its minimal geometry makes it easy to confuse with credit cards, presentation slides, or generic document/window icons.",
@@ -207,6 +207,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "index card, note card, or flashcard",
+     "strength": "primary"
+    },
+    {
+     "meaning": "business card or name badge",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "presentation slide or UI card component",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "mailing label or postcard",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very generic shape; easily confused with a credit card, a presentation slide, a browser window, a text box, or a shipping label.",
+   "near_misses": [
+    {
+     "task": "Pay off the Chase Sapphire credit card balance",
+     "better": "credit card with magnetic stripe or chip",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew driver's license ID card at the DMV",
+     "better": "ID badge with person silhouette",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put the new microSD card into the dashcam",
+     "better": "SD memory card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the hotel room accepts debit cards",
+     "better": "hotel or payment icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Update my email signature",
+     "better": "email envelope or @ symbol",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "aod_tablet"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4040,
+    "output": 632,
+    "thoughts": 130,
+    "total": 4802
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Consists of a single undivided rectangular panel with two equal-length horizontal bars aligned to the top-left, representing a note card, index card, or label rather than a multi-panel slide carousel."
 }

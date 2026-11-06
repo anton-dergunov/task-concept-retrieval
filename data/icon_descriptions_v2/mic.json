@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "podcast or broadcast",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "voice assistant, dictation, or singing",
+   "meaning": "podcast, broadcast, or singing",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Easily confused at a glance with the microphone with three dots underneath, especially when tasks involve speaking or voice memos.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -156,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Dictate the first draft of the quarterly report",
+   "better": "microphone with three dots underneath for dictation or speech-to-text",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up voice typing on the new laptop",
+   "better": "microphone with three dots underneath for speech-to-text",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Listen to the new Hardcore History episode on the train",
    "better": "headphones",
    "trap": "shared_vocabulary"
@@ -179,17 +185,12 @@
    "task": "Order a smart plug that works with voice control",
    "better": "smart plug or electrical outlet",
    "trap": "property"
-  },
-  {
-   "task": "Take omega-3 capsules with breakfast",
-   "better": "pill capsule",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A universally recognizable studio microphone icon. It fits tasks centered on microphones, voice recording, voiceovers, voice memos, podcasts, and audio input setup. It is distinct from headphones (listening), speakers (playback), and phone handsets (calls).",
@@ -207,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "microphone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "voice recording or audio note",
+     "strength": "primary"
+    },
+    {
+     "meaning": "podcast or broadcast",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "voice assistant, dictation, or singing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Listen to the new Hardcore History episode on the train",
+     "better": "headphones",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the dentist to move Friday's cleaning",
+     "better": "telephone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a waterproof Bluetooth speaker for the patio",
+     "better": "speaker",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the annual hosting invoice for Simplecast",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a smart plug that works with voice control",
+     "better": "smart plug or electrical outlet",
+     "trap": "property"
+    },
+    {
+     "task": "Take omega-3 capsules with breakfast",
+     "better": "pill capsule",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_voice"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4000,
+    "output": 1018,
+    "thoughts": 76,
+    "total": 5094
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "A plain capsule microphone on a stem with nothing underneath, representing a physical microphone, general audio recording, or podcasting rather than speech-to-text dictation."
 }

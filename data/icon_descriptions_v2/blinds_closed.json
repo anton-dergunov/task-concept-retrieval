@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "window blinds or shutters",
+   "meaning": "closed or lowered window blinds / shutters",
    "strength": "primary"
   },
   {
-   "meaning": "closed blinds / shade / privacy",
-   "strength": "secondary"
+   "meaning": "window blinds or shades (general)",
+   "strength": "primary"
   },
   {
-   "meaning": "shelving unit or server rack",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "apartment building facade",
+   "meaning": "room darkening, blackout shade, or privacy",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the grid of horizontal slats and vertical cord looks very similar to an office building, a server rack, a bookshelf, or the Chinese character 且.",
+ "ambiguity": "Nearly interchangeable with the partially open blinds icon for general blinds tasks; at small sizes the full grid of slats also looks like a shelving unit, server rack, or office building with an odd bump on the bottom.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -152,14 +148,24 @@
  ],
  "near_misses": [
   {
+   "task": "Open the living room blinds to give the houseplants morning sun",
+   "better": "partially open window blinds",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Raise the blinds halfway before the house cleaning crew arrives",
+   "better": "partially open window blinds",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Set up a double-blind tasting of the three Pinot Noirs",
    "better": "wine glass",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Wash the sheer linen curtains on the gentle cycle",
-   "better": "curtains / laundry",
-   "trap": "lookalike_glyph"
+   "task": "Check the blind spot mirror on the passenger side",
+   "better": "car or side mirror",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Assemble the 4-tier garage storage shelf",
@@ -167,18 +173,8 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Check the blind spot mirror on the passenger side",
-   "better": "car / mirror",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay the monthly commercial building lease",
-   "better": "office building / money",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a cordless drill to mount the brackets",
-   "better": "drill",
+   "task": "Buy a cordless drill to mount the window brackets",
+   "better": "power drill",
    "trap": "parent_topic"
   }
  ],
@@ -203,6 +199,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "window blinds or shutters",
+     "strength": "primary"
+    },
+    {
+     "meaning": "closed blinds / shade / privacy",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "shelving unit or server rack",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "apartment building facade",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the grid of horizontal slats and vertical cord looks very similar to an office building, a server rack, a bookshelf, or the Chinese character 且.",
+   "near_misses": [
+    {
+     "task": "Set up a double-blind tasting of the three Pinot Noirs",
+     "better": "wine glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wash the sheer linen curtains on the gentle cycle",
+     "better": "curtains / laundry",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Assemble the 4-tier garage storage shelf",
+     "better": "shelving unit",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the blind spot mirror on the passenger side",
+     "better": "car / mirror",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly commercial building lease",
+     "better": "office building / money",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a cordless drill to mount the brackets",
+     "better": "drill",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "blinds"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4055,
+    "output": 1065,
+    "thoughts": 99,
+    "total": 5219
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Shows horizontal slats filling the entire window frame down to the sill with the pull-cord knob protruding beneath the sill, representing fully closed or lowered blinds (or shutters), in contrast to the partially raised blinds."
 }

@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "moon / lunar phase / astronomy",
+   "meaning": "moon / crescent moon / astronomy",
    "strength": "primary"
   },
   {
@@ -15,7 +15,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "dark mode / do not disturb setting",
+   "meaning": "dark mode / Do Not Disturb setting",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a banana or a C-shaped curve at very small sizes, though the classic crescent proportions make it clearly a moon.",
+ "ambiguity": "Completely interchangeable with the slightly wider tilted crescent moon and nearly interchangeable with the vertical waning crescent moon for all moon, night, and sleep concepts.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Check the waning crescent moonrise time before dawn",
+   "better": "vertical waning crescent moon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy fresh croissants at the bakery tomorrow morning",
+   "better": "croissant / bread",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book 4 nights at the Kyoto ryokan in April",
    "better": "hotel / bed",
    "trap": "shared_vocabulary"
@@ -163,11 +173,6 @@
    "task": "Order a waterproof headlamp with red night-vision mode",
    "better": "headlamp / flashlight",
    "trap": "property"
-  },
-  {
-   "task": "Buy fresh croissants at the bakery tomorrow morning",
-   "better": "croissant / bread",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the overnight shipping fee for the passport renewal",
@@ -188,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognizable crescent moon icon. It fits tasks centered on sleep and bedtime routines, lunar astronomy or stargazing, night shifts, Ramadan/Islamic calendar events, and UI dark mode or Do Not Disturb settings. Care should be taken not to use it when 'night' or 'overnight' is merely a timing attribute or hotel duration.",
@@ -206,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "moon / lunar phase / astronomy",
+     "strength": "primary"
+    },
+    {
+     "meaning": "night / evening / bedtime / sleep",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dark mode / do not disturb setting",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Islam / Ramadan / Eid",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a banana or a C-shaped curve at very small sizes, though the classic crescent proportions make it clearly a moon.",
+   "near_misses": [
+    {
+     "task": "Book 4 nights at the Kyoto ryokan in April",
+     "better": "hotel / bed",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a waterproof headlamp with red night-vision mode",
+     "better": "headlamp / flashlight",
+     "trap": "property"
+    },
+    {
+     "task": "Buy fresh croissants at the bakery tomorrow morning",
+     "better": "croissant / bread",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the overnight shipping fee for the passport renewal",
+     "better": "package / shipping",
+     "trap": "property"
+    },
+    {
+     "task": "Wash the sheets and pillowcases",
+     "better": "laundry / bed",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Schedule date night babysitter for Saturday",
+     "better": "calendar / baby",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nightlight_round",
+   "bedtime"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5346,
+    "output": 1669,
+    "thoughts": 170,
+    "total": 7185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "This crescent moon is tilted toward the upper right with a deeply scooped, circular inner curve (making its horns curl further around than the wider-opening tilted crescent or the vertical crescent), though it is functionally interchangeable with both for moon, night, and sleep tasks."
 }

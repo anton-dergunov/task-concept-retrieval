@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "index card, flashcard, or note card",
+   "meaning": "index card, flashcard, or horizontal note card",
    "strength": "primary"
   },
   {
-   "meaning": "business card or contact card",
+   "meaning": "presentation slide, summary card, or UI info card",
    "strength": "primary"
-  },
-  {
-   "meaning": "presentation slide or summary card",
-   "strength": "secondary"
   },
   {
    "meaning": "subtitles, closed captions, or text box",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with generic document, list, menu, credit card, or closed-caption UI icons because it is just a rectangle with three lines.",
+ "ambiguity": "Easily confused with the rounded square note (which is 1:1 with the short line at the bottom rather than the top) and with the landscape folder if the folder's top-left tab isn't noticed.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -165,19 +161,24 @@
  ],
  "near_misses": [
   {
+   "task": "Print the vertical two-page NDA for tomorrow's meeting",
+   "better": "tall portrait page with folded top-right corner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Design the two-column bi-fold program for the recital",
+   "better": "landscape rectangle split vertically into two panes",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Organize the warranty manuals inside the appliance folder",
+   "better": "landscape file folder with top-left tab",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Activate the new Visa credit card before booking flights",
    "better": "credit card with magnetic stripe or chip",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Renew my driver's license at the DMV next Tuesday",
-   "better": "ID card with person portrait",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "File the signed lease agreement PDF in the apartment folder",
-   "better": "vertical page / document icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a birthday greeting card and envelopes for Mum",
@@ -188,17 +189,12 @@
    "task": "Record the voiceover audio for the onboarding slides",
    "better": "microphone",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Write a 4-page essay on the causes of the 1973 oil crisis",
-   "better": "vertical document or pen and paper",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a horizontal rectangular card containing three lines of text, which fits index cards, flashcards, cue cards, business cards, slides, or video captions. However, because it lacks a portrait, chip, or distinctive shape, it is somewhat generic and easily confused with generic document, text-box, or UI layout icons.",
@@ -218,6 +214,100 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "index card, flashcard, or note card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "business card or contact card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "presentation slide or summary card",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "subtitles, closed captions, or text box",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with generic document, list, menu, credit card, or closed-caption UI icons because it is just a rectangle with three lines.",
+   "near_misses": [
+    {
+     "task": "Activate the new Visa credit card before booking flights",
+     "better": "credit card with magnetic stripe or chip",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew my driver's license at the DMV next Tuesday",
+     "better": "ID card with person portrait",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "File the signed lease agreement PDF in the apartment folder",
+     "better": "vertical page / document icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a birthday greeting card and envelopes for Mum",
+     "better": "folded greeting card or envelope with heart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Record the voiceover audio for the onboarding slides",
+     "better": "microphone",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Write a 4-page essay on the causes of the 1973 oil crisis",
+     "better": "vertical document or pen and paper",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "description",
+   "feed",
+   "text_snippet",
+   "chrome_reader_mode",
+   "article",
+   "library_books",
+   "source"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12132,
+    "output": 4025,
+    "thoughts": 352,
+    "total": 16509
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "A wide landscape rounded rectangle with four intact corners and three horizontal bars (short top bar above two full-width bars), distinct from the square note by its horizontal card proportions and from the postcard and folder by having no vertical split or top tab."
 }

@@ -7,15 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "USB, flash drive, or USB cable/port",
+   "meaning": "USB port, cable, or flash drive",
    "strength": "primary"
   },
   {
-   "meaning": "peripheral connection or data transfer",
+   "meaning": "wired peripheral connection or serial bus",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could slightly resemble a candelabra, cactus, or git branching diagram to someone unfamiliar with the standard USB trident, though the geometric tips make it unmistakable.",
+ "ambiguity": "At a quick glance, its vertical stem with two side arms could be confused with a stylized cactus or the geometric flower/sprout icon, or with a version-control branching graph.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -145,14 +145,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small USB rechargeable headlamp for camping",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Repot the kitchen windowsill herbs into larger planters",
+   "better": "geometric flower or plant sprout",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Plug in the laser printer and print a test page",
-   "better": "printer",
-   "trap": "parent_topic"
+   "task": "Water the saguaro cactus in the front yard",
+   "better": "plant or cactus",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Merge feature branch into main before Friday's release",
@@ -160,8 +160,13 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Plug in the laser printer and print a test page",
+   "better": "printer",
+   "trap": "parent_topic"
+  },
+  {
    "task": "Update the drivers for the Bluetooth mouse",
-   "better": "computer mouse / Bluetooth",
+   "better": "computer mouse or Bluetooth",
    "trap": "shared_vocabulary"
   },
   {
@@ -170,15 +175,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Order a surge protector power strip for behind the TV",
-   "better": "power plug / outlet",
-   "trap": "lookalike_glyph"
+   "task": "Buy a rechargeable headlamp that charges via USB-C",
+   "better": "headlamp",
+   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts the universal USB trident symbol with a circle base and circle, triangle, and square prongs. It is immediately recognizable and ideal for tasks involving flash drives, USB cables, hubs, ports, and bootable media. It should not be used when 'USB' is merely an attribute of another product like a rechargeable lamp or microphone.",
@@ -196,6 +201,83 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "USB, flash drive, or USB cable/port",
+     "strength": "primary"
+    },
+    {
+     "meaning": "peripheral connection or data transfer",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could slightly resemble a candelabra, cactus, or git branching diagram to someone unfamiliar with the standard USB trident, though the geometric tips make it unmistakable.",
+   "near_misses": [
+    {
+     "task": "Plug in the laser printer and print a test page",
+     "better": "printer",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Merge feature branch into main before Friday's release",
+     "better": "git branch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the drivers for the Bluetooth mouse",
+     "better": "computer mouse / Bluetooth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the external hard drive is mounted",
+     "better": "hard drive",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a surge protector power strip for behind the TV",
+     "better": "power plug / outlet",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "lda"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4018,
+    "output": 1065,
+    "thoughts": 0,
+    "total": 5083
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Depicts the standard USB trident with a central upward arrow, a base circle, and two open upward-turning side branches capped with a circle and a square, unlike the closed-loop leaves and hollow rectangular blossom of the geometric flower."
 }

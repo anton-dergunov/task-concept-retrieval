@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "system utility or control panel app",
+   "meaning": "system utility or settings app tile",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable in meaning from an unframed gear icon; at very small sizes the inner gear could resemble a sun or flower inside a box, or a wall safe.",
+ "ambiguity": "Nearly interchangeable at task-list size with the gear inside a horizontal rectangular frame; could also be mistaken for a wall safe with a combination dial.",
  "modifier_semantics": [
   {
    "modifier": "rounded square border",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Adjust the aspect ratio and resolution on the living room TV screen",
+   "better": "gear inside a horizontal rectangular screen frame or TV",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the combination on the basement wall safe",
+   "better": "safe with combination dial and handle or padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pack climbing gear for the weekend trip to Joshua Tree",
    "better": "carabiner, rope, or backpack",
    "trap": "shared_vocabulary"
@@ -175,16 +185,6 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Check the combination on the basement wall safe",
-   "better": "safe or padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a new brightness sensor for the porch light",
-   "better": "lightbulb or sun",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Update the billing credit card before the subscription renews",
    "better": "credit card",
    "trap": "parent_topic"
@@ -193,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a six-toothed gear enclosed in a rounded square, universally recognized as settings, system configuration, or an admin utility app. It fits technical setup, preference tweaking, automation, and literal mechanical gear tasks well, though it overlaps heavily with standard unframed cogwheel icons.",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "settings, configuration, or preferences",
+     "strength": "primary"
+    },
+    {
+     "meaning": "system utility or control panel app",
+     "strength": "primary"
+    },
+    {
+     "meaning": "automation, workflow, or background process",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "mechanical part, gear, or machinery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable in meaning from an unframed gear icon; at very small sizes the inner gear could resemble a sun or flower inside a box, or a wall safe.",
+   "near_misses": [
+    {
+     "task": "Pack climbing gear for the weekend trip to Joshua Tree",
+     "better": "carabiner, rope, or backpack",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set the dining table for eight before guests arrive",
+     "better": "plate and cutlery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the leaking trap under the bathroom sink",
+     "better": "wrench, pipe, or faucet",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check the combination on the basement wall safe",
+     "better": "safe or padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new brightness sensor for the porch light",
+     "better": "lightbulb or sun",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the billing credit card before the subscription renews",
+     "better": "credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "tv_options_input_settings"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4069,
+    "output": 1099,
+    "thoughts": 0,
+    "total": 5168
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "Encloses the six-toothed gear in a 1:1 rounded square frame (like an app tile or button) rather than a wider horizontal rectangle, though the two icons are virtually interchangeable in meaning."
 }

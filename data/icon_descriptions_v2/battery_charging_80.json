@@ -13,15 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "battery or portable power bank",
+   "meaning": "portable power bank or battery pack",
    "strength": "primary"
   },
   {
-   "meaning": "electrical power or energy supply",
+   "meaning": "mostly charged battery or 80% charge limit",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to other battery state icons (full battery, battery with bolt inside); at small sizes the partial fill might look like a bottle with a label.",
+ "ambiguity": "Nearly identical to the ~90% and ~60% filled charging battery icons, and interchangeable with the entire charging-battery progression in a task list.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt badge",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Put the completely drained power bank on the charger",
+   "better": "empty charging battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Discharge camera batteries to 20% before long-term storage",
+   "better": "low-fill charging battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small cordless rechargeable beard trimmer",
    "better": "beard trimmer or razor",
    "trap": "property"
@@ -175,22 +185,12 @@
    "task": "Dispute the duplicate $45 charge on the Visa statement",
    "better": "credit card",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Refill the insulated water bottle before heading to the gym",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Clean the green corrosion off the brass contacts with vinegar",
-   "better": "cleaning brush or electronics",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Clearly depicts a battery with a charging lightning bolt badge. It fits common everyday tasks around charging devices, topping up power banks, and buying, replacing, or recycling batteries, though it shares visual space with other battery-level variants.",
@@ -208,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery charging or rechargeable battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery or portable power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "electrical power or energy supply",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to other battery state icons (full battery, battery with bolt inside); at small sizes the partial fill might look like a bottle with a label.",
+   "near_misses": [
+    {
+     "task": "Buy a small cordless rechargeable beard trimmer",
+     "better": "beard trimmer or razor",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before Tuesday",
+     "better": "invoice or bill with lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take a quiet weekend off to recharge my batteries",
+     "better": "hammock, spa, or relaxing person",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the duplicate $45 charge on the Visa statement",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill the insulated water bottle before heading to the gym",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean the green corrosion off the brass contacts with vinegar",
+     "better": "cleaning brush or electronics",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_90",
+   "battery_charging_60",
+   "battery_charging_50",
+   "battery_charging_30",
+   "battery_charging_20",
+   "battery_charging_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10582,
+    "output": 3519,
+    "thoughts": 0,
+    "total": 14101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Filled to about three-quarters (~75-80%) with a medium rectangular empty space at the top and a lightning bolt badge at the bottom right; functionally interchangeable with the other partial-fill charging battery icons."
 }

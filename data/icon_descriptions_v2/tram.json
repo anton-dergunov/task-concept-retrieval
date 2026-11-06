@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "tram, streetcar, trolley, or light rail",
+   "meaning": "tram / streetcar / trolley",
    "strength": "primary"
   },
   {
-   "meaning": "train, subway, or metro",
+   "meaning": "light rail / electric city transit",
    "strength": "primary"
   },
   {
-   "meaning": "public transit or daily commute",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "aerial cable car or gondola",
+   "meaning": "public transit / daily commute",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles generic train or subway icons, and at small sizes the top pantograph can make it look like an aerial cable car or even an electric kettle or lantern.",
+ "ambiguity": "Easily confused at a glance with the two pantograph-less train/subway icons that share the exact same cab face and single center headlight, or mistaken for an aerial cable car due to the T-bar on top.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -154,29 +150,29 @@
  ],
  "near_misses": [
   {
-   "task": "Tighten the loose wheel on the supermarket shopping trolley",
-   "better": "shopping cart",
-   "trap": "shared_vocabulary"
+   "task": "Book high-speed Eurostar train tickets to Paris",
+   "better": "train car on railway tracks without overhead pantograph",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Prepare slide deck for the new employee onboarding train-the-trainer session",
-   "better": "presentation slides or teacher",
+   "task": "Reload the underground subway metro card for next month",
+   "better": "train or subway car without overhead pantograph",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book mountain cable car tickets for the Chamonix day trip",
+   "better": "aerial gondola suspended from an angled cable",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Tighten the loose wheel on the supermarket shopping trolley",
+   "better": "shopping cart",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Find an apartment within a ten-minute walk of a light rail station",
    "better": "apartment or house",
    "trap": "property"
-  },
-  {
-   "task": "Book mountain cable car tickets for the Chamonix day trip",
-   "better": "aerial gondola on cable",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Descale the electric kettle with white vinegar",
-   "better": "electric kettle",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy noise-cancelling earbuds for the noisy morning streetcar",
@@ -205,6 +201,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "tram, streetcar, trolley, or light rail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "train, subway, or metro",
+     "strength": "primary"
+    },
+    {
+     "meaning": "public transit or daily commute",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "aerial cable car or gondola",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles generic train or subway icons, and at small sizes the top pantograph can make it look like an aerial cable car or even an electric kettle or lantern.",
+   "near_misses": [
+    {
+     "task": "Tighten the loose wheel on the supermarket shopping trolley",
+     "better": "shopping cart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Prepare slide deck for the new employee onboarding train-the-trainer session",
+     "better": "presentation slides or teacher",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Find an apartment within a ten-minute walk of a light rail station",
+     "better": "apartment or house",
+     "trap": "property"
+    },
+    {
+     "task": "Book mountain cable car tickets for the Chamonix day trip",
+     "better": "aerial gondola on cable",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Descale the electric kettle with white vinegar",
+     "better": "electric kettle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy noise-cancelling earbuds for the noisy morning streetcar",
+     "better": "headphones or earbuds",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "directions_railway_2",
+   "directions_railway"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5376,
+    "output": 1123,
+    "thoughts": 178,
+    "total": 6677
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "Features a T-shaped overhead pantograph on the roof and two splayed diagonal rail legs at the bottom, specifically indicating an electric tram, streetcar, or trolley rather than a heavy train or subway."
 }

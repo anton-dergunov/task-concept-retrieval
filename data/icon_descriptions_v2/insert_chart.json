@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "bar chart, statistics, or analytics",
+   "meaning": "bar chart, statistics, or metrics report",
    "strength": "primary"
   },
   {
@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "metrics, reporting, or data dashboard",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "audio equalizer or sound levels",
+   "meaning": "data dashboard or analytics overview",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a Kanban board icon (like Trello, though Kanban columns are usually aligned at the top rather than the bottom) or audio level bars.",
+ "ambiguity": "Functionally interchangeable with the closed-frame ascending bar chart with a split middle bar for most chart and analytics tasks, and easily mistaken for the plus-badged bar chart if the corner isn't noticed.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -156,45 +152,45 @@
  ],
  "near_misses": [
   {
-   "task": "Book a high-top table at the new wine bar on 5th",
-   "better": "wine glass or cocktail",
-   "trap": "shared_vocabulary"
+   "task": "Create a new bar chart for the Q4 pitch deck",
+   "better": "bar chart in a square frame with a plus sign in the top-right corner",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a box of protein bars for hiking",
-   "better": "snack bar or hiking",
-   "trap": "shared_vocabulary"
+   "task": "Break down the stacked cohort retention metrics by tier",
+   "better": "ascending bar chart with a segmented middle bar in a square frame",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Move stalled tickets out of the Doing column in Trello",
-   "better": "kanban board (top-aligned columns)",
+   "better": "kanban board icon with top-aligned columns",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Dial down the mid-range on the living room stereo equalizer",
-   "better": "sliders / audio equalizer",
+   "better": "sliders / audio equalizer icon",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Book a high-top table at the new wine bar on 5th",
+   "better": "wine glass or cocktail icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Print the eye chart for the kids' school physical",
-   "better": "eye",
+   "better": "eye icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a wedding gift for the data analyst on our team",
-   "better": "gift box",
+   "better": "gift box icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Order a data-only eSIM for the week in Tokyo",
-   "better": "SIM card or phone",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a three-column bar chart framed inside a rounded square, universally understood as statistics, analytics, charts, or poll results. It fits many data, reporting, finance, and tracking tasks, though it shares visual structure with many other chart/graph icons and slightly resembles a Kanban board.",
@@ -212,6 +208,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "assessment"
- }
+  "alias_of": "assessment",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bar chart, statistics, or analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "poll or survey results",
+     "strength": "primary"
+    },
+    {
+     "meaning": "metrics, reporting, or data dashboard",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audio equalizer or sound levels",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a Kanban board icon (like Trello, though Kanban columns are usually aligned at the top rather than the bottom) or audio level bars.",
+   "near_misses": [
+    {
+     "task": "Book a high-top table at the new wine bar on 5th",
+     "better": "wine glass or cocktail",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a box of protein bars for hiking",
+     "better": "snack bar or hiking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Move stalled tickets out of the Doing column in Trello",
+     "better": "kanban board (top-aligned columns)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Dial down the mid-range on the living room stereo equalizer",
+     "better": "sliders / audio equalizer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Print the eye chart for the kids' school physical",
+     "better": "eye",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a wedding gift for the data analyst on our team",
+     "better": "gift box",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a data-only eSIM for the week in Tokyo",
+     "better": "SIM card or phone",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "addchart",
+   "analytics"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5457,
+    "output": 1742,
+    "thoughts": 246,
+    "total": 7445
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Depicts three solid vertical bars (medium, tall, short) inside a fully closed rounded square, lacking both the corner plus sign of the add-chart icon and the split middle bar of the ascending analytics icon, though it is largely interchangeable with the latter for general statistics."
 }

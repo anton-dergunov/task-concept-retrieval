@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "screen off / no screens / digital detox",
+   "meaning": "no TV / screen-free time / digital detox",
    "strength": "primary"
   },
   {
-   "meaning": "broken, disconnected, or disabled monitor / TV",
+   "meaning": "broken, disconnected, or disabled television or monitor",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "headless computer or server without monitor",
+   "meaning": "headless server or computer without display",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with 'stop casting' or 'laptop off' icons at very small sizes.",
+ "ambiguity": "Interchangeable with the slashed monitor on a T-stand and the slashed TV on a rectangular block base; also resembles the slashed laptop at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,45 +161,40 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new 27-inch 4K monitor for the home office",
-   "better": "monitor (without slash)",
+   "task": "Return broken company laptop to IT helpdesk",
+   "better": "laptop with slash",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Wipe dust and fingerprints off the TV screen",
-   "better": "monitor or cleaning cloth",
+   "task": "Exclude build directory from cloud backup sync",
+   "better": "file folder with slash",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Screen new tenant applications for the downstairs apartment",
-   "better": "document / resume / filter",
-   "trap": "shared_vocabulary"
+   "task": "Disable camera permissions for Zoom",
+   "better": "video camera with slash",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Patch the torn window screen on the back porch",
-   "better": "window / mesh repair",
+   "better": "house window or mesh repair",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Monitor server CPU usage after the Tuesday deployment",
-   "better": "gauge / chart / server",
+   "task": "Monitor server CPU usage after Tuesday deployment",
+   "better": "gauge, chart, or server",
    "trap": "generic_verb"
   },
   {
    "task": "Buy a non-glare matte laptop sleeve",
    "better": "laptop bag",
    "trap": "property"
-  },
-  {
-   "task": "Call the eye doctor about dry eyes",
-   "better": "eye / doctor / phone",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a desktop monitor or TV screen with a diagonal slash through it. It fits tasks about reducing screen time (digital detox, no-screen rules), troubleshooting a blank or disconnected display, disposing of a broken monitor, or headless server setups. Could be confused with a normal monitor icon if the slash isn't noticed.",
@@ -217,6 +212,105 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "screen off / no screens / digital detox",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken, disconnected, or disabled monitor / TV",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stop screen sharing or disable external display",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "headless computer or server without monitor",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with 'stop casting' or 'laptop off' icons at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a new 27-inch 4K monitor for the home office",
+     "better": "monitor (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wipe dust and fingerprints off the TV screen",
+     "better": "monitor or cleaning cloth",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Screen new tenant applications for the downstairs apartment",
+     "better": "document / resume / filter",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Patch the torn window screen on the back porch",
+     "better": "window / mesh repair",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Monitor server CPU usage after the Tuesday deployment",
+     "better": "gauge / chart / server",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a non-glare matte laptop sleeve",
+     "better": "laptop bag",
+     "trap": "property"
+    },
+    {
+     "task": "Call the eye doctor about dry eyes",
+     "better": "eye / doctor / phone",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_access_disabled",
+   "sync_saved_locally_off",
+   "domain_verification_off",
+   "videocam_off",
+   "folder_off",
+   "web_asset_off",
+   "tv_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12219,
+    "output": 3998,
+    "thoughts": 0,
+    "total": 16217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Shows a monitor or TV with a wide, bevel-edged pedestal base directly under the screen, functionally interchangeable with the other two slashed monitor/TV icons."
 }

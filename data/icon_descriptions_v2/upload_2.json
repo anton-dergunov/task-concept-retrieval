@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "upload / submit file",
+   "meaning": "upload or submit file",
    "strength": "primary"
   },
   {
-   "meaning": "caps lock / shift key",
+   "meaning": "export, publish, or back up to cloud",
    "strength": "secondary"
   },
   {
-   "meaning": "export / publish",
+   "meaning": "Caps Lock or Shift keyboard symbol",
    "strength": "secondary"
   },
   {
-   "meaning": "upgrade / promote / move to top",
+   "meaning": "upgrade or promote",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles the keyboard symbol for Caps Lock (or Shift with an underline) due to the hollow blocky arrow shape, as well as standard file upload icons.",
+ "ambiguity": "Interchangeable at a glance with the shorter, wider hollow upward arrow over a horizontal bar, and shares the same dual reading as both a file-upload action and a Caps Lock key symbol.",
  "modifier_semantics": [
   {
    "modifier": "horizontal bar beneath arrow",
@@ -162,40 +162,45 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the stuck Caps Lock key on the office keyboard",
+   "better": "keyboard icon or the wider, squat Caps Lock arrow over a bar",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Download the bank statements for last year",
-   "better": "download arrow (pointing down to bar)",
+   "better": "downward arrow over a bar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Send the invoice PDF to the client by email",
+   "better": "email envelope icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Scan the signed contract on the flatbed scanner",
-   "better": "scanner / document",
+   "better": "scanner or document icon",
    "trap": "generic_verb"
   },
   {
    "task": "Pick up dry cleaning on the way home",
-   "better": "shirt / hanger",
+   "better": "shirt or hanger icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a high-upload-speed router for the home office",
-   "better": "router / wifi",
+   "better": "router or wifi icon",
    "trap": "property"
   },
   {
    "task": "Write speaker bio and talk abstract",
-   "better": "document / text",
+   "better": "document or text icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Send the invoice PDF to the client by email",
-   "better": "email / envelope",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a thick hollow upward arrow over a horizontal bar, universally read as 'upload' (and also used on keyboards for Caps Lock). It fits action-centered tasks where uploading, submitting, or publishing files to a portal or server is the core point of the task, though whenever the document type itself is more salient (e.g. passport, tax form, video), that object icon may compete.",
@@ -215,6 +220,94 @@
    "example_tasks with parent: 2 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload / submit file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "caps lock / shift key",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "export / publish",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upgrade / promote / move to top",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles the keyboard symbol for Caps Lock (or Shift with an underline) due to the hollow blocky arrow shape, as well as standard file upload icons.",
+   "near_misses": [
+    {
+     "task": "Download the bank statements for last year",
+     "better": "download arrow (pointing down to bar)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Scan the signed contract on the flatbed scanner",
+     "better": "scanner / document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up dry cleaning on the way home",
+     "better": "shirt / hanger",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a high-upload-speed router for the home office",
+     "better": "router / wifi",
+     "trap": "property"
+    },
+    {
+     "task": "Write speaker bio and talk abstract",
+     "better": "document / text",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Send the invoice PDF to the client by email",
+     "better": "email / envelope",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shift_lock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4057,
+    "output": 1149,
+    "thoughts": 116,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "Draws the hollow upward block arrow with a taller, narrower shaft and more acute head above the horizontal bar, though it is functionally interchangeable with the shorter, wider-shafted version."
 }

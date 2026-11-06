@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "water, hydration, or plumbing",
+   "meaning": "liquid level, fluid refill, or printer ink supply",
    "strength": "primary"
   },
   {
-   "meaning": "humidity or moisture level",
+   "meaning": "humidity level or moisture percentage",
    "strength": "primary"
   },
   {
-   "meaning": "ink, toner, or liquid refill",
+   "meaning": "opacity, color saturation, or contrast in design",
    "strength": "secondary"
   },
   {
-   "meaning": "contrast, saturation, or opacity adjustment",
+   "meaning": "water or hydration tracking",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for an upside-down map pin or a chestnut at small sizes; the half-fill distinguishes it slightly from a plain solid water drop.",
+ "ambiguity": "Visually identical to the other half-filled droplet in the group, and easily confused with the plain outlined droplet when used for general water tasks.",
  "modifier_semantics": [
   {
    "modifier": "half-filled horizontal level",
@@ -163,13 +163,13 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Turn off the main water valve before the plumber arrives",
+   "better": "plain outlined water droplet or pipe",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Schedule routine fasting blood test at the clinic",
-   "better": "syringe or test tube",
+   "task": "Schedule a blood donation appointment at the clinic",
+   "better": "plain outlined droplet",
    "trap": "lookalike_glyph"
   },
   {
@@ -196,7 +196,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a half-filled droplet, universally read as water, hydration, humidity, or ink/liquid level. It fits a wide range of everyday tasks from drinking water and watering plants to paying water bills, checking humidity, and refilling ink, though it shares most meanings with a plain droplet icon.",
@@ -214,6 +214,87 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 2
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "water, hydration, or plumbing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "humidity or moisture level",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ink, toner, or liquid refill",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "contrast, saturation, or opacity adjustment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for an upside-down map pin or a chestnut at small sizes; the half-fill distinguishes it slightly from a plain solid water drop.",
+   "near_misses": [
+    {
+     "task": "Check if the patio umbrella is dry before folding it",
+     "better": "umbrella",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Liquidate old brokerage account and transfer cash",
+     "better": "bank or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drop off Goodwill donation bags on Saturday morning",
+     "better": "box or charity bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new stainless steel kettle for the kitchen",
+     "better": "kettle",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "humidity_low",
+   "opacity"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5297,
+    "output": 1531,
+    "thoughts": 96,
+    "total": 6924
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "This half-filled droplet is visually identical to and completely interchangeable with the other half-filled droplet, and differs from the plain outlined droplet by having a solid black bottom half that cues fluid level, humidity, ink, or opacity."
 }

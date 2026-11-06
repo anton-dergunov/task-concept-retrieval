@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "high five, wave, or greeting",
+   "meaning": "high five or touch",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read equally as a literal human hand/glove, a 'stop/hold' gesture, or 'raising a hand' to volunteer or ask a question.",
+ "ambiguity": "Virtually identical and interchangeable with the flat-bottomed open hand, and easily confused with the open palm showing a thumb crease line.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -59,11 +59,6 @@
    "task": "Unscented hand cream for desk",
    "parent": "",
    "domain": "shopping"
-  },
-  {
-   "task": "Sign up for Saturday morning shift",
-   "parent": "Food Bank Volunteering",
-   "domain": "social_family"
   },
   {
    "task": "Do all ten tendon glides",
@@ -160,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Welcome the new intern on her first morning and introduce her to the team",
+   "better": "waving hand with motion arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test the tap targets on the mobile checkout button",
+   "better": "pointing index-finger hand",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Hand wash the wool sweaters in cold water",
    "better": "sweater or wash tub",
    "trap": "property"
@@ -180,17 +185,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Install grab bar in the guest shower",
-   "better": "shower or grab bar",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Hold mail at the post office for August vacation",
    "better": "envelope or mailbox",
    "trap": "generic_verb"
   },
   {
-   "task": "Bake four dozen chocolate chip cookies for the bake sale",
+   "task": "Bake four dozen chocolate chip cookies for the volunteer bake sale",
    "better": "cookie",
    "trap": "parent_topic"
   }
@@ -198,7 +198,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear outline of a raised open hand with five digits. It directly fits tasks about hand care, gloves, manicure, fingerprinting, and volunteering, as well as 'stop/hold' actions, and is visually distinct from pointing or grabbing hand cursors.",
@@ -216,6 +216,104 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hand, palm, fingers, or glove",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stop, halt, wait, or block",
+     "strength": "primary"
+    },
+    {
+     "meaning": "volunteer, raise hand, or pledge",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "high five, wave, or greeting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read equally as a literal human hand/glove, a 'stop/hold' gesture, or 'raising a hand' to volunteer or ask a question.",
+   "near_misses": [
+    {
+     "task": "Hand wash the wool sweaters in cold water",
+     "better": "sweater or wash tub",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up a small hand mixer at Target",
+     "better": "electric mixer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hand in the signed permission slip to Mrs. Gable",
+     "better": "document or signature",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the loose minute hand on the kitchen clock",
+     "better": "wall clock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install grab bar in the guest shower",
+     "better": "shower or grab bar",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hold mail at the post office for August vacation",
+     "better": "envelope or mailbox",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Bake four dozen chocolate chip cookies for the bake sale",
+     "better": "cookie",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pan_tool_alt",
+   "hand_gesture",
+   "pan_tool",
+   "eda"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8102,
+    "output": 1643,
+    "thoughts": 0,
+    "total": 9745
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "A plain open hand with a continuously rounded U-shaped base and no modifiers, virtually interchangeable in meaning with the flat-bottomed open hand."
 }

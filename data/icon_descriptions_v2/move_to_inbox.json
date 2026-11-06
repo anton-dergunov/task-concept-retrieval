@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "move to inbox / incoming messages or items",
+   "meaning": "inbox / process incoming messages, mail, or tasks",
    "strength": "primary"
   },
   {
-   "meaning": "download / save to local storage or folder",
+   "meaning": "receive or collect incoming submissions",
    "strength": "primary"
   },
   {
-   "meaning": "archive / file away into a box or drawer",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "import data or files",
+   "meaning": "move item back to inbox",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read interchangeably as 'inbox' (receiving messages/tasks), 'download' (saving files from the internet), or 'archive' (filing things into a box), and closely resembles a plain inbox tray without the arrow.",
+ "ambiguity": "Easily confused at a glance with the download bracket (arrow entering an open-top rectangle) or the archive box (3D box with a downward arrow on the front), and can be used loosely for downloading or archiving when those icons aren't seen alongside it.",
  "modifier_semantics": [
   {
    "modifier": "downward pointing arrow",
@@ -161,19 +157,19 @@
  ],
  "near_misses": [
   {
-   "task": "Send the signed contract back to the client",
-   "better": "paper plane, outbox with upward arrow, or envelope",
+   "task": "Download the Q3 bank statements as CSV files",
+   "better": "download bracket with downward arrow entering from the top",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Upload the final tax return to the accountant's portal",
-   "better": "upward arrow into cloud or outbox",
+   "task": "Archive old project emails from 2023",
+   "better": "3D archive storage box with downward arrow",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy plastic storage bins for the basement shelves",
-   "better": "storage box or crate",
-   "trap": "shared_vocabulary"
+   "task": "Upload the signed tax return to the accountant's portal",
+   "better": "outbox or upload icon with upward arrow",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Install the downloaded macOS security update",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows an inbox tray with a downward arrow pointing into it, universally understood as incoming mail/items (inbox), downloading, or archiving into a tray. It fits real tasks around inbox zero, triaging incoming requests, and downloading files, though it can be confused with a plain inbox tray or generic download arrow.",
@@ -212,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "move to inbox / incoming messages or items",
+     "strength": "primary"
+    },
+    {
+     "meaning": "download / save to local storage or folder",
+     "strength": "primary"
+    },
+    {
+     "meaning": "archive / file away into a box or drawer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "import data or files",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read interchangeably as 'inbox' (receiving messages/tasks), 'download' (saving files from the internet), or 'archive' (filing things into a box), and closely resembles a plain inbox tray without the arrow.",
+   "near_misses": [
+    {
+     "task": "Send the signed contract back to the client",
+     "better": "paper plane, outbox with upward arrow, or envelope",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upload the final tax return to the accountant's portal",
+     "better": "upward arrow into cloud or outbox",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy plastic storage bins for the basement shelves",
+     "better": "storage box or crate",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install the downloaded macOS security update",
+     "better": "gear, laptop, or shield",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the refund hit my checking account",
+     "better": "bank, dollar sign, or credit card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Reply to Sarah's email about Thanksgiving dinner",
+     "better": "reply arrow, envelope, or chat bubble",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "system_update_alt",
+   "archive"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5463,
+    "output": 1553,
+    "thoughts": 169,
+    "total": 7185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "Unlike the open-top download bracket or the 3D archive box, this icon has a horizontal divider with a curved thumb notch near the bottom, marking it specifically as an inbox tray receiving incoming mail or tasks."
 }

@@ -18,11 +18,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "weak secured Wi-Fi signal",
+   "meaning": "medium or 2-bar secured Wi-Fi signal",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "locked or restricted internet connection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "It depicts a specific OS status bar state (medium signal strength, password-protected) rather than just a generic Wi-Fi icon, which looks nearly identical to full/low signal variants at small sizes.",
+ "ambiguity": "Nearly identical at small sizes to the locked Wi-Fi icon with only the bottom tip filled; viewers will read both simply as secured Wi-Fi without noticing the tiny difference in fill height.",
  "modifier_semantics": [
   {
    "modifier": "closed padlock badge at bottom right",
@@ -161,23 +165,28 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof Wi-Fi security camera for the porch",
+   "task": "Troubleshoot why the patio only gets a barely-there 1-bar secured Wi-Fi signal",
+   "better": "locked Wi-Fi icon with 1-bar tip-filled signal wedge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the broken Wi-Fi router in the living room",
+   "better": "plain Wi-Fi signal or router without padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a small waterproof Wi-Fi security camera for the front porch",
    "better": "security camera",
    "trap": "property"
   },
   {
-   "task": "Buy a sturdy padlock for the backyard shed",
+   "task": "Buy a sturdy padlock for the backyard garden shed",
    "better": "padlock",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Clean the bathroom exhaust fan over the weekend",
-   "better": "ventilation fan",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Return the old router box to the UPS store",
-   "better": "package / shipping box",
+   "better": "package or shipping box",
    "trap": "parent_topic"
   },
   {
@@ -194,7 +203,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a half-filled Wi-Fi signal wedge with a padlock badge, universally understood as secured or password-protected Wi-Fi. While originating as a system status indicator for signal strength, it serves well as a specific icon for tasks about Wi-Fi passwords, guest networks, and router security, though it is easily confused with other Wi-Fi strength variants.",
@@ -212,6 +221,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi password or secured wireless network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "network security or router encryption settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weak secured Wi-Fi signal",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "It depicts a specific OS status bar state (medium signal strength, password-protected) rather than just a generic Wi-Fi icon, which looks nearly identical to full/low signal variants at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof Wi-Fi security camera for the porch",
+     "better": "security camera",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a sturdy padlock for the backyard shed",
+     "better": "padlock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the bathroom exhaust fan over the weekend",
+     "better": "ventilation fan",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return the old router box to the UPS store",
+     "better": "package / shipping box",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Reset my bank account login password",
+     "better": "key or padlock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the smart thermostat is still online",
+     "better": "thermostat",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "network_wifi_1_bar_locked"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4090,
+    "output": 1187,
+    "thoughts": 141,
+    "total": 5418
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "The bottom of the Wi-Fi wedge is filled up to roughly two bars (about a third of the height), slightly higher than the tiny tip fill in the other locked Wi-Fi icon, though the two are functionally interchangeable."
 }

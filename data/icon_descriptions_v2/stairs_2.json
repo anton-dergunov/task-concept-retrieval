@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "stair climbing / workout / cardio",
+   "meaning": "three-stage progression / levels / tiers",
    "strength": "secondary"
   },
   {
-   "meaning": "levels / stages / step-by-step progression",
+   "meaning": "step function / digital step signal",
    "strength": "secondary"
   },
   {
-   "meaning": "step function / digital signal",
+   "meaning": "stair climbing / cardio workout",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can look like a statistical step chart, a digital square-wave signal, or an escalator symbol lacking arrows.",
+ "ambiguity": "Virtually interchangeable with the four-riser staircase icon for general stair tasks, and easily mistaken for a statistical step chart or digital square-wave edge.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -153,6 +153,16 @@
  ],
  "near_misses": [
   {
+   "task": "Vacuum the carpeted stairs from the basement to the attic",
+   "better": "four-riser staircase icon or vacuum cleaner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Log 20 flights of stairs on the gym stairmaster",
+   "better": "four-riser staircase icon or fitness tracker",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Hit 10,000 steps every day this month",
    "better": "footprints or pedometer",
    "trap": "shared_vocabulary"
@@ -170,15 +180,10 @@
   {
    "task": "Buy a folding 3-step ladder for the pantry",
    "better": "stepladder",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
-   "task": "Plot the quarterly revenue growth line chart for the board deck",
-   "better": "line chart",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Replace the burnt-out chandelier bulbs above the landing",
+   "task": "Replace the burnt-out chandelier bulbs above the stair landing",
    "better": "lightbulb",
    "trap": "parent_topic"
   }
@@ -186,7 +191,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear side-profile glyph of three steps representing physical stairs, staircases, or stair-climbing workouts. It fits home maintenance, cleaning, remodeling, and cardio fitness tasks well, though 'steps' in task titles often refers to walking pedometer steps or procedural instructions rather than a physical staircase.",
@@ -204,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "stairs / staircase / steps",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stair climbing / workout / cardio",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "levels / stages / step-by-step progression",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "step function / digital signal",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can look like a statistical step chart, a digital square-wave signal, or an escalator symbol lacking arrows.",
+   "near_misses": [
+    {
+     "task": "Hit 10,000 steps every day this month",
+     "better": "footprints or pedometer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write down the reproduction steps for the login crash",
+     "better": "numbered list or bug icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up 2-step verification on the joint bank account",
+     "better": "shield or padlock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a folding 3-step ladder for the pantry",
+     "better": "stepladder",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Plot the quarterly revenue growth line chart for the board deck",
+     "better": "line chart",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the burnt-out chandelier bulbs above the landing",
+     "better": "lightbulb",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "floor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4085,
+    "output": 740,
+    "thoughts": 126,
+    "total": 4951
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Drawn with only three horizontal treads and two vertical risers ending in a flat top landing, making it coarser and slightly more suggestive of a step waveform or three-stage progression than the four-riser staircase, though the two are largely interchangeable."
 }

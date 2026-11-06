@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "camera off / video disabled / no video",
+   "meaning": "camera off / video disabled / audio-only call",
    "strength": "primary"
   },
   {
-   "meaning": "broken webcam or security camera",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cancelled video call or meeting",
-   "strength": "secondary"
+   "meaning": "broken webcam, camcorder, or security camera",
+   "strength": "primary"
   },
   {
    "meaning": "no filming or recording allowed",
    "strength": "secondary"
+  },
+  {
+   "meaning": "cancelled video meeting",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to overlook the slash at very small sizes and confuse it with a regular video camera icon.",
+ "ambiguity": "Distinct from the monitors, windows, and folder in this group due to the right-side lens cone, though at tiny sizes the boxy body plus slash could momentarily blend in.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -159,24 +159,24 @@
  ],
  "near_misses": [
   {
-   "task": "Record product walkthrough video for the release notes",
-   "better": "video camera (without slash)",
+   "task": "Turn off external monitor after work",
+   "better": "desktop monitor with slash",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Join the client kickoff call with mute on",
+   "task": "Stop screen sharing in Zoom meeting",
+   "better": "monitor or screen with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Join the client kickoff call with microphone muted",
    "better": "muted microphone",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Cancel Netflix and Mubi subscriptions before renewal",
-   "better": "subscription / TV / credit card",
+   "task": "Cancel Netflix and Mubi video subscriptions",
+   "better": "subscription or credit card",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book a windowless room for the projector demo",
-   "better": "projector / meeting room",
-   "trap": "property"
   },
   {
    "task": "Buy SD card for the new camcorder",
@@ -185,14 +185,14 @@
   },
   {
    "task": "Check security camera footage from Tuesday night",
-   "better": "video camera / CCTV",
+   "better": "intact video camera or CCTV",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "Shows a video camera crossed out by a diagonal slash, universally recognized as 'video off' or 'camera disabled'. While originally a UI toggle state, in a task manager it fits a specific niche of tasks around fixing a broken webcam/security camera, disabling camera permissions, or cancelling video calls. Must be distinguished from the unslashed video camera used for regular calls and filming.",
@@ -210,6 +210,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera off / video disabled / no video",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken webcam or security camera",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cancelled video call or meeting",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "no filming or recording allowed",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to overlook the slash at very small sizes and confuse it with a regular video camera icon.",
+   "near_misses": [
+    {
+     "task": "Record product walkthrough video for the release notes",
+     "better": "video camera (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Join the client kickoff call with mute on",
+     "better": "muted microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel Netflix and Mubi subscriptions before renewal",
+     "better": "subscription / TV / credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a windowless room for the projector demo",
+     "better": "projector / meeting room",
+     "trap": "property"
+    },
+    {
+     "task": "Buy SD card for the new camcorder",
+     "better": "SD memory card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check security camera footage from Tuesday night",
+     "better": "video camera / CCTV",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_access_disabled",
+   "mimo_disconnect",
+   "sync_saved_locally_off",
+   "domain_verification_off",
+   "folder_off",
+   "web_asset_off",
+   "tv_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12219,
+    "output": 3998,
+    "thoughts": 0,
+    "total": 16217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "The only icon in the group with a triangular lens cone protruding from the right side and a squarer body, clearly depicting a video camera rather than a screen, window, or folder."
 }

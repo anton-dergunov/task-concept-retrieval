@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "roller blind / window shade / blackout shade",
+   "meaning": "closed roller blind or blackout shade",
    "strength": "primary"
   },
   {
-   "meaning": "window / window treatment",
+   "meaning": "close or lower window shades",
    "strength": "primary"
   },
   {
-   "meaning": "projector screen (pull-down screen)",
+   "meaning": "pull-down projector screen",
    "strength": "secondary"
   },
   {
-   "meaning": "top hat or bell on a ledge (visual misread)",
+   "meaning": "window or window treatment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a boxy top hat, a bell on a stand, a guillotine, or a pull-down projector screen, and the closed-vs-open position of the shade is indistinguishable from sibling icons in a smart-home blind set.",
+ "ambiguity": "Very easily confused with the half-open roller shade icon (which is identical except the shade bar and knob are raised to the middle of the window), and the outer silhouette with the low brim resembles a boxy top hat or bell.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -151,19 +151,14 @@
  ],
  "near_misses": [
   {
-   "task": "Do a double-blind tasting of the three Pinot Noirs with Mark",
-   "better": "wine glass",
-   "trap": "shared_vocabulary"
+   "task": "Open the living room blinds to let morning sunlight in for the plants",
+   "better": "half-open window shade (raised in the frame)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Clean the oven door glass with baking soda paste",
-   "better": "oven / stove",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Update Windows 11 on the home office PC before Tuesday",
-   "better": "computer / monitor",
-   "trap": "shared_vocabulary"
+   "task": "Replace the frayed pull cord on the kitchen roller shade",
+   "better": "half-open window shade (where the hanging cord and knob are clearly visible inside the pane)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Rent a formal top hat for Arthur's wedding at Ascot",
@@ -171,18 +166,23 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Book an eye exam for new polarized sunglasses",
-   "better": "sunglasses",
+   "task": "Do a double-blind tasting of the three Pinot Noirs with Mark",
+   "better": "wine glass",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Update Windows 11 on the home office PC before Tuesday",
+   "better": "computer or monitor",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a blackout eye mask for the overnight flight to Tokyo",
-   "better": "sleep mask / airplane",
+   "better": "sleep mask or airplane",
    "trap": "property"
   },
   {
    "task": "Pay the window cleaner £20 by bank transfer",
-   "better": "money / bank transfer",
+   "better": "money or bank transfer",
    "trap": "parent_topic"
   }
  ],
@@ -207,6 +207,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "roller blind / window shade / blackout shade",
+     "strength": "primary"
+    },
+    {
+     "meaning": "window / window treatment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "projector screen (pull-down screen)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "top hat or bell on a ledge (visual misread)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a boxy top hat, a bell on a stand, a guillotine, or a pull-down projector screen, and the closed-vs-open position of the shade is indistinguishable from sibling icons in a smart-home blind set.",
+   "near_misses": [
+    {
+     "task": "Do a double-blind tasting of the three Pinot Noirs with Mark",
+     "better": "wine glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the oven door glass with baking soda paste",
+     "better": "oven / stove",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update Windows 11 on the home office PC before Tuesday",
+     "better": "computer / monitor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Rent a formal top hat for Arthur's wedding at Ascot",
+     "better": "top hat",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book an eye exam for new polarized sunglasses",
+     "better": "sunglasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a blackout eye mask for the overnight flight to Tokyo",
+     "better": "sleep mask / airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the window cleaner £20 by bank transfer",
+     "better": "money / bank transfer",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "roller_shades"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4122,
+    "output": 1178,
+    "thoughts": 0,
+    "total": 5300
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Shows the roller shade pulled almost completely down to the windowsill with the pull-cord knob protruding below the sill, unlike the half-open look-alike where the bar and knob sit inside the frame."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "charging battery or recharging device",
+   "meaning": "battery charging / recharging device",
    "strength": "primary"
   },
   {
-   "meaning": "battery or portable power bank",
+   "meaning": "battery / portable power bank",
    "strength": "primary"
   },
   {
-   "meaning": "battery charger or charging cable",
+   "meaning": "battery charger / charging cable",
    "strength": "secondary"
   },
   {
-   "meaning": "electrical power or energy supply",
+   "meaning": "EV charging / power supply",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the open right end cut by the bolt makes it look slightly less like a traditional capped battery, potentially resembling a generic container or card with a flash symbol.",
+ "ambiguity": "Functionally interchangeable with the hollow charging battery outline, differing only by the solid inner fill block.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt",
@@ -163,9 +163,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp or flashlight",
-   "trap": "property"
+   "task": "Plug in the dead phone before the battery dies completely",
+   "better": "empty charging battery outline without inner fill",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Recycle the depleted AA batteries in the drawer",
+   "better": "empty battery outline or recycling symbol",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Dispute the double charge from the hotel on my Visa statement",
@@ -175,12 +180,7 @@
   {
    "task": "Pay the monthly electric bill before Friday",
    "better": "invoice or utility bill",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Unplug the router and balcony lights before the thunderstorm hits",
-   "better": "thunderstorm or lightning cloud",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a battery-powered milk frother for morning coffee",
@@ -196,7 +196,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a partially filled battery with a lightning bolt indicating charging or electrical power. It is an ideal match for everyday tasks involving charging devices, power banks, chargers, and replacing or recycling batteries, though it sits alongside several similar battery-status variants.",
@@ -216,6 +216,91 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "charging battery or recharging device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery or portable power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery charger or charging cable",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "electrical power or energy supply",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the open right end cut by the bolt makes it look slightly less like a traditional capped battery, potentially resembling a generic container or card with a flash symbol.",
+   "near_misses": [
+    {
+     "task": "Dispute the double charge from the hotel on my Visa statement",
+     "better": "credit card or receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly electric bill before Friday",
+     "better": "invoice or utility bill",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Unplug the router and balcony lights before the thunderstorm hits",
+     "better": "thunderstorm or lightning cloud",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a battery-powered milk frother for morning coffee",
+     "better": "milk frother or coffee cup",
+     "trap": "property"
+    },
+    {
+     "task": "Take a quiet afternoon off to recharge after the product launch",
+     "better": "person resting, sofa, or cup of tea",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_bolt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4024,
+    "output": 1037,
+    "thoughts": 106,
+    "total": 5167
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:14Z"
+  }
+ },
+ "distinguishing": "This is the filled version containing a solid inner block of charge, making it read more clearly as a battery at small sizes than the hollow outline version, though the two are largely interchangeable for charging tasks."
 }

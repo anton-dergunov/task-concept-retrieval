@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "stylized pine or evergreen tree",
+   "meaning": "page up or shift keyboard symbol",
    "strength": "primary"
-  },
-  {
-   "meaning": "page up or shift keyboard key symbol",
-   "strength": "secondary"
   },
   {
    "meaning": "upload or push to remote",
    "strength": "secondary"
+  },
+  {
+   "meaning": "small two-tiered pine or conifer tree",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Reads either as a double-tiered upward arrow (upgrade, page up, shift) or as a geometric conifer tree with two stacked canopy tiers and a short trunk.",
+ "ambiguity": "Easily confused with the three-tiered evergreen tree / triple-chevron arrow, since both use the exact same hollow block-arrow base and stacked chevron style; also bridges UI arrow meanings and conifer tree meanings.",
  "modifier_semantics": [
   {
    "modifier": "upper chevron cap",
@@ -54,11 +54,6 @@
    "task": "Upgrade NAS firmware",
    "parent": "",
    "domain": "tech"
-  },
-  {
-   "task": "Pick up Christmas tree",
-   "parent": "",
-   "domain": "home"
   },
   {
    "task": "Upgrade seats on Tokyo flight",
@@ -161,6 +156,21 @@
  ],
  "near_misses": [
   {
+   "task": "Plant sapling pine trees along the backyard fence",
+   "better": "three-tiered pine tree",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take down the Christmas tree and pack ornaments",
+   "better": "three-tiered pine tree",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Shift Saturday dentist appointment to next Thursday",
+   "better": "calendar or tooth",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Check if the new monitor supports high refresh rate",
    "better": "monitor",
    "trap": "generic_verb"
@@ -171,24 +181,9 @@
    "trap": "property"
   },
   {
-   "task": "Shift Saturday dentist appointment to next Thursday",
-   "better": "calendar or tooth",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Fix broken Shift keycap on the mechanical keyboard",
-   "better": "keyboard",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the invoice for the new SSD",
+   "task": "Pay the invoice for the new SSD upgrade",
    "better": "receipt or credit card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy pine-scented floor cleaner for the hallway",
-   "better": "spray bottle or mop",
-   "trap": "property"
   }
  ],
  "scores": {
@@ -212,6 +207,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upgrade, level up, or boost",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stylized pine or evergreen tree",
+     "strength": "primary"
+    },
+    {
+     "meaning": "page up or shift keyboard key symbol",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upload or push to remote",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Reads either as a double-tiered upward arrow (upgrade, page up, shift) or as a geometric conifer tree with two stacked canopy tiers and a short trunk.",
+   "near_misses": [
+    {
+     "task": "Check if the new monitor supports high refresh rate",
+     "better": "monitor",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy high-protein recovery shake after gym",
+     "better": "bottle or shaker",
+     "trap": "property"
+    },
+    {
+     "task": "Shift Saturday dentist appointment to next Thursday",
+     "better": "calendar or tooth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix broken Shift keycap on the mechanical keyboard",
+     "better": "keyboard",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the invoice for the new SSD",
+     "better": "receipt or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy pine-scented floor cleaner for the hallway",
+     "better": "spray bottle or mop",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arrow_shape_up_stack_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 621,
+    "thoughts": 105,
+    "total": 4785
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Has a single chevron cap above the hollow upward block arrow (two tiers total), reading primarily as an upgrade, boost, or Page Up symbol rather than the taller three-tiered pine tree."
 }

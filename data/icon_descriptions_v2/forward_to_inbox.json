@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "outgoing mail or letter",
+   "meaning": "outgoing mail or message",
    "strength": "primary"
   },
   {
-   "meaning": "reply to message",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "export messages or move email to folder",
+   "meaning": "export or move email to another folder or address",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a standard envelope, reply arrow, or share/export icon at very small sizes.",
+ "ambiguity": "Virtually identical to and completely interchangeable with the other envelope with a bottom-right arrow (differing only by a tiny proportion shift), and at small sizes the arrow can resemble the bottom-right checkmark badge.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow",
@@ -161,40 +157,40 @@
  ],
  "near_misses": [
   {
+   "task": "Confirm my email address for the new bank account",
+   "better": "envelope with checkmark badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Email the zipped photos attached to the family list",
+   "better": "envelope with paperclip badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a box of padded #000 shipping envelopes",
-   "better": "package or shopping bag",
+   "better": "package or shopping bag icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Call the post office about the missing parcel",
-   "better": "phone receiver or package",
+   "better": "phone receiver or package icon",
    "trap": "generic_verb"
   },
   {
    "task": "Print the return shipping label for the boots",
-   "better": "printer or barcode label",
+   "better": "printer or barcode label icon",
    "trap": "parent_topic"
   },
   {
    "task": "Update my email address in the airline loyalty profile",
-   "better": "user profile or airplane",
-   "trap": "property"
-  },
-  {
-   "task": "Export the Figma frames as PNGs for the deck",
-   "better": "image or export box",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the water bill that came in the mail",
-   "better": "water drop or bill/invoice",
+   "better": "user profile or airplane icon",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an envelope with a right-pointing arrow at the bottom right, universally understood as sending, forwarding, or outgoing email/mail. Sending and forwarding emails are among the most common everyday action tasks across work and personal life, though it slightly overlaps with plain envelope or reply icons.",
@@ -212,6 +208,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "send or forward an email",
+     "strength": "primary"
+    },
+    {
+     "meaning": "outgoing mail or letter",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reply to message",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "export messages or move email to folder",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a standard envelope, reply arrow, or share/export icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a box of padded #000 shipping envelopes",
+     "better": "package or shopping bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the post office about the missing parcel",
+     "better": "phone receiver or package",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Print the return shipping label for the boots",
+     "better": "printer or barcode label",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Update my email address in the airline loyalty profile",
+     "better": "user profile or airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Export the Figma frames as PNGs for the deck",
+     "better": "image or export box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the water bill that came in the mail",
+     "better": "water drop or bill/invoice",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mail_off",
+   "attach_email",
+   "stacked_email",
+   "mail",
+   "unsubscribe",
+   "mark_email_read",
+   "outgoing_mail"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12060,
+    "output": 2435,
+    "thoughts": 63,
+    "total": 14558
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "A right-pointing arrow replaces the bottom-right corner of the envelope to show sending, forwarding, or outgoing mail; visually and semantically interchangeable with the other right-arrow envelope in this group."
 }

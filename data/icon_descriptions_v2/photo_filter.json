@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "AI / artificial intelligence / generative tool",
+   "meaning": "AI tool, generative assistant, or smart auto-enhance action",
    "strength": "primary"
   },
   {
-   "meaning": "auto-enhance / polish / touch up image or content",
+   "meaning": "retouch, upscale, or polish a square photo or icon",
    "strength": "primary"
   },
   {
-   "meaning": "clean / make spotless / shine",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "magic / special effects / new feature",
+   "meaning": "clean, shine, or make spotless",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as modern AI/auto-generation or as physical cleaning and polishing depending on the user's context; also very close to plain sparkle icons without the square frame.",
+ "ambiguity": "Nearly interchangeable with the horizontal rectangular frame with a bottom-right sparkle; both convey AI/magic enhancement inside a frame.",
  "modifier_semantics": [
   {
    "modifier": "four-pointed sparkles",
@@ -160,40 +156,45 @@
  ],
  "near_misses": [
   {
-   "task": "Buy sparklers for New Year's Eve party",
-   "better": "fireworks / sparkler stick",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Watch the Perseid meteor shower on Tuesday night",
-   "better": "night sky / telescope / shooting star",
+   "task": "Use AI to generate the widescreen title slide for Friday's keynote",
+   "better": "horizontal rectangular frame with bottom-right sparkle",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Wipe fingerprints off the living room TV screen",
+   "better": "horizontal rectangular frame with sparkles or TV icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy sparklers for New Year's Eve party",
+   "better": "fireworks or sparkler stick icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Pick up magic tricks kit for Leo's birthday",
-   "better": "gift box or magician hat",
+   "better": "gift box or magician hat icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a self-cleaning litter box for the cat",
-   "better": "cat / pet litter box",
+   "better": "cat or pet litter box icon",
    "trap": "property"
   },
   {
    "task": "Clean up old branches in the git repository",
-   "better": "git branch / code icon",
+   "better": "git branch or code icon",
    "trap": "generic_verb"
   },
   {
    "task": "Send invoice to the client for the RAG prototype",
-   "better": "invoice / money",
+   "better": "invoice or money icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A rounded square frame with two four-pointed sparkles is widely recognized as the standard symbol for AI tools, auto-enhancement, photo retouching, or making something spotless. It fits tasks centered on LLMs, image enhancement, and deep cleaning, though it shares visual territory with other sparkle and magic-wand icons.",
@@ -211,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "AI / artificial intelligence / generative tool",
+     "strength": "primary"
+    },
+    {
+     "meaning": "auto-enhance / polish / touch up image or content",
+     "strength": "primary"
+    },
+    {
+     "meaning": "clean / make spotless / shine",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "magic / special effects / new feature",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as modern AI/auto-generation or as physical cleaning and polishing depending on the user's context; also very close to plain sparkle icons without the square frame.",
+   "near_misses": [
+    {
+     "task": "Buy sparklers for New Year's Eve party",
+     "better": "fireworks / sparkler stick",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Watch the Perseid meteor shower on Tuesday night",
+     "better": "night sky / telescope / shooting star",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up magic tricks kit for Leo's birthday",
+     "better": "gift box or magician hat",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a self-cleaning litter box for the cat",
+     "better": "cat / pet litter box",
+     "trap": "property"
+    },
+    {
+     "task": "Clean up old branches in the git repository",
+     "better": "git branch / code icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Send invoice to the client for the RAG prototype",
+     "better": "invoice / money",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ambient_screen"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4128,
+    "output": 1147,
+    "thoughts": 0,
+    "total": 5275
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:42Z"
+  }
+ },
+ "distinguishing": "Uses a 1:1 square frame with the second sparkle breaking the top-right corner, reading as a general AI/auto-enhance button or square image tile rather than a widescreen slide or display, though both icons are largely interchangeable."
 }

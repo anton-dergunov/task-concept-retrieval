@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "verified or approved folder / files",
+   "meaning": "verified, approved, or completed file folder or directory",
    "strength": "primary"
   },
   {
-   "meaning": "completed project or finalized dossier",
+   "meaning": "completed project, closed case, or finalized dossier",
    "strength": "primary"
   },
   {
    "meaning": "organize and file away documents",
    "strength": "secondary"
-  },
-  {
-   "meaning": "task project or checklist category",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a plain folder icon or a generic task-completion icon at very small sizes, though both shapes are bold and clear.",
+ "ambiguity": "At small sizes, the top-left folder tab could blur into a plain rectangle, making it look like the browser window with a checkmark.",
  "modifier_semantics": [
   {
    "modifier": "checkmark inside the folder body",
@@ -153,48 +149,44 @@
   {
    "task": "Clean out theDownloads directory on the MacBook",
    "central": "computer / trash cleanup"
-  },
-  {
-   "task": "Get notary stamp on the power of attorney papers",
-   "central": "stamp / legal certificate"
   }
  ],
  "near_misses": [
   {
-   "task": "Check the weather forecast before packing for the hike",
-   "better": "weather / sun and cloud",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Buy a leather briefcase with a padded laptop compartment",
-   "better": "briefcase",
+   "task": "Proofread and approve the final contract document",
+   "better": "vertical document page with folded corner and checkmark",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Run cross-browser QA checks on the checkout page",
+   "better": "browser window with top header bar and checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the weather forecast before packing for the hike",
+   "better": "sun and cloud weather icon",
+   "trap": "generic_verb"
+  },
+  {
    "task": "File down the sharp edges on the 3D-printed bracket",
-   "better": "metal file / hand tool",
+   "better": "metal hand file tool",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book the dentist appointment for next Tuesday",
-   "better": "tooth / dentist",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Send the approved invoice to accounting via email",
-   "better": "invoice / email",
+   "better": "invoice or envelope",
    "trap": "property"
   },
   {
-   "task": "Verify that the garage door is locked before bed",
-   "better": "garage / lock",
-   "trap": "generic_verb"
+   "task": "Book the dentist appointment for next Tuesday",
+   "better": "tooth or calendar",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a file folder with a checkmark inside, representing verified files, completed project folders, or filing paperwork away. It fits many administrative, financial, and digital organization tasks well, though it competes with plain folder and document icons.",
@@ -212,6 +204,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "verified or approved folder / files",
+     "strength": "primary"
+    },
+    {
+     "meaning": "completed project or finalized dossier",
+     "strength": "primary"
+    },
+    {
+     "meaning": "organize and file away documents",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "task project or checklist category",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain folder icon or a generic task-completion icon at very small sizes, though both shapes are bold and clear.",
+   "near_misses": [
+    {
+     "task": "Check the weather forecast before packing for the hike",
+     "better": "weather / sun and cloud",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a leather briefcase with a padded laptop compartment",
+     "better": "briefcase",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "File down the sharp edges on the 3D-printed bracket",
+     "better": "metal file / hand tool",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the dentist appointment for next Tuesday",
+     "better": "tooth / dentist",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Send the approved invoice to accounting via email",
+     "better": "invoice / email",
+     "trap": "property"
+    },
+    {
+     "task": "Verify that the garage door is locked before bed",
+     "better": "garage / lock",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fact_check",
+   "select_check_box",
+   "domain_verification",
+   "library_add_check",
+   "task"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9373,
+    "output": 3078,
+    "thoughts": 235,
+    "total": 12686
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The outer frame has a raised trapezoidal tab on the top-left corner, clearly identifying it as a file folder with a checkmark rather than a window, card, checkbox, or single sheet of paper."
 }

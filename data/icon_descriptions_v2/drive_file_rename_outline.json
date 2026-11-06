@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "write / edit / compose",
+   "meaning": "highlight text or use a highlighter / marker",
    "strength": "primary"
   },
   {
-   "meaning": "highlighter / highlight text",
+   "meaning": "write, handwrite, or jot down",
    "strength": "primary"
   },
   {
-   "meaning": "sign / signature",
+   "meaning": "sign or initial a line",
    "strength": "secondary"
   },
   {
-   "meaning": "pencil / pen / stationery",
+   "meaning": "edit or annotate",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as a generic edit/write pencil, a highlighter making a thick mark, or a pen signing a line; very similar to other pencil and pen icons.",
+ "ambiguity": "Nearly interchangeable in meaning with the plain pencil and the pencil over a full horizontal bar, differing only by the beveled stroke beside the tip.",
  "modifier_semantics": [
   {
    "modifier": "thick horizontal wedge stroke at bottom right",
@@ -163,6 +163,16 @@
  ],
  "near_misses": [
   {
+   "task": "Buy a pack of #2 wooden pencils for school",
+   "better": "plain pencil without a stroke",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fill in the blank fields on the customs declaration form",
+   "better": "pencil above a full horizontal line / form field bar",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Edit family vacation video in DaVinci Resolve",
    "better": "video / film clapperboard",
    "trap": "generic_verb"
@@ -173,19 +183,9 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Sign up for the autumn half marathon",
-   "better": "running shoe / runner",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Book hair highlights appointment with Jenna",
    "better": "scissors / hair salon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Remove crayon marks from the hallway wallpaper",
-   "better": "sponge / cleaning",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the freelance copywriter's invoice",
@@ -196,7 +196,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a tilted pencil or marker with a thick stroke beside its tip, universally understood as writing, editing, signing, or highlighting. It fits any task centered on composing text, signing paperwork, or buying writing instruments, though it competes closely with plain pencil and fountain pen icons.",
@@ -214,6 +214,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "write / edit / compose",
+     "strength": "primary"
+    },
+    {
+     "meaning": "highlighter / highlight text",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sign / signature",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pencil / pen / stationery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as a generic edit/write pencil, a highlighter making a thick mark, or a pen signing a line; very similar to other pencil and pen icons.",
+   "near_misses": [
+    {
+     "task": "Edit family vacation video in DaVinci Resolve",
+     "better": "video / film clapperboard",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Update my shipping address on Amazon",
+     "better": "location pin / home",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book hair highlights appointment with Jenna",
+     "better": "scissors / hair salon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Remove crayon marks from the hallway wallpaper",
+     "better": "sponge / cleaning",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the freelance copywriter's invoice",
+     "better": "invoice / money",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "edit",
+   "border_color"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5359,
+    "output": 1563,
+    "thoughts": 0,
+    "total": 6922
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "Adds a short, angled wedge stroke trailing directly from the pencil tip to the right, showing the pencil actively laying down a thick mark or highlight."
 }

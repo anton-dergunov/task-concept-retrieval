@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "motion blur / fast movement / speed",
+   "meaning": "speed, fast movement, or velocity",
    "strength": "primary"
   },
   {
-   "meaning": "action shot / burst mode / motion photo",
+   "meaning": "motion blur, action shot, or animation",
    "strength": "primary"
   },
   {
-   "meaning": "comet / meteor / projectile",
+   "meaning": "express delivery or rush shipping",
    "strength": "secondary"
   },
   {
-   "meaning": "animation / motion graphics",
+   "meaning": "comet, meteor, or projectile",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can look like a key, a magnifying glass on its side, or an abstract menu/list icon next to a radio button.",
+ "ambiguity": "Virtually identical to and interchangeable with the shorter-trail version that has a single detached dot on the bottom line; can also be mistaken for a stylized key or a radio button next to list bars.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal segmented trail lines on the left",
@@ -180,9 +180,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the speeding ticket online before Friday",
-   "better": "receipt, ticket, or car",
-   "trap": "shared_vocabulary"
+   "task": "Set fan or playback speed to the lower moderate-speed step",
+   "better": "speeding circle with shorter single-dot trail",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Invoice the client for the logo animation package",
@@ -193,7 +193,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon shows a circle with three segmented horizontal speed lines trailing behind it, a standard camera/UI glyph for motion blur, burst/action mode, animation, or a comet/meteor. While visually distinctive, it mostly represents a camera setting or abstract motion, so its fit for everyday to-do tasks is narrow (photography, motion design, stargazing).",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "motion_blur"
- }
+  "alias_of": "motion_blur",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "motion blur / fast movement / speed",
+     "strength": "primary"
+    },
+    {
+     "meaning": "action shot / burst mode / motion photo",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comet / meteor / projectile",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "animation / motion graphics",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can look like a key, a magnifying glass on its side, or an abstract menu/list icon next to a radio button.",
+   "near_misses": [
+    {
+     "task": "Quick grocery run before dinner",
+     "better": "shopping cart or basket",
+     "trap": "property"
+    },
+    {
+     "task": "Run 5km tempo pace around the park",
+     "better": "running person or sneaker",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "File a motion to dismiss with the county clerk",
+     "better": "gavel or legal document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cut a spare front door key at the hardware store",
+     "better": "house key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the speeding ticket online before Friday",
+     "better": "receipt, ticket, or car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Invoice the client for the logo animation package",
+     "better": "invoice or dollar sign",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "blur_medium"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4058,
+    "output": 1060,
+    "thoughts": 191,
+    "total": 5309
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "Has a longer, more fragmented motion trail with detached segments on both the middle and bottom lines rather than only the bottom line, though in practice both icons are interchangeable for speed and motion."
 }

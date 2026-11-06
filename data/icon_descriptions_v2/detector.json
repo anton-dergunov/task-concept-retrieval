@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be interpreted equally as a smoke/CO alarm emitting sound or a ceiling-mounted Ubiquiti-style Wi-Fi access point or motion sensor emitting radio waves.",
+ "ambiguity": "Could be mistaken for the ceiling smoke detector with a battery icon below it at a quick glance because both share the identical top sensor housing, or confused between a sounding smoke alarm and a ceiling-mounted Wi-Fi access point.",
  "modifier_semantics": [
   {
    "modifier": "two downward-curving signal or sound waves below",
@@ -68,11 +68,6 @@
    "task": "Order 3-pack Kidde alarms",
    "parent": "",
    "domain": "shopping"
-  },
-  {
-   "task": "Check expiration dates on back",
-   "parent": "Smoke Detectors",
-   "domain": "home"
   },
   {
    "task": "Find out which bedroom smoke alarm is chirping at 3am",
@@ -160,18 +155,18 @@
  ],
  "near_misses": [
   {
-   "task": "Set morning alarm for 5:30 AM flight",
-   "better": "alarm clock",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay monthly Wi-Fi internet bill",
-   "better": "router or invoice",
+   "task": "Replace 9V battery in the hallway smoke detector",
+   "better": "ceiling smoke detector with battery symbol below",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy cherry wood chunks for the smoker",
-   "better": "BBQ smoker / grill",
+   "task": "Fix chirping low-battery alert on upstairs carbon monoxide alarm",
+   "better": "ceiling smoke detector with battery symbol below",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set morning alarm for 5:30 AM flight",
+   "better": "alarm clock",
    "trap": "shared_vocabulary"
   },
   {
@@ -211,6 +206,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smoke detector / fire alarm / carbon monoxide detector",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ceiling Wi-Fi access point",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ceiling motion sensor / occupancy sensor",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "ceiling speaker / intercom",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be interpreted equally as a smoke/CO alarm emitting sound or a ceiling-mounted Ubiquiti-style Wi-Fi access point or motion sensor emitting radio waves.",
+   "near_misses": [
+    {
+     "task": "Set morning alarm for 5:30 AM flight",
+     "better": "alarm clock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay monthly Wi-Fi internet bill",
+     "better": "router or invoice",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy cherry wood chunks for the smoker",
+     "better": "BBQ smoker / grill",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install recessed LED pot lights in living room ceiling",
+     "better": "ceiling light / lightbulb",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Recharge kitchen fire extinguisher",
+     "better": "fire extinguisher",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Wash smoke smell out of camping jacket",
+     "better": "jacket / laundry",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "detector_battery"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4036,
+    "output": 616,
+    "thoughts": 0,
+    "total": 4652
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Shows two downward-curving sound or signal arcs below the ceiling-mounted detector housing instead of a horizontal battery symbol, representing the detector, alarm sound, or wireless signal itself rather than battery replacement."
 }

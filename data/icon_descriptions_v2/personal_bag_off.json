@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "travel without carry-on or luggage",
+   "meaning": "travel light / no carry-on or luggage",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the crossed-out rounded shape with a top loop can be mistaken for a crossed-out padlock (unlocked), a bell (muted notifications), or a lantern.",
+ "ambiguity": "At small sizes, the crossed-out rounded shape with a top loop can be mistaken for a crossed-out padlock, a muted notification bell, or at a fast glance the crossed-out hand-held smartphone.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,40 +161,40 @@
  ],
  "near_misses": [
   {
+   "task": "Start a 24-hour digital detox with no smartphone screens on Sunday",
+   "better": "crossed-out smartphone in hand icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put phones away in the basket before family dinner",
+   "better": "crossed-out smartphone in hand icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new 30L waterproof commuter backpack for cycling",
    "better": "plain backpack without slash",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Pack spare socks and headlamp into the daypack",
    "better": "plain backpack without slash",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Mute phone notifications during the afternoon board workshop",
-   "better": "crossed-out bell",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Unlock the side gate for the meter reader on Thursday morning",
-   "better": "open padlock",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Book the cabin that doesn't require a long backpack-in approach",
-   "better": "cabin or house",
+   "better": "cabin or house icon",
    "trap": "property"
   },
   {
    "task": "Order replacement buckle for the torn backpack strap",
-   "better": "buckle or repair tool",
+   "better": "buckle or repair tool icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon shows a backpack crossed out with a diagonal slash, indicating 'no bags allowed', travelling without luggage, or unpacking/emptying a backpack. While useful for specific travel or event-policy tasks, the slash obscures the front pocket detail so it can resemble a muted bell or crossed-out padlock at small sizes.",
@@ -212,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no backpack / bags prohibited / bag restriction",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unpack backpack / empty bag",
+     "strength": "primary"
+    },
+    {
+     "meaning": "travel without carry-on or luggage",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "no school / school holiday",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the crossed-out rounded shape with a top loop can be mistaken for a crossed-out padlock (unlocked), a bell (muted notifications), or a lantern.",
+   "near_misses": [
+    {
+     "task": "Buy a new 30L waterproof commuter backpack for cycling",
+     "better": "plain backpack without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack spare socks and headlamp into the daypack",
+     "better": "plain backpack without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Mute phone notifications during the afternoon board workshop",
+     "better": "crossed-out bell",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Unlock the side gate for the meter reader on Thursday morning",
+     "better": "open padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the cabin that doesn't require a long backpack-in approach",
+     "better": "cabin or house",
+     "trap": "property"
+    },
+    {
+     "task": "Order replacement buckle for the torn backpack strap",
+     "better": "buckle or repair tool",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_hand_left_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4166,
+    "output": 1156,
+    "thoughts": 0,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Shows a dome-topped backpack with a top loop handle and horizontal front pocket line crossed out by a diagonal slash, meaning no bags or luggage restrictions, unlike the crossed-out rectangular smartphone held in a hand."
 }

@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "medical care, hospital, clinic, or first aid",
+   "meaning": "first aid kit, pharmacy, dispensary, or basic medical supplies",
    "strength": "primary"
   },
   {
-   "meaning": "pharmacy, dispensary, or health supplies",
+   "meaning": "general medical care, clinic, or hospital",
    "strength": "primary"
   },
   {
-   "meaning": "add, create new, or plus sign",
+   "meaning": "Red Cross organization, blood donation, or Switzerland",
    "strength": "secondary"
   },
   {
-   "meaning": "Switzerland or Red Cross organization",
+   "meaning": "add, plus sign, or directional pad (D-pad)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with a generic 'add / new item' plus button or a directional pad (D-pad) in gaming contexts.",
+ "ambiguity": "Easily interchangeable for general health tasks with the medical cross containing a heartbeat pulse line, and can also be mistaken for a generic plus/add button or a controller D-pad.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -156,13 +156,23 @@
  ],
  "near_misses": [
   {
+   "task": "Schedule annual ECG and cardiology checkup at the hospital",
+   "better": "medical cross with heartbeat pulse line",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check resting heart rate and blood pressure vitals before morning meds",
+   "better": "medical cross with heartbeat pulse line",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Practice addition and subtraction flashcards with Leo",
-   "better": "math symbols (+ - × ÷) or abacus/calculator",
+   "better": "math symbols (+ - × ÷) or calculator",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Fix the sticky D-pad on the Nintendo Switch controller",
-   "better": "gamepad / controller",
+   "better": "gamepad controller",
    "trap": "lookalike_glyph"
   },
   {
@@ -176,20 +186,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Book train tickets from Zurich to Zermatt on SBB",
-   "better": "train",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Buy medical-grade silicone tubing for the espresso machine repair",
-   "better": "espresso machine or wrench/tube",
+   "better": "espresso machine or wrench",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The thick hollow Greek cross is universally recognized as the symbol for first aid, pharmacies, and medical clinics. It fits a common set of household, travel, and health tasks (first aid kits, clinic visits, pharmacy runs), though its similarity to a generic 'add' plus icon requires distinguishing medical subjects from generic creation actions.",
@@ -207,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "medical care, hospital, clinic, or first aid",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pharmacy, dispensary, or health supplies",
+     "strength": "primary"
+    },
+    {
+     "meaning": "add, create new, or plus sign",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Switzerland or Red Cross organization",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with a generic 'add / new item' plus button or a directional pad (D-pad) in gaming contexts.",
+   "near_misses": [
+    {
+     "task": "Practice addition and subtraction flashcards with Leo",
+     "better": "math symbols (+ - × ÷) or abacus/calculator",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix the sticky D-pad on the Nintendo Switch controller",
+     "better": "gamepad / controller",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Polish the silver altar cross before Easter Sunday service",
+     "better": "Latin Christian cross (longer bottom arm)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add three more folding chairs to the dinner party rental order",
+     "better": "chair",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book train tickets from Zurich to Zermatt on SBB",
+     "better": "train",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy medical-grade silicone tubing for the espresso machine repair",
+     "better": "espresso machine or wrench/tube",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "health_metrics"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4110,
+    "output": 1186,
+    "thoughts": 118,
+    "total": 5414
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "A plain outlined symmetrical cross with an empty interior, representing general first aid, a pharmacy cross, or the Red Cross, whereas the cross with an ECG pulse line inside specifically emphasizes clinical diagnostics, vital signs, or emergency hospital care."
 }

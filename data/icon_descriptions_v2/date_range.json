@@ -9,19 +9,19 @@
  },
  "readings": [
   {
+   "meaning": "weekly calendar, week view, or short date range",
+   "strength": "primary"
+  },
+  {
    "meaning": "calendar or schedule",
    "strength": "primary"
   },
   {
-   "meaning": "date range, multi-day event, or week view",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "upcoming events or pending schedule",
+   "meaning": "upcoming or pending events",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The three dots could represent a row of days in a calendar grid or an ellipsis for more/pending events; nearly identical to other generic calendar icons.",
+ "ambiguity": "Closely resembles the six-dot calendar at small sizes and is largely interchangeable with all other calendar variants for generic scheduling tasks.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal dots",
@@ -163,33 +163,33 @@
  ],
  "near_misses": [
   {
+   "task": "Print the full monthly wall calendar for the kitchen",
+   "better": "calendar with a six-dot grid",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check today's date on the desk calendar",
+   "better": "calendar with a single large dot",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay rent on the 1st of the month",
-   "better": "money / house",
+   "better": "money or house",
    "trap": "property"
   },
   {
    "task": "Schedule annual furnace inspection",
-   "better": "furnace / wrench",
+   "better": "furnace or wrench",
    "trap": "generic_verb"
   },
   {
    "task": "Buy fresh dates and figs for the cheese board",
-   "better": "fruit / groceries",
+   "better": "fruit or groceries",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Replace the battery in the kitchen wall clock",
-   "better": "clock / battery",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy dry-erase markers in four colors",
-   "better": "marker / pen",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Finish tax return before April 15 deadline",
-   "better": "tax form / calculator",
+   "better": "tax form or calculator",
    "trap": "property"
   }
  ],
@@ -216,6 +216,93 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "calendar or schedule",
+     "strength": "primary"
+    },
+    {
+     "meaning": "date range, multi-day event, or week view",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upcoming events or pending schedule",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The three dots could represent a row of days in a calendar grid or an ellipsis for more/pending events; nearly identical to other generic calendar icons.",
+   "near_misses": [
+    {
+     "task": "Pay rent on the 1st of the month",
+     "better": "money / house",
+     "trap": "property"
+    },
+    {
+     "task": "Schedule annual furnace inspection",
+     "better": "furnace / wrench",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy fresh dates and figs for the cheese board",
+     "better": "fruit / groceries",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the battery in the kitchen wall clock",
+     "better": "clock / battery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy dry-erase markers in four colors",
+     "better": "marker / pen",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Finish tax return before April 15 deadline",
+     "better": "tax form / calculator",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "calendar_month",
+   "today",
+   "event",
+   "calendar_today"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7991,
+    "output": 2433,
+    "thoughts": 238,
+    "total": 10662
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "It contains a single horizontal row of three small dots, suggesting a single week, a short multi-day span, or an ellipsis for upcoming events, unlike the full six-dot month grid, the single-dot day markers, or the empty calendar."
 }

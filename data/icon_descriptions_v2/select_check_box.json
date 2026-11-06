@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "completed checkbox / task done",
+   "meaning": "completed checkbox, single task done, or sign-off",
    "strength": "primary"
   },
   {
-   "meaning": "checklist / inspection / audit",
+   "meaning": "vote, ballot selection, or poll choice",
    "strength": "primary"
   },
   {
-   "meaning": "approval / sign-off / verification",
+   "meaning": "verification, approval, or confirmation",
    "strength": "secondary"
   },
   {
-   "meaning": "vote / ballot selection / poll",
+   "meaning": "audit or compliance check",
    "strength": "secondary"
   }
  ],
- "ambiguity": "In a to-do list app, a checked box looks identical to the interactive completion checkbox of the task itself, making it easy to confuse with UI state rather than a task topic.",
+ "ambiguity": "Easily confused with the stacked double-checkbox icon, and in a to-do app it looks identical to the interactive task-completion checkbox UI element.",
  "modifier_semantics": [
   {
    "modifier": "checkmark",
@@ -160,13 +160,18 @@
  ],
  "near_misses": [
   {
-   "task": "Check if the basement dehumidifier tank is full",
-   "better": "dehumidifier or water droplet",
-   "trap": "generic_verb"
+   "task": "Batch-approve all pending expense reports in the queue",
+   "better": "stacked multiple checkboxes with checkmark",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Check flight status for BA 287",
-   "better": "airplane",
+   "task": "Fill out the 10-question customer feedback survey",
+   "better": "card with three list lines and a checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if the basement dehumidifier tank is full",
+   "better": "dehumidifier or water droplet",
    "trap": "generic_verb"
   },
   {
@@ -176,24 +181,19 @@
   },
   {
    "task": "Deposit the insurance reimbursement check at the ATM",
-   "better": "bank check / money",
+   "better": "bank check or money",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Verify backups on the NAS drive",
-   "better": "hard drive / server",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Book the caterer and pay the 30% deposit",
-   "better": "food / payment",
+   "better": "food or payment",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a standard checkbox with a checkmark. While universally recognizable and occasionally useful for tasks specifically about checklists, inspections, approvals, or voting, it is a poor fit inside a to-do list because it duplicates the task's own completion checkbox and encourages false matches on generic verbs like 'check' or 'verify'.",
@@ -211,6 +211,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "completed checkbox / task done",
+     "strength": "primary"
+    },
+    {
+     "meaning": "checklist / inspection / audit",
+     "strength": "primary"
+    },
+    {
+     "meaning": "approval / sign-off / verification",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "vote / ballot selection / poll",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "In a to-do list app, a checked box looks identical to the interactive completion checkbox of the task itself, making it easy to confuse with UI state rather than a task topic.",
+   "near_misses": [
+    {
+     "task": "Check if the basement dehumidifier tank is full",
+     "better": "dehumidifier or water droplet",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check flight status for BA 287",
+     "better": "airplane",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a checkered flannel shirt for autumn",
+     "better": "shirt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Deposit the insurance reimbursement check at the ATM",
+     "better": "bank check / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Verify backups on the NAS drive",
+     "better": "hard drive / server",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book the caterer and pay the 30% deposit",
+     "better": "food / payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fact_check",
+   "domain_verification",
+   "folder_check",
+   "library_add_check",
+   "task"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9373,
+    "output": 3078,
+    "thoughts": 235,
+    "total": 12686
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "This is a single 1:1 square checkbox whose checkmark breaks through the top-right corner of the border, unlike the double-stacked checkboxes or the enclosed document, folder, and window frames."
 }

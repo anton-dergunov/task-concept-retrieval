@@ -9,23 +9,19 @@
  },
  "readings": [
   {
+   "meaning": "closed captions, subtitles, or on-screen display settings",
+   "strength": "primary"
+  },
+  {
    "meaning": "keyboard settings, input method configuration, or key remapping",
    "strength": "primary"
   },
   {
-   "meaning": "subtitles, closed captions, or on-screen display settings",
-   "strength": "primary"
-  },
-  {
-   "meaning": "application window, panel, or widget preferences",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "card or payment method settings",
+   "meaning": "UI widget, dialog, or form field preferences",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the right half of the rectangle is cut away by the gear badge, only two small squares and one bar remain visible inside, making it ambiguous between a simplified keyboard, a subtitles/captions box, a browser window, and a pixelated face.",
+ "ambiguity": "With the right side obscured by the six-toothed gear, the three small internal shapes can be misread as chip contacts on a credit card (confusing it with the card with gear) or the bottom shelf of the inbox tray.",
  "modifier_semantics": [
   {
    "modifier": "eight-toothed cogwheel badge at bottom right",
@@ -170,8 +166,18 @@
  ],
  "near_misses": [
   {
+   "task": "Update billing address and auto-pay on saved credit cards",
+   "better": "credit card with gear",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure automatic email sorting rules in the inbox",
+   "better": "inbox tray with gear",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a wireless keyboard for the home office desk",
-   "better": "plain keyboard without gear modifier, or shopping cart",
+   "better": "plain keyboard without gear",
    "trap": "generic_verb"
   },
   {
@@ -180,24 +186,14 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Freeze the lost Visa credit card in the banking app",
-   "better": "credit card with lock",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a 65% mechanical keyboard with hot-swappable switches",
-   "better": "keyboard",
+   "better": "plain keyboard icon",
    "trap": "property"
   },
   {
-   "task": "Order USB-C coiled aviator cable from Drop",
-   "better": "cable / plug",
+   "task": "Order USB-C coiled aviator cable for the custom keyboard build",
+   "better": "cable or plug icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Update billing address on all saved payment cards",
-   "better": "credit card",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -223,6 +219,96 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "keyboard settings, input method configuration, or key remapping",
+     "strength": "primary"
+    },
+    {
+     "meaning": "subtitles, closed captions, or on-screen display settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "application window, panel, or widget preferences",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "card or payment method settings",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the right half of the rectangle is cut away by the gear badge, only two small squares and one bar remain visible inside, making it ambiguous between a simplified keyboard, a subtitles/captions box, a browser window, and a pixelated face.",
+   "near_misses": [
+    {
+     "task": "Buy a wireless keyboard for the home office desk",
+     "better": "plain keyboard without gear modifier, or shopping cart",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Practice scales on the MIDI keyboard before Tuesday's lesson",
+     "better": "musical piano keys",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Freeze the lost Visa credit card in the banking app",
+     "better": "credit card with lock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 65% mechanical keyboard with hot-swappable switches",
+     "better": "keyboard",
+     "trap": "property"
+    },
+    {
+     "task": "Order USB-C coiled aviator cable from Drop",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Update billing address on all saved payment cards",
+     "better": "credit card",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "credit_card_gear",
+   "folder_managed",
+   "inbox_customize"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6793,
+    "output": 2058,
+    "thoughts": 257,
+    "total": 9108
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Inside the rectangular frame are two small squares above a short horizontal bar on the left alongside a six-toothed gear, depicting closed-caption/subtitle text or keyboard keys rather than a top stripe, folder tab, or inbox shelf."
 }

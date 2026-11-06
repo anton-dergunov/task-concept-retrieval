@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "smartwatch or fitness tracker sync, transfer, or setup",
+   "meaning": "sync, transfer, or export workout data from a smartwatch",
    "strength": "primary"
   },
   {
-   "meaning": "wrist navigation or turn-by-turn directions on a watch",
+   "meaning": "wrist navigation or turn-by-turn route guidance on a watch",
    "strength": "primary"
   },
   {
-   "meaning": "set watch time forward (e.g., daylight saving or time zone)",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "export or send workout route to a wearable device",
+   "meaning": "set watch time forward for daylight saving or time zone change",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the arrow inside the circle could look like a single thick clock hand or a generic compass/navigation badge if the watch straps are overlooked.",
+ "ambiguity": "Shares the identical wristwatch casing with the downward-arrow watch ( differ only by a 90-degree rotation of the arrow) and the checkmark watch.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow",
@@ -162,14 +158,24 @@
  ],
  "near_misses": [
   {
-   "task": "Watch the next episode of Severance with Sarah",
-   "better": "TV or play button",
-   "trap": "shared_vocabulary"
+   "task": "Install the latest Garmin system update over Wi-Fi",
+   "better": "wristwatch with downward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up repaired Seiko wristwatch from the jeweler",
+   "better": "wristwatch with checkmark or plain wristwatch",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Push the project deadline forward by two weeks",
    "better": "calendar with arrow",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Watch the next episode of Severance with Sarah",
+   "better": "TV or play button",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Check how long the sourdough bulk fermentation takes",
@@ -177,25 +183,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a waterproof jacket for the Scottish Highlands trip",
-   "better": "jacket / raincoat",
-   "trap": "property"
-  },
-  {
-   "task": "Pay the annual AppleCare+ invoice",
+   "task": "Pay the annual AppleCare+ invoice for my wearable",
    "better": "receipt or credit card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Turn right onto Highway 101 and pick up lumber",
-   "better": "lumber / wood planks",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a wristwatch with a right-pointing arrow on its face. It fits tasks centered on syncing or sending routes/data to a smartwatch, wrist-based navigation, or setting a watch forward, though it could occasionally be confused with a generic 'postpone time' or clock-advance symbol.",
@@ -213,6 +209,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartwatch or fitness tracker sync, transfer, or setup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wrist navigation or turn-by-turn directions on a watch",
+     "strength": "primary"
+    },
+    {
+     "meaning": "set watch time forward (e.g., daylight saving or time zone)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "export or send workout route to a wearable device",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the arrow inside the circle could look like a single thick clock hand or a generic compass/navigation badge if the watch straps are overlooked.",
+   "near_misses": [
+    {
+     "task": "Watch the next episode of Severance with Sarah",
+     "better": "TV or play button",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Push the project deadline forward by two weeks",
+     "better": "calendar with arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check how long the sourdough bulk fermentation takes",
+     "better": "timer or stopwatch",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a waterproof jacket for the Scottish Highlands trip",
+     "better": "jacket / raincoat",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the annual AppleCare+ invoice",
+     "better": "receipt or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Turn right onto Highway 101 and pick up lumber",
+     "better": "lumber / wood planks",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "watch_check",
+   "watch_arrow_down"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5458,
+    "output": 1495,
+    "thoughts": 92,
+    "total": 7045
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:14Z"
+  }
+ },
+ "distinguishing": "Shows a rightward-pointing arrow inside the watch face instead of a checkmark or downward arrow, indicating forwarding watch time, turn-by-turn wrist navigation, or exporting/sending data to or from a wearable."
 }

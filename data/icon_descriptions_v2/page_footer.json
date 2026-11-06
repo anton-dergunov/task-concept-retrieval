@@ -11,19 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "computer monitor or display screen",
-   "strength": "primary"
-  },
-  {
-   "meaning": "television screen with soundbar or shelf",
+   "meaning": "television screen mounted above a soundbar or shelf",
    "strength": "secondary"
   },
   {
-   "meaning": "docked tablet or presentation slide",
+   "meaning": "docked tablet or portable workstation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the bottom bar does not flare wider than the screen, it can look like a TV with a soundbar underneath, a monitor above a shelf, or an abstract layout block rather than a laptop.",
+ "ambiguity": "Nearly interchangeable with the laptop icon whose base bar extends slightly wider than the screen, and easily confused with the plain desktop monitor on a short block stand.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,8 +151,18 @@
  ],
  "near_misses": [
   {
+   "task": "Calibrate the color profile on the 27-inch desktop monitor",
+   "better": "desktop monitor on attached block stand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mirror the quarterly slide deck to the conference room TV",
+   "better": "screen with upward AirPlay triangle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Email the signed lease PDF from my laptop tonight",
-   "better": "email or signed document",
+   "better": "email envelope or signed document",
    "trap": "property"
   },
   {
@@ -170,25 +176,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Hang the new oak picture frame over the hallway console table",
-   "better": "picture frame with image",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Renew the Adobe Creative Cloud annual subscription",
    "better": "credit card or subscription renewal",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Book a window seat for the flight to Chicago",
-   "better": "airplane or ticket",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 5,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a simplified screen above a horizontal base bar, universally used for a laptop, Chromebook, or computer display. It fits a wide range of everyday hardware, setup, repair, and IT tasks, though its minimal geometry makes it slightly easy to confuse with a generic monitor, TV with soundbar, or UI layout icon.",
@@ -206,6 +202,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "laptop or notebook computer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "computer monitor or display screen",
+     "strength": "primary"
+    },
+    {
+     "meaning": "television screen with soundbar or shelf",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "docked tablet or presentation slide",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the bottom bar does not flare wider than the screen, it can look like a TV with a soundbar underneath, a monitor above a shelf, or an abstract layout block rather than a laptop.",
+   "near_misses": [
+    {
+     "task": "Email the signed lease PDF from my laptop tonight",
+     "better": "email or signed document",
+     "trap": "property"
+    },
+    {
+     "task": "Check the gas bill online before autopay runs",
+     "better": "bill or invoice",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a paper notebook for the botany field class",
+     "better": "spiral notebook or book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hang the new oak picture frame over the hallway console table",
+     "better": "picture frame with image",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew the Adobe Creative Cloud annual subscription",
+     "better": "credit card or subscription renewal",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book a window seat for the flight to Chicago",
+     "better": "airplane or ticket",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "airplay",
+   "computer",
+   "tv",
+   "remove_from_queue"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8043,
+    "output": 2357,
+    "thoughts": 160,
+    "total": 10560
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "Has a detached horizontal bottom bar that is flush with the exact width of the screen above it, making it practically interchangeable with the wider-base laptop icon or readable as a TV above a soundbar."
 }

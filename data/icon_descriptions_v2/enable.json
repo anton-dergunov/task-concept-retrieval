@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "download or save file locally",
+   "meaning": "download, import, or save file into local storage",
    "strength": "primary"
   },
   {
-   "meaning": "shut down or power off device",
+   "meaning": "shut down, power off, or hibernate device",
    "strength": "primary"
   },
   {
-   "meaning": "import or bring data in",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "hibernate or put system into low-power state",
+   "meaning": "install update into system",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly resembles both a standard download icon (arrow in circle) and a power/standby symbol with a downward arrow (power down / shut down), especially at small sizes.",
+ "ambiguity": "Because the top gap hugs the arrow shaft just like an IEC power button symbol, it is ambiguous between powering down a machine and downloading/importing a file, and at list size it blurs with the bottom-open arc and half-dashed download ring.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow",
@@ -172,34 +168,34 @@
  ],
  "near_misses": [
   {
+   "task": "Export the quarterly transaction log out of QuickBooks",
+   "better": "downward arrow exiting bottom-open circle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Resume the paused torrent download on the desktop",
+   "better": "downward arrow inside half-dashed progress ring",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a downloadable pattern for the Raglan sweater",
-   "better": "yarn / knitting needles",
+   "better": "yarn or knitting needles",
    "trap": "property"
   },
   {
    "task": "Check why the fiber download speed dropped below 100 Mbps",
-   "better": "speedometer / router",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Turn on the outdoor Christmas lights at dusk",
-   "better": "power button / string lights",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Upload the signed tax forms to the accountant's portal",
-   "better": "upload arrow",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the monthly electric power bill",
-   "better": "invoice / lightning bolt",
+   "better": "speedometer or router",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new USB-C external SSD for the Downloads folder",
-   "better": "hard drive / SSD",
+   "better": "hard drive or SSD",
    "trap": "parent_topic"
+  },
+  {
+   "task": "Upload the signed tax forms to the accountant's portal",
+   "better": "upward arrow",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -225,6 +221,92 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download or save file locally",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shut down or power off device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "import or bring data in",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "hibernate or put system into low-power state",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly resembles both a standard download icon (arrow in circle) and a power/standby symbol with a downward arrow (power down / shut down), especially at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a downloadable pattern for the Raglan sweater",
+     "better": "yarn / knitting needles",
+     "trap": "property"
+    },
+    {
+     "task": "Check why the fiber download speed dropped below 100 Mbps",
+     "better": "speedometer / router",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Turn on the outdoor Christmas lights at dusk",
+     "better": "power button / string lights",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upload the signed tax forms to the accountant's portal",
+     "better": "upload arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new USB-C external SSD for the Downloads folder",
+     "better": "hard drive / SSD",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "output_circle",
+   "downloading"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5384,
+    "output": 1520,
+    "thoughts": 181,
+    "total": 7085
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:47Z"
+  }
+ },
+ "distinguishing": "The circle is open at the top with the downward arrow's shaft passing through the gap into the interior—like a power symbol with an arrowhead—unlike the bottom-open arc or the fully enclosed half-dashed circle."
 }

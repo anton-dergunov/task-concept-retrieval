@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "upload or pending upload",
+   "meaning": "pending or queued upload",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "increase, boost, or move up in priority",
+   "meaning": "publish status or ephemeral story",
    "strength": "secondary"
   },
   {
-   "meaning": "north or forward direction",
+   "meaning": "increase, boost, or move up in priority",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with a solid-circle up arrow, a generic scroll-to-top UI button, or a compass north indicator at small sizes.",
+ "ambiguity": "Easily mistaken at small sizes for the up-arrow inside a half-solid half-dashed circle, or for a solid-circle up-arrow button.",
  "modifier_semantics": [
   {
    "modifier": "dashed circular border",
@@ -161,34 +161,34 @@
  ],
  "near_misses": [
   {
+   "task": "Resume paused video upload to YouTube",
+   "better": "up-arrow inside a half-solid half-dashed progress circle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check compass bearing before leaving trailhead",
+   "better": "compass icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update passport before the autumn trip to Japan",
-   "better": "passport",
+   "better": "passport icon",
    "trap": "generic_verb"
   },
   {
    "task": "Pick up dry cleaning from the shop up the street",
-   "better": "shirt on hanger / dry cleaning",
+   "better": "shirt on hanger icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy an upgraded saddle for the commuter bike",
-   "better": "bicycle saddle / bicycle",
+   "better": "bicycle saddle or bicycle icon",
    "trap": "property"
   },
   {
-   "task": "Set alarm for 5am wake-up tomorrow",
-   "better": "alarm clock",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the annual cloud storage invoice",
-   "better": "credit card / invoice",
+   "better": "credit card or invoice icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Update kitchen spice rack labels",
-   "better": "spice jar / label tag",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -212,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload or pending upload",
+     "strength": "primary"
+    },
+    {
+     "meaning": "software update or version upgrade",
+     "strength": "primary"
+    },
+    {
+     "meaning": "increase, boost, or move up in priority",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "north or forward direction",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with a solid-circle up arrow, a generic scroll-to-top UI button, or a compass north indicator at small sizes.",
+   "near_misses": [
+    {
+     "task": "Update passport before the autumn trip to Japan",
+     "better": "passport",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up dry cleaning from the shop up the street",
+     "better": "shirt on hanger / dry cleaning",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an upgraded saddle for the commuter bike",
+     "better": "bicycle saddle / bicycle",
+     "trap": "property"
+    },
+    {
+     "task": "Set alarm for 5am wake-up tomorrow",
+     "better": "alarm clock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the annual cloud storage invoice",
+     "better": "credit card / invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Update kitchen spice rack labels",
+     "better": "spice jar / label tag",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arrow_upload_progress"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 1029,
+    "thoughts": 0,
+    "total": 5088
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:23Z"
+  }
+ },
+ "distinguishing": "The entire circular border is evenly dashed into eight segments rather than half-solid, suggesting a pending, queued, or draft upload/update rather than one half-finished, though at small sizes the two icons are nearly interchangeable."
 }

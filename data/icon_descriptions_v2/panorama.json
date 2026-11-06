@@ -11,19 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "framed artwork, print, or painting",
+   "meaning": "landscape-oriented photo or widescreen image",
    "strength": "primary"
   },
   {
-   "meaning": "photo gallery or album",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "landscape orientation or wallpaper",
+   "meaning": "photo gallery or image file",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Nearly identical to other image/photo icons that include a small sun circle above the peaks; could occasionally be read as a window looking out at mountains.",
+ "ambiguity": "Nearly interchangeable with the plain square frame; also easily confused with the pedestal-base screen if the thin base isn't noticed.",
  "modifier_semantics": [],
  "domains": [
   "creative",
@@ -159,14 +155,24 @@
  ],
  "near_misses": [
   {
-   "task": "Charge Sony A7III batteries and format SD cards before Saturday",
-   "better": "camera or battery",
-   "trap": "shared_vocabulary"
+   "task": "Load family vacation photos onto the smart display",
+   "better": "screen on a flat base with mountain peaks",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Book mountain cabin in the Dolomites for August",
-   "better": "mountains or cabin",
+   "task": "Take product photos of the ceramic mugs for Etsy",
+   "better": "camera body with mountain peaks",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Design a vertical poster for the jazz concert",
+   "better": "vertical portrait frame with mountain peaks",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Charge Sony A7III batteries and format SD cards",
+   "better": "battery or memory card",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Picture how the dining table fits if we rotate the rug",
@@ -179,11 +185,6 @@
    "trap": "property"
   },
   {
-   "task": "Pay the framing shop invoice by bank transfer",
-   "better": "invoice or credit card",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Pick up eyeglasses with the new tortoiseshell frames",
    "better": "eyeglasses",
    "trap": "shared_vocabulary"
@@ -192,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a rectangular frame enclosing two mountain peaks, the standard pictogram for a photo, image file, or framed picture. It fits many everyday tasks across digital photo management, printing snapshots, graphic assets, and hanging artwork at home. It overlaps closely with variant image icons that include a small sun above the mountains.",
@@ -212,6 +213,98 @@
    "domains: 9 not in 1-8"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photo, image, or picture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "framed artwork, print, or painting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo gallery or album",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "landscape orientation or wallpaper",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Nearly identical to other image/photo icons that include a small sun circle above the peaks; could occasionally be read as a window looking out at mountains.",
+   "near_misses": [
+    {
+     "task": "Charge Sony A7III batteries and format SD cards before Saturday",
+     "better": "camera or battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book mountain cabin in the Dolomites for August",
+     "better": "mountains or cabin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Picture how the dining table fits if we rotate the rug",
+     "better": "table or floor plan",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy picture-perfect strawberries for the birthday tart",
+     "better": "strawberry or cake",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the framing shop invoice by bank transfer",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up eyeglasses with the new tortoiseshell frames",
+     "better": "eyeglasses",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "photo_frame",
+   "photo_camera_back",
+   "image",
+   "image_inset",
+   "planner_banner_ad_pt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9297,
+    "output": 3033,
+    "thoughts": 0,
+    "total": 12330
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "A plain wide (landscape) rectangular frame around two mountain peaks with no base, camera top, or inner mat—interchangeable with the plain square frame for generic photos, or specifically a landscape-oriented image."
 }

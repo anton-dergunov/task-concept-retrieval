@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Virtually identical and interchangeable in meaning with the right-tilted telephone handset.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -41,11 +41,6 @@
   "manage phone plan or landline"
  ],
  "example_tasks": [
-  {
-   "task": "Call Mom back",
-   "parent": "",
-   "domain": "social_family"
-  },
   {
    "task": "Ring the plumber",
    "parent": "",
@@ -124,7 +119,6 @@
  ],
  "example_tasks_es": [
   "Llamar a la abuela por su santo",
-  "Llamar al seguro para dar parte del golpe en el parachoques",
   "Telefonear a la clínica dental para adelantar la cita de limpieza"
  ],
  "example_tasks_ru": [
@@ -177,15 +171,20 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Order a replacement banana plug for the speaker wire",
-   "better": "cable / plug",
+   "task": "End the active support call and hang up the phone",
+   "better": "downward-facing hang-up telephone handset",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check missed call notifications from the courier",
+   "better": "telephone handset with an incoming or missed arrow badge",
    "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A classic telephone handset outline universally understood as making a phone call or telephone service. 'Call X' is one of the most frequent action-led task types across personal admin, work, family, and health, and the handset cleanly distinguishes voice calls from smartphone device tasks.",
@@ -203,6 +202,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "call"
- }
+  "alias_of": "call",
+  "guard": {
+   "dropped": {
+    "example_tasks": 1,
+    "example_tasks_es": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "phone call / make a call",
+     "strength": "primary"
+    },
+    {
+     "meaning": "telephone / landline / telecom service",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contact / customer support",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a new MagSafe case for my iPhone 15",
+     "better": "smartphone / mobile device",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the cracked screen protector on Nadia's phone",
+     "better": "smartphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Back up phone photos to iCloud before the trip",
+     "better": "photos / cloud backup",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "On-call rotation handoff notes for next week",
+     "better": "document / notes or pager",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the signed lease back to the landlord",
+     "better": "envelope / email",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a replacement banana plug for the speaker wire",
+     "better": "cable / plug",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "phone_enabled"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 3979,
+    "output": 599,
+    "thoughts": 0,
+    "total": 4578
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:31Z"
+  }
+ },
+ "distinguishing": "This telephone handset is tilted from top-left to bottom-right with its inner side facing up and right, making it a horizontal mirror image of the other handset and completely interchangeable in meaning."
 }

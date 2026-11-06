@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "page layout / dashboard / UI wireframe",
+   "meaning": "page layout, dashboard, or UI wireframe",
    "strength": "primary"
   },
   {
-   "meaning": "bento box / meal prep container with compartments",
+   "meaning": "bento box or divided meal-prep container",
    "strength": "secondary"
   },
   {
-   "meaning": "photo collage / moodboard / masonry grid",
+   "meaning": "single photo collage or moodboard grid",
    "strength": "secondary"
   },
   {
-   "meaning": "floor plan / room partitioning",
+   "meaning": "floor plan or room partitioning",
    "strength": "secondary"
   }
  ],
- "ambiguity": "It is primarily an abstract UI layout toggle, which can easily be confused with a table, window split-screen control, architectural window frame, or divided food tray.",
+ "ambiguity": "Easily confused with the stacked 3-pane layout templates icon (which adds a back-layer L-line and lacks the left sidebar) or the single ID/article card (which has floating solid blocks inside rather than edge-to-edge divider lines).",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Renew my expired driver's license at the DMV",
+   "better": "single horizontal card with a photo block and text bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Create three reusable page templates for the company wiki",
+   "better": "stacked multi-pane layout square with a back-layer L-line",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Wash the living room windows before Sunday",
    "better": "window with curtains or spray bottle",
    "trap": "lookalike_glyph"
@@ -163,7 +173,7 @@
   },
   {
    "task": "Check the dashboard warning light in the Civic",
-   "better": "car / warning engine light",
+   "better": "car or engine warning light",
    "trap": "shared_vocabulary"
   },
   {
@@ -172,20 +182,15 @@
    "trap": "property"
   },
   {
-   "task": "Write introduction paragraph for the newsletter",
-   "better": "document / pen",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Organize tax receipts from March",
-   "better": "receipt / tax folder",
+   "better": "receipt or tax folder",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows a rectangle divided into a left sidebar, a top header pane, and two bottom panes—a classic UI wireframe, bento grid, or dashboard layout. While it looks like generic UI chrome for switching views, it serves well for tasks specifically about page layout, wireframing, dashboards, or photo collages, though it is easily confused with tables or window icons.",
@@ -203,6 +208,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "page layout / dashboard / UI wireframe",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bento box / meal prep container with compartments",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "photo collage / moodboard / masonry grid",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "floor plan / room partitioning",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "It is primarily an abstract UI layout toggle, which can easily be confused with a table, window split-screen control, architectural window frame, or divided food tray.",
+   "near_misses": [
+    {
+     "task": "Wash the living room windows before Sunday",
+     "better": "window with curtains or spray bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Export Q3 expenses to an Excel spreadsheet",
+     "better": "spreadsheet table with uniform rows and columns",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the dashboard warning light in the Civic",
+     "better": "car / warning engine light",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a 12-compartment tackle box for trout lures",
+     "better": "fishing hook or fish",
+     "trap": "property"
+    },
+    {
+     "task": "Write introduction paragraph for the newsletter",
+     "better": "document / pen",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Organize tax receipts from March",
+     "better": "receipt / tax folder",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "backup_table",
+   "full_coverage",
+   "newsmode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6730,
+    "output": 2225,
+    "thoughts": 242,
+    "total": 9197
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Unlike the stacked icons with an L-shaped back layer or the card with floating content blocks, this is a single horizontal rectangle partitioned edge-to-edge by internal grid dividers into four panes (a left sidebar, top header, and two bottom boxes), representing a single dashboard or UI page layout."
 }

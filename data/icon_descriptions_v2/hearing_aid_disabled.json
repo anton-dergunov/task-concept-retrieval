@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "hearing aid or assistive listening off / disabled",
+   "meaning": "hearing aid or assistive listening device off / disabled",
    "strength": "primary"
   },
   {
-   "meaning": "hard of hearing / deafness / hearing loss",
+   "meaning": "broken or malfunctioning hearing aid or in-ear monitor",
    "strength": "primary"
   },
   {
-   "meaning": "broken or malfunctioning hearing aid or earbud",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "no audio / sound muted in ear",
+   "meaning": "hard of hearing / deafness accessibility",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the inner earpiece geometry looks like a tangle of lines under the slash, and the outer arcs resemble a disabled Wi-Fi or speaker mute symbol.",
+ "ambiguity": "Easily confused with the bare slashed ear icon for general deafness or hearing loss, as the small earpiece shape inside the ear blends into the diagonal slash at list size.",
  "modifier_semantics": [
   {
    "modifier": "diagonal strike-through slash",
@@ -160,13 +156,18 @@
  ],
  "near_misses": [
   {
-   "task": "Fix home Wi-Fi router dropping signal in bedroom",
-   "better": "wifi off / router",
+   "task": "Book annual audiogram to check progressive hearing loss",
+   "better": "slashed ear without earpiece (general hearing loss / deafness)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Mute microphone on Zoom call before joining",
-   "better": "muted microphone",
+   "task": "Request sign language interpreter for the town hall",
+   "better": "slashed ear without earpiece (deafness accessibility) or signing hands",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix home Wi-Fi router dropping signal in bedroom",
+   "better": "wifi off / router",
    "trap": "lookalike_glyph"
   },
   {
@@ -193,7 +194,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts an ear with an assistive listening device and sound waves crossed out by a slash, representing hearing loss, deafness, or a disabled/broken hearing aid. It fits a narrow but real set of medical, family-care, and accessibility tasks, though at small sizes the busy intersection of lines can be mistaken for a muted speaker or disabled Wi-Fi symbol.",
@@ -211,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hearing aid or assistive listening off / disabled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hard of hearing / deafness / hearing loss",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken or malfunctioning hearing aid or earbud",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "no audio / sound muted in ear",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the inner earpiece geometry looks like a tangle of lines under the slash, and the outer arcs resemble a disabled Wi-Fi or speaker mute symbol.",
+   "near_misses": [
+    {
+     "task": "Fix home Wi-Fi router dropping signal in bedroom",
+     "better": "wifi off / router",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Mute microphone on Zoom call before joining",
+     "better": "muted microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy silent wall clock for the guest bedroom",
+     "better": "wall clock",
+     "trap": "property"
+    },
+    {
+     "task": "Prepare slides for zoning board hearing on Thursday",
+     "better": "gavel / presentation slides",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay $180 invoice from the audiology clinic",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Listen to the new history podcast episode on the train",
+     "better": "headphones / podcast",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hearing_disabled"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4084,
+    "output": 1096,
+    "thoughts": 165,
+    "total": 5345
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:13Z"
+  }
+ },
+ "distinguishing": "Includes an angular hearing-aid or earpiece block tucked into the ear canal opening under the diagonal slash, making it specifically about a disabled or broken hearing device rather than general hearing loss."
 }

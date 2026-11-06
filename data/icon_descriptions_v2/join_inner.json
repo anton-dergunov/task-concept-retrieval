@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "Venn diagram / overlap / intersection",
+   "meaning": "Venn diagram intersection / common overlap / SQL inner join",
    "strength": "primary"
   },
   {
-   "meaning": "boolean intersect / combine shapes (vector graphics)",
+   "meaning": "boolean intersect / combine overlapping shapes (vector graphics Let's combine)",
    "strength": "primary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "partnership / union / wedding rings",
+   "meaning": "partnership / union / interlocking rings",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like a boolean intersect tool from design software, a Venn diagram, interlocking rings, or the Mastercard symbol.",
+ "ambiguity": "Easily confused at a glance with the two overlapping circles with the entire left circle filled (left join), as well as the Mastercard logo or wedding rings.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -159,6 +159,16 @@
  ],
  "near_misses": [
   {
+   "task": "Rewrite the reporting query to use a SQL left join so unmatched customers still appear",
+   "better": "two overlapping circles with the entire left circle filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Subtract the background shape from the foreground layer in Illustrator",
+   "better": "overlapping shapes with one crescent filled or boolean subtract icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay off the Mastercard balance before the statement closes",
    "better": "credit card",
    "trap": "lookalike_glyph"
@@ -182,17 +192,12 @@
    "task": "Buy new contact lenses before the trip",
    "better": "eye or contact lens case",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order extra whiteboard markers for the workshop",
-   "better": "marker pen",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts two overlapping circles with a filled intersection, representing a Venn diagram, logical/set intersection, or boolean shape intersect in vector design. While distinctive, it is an abstract diagram/UI glyph that directly matches only a niche set of tasks around diagrams, math sets, data overlap, and vector graphics, and can be confused with rings or the Mastercard logo.",
@@ -212,6 +217,94 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Venn diagram / overlap / intersection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "boolean intersect / combine shapes (vector graphics)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Mastercard / credit card logo",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "partnership / union / wedding rings",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like a boolean intersect tool from design software, a Venn diagram, interlocking rings, or the Mastercard symbol.",
+   "near_misses": [
+    {
+     "task": "Pay off the Mastercard balance before the statement closes",
+     "better": "credit card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up the engraved wedding rings from the jeweler",
+     "better": "ring with diamond or two thin interlocked rings",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Report the broken traffic light at the main road intersection",
+     "better": "traffic light or crossroads",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reschedule the two overlapping dentist and vet appointments",
+     "better": "calendar",
+     "trap": "property"
+    },
+    {
+     "task": "Buy new contact lenses before the trip",
+     "better": "eye or contact lens case",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order extra whiteboard markers for the workshop",
+     "better": "marker pen",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "join_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4043,
+    "output": 680,
+    "thoughts": 85,
+    "total": 4808
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Only the central overlapping lens is filled solid black while both outer crescents remain outlined, representing set intersection or an inner join rather than a left join."
 }

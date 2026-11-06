@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "pivot table or data summarization",
+   "meaning": "pivot table or spreadsheet data summarization",
    "strength": "primary"
   },
   {
-   "meaning": "transpose rows and columns in a spreadsheet",
+   "meaning": "transpose rows and columns in a table / spreadsheet",
    "strength": "primary"
   },
   {
-   "meaning": "rotate table layout or view",
+   "meaning": "rotate or revert table layout / view",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like an abstract L-shaped bracket, a desk corner, or a generic UI layout toggle rather than a spreadsheet pivot table.",
+ "ambiguity": "Easily mistaken at a glance for the document-restore icon with the identical bottom-left curved arrow and outer frame, or misread as an L-shaped corner desk or UI sidebar layout.",
  "modifier_semantics": [
   {
    "modifier": "curved counter-clockwise arrow in bottom-left corner",
@@ -159,6 +159,21 @@
  ],
  "near_misses": [
   {
+   "task": "Restore the Google Doc proposal to yesterday's version",
+   "better": "document with horizontal text lines and curved arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Revert changes to the README markdown file",
+   "better": "document with horizontal text lines and curved arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Measure the L-shaped corner desk for the home office",
+   "better": "desk or measuring tape",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Sand and oil the oak dining table before Thanksgiving",
    "better": "furniture dining table",
    "trap": "shared_vocabulary"
@@ -174,19 +189,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Measure the L-shaped corner desk for the home office",
-   "better": "desk or measuring tape",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Email Sarah the link to the shared budget spreadsheet",
    "better": "email envelope or message",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Undo the last database migration on staging",
-   "better": "database cylinder with undo arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -210,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pivot table or data summarization",
+     "strength": "primary"
+    },
+    {
+     "meaning": "transpose rows and columns in a spreadsheet",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rotate table layout or view",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "spreadsheet or data table",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like an abstract L-shaped bracket, a desk corner, or a generic UI layout toggle rather than a spreadsheet pivot table.",
+   "near_misses": [
+    {
+     "task": "Sand and oil the oak dining table before Thanksgiving",
+     "better": "furniture dining table",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a corner table for four at Trattoria Roma on Friday",
+     "better": "restaurant cutlery or reservation",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Rotate the winter tyres on the Subaru this weekend",
+     "better": "car tyre or wheel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Measure the L-shaped corner desk for the home office",
+     "better": "desk or measuring tape",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Email Sarah the link to the shared budget spreadsheet",
+     "better": "email envelope or message",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Undo the last database migration on staging",
+     "better": "database cylinder with undo arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "convert_to_text"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4129,
+    "output": 727,
+    "thoughts": 0,
+    "total": 4856
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "Shows a partitioned table grid (a full-width top header bar and two stacked right-hand column cells) with the bottom-left curved arrow, specifically depicting a spreadsheet pivot table or row-column transpose rather than a text document."
 }

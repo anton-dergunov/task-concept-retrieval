@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "book or reading",
+   "meaning": "book / reading",
    "strength": "primary"
   },
   {
-   "meaning": "studying, learning, or textbook",
+   "meaning": "studying / learning / textbook",
    "strength": "primary"
   },
   {
-   "meaning": "manual, documentation, or guide",
+   "meaning": "blank notebook / sketchbook / journal",
    "strength": "secondary"
   },
   {
-   "meaning": "notebook, journal, or story",
+   "meaning": "manual / documentation / guide",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Functionally interchangeable for general book and reading tasks with the open book with text lines on the right page and the open book with a turning page.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Read the printed installation manual for the new dishwasher",
+   "better": "open book with text lines on the right page",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Finish reading the next two chapters of the novel before bed",
+   "better": "open book with a turning page",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book the dentist appointment for next Tuesday morning",
    "better": "tooth or calendar",
    "trap": "shared_vocabulary"
@@ -177,11 +187,6 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Download the new history audiobook for the long drive",
-   "better": "headphones or book with audio badge",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Read through the lease renewal contract before signing",
    "better": "contract / document with signature",
    "trap": "generic_verb"
@@ -190,7 +195,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A universally recognizable open book icon. It is the premier choice for tasks centered on reading, books, textbooks, manuals, documentation, and studying across personal, academic, and work contexts.",
@@ -208,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "book or reading",
+     "strength": "primary"
+    },
+    {
+     "meaning": "studying, learning, or textbook",
+     "strength": "primary"
+    },
+    {
+     "meaning": "manual, documentation, or guide",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "notebook, journal, or story",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Book the dentist appointment for next Tuesday morning",
+     "better": "tooth or calendar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Lisbon for the October break",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reconcile the Q3 bookkeeping entries in QuickBooks",
+     "better": "calculator, spreadsheet, or receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Bake a lemon loaf for tomorrow's book club meeting",
+     "better": "cake / bread / baking",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Download the new history audiobook for the long drive",
+     "better": "headphones or book with audio badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Read through the lease renewal contract before signing",
+     "better": "contract / document with signature",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "auto_stories",
+   "menu_book"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5343,
+    "output": 1749,
+    "thoughts": 0,
+    "total": 7092
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "Both the left and right curved pages are completely empty outlines with no lines or turning page, making it the cleanest generic open-book silhouette (or a blank sketchbook/notebook), and functionally interchangeable with the other two for general book tasks."
 }

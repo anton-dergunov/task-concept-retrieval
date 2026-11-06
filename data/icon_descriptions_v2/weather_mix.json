@@ -11,23 +11,19 @@
  },
  "readings": [
   {
-   "meaning": "sleet, hail, or freezing rain",
+   "meaning": "sleet, freezing rain, or wintry mix",
    "strength": "primary"
   },
   {
-   "meaning": "wintry mix or severe bad weather",
+   "meaning": "hail or severe bad weather",
    "strength": "primary"
   },
   {
-   "meaning": "weather forecast or meteorology",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "rain or precipitation",
+   "meaning": "weather forecast or precipitation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the mixed diamond, dash, and droplet shapes below the cloud blur into generic rain or snow.",
+ "ambiguity": "Almost identical at glanceable sizes to the cloud with three diamonds and a dash; both blur into generic rain or snow icons.",
  "modifier_semantics": [
   {
    "modifier": "diamond shapes and angled dash",
@@ -167,9 +163,9 @@
  ],
  "near_misses": [
   {
-   "task": "Buy asmall waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "File an auto insurance claim for hail damage on the roof",
+   "better": "cloud with three diamond hail pellets and dash",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Back up 2024 family photos to iCloud storage",
@@ -177,14 +173,14 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Brainstorm new product names with the marketing team",
-   "better": "lightbulb or thought bubble",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Buy new winter boots with good ice grip for mom",
    "better": "boot",
    "trap": "property"
+  },
+  {
+   "task": "Brainstorm new product names with the marketing team",
+   "better": "lightbulb or thought bubble",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Replace the cracked windshield wiper blades on the Civic",
@@ -200,7 +196,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a weather cloud dropping a mix of ice pellets (diamonds), sleet (dash), and a raindrop, representing sleet, hail, wintry mix, or general inclement weather. It fits tasks around checking forecasts, preparing for ice/hail storms, or handling storm damage, though at small sizes it looks very similar to standard rain or snow icons.",
@@ -218,6 +214,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sleet, hail, or freezing rain",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wintry mix or severe bad weather",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weather forecast or meteorology",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rain or precipitation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the mixed diamond, dash, and droplet shapes below the cloud blur into generic rain or snow.",
+   "near_misses": [
+    {
+     "task": "Back up 2024 family photos to iCloud storage",
+     "better": "cloud storage with upload arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Brainstorm new product names with the marketing team",
+     "better": "lightbulb or thought bubble",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy new winter boots with good ice grip for mom",
+     "better": "boot",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the cracked windshield wiper blades on the Civic",
+     "better": "car or windshield wipers",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the basement dehumidifier keeps shutting off",
+     "better": "appliance or humidity gauge",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "weather_hail"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4034,
+    "output": 974,
+    "thoughts": 160,
+    "total": 5168
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "Replaces the lowest diamond pellet with a rounded teardrop water droplet alongside two diamonds and a slanted dash to indicate sleet or rain mixed with ice, though in practice it is nearly interchangeable with the all-diamond hail cloud."
 }

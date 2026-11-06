@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "mute chat / disable messages / turn off notifications",
+   "meaning": "mute chat / disable messages / turn off chat notifications",
    "strength": "primary"
   },
   {
@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "do not disturb / no texting / silence",
+   "meaning": "do not disturb / no texting",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the tail and diagonal slash can look like a play triangle or a broken rectangle/screen-off icon.",
+ "ambiguity": "At small sizes, the empty rectangular outline with a diagonal slash can be confused with the slashed label tag or slashed SIM card if the bottom-left tail isn't noticed.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,8 +161,23 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the broken product thumbnail images on the checkout page",
+   "better": "slashed picture frame with mountain silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Remove the deprecated status tags from old Jira tickets",
+   "better": "slashed right-pointing label tag",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Eject and remove the SIM card from the old phone before trading it in",
+   "better": "slashed SIM card with notched corner",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Reply to Sarah's text message about dinner on Friday",
-   "better": "speech bubble (unslashed)",
+   "better": "unslashed speech bubble",
    "trap": "lookalike_glyph"
   },
   {
@@ -179,16 +194,6 @@
    "task": "Draft the customer apology email for the chat outage",
    "better": "envelope / email",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check why the live chat widget wasn't loading yesterday",
-   "better": "speech bubble or bug",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Turn off monitor screen after 10 minutes of inactivity",
-   "better": "monitor / display",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -212,6 +217,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "mute chat / disable messages / turn off notifications",
+     "strength": "primary"
+    },
+    {
+     "meaning": "turn off comments / close discussion",
+     "strength": "primary"
+    },
+    {
+     "meaning": "do not disturb / no texting / silence",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "hide subtitles / captions off",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the tail and diagonal slash can look like a play triangle or a broken rectangle/screen-off icon.",
+   "near_misses": [
+    {
+     "task": "Reply to Sarah's text message about dinner on Friday",
+     "better": "speech bubble (unslashed)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Mute microphone automatically when joining Zoom calls",
+     "better": "slashed microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a silent mechanical keyboard for the shared office",
+     "better": "keyboard",
+     "trap": "property"
+    },
+    {
+     "task": "Draft the customer apology email for the chat outage",
+     "better": "envelope / email",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the live chat widget wasn't loading yesterday",
+     "better": "speech bubble or bug",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Turn off monitor screen after 10 minutes of inactivity",
+     "better": "monitor / display",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hide_image",
+   "image_not_supported",
+   "label_off",
+   "no_sim"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8093,
+    "output": 2769,
+    "thoughts": 160,
+    "total": 11022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Unlike the picture frames, right-pointing tag, or vertical notched card, this icon has a pointed tail extending downward from the bottom-left corner, marking it as a crossed-out speech bubble for muting chat or disabling comments."
 }

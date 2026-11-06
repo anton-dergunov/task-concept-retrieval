@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "air vent, exhaust hood, or downward airflow",
+   "meaning": "air vent, ceiling register, or direct downward airflow",
    "strength": "primary"
   },
   {
-   "meaning": "batch download or bulk export from container",
+   "meaning": "batch download or bulk export downward from a source",
    "strength": "primary"
   },
   {
-   "meaning": "shower head or downward water spray",
+   "meaning": "overhead shower head or straight downward spray",
    "strength": "secondary"
   },
   {
-   "meaning": "distribute or push updates down to multiple targets",
+   "meaning": "air curtain or range hood downdraft",
    "strength": "secondary"
   }
  ],
- "ambiguity": "looks like either a car/home AC air vent indicator, a range hood exhaust icon, or an inverted bulk-upload/batch-download symbol",
+ "ambiguity": "Easily confused with the top bracket with outward-curving left, down, and right arrows when used for general HVAC or air conditioning tasks; also ambiguous between a physical ceiling vent and an abstract bulk-download symbol.",
  "modifier_semantics": [
   {
    "modifier": "three downward arrows",
@@ -159,13 +159,18 @@
  ],
  "near_misses": [
   {
-   "task": "Download the new Spotify update on my phone",
-   "better": "single download arrow or phone icon",
+   "task": "Distribute the quarterly board deck to all department heads",
+   "better": "top bracket with three arrows fanning out left, down, and right",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Upload the signed lease PDF to the tenant portal",
-   "better": "upload arrow pointing up into bracket",
+   "task": "Adjust the wall AC louvers to circulate air across the whole room",
+   "better": "top bracket with three arrows spreading left, down, and right",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download the new Spotify update on my phone",
+   "better": "single download arrow or phone icon",
    "trap": "lookalike_glyph"
   },
   {
@@ -182,11 +187,6 @@
    "task": "Pay the $180 HVAC maintenance invoice",
    "better": "credit card, money, or invoice icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check the weather forecast for high winds tomorrow",
-   "better": "wind gusts or weather cloud icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -210,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "air vent, exhaust hood, or downward airflow",
+     "strength": "primary"
+    },
+    {
+     "meaning": "batch download or bulk export from container",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shower head or downward water spray",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "distribute or push updates down to multiple targets",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "looks like either a car/home AC air vent indicator, a range hood exhaust icon, or an inverted bulk-upload/batch-download symbol",
+   "near_misses": [
+    {
+     "task": "Download the new Spotify update on my phone",
+     "better": "single download arrow or phone icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upload the signed lease PDF to the tenant portal",
+     "better": "upload arrow pointing up into bracket",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a breathable mesh running shirt for summer",
+     "better": "t-shirt or running shoe icon",
+     "trap": "property"
+    },
+    {
+     "task": "Vent to Sarah over coffee about the project reorg",
+     "better": "coffee cup or speech bubbles",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $180 HVAC maintenance invoice",
+     "better": "credit card, money, or invoice icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the weather forecast for high winds tomorrow",
+     "better": "wind gusts or weather cloud icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fan_indirect"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4097,
+    "output": 1158,
+    "thoughts": 0,
+    "total": 5255
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "All three arrows point straight down in parallel from the top bracket, indicating direct downward airflow, a shower spray, or a parallel batch download, whereas the look-alike has outer arrows curving sideways to show wide dispersion or fan-out distribution."
 }

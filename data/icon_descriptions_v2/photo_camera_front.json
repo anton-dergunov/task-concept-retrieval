@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "portrait photo / headshot / profile picture",
+   "meaning": "portrait photo, headshot, or profile picture",
    "strength": "primary"
   },
   {
-   "meaning": "selfie / front-facing camera",
+   "meaning": "selfie or front-facing camera",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the head of the person silhouette could be mistaken for a regular round camera lens.",
+ "ambiguity": "At small sizes, the rectangular camera body with a person inside can be mistaken for the file folder with a person inside (shared folder/client file), or the person's head can look like a standard round camera lens.",
  "modifier_semantics": [
   {
    "modifier": "person silhouette inside camera frame",
@@ -162,40 +162,45 @@
  ],
  "near_misses": [
   {
-   "task": "Renew my passport before the October trip to Japan",
-   "better": "passport booklet",
-   "trap": "shared_vocabulary"
+   "task": "Grant the new contractor access to the shared Google Drive folder",
+   "better": "file folder with a person silhouette inside (shared folder icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "File the signed onboarding forms in the new hire's personnel folder",
+   "better": "file folder with a person silhouette inside (personnel dossier icon)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Take photos of the scratched bumper for the insurance claim",
-   "better": "standard camera or car",
+   "better": "standard camera with a round lens or car icon",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Update my resume summary and work history on LinkedIn",
-   "better": "resume / CV document",
+   "task": "Renew my passport before the October trip to Japan",
+   "better": "passport booklet icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Backup SD card photos from the Yosemite hike to the NAS",
-   "better": "SD card or cloud storage",
-   "trap": "lookalike_glyph"
+   "task": "Update my resume summary and work history on LinkedIn",
+   "better": "resume / CV document icon",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a wooden picture frame for grandma's portrait",
-   "better": "picture frame",
+   "better": "picture frame icon",
    "trap": "property"
   },
   {
-   "task": "Pay the $150 studio rental fee",
-   "better": "money / credit card",
+   "task": "Pay the $150 portrait studio rental fee",
+   "better": "money or credit card icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a camera outline containing a person's head-and-shoulders silhouette, universally understood as a portrait photo, headshot, ID photo, or profile picture. It fits a distinct, recurring set of real-world tasks (getting passport photos, updating professional avatars, shooting portraits), though at tiny sizes the silhouette's head might briefly look like a standard camera lens.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "portrait photo / headshot / profile picture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "selfie / front-facing camera",
+     "strength": "primary"
+    },
+    {
+     "meaning": "passport or ID photo",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "portrait photography session",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the head of the person silhouette could be mistaken for a regular round camera lens.",
+   "near_misses": [
+    {
+     "task": "Renew my passport before the October trip to Japan",
+     "better": "passport booklet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take photos of the scratched bumper for the insurance claim",
+     "better": "standard camera or car",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my resume summary and work history on LinkedIn",
+     "better": "resume / CV document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Backup SD card photos from the Yosemite hike to the NAS",
+     "better": "SD card or cloud storage",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a wooden picture frame for grandma's portrait",
+     "better": "picture frame",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $150 studio rental fee",
+     "better": "money / credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "folder_shared"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4088,
+    "output": 1157,
+    "thoughts": 0,
+    "total": 5245
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "This icon shows a camera body outline (with a centered trapezoidal top viewfinder bump) and a centered person silhouette inside, representing a portrait photo, headshot, or selfie camera rather than a file folder."
 }

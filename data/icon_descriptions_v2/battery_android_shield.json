@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "shield / security / protection",
+   "meaning": "battery protection or empty-battery safeguard (outline style)",
    "strength": "primary"
   },
   {
-   "meaning": "device or screen protection (warranty, insurance, firewall)",
+   "meaning": "device screen or display protection (warranty, screen protector)",
    "strength": "primary"
   },
   {
    "meaning": "card or account security / fraud protection",
    "strength": "secondary"
-  },
-  {
-   "meaning": "hard Drive or battery protection / safe storage",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "The base rectangle has no details inside (no magnetic stripe, battery terminal, or screen bezel), making it ambiguous whether it represents a credit card, a screen/tablet, a battery, or a generic box.",
+ "ambiguity": "Without the inner charge block or visible battery terminal nub, the hollow rectangle looks equally like an empty battery, a tablet/phone screen, or a card beside a security shield, and is nearly interchangeable with the filled battery-shield icon.",
  "modifier_semantics": [
   {
    "modifier": "half-shaded shield badge on the right",
@@ -160,40 +156,40 @@
  ],
  "near_misses": [
   {
+   "task": "Turn on 80% maximum charge limit for laptop battery health",
+   "better": "filled battery with shield icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test the UPS battery backup load capacity in the server closet",
+   "better": "filled battery with shield icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a waterproof hard case for the camera",
-   "better": "camera case or camera",
+   "better": "camera case or camera icon",
    "trap": "property"
   },
   {
    "task": "Verify that the external SSD backup finished cleanly",
-   "better": "hard drive / SSD",
+   "better": "hard drive or SSD icon",
    "trap": "generic_verb"
   },
   {
    "task": "Pay the quarterly homeowners insurance bill",
-   "better": "house with shield or bill/invoice",
+   "better": "house with shield or invoice icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Charge the spare power bank before the flight",
-   "better": "battery / power bank",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a RFID-blocking leather wallet for dad",
-   "better": "wallet",
+   "task": "Order an RFID-blocking leather wallet for dad",
+   "better": "wallet icon",
    "trap": "property"
-  },
-  {
-   "task": "Mail the signed notarized affidavit to the claims adjuster",
-   "better": "envelope / mail",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon shows an unadorned horizontal rounded rectangle with a large shield cutting into its right side. Because the rectangle lacks internal markings (unlike a credit card with a stripe or a battery with a terminal), it reads somewhat generically as protected hardware, screen/device warranty, or card security, making it useful for warranty, device protection, and fraud-lock tasks.",
@@ -211,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shield / security / protection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "device or screen protection (warranty, insurance, firewall)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "card or account security / fraud protection",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "hard Drive or battery protection / safe storage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The base rectangle has no details inside (no magnetic stripe, battery terminal, or screen bezel), making it ambiguous whether it represents a credit card, a screen/tablet, a battery, or a generic box.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof hard case for the camera",
+     "better": "camera case or camera",
+     "trap": "property"
+    },
+    {
+     "task": "Verify that the external SSD backup finished cleanly",
+     "better": "hard drive / SSD",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the quarterly homeowners insurance bill",
+     "better": "house with shield or bill/invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge the spare power bank before the flight",
+     "better": "battery / power bank",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a RFID-blocking leather wallet for dad",
+     "better": "wallet",
+     "trap": "property"
+    },
+    {
+     "task": "Mail the signed notarized affidavit to the claims adjuster",
+     "better": "envelope / mail",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_shield"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4109,
+    "output": 1043,
+    "thoughts": 159,
+    "total": 5311
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:25Z"
+  }
+ },
+ "distinguishing": "The rounded rectangle is completely hollow with no inner charge fill, reading as either an empty/outline battery with a shield or a generic screen/card outline with a security badge; largely interchangeable with the filled version for general battery protection tasks."
 }

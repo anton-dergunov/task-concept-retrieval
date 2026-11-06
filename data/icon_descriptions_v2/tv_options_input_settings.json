@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "system or display settings",
+   "meaning": "settings, configuration, or preferences",
    "strength": "primary"
   },
   {
-   "meaning": "tablet configuration or setup",
+   "meaning": "display, screen, video, or tablet settings",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "software automation or backend setup",
+   "meaning": "software automation or system setup",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a wall safe, a camera body from the front, or a generic plain gear icon at very small sizes.",
+ "ambiguity": "Nearly interchangeable at task-list size with the gear inside a square frame; also resembles a hotel safe or a minimalist front-facing camera.",
  "modifier_semantics": [
   {
    "modifier": "centered six-toothed gear inside",
@@ -64,11 +64,6 @@
    "task": "TV picture configuration",
    "parent": "",
    "domain": "hobbies"
-  },
-  {
-   "task": "Finish initial setup",
-   "parent": "Kids' Fire Tablet",
-   "domain": "home"
   },
   {
    "task": "Check privacy options",
@@ -161,8 +156,23 @@
  ],
  "near_misses": [
   {
+   "task": "Rearrange the Settings app tile on the phone home screen",
+   "better": "gear inside a square app-icon frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put the passports and spare cash into the hotel safe",
+   "better": "safe or lockbox with dial",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take photos of the sunset at the pier",
+   "better": "camera with top shutter button",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order a replacement rear derailleur gear for the road bike",
-   "better": "bicycle gear / drivetrain",
+   "better": "bicycle drivetrain or bike",
    "trap": "shared_vocabulary"
   },
   {
@@ -171,30 +181,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Take photos of the sunset at the pier",
-   "better": "camera",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Put the passports and spare cash into the hotel safe",
-   "better": "safe / lockbox with dial",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a padded sleeve for the 11-inch iPad",
-   "better": "case / bag",
+   "better": "tablet or protective case",
    "trap": "parent_topic"
   },
   {
    "task": "Set up the dining room table for twelve guests",
-   "better": "dining table / cutlery",
+   "better": "dining table or cutlery",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a rectangular screen or tablet frame enclosing a gear, clearly representing system settings, display preferences, or device configuration. It fits tech, home device, and admin setup tasks well, though at tiny sizes the frame around the cog can faintly resemble a point-and-shoot camera or wall safe.",
@@ -212,6 +212,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "system or display settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tablet configuration or setup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "control panel or preferences window",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "software automation or backend setup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a wall safe, a camera body from the front, or a generic plain gear icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Order a replacement rear derailleur gear for the road bike",
+     "better": "bicycle gear / drivetrain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack camping gear into the trunk for Friday",
+     "better": "tent or backpack",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take photos of the sunset at the pier",
+     "better": "camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Put the passports and spare cash into the hotel safe",
+     "better": "safe / lockbox with dial",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a padded sleeve for the 11-inch iPad",
+     "better": "case / bag",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up the dining room table for twelve guests",
+     "better": "dining table / cutlery",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_applications"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4069,
+    "output": 1099,
+    "thoughts": 0,
+    "total": 5168
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "Encloses the six-toothed gear in a wider horizontal rectangular frame (suggesting a display screen, tablet, or window) rather than a 1:1 square, though the two icons are nearly interchangeable for general settings."
 }

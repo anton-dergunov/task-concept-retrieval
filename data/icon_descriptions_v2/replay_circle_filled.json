@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "replay or repeat from the beginning",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "return or send back",
+   "meaning": "replay or restart from the beginning",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with refresh, reload, sync, or rotate-left icons, which all use circular arrows.",
+ "ambiguity": "Easily confused at a glance with the two-arrow circular sync/exchange icon in the same enclosing circle, or with image rotate-left icons.",
  "modifier_semantics": [
   {
    "modifier": "enclosing circle",
@@ -161,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Sync Google Calendar with the work Outlook account",
+   "better": "two opposing circular arrows in a circle for two-way sync",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Exchange leftover Euros back into US dollars at the bank",
+   "better": "two opposing circular arrows in a circle for exchange/swap, or currency icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Rotate the scanned tax PDF 90 degrees counterclockwise",
    "better": "document or image rotate icon",
    "trap": "lookalike_glyph"
@@ -176,11 +182,6 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Restore the antique wooden dining chairs",
-   "better": "chair or woodworking tool",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Buy a reversible leather belt for the trip",
    "better": "belt",
    "trap": "property"
@@ -194,7 +195,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows a counterclockwise arrow inside a circle, universally recognized as undo, revert, reset, or replay. While most tasks should use an icon for the specific object being reset or returned (like a laptop, router, or package), this glyph fits technical rollback, backup restoration, or reset tasks where reversing a state is the core concept. It is easily confused with other circular arrow icons for refresh, sync, or image rotation.",
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "undo, revert, or roll back",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reset or restore to previous state",
+     "strength": "primary"
+    },
+    {
+     "meaning": "replay or repeat from the beginning",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "return or send back",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with refresh, reload, sync, or rotate-left icons, which all use circular arrows.",
+   "near_misses": [
+    {
+     "task": "Rotate the scanned tax PDF 90 degrees counterclockwise",
+     "better": "document or image rotate icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Refresh the kitchen cabinets with a new coat of paint",
+     "better": "paint roller or cabinet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Return library books before Friday",
+     "better": "books",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Restore the antique wooden dining chairs",
+     "better": "chair or woodworking tool",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a reversible leather belt for the trip",
+     "better": "belt",
+     "trap": "property"
+    },
+    {
+     "task": "Email customer support about the missing refund",
+     "better": "email or money/refund icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "change_circle"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4023,
+    "output": 1070,
+    "thoughts": 0,
+    "total": 5093
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "Shows a single counter-clockwise circular arrow inside the circle (undo, revert, reset, or replay), whereas the look-alike splits the inner ring into two opposing arrows (sync or exchange)."
 }

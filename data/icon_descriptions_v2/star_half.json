@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "rating or review score (specifically half-star increments)",
+   "meaning": "star rating, review score, or evaluation",
    "strength": "primary"
   },
   {
-   "meaning": "product, service, or business evaluation",
+   "meaning": "writing or submitting a customer review",
    "strength": "primary"
   },
   {
-   "meaning": "favorite or bookmark with partial status",
+   "meaning": "ranking or grading items by quality",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the half-fill might blur and look like a regular solid or outlined star (generic favorite/important marker).",
+ "ambiguity": "At very small sizes the half-fill can blur into a plain star, but on inspection it clearly means a rating score rather than a literal celestial star or a generic bookmark.",
  "modifier_semantics": [
   {
    "modifier": "half-filled split",
@@ -174,33 +174,38 @@
  ],
  "near_misses": [
   {
+   "task": "Buy a gold star topper for the Christmas tree",
+   "better": "plain single star or Christmas tree icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Photograph the night sky stars during the camping trip",
+   "better": "star with small companion star in the sky icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bookmark favorite recipe websites in the browser",
+   "better": "plain single star or overlapping stacked stars icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book a 4-star hotel near the train station in Milan",
-   "better": "hotel / bed",
+   "better": "hotel bed or building icon",
    "trap": "property"
   },
   {
    "task": "Review the Q3 marketing budget spreadsheet before Tuesday",
-   "better": "spreadsheet / money",
+   "better": "spreadsheet or money icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Review pull request #412 for the auth service",
-   "better": "code / git pull request",
+   "better": "code or git pull request icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a gold star topper for the Christmas tree",
-   "better": "Christmas tree / ornament",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Clean up old browser bookmarks and reading list",
-   "better": "bookmark ribbon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Send $10 Amazon gift card to top reviewer",
-   "better": "gift card",
+   "better": "gift card icon",
    "trap": "parent_topic"
   }
  ],
@@ -227,6 +232,92 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "rating or review score (specifically half-star increments)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "product, service, or business evaluation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "favorite or bookmark with partial status",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the half-fill might blur and look like a regular solid or outlined star (generic favorite/important marker).",
+   "near_misses": [
+    {
+     "task": "Book a 4-star hotel near the train station in Milan",
+     "better": "hotel / bed",
+     "trap": "property"
+    },
+    {
+     "task": "Review the Q3 marketing budget spreadsheet before Tuesday",
+     "better": "spreadsheet / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review pull request #412 for the auth service",
+     "better": "code / git pull request",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a gold star topper for the Christmas tree",
+     "better": "Christmas tree / ornament",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean up old browser bookmarks and reading list",
+     "better": "bookmark ribbon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send $10 Amazon gift card to top reviewer",
+     "better": "gift card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hotel_class",
+   "stars_2",
+   "star"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6734,
+    "output": 2179,
+    "thoughts": 180,
+    "total": 9093
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "Split vertically down the center with the left half solid black and the right half hollow outline, which specifically denotes a fractional star rating or review score unlike the wholly outlined single or multi-star icons."
 }

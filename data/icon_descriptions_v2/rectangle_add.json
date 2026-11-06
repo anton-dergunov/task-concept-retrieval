@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "first aid kit or medical care",
+   "meaning": "first aid kit or medical supplies box",
    "strength": "primary"
   },
   {
-   "meaning": "health insurance card",
+   "meaning": "medical care or clinic",
    "strength": "primary"
   },
   {
-   "meaning": "Swiss flag or Switzerland",
+   "meaning": "health insurance or medical benefit card",
    "strength": "secondary"
   },
   {
-   "meaning": "add new card or slide",
+   "meaning": "add new slide, card, or display frame",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Lacks a handle to clearly be a first-aid box, so it can be read as a health insurance card, a Swiss flag (though rectangular rather than square), or a generic UI button for 'add item/slide'.",
+ "ambiguity": "Nearly interchangeable with the rounded square with a centered cross (differing only in aspect ratio) and easily confused with the horizontal rectangle where the cross is shifted right.",
  "modifier_semantics": [
   {
    "modifier": "centered plus sign inside",
@@ -161,8 +161,13 @@
  ],
  "near_misses": [
   {
-   "task": "Add new credit card to Apple Pay",
-   "better": "credit card with chip/stripe",
+   "task": "Find the nearest urgent care clinic on the map",
+   "better": "square hospital sign with centered cross",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Keep digital copy of dental insurance card in wallet",
+   "better": "horizontal card rectangle with right-aligned plus sign",
    "trap": "lookalike_glyph"
   },
   {
@@ -171,18 +176,13 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Charge the battery on the DSLR camera",
-   "better": "battery with plus/minus",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book dentist appointment for crown prep",
    "better": "tooth",
    "trap": "parent_topic"
   },
   {
    "task": "Calculate total expenses from the hospital stay",
-   "better": "calculator or math symbols",
+   "better": "calculator",
    "trap": "generic_verb"
   },
   {
@@ -194,7 +194,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A horizontal rectangle containing a bold plus/cross reads primarily as a medical symbol (a first-aid box without its handle, or a health insurance card) and secondarily as the Swiss flag or an 'add card/slide' UI action. It fits well for tasks around first-aid supplies, medical cards, or general healthcare, though a briefcase with a handle and cross is clearer for a kit.",
@@ -212,6 +212,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "first aid kit or medical care",
+     "strength": "primary"
+    },
+    {
+     "meaning": "health insurance card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Swiss flag or Switzerland",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "add new card or slide",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Lacks a handle to clearly be a first-aid box, so it can be read as a health insurance card, a Swiss flag (though rectangular rather than square), or a generic UI button for 'add item/slide'.",
+   "near_misses": [
+    {
+     "task": "Add new credit card to Apple Pay",
+     "better": "credit card with chip/stripe",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up amoxicillin prescription at Walgreens",
+     "better": "pill bottle or capsule",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge the battery on the DSLR camera",
+     "better": "battery with plus/minus",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book dentist appointment for crown prep",
+     "better": "tooth",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Calculate total expenses from the hospital stay",
+     "better": "calculator or math symbols",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a waterproof case for the action camera",
+     "better": "camera",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "create_new_folder",
+   "magnify_fullscreen",
+   "note_add",
+   "local_hospital"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8092,
+    "output": 2462,
+    "thoughts": 0,
+    "total": 10554
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "A wider horizontal rectangle (roughly 4:3) with a centered cross, unlike the off-center cross in the identical rectangle or the 1:1 square frame."
 }

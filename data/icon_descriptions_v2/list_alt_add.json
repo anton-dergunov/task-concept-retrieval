@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "new list or create list",
+   "meaning": "create a new list, checklist, or inventory",
    "strength": "primary"
   },
   {
-   "meaning": "add item to list or backlog",
+   "meaning": "add item to a list, backlog, or agenda",
    "strength": "primary"
   },
   {
-   "meaning": "draft agenda or inventory",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "checklist or directory",
+   "meaning": "append to directory or catalog",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic 'add task' or 'new note' UI button, or with other list/checklist icons at very small sizes.",
+ "ambiguity": "Easily confused at a glance with the plain framed bulleted list when the bottom-right plus badge isn't noticed, or used interchangeably for general list tasks where 'creating' vs 'viewing' a list isn't a meaningful distinction.",
  "modifier_semantics": [
   {
    "modifier": "plus sign in bottom right corner",
@@ -164,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Review the packing list before leaving for the airport",
+   "better": "plain framed bulleted list without a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Investigate the critical error log from last night's outage",
+   "better": "framed card with exclamation mark and text lines",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy milk, eggs, and sourdough from Trader Joe's",
    "better": "shopping cart or grocery bag",
    "trap": "parent_topic"
@@ -172,16 +178,6 @@
    "task": "List the old stroller on Facebook Marketplace",
    "better": "stroller or price tag",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check off completed habits for the week",
-   "better": "checkbox with checkmark",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Call the emergency clinic on the plus-care network",
-   "better": "phone or medical cross",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a bullet journal with dotted pages",
@@ -215,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "new list or create list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "add item to list or backlog",
+     "strength": "primary"
+    },
+    {
+     "meaning": "draft agenda or inventory",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "checklist or directory",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic 'add task' or 'new note' UI button, or with other list/checklist icons at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy milk, eggs, and sourdough from Trader Joe's",
+     "better": "shopping cart or grocery bag",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "List the old stroller on Facebook Marketplace",
+     "better": "stroller or price tag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check off completed habits for the week",
+     "better": "checkbox with checkmark",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Call the emergency clinic on the plus-care network",
+     "better": "phone or medical cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a bullet journal with dotted pages",
+     "better": "notebook or journal",
+     "trap": "property"
+    },
+    {
+     "task": "Add extra memory to the NAS server",
+     "better": "RAM stick or server",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "list_alt",
+   "breaking_news"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5392,
+    "output": 1520,
+    "thoughts": 147,
+    "total": 7059
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Unlike the plain framed bulleted list or the framed alert card with an exclamation mark, this framed bulleted list has a plus sign badge in the bottom-right corner indicating creating a new list or adding items to one."
 }

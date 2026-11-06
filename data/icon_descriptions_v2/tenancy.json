@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "hierarchy / organization chart",
+   "meaning": "hierarchy or organization chart",
    "strength": "primary"
   },
   {
-   "meaning": "tree data structure / parent-child nodes",
+   "meaning": "tree data structure or parent-child nodes",
    "strength": "primary"
   },
   {
-   "meaning": "network topology / hub and spoke",
+   "meaning": "network topology or hub-and-spoke distribution",
    "strength": "secondary"
   },
   {
-   "meaning": "family tree / genealogy",
+   "meaning": "family tree or genealogy",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a chemical molecule, a tripod or stand, a paw print at tiny sizes, or a generic share/connection icon.",
+ "ambiguity": "Virtually interchangeable with the other four-node hierarchy icon (four equal-sized rings with the bottom three in an arc), and easily confused at a glance with the three-node Y-junction molecule/network icon.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -155,9 +155,14 @@
  ],
  "near_misses": [
   {
-   "task": "Prune the apple tree in the backyard before frost",
-   "better": "botanical tree",
-   "trap": "shared_vocabulary"
+   "task": "Build 3D ball-and-stick molecule models for chemistry lab",
+   "better": "three rings connected at a central Y-junction (molecule)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Diagram the three-way junction in the peer-to-peer graph",
+   "better": "three-node Y-junction network glyph",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a sturdy tripod for the telephoto lens",
@@ -165,13 +170,13 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Share the vacation photo album with the family group",
-   "better": "share icon or photo album",
-   "trap": "lookalike_glyph"
+   "task": "Prune the apple tree in the backyard before frost",
+   "better": "botanical tree",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Organize the spice rack alphabetically",
-   "better": "spice jar / kitchen shelf",
+   "better": "spice jar or kitchen shelf",
    "trap": "generic_verb"
   },
   {
@@ -181,14 +186,14 @@
   },
   {
    "task": "Check hierarchical permissions on the staging server",
-   "better": "lock / shield / server",
+   "better": "lock, shield, or server",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a parent node branching into three child nodes, which is the standard visual representation of a hierarchy, tree structure, taxonomy, or org chart. It fits tasks centered on org charts, data trees, sitemaps, and genealogy, though it can occasionally resemble a network share icon or a chemical molecule.",
@@ -206,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hierarchy / organization chart",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tree data structure / parent-child nodes",
+     "strength": "primary"
+    },
+    {
+     "meaning": "network topology / hub and spoke",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "family tree / genealogy",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a chemical molecule, a tripod or stand, a paw print at tiny sizes, or a generic share/connection icon.",
+   "near_misses": [
+    {
+     "task": "Prune the apple tree in the backyard before frost",
+     "better": "botanical tree",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a sturdy tripod for the telephoto lens",
+     "better": "camera tripod",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Share the vacation photo album with the family group",
+     "better": "share icon or photo album",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Organize the spice rack alphabetically",
+     "better": "spice jar / kitchen shelf",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book hotel rooms for the new team leads",
+     "better": "hotel bed",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check hierarchical permissions on the staging server",
+     "better": "lock / shield / server",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "network_node",
+   "graph_4"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5365,
+    "output": 1778,
+    "thoughts": 185,
+    "total": 7328
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Shows a larger top parent ring connected to three smaller bottom child rings aligned on a flat horizontal row; it is semantically interchangeable with the equal-ring arc-bottomed four-node tree, and differs from the three-node Y-junction by having a top parent ring and three bottom child rings."
 }

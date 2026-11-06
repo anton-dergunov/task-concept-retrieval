@@ -13,7 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "mobile app, mobile payment, or digital wallet",
+   "meaning": "using a mobile app, mobile payment, or digital wallet",
+   "strength": "primary"
+  },
+  {
+   "meaning": "left-handed phone grip or one-handed mode",
    "strength": "secondary"
   },
   {
@@ -21,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the top dot can look like a lanyard punch-hole on a badge or price tag rather than a front-facing phone camera, and the thumb looks like a checkmark.",
+ "ambiguity": "Virtually interchangeable with its mirror-image icon of a smartphone held in the right hand for any general mobile task; the rectangular body with a top dot also echoes the speaker cabinet in the speaker-and-headphones icon.",
  "modifier_semantics": [
   {
    "modifier": "hand with thumb holding bottom-left corner",
@@ -158,40 +162,40 @@
  ],
  "near_misses": [
   {
+   "task": "Configure right-handed one-handed keyboard mode on phone",
+   "better": "smartphone held in right hand with thumb on bottom-right",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch computer audio output between speakers and headphones",
+   "better": "speaker and headphones audio equipment icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Grandma about Sunday dinner",
-   "better": "telephone receiver",
+   "better": "telephone receiver icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pay the monthly Verizon bill",
-   "better": "bill / invoice / credit card",
+   "task": "Pay the monthly Verizon wireless bill",
+   "better": "bill, invoice, or credit card icon",
    "trap": "generic_verb"
   },
   {
    "task": "Buy a mobile tool cart for the garage",
-   "better": "tool cart / toolbox",
+   "better": "tool cart or toolbox icon",
    "trap": "property"
   },
   {
-   "task": "Pick up dry cleaning tags from the counter",
-   "better": "clothing hanger / price tag",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Record podcast voiceover on microphone",
-   "better": "microphone",
+   "task": "Record podcast voiceover on my phone microphone",
+   "better": "microphone icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Print laminated visitor badges for the conference",
-   "better": "ID badge with lanyard",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a smartphone held in a hand with the thumb wrapping across the lower-left corner and a front camera dot at the top. It fits tasks centered on a mobile phone, handset setup, or tap-to-pay/mobile apps, though the angular thumb resembles a checkmark and the top dot can make it look like a hang tag or badge.",
@@ -209,6 +213,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone or mobile phone in hand",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile app, mobile payment, or digital wallet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "ID badge, keycard, or ticket held in hand",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the top dot can look like a lanyard punch-hole on a badge or price tag rather than a front-facing phone camera, and the thumb looks like a checkmark.",
+   "near_misses": [
+    {
+     "task": "Call Grandma about Sunday dinner",
+     "better": "telephone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly Verizon bill",
+     "better": "bill / invoice / credit card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a mobile tool cart for the garage",
+     "better": "tool cart / toolbox",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up dry cleaning tags from the counter",
+     "better": "clothing hanger / price tag",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Record podcast voiceover on microphone",
+     "better": "microphone",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Print laminated visitor badges for the conference",
+     "better": "ID badge with lanyard",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "media_output",
+   "mobile_hand"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5437,
+    "output": 1586,
+    "thoughts": 0,
+    "total": 7023
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "Shows a vertical smartphone with a top camera dot held by a left hand on the left edge with the thumb reaching right, making it a horizontal mirror image of the right-handed smartphone icon and practically interchangeable for general phone tasks."
 }

@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "battery / rechargeable cell / power bank",
+   "meaning": "low battery / quarter-charged battery / needs charging",
    "strength": "primary"
   },
   {
-   "meaning": "low battery / needs charging / battery replacement",
+   "meaning": "battery / rechargeable cell / power bank (interchangeable with other battery levels)",
    "strength": "primary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles other battery level indicator icons (half full, empty, full) and only differs by the amount of interior fill.",
+ "ambiguity": "Easily confused with the critically low battery and the half-full battery; for general to-do items about batteries or charging, the five fill-level variants are functionally interchangeable.",
  "modifier_semantics": [
   {
    "modifier": "solid fill covering the right quarter of the interior",
@@ -108,11 +108,6 @@
    "domain": "travel"
   },
   {
-   "task": "Test the car battery voltage with the multimeter before the first freeze hits",
-   "parent": "",
-   "domain": "home"
-  },
-  {
    "task": "Replace the corroded AA batteries in the kitchen scale and clean the contacts",
    "parent": "",
    "domain": "home"
@@ -158,9 +153,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping",
-   "better": "headlamp / flashlight",
-   "trap": "property"
+   "task": "Recycle the completely dead watch button cell",
+   "better": "completely empty battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the charged power bank in the carry-on bag",
+   "better": "mostly full battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Order a battery-powered lawn edger for the front yard",
@@ -181,17 +181,12 @@
    "task": "Check why the living room TV remote isn't responding",
    "better": "remote control",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Order a waterproof Pelican case for the Sony A7IV",
-   "better": "camera / case",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a horizontal battery at roughly 25% charge. While originally designed as a UI status indicator for low battery, in a task planner it serves naturally and recognizably for everyday tasks about buying, charging, replacing, or recycling batteries and power banks, though it shares visual space with other battery-level variants.",
@@ -209,6 +204,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1,
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / rechargeable cell / power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low battery / needs charging / battery replacement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power / energy level",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles other battery level indicator icons (half full, empty, full) and only differs by the amount of interior fill.",
+   "near_misses": [
+    {
+     "task": "Order a battery-powered lawn edger for the front yard",
+     "better": "lawn mower / garden tool",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric power bill online",
+     "better": "lightning bolt / invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice drum battery rudiments for twenty minutes",
+     "better": "drum / music note",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check why the living room TV remote isn't responding",
+     "better": "remote control",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a waterproof Pelican case for the Sony A7IV",
+     "better": "camera / case",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_horiz_000",
+   "badge_critical_battery",
+   "battery_horiz_050",
+   "battery_horiz_075"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7940,
+    "output": 2460,
+    "thoughts": 0,
+    "total": 10400
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "This battery has a solid black fill covering roughly the right quarter to third of the interior, placing it between the barely-filled low battery and the half-filled battery."
 }

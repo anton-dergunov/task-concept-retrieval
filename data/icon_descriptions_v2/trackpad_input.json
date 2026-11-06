@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "touchscreen / touch display",
+   "meaning": "touchscreen, touch display, or interactive kiosk",
    "strength": "primary"
   },
   {
-   "meaning": "tablet or interactive kiosk",
+   "meaning": "trackpad or touchpad",
    "strength": "primary"
   },
   {
-   "meaning": "trackpad / touchpad",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "tap / select / interactive UI",
+   "meaning": "single-finger tap or select interaction",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic click/select cursor icon or a laptop trackpad rather than a full touchscreen display.",
+ "ambiguity": "Look-alike to the two-finger and three-finger touchpad icons at small sizes, where curled fingers and raised fingers both read as vertical bars.",
  "modifier_semantics": [
   {
    "modifier": "pointing hand with extended index finger",
@@ -161,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Enable two-finger tap for right-click on laptop trackpad",
+   "better": "touchpad with two-finger hand gesture",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up three-finger swipe to switch desktop workspaces",
+   "better": "touchpad with three-finger hand gesture",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Get in touch with Sarah about the Q3 budget",
    "better": "phone or message bubble",
    "trap": "shared_vocabulary"
@@ -171,30 +177,20 @@
    "trap": "property"
   },
   {
-   "task": "Select health insurance plan before open enrollment closes",
-   "better": "medical shield or document",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Book manicure and hand massage for Saturday",
-   "better": "hand or nail polish",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the monthly AppleCare+ invoice",
-   "better": "credit card or receipt",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Touch up the chipped baseboard paint in the hallway",
    "better": "paintbrush",
    "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the monthly AppleCare+ invoice for the iPad",
+   "better": "credit card or receipt",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a hand tapping a horizontal rectangular screen, representing a touchscreen, tablet, kiosk, or trackpad. It fits tasks centered on touch displays, tablets, infotainment screens, and touchpads, though it can be confused with generic UI click/selection icons.",
@@ -212,6 +208,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "touchscreen / touch display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tablet or interactive kiosk",
+     "strength": "primary"
+    },
+    {
+     "meaning": "trackpad / touchpad",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tap / select / interactive UI",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic click/select cursor icon or a laptop trackpad rather than a full touchscreen display.",
+   "near_misses": [
+    {
+     "task": "Get in touch with Sarah about the Q3 budget",
+     "better": "phone or message bubble",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a touch-sensitive bedside lamp for the guest room",
+     "better": "lamp",
+     "trap": "property"
+    },
+    {
+     "task": "Book manicure and hand massage for Saturday",
+     "better": "hand or nail polish",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly AppleCare+ invoice",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Touch up the chipped baseboard paint in the hallway",
+     "better": "paintbrush",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "trackpad_input_3",
+   "trackpad_input_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5304,
+    "output": 1473,
+    "thoughts": 158,
+    "total": 6935
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "Only the single index finger is extended upward while the other fingers are curled down, making this the cleanest cue for a standard single-tap touchscreen, interactive kiosk, or basic trackpad click compared to the two- and three-finger multi-touch variants."
 }

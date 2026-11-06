@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "low battery or nearly empty battery",
+   "meaning": "critically low battery or nearly empty battery needing recharge",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "charge device or recharge power",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "low personal energy or fatigue",
+   "meaning": "low personal energy or exhaustion",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles other battery level icons (empty, half, full), so at small sizes it typically reads simply as 'battery' or 'low battery'.",
+ "ambiguity": "Virtually interchangeable at list size with the ~25% and ~40% filled battery icons, and easily confused with any generic battery icon when not viewed side-by-side.",
  "modifier_semantics": [
   {
    "modifier": "single vertical fill bar on the far left inside",
@@ -161,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Unplug the fully charged power bank before packing",
+   "better": "fully charged 100% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Drain the drone batteries to 50% storage voltage for winter",
+   "better": "half-filled 50% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small waterproof battery-powered fan for the tent",
    "better": "fan",
    "trap": "property"
@@ -171,18 +177,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Jump-start the Honda Civic and drive it for 30 minutes",
-   "better": "car or car battery with dual terminals",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Schedule the cognitive test battery with the neuropsychologist",
    "better": "brain or medical clipboard",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Take a 20-minute nap after lunch to recharge my batteries",
-   "better": "bed or sleep",
    "trap": "shared_vocabulary"
   },
   {
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A universally recognized horizontal battery icon with one bar left, indicating a battery in general or a low battery needing replacement or charging. It fits common household, shopping, travel, and tech tasks about buying cells, replacing dead batteries, or charging power packs, though it looks very similar to other battery-level variants.",
@@ -212,6 +208,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "low battery or nearly empty battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery or portable power cell",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charge device or recharge power",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "low personal energy or fatigue",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles other battery level icons (empty, half, full), so at small sizes it typically reads simply as 'battery' or 'low battery'.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof battery-powered fan for the tent",
+     "better": "fan",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before the 15th",
+     "better": "invoice or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Jump-start the Honda Civic and drive it for 30 minutes",
+     "better": "car or car battery with dual terminals",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule the cognitive test battery with the neuropsychologist",
+     "better": "brain or medical clipboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take a 20-minute nap after lunch to recharge my batteries",
+     "better": "bed or sleep",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a protective silicone sleeve for the new power bank",
+     "better": "case or shopping bag",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_2",
+   "battery_android_frame_3",
+   "battery_android_frame_4",
+   "battery_android_frame_5",
+   "battery_android_frame_6",
+   "battery_android_frame_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10606,
+    "output": 3427,
+    "thoughts": 0,
+    "total": 14033
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "This battery has the thinnest interior fill bar (~15% full), making it the clearest representation of a critically low battery needing a recharge, though nearly interchangeable with the ~25% battery at small sizes."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "download complete / downloaded file",
+   "meaning": "download complete / downloaded file / saved offline",
    "strength": "primary"
   },
   {
-   "meaning": "verified or approved entry on a form line",
+   "meaning": "approved or verified entry on a form line",
    "strength": "secondary"
   },
   {
-   "meaning": "saved offline / stored locally",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "completed / done",
+   "meaning": "installed / saved to device",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a generic checkmark (which duplicates the to-do checkbox itself) or for a download arrow if glanced at quickly.",
+ "ambiguity": "Can be confused with the checkmark beside three horizontal list bars when scanning quickly for any checkmark-and-line symbol, or mistaken for a standard download arrow.",
  "modifier_semantics": [
   {
    "modifier": "horizontal base line below checkmark",
@@ -161,24 +157,24 @@
  ],
  "near_misses": [
   {
-   "task": "Check tire pressure before driving up to Tahoe",
-   "better": "tire pressure gauge or car",
-   "trap": "generic_verb"
+   "task": "Draft the pre-flight inspection checklist for the Cessna",
+   "better": "checkmark with three horizontal list bars (checklist)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Check if the sourdough starter is bubbly enough to bake",
-   "better": "bread / jar",
+   "task": "Check off all mandatory compliance items before the audit",
+   "better": "checkmark with three horizontal list bars (complete all list items)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check tire pressure before driving up to Tahoe",
+   "better": "tire pressure gauge or car",
    "trap": "generic_verb"
   },
   {
    "task": "Buy pre-approved TSA locks for the checked suitcases",
    "better": "padlock or suitcase",
    "trap": "property"
-  },
-  {
-   "task": "Upload the edited podcast episode to Libsyn",
-   "better": "upload arrow or microphone",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Write a check to the landscaper for November mowing",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows a checkmark over a horizontal base line, the standard UI glyph for 'download complete' or 'saved offline', and secondarily 'approved/verified on a line'. It fits tasks about downloading files for offline use or final verification, though in a task list any checkmark icon risks blending in with the completion checkboxes.",
@@ -212,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "download_done"
- }
+  "alias_of": "download_done",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download complete / downloaded file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "verified or approved entry on a form line",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "saved offline / stored locally",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "completed / done",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a generic checkmark (which duplicates the to-do checkbox itself) or for a download arrow if glanced at quickly.",
+   "near_misses": [
+    {
+     "task": "Check tire pressure before driving up to Tahoe",
+     "better": "tire pressure gauge or car",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check if the sourdough starter is bubbly enough to bake",
+     "better": "bread / jar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy pre-approved TSA locks for the checked suitcases",
+     "better": "padlock or suitcase",
+     "trap": "property"
+    },
+    {
+     "task": "Upload the edited podcast episode to Libsyn",
+     "better": "upload arrow or microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write a check to the landscaper for November mowing",
+     "better": "bank check / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Ask Sarah to bring the HDMI adapter for the projector",
+     "better": "cable / projector (under 'Download Festival Trip')",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sweep"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 730,
+    "thoughts": 103,
+    "total": 4906
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Shows a checkmark centered directly above a single flat horizontal baseline (indicating a finished download or a checked signature/entry line), whereas the look-alike places three staggered horizontal list bars to the right of the checkmark."
 }

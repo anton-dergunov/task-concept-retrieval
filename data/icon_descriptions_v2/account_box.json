@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "user profile or account",
+   "meaning": "user profile, account, or square avatar",
    "strength": "primary"
   },
   {
-   "meaning": "avatar, portrait, or ID photo",
+   "meaning": "single contact or person entry",
    "strength": "primary"
   },
   {
-   "meaning": "contact or person",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "framed portrait picture",
+   "meaning": "framed square portrait or headshot",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can look like a generic landscape photo icon (sun over a hill) or a washing machine / speaker box.",
+ "ambiguity": "Very easily confused with the tall vertical portrait frame for general profile/headshot tasks, and at tiny sizes the circle and arc can look like a sun-and-hill landscape photo.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -141,10 +137,6 @@
    "central": "text / bio"
   },
   {
-   "task": "Turn on two-factor authentication in account settings",
-   "central": "security / 2FA"
-  },
-  {
    "task": "Book 30-minute session with the portrait photographer",
    "central": "photographer / camera"
   },
@@ -154,6 +146,16 @@
   }
  ],
  "near_misses": [
+  {
+   "task": "Check Dr. Patel's appointment availability for Tuesday",
+   "better": "calendar page with top tabs and person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Merge duplicate contact cards in the address book",
+   "better": "stacked square frames with person silhouette",
+   "trap": "lookalike_glyph"
+  },
   {
    "task": "Call Sarah about the weekend carpool",
    "better": "phone handset",
@@ -178,17 +180,12 @@
    "task": "Pay the $130 passport renewal fee online",
    "better": "credit card or passport booklet",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Clean the rubber seal on the front-loading washing machine",
-   "better": "washing machine",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a stylized head-and-shoulders silhouette inside a square frame, the standard glyph for a user profile, avatar, headshot, or framed portrait. It fits tasks about updating online profiles, taking ID/passport photos, or framing portraits, though at tiny sizes the circle-and-arc inside a square can resemble a sun-over-hill landscape picture icon.",
@@ -206,6 +203,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "user profile or account",
+     "strength": "primary"
+    },
+    {
+     "meaning": "avatar, portrait, or ID photo",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contact or person",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "framed portrait picture",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can look like a generic landscape photo icon (sun over a hill) or a washing machine / speaker box.",
+   "near_misses": [
+    {
+     "task": "Call Sarah about the weekend carpool",
+     "better": "phone handset",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Develop roll of landscape photos from the Dolomites trip",
+     "better": "mountain landscape photo or film roll",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Compare aluminium extrusions with a 20x20 square profile",
+     "better": "ruler or construction beam",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a low-profile mechanical keyboard for the office",
+     "better": "keyboard",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $130 passport renewal fee online",
+     "better": "credit card or passport booklet",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Clean the rubber seal on the front-loading washing machine",
+     "better": "washing machine",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "perm_contact_calendar",
+   "person_book",
+   "switch_account"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6728,
+    "output": 2165,
+    "thoughts": 0,
+    "total": 8893
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:16Z"
+  }
+ },
+ "distinguishing": "It is a single, unadorned 1:1 square frame around the person bust—lacking the top calendar tabs, the taller portrait aspect ratio, or the second stacked card behind it."
 }

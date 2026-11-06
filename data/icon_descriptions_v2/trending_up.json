@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic line chart icon or a lightning bolt at very small sizes.",
+ "ambiguity": "Semantically interchangeable with the rounded-curve upward trend arrow, and easily mistaken for the arrowhead-less upward zigzag line at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -155,24 +155,24 @@
  ],
  "near_misses": [
   {
+   "task": "Review Q3 churn and revenue decline report",
+   "better": "downward-pointing zigzag trend arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add a mini sparkline column to the spreadsheet",
+   "better": "upward zigzag line without an arrowhead",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Make a big pot of chicken stock for the freezer",
-   "better": "soup pot / broth",
+   "better": "soup pot or broth carton",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Stock up on AA batteries and dish soap at Costco",
-   "better": "shopping cart / batteries",
+   "better": "shopping cart or batteries",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay the $140 electric bill before Tuesday",
-   "better": "invoice / bill or dollar sign",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Take the stairs up to the 6th floor every morning",
-   "better": "stairs",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a faster high-performance SD card for the camera",
@@ -181,7 +181,7 @@
   },
   {
    "task": "Book hotel near the convention center in Chicago",
-   "better": "hotel / bed",
+   "better": "hotel or bed",
    "trap": "parent_topic"
   },
   {
@@ -193,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A classic upward-trending zigzag arrow universally read as growth, stock investments, or analytics metrics. It fits personal investing and work KPI tasks well, though it sits near other chart and graph icons.",
@@ -211,6 +211,101 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upward trend, growth, or increase",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stock market, investing, or equities",
+     "strength": "primary"
+    },
+    {
+     "meaning": "analytics, metrics, or performance chart",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "progress or improvement over time",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic line chart icon or a lightning bolt at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Make a big pot of chicken stock for the freezer",
+     "better": "soup pot / broth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Stock up on AA batteries and dish soap at Costco",
+     "better": "shopping cart / batteries",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $140 electric bill before Tuesday",
+     "better": "invoice / bill or dollar sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the stairs up to the 6th floor every morning",
+     "better": "stairs",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a faster high-performance SD card for the camera",
+     "better": "SD memory card",
+     "trap": "property"
+    },
+    {
+     "task": "Book hotel near the convention center in Chicago",
+     "better": "hotel / bed",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Improve kitchen knife skills",
+     "better": "chef knife",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "moving",
+   "trending_down",
+   "show_chart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6713,
+    "output": 1309,
+    "thoughts": 180,
+    "total": 8202
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Has sharp, angular corners at the peak and trough of an upward-pointing arrow, contrasting with the downward-pointing arrow and the arrowhead-less line, while being semantically interchangeable with the rounded upward trend arrow."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "speaking, talking, or voice communication",
-   "strength": "primary"
-  },
-  {
    "meaning": "listening, hearing, or receiving audio",
    "strength": "primary"
   },
   {
-   "meaning": "speech therapy, pronunciation, or voice coaching",
+   "meaning": "audiology, hearing test, or hearing aid",
+   "strength": "primary"
+  },
+  {
+   "meaning": "active listening, comprehension, or audio monitoring",
    "strength": "secondary"
   },
   {
-   "meaning": "voice command, dictation, or voice assistant",
+   "meaning": "speaking or voice command (by common misreading of the wave direction)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the arcs curve toward the person (longer arc inside, shorter outside), it literally depicts waves incoming (listening/hearing), but at small sizes it is almost indistinguishable from the standard person-speaking or voice-over icon where waves radiate outward.",
+ "ambiguity": "Completely identical to the other person with inward-facing waves, and easily mistaken at list size for the person with outward-radiating waves (speaking/voice) because the reversal of the two small arcs is hard to spot at a glance.",
  "modifier_semantics": [
   {
    "modifier": "two curved wave arcs on the right",
@@ -162,28 +162,33 @@
  ],
  "near_misses": [
   {
+   "task": "Record the voice-over narration for the product demo",
+   "better": "person with outward-radiating sound waves (speaking)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Practice pronunciation for the Spanish oral exam",
+   "better": "person with outward-radiating sound waves (speaking)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the plumber about the radiator leak",
-   "better": "phone handset",
+   "better": "telephone handset",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pair the new Bluetooth speaker with the kitchen tablet",
-   "better": "speaker",
+   "better": "audio speaker box",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check Wi-Fi signal strength in the attic bedroom",
-   "better": "wifi signal bars",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a quiet voice-controlled tower fan for the bedroom",
-   "better": "fan",
+   "better": "electric fan",
    "trap": "property"
   },
   {
    "task": "Listen to the new Rest is History podcast episode",
-   "better": "headphones or podcast",
+   "better": "headphones or podcast microphone",
    "trap": "generic_verb"
   },
   {
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon shows a person bust with sound waves next to the head, clearly signaling speaking, voice communication, or listening/hearing. It fits tasks centered on in-person conversations, public speaking, pronunciation practice, speech therapy, or audiology. It can be confused with a standard outgoing-voice icon (since the arcs curve inward) or with contactless/radio wave badges.",
@@ -213,6 +218,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "speaking, talking, or voice communication",
+     "strength": "primary"
+    },
+    {
+     "meaning": "listening, hearing, or receiving audio",
+     "strength": "primary"
+    },
+    {
+     "meaning": "speech therapy, pronunciation, or voice coaching",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "voice command, dictation, or voice assistant",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the arcs curve toward the person (longer arc inside, shorter outside), it literally depicts waves incoming (listening/hearing), but at small sizes it is almost indistinguishable from the standard person-speaking or voice-over icon where waves radiate outward.",
+   "near_misses": [
+    {
+     "task": "Call the plumber about the radiator leak",
+     "better": "phone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pair the new Bluetooth speaker with the kitchen tablet",
+     "better": "speaker",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check Wi-Fi signal strength in the attic bedroom",
+     "better": "wifi signal bars",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a quiet voice-controlled tower fan for the bedroom",
+     "better": "fan",
+     "trap": "property"
+    },
+    {
+     "task": "Listen to the new Rest is History podcast episode",
+     "better": "headphones or podcast",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book train tickets to Chicago for the annual conference",
+     "better": "train",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "spatial_audio_off",
+   "record_voice_over"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5440,
+    "output": 1739,
+    "thoughts": 0,
+    "total": 7179
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "Visually identical and completely interchangeable with the other person-with-inward-waves icon; unlike the person with outward-radiating waves, its two arcs curve concave to the right (longer arc closer to the head, shorter arc outside), showing sound or signals travelling inward toward the person rather than being spoken outward."
 }

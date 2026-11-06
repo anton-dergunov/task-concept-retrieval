@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with circular refresh/sync arrows or vertical upload/download arrows at a quick glance.",
+ "ambiguity": "Functionally interchangeable with the shorter staggered opposite horizontal arrows, and easily confused at a glance with the right-angled rectangular repeat loop.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set the focus timer playlist to repeat continuously",
+   "better": "right-angled rectangular repeat loop arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fork the main repository for the new feature",
+   "better": "horizontal stem splitting into two diverging arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Replace the broken light switch in the upstairs hallway",
    "better": "light switch or electrical outlet",
    "trap": "shared_vocabulary"
@@ -179,17 +189,12 @@
    "task": "Buy snacks and drinks for the neighborhood clothing swap",
    "better": "snacks or drinks",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Turn on automatic background app refresh on iPad",
-   "better": "circular refresh arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The two opposing horizontal arrows universally represent swapping, exchanging, transferring, or converting. While abstract, it is the primary visual symbol for common high-value action tasks like bank transfers, currency exchanges, store exchanges, and shift swaps.",
@@ -207,6 +212,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "swap, exchange, or trade",
+     "strength": "primary"
+    },
+    {
+     "meaning": "transfer funds or data between accounts",
+     "strength": "primary"
+    },
+    {
+     "meaning": "convert units, currency, or file formats",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "two-way sync or round trip",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with circular refresh/sync arrows or vertical upload/download arrows at a quick glance.",
+   "near_misses": [
+    {
+     "task": "Replace the broken light switch in the upstairs hallway",
+     "better": "light switch or electrical outlet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a Nintendo Switch charger for the road trip",
+     "better": "game controller or charger cable",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up a convertible crib in the nursery",
+     "better": "baby crib",
+     "trap": "property"
+    },
+    {
+     "task": "Check the stock market index before noon",
+     "better": "stock chart or line graph",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy snacks and drinks for the neighborhood clothing swap",
+     "better": "snacks or drinks",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Turn on automatic background app refresh on iPad",
+     "better": "circular refresh arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shuffle",
+   "arrow_split",
+   "repeat",
+   "swap_horiz"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8029,
+    "output": 1556,
+    "thoughts": 0,
+    "total": 9585
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "Two full-length, straight horizontal arrows stacked directly above one another point right and left without corner bends, virtually interchangeable in meaning with the shorter staggered horizontal arrows for swap, exchange, or transfer."
 }

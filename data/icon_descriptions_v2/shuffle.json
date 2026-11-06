@@ -7,19 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "shuffle or randomize",
+   "meaning": "shuffle or randomize order",
    "strength": "primary"
   },
   {
-   "meaning": "swap or switch order",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cross-reference or intersect",
+   "meaning": "cross-switch or interleave paths",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, it can look like a simple 'X' or cancel/close button, or a full-screen expand icon.",
+ "ambiguity": "Easily confused with the single-stem split/fork arrows when small, since both end in identical top-right and bottom-right diagonal arrowheads.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -165,24 +161,29 @@
  ],
  "near_misses": [
   {
+   "task": "Split the restaurant bill between two cards",
+   "better": "horizontal stem splitting into two diverging arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Exchange US dollars for Euros at the airport",
+   "better": "two opposite horizontal swap arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel the unused Adobe Creative Cloud subscription",
+   "better": "plain X / cancel mark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a purple iPod Shuffle on eBay for running",
-   "better": "music player / headphones",
+   "better": "music player or headphones",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Practice the Texas shuffle rhythm on drums",
-   "better": "drum / music note",
+   "better": "drum or music note",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Cancel the unused Adobe Creative Cloud subscription",
-   "better": "X / cancel mark",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Expand the living room layout to fullscreen before printing",
-   "better": "fullscreen / expand arrows",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Rearrange the furniture in the guest bedroom",
@@ -191,14 +192,14 @@
   },
   {
    "task": "Book the DJ and sound system",
-   "better": "speaker / DJ turntable",
+   "better": "speaker or DJ turntable",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The crossed diagonal arrows are the universal media-player symbol for 'shuffle' or 'randomize'. While clear in UI contexts, very few real-life to-do tasks are specifically about randomization (mostly draws, flashcards, or coding), and at small sizes it closely resembles an 'X' or fullscreen expand icon.",
@@ -218,6 +219,93 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shuffle or randomize",
+     "strength": "primary"
+    },
+    {
+     "meaning": "swap or switch order",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cross-reference or intersect",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, it can look like a simple 'X' or cancel/close button, or a full-screen expand icon.",
+   "near_misses": [
+    {
+     "task": "Buy a purple iPod Shuffle on eBay for running",
+     "better": "music player / headphones",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice the Texas shuffle rhythm on drums",
+     "better": "drum / music note",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel the unused Adobe Creative Cloud subscription",
+     "better": "X / cancel mark",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Expand the living room layout to fullscreen before printing",
+     "better": "fullscreen / expand arrows",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Rearrange the furniture in the guest bedroom",
+     "better": "sofa / furniture",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book the DJ and sound system",
+     "better": "speaker / DJ turntable",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arrow_split",
+   "repeat",
+   "sync_alt",
+   "swap_horiz"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8029,
+    "output": 1556,
+    "thoughts": 0,
+    "total": 9585
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "Two diagonal shafts cross in an X from left to right with arrowheads at the top-right and bottom-right corners, representing shuffling or randomizing rather than splitting from one stem or looping/swapping horizontally."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "feedback or bug report",
+   "meaning": "bug report, issue feedback, or complaint",
    "strength": "primary"
   },
   {
-   "meaning": "urgent message or alert notification",
+   "meaning": "urgent message, warning notice, or alert notification",
    "strength": "primary"
   },
   {
-   "meaning": "announcement or notice",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "complaint or issue comment",
+   "meaning": "failed message delivery alert",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Standard icon for 'Send Feedback' in Google Material Design; can also be read as an urgent chat message, a delivery failure on an SMS, or a general warning notice.",
+ "ambiguity": "Very easily confused at small sizes with the speech bubble containing a lowercase 'i', since both feature a single centered vertical bar and a dot (only inverted).",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark inside center",
@@ -174,40 +170,40 @@
  ],
  "near_misses": [
   {
-   "task": "Fix the urgent kitchen sink leak before guests arrive",
-   "better": "wrench or plumbing icon",
-   "trap": "property"
-  },
-  {
    "task": "Text Sarah about grabbing coffee on Tuesday",
-   "better": "plain speech bubble or chat icon",
+   "better": "speech bubble with three horizontal dots",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Write helpful tooltip text for the onboarding screen",
+   "better": "speech bubble with lowercase info letter i",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the urgent kitchen sink leak before guests arrive",
+   "better": "wrench or plumbing pipe",
+   "trap": "property"
+  },
+  {
    "task": "Check the server logs for error messages",
-   "better": "terminal or log file icon",
+   "better": "terminal or log file",
    "trap": "generic_verb"
   },
   {
    "task": "Buy a megaphone for the field day announcements",
-   "better": "megaphone icon",
+   "better": "megaphone",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Update the billing credit card before the subscription expires",
-   "better": "credit card icon",
-   "trap": "property"
-  },
-  {
    "task": "Schedule the database maintenance window",
-   "better": "calendar or database icon",
+   "better": "calendar or database",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A rectangular speech bubble containing an exclamation mark is the standard UI glyph for 'send feedback' or 'report an issue', and naturally reads as an urgent message, complaint, or announcement. It fits tasks centered on reporting bugs, sending urgent texts/notices, or giving feedback, though it must not be used merely to mark any unrelated task as high-priority.",
@@ -227,6 +223,98 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "feedback or bug report",
+     "strength": "primary"
+    },
+    {
+     "meaning": "urgent message or alert notification",
+     "strength": "primary"
+    },
+    {
+     "meaning": "announcement or notice",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "complaint or issue comment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Standard icon for 'Send Feedback' in Google Material Design; can also be read as an urgent chat message, a delivery failure on an SMS, or a general warning notice.",
+   "near_misses": [
+    {
+     "task": "Fix the urgent kitchen sink leak before guests arrive",
+     "better": "wrench or plumbing icon",
+     "trap": "property"
+    },
+    {
+     "task": "Text Sarah about grabbing coffee on Tuesday",
+     "better": "plain speech bubble or chat icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the server logs for error messages",
+     "better": "terminal or log file icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a megaphone for the field day announcements",
+     "better": "megaphone icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update the billing credit card before the subscription expires",
+     "better": "credit card icon",
+     "trap": "property"
+    },
+    {
+     "task": "Schedule the database maintenance window",
+     "better": "calendar or database icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "textsms",
+   "chat_info",
+   "3p"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6707,
+    "output": 1413,
+    "thoughts": 0,
+    "total": 8120,
+    "seconds": 27.28,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:11:55Z"
+  }
+ },
+ "distinguishing": "Contains a vertical exclamation mark (bar on top, dot at bottom) inside the speech bubble, signifying an urgent alert, error report, or critical feedback rather than neutral information or casual chat."
 }

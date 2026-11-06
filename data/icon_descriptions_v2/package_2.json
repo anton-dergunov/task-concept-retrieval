@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "package, parcel, shipment, delivery",
+   "meaning": "package, parcel, shipment, or delivery",
    "strength": "primary"
   },
   {
-   "meaning": "moving box, storage box, packing",
+   "meaning": "moving box, storage box, or packing",
    "strength": "primary"
   },
   {
-   "meaning": "software package, module, dependency, build artifact",
+   "meaning": "software package, dependency, or build artifact",
    "strength": "secondary"
   },
   {
-   "meaning": "product, inventory item, physical stock",
+   "meaning": "product or physical inventory item",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a plain 3D cube or block icon if the top tape line isn't noticed, though both often overlap in software contexts.",
+ "ambiguity": "Can be confused with the plain 3D wireframe cube if the single line across the top face goes unnoticed, and both are frequently used for software packages or modules.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Export the Blender character mesh as an STL for 3D printing",
+   "better": "plain 3D wireframe cube",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Calculate the volume of the cube for the geometry worksheet",
+   "better": "plain 3D wireframe cube",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book the 5-night holiday package to Lisbon",
    "better": "airplane or suitcase",
    "trap": "shared_vocabulary"
@@ -170,11 +180,6 @@
    "trap": "property"
   },
   {
-   "task": "Solve the Rubik's cube under two minutes",
-   "better": "puzzle or game controller",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Turn off the water valve before the movers arrive",
    "better": "water droplet or wrench",
    "trap": "parent_topic"
@@ -188,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a taped isometric cardboard box, universally understood as a parcel, delivery, moving box, or software package. It maps cleanly to frequent everyday tasks like picking up deliveries, returning online orders, packing for a move, and publishing software packages.",
@@ -206,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "package, parcel, shipment, delivery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "moving box, storage box, packing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "software package, module, dependency, build artifact",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "product, inventory item, physical stock",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain 3D cube or block icon if the top tape line isn't noticed, though both often overlap in software contexts.",
+   "near_misses": [
+    {
+     "task": "Book the 5-night holiday package to Lisbon",
+     "better": "airplane or suitcase",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the compensation package from the recruiter",
+     "better": "document or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy boxed wine for the barbecue",
+     "better": "wine glass or bottle",
+     "trap": "property"
+    },
+    {
+     "task": "Solve the Rubik's cube under two minutes",
+     "better": "puzzle or game controller",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn off the water valve before the movers arrive",
+     "better": "water droplet or wrench",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Unpack why the client meeting went badly",
+     "better": "speech bubbles or people",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "deployed_code"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4071,
+    "output": 1062,
+    "thoughts": 89,
+    "total": 5222
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "Features a diagonal seam or tape strip across the top face of the cube, turning the geometric shape into a sealed cardboard shipping box or parcel."
 }

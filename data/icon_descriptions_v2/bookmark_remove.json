@@ -13,15 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "bookmark or reading list",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "unsave item or clear saved posts",
-   "strength": "secondary"
+   "meaning": "unsave item or clear reading list",
+   "strength": "primary"
   }
  ],
- "ambiguity": "At small sizes the minus sign can blend into the top edge of the bookmark, making it look like a plain bookmark or a stylized letter G.",
+ "ambiguity": "Easily mistaken for the bookmark with a plus sign or a plain bookmark at small sizes when the horizontal bar blends into the broken top-right corner of the ribbon.",
  "modifier_semantics": [
   {
    "modifier": "minus sign in top right corner",
@@ -172,40 +168,40 @@
  ],
  "near_misses": [
   {
+   "task": "Bookmark the new payroll portal on my work laptop",
+   "better": "bookmark with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Save the tax forms reference page to browser favorites",
+   "better": "bookmark with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a leather bookmark for Dad's birthday",
-   "better": "plain bookmark or gift icon (this icon means remove bookmark)",
+   "better": "plain bookmark or gift",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Bookmark the new payroll portal on my work laptop",
-   "better": "bookmark with plus sign or plain bookmark",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Read the three bookmarked papers on transformer attention",
-   "better": "document or open book icon",
+   "better": "document or open book",
    "trap": "property"
   },
   {
    "task": "Remove blue ink stain from linen trousers",
-   "better": "shirt or laundry icon",
+   "better": "shirt or laundry",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Remove security tag that the cashier left on the jacket",
-   "better": "price tag or jacket icon",
+   "better": "price tag or jacket",
    "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Compare airline baggage fees",
-   "better": "suitcase or airplane icon",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a ribbon bookmark with a minus badge in the top-right corner, meaning remove bookmark or clean up saved bookmarks. While originally a UI action glyph, it fits digital decluttering tasks like pruning browser bookmarks, clearing reading lists, or unsaving old items, though it can be confused with a plain bookmark if the minus isn't noticed.",
@@ -225,6 +221,90 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remove bookmark or clean up saved bookmarks",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bookmark or reading list",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "unsave item or clear saved posts",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the minus sign can blend into the top edge of the bookmark, making it look like a plain bookmark or a stylized letter G.",
+   "near_misses": [
+    {
+     "task": "Buy a leather bookmark for Dad's birthday",
+     "better": "plain bookmark or gift icon (this icon means remove bookmark)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Bookmark the new payroll portal on my work laptop",
+     "better": "bookmark with plus sign or plain bookmark",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Read the three bookmarked papers on transformer attention",
+     "better": "document or open book icon",
+     "trap": "property"
+    },
+    {
+     "task": "Remove blue ink stain from linen trousers",
+     "better": "shirt or laundry icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Remove security tag that the cashier left on the jacket",
+     "better": "price tag or jacket icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Compare airline baggage fees",
+     "better": "suitcase or airplane icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bookmark_add"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 603,
+    "thoughts": 0,
+    "total": 4662
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Has a horizontal minus sign (-) in the top-right corner instead of a plus sign (+), meaning to remove, delete, or clean up bookmarks rather than add them."
 }

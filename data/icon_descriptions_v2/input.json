@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "TV video input / source",
+   "meaning": "TV video input / AV source",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with log out, export, or external link icons that use a box and arrow in slightly different orientations.",
+ "ambiguity": "Virtually indistinguishable in use from the 1:1 square frame with a left-entering arrow, and easily confused with the application window with a left-entering arrow or the square frame with a right-exiting arrow.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow entering from left",
@@ -161,12 +161,17 @@
  "near_misses": [
   {
    "task": "Export Q4 transactions to CSV for the accountant",
-   "better": "export icon (arrow pointing out of box)",
+   "better": "square frame with a right-pointing arrow exiting through the right side",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Log out of Netflix on the Airbnb television",
-   "better": "logout icon (arrow leaving box)",
+   "task": "Move downloaded receipts into the tax folder",
+   "better": "file folder with a right-pointing arrow inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Present my screen during the all-hands webinar",
+   "better": "rectangular screen frame with an upward-pointing arrow inside",
    "trap": "lookalike_glyph"
   },
   {
@@ -176,24 +181,19 @@
   },
   {
    "task": "Pay customs duty on the imported camera lens",
-   "better": "camera lens or customs/receipt icon",
+   "better": "camera lens or receipt icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Enter the marathon lottery before registration closes tonight",
    "better": "running shoe or ticket",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Email Sarah the new API key",
-   "better": "email / envelope or key",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts an arrow entering a rectangular frame from the left, the standard symbol for TV/monitor input source, data import, or logging in. It fits technical and administrative tasks around importing files, signing into portals, or configuring AV inputs, though it can be confused with export or logout icons at a quick glance.",
@@ -211,6 +211,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "log in / sign in",
+     "strength": "primary"
+    },
+    {
+     "meaning": "import / input data",
+     "strength": "primary"
+    },
+    {
+     "meaning": "TV video input / source",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "enter / check in",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with log out, export, or external link icons that use a box and arrow in slightly different orientations.",
+   "near_misses": [
+    {
+     "task": "Export Q4 transactions to CSV for the accountant",
+     "better": "export icon (arrow pointing out of box)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Log out of Netflix on the Airbnb television",
+     "better": "logout icon (arrow leaving box)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order imported Italian olive oil for the dinner party",
+     "better": "olive oil bottle",
+     "trap": "property"
+    },
+    {
+     "task": "Pay customs duty on the imported camera lens",
+     "better": "camera lens or customs/receipt icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Enter the marathon lottery before registration closes tonight",
+     "better": "running shoe or ticket",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email Sarah the new API key",
+     "better": "email / envelope or key",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "business_messages",
+   "output",
+   "exit_to_app",
+   "tab_move",
+   "drive_file_move",
+   "drive_folder_upload",
+   "present_to_all"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12136,
+    "output": 4252,
+    "thoughts": 0,
+    "total": 16388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "A wider landscape-oriented rectangle with a uniform thin border and a right-pointing arrow entering through a gap on the left; virtually interchangeable in meaning with the 1:1 square version with a left-entering arrow, though slightly more suggestive of a TV/monitor AV input symbol."
 }

@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "fullscreen or expand view",
-   "strength": "primary"
-  },
-  {
-   "meaning": "screenshot or screen capture region",
+   "meaning": "fullscreen mode or expand view",
    "strength": "primary"
   },
   {
    "meaning": "camera viewfinder or focus area",
+   "strength": "primary"
+  },
+  {
+   "meaning": "scan document, barcode, or QR code",
    "strength": "secondary"
   },
   {
-   "meaning": "scan document or QR code",
+   "meaning": "screen capture or crop region",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily read as generic UI chrome for entering fullscreen mode rather than a concrete object; also overlaps with barcode/QR scanner icons that lack a center scan line, and with image crop icons.",
+ "ambiguity": "Overlaps with the bottom-right plus-sign frame for screenshot/capture tasks, and with the exclamation-mark frame if the task is about scanning or camera issues.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Drag a selection box to screenshot the chart",
+   "better": "corner brackets with bottom-right plus crosshair",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the 'unable to scan QR code' error message in the app",
+   "better": "corner brackets frame with central exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy 16x20 oak picture frames for the hallway prints",
    "better": "picture frame with artwork inside",
    "trap": "shared_vocabulary"
@@ -165,29 +175,19 @@
   },
   {
    "task": "Book annual skin cancer screening with the dermatologist",
-   "better": "medical / doctor icon",
+   "better": "medical or doctor icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Generate a printable QR code for the guest Wi-Fi password",
-   "better": "QR code glyph",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order new polycarbonate lenses for my everyday glasses frames",
    "better": "eyeglasses",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Email the tax accountant about the missing receipt",
-   "better": "email / envelope",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Four rounded corner brackets form a rectangular viewfinder or fullscreen frame. While frequently used as interface chrome for fullscreen toggles, it serves as a recognizable icon for tasks centered on taking screenshots, capturing screen regions, or scanning documents, though it can be confused with QR code scanners or generic crop tools.",
@@ -205,6 +205,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "fullscreen or expand view",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screenshot or screen capture region",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera viewfinder or focus area",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "scan document or QR code",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily read as generic UI chrome for entering fullscreen mode rather than a concrete object; also overlaps with barcode/QR scanner icons that lack a center scan line, and with image crop icons.",
+   "near_misses": [
+    {
+     "task": "Buy 16x20 oak picture frames for the hallway prints",
+     "better": "picture frame with artwork inside",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace bent aluminum window screen in the guest bedroom",
+     "better": "window",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book annual skin cancer screening with the dermatologist",
+     "better": "medical / doctor icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Generate a printable QR code for the guest Wi-Fi password",
+     "better": "QR code glyph",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order new polycarbonate lenses for my everyday glasses frames",
+     "better": "eyeglasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the tax accountant about the missing receipt",
+     "better": "email / envelope",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screenshot_region",
+   "frame_exclamation"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5366,
+    "output": 939,
+    "thoughts": 153,
+    "total": 6458
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "A plain, empty rectangular frame of four rounded corner brackets with no central exclamation mark and no corner plus sign, representing a general fullscreen view, camera viewfinder, or scan area."
 }

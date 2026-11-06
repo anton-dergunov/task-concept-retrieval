@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "rating or customer review",
+   "meaning": "favorite, starred item, or bookmark",
    "strength": "primary"
   },
   {
-   "meaning": "favorite or saved item",
+   "meaning": "literal star shape, star ornament, or tree topper",
    "strength": "primary"
   },
   {
-   "meaning": "star, astronomy, or night sky",
+   "meaning": "general rating or review",
    "strength": "secondary"
   },
   {
-   "meaning": "tree topper or star decoration",
+   "meaning": "astronomy or star in the sky",
    "strength": "secondary"
   }
  ],
- "ambiguity": "As an outline star, it is standard UI chrome for 'unfavorited' or 'rate this', which can blur whether a task is about writing a review, organizing favorites, or literal astronomy.",
+ "ambiguity": "Overlaps heavily with the other star icons for general favoriting or rating tasks, though it lacks the specific half-score cue of the half-filled star or the multi-star cues of the paired stars.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -156,40 +156,45 @@
  ],
  "near_misses": [
   {
+   "task": "Write a 3.5-star product review for the coffee maker",
+   "better": "half-filled rating star icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Export the entire list of saved favorites from the app",
+   "better": "overlapping stacked stars icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Spot the North Star and Little Dipper with the kids tonight",
+   "better": "large star with small companion star icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the urgent electric bill first thing tomorrow morning",
-   "better": "bill or lightning bolt",
+   "better": "bill or lightning bolt icon",
    "trap": "property"
   },
   {
    "task": "Review the Q3 marketing budget spreadsheet before the meeting",
-   "better": "spreadsheet or budget",
+   "better": "spreadsheet or budget icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy an Energy Star certified dishwasher for the kitchen",
-   "better": "dishwasher",
+   "better": "dishwasher or appliance icon",
    "trap": "property"
   },
   {
-   "task": "Renew Texas Lone Star card benefits online",
-   "better": "ID or payment card",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the cracked sheriff badge on the Halloween costume",
-   "better": "sheriff badge",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book a room at a 4-star hotel near the convention center",
-   "better": "hotel bed or building",
+   "better": "hotel bed or building icon",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A classic five-pointed outline star is universally recognized. While often used as UI chrome for priority, in task subjects it cleanly represents customer ratings/reviews, managing favorites/bookmarks, literal stars/stargazing, and star-shaped ornaments. Care must be taken not to use it merely for 'important' tasks (a task property) or generic 'review a document' verbs.",
@@ -207,6 +212,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "star"
- }
+  "alias_of": "star",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "rating or customer review",
+     "strength": "primary"
+    },
+    {
+     "meaning": "favorite or saved item",
+     "strength": "primary"
+    },
+    {
+     "meaning": "star, astronomy, or night sky",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tree topper or star decoration",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "As an outline star, it is standard UI chrome for 'unfavorited' or 'rate this', which can blur whether a task is about writing a review, organizing favorites, or literal astronomy.",
+   "near_misses": [
+    {
+     "task": "Pay the urgent electric bill first thing tomorrow morning",
+     "better": "bill or lightning bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Review the Q3 marketing budget spreadsheet before the meeting",
+     "better": "spreadsheet or budget",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an Energy Star certified dishwasher for the kitchen",
+     "better": "dishwasher",
+     "trap": "property"
+    },
+    {
+     "task": "Renew Texas Lone Star card benefits online",
+     "better": "ID or payment card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the cracked sheriff badge on the Halloween costume",
+     "better": "sheriff badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a room at a 4-star hotel near the convention center",
+     "better": "hotel bed or building",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hotel_class",
+   "stars_2",
+   "star_half"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6734,
+    "output": 2179,
+    "thoughts": 180,
+    "total": 9093
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "A single unadorned hollow five-pointed star with no secondary star or partial fill, serving as the standard emblem for a single favorite, bookmark, or literal star shape."
 }

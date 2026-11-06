@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "urgent vehicle maintenance, recall, or repair",
+   "meaning": "urgent personal vehicle maintenance, recall, or repair",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "car accident or insurance claim",
+   "meaning": "car accident or auto insurance claim",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Nearly identical at small sizes to the taxi with an exclamation badge, differing only by the absence of the tiny roof sign next to the badge.",
  "modifier_semantics": [
   {
    "modifier": "solid black circle badge on upper right containing a white exclamation mark",
@@ -94,11 +94,6 @@
    "domain": "finance"
   },
   {
-   "task": "Upload photos of the rear bumper dent to the insurance portal",
-   "parent": "",
-   "domain": "finance"
-  },
-  {
    "task": "Find out why the tire pressure light keeps coming back on",
    "parent": "",
    "domain": "home"
@@ -159,6 +154,21 @@
  ],
  "near_misses": [
   {
+   "task": "Dispute overcharged Uber fare from last night",
+   "better": "taxi with exclamation mark badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call cab company about phone left in backseat",
+   "better": "taxi with exclamation mark badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book a rental car for the Denver conference",
+   "better": "plain car or car key",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Wash and vacuum the car before picking up grandma",
    "better": "car wash or plain car",
    "trap": "generic_verb"
@@ -169,30 +179,20 @@
    "trap": "property"
   },
   {
-   "task": "Book a rental car for the Denver conference",
-   "better": "plain car or key",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new infant car seat for the back",
    "better": "child seat",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy winter wiper blades at AutoZone",
-   "better": "wiper or shopping bag",
+   "better": "windshield wiper or shopping bag",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check tire pressure before the road trip",
-   "better": "tire or pressure gauge",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly shows the front of a car with a prominent exclamation mark badge, universally understood as a vehicle warning, breakdown, or urgent car issue. It fits a common, concrete set of life tasks around check-engine lights, repairs, recalls, and tickets, distinguishing them well from routine driving or car shopping.",
@@ -210,6 +210,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car problem, breakdown, or dashboard warning light",
+     "strength": "primary"
+    },
+    {
+     "meaning": "urgent vehicle maintenance, recall, or repair",
+     "strength": "primary"
+    },
+    {
+     "meaning": "overdue car registration, inspection, or parking ticket",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "car accident or insurance claim",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Wash and vacuum the car before picking up grandma",
+     "better": "car wash or plain car",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Urgent: renew passport before the trip",
+     "better": "passport",
+     "trap": "property"
+    },
+    {
+     "task": "Book a rental car for the Denver conference",
+     "better": "plain car or key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new infant car seat for the back",
+     "better": "child seat",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy winter wiper blades at AutoZone",
+     "better": "wiper or shopping bag",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check tire pressure before the road trip",
+     "better": "tire or pressure gauge",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "taxi_alert"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 758,
+    "thoughts": 0,
+    "total": 4793
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "Shows a standard passenger car with a smooth, flat roof (no taxi roof sign) and an exclamation badge, representing personal vehicle issues or alerts rather than a taxi or rideshare problem."
 }

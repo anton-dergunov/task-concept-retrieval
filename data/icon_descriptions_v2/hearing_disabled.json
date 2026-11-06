@@ -14,19 +14,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "hearing accessibility or assistive listening disabled",
-   "strength": "primary"
-  },
-  {
-   "meaning": "ear protection, earplugs, or blocking noise",
+   "meaning": "ear protection, earplugs, or blocking loud noise",
    "strength": "secondary"
   },
   {
-   "meaning": "audiology, hearing test, or hearing aid issue",
+   "meaning": "audiology checkup or hearing test",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the curved lines and slash can resemble a disabled Wi-Fi or RSS signal icon.",
+ "ambiguity": "Easily mistaken for the slashed ear with an earpiece (hearing aid off), and at very small sizes the curved arcs and slash resemble a disabled Wi-Fi icon.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -168,6 +164,21 @@
  ],
  "near_misses": [
   {
+   "task": "Drop off Grandpa's broken hearing aid for repair",
+   "better": "slashed ear with earpiece / hearing aid inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn off telecoil mode on assistive listening receiver",
+   "better": "slashed ear with earpiece / hearing aid off",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix dead Wi-Fi zone in the upstairs guest bedroom",
+   "better": "wifi with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a super quiet 38 dBA Bosch dishwasher for the open kitchen",
    "better": "dishwasher",
    "trap": "property"
@@ -183,25 +194,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Fix dead Wi-Fi zone in the upstairs guest bedroom",
-   "better": "wifi with slash",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the $185 copay invoice on the clinic portal",
    "better": "credit card or bill",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Mute noisy Slack channels during deep work blocks",
-   "better": "muted bell or speaker with slash",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the standard accessibility symbol for deafness or hard of hearing (an ear with a sound wave crossed out by a slash). It fits specific medical, accessibility, hearing-aid, and noise-blocking tasks well, though at tiny sizes the concentric curves and slash can briefly resemble a disabled Wi-Fi symbol.",
@@ -219,6 +220,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "deafness, hearing loss, or hard of hearing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hearing accessibility or assistive listening disabled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ear protection, earplugs, or blocking noise",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audiology, hearing test, or hearing aid issue",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the curved lines and slash can resemble a disabled Wi-Fi or RSS signal icon.",
+   "near_misses": [
+    {
+     "task": "Buy a super quiet 38 dBA Bosch dishwasher for the open kitchen",
+     "better": "dishwasher",
+     "trap": "property"
+    },
+    {
+     "task": "Listen back to the voice memo from the lawyer meeting",
+     "better": "microphone or headphones",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Shuck six ears of sweet corn for the barbecue",
+     "better": "corn",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix dead Wi-Fi zone in the upstairs guest bedroom",
+     "better": "wifi with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $185 copay invoice on the clinic portal",
+     "better": "credit card or bill",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Mute noisy Slack channels during deep work blocks",
+     "better": "muted bell or speaker with slash",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hearing_aid_disabled"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4084,
+    "output": 1096,
+    "thoughts": 165,
+    "total": 5345
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:13Z"
+  }
+ },
+ "distinguishing": "Shows a bare human ear outline with a sound wave arc and diagonal slash, without any earpiece or hearing-aid device inside the ear opening, representing general deafness, hearing loss, or ear protection."
 }

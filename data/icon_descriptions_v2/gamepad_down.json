@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "directional pad (D-pad) with down button pressed",
+   "meaning": "D-pad down button pressed / downward directional input",
    "strength": "primary"
   },
   {
-   "meaning": "video game controller or gaming input",
+   "meaning": "video game controller / gaming",
    "strength": "primary"
   },
   {
-   "meaning": "remote control navigation buttons",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "four-way directional controls",
+   "meaning": "remote control navigation buttons (down)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can look like a decorative cross, a four-petal flower, or a generic gamepad symbol without the specific down-direction emphasis being noticeable.",
+ "ambiguity": "At small list sizes, easily mistaken for the neutral four-way D-pad or the D-pads with up, left, or right pressed, as well as a decorative cross.",
  "modifier_semantics": [
   {
    "modifier": "solid filled bottom button",
@@ -159,13 +155,18 @@
  ],
  "near_misses": [
   {
-   "task": "Walk 500 meters south from the trailhead to find the boundary marker",
-   "better": "compass",
+   "task": "Test why the D-pad up button isn't registering jumps",
+   "better": "D-pad with top button filled",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Restock the car first-aid kit with gauze and antiseptic wipes",
-   "better": "medical cross or first-aid kit",
+   "task": "Map quick-heal item to the right D-pad button",
+   "better": "D-pad with right button filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy replacement rubber conductive pad for the controller D-pad",
+   "better": "neutral D-pad with all four buttons outlined",
    "trap": "lookalike_glyph"
   },
   {
@@ -192,7 +193,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a PlayStation-style segmented directional pad (D-pad) with the bottom button filled in. While primarily an input prompt glyph for 'D-pad Down', in a task planner it serves as a recognizable symbol for controller repair, button remapping, or video gaming tasks, though a full gamepad icon is usually broader.",
@@ -210,6 +211,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "directional pad (D-pad) with down button pressed",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video game controller or gaming input",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remote control navigation buttons",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "four-way directional controls",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can look like a decorative cross, a four-petal flower, or a generic gamepad symbol without the specific down-direction emphasis being noticeable.",
+   "near_misses": [
+    {
+     "task": "Walk 500 meters south from the trailhead to find the boundary marker",
+     "better": "compass",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Restock the car first-aid kit with gauze and antiseptic wipes",
+     "better": "medical cross or first-aid kit",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download the monthly PDF statements before the bank closes the account",
+     "better": "download arrow or document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Play board games with the kids after dinner",
+     "better": "dice or board game pawn",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the annual PlayStation Plus subscription invoice",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the ceiling fan remote isn't turning the light on",
+     "better": "ceiling fan or lightbulb",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "gamepad_up",
+   "gamepad_left",
+   "gamepad_right",
+   "games"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8076,
+    "output": 2572,
+    "thoughts": 0,
+    "total": 10648
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "The bottom button of the four-way directional pad is solid black while the top, left, and right buttons are outlined, indicating the 'down' direction is pressed; for general gaming tasks, it is virtually interchangeable with the others."
 }

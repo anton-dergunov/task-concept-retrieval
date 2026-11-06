@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "cancel, abort, or opt out",
+   "meaning": "cancel, revoke, or opt out",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with the mathematical empty set symbol (which slashes top-right to bottom-left) or a generic 'none/disabled' UI state.",
+ "ambiguity": "Identical to the other circle-backslash prohibition icon in the group; can also be confused with the mathematical empty set symbol (which slashes top-right to bottom-left) or a generic close/cancel X mark.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -162,13 +162,18 @@
  ],
  "near_misses": [
   {
-   "task": "Cancel dentist appointment for Thursday afternoon",
-   "better": "tooth or calendar with cross",
-   "trap": "generic_verb"
+   "task": "Prove that the intersection of the two sets is the empty set",
+   "better": "empty set symbol (circle with slash extending through from top-right to bottom-left)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Cancel flight to Chicago and request voucher",
-   "better": "airplane",
+   "task": "Clear the search input field on click",
+   "better": "circle with an X inside (close/clear button)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel dentist appointment for Thursday afternoon",
+   "better": "tooth or calendar with cross",
    "trap": "generic_verb"
   },
   {
@@ -178,17 +183,12 @@
   },
   {
    "task": "Sand down the wooden butcher block in the kitchen",
-   "better": "cutting board / kitchen counter",
+   "better": "cutting board or kitchen counter",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Walk three blocks to the hardware store for screws",
    "better": "screws or hardware store",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check if the bathroom drain is blocked again",
-   "better": "plumbing pipe or sink",
    "trap": "shared_vocabulary"
   },
   {
@@ -200,7 +200,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The universal prohibition sign (circle with a diagonal slash) is instantly recognizable for banning, blocking, opting out, or cancelling abstract services and habits. However, when cancelling or avoiding a concrete object with its own visual representation (like a flight, dentist appointment, or coffee), the specific object's icon is a much better fit.",
@@ -218,6 +218,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "prohibition, ban, or forbidden",
+     "strength": "primary"
+    },
+    {
+     "meaning": "block, deny, or restrict access",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel, abort, or opt out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "quit or stop a habit",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with the mathematical empty set symbol (which slashes top-right to bottom-left) or a generic 'none/disabled' UI state.",
+   "near_misses": [
+    {
+     "task": "Cancel dentist appointment for Thursday afternoon",
+     "better": "tooth or calendar with cross",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy non-dairy milk for the weekend guests",
+     "better": "milk carton",
+     "trap": "property"
+    },
+    {
+     "task": "Sand down the wooden butcher block in the kitchen",
+     "better": "cutting board / kitchen counter",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Walk three blocks to the hardware store for screws",
+     "better": "screws or hardware store",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the bathroom drain is blocked again",
+     "better": "plumbing pipe or sink",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order new brake pads for the bike",
+     "better": "bicycle",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "do_disturb_alt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 1135,
+    "thoughts": 53,
+    "total": 5237
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Visually identical and completely interchangeable with the other circle-with-diagonal-slash prohibition icon in this group, both showing a thick ring with a top-left to bottom-right diagonal bar."
 }

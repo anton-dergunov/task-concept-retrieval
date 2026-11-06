@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "inbox settings or mail rules configuration",
+   "meaning": "inbox settings, mail rules, or email filter configuration",
    "strength": "primary"
   },
   {
-   "meaning": "email filters and automated inbox management",
+   "meaning": "automated inbox management or email forwarding preferences",
    "strength": "primary"
   },
   {
-   "meaning": "system tray or notification drawer settings",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "hard drive or storage configuration",
+   "meaning": "hard drive, storage drive, or system tray configuration",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the inbox tray cutout is partially obscured by the gear, making it look like a generic window, image frame, or hard drive with a settings badge.",
+ "ambiguity": "Because the six-toothed gear cuts off the right half of the inner curved shelf, the remaining bottom-left line looks very similar to the bottom bar inside the caption/keyboard box or the lower edge of the credit card.",
  "modifier_semantics": [
   {
    "modifier": "six-toothed gear in bottom right corner",
@@ -160,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set up automatic folder backup and sync rules",
+   "better": "folder with gear",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Manage saved payment methods and card limits",
+   "better": "credit card with gear",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Reply to Sarah's email about the Q3 budget",
    "better": "envelope or reply arrow",
    "trap": "shared_vocabulary"
@@ -167,22 +173,12 @@
   {
    "task": "Buy a wooden desk inbox tray for incoming mail",
    "better": "plain inbox tray without gear",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check inbox for the flight confirmation code",
-   "better": "airplane or ticket",
    "trap": "generic_verb"
   },
   {
-   "task": "Change macOS system settings for external display scaling",
-   "better": "display with gear or plain gear",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order replacement bike cassette cog",
-   "better": "bicycle or gear",
-   "trap": "lookalike_glyph"
+   "task": "Check inbox for the flight confirmation code",
+   "better": "airplane or ticket icon",
+   "trap": "generic_verb"
   },
   {
    "task": "Draft the welcome email for new subscribers",
@@ -211,6 +207,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "inbox settings or mail rules configuration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "email filters and automated inbox management",
+     "strength": "primary"
+    },
+    {
+     "meaning": "system tray or notification drawer settings",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "hard drive or storage configuration",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the inbox tray cutout is partially obscured by the gear, making it look like a generic window, image frame, or hard drive with a settings badge.",
+   "near_misses": [
+    {
+     "task": "Reply to Sarah's email about the Q3 budget",
+     "better": "envelope or reply arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a wooden desk inbox tray for incoming mail",
+     "better": "plain inbox tray without gear",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check inbox for the flight confirmation code",
+     "better": "airplane or ticket",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Change macOS system settings for external display scaling",
+     "better": "display with gear or plain gear",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement bike cassette cog",
+     "better": "bicycle or gear",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Draft the welcome email for new subscribers",
+     "better": "envelope with pencil or document",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "credit_card_gear",
+   "folder_managed",
+   "subtitles_gear"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6793,
+    "output": 2058,
+    "thoughts": 257,
+    "total": 9108
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Unlike the top stripe of the card or the small blocks inside the caption/keyboard box, this icon has a square frame with a horizontal inner lip near the bottom that dips into a curve, depicting an inbox tray with a six-toothed gear."
 }

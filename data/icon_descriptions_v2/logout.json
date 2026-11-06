@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "exit / leave",
+   "meaning": "exit / leave (or doorway exit)",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with login/sign-in, import, or share icons that use brackets and arrows with slightly different orientations.",
+ "ambiguity": "Completely interchangeable in meaning with the curved-arc exit arrow; also easily confused with log-in, import, or share icons that combine a square bracket with an arrow in a different orientation.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow leaving the bracket",
@@ -159,8 +159,13 @@
  ],
  "near_misses": [
   {
+   "task": "Sign out of all active browser sessions on shared computers",
+   "better": "curved arc with right-pointing arrow (interchangeable circular log-out glyph)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Log in to the new health insurance portal and set up 2FA",
-   "better": "login icon (arrow pointing into bracket) or shield",
+   "better": "log-in icon with arrow pointing into a bracket",
    "trap": "lookalike_glyph"
   },
   {
@@ -170,29 +175,24 @@
   },
   {
    "task": "Buy an outdoor-rated exit sign for the studio back door",
-   "better": "running person exit sign or shopping cart",
+   "better": "running person exit sign",
    "trap": "property"
-  },
-  {
-   "task": "Share the wedding photo album link with the family group",
-   "better": "photo album or share icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Return the rental skis before the shop closes at 5",
-   "better": "skis",
-   "trap": "parent_topic"
   },
   {
    "task": "Check out the new bakery on 4th Street this weekend",
    "better": "croissant / bakery",
-   "trap": "shared_vocabulary"
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Return the rental skis before leaving the resort at 5",
+   "better": "skis",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A standard UI glyph showing an arrow leaving a bracket, universally read as 'log out', 'exit', or 'export'. While clear in software interfaces, it applies to a narrow slice of real-world to-do tasks (mostly signing out of accounts, exporting data, or checking out) and is easily confused with login or import icons.",
@@ -210,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "log out / sign out",
+     "strength": "primary"
+    },
+    {
+     "meaning": "exit / leave",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export / extract data",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "check out (hotel or venue)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with login/sign-in, import, or share icons that use brackets and arrows with slightly different orientations.",
+   "near_misses": [
+    {
+     "task": "Log in to the new health insurance portal and set up 2FA",
+     "better": "login icon (arrow pointing into bracket) or shield",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the highway 14 exit toward Pasadena for the flea market",
+     "better": "highway sign or car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an outdoor-rated exit sign for the studio back door",
+     "better": "running person exit sign or shopping cart",
+     "trap": "property"
+    },
+    {
+     "task": "Share the wedding photo album link with the family group",
+     "better": "photo album or share icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return the rental skis before the shop closes at 5",
+     "better": "skis",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check out the new bakery on 4th Street this weekend",
+     "better": "croissant / bakery",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "chip_extraction"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1078,
+    "thoughts": 0,
+    "total": 5169
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "Uses a three-sided rectangular bracket (resembling a door frame) on the left instead of a curved arc, though both icons are functionally interchangeable symbols for logging out, exiting, or exporting."
 }

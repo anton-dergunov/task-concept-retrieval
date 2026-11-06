@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "fraud warning or identity theft alert",
+   "meaning": "fraud warning, phishing alert, or identity theft risk",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic warning sign (triangle with exclamation mark) or an information badge (if the inverted exclamation mark is misread as an 'i' at tiny sizes).",
+ "ambiguity": "At small sizes, easily confused with its vertical inversion, the shield with a lowercase 'i' (dot above vertical bar), or with the shield with a keyhole.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Read the travel insurance coverage terms and exclusions",
+   "better": "shield with info 'i' (insurance details or policy information) ",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Run a full malware and antivirus scan to verify system safety",
+   "better": "shield with checkmark (verified protection or security checkup) ",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a waterproof and shockproof case for the new iPad",
    "better": "tablet case",
    "trap": "property"
@@ -172,29 +182,19 @@
   },
   {
    "task": "Clean the plastic face shield from the woodworking shop",
-   "better": "safety mask / visor",
+   "better": "safety mask or visor",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check the engine oil pressure warning light on the dashboard",
-   "better": "car / oil can warning",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order catering for the team lunch",
-   "better": "food / catering",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Set up a Roth IRA for long-term financial security",
-   "better": "piggy bank / investment chart",
+   "better": "piggy bank or investment chart",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a shield with an exclamation mark inside, universally understood as a security warning, vulnerability, breach, or fraud alert. It fits well for tasks involving compromised passwords, software vulnerabilities, credit freezes, and alarm faults, though it must be distinguished from a plain shield (general protection/insurance) or a triangular hazard sign.",
@@ -212,6 +212,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "security alert, vulnerability, or data breach",
+     "strength": "primary"
+    },
+    {
+     "meaning": "fraud warning or identity theft alert",
+     "strength": "primary"
+    },
+    {
+     "meaning": "insurance claim, coverage dispute, or policy lapse",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "safety hazard or protection failure",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic warning sign (triangle with exclamation mark) or an information badge (if the inverted exclamation mark is misread as an 'i' at tiny sizes).",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof and shockproof case for the new iPad",
+     "better": "tablet case",
+     "trap": "property"
+    },
+    {
+     "task": "Verify that the garage door is locked before heading to the airport",
+     "better": "garage door or padlock",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Clean the plastic face shield from the woodworking shop",
+     "better": "safety mask / visor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the engine oil pressure warning light on the dashboard",
+     "better": "car / oil can warning",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order catering for the team lunch",
+     "better": "food / catering",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up a Roth IRA for long-term financial security",
+     "better": "piggy bank / investment chart",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shield_lock",
+   "encrypted",
+   "privacy_tip",
+   "verified_user",
+   "shield_moon"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9379,
+    "output": 1838,
+    "thoughts": 0,
+    "total": 11217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Contains a bold exclamation mark (vertical bar above a dot) inside the shield, specifically signaling a security alert, breach, vulnerability, or coverage warning rather than intact protection."
 }

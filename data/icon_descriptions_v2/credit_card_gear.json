@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "credit card or payment settings and management",
+   "meaning": "credit card settings, billing preferences, or payment method management",
    "strength": "primary"
   },
   {
-   "meaning": "auto-pay, billing preferences, or card limits",
+   "meaning": "auto-pay setup, card spending limits, or subscription billing configuration",
    "strength": "primary"
   },
   {
-   "meaning": "browser window or application settings",
+   "meaning": "application window or browser preferences",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the magnetic stripe on the card looks like a browser or application window title bar, making it resemble a 'window settings' or 'system preferences' icon.",
+ "ambiguity": "At small sizes, the magnetic stripe looks like an application window header, and the overall rectangular outline can blur into the inbox tray or caption/keyboard box with a gear.",
  "modifier_semantics": [
   {
    "modifier": "six-toothed gear badge at bottom right",
@@ -158,8 +158,18 @@
  ],
  "near_misses": [
   {
-   "task": "Configure default window layout in VS Code",
-   "better": "application window with gear or code editor icon",
+   "task": "Set up automatic email filtering rules for the support inbox",
+   "better": "inbox tray with gear",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure default subtitle font and size on the smart TV",
+   "better": "caption/subtitle box with gear",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change permissions on the shared project folder",
+   "better": "folder with gear",
    "trap": "lookalike_glyph"
   },
   {
@@ -173,13 +183,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Put the new car insurance card in the glovebox",
-   "better": "car or ID document icon",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Pay the plumber by card instead of cash",
-   "better": "plumber / wrench or general payment icon",
+   "better": "wrench or general payment icon",
    "trap": "property"
   },
   {
@@ -209,6 +214,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "credit card or payment settings and management",
+     "strength": "primary"
+    },
+    {
+     "meaning": "auto-pay, billing preferences, or card limits",
+     "strength": "primary"
+    },
+    {
+     "meaning": "browser window or application settings",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the magnetic stripe on the card looks like a browser or application window title bar, making it resemble a 'window settings' or 'system preferences' icon.",
+   "near_misses": [
+    {
+     "task": "Configure default window layout in VS Code",
+     "better": "application window with gear or code editor icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a replacement gear cable for the road bike",
+     "better": "bicycle or mechanical gear icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send a birthday card to Grandma before Thursday",
+     "better": "greeting card or envelope icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put the new car insurance card in the glovebox",
+     "better": "car or ID document icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the plumber by card instead of cash",
+     "better": "plumber / wrench or general payment icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the replacement Visa arrived in the mail",
+     "better": "mailbox or plain credit card icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "folder_managed",
+   "inbox_customize",
+   "subtitles_gear"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6793,
+    "output": 2058,
+    "thoughts": 257,
+    "total": 9108
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Unlike the folder tab, bottom inbox shelf, or internal dotted blocks of the others, this rectangle has a thick solid horizontal stripe across the upper half representing a credit card's magnetic stripe or a window title bar."
 }

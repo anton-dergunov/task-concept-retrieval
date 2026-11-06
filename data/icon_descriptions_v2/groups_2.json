@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "group of people, team, or community",
+   "meaning": "diversity, inclusion, or diverse community",
    "strength": "primary"
   },
   {
-   "meaning": "diversity, inclusion, or diverse audience",
+   "meaning": "group of people, friends, family, or team",
    "strength": "primary"
   },
   {
-   "meaning": "friends, family, or guests",
+   "meaning": "audience, guests, or club members",
    "strength": "secondary"
   },
   {
-   "meaning": "panel, committee, or club members",
+   "meaning": "panel, committee, or cast of characters",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to generic three-user group icons, though the distinct hairstyles give it a stronger diversity or specific-people flavor that can blend away at very small sizes.",
+ "ambiguity": "At small sizes the hairstyle contours blur into round heads, making it easily mistaken for the generic three-person group icon with plain circular heads.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set up a shared user group in Active Directory",
+   "better": "three people with plain circular heads",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Assign permissions to the admin role group",
+   "better": "three people with plain circular heads",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book a family-friendly hotel near the science museum",
    "better": "hotel / bed",
    "trap": "property"
@@ -170,16 +180,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a new ergonomic chair for the office",
-   "better": "office chair",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Change my profile picture on Slack",
-   "better": "single person avatar / camera",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check with Sarah if the contract came back signed",
    "better": "signed contract / document",
    "trap": "generic_verb"
@@ -188,7 +188,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows three distinct person silhouettes with varied hairstyles, universally read as a group of people, team, community, or guests. It fits many common tasks around teams, friends, family gatherings, and attendee lists, though it overlaps closely with standard multi-user icons.",
@@ -206,6 +206,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "group of people, team, or community",
+     "strength": "primary"
+    },
+    {
+     "meaning": "diversity, inclusion, or diverse audience",
+     "strength": "primary"
+    },
+    {
+     "meaning": "friends, family, or guests",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "panel, committee, or club members",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to generic three-user group icons, though the distinct hairstyles give it a stronger diversity or specific-people flavor that can blend away at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Book a family-friendly hotel near the science museum",
+     "better": "hotel / bed",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a four-player board game for rainy evenings at the cottage",
+     "better": "board game / dice",
+     "trap": "property"
+    },
+    {
+     "task": "Group the loose receipts by month before sending to the accountant",
+     "better": "receipt / folder",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a new ergonomic chair for the office",
+     "better": "office chair",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Change my profile picture on Slack",
+     "better": "single person avatar / camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check with Sarah if the contract came back signed",
+     "better": "signed contract / document",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "groups"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4077,
+    "output": 1060,
+    "thoughts": 0,
+    "total": 5137
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "Each of the three figures has a distinct head shape showing different hairstyles (curly hair on the left, long or hooded hair in the center, swept hair or cap on the right), connoting diversity, inclusion, or real individuals rather than abstract circular user avatars."
 }

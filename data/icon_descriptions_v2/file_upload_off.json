@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "upload disabled / block uploads",
+   "meaning": "upload disabled / block or restrict file uploads",
    "strength": "primary"
   },
   {
-   "meaning": "failed or stuck file upload",
+   "meaning": "fix failed or stuck file upload",
    "strength": "primary"
   },
   {
-   "meaning": "cancel upload or stop cloud backup",
+   "meaning": "pause or turn off automatic cloud backup / sync uploads",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the diagonal slash breaks up the arrow head and tray, making it easy to confuse with a disabled download icon, a broken link, or an abstract geometric mark.",
+ "ambiguity": "Easily mistaken at small sizes for the slashed downward-arrow-in-tray icon (download disabled), since both share the identical open tray and diagonal slash and differ only in the fragmented arrow pieces above the tray.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -160,18 +160,23 @@
  ],
  "near_misses": [
   {
-   "task": "Upload signed lease agreement to the tenant portal",
-   "better": "upload (without slash) or document icon",
+   "task": "Turn off automatic podcast downloads on phone to save storage",
+   "better": "slashed downward arrow in tray (download disabled)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Fix broken PDF download link on the pricing page",
-   "better": "download disabled / broken link icon",
+   "better": "slashed downward arrow in tray (download disabled) or broken link icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload signed lease agreement to the tenant portal",
+   "better": "unslashed upward arrow in tray (upload) or document icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Export offline copy of the budget spreadsheet",
-   "better": "spreadsheet or export icon",
+   "better": "spreadsheet icon",
    "trap": "property"
   },
   {
@@ -186,7 +191,7 @@
   },
   {
    "task": "Check whether the client uploaded the brand assets",
-   "better": "folder or upload icon",
+   "better": "folder or unslashed upload icon",
    "trap": "generic_verb"
   }
  ],
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload disabled / block uploads",
+     "strength": "primary"
+    },
+    {
+     "meaning": "failed or stuck file upload",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel upload or stop cloud backup",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "unpublish or take down uploaded content",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the diagonal slash breaks up the arrow head and tray, making it easy to confuse with a disabled download icon, a broken link, or an abstract geometric mark.",
+   "near_misses": [
+    {
+     "task": "Upload signed lease agreement to the tenant portal",
+     "better": "upload (without slash) or document icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix broken PDF download link on the pricing page",
+     "better": "download disabled / broken link icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Export offline copy of the budget spreadsheet",
+     "better": "spreadsheet or export icon",
+     "trap": "property"
+    },
+    {
+     "task": "Email tax documents to accountant instead of using their broken upload portal",
+     "better": "email / envelope icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new SD card reader for transferring camera photos",
+     "better": "SD card or camera icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the client uploaded the brand assets",
+     "better": "folder or upload icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_download_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4098,
+    "output": 1190,
+    "thoughts": 86,
+    "total": 5374
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Shows an upward-pointing arrow rising from a tray crossed out by a diagonal slash with the upward chevron visible at the top (upload disabled), whereas the look-alike has a downward arrow whose head is bisected by the slash (download disabled)."
 }

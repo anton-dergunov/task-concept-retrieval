@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "video library, playlist, or collection of videos",
+   "meaning": "video playlist, library, or collection of clips",
    "strength": "primary"
   },
   {
-   "meaning": "watch videos, TV series, or course lectures",
+   "meaning": "multi-part video course, lecture series, or subscriptions",
    "strength": "primary"
   },
   {
-   "meaning": "YouTube channel or subscriptions",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "media files or clips",
+   "meaning": "batch of media files or footage",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to a standard single video play icon if the stacked corner line isn't noticed, or could be read as slideshow presentation.",
+ "ambiguity": "Interchangeable with the tilted-layer stacked square play icon; also easily confused with the unstacked square play button if the outer L-bracket isn't noticed.",
  "modifier_semantics": [
   {
    "modifier": "stacked rear card edge",
@@ -163,24 +159,29 @@
  ],
  "near_misses": [
   {
-   "task": "Buy HDMI cable for the video monitor",
-   "better": "cable or monitor icon",
+   "task": "Watch the 5-minute product demo video",
+   "better": "single rectangular or square play button",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Record my screen while reproducing the login bug",
+   "better": "framed video camera icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Make a Spotify playlist for the Friday road trip",
+   "better": "music note or headphones playlist icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Call mom on FaceTime tonight",
-   "better": "video call camera with phone/person icon",
+   "task": "Buy an HDMI cable for the video monitor",
+   "better": "cable or monitor icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Mount the security camera over the garage door",
    "better": "CCTV security camera icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Make Spotify playlist for the road trip",
-   "better": "music note or headphones playlist icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book tickets for Dune at the IMAX on Friday",
@@ -196,7 +197,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A play button inside stacked squares is the standard icon for a video library, playlist, or collection of clips (familiar from YouTube's Library/Subscriptions tab). It fits tasks about watching a series/course, curating playlists, or managing video files, though at a quick glance it blends with a single video play icon.",
@@ -214,6 +215,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video library, playlist, or collection of videos",
+     "strength": "primary"
+    },
+    {
+     "meaning": "watch videos, TV series, or course lectures",
+     "strength": "primary"
+    },
+    {
+     "meaning": "YouTube channel or subscriptions",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "media files or clips",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to a standard single video play icon if the stacked corner line isn't noticed, or could be read as slideshow presentation.",
+   "near_misses": [
+    {
+     "task": "Buy HDMI cable for the video monitor",
+     "better": "cable or monitor icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call mom on FaceTime tonight",
+     "better": "video call camera with phone/person icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mount the security camera over the garage door",
+     "better": "CCTV security camera icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Make Spotify playlist for the road trip",
+     "better": "music note or headphones playlist icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book tickets for Dune at the IMAX on Friday",
+     "better": "movie ticket or cinema clapperboard icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the stock footage invoice for April",
+     "better": "invoice or money icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hangout_video",
+   "slideshow",
+   "smart_display",
+   "live_tv",
+   "animated_images"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9468,
+    "output": 3165,
+    "thoughts": 0,
+    "total": 12633
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "Adds a straight, orthogonal L-shaped corner line behind the bottom-left of the square play button to represent a stack of videos or playlist; it is completely interchangeable in meaning with the tilted-stack square play icon."
 }

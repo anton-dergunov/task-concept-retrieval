@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "vibrating phone / mobile vibration / haptic feedback",
+   "meaning": "vibrating phone, silent vibrate mode, or haptic feedback",
    "strength": "primary"
   },
   {
-   "meaning": "phone notification / incoming call alert",
+   "meaning": "phone notification or incoming call alert",
    "strength": "primary"
   },
   {
-   "meaning": "mobile device / smartphone",
+   "meaning": "smartphone or mobile device",
    "strength": "secondary"
   },
   {
-   "meaning": "story carousel / card slider",
+   "meaning": "mobile story carousel or card slider UI",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the flanking bars can make the whole glyph look like a barbell or dumbbell weight, or like a card carousel UI layout.",
+ "ambiguity": "Essentially interchangeable with the smartphone flanked by staggered bars for phone vibration or alert tasks; at very small sizes the symmetrical stepped bars also make the whole glyph resemble a dumbbell weight.",
  "modifier_semantics": [
   {
    "modifier": "two vertical bars on each side",
@@ -160,18 +160,23 @@
  ],
  "near_misses": [
   {
-   "task": "Buy 15kg rubber hex dumbbells for the garage gym",
-   "better": "dumbbell / weight",
+   "task": "Add a shake-to-undo gesture to the iOS app",
+   "better": "smartphone with staggered shake bars",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Track Down Why the Washing Machine Vibrates So Loudly on the Spin Cycle",
+   "task": "Buy 15kg rubber hex dumbbells for the garage gym",
+   "better": "dumbbell or weight",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Track down why the washing machine vibrates so loudly on the spin cycle",
    "better": "washing machine",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Call Dr. Patel about the bloodwork results before Friday",
-   "better": "phone handset / call",
+   "better": "phone handset",
    "trap": "generic_verb"
   },
   {
@@ -181,19 +186,14 @@
   },
   {
    "task": "Pay the monthly T-Mobile family plan bill ($142)",
-   "better": "invoice / receipt / money",
+   "better": "invoice, receipt, or money",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Design the horizontal card carousel for the homepage hero section",
-   "better": "carousel layout",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a smartphone with stepped vertical bars on both sides representing vibration or haptic feedback. It fits tasks specifically about phone notifications, vibration settings, haptics in mobile development, or smartphone tasks, though at very small sizes its silhouette somewhat resembles a dumbbell or a card carousel.",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "vibrating phone / mobile vibration / haptic feedback",
+     "strength": "primary"
+    },
+    {
+     "meaning": "phone notification / incoming call alert",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile device / smartphone",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "story carousel / card slider",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the flanking bars can make the whole glyph look like a barbell or dumbbell weight, or like a card carousel UI layout.",
+   "near_misses": [
+    {
+     "task": "Buy 15kg rubber hex dumbbells for the garage gym",
+     "better": "dumbbell / weight",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Track Down Why the Washing Machine Vibrates So Loudly on the Spin Cycle",
+     "better": "washing machine",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call Dr. Patel about the bloodwork results before Friday",
+     "better": "phone handset / call",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a shockproof vibrating alarm clock for heavy sleepers",
+     "better": "alarm clock",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly T-Mobile family plan bill ($142)",
+     "better": "invoice / receipt / money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Design the horizontal card carousel for the homepage hero section",
+     "better": "carousel layout",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "edgesensor_high"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4116,
+    "output": 1095,
+    "thoughts": 177,
+    "total": 5388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:28Z"
+  }
+ },
+ "distinguishing": "The flanking bars on each side are vertically centered and stepped in height (taller inner bar, shorter outer bar) like radiating waves or adjacent cards, unlike the vertically offset bars of equal length on the look-alike; for vibrating phone tasks the two are essentially interchangeable."
 }

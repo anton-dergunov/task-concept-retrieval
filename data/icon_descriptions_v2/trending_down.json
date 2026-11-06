@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a lightning bolt or an electrical discharge symbol at small sizes.",
+ "ambiguity": "Can be mistaken for the upward-pointing trend arrows if a viewer only notices the zigzag shape without checking the arrowhead position, or for a lightning bolt at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Rebalance index funds in the brokerage growth portfolio",
+   "better": "upward-pointing zigzag trend arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plot the raw time-series data as a line graph",
+   "better": "upward zigzag line without an arrowhead",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Download offline maps of the Dolomites before the flight",
    "better": "download arrow into tray or map",
    "trap": "lookalike_glyph"
@@ -172,11 +182,6 @@
    "task": "Turn down the water heater temperature in the basement",
    "better": "thermometer or water heater",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Fix the tripped circuit breaker in the garage",
-   "better": "lightning bolt or electrical panel",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Cancel the gym membership in person with a signed form",
@@ -205,6 +210,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "downward trend, decline, or decrease",
+     "strength": "primary"
+    },
+    {
+     "meaning": "financial loss, market drop, or devaluation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cost reduction, expense cutting, or lowering a metric",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "weight loss or health metric reduction",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a lightning bolt or an electrical discharge symbol at small sizes.",
+   "near_misses": [
+    {
+     "task": "Download offline maps of the Dolomites before the flight",
+     "better": "download arrow into tray or map",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a cheap HDMI cable for the bedroom monitor",
+     "better": "cable or monitor",
+     "trap": "property"
+    },
+    {
+     "task": "Drop off the goodwill bags at the donation center",
+     "better": "donation box or clothing bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Turn down the water heater temperature in the basement",
+     "better": "thermometer or water heater",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the tripped circuit breaker in the garage",
+     "better": "lightning bolt or electrical panel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel the gym membership in person with a signed form",
+     "better": "dumbbell or contract form",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "moving",
+   "trending_up",
+   "show_chart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6713,
+    "output": 1309,
+    "thoughts": 180,
+    "total": 8202
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Points diagonally downward to the bottom-right instead of upward, signifying a decrease, decline, or reduction rather than growth."
 }

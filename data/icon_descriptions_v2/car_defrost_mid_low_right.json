@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "car climate control / HVAC / cabin air conditioning and defroster",
+   "meaning": "car climate control: windshield defroster and upper-body / dashboard vent airflow",
    "strength": "primary"
   },
   {
-   "meaning": "car heater / blower fan / cabin air filter",
+   "meaning": "vehicle air conditioning, cabin vents, or HVAC repair",
    "strength": "primary"
   },
   {
-   "meaning": "windshield defroster",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "vehicle ventilation settings",
+   "meaning": "cabin air filter or blower fan maintenance",
    "strength": "secondary"
   }
  ],
- "ambiguity": "It is a specialized automotive dashboard indicator (defrost + upper body airflow mode); outside a car context, the top-left defroster symbol might look like a tiny toaster or vent grate at small sizes.",
+ "ambiguity": "Semantically interchangeable with its horizontal mirror (right-facing seated person with windshield defroster and left-pointing arrow to torso), and easily confused at small sizes with the two floor-vent icons where the arrow points straight down toward the feet.",
  "modifier_semantics": [
   {
    "modifier": "curved trapezoid frame with wavy vertical lines",
@@ -165,24 +161,24 @@
  ],
  "near_misses": [
   {
+   "task": "Fix car heater actuator stuck on footwell floor vents",
+   "better": "seated person with windshield defroster and downward arrow toward feet",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clear debris from the under-dash floor heater vents",
+   "better": "seated person with downward floor-airflow arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Change the furnace air filter in the basement",
    "better": "house / furnace / air filter",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy an ergonomic lumbar cushion for my office chair",
-   "better": "office chair / cushion",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Repair the stone chip in the front windshield",
    "better": "windshield / glass crack",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book a window seat on the train to Chicago",
-   "better": "train / seat",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Replace the engine air intake filter",
@@ -198,7 +194,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon is the standard automotive dashboard symbol for combined windshield defrost and upper-body cabin airflow. While it is a UI control mode inside a vehicle, in a task planner it serves as a very clear and specific icon for car HVAC maintenance tasks—such as replacing the cabin air filter, recharging the AC, or fixing the heater/defroster—though its use is limited to that narrow automotive niche.",
@@ -216,6 +212,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "car_defrost_mid_right"
- }
+  "alias_of": "car_defrost_mid_right",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car climate control / HVAC / cabin air conditioning and defroster",
+     "strength": "primary"
+    },
+    {
+     "meaning": "car heater / blower fan / cabin air filter",
+     "strength": "primary"
+    },
+    {
+     "meaning": "windshield defroster",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "vehicle ventilation settings",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "It is a specialized automotive dashboard indicator (defrost + upper body airflow mode); outside a car context, the top-left defroster symbol might look like a tiny toaster or vent grate at small sizes.",
+   "near_misses": [
+    {
+     "task": "Change the furnace air filter in the basement",
+     "better": "house / furnace / air filter",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an ergonomic lumbar cushion for my office chair",
+     "better": "office chair / cushion",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Repair the stone chip in the front windshield",
+     "better": "windshield / glass crack",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a window seat on the train to Chicago",
+     "better": "train / seat",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the engine air intake filter",
+     "better": "car engine",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check tire pressure before the cold snap",
+     "better": "tire / pressure gauge",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_defrost_low_right",
+   "car_defrost_low_left",
+   "car_defrost_mid_low_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6712,
+    "output": 2141,
+    "thoughts": 201,
+    "total": 9054
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Shows the seated person on the right facing left with a right-pointing horizontal arrow aimed at the torso (windshield defrost + upper-body/dash vent airflow), making it a horizontal mirror of the other torso-airflow icon and interchangeable with it in meaning, while differing from the two icons with a downward arrow toward the feet."
 }

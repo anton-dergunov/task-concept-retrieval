@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "rating, review, or feedback score",
+   "meaning": "rating, customer review, or feedback score",
    "strength": "primary"
   },
   {
-   "meaning": "star or astronomy",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "favorite or bookmark",
+   "meaning": "partial credit, ranking, or evaluation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small list-icon sizes it looks almost identical to a standard solid star (favorite/important) or a decorative nautical star.",
+ "ambiguity": "At small list-icon sizes, the thick outline makes the right side look nearly filled, so it is easily mistaken for the fully outlined star or a solid star.",
  "modifier_semantics": [
   {
    "modifier": "half-filled split",
@@ -158,33 +154,38 @@
  ],
  "near_misses": [
   {
-   "task": "Book a four-star hotel near the central station in Milan",
-   "better": "hotel / bed",
-   "trap": "property"
-  },
-  {
-   "task": "Review the commercial lease contract before signing on Tuesday",
-   "better": "contract / document",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check the collimation on the backyard telescope before the meteor shower",
-   "better": "telescope",
+   "task": "Bookmark the best flight deals to Tokyo in browser",
+   "better": "outlined star or bookmark ribbon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a brass tree-topper star for Christmas",
-   "better": "Christmas tree / ornament",
+   "better": "outlined decorative star or Christmas tree",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the annual hosting invoice for the review blog",
-   "better": "invoice / payment",
+   "task": "Watch the Perseid meteor shower from the state park",
+   "better": "outlined star or telescope",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book a four-star hotel near the central station in Milan",
+   "better": "hotel or bed",
+   "trap": "property"
+  },
+  {
+   "task": "Review the commercial lease contract before signing on Tuesday",
+   "better": "contract or document",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the annual hosting invoice for the product review blog",
+   "better": "invoice or payment",
    "trap": "parent_topic"
   },
   {
    "task": "Star the most urgent tax emails in Gmail",
-   "better": "email / envelope",
+   "better": "email envelope",
    "trap": "generic_verb"
   }
  ],
@@ -211,6 +212,90 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "rating, review, or feedback score",
+     "strength": "primary"
+    },
+    {
+     "meaning": "star or astronomy",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "favorite or bookmark",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small list-icon sizes it looks almost identical to a standard solid star (favorite/important) or a decorative nautical star.",
+   "near_misses": [
+    {
+     "task": "Book a four-star hotel near the central station in Milan",
+     "better": "hotel / bed",
+     "trap": "property"
+    },
+    {
+     "task": "Review the commercial lease contract before signing on Tuesday",
+     "better": "contract / document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the collimation on the backyard telescope before the meteor shower",
+     "better": "telescope",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a brass tree-topper star for Christmas",
+     "better": "Christmas tree / ornament",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the annual hosting invoice for the review blog",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Star the most urgent tax emails in Gmail",
+     "better": "email / envelope",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "star_rate"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4062,
+    "output": 1061,
+    "thoughts": 0,
+    "total": 5123
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:38Z"
+  }
+ },
+ "distinguishing": "Five-pointed star split vertically with the left half solid black and the right half outlined, specifically denoting a fractional score, rating, or customer review rather than a general star or bookmark."
 }

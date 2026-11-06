@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "download update / install software update",
-   "strength": "primary"
-  },
-  {
    "meaning": "sync down / pull changes from server",
    "strength": "primary"
   },
   {
-   "meaning": "refresh and save locally",
+   "meaning": "download software update",
+   "strength": "primary"
+  },
+  {
+   "meaning": "downgrade / roll back version",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a plain refresh/sync icon or a generic download icon at small sizes.",
+ "ambiguity": "Easily confused at a glance with the sync-and-up-arrow icon when the user generally thinks of 'software update' without distinguishing between downloading an update and upgrading to a higher version.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow on the right",
@@ -151,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Push local commits and sync up to the remote repository",
+   "better": "sync cycle with an upward arrow (sync up / push)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upgrade database server to the next major release",
+   "better": "sync cycle with an upward arrow (upgrade version)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update my resume with the new project",
    "better": "document / CV",
    "trap": "generic_verb"
@@ -159,11 +169,6 @@
    "task": "Give mom an update on the kitchen remodel",
    "better": "phone call or message",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Put the recycling bin out by the curb",
-   "better": "recycling symbol or trash bin",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new router with automatic firmware updates",
@@ -179,7 +184,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a circular sync/refresh symbol with a downward arrow, clearly signifying downloading an update or pulling remote changes locally. It fits software, firmware, and data synchronization tasks well, though it must not be used for generic 'update' tasks like updating a document or updating a person.",
@@ -197,6 +202,85 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download update / install software update",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sync down / pull changes from server",
+     "strength": "primary"
+    },
+    {
+     "meaning": "refresh and save locally",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain refresh/sync icon or a generic download icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Update my resume with the new project",
+     "better": "document / CV",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Give mom an update on the kitchen remodel",
+     "better": "phone call or message",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put the recycling bin out by the curb",
+     "better": "recycling symbol or trash bin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new router with automatic firmware updates",
+     "better": "Wi-Fi router",
+     "trap": "property"
+    },
+    {
+     "task": "Email the client the new maintenance window schedule",
+     "better": "email / envelope",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sync_arrow_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4006,
+    "output": 974,
+    "thoughts": 0,
+    "total": 4980
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Shows a straight downward arrow on the right beside the circular sync arrows, signifying pulling changes down, downloading an update, or downgrading, as opposed to the upward arrow for uploading or upgrading."
 }

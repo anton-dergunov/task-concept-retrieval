@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "reviews, ratings, or customer feedback",
+   "meaning": "astronomy, stargazing, constellations, or night sky",
    "strength": "primary"
   },
   {
-   "meaning": "favorites, bookmarks, or wishlists",
+   "meaning": "bonus rewards, loyalty points, or special perks",
    "strength": "primary"
   },
   {
-   "meaning": "astronomy, stargazing, or night sky",
+   "meaning": "favorites, featured items, or top picks",
    "strength": "secondary"
   },
   {
-   "meaning": "rewards, loyalty points, or achievements",
+   "meaning": "reviews or star ratings",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with a plain single star icon or a sparkles/magic/AI icon at small sizes.",
+ "ambiguity": "Can be confused with the plain single star or the overlapping double star when used generically for favorites or ratings, and with multi-sparkle AI/magic icons.",
  "modifier_semantics": [
   {
    "modifier": "smaller solid black five-pointed star at top right",
@@ -163,33 +163,33 @@
  ],
  "near_misses": [
   {
+   "task": "Score the contractor 4.5 stars on Google Reviews",
+   "better": "half-filled rating star icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Organize all starred bookmarks in Chrome into folders",
+   "better": "overlapping stacked stars or single plain star icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book a 4-star hotel near the convention center in Chicago",
-   "better": "hotel bed or building",
+   "better": "hotel bed or building icon",
    "trap": "property"
   },
   {
    "task": "Review Q3 marketing budget spreadsheet before Friday",
-   "better": "spreadsheet or money",
+   "better": "spreadsheet or money icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay annual Energy Star appliance rebate fee",
-   "better": "appliance or receipt",
-   "trap": "property"
   },
   {
    "task": "Watch the new Star Wars series with Sam",
-   "better": "TV or film clapperboard",
+   "better": "TV or film clapperboard icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Auto-format messy notes with the AI assistant",
-   "better": "AI sparkles or robot",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Collin's wooden tripod legs",
-   "better": "tripod or telescope",
+   "task": "Tighten the loose wooden tripod legs before the astronomy club night",
+   "better": "tripod or tools icon",
    "trap": "parent_topic"
   }
  ],
@@ -214,6 +214,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "reviews, ratings, or customer feedback",
+     "strength": "primary"
+    },
+    {
+     "meaning": "favorites, bookmarks, or wishlists",
+     "strength": "primary"
+    },
+    {
+     "meaning": "astronomy, stargazing, or night sky",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rewards, loyalty points, or achievements",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with a plain single star icon or a sparkles/magic/AI icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Book a 4-star hotel near the convention center in Chicago",
+     "better": "hotel bed or building",
+     "trap": "property"
+    },
+    {
+     "task": "Review Q3 marketing budget spreadsheet before Friday",
+     "better": "spreadsheet or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay annual Energy Star appliance rebate fee",
+     "better": "appliance or receipt",
+     "trap": "property"
+    },
+    {
+     "task": "Watch the new Star Wars series with Sam",
+     "better": "TV or film clapperboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Auto-format messy notes with the AI assistant",
+     "better": "AI sparkles or robot",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Collin's wooden tripod legs",
+     "better": "tripod or telescope",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hotel_class",
+   "star",
+   "star_half"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6734,
+    "output": 2179,
+    "thoughts": 180,
+    "total": 9093
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "Features a small, complete solid black star floating above the upper-right point of the large outlined star, evoking night-sky stars, sparkles, or bonus rewards more than the plain single star, the overlapping stacked star, or the half-filled star."
 }

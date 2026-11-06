@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Completely interchangeable with the square-capped power symbol; both depict the exact same standby/power button glyph.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -164,6 +164,11 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Flip the main breaker switch in the garage panel",
+   "better": "toggle switch or electrical panel",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Draft durable power of attorney for mom with the lawyer",
    "better": "legal document or gavel",
    "trap": "shared_vocabulary"
@@ -187,7 +192,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The universal IEC power/standby symbol is instantly recognizable and completely unique. It fits tasks centered on shutting down, rebooting, or turning off computers, servers, and household appliances, or fixing physical power switches, though lightning bolts or plugs are better for general electricity and charging tasks.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "power on/off or standby switch",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shut down, reboot, or restart a device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "electricity or power supply",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "digital detox or unplugging",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a new 65W USB-C power adapter for my travel bag",
+     "better": "power plug or charger adapter",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge all camera batteries the night before the shoot",
+     "better": "battery with charging bolt",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Draft durable power of attorney for mom with the lawyer",
+     "better": "legal document or gavel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a battery-powered hedge trimmer for the front bushes",
+     "better": "hedge trimmer or garden shears",
+     "trap": "property"
+    },
+    {
+     "task": "Set a 20-minute timer for an afternoon power nap",
+     "better": "bed or alarm timer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the corroded 9V battery in the hallway smoke detector",
+     "better": "smoke detector or battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "power_settings_new"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 654,
+    "thoughts": 96,
+    "total": 4785
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "Drawn with rounded stroke ends rather than square-cut stroke ends, though the two power symbols are completely interchangeable in meaning."
 }

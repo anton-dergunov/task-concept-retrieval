@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "upload profile picture or avatar",
+   "meaning": "upload profile picture, avatar, or user data",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "self-improvement or personal growth",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "inhale or breathing exercise",
+   "meaning": "inhale, take medication orally, or breathing exercise",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The arrow pointing into the bottom of the head can look like inhaling, swallowing, or looking up, and at very small sizes the whole shape resembles a keyhole or mushroom.",
+ "ambiguity": "Can be confused with the face with a downward-pointing arrow when scanning quickly, and at very small sizes the upward arrow into the round head looks like a keyhole or mushroom.",
  "modifier_semantics": [
   {
    "modifier": "upward-pointing arrow at bottom center",
@@ -161,18 +157,23 @@
  ],
  "near_misses": [
   {
+   "task": "Download the speaker bios and headshots from the drive",
+   "better": "face with downward-pointing arrow for downloading user profiles or headshots",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Assign the onboarding tasks to the new hire",
+   "better": "face with right-pointing arrow for assigning or delegating to a person",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Back up all family photos to the external hard drive",
    "better": "cloud upload or hard drive",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book a haircut and bangs trim with Elena on Friday",
-   "better": "scissors or haircut",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Call mom to catch up on family news",
-   "better": "phone call",
+   "better": "phone handset",
    "trap": "generic_verb"
   },
   {
@@ -184,17 +185,12 @@
    "task": "Buy a new USB-C ring light for video calls",
    "better": "ring light or lamp",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Export the customer contact list to CSV",
-   "better": "spreadsheet or file export",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a stylized human face with an upward arrow at the bottom, naturally reading as uploading a profile picture/avatar, promoting a user, or inhaling. It fits a concrete niche of profile-update and role-promotion tasks, though at very small sizes the bottom arrow interrupting the circle could briefly look like a keyhole.",
@@ -212,6 +208,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload profile picture or avatar",
+     "strength": "primary"
+    },
+    {
+     "meaning": "promote user, upgrade account, or level up",
+     "strength": "primary"
+    },
+    {
+     "meaning": "self-improvement or personal growth",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "inhale or breathing exercise",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The arrow pointing into the bottom of the head can look like inhaling, swallowing, or looking up, and at very small sizes the whole shape resembles a keyhole or mushroom.",
+   "near_misses": [
+    {
+     "task": "Back up all family photos to the external hard drive",
+     "better": "cloud upload or hard drive",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a haircut and bangs trim with Elena on Friday",
+     "better": "scissors or haircut",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call mom to catch up on family news",
+     "better": "phone call",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a user-friendly standing desk converter",
+     "better": "desk",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new USB-C ring light for video calls",
+     "better": "ring light or lamp",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Export the customer contact list to CSV",
+     "better": "spreadsheet or file export",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "face_left",
+   "face_right",
+   "face_down"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6802,
+    "output": 2060,
+    "thoughts": 0,
+    "total": 8862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The arrow at the bottom of the cartoon face points straight up into the chin, signifying uploading a profile, promoting/upgrading a user, or inhaling, directly opposite the downward-pointing arrow."
 }

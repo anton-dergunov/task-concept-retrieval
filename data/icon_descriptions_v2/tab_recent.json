@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "picture-in-picture history or scheduled overlay window",
+   "meaning": "recent files, folder history, or scheduled backup",
    "strength": "primary"
   },
   {
-   "meaning": "screen time or display timer",
+   "meaning": "screen time, display timer, or picture-in-picture history",
    "strength": "primary"
   },
   {
-   "meaning": "scheduled webinar or video call with webcam inset",
+   "meaning": "scheduled webinar or video call with corner webcam inset",
    "strength": "secondary"
   },
   {
-   "meaning": "folder with clock badge (at small size)",
+   "meaning": "delayed or scheduled postcard / mail with stamp",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the rectangle with the filled top-right corner looks very similar to a file folder icon or a generic credit card / badge with a clock.",
+ "ambiguity": "Easily mistaken at small sizes for the credit card with a horizontal stripe and clock badge, and ambiguous in meaning between a file folder tab and a screen with a picture-in-picture inset.",
  "modifier_semantics": [
   {
    "modifier": "clock badge",
@@ -165,19 +165,24 @@
  ],
  "near_misses": [
   {
+   "task": "Set up automatic monthly credit card bill pay",
+   "better": "credit card with horizontal stripe and clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check pending charges on my visa statement",
+   "better": "credit card with horizontal stripe and clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order replacement cracked screen for iPhone 13",
    "better": "smartphone or broken screen",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new wall clock for the kitchen",
-   "better": "clock",
+   "better": "standalone clock",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Back up old project folders to external drive",
-   "better": "folder with clock or archive box",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Wash the living room window screens before spring",
@@ -188,11 +193,6 @@
    "task": "Buy a new ergonomic chair for long hours at the computer",
    "better": "office chair",
    "trap": "property"
-  },
-  {
-   "task": "Read physical paperbacks before bed",
-   "better": "book",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -216,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "picture-in-picture history or scheduled overlay window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen time or display timer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "scheduled webinar or video call with webcam inset",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "folder with clock badge (at small size)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the rectangle with the filled top-right corner looks very similar to a file folder icon or a generic credit card / badge with a clock.",
+   "near_misses": [
+    {
+     "task": "Order replacement cracked screen for iPhone 13",
+     "better": "smartphone or broken screen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new wall clock for the kitchen",
+     "better": "clock",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Back up old project folders to external drive",
+     "better": "folder with clock or archive box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wash the living room window screens before spring",
+     "better": "window or cleaning brush",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new ergonomic chair for long hours at the computer",
+     "better": "office chair",
+     "trap": "property"
+    },
+    {
+     "task": "Read physical paperbacks before bed",
+     "better": "book",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "credit_card_clock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4066,
+    "output": 649,
+    "thoughts": 247,
+    "total": 4962
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:46Z"
+  }
+ },
+ "distinguishing": "Has a solid rectangular block only in the upper-right corner (forming a folder-tab silhouette or picture-in-picture inset) instead of a full-width horizontal magnetic stripe across the card."
 }

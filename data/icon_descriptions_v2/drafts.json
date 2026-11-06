@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "open mail, read email, or inbox",
+   "meaning": "single open email, read message, or opened letter",
    "strength": "primary"
   },
   {
-   "meaning": "physical letter or postal mail",
+   "meaning": "physical postal mail or invitation",
    "strength": "primary"
   },
   {
-   "meaning": "message or invitation",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "mark as read",
+   "meaning": "mark single email as read",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely related to a closed envelope (which represents mail/email generally or unread mail); at very small sizes, the raised flap can make the outline resemble a small house.",
+ "ambiguity": "Easily confused with the overlapping open-and-closed envelopes icon at small sizes because both share the peaked top silhouette of a raised envelope flap.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -78,11 +74,6 @@
    "task": "Email landlord about the leaky radiator in the guest bedroom",
    "parent": "",
    "domain": "home"
-  },
-  {
-   "task": "Unsubscribe from all the retail newsletters clogging up my personal inbox",
-   "parent": "",
-   "domain": "admin"
   },
   {
    "task": "Write a proper thank-you letter to Aunt Clara for the birthday check",
@@ -155,40 +146,40 @@
  ],
  "near_misses": [
   {
-   "task": "Ship the broken espresso machine back to Breville in its box",
-   "better": "package / parcel box",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Text Dave on WhatsApp about Saturday's kickoff time",
-   "better": "chat bubble",
+   "task": "Triage all 400 unread and read emails to reach inbox zero",
+   "better": "overlapping open and closed envelopes (bulk mail / inbox triage) Icon",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Toggle the selected thread between read and unread status",
+   "better": "overlapping open and closed envelopes (read/unread toggle) Icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Ship the broken espresso machine back to Breville in its box",
+   "better": "package / parcel box Icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Pay the electric bill that came in the mail yesterday",
-   "better": "bill / invoice or electricity bolt",
+   "better": "bill / invoice or electricity bolt Icon",
    "trap": "property"
   },
   {
    "task": "Buy a brass letter opener for Dad's desk",
-   "better": "knife / letter opener or gift",
+   "better": "knife / letter opener or gift Icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Schedule a 1-on-1 call with the client mentioned in the email thread",
-   "better": "phone / call",
+   "better": "phone / call Icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Paint the front porch trim and the house numbers",
-   "better": "house / paintbrush",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "An open envelope with its flap raised is a universal symbol for mail, email, reading messages, and managing an inbox. It fits a very common family of everyday tasks (answering emails, sorting physical post, inbox zero, sending invitations), though it slightly overlaps with the standard closed envelope icon.",
@@ -206,6 +197,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "open mail, read email, or inbox",
+     "strength": "primary"
+    },
+    {
+     "meaning": "physical letter or postal mail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "message or invitation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "mark as read",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely related to a closed envelope (which represents mail/email generally or unread mail); at very small sizes, the raised flap can make the outline resemble a small house.",
+   "near_misses": [
+    {
+     "task": "Ship the broken espresso machine back to Breville in its box",
+     "better": "package / parcel box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Text Dave on WhatsApp about Saturday's kickoff time",
+     "better": "chat bubble",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the electric bill that came in the mail yesterday",
+     "better": "bill / invoice or electricity bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a brass letter opener for Dad's desk",
+     "better": "knife / letter opener or gift",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule a 1-on-1 call with the client mentioned in the email thread",
+     "better": "phone / call",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Paint the front porch trim and the house numbers",
+     "better": "house / paintbrush",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mark_as_unread"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4086,
+    "output": 649,
+    "thoughts": 0,
+    "total": 4735
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Shows a single open envelope with its top flap raised, representing one read message or a single piece of opened mail, unlike the overlapping pair of open and closed envelopes."
 }

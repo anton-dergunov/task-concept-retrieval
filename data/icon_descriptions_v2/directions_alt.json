@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "directions, navigation, or driving route",
+   "meaning": "wayfinding, directional sign, or one-way route",
    "strength": "primary"
   },
   {
-   "meaning": "turn right or road sign",
+   "meaning": "proceed forward, continue, or next step",
    "strength": "primary"
   },
   {
-   "meaning": "detour, redirect, or forwarding",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "next step or proceed forward",
+   "meaning": "directions or navigation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles generic UI 'next' or 'forward' buttons, flowchart decision nodes, or a 'turn right' sign rather than general navigation.",
+ "ambiguity": "Very easily confused with the diamond sign containing a bent right-turn arrow for general navigation tasks, as well as generic UI 'next' or 'forward' buttons.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow",
@@ -178,28 +174,33 @@
  ],
  "near_misses": [
   {
+   "task": "Look up driving directions and turns to the cabin",
+   "better": "diamond sign with a bent right-turn arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Practice left and right turns for the driving test",
+   "better": "diamond sign with a bent right-turn arrow or steering wheel",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Forward the signed lease PDF to the landlord",
-   "better": "email / share arrow",
+   "better": "email or share arrow",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Decide on next steps for the Q3 marketing campaign",
-   "better": "checklist / roadmap",
+   "better": "checklist or project roadmap",
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a diamond anniversary band for Sarah",
-   "better": "ring / diamond gem",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Sign the right-of-way easement agreement for the driveway",
-   "better": "contract / signature",
+   "better": "contract or signature",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pack the cooler and camp stove",
-   "better": "cooler / camping stove",
+   "task": "Pack the cooler and camp stove for the road trip",
+   "better": "cooler or camping stove",
    "trap": "parent_topic"
   },
   {
@@ -211,7 +212,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The diamond frame with a right arrow is the standard visual shorthand for road signage and navigation directions (familiar from mapping apps like Google Maps). It fits tasks about routes, driving directions, detours, and traffic signs, though it can be confused with a generic 'next' or 'forward' arrow.",
@@ -231,6 +232,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "directions, navigation, or driving route",
+     "strength": "primary"
+    },
+    {
+     "meaning": "turn right or road sign",
+     "strength": "primary"
+    },
+    {
+     "meaning": "detour, redirect, or forwarding",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "next step or proceed forward",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles generic UI 'next' or 'forward' buttons, flowchart decision nodes, or a 'turn right' sign rather than general navigation.",
+   "near_misses": [
+    {
+     "task": "Forward the signed lease PDF to the landlord",
+     "better": "email / share arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Decide on next steps for the Q3 marketing campaign",
+     "better": "checklist / roadmap",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a diamond anniversary band for Sarah",
+     "better": "ring / diamond gem",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sign the right-of-way easement agreement for the driveway",
+     "better": "contract / signature",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the cooler and camp stove",
+     "better": "cooler / camping stove",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a right-angled USB-C cable for the car mount",
+     "better": "USB cable",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "directions"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4070,
+    "output": 839,
+    "thoughts": 114,
+    "total": 5023
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:36Z"
+  }
+ },
+ "distinguishing": "Shows a straight horizontal right-pointing arrow inside the diamond border rather than a bent 90-degree turn arrow, reading more as proceed forward, one-way direction, or next step."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "screen sharing or casting from phone",
-   "strength": "primary"
-  },
-  {
    "meaning": "share or forward from mobile phone",
    "strength": "primary"
   },
   {
-   "meaning": "transfer data to another phone",
-   "strength": "secondary"
+   "meaning": "screen sharing or casting from phone",
+   "strength": "primary"
   },
   {
    "meaning": "call forwarding on mobile",
    "strength": "secondary"
+  },
+  {
+   "meaning": "create mobile shortcut or redirect",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a smartwatch face with a navigation turn arrow because of the prominent side button bump, or a door with a turn-right sign at very small sizes.",
+ "ambiguity": "Nearly interchangeable at a glance with the mobile screen with a straight right arrow and the mobile screen with a diagonal northeast arrow; also easily confused with the stacked mobile screens with a bent arrow when small.",
  "modifier_semantics": [
   {
    "modifier": "curved right-pointing arrow inside screen",
@@ -159,19 +159,19 @@
  ],
  "near_misses": [
   {
+   "task": "Migrate all apps and photos to my new phone",
+   "better": "stacked mobile screens with a bent arrow or phone with straight right transfer arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test external links opening in the mobile browser",
+   "better": "mobile screen with diagonal northeast arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Turn right after the mobile phone mast on the hike",
    "better": "turn-right navigation arrow or map",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new silicone case with stiffer side buttons",
-   "better": "plain smartphone or phone case",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a replacement strap for the Apple Watch",
-   "better": "smartwatch with wrist straps",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check my phone for the verification code",
@@ -192,7 +192,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a smartphone with a side button and a forward/share arrow on the screen. It fits tasks about transferring data between phones, casting a mobile screen, or setting up call/message forwarding, though the pronounced side bump makes the body slightly resemble a smartwatch case.",
@@ -210,6 +210,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "app_shortcut"
- }
+  "alias_of": "app_shortcut",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "screen sharing or casting from phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "share or forward from mobile phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "transfer data to another phone",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "call forwarding on mobile",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a smartwatch face with a navigation turn arrow because of the prominent side button bump, or a door with a turn-right sign at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Turn right after the mobile phone mast on the hike",
+     "better": "turn-right navigation arrow or map",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new silicone case with stiffer side buttons",
+     "better": "plain smartphone or phone case",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a replacement strap for the Apple Watch",
+     "better": "smartwatch with wrist straps",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check my phone for the verification code",
+     "better": "key or shield for 2FA code",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Compare trade-in prices for a refurbished unlocked smartphone",
+     "better": "price tag or plain smartphone",
+     "trap": "property"
+    },
+    {
+     "task": "Cancel the old SIM card contract at the shop",
+     "better": "SIM card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "send_to_mobile",
+   "offline_share",
+   "add_to_home_screen"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6817,
+    "output": 2095,
+    "thoughts": 227,
+    "total": 9139
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Shows a single mobile screen containing a bent, 90-degree right-turning arrow (rather than a straight horizontal or diagonal arrow, or a stacked pair of screens), specifically cueing sharing, forwarding, or screen casting from a single phone."
 }

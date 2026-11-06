@@ -11,19 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "Project columns or task workflow",
+   "meaning": "project columns or task workflow",
    "strength": "primary"
   },
   {
-   "meaning": "Inverted bar chart or analytics widget",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "Audio equalizer or graphic bars",
+   "meaning": "top-aligned vertical bar chart or widget",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly resembles the Trello logo and a Kanban board, but can be mistaken for an inverted bar chart, a radiator, or vertical alignment UI chrome.",
+ "ambiguity": "At a quick glance, the vertical bars inside a rounded frame can be mistaken for the two-bar pause screen icon, or for a bar chart / alignment icon.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -154,13 +150,18 @@
  ],
  "near_misses": [
   {
-   "task": "Plot the Q4 revenue bar chart for the investor deck",
-   "better": "bar chart with bottom-aligned ascending bars",
+   "task": "Pause our Netflix subscription while we travel in August",
+   "better": "rectangular screen frame with two equal vertical pause bars",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Bleed the cast-iron radiator in the guest bedroom",
-   "better": "heating radiator with fins and valve",
+   "task": "Replace the cracked two-prong wall outlet behind the sofa",
+   "better": "rectangular frame with two equal vertical slots or electrical outlet icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plot the Q4 revenue bar chart for the investor deck",
+   "better": "bar chart with bottom-aligned ascending bars",
    "trap": "lookalike_glyph"
   },
   {
@@ -174,14 +175,14 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Record the voiceover for the product demo video",
-   "better": "microphone",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Check Trello for any comments from the client",
    "better": "speech bubble or comment icon",
    "trap": "generic_verb"
+  },
+  {
+   "task": "Record the voiceover for the product demo video",
+   "better": "microphone",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -205,6 +206,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Kanban board or Trello board",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Project columns or task workflow",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Inverted bar chart or analytics widget",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Audio equalizer or graphic bars",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly resembles the Trello logo and a Kanban board, but can be mistaken for an inverted bar chart, a radiator, or vertical alignment UI chrome.",
+   "near_misses": [
+    {
+     "task": "Plot the Q4 revenue bar chart for the investor deck",
+     "better": "bar chart with bottom-aligned ascending bars",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a cedar cutting board for brisket",
+     "better": "kitchen cutting board",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the financial packet to the board of directors",
+     "better": "group of people around a conference table",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Record the voiceover for the product demo video",
+     "better": "microphone",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check Trello for any comments from the client",
+     "better": "speech bubble or comment icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pause_presentation"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4071,
+    "output": 705,
+    "thoughts": 0,
+    "total": 4776
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "Shows a square frame containing three top-aligned vertical bars of different lengths representing board columns, unlike the look-alike which has a wider frame with two equal centered vertical bars for pause."
 }

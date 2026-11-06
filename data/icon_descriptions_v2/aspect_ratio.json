@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "aspect ratio or framing size",
+   "meaning": "aspect ratio, canvas size, or video framing",
    "strength": "primary"
   },
   {
@@ -18,15 +18,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "screenshot or screen capture area",
+   "meaning": "screen capture area or crop bounds",
    "strength": "secondary"
   },
   {
-   "meaning": "picture frame or canvas mat",
+   "meaning": "picture frame or mat",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like UI chrome for maximizing a window or changing video aspect ratio; can also be read as a physical picture frame or a screenshot/crop bounding box.",
+ "ambiguity": "Closely resembles the mobile screenshot icon that has the same corner brackets inside a bezel-framed phone screen.",
  "modifier_semantics": [
   {
    "modifier": "two opposing inner corner brackets",
@@ -161,8 +161,13 @@
  ],
  "near_misses": [
   {
-   "task": "Upload the raw photos from the SD card to the NAS",
-   "better": "photo / image with mountains and sun, or SD card",
+   "task": "Capture a screenshot of the login error on the test phone",
+   "better": "horizontal mobile device screen with side bezels and corner brackets",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sync the SRT subtitle file with the final video cut",
+   "better": "screen frame with horizontal subtitle bars",
    "trap": "lookalike_glyph"
   },
   {
@@ -184,11 +189,6 @@
    "task": "Export the final banner in high-resolution full-bleed format",
    "better": "image file or export arrow",
    "trap": "property"
-  },
-  {
-   "task": "Order timber for the shed door frame",
-   "better": "door or wood planks",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -212,6 +212,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "aspect ratio or framing size",
+     "strength": "primary"
+    },
+    {
+     "meaning": "full screen, fit to screen, or maximize view",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screenshot or screen capture area",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "picture frame or canvas mat",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like UI chrome for maximizing a window or changing video aspect ratio; can also be read as a physical picture frame or a screenshot/crop bounding box.",
+   "near_misses": [
+    {
+     "task": "Upload the raw photos from the SD card to the NAS",
+     "better": "photo / image with mountains and sun, or SD card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new 27-inch 4K monitor for the home office",
+     "better": "computer monitor on a stand",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the cracked screen protector on my phone",
+     "better": "smartphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy new tortoiseshell glasses frames at the optometrist",
+     "better": "eyeglasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Export the final banner in high-resolution full-bleed format",
+     "better": "image file or export arrow",
+     "trap": "property"
+    },
+    {
+     "task": "Order timber for the shed door frame",
+     "better": "door or wood planks",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "subtitles",
+   "screenshot_tablet"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5445,
+    "output": 1547,
+    "thoughts": 119,
+    "total": 7111
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:14Z"
+  }
+ },
+ "distinguishing": "It shows top-left and bottom-right corner brackets inside a single unadorned rectangle without side bezel lines, representing general aspect ratio, fullscreen, or framing rather than a mobile device."
 }

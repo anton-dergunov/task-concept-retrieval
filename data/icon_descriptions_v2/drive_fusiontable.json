@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, it can be mistaken for a generic image/photo placeholder showing mountains (though it lacks the sun/circle usually present in photo icons), or a cracked tile.",
+ "ambiguity": "Completely interchangeable in meaning with the sharp-cornered square line chart icon; also easily mistaken at small sizes for a landscape photo placeholder icon (mountains in a frame, lacking a sun dot) or a cracked tile.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -168,39 +168,39 @@
  "near_misses": [
   {
    "task": "Hang the framed mountain print in the hallway",
-   "better": "picture frame / photo",
+   "better": "landscape photo frame with sun and mountains",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if the kitchen floor tile is cracked",
+   "better": "cracked square tile",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Measure blood pressure and heart rate before breakfast",
+   "better": "heart pulse / ECG waveform",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Track package delivery from UPS",
-   "better": "package / box",
+   "better": "shipping package / box",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check if the kitchen floor tile is cracked",
-   "better": "tile / crack",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Call Fidelity to update beneficiary address",
-   "better": "phone call",
+   "better": "phone receiver",
    "trap": "parent_topic"
   },
   {
    "task": "Buy a high-growth indoor plant for the living room",
    "better": "potted plant",
    "trap": "property"
-  },
-  {
-   "task": "Measure blood pressure before breakfast",
-   "better": "blood pressure cuff / heart pulse",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a rising zigzag line inside a rounded square box, universally read as a line chart, analytics, or stock trend. It fits tasks involving data visualization, metrics, and financial tracking well, though it shares visual space with other chart icons and slightly resembles a mountain landscape picture icon without the sun.",
@@ -220,6 +220,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "line chart, graph, or analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stock market, financial performance, or portfolio trend",
+     "strength": "primary"
+    },
+    {
+     "meaning": "metrics, statistics, or progress tracking",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "landscape picture frame with mountains",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, it can be mistaken for a generic image/photo placeholder showing mountains (though it lacks the sun/circle usually present in photo icons), or a cracked tile.",
+   "near_misses": [
+    {
+     "task": "Hang the framed mountain print in the hallway",
+     "better": "picture frame / photo",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Track package delivery from UPS",
+     "better": "package / box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the kitchen floor tile is cracked",
+     "better": "tile / crack",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Fidelity to update beneficiary address",
+     "better": "phone call",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a high-growth indoor plant for the living room",
+     "better": "potted plant",
+     "trap": "property"
+    },
+    {
+     "task": "Measure blood pressure before breakfast",
+     "better": "blood pressure cuff / heart pulse",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sound_detection_glass_break"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4046,
+    "output": 739,
+    "thoughts": 0,
+    "total": 4785
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "This icon has rounded outer corners on its square frame, whereas the other icon has sharp 90-degree corners; in meaning, the two icons are completely interchangeable."
 }

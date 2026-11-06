@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "private message or confidential correspondence",
+   "meaning": "email account protection (2FA, SPF/DKIM/DMARC)",
    "strength": "secondary"
   },
   {
-   "meaning": "email account protection (2FA, SPF/DKIM/DMARC)",
+   "meaning": "private message or confidential correspondence",
    "strength": "secondary"
   }
  ],
- "ambiguity": "May be confused with an envelope with a padlock icon (locked/encrypted email) or a generic email icon at very small sizes.",
+ "ambiguity": "Distinguishable from the physical postbox icon at a glance, though it may be mistaken for a generic email icon at very small sizes if the shield badge isn't noticed.",
  "modifier_semantics": [
   {
    "modifier": "shield badge in bottom right",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Walk to the corner postbox to mail the wedding invitations",
+   "better": "postbox with an envelope",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Install a locking anti-theft mailbox at the end of the driveway",
+   "better": "postbox with an envelope",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Reply to Sarah's email about the August cabin dates",
    "better": "plain envelope / email",
    "trap": "generic_verb"
@@ -176,25 +186,15 @@
    "trap": "property"
   },
   {
-   "task": "Install a locking anti-theft mailbox at the end of the driveway",
-   "better": "physical postbox",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Pay the annual Bitwarden family password manager invoice",
    "better": "invoice or credit card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy padded bubble mailers to protect the ceramic mugs in transit",
-   "better": "shipping package / box",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon clearly combines a mail envelope with a security shield, universally understood as secure/encrypted email, spam protection, or email account hardening. It fits a concrete set of tech, admin, and work tasks around email privacy (PGP, ProtonMail, SPF/DKIM, phishing, 2FA), though it is more specialized than a plain envelope.",
@@ -212,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "secure email or encrypted mail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "email security, spam filter, or phishing protection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "private message or confidential correspondence",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "email account protection (2FA, SPF/DKIM/DMARC)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "May be confused with an envelope with a padlock icon (locked/encrypted email) or a generic email icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Reply to Sarah's email about the August cabin dates",
+     "better": "plain envelope / email",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email the signed auto insurance renewal back to the broker",
+     "better": "insurance policy or car with shield",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send a confidential tax return PDF to the accountant",
+     "better": "tax document",
+     "trap": "property"
+    },
+    {
+     "task": "Install a locking anti-theft mailbox at the end of the driveway",
+     "better": "physical postbox",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the annual Bitwarden family password manager invoice",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy padded bubble mailers to protect the ceramic mugs in transit",
+     "better": "shipping package / box",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "local_post_office"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4084,
+    "output": 1046,
+    "thoughts": 0,
+    "total": 5130
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "Shows a single large envelope with a half-shaded security shield badge on its bottom-right corner and no postbox behind it, indicating encrypted email, spam protection, or secure messaging rather than physical post."
 }

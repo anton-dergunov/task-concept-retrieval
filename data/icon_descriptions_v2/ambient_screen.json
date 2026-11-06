@@ -10,19 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "AI image generation or smart photo enhancement",
+   "meaning": "AI-generated or auto-enhanced slide, video frame, or widescreen image",
    "strength": "primary"
   },
   {
-   "meaning": "clean screen or display",
+   "meaning": "smart presentation deck, featured card, or clean display screen",
    "strength": "secondary"
   },
   {
-   "meaning": "featured slide, card, or canvas",
+   "meaning": "AI or generative tool (interchangeable with the square sparkle frame)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without mountain/sun details inside the rectangle, it looks like a generic screen, card, or slide with sparkles rather than specifically a photo.",
+ "ambiguity": "Nearly interchangeable at small sizes with the square frame with a top-right sparkle; both read broadly as AI generation, auto-enhance, or a sparkling frame.",
  "modifier_semantics": [
   {
    "modifier": "four-pointed sparkles",
@@ -163,19 +163,24 @@
  ],
  "near_misses": [
   {
+   "task": "Generate AI avatars for the team directory",
+   "better": "square frame with top-right sparkle or user profile icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Auto-enhance square product thumbnails for the online store",
+   "better": "square frame with top-right sparkle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Sort the 400 raw photos from the Dolomites trip into folders",
    "better": "standard photo or camera icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book a campsite in Joshua Tree for the Perseid meteor shower",
-   "better": "night sky, stars, or tent icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new 27-inch 4K monitor for the home office",
    "better": "computer monitor with stand icon",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Make the bathroom tiles sparkle before the guests arrive",
@@ -196,7 +201,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon shows a rectangular frame or screen with two four-pointed AI/magic sparkles, making it a solid fit for AI image generation, photo enhancement, slide polishing, or screen cleaning tasks. However, the empty rectangle lacks photo details (like mountains or a sun), so it is somewhat abstract and easily confused with generic AI features, cards, or display icons.",
@@ -216,6 +221,90 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "AI image generation or smart photo enhancement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "clean screen or display",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "featured slide, card, or canvas",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without mountain/sun details inside the rectangle, it looks like a generic screen, card, or slide with sparkles rather than specifically a photo.",
+   "near_misses": [
+    {
+     "task": "Sort the 400 raw photos from the Dolomites trip into folders",
+     "better": "standard photo or camera icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a campsite in Joshua Tree for the Perseid meteor shower",
+     "better": "night sky, stars, or tent icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new 27-inch 4K monitor for the home office",
+     "better": "computer monitor with stand icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Make the bathroom tiles sparkle before the guests arrive",
+     "better": "cleaning spray, sponge, or bucket icon",
+     "trap": "property"
+    },
+    {
+     "task": "Email the printer the final CMYK PDF of the poster",
+     "better": "email or printer icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Review the new brand guidelines deck from the agency",
+     "better": "presentation chart or document icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "photo_filter"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4128,
+    "output": 1147,
+    "thoughts": 0,
+    "total": 5275
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:42Z"
+  }
+ },
+ "distinguishing": "Uses a wide horizontal rectangle with the second sparkle at the bottom-right corner, suggesting a widescreen slide, video frame, or display card rather than a square tile, though both icons are nearly interchangeable as AI/auto-enhance symbols."
 }

@@ -7,15 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "traffic cone / construction / work in progress",
+   "meaning": "traffic cone or safety pylon",
    "strength": "primary"
   },
   {
-   "meaning": "alchemical earth / fire element symbol or abstract totem",
-   "strength": "secondary"
+   "meaning": "roadwork, construction zone, or work in progress",
+   "strength": "primary"
   },
   {
-   "meaning": "eject symbol (upward triangle over horizontal bar)",
+   "meaning": "eject symbol or upward delta over a bar",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly resembles an abstract geometric logo (like Vercel or Prisma), a media eject symbol, or a simplified letter 'A' on a line; lacks the horizontal stripes that make a traffic cone unmistakable.",
+ "ambiguity": "Easily mistaken for the stepped marker/highlighter icon which shares the identical bottom base, or for a media eject button or abstract delta logo.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -153,14 +153,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy waffle cones for the birthday ice cream bar",
-   "better": "ice cream cone",
-   "trap": "shared_vocabulary"
+   "task": "Buy yellow highlighters for exam study",
+   "better": "stepped marker or highlighter tip",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Rake up pine cones from the side yard before mowing",
-   "better": "pine cone / tree",
-   "trap": "shared_vocabulary"
+   "task": "Apply wood glue to the loose chair joint",
+   "better": "stepped applicator nozzle or glue bottle",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Safely eject the backup drive and store it in the fireproof safe",
@@ -168,13 +168,13 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Download VLC Media Player onto the living room laptop",
-   "better": "video player / laptop",
-   "trap": "lookalike_glyph"
+   "task": "Buy waffle cones for the birthday ice cream bar",
+   "better": "ice cream cone",
+   "trap": "shared_vocabulary"
   },
   {
-   "task": "Pick up the plastic Elizabethan cone from the vet for the dog",
-   "better": "dog / pet collar",
+   "task": "Rake up pine cones from the side yard before mowing",
+   "better": "pine cone / tree",
    "trap": "shared_vocabulary"
   },
   {
@@ -186,7 +186,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The glyph depicts a tall hollow triangle hovering above a trapezoidal base, reading as a minimal traffic/safety cone (or an abstract 'eject' / monument symbol). Because it lacks stripes, its recognizability as a traffic cone is low, and it only fits a narrow set of tasks around safety cones, sports drills, or roadwork/construction.",
@@ -206,6 +206,94 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "traffic cone / construction / work in progress",
+     "strength": "primary"
+    },
+    {
+     "meaning": "alchemical earth / fire element symbol or abstract totem",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "eject symbol (upward triangle over horizontal bar)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "metronome or obelisk monument",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly resembles an abstract geometric logo (like Vercel or Prisma), a media eject symbol, or a simplified letter 'A' on a line; lacks the horizontal stripes that make a traffic cone unmistakable.",
+   "near_misses": [
+    {
+     "task": "Buy waffle cones for the birthday ice cream bar",
+     "better": "ice cream cone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Rake up pine cones from the side yard before mowing",
+     "better": "pine cone / tree",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Safely eject the backup drive and store it in the fireproof safe",
+     "better": "hard drive / USB drive",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download VLC Media Player onto the living room laptop",
+     "better": "video player / laptop",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up the plastic Elizabethan cone from the vet for the dog",
+     "better": "dog / pet collar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the contractor's second invoice for the kitchen remodel",
+     "better": "invoice / money",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "stylus_pen"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4074,
+    "output": 995,
+    "thoughts": 272,
+    "total": 5341
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "Forms a single smooth, unstepped hollow triangle tapering straight to the apex above the base, depicting a traffic cone or pylon rather than a stepped marker nib."
 }

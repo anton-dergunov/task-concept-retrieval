@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "screenshot or screen capture",
+   "meaning": "take a screenshot or drag a screen capture selection",
    "strength": "primary"
   },
   {
-   "meaning": "scan document or QR code",
-   "strength": "secondary"
+   "meaning": "new selection, crop area, or add artboard/frame",
+   "strength": "primary"
   },
   {
-   "meaning": "new selection or crop area",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "add frame or artboard",
+   "meaning": "new document or barcode scan",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a plain fullscreen/expand icon, a camera viewfinder, or a generic UI selection tool.",
+ "ambiguity": "Easily confused at a glance with the plain four-corner fullscreen/viewfinder frame when the task involves general screen viewing or scanning without a 'new' or 'capture crosshair' action.",
  "modifier_semantics": [
   {
    "modifier": "plus sign at bottom right corner",
@@ -161,13 +157,23 @@
  ],
  "near_misses": [
   {
+   "task": "Test the video player in fullscreen mode on Safari",
+   "better": "plain four-corner fullscreen frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Debug the camera autofocus error on the barcode scanner",
+   "better": "corner brackets frame with central exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy wooden picture frames for the hallway gallery wall",
-   "better": "picture frame with image",
+   "better": "picture frame with artwork inside",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Replace cracked glass screen on Maya's iPad",
-   "better": "tablet / screen",
+   "better": "tablet or screen device",
    "trap": "shared_vocabulary"
   },
   {
@@ -176,25 +182,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Add dark mode toggle to the video player fullscreen view",
-   "better": "video player or moon/dark mode",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Write alt text for all images",
-   "better": "text / accessibility icon",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Review the new login screen with security team",
-   "better": "lock / security",
+   "task": "Review the new login screen with the security team",
+   "better": "lock or security shield",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The three corner brackets with a bottom-right plus sign represent a screen capture selection box, viewfinder, or crop/scan area. It works well for tasks centered on taking screenshots, scanning documents, or cropping images, though at small sizes it looks very similar to generic fullscreen or expand UI icons.",
@@ -212,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "screenshot or screen capture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "scan document or QR code",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "new selection or crop area",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "add frame or artboard",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain fullscreen/expand icon, a camera viewfinder, or a generic UI selection tool.",
+   "near_misses": [
+    {
+     "task": "Buy wooden picture frames for the hallway gallery wall",
+     "better": "picture frame with image",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace cracked glass screen on Maya's iPad",
+     "better": "tablet / screen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Unclog the flatbed scanner paper feeder in the copy room",
+     "better": "scanner machine",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add dark mode toggle to the video player fullscreen view",
+     "better": "video player or moon/dark mode",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write alt text for all images",
+     "better": "text / accessibility icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Review the new login screen with security team",
+     "better": "lock / security",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "frame_exclamation",
+   "screenshot_frame_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5366,
+    "output": 939,
+    "thoughts": 153,
+    "total": 6458
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Unlike the empty four-corner frame or the frame with a central exclamation mark, this icon has sharp corners and replaces the bottom-right bracket with a plus sign crosshair, indicating an active region selection, screenshot capture, or adding a new frame."
 }

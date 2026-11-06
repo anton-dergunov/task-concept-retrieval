@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "TV or monitor input source (AV / HDMI input selection symbol standard on remotes and displays)",
+   "meaning": "TV or monitor input source selection (AV / HDMI input)",
    "strength": "primary"
   },
   {
-   "meaning": "cast, stream or mirror media to a TV or external display",
+   "meaning": "cast, stream, or mirror media into a TV or external display",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Resembles a generic 'log in / sign in' door-and-arrow icon or a browser 'back' button inside a window at small sizes.",
+ "ambiguity": "Can be mistaken for the outward-pointing export box if the arrow direction and monitor stand are missed, or for the camera with a double arrow if the bottom stand is confused with a top camera hump.",
  "modifier_semantics": [
   {
    "modifier": "inward left-pointing arrow entering the screen",
@@ -158,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Export the quarterly tax spreadsheet to a CSV file",
+   "better": "box or frame with an outward-pointing export arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch between front and rear cameras during the video test",
+   "better": "camera body with a double-headed arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new 27-inch 4K monitor for the home office",
    "better": "plain computer monitor without arrow",
    "trap": "lookalike_glyph"
@@ -168,11 +178,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Log in to the tax portal and download last year's receipt",
-   "better": "user profile or key / login door icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Watch the finale on the living room TV tonight",
    "better": "plain television screen or play button",
    "trap": "parent_topic"
@@ -181,11 +186,6 @@
    "task": "Check if the new monitor has a USB-C power delivery input",
    "better": "USB-C cable or plug icon",
    "trap": "property"
-  },
-  {
-   "task": "Back up desktop photos to the external hard drive",
-   "better": "hard drive or cloud upload arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -211,6 +211,95 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "TV or monitor input source (AV / HDMI input selection symbol standard on remotes and displays)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cast, stream or mirror media to a TV or external display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remote desktop connection or logging into a workstation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "import or transfer files onto a computer",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Resembles a generic 'log in / sign in' door-and-arrow icon or a browser 'back' button inside a window at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a new 27-inch 4K monitor for the home office",
+     "better": "plain computer monitor without arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return the faulty monitor to Best Buy before Friday",
+     "better": "package return or box with return arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Log in to the tax portal and download last year's receipt",
+     "better": "user profile or key / login door icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Watch the finale on the living room TV tonight",
+     "better": "plain television screen or play button",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the new monitor has a USB-C power delivery input",
+     "better": "USB-C cable or plug icon",
+     "trap": "property"
+    },
+    {
+     "task": "Back up desktop photos to the external hard drive",
+     "better": "hard drive or cloud upload arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_share",
+   "switch_camera"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5430,
+    "output": 1568,
+    "thoughts": 192,
+    "total": 7190
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Features a hollow monitor or TV screen on a stand with its right frame edge bending inward into a left-pointing arrow, representing display input or incoming connection rather than outgoing export or camera switching."
 }

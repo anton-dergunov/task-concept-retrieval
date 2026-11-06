@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "unlike, unfollow, or clear liked items",
+   "meaning": "unlike, unfollow, or prune liked items",
    "strength": "primary"
   },
   {
    "meaning": "lower heart rate or reduce cardiovascular risk",
    "strength": "secondary"
-  },
-  {
-   "meaning": "cancel charity donation or end sponsorship",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the minus sign can blend into the heart outline or be misread as a plain heart or a heart with a plus sign.",
+ "ambiguity": "At small sizes the minus sign can be confused with the checkmark in the same corner position, or confused with the horizontal bar beneath the underlined heart.",
  "modifier_semantics": [
   {
    "modifier": "minus sign",
@@ -162,13 +158,13 @@
  ],
  "near_misses": [
   {
-   "task": "Add the cast-iron Dutch oven to my birthday wishlist",
-   "better": "heart with plus sign",
+   "task": "Buy Valentine's Day chocolates and a card for Sam",
+   "better": "plain outlined heart",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy Valentine's Day chocolates and a card for Sam",
-   "better": "plain heart or gift box",
+   "task": "Confirm my organ donor registration status is active",
+   "better": "heart with checkmark",
    "trap": "lookalike_glyph"
   },
   {
@@ -213,6 +209,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remove from favorites, wishlist, or saved likes",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unlike, unfollow, or clear liked items",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lower heart rate or reduce cardiovascular risk",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cancel charity donation or end sponsorship",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the minus sign can blend into the heart outline or be misread as a plain heart or a heart with a plus sign.",
+   "near_misses": [
+    {
+     "task": "Add the cast-iron Dutch oven to my birthday wishlist",
+     "better": "heart with plus sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy Valentine's Day chocolates and a card for Sam",
+     "better": "plain heart or gift box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick a heart-healthy low-sodium dressing at the grocery store",
+     "better": "salad bottle or grocery basket",
+     "trap": "property"
+    },
+    {
+     "task": "Check my heart rate variability in Apple Health after morning run",
+     "better": "heart with pulse line (ECG)",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order the USB-C dock from the top of my wishlist",
+     "better": "USB hub / shopping cart",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Learn all the anatomical chambers of the heart by heart for bio exam",
+     "better": "anatomical heart or flashcards",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hr_resting",
+   "favorite",
+   "heart_check"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6749,
+    "output": 2043,
+    "thoughts": 0,
+    "total": 8792
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "The lower-right wall of the heart is open and replaced by a horizontal minus sign, specifically indicating removal from favorites or unliking."
 }

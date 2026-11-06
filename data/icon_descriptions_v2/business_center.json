@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a toolbox, first-aid kit case, or small suitcase when seen at very small sizes.",
+ "ambiguity": "Can be confused with the briefcase with a right-pointing chevron at small sizes, or with a generic toolbox or first-aid kit case.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -169,13 +169,18 @@
  ],
  "near_misses": [
   {
-   "task": "Pack the big wheeled suitcase for two weeks in Portugal",
-   "better": "wheeled luggage / suitcase",
+   "task": "Book flights and hotel for the Chicago business trip",
+   "better": "briefcase with right-pointing chevron for work travel",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Restock band-aids and antiseptic wipes in the car kit",
-   "better": "first-aid kit with cross",
+   "task": "Transition client accounts before starting the next job",
+   "better": "briefcase with right-pointing chevron for career move",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the big wheeled suitcase for two weeks in Portugal",
+   "better": "wheeled luggage / suitcase",
    "trap": "lookalike_glyph"
   },
   {
@@ -222,6 +227,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "briefcase, work bag, or attaché case",
+     "strength": "primary"
+    },
+    {
+     "meaning": "work, job, employment, or career",
+     "strength": "primary"
+    },
+    {
+     "meaning": "business or professional matters",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "toolbox or small carry case",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a toolbox, first-aid kit case, or small suitcase when seen at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Pack the big wheeled suitcase for two weeks in Portugal",
+     "better": "wheeled luggage / suitcase",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Restock band-aids and antiseptic wipes in the car kit",
+     "better": "first-aid kit with cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Put the socket wrenches back into the garage toolbox",
+     "better": "toolbox or wrench",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Work out legs and shoulders at the gym before 8am",
+     "better": "dumbbell",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a padded 14-inch laptop sleeve for commuting",
+     "better": "laptop",
+     "trap": "property"
+    },
+    {
+     "task": "Call the client in Zurich about the delayed shipment",
+     "better": "phone",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "next_week"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4041,
+    "output": 1101,
+    "thoughts": 75,
+    "total": 5217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "Shows a horizontal closing seam and a square center latch on the briefcase instead of a directional chevron, representing a literal briefcase or general work and employment rather than a business trip or career transition."
 }

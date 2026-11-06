@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / power / charging",
+   "meaning": "battery / medium-high battery level (approx. 60%)",
    "strength": "primary"
   },
   {
-   "meaning": "bottle / container with label",
-   "strength": "secondary"
+   "meaning": "charging / portable power bank",
+   "strength": "primary"
   },
   {
-   "meaning": "energy / stamina",
+   "meaning": "bottle / container with square label",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can look like a medicine bottle or water flask with a square white label, or a clipboard at very small sizes.",
+ "ambiguity": "Virtually indistinguishable from the ~50% and ~75% filled battery icons, and easily read as a medicine bottle with a square white label at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "half-filled level",
@@ -157,19 +157,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp / flashlight",
-   "trap": "property"
+   "task": "Check that all emergency flashlight batteries are 100% full",
+   "better": "solid full battery",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the monthly electric bill before Friday",
-   "better": "invoice / bill / lightning bolt",
-   "trap": "shared_vocabulary"
+   "task": "Configure phone to stop charging at 85-90% overnight",
+   "better": "nearly full battery with narrow top gap",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up prescription bottle from Walgreens",
    "better": "pill bottle / medicine",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the monthly electric bill before Friday",
+   "better": "invoice / bill / lightning bolt",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Practice drum battery rudiments for 20 minutes",
@@ -180,17 +185,12 @@
    "task": "Buy a new cordless Makita impact driver",
    "better": "power drill",
    "trap": "property"
-  },
-  {
-   "task": "Pack the insulated water flask for the hike",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an upright battery at half capacity. While it originates as a UI status indicator, in a task list it serves well as a concrete symbol for tasks involving household batteries, charging devices, power banks, and car batteries, though it slightly resembles a bottle with a label.",
@@ -210,6 +210,91 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / power / charging",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bottle / container with label",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "energy / stamina",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can look like a medicine bottle or water flask with a square white label, or a clipboard at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric bill before Friday",
+     "better": "invoice / bill / lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up prescription bottle from Walgreens",
+     "better": "pill bottle / medicine",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Practice drum battery rudiments for 20 minutes",
+     "better": "drum / drumsticks",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new cordless Makita impact driver",
+     "better": "power drill",
+     "trap": "property"
+    },
+    {
+     "task": "Pack the insulated water flask for the hike",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_full",
+   "battery_3_bar",
+   "battery_vert_050",
+   "battery_5_bar",
+   "battery_6_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9321,
+    "output": 3291,
+    "thoughts": 0,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Shows a battery filled to roughly 60% with a nearly square white cutout in the upper portion, making it visually interchangeable with the 50% and 75% battery icons in the same progress series."
 }

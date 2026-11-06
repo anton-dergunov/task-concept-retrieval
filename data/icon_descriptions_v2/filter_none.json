@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "copy or duplicate",
+   "meaning": "copy, clone, or duplicate",
    "strength": "primary"
   },
   {
-   "meaning": "multiple items or layers",
+   "meaning": "multiple items, photo carousel, or album",
    "strength": "secondary"
   },
   {
-   "meaning": "restore window or multi-window",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "clone or backup",
+   "meaning": "restore window or multi-window view",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with generic document copy, window maximize/restore UI chrome, or photo album/carousel indicators.",
+ "ambiguity": "Almost indistinguishable at a glance from the portrait overlapping rectangles, and also overlaps heavily with the solid-back overlapping squares.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -152,6 +148,16 @@
  ],
  "near_misses": [
   {
+   "task": "Photocopy tax forms and W-2s for the accountant",
+   "better": "stacked documents with dog-ear fold",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Merge overlapping vector shapes in the logo icon",
+   "better": "overlapping solid and outlined squares (boolean/layer icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Review the sales page copy before launch",
    "better": "text document or edit pen",
    "trap": "shared_vocabulary"
@@ -165,16 +171,6 @@
    "task": "Check if the backup job finished last night",
    "better": "database or server with check",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Frame the square print for the hallway",
-   "better": "picture frame",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a new leather key fob cover",
-   "better": "key",
-   "trap": "parent_topic"
   },
   {
    "task": "Send a CC email to the department head",
@@ -205,6 +201,96 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "copy or duplicate",
+     "strength": "primary"
+    },
+    {
+     "meaning": "multiple items or layers",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "restore window or multi-window",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "clone or backup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with generic document copy, window maximize/restore UI chrome, or photo album/carousel indicators.",
+   "near_misses": [
+    {
+     "task": "Review the sales page copy before launch",
+     "better": "text document or edit pen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Copy-edit the manuscript chapters for typos",
+     "better": "pencil or proofreading mark",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the backup job finished last night",
+     "better": "database or server with check",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Frame the square print for the hallway",
+     "better": "picture frame",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new leather key fob cover",
+     "better": "key",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Send a CC email to the department head",
+     "better": "email envelope",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shadow",
+   "content_copy",
+   "file_copy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6644,
+    "output": 1988,
+    "thoughts": 0,
+    "total": 8632
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "This icon shows a 1:1 rounded square in front of a detached L-shaped corner, making it virtually interchangeable with the portrait rectangle version as a general-purpose 'copy/duplicate' or multi-item symbol, or slightly better suited to square media like album carousels."
 }

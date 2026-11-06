@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "edit route, itinerary, or path",
+   "meaning": "edit route, itinerary, waypoints, or navigation path",
    "strength": "primary"
   },
   {
-   "meaning": "edit workflow, process diagram, or pipeline",
+   "meaning": "edit workflow, state transition, or process pipeline",
    "strength": "primary"
   },
   {
-   "meaning": "connect nodes or draw vector path",
+   "meaning": "edit git branch history, interactive rebase, or amend commits",
    "strength": "secondary"
   },
   {
-   "meaning": "reroute or change direction",
+   "meaning": "edit vector path or node connections",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like an abstract diagram, a git branch icon, or a vector pen/anchor tool.",
+ "ambiguity": "At small sizes it can be confused with the two-segment parallel node transfer icon when the bottom-right pencil blends in with the nodes and arrows.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow",
@@ -167,40 +167,45 @@
  ],
  "near_misses": [
   {
+   "task": "Compare staging and production branches before release",
+   "better": "two parallel node segments with rightward arrows icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Migrate database records from legacy table to new schema",
+   "better": "two parallel node segments with rightward arrows icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new mechanical pencil for sketching",
-   "better": "pencil",
+   "better": "pencil icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Set up the new Wi-Fi router in the hallway",
-   "better": "wireless router",
+   "better": "wireless router icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Merge the feature branch into main",
-   "better": "git branch / merge icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book the hotel in Florence for three nights",
-   "better": "hotel / bed",
+   "better": "hotel or bed icon",
    "trap": "parent_topic"
   },
   {
    "task": "Write blog post about our team workflow",
-   "better": "document / blog post",
+   "better": "document or writing icon",
    "trap": "property"
   },
   {
    "task": "Review quarterly goals with manager",
-   "better": "target / meeting",
+   "better": "target or meeting icon",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts connected nodes with a directional arrow and an edit pencil, representing editing a route, path, workflow, or node graph. It fits tasks about planning or modifying itineraries, outdoor routes, and process diagrams, though at small sizes it can look somewhat abstract or be confused with git branch or vector node tools.",
@@ -218,6 +223,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "edit route, itinerary, or path",
+     "strength": "primary"
+    },
+    {
+     "meaning": "edit workflow, process diagram, or pipeline",
+     "strength": "primary"
+    },
+    {
+     "meaning": "connect nodes or draw vector path",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "reroute or change direction",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like an abstract diagram, a git branch icon, or a vector pen/anchor tool.",
+   "near_misses": [
+    {
+     "task": "Buy a new mechanical pencil for sketching",
+     "better": "pencil",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up the new Wi-Fi router in the hallway",
+     "better": "wireless router",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Merge the feature branch into main",
+     "better": "git branch / merge icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the hotel in Florence for three nights",
+     "better": "hotel / bed",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Write blog post about our team workflow",
+     "better": "document / blog post",
+     "trap": "property"
+    },
+    {
+     "task": "Review quarterly goals with manager",
+     "better": "target / meeting",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "rebase"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4055,
+    "output": 696,
+    "thoughts": 0,
+    "total": 4751
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:13Z"
+  }
+ },
+ "distinguishing": "Replaces the bottom arrow and fourth node with an angled edit pencil in the bottom right, meaning editing a route, path, or workflow rather than comparing or migrating between two parallel segments."
 }

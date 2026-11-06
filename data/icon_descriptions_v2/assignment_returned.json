@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "paste from clipboard / import into list or task",
+   "meaning": "download a report, task list, or assignment",
    "strength": "primary"
   },
   {
-   "meaning": "download report, task list, or assignment",
+   "meaning": "import or paste items into a clipboard or board",
    "strength": "primary"
   },
   {
-   "meaning": "save to clipboard or archive task",
+   "meaning": "save to clipboard, archive, or move task to bottom of list",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read as a generic download box, a shopping bag with a downward arrow, or a hanging sign/calendar at small sizes.",
+ "ambiguity": "Shares the identical square clipboard frame with the left-arrow clipboard icon, and can also be mistaken for a generic download box, shopping bag, or hanging tag.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow inside the board",
@@ -156,40 +156,45 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a wooden clipboard for the warehouse",
-   "better": "plain clipboard without arrow",
+   "task": "Roll back the staging deployment to the previous build",
+   "better": "square clipboard with a left-pointing arrow",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy wooden wallpapering paste for the hallway",
-   "better": "glue / wallpaper roll",
+   "task": "Move blocked tickets back to the previous sprint column",
+   "better": "square clipboard with a left-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the signed contract to the client portal",
+   "better": "clipboard or document with an upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a wooden clipboard for the warehouse",
+   "better": "plain clipboard without an arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy wallpaper paste for the hallway renovation",
+   "better": "paint roller or wallpaper roll",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check the project board before standup",
-   "better": "kanban board / checklist",
+   "task": "Check the project board before morning standup",
+   "better": "kanban board or checklist",
    "trap": "generic_verb"
   },
   {
    "task": "Print the downloadable tax forms for mom",
    "better": "printer",
    "trap": "property"
-  },
-  {
-   "task": "Email the accountant about missing receipts",
-   "better": "envelope / email",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Upload the signed contract to the client portal",
-   "better": "clipboard or document with upward arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a square clipboard with a top hanging loop and a downward arrow in the center, representing pasting from a clipboard, importing a task list, or downloading a report/form. It fits tasks centered on downloading records, importing checklists, or pasting data, though its squat square shape makes it slightly less obvious than a standard tall clipboard.",
@@ -207,6 +212,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "paste from clipboard / import into list or task",
+     "strength": "primary"
+    },
+    {
+     "meaning": "download report, task list, or assignment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "save to clipboard or archive task",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read as a generic download box, a shopping bag with a downward arrow, or a hanging sign/calendar at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a wooden clipboard for the warehouse",
+     "better": "plain clipboard without arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy wooden wallpapering paste for the hallway",
+     "better": "glue / wallpaper roll",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the project board before standup",
+     "better": "kanban board / checklist",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Print the downloadable tax forms for mom",
+     "better": "printer",
+     "trap": "property"
+    },
+    {
+     "task": "Email the accountant about missing receipts",
+     "better": "envelope / email",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Upload the signed contract to the client portal",
+     "better": "clipboard or document with upward arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "assignment_return"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 1127,
+    "thoughts": 0,
+    "total": 5186
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Shows a downward-pointing arrow centered inside the square clipboard frame (signifying download, import, save, or paste into a board), whereas the look-alike has a left-pointing arrow (signifying return, previous, or roll back)."
 }

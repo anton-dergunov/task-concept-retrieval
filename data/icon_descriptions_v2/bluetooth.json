@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "Bluetooth wireless connection or pairing",
+   "meaning": "Bluetooth wireless connection or general Bluetooth topic",
    "strength": "primary"
   },
   {
-   "meaning": "Bluetooth adapter or dongle",
+   "meaning": "Bluetooth USB adapter, dongle, or module",
    "strength": "secondary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "None at normal sizes; universally recognized as the Bluetooth logo.",
+ "ambiguity": "Easily confused with the Bluetooth symbols that have three dots underneath or two flanking dots on the sides, as all three share the same dominant central glyph and mean the same thing in a task context.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,24 +154,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy waterproof Bluetooth speaker for the shower",
+   "task": "Put the headphones into Bluetooth pairing mode and scan for devices",
+   "better": "Bluetooth symbol with three dots underneath (searching) or headphones",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if the wireless controller stays connected via Bluetooth",
+   "better": "Bluetooth symbol with two flanking dots (connected) or game controller",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a waterproof Bluetooth speaker for the shower",
    "better": "speaker",
    "trap": "property"
   },
   {
    "task": "Replace the batteries in my Bluetooth mouse",
-   "better": "mouse",
+   "better": "computer mouse",
    "trap": "property"
-  },
-  {
-   "task": "Schedule teeth cleaning and checkup with the dentist",
-   "better": "tooth",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Switch home Wi-Fi router to the 5 GHz channel",
-   "better": "wifi",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order a USB-C to headphone jack adapter",
@@ -187,7 +187,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts the standard Bluetooth symbol. It is unmistakable and ideal for tasks specifically about pairing devices, troubleshooting wireless connections, or buying Bluetooth adapters, though when ",
@@ -207,6 +207,88 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Bluetooth wireless connection or pairing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Bluetooth adapter or dongle",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Nordic bind rune",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "None at normal sizes; universally recognized as the Bluetooth logo.",
+   "near_misses": [
+    {
+     "task": "Buy waterproof Bluetooth speaker for the shower",
+     "better": "speaker",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the batteries in my Bluetooth mouse",
+     "better": "mouse",
+     "trap": "property"
+    },
+    {
+     "task": "Switch home Wi-Fi router to the 5 GHz channel",
+     "better": "wifi",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a USB-C to headphone jack adapter",
+     "better": "cable / adapter",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Read chapter on Harald Bluetooth and Danish unification",
+     "better": "book / history",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_bluetooth",
+   "bluetooth_connected"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5281,
+    "output": 904,
+    "thoughts": 0,
+    "total": 6185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Shows the bare, unmodified Bluetooth rune without any dots below or beside it, representing general Bluetooth hardware or wireless functionality, though largely interchangeable with the dotted variants in a to-do list."
 }

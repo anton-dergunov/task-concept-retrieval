@@ -10,19 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "car climate control, cabin airflow, or AC vent mode",
+   "meaning": "car climate control bi-level airflow (face and footwell vents) or general cabin HVAC",
    "strength": "primary"
   },
   {
-   "meaning": "automotive heating, ventilation, and air conditioning (HVAC)",
+   "meaning": "vehicle heating, ventilation, and air conditioning service",
    "strength": "primary"
   },
   {
-   "meaning": "seat position or ergonomic posture adjustment",
+   "meaning": "seat height and backrest posture adjustment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Out of an automotive context, the arrows pointing at and down next to a seated figure could be misread as adjusting a desk chair or taking a seat.",
+ "ambiguity": "Functionally interchangeable with its horizontally mirrored twin (left-facing seated person with face and foot arrows), and easily confused at small sizes with the single-arrow upper-body vent icon.",
  "modifier_semantics": [
   {
    "modifier": "left-pointing arrow aimed at upper body",
@@ -160,40 +160,40 @@
  ],
  "near_misses": [
   {
-   "task": "Pick up 16x25x1 MERV 11 furnace filters at the hardware store",
-   "better": "house HVAC or air filter icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Reserve two aisle seats near the front on the flight to Chicago",
-   "better": "airplane or airline seat icon",
+   "task": "Clean dust out of the center dashboard face-level air vents",
+   "better": "seated figure with a single arrow pointing only at the upper body",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Reserve two aisle seats near the front on the flight to Chicago",
+   "better": "airplane seat or airplane",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up 16x25x1 MERV 11 furnace filters at the hardware store",
+   "better": "home air filter or house HVAC",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Rent an economy car with working air conditioning for Sevilla",
-   "better": "rental car icon",
+   "better": "rental car",
    "trap": "property"
   },
   {
    "task": "Swap winter tires for the all-seasons and check tread depth",
-   "better": "car tire or wheel icon",
+   "better": "car tire or wheel",
    "trap": "parent_topic"
   },
   {
    "task": "Pay the $180 invoice from the auto AC repair shop",
-   "better": "invoice, receipt, or credit card icon",
+   "better": "invoice, receipt, or credit card",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Install the rear-facing infant car seat in the middle row",
-   "better": "baby car seat icon",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "This is the standard automotive dashboard pictogram for bi-level cabin airflow (directing air to both the upper body and the footwell). It is a strong, distinctive choice for vehicle climate control, cabin air filter, car AC/heater maintenance, and occasionally seating ergonomics, though outside of car owners some viewers may just see a seated person with arrows.",
@@ -211,6 +211,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car climate control, cabin airflow, or AC vent mode",
+     "strength": "primary"
+    },
+    {
+     "meaning": "automotive heating, ventilation, and air conditioning (HVAC)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "seat position or ergonomic posture adjustment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Out of an automotive context, the arrows pointing at and down next to a seated figure could be misread as adjusting a desk chair or taking a seat.",
+   "near_misses": [
+    {
+     "task": "Pick up 16x25x1 MERV 11 furnace filters at the hardware store",
+     "better": "house HVAC or air filter icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reserve two aisle seats near the front on the flight to Chicago",
+     "better": "airplane or airline seat icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Rent an economy car with working air conditioning for Sevilla",
+     "better": "rental car icon",
+     "trap": "property"
+    },
+    {
+     "task": "Swap winter tires for the all-seasons and check tread depth",
+     "better": "car tire or wheel icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the $180 invoice from the auto AC repair shop",
+     "better": "invoice, receipt, or credit card icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Install the rear-facing infant car seat in the middle row",
+     "better": "baby car seat icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_fan_mid_left",
+   "car_fan_mid_low_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5472,
+    "output": 1079,
+    "thoughts": 177,
+    "total": 6728
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "Shows a right-facing seated person with two arrows (toward the upper body and down toward the feet) rather than one, and is the exact horizontal mirror of the left-facing two-arrow icon, making the two bi-level icons interchangeable in meaning."
 }

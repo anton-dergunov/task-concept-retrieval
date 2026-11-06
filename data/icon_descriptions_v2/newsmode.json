@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "ID card, driver's license, or membership card",
+   "meaning": "ID card, driver's license, or membership badge",
    "strength": "primary"
   },
   {
-   "meaning": "business card or contact card",
+   "meaning": "single business card or contact card",
    "strength": "primary"
   },
   {
-   "meaning": "newspaper, newsletter, or article",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "web page layout or dashboard template",
+   "meaning": "newspaper page, newsletter, or article",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the left rectangle is a solid block rather than a person silhouette, it can be read equally as an ID/business card, a newspaper page, or a generic UI layout wireframe.",
+ "ambiguity": "Closely resembles the stacked slide/business-card icon (which has an L-shaped back layer and lacks the bottom full-width bar) and shares the single rounded-rectangle silhouette of the 4-pane dashboard layout icon.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -157,24 +153,24 @@
  ],
  "near_misses": [
   {
-   "task": "Call Chase to dispute the duplicate charge on my credit card",
-   "better": "credit card with magnetic stripe or chip",
-   "trap": "shared_vocabulary"
+   "task": "Finish the pitch deck slides for Monday's investor meeting",
+   "better": "stacked horizontal cards with an L-shaped back layer",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a birthday card for Mum on the way home",
-   "better": "folded greeting card or envelope with heart",
+   "task": "Rearrange the widgets on the analytics dashboard",
+   "better": "single horizontal rectangle divided into four edge-to-edge panes",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call Chase to dispute the duplicate charge on my credit card",
+   "better": "credit card with magnetic stripe or chip",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Bring valid photo ID to pick up the concert tickets at will call",
    "better": "concert tickets",
    "trap": "property"
-  },
-  {
-   "task": "Mount the 27-inch monitor onto the desk arm",
-   "better": "computer monitor with stand",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay annual car registration fee before the sticker expires",
@@ -208,6 +204,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "ID card, driver's license, or membership card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "business card or contact card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "newspaper, newsletter, or article",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "web page layout or dashboard template",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the left rectangle is a solid block rather than a person silhouette, it can be read equally as an ID/business card, a newspaper page, or a generic UI layout wireframe.",
+   "near_misses": [
+    {
+     "task": "Call Chase to dispute the duplicate charge on my credit card",
+     "better": "credit card with magnetic stripe or chip",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Bring valid photo ID to pick up the concert tickets at will call",
+     "better": "concert tickets",
+     "trap": "property"
+    },
+    {
+     "task": "Mount the 27-inch monitor onto the desk arm",
+     "better": "computer monitor with stand",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay annual car registration fee before the sticker expires",
+     "better": "car or license plate",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify user identity in the admin console",
+     "better": "shield or checkmark badge",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "view_quilt",
+   "backup_table",
+   "full_coverage"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6730,
+    "output": 2225,
+    "thoughts": 242,
+    "total": 9197
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "A single unstacked horizontal card containing a floating solid portrait rectangle on the left, two short text bars on the right, and a third full-width bar across the bottom, clearly reading as an individual ID card, license, or single article rather than a deck of cards or a wireframe grid."
 }

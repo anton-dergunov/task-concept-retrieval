@@ -11,15 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "two-drawer filing cabinet or dresser",
+   "meaning": "storage box or trunk with center clasp",
    "strength": "secondary"
   },
   {
-   "meaning": "storage box or trunk with center clasp",
+   "meaning": "two-drawer filing cabinet or dresser",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a digital digit 8, a battery, a light switch, or a generic split-screen layout toggle.",
+ "ambiguity": "Virtually identical and interchangeable in meaning with the sharp-cornered double-hung window; also shares the same rounded rectangular outline as the two-door refrigerator.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -148,6 +148,16 @@
  ],
  "near_misses": [
   {
+   "task": "Defrost the top freezer and wipe down the fridge shelves",
+   "better": "refrigerator with top freezer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a replacement water filter for the kitchen refrigerator",
+   "better": "refrigerator with top freezer",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Upgrade office PC to Windows 11 Pro over the weekend",
    "better": "operating system or computer",
    "trap": "shared_vocabulary"
@@ -163,11 +173,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a 9V battery for the hallway smoke detector",
-   "better": "battery",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pick up a gallon of blue windshield washer fluid",
    "better": "car",
    "trap": "parent_topic"
@@ -181,7 +186,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a single- or double-hung sash window with a center meeting rail and lock tab. It fits home maintenance tasks involving cleaning, repairing, or insulating windows, though its minimal blocky geometry makes it easy to confuse with a digital '8', a filing cabinet, or a UI split-view icon at small sizes.",
@@ -199,6 +204,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "double-hung sash window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "two-drawer filing cabinet or dresser",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "storage box or trunk with center clasp",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a digital digit 8, a battery, a light switch, or a generic split-screen layout toggle.",
+   "near_misses": [
+    {
+     "task": "Upgrade office PC to Windows 11 Pro over the weekend",
+     "better": "operating system or computer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flight with a window seat for the Denver trip",
+     "better": "airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Check the transfer window deadline for the fantasy league",
+     "better": "calendar or sports",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 9V battery for the hallway smoke detector",
+     "better": "battery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up a gallon of blue windshield washer fluid",
+     "better": "car",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the living room windows are locked before leaving for the airport",
+     "better": "lock",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "kitchen",
+   "window_closed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5398,
+    "output": 1626,
+    "thoughts": 0,
+    "total": 7024
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:21Z"
+  }
+ },
+ "distinguishing": "It shows a double-hung sash window with a centered latch on the middle bar and rounded outer corners, making it interchangeable in meaning with the sharp-cornered sash window and distinct from the refrigerator with two left-aligned vertical handles."
 }

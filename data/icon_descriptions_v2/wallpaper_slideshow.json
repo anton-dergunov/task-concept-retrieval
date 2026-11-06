@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "select photos / pick images from a gallery",
+   "meaning": "select multiple photos / pick images from a gallery",
    "strength": "primary"
   },
   {
-   "meaning": "photo album / multiple images / photo library",
+   "meaning": "batch scan, crop, or extract multiple images",
    "strength": "primary"
   },
   {
-   "meaning": "batch crop, scan, or extract images",
+   "meaning": "copy or duplicate an image",
    "strength": "secondary"
   },
   {
-   "meaning": "copy or duplicate image files",
+   "meaning": "screenshots folder or album of captures",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the segmented frame looks nearly identical to a standard photo gallery or stacked-images icon, and the dashed border can read as either selection, cropping, or scanning.",
+ "ambiguity": "Can be mistaken for the single bracketed-photo icon when glancing quickly, or for a standard photo album icon when the dashed corner gaps blur together at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "four-corner segmented dashed border",
@@ -169,19 +169,19 @@
  ],
  "near_misses": [
   {
+   "task": "Take a screenshot of the payment confirmation screen",
+   "better": "single bracketed photo icon for a single screenshot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Run reverse image search on the mystery chair photo",
+   "better": "single bracketed photo icon for visual lookup of one image",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a 50mm prime lens before the portrait session",
    "better": "camera lens or camera",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Hang the framed botanical print in the hallway",
-   "better": "framed picture on wall or hammer/nail",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Hike the North Ridge trail before sunrise",
-   "better": "mountain or hiking boot",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check if the passport photo meets the matte finish requirement",
@@ -195,7 +195,7 @@
   },
   {
    "task": "Take a picture of the serial number behind the fridge",
-   "better": "camera or barcode/fridge",
+   "better": "camera or barcode icon",
    "trap": "generic_verb"
   }
  ],
@@ -220,6 +220,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "select photos / pick images from a gallery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo album / multiple images / photo library",
+     "strength": "primary"
+    },
+    {
+     "meaning": "batch crop, scan, or extract images",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "copy or duplicate image files",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the segmented frame looks nearly identical to a standard photo gallery or stacked-images icon, and the dashed border can read as either selection, cropping, or scanning.",
+   "near_misses": [
+    {
+     "task": "Buy a 50mm prime lens before the portrait session",
+     "better": "camera lens or camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hang the framed botanical print in the hallway",
+     "better": "framed picture on wall or hammer/nail",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hike the North Ridge trail before sunrise",
+     "better": "mountain or hiking boot",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the passport photo meets the matte finish requirement",
+     "better": "passport or ID card",
+     "trap": "property"
+    },
+    {
+     "task": "Book the wedding photographer and pay the deposit",
+     "better": "camera or contract/payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Take a picture of the serial number behind the fridge",
+     "better": "camera or barcode/fridge",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wallpaper"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4107,
+    "output": 1067,
+    "thoughts": 100,
+    "total": 5274
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:18Z"
+  }
+ },
+ "distinguishing": "Adds an L-shaped backing line behind the bottom-left of the bracketed landscape picture to indicate a stack, meaning selecting multiple photos, batch image processing, or copying an image rather than capturing a single image."
 }

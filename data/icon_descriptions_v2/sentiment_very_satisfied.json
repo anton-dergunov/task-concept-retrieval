@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "happiness, joy, or positive mood",
-   "strength": "primary"
-  },
-  {
    "meaning": "laughter, comedy, or jokes",
    "strength": "primary"
   },
   {
-   "meaning": "emojis, reactions, or emoticons",
-   "strength": "secondary"
+   "meaning": "joy, glee, or excited happiness",
+   "strength": "primary"
   },
   {
-   "meaning": "customer satisfaction or feedback score",
+   "meaning": "laughing emoji or message reaction",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with other smiling or laughing face icons in the same set.",
+ "ambiguity": "Very close to the dot-eyed open-mouth grinning face for general happy/fun tasks, and shares upward-angled eyes with the flat-mouthed arch-eyed face.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -154,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Keep an unbothered poker face during the salary negotiation",
+   "better": "face with arched eyes and a flat horizontal mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy diapers and wipes for the baby shower gift",
+   "better": "baby face with a curl of hair on top",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a funny birthday card for Uncle Bob",
    "better": "greeting card",
    "trap": "property"
@@ -164,30 +170,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Plug in the Happy Light lamp on my desk for winter mornings",
+   "task": "Plug in the HappyLight lamp on my desk for winter mornings",
    "better": "desk lamp / light",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book teeth whitening appointment before the wedding",
-   "better": "tooth / dentist",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the annual invoice for the meditation app",
    "better": "payment / invoice",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Keep the plants on the balcony happy while Sarah is away",
-   "better": "plant / watering",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A universally recognizable grinning face with squinting chevron eyes. It fits tasks centered on mood tracking, gratitude, comedy/jokes, customer satisfaction ratings, and emoji sets, though it overlaps closely with other smiling face variants.",
@@ -205,6 +201,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "happiness, joy, or positive mood",
+     "strength": "primary"
+    },
+    {
+     "meaning": "laughter, comedy, or jokes",
+     "strength": "primary"
+    },
+    {
+     "meaning": "emojis, reactions, or emoticons",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "customer satisfaction or feedback score",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with other smiling or laughing face icons in the same set.",
+   "near_misses": [
+    {
+     "task": "Buy a funny birthday card for Uncle Bob",
+     "better": "greeting card",
+     "trap": "property"
+    },
+    {
+     "task": "Order happy hour snacks for the office mixer",
+     "better": "drinks or food",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Plug in the Happy Light lamp on my desk for winter mornings",
+     "better": "desk lamp / light",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book teeth whitening appointment before the wedding",
+     "better": "tooth / dentist",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the annual invoice for the meditation app",
+     "better": "payment / invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Keep the plants on the balcony happy while Sarah is away",
+     "better": "plant / watering",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_content",
+   "sentiment_neutral",
+   "insert_emoticon",
+   "sentiment_satisfied_alt",
+   "sentiment_calm",
+   "child_care"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10675,
+    "output": 3460,
+    "thoughts": 0,
+    "total": 14135
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "Pairs sharp upward-pointing chevron (^ ^) eyes with a filled D-shaped open mouth, showing squinting laughter, glee, or comedy more strongly than the dot-eyed grinning face."
 }

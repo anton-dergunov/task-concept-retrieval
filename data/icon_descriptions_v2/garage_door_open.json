@@ -7,19 +7,19 @@
  },
  "readings": [
   {
+   "meaning": "open garage or raised garage door",
+   "strength": "primary"
+  },
+  {
    "meaning": "garage or garage door",
    "strength": "primary"
   },
   {
-   "meaning": "storage unit or shed",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "carport or workshop",
+   "meaning": "carport or open-bay shed",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a generic house icon at very small sizes, or for a capital letter A under a roof.",
+ "ambiguity": "Easily confused with the closed garage icon (which has three full slats and a closed bottom), and for general garage or storage tasks the two are largely interchangeable; the doorway alone can also resemble a block letter A inside a house.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -149,8 +149,18 @@
  ],
  "near_misses": [
   {
+   "task": "Replace the cracked rubber weatherstripping along the bottom of the closed garage door",
+   "better": "closed garage with full three-slat roll-up door",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Padlock the self-storage unit before leaving town for the month",
+   "better": "closed garage or storage unit with full roll-up door",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Drop the Forester off at Miller's Garage for the 60k service",
-   "better": "car with wrench / auto repair",
+   "better": "car with wrench or auto repair",
    "trap": "shared_vocabulary"
   },
   {
@@ -164,25 +174,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Refinance the house mortgage before rates climb again",
-   "better": "house with dollar sign",
-   "trap": "lookalike_glyph"
+   "task": "Buy a garage-ready upright freezer for bulk meat",
+   "better": "freezer or refrigerator",
+   "trap": "property"
   },
   {
    "task": "Take the winter tires off the rims",
    "better": "tire or wheel",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a garage-ready upright freezer for bulk meat",
-   "better": "freezer / refrigerator",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a small gabled building with a wide doorway and a partially lowered horizontal bar representing an overhead garage door. It fits tasks centered on a home garage, garage door maintenance, sheds, or self-storage units, though at tiny sizes it shares a silhouette with a plain house.",
@@ -200,6 +205,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "garage or garage door",
+     "strength": "primary"
+    },
+    {
+     "meaning": "storage unit or shed",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "carport or workshop",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a generic house icon at very small sizes, or for a capital letter A under a roof.",
+   "near_misses": [
+    {
+     "task": "Drop the Forester off at Miller's Garage for the 60k service",
+     "better": "car with wrench / auto repair",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Price tag the kids' old toys for Saturday's garage sale",
+     "better": "price tag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Export the rough podcast mix from GarageBand as MP3",
+     "better": "audio waveform or guitar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refinance the house mortgage before rates climb again",
+     "better": "house with dollar sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the winter tires off the rims",
+     "better": "tire or wheel",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a garage-ready upright freezer for bulk meat",
+     "better": "freezer / refrigerator",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "garage_door"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4064,
+    "output": 1178,
+    "thoughts": 139,
+    "total": 5381
+   },
+   "soft_problems": [
+    "refers to a letter 1x"
+   ],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "Shows only the top slat of the roll-up door with an open gap underneath and no bottom sill, depicting an open garage door (or open carport bay) rather than the fully closed three-slat door."
 }

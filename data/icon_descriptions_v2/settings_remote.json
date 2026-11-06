@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "remote control / clicker",
+   "meaning": "remote control / TV or appliance clicker",
    "strength": "primary"
   },
   {
-   "meaning": "garage door opener / key fob",
+   "meaning": "garage door opener / wireless wall switch",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "wireless sensor or smart switch",
+   "meaning": "wireless doorbell chime button / entry transmitter",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can be mistaken for a Wi-Fi hotspot, an NFC contactless phone tap, or an inverted exclamation mark.",
+ "ambiguity": "Virtually interchangeable with the filled pill-shaped remote control; can also be mistaken for a smartphone tapping an NFC terminal or a Wi-Fi hotspot icon.",
  "modifier_semantics": [
   {
    "modifier": "two concentric curved signal waves above top edge",
@@ -160,14 +160,14 @@
  ],
  "near_misses": [
   {
-   "task": "Negotiate two remote work days per week with HR",
-   "better": "laptop or house with briefcase",
-   "trap": "shared_vocabulary"
+   "task": "Replace the coin battery inside the oval keychain car fob",
+   "better": "filled pill-shaped key fob / remote",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Book cabin in a remote part of Scottish Highlands",
-   "better": "mountain or cabin",
-   "trap": "shared_vocabulary"
+   "task": "Set up Apple Pay contactless cards on new phone",
+   "better": "credit card or smartphone with contactless symbol",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Restart the home Wi-Fi router in the hallway",
@@ -175,9 +175,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Set up Apple Pay contactless cards on new phone",
-   "better": "credit card or smartphone with contactless symbol",
-   "trap": "lookalike_glyph"
+   "task": "Negotiate two remote work days per week with HR",
+   "better": "laptop or house with briefcase",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a dimmable floor lamp with remote control for reading corner",
@@ -193,7 +193,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a simple handheld remote control or clicker emitting wireless signal waves. It fits concrete household and tech tasks involving TV remotes, garage door fobs, and presentation clickers, though at tiny sizes it could momentarily blend in with Wi-Fi or NFC phone icons.",
@@ -213,6 +213,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remote control / clicker",
+     "strength": "primary"
+    },
+    {
+     "meaning": "garage door opener / key fob",
+     "strength": "primary"
+    },
+    {
+     "meaning": "presentation pointer / slide clicker",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "wireless sensor or smart switch",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can be mistaken for a Wi-Fi hotspot, an NFC contactless phone tap, or an inverted exclamation mark.",
+   "near_misses": [
+    {
+     "task": "Negotiate two remote work days per week with HR",
+     "better": "laptop or house with briefcase",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book cabin in a remote part of Scottish Highlands",
+     "better": "mountain or cabin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Restart the home Wi-Fi router in the hallway",
+     "better": "Wi-Fi router box with antennas",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Set up Apple Pay contactless cards on new phone",
+     "better": "credit card or smartphone with contactless symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a dimmable floor lamp with remote control for reading corner",
+     "better": "floor lamp",
+     "trap": "property"
+    },
+    {
+     "task": "Mount the new 65-inch OLED television on the living room wall",
+     "better": "television screen",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "missing_controller"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4086,
+    "output": 1044,
+    "thoughts": 188,
+    "total": 5318
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Drawn as a rectangular outline with a solid black circular button inside, making it a boxy outlined variant that is nearly interchangeable with the filled pill-shaped remote."
 }

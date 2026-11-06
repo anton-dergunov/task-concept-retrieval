@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "layout templates / page wireframes",
+   "meaning": "layout templates or multiple UI wireframes",
    "strength": "primary"
   },
   {
-   "meaning": "photo collages / multi-panel grids",
+   "meaning": "photo collages or multi-panel image grids",
    "strength": "primary"
   },
   {
-   "meaning": "comic panels / storyboards",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "dashboard views / UI workspaces",
+   "meaning": "comic panels or storyboards",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can look like architectural floor plans, window frames, or generic copy/duplicate icons at small sizes.",
+ "ambiguity": "Shares the exact bottom-left L-line with the stacked slide/business-card icon (which has floating solid blocks inside instead of edge-to-edge grid lines) and shares the divided-pane look with the single 4-pane dashboard layout icon.",
  "modifier_semantics": [
   {
    "modifier": "overlapping back layer L-line at bottom-left",
@@ -157,13 +153,13 @@
  ],
  "near_misses": [
   {
-   "task": "Wash the living room casement windows before winter",
-   "better": "window with curtains or squeegee",
+   "task": "Wireframe the new sidebar navigation for the admin dashboard",
+   "better": "single horizontal 4-pane layout rectangle with a left sidebar",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Redraw the basement remodel floor plan with the architect's dimensions",
-   "better": "architectural blueprint / compass",
+   "task": "Order 500 printed business cards for the trade show",
+   "better": "stacked horizontal cards with a photo block and text lines",
    "trap": "lookalike_glyph"
   },
   {
@@ -173,7 +169,7 @@
   },
   {
    "task": "Send the final kitchen cabinet layout PDF to the contractor",
-   "better": "kitchen cabinets or email/send",
+   "better": "kitchen cabinets or email/send icon",
    "trap": "shared_vocabulary"
   },
   {
@@ -182,7 +178,7 @@
    "trap": "property"
   },
   {
-   "task": "Buy double-sided archival tape",
+   "task": "Buy double-sided archival tape for the scrapbook",
    "better": "tape roll",
    "trap": "parent_topic"
   }
@@ -208,6 +204,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "layout templates / page wireframes",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo collages / multi-panel grids",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comic panels / storyboards",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "dashboard views / UI workspaces",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can look like architectural floor plans, window frames, or generic copy/duplicate icons at small sizes.",
+   "near_misses": [
+    {
+     "task": "Wash the living room casement windows before winter",
+     "better": "window with curtains or squeegee",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Redraw the basement remodel floor plan with the architect's dimensions",
+     "better": "architectural blueprint / compass",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Copy the tax receipts folder onto the backup thumb drive",
+     "better": "two overlapping documents or USB drive",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send the final kitchen cabinet layout PDF to the contractor",
+     "better": "kitchen cabinets or email/send",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a 500-piece wooden jigsaw puzzle for the cabin",
+     "better": "jigsaw puzzle piece",
+     "trap": "property"
+    },
+    {
+     "task": "Buy double-sided archival tape",
+     "better": "tape roll",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "view_quilt",
+   "full_coverage",
+   "newsmode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6730,
+    "output": 2225,
+    "thoughts": 242,
+    "total": 9197
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Combines edge-to-edge internal grid dividers (one top pane over two bottom panes) with an L-shaped back-layer line at the bottom-left, signifying multiple layout templates, collages, or storyboards rather than a single dashboard or a stack of text/photo cards."
 }

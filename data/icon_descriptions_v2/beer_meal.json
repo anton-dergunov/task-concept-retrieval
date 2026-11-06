@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "beer, pub, bar, or drinking out",
+   "meaning": "bar snacks, pub food, gastropub, or izakaya (drinks and bites)",
    "strength": "primary"
   },
   {
-   "meaning": "bar snacks, pub food, or izakaya",
+   "meaning": "happy hour or going out for drinks and appetizers",
    "strength": "primary"
   },
   {
-   "meaning": "happy hour or after-work drinks",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "root beer float or frothy beverage with snack",
+   "meaning": "beer pairing or tasting flight with snacks",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the small dish in front can look like a base step, an ashtray, or part of a strange machine, and the foam can resemble a cloud over a building.",
+ "ambiguity": "Easily confused with the plain frothy beer mug when tasks are generally about beer or a bar; at small sizes the front dish can look like a base step or ashtray.",
  "modifier_semantics": [
   {
    "modifier": "small low bowl or dish in front left",
@@ -160,9 +156,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy root ginger and brown sugar at the grocery store",
-   "better": "ginger root or grocery bag",
-   "trap": "shared_vocabulary"
+   "task": "Pick up a six-pack of IPA from the liquor store",
+   "better": "plain frothy beer mug without a dish",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sanitize the fermenter for the pale ale batch",
+   "better": "plain frothy beer mug without a dish",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Install Homebrew package manager on the new MacBook",
@@ -170,22 +171,17 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check weather forecast for cloudy skies tomorrow afternoon",
-   "better": "cloud / weather icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Simmer the beef chuck in dark stout for three hours",
    "better": "cooking pot / stew",
    "trap": "property"
   },
   {
-   "task": "Book the train tickets to Munich",
+   "task": "Book the train tickets to Munich for Oktoberfest",
    "better": "train ticket",
    "trap": "parent_topic"
   },
   {
-   "task": "Verify everyone's IDs are valid before the trip",
+   "task": "Verify everyone's IDs are valid before the bar crawl",
    "better": "ID card",
    "trap": "generic_verb"
   }
@@ -193,7 +189,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a frothy beer mug paired with a small snack bowl. It fits tasks about going out for drinks, pub nights, happy hours, homebrewing, or buying beer and bar snacks, though the small bowl on the left slightly muddies the silhouette at tiny sizes.",
@@ -211,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "beer, pub, bar, or drinking out",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bar snacks, pub food, or izakaya",
+     "strength": "primary"
+    },
+    {
+     "meaning": "happy hour or after-work drinks",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "root beer float or frothy beverage with snack",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the small dish in front can look like a base step, an ashtray, or part of a strange machine, and the foam can resemble a cloud over a building.",
+   "near_misses": [
+    {
+     "task": "Buy root ginger and brown sugar at the grocery store",
+     "better": "ginger root or grocery bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install Homebrew package manager on the new MacBook",
+     "better": "terminal or laptop",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check weather forecast for cloudy skies tomorrow afternoon",
+     "better": "cloud / weather icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Simmer the beef chuck in dark stout for three hours",
+     "better": "cooking pot / stew",
+     "trap": "property"
+    },
+    {
+     "task": "Book the train tickets to Munich",
+     "better": "train ticket",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify everyone's IDs are valid before the trip",
+     "better": "ID card",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sports_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4066,
+    "output": 1001,
+    "thoughts": 76,
+    "total": 5143
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:13Z"
+  }
+ },
+ "distinguishing": "Adds a small low dish or bowl in front of the frothy beer mug, representing bar food, snacks, or an izakaya/gastropub rather than just the drink."
 }

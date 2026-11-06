@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "The unusual top-left tail makes the bubble look slightly like a folder tab or callout box, and the opposing half-arrows can mean either back-and-forth dialogue, translation, or data sync.",
+ "ambiguity": "At small sizes, the top-left speech tail can resemble the top-left tab of a file folder with an arrow inside, though the two opposing half-arrows clearly distinguish it from single-arrow folder or box icons.",
  "modifier_semantics": [
   {
    "modifier": "two opposing horizontal half-arrows inside",
@@ -166,6 +166,16 @@
  ],
  "near_misses": [
   {
+   "task": "Move old project files into the archive folder",
+   "better": "file folder with a right-pointing arrow inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Import chat backup CSV into the web portal",
+   "better": "box or window frame with an inward-pointing arrow from the left",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Convert EUR to JPY before the Tokyo trip",
    "better": "currency exchange icon with coin or bank symbols",
    "trap": "shared_vocabulary"
@@ -177,18 +187,8 @@
   },
   {
    "task": "Check Slack before logging off",
-   "better": "Slack or simple unread badge icon",
+   "better": "chat bubble with unread badge",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Call Grandma for her birthday",
-   "better": "telephone handset icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Write a birthday card for Sam",
-   "better": "greeting card or envelope icon",
-   "trap": "parent_topic"
   },
   {
    "task": "Switch to a cheaper prepaid mobile plan with unlimited texting",
@@ -219,6 +219,100 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "conversation, back-and-forth chat, or discussion",
+     "strength": "primary"
+    },
+    {
+     "meaning": "translate text or language exchange",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sync messages or transfer chat history",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "reply or respond to a message",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The unusual top-left tail makes the bubble look slightly like a folder tab or callout box, and the opposing half-arrows can mean either back-and-forth dialogue, translation, or data sync.",
+   "near_misses": [
+    {
+     "task": "Convert EUR to JPY before the Tokyo trip",
+     "better": "currency exchange icon with coin or bank symbols",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Return the small running shoes and exchange for size 10",
+     "better": "shoe or package return icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check Slack before logging off",
+     "better": "Slack or simple unread badge icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Call Grandma for her birthday",
+     "better": "telephone handset icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write a birthday card for Sam",
+     "better": "greeting card or envelope icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Switch to a cheaper prepaid mobile plan with unlimited texting",
+     "better": "SIM card or mobile phone icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "output",
+   "exit_to_app",
+   "tab_move",
+   "input",
+   "drive_file_move",
+   "drive_folder_upload",
+   "present_to_all"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12136,
+    "output": 4252,
+    "thoughts": 0,
+    "total": 16388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "A speech bubble with a pointed tail at the top-left corner containing two opposing horizontal half-arrows, representing back-and-forth conversation, message sync, or translation rather than file/folder operations or login/logout."
 }

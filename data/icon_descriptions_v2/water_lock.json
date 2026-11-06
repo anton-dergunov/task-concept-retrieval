@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "weatherproof or waterproof padlock",
+   "meaning": "weatherproof or waterproof outdoor padlock",
    "strength": "primary"
   },
   {
-   "meaning": "water shutoff valve lock or meter lock",
+   "meaning": "water shutoff valve lock / outdoor spigot lock / meter lock",
    "strength": "primary"
   },
   {
-   "meaning": "lubricate or oil a lock",
+   "meaning": "lubricate, oil, or de-ice a physical lock",
    "strength": "secondary"
   },
   {
-   "meaning": "data leak or security breach",
+   "meaning": "appliance water-dispenser lock or data leak",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the droplet badge could be mistaken for a location pin or generic notification dot next to a lock, or the combination might be read as a smart humidifier/water lock feature on an appliance.",
+ "ambiguity": "Could be mistaken for the plain closed padlock if the droplet badge is overlooked, or confused with the person-badged and clock-badged locks at a quick glance.",
  "modifier_semantics": [
   {
    "modifier": "water droplet badge at bottom right",
@@ -159,13 +159,18 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Change the master password on 1Password",
+   "better": "plain closed padlock",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Change the master password on 1Password",
-   "better": "plain padlock or key",
+   "task": "Unfreeze Equifax credit report for mortgage application",
+   "better": "open padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a standard combination padlock for the gym locker",
+   "better": "plain closed padlock",
    "trap": "lookalike_glyph"
   },
   {
@@ -177,11 +182,6 @@
    "task": "Lock in the catering headcount with the venue",
    "better": "calendar or checklist",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order a heavy-duty U-lock for the commuter bike",
-   "better": "bike lock / plain padlock",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Replace the rusted hinges on the garden gate",
@@ -210,6 +210,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "weatherproof or waterproof padlock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "water shutoff valve lock or meter lock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lubricate or oil a lock",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "data leak or security breach",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the droplet badge could be mistaken for a location pin or generic notification dot next to a lock, or the combination might be read as a smart humidifier/water lock feature on an appliance.",
+   "near_misses": [
+    {
+     "task": "Change the master password on 1Password",
+     "better": "plain padlock or key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix the slow drip under the kitchen sink trap",
+     "better": "pipe or faucet with droplet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Lock in the catering headcount with the venue",
+     "better": "calendar or checklist",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a heavy-duty U-lock for the commuter bike",
+     "better": "bike lock / plain padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the rusted hinges on the garden gate",
+     "better": "gate or hinge",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "lock_open_right",
+   "lock_open",
+   "lock",
+   "lock_person",
+   "lock_clock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9438,
+    "output": 1901,
+    "thoughts": 210,
+    "total": 11549
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Combines a closed keyhole padlock with a water droplet badge at the bottom right, indicating water-related locking, weatherproofing, or liquid/moisture protection rather than general security."
 }

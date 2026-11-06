@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "text message / SMS / chat message",
+   "meaning": "text message, SMS, or chat comment",
    "strength": "primary"
   },
   {
-   "meaning": "comment / feedback / annotation",
+   "meaning": "tooltip, pop-up note, caption, or annotation",
    "strength": "primary"
   },
   {
-   "meaning": "tooltip / caption / pop-up note",
+   "meaning": "subtitles or closed captions",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles generic chat bubble icons, notification pop-ups, or subtitle/caption symbols.",
+ "ambiguity": "Nearly interchangeable with the left-tailed and right-tailed three-line speech bubbles for general messaging or commenting; at small sizes the centered pointer also echoes the book-with-ribbon icon.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal text lines inside",
@@ -157,14 +157,24 @@
  ],
  "near_misses": [
   {
-   "task": "Call Purvin to discuss his comments on the proposal",
-   "better": "phone handset",
-   "trap": "generic_verb"
+   "task": "Draft a product review for the new espresso machine",
+   "better": "speech bubble with a pencil inside",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Email the signed lease agreement back to the agency",
-   "better": "envelope / email",
+   "task": "Send the bulleted meeting agenda to the project chat",
+   "better": "speech bubble with bulleted list inside",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Read chapter 4 of the bookmarked study guide",
+   "better": "rectangle with ribbon bookmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call Purvin to discuss his comments on the proposal",
+   "better": "telephone handset",
+   "trap": "generic_verb"
   },
   {
    "task": "Prepare slides for the keynote speech in Chicago",
@@ -172,25 +182,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book a consultation with the pediatric speech therapist",
-   "better": "medical / therapist icon",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Pay the monthly mobile phone and SMS plan bill",
-   "better": "bill / receipt / credit card",
+   "better": "bill, receipt, or credit card",
    "trap": "property"
-  },
-  {
-   "task": "Buy a new USB microphone for Discord voice chat",
-   "better": "microphone",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a rectangular speech or comment bubble containing lines of text. It is an immediate, natural fit for everyday tasks involving texting, messaging, or responding to comments, though it shares visual space with other speech bubble variants.",
@@ -208,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "text message / SMS / chat message",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comment / feedback / annotation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tooltip / caption / pop-up note",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles generic chat bubble icons, notification pop-ups, or subtitle/caption symbols.",
+   "near_misses": [
+    {
+     "task": "Call Purvin to discuss his comments on the proposal",
+     "better": "phone handset",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email the signed lease agreement back to the agency",
+     "better": "envelope / email",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Prepare slides for the keynote speech in Chicago",
+     "better": "podium or presentation screen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a consultation with the pediatric speech therapist",
+     "better": "medical / therapist icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly mobile phone and SMS plan bill",
+     "better": "bill / receipt / credit card",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new USB microphone for Discord voice chat",
+     "better": "microphone",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "card_membership",
+   "chat",
+   "comment",
+   "rate_review",
+   "speaker_notes"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9326,
+    "output": 2907,
+    "thoughts": 0,
+    "total": 12233
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Has a V-shaped pointer centered on the bottom edge (like a tooltip or caption callout) with three left-aligned text lines inside, functionally interchangeable for general messaging with the left- and right-tailed text bubbles."
 }

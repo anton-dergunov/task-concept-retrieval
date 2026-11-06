@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "calendar / schedule / planner",
+   "meaning": "today, specific date, or single event",
    "strength": "primary"
   },
   {
-   "meaning": "today / specific date / single event",
-   "strength": "primary"
+   "meaning": "start date or opening day on a calendar",
+   "strength": "secondary"
   },
   {
-   "meaning": "appointment / deadline",
+   "meaning": "calendar or appointment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable in meaning from other basic calendar icons (blank calendar, multi-dot calendar grid); at very small sizes, the large dot on the left could briefly suggest a washing machine or camera.",
+ "ambiguity": "Practically interchangeable with the calendar showing a single dot in the lower-right unless contrasted side by side as start date versus end date; also overlaps heavily with the multi-dot and blank calendars.",
  "modifier_semantics": [
   {
    "modifier": "single solid circular dot",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Mark the final deadline at the end of the month",
+   "better": "calendar with a single dot in the lower-right corner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Review the full monthly shift roster",
+   "better": "calendar with a six-dot grid",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay electric bill before the 15th",
    "better": "invoice or lightning bolt",
    "trap": "property"
@@ -166,19 +176,9 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Book flights to Lisbon for October",
-   "better": "airplane",
-   "trap": "property"
-  },
-  {
    "task": "Buy dried dates and figs at the market",
-   "better": "fruit / grocery bag",
+   "better": "fruit or grocery bag",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order flowers for Mom's birthday",
-   "better": "bouquet / cake",
-   "trap": "parent_topic"
   },
   {
    "task": "Wash the white bedsheets at 60 degrees",
@@ -207,6 +207,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "calendar / schedule / planner",
+     "strength": "primary"
+    },
+    {
+     "meaning": "today / specific date / single event",
+     "strength": "primary"
+    },
+    {
+     "meaning": "appointment / deadline",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable in meaning from other basic calendar icons (blank calendar, multi-dot calendar grid); at very small sizes, the large dot on the left could briefly suggest a washing machine or camera.",
+   "near_misses": [
+    {
+     "task": "Pay electric bill before the 15th",
+     "better": "invoice or lightning bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Schedule haircut with Marco for next Tuesday",
+     "better": "scissors",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book flights to Lisbon for October",
+     "better": "airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Buy dried dates and figs at the market",
+     "better": "fruit / grocery bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order flowers for Mom's birthday",
+     "better": "bouquet / cake",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Wash the white bedsheets at 60 degrees",
+     "better": "washing machine",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "calendar_month",
+   "date_range",
+   "event",
+   "calendar_today"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7991,
+    "output": 2433,
+    "thoughts": 238,
+    "total": 10662
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "It features one large solid dot positioned on the middle-left of the calendar page, indicating a single specific date, today, or the start of an event, though it is nearly interchangeable in meaning with the calendar having a single dot on the lower-right."
 }

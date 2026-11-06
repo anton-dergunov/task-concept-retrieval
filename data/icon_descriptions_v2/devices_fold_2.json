@@ -11,7 +11,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "shop awning / market stall / storefront",
+   "meaning": "shop awning / market stall / storefront canopy",
    "strength": "secondary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "trash bin with flip lid / mail slot flap",
+   "meaning": "flip-top bin / mail slot flap",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Highly schematic geometric outline that is easily confused between an open awning window, a storefront canopy, a peeling sticky note pad, or a flip-top bin, especially at small sizes.",
+ "ambiguity": "Easily confused at a glance with the lidded storage box because the tilted top flap sits over a square base much like a box lid, and its slanted parallelogram shape echoes the open flap of the file folder.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -106,11 +106,6 @@
    "domain": "home"
   },
   {
-   "task": "Call the glazier to replace the cracked pane in the small bathroom awning window",
-   "parent": "",
-   "domain": "home"
-  },
-  {
    "task": "Wash mildew off the striped canvas awning above the bakery entrance before inspection",
    "parent": "",
    "domain": "work"
@@ -151,6 +146,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pack old winter clothes into plastic storage bins for the attic",
+   "better": "storage box with overhanging lid and handle slot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Move signed client contracts into the shared network folder",
+   "better": "open file folder with tab",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Upgrade laptop from Windows 10 to Windows 11",
    "better": "computer / OS logo",
    "trap": "shared_vocabulary"
@@ -166,25 +171,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Archive last quarter's tax receipts in a cardboard box",
-   "better": "archive box",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check the weather outside before hanging the laundry",
    "better": "cloud / sun weather icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Write a thank-you note to Aunt Clara for the sweater",
-   "better": "envelope / letter",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows a simple rectangular outline with a tilted top flap, representing an awning/hopper window, a shop awning, or a flip notepad. Because it lacks any window panes, awning stripes, or text lines, it is quite ambiguous at small sizes, though still usable for specific window, vent, or awning maintenance tasks.",
@@ -202,6 +197,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "awning window / casement window / vent flap",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shop awning / market stall / storefront",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sticky note pad / flip notepad",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "trash bin with flip lid / mail slot flap",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Highly schematic geometric outline that is easily confused between an open awning window, a storefront canopy, a peeling sticky note pad, or a flip-top bin, especially at small sizes.",
+   "near_misses": [
+    {
+     "task": "Upgrade laptop from Windows 10 to Windows 11",
+     "better": "computer / OS logo",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book an aisle or window seat on the flight to Lisbon",
+     "better": "airplane seat / airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Buy Windex spray and microfiber cloths",
+     "better": "spray bottle",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Archive last quarter's tax receipts in a cardboard box",
+     "better": "archive box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the weather outside before hanging the laundry",
+     "better": "cloud / sun weather icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Write a thank-you note to Aunt Clara for the sweater",
+     "better": "envelope / letter",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "inventory_2",
+   "folder_open"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5395,
+    "output": 968,
+    "thoughts": 107,
+    "total": 6470
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "Unlike the lidded storage box with a handle slot or the wide tabbed folder, this is a tall square frame whose upper half tilts outward to the right like a storefront awning or hinged casement window."
 }

@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "medical checkup or physical exam",
+   "meaning": "medical checkup or annual physical exam",
    "strength": "primary"
   },
   {
-   "meaning": "doctor appointment or health clearance",
+   "meaning": "health clearance or medical approval",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "verified medical provider or stethoscope",
+   "meaning": "confirm doctor appointment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without the circular chestpiece at the end of the tube, the U-shaped earpiece assembly could momentarily look like calipers, a tuning fork, or audio headphones at very small sizes.",
+ "ambiguity": "Easily confused at a glance with the stethoscope with a right-pointing arrow for general doctor tasks, and without the circular chestpiece the U-shaped earpiece assembly can momentarily resemble headphones or calipers.",
  "modifier_semantics": [
   {
    "modifier": "checkmark",
@@ -132,7 +132,6 @@
   }
  ],
  "example_tasks_es": [
-  "Pedir cita para el chequeo médico anual en la clínica",
   "Llevar el certificado de aptitud física firmado al club de natación",
   "Confirmar consulta con el médico de cabecera para el martes"
  ],
@@ -161,9 +160,14 @@
  ],
  "near_misses": [
   {
-   "task": "Pick up amoxicillin prescription from Walgreens",
-   "better": "pill or prescription bottle",
-   "trap": "shared_vocabulary"
+   "task": "Ask primary care doctor for a dermatology referral",
+   "better": "stethoscope with right-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Transfer immunization and medical records to the new clinic",
+   "better": "stethoscope with right-pointing arrow",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Check Sony WH-1000XM5 headphone warranty status",
@@ -171,13 +175,13 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Doctor the sour sauce with a bit of honey and butter",
-   "better": "cooking pot or spoon",
+   "task": "Pick up amoxicillin prescription from Walgreens",
+   "better": "pill or prescription bottle",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy surgical-grade stainless steel ear studs",
-   "better": "earrings / jewelry",
+   "better": "earrings or jewelry",
    "trap": "property"
   },
   {
@@ -194,7 +198,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows the upper binaural tubing of a stethoscope paired with a checkmark in place of the chestpiece. It naturally represents medical checkups, physical exams, health clearances, doctor appointments, or system health checks. Because the circular diaphragm of the stethoscope is omitted to make room for the checkmark, the remaining U-shape is slightly less recognizable at tiny sizes than a full stethoscope.",
@@ -212,6 +216,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_es": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "medical checkup or physical exam",
+     "strength": "primary"
+    },
+    {
+     "meaning": "doctor appointment or health clearance",
+     "strength": "primary"
+    },
+    {
+     "meaning": "system health check or diagnostics passed",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "verified medical provider or stethoscope",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without the circular chestpiece at the end of the tube, the U-shaped earpiece assembly could momentarily look like calipers, a tuning fork, or audio headphones at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Pick up amoxicillin prescription from Walgreens",
+     "better": "pill or prescription bottle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check Sony WH-1000XM5 headphone warranty status",
+     "better": "headphones",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Doctor the sour sauce with a bit of honey and butter",
+     "better": "cooking pot or spoon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy surgical-grade stainless steel ear studs",
+     "better": "earrings / jewelry",
+     "trap": "property"
+    },
+    {
+     "task": "Drive down to the pharmacy for bandages and antiseptic",
+     "better": "first aid kit or bandage",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the dental crown claim went through",
+     "better": "tooth",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "stethoscope_arrow"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4064,
+    "output": 674,
+    "thoughts": 59,
+    "total": 4797
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "Has a checkmark at the bottom right instead of a right-pointing arrow, signifying a medical checkup, health clearance, or passed diagnostics rather than a referral or transfer."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "electricity / electrical power / utility",
+   "meaning": "electricity or electrical power",
    "strength": "primary"
   },
   {
-   "meaning": "charging / battery power",
+   "meaning": "charging or power supply",
    "strength": "primary"
   },
   {
-   "meaning": "camera flash / strobe",
+   "meaning": "energy utility or electric bill",
    "strength": "secondary"
   },
   {
-   "meaning": "energy / quick action / shortcut",
+   "meaning": "camera flash or quick action",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles an uncircled lightning bolt or a battery-charging icon; also used in UIs for camera flash auto/on or instant actions.",
+ "ambiguity": "Virtually identical to and interchangeable with the encircled lightning bolt whose tips touch the ring; also easily confused with an unenclosed lightning bolt or a battery-charging symbol.",
  "modifier_semantics": [
   {
    "modifier": "circular border",
@@ -163,6 +163,16 @@
  ],
  "near_misses": [
   {
+   "task": "Check severe thunderstorm warning for Saturday's hike",
+   "better": "storm cloud with lightning",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plug in the power strip behind the TV stand",
+   "better": "electrical plug / outlet",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy an electric toothbrush for guest bathroom",
    "better": "toothbrush",
    "trap": "property"
@@ -186,22 +196,12 @@
    "task": "Dispute the duplicate $45 charge on Visa statement",
    "better": "credit card / receipt",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check severe thunderstorm warning for Saturday's hike",
-   "better": "storm cloud with lightning",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Download the PDF invoices from 2024 for taxes",
-   "better": "document / tax",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A lightning bolt enclosed in a circle universally signifies electrical power, utility bills, or battery charging. It is a strong fit for household electrical maintenance, utility admin, and charging gear, though it overlaps closely with uncircled bolt and battery icons.",
@@ -219,6 +219,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "electricity / electrical power / utility",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / battery power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera flash / strobe",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "energy / quick action / shortcut",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles an uncircled lightning bolt or a battery-charging icon; also used in UIs for camera flash auto/on or instant actions.",
+   "near_misses": [
+    {
+     "task": "Buy an electric toothbrush for guest bathroom",
+     "better": "toothbrush",
+     "trap": "property"
+    },
+    {
+     "task": "Do a quick 15-minute lightning tidy of the living room",
+     "better": "broom / cleaning",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new USB-C to Lightning cable for the car",
+     "better": "cable / connector",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Draft slides for my 5-minute lightning talk on Friday",
+     "better": "presentation / podium",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the duplicate $45 charge on Visa statement",
+     "better": "credit card / receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check severe thunderstorm warning for Saturday's hike",
+     "better": "storm cloud with lightning",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download the PDF invoices from 2024 for taxes",
+     "better": "document / tax",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "charger"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4060,
+    "output": 1048,
+    "thoughts": 69,
+    "total": 5177
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "The lightning bolt is slightly smaller so its tips float clear of the inner edge of the circular ring, unlike the version where the tips touch the ring, though the two are completely interchangeable in meaning."
 }

@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "contact details or personal profile information",
+   "meaning": "contact details, user profile, or personal record",
    "strength": "primary"
   },
   {
-   "meaning": "user bio, resume, or personal record",
+   "meaning": "contact list, directory entry, or user menu",
    "strength": "primary"
   },
   {
-   "meaning": "contact list or directory entry",
+   "meaning": "assigned tasks or checklist for a person",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with a framed ID card or badge icon (which has a rectangle around the person and lines) or a generic user account icon.",
+ "ambiguity": "Virtually interchangeable with the person bust with three tapering right-aligned bars, and easy to confuse with a framed ID card or badge icon.",
  "modifier_semantics": [
   {
    "modifier": "three stacked horizontal bars",
@@ -162,8 +162,13 @@
  ],
  "near_misses": [
   {
+   "task": "Rewrite short author bio and profile summary next to avatar photo",
+   "better": "person bust with three tapering text lines wrapping the shoulder",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Renew driver's license at the DMV before it expires next month",
-   "better": "ID card / driver's license with rectangular border",
+   "better": "ID card or driver's license with rectangular border",
    "trap": "lookalike_glyph"
   },
   {
@@ -173,17 +178,17 @@
   },
   {
    "task": "Buy contact solution and a spare lens case at the pharmacy",
-   "better": "eye / contact lens",
+   "better": "eye or contact lens",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check whether Sarah replied to the housewarming invite",
-   "better": "envelope / message",
+   "better": "envelope or message",
    "trap": "generic_verb"
   },
   {
    "task": "Buy a wooden Montessori name puzzle for Leo's personalised gift",
-   "better": "gift box / puzzle piece",
+   "better": "gift box or puzzle piece",
    "trap": "property"
   },
   {
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a person outline next to three text lines, clearly signifying a user profile, biography, or contact details. It fits tasks about updating personal info, bios, and contact records well, though it closely resembles bordered ID card and contact card icons.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "contact details or personal profile information",
+     "strength": "primary"
+    },
+    {
+     "meaning": "user bio, resume, or personal record",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contact list or directory entry",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "account settings or user attributes",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with a framed ID card or badge icon (which has a rectangle around the person and lines) or a generic user account icon.",
+   "near_misses": [
+    {
+     "task": "Renew driver's license at the DMV before it expires next month",
+     "better": "ID card / driver's license with rectangular border",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Dave to ask about borrowing his pressure washer",
+     "better": "phone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy contact solution and a spare lens case at the pharmacy",
+     "better": "eye / contact lens",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check whether Sarah replied to the housewarming invite",
+     "better": "envelope / message",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a wooden Montessori name puzzle for Leo's personalised gift",
+     "better": "gift box / puzzle piece",
+     "trap": "property"
+    },
+    {
+     "task": "Order new lanyard and plastic badge holder for the trade show",
+     "better": "lanyard badge",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "person_text"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4051,
+    "output": 1190,
+    "thoughts": 196,
+    "total": 5437
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:35Z"
+  }
+ },
+ "distinguishing": "The three horizontal bars to the upper right are all equal in length and sit higher beside the head like a menu or uniform list, unlike the look-alike whose bars step down in length down to the base of the shoulders; in practice the two are nearly interchangeable."
 }

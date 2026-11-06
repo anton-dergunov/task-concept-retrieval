@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "smartphone / mobile phone",
+   "meaning": "smartphone or mobile phone (modern gesture-bar style/iPhone/Android) ",
    "strength": "primary"
   },
   {
-   "meaning": "mobile app / screen device",
+   "meaning": "mobile app or screen device",
    "strength": "secondary"
   },
   {
-   "meaning": "portable power bank or e-reader",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "smartwatch case without straps",
+   "meaning": "phone home bar or swipe-up gesture navigation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read as a smartwatch head without bands or a portable battery pack because of the thick bezel and prominent side button, though the bottom home bar clearly points to a smartphone.",
+ "ambiguity": "Interchangeable for general smartphone tasks with the smartphone with a circular bottom home button and the smartphone with a top camera dot; also resembles a smartwatch case without straps due to the prominent side button.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -157,6 +153,16 @@
  ],
  "near_misses": [
   {
+   "task": "Take a screenshot of the flight confirmation on my phone",
+   "better": "smartphone with corner capture brackets inside the screen",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Place the phone on the desk charging dock",
+   "better": "smartphone with a horizontal dock bar underneath",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Dr. Patel's office to reschedule the dental cleaning",
    "better": "telephone handset / phone call",
    "trap": "shared_vocabulary"
@@ -172,16 +178,6 @@
    "trap": "property"
   },
   {
-   "task": "Buy a new leather strap for the Apple Watch",
-   "better": "wristwatch / smartwatch",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Charge the 20,000mAh Anker power bank before the camping trip",
-   "better": "battery / power bank",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the monthly Verizon bill on Visa",
    "better": "invoice / credit card",
    "trap": "parent_topic"
@@ -190,7 +186,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a vertical smartphone with a bottom home bar and a side power button. It is an ideal, high-frequency icon for tasks centered on a mobile phone itself (repairs, upgrades, backups, cases, SIM setup), though voice calls are better served by a classic telephone handset icon.",
@@ -208,6 +204,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "phone_iphone"
- }
+  "alias_of": "phone_iphone",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone / mobile phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile app / screen device",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "portable power bank or e-reader",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smartwatch case without straps",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read as a smartwatch head without bands or a portable battery pack because of the thick bezel and prominent side button, though the bottom home bar clearly points to a smartphone.",
+   "near_misses": [
+    {
+     "task": "Call Dr. Patel's office to reschedule the dental cleaning",
+     "better": "telephone handset / phone call",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check notifications on the way to the station",
+     "better": "bell / notification",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Make the portfolio site mobile-friendly for smaller viewports",
+     "better": "website / browser layout",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new leather strap for the Apple Watch",
+     "better": "wristwatch / smartwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Charge the 20,000mAh Anker power bank before the camping trip",
+     "better": "battery / power bank",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly Verizon bill on Visa",
+     "better": "invoice / credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screenshot",
+   "phone_android",
+   "smartphone",
+   "dock",
+   "settings_cell"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9431,
+    "output": 2014,
+    "thoughts": 0,
+    "total": 11445
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Shows a smartphone with a horizontal pill-shaped home bar at the bottom of the screen and no top dot, making it visually interchangeable as a generic smartphone icon with the bottom-button and top-camera variants."
 }

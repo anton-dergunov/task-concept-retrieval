@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "chemical-free / no harsh chemicals / non-toxic",
+   "meaning": "disable experimental features / turn off beta labs",
    "strength": "primary"
   },
   {
-   "meaning": "disable experimental features / turn off beta labs",
+   "meaning": "chemical-free / no harsh chemicals / non-toxic",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the severed top neck and bottom triangle look like an abstract geometric symbol or a crossed-out pi sign overlapping a delta.",
+ "ambiguity": "Easily confused at a glance with the slashed pushpin because both have a rimmed vertical neck and a triangular lower body bisected by a diagonal slash, differing mainly by the absence of a bottom pin point.",
  "modifier_semantics": [
   {
    "modifier": "diagonal strike-through slash",
@@ -160,8 +160,18 @@
  ],
  "near_misses": [
   {
+   "task": "Unpin outdated announcements from the team Slack channel",
+   "better": "slashed pushpin",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take down old event flyers from the breakroom corkboard",
+   "better": "slashed pushpin",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy two 250ml borosilicate Erlenmeyer flasks for the home titration setup",
-   "better": "intact laboratory flask without slash",
+   "better": "intact laboratory flask without a slash",
    "trap": "lookalike_glyph"
   },
   {
@@ -175,19 +185,9 @@
    "trap": "property"
   },
   {
-   "task": "Order a cast-iron skillet to replace the scratched non-stick pan",
-   "better": "frying pan / skillet",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Verify whether the staging server still has debug mode turned on",
    "better": "server or bug icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Turn off kitchen timer",
-   "better": "timer / alarm bell with slash",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "chemical-free / no harsh chemicals / non-toxic",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disable experimental features / turn off beta labs",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stop A/B test or cancel experiment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "skip lab session / no lab work",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the severed top neck and bottom triangle look like an abstract geometric symbol or a crossed-out pi sign overlapping a delta.",
+   "near_misses": [
+    {
+     "task": "Buy two 250ml borosilicate Erlenmeyer flasks for the home titration setup",
+     "better": "intact laboratory flask without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Launch the new checkout button color A/B experiment at 10% traffic",
+     "better": "intact laboratory flask or split-test arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up non-toxic washable finger paints for Maya's birthday party",
+     "better": "paint palette or paintbrush",
+     "trap": "property"
+    },
+    {
+     "task": "Order a cast-iron skillet to replace the scratched non-stick pan",
+     "better": "frying pan / skillet",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify whether the staging server still has debug mode turned on",
+     "better": "server or bug icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Turn off kitchen timer",
+     "better": "timer / alarm bell with slash",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "keep_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4135,
+    "output": 1073,
+    "thoughts": 109,
+    "total": 5317
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "Unlike the slashed pushpin, this icon has a wide flat base with rounded corners and no bottom spike, depicting a crossed-out Erlenmeyer flask for disabling experiments or avoiding chemicals."
 }

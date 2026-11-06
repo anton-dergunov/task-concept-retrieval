@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "charging battery / charge device",
+   "meaning": "charge critically low battery or battery charging",
    "strength": "primary"
   },
   {
-   "meaning": "battery / power bank / rechargeable battery",
+   "meaning": "battery, power bank, or rechargeable cell",
    "strength": "primary"
   },
   {
-   "meaning": "power supply / charger",
+   "meaning": "very low battery on charger",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to other battery state icons (full, half, alert); the lightning bolt specifically cues charging or power.",
+ "ambiguity": "Differs from the ~30% filled and completely empty charging battery icons by only a few pixels of bottom fill height; interchangeable with all other icons in this charging-battery sequence.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt badge at bottom right",
@@ -157,13 +157,18 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Unplug the fully charged battery pack from the wall",
+   "better": "nearly full charging battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Keep spare lithium batteries at 50% charge in the safe",
+   "better": "half-full charging battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly electric bill before Friday",
-   "better": "invoice / bill",
+   "better": "invoice or bill",
    "trap": "shared_vocabulary"
   },
   {
@@ -173,24 +178,19 @@
   },
   {
    "task": "Call the electrician about the flickering kitchen breaker",
-   "better": "electrician / plug",
+   "better": "electrician or electrical panel",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a new insulated water bottle with a narrow cap",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a replacement windscreen wiper blade",
-   "better": "car / wiper",
+   "better": "car or wiper",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "An upright battery outline with a lightning bolt badge at the lower right, universally recognized as a battery or charging. It fits real tasks about charging devices, packing power banks, or buying and replacing household, tool, or vehicle batteries. It only risks confusion with other battery-level variants in the same icon set.",
@@ -208,6 +208,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "charging battery / charge device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery / power bank / rechargeable battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power supply / charger",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to other battery state icons (full, half, alert); the lightning bolt specifically cues charging or power.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric bill before Friday",
+     "better": "invoice / bill",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the kids' tablets are ready for the road trip",
+     "better": "tablet",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Call the electrician about the flickering kitchen breaker",
+     "better": "electrician / plug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new insulated water bottle with a narrow cap",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a replacement windscreen wiper blade",
+     "better": "car / wiper",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_90",
+   "battery_charging_80",
+   "battery_charging_60",
+   "battery_charging_50",
+   "battery_charging_30",
+   "battery_charging_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10582,
+    "output": 3519,
+    "thoughts": 0,
+    "total": 14101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Has only a very shallow fill bar at the very bottom (~15-20%, not completely empty as earlier described) alongside the bottom-right lightning bolt badge; virtually interchangeable with the ~30% and completely empty charging battery icons."
 }

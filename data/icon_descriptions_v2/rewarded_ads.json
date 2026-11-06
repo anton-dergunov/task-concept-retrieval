@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "trophy, award, or championship cup",
+   "meaning": "trophy / award / championship cup",
    "strength": "primary"
   },
   {
-   "meaning": "competition, tournament, or contest",
+   "meaning": "competition / tournament / contest",
    "strength": "primary"
   },
   {
-   "meaning": "achievement, milestone, or first-place prize",
+   "meaning": "achievement / milestone / first-place prize",
    "strength": "secondary"
   },
   {
-   "meaning": "reward or recognition",
+   "meaning": "reward / recognition / badge of honor",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to a plain trophy icon at small sizes, where the central dot reads simply as a decorative emblem or medal rather than a distinct status indicator.",
+ "ambiguity": "Virtually interchangeable with the plain trophy cup without a dot, since at list size the central dot looks like decorative detailing on a trophy rather than a separate meaning.",
  "modifier_semantics": [
   {
    "modifier": "solid circular dot centered on the cup bowl",
@@ -164,7 +164,17 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a box of gold-medal flour for the sourdough starter",
+   "task": "Pick up the plain unengraved participation trophies from the shop",
+   "better": "plain trophy cup without central dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order two ceramic espresso cups with side handles",
+   "better": "coffee cup / mug",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a bag of gold-medal flour for the sourdough starter",
    "better": "flour bag / baking",
    "trap": "shared_vocabulary"
   },
@@ -174,30 +184,20 @@
    "trap": "property"
   },
   {
-   "task": "Order two ceramic espresso cups with handles",
-   "better": "coffee cup / mug",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Redeem airline reward miles for the Tokyo flight",
    "better": "airplane / ticket",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book hotel near the stadium",
+   "task": "Book hotel near the stadium for the finals",
    "better": "hotel / bed",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy two 45lb Olympic bumper plates for the home gym",
-   "better": "barbell / weights",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a two-handled trophy cup on a pedestal with a central emblem dot. It is universally recognizable for tasks involving awards, trophies, competitions, tournaments, and achievements across work, sports, school, and gaming, though it is visually very close to a plain trophy icon.",
@@ -215,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "trophy, award, or championship cup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "competition, tournament, or contest",
+     "strength": "primary"
+    },
+    {
+     "meaning": "achievement, milestone, or first-place prize",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "reward or recognition",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to a plain trophy icon at small sizes, where the central dot reads simply as a decorative emblem or medal rather than a distinct status indicator.",
+   "near_misses": [
+    {
+     "task": "Buy a box of gold-medal flour for the sourdough starter",
+     "better": "flour bag / baking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read the Pulitzer prize-winning biography of Oppenheimer",
+     "better": "book",
+     "trap": "property"
+    },
+    {
+     "task": "Order two ceramic espresso cups with handles",
+     "better": "coffee cup / mug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Redeem airline reward miles for the Tokyo flight",
+     "better": "airplane / ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book hotel near the stadium",
+     "better": "hotel / bed",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy two 45lb Olympic bumper plates for the home gym",
+     "better": "barbell / weights",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "emoji_events"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 1015,
+    "thoughts": 138,
+    "total": 5202
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "This trophy has a solid circular dot centered inside the cup bowl (like a medallion or emblem), whereas the other icon has a plain empty bowl; the two are functionally interchangeable for task lists."
 }

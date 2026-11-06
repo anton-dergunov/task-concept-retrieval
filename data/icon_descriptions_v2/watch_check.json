@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "smartwatch or wristwatch (paired, synced, ready, or verified)",
+   "meaning": "smartwatch or fitness tracker (paired, ready, or daily goal completed)",
    "strength": "primary"
   },
   {
-   "meaning": "fitness tracker or daily activity goal completed",
+   "meaning": "wristwatch (general wear, repair, or battery replacement)",
    "strength": "primary"
   },
   {
-   "meaning": "watch repair, battery replacement, or setup finished",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "on-time check-in or time tracking confirmed",
+   "meaning": "on-time check-in or time-tracking confirmation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the checkmark inside the round face can look like regular clock hands set to roughly 10:10 or 8:10, making it indistinguishable from a plain wristwatch icon.",
+ "ambiguity": "Shares the identical wristwatch silhouette with the downward-arrow and rightward-arrow watch icons, and at small sizes the checkmark resembles standard 10:10 watch hands.",
  "modifier_semantics": [
   {
    "modifier": "checkmark inside the watch face",
@@ -162,24 +158,24 @@
  ],
  "near_misses": [
   {
+   "task": "Download the new watchOS firmware update tonight",
+   "better": "wristwatch with downward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Send the GPX trail route to my Garmin for tomorrow's hike",
+   "better": "wristwatch with rightward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Watch the new episode of Severance tonight",
    "better": "television or play button",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Set kitchen timer for 45 minutes while sourdough bakes",
-   "better": "stopwatch or kitchen timer",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check what time the pharmacy closes on Sundays",
    "better": "clock or pharmacy cross",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Submit biweekly timesheet in Workday before Friday 5pm",
-   "better": "timesheet / calendar with clock",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Ask neighbor to keep watch over the house while we are in Lisbon",
@@ -195,7 +191,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a wristwatch or smartwatch with a checkmark on its face, making it ideal for tasks involving smartwatches, fitness trackers, or watch maintenance. At tiny list sizes the checkmark can resemble regular watch hands, which still safely reads as a wristwatch.",
@@ -213,6 +209,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartwatch or wristwatch (paired, synced, ready, or verified)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "fitness tracker or daily activity goal completed",
+     "strength": "primary"
+    },
+    {
+     "meaning": "watch repair, battery replacement, or setup finished",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "on-time check-in or time tracking confirmed",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the checkmark inside the round face can look like regular clock hands set to roughly 10:10 or 8:10, making it indistinguishable from a plain wristwatch icon.",
+   "near_misses": [
+    {
+     "task": "Watch the new episode of Severance tonight",
+     "better": "television or play button",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set kitchen timer for 45 minutes while sourdough bakes",
+     "better": "stopwatch or kitchen timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check what time the pharmacy closes on Sundays",
+     "better": "clock or pharmacy cross",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Submit biweekly timesheet in Workday before Friday 5pm",
+     "better": "timesheet / calendar with clock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Ask neighbor to keep watch over the house while we are in Lisbon",
+     "better": "house or eye",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy running shoes that pair with Garmin footpod",
+     "better": "running shoe",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "watch_arrow_down",
+   "watch_arrow"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5458,
+    "output": 1495,
+    "thoughts": 92,
+    "total": 7045
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:14Z"
+  }
+ },
+ "distinguishing": "Shows a checkmark inside the round watch face rather than a downward or rightward arrow, indicating a completed fitness goal, a paired or verified smartwatch, or a general wristwatch (since the checkmark doubles as 10:10 clock hands)."
 }

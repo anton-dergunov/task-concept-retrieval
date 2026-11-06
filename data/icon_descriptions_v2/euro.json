@@ -11,7 +11,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "money, payment, budget, or price (especially in Eurozone)",
+   "meaning": "money, payment, budget, or finance (especially in the Eurozone)",
    "strength": "primary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could briefly resemble a mathematical set membership symbol (∈) or a stylized letter C/E at tiny sizes, though the double crossbar makes the Euro reading unmistakable.",
+ "ambiguity": "Identical to the duplicate Euro currency symbol in this set; at very small sizes, could also be mistaken for a mathematical set membership symbol (∈) or a stylized letter C or E.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -153,12 +153,12 @@
  "near_misses": [
   {
    "task": "Find a cheap waterproof jacket under €80 for hiking",
-   "better": "jacket / coat",
+   "better": "jacket or coat",
    "trap": "property"
   },
   {
    "task": "Watch the Euro 2028 qualifier match with the guys on Saturday",
-   "better": "soccer ball / football",
+   "better": "soccer ball or football",
    "trap": "shared_vocabulary"
   },
   {
@@ -168,7 +168,12 @@
   },
   {
    "task": "Write the C++ function to check set membership for the parser",
-   "better": "code brackets",
+   "better": "mathematical element-of symbol or code brackets",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the US vendor invoice in US dollars via wire transfer",
+   "better": "dollar sign currency symbol",
    "trap": "lookalike_glyph"
   },
   {
@@ -185,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the Euro (€) currency sign. It is universally recognizable and serves as the primary icon for tasks about euro exchange, travel cash, and general money, payments, pricing, or budgeting (especially for European users).",
@@ -203,6 +208,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Euro currency or European money",
+     "strength": "primary"
+    },
+    {
+     "meaning": "money, payment, budget, or price (especially in Eurozone)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "currency exchange to or from Euros",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could briefly resemble a mathematical set membership symbol (∈) or a stylized letter C/E at tiny sizes, though the double crossbar makes the Euro reading unmistakable.",
+   "near_misses": [
+    {
+     "task": "Find a cheap waterproof jacket under €80 for hiking",
+     "better": "jacket / coat",
+     "trap": "property"
+    },
+    {
+     "task": "Watch the Euro 2028 qualifier match with the guys on Saturday",
+     "better": "soccer ball / football",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew European Health Insurance Card before flying to Spain",
+     "better": "ID card or medical cross",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write the C++ function to check set membership for the parser",
+     "better": "code brackets",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Scan and upload the pharmacy receipt for insurance",
+     "better": "scanner or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a new leather wallet for dad's birthday",
+     "better": "wallet or gift box",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "euro_symbol"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 659,
+    "thoughts": 30,
+    "total": 4724
+   },
+   "soft_problems": [
+    "refers to a letter 1x"
+   ],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Visually identical to and completely interchangeable with the other plain Euro currency symbol in this group, showing the exact same curved C-shape crossed by two horizontal bars."
 }

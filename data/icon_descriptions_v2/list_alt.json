@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "bulleted list or checklist",
+   "meaning": "bulleted list, checklist, or index",
    "strength": "primary"
   },
   {
-   "meaning": "menu, agenda, or index",
+   "meaning": "agenda, menu, or table of contents",
    "strength": "primary"
   },
   {
-   "meaning": "server rack or control panel",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "table of contents or outline",
+   "meaning": "inventory, directory, or summary outline",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to an unbordered bulleted list icon or a checklist icon, and can be seen as generic UI chrome for 'list view'.",
+ "ambiguity": "Easily confused with the framed bulleted list with a plus sign if the task involves a list of any kind, and at small sizes the three stacked dots on the left look very similar to the exclamation mark in the alert card.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -156,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Start a new wish list for holiday gift ideas",
+   "better": "framed bulleted list with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Read the system warning notice about scheduled maintenance",
+   "better": "framed card with exclamation mark and text lines",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy milk, eggs, and sourdough on the way home",
    "better": "shopping cart or grocery bag",
    "trap": "parent_topic"
@@ -171,25 +177,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Reboot the NAS server in the hall closet",
-   "better": "server rack or hard drive",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Format the bibliography as a numbered list in Word",
    "better": "document or book",
-   "trap": "property"
-  },
-  {
-   "task": "Review the itemized hospital bill for duplicate charges",
-   "better": "receipt or invoice",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows three bullet points and lines inside a rounded square frame, universally read as a bulleted list, checklist, or agenda. In a to-do app it is somewhat meta, but still useful for tasks whose explicit output is a list, roster, inventory, or meeting agenda; it strongly overlaps with unframed list and checklist icons.",
@@ -207,6 +203,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bulleted list or checklist",
+     "strength": "primary"
+    },
+    {
+     "meaning": "menu, agenda, or index",
+     "strength": "primary"
+    },
+    {
+     "meaning": "server rack or control panel",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "table of contents or outline",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to an unbordered bulleted list icon or a checklist icon, and can be seen as generic UI chrome for 'list view'.",
+   "near_misses": [
+    {
+     "task": "Buy milk, eggs, and sourdough on the way home",
+     "better": "shopping cart or grocery bag",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "List the old stroller on Craigslist for $60",
+     "better": "price tag or stroller",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the tire pressure before driving to Portland",
+     "better": "car or tire gauge",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Reboot the NAS server in the hall closet",
+     "better": "server rack or hard drive",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Format the bibliography as a numbered list in Word",
+     "better": "document or book",
+     "trap": "property"
+    },
+    {
+     "task": "Review the itemized hospital bill for duplicate charges",
+     "better": "receipt or invoice",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "list_alt_add",
+   "breaking_news"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5392,
+    "output": 1520,
+    "thoughts": 147,
+    "total": 7059
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Shows an unmodified rounded square frame with three circular bullet points and three text bars, lacking both the bottom-right plus badge of the add-list icon and the left-hand exclamation mark of the alert card."
 }

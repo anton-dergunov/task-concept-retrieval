@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "return or send back",
+   "meaning": "return item, send back, or give back",
    "strength": "primary"
   },
   {
-   "meaning": "U-turn or turn around",
+   "meaning": "U-turn (especially a left U-turn in right-hand traffic) or turn around",
    "strength": "primary"
   },
   {
-   "meaning": "revert, rollback, or undo",
+   "meaning": "undo, revert, or roll back",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with undo, refresh, or reply arrows, though the vertical U-turn road-sign orientation strongly signals returning or turning back.",
+ "ambiguity": "Easily confused with the right-curving U-turn arrow; for general 'return' or 'turn back' tasks they are nearly interchangeable, differing only when left vs. right U-turn direction or undo (left) vs. redo (right) matters.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -149,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Redo the accidentally undone database migration step",
+   "better": "clockwise right-curving U-turn or redo arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Practice making a right-hand U-turn for the UK driving test",
+   "better": "right-curving U-turn arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "File state and federal tax return before April 15",
    "better": "tax form or document icon",
    "trap": "shared_vocabulary"
@@ -164,17 +174,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Bend copper tubing into a U-bend for the sink trap",
-   "better": "pipe or wrench icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Return Sarah's phone call about the cabin trip",
    "better": "phone icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a new pair of running shoes that actually fit",
+   "task": "Buy a new pair of running shoes to replace the returned ones",
    "better": "running shoe icon",
    "trap": "parent_topic"
   }
@@ -182,7 +187,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A classic 180-degree U-turn arrow pointing downward on the left. While abstract, it is the clearest visual cue for tasks centered on returning merchandise, sending back borrowed items, or reverting software changes, where the act of returning/reversing is the main point of the task.",
@@ -200,6 +205,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "return or send back",
+     "strength": "primary"
+    },
+    {
+     "meaning": "U-turn or turn around",
+     "strength": "primary"
+    },
+    {
+     "meaning": "revert, rollback, or undo",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with undo, refresh, or reply arrows, though the vertical U-turn road-sign orientation strongly signals returning or turning back.",
+   "near_misses": [
+    {
+     "task": "File state and federal tax return before April 15",
+     "better": "tax form or document icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book return flight from Tokyo to San Francisco",
+     "better": "airplane icon",
+     "trap": "property"
+    },
+    {
+     "task": "Calculate expected return on investment for the index fund portfolio",
+     "better": "chart or money icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Bend copper tubing into a U-bend for the sink trap",
+     "better": "pipe or wrench icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return Sarah's phone call about the cabin trip",
+     "better": "phone icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new pair of running shoes that actually fit",
+     "better": "running shoe icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "u_turn_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4058,
+    "output": 933,
+    "thoughts": 0,
+    "total": 4991
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "This vertical U-turn arrow curves counter-clockwise to the left (stem on the right, arrowhead pointing down on the left), matching a standard left U-turn sign or a leftward undo/revert action, though for general 'return' tasks the two icons are virtually interchangeable."
 }

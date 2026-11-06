@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the slashed speaker box and headphones break into disconnected strokes that resemble a broken document, a slashed padlock, or an unreadable abstract symbol.",
+ "ambiguity": "At list size, the open L-shaped corner on the left and diagonal slash look very similar to the slashed clapperboard with a pencil, and the fragments can also look like a slashed padlock or broken document.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -154,14 +154,24 @@
  ],
  "near_misses": [
   {
+   "task": "Lock the final cut of the wedding video against further edits",
+   "better": "slashed clapperboard with pencil",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel the freelance video editor contract for the promo reel",
+   "better": "slashed clapperboard with pencil",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up the new bookshelf speakers and headphones at the desk",
+   "better": "speaker and headphones (without slash)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy new noise-cancelling headphones for the flight to Tokyo",
    "better": "headphones (without slash)",
    "trap": "property"
-  },
-  {
-   "task": "Set up the new bookshelf speakers in the living room",
-   "better": "speaker (without slash)",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check whether the Bluetooth speaker battery is charged",
@@ -177,17 +187,12 @@
    "task": "Mute microphone during the all-hands town hall",
    "better": "slashed microphone",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Unlock the back gate before the meter reader arrives",
-   "better": "unlocked padlock",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon combines a rectangular speaker box and over-ear headphones crossed out by a diagonal slash, representing disabled or disconnected audio output devices. Because the slash breaks up two already compact shapes, the glyph is visually cluttered at list size and only fits a narrow set of audio-troubleshooting or device-disabling tasks.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "audio output disabled / no sound devices",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disconnect headphones and speakers",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken or missing audio equipment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "quiet zone / no loud audio or headphones allowed",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the slashed speaker box and headphones break into disconnected strokes that resemble a broken document, a slashed padlock, or an unreadable abstract symbol.",
+   "near_misses": [
+    {
+     "task": "Buy new noise-cancelling headphones for the flight to Tokyo",
+     "better": "headphones (without slash)",
+     "trap": "property"
+    },
+    {
+     "task": "Set up the new bookshelf speakers in the living room",
+     "better": "speaker (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check whether the Bluetooth speaker battery is charged",
+     "better": "speaker or battery",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order replacement velour ear pads for the Sennheiser HD600",
+     "better": "headphones",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Mute microphone during the all-hands town hall",
+     "better": "slashed microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Unlock the back gate before the meter reader arrives",
+     "better": "unlocked padlock",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "movie_edit_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4128,
+    "output": 1182,
+    "thoughts": 0,
+    "total": 5310
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Shows a rectangular speaker cabinet on the left paired with over-ear headphones in the bottom right under a diagonal slash (disabled audio hardware), whereas the other icon shows a striped film clapperboard with a pencil under a slash (disabled video editing)."
 }

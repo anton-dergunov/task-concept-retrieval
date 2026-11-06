@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "cruise control off / speed control disabled",
+   "meaning": "cruise control off, speed limiter disabled, or unthrottled speed",
    "strength": "primary"
   },
   {
-   "meaning": "speed limit off / no speed limit / unthrottled",
+   "meaning": "broken speedometer or faulty pressure/dashboard gauge",
    "strength": "primary"
   },
   {
-   "meaning": "performance monitoring or dashboard disabled",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "broken speedometer or faulty gauge",
+   "meaning": "performance monitoring or metrics tracking disabled",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the crossed-out dial with a diagonal needle and horizontal bar strongly resembles a 'no time / timer off' clock icon or a generic prohibition sign with an unrecognizable interior.",
+ "ambiguity": "Because the diagonal slash hides the center pivot of the gauge, the straight needle and horizontal baseline inside the circle are hard to parse at small sizes and easily mistaken for the slashed user avatar, a slashed clock/timer, or a generic prohibition sign.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -174,40 +170,45 @@
  ],
  "near_misses": [
   {
-   "task": "Run a fast internet speed test on the new router",
-   "better": "speedometer / gauge (without slash)",
+   "task": "Deactivate old Twitter user account and wipe profile",
+   "better": "slashed user avatar in circle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Block spam contacts and revoke guest user access",
+   "better": "slashed user avatar in circle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Run an internet speed test on the new fiber connection",
+   "better": "unslashed speedometer gauge icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Turn off the 6am weekday alarm",
-   "better": "alarm clock with slash",
+   "better": "slashed alarm clock or bell icon",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the speeding ticket from the camera on Route 9",
-   "better": "ticket / fine / receipt",
+   "task": "Pay the speeding ticket from the highway camera",
+   "better": "ticket, fine, or receipt icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Quickly review the quarterly sales dashboard",
-   "better": "chart / document",
+   "task": "Quickly review the quarterly sales report",
+   "better": "chart or document icon",
    "trap": "property"
   },
   {
-   "task": "Check tire pressure before the long highway drive",
-   "better": "tire / pressure gauge (without slash)",
+   "task": "Check tire pressure before the road trip",
+   "better": "unslashed tire pressure gauge icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Order new winter wiper blades",
-   "better": "windshield wipers / car",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows a simple circular gauge or speedometer with a diagonal slash through it, representing 'speed/cruise control off', 'no speed limit / unthrottled', or a broken gauge. Because the slash obscures the left side of the dial, it is hard to read at small sizes and easily confused with a crossed-out clock or timer, making it useful only for a narrow set of vehicle gauge or network-throttling tasks.",
@@ -227,6 +228,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cruise control off / speed control disabled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "speed limit off / no speed limit / unthrottled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "performance monitoring or dashboard disabled",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "broken speedometer or faulty gauge",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the crossed-out dial with a diagonal needle and horizontal bar strongly resembles a 'no time / timer off' clock icon or a generic prohibition sign with an unrecognizable interior.",
+   "near_misses": [
+    {
+     "task": "Run a fast internet speed test on the new router",
+     "better": "speedometer / gauge (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn off the 6am weekday alarm",
+     "better": "alarm clock with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the speeding ticket from the camera on Route 9",
+     "better": "ticket / fine / receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Quickly review the quarterly sales dashboard",
+     "better": "chart / document",
+     "trap": "property"
+    },
+    {
+     "task": "Check tire pressure before the long highway drive",
+     "better": "tire / pressure gauge (without slash)",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order new winter wiper blades",
+     "better": "windshield wipers / car",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "account_circle_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4090,
+    "output": 1144,
+    "thoughts": 79,
+    "total": 5313
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:25Z"
+  }
+ },
+ "distinguishing": "Inside the slashed circle, this icon shows a straight angled gauge needle in the upper right and a flat horizontal bar at the bottom (a speedometer or dial), rather than the curved head and shoulders of a user avatar."
 }

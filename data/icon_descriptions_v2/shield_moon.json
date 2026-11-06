@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "eye comfort, blue light filter, or night shield screen protection",
+   "meaning": "eye comfort shield, blue light filter, or night screen protection",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "Islamic insurance, Takaful, or halal coverage",
+   "meaning": "Islamic insurance (Takaful) or halal coverage",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the inner crescent can look like a curved checkmark or C-shaped logo inside a generic security shield.",
+ "ambiguity": "At very small sizes the curved crescent could momentarily resemble the angled stroke of the shield with a checkmark, but is otherwise distinct.",
  "modifier_semantics": [
   {
    "modifier": "crescent moon",
@@ -159,6 +159,11 @@
  ],
  "near_misses": [
   {
+   "task": "Set up a hardware passkey on personal GitHub account",
+   "better": "shield with padlock (account lock and authentication) ",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Switch VS Code and Slack to dark theme",
    "better": "crescent moon or palette",
    "trap": "shared_vocabulary"
@@ -169,19 +174,9 @@
    "trap": "property"
   },
   {
-   "task": "Renew annual homeowner's insurance policy with State Farm",
-   "better": "house with shield",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Take 3mg melatonin thirty minutes before bed",
    "better": "pill or bed",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Enable 2FA hardware key on personal GitHub account",
-   "better": "key or plain shield with lock",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the quarterly ADT monitoring invoice",
@@ -212,6 +207,100 @@
    "example_tasks with parent: 2 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "nighttime security or overnight home alarm mode",
+     "strength": "primary"
+    },
+    {
+     "meaning": "eye comfort, blue light filter, or night shield screen protection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "do not disturb or sleep protection mode",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Islamic insurance, Takaful, or halal coverage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the inner crescent can look like a curved checkmark or C-shaped logo inside a generic security shield.",
+   "near_misses": [
+    {
+     "task": "Switch VS Code and Slack to dark theme",
+     "better": "crescent moon or palette",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book refundable night train from Munich to Rome",
+     "better": "train",
+     "trap": "property"
+    },
+    {
+     "task": "Renew annual homeowner's insurance policy with State Farm",
+     "better": "house with shield",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take 3mg melatonin thirty minutes before bed",
+     "better": "pill or bed",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Enable 2FA hardware key on personal GitHub account",
+     "better": "key or plain shield with lock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the quarterly ADT monitoring invoice",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shield_lock",
+   "encrypted",
+   "gpp_maybe",
+   "privacy_tip",
+   "verified_user"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9379,
+    "output": 1838,
+    "thoughts": 0,
+    "total": 11217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Contains a solid crescent moon inside the shield, uniquely indicating nighttime security, overnight alarm mode, or screen eye-comfort/blue-light protection."
 }

@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "bathroom scale / body weight scale",
+   "meaning": "bathroom scale / digital body weight scale",
    "strength": "primary"
   },
   {
-   "meaning": "smart scale / digital scale",
-   "strength": "primary"
-  },
-  {
-   "meaning": "wall outlet or smart switch plate",
+   "meaning": "wall power outlet / recessed electrical socket",
    "strength": "secondary"
   },
   {
-   "meaning": "UI card with more options button",
+   "meaning": "UI card with circular more-options button",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a generic UI panel with an ellipsis 'more options' button, or a European wall power outlet at small sizes.",
+ "ambiguity": "Easily confused with the square frame having three loose dots across the top, or read at small sizes as a European wall socket or a UI card with an overflow menu button.",
  "modifier_semantics": [
   {
    "modifier": "circle with three dots",
@@ -161,34 +157,29 @@
  ],
  "near_misses": [
   {
+   "task": "Clean the baked-on grease off the oven knobs",
+   "better": "square appliance front with three separate control knobs across the top",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test the checkout flow in a fresh browser window",
+   "better": "square window frame with three separate header dots across the top",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Weigh 500g bread flour and 350g water for the levain",
-   "better": "kitchen food scale or bread",
+   "better": "kitchen food scale with bowl or bread",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Practice C major and G minor scales for 15 minutes",
-   "better": "piano or musical notes",
+   "better": "piano keys or musical notes",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Scale up the Postgres database instance before Monday's launch",
-   "better": "database / server",
+   "better": "database cylinder / server stack",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Descale the espresso machine boiler with citric acid",
-   "better": "coffee machine",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the cracked wall outlet cover behind the sofa",
-   "better": "electrical outlet / plug",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Design the three-dots overflow menu for the profile card",
-   "better": "UI menu / ellipsis icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a 1:24 scale model kit of the Porsche 911",
@@ -196,7 +187,7 @@
    "trap": "property"
   },
   {
-   "task": "Meal prep four chicken and rice lunches for the week",
+   "task": "Meal prep four chicken and rice lunches for the weight-loss plan",
    "better": "food container / meal",
    "trap": "parent_topic"
   }
@@ -204,7 +195,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a top-down square bathroom scale (specifically styled like a smart scale with a circular digital readout at the topcenter), making it well-suited for body weight tracking, weigh-ins, and scale maintenance tasks. However, the three dots inside the circle strongly resemble a UI ellipsis 'more' button or a round electrical socket, which hurts its immediate recognizability outside a health context.",
@@ -222,6 +213,104 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bathroom scale / body weight scale",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smart scale / digital scale",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wall outlet or smart switch plate",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "UI card with more options button",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a generic UI panel with an ellipsis 'more options' button, or a European wall power outlet at small sizes.",
+   "near_misses": [
+    {
+     "task": "Weigh 500g bread flour and 350g water for the levain",
+     "better": "kitchen food scale or bread",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice C major and G minor scales for 15 minutes",
+     "better": "piano or musical notes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Scale up the Postgres database instance before Monday's launch",
+     "better": "database / server",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Descale the espresso machine boiler with citric acid",
+     "better": "coffee machine",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the cracked wall outlet cover behind the sofa",
+     "better": "electrical outlet / plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Design the three-dots overflow menu for the profile card",
+     "better": "UI menu / ellipsis icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a 1:24 scale model kit of the Porsche 911",
+     "better": "model car",
+     "trap": "property"
+    },
+    {
+     "task": "Meal prep four chicken and rice lunches for the week",
+     "better": "food container / meal",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "padding"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4170,
+    "output": 1116,
+    "thoughts": 145,
+    "total": 5431
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:14Z"
+  }
+ },
+ "distinguishing": "Encloses the three dots inside a solid black circular dial near the top center of the square, reading as a bathroom scale display or a round recessed wall socket rather than three separate window dots or appliance knobs."
 }

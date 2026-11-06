@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "location, place, or address",
+   "meaning": "location, place, venue, or street address",
    "strength": "primary"
   },
   {
-   "meaning": "map pin or GPS waypoint",
+   "meaning": "map pin, GPS waypoint, or destination",
    "strength": "primary"
   },
   {
-   "meaning": "destination, stop, or venue",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "check-in or arrival point",
+   "meaning": "drop-off, pickup, or arrival spot",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "At small sizes, can be confused with the map pin containing a person silhouette when a task involves meeting someone at a place.",
  "modifier_semantics": [
   {
    "modifier": "oval target ring beneath pin point",
@@ -164,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Share my live location with Sarah on Find My",
+   "better": "map pin with person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update Mom's new street address in my contacts",
+   "better": "map pin with person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a box of brass push pins for the corkboard",
    "better": "thumbtack / pushpin",
    "trap": "shared_vocabulary"
@@ -187,17 +193,12 @@
    "task": "Renew passport before the Japan trip",
    "better": "passport",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Put eye drops in before bed",
-   "better": "liquid drop or eye",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows a standard map pin hovering over a ground spot, universally understood as location, address, venue, or map waypoint. It fits tasks centered on finding, saving, updating, or sharing a place or address across travel, errands, outdoors, and admin.",
@@ -215,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "location, place, or address",
+     "strength": "primary"
+    },
+    {
+     "meaning": "map pin or GPS waypoint",
+     "strength": "primary"
+    },
+    {
+     "meaning": "destination, stop, or venue",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "check-in or arrival point",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a box of brass push pins for the corkboard",
+     "better": "thumbtack / pushpin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reset the 4-digit PIN on my debit card",
+     "better": "keypad or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Address the performance regressions in the search endpoint",
+     "better": "bug or code brackets",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the local hardware store carries cedar shims",
+     "better": "hardware tools or store",
+     "trap": "property"
+    },
+    {
+     "task": "Renew passport before the Japan trip",
+     "better": "passport",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Put eye drops in before bed",
+     "better": "liquid drop or eye",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "person_pin_circle"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4022,
+    "output": 637,
+    "thoughts": 0,
+    "total": 4659
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "Shows a standard map pin with a simple round dot inside and an oval target base underneath, representing a general physical location, venue, or destination rather than a specific person's whereabouts."
 }

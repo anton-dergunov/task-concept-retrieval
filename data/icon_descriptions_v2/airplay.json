@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "AirPlay, screen mirroring, or wireless video casting",
+   "meaning": "AirPlay, screen mirroring, or wireless video casting to a display",
    "strength": "primary"
   },
   {
-   "meaning": "television or computer monitor on a triangular stand",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "presentation display or external screen output",
+   "meaning": "stream media to a smart TV or external presentation screen",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a generic desktop monitor or TV on a pedestal stand by users unfamiliar with the AirPlay symbol.",
+ "ambiguity": "At a quick glance, the upward triangle at the bottom can be misread as a flared pedestal stand for a plain desktop monitor or television.",
  "modifier_semantics": [
   {
    "modifier": "upward solid triangle overlapping bottom edge",
@@ -157,8 +153,13 @@
  ],
  "near_misses": [
   {
-   "task": "Listen to the new episode of the history podcast on my walk",
-   "better": "headphones or podcast microphone",
+   "task": "Wipe fingerprints off the desktop monitor with a microfiber cloth",
+   "better": "plain desktop monitor on rectangular stand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack my MacBook laptop and charger for the client visit",
+   "better": "laptop with wider keyboard base",
    "trap": "lookalike_glyph"
   },
   {
@@ -177,14 +178,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a replacement remote for the Apple TV",
+   "task": "Order a replacement Siri remote for the Apple TV",
    "better": "remote control",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Wipe fingerprints off the desktop monitor with microfiber cloth",
-   "better": "desktop monitor",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -208,6 +204,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "AirPlay, screen mirroring, or wireless video casting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "television or computer monitor on a triangular stand",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "presentation display or external screen output",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a generic desktop monitor or TV on a pedestal stand by users unfamiliar with the AirPlay symbol.",
+   "near_misses": [
+    {
+     "task": "Listen to the new episode of the history podcast on my walk",
+     "better": "headphones or podcast microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy an AirPlay-compatible soundbar for the basement",
+     "better": "soundbar or speaker",
+     "trap": "property"
+    },
+    {
+     "task": "Cast the bronze figurine at the community foundry on Saturday",
+     "better": "sculpture or crucible",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the actors cast in the summer theater production",
+     "better": "theater masks",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a replacement remote for the Apple TV",
+     "better": "remote control",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Wipe fingerprints off the desktop monitor with microfiber cloth",
+     "better": "desktop monitor",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "page_footer",
+   "computer",
+   "tv",
+   "remove_from_queue"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8043,
+    "output": 2357,
+    "thoughts": 160,
+    "total": 10560
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "Unlike the monitors and laptops with rectangular bases, the bottom edge of this screen is broken by a solid upward-pointing triangle, forming the standard AirPlay and wireless screen-casting symbol."
 }

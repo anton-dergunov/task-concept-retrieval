@@ -9,19 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "broken, missing, or disabled image",
+   "meaning": "broken, missing, or unrendered image",
    "strength": "primary"
   },
   {
-   "meaning": "delete or remove photos",
+   "meaning": "delete, remove, or hide photos / pictures",
    "strength": "primary"
   },
   {
-   "meaning": "hide pictures or turn off image loading",
+   "meaning": "disable image loading or thumbnails",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "no photography allowed",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the mountain silhouette inside can blur into the slash, resembling a generic crossed-out checkbox or disabled window.",
+ "ambiguity": "Identical pixel-for-pixel to the other slashed mountain picture frame icon in this set.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash from top-left to bottom-right",
@@ -171,14 +175,24 @@
  ],
  "near_misses": [
   {
-   "task": "Take passport photos at the pharmacy",
-   "better": "camera or ID photo icon",
-   "trap": "shared_vocabulary"
+   "task": "Mute the family group chat notifications during work hours",
+   "better": "slashed speech bubble",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Untag old team members from the archived project issues",
+   "better": "slashed right-pointing label tag",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a wooden 8x10 picture frame for the living room",
-   "better": "intact picture frame icon",
+   "better": "intact picture frame without slash",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take passport photos at the pharmacy",
+   "better": "camera or ID photo icon",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Organize summer trip photos into an album",
@@ -192,19 +206,14 @@
   },
   {
    "task": "Cancel Adobe Lightroom subscription",
-   "better": "subscription or credit card with slash icon",
+   "better": "credit card or subscription cancel icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Uncheck the completed items on the packing list",
-   "better": "checkbox icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a standard landscape picture frame crossed out with a diagonal slash, universally understood as a broken/missing image or deleting/hiding photos. It fits tasks centered on fixing broken web images or purging unwanted photos, though it is narrower than the plain image icon.",
@@ -224,6 +233,93 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "broken, missing, or disabled image",
+     "strength": "primary"
+    },
+    {
+     "meaning": "delete or remove photos",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hide pictures or turn off image loading",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the mountain silhouette inside can blur into the slash, resembling a generic crossed-out checkbox or disabled window.",
+   "near_misses": [
+    {
+     "task": "Take passport photos at the pharmacy",
+     "better": "camera or ID photo icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a wooden 8x10 picture frame for the living room",
+     "better": "intact picture frame icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Organize summer trip photos into an album",
+     "better": "intact image or photo album icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Export logo with a transparent background",
+     "better": "image file or layers icon",
+     "trap": "property"
+    },
+    {
+     "task": "Cancel Adobe Lightroom subscription",
+     "better": "subscription or credit card with slash icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Uncheck the completed items on the packing list",
+     "better": "checkbox icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "chat_bubble_off",
+   "hide_image",
+   "label_off",
+   "no_sim"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8093,
+    "output": 2769,
+    "thoughts": 160,
+    "total": 11022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Visually identical to the other slashed square picture frame containing a two-peak mountain silhouette, making the two completely interchangeable for broken-image or remove-photo tasks, while the interior mountain shape sets both apart from the speech bubble, label tag, and SIM card."
 }

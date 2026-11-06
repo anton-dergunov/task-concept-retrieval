@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "internet outage or ISP issue",
+   "meaning": "troubleshoot internet outage or ISP issue",
    "strength": "primary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the exclamation mark can blend into the right side of the Wi-Fi arcs or look like a lock or question mark badge.",
+ "ambiguity": "Interchangeable with the two-arc Wi-Fi with an exclamation mark; at small list sizes, the badge can also blur into the arcs and resemble the plain three-arc Wi-Fi icon or the plus-badged Wi-Fi icon.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -161,40 +161,40 @@
  ],
  "near_misses": [
   {
+   "task": "Add a mesh Wi-Fi extender in the hallway to reach the patio",
+   "better": "Wi-Fi with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Send the guest Wi-Fi password to Sarah and Mark before they arrive",
+   "better": "plain Wi-Fi icon without alert badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the monthly fiber internet bill before the 15th",
    "better": "invoice, receipt, or credit card",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Send the guest Wi-Fi password to Sarah and Mark before they arrive",
-   "better": "key, password, or plain Wi-Fi icon without alert",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a small Wi-Fi enabled meat thermometer for the smoker",
-   "better": "thermometer or grill",
+   "better": "thermometer",
    "trap": "property"
   },
   {
-   "task": "Listen to the new episode of the Reply All podcast on the train",
-   "better": "headphones or podcast microphone",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a 15-meter Cat6 cable from Amazon for the desk",
-   "better": "ethernet cable or shopping cart",
+   "better": "ethernet cable",
    "trap": "parent_topic"
   },
   {
    "task": "Check if the new fiber plan is available at our street address",
-   "better": "plain Wi-Fi or router icon (no error modifier)",
+   "better": "plain Wi-Fi icon without alert badge",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a standard three-arc Wi-Fi symbol with an exclamation mark badge on the lower right, universally understood as a Wi-Fi problem, unstable connection, or internet outage. It fits a narrow but common family of household and office troubleshooting tasks (fixing dropouts, calling the ISP, resolving dead zones), though it can be confused at small sizes with plain Wi-Fi or other badged Wi-Fi variants.",
@@ -214,6 +214,96 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi problem, unstable internet, or network connection error",
+     "strength": "primary"
+    },
+    {
+     "meaning": "internet outage or ISP issue",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weak wireless signal or dead zone",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the exclamation mark can blend into the right side of the Wi-Fi arcs or look like a lock or question mark badge.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly fiber internet bill before the 15th",
+     "better": "invoice, receipt, or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the guest Wi-Fi password to Sarah and Mark before they arrive",
+     "better": "key, password, or plain Wi-Fi icon without alert",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a small Wi-Fi enabled meat thermometer for the smoker",
+     "better": "thermometer or grill",
+     "trap": "property"
+    },
+    {
+     "task": "Listen to the new episode of the Reply All podcast on the train",
+     "better": "headphones or podcast microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 15-meter Cat6 cable from Amazon for the desk",
+     "better": "ethernet cable or shopping cart",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the new fiber plan is available at our street address",
+     "better": "plain Wi-Fi or router icon (no error modifier)",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_4_bar_plus",
+   "android_wifi_3_bar_plus",
+   "android_wifi_3_bar_alert",
+   "android_wifi_4_bar",
+   "wifi",
+   "android_wifi_3_bar",
+   "nest_remote_comfort_sensor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12117,
+    "output": 4047,
+    "thoughts": 0,
+    "total": 16164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Shows a three-arc Wi-Fi signal with an exclamation mark in the bottom right, differing from the two-arc exclamation variant only in arc count and identical in meaning."
 }

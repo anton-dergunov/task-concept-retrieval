@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "out-of-stock alert or price drop notification",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "urgent shopping or emergency supplies purchase",
+   "meaning": "out-of-stock alert or backorder notification",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the exclamation mark could be misread as a downward arrow (add to cart) or an item sitting inside the cart.",
+ "ambiguity": "At small list sizes, the exclamation mark inside the open basket can be mistaken for a plus sign or an item sitting in a plain shopping cart.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -160,34 +156,34 @@
  ],
  "near_misses": [
   {
-   "task": "Buy milk, eggs, and sourdough bread on the way home",
-   "better": "plain shopping cart or grocery bag (no error/alert needed for routine shopping, urgency is just a property if any, or normal shopping without modifier) -> trap: lookalike_glyph",
+   "task": "Do the weekly grocery shopping at Trader Joe's",
+   "better": "plain closed-top shopping cart without an exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add extra coffee filters and dish soap to the Instacart order",
+   "better": "shopping cart with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Complete checkout on the Amazon cart before midnight",
+   "better": "shopping cart with a right-pointing arrow",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Urgently buy a replacement charger for the MacBook before Tuesday's flight",
-   "better": "laptop charger or plug (urgency is a property, charger is the central object natively bought) ",
+   "better": "laptop charger or power plug",
    "trap": "property"
   },
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp (buy is a generic verb, the item itself is the subject of the task) ",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Fix the squeaky front wheel on our folding metal laundry cart",
-   "better": "hand truck / utility cart or wrench (literal physical cart repair, not e-commerce checkout alert) ",
+   "better": "utility cart or wrench",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Order 500 matte business cards with the updated phone number",
-   "better": "business card / ID card (even under a 'Shopping Problems' or 'Urgent Orders' list, the specific item wins) ",
+   "better": "business card / ID card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Download the new Mario Kart booster course pass on the Switch",
-   "better": "gamepad / racing flag (shared word 'kart/cart', completely different subject) ",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -211,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shopping issue, order problem, or payment failure",
+     "strength": "primary"
+    },
+    {
+     "meaning": "abandoned cart or pending checkout reminder",
+     "strength": "primary"
+    },
+    {
+     "meaning": "out-of-stock alert or price drop notification",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "urgent shopping or emergency supplies purchase",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the exclamation mark could be misread as a downward arrow (add to cart) or an item sitting inside the cart.",
+   "near_misses": [
+    {
+     "task": "Buy milk, eggs, and sourdough bread on the way home",
+     "better": "plain shopping cart or grocery bag (no error/alert needed for routine shopping, urgency is just a property if any, or normal shopping without modifier) -> trap: lookalike_glyph",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Urgently buy a replacement charger for the MacBook before Tuesday's flight",
+     "better": "laptop charger or plug (urgency is a property, charger is the central object natively bought) ",
+     "trap": "property"
+    },
+    {
+     "task": "Fix the squeaky front wheel on our folding metal laundry cart",
+     "better": "hand truck / utility cart or wrench (literal physical cart repair, not e-commerce checkout alert) ",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order 500 matte business cards with the updated phone number",
+     "better": "business card / ID card (even under a 'Shopping Problems' or 'Urgent Orders' list, the specific item wins) ",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Download the new Mario Kart booster course pass on the Switch",
+     "better": "gamepad / racing flag (shared word 'kart/cart', completely different subject) ",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "add_shopping_cart",
+   "shopping_cart_checkout",
+   "remove_shopping_cart",
+   "shopping_cart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8105,
+    "output": 2466,
+    "thoughts": 0,
+    "total": 10571
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "An open-top shopping cart containing a vertical exclamation mark, signaling an order problem, payment failure, or abandoned cart alert rather than adding, removing, or checking out."
 }

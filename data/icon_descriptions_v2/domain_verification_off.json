@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "blocked web page, ad blocker, or disabled browser window",
+   "meaning": "blocked web page, ad blocker, or disabled web app",
    "strength": "primary"
   },
   {
-   "meaning": "offline web app or unavailable website",
+   "meaning": "broken image or failed media load on a page",
    "strength": "primary"
   },
   {
-   "meaning": "broken or hidden image placeholder",
+   "meaning": "disable terminal window or headless script execution",
    "strength": "secondary"
   },
   {
-   "meaning": "disabled card or payment method",
+   "meaning": "cancelled or disabled payment card",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The interior shape cut in half by the slash is reduced to an abstract block and diamond, so at small sizes it can look like a missing-image icon, a disabled credit card, or a muted display.",
+ "ambiguity": "Very close to the empty slashed browser window (differing only by the small interior fragments) and the slashed laptop (which also has an interior diagonal tick).",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -162,13 +162,13 @@
  ],
  "near_misses": [
   {
-   "task": "Cancel my lost Visa credit card in the banking app",
-   "better": "credit card with a slash",
+   "task": "Block pop-up browser windows in Safari",
+   "better": "plain browser window with slash (empty interior)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Replace missing product photos in the online store",
-   "better": "image frame with mountains and slash",
+   "task": "Leave work laptop at home during vacation",
+   "better": "laptop with slash",
    "trap": "lookalike_glyph"
   },
   {
@@ -183,11 +183,11 @@
   },
   {
    "task": "Check whether the company website is loading properly",
-   "better": "browser window or globe",
+   "better": "intact browser window or globe",
    "trap": "generic_verb"
   },
   {
-   "task": "Draft the email announcement for customers",
+   "task": "Draft the downtime announcement email for customers",
    "better": "envelope or email",
    "trap": "parent_topic"
   }
@@ -195,7 +195,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a browser or application window frame crossed out by a diagonal slash. It fits tasks centered on blocking websites, setting up ad blockers, restricting web access, or handling offline/broken web pages, though the clipped interior mark can be confused with a broken image or disabled card at small sizes.",
@@ -213,6 +213,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "blocked web page, ad blocker, or disabled browser window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "offline web app or unavailable website",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken or hidden image placeholder",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "disabled card or payment method",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The interior shape cut in half by the slash is reduced to an abstract block and diamond, so at small sizes it can look like a missing-image icon, a disabled credit card, or a muted display.",
+   "near_misses": [
+    {
+     "task": "Cancel my lost Visa credit card in the banking app",
+     "better": "credit card with a slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace missing product photos in the online store",
+     "better": "image frame with mountains and slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Build the new portfolio website in Astro",
+     "better": "intact browser window or globe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read saved articles offline on the flight to Madrid",
+     "better": "article or airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the company website is loading properly",
+     "better": "browser window or globe",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Draft the email announcement for customers",
+     "better": "envelope or email",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_access_disabled",
+   "mimo_disconnect",
+   "sync_saved_locally_off",
+   "videocam_off",
+   "folder_off",
+   "web_asset_off",
+   "tv_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12219,
+    "output": 3998,
+    "thoughts": 0,
+    "total": 16217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Has a thick solid top bar AND a diagonal tick and block inside the frame (a slashed browser window with a code prompt or broken image inside), setting it apart from the empty slashed browser window."
 }

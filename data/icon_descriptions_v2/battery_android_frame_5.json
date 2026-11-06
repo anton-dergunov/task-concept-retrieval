@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / batteries",
+   "meaning": "battery or batteries",
    "strength": "primary"
   },
   {
-   "meaning": "charge device / power bank",
+   "meaning": "mostly charged battery (~65%) or power bank",
    "strength": "primary"
   },
   {
-   "meaning": "battery level / energy",
+   "meaning": "battery level or energy",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Essentially identical to other partial-fill battery icons (50%, 60%, 75%) at small sizes.",
+ "ambiguity": "Interchangeable at list scale with the ~50% half-battery and ~80% three-quarter battery icons.",
  "modifier_semantics": [
   {
    "modifier": "solid inner rectangle filling roughly two-thirds of the interior",
@@ -157,9 +157,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Put the dead tablet on the charger before bed",
+   "better": "critically low ~15% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Verify all Makita tool batteries are 100% topped off",
+   "better": "fully charged 100% battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Order a cordless battery-powered hedge trimmer",
@@ -169,11 +174,6 @@
   {
    "task": "Pay the monthly electric utility bill before Friday",
    "better": "invoice or lightning bolt",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Practice drum battery rudiments for 20 minutes",
-   "better": "drum",
    "trap": "shared_vocabulary"
   },
   {
@@ -190,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognized horizontal battery icon showing roughly two-thirds charge. While technically a UI status indicator for mid-high battery level, in a task list it serves well as the standard icon for buying, charging, replacing, or recycling batteries and power banks, though it shares its look with other partial-fill battery glyphs.",
@@ -208,6 +208,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charge device / power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery level / energy",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Essentially identical to other partial-fill battery icons (50%, 60%, 75%) at small sizes.",
+   "near_misses": [
+    {
+     "task": "Order a cordless battery-powered hedge trimmer",
+     "better": "hedge trimmer",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before Friday",
+     "better": "invoice or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice drum battery rudiments for 20 minutes",
+     "better": "drum",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule the full neuropsychological test battery for Leo",
+     "better": "clipboard or brain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a hard-shell zippered case for the Anker power bank",
+     "better": "pouch or case",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_1",
+   "battery_android_frame_2",
+   "battery_android_frame_3",
+   "battery_android_frame_4",
+   "battery_android_frame_6",
+   "battery_android_frame_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10606,
+    "output": 3427,
+    "thoughts": 0,
+    "total": 14033
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The interior fill block extends slightly past halfway (~60-65%), making it visually interchangeable with both the ~50% half-filled and ~80% three-quarters-filled battery icons."
 }

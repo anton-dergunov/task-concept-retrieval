@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "map pin or GPS waypoint",
+   "meaning": "map pin, GPS badge, or point of interest",
    "strength": "primary"
   },
   {
-   "meaning": "destination, venue, or check-in point",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "directions or navigation",
+   "meaning": "destination, venue, or check-in button",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Close duplicate of a standalone map pin icon without the enclosing circle.",
+ "ambiguity": "Semantically interchangeable with the plain outlined map pin and the map pin over a horizontal bar; differs only in having a heavy filled-circle enclosure.",
  "modifier_semantics": [
   {
    "modifier": "enclosing solid black circle",
@@ -164,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Add street address to the contact card",
+   "better": "plain outlined map pin",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mark the exact drop-off spot on the curb",
+   "better": "map pin with horizontal bar underneath",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy pushpins for the corkboard in the study",
    "better": "thumbtack / office pushpin",
    "trap": "shared_vocabulary"
@@ -179,11 +185,6 @@
    "trap": "property"
   },
   {
-   "task": "Frame the vintage topographical map of Maine",
-   "better": "folded map / picture frame",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book window seats on the flight to Lisbon",
    "better": "airplane / seat",
    "trap": "parent_topic"
@@ -197,7 +198,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The teardrop map marker inside a circle is the universal symbol for location, address, or map pin. It fits many common tasks across travel, errands, moving, and admin (updating addresses, pinning spots, sharing coordinates, choosing venues), and is only less distinctive because plain uncircled map pin variants also exist.",
@@ -215,6 +216,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "location, place, or address",
+     "strength": "primary"
+    },
+    {
+     "meaning": "map pin or GPS waypoint",
+     "strength": "primary"
+    },
+    {
+     "meaning": "destination, venue, or check-in point",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "directions or navigation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Close duplicate of a standalone map pin icon without the enclosing circle.",
+   "near_misses": [
+    {
+     "task": "Buy pushpins for the corkboard in the study",
+     "better": "thumbtack / office pushpin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reset debit card PIN at the ATM",
+     "better": "keypad / credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy locally grown apples at the Saturday market",
+     "better": "apple / produce basket",
+     "trap": "property"
+    },
+    {
+     "task": "Frame the vintage topographical map of Maine",
+     "better": "folded map / picture frame",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book window seats on the flight to Lisbon",
+     "better": "airplane / seat",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Track where the monthly grocery budget is going",
+     "better": "receipt / chart / wallet",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pin_drop",
+   "location_on"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5309,
+    "output": 1567,
+    "thoughts": 0,
+    "total": 6876
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Sets a white teardrop map pin in negative space inside a heavy solid black disc, visually reading as a circular badge or button rather than a bare outline pin, though it means the same thing (location/place) as the other two."
 }

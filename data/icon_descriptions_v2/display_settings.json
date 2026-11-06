@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "display settings or monitor calibration",
+   "meaning": "display settings, monitor calibration, or picture/brightness controls",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "TV picture and sound settings",
+   "meaning": "TV audio/video settings menu",
    "strength": "secondary"
   },
   {
-   "meaning": "software dashboard or control panel",
+   "meaning": "software control panel or admin dashboard",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a plain monitor, a generic settings/sliders icon, or a mixing console screen at very small sizes.",
+ "ambiguity": "Shares the exact monitor frame with the monitor containing corner brackets, so at small sizes it can be mistaken for a generic computer monitor or screen-resolution/fullscreen icon.",
  "modifier_semantics": [
   {
    "modifier": "two horizontal slider controls inside the screen",
@@ -166,32 +166,37 @@
  "near_misses": [
   {
    "task": "Buy a 27-inch 4K monitor for the home office",
-   "better": "plain computer monitor without sliders, or shopping cart",
-   "trap": "generic_verb"
+   "better": "computer monitor with corner brackets or plain monitor",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change the external display resolution to 1440p and fix overscan",
+   "better": "monitor with corner brackets showing screen bounds/size",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take a fullscreen screenshot of the dashboard bug",
+   "better": "monitor with corner capture brackets or camera",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Adjust the height and tilt of the monitor arm",
-   "better": "monitor on an adjustable stand or wrench/tool",
+   "better": "wrench/tool or physical monitor stand",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Clean fingerprints off the TV screen with microfiber cloth",
-   "better": "spray bottle or cleaning cloth, or plain TV",
+   "task": "Clean fingerprints off the TV screen with a microfiber cloth",
+   "better": "spray bottle or cleaning cloth",
    "trap": "parent_topic"
   },
   {
    "task": "Mix levels on the podcast vocal track",
-   "better": "audio sliders / equalizer without computer monitor, or microphone",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Change notification preferences on my iPhone",
-   "better": "smartphone with settings gear or bell",
-   "trap": "lookalike_glyph"
+   "better": "audio equalizer sliders without a monitor frame, or microphone",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Order a matte anti-glare screen protector",
-   "better": "screen shield / protector or package",
+   "better": "screen shield or package",
    "trap": "property"
   }
  ],
@@ -218,6 +223,94 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "display settings or monitor calibration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "computer system preferences or PC configuration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "TV picture and sound settings",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "software dashboard or control panel",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a plain monitor, a generic settings/sliders icon, or a mixing console screen at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a 27-inch 4K monitor for the home office",
+     "better": "plain computer monitor without sliders, or shopping cart",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Adjust the height and tilt of the monitor arm",
+     "better": "monitor on an adjustable stand or wrench/tool",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean fingerprints off the TV screen with microfiber cloth",
+     "better": "spray bottle or cleaning cloth, or plain TV",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Mix levels on the podcast vocal track",
+     "better": "audio sliders / equalizer without computer monitor, or microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Change notification preferences on my iPhone",
+     "better": "smartphone with settings gear or bell",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a matte anti-glare screen protector",
+     "better": "screen shield / protector or package",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screenshot_monitor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4106,
+    "output": 716,
+    "thoughts": 107,
+    "total": 4929
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "Shows two horizontal adjustment sliders inside the monitor screen (signaling display settings, system preferences, or calibration) rather than corner brackets."
 }

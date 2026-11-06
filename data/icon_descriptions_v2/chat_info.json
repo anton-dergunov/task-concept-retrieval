@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "information message, notice, or announcement",
+   "meaning": "information notice, help message, or FAQ inquiry",
    "strength": "primary"
   },
   {
-   "meaning": "inquiry, asking for information, or customer support chat",
+   "meaning": "explanatory tooltip or instructions comment",
    "strength": "primary"
   },
   {
-   "meaning": "tooltip, help text, or explanatory comment",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "tourist information desk or visitor center",
+   "meaning": "customer support or visitor info desk chat",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the lowercase 'i' is easily mistaken for an exclamation mark ('!'), making it look like an urgent alert or error message rather than neutral information.",
+ "ambiguity": "Easily mistaken at small sizes for the speech bubble with an exclamation mark, as the dot-above-bar of 'i' is the exact vertical inversion of '!'.",
  "modifier_semantics": [
   {
    "modifier": "lowercase letter i",
@@ -161,18 +157,23 @@
  ],
  "near_misses": [
   {
+   "task": "Report the urgent checkout error to engineering",
+   "better": "speech bubble with an exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reply to the group chat about dinner plans",
+   "better": "speech bubble with three horizontal dots",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update credit card info on Netflix",
    "better": "credit card",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Fix the urgent error popup on checkout",
-   "better": "speech bubble with exclamation mark / warning alert",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Inform the dentist we need to reschedule",
-   "better": "tooth / dentist or calendar",
+   "better": "tooth or calendar",
    "trap": "generic_verb"
   },
   {
@@ -184,11 +185,6 @@
    "task": "Book flights to Lisbon",
    "better": "airplane",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Call Mom to catch up",
-   "better": "phone handset",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -212,6 +208,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "information message, notice, or announcement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "inquiry, asking for information, or customer support chat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tooltip, help text, or explanatory comment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tourist information desk or visitor center",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the lowercase 'i' is easily mistaken for an exclamation mark ('!'), making it look like an urgent alert or error message rather than neutral information.",
+   "near_misses": [
+    {
+     "task": "Update credit card info on Netflix",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the urgent error popup on checkout",
+     "better": "speech bubble with exclamation mark / warning alert",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Inform the dentist we need to reschedule",
+     "better": "tooth / dentist or calendar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy an informative book on backyard beekeeping",
+     "better": "book or bee",
+     "trap": "property"
+    },
+    {
+     "task": "Book flights to Lisbon",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Call Mom to catch up",
+     "better": "phone handset",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "textsms",
+   "feedback",
+   "3p"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6707,
+    "output": 1413,
+    "thoughts": 0,
+    "total": 8120,
+    "seconds": 27.28,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:11:55Z"
+  }
+ },
+ "distinguishing": "Contains a lowercase letter 'i' (dot on top, vertical bar below) inside the speech bubble, representing informational notices, help inquiries, or tooltips rather than urgent warnings or standard text messages."
 }

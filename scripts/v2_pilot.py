@@ -21,11 +21,8 @@ from __future__ import annotations
 
 import argparse
 import base64
-import hashlib
 import html
-import io
 import json
-import math
 import random
 import statistics
 import sys
@@ -39,6 +36,7 @@ sys.path.insert(0, str(ROOT))
 from tcr import config  # noqa: E402
 from tcr import describe_v2 as dv2  # noqa: E402
 from tcr.data import glyph_hashes, icon_labels, load_icons  # noqa: E402
+from tcr.judging import contact_sheet, describe_slot, text_slot, wilson  # noqa: E402
 from tcr.llm import LLMError, complete_json  # noqa: E402
 
 OUT = config.RESULTS_DIR / "v2_pilot"
@@ -89,7 +87,7 @@ def levels_by_glyph():
 def cmd_sample(args):
     hashes = glyph_hashes()
     levels = levels_by_glyph()
-    reps = [ic.name for ic in load_icons(include_discarded=True)]   # one name per glyph
+    reps = [ic.name for ic in load_icons(include_discarded=True, version="v1")]   # one name per glyph
     by_level = defaultdict(list)
     for n in sorted(reps):
         by_level[levels.get(hashes[n], "unsure")].append(n)
@@ -182,52 +180,6 @@ def cost_table(cfgs, sample):
 # --- sheets (blind) ----------------------------------------------------------------
 
 SLOTS = "ABCDE"
-
-
-def _label_font(size):
-    from PIL import ImageFont
-    try:
-        return ImageFont.load_default(size=size)
-    except TypeError:
-        return ImageFont.load_default()
-
-
-def contact_sheet(items, path, px=256, cols=5):
-    from PIL import Image, ImageDraw
-    rows = math.ceil(len(items) / cols)
-    pad = 40
-    sheet = Image.new("RGB", (cols * px, rows * (px + pad)), "white")
-    draw = ImageDraw.Draw(sheet)
-    font = _label_font(28)
-    for i, (gid, icon) in enumerate(items):
-        x, y = (i % cols) * px, (i // cols) * (px + pad)
-        draw.text((x + 10, y + 6), gid, fill=(200, 0, 0), font=font)
-        sheet.paste(Image.open(io.BytesIO(dv2.glyph_png(icon))).convert("RGB"), (x, y + pad))
-        draw.rectangle([x, y, x + px - 1, y + px + pad - 1], outline=(200, 200, 200))
-    sheet.save(path)
-
-
-def describe_slot(d):
-    dep = d["depiction"]
-    mods = "; ".join(dep.get("modifiers") or []) or "none"
-    reads = "; ".join(f"{r['meaning']} ({r['strength']})" for r in d["readings"])
-    sc = d["scores"]
-    return (f"- drawn: {dep['primary_object']} | modifiers: {mods} | {dep.get('composition', '')}\n"
-            f"  - readings: {reads}\n"
-            f"  - ambiguity: {d.get('ambiguity') or '—'}\n"
-            f"  - discard: {d['discard']} | recognizability {sc['recognizability']}, "
-            f"task_fit {sc['task_fit']}, distinctiveness {sc['distinctiveness']}")
-
-
-def text_slot(d):
-    ex = d["example_tasks"]
-    pick = ex[::2][:8]
-    lines = ["  - examples: " + " / ".join(
-        (f"[{e['parent']}] " if e.get("parent") else "") + e["task"] for e in pick)]
-    lines.append("  - ES/RU: " + " / ".join(d["example_tasks_es"][:1] + d["example_tasks_ru"][:1]))
-    lines.append("  - near-misses: " + " / ".join(
-        f"{n['task']} → better: {n['better']} ({n['trap']})" for n in d["near_misses"][:4]))
-    return "\n".join(lines)
 
 
 JUDGE_README = """# Blind judging: v2 icon-description pilot
@@ -325,16 +277,6 @@ def levels_of(sample):
 
 
 # --- report ------------------------------------------------------------------------
-
-def wilson(k, n, z=1.96):
-    if n == 0:
-        return (float("nan"), float("nan"))
-    p = k / n
-    den = 1 + z * z / n
-    c = (p + z * z / (2 * n)) / den
-    h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / den
-    return (max(0.0, c - h), min(1.0, c + h))
-
 
 def read_jsonl(path):
     if not path.exists():

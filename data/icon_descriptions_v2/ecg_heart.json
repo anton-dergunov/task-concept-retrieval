@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "heart rate, pulse, or ECG / cardiology",
+   "meaning": "heart rate, pulse, or cardiology",
    "strength": "primary"
   },
   {
-   "meaning": "general health, medical checkup, or vital signs",
+   "meaning": "health, medical checkup, or vital signs",
    "strength": "primary"
   },
   {
-   "meaning": "cardio workout or fitness tracking",
+   "meaning": "cardio workout or aerobic fitness",
    "strength": "secondary"
   },
   {
-   "meaning": "system health monitoring or uptime status",
+   "meaning": "system health or uptime monitoring",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the interior waveform could be misread as a cracked or broken heart.",
+ "ambiguity": "Completely interchangeable in meaning and nearly identical at a glance to the heart outline with a protruding pulse line; at very small sizes, the interior line could also be misread as a cracked or broken heart.",
  "modifier_semantics": [
   {
    "modifier": "ECG pulse line across center",
@@ -166,6 +166,11 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Fix broken heart-shaped locket clasp at the jeweler",
+   "better": "jewelry / necklace or broken heart",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Learn the heart-shaped latte art pour for cappuccinos",
    "better": "coffee cup / mug",
    "trap": "property"
@@ -184,17 +189,12 @@
    "task": "Buy new running shoes with better arch support",
    "better": "running shoe / sneaker",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Fix broken heart-shaped locket clasp at the jeweler",
-   "better": "jewelry / necklace or broken heart",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a heart containing an ECG pulse line, universally understood as heart rate, cardiology, vitals, or general health tracking. It fits medical checkups, heart rate monitors, cardio training zones, and system heartbeat checks well, while distinguishing medical/fitness tasks from romantic or favorite-related plain heart icons.",
@@ -212,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "heart rate, pulse, or ECG / cardiology",
+     "strength": "primary"
+    },
+    {
+     "meaning": "general health, medical checkup, or vital signs",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cardio workout or fitness tracking",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "system health monitoring or uptime status",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the interior waveform could be misread as a cracked or broken heart.",
+   "near_misses": [
+    {
+     "task": "Buy Valentine's Day chocolates and a card for Maya",
+     "better": "plain heart, gift box, or greeting card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Learn the heart-shaped latte art pour for cappuccinos",
+     "better": "coffee cup / mug",
+     "trap": "property"
+    },
+    {
+     "task": "Check on Grandma after her hip replacement surgery",
+     "better": "phone call, person, or hospital bed",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Roast marinated artichoke hearts for Friday's antipasto platter",
+     "better": "vegetable / artichoke or cooking pan",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy new running shoes with better arch support",
+     "better": "running shoe / sneaker",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix broken heart-shaped locket clasp at the jeweler",
+     "better": "jewelry / necklace or broken heart",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cardiology"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4079,
+    "output": 665,
+    "thoughts": 0,
+    "total": 4744
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "The ECG pulse line terminates cleanly against the inner walls of a continuous, unbroken heart outline rather than protruding past the sides with a cutout gap; the two icons are completely interchangeable in meaning."
 }

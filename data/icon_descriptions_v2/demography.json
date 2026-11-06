@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "user profile or account details",
+   "meaning": "user profile, bio, or account details",
    "strength": "primary"
   },
   {
-   "meaning": "contact card or contact information",
+   "meaning": "contact card or personal information",
    "strength": "primary"
   },
   {
-   "meaning": "resume, CV, or personal bio",
+   "meaning": "resume, CV, or employee dossier",
    "strength": "secondary"
   },
   {
-   "meaning": "personal record, dossier, or employee file",
+   "meaning": "note or list assigned to a person",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic ID card, address book, or shared document icon at small sizes.",
+ "ambiguity": "Shares the identical rounded-square three-line base with the arrow, ellipsis, and plus variants, so at list size the small avatar inside the dark circle must be read closely to tell it apart from the other badged notes.",
  "modifier_semantics": [
   {
    "modifier": "circular user avatar badge at bottom right",
@@ -162,40 +162,40 @@
  ],
  "near_misses": [
   {
-   "task": "Call coni about Saturday dinner",
-   "better": "phone receiver",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Renew passport before the October trip to Japan",
-   "better": "passport booklet",
+   "task": "Export the client contact list to a CSV file",
+   "better": "square note frame with an upward-right arrow badge (export list)",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Create a new meeting notes template in Notion",
+   "better": "square note frame with a plus badge (new note or document)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call Coni about Saturday dinner",
+   "better": "phone receiver icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Write a personal reflection in the nightly journal",
-   "better": "notebook or journal",
+   "better": "bound notebook or journal icon",
    "trap": "property"
   },
   {
    "task": "Check with HR if the signed offer letter arrived",
-   "better": "envelope or contract",
+   "better": "envelope or contract icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a new leather badge holder for the office lanyard",
-   "better": "ID lanyard badge",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Schedule a 30-minute mock interview with Alex",
-   "better": "calendar or video call",
+   "better": "calendar or video call icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a text document or list with a person avatar badge, clearly representing personal information, a user profile, a contact card, or a resume/CV. It fits many common life and work tasks around updating profiles, resumes, biographies, and contact records, though it can slightly overlap with generic ID card or address book icons.",
@@ -213,6 +213,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "user profile or account details",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contact card or contact information",
+     "strength": "primary"
+    },
+    {
+     "meaning": "resume, CV, or personal bio",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal record, dossier, or employee file",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic ID card, address book, or shared document icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Call coni about Saturday dinner",
+     "better": "phone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew passport before the October trip to Japan",
+     "better": "passport booklet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write a personal reflection in the nightly journal",
+     "better": "notebook or journal",
+     "trap": "property"
+    },
+    {
+     "task": "Check with HR if the signed offer letter arrived",
+     "better": "envelope or contract",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new leather badge holder for the office lanyard",
+     "better": "ID lanyard badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule a 30-minute mock interview with Alex",
+     "better": "calendar or video call",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "export_notes",
+   "other_admission",
+   "add_notes"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6721,
+    "output": 2153,
+    "thoughts": 0,
+    "total": 8874
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Unlike the arrow, ellipsis, or plus action badges on the same three-line square frame, the bottom-right badge shows a person's head-and-shoulders silhouette, turning the note into a personal profile, bio, or contact record."
 }

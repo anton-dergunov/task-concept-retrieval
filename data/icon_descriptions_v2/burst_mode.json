@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "photo gallery or image carousel",
+   "meaning": "photo carousel, image strip, or burst photo stack",
    "strength": "primary"
   },
   {
-   "meaning": "photo album or stack of pictures",
+   "meaning": "photo gallery or picture album",
    "strength": "primary"
   },
   {
-   "meaning": "pause slideshow or video playback",
+   "meaning": "left-hand sidebar or split-view layout beside an image",
    "strength": "secondary"
   },
   {
-   "meaning": "split-view image layout or sidebar gallery",
+   "meaning": "pause slideshow or media playback",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The two vertical bars look identical to a media 'pause' symbol next to a picture, or UI layout chrome for a sidebar/carousel view.",
+ "ambiguity": "Virtually interchangeable with the mirror-image icon that places the two vertical bars on the right of the picture frame, and also overlaps with the thumbnail-squares gallery icon for general photo collection tasks.",
  "modifier_semantics": [
   {
    "modifier": "two vertical bars on the left",
@@ -161,18 +161,23 @@
  ],
  "near_misses": [
   {
-   "task": "Book mountain cabin in Chamonix for February",
-   "better": "mountain or cabin icon",
+   "task": "Create a thumbnail grid preview for the portfolio page",
+   "better": "picture frame with two small stacked squares on the right (thumbnail view) ",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add a right-side properties panel next to the photo canvas",
+   "better": "picture frame with vertical bars on the right",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Pause Netflix subscription while we are away in July",
-   "better": "pause button or subscription/TV icon",
-   "trap": "lookalike_glyph"
+   "better": "standalone pause button or TV icon",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Hang the oak picture frame in the hallway",
-   "better": "hammer/wall or single frame with hanging wire",
+   "better": "single frame with hanging wire or hammer",
    "trap": "shared_vocabulary"
   },
   {
@@ -181,20 +186,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Check photo ID expiration date before booking flights",
-   "better": "ID card or passport icon",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Send high-res headshot to conference organizers",
-   "better": "portrait/user photo icon",
+   "better": "single portrait / user photo icon",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a standard mountain-landscape picture glyph flanked by two vertical bars representing stacked slides or a carousel/gallery view. It fits tasks about photo albums, slideshows, image galleries, and UI carousels, though at small sizes the two bars can easily be misread as a 'pause' symbol next to an image.",
@@ -212,6 +212,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photo gallery or image carousel",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo album or stack of pictures",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pause slideshow or video playback",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "split-view image layout or sidebar gallery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The two vertical bars look identical to a media 'pause' symbol next to a picture, or UI layout chrome for a sidebar/carousel view.",
+   "near_misses": [
+    {
+     "task": "Book mountain cabin in Chamonix for February",
+     "better": "mountain or cabin icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pause Netflix subscription while we are away in July",
+     "better": "pause button or subscription/TV icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hang the oak picture frame in the hallway",
+     "better": "hammer/wall or single frame with hanging wire",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new 35mm prime lens for portraits",
+     "better": "camera lens or camera icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check photo ID expiration date before booking flights",
+     "better": "ID card or passport icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send high-res headshot to conference organizers",
+     "better": "portrait/user photo icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "gallery_thumbnail",
+   "art_track"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5380,
+    "output": 1161,
+    "thoughts": 0,
+    "total": 6541
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "Has two full-height vertical bars to the LEFT of the mountain picture frame (a horizontal mirror of the version with bars on the right, and distinct from the version with two small squares on the right); for general photo album or carousel tasks it is virtually interchangeable with the right-bar version."
 }

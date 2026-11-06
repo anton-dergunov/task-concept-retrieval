@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "beer / pint / ale",
+   "meaning": "beer, pint, ale, or draft drink",
    "strength": "primary"
   },
   {
-   "meaning": "pub / bar / brewery / happy hour",
+   "meaning": "brewery, beer garden, or grabbing a drink",
    "strength": "primary"
   },
   {
-   "meaning": "homebrewing / craft beer",
+   "meaning": "homebrewing or craft beer",
    "strength": "secondary"
   },
   {
-   "meaning": "root beer float / frothy drink",
+   "meaning": "root beer float or frothy beverage",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the overflowing foam could slightly resemble a cloud over a building or a chef hat, though the mug handle keeps it recognizable.",
+ "ambiguity": "Easily confused with the beer mug with a small snack dish in front when used for general pub or happy-hour outings.",
  "modifier_semantics": [],
  "domains": [
   "food",
@@ -153,14 +153,19 @@
  ],
  "near_misses": [
   {
+   "task": "Book a table at the izakaya for drinks and bar snacks",
+   "better": "beer mug with a small snack dish in front",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order pretzels and beer cheese for the pub trivia table",
+   "better": "beer mug with a small snack dish in front",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy ginger beer and limes for Moscow mules",
    "better": "cocktail glass or bottle",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order a new ceramic coffee mug for my desk",
-   "better": "coffee mug",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Bake a loaf of cheddar beer bread",
@@ -173,12 +178,7 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Pick up a bottle of Pinot Noir for dinner",
-   "better": "wine glass or bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check ID at the door for the fundraiser",
+   "task": "Check IDs at the door for the brewery fundraiser",
    "better": "ID card",
    "trap": "generic_verb"
   }
@@ -186,7 +186,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly shows a beer mug with a frothy head overflowing the rim. It fits everyday tasks around buying beer, meeting friends at a pub, organizing happy hours, or homebrewing, and is easily distinguished from coffee mugs and wine glasses by the asymmetrical foam cap.",
@@ -204,6 +204,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "beer / pint / ale",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pub / bar / brewery / happy hour",
+     "strength": "primary"
+    },
+    {
+     "meaning": "homebrewing / craft beer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "root beer float / frothy drink",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the overflowing foam could slightly resemble a cloud over a building or a chef hat, though the mug handle keeps it recognizable.",
+   "near_misses": [
+    {
+     "task": "Buy ginger beer and limes for Moscow mules",
+     "better": "cocktail glass or bottle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a new ceramic coffee mug for my desk",
+     "better": "coffee mug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Bake a loaf of cheddar beer bread",
+     "better": "bread loaf",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the invoice from the beverage distributor",
+     "better": "invoice or money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up a bottle of Pinot Noir for dinner",
+     "better": "wine glass or bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check ID at the door for the fundraiser",
+     "better": "ID card",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "beer_meal"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4066,
+    "output": 1001,
+    "thoughts": 76,
+    "total": 5143
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:13Z"
+  }
+ },
+ "distinguishing": "Shows a standalone frothy beer mug with no food dish alongside, representing beer, brewing, or a drink by itself."
 }

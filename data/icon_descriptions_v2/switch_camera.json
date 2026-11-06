@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "switch camera / flip between front and rear camera",
+   "meaning": "switch camera or flip between front and rear camera",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a circular lens, the camera outline with a top bump can slightly resemble a folder with a center tab or a briefcase at tiny sizes.",
+ "ambiguity": "At tiny sizes, the rectangular camera body with an internal arrow could be confused with the monitor input icon (bottom stand vs top hump) or a folder with a transfer arrow.",
  "modifier_semantics": [
   {
    "modifier": "horizontal double-headed arrow",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Switch the TV input to the Apple TV box",
+   "better": "monitor or TV screen with an inward-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Export the edited RAW photos to the client drive",
+   "better": "box or frame with an outward-pointing export arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Take passport photo at Walgreens",
    "better": "plain camera or ID card",
    "trap": "lookalike_glyph"
@@ -177,16 +187,6 @@
    "trap": "property"
   },
   {
-   "task": "Move the tax folders from Downloads to the NAS",
-   "better": "folder with transfer arrow",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book flights to Rome",
-   "better": "airplane",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Switch health insurance plans during open enrollment",
    "better": "health shield or swap arrows",
    "trap": "shared_vocabulary"
@@ -195,7 +195,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a camera body outline containing a horizontal double-headed arrow, a standard UI glyph for switching cameras, transferring photos, or panoramic width. While originalmente a camera-flip UI button, in a task manager it serves well for photo transfers, camera syncing, multi-cam switching, or trading camera gear.",
@@ -213,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "switch camera / flip between front and rear camera",
+     "strength": "primary"
+    },
+    {
+     "meaning": "transfer photos or sync camera files",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wide-angle or panoramic photo mode",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "exchange or trade in camera gear",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a circular lens, the camera outline with a top bump can slightly resemble a folder with a center tab or a briefcase at tiny sizes.",
+   "near_misses": [
+    {
+     "task": "Take passport photo at Walgreens",
+     "better": "plain camera or ID card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the security cameras before going to bed",
+     "better": "CCTV security camera",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a waterproof camera pouch for kayaking",
+     "better": "pouch or camera case",
+     "trap": "property"
+    },
+    {
+     "task": "Move the tax folders from Downloads to the NAS",
+     "better": "folder with transfer arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights to Rome",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Switch health insurance plans during open enrollment",
+     "better": "health shield or swap arrows",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_share",
+   "reset_tv"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5430,
+    "output": 1568,
+    "thoughts": 192,
+    "total": 7190
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Has a top viewfinder hump making it a camera body, with a symmetrical double-headed left-right arrow fully enclosed inside, unlike the monitor with an inward arrow or the solid block with an outward arrow."
 }

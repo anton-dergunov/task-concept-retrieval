@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "favorite collection, album, or group of items",
+   "meaning": "saved bookmarks, starred browser tabs, or favorite windows/items",
    "strength": "primary"
   },
   {
-   "meaning": "saved bookmarks, starred browser tabs, or reading list",
+   "meaning": "favorite collection, album, or group of items",
    "strength": "primary"
   },
   {
    "meaning": "master template, featured slide, or reusable preset",
    "strength": "secondary"
-  },
-  {
-   "meaning": "best shots or highlight selection from a photo set",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic 'copy/duplicate' icon, 'window restore' chrome, or an app/widget icon at small sizes.",
+ "ambiguity": "Nearly interchangeable with the tilted-card starred square icon, and also resembles a generic copy/duplicate or multiple-windows icon.",
  "modifier_semantics": [
   {
    "modifier": "solid five-pointed star inside the front square",
@@ -161,19 +157,24 @@
  ],
  "near_misses": [
   {
-   "task": "Leave a five-star review for the plumber on Google",
-   "better": "star rating or review speech bubble",
-   "trap": "shared_vocabulary"
+   "task": "Pick favorite wedding snapshots for the printed photo album",
+   "better": "tilted overlapping squares with star (fanned photo prints/album)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sort the rare holographic Pokemon trading cards into sleeves",
+   "better": "tilted overlapping squares with star (fanned cards/stickers)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Make two photocopies of the signed lease agreement",
-   "better": "document copy or printer icon",
+   "better": "plain overlapping pages or printer icon",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a new pack of index flashcards for Spanish vocab",
-   "better": "flashcards or language learning icon",
-   "trap": "lookalike_glyph"
+   "task": "Leave a five-star review for the plumber on Google",
+   "better": "single star rating or review speech bubble",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Review the starred emails in Gmail and reply to the accountant",
@@ -184,17 +185,12 @@
    "task": "Pay the annual renewal invoice for Readwise",
    "better": "invoice, receipt, or credit card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Watch the featured documentary on Mubi tonight",
-   "better": "film clapperboard or TV screen",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The overlapping squares with a star represent a starred collection, saved bookmarks/tabs, photo selects, or a master template. While somewhat abstract and UI-derived, it fits real digital curation tasks like culling favorite photos, organizing browser bookmarks, or building reusable templates, though it can be confused with a plain copy/duplicate icon.",
@@ -212,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "favorite collection, album, or group of items",
+     "strength": "primary"
+    },
+    {
+     "meaning": "saved bookmarks, starred browser tabs, or reading list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "master template, featured slide, or reusable preset",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "best shots or highlight selection from a photo set",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic 'copy/duplicate' icon, 'window restore' chrome, or an app/widget icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Leave a five-star review for the plumber on Google",
+     "better": "star rating or review speech bubble",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Make two photocopies of the signed lease agreement",
+     "better": "document copy or printer icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new pack of index flashcards for Spanish vocab",
+     "better": "flashcards or language learning icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Review the starred emails in Gmail and reply to the accountant",
+     "better": "email envelope or reply arrow",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the annual renewal invoice for Readwise",
+     "better": "invoice, receipt, or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Watch the featured documentary on Mubi tonight",
+     "better": "film clapperboard or TV screen",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cards_star"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4102,
+    "output": 1106,
+    "thoughts": 0,
+    "total": 5208
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Both overlapping squares are upright and axis-aligned with the back square above and to the left (like windows, tabs, or a copy/template icon), whereas the other icon tilts the back square at an angle behind the bottom-left corner; for general favorite collections, the two are largely interchangeable."
 }

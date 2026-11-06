@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "train, subway, metro, or rail transit",
+   "meaning": "train / subway / metro",
    "strength": "primary"
   },
   {
-   "meaning": "commuter rail or light rail",
+   "meaning": "commuter rail / railway transit",
    "strength": "primary"
   },
   {
-   "meaning": "public transit or commuting",
+   "meaning": "public transit / commuting",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a tram, trolley, or city bus icon, or at very small sizes resemble an old computer tower or kitchen appliance.",
+ "ambiguity": "Virtually interchangeable with the train car on a two-tiered split track base; also easily mistaken for the tram with an overhead pantograph when scanned quickly.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -150,40 +150,40 @@
  ],
  "near_misses": [
   {
+   "task": "Ride the vintage trolley car through the city center",
+   "better": "tram or streetcar with overhead pantograph",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the streetcar schedule for the museum route",
+   "better": "tram or streetcar with overhead pantograph",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Train for the October half marathon four times a week",
+   "better": "running shoe or runner",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Train the new summer interns on our ticketing workflow",
    "better": "presentation or people",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Train for the October half marathon 4x a week",
-   "better": "running shoe or runner",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Have the tailor shorten the train on the wedding dress",
-   "better": "dress or needle and thread",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Take the FlixBus from Prague to Berlin on Tuesday",
-   "better": "bus",
+   "task": "Take the long-distance coach bus from Prague to Berlin",
+   "better": "bus with two headlights and wheels",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Renew passport before booking the Eurostar trip",
-   "better": "passport",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Buy noise-cancelling headphones for the subway",
+   "task": "Buy noise-cancelling headphones for the morning subway",
    "better": "headphones",
-   "trap": "property"
+   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the front of a train or subway car on tracks with a single central headlight. It is an ideal glanceable cue for tasks involving rail tickets, subway cards, train schedules, and station pickups, though it sits close to tram and bus glyphs in a full transport icon set.",
@@ -201,6 +201,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "train, subway, metro, or rail transit",
+     "strength": "primary"
+    },
+    {
+     "meaning": "commuter rail or light rail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "public transit or commuting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a tram, trolley, or city bus icon, or at very small sizes resemble an old computer tower or kitchen appliance.",
+   "near_misses": [
+    {
+     "task": "Train the new summer interns on our ticketing workflow",
+     "better": "presentation or people",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Train for the October half marathon 4x a week",
+     "better": "running shoe or runner",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Have the tailor shorten the train on the wedding dress",
+     "better": "dress or needle and thread",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take the FlixBus from Prague to Berlin on Tuesday",
+     "better": "bus",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew passport before booking the Eurostar trip",
+     "better": "passport",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy noise-cancelling headphones for the subway",
+     "better": "headphones",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "directions_railway_2",
+   "tram"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5376,
+    "output": 1123,
+    "thoughts": 178,
+    "total": 6677
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "Shows a train cab on a single solid trapezoidal pedestal base with a slightly flatter roof and no overhead pantograph, making it functionally interchangeable with the split-base train icon and distinct from the tram."
 }

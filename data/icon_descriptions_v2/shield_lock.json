@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "security, cybersecurity, or account protection",
+   "meaning": "account security, password management, or encryption",
    "strength": "primary"
   },
   {
-   "meaning": "privacy settings or access control",
+   "meaning": "privacy settings, access control, or authentication",
    "strength": "primary"
   },
   {
-   "meaning": "password management or authentication",
+   "meaning": "cybersecurity or data protection",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely overlaps with a plain shield (protection/insurance) or a standalone padlock (lock/password), though both carry nearly identical security meanings.",
+ "ambiguity": "Functionally overlaps almost completely with the shield with a keyhole, and broadly overlaps with the shield with a checkmark for general security tasks.",
  "modifier_semantics": [
   {
    "modifier": "closed padlock",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Investigate the suspicious login alert from an unknown IP",
+   "better": "shield with exclamation mark (security alert or breach warning) ",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Review the updated GDPR data retention and privacy policy",
+   "better": "shield with info 'i' (privacy policy or security guidelines) ",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new U-lock for the commuter bike",
    "better": "bicycle lock or bicycle",
    "trap": "shared_vocabulary"
@@ -176,16 +186,6 @@
    "trap": "property"
   },
   {
-   "task": "Compare dental insurance plans before open enrollment ends",
-   "better": "tooth or medical cross",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Call the locksmith to rekey the back door deadbolt",
-   "better": "key",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new power adapter for the hallway camera",
    "better": "power plug or camera",
    "trap": "parent_topic"
@@ -194,7 +194,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A shield containing a closed padlock is the universal emblem for security, privacy, and account protection. It fits common tasks around passwords, 2FA, encryption, credit freezes, and alarm systems, though it overlaps with plain padlock and plain shield icons.",
@@ -212,6 +212,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "security, cybersecurity, or account protection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "privacy settings or access control",
+     "strength": "primary"
+    },
+    {
+     "meaning": "password management or authentication",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "home security or alarm system",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely overlaps with a plain shield (protection/insurance) or a standalone padlock (lock/password), though both carry nearly identical security meanings.",
+   "near_misses": [
+    {
+     "task": "Buy a new U-lock for the commuter bike",
+     "better": "bicycle lock or bicycle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Get the refundable security deposit back from the landlord",
+     "better": "money or house",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a waterproof lockable storage bin for the camping gear",
+     "better": "storage box",
+     "trap": "property"
+    },
+    {
+     "task": "Compare dental insurance plans before open enrollment ends",
+     "better": "tooth or medical cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the locksmith to rekey the back door deadbolt",
+     "better": "key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new power adapter for the hallway camera",
+     "better": "power plug or camera",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "encrypted",
+   "gpp_maybe",
+   "privacy_tip",
+   "verified_user",
+   "shield_moon"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9379,
+    "output": 1838,
+    "thoughts": 0,
+    "total": 11217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Contains a closed padlock with an arched shackle inside the shield, denoting locked security, encryption, or password protection, though it is nearly interchangeable in meaning with the shield containing a keyhole."
 }

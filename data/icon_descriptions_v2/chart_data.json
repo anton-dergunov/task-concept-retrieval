@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "upward trend, growth, or analytics chart",
+   "meaning": "upward trend, growth, or rising metrics",
    "strength": "primary"
   },
   {
-   "meaning": "stock market, investments, or financial performance",
+   "meaning": "stock market gains, investments, or financial performance",
    "strength": "primary"
   },
   {
-   "meaning": "metrics dashboard or statistics report",
+   "meaning": "analytics chart or statistics report",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with an unbordered trend arrow, a general line chart, or an external link / maximize box icon at very small sizes.",
+ "ambiguity": "Easily confused at a glance with the boxed zigzag line chart that has a diagonally hatched bottom band, as both show a rising three-segment polyline inside a rounded square.",
  "modifier_semantics": [
   {
    "modifier": "rounded square border",
@@ -162,13 +162,28 @@
  ],
  "near_misses": [
   {
+   "task": "Set minimum alert threshold on the server CPU graph",
+   "better": "boxed line chart with a diagonally hatched baseline band along the bottom",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add a shaded baseline floor to the revenue chart",
+   "better": "boxed line chart with a diagonally hatched baseline band along the bottom",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Open external links in a new browser window by default",
+   "better": "external link arrow exiting the corner of a box",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy chicken stock and celery for Sunday's soup",
    "better": "soup pot or broth carton",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check how much printer paper we have in stock",
-   "better": "boxes / inventory / paper ream",
+   "better": "inventory boxes or paper ream",
    "trap": "shared_vocabulary"
   },
   {
@@ -177,13 +192,8 @@
    "trap": "property"
   },
   {
-   "task": "Open links in a new browser window by default",
-   "better": "external link arrow exiting a box",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Mail signed W-9 form to the brokerage",
-   "better": "envelope or document signature",
+   "better": "envelope or document with signature",
    "trap": "parent_topic"
   },
   {
@@ -195,7 +205,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an upward-trending zigzag arrow framed inside a rounded square, universally understood as growth, analytics, metrics, or stock market performance. It is a strong fit for finance, business analytics, and personal tracking tasks, though it sits close to unbordered trend arrows and line chart icons.",
@@ -213,6 +223,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upward trend, growth, or analytics chart",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stock market, investments, or financial performance",
+     "strength": "primary"
+    },
+    {
+     "meaning": "metrics dashboard or statistics report",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "progress or performance improvement",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with an unbordered trend arrow, a general line chart, or an external link / maximize box icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy chicken stock and celery for Sunday's soup",
+     "better": "soup pot or broth carton",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check how much printer paper we have in stock",
+     "better": "boxes / inventory / paper ream",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a high-growth potting mix for the monstera",
+     "better": "potted plant or soil bag",
+     "trap": "property"
+    },
+    {
+     "task": "Open links in a new browser window by default",
+     "better": "external link arrow exiting a box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Mail signed W-9 form to the brokerage",
+     "better": "envelope or document signature",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Track package from Zappos",
+     "better": "delivery box or shipping truck",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "data_thresholding"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4082,
+    "output": 1207,
+    "thoughts": 0,
+    "total": 5289
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "Shows a rising zigzag line with a pointed arrowhead at the upper-right tip inside a plain square frame (no hatched band along the bottom), emphasizing upward growth, rising trends, or increasing values rather than a chart with a baseline or floor limit."
 }

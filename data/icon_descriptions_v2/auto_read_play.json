@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "video message, async screen recording, or Loom clip",
+   "meaning": "voice note, audio message, or playable media clip in chat",
    "strength": "primary"
   },
   {
-   "meaning": "voice note or audio message in chat",
+   "meaning": "async screen recording, video message, or Loom clip",
    "strength": "primary"
   },
   {
-   "meaning": "voicemail or recorded message",
+   "meaning": "voicemail or recorded message playback",
    "strength": "secondary"
   },
   {
-   "meaning": "video comment or media chat thread",
+   "meaning": "video comment or media attachment in a thread",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the bottom-left pointer tail can be overlooked, making it look like a standard video player or YouTube logo.",
+ "ambiguity": "Easily confused with the speech bubble containing a video camera when tasks involve recorded video messages, and at small sizes the bottom-left tail can be overlooked, making it look like a plain video player.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing play triangle inside the bubble",
@@ -161,9 +161,14 @@
  ],
  "near_misses": [
   {
-   "task": "Join live Zoom call with the Amsterdam team at 10am",
-   "better": "video camera or headset icon (live call, not recorded message)",
-   "trap": "shared_vocabulary"
+   "task": "Join live Zoom video chat with the Amsterdam team at 10am",
+   "better": "speech bubble containing a video camera (live video call, not a playable recorded message)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "FaceTime Mom and Dad to show them the new apartment",
+   "better": "speech bubble containing a video camera (interactive video chat)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Watch the new 2-hour Dune documentary on YouTube tonight",
@@ -173,7 +178,7 @@
   {
    "task": "Text the landlord back about the leaky radiator valve",
    "better": "plain speech bubble with text lines or dots",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a USB lapel microphone for clearer Loom recordings",
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a chat bubble with a play button, clearly signifying a playable message such as an async video walkthrough (Loom, Marco Polo), a voice note, or a voicemail. It fits modern communication and remote-work tasks very well, though at small sizes the bubble's corner tail can be missed and mistaken for a plain video player.",
@@ -214,6 +219,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video message, async screen recording, or Loom clip",
+     "strength": "primary"
+    },
+    {
+     "meaning": "voice note or audio message in chat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "voicemail or recorded message",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "video comment or media chat thread",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the bottom-left pointer tail can be overlooked, making it look like a standard video player or YouTube logo.",
+   "near_misses": [
+    {
+     "task": "Join live Zoom call with the Amsterdam team at 10am",
+     "better": "video camera or headset icon (live call, not recorded message)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Watch the new 2-hour Dune documentary on YouTube tonight",
+     "better": "TV, movie clapperboard, or plain video player without speech bubble",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Text the landlord back about the leaky radiator valve",
+     "better": "plain speech bubble with text lines or dots",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a USB lapel microphone for clearer Loom recordings",
+     "better": "microphone icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check the release schedule for the client tutorial series",
+     "better": "calendar icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the annual invoice for our Vimeo team account",
+     "better": "credit card or invoice icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "video_chat"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 1172,
+    "thoughts": 0,
+    "total": 5245
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Contains a right-pointing play triangle inside the speech bubble rather than a camcorder, representing a playable voice or media clip sent in chat rather than a live video call."
 }

@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "shocked, distressed, or unhappy face",
+   "meaning": "shocked, horrified, or acutely distressed face (panic, fear, trauma, crying)",
    "strength": "primary"
   },
   {
-   "meaning": "negative mood, sadness, anxiety, or grief",
+   "meaning": "severe negative mood, anxiety, or emotional crisis",
    "strength": "primary"
   },
   {
-   "meaning": "customer complaint, bad experience, or negative feedback",
+   "meaning": "very bad experience, severe complaint, or lowest rating on a feedback scale",
    "strength": "secondary"
   },
   {
-   "meaning": "North American Type B electrical outlet socket",
+   "meaning": "North American three-prong electrical outlet or socket",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a standard three-prong North American electrical outlet or a plain frowning face at small sizes.",
+ "ambiguity": "Easily confused at list size with the simple line-frown sad face (which means general sadness or mild dissatisfaction rather than open-mouthed shock or distress) and with a round three-prong electrical socket.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -153,6 +153,16 @@
  ],
  "near_misses": [
   {
+   "task": "Log today's mild low mood in daily journal",
+   "better": "frowning face with simple curved-line mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Follow up on slightly dissatisfied customer survey responses",
+   "better": "frowning face with simple curved-line mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Replace the cracked three-prong wall outlet behind the sofa",
    "better": "electrical outlet / plug",
    "trap": "lookalike_glyph"
@@ -168,16 +178,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pick up baby pacifier clips at Target",
-   "better": "baby / pacifier",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Wash teatral masks after Saturday rehearsal",
-   "better": "theater masks",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the overdue gas bill before they add a late fee",
    "better": "bill / invoice",
    "trap": "property"
@@ -186,7 +186,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a distressed, shocked, or frowning face emoticon with an open downturning mouth. It fits tasks centered on mood tracking, anxiety/depression logging, grief support, or handling negative customer feedback and complaints, though it looks very similar to other sad-face icons and to a North American electrical socket.",
@@ -204,6 +204,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shocked, distressed, or unhappy face",
+     "strength": "primary"
+    },
+    {
+     "meaning": "negative mood, sadness, anxiety, or grief",
+     "strength": "primary"
+    },
+    {
+     "meaning": "customer complaint, bad experience, or negative feedback",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "North American Type B electrical outlet socket",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a standard three-prong North American electrical outlet or a plain frowning face at small sizes.",
+   "near_misses": [
+    {
+     "task": "Replace the cracked three-prong wall outlet behind the sofa",
+     "better": "electrical outlet / plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy horror movie tickets for Friday night",
+     "better": "movie ticket / film clapper",
+     "trap": "property"
+    },
+    {
+     "task": "Read The Great Depression chapter for AP History",
+     "better": "book / history",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up baby pacifier clips at Target",
+     "better": "baby / pacifier",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Wash teatral masks after Saturday rehearsal",
+     "better": "theater masks",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the overdue gas bill before they add a late fee",
+     "better": "bill / invoice",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_dissatisfied"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 1112,
+    "thoughts": 0,
+    "total": 5185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "This face has a solid filled semicircular open mouth (curved on top, flat at the bottom) showing shock, horror, or acute distress, whereas the look-alike has a simple curved line for a closed frowning mouth; functionally, both represent negative mood or dissatisfaction and are nearly interchangeable at small sizes."
 }

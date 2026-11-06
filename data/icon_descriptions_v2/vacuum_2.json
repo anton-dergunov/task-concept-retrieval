@@ -7,8 +7,12 @@
  },
  "readings": [
   {
-   "meaning": "webcam / web camera / security camera",
+   "meaning": "webcam / desktop camera / security camera",
    "strength": "primary"
+  },
+  {
+   "meaning": "subway or train in a circular tunnel",
+   "strength": "secondary"
   },
   {
    "meaning": "video call / livestream",
@@ -17,13 +21,9 @@
   {
    "meaning": "car steering wheel",
    "strength": "secondary"
-  },
-  {
-   "meaning": "subway or train in a tunnel",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it is easily mistaken for a car steering wheel with two bottom spokes, a front-facing train inside a round tunnel with tracks, or an abstract user avatar.",
+ "ambiguity": "Easily confused with the look-alike icon that has dotted diagonal lines outside the bottom of the circle, as well as a car steering wheel with two bottom spokes or a front-facing train in a tunnel.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,19 +154,24 @@
  ],
  "near_misses": [
   {
-   "task": "Pack the mirrorless camera and 35mm lens for the coast trip",
-   "better": "DSLR / photo camera",
-   "trap": "shared_vocabulary"
+   "task": "Ride the underground metro line to the airport terminal",
+   "better": "train in a tunnel with dotted tracks extending outside the circle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Inspect the railway tunnel approach and ballast drainage",
+   "better": "tunnel circle with dotted track lines extending from the bottom",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Stitch a leather cover onto the worn car steering wheel",
-   "better": "car steering wheel",
+   "better": "three-spoke car steering wheel",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Take the night train through the Channel Tunnel to Paris",
-   "better": "train / locomotive",
-   "trap": "lookalike_glyph"
+   "task": "Pack the mirrorless camera and 35mm lens for the coast trip",
+   "better": "DSLR / photo camera",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Book a camera-ready haircut before the company offsite",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "webcam / web camera / security camera",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video call / livestream",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "car steering wheel",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "subway or train in a tunnel",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it is easily mistaken for a car steering wheel with two bottom spokes, a front-facing train inside a round tunnel with tracks, or an abstract user avatar.",
+   "near_misses": [
+    {
+     "task": "Pack the mirrorless camera and 35mm lens for the coast trip",
+     "better": "DSLR / photo camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Stitch a leather cover onto the worn car steering wheel",
+     "better": "car steering wheel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the night train through the Channel Tunnel to Paris",
+     "better": "train / locomotive",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a camera-ready haircut before the company offsite",
+     "better": "scissors / haircut",
+     "trap": "property"
+    },
+    {
+     "task": "Order a gooseneck desk lamp for the home office",
+     "better": "desk lamp",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Watch the recorded product demo from yesterday's meeting",
+     "better": "play button / video file",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "vacuum_2_on"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4064,
+    "output": 1120,
+    "thoughts": 135,
+    "total": 5319
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "A self-contained outer circle with no external dots, making it read more cleanly as a round desktop webcam or steering wheel than the version with dotted track lines extending outside the ring."
 }

@@ -17,11 +17,15 @@
    "strength": "primary"
   },
   {
+   "meaning": "high charge / 80% or nearly full battery",
+   "strength": "secondary"
+  },
+  {
    "meaning": "energy / battery health",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable from 50% or 100% battery icons at small sizes.",
+ "ambiguity": "Virtually indistinguishable at small sizes from the two-thirds-filled and half-filled battery icons, and interchangeable with them for general battery tasks.",
  "modifier_semantics": [
   {
    "modifier": "three-quarters solid fill level",
@@ -157,9 +161,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small rechargeable headlamp for camping",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Drain camera batteries to 50% before long-term storage",
+   "better": "half-filled battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Keep e-bike battery around two-thirds charge in the garage",
+   "better": "two-thirds filled battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up cordless Makita drill from brother's garage",
@@ -177,11 +186,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pay the monthly ConEd electric bill before Friday",
-   "better": "invoice / lightning bolt",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a braided 2m USB-C cable for the nightstand",
    "better": "cable / plug",
    "trap": "parent_topic"
@@ -190,7 +194,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a standard horizontal battery icon filled to roughly 75%. It is an immediately recognizable symbol for tasks involving buying, charging, testing, or recycling batteries and power banks, though it overlaps heavily with other battery-level variants in the same icon set.",
@@ -208,6 +212,88 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / power cell",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "energy / battery health",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable from 50% or 100% battery icons at small sizes.",
+   "near_misses": [
+    {
+     "task": "Pick up cordless Makita drill from brother's garage",
+     "better": "power drill",
+     "trap": "property"
+    },
+    {
+     "task": "Practice rudiments for 20 minutes on the drum battery",
+     "better": "drum / drumsticks",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the neuropsychological test battery results with Dr. Evans",
+     "better": "medical chart / clipboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly ConEd electric bill before Friday",
+     "better": "invoice / lightning bolt",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a braided 2m USB-C cable for the nightstand",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_4",
+   "battery_android_5"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5291,
+    "output": 1571,
+    "thoughts": 120,
+    "total": 6982
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:29Z"
+  }
+ },
+ "distinguishing": "Filled roughly three-quarters to four-fifths (80%) from the left, leaving only a narrow vertical white sliver on the right; interchangeable with the half-filled and two-thirds-filled battery icons unless a high/nearly-full charge is specifically meant."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "buy, add, or replace batteries",
+   "meaning": "buy, add, or install new batteries",
    "strength": "primary"
   },
   {
-   "meaning": "charge battery or add backup power",
+   "meaning": "charge battery or add backup power / power bank",
    "strength": "primary"
   },
   {
-   "meaning": "battery saver mode",
+   "meaning": "enable battery saver or extended battery mode",
    "strength": "secondary"
   },
   {
-   "meaning": "medical bottle or vial (at very small sizes)",
+   "meaning": "medical bottle or pharmacy vial (at very small sizes)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the upright cylinder with a top cap and plus sign can resemble a medicine bottle or pharmacy vial.",
+ "ambiguity": "Could be confused with the battery with a checkmark when a task is about checking battery status rather than adding or buying batteries; at small sizes, the cylinder with a cap and plus sign can also resemble a medicine bottle.",
  "modifier_semantics": [
   {
    "modifier": "plus sign at bottom right",
@@ -161,13 +161,13 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Test the smoke detector batteries in the hallway",
+   "better": "battery with a checkmark",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Refill prescription bottle at the pharmacy before Friday",
-   "better": "pill bottle",
+   "task": "Verify laptop battery health and cycle count before warranty expires",
+   "better": "battery with a checkmark",
    "trap": "lookalike_glyph"
   },
   {
@@ -212,6 +212,86 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "battery_saver"
- }
+  "alias_of": "battery_saver",
+  "guard": {
+   "dropped": {
+    "near_misses": 2
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "buy, add, or replace batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charge battery or add backup power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery saver mode",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "medical bottle or vial (at very small sizes)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the upright cylinder with a top cap and plus sign can resemble a medicine bottle or pharmacy vial.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric power bill online",
+     "better": "invoice or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice drum battery rudiments for twenty minutes",
+     "better": "drums",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check why the cordless vacuum keeps cutting out on high mode",
+     "better": "vacuum cleaner",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Mount the solar panel on the shed roof",
+     "better": "solar panel",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_status_good"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4003,
+    "output": 1002,
+    "thoughts": 0,
+    "total": 5005
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Has a plus sign badge at the bottom right instead of a checkmark, indicating adding, buying, charging, or extending battery power rather than verifying or checking it."
 }

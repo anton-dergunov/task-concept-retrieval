@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "home water supply, plumbing, or water bill",
+   "meaning": "home water supply, plumbing, or water utility bill",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "water heater or home heating oil",
+   "meaning": "home water leak detector or moisture sensor",
    "strength": "secondary"
   },
   {
-   "meaning": "smart home leak detector or moisture sensor",
+   "meaning": "water heater or home heating oil",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the half-filled droplet can look like a flame (heating/gas) or a location pin inside a house.",
+ "ambiguity": "At small sizes, the half-filled droplet can look like a flame (heating/gas), a location pin, or the nested inner shape of the folded-ribbon smart home house icon.",
  "modifier_semantics": [
   {
    "modifier": "half-filled water drop inside",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set up the new Google Nest smart speaker in the kitchen",
+   "better": "folded-ribbon smart home house logo (Google Home / smart home)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure evening routines in the Google Home app",
+   "better": "folded-ribbon smart home house logo (Google Home / smart home)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy waterproof sealant for the balcony tiles",
    "better": "paint can or brush",
    "trap": "property"
@@ -177,19 +187,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Bleed the radiators and check the gas boiler pressure",
-   "better": "flame or radiator icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Call the insurance agent to add flood coverage",
    "better": "phone or shield icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check the weather forecast for rain this weekend",
-   "better": "rain cloud",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -213,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "home water supply, plumbing, or water bill",
+     "strength": "primary"
+    },
+    {
+     "meaning": "indoor humidity, humidifier, or dehumidifier",
+     "strength": "primary"
+    },
+    {
+     "meaning": "water heater or home heating oil",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smart home leak detector or moisture sensor",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the half-filled droplet can look like a flame (heating/gas) or a location pin inside a house.",
+   "near_misses": [
+    {
+     "task": "Buy waterproof sealant for the balcony tiles",
+     "better": "paint can or brush",
+     "trap": "property"
+    },
+    {
+     "task": "Water the houseplants in the living room",
+     "better": "houseplant or watering can",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drink at least two liters of water while working from home",
+     "better": "water bottle or glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Bleed the radiators and check the gas boiler pressure",
+     "better": "flame or radiator icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the insurance agent to add flood coverage",
+     "better": "phone or shield icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the weather forecast for rain this weekend",
+     "better": "rain cloud",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "home_app_logo"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4023,
+    "output": 1017,
+    "thoughts": 0,
+    "total": 5040
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:47Z"
+  }
+ },
+ "distinguishing": "A sharp-cornered pentagon house outline containing a half-filled water drop in the center, unlike the rounded folded-ribbon house logo without a droplet."
 }

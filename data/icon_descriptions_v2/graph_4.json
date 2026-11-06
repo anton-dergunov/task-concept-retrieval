@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "hierarchy / tree structure / taxonomy",
+   "meaning": "hierarchy, tree structure, or taxonomy",
    "strength": "primary"
   },
   {
-   "meaning": "org chart / team structure / delegation",
+   "meaning": "org chart, team structure, or delegation",
    "strength": "primary"
   },
   {
-   "meaning": "network hub / distribution / branching",
+   "meaning": "network hub, distribution, or fan-out",
    "strength": "secondary"
   },
   {
-   "meaning": "family tree / genealogy",
+   "meaning": "family tree or genealogy",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic share icon, a molecular structure, or a tripod/claw at very small sizes.",
+ "ambiguity": "Virtually interchangeable with the other four-node hierarchy icon (larger top ring over three horizontally aligned bottom rings), and easily mistaken for the three-node Y-junction network/molecule icon at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -154,19 +154,24 @@
  ],
  "near_misses": [
   {
-   "task": "Prune the apple tree branches in the backyard",
-   "better": "botanical tree or pruning shears",
-   "trap": "shared_vocabulary"
+   "task": "Study covalent bonding models for the organic chemistry exam",
+   "better": "three rings meeting at a central Y-junction (molecule / chemical bond)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Share the vacation photo album with the family group",
-   "better": "share arrow or photo album",
+   "task": "Configure peer-to-peer mesh routing between the three studio nodes",
+   "better": "three-node Y-junction network glyph",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Pack the camera tripod for the weekend landscape shoot",
    "better": "camera tripod",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Prune the apple tree branches in the backyard",
+   "better": "botanical tree or pruning shears",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Book flights for the family reunion in Chicago",
@@ -187,7 +192,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a one-to-many hierarchical tree structure (one parent node connected to three child nodes). It fits tasks involving org charts, sitemaps, taxonomies, folder structures, and genealogy, though it could occasionally be mistaken for a share node icon or a tripod at small sizes.",
@@ -205,6 +210,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hierarchy / tree structure / taxonomy",
+     "strength": "primary"
+    },
+    {
+     "meaning": "org chart / team structure / delegation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "network hub / distribution / branching",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "family tree / genealogy",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic share icon, a molecular structure, or a tripod/claw at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Prune the apple tree branches in the backyard",
+     "better": "botanical tree or pruning shears",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Share the vacation photo album with the family group",
+     "better": "share arrow or photo album",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack the camera tripod for the weekend landscape shoot",
+     "better": "camera tripod",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights for the family reunion in Chicago",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the new git branch passes CI tests",
+     "better": "git branch icon or checkmark",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy hierarchical tab dividers for the tax binder",
+     "better": "binder or folder tabs",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "network_node",
+   "tenancy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5365,
+    "output": 1778,
+    "thoughts": 185,
+    "total": 7328
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Shows one top ring branching directly into three bottom rings arranged in a curved arc with all four rings the same size; it is semantically interchangeable with the flat-bottomed hierarchy tree with a larger top ring, and differs from the three-node Y-junction by having a fourth middle-bottom node."
 }

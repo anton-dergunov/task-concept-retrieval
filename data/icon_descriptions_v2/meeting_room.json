@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
+   "meaning": "sliding door / pocket door",
+   "strength": "secondary"
+  },
+  {
    "meaning": "room / office / interior space",
    "strength": "secondary"
   },
   {
    "meaning": "leave / exit / check out",
    "strength": "secondary"
-  },
-  {
-   "meaning": "open / welcome / access",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Without an arrow, it can represent a physical door, a room, or the abstract action of entering/exiting.",
+ "ambiguity": "Interchangeable at a glance with the angled hinged open door icon for general doorway, room, or entrance tasks.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Oil the squeaky hinges on the bedroom door",
+   "better": "angled hinged door in rounded frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Install a rubber doorstop behind the swinging front door",
+   "better": "angled hinged door in rounded frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cut two spare house keys for the pet sitter",
    "better": "key",
    "trap": "shared_vocabulary"
@@ -174,11 +184,6 @@
    "trap": "property"
   },
   {
-   "task": "Log out of all shared Netflix devices",
-   "better": "logout arrow / tv",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a roll of painters tape and a 2-inch angled brush",
    "better": "paintbrush",
    "trap": "parent_topic"
@@ -187,7 +192,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a partially open door with a doorknob in a doorframe. It fits tasks centered on physical doors, doorways, rooms, and hotel checkouts, though it overlaps slightly with logout/exit icons that include an arrow.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "door / doorway / entrance",
+     "strength": "primary"
+    },
+    {
+     "meaning": "room / office / interior space",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "leave / exit / check out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "open / welcome / access",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without an arrow, it can represent a physical door, a room, or the abstract action of entering/exiting.",
+   "near_misses": [
+    {
+     "task": "Cut two spare house keys for the pet sitter",
+     "better": "key",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the deadbolt on the side garage entrance",
+     "better": "lock / padlock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge the Ring video doorbell battery",
+     "better": "bell / camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Ask the courier to leave the wine case at the front door",
+     "better": "package / box",
+     "trap": "property"
+    },
+    {
+     "task": "Log out of all shared Netflix devices",
+     "better": "logout arrow / tv",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a roll of painters tape and a 2-inch angled brush",
+     "better": "paintbrush",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "door_open"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4026,
+    "output": 1143,
+    "thoughts": 0,
+    "total": 5169
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:23Z"
+  }
+ },
+ "distinguishing": "This icon shows a flat, un-angled rectangular door panel offset from a sharp-cornered frame with a gap in the bottom threshold (like a sliding door), whereas the other shows a hinged door angled in perspective inside a rounded frame; in meaning, the two are interchangeable for general door or room tasks."
 }

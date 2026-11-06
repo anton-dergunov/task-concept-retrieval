@@ -17,15 +17,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "share or publish photo",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "photo backup to cloud",
+   "meaning": "publish or back up photos to cloud",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic file upload icon or an external link icon if the mountain peaks inside the frame are hard to make out at very small sizes.",
+ "ambiguity": "Overlaps conceptually with the picture frame with a plus sign when adding an image to a platform involves uploading it.",
  "modifier_semantics": [
   {
    "modifier": "upward arrow in top right corner",
@@ -158,33 +154,33 @@
  ],
  "near_misses": [
   {
-   "task": "Frame the mountain landscape print for the hallway",
-   "better": "picture frame or hammer",
+   "task": "Create a new photo album for the Japan trip",
+   "better": "picture frame with plus sign (new photo/album)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Take passport photos at Walgreens",
-   "better": "camera",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Upload the signed PDF contract to DocuSign",
-   "better": "document upload",
-   "trap": "generic_verb"
+   "task": "Insert team photos into the slide deck",
+   "better": "picture frame with plus sign (insert image)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Download the wedding gallery before the link expires",
-   "better": "image download (down arrow) or photo",
+   "better": "image with downward arrow (download image)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Upgrade the Lightroom cloud storage plan to 1TB",
-   "better": "cloud storage or credit card",
+   "task": "Upload the signed PDF contract to DocuSign",
+   "better": "document upload icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Take passport photos at Walgreens",
+   "better": "camera icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new SD card reader for the trip",
-   "better": "memory card or adapter",
+   "better": "memory card or adapter icon",
    "trap": "parent_topic"
   }
  ],
@@ -211,6 +207,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload photo or image",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export picture or graphic",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "share or publish photo",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "photo backup to cloud",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic file upload icon or an external link icon if the mountain peaks inside the frame are hard to make out at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Frame the mountain landscape print for the hallway",
+     "better": "picture frame or hammer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take passport photos at Walgreens",
+     "better": "camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upload the signed PDF contract to DocuSign",
+     "better": "document upload",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Download the wedding gallery before the link expires",
+     "better": "image download (down arrow) or photo",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upgrade the Lightroom cloud storage plan to 1TB",
+     "better": "cloud storage or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new SD card reader for the trip",
+     "better": "memory card or adapter",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "add_photo_alternate"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4034,
+    "output": 1012,
+    "thoughts": 0,
+    "total": 5046
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Has an upward-pointing arrow in the top-right corner of the mountain picture frame rather than a plus sign, specifically indicating uploading, exporting, or backing up an image rather than inserting or creating one."
 }

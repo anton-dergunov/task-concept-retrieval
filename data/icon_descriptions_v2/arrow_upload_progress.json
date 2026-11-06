@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the dashed right half of the circle barely registers, making it look like a plain up-arrow button; it also resembles a WhatsApp/Instagram status ring or a directional north indicator.",
+ "ambiguity": "Nearly indistinguishable at list size from the up-arrow inside a fully dashed circle, and both look like a plain circled up-arrow.",
  "modifier_semantics": [
   {
    "modifier": "half-solid half-dashed circular ring",
@@ -158,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Queue raw photo batch for overnight upload",
+   "better": "up-arrow inside a fully dashed circle (pending or queued upload)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hike up North Dome via Indian Rock",
+   "better": "mountain or compass north icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update marital status with HR",
    "better": "person or ID card icon",
    "trap": "generic_verb"
@@ -173,19 +183,9 @@
    "trap": "property"
   },
   {
-   "task": "Hike up North Dome via Indian Rock",
-   "better": "mountain or hiking boot icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new 4TB SSD at Micro Center",
    "better": "hard drive icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Pick up dry cleaning on the way uptown",
-   "better": "shirt or hanger icon",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -211,6 +211,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload or backup in progress",
+     "strength": "primary"
+    },
+    {
+     "meaning": "software update or upgrade",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ephemeral status or story post",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "deploy or publish build",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the dashed right half of the circle barely registers, making it look like a plain up-arrow button; it also resembles a WhatsApp/Instagram status ring or a directional north indicator.",
+   "near_misses": [
+    {
+     "task": "Update marital status with HR",
+     "better": "person or ID card icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Upgrade economy seat to exit row on the Tokyo flight",
+     "better": "airplane or seat icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a high-upload-speed fibre plan for the flat",
+     "better": "wifi or router icon",
+     "trap": "property"
+    },
+    {
+     "task": "Hike up North Dome via Indian Rock",
+     "better": "mountain or hiking boot icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new 4TB SSD at Micro Center",
+     "better": "hard drive icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up dry cleaning on the way uptown",
+     "better": "shirt or hanger icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arrow_upload_ready"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 1029,
+    "thoughts": 0,
+    "total": 5088
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:23Z"
+  }
+ },
+ "distinguishing": "The circular border is half-solid on the left and half-dashed on the right, indicating an upload, update, or status ring that is partially complete or in progress, though in a task list it is practically interchangeable with the fully-dashed version."
 }

@@ -15,7 +15,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "job / career / portfolio",
+   "meaning": "job / career / single project",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Lacks interior lines or clasps, so it sits equally between an office briefcase and a travel suitcase; at very small sizes it could briefly look like a padlock or shopping bag.",
+ "ambiguity": "Nearly interchangeable in meaning with the briefcase with a center dot, and easily confused with the stacked briefcases when singular vs. plural is not obvious.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -152,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Compare all active client project portfolios",
+   "better": "stacked briefcases",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Complete the safety inspection checklist on the clipboard",
+   "better": "clipboard with top clip",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book flight to Chicago for the sales conference",
    "better": "airplane",
    "trap": "shared_vocabulary"
@@ -167,25 +177,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Buy a combination padlock for the gym locker",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check work email before 9am",
    "better": "envelope / email",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Put on out-of-office auto-reply for next week",
-   "better": "calendar / mail",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A plain rectangular case with a top handle is universally read as either a suitcase (luggage/packing) or a briefcase (work/career). It is great for tasks about physical bags, packing for trips, or general career/job-hunting headings, though a suitcase icon with wheels or a briefcase with clasps would distinguish the two senses more sharply.",
@@ -203,6 +203,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "briefcase / work / business",
+     "strength": "primary"
+    },
+    {
+     "meaning": "suitcase / luggage / packing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "job / career / portfolio",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "carrying case / toolkit",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Lacks interior lines or clasps, so it sits equally between an office briefcase and a travel suitcase; at very small sizes it could briefly look like a padlock or shopping bag.",
+   "near_misses": [
+    {
+     "task": "Book flight to Chicago for the sales conference",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a travel-sized hair dryer",
+     "better": "hair dryer",
+     "trap": "property"
+    },
+    {
+     "task": "Finish the quarterly revenue spreadsheet for work",
+     "better": "spreadsheet / chart",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a combination padlock for the gym locker",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check work email before 9am",
+     "better": "envelope / email",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Put on out-of-office auto-reply for next week",
+     "better": "calendar / mail",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cases",
+   "content_paste",
+   "enterprise"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6697,
+    "output": 1916,
+    "thoughts": 115,
+    "total": 8728
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:56Z"
+  }
+ },
+ "distinguishing": "A single, completely empty rectangular briefcase outline with a top handle—lacking the stacked backing line of the multi-case icon and the center dot of the latched briefcase."
 }

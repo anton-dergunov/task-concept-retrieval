@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "D-pad left button / directional pad input",
+   "meaning": "D-pad left button pressed / leftward directional input",
    "strength": "primary"
   },
   {
-   "meaning": "game controller / video gaming",
+   "meaning": "video game controller / gaming",
    "strength": "primary"
   },
   {
-   "meaning": "remote control navigation buttons",
+   "meaning": "remote control navigation buttons (left)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small list sizes, the solid left button versus hollow buttons is hard to distinguish from a generic D-pad or decorative cross.",
+ "ambiguity": "At small list sizes, easily mistaken for the neutral four-way D-pad or the D-pads with up, down, or right pressed.",
  "modifier_semantics": [
   {
    "modifier": "solid filled left button",
@@ -154,19 +154,24 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the unresponsive right button on the TV remote navigation pad",
+   "better": "D-pad with right button filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Assign inventory menu to the D-pad up button",
+   "better": "D-pad with top button filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Organize retro game controllers in the media console drawer",
+   "better": "neutral D-pad with all four buttons outlined",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Turn left onto Oak Street when picking up the dry cleaning",
    "better": "left turn arrow or map route icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Restock the first aid kit in the trunk before the camping trip",
-   "better": "medical cross / first aid kit icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check the compass bearing for the ridge trail",
-   "better": "compass rose icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy HDMI 2.1 cable for the PS5",
@@ -182,7 +187,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a four-piece segmented D-pad (like a PlayStation directional pad) with the left button highlighted. While specific UI prompt icons for individual D-pad directions are niche, it serves well as a recognizable symbol for controller repair, input mapping, and general video gaming tasks.",
@@ -200,6 +205,88 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "D-pad left button / directional pad input",
+     "strength": "primary"
+    },
+    {
+     "meaning": "game controller / video gaming",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remote control navigation buttons",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small list sizes, the solid left button versus hollow buttons is hard to distinguish from a generic D-pad or decorative cross.",
+   "near_misses": [
+    {
+     "task": "Turn left onto Oak Street when picking up the dry cleaning",
+     "better": "left turn arrow or map route icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Restock the first aid kit in the trunk before the camping trip",
+     "better": "medical cross / first aid kit icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the compass bearing for the ridge trail",
+     "better": "compass rose icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy HDMI 2.1 cable for the PS5",
+     "better": "cable / plug icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Make sure the new indie platformer has full controller support before buying",
+     "better": "video game / shopping cart icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "gamepad_up",
+   "gamepad_down",
+   "gamepad_right",
+   "games"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8076,
+    "output": 2572,
+    "thoughts": 0,
+    "total": 10648
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "The left button of the four-way directional pad is solid black while the top, bottom, and right buttons are outlined, indicating the 'left' direction is pressed; for general gaming tasks, it is virtually interchangeable with the others."
 }

@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "wall light switch or dimmer switch",
+   "meaning": "wall light switch or dimmer switch (especially in the off/down position)",
    "strength": "primary"
   },
   {
-   "meaning": "smart home wall switch",
-   "strength": "primary"
-  },
-  {
-   "meaning": "electrical wall plate or outlet cover",
+   "meaning": "turn off lights or power down electrical switches",
    "strength": "secondary"
   },
   {
-   "meaning": "tablet or smartphone with screen symbol",
+   "meaning": "smart home wall switch or electrical wall plate",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the outer rounded rectangle and top/bottom screw dots strongly resemble a tablet or old smartphone with a camera and home button.",
+ "ambiguity": "Nearly identical to the wall switch with the toggle in the upper (on) position, and at small sizes the outer rounded rectangle and top/bottom screw dots resemble a tablet or old smartphone.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -42,11 +38,6 @@
   "label mystery wall switches"
  ],
  "example_tasks": [
-  {
-   "task": "Replace hallway light switch",
-   "parent": "",
-   "domain": "home"
-  },
   {
    "task": "Lutron Caseta dimmer switches",
    "parent": "",
@@ -168,24 +159,29 @@
  ],
  "near_misses": [
   {
+   "task": "Turn on the porch light before guests arrive at 7pm",
+   "better": "wall light switch toggled up (on position) or glowing light bulb",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Charge the iPad mini and download episodes for the road trip",
+   "better": "tablet computer",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Switch car insurance before renewal on the 15th",
-   "better": "car or shield with arrows",
+   "better": "car or insurance shield with arrows",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a Nintendo Switch dock for the bedroom TV",
-   "better": "game controller",
+   "better": "game controller or handheld console",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Configure VLANs on the 8-port managed network switch",
    "better": "network switch or ethernet port",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the cracked screen protector on the iPad",
-   "better": "tablet",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy 2700K warm white LED bulbs for the living room",
@@ -201,7 +197,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a North American-style wall light switch plate with two screw holes and a central rocker switch toggled to one side. It is a specific fit for DIY home electrical tasks and smart home switch installations, though at small sizes the outer bezel and screw dots can easily be mistaken for a tablet or old smartphone.",
@@ -221,6 +217,92 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1,
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "wall light switch or dimmer switch",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smart home wall switch",
+     "strength": "primary"
+    },
+    {
+     "meaning": "electrical wall plate or outlet cover",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tablet or smartphone with screen symbol",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the outer rounded rectangle and top/bottom screw dots strongly resemble a tablet or old smartphone with a camera and home button.",
+   "near_misses": [
+    {
+     "task": "Switch car insurance before renewal on the 15th",
+     "better": "car or shield with arrows",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a Nintendo Switch dock for the bedroom TV",
+     "better": "game controller",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Configure VLANs on the 8-port managed network switch",
+     "better": "network switch or ethernet port",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy 2700K warm white LED bulbs for the living room",
+     "better": "light bulb",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a bedside lamp with a dimmer switch on the cord",
+     "better": "table lamp",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "switch_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4157,
+    "output": 1144,
+    "thoughts": 120,
+    "total": 5421
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "The inner white square of the rocker/toggle is in the bottom half (switched down / OFF position), whereas the other icon has it in the top half (switched up / ON position); for general wall switch tasks the two are nearly interchangeable."
 }

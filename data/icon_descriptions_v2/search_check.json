@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "inspection, audit, or quality check",
+   "meaning": "inspection, audit, or quality assurance check",
    "strength": "primary"
   },
   {
@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "proofreading or detailed review",
+   "meaning": "proofreading or detailed review pass",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a plain search/magnifying glass icon at very small sizes, or a zoom-in icon if the checkmark is misread as a plus sign.",
+ "ambiguity": "Completely interchangeable with the magnifying glass with a larger lens and larger checkmark; also easily confused at small sizes with a plain magnifying glass (search) or a magnifying glass with a plus sign (zoom in).",
  "modifier_semantics": [
   {
    "modifier": "checkmark inside lens",
@@ -133,7 +133,6 @@
   }
  ],
  "example_tasks_es": [
-  "Pasar la ITV del coche antes de que caduque el mes que viene",
   "Auditar las facturas del tercer trimestre con la gestoría",
   "Revisar las referencias de los candidatos para el puesto de diseño"
  ],
@@ -148,10 +147,6 @@
    "central": "receipts / tax documents"
   },
   {
-   "task": "Patch the drywall holes in the hallway before the landlord walkthrough",
-   "central": "wall repair / spackle"
-  },
-  {
    "task": "Pull Equifax and TransUnion credit reports to look for errors",
    "central": "credit report / document"
   },
@@ -162,23 +157,18 @@
  ],
  "near_misses": [
   {
-   "task": "Check if the pharmacy has my prescription ready",
-   "better": "pill / pharmacy bottle",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Review slides for tomorrow's client pitch",
    "better": "presentation slides",
    "trap": "generic_verb"
   },
   {
    "task": "Clean the brass magnifying glass on grandpa's desk",
-   "better": "plain magnifying glass or cleaning cloth",
-   "trap": "shared_vocabulary"
+   "better": "plain magnifying glass without checkmark",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Zoom in on the backyard survey map to check the fence line",
-   "better": "map or fence",
+   "better": "magnifying glass with a plus sign (zoom in) or map",
    "trap": "lookalike_glyph"
   },
   {
@@ -188,14 +178,19 @@
   },
   {
    "task": "Pay the $450 invoice to the home inspector",
-   "better": "money / invoice / payment",
+   "better": "money or invoice",
    "trap": "parent_topic"
+  },
+  {
+   "task": "Take the Honda in for its state emissions inspection",
+   "better": "car",
+   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A magnifying glass with a checkmark inside clearly communicates inspection, verification, auditing, QA, or fact-checking. While generic 'check' or 'review' tasks should use the icon of the object being checked, this icon is a strong fit when the inspection, audit, or verification process itself is the central subject of the task.",
@@ -213,6 +208,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_es": 1,
+    "context_tasks": 1,
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "inspection, audit, or quality check",
+     "strength": "primary"
+    },
+    {
+     "meaning": "verification, fact-checking, or background check",
+     "strength": "primary"
+    },
+    {
+     "meaning": "proofreading or detailed review",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "search complete or found item",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a plain search/magnifying glass icon at very small sizes, or a zoom-in icon if the checkmark is misread as a plus sign.",
+   "near_misses": [
+    {
+     "task": "Review slides for tomorrow's client pitch",
+     "better": "presentation slides",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Clean the brass magnifying glass on grandpa's desk",
+     "better": "plain magnifying glass or cleaning cloth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Zoom in on the backyard survey map to check the fence line",
+     "better": "map or fence",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a certified refurbished monitor for the home office",
+     "better": "computer monitor",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $450 invoice to the home inspector",
+     "better": "money / invoice / payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "search_check_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4063,
+    "output": 1088,
+    "thoughts": 0,
+    "total": 5151
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "Visually shows a slightly smaller circular lens and smaller checkmark compared to the larger-lensed magnifying glass with checkmark, but the two icons are completely interchangeable in meaning."
 }

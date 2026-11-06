@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / power cell",
+   "meaning": "battery, batteries, or portable power bank",
    "strength": "primary"
   },
   {
-   "meaning": "fully charged / full battery",
+   "meaning": "fully charged battery (100%)",
    "strength": "primary"
   },
   {
-   "meaning": "portable power bank / charger",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "personal energy level / stamina",
+   "meaning": "full personal energy or stamina",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Can be mistaken for the ~80% filled battery at very small sizes, or any battery icon when used for generic battery tasks.",
  "modifier_semantics": [
   {
    "modifier": "solid filled interior rectangle",
@@ -163,6 +159,16 @@
  ],
  "near_misses": [
   {
+   "task": "Plug in the laptop before the low battery dies",
+   "better": "critically low ~15% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Store the lithium battery pack at 50% half charge",
+   "better": "half-filled 50% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small battery-powered clip fan for the stroller",
    "better": "fan or stroller",
    "trap": "property"
@@ -181,22 +187,12 @@
    "task": "Call Pep Boys about replacing the alternator on the Civic",
    "better": "car",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Look up why the battery charge contested on my Visa statement",
-   "better": "credit card",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pack the white brick of goat cheese in the cooler",
-   "better": "cheese or cooler",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a horizontal battery with a full charge fill. It is an immediate, unmistakable cue for everyday tasks involving buying, charging, replacing, or recycling household, camera, device, or vehicle batteries, and only differs slightly from partial-charge battery variants.",
@@ -214,6 +210,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / power cell",
+     "strength": "primary"
+    },
+    {
+     "meaning": "fully charged / full battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "portable power bank / charger",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy level / stamina",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a small battery-powered clip fan for the stroller",
+     "better": "fan or stroller",
+     "trap": "property"
+    },
+    {
+     "task": "Practice the acoustic drum battery cadence for Saturday's parade",
+     "better": "drum",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule the neuropsych testing battery with Dr. Patel",
+     "better": "medical clipboard or brain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call Pep Boys about replacing the alternator on the Civic",
+     "better": "car",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Look up why the battery charge contested on my Visa statement",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the white brick of goat cheese in the cooler",
+     "better": "cheese or cooler",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_1",
+   "battery_android_frame_2",
+   "battery_android_frame_3",
+   "battery_android_frame_4",
+   "battery_android_frame_5",
+   "battery_android_frame_6"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10606,
+    "output": 3427,
+    "thoughts": 0,
+    "total": 14033
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The interior rectangle is 100% filled from left to right with no empty gap inside the frame, distinguishing it from all six partially filled battery icons as a fully charged or generic battery."
 }

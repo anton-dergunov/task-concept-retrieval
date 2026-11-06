@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "garage",
+   "meaning": "garage or garage door",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can be mistaken for a generic house icon or a house with a number 8 inside.",
+ "ambiguity": "At small sizes it can be mistaken for the house icon with staggered brick or room compartments, or a generic home icon.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Repoint crumbling mortar on the front brick facade",
+   "better": "house with staggered brick compartments",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Draft floor plan layout for the basement remodel",
+   "better": "house divided into room compartments",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Park the Honda in the garage before the hailstorm hits",
    "better": "car",
    "trap": "shared_vocabulary"
@@ -165,16 +175,11 @@
   },
   {
    "task": "Drop the Subaru at the mechanic's garage for brake pads",
-   "better": "car repair / wrench",
+   "better": "car repair or wrench",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pay monthly mortgage and homeowner insurance",
-   "better": "house",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a replacement CR2032 battery for the clicker",
+   "task": "Order a replacement CR2032 battery for the garage door clicker",
    "better": "battery",
    "trap": "parent_topic"
   },
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "garage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "storage unit or self-storage locker",
+     "strength": "primary"
+    },
+    {
+     "meaning": "warehouse or depot",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "shed or outbuilding",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can be mistaken for a generic house icon or a house with a number 8 inside.",
+   "near_misses": [
+    {
+     "task": "Park the Honda in the garage before the hailstorm hits",
+     "better": "car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Post flyers for Saturday's neighborhood garage sale",
+     "better": "price tag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drop the Subaru at the mechanic's garage for brake pads",
+     "better": "car repair / wrench",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay monthly mortgage and homeowner insurance",
+     "better": "house",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a replacement CR2032 battery for the clicker",
+     "better": "battery",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Free up 20 GB of iCloud storage before the backup fails",
+     "better": "cloud",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nest_multi_room"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 1101,
+    "thoughts": 140,
+    "total": 5290
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Shows an open-bottomed roof frame around a centered two-panel overhead door, representing a garage or storage unit rather than a closed house divided into staggered brick or room compartments."
 }

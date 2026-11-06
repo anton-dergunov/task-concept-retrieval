@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "user account, online profile, or system login",
+   "meaning": "desktop user account, online profile, or system login",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as communicating with a person on screen (video call/telehealth) or as a user account/login screen on a computer.",
+ "ambiguity": "Can be read either as a live person on a screen (video call) or a user account login screen, and at tiny sizes its framed bust resembles the vertical portrait card/badge with a person inside.",
  "modifier_semantics": [
   {
    "modifier": "user bust silhouette inside the screen",
@@ -164,9 +164,19 @@
  ],
  "near_misses": [
   {
+   "task": "Pick up my new employee ID badge from the security desk",
+   "better": "vertical ID card or badge with person inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Print a 5x7 portrait photo of Grandma for the desk frame",
+   "better": "vertical portrait frame with person inside",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Calibrate the Dell 27-inch monitor colors with the spyder",
    "better": "plain computer monitor without person",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Call the plumber back about the leaking shutoff valve",
@@ -174,13 +184,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Watch the season finale of Severance on the TV",
-   "better": "television or play button",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check if the new contractor has GitHub access",
-   "better": "key or lock / permissions icon",
+   "better": "key or lock icon",
    "trap": "generic_verb"
   },
   {
@@ -215,6 +220,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video call, online meeting, or virtual interview",
+     "strength": "primary"
+    },
+    {
+     "meaning": "user account, online profile, or system login",
+     "strength": "primary"
+    },
+    {
+     "meaning": "webinar, online class, or teletherapy session",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "remote work or virtual desktop session",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as communicating with a person on screen (video call/telehealth) or as a user account/login screen on a computer.",
+   "near_misses": [
+    {
+     "task": "Calibrate the Dell 27-inch monitor colors with the spyder",
+     "better": "plain computer monitor without person",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the plumber back about the leaking shutoff valve",
+     "better": "telephone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Watch the season finale of Severance on the TV",
+     "better": "television or play button",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the new contractor has GitHub access",
+     "better": "key or lock / permissions icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a wedding gift for the Zoom-ceremony couple",
+     "better": "gift box",
+     "trap": "property"
+    },
+    {
+     "task": "Zoom Recordings: free up 20 GB on the external drive",
+     "better": "hard drive or folder",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "server_person"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4094,
+    "output": 720,
+    "thoughts": 114,
+    "total": 4928
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "Horizontal computer monitor with a solid protruding pedestal base at the bottom (for video calls, webinars, or desktop user accounts), whereas the look-alike is a vertical card with an inward notch cut into its bottom edge."
 }

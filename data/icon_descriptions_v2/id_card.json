@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "ID card or driver's license",
+   "meaning": "ID card, driver's license, or photo identification",
    "strength": "primary"
   },
   {
-   "meaning": "employee badge or membership card",
+   "meaning": "employee badge, membership card, or press pass",
    "strength": "primary"
   },
   {
-   "meaning": "contact card or business card",
+   "meaning": "contact card, vCard, or business card",
    "strength": "secondary"
   },
   {
-   "meaning": "user profile or account details",
+   "meaning": "user profile card or account details",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a generic contact vCard, business card, or website user profile section rather than a physical identification document.",
+ "ambiguity": "At a quick glance the rectangular frame and two bars resemble the alert card with an exclamation mark or the monitor with a bulleted list, though the person silhouette is clearly recognizable.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the critical warning banner on the checkout page",
+   "better": "rectangular card with exclamation mark and two bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Prepare the bulleted slide deck for Monday's pitch",
+   "better": "monitor screen displaying a two-item bulleted list",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy RFID-blocking leather wallet for dad",
    "better": "wallet",
    "trap": "property"
@@ -167,7 +177,7 @@
   },
   {
    "task": "Pay $150 annual fee on my Chase Sapphire credit card",
-   "better": "credit card",
+   "better": "credit card with magnetic stripe or chip",
    "trap": "lookalike_glyph"
   },
   {
@@ -179,11 +189,6 @@
    "task": "Parallel parking practice behind the high school",
    "better": "car",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Call the plumber from the magnet on the fridge",
-   "better": "phone",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -209,6 +214,95 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "ID card or driver's license",
+     "strength": "primary"
+    },
+    {
+     "meaning": "employee badge or membership card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contact card or business card",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "user profile or account details",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a generic contact vCard, business card, or website user profile section rather than a physical identification document.",
+   "near_misses": [
+    {
+     "task": "Buy RFID-blocking leather wallet for dad",
+     "better": "wallet",
+     "trap": "property"
+    },
+    {
+     "task": "Verify my identity on the tax portal with 2FA code",
+     "better": "shield or lock",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay $150 annual fee on my Chase Sapphire credit card",
+     "better": "credit card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write birthday card for Aunt Clara",
+     "better": "greeting card or envelope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Parallel parking practice behind the high school",
+     "better": "car",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Call the plumber from the magnet on the fridge",
+     "better": "phone",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "problem",
+   "dvr"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5417,
+    "output": 1059,
+    "thoughts": 232,
+    "total": 6708
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Shows a person silhouette (head and shoulders) to the left of the two text bars inside a plain card with no bottom stand, making it an ID badge or contact card rather than an alert banner or a monitor screen."
 }

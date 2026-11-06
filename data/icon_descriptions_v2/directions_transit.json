@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "train or railway",
+   "meaning": "train / railway",
    "strength": "primary"
   },
   {
-   "meaning": "subway, metro, or commuter rail",
+   "meaning": "subway / metro / commuter rail",
    "strength": "primary"
   },
   {
-   "meaning": "public transit or commute",
+   "meaning": "monorail / light rail / tram",
    "strength": "secondary"
   },
   {
-   "meaning": "tram or light rail",
+   "meaning": "public transit / rail commute",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can look like a bus or tram at very small sizes, though the flared rail base without side mirrors or rubber tires marks it as rail.",
+ "ambiguity": "Interchangeable in meaning and nearly identical at list size to the train with two separate angled rails, and easy to confuse with the road bus sharing the same body shell.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -159,23 +159,23 @@
  ],
  "near_misses": [
   {
-   "task": "Train the new summer intern on the billing software",
-   "better": "person teaching or onboarding checklist",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Train for the October half marathon on the river trail",
-   "better": "running shoe or runner",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Book the Greyhound bus to Montreal for Thanksgiving",
-   "better": "bus with side mirrors and tires",
+   "better": "bus with single windshield and tires",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Check the airport shuttle bus schedule for terminal 2",
+   "better": "bus with vertical wheels",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Train for the October half marathon on the river trail",
+   "better": "running shoe / runner",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Crate train the puppy before we both go back to the office",
-   "better": "dog or pet crate",
+   "better": "dog / pet crate",
    "trap": "shared_vocabulary"
   },
   {
@@ -185,14 +185,14 @@
   },
   {
    "task": "Buy a subway-tile backsplash sample from the tile showroom",
-   "better": "wall tiles or home sample",
+   "better": "wall tiles / home sample",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows the front of a rail car or subway train on a track base. It is the standard icon for tasks involving train travel, subway commutes, rail passes, and station pickups, and is distinguished from a bus icon by the tapered rail base and lack of wheels or side mirrors.",
@@ -212,6 +212,95 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "train or railway",
+     "strength": "primary"
+    },
+    {
+     "meaning": "subway, metro, or commuter rail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "public transit or commute",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tram or light rail",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can look like a bus or tram at very small sizes, though the flared rail base without side mirrors or rubber tires marks it as rail.",
+   "near_misses": [
+    {
+     "task": "Train the new summer intern on the billing software",
+     "better": "person teaching or onboarding checklist",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Train for the October half marathon on the river trail",
+     "better": "running shoe or runner",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the Greyhound bus to Montreal for Thanksgiving",
+     "better": "bus with side mirrors and tires",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Crate train the puppy before we both go back to the office",
+     "better": "dog or pet crate",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew my passport before the Eurostar trip in May",
+     "better": "passport booklet",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a subway-tile backsplash sample from the tile showroom",
+     "better": "wall tiles or home sample",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "directions_bus",
+   "train"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5374,
+    "output": 911,
+    "thoughts": 140,
+    "total": 6425
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "It features a split windshield and a solid filled trapezoidal base underneath rather than two separate rails or two vertical bus tires, making it visually a tiny bit heavier at the bottom but functionally interchangeable with the two-rail train icon."
 }

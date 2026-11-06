@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "hotel, lodging, or accommodation",
+   "meaning": "hotel, lodging, or overnight accommodation",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "sleep or rest",
+   "meaning": "sleep or overnight stay",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the front-facing bed inside a box can resemble a car front silhouette (parking sign), an armchair, or a printer tray.",
+ "ambiguity": "At list size, the stacked rounded-arch silhouette inside the square frame looks very similar to the framed armchair/couch icon, as well as a front-facing car silhouette.",
  "modifier_semantics": [
   {
    "modifier": "rounded square enclosure",
@@ -159,6 +159,16 @@
  ],
  "near_misses": [
   {
+   "task": "Vacuum the living room couch cushions before guests arrive",
+   "better": "armchair or sofa inside a square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a day pass for the airport lounge during our layover",
+   "better": "armchair or lounge sign inside a square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the Airbnb host the remaining security deposit",
    "better": "credit card or money",
    "trap": "generic_verb"
@@ -169,11 +179,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Find overnight parking garage near the downtown hotel",
-   "better": "parking (P sign) or car",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy train tickets from Rome to Florence",
    "better": "train or ticket",
    "trap": "parent_topic"
@@ -182,17 +187,12 @@
    "task": "Pick up melatonin gummies at the pharmacy",
    "better": "pill or pharmacy",
    "trap": "property"
-  },
-  {
-   "task": "Download sleep tracker app onto Apple Watch",
-   "better": "smartwatch or app",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a front-facing bed enclosed in a rounded square, the standard map symbol for lodging/hotel as well as a bedroom or bed. It fits common travel tasks (booking hotels, hostels, Airbnbs) and home tasks (bedding, mattresses, guest rooms), though at very small sizes the silhouette can slightly resemble a car front or armchair.",
@@ -210,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hotel, lodging, or accommodation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bedroom or guest room",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bed, mattress, or bedding",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sleep or rest",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the front-facing bed inside a box can resemble a car front silhouette (parking sign), an armchair, or a printer tray.",
+   "near_misses": [
+    {
+     "task": "Pay the Airbnb host the remaining security deposit",
+     "better": "credit card or money",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Plant marigolds and basil in the raised garden bed",
+     "better": "plant or sprout",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Find overnight parking garage near the downtown hotel",
+     "better": "parking (P sign) or car",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy train tickets from Rome to Florence",
+     "better": "train or ticket",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up melatonin gummies at the pharmacy",
+     "better": "pill or pharmacy",
+     "trap": "property"
+    },
+    {
+     "task": "Download sleep tracker app onto Apple Watch",
+     "better": "smartwatch or app",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "living"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4025,
+    "output": 1043,
+    "thoughts": 74,
+    "total": 5142
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "Inside the rounded square frame, this icon shows a front-facing bed with a flat horizontal mattress and two straight legs at the bottom, representing a bedroom, hotel, or bed rather than an armchair or lounge."
 }

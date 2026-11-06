@@ -7,15 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "train or railway",
+   "meaning": "train / railway",
    "strength": "primary"
   },
   {
-   "meaning": "subway, metro, or commuter rail",
+   "meaning": "subway / metro / commuter rail",
    "strength": "primary"
   },
   {
-   "meaning": "public transit or commute",
+   "meaning": "public transit / rail commute",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can blend with bus or tram icons at small sizes, though the two angled rails at the bottom distinguish it from road vehicles.",
+ "ambiguity": "Virtually interchangeable with the train on a solid filled track base, and easily confused at a glance with the road bus that shares the same cab outline and headlights.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -154,8 +154,18 @@
  ],
  "near_misses": [
   {
+   "task": "Book the FlixBus from Prague to Berlin for Friday",
+   "better": "bus with single windshield and tires",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reserve a charter coach for the school field trip",
+   "better": "bus with rubber tires",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Train the new summer intern on the billing software",
-   "better": "person or teaching",
+   "better": "person teaching",
    "trap": "shared_vocabulary"
   },
   {
@@ -164,18 +174,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Have the tailor bustle the train on the wedding dress",
-   "better": "dress or needle",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book the FlixBus from Prague to Berlin for Friday",
-   "better": "bus",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pick up dry cleaning on the walk from the subway station",
-   "better": "shirt or hanger",
+   "better": "shirt / hanger",
    "trap": "property"
   },
   {
@@ -187,7 +187,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the front of a train or subway car on rails. It fits common tasks around rail tickets, transit passes, commuter schedules, and station pickups, and is distinguished from bus icons by the angled tracks underneath.",
@@ -205,6 +205,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "train or railway",
+     "strength": "primary"
+    },
+    {
+     "meaning": "subway, metro, or commuter rail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "public transit or commute",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "train station",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can blend with bus or tram icons at small sizes, though the two angled rails at the bottom distinguish it from road vehicles.",
+   "near_misses": [
+    {
+     "task": "Train the new summer intern on the billing software",
+     "better": "person or teaching",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Potty train the puppy before we put the living room rug back",
+     "better": "dog",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Have the tailor bustle the train on the wedding dress",
+     "better": "dress or needle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the FlixBus from Prague to Berlin for Friday",
+     "better": "bus",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up dry cleaning on the walk from the subway station",
+     "better": "shirt or hanger",
+     "trap": "property"
+    },
+    {
+     "task": "Renew passport before booking the Eurostar trip",
+     "better": "passport",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "directions_bus",
+   "directions_transit"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5374,
+    "output": 911,
+    "thoughts": 140,
+    "total": 6425
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "It has a split windshield and two separate angled rails beneath the cab, distinguishing it from the bus with vertical tires, while being nearly interchangeable in meaning with the train sitting on a solid trapezoidal track bed."
 }

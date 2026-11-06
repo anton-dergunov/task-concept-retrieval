@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "add or set up a Wi-Fi network",
+   "meaning": "add or set up a new Wi-Fi network",
    "strength": "primary"
   },
   {
-   "meaning": "extend wireless coverage or add mesh node",
+   "meaning": "extend wireless coverage or add a mesh Wi-Fi node",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "enable personal hotspot or guest network",
+   "meaning": "create a guest network or personal hotspot",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without inner arcs, the wedge shape could be mistaken for a pie chart slice, radar sweep, or pizza slice at a glance, though it is the standard Android Wi-Fi silhouette.",
+ "ambiguity": "At small list sizes, the upright plus badge can be mistaken for the diagonal X badge on the disconnected-Wi-Fi icon, and the empty fan wedge without concentric arcs can look like a pie chart slice or radar sweep.",
  "modifier_semantics": [
   {
    "modifier": "plus sign",
@@ -160,40 +160,45 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small Wi-Fi enabled baby monitor for the nursery",
-   "better": "baby monitor or camera",
-   "trap": "property"
+   "task": "Troubleshoot why the office Wi-Fi keeps dropping out",
+   "better": "Wi-Fi wedge with X cross (disconnected/broken Wi-Fi)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Check if the internet is back up after the storm",
-   "better": "router or globe with question/check",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Order two extra pepperoni slices for the kids",
-   "better": "pizza slice",
+   "task": "Call ISP to cancel our home internet service before moving",
+   "better": "Wi-Fi wedge with X cross (cancel/disable Wi-Fi) or phone icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Build a pie chart of Q3 marketing spend",
-   "better": "pie chart",
+   "better": "pie chart icon",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Buy a small Wi-Fi enabled baby monitor for the nursery",
+   "better": "baby monitor or camera icon",
+   "trap": "property"
+  },
+  {
+   "task": "Check if the internet bill was auto-paid this month",
+   "better": "receipt or credit card icon",
+   "trap": "generic_verb"
+  },
+  {
    "task": "Pay the monthly Comcast internet invoice",
-   "better": "receipt or credit card",
+   "better": "receipt or credit card icon",
    "trap": "parent_topic"
   },
   {
    "task": "Network with three product managers at the mixer",
-   "better": "people / handshake",
+   "better": "people / handshake icon",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a hollow wedge-style Wi-Fi symbol with a plus sign, clearly representing adding a Wi-Fi network, extending wireless coverage, or connecting a new device. It fits specific home and office networking tasks well, though the hollow wedge without concentric arcs can briefly resemble a pie chart or pizza slice out of context.",
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add or set up a Wi-Fi network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "extend wireless coverage or add mesh node",
+     "strength": "primary"
+    },
+    {
+     "meaning": "connect a new device to Wi-Fi",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "enable personal hotspot or guest network",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without inner arcs, the wedge shape could be mistaken for a pie chart slice, radar sweep, or pizza slice at a glance, though it is the standard Android Wi-Fi silhouette.",
+   "near_misses": [
+    {
+     "task": "Buy a small Wi-Fi enabled baby monitor for the nursery",
+     "better": "baby monitor or camera",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the internet is back up after the storm",
+     "better": "router or globe with question/check",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order two extra pepperoni slices for the kids",
+     "better": "pizza slice",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Build a pie chart of Q3 marketing spend",
+     "better": "pie chart",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly Comcast internet invoice",
+     "better": "receipt or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Network with three product managers at the mixer",
+     "better": "people / handshake",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "signal_wifi_bad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4109,
+    "output": 915,
+    "thoughts": 0,
+    "total": 5024
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Has an upright plus (+) badge in the bottom-right corner of the Wi-Fi wedge instead of a diagonal X cross, signifying adding, setting up, or extending a wireless network rather than a disconnection."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / battery check / charged battery",
+   "meaning": "check or test battery charge and health",
    "strength": "primary"
   },
   {
-   "meaning": "verify battery health or charge level",
+   "meaning": "battery fully charged or backup power ready",
    "strength": "primary"
   },
   {
-   "meaning": "rechargeable batteries ready or replaced",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "power supply or backup power verified",
+   "meaning": "confirm batteries are replaced and working",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the upright cylinder with a cap can briefly resemble a small bottle, clipboard, or mobile phone with a checkmark.",
+ "ambiguity": "Could be confused with the battery with a plus sign for general battery tasks; at very small sizes, the upright outline with a cap can also briefly resemble a bottle or clipboard with a checkmark.",
  "modifier_semantics": [
   {
    "modifier": "checkmark badge at bottom right",
@@ -133,13 +129,11 @@
   }
  ],
  "example_tasks_es": [
-  "Comprobar el estado de la batería del coche antes de que empiece el frío",
   "Poner a cargar las dos baterías de la cámara para la boda del sábado",
   "Comprar pilas botón CR2032 para el mando del garaje y la báscula"
  ],
  "example_tasks_ru": [
   "Зарядить оба пауэрбанка и запасные аккумуляторы для фотоаппарата перед поездом",
-  "Проверить напряжение автомобильного аккумулятора мультиметром до наступления морозов",
   "Сдать пакет со старыми пальчиковыми батарейками в контейнер во ВкусВилле"
  ],
  "context_tasks": [
@@ -162,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Buy a pack of AA batteries for the TV remote",
+   "better": "battery with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add an external battery pack to the camera rig",
+   "better": "battery with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small battery-powered clip fan for the stroller",
    "better": "fan or stroller",
    "trap": "property"
@@ -177,19 +181,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a insulated stainless steel water bottle with a leakproof cap",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the monthly electric bill before the 15th",
    "better": "invoice or lightning bolt",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pack the heavy winter sleeping bags",
-   "better": "sleeping bag or tent",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -213,6 +207,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_es": 1,
+    "example_tasks_ru": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / battery check / charged battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "verify battery health or charge level",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rechargeable batteries ready or replaced",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "power supply or backup power verified",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the upright cylinder with a cap can briefly resemble a small bottle, clipboard, or mobile phone with a checkmark.",
+   "near_misses": [
+    {
+     "task": "Buy a small battery-powered clip fan for the stroller",
+     "better": "fan or stroller",
+     "trap": "property"
+    },
+    {
+     "task": "Schedule the neuropsychological test battery for Leo",
+     "better": "brain or medical clipboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Walk down to Battery Park before the ferry leaves",
+     "better": "park trees or ferry boat",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a insulated stainless steel water bottle with a leakproof cap",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly electric bill before the 15th",
+     "better": "invoice or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the heavy winter sleeping bags",
+     "better": "sleeping bag or tent",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_saver"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4003,
+    "output": 1002,
+    "thoughts": 0,
+    "total": 5005
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Has a checkmark badge at the bottom right instead of a plus sign, indicating testing, verifying, or confirming battery charge/health rather than adding or buying batteries."
 }

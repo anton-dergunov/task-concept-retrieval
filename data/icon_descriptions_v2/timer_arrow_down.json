@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "reduce duration, cut time, or faster pace",
+   "meaning": "reduce duration, cut time, or lower latency",
    "strength": "primary"
   },
   {
-   "meaning": "low latency, timeout, or slow down",
+   "meaning": "slow down pace or speed",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "The downward arrow next to a stopwatch can mean opposite things depending on context: either faster performance (lower elapsed time, like a 5K PR) or slower speed (slowing down playback or cadence).",
+ "ambiguity": "Easily confused at a glance with the stopwatch with an upward arrow, and semantically ambiguous because 'time down' can mean faster completion (lower elapsed time) or slower speed.",
  "modifier_semantics": [
   {
    "modifier": "downward-pointing arrow on the right",
@@ -176,14 +176,24 @@
  ],
  "near_misses": [
   {
-   "task": "Pick up a quick 15-minute weeknight dinner on the way home",
-   "better": "food / takeout bag",
-   "trap": "property"
+   "task": "Add 30 minutes to the street parking meter via the app",
+   "better": "stopwatch with upward arrow (increase time)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Track total elapsed study hours with a count-up stopwatch",
+   "better": "stopwatch with upward arrow (count-up timer)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Take the vintage pocket watch to the jeweler for cleaning",
    "better": "pocket watch / clock repair",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up a quick 15-minute weeknight dinner on the way home",
+   "better": "food / takeout bag",
+   "trap": "property"
   },
   {
    "task": "Download the Time Tracker desktop app onto my work MacBook",
@@ -199,17 +209,12 @@
    "task": "Check how long the roast has left in the oven",
    "better": "oven / roast",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Install a smart plug for the living room floor lamp",
-   "better": "electrical plug / lamp",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a stopwatch paired with a downward arrow, representing a countdown timer or reducing elapsed time/duration. It fits a focused set of real tasks around cutting down build/load times, lowering running paces, reducing screen time, or managing physical countdown timers, though the down arrow can occasionally be misread as slowing down or downloading time logs.",
@@ -229,6 +234,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "countdown timer or time running down",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reduce duration, cut time, or faster pace",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low latency, timeout, or slow down",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sort by duration descending",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The downward arrow next to a stopwatch can mean opposite things depending on context: either faster performance (lower elapsed time, like a 5K PR) or slower speed (slowing down playback or cadence).",
+   "near_misses": [
+    {
+     "task": "Pick up a quick 15-minute weeknight dinner on the way home",
+     "better": "food / takeout bag",
+     "trap": "property"
+    },
+    {
+     "task": "Take the vintage pocket watch to the jeweler for cleaning",
+     "better": "pocket watch / clock repair",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download the Time Tracker desktop app onto my work MacBook",
+     "better": "laptop / app download",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order new carbon racing shoes for the marathon",
+     "better": "running shoe",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check how long the roast has left in the oven",
+     "better": "oven / roast",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Install a smart plug for the living room floor lamp",
+     "better": "electrical plug / lamp",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "timer_arrow_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1142,
+    "thoughts": 55,
+    "total": 5288
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "Shows a downward-pointing arrow next to the stopwatch (counting down or reducing duration), whereas the look-alike shows an upward-pointing arrow (counting up or extending duration)."
 }

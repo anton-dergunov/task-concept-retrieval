@@ -11,7 +11,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "tote bag or handbag / purse",
+   "meaning": "handbag, purse, or tote bag",
    "strength": "primary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the top arch can make it resemble a padlock if the inner U-shaped handle loop is overlooked.",
+ "ambiguity": "Functionally interchangeable with the taller shopping bag with vertical handle ends; at tiny sizes the top arch can also resemble a padlock if the inner U-shaped loop is overlooked.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -150,19 +150,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp / flashlight",
-   "trap": "generic_verb"
+   "task": "Change the combo on the shed padlock before the contractor arrives",
+   "better": "padlock / lock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack a tall paper gift bag with tissue paper for the bottle of wine",
+   "better": "tall gift / shopping bag with vertical handle ends or wrapped gift box",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Order 50 lbs of 80-lb bag concrete mix for the fence posts",
    "better": "cement / fence",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Change the combo on the shed padlock before the contractor arrives",
-   "better": "padlock / lock",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the $45 checked bag fee for the Denver flight",
@@ -183,7 +183,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a shopping bag or tote bag with top and front loop handles. It is an ideal fit for tasks centered on physical bags (totes, purses, gift bags) as well as general shopping errands, mall runs, and store pickups, though tasks about buying a specific item should use that item's icon instead. At very small sizes, the top arch could briefly resemble a padlock.",
@@ -201,6 +201,87 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shopping bag or retail shopping",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tote bag or handbag / purse",
+     "strength": "primary"
+    },
+    {
+     "meaning": "online order pickup or store errand",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the top arch can make it resemble a padlock if the inner U-shaped handle loop is overlooked.",
+   "near_misses": [
+    {
+     "task": "Order 50 lbs of 80-lb bag concrete mix for the fence posts",
+     "better": "cement / fence",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change the combo on the shed padlock before the contractor arrives",
+     "better": "padlock / lock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $45 checked bag fee for the Denver flight",
+     "better": "suitcase / luggage",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a fresh baguette and croissants for Sunday brunch",
+     "better": "bread / croissant",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy bagless vacuum cleaner filters for the Dyson",
+     "better": "vacuum cleaner",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shopping_bag"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4001,
+    "output": 1083,
+    "thoughts": 173,
+    "total": 5257
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:10Z"
+  }
+ },
+ "distinguishing": "Shows a wider rectangular bag with one arched top handle and a second U-shaped handle loop drooping down on the front, whereas the other icon is a taller square bag with a single top handle whose ends extend straight down inside the rim; in meaning the two are interchangeable as shopping or tote bags, though this wider shape slightly favors a handbag or purse."
 }

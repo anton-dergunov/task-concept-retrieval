@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "alert notification banner or warning message",
+   "meaning": "alert notification banner, toast message, or warning popup",
    "strength": "primary"
   },
   {
-   "meaning": "error dialog, system alert, or notice card",
+   "meaning": "system error dialog or important notice card",
    "strength": "primary"
   },
   {
-   "meaning": "important announcement or advisory notice",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "overdue or urgent note card",
+   "meaning": "advisory announcement or urgent bulletin",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with an ID badge, business card, or postcard layout at very small sizes if the exclamation mark blurs into a portrait silhouette.",
+ "ambiguity": "At very small sizes, the exclamation mark's dot and bar next to the two lines can be misread as the two bullet dots inside the monitor screen, or mistaken for the layout of the ID card.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -169,27 +165,23 @@
   {
    "task": "Audit Sentry error logs from last night's release",
    "central": "logs"
-  },
-  {
-   "task": "Renew passport before the six-month expiration warning kicks in",
-   "central": "passport"
   }
  ],
  "near_misses": [
   {
+   "task": "Renew my driver's license at the DMV before Friday",
+   "better": "ID card with person silhouette and two bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Format the bullet points on the keynote presentation slides",
+   "better": "monitor screen with two bulleted list lines",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy milk and eggs urgently before guests arrive",
-   "better": "shopping cart or milk",
+   "better": "shopping cart or milk carton",
    "trap": "property"
-  },
-  {
-   "task": "Order 500 matte business cards with the new logo",
-   "better": "business card with person silhouette",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Renew driver's license at the DMV",
-   "better": "ID card with photo",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Give two weeks notice to my manager on Monday",
@@ -235,6 +227,102 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "alert notification banner or warning message",
+     "strength": "primary"
+    },
+    {
+     "meaning": "error dialog, system alert, or notice card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "important announcement or advisory notice",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "overdue or urgent note card",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with an ID badge, business card, or postcard layout at very small sizes if the exclamation mark blurs into a portrait silhouette.",
+   "near_misses": [
+    {
+     "task": "Buy milk and eggs urgently before guests arrive",
+     "better": "shopping cart or milk",
+     "trap": "property"
+    },
+    {
+     "task": "Order 500 matte business cards with the new logo",
+     "better": "business card with person silhouette",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew driver's license at the DMV",
+     "better": "ID card with photo",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Give two weeks notice to my manager on Monday",
+     "better": "resignation letter or person talking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the oven timer in twenty minutes",
+     "better": "timer or clock",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the overdue electric bill online",
+     "better": "invoice or lightning bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the smoke detector battery in the hallway",
+     "better": "smoke detector or battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "id_card",
+   "dvr"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5417,
+    "output": 1059,
+    "thoughts": 232,
+    "total": 6708
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Features a bold exclamation mark to the left of the two text bars inside a standless rectangular frame, signifying a warning notification or alert banner rather than a personal ID card or a desktop display with bullet points."
 }

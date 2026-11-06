@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "gamepad action buttons (left button highlighted)",
+   "meaning": "gamepad action buttons with left (west) button pressed",
    "strength": "primary"
   },
   {
-   "meaning": "video game controller or gaming",
+   "meaning": "video gaming or console controller",
    "strength": "primary"
   },
   {
-   "meaning": "loading spinner or step indicator",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "directional control pad",
+   "meaning": "four-way indicator with left position active",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as the four face buttons of a video game controller with the left button pressed, or as an abstract four-dot loading spinner or stove burner indicator.",
+ "ambiguity": "Easily confused at a glance with the other three four-circle gamepad button icons (with right, bottom, or top circle filled), and interchangeable with them for generic gaming tasks.",
  "modifier_semantics": [
   {
    "modifier": "filled left circle",
@@ -160,29 +156,29 @@
  ],
  "near_misses": [
   {
-   "task": "Scrub burnt grease off the front-left stove burner ring",
-   "better": "stove / cooktop",
+   "task": "Bind dodge roll to the right face button in controller settings",
+   "better": "four gamepad buttons in a diamond with the right circle filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add a loading spinner while the dashboard data fetches",
+   "better": "six hollow rings arranged in a circle",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Sew the loose button back onto my navy blazer",
-   "better": "shirt button / needle and thread",
+   "better": "shirt button or needle and thread",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Fix the CSS alignment of the primary submit button on mobile",
-   "better": "code / UI button rectangle",
+   "better": "UI button rectangle or code brackets",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Order a 500GB microSD card for the Nintendo Switch",
    "better": "memory card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Replace the loading spinner animation on the checkout page",
-   "better": "loader / code",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check if the living room TV supports 120Hz gaming mode",
@@ -193,7 +189,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The four circles in a diamond with the left one filled represent the four face buttons of a video game controller with the west button pressed. It fits tasks about gaming, controllers, and button mapping, though out of context it can be mistaken for an abstract loading spinner or a stove burner diagram.",
@@ -211,6 +207,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "gamepad action buttons (left button highlighted)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video game controller or gaming",
+     "strength": "primary"
+    },
+    {
+     "meaning": "loading spinner or step indicator",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "directional control pad",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as the four face buttons of a video game controller with the left button pressed, or as an abstract four-dot loading spinner or stove burner indicator.",
+   "near_misses": [
+    {
+     "task": "Scrub burnt grease off the front-left stove burner ring",
+     "better": "stove / cooktop",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sew the loose button back onto my navy blazer",
+     "better": "shirt button / needle and thread",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the CSS alignment of the primary submit button on mobile",
+     "better": "code / UI button rectangle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a 500GB microSD card for the Nintendo Switch",
+     "better": "memory card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace the loading spinner animation on the checkout page",
+     "better": "loader / code",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the living room TV supports 120Hz gaming mode",
+     "better": "television",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "graph_6",
+   "gamepad_circle_right",
+   "gamepad_circle_down",
+   "gamepad_circle_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8107,
+    "output": 2567,
+    "thoughts": 233,
+    "total": 10907
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "Shows four circles in a diamond with the left (west) circle filled solid, distinguishing it from the right-, bottom-, and top-filled four-button icons and the six-ring spinner; for general gaming tasks the four diamond icons are largely interchangeable."
 }

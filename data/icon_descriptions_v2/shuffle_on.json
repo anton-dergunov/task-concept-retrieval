@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "shuffle or randomize (playback, order, items)",
+   "meaning": "shuffle or randomize order",
    "strength": "primary"
   },
   {
-   "meaning": "switch, swap, or reroute",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "crossroads or intersection",
+   "meaning": "cross-switch or reroute paths",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with fullscreen/expand arrows or close ('X') buttons at very small sizes, though the two right-pointing arrowheads clearly indicate shuffle.",
+ "ambiguity": "Forms a media-control pair with the boxed rectangular-loop repeat icon and can be mistaken for it if used generically for 'swap'; at tiny sizes the crossing shafts also resemble a boxed 'X' close button or fullscreen expand arrows.",
  "modifier_semantics": [
   {
    "modifier": "filled rounded square container",
@@ -156,8 +152,28 @@
  ],
  "near_misses": [
   {
+   "task": "Repost the conference announcement on the company account",
+   "better": "rectangular loop of two arrows in a square",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set the lobby promo video to loop continuously",
+   "better": "rectangular loop of two arrows in a square or video icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fullscreen mode breaks on Safari when rotating the iPad",
+   "better": "four-corner expand / fullscreen arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new pair of running shoes for shuffle jogging",
    "better": "running shoe",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace the broken headphone jack on my old iPod Shuffle",
+   "better": "headphones or music player",
    "trap": "shared_vocabulary"
   },
   {
@@ -166,23 +182,8 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Fullscreen mode breaks on Safari when rotating the iPad",
-   "better": "expand / fullscreen arrows",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Replace the broken headphone jack on my old iPod Shuffle",
-   "better": "headphones or music player",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Buy a wooden card shuffler for grandpa's poker nights",
    "better": "playing cards",
-   "trap": "property"
-  },
-  {
-   "task": "Download offline maps for the drive",
-   "better": "map",
    "trap": "parent_topic"
   }
  ],
@@ -207,6 +208,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shuffle or randomize (playback, order, items)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "switch, swap, or reroute",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "crossroads or intersection",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with fullscreen/expand arrows or close ('X') buttons at very small sizes, though the two right-pointing arrowheads clearly indicate shuffle.",
+   "near_misses": [
+    {
+     "task": "Buy a new pair of running shoes for shuffle jogging",
+     "better": "running shoe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Move the dentist appointment from Tuesday to Thursday",
+     "better": "calendar or tooth",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fullscreen mode breaks on Safari when rotating the iPad",
+     "better": "expand / fullscreen arrows",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the broken headphone jack on my old iPod Shuffle",
+     "better": "headphones or music player",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a wooden card shuffler for grandpa's poker nights",
+     "better": "playing cards",
+     "trap": "property"
+    },
+    {
+     "task": "Download offline maps for the drive",
+     "better": "map",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "repeat_on"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4061,
+    "output": 1105,
+    "thoughts": 131,
+    "total": 5297
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "Shows two diagonal arrows crossing in an X and both pointing toward the right corners (shuffle or randomize), whereas the looped-arrows icon shows two right-angled arrows pointing in opposite directions around a rectangle (repeat or repost)."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "smartphone action button / shortcut / external link on mobile",
+   "meaning": "open external link or launch app on mobile",
    "strength": "primary"
   },
   {
-   "meaning": "mobile data export or screen sharing",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "smartwatch face or fitness tracker screen",
-   "strength": "secondary"
+   "meaning": "outbound action, shortcut, or export from smartphone",
+   "strength": "primary"
   },
   {
    "meaning": "upgrade phone or mobile plan",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like a smartphone with a prominent side button (or an Apple Watch / smartwatch casing without straps) and a generic northeast arrow inside, making it easy to confuse with plain phone, watch, or share icons.",
+ "ambiguity": "Easily confused at small sizes with the single mobile screen with a straight right arrow or the single mobile screen with a bent right arrow, since all three show an outbound arrow inside an identical device frame.",
  "modifier_semantics": [
   {
    "modifier": "diagonal arrow pointing up and right",
@@ -164,13 +160,13 @@
  ],
  "near_misses": [
   {
-   "task": "Call Mom back about Sunday dinner",
-   "better": "phone handset",
+   "task": "Forward the client's text message to my partner",
+   "better": "mobile screen with bent forward arrow",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a leather strap for my Apple Watch",
-   "better": "wristwatch",
+   "task": "Mirror my iPhone screen onto the conference room display",
+   "better": "stacked mobile screens with bent arrow",
    "trap": "lookalike_glyph"
   },
   {
@@ -197,7 +193,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a vertical mobile screen with a prominent right-side button and an upward-right arrow pointing toward that edge, representing a phone side/action button, mobile shortcut, or outgoing transfer/call forwarding from a phone. It fits specific smartphone setup and data-export tasks, though at small sizes it can be confused with a smartwatch casing or generic phone icon.",
@@ -215,6 +211,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone action button / shortcut / external link on mobile",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile data export or screen sharing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smartwatch face or fitness tracker screen",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upgrade phone or mobile plan",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like a smartphone with a prominent side button (or an Apple Watch / smartwatch casing without straps) and a generic northeast arrow inside, making it easy to confuse with plain phone, watch, or share icons.",
+   "near_misses": [
+    {
+     "task": "Call Mom back about Sunday dinner",
+     "better": "phone handset",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a leather strap for my Apple Watch",
+     "better": "wristwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the mobile-friendly layout of the checkout page",
+     "better": "web browser or shopping cart",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly T-Mobile bill before the 15th",
+     "better": "bill / receipt or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Share the Q3 revenue slide deck with the board",
+     "better": "presentation slides",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a 20W USB-C wall charger for the bedroom",
+     "better": "power plug / charger",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "app_shortcut",
+   "send_to_mobile",
+   "offline_share"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6817,
+    "output": 2095,
+    "thoughts": 227,
+    "total": 9139
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Shows a single mobile screen containing a diagonal arrow pointing up and right (northeast) rather than a bent or horizontal right arrow, specifically evoking an external link, app launch, or outbound call/action on mobile."
 }

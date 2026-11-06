@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the hand gripping the right side of the rectangle can look like the handle of a beer mug or coffee cup with a slash through it.",
+ "ambiguity": "At small sizes, the hand gripping the right side of the vertical rectangle can look like the side lens cone of the slashed video cameras or the handle of a mug.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash across the entire icon",
@@ -161,14 +161,19 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off webcam during the team standup",
+   "better": "slashed video camera with person",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Do not take photos inside the art gallery",
+   "better": "slashed photo camera",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cancel old mobile phone contract with Verizon",
    "better": "contract document or SIM card",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Stop drinking coffee after 2pm",
-   "better": "mug or coffee cup",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check why my phone won't connect to home Wi-Fi",
@@ -184,11 +189,6 @@
    "task": "Download offline maps onto phone before the hike",
    "better": "map",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Decline telemarketer calls automatically",
-   "better": "phone handset with slash",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -212,6 +212,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no phone / put phone away / digital detox",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen-free time / unplugged activity",
+     "strength": "primary"
+    },
+    {
+     "meaning": "turn off mobile device / silence phone",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "mobile device not working / offline",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the hand gripping the right side of the rectangle can look like the handle of a beer mug or coffee cup with a slash through it.",
+   "near_misses": [
+    {
+     "task": "Cancel old mobile phone contract with Verizon",
+     "better": "contract document or SIM card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Stop drinking coffee after 2pm",
+     "better": "mug or coffee cup",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check why my phone won't connect to home Wi-Fi",
+     "better": "Wi-Fi symbol",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a non-slip case for the new iPhone",
+     "better": "smartphone case",
+     "trap": "property"
+    },
+    {
+     "task": "Download offline maps onto phone before the hike",
+     "better": "map",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Decline telemarketer calls automatically",
+     "better": "phone handset with slash",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_copy_off",
+   "video_camera_front_off",
+   "privacy",
+   "no_photography",
+   "preview_off",
+   "ad_group_off",
+   "ad_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12129,
+    "output": 3883,
+    "thoughts": 0,
+    "total": 16012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "Unlike the cameras, documents, and browser windows in this group, this shows a vertical smartphone with a top camera dot held by a hand on the right, crossed out by a diagonal slash."
 }

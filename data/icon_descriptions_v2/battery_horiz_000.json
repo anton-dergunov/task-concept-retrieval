@@ -7,15 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "battery / batteries",
+   "meaning": "empty or dead battery / needs replacement or charging",
    "strength": "primary"
   },
   {
-   "meaning": "empty or dead battery / low power",
+   "meaning": "battery / batteries (generic)",
    "strength": "primary"
   },
   {
-   "meaning": "charging / recharge device",
+   "meaning": "low power / depleted charge",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a rolling pin with one handle or a USB stick at tiny sizes, though the battery silhouette is standard.",
+ "ambiguity": "Almost indistinguishable at small sizes from the nearly empty battery with a slightly thicker right border, and serves as a generic battery icon alongside all the partially filled battery icons.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -94,11 +94,6 @@
    "domain": "home"
   },
   {
-   "task": "Test the car battery voltage with the multimeter before winter hits",
-   "parent": "",
-   "domain": "home"
-  },
-  {
    "task": "Order a replacement battery for the Dyson V8 vacuum",
    "parent": "Appliance repairs",
    "domain": "shopping"
@@ -154,9 +149,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof battery-powered headlamp for camping",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Top off the half-charged Anker power bank before the flight",
+   "better": "half-full or mostly full battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Keep the lithium drone batteries at 50% storage charge for winter",
+   "better": "half-full battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly electric utility bill online",
@@ -174,11 +174,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a new wooden rolling pin for pastry dough",
-   "better": "rolling pin",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a cordless Makita drill for the workshop",
    "better": "drill",
    "trap": "property"
@@ -187,7 +182,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an empty battery outline, universally understood as a battery, low power, or charging. It fits common everyday tasks around buying, charging, swapping, and recycling batteries or power banks, though it overlaps slightly with fuller battery level icons.",
@@ -205,6 +200,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1,
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "empty or dead battery / low power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / recharge device",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "power bank / portable power",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a rolling pin with one handle or a USB stick at tiny sizes, though the battery silhouette is standard.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric utility bill online",
+     "better": "lightning bolt or bill/invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the unauthorized credit card charge from yesterday",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Recharge my social battery with a quiet weekend at home",
+     "better": "home or couch/relaxation",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new wooden rolling pin for pastry dough",
+     "better": "rolling pin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a cordless Makita drill for the workshop",
+     "better": "drill",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "badge_critical_battery",
+   "battery_low",
+   "battery_horiz_050",
+   "battery_horiz_075"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7940,
+    "output": 2460,
+    "thoughts": 0,
+    "total": 10400
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "This battery has a completely empty white interior with uniform border thickness on all four sides, representing a dead, depleted, or generic uncharged battery rather than a partially filled one."
 }

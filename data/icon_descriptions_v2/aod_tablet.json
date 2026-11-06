@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read as a web layout toggle with left and right sidebars, a presentation slide, a carousel UI component, or a stylized ticket or plaque at small sizes.",
+ "ambiguity": "At small sizes, could be mistaken for the single-panel note card with top-left lines if the vertical side dividers blur into the outer border.",
  "modifier_semantics": [
   {
    "modifier": "two centered horizontal lines",
@@ -164,6 +164,16 @@
  ],
  "near_misses": [
   {
+   "task": "Write Spanish vocabulary on index cards for the exam",
+   "better": "single-panel index card or note card with top-left text lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order 500 matte business cards from the print shop",
+   "better": "single-panel business card or note card",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy two kids' playground slides for the backyard fort",
    "better": "playground slide",
    "trap": "shared_vocabulary"
@@ -180,24 +190,14 @@
   },
   {
    "task": "Buy HDMI adapter for the MacBook",
-   "better": "cable / adapter",
+   "better": "cable or adapter",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Take the kids to the antique carousel at the pier",
-   "better": "merry-go-round horse",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay the credit card bill before the statement closes",
-   "better": "credit card",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon shows a framed rectangle with narrow side panels and two centered lines of text, representing a presentation slide, UI carousel, or three-column page layout. While rather abstract and UI-chrome-like, it serves well enough for tasks about slide decks, presentations, and web carousels, though it can be confused with generic layout toggles or tickets.",
@@ -215,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "presentation slide or slide deck view",
+     "strength": "primary"
+    },
+    {
+     "meaning": "image carousel or slideshow widget",
+     "strength": "primary"
+    },
+    {
+     "meaning": "three-column page layout with sidebars",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "admission ticket or coupon stub",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read as a web layout toggle with left and right sidebars, a presentation slide, a carousel UI component, or a stylized ticket or plaque at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy two kids' playground slides for the backyard fort",
+     "better": "playground slide",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Prepare glass microscope slides for the botany lab",
+     "better": "microscope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the quarterly revenue numbers before the presentation",
+     "better": "chart or spreadsheet",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy HDMI adapter for the MacBook",
+     "better": "cable / adapter",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Take the kids to the antique carousel at the pier",
+     "better": "merry-go-round horse",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the credit card bill before the statement closes",
+     "better": "credit card",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "featured_play_list"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4040,
+    "output": 632,
+    "thoughts": 130,
+    "total": 4802
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Has two vertical dividing lines creating narrow left and right side panels around two centered horizontal bars of unequal length, depicting a presentation slide deck, carousel, or three-column layout rather than a simple single-panel note card."
 }

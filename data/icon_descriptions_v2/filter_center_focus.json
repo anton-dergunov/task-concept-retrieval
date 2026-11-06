@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "camera focus / viewfinder / autofocus",
+   "meaning": "camera focus, autofocus point, or spot metering",
    "strength": "primary"
   },
   {
-   "meaning": "scan / visual search / object recognition",
+   "meaning": "visual search, object recognition, or scan",
    "strength": "primary"
   },
   {
-   "meaning": "screenshot / screen capture",
+   "meaning": "screenshot or screen capture",
    "strength": "secondary"
   },
   {
-   "meaning": "center-weighted metering / target focus",
+   "meaning": "center-target alignment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic camera icon, a fullscreen toggle, a QR code scanner, or a die showing one pip at very small sizes.",
+ "ambiguity": "Virtually indistinguishable at list size from the corner-bracket viewfinder icons with a medium or large central ring; can also be confused with a fullscreen toggle, a QR scanner, or a one-pip die.",
  "modifier_semantics": [],
  "domains": [
   "creative",
@@ -154,13 +154,23 @@
  ],
  "near_misses": [
   {
+   "task": "Switch camera to wide center-weighted metering mode for portraits",
+   "better": "viewfinder brackets with a medium or large central ring",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy replacement dice for the Settlers of Catan box",
+   "better": "dice with pips",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Stay focused during the two-hour quarterly planning call",
-   "better": "target / bullseye or brain",
+   "better": "target bullseye or brain",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new leather camera strap for the Fuji",
-   "better": "camera",
+   "better": "camera or strap",
    "trap": "parent_topic"
   },
   {
@@ -169,25 +179,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy replacement dice for the Settlers of Catan box",
-   "better": "dice",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Look closely at the contractor's estimate for the bathroom tile",
-   "better": "document / invoice",
+   "better": "invoice or document",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Pick up the framed watercolor from the framer on 5th",
-   "better": "framed picture / art",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a camera viewfinder or focus brackets around a center ring, widely recognized for autofocus, visual scanning, and screenshots. It fits photography, scanning, and UI capture tasks well, though for general photography a literal camera icon is preferred.",
@@ -205,6 +205,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera focus / viewfinder / autofocus",
+     "strength": "primary"
+    },
+    {
+     "meaning": "scan / visual search / object recognition",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screenshot / screen capture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "center-weighted metering / target focus",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic camera icon, a fullscreen toggle, a QR code scanner, or a die showing one pip at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Stay focused during the two-hour quarterly planning call",
+     "better": "target / bullseye or brain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new leather camera strap for the Fuji",
+     "better": "camera",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order wooden picture frames for the hallway prints",
+     "better": "picture frame",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy replacement dice for the Settlers of Catan box",
+     "better": "dice",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Look closely at the contractor's estimate for the bathroom tile",
+     "better": "document / invoice",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up the framed watercolor from the framer on 5th",
+     "better": "framed picture / art",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "center_focus_weak",
+   "center_focus_strong"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5369,
+    "output": 1541,
+    "thoughts": 186,
+    "total": 7096
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Features the smallest central ring inside the four corner brackets (suggesting spot metering or a pinpoint focus point), though in a general task list it is practically interchangeable with the medium-ring and large-ring viewfinder icons."
 }

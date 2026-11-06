@@ -18,7 +18,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "weak encrypted Wi-Fi signal",
+   "meaning": "very weak or 1-bar encrypted Wi-Fi signal",
    "strength": "secondary"
   },
   {
@@ -26,7 +26,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the partially filled wedge looks like a generic Wi-Fi + lock icon, and the low-signal aspect goes unnoticed; the fan shape could also briefly resemble a radar sweep or pie slice.",
+ "ambiguity": "Visually almost indistinguishable at list-icon sizes from the locked Wi-Fi icon with a two-bar half-filled wedge; both read generically as secured Wi-Fi rather than distinct signal levels.",
  "modifier_semantics": [
   {
    "modifier": "closed padlock badge at bottom right",
@@ -165,23 +165,28 @@
  ],
  "near_misses": [
   {
+   "task": "Test whether the guest bedroom gets at least medium two-bar secured Wi-Fi reception",
+   "better": "locked Wi-Fi icon with half-filled two-bar signal wedge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a weatherproof combination padlock for the backyard storage shed",
+   "better": "padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the monthly Xfinity internet bill before the 15th",
    "better": "receipt or credit card",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a waterproof padlock for the backyard garden shed",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a Wi-Fi enabled meat thermometer for the smoker",
+   "task": "Order a Wi-Fi enabled meat thermometer for the backyard smoker",
    "better": "thermometer",
    "trap": "property"
   },
   {
-   "task": "Check if the basement has enough signal for a home office desk",
-   "better": "Wi-Fi signal bars",
+   "task": "Check if the smart thermostat is still connected to the home network",
+   "better": "thermostat",
    "trap": "generic_verb"
   },
   {
@@ -198,7 +203,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon combines a Wi-Fi wedge (shown at low 1-bar fill) with a padlock badge, which users immediately read as Wi-Fi password or wireless network security. While originally a system status glyph for weak encrypted Wi-Fi, it serves well in a task list for the common household and office chores of changing, sharing, or securing Wi-Fi passwords, though it closely resembles a full-strength locked Wi-Fi icon.",
@@ -216,6 +221,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi password or secured wireless network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "network security or router access control",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weak encrypted Wi-Fi signal",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "locked or restricted internet connection",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the partially filled wedge looks like a generic Wi-Fi + lock icon, and the low-signal aspect goes unnoticed; the fan shape could also briefly resemble a radar sweep or pie slice.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly Xfinity internet bill before the 15th",
+     "better": "receipt or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a waterproof padlock for the backyard garden shed",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a Wi-Fi enabled meat thermometer for the smoker",
+     "better": "thermometer",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the basement has enough signal for a home office desk",
+     "better": "Wi-Fi signal bars",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Return the rented mobile hotspot at the airport counter",
+     "better": "package return or airport",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Change master password for Bitwarden vault",
+     "better": "key or padlock",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "network_wifi_2_bar_locked"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4090,
+    "output": 1187,
+    "thoughts": 141,
+    "total": 5418
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "Only the very bottom tip (one bar) of the Wi-Fi wedge is filled solid, compared to the slightly higher two-bar fill in the other locked Wi-Fi icon, making the two practically interchangeable for task planning."
 }

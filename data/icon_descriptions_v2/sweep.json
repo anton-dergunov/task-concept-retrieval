@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "checklist / to-do list / task list",
+   "meaning": "checklist / inspection list / criteria list",
    "strength": "primary"
   },
   {
-   "meaning": "complete all items / check off list",
+   "meaning": "complete all items / batch verification",
    "strength": "primary"
   },
   {
-   "meaning": "verification criteria / requirements list",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "audit / inspection steps",
+   "meaning": "audit steps / requirements review",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic 'done' checkmark or a 'fast checkmark' (speed lines) if the bars are read as motion trails rather than list lines; also very generic inside a task manager where every item is already a task.",
+ "ambiguity": "Can be mistaken for the checkmark over a single horizontal baseline at small sizes, or read as a checkmark with speed/motion lines rather than list items.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal bars",
@@ -161,14 +157,19 @@
  ],
  "near_misses": [
   {
+   "task": "Verify the offline maps finished downloading to the tablet",
+   "better": "checkmark above a single horizontal baseline (download complete)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sign and approve the bottom line of the contractor waiver",
+   "better": "checkmark above a single horizontal baseline (approved entry line) or pen",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check if the bathroom fan is venting outside",
    "better": "ventilation fan",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Check on grandma after her dentist appointment",
-   "better": "phone call or person",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Deposit the insurance refund check at the ATM",
@@ -177,13 +178,8 @@
   },
   {
    "task": "Buy a new pair of hiking boots for the Dolomites",
-   "better": "hiking boot",
+   "better": "hiking boot (under 'Packing Checklist')",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Verify the kitchen faucet isn't dripping anymore",
-   "better": "faucet",
-   "trap": "generic_verb"
   },
   {
    "task": "Order a checkered tablecloth for the picnic",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon combines a large checkmark with three horizontal list bars, clearly signifying a checklist or task list. Because it appears inside a to-do app where everything is already a task, it is only useful when the task itself is explicitly about creating, reviewing, or running through a checklist (like a packing list, pre-flight checklist, or GTD backlog review), rather than any generic task starting with 'check'.",
@@ -214,6 +210,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "checklist / to-do list / task list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "complete all items / check off list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "verification criteria / requirements list",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audit / inspection steps",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic 'done' checkmark or a 'fast checkmark' (speed lines) if the bars are read as motion trails rather than list lines; also very generic inside a task manager where every item is already a task.",
+   "near_misses": [
+    {
+     "task": "Check if the bathroom fan is venting outside",
+     "better": "ventilation fan",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check on grandma after her dentist appointment",
+     "better": "phone call or person",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Deposit the insurance refund check at the ATM",
+     "better": "bank check / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new pair of hiking boots for the Dolomites",
+     "better": "hiking boot",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify the kitchen faucet isn't dripping anymore",
+     "better": "faucet",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a checkered tablecloth for the picnic",
+     "better": "tablecloth",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "download_done"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 730,
+    "thoughts": 103,
+    "total": 4906
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Features three stepped horizontal bars to the right of the checkmark representing multiple list items (a checklist or batch completion), unlike the checkmark centered over a single bottom baseline."
 }

@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read interchangeably as a desktop computer monitor or a flat-screen television.",
+ "ambiguity": "Interchangeable with the wide-base thin-neck monitor and the trapezoidal-base monitor; also ambiguous between a computer monitor and a television.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -151,14 +151,19 @@
  ],
  "near_misses": [
   {
+   "task": "Pack the MacBook charger and dongle in my carry-on",
+   "better": "laptop computer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upgrade RAM in the 27-inch iMac in the studio",
+   "better": "all-in-one desktop computer with thick chin bezel",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Monitor blood pressure every morning for two weeks",
    "better": "blood pressure cuff or heart",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pack the MacBook charger and dongle in my carry-on",
-   "better": "laptop or power plug",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Watch the new Dune movie with Sarah on Friday night",
@@ -166,13 +171,8 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Replace the cracked glass screen on Ava's iPad",
-   "better": "tablet",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Order a braided USB-C charging cable",
-   "better": "cable / plug",
+   "better": "cable or power plug",
    "trap": "parent_topic"
   },
   {
@@ -184,7 +184,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear, universally recognizable glyph of a computer monitor or desktop display on a stand. It fits tasks centered on monitors, desktop computers, workspace screen setup, and televisions, though it partially overlaps with dedicated TV icons.",
@@ -202,6 +202,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "computer monitor or display screen",
+     "strength": "primary"
+    },
+    {
+     "meaning": "desktop computer or workstation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "television set",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read interchangeably as a desktop computer monitor or a flat-screen television.",
+   "near_misses": [
+    {
+     "task": "Monitor blood pressure every morning for two weeks",
+     "better": "blood pressure cuff or heart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the MacBook charger and dongle in my carry-on",
+     "better": "laptop or power plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Watch the new Dune movie with Sarah on Friday night",
+     "better": "film clapperboard or popcorn",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a braided USB-C charging cable",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Download offline maps for the desktop and phone before leaving",
+     "better": "map",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "jamboard_kiosk",
+   "monitor",
+   "desktop_mac",
+   "laptop_mac",
+   "laptop_windows",
+   "laptop_chromebook"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10537,
+    "output": 3307,
+    "thoughts": 0,
+    "total": 13844
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "Shows a rectangular screen on a thicker, shorter neck and narrower pedestal base than the wide-base monitor, though the two are functionally interchangeable as desktop monitors or TVs."
 }

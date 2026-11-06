@@ -10,23 +10,19 @@
  },
  "readings": [
   {
+   "meaning": "export, extract, or pull data out",
+   "strength": "primary"
+  },
+  {
    "meaning": "download or save offline",
    "strength": "primary"
   },
   {
-   "meaning": "install update or firmware",
-   "strength": "primary"
-  },
-  {
-   "meaning": "export or pull data out",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "power down or sleep",
+   "meaning": "offload or eject from storage",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly resembles an inverted power button symbol, or an export/eject icon, in addition to a download or update indicator.",
+ "ambiguity": "Easily confused at small sizes with the circle open at the top with an entering downward arrow or the half-dashed circle download icon, as all three read broadly as a downward arrow in a circle for downloading.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow",
@@ -166,8 +162,18 @@
  ],
  "near_misses": [
   {
-   "task": "Upload the signed lease agreement to the landlord's portal",
-   "better": "upload arrow pointing up",
+   "task": "Import the customer CSV into the CRM database",
+   "better": "downward arrow entering top-open circle for import",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Shut down the home NAS server before the power outage",
+   "better": "power-style top-open circle with downward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wait for the macOS software update download to finish",
+   "better": "downward arrow inside half-dashed progress circle",
    "trap": "lookalike_glyph"
   },
   {
@@ -184,22 +190,12 @@
    "task": "Update my resume with the new project lead role",
    "better": "document or resume",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Buy a new power strip for the standing desk",
-   "better": "power plug or outlet",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Ask IT for a license key",
-   "better": "key or chat message",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a downward arrow inside an open-bottomed circular arc, universally read in software interfaces as 'download', 'install update', or 'save offline'. It fits concrete action tasks where pulling files, media, or updates onto a device is the primary goal, though it can be confused with other circular download or power-down symbols.",
@@ -217,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download or save offline",
+     "strength": "primary"
+    },
+    {
+     "meaning": "install update or firmware",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export or pull data out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "power down or sleep",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly resembles an inverted power button symbol, or an export/eject icon, in addition to a download or update indicator.",
+   "near_misses": [
+    {
+     "task": "Upload the signed lease agreement to the landlord's portal",
+     "better": "upload arrow pointing up",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn off the main water valve in the basement before leaving",
+     "better": "faucet or valve",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Print the downloadable PDF boarding passes for mom",
+     "better": "printer or ticket",
+     "trap": "property"
+    },
+    {
+     "task": "Update my resume with the new project lead role",
+     "better": "document or resume",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new power strip for the standing desk",
+     "better": "power plug or outlet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Ask IT for a license key",
+     "better": "key or chat message",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "enable",
+   "downloading"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5384,
+    "output": 1520,
+    "thoughts": 181,
+    "total": 7085
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:47Z"
+  }
+ },
+ "distinguishing": "The circle is open at the bottom with the downward arrow pointing out through the gap, whereas the others have an arrow entering a top gap or enclosed in a half-dashed ring, suggesting pulling or exporting data outward rather than bringing it in."
 }

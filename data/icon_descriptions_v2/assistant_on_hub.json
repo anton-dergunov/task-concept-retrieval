@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "computer password, login PIN, or lock screen passcode",
+   "meaning": "smart home display / voice assistant screen (Nest Hub, Echo Show) showing four assistant dots",
+   "strength": "primary"
+  },
+  {
+   "meaning": "computer password, login PIN, or lock screen passcode on a monitor",
    "strength": "primary"
   },
   {
    "meaning": "TV parental control PIN or device unlock code",
-   "strength": "primary"
-  },
-  {
-   "meaning": "computer loading, buffering, or system update in progress",
    "strength": "secondary"
   },
   {
-   "meaning": "more display options or smart display menu",
+   "meaning": "computer or TV loading, buffering, or updating",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, it can be mistaken for a speech bubble with typing dots, a wall power outlet, or a generic more-options ellipsis button.",
+ "ambiguity": "Virtually identical at list size to the rounder-cornered smart display on a flat rectangular base; also easily mistaken for a speech bubble with typing dots or a generic password field.",
  "modifier_semantics": [
   {
    "modifier": "four horizontal solid dots",
@@ -160,14 +160,19 @@
  ],
  "near_misses": [
   {
-   "task": "Change the 4-digit PIN on my Chase debit card at the ATM",
-   "better": "credit card with keypad or PIN",
-   "trap": "shared_vocabulary"
+   "task": "Set up the Google Nest Hub on the bedroom nightstand",
+   "better": "rounded smart display on a flat rectangular base (interchangeable look-alike, though that glyph has the softer pill-like bezel of a bedside hub Noticeably only on close inspection) or either icon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Reply to Sarah's text message about dinner tonight",
    "better": "speech bubble / chat message",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change the 4-digit PIN on my Chase debit card at the ATM",
+   "better": "credit card with keypad or PIN",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a surge protector power strip with 6 outlets for the TV stand",
@@ -180,7 +185,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a HDMI 2.1 cable for the new monitor",
+   "task": "Order an HDMI 2.1 cable for the new monitor",
    "better": "cable / plug",
    "trap": "parent_topic"
   },
@@ -193,7 +198,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a monitor or TV screen containing four masked dots, which strongly cues a desktop login password, Windows/Mac PIN, TV parental control code, or a loading screen. It fits specific tech and household tasks around device passcodes and screen locks, though at tiny sizes it can resemble a chat typing indicator.",
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "computer password, login PIN, or lock screen passcode",
+     "strength": "primary"
+    },
+    {
+     "meaning": "TV parental control PIN or device unlock code",
+     "strength": "primary"
+    },
+    {
+     "meaning": "computer loading, buffering, or system update in progress",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "more display options or smart display menu",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, it can be mistaken for a speech bubble with typing dots, a wall power outlet, or a generic more-options ellipsis button.",
+   "near_misses": [
+    {
+     "task": "Change the 4-digit PIN on my Chase debit card at the ATM",
+     "better": "credit card with keypad or PIN",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reply to Sarah's text message about dinner tonight",
+     "better": "speech bubble / chat message",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a surge protector power strip with 6 outlets for the TV stand",
+     "better": "power outlet / plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the front door smart lock keypad battery",
+     "better": "door lock or keypad",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a HDMI 2.1 cable for the new monitor",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify that the backup server is still running",
+     "better": "server rack",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "home_max_dots"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4127,
+    "output": 792,
+    "thoughts": 0,
+    "total": 4919
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:21Z"
+  }
+ },
+ "distinguishing": "Has sharper inner screen corners and a curved, rounded-bottom pedestal base, though in practice it is nearly interchangeable with the rounder-bezel screen on a flat rectangular base (both depict a smart display or monitor with four horizontal dots)."
 }

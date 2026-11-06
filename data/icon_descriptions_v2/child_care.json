@@ -15,11 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "young child or kid",
+   "meaning": "young child, kid, or parenting",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the top curl can blend into the outline, making it look like a generic happy smiley face.",
+ "ambiguity": "At small sizes the curl of hair merges into the top circle border, making it look just like the dot-eyed open-mouth grinning face.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -149,13 +149,18 @@
  ],
  "near_misses": [
   {
-   "task": "Prune the baby tomato plants in the greenhouse",
-   "better": "plant / seedling",
-   "trap": "shared_vocabulary"
+   "task": "Add a grinning emoji reaction picker to the chat widget",
+   "better": "grinning smiley face without hair curl",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Switch to baby steps on the database migration",
-   "better": "database / server",
+   "task": "Send a customer satisfaction survey after ticket resolution",
+   "better": "standard smiley face with dot eyes",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Prune the baby tomato plants in the greenhouse",
+   "better": "plant / seedling",
    "trap": "shared_vocabulary"
   },
   {
@@ -169,11 +174,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Add a happy emoji reaction to the Slack announcement",
-   "better": "smiley face / emoji",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Paint the accent wall in the nursery sage green",
    "better": "paint roller",
    "trap": "parent_topic"
@@ -182,7 +182,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The single curl of hair at the top of the round smiling face is the universal visual shorthand for a baby or infant. It fits a large, coherent family of parenting, childcare, nursery, and pediatric tasks, though at tiny sizes it can be mistaken for a generic happy face emoji.",
@@ -200,6 +200,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "baby, infant, or toddler",
+     "strength": "primary"
+    },
+    {
+     "meaning": "childcare, nursery, or babysitting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "young child or kid",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the top curl can blend into the outline, making it look like a generic happy smiley face.",
+   "near_misses": [
+    {
+     "task": "Prune the baby tomato plants in the greenhouse",
+     "better": "plant / seedling",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Switch to baby steps on the database migration",
+     "better": "database / server",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy baby spinach and cherry tomatoes for the salad",
+     "better": "leafy greens / food",
+     "trap": "property"
+    },
+    {
+     "task": "Pay down the smallest credit card first using the baby steps method",
+     "better": "credit card / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add a happy emoji reaction to the Slack announcement",
+     "better": "smiley face / emoji",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Paint the accent wall in the nursery sage green",
+     "better": "paint roller",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_content",
+   "sentiment_neutral",
+   "insert_emoticon",
+   "sentiment_satisfied_alt",
+   "sentiment_calm",
+   "sentiment_very_satisfied"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10675,
+    "output": 3460,
+    "thoughts": 0,
+    "total": 14135
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "Identical to the dot-eyed open-mouth grinning face except for a single curved lock of hair at the top of the head, which turns the generic smiley into a baby or infant."
 }

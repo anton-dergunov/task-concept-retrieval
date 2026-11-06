@@ -17,11 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "subtitles, captions, or quote",
+   "meaning": "quote, caption, or note",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to other speech bubble variants (rounded bubble, bubble with dots, two overlapping bubbles), making it hard to distinguish between SMS, live chat, and comments.",
+ "ambiguity": "Essentially interchangeable with the centered-pointer and right-pointer three-line speech bubbles; also easily confused at a glance with the left-tailed bulleted-list bubble.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal lines inside",
@@ -157,29 +157,29 @@
  ],
  "near_misses": [
   {
+   "task": "Write a feedback comment on the design mockups",
+   "better": "speech bubble with pencil inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Share the 3 talking points in the team channel",
+   "better": "speech bubble with bulleted list inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Email the signed tax forms to the accountant",
+   "better": "envelope",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Grandma to wish her a happy birthday",
    "better": "telephone receiver",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Email the signed tax forms to the accountant",
-   "better": "envelope / email",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the $15 monthly SMS gateway invoice",
-   "better": "invoice / money",
+   "better": "invoice or credit card",
    "trap": "property"
-  },
-  {
-   "task": "Prepare slides for the keynote speech in Berlin",
-   "better": "presentation screen / podium",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check if the contractor sent the updated bathroom tile quote",
-   "better": "estimate / document",
-   "trap": "generic_verb"
   },
   {
    "task": "Buy a new headset for Discord voice chats",
@@ -190,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A square speech bubble with lines of text universally represents a text message, chat, or written comment. It is a top-tier match for everyday tasks like texting people back, replying in Slack/WhatsApp, or leaving reviews, though it closely resembles other speech-bubble icons in most sets.",
@@ -208,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "chat"
- }
+  "alias_of": "chat",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "text message, SMS, or chat message",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comment, reply, or written feedback",
+     "strength": "primary"
+    },
+    {
+     "meaning": "subtitles, captions, or quote",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to other speech bubble variants (rounded bubble, bubble with dots, two overlapping bubbles), making it hard to distinguish between SMS, live chat, and comments.",
+   "near_misses": [
+    {
+     "task": "Call Grandma to wish her a happy birthday",
+     "better": "telephone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the signed tax forms to the accountant",
+     "better": "envelope / email",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $15 monthly SMS gateway invoice",
+     "better": "invoice / money",
+     "trap": "property"
+    },
+    {
+     "task": "Prepare slides for the keynote speech in Berlin",
+     "better": "presentation screen / podium",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the contractor sent the updated bathroom tile quote",
+     "better": "estimate / document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new headset for Discord voice chats",
+     "better": "headset with microphone",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "card_membership",
+   "tooltip_2",
+   "comment",
+   "rate_review",
+   "speaker_notes"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9326,
+    "output": 2907,
+    "thoughts": 0,
+    "total": 12233
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Has the speech tail flushing down from the bottom-left corner and three left-aligned lines inside (the bottom one shorter), making it the standard incoming text/comment bubble and nearly interchangeable with the centered-tail and right-tail text bubbles."
 }

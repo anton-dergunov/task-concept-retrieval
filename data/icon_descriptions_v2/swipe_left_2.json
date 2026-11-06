@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "two-finger swipe left or rotate gesture",
+   "meaning": "two-finger swipe left or rotate counterclockwise gesture",
    "strength": "primary"
   },
   {
-   "meaning": "touchpad or touchscreen gesture",
+   "meaning": "multi-touch trackpad or touchscreen gesture",
    "strength": "primary"
   },
   {
-   "meaning": "undo gesture or navigate back",
+   "meaning": "two-finger undo or navigate back shortcut",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with single-finger swipe, rotate, or generic undo/back icons at small sizes.",
+ "ambiguity": "Easily confused at list size with the one-finger swipe-left icon (which has only the index finger raised) or the two-finger swipe-right icon (where the arrow points right).",
  "modifier_semantics": [
   {
    "modifier": "curved arrow pointing left",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Implement single-finger swipe-left to delete email rows in the mobile app",
+   "better": "one-finger swipe left icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure two-finger clockwise rotate shortcut in Procreate",
+   "better": "two-finger swipe right / rotate clockwise icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy winter gloves with touchscreen fingertips",
    "better": "gloves",
    "trap": "property"
@@ -164,19 +174,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Undo last git commit on main branch",
-   "better": "git branch or undo arrow",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Swipe badge at the security desk to activate it",
    "better": "ID badge",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book manicure appointment for Friday",
-   "better": "fingernails or nail polish",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order replacement battery for Magic Trackpad",
@@ -187,7 +187,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a two-finger swipe left or counter-clockwise rotation touch gesture. It is a specific UI/interaction symbol useful only for a narrow set of tasks about configuring trackpads, learning tablet gestures, or developing touch interfaces, and is easily confused with generic swipe or hand icons.",
@@ -205,6 +205,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "two-finger swipe left or rotate gesture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "touchpad or touchscreen gesture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "undo gesture or navigate back",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with single-finger swipe, rotate, or generic undo/back icons at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy winter gloves with touchscreen fingertips",
+     "better": "gloves",
+     "trap": "property"
+    },
+    {
+     "task": "Rotate the living room rug 180 degrees",
+     "better": "rug or rotate arrows",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Undo last git commit on main branch",
+     "better": "git branch or undo arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Swipe badge at the security desk to activate it",
+     "better": "ID badge",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book manicure appointment for Friday",
+     "better": "fingernails or nail polish",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order replacement battery for Magic Trackpad",
+     "better": "battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "swipe_right_2",
+   "swipe_right",
+   "swipe_left",
+   "swipe"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7990,
+    "output": 2437,
+    "thoughts": 0,
+    "total": 10427
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:08Z"
+  }
+ },
+ "distinguishing": "Shows two extended fingers beneath a curved arrow pointing left (counterclockwise), representing a two-finger swipe left or counterclockwise rotation rather than a one-finger swipe or rightward motion."
 }

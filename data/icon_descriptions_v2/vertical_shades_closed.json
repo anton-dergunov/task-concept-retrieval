@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "radiator or home heating unit",
+   "meaning": "radiator or finned home heating unit",
    "strength": "primary"
   },
   {
-   "meaning": "colonnade, classical building, or courthouse",
+   "meaning": "safety gate, baby gate, or barred barrier",
    "strength": "secondary"
   },
   {
-   "meaning": "fence, gate, or safety barrier",
+   "meaning": "colonnade or classical pillared building",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Highly geometric and abstract; easily read as a radiator, a balcony railing, a baby gate, jail bars, or a classical pillared building.",
+ "ambiguity": "Easily confused at a glance with the four-bar, three-pane window/balustrade icon; both share the exact same outer frame and wider bottom sill.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -123,7 +123,6 @@
   }
  ],
  "example_tasks_es": [
-  "Purgar los radiadores del salón antes de que empiece el frío",
   "Pintar la barandilla del balcón con esmalte antioxidante negro",
   "Medir el hueco de la escalera para comprar la barrera de seguridad del bebé"
  ],
@@ -152,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Clean the three-pane French window on the terrace",
+   "better": "the three-pane window/balustrade icon with wider side panes",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Practice writing the kanji radical 皿 for dish",
+   "better": "the three-slot, four-bar icon that matches the three-compartment shape of 皿",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Flush the car radiator and top up coolant",
    "better": "car or engine coolant icon",
    "trap": "shared_vocabulary"
@@ -159,12 +168,7 @@
   {
    "task": "Format spreadsheet with 4 vertical columns",
    "better": "table or spreadsheet columns icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check barcode on the return package",
-   "better": "barcode icon",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Book hotel room with a sea-view balcony in Lisbon",
@@ -172,7 +176,7 @@
    "trap": "property"
   },
   {
-   "task": "Water the cherry tomatoes every morning",
+   "task": "Water the cherry tomatoes on the balcony every morning",
    "better": "plant or watering can icon",
    "trap": "parent_topic"
   }
@@ -198,6 +202,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_es": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "balcony railing, balustrade, or guard rail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "radiator or home heating unit",
+     "strength": "primary"
+    },
+    {
+     "meaning": "colonnade, classical building, or courthouse",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "fence, gate, or safety barrier",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Highly geometric and abstract; easily read as a radiator, a balcony railing, a baby gate, jail bars, or a classical pillared building.",
+   "near_misses": [
+    {
+     "task": "Flush the car radiator and top up coolant",
+     "better": "car or engine coolant icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Format spreadsheet with 4 vertical columns",
+     "better": "table or spreadsheet columns icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check barcode on the return package",
+     "better": "barcode icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book hotel room with a sea-view balcony in Lisbon",
+     "better": "hotel or bed icon",
+     "trap": "property"
+    },
+    {
+     "task": "Water the cherry tomatoes every morning",
+     "better": "plant or watering can icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "curtains_closed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4061,
+    "output": 882,
+    "thoughts": 0,
+    "total": 4943
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "Has five evenly spaced vertical bars creating four equal narrow slots on a wider base, reading more strongly as a multi-bar balcony railing, safety gate, or finned radiator than the three-pane window version."
 }

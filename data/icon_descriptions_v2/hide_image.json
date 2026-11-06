@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "delete, remove, or hide photos",
+   "meaning": "delete, remove, or hide photos / pictures",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the diagonal slash partially obscures the mountain peaks, making it resemble a generic crossed-out checkbox or disabled fullscreen toggle.",
+ "ambiguity": "Completely identical to the other slashed square frame with a mountain silhouette inside; at tiny sizes, the mountain peaks can also blend into the slash and look like the slashed speech bubble or SIM card.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,40 +161,45 @@
  ],
  "near_misses": [
   {
-   "task": "Print and frame three 8x10 photos from the Dolomites trip for the hallway",
-   "better": "intact picture frame or photo icon without slash",
+   "task": "Disable blog post comments on the company website",
+   "better": "slashed speech bubble",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Format and remove the corrupted SD memory card from the dashcam",
+   "better": "slashed SD/SIM card with notched corner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Print and frame three 8x10 photos from the Dolomites trip",
+   "better": "intact picture frame without slash",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Take my broken Nikon lens to the repair shop on 4th Street",
-   "better": "camera or camera lens icon",
+   "better": "camera or camera lens",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Cancel the Adobe Lightroom subscription before it renews on Friday",
-   "better": "subscription / credit card with slash or cancel icon",
+   "better": "credit card or subscription cancel icon",
    "trap": "parent_topic"
   },
   {
    "task": "Buy non-glare acrylic sheets for the bedroom poster frames",
-   "better": "picture frame or shopping bag icon",
+   "better": "intact picture frame",
    "trap": "property"
   },
   {
    "task": "Check if the living room painting hangs level over the sofa",
-   "better": "picture frame or spirit level icon",
+   "better": "intact picture frame or spirit level",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Disable webcam access for browser extensions in macOS privacy settings",
-   "better": "video camera or webcam with slash",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a standard mountain-in-frame image glyph crossed out with a diagonal slash, universally understood as a broken/missing image or deleting/hiding photos. While narrower than the plain photo icon, it fits concrete recurring tasks like culling photo libraries, clearing phone screenshots, and fixing broken web thumbnails.",
@@ -212,6 +217,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "broken, missing, or unrendered image",
+     "strength": "primary"
+    },
+    {
+     "meaning": "delete, remove, or hide photos",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disable image loading or thumbnails",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "no photography allowed",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the diagonal slash partially obscures the mountain peaks, making it resemble a generic crossed-out checkbox or disabled fullscreen toggle.",
+   "near_misses": [
+    {
+     "task": "Print and frame three 8x10 photos from the Dolomites trip for the hallway",
+     "better": "intact picture frame or photo icon without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take my broken Nikon lens to the repair shop on 4th Street",
+     "better": "camera or camera lens icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel the Adobe Lightroom subscription before it renews on Friday",
+     "better": "subscription / credit card with slash or cancel icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy non-glare acrylic sheets for the bedroom poster frames",
+     "better": "picture frame or shopping bag icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the living room painting hangs level over the sofa",
+     "better": "picture frame or spirit level icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Disable webcam access for browser extensions in macOS privacy settings",
+     "better": "video camera or webcam with slash",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "chat_bubble_off",
+   "image_not_supported",
+   "label_off",
+   "no_sim"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8093,
+    "output": 2769,
+    "thoughts": 160,
+    "total": 11022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Distinguished from the empty speech bubble, tag, and SIM card by the mountain peaks silhouette inside the square frame, indicating a broken, missing, or disabled image; it is visually identical to and interchangeable with the other slashed mountain-picture icon in this group."
 }

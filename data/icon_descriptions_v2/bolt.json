@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "electricity or electrical power",
+   "meaning": "electricity, electrical power, or utility bill",
    "strength": "primary"
   },
   {
-   "meaning": "charging or energy",
+   "meaning": "charging, battery power, or energy",
    "strength": "primary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "thunderstorm or lightning",
+   "meaning": "thunderstorm, lightning, or quick high-energy action",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Completely interchangeable in meaning and function with the wider diagonal outlined lightning bolt; at list size the two cannot be meaningfully distinguished.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -44,11 +44,6 @@
   "install surge protection for appliances"
  ],
  "example_tasks": [
-  {
-   "task": "pay electric bill",
-   "parent": "",
-   "domain": "finance"
-  },
   {
    "task": "label breaker panel",
    "parent": "",
@@ -155,19 +150,29 @@
  ],
  "near_misses": [
   {
+   "task": "Pay the monthly electricity utility bill online",
+   "better": "either outlined lightning bolt icon (both upright and diagonal lightning bolts are interchangeable for electricity)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test the external camera flash strobe before the portrait shoot",
+   "better": "either outlined lightning bolt icon (interchangeable with the diagonal lightning bolt for flash)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Charge the AA rechargeable batteries before the camping trip",
+   "better": "battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new electric toothbrush head",
    "better": "toothbrush",
    "trap": "property"
   },
   {
    "task": "Order a 2-meter Apple Lightning cable for the bedroom",
-   "better": "cable",
+   "better": "charging cable / connector",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Charge the AA rechargeable batteries before the trip",
-   "better": "battery",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Do a quick 10-minute lightning cleanup of the living room",
@@ -178,17 +183,12 @@
    "task": "Practice scales on the electric guitar for 30 minutes",
    "better": "guitar",
    "trap": "property"
-  },
-  {
-   "task": "Update Adobe Flash archive settings on the old Mac",
-   "better": "computer / software",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic lightning bolt, universally understood as electricity, power, energy, or camera flash. It is an ideal fit for common household tasks involving electricity bills, meter readings, circuit breakers, and hiring electricians, though specific hardware like batteries, plugs, or cables usually have their own dedicated icons.",
@@ -206,6 +206,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "electricity or electrical power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging or energy",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera flash",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "thunderstorm or lightning",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a new electric toothbrush head",
+     "better": "toothbrush",
+     "trap": "property"
+    },
+    {
+     "task": "Order a 2-meter Apple Lightning cable for the bedroom",
+     "better": "cable",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge the AA rechargeable batteries before the trip",
+     "better": "battery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Do a quick 10-minute lightning cleanup of the living room",
+     "better": "broom / cleaning",
+     "trap": "property"
+    },
+    {
+     "task": "Practice scales on the electric guitar for 30 minutes",
+     "better": "guitar",
+     "trap": "property"
+    },
+    {
+     "task": "Update Adobe Flash archive settings on the old Mac",
+     "better": "computer / software",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "electric_bolt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 3997,
+    "output": 1115,
+    "thoughts": 0,
+    "total": 5112
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "A more upright, narrower outlined lightning bolt with horizontal middle steps, visually slightly different in slant from the wider diagonal lightning bolt but completely interchangeable in meaning."
 }

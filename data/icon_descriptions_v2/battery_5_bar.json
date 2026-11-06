@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / portable power",
+   "meaning": "battery / three-quarters full battery (approx. 75-80%)",
    "strength": "primary"
   },
   {
-   "meaning": "charging / battery level",
+   "meaning": "charging / battery level / power bank",
    "strength": "primary"
-  },
-  {
-   "meaning": "power bank / rechargeable cell",
-   "strength": "secondary"
   },
   {
    "meaning": "pill bottle with white label",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can look like a small medicine bottle or cosmetics jar with a white label at very small sizes, and is easily confused with other battery fill-level icons (full, half, low).",
+ "ambiguity": "Hard to tell apart from the 60% and 90% battery level icons without a side-by-side comparison, and interchangeable with all battery icons for general battery tasks.",
  "modifier_semantics": [
   {
    "modifier": "two-thirds solid fill",
@@ -164,19 +160,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp / flashlight",
-   "trap": "property"
+   "task": "Verify backup battery bank is 100% charged before camping",
+   "better": "solid full battery",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the monthly electric utility bill before Friday",
-   "better": "invoice / lightning bolt",
-   "trap": "shared_vocabulary"
+   "task": "Charge lithium-ion drone batteries to 50% storage voltage",
+   "better": "half-full (50%) battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up prescription bottle of amoxicillin from the pharmacy",
    "better": "pill / medicine bottle",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the monthly electric utility bill before Friday",
+   "better": "invoice / lightning bolt",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Schedule full psychological test battery with the clinic",
@@ -197,7 +198,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an upright battery filled to roughly two-thirds capacity. While it originates as a UI status indicator for charge level, in a task list it serves well as a concrete icon for tasks about batteries, charging devices, power banks, and replacing household cells, though it is nearly interchangeable with other battery-level glyphs.",
@@ -215,6 +216,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / portable power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / battery level",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / rechargeable cell",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pill bottle with white label",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can look like a small medicine bottle or cosmetics jar with a white label at very small sizes, and is easily confused with other battery fill-level icons (full, half, low).",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric utility bill before Friday",
+     "better": "invoice / lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up prescription bottle of amoxicillin from the pharmacy",
+     "better": "pill / medicine bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule full psychological test battery with the clinic",
+     "better": "clipboard / medical chart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new cordless Makita drill for the shed",
+     "better": "power drill",
+     "trap": "property"
+    },
+    {
+     "task": "Order wall-mounted toothbrush holder for the kids' bathroom",
+     "better": "toothbrush",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_full",
+   "battery_3_bar",
+   "battery_vert_050",
+   "battery_4_bar",
+   "battery_6_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9321,
+    "output": 3291,
+    "thoughts": 0,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Filled with black up to roughly 75% leaving a horizontal rectangular white cutout in the top quarter, sitting midway between the square-cutout (~60%) battery and the thin-slit (~90%) battery and interchangeable with both."
 }

@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "align to left margin / backstop",
+   "meaning": "backtab / shift-tab key",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Pure UI control glyph; easily confused with previous track, back, left-tab stop, collapse sidebar, or outdent depending on software context.",
+ "ambiguity": "Interchangeable with the left-pointing arrow facing a shorter vertical bar of equal height to the arrowhead; also easily mistaken for a plain back arrow, media previous-track icon, or uppercase letter K at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "vertical bar on left",
@@ -165,29 +165,34 @@
   },
   {
    "task": "Download the Q4 tax statements from the portal",
-   "better": "down arrow into tray",
+   "better": "down arrow into horizontal tray",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Log out of all shared studio machines",
-   "better": "door with exit arrow",
+   "better": "door or bracket with exit arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy potassium supplements at the pharmacy",
+   "better": "pill bottle or capsule",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Start the sourdough starter before Saturday morning",
-   "better": "bread or jar",
+   "better": "bread loaf or starter jar",
    "trap": "generic_verb"
   },
   {
    "task": "Review the left-aligned layout mockup for the landing page",
-   "better": "webpage layout",
+   "better": "webpage layout wireframe",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 1,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": true,
  "reasoning": "This is an abstract interface-chrome glyph (arrow to a left vertical bar) meaning 'jump to start', 'first page', 'collapse left', or 'outdent'. It does not depict any real-world object or task subject and should be discarded from a task-planning icon library.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "jump to beginning / first page / start",
+     "strength": "primary"
+    },
+    {
+     "meaning": "outdent / decrease indent",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dock or collapse panel to left edge",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "align to left margin / backstop",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Pure UI control glyph; easily confused with previous track, back, left-tab stop, collapse sidebar, or outdent depending on software context.",
+   "near_misses": [
+    {
+     "task": "Return the defective router to Amazon before Friday",
+     "better": "package with return arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call back the dentist about the crown appointment",
+     "better": "phone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download the Q4 tax statements from the portal",
+     "better": "down arrow into tray",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Log out of all shared studio machines",
+     "better": "door with exit arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Start the sourdough starter before Saturday morning",
+     "better": "bread or jar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Review the left-aligned layout mockup for the landing page",
+     "better": "webpage layout",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "keyboard_tab_rtl"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4052,
+    "output": 693,
+    "thoughts": 0,
+    "total": 4745
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "Has a taller vertical bar that extends well above and below the chevron tips of the slightly shorter left-pointing arrow, though in meaning it is completely interchangeable with the matching shorter-bar arrow-to-left-bar icon."
 }

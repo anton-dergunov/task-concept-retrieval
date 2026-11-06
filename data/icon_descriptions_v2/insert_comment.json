@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "comment, feedback, or written review",
+   "meaning": "outgoing reply, response, or comment",
    "strength": "primary"
   },
   {
-   "meaning": "reply or respond to someone in writing",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "subtitles or closed captions",
+   "meaning": "written review or feedback",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to other speech bubble variants (rounded, empty, or with dots), making it broadly interchangeable for any messaging or commenting task.",
+ "ambiguity": "Interchangeable with the left-tailed and centered-pointer three-line speech bubbles for almost any messaging or commenting task.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal text lines inside",
@@ -161,40 +157,40 @@
  ],
  "near_misses": [
   {
+   "task": "Edit my comment on the GitHub issue",
+   "better": "speech bubble with pencil inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Post the bulleted summary of action items in Slack",
+   "better": "speech bubble with bulleted list inside",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Grandma to wish her a happy 80th birthday",
    "better": "telephone handset",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Email the signed tax forms back to the accountant",
-   "better": "envelope / email icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Practice my 5-minute lightning talk for the engineering offsite",
+   "task": "Practice my 5-minute lightning talk for the offsite",
    "better": "podium or microphone",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the $45 international roaming and SMS overage bill",
-   "better": "credit card or bill/receipt",
+   "better": "credit card or receipt",
    "trap": "property"
   },
   {
    "task": "Buy a new mechanical keyboard for writing long replies",
    "better": "keyboard",
    "trap": "property"
-  },
-  {
-   "task": "Book the restaurant table for eight people on Friday",
-   "better": "restaurant / cutlery or calendar",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A classic rectangular speech bubble with three lines of text inside, universally understood as a text message, chat, or written comment. It is an ideal fit for common everyday tasks like texting someone back, replying in group chats, or commenting on documents, though it shares visual overlap with other speech bubble icons.",
@@ -212,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "comment"
- }
+  "alias_of": "comment",
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "text message, SMS, or chat message",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comment, feedback, or written review",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reply or respond to someone in writing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "subtitles or closed captions",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to other speech bubble variants (rounded, empty, or with dots), making it broadly interchangeable for any messaging or commenting task.",
+   "near_misses": [
+    {
+     "task": "Call Grandma to wish her a happy 80th birthday",
+     "better": "telephone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice my 5-minute lightning talk for the engineering offsite",
+     "better": "podium or microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $45 international roaming and SMS overage bill",
+     "better": "credit card or bill/receipt",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new mechanical keyboard for writing long replies",
+     "better": "keyboard",
+     "trap": "property"
+    },
+    {
+     "task": "Book the restaurant table for eight people on Friday",
+     "better": "restaurant / cutlery or calendar",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "card_membership",
+   "tooltip_2",
+   "chat",
+   "rate_review",
+   "speaker_notes"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9326,
+    "output": 2907,
+    "thoughts": 0,
+    "total": 12233
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Has the speech tail flushing down from the bottom-right corner and three equal-length horizontal lines inside, Suggesting an outgoing reply bubble, though in practice interchangeable with the left-tailed and center-tailed text bubbles."
 }

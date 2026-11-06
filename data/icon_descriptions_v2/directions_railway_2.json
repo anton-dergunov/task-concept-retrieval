@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "train / railway",
+   "meaning": "train / railway / intercity rail",
    "strength": "primary"
   },
   {
@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "public transit / commute",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "tram / streetcar",
+   "meaning": "public transit / rail commute",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a tram or monorail; distinguished from a bus by the tapered track base and single center headlight.",
+ "ambiguity": "Virtually interchangeable with the train car on a single solid base; easily confused at small sizes with the tram with an overhead pantograph.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -156,40 +152,45 @@
  ],
  "near_misses": [
   {
+   "task": "Buy a day pass for the historic Lisbon streetcar",
+   "better": "tram or streetcar with overhead pantograph",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the overhead trolley down to the waterfront",
+   "better": "tram or streetcar with overhead pantograph",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Train the new summer intern on the billing software",
-   "better": "person teaching / presentation",
+   "better": "person teaching or presentation",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Crate train the puppy before our July road trip",
-   "better": "dog / pet",
+   "better": "dog or pet",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Have the tailor shorten the train on the wedding dress",
-   "better": "dress / needle and thread",
+   "better": "dress or needle and thread",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book the long-distance coach bus to Boston",
-   "better": "bus",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Call the hotel near the central train station to ask about early check-in",
-   "better": "phone / hotel bed",
+   "task": "Call the hotel near the central train station about early check-in",
+   "better": "phone or hotel bed",
    "trap": "property"
   },
   {
-   "task": "Buy AA batteries for the wireless mouse",
-   "better": "battery",
+   "task": "Renew passport before booking the Eurostar trip",
+   "better": "passport",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows the front of a train car with a single center headlight resting on railway tracks. Ideal for tasks involving rail travel, subway cards, commuter passes, timetables, and station pickups; distinct from a bus icon because of the tracks and single headlight.",
@@ -207,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "train / railway",
+     "strength": "primary"
+    },
+    {
+     "meaning": "subway / metro / commuter rail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "public transit / commute",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tram / streetcar",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a tram or monorail; distinguished from a bus by the tapered track base and single center headlight.",
+   "near_misses": [
+    {
+     "task": "Train the new summer intern on the billing software",
+     "better": "person teaching / presentation",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Crate train the puppy before our July road trip",
+     "better": "dog / pet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Have the tailor shorten the train on the wedding dress",
+     "better": "dress / needle and thread",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the long-distance coach bus to Boston",
+     "better": "bus",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the hotel near the central train station to ask about early check-in",
+     "better": "phone / hotel bed",
+     "trap": "property"
+    },
+    {
+     "task": "Buy AA batteries for the wireless mouse",
+     "better": "battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "directions_railway",
+   "tram"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5376,
+    "output": 1123,
+    "thoughts": 178,
+    "total": 6677
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "Shows a train cab resting on a two-tiered, split trapezoidal track base with no overhead pantograph, making it virtually interchangeable in meaning with the single-base train icon and distinct from the overhead-wire tram."
 }

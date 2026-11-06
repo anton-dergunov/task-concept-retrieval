@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "battery replacement, health, or disposal",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "electrical power or energy supply",
+   "meaning": "half-full battery or mid-level charge",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to other battery-level and charging status icons in the same icon family.",
+ "ambiguity": "Easily confused with the ~60% and ~30% filled charging battery icons right next to it in the progression; all Partial-fill charging batteries mean the same thing in a to-do list.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt badge at bottom right",
@@ -161,9 +157,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp or flashlight",
-   "trap": "property"
+   "task": "Recharge the completely empty AA rechargeables",
+   "better": "empty charging battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check that backup batteries are fully topped up to 90%+",
+   "better": "nearly full charging battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly ConEd electricity bill before Friday",
@@ -174,11 +175,6 @@
    "task": "Dispute the double charge from the hotel on the Visa card",
    "better": "credit card",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Refill the insulated water bottle before leaving for the gym",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Take an afternoon walk without the phone to recharge after the sprint",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A half-full vertical battery with a lightning bolt badge clearly signals batteries, charging, or portable power banks. It fits concrete tasks about charging gear, buying or recycling batteries, and replacing device or car batteries, though it shares its silhouette with several other battery-status glyphs.",
@@ -212,6 +208,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery charging or rechargeable battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "portable power bank or backup battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery replacement, health, or disposal",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "electrical power or energy supply",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to other battery-level and charging status icons in the same icon family.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly ConEd electricity bill before Friday",
+     "better": "invoice or bill with currency symbol",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the double charge from the hotel on the Visa card",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill the insulated water bottle before leaving for the gym",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take an afternoon walk without the phone to recharge after the sprint",
+     "better": "walking person or nature/park",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the contacts inside the kitchen smoke detector",
+     "better": "smoke detector or alarm",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_90",
+   "battery_charging_80",
+   "battery_charging_60",
+   "battery_charging_30",
+   "battery_charging_20",
+   "battery_charging_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10582,
+    "output": 3519,
+    "thoughts": 0,
+    "total": 14101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Filled to just below halfway (~45-50%), with the internal fill line meeting the left curve of the lightning bolt cutout slightly below its top edge; interchangeable in practice with the other mid-level charging batteries."
 }

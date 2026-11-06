@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "pause timer or countdown",
+   "meaning": "pause timer, countdown, or timed session",
    "strength": "primary"
   },
   {
-   "meaning": "pause subscription or recurring service",
+   "meaning": "pause, suspend, or put recurring service on hold",
    "strength": "primary"
-  },
-  {
-   "meaning": "put project or activity on hold",
-   "strength": "secondary"
   },
   {
    "meaning": "take a break or rest interval",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the outer ring with the dot looks almost identical to a standard circular pause button or an electrical power outlet.",
+ "ambiguity": "Almost indistinguishable at list-icon size from the plain circular pause button with an unbroken ring, and both can also resemble a round two-slot electrical outlet.",
  "modifier_semantics": [
   {
    "modifier": "circular progress ring with top-left gap and dot",
@@ -161,9 +157,14 @@
  ],
  "near_misses": [
   {
-   "task": "Cancel Netflix subscription for good",
-   "better": "cancel / cross mark or trash",
-   "trap": "shared_vocabulary"
+   "task": "Put gym membership on hold for the summer",
+   "better": "plain circular pause button",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the sticking pause button on the cassette deck",
+   "better": "plain circular pause button or cassette deck",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a European two-pin plug adapter for the hairdryer",
@@ -176,14 +177,14 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Cancel Netflix subscription for good",
+   "better": "cancel / cross mark or trash",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Check which annual subscriptions renew next month",
    "better": "calendar or credit card",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Ask the landlord to replace the broken kitchen faucet",
-   "better": "faucet / tap",
-   "trap": "parent_topic"
   },
   {
    "task": "Download offline podcasts for the long layover",
@@ -194,7 +195,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a pause symbol enclosed in a timer or progress ring. While originally a media or timer UI control, in a task manager it is genuinely useful for tasks about pausing subscriptions, freezing memberships, or putting projects and deliveries on hold, though it looks very similar to a plain pause button.",
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pause timer or countdown",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pause subscription or recurring service",
+     "strength": "primary"
+    },
+    {
+     "meaning": "put project or activity on hold",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "take a break or rest interval",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the outer ring with the dot looks almost identical to a standard circular pause button or an electrical power outlet.",
+   "near_misses": [
+    {
+     "task": "Cancel Netflix subscription for good",
+     "better": "cancel / cross mark or trash",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a European two-pin plug adapter for the hairdryer",
+     "better": "electrical plug / outlet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Set a 45-minute oven timer for the sourdough loaf",
+     "better": "stopwatch / kitchen timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check which annual subscriptions renew next month",
+     "better": "calendar or credit card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Ask the landlord to replace the broken kitchen faucet",
+     "better": "faucet / tap",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Download offline podcasts for the long layover",
+     "better": "podcasts / headphones",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pause_circle"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 1092,
+    "thoughts": 0,
+    "total": 5127
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Unlike the solid circular pause button, this icon's outer ring is broken at the top-left by a single round dot, turning the frame into a stylized circular progress or countdown ring, though for general task use the two icons are nearly interchangeable as pause symbols."
 }

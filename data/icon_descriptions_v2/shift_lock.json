@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "upload file or data",
+   "meaning": "upload or submit file",
    "strength": "primary"
   },
   {
-   "meaning": "publish or deploy online",
+   "meaning": "Caps Lock or Shift keyboard key",
    "strength": "secondary"
   },
   {
-   "meaning": "export or back up to cloud",
+   "meaning": "publish, export, or deploy online",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a keyboard Shift or Caps Lock key symbol, or a generic up arrow at very small sizes.",
+ "ambiguity": "Virtually identical in meaning and glanceable appearance to the taller hollow upward arrow over a horizontal bar, and easily confused with a keyboard Caps Lock symbol or a generic upload icon.",
  "modifier_semantics": [
   {
    "modifier": "horizontal bottom bar",
@@ -163,12 +163,17 @@
  "near_misses": [
   {
    "task": "Download the offline maps for the Dolomites hike",
-   "better": "down arrow into tray or map icon",
+   "better": "downward arrow into a tray or map icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new mechanical keyboard with a split shift key",
    "better": "keyboard icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Remap the Caps Lock key to Control on the new laptop",
+   "better": "keyboard icon or the squat Caps Lock symbol if distinguishing keyboard keys from taller upload arrows",
    "trap": "lookalike_glyph"
   },
   {
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The upward blocky arrow over a horizontal bar is the standard symbol for uploading or submitting files. While uploading is an action, it is very frequently the core point of digital admin, work, and creative tasks (uploading documents to portals, pushing builds, backing up media). It slightly resembles a keyboard Shift/Caps Lock icon or a generic up arrow.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload file or data",
+     "strength": "primary"
+    },
+    {
+     "meaning": "publish or deploy online",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "export or back up to cloud",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upgrade or update version",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a keyboard Shift or Caps Lock key symbol, or a generic up arrow at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Download the offline maps for the Dolomites hike",
+     "better": "down arrow into tray or map icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new mechanical keyboard with a split shift key",
+     "better": "keyboard icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Bring the holiday decoration boxes up from the basement",
+     "better": "box or stairs icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the accountant looked at the uploaded W-2s",
+     "better": "tax document or message icon",
+     "trap": "property"
+    },
+    {
+     "task": "Write the description and tags for next week's video",
+     "better": "text document or video icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Update macOS on the work laptop over the weekend",
+     "better": "laptop or refresh arrows icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "upload_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4057,
+    "output": 1149,
+    "thoughts": 116,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "Draws the hollow upward block arrow with a shorter, wider shaft and broader head above the horizontal bar (closely matching standard Caps Lock key proportions), though in a task list it is functionally interchangeable with the taller, narrower-shafted version."
 }

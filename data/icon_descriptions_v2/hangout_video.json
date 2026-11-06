@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "video call / video conference",
+   "meaning": "video call, Zoom meeting, or video conference",
    "strength": "primary"
   },
   {
-   "meaning": "video recording / screen recording",
+   "meaning": "screen recording, webcam capture, or live stream",
    "strength": "primary"
   },
   {
-   "meaning": "video file / clip",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "webcam / live stream",
+   "meaning": "record a video clip or vlog",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles an unframed video camera icon, a media player icon, or a movie/cinema symbol.",
+ "ambiguity": "At small sizes, the internal camera shape can briefly resemble the play-triangle icons in a rectangular frame, though the heavy square body and reversed triangle orientation distinguish it as a camera.",
  "modifier_semantics": [
   {
    "modifier": "rounded rectangular border",
@@ -164,8 +160,18 @@
  ],
  "near_misses": [
   {
+   "task": "Watch the recorded keynote video on YouTube",
+   "better": "rectangular video player with play triangle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sort through the playlist of tutorial videos",
+   "better": "stacked square play icon for video library",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book four aisle seats for Dune Part Two on IMAX",
-   "better": "movie ticket / cinema clapperboard",
+   "better": "movie ticket or cinema clapperboard",
    "trap": "shared_vocabulary"
   },
   {
@@ -174,18 +180,13 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pack the 35mm film camera and extra rolls for Lisbon",
-   "better": "photo camera",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check whether the HDMI cable supports 4K 60Hz video output",
-   "better": "cable / plug",
+   "better": "cable or plug",
    "trap": "property"
   },
   {
    "task": "Pay the freelance invoice for the voiceover artist",
-   "better": "invoice / money",
+   "better": "invoice or money",
    "trap": "parent_topic"
   },
   {
@@ -215,6 +216,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video call / video conference",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video recording / screen recording",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video file / clip",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "webcam / live stream",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles an unframed video camera icon, a media player icon, or a movie/cinema symbol.",
+   "near_misses": [
+    {
+     "task": "Book four aisle seats for Dune Part Two on IMAX",
+     "better": "movie ticket / cinema clapperboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install the wired doorbell camera by the front porch",
+     "better": "security camera / CCTV",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the 35mm film camera and extra rolls for Lisbon",
+     "better": "photo camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check whether the HDMI cable supports 4K 60Hz video output",
+     "better": "cable / plug",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the freelance invoice for the voiceover artist",
+     "better": "invoice / money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Review the quarterly slides before getting on the call",
+     "better": "presentation slides",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "slideshow",
+   "smart_display",
+   "video_library",
+   "live_tv",
+   "animated_images"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9468,
+    "output": 3165,
+    "thoughts": 0,
+    "total": 12633
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "Unlike the other icons in this group which all feature a single right-pointing play triangle, this icon contains a solid video camera silhouette (square body with a left-pointing lens cone on the right) inside a rectangular frame, signifying video calling or recording rather than media playback."
 }

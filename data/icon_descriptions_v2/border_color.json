@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "write / draft / take notes",
-   "strength": "primary"
-  },
-  {
    "meaning": "sign a document or signature line",
    "strength": "primary"
   },
   {
-   "meaning": "edit / revise text",
+   "meaning": "fill in a line or form field",
+   "strength": "primary"
+  },
+  {
+   "meaning": "write, draft, or edit text",
    "strength": "secondary"
   },
   {
-   "meaning": "pens, pencils, and stationery",
+   "meaning": "highlight or color-code text",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Often used in rich-text toolbars to represent text highlight color or border color because of the thick bar beneath the pencil.",
+ "ambiguity": "Very easily mistaken for the plain pencil or the pencil with a trailing stroke to the right, as all three use the identical diagonal pencil.",
  "modifier_semantics": [
   {
    "modifier": "thick horizontal bar underneath",
@@ -163,6 +163,16 @@
  ],
  "near_misses": [
   {
+   "task": "Sharpen the drawing pencils in the studio",
+   "better": "plain pencil icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy yellow chisel-tip highlighters for exam prep",
+   "better": "pencil making a beveled highlighter stroke",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update my billing address on the utility portal",
    "better": "house / credit card",
    "trap": "generic_verb"
@@ -171,11 +181,6 @@
    "task": "Edit the beach vacation reel down to 30 seconds",
    "better": "video / clapperboard / scissors",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pick up my prescription from the pharmacy counter",
-   "better": "pill / pharmacy",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Sign up for the Saturday morning pottery workshop",
@@ -196,7 +201,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a pencil over a horizontal line, universally recognized as writing, signing on a line, or editing. It fits many everyday tasks involving signatures, handwriting, creative writing, and stationery, though generic 'edit/update' tasks are better served by icons showing the object being updated.",
@@ -214,6 +219,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "write / draft / take notes",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sign a document or signature line",
+     "strength": "primary"
+    },
+    {
+     "meaning": "edit / revise text",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pens, pencils, and stationery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Often used in rich-text toolbars to represent text highlight color or border color because of the thick bar beneath the pencil.",
+   "near_misses": [
+    {
+     "task": "Update my billing address on the utility portal",
+     "better": "house / credit card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Edit the beach vacation reel down to 30 seconds",
+     "better": "video / clapperboard / scissors",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up my prescription from the pharmacy counter",
+     "better": "pill / pharmacy",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sign up for the Saturday morning pottery workshop",
+     "better": "pottery / calendar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mail the signed contract via certified post",
+     "better": "envelope / mailbox",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the freelance illustrator for the book cover",
+     "better": "money / bank transfer",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "edit",
+   "drive_file_rename_outline"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5359,
+    "output": 1563,
+    "thoughts": 0,
+    "total": 6922
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "Places a full-width, solid rectangular bar underneath the entire pencil, evoking a signature line, form baseline, or color-indicator bar."
 }

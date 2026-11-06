@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "turn right / right turn navigation",
+   "meaning": "forward or redirect a message or email",
    "strength": "primary"
   },
   {
-   "meaning": "forward / redirect / reroute",
+   "meaning": "turn right (navigation direction Only when directional routing is the point of the task, not for general driving.)",
    "strength": "primary"
   },
   {
-   "meaning": "share / send onward",
+   "meaning": "share or send onward",
    "strength": "secondary"
   },
   {
-   "meaning": "redo / next step",
+   "meaning": "redo or advance to next step",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with email forward, share, or generic UI navigation chrome.",
+ "ambiguity": "Can be mistaken at a quick scan for the left-pointing reply/undo arrow, or confused with generic share and external-link UI icons.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -168,39 +168,44 @@
  "near_misses": [
   {
    "task": "Reply to Mark's email about the Q3 budget",
-   "better": "reply arrow (pointing left) or envelope",
+   "better": "left-pointing curved reply arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Return the defective blender to the store",
+   "better": "left-pointing return arrow or package icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Undo the last database migration on staging",
+   "better": "left-pointing undo arrow or database icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Look forward to the long weekend in October",
-   "better": "calendar",
+   "better": "calendar icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new right-angle USB-C cable for the desk",
-   "better": "cable or plug",
+   "better": "cable or plug icon",
    "trap": "property"
   },
   {
    "task": "Turn the compost pile in the backyard",
-   "better": "shovel or plant",
+   "better": "shovel or plant icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Move the winter coats to the basement storage",
-   "better": "box or coat",
+   "better": "box or coat icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Pay the $35 fee",
-   "better": "credit card or money",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a 90-degree bent arrow going up and turning right, standard for 'turn right' in navigation or 'forward / redirect' in digital interfaces. While mostly UI chrome, it serves as a decent action icon for tasks explicitly about forwarding emails/mail, setting up URL/call redirects, or port forwarding, though an envelope-with-arrow is usually clearer for mail.",
@@ -220,6 +225,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "turn right / right turn navigation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "forward / redirect / reroute",
+     "strength": "primary"
+    },
+    {
+     "meaning": "share / send onward",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "redo / next step",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with email forward, share, or generic UI navigation chrome.",
+   "near_misses": [
+    {
+     "task": "Reply to Mark's email about the Q3 budget",
+     "better": "reply arrow (pointing left) or envelope",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Look forward to the long weekend in October",
+     "better": "calendar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new right-angle USB-C cable for the desk",
+     "better": "cable or plug",
+     "trap": "property"
+    },
+    {
+     "task": "Turn the compost pile in the backyard",
+     "better": "shovel or plant",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Move the winter coats to the basement storage",
+     "better": "box or coat",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the $35 fee",
+     "better": "credit card or money",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "reply"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4046,
+    "output": 694,
+    "thoughts": 122,
+    "total": 4862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Rises up a taller vertical stem and turns ninety degrees to the right with a tighter corner, signifying a right turn, forwarding a message, or redoing an action rather than replying or going back."
 }

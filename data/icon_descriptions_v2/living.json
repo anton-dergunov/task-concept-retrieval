@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "furniture or seating",
+   "meaning": "airport lounge or waiting room",
    "strength": "secondary"
   },
   {
-   "meaning": "waiting room or airport lounge",
+   "meaning": "upholstered furniture or seating",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the heavy outer box and simple shape can make it look like an inbox tray, a wall outlet, or an RJ45 ethernet port.",
+ "ambiguity": "At small sizes, it is easily confused with the framed bed icon because both feature a rounded backrest inside an identical square border; the recessed seat and armrests can also resemble an inbox tray or RJ45 wall jack.",
  "modifier_semantics": [
   {
    "modifier": "rounded square border",
@@ -160,24 +160,24 @@
  ],
  "near_misses": [
   {
+   "task": "Book a boutique hotel near the conference center",
+   "better": "bed inside a square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change the guest bedroom sheets and pillowcases",
+   "better": "bed inside a square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Sign up for the Couch to 5K running program",
    "better": "running shoe or runner",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book a therapist appointment for Wednesday afternoon",
-   "better": "calendar or healthcare",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Mount the 65-inch TV on the wall",
+   "task": "Mount the 65-inch TV on the living room wall",
    "better": "television",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Clear out the email inbox down to zero",
-   "better": "inbox tray or envelope",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy an ergonomic mesh office chair for my desk",
@@ -185,9 +185,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Crimp new RJ45 connector onto the living room ethernet cable",
-   "better": "ethernet plug or cable",
-   "trap": "lookalike_glyph"
+   "task": "Schedule a 30-minute rest break after lunch",
+   "better": "clock or timer",
+   "trap": "property"
   }
  ],
  "scores": {
@@ -211,6 +211,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "armchair, couch, or sofa",
+     "strength": "primary"
+    },
+    {
+     "meaning": "living room or lounge area",
+     "strength": "primary"
+    },
+    {
+     "meaning": "furniture or seating",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "waiting room or airport lounge",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the heavy outer box and simple shape can make it look like an inbox tray, a wall outlet, or an RJ45 ethernet port.",
+   "near_misses": [
+    {
+     "task": "Sign up for the Couch to 5K running program",
+     "better": "running shoe or runner",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a therapist appointment for Wednesday afternoon",
+     "better": "calendar or healthcare",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mount the 65-inch TV on the wall",
+     "better": "television",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy an ergonomic mesh office chair for my desk",
+     "better": "swivel office chair",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Crimp new RJ45 connector onto the living room ethernet cable",
+     "better": "ethernet plug or cable",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bedroom_child"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4025,
+    "output": 1043,
+    "thoughts": 74,
+    "total": 5142
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "Inside the rounded square frame, this icon shows an armchair or sofa with two raised rounded armrests flanking a recessed seat and a closed bottom, representing a lounge, living room, or couch rather than a bed or bedroom."
 }

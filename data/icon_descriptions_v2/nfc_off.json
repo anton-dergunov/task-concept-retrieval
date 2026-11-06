@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the diagonal slash hides the inner loop of the NFC coil, it looks like generic nested squares and is easily mistaken for 'no border', 'exit fullscreen', or 'uncheck checkbox' at small sizes.",
+ "ambiguity": "At small sizes, the slashed nested squares can blur into the slashed laptop-and-phone icon, or look like a generic 'no border' or 'uncheck checkbox' symbol because the slash hides the NFC coil junction.",
  "modifier_semantics": [
   {
    "modifier": "diagonal strike-through slash",
@@ -171,6 +171,16 @@
  ],
  "near_misses": [
   {
+   "task": "Do a weekend digital detox with no phone or laptop",
+   "better": "slashed laptop and smartphone icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unlink work smartphone from home computer sync",
+   "better": "slashed laptop and smartphone icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Program NFC stickers to trigger bedtime routine by the nightstand",
    "better": "NFC icon without slash",
    "trap": "shared_vocabulary"
@@ -183,12 +193,7 @@
   {
    "task": "Buy unframed poster for the living room wall",
    "better": "picture frame icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Uncheck all completed items in the packing checklist",
-   "better": "checkbox icon",
-   "trap": "lookalike_glyph"
+   "trap": "property"
   },
   {
    "task": "Buy a waterproof RFID key fob for the community pool gate",
@@ -204,7 +209,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows the concentric square coil of an NFC symbol crossed out with a diagonal slash (NFC off / contactless disabled). Because the slash obscures the crucial inner hook that identifies the NFC logo, it looks like generic nested squares and is hard to recognize outside a phone settings menu, though it fits a small niche of tasks around disabling contactless payments, fixing broken NFC, or RFID blocking.",
@@ -224,6 +229,90 @@
    "example_tasks: 20 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "NFC disabled / contactless off",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no frame / borderless / uncheck box",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "disable picture-in-picture or screen mirroring",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the diagonal slash hides the inner loop of the NFC coil, it looks like generic nested squares and is easily mistaken for 'no border', 'exit fullscreen', or 'uncheck checkbox' at small sizes.",
+   "near_misses": [
+    {
+     "task": "Program NFC stickers to trigger bedtime routine by the nightstand",
+     "better": "NFC icon without slash",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add new Visa card to Apple Pay",
+     "better": "credit card or contactless wave icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy unframed poster for the living room wall",
+     "better": "picture frame icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Uncheck all completed items in the packing checklist",
+     "better": "checkbox icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof RFID key fob for the community pool gate",
+     "better": "key fob icon",
+     "trap": "property"
+    },
+    {
+     "task": "Ship the broken card reader back to Square via UPS",
+     "better": "package or shipping box icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "phonelink_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4066,
+    "output": 1063,
+    "thoughts": 165,
+    "total": 5294
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "Shows a single square outline looping inward into a concentric inner square (the NFC coil symbol) struck through with a slash, rather than a laptop and smartphone side by side with a slash."
 }

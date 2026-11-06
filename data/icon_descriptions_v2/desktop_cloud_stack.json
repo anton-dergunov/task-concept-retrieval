@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "virtual machine or cloud desktop",
+   "meaning": "virtual machines (VMs) / multiple cloud instances",
    "strength": "primary"
   },
   {
-   "meaning": "remote desktop or VDI session",
+   "meaning": "remote desktop / VDI / cloud screen sharing",
    "strength": "primary"
   },
   {
-   "meaning": "cloud backup or multi-device cloud sync",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cloud computing or web hosting environment",
+   "meaning": "multi-device cloud sync / cloud backup across screens",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a plain monitor, screen mirroring/casting, or a weather app on a TV at small sizes.",
+ "ambiguity": "Very easily mistaken for the single cloud monitor at a glance, or confused with generic screen casting/mirroring icons that also use a stacked screen outline.",
  "modifier_semantics": [
   {
    "modifier": "cloud inside screen",
@@ -167,13 +163,18 @@
  ],
  "near_misses": [
   {
+   "task": "Check personal iCloud storage quota on the iMac",
+   "better": "single monitor with a cloud inside",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a 27-inch 4K monitor for the home office",
-   "better": "plain computer monitor without cloud",
+   "better": "plain computer monitor without a cloud",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Check the weekend weather forecast on the computer",
-   "better": "weather cloud and sun icon",
+   "better": "weather cloud and sun icon, or single cloud monitor",
    "trap": "shared_vocabulary"
   },
   {
@@ -182,25 +183,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Clean dust off the desktop screen with microfiber cloth",
-   "better": "cleaning spray or monitor icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a cloud wrist rest for the mechanical keyboard",
    "better": "keyboard icon",
    "trap": "property"
   },
   {
-   "task": "Email the tax PDF to the accountant",
+   "task": "Email the cloud migration PDF to the CTO",
    "better": "email / envelope icon",
-   "trap": "parent_topic"
+   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a desktop monitor, a cloud inside the screen, and a stacked second window frame behind it, clearly representing a virtual machine, cloud workstation, or remote desktop session. It is an excellent fit for IT, self-hosting, and remote-work tasks involving VMs, VDI, or cloud backups, though less common outside technical domains.",
@@ -218,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "virtual machine or cloud desktop",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remote desktop or VDI session",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cloud backup or multi-device cloud sync",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cloud computing or web hosting environment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain monitor, screen mirroring/casting, or a weather app on a TV at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a 27-inch 4K monitor for the home office",
+     "better": "plain computer monitor without cloud",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the weekend weather forecast on the computer",
+     "better": "weather cloud and sun icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the Adobe Creative Cloud renewal contract",
+     "better": "contract / signature icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean dust off the desktop screen with microfiber cloth",
+     "better": "cleaning spray or monitor icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a cloud wrist rest for the mechanical keyboard",
+     "better": "keyboard icon",
+     "trap": "property"
+    },
+    {
+     "task": "Email the tax PDF to the accountant",
+     "better": "email / envelope icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_cloud"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4075,
+    "output": 1070,
+    "thoughts": 193,
+    "total": 5338
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "Has an L-shaped outline of a second screen stacked behind the upper-right of the cloud monitor, indicating multiple virtual machines, a remote desktop session (screen-in-screen), or multi-device cloud syncing."
 }

@@ -14,7 +14,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "patient transfer or moving a hospital bed",
+   "meaning": "patient transfer out of ward or hospital bed",
    "strength": "primary"
   },
   {
@@ -22,7 +22,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the top-down bed with a circle and cross resembles a game controller, a smart doorbell, or a contact card with an export arrow.",
+ "ambiguity": "Easily confused at a glance with the hospital bed with an inward-pointing arrow (hospital admission); at small sizes, the top-down bed with a circle and cross also resembles a contact card with an export arrow or a gamepad.",
  "modifier_semantics": [
   {
    "modifier": "medical cross on the blanket",
@@ -162,22 +162,27 @@
  "near_misses": [
   {
    "task": "Check into the surgical admissions desk by 6am fasting",
-   "better": "hospital admission / bed with inward arrow",
+   "better": "hospital bed with inward-pointing arrow (hospital admission)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack overnight bag for mom's scheduled hospital admission",
+   "better": "hospital bed with inward-pointing arrow (hospital admission)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Change the sheets on the guest bed before company arrives",
-   "better": "regular bed",
+   "better": "regular bed without medical cross",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Export my contacts list from the old phone to a vCard file",
-   "better": "address book / contact card export",
+   "better": "address book or contact card with export arrow",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Pair the wireless D-pad controller with the living room Apple TV",
-   "better": "gamepad / controller",
+   "better": "gamepad / video game controller",
    "trap": "lookalike_glyph"
   },
   {
@@ -186,8 +191,8 @@
    "trap": "property"
   },
   {
-   "task": "Pay the $450 ambulance co-pay bill online",
-   "better": "bill / ambulance",
+   "task": "Pay the $450 inpatient stay co-pay bill online",
+   "better": "invoice or credit card payment",
    "trap": "parent_topic"
   }
  ],
@@ -212,6 +217,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hospital discharge / leaving inpatient care",
+     "strength": "primary"
+    },
+    {
+     "meaning": "patient transfer or moving a hospital bed",
+     "strength": "primary"
+    },
+    {
+     "meaning": "outpatient transition or home recovery after hospitalization",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the top-down bed with a circle and cross resembles a game controller, a smart doorbell, or a contact card with an export arrow.",
+   "near_misses": [
+    {
+     "task": "Check into the surgical admissions desk by 6am fasting",
+     "better": "hospital admission / bed with inward arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Change the sheets on the guest bed before company arrives",
+     "better": "regular bed",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Export my contacts list from the old phone to a vCard file",
+     "better": "address book / contact card export",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pair the wireless D-pad controller with the living room Apple TV",
+     "better": "gamepad / controller",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof mattress protector for the hospital-grade adjustable bed",
+     "better": "mattress cover / bedding",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $450 ambulance co-pay bill online",
+     "better": "bill / ambulance",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "inpatient"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4115,
+    "output": 1146,
+    "thoughts": 0,
+    "total": 5261
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "The arrow on the right points outward away from the medical bed, signifying discharge or leaving inpatient care rather than entering it."
 }

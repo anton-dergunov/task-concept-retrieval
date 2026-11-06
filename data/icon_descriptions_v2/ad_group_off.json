@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "close browser tabs or multiple windows",
+   "meaning": "close multiple windows or browser tabs",
    "strength": "primary"
   },
   {
-   "meaning": "remove duplicate items or files",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "disable picture-in-picture or multi-window mode",
+   "meaning": "disable multi-window or picture-in-picture mode",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a generic 'copy disabled' or 'no duplicates' icon, or a broken image/screen icon at very small sizes.",
+ "ambiguity": "Easily confused with the single slashed browser window (same solid header bar) and the slashed duplicate documents (same L-shaped offset back layer).",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -159,40 +155,40 @@
  ],
  "near_misses": [
   {
+   "task": "Delete duplicate files in the Downloads folder",
+   "better": "slashed overlapping documents with folded corner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hide live preview pane in the markdown editor",
+   "better": "slashed browser window with eye",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Wash the living room windows before Sunday",
    "better": "house window pane or squeegee",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Upgrade desktop PC from Windows 10 to Windows 11",
-   "better": "OS / computer monitor icon",
+   "better": "computer monitor",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Copy the house keys for the pet sitter",
-   "better": "key icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Cancel the pop-up tent rental for the garden party",
-   "better": "tent / canopy icon",
+   "better": "tent / canopy",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check that the new landing page works without pop-ups",
-   "better": "landing page / web layout icon",
+   "better": "web page layout",
    "trap": "property"
-  },
-  {
-   "task": "Buy blackout curtains for the bedroom window",
-   "better": "curtains / home window icon",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts two overlapping application/browser windows crossed out by a diagonal slash, which represents blocking pop-ups, closing multiple tabs/windows, or removing duplicates. While primarily a UI chrome glyph, it fits real digital-hygiene tasks like cleaning up browser tabs, configuring pop-up blockers, or deduplicating files.",
@@ -210,6 +206,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pop-up blocker / block pop-up windows",
+     "strength": "primary"
+    },
+    {
+     "meaning": "close browser tabs or multiple windows",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remove duplicate items or files",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "disable picture-in-picture or multi-window mode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a generic 'copy disabled' or 'no duplicates' icon, or a broken image/screen icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Wash the living room windows before Sunday",
+     "better": "house window pane or squeegee",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upgrade desktop PC from Windows 10 to Windows 11",
+     "better": "OS / computer monitor icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Copy the house keys for the pet sitter",
+     "better": "key icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel the pop-up tent rental for the garden party",
+     "better": "tent / canopy icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check that the new landing page works without pop-ups",
+     "better": "landing page / web layout icon",
+     "trap": "property"
+    },
+    {
+     "task": "Buy blackout curtains for the bedroom window",
+     "better": "curtains / home window icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_hand_off",
+   "file_copy_off",
+   "video_camera_front_off",
+   "privacy",
+   "no_photography",
+   "preview_off",
+   "ad_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12129,
+    "output": 3883,
+    "thoughts": 0,
+    "total": 16012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "Shows two overlapping landscape application windows (solid top header bar with an L-shaped second window behind) under a slash, unlike the single slashed window or the portrait stacked documents."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "count-up timer or stopwatch",
+   "meaning": "increase duration, extend time limit, or add time",
    "strength": "primary"
   },
   {
-   "meaning": "increase duration or add time",
+   "meaning": "count-up stopwatch or track elapsed time",
    "strength": "primary"
   },
   {
-   "meaning": "track elapsed time or uptime",
+   "meaning": "speed up pace or increase tempo",
    "strength": "secondary"
   },
   {
-   "meaning": "improve speed or pace",
+   "meaning": "sort by duration ascending or track uptime",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Whether the up arrow means 'counting up' (stopwatch vs countdown) or 'more/longer time' (extending a limit) or 'faster pace'.",
+ "ambiguity": "Easily confused at a glance with the stopwatch with a downward arrow, and semantically ambiguous between extending duration (more time) vs speeding up pace.",
  "modifier_semantics": [
   {
    "modifier": "upward pointing arrow",
@@ -161,6 +161,21 @@
  ],
  "near_misses": [
   {
+   "task": "Set a 20-minute Pomodoro countdown timer for focused writing",
+   "better": "stopwatch with downward arrow (countdown timer)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Shave 2 minutes off my 5K run time this month",
+   "better": "stopwatch with downward arrow (reduce time)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a vintage mechanical pocket watch for Dad's birthday",
+   "better": "gift or pocket watch without arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Quick 10-minute living room tidy before guests arrive",
    "better": "broom or sparkles (cleaning)",
    "trap": "property"
@@ -171,19 +186,9 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Order a vintage mechanical pocket watch for Dad's birthday",
-   "better": "gift or pocket watch without arrow",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy new running shoes for the half-marathon time trial",
    "better": "running shoe",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Set morning alarm an hour earlier for the airport run",
-   "better": "alarm clock",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Upload Q3 timesheet PDF to HR portal",
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a stopwatch paired with an upward arrow, clearly communicating counting up elapsed time or increasing a time duration/timeout. It fits specific tasks around extending timeouts, building endurance hold times, or timing how long something takes, though plain stopwatch or clock icons cover much of the same ground.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "count-up timer or stopwatch",
+     "strength": "primary"
+    },
+    {
+     "meaning": "increase duration or add time",
+     "strength": "primary"
+    },
+    {
+     "meaning": "track elapsed time or uptime",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "improve speed or pace",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Whether the up arrow means 'counting up' (stopwatch vs countdown) or 'more/longer time' (extending a limit) or 'faster pace'.",
+   "near_misses": [
+    {
+     "task": "Quick 10-minute living room tidy before guests arrive",
+     "better": "broom or sparkles (cleaning)",
+     "trap": "property"
+    },
+    {
+     "task": "Check when the parking permit expires",
+     "better": "car or permit badge",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a vintage mechanical pocket watch for Dad's birthday",
+     "better": "gift or pocket watch without arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy new running shoes for the half-marathon time trial",
+     "better": "running shoe",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set morning alarm an hour earlier for the airport run",
+     "better": "alarm clock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upload Q3 timesheet PDF to HR portal",
+     "better": "document upload",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "timer_arrow_down"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1142,
+    "thoughts": 55,
+    "total": 5288
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "Shows an upward-pointing arrow next to the stopwatch (counting up or increasing duration), whereas the look-alike shows a downward-pointing arrow (counting down or reducing duration)."
 }

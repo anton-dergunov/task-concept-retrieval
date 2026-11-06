@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as a winter or work glove, a stop gesture, a greeting wave, or a UI grab/pan cursor depending on context.",
+ "ambiguity": "Virtually identical and interchangeable with the rounded-bottom open hand, and only differs from the waving hand by lacking the two outer motion arcs.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -59,11 +59,6 @@
    "task": "Morning tendon glides",
    "parent": "Hand therapy",
    "domain": "health_fitness"
-  },
-  {
-   "task": "Sign up for Saturday shift",
-   "parent": "Food Bank Volunteering",
-   "domain": "social_family"
   },
   {
    "task": "Order O'Keeffe's Working Hands",
@@ -156,13 +151,23 @@
  ],
  "near_misses": [
   {
+   "task": "Send a welcome message to new community Slack members",
+   "better": "waving hand with motion arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Tap the NFC payment terminal to test Apple Pay",
+   "better": "pointing index-finger hand",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Hand in the signed lease renewal to the management office",
-   "better": "document / contract",
+   "better": "document or contract",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pick up a second-hand dresser from Craigslist in Oakland",
-   "better": "dresser / furniture",
+   "better": "dresser or furniture",
    "trap": "property"
   },
   {
@@ -172,24 +177,19 @@
   },
   {
    "task": "Hold mail delivery via USPS for the two weeks in August",
-   "better": "envelope / mailbox",
+   "better": "envelope or mailbox",
    "trap": "generic_verb"
   },
   {
    "task": "Bake sourdough loaves for the volunteer appreciation dinner",
    "better": "bread loaf",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Stop the leaking toilet tank flapper in the guest bath",
-   "better": "toilet / plumbing",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a clear outlined open hand with five digits. It fits concrete tasks about hand care, manicure, gloves, fingerprinting, sign language, hand-washing delicates, and volunteering (raising a hand), though idiomatic uses like 'hand in' or 'second-hand' are frequent false positives.",
@@ -207,6 +207,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hand, palm, fingers, or glove",
+     "strength": "primary"
+    },
+    {
+     "meaning": "volunteer, raise hand, or sign up to help",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stop, halt, or hold",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "touch, manual work, or hand therapy",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as a winter or work glove, a stop gesture, a greeting wave, or a UI grab/pan cursor depending on context.",
+   "near_misses": [
+    {
+     "task": "Hand in the signed lease renewal to the management office",
+     "better": "document / contract",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a second-hand dresser from Craigslist in Oakland",
+     "better": "dresser / furniture",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a brass wall clock with luminous hands",
+     "better": "clock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hold mail delivery via USPS for the two weeks in August",
+     "better": "envelope / mailbox",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Bake sourdough loaves for the volunteer appreciation dinner",
+     "better": "bread loaf",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Stop the leaking toilet tank flapper in the guest bath",
+     "better": "toilet / plumbing",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "back_hand",
+   "pan_tool_alt",
+   "hand_gesture",
+   "eda"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8102,
+    "output": 1643,
+    "thoughts": 0,
+    "total": 9745
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "A plain open hand with four upright fingers and a flattened horizontal bottom edge, virtually interchangeable in meaning with the rounded-bottom open hand."
 }

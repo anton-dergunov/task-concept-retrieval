@@ -11,19 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "landscape, scenery, or outdoor trip",
+   "meaning": "landscape, scenery, photo, or picture",
    "strength": "primary"
   },
   {
    "meaning": "yoga pose, stretching, or downward dog",
    "strength": "secondary"
-  },
-  {
-   "meaning": "Nuxt framework or abstract brand mark",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Because the peaks are heavily rounded and bottomless, it can look like a stick figure bending over in a yoga pose, an abstract wave/pulse, or a software logo at small sizes.",
+ "ambiguity": "Could be confused with the mountain-and-sun icon with a pencil badge if the task is about editing or retouching photos rather than viewing photos or going outdoors; without a surrounding frame, the rounded peaks can also resemble a bending stick figure.",
  "modifier_semantics": [],
  "domains": [
   "outdoors",
@@ -153,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Retouch the wedding portraits in Lightroom",
+   "better": "mountain and sun with an edit pencil badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Crop and color-correct the product photos for the store",
+   "better": "mountain and sun with an edit pencil badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a case of Mountain Dew for the game night",
    "better": "soda bottle or drink can",
    "trap": "shared_vocabulary"
@@ -163,12 +169,7 @@
    "trap": "property"
   },
   {
-   "task": "Upgrade Nuxt project to version 3.12",
-   "better": "code brackets or terminal",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book flights to Denver",
+   "task": "Book flights to Denver for the ski trip",
    "better": "airplane",
    "trap": "parent_topic"
   },
@@ -176,17 +177,12 @@
    "task": "Check the peak hours electricity rate on our utility bill",
    "better": "lightning bolt or invoice",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Frame the 16x20 photo print from Banff",
-   "better": "picture frame",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a stylized two-peak mountain silhouette with a sun/moon circle above the lower peak, though its rounded open bottom also resembles a person bending in a yoga pose. It fits outdoor, hiking, mountain trip, and nature tasks well, while requiring care not to confuse it with a generic photo/gallery icon or a stretching figure.",
@@ -204,6 +200,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "mountains, nature, outdoors, or hiking",
+     "strength": "primary"
+    },
+    {
+     "meaning": "landscape, scenery, or outdoor trip",
+     "strength": "primary"
+    },
+    {
+     "meaning": "yoga pose, stretching, or downward dog",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Nuxt framework or abstract brand mark",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the peaks are heavily rounded and bottomless, it can look like a stick figure bending over in a yoga pose, an abstract wave/pulse, or a software logo at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a case of Mountain Dew for the game night",
+     "better": "soda bottle or drink can",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Tune the rear derailleur on the mountain bike",
+     "better": "bicycle",
+     "trap": "property"
+    },
+    {
+     "task": "Upgrade Nuxt project to version 3.12",
+     "better": "code brackets or terminal",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights to Denver",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the peak hours electricity rate on our utility bill",
+     "better": "lightning bolt or invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Frame the 16x20 photo print from Banff",
+     "better": "picture frame",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "landscape_2_edit"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1011,
+    "thoughts": 130,
+    "total": 5232
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "Shows the complete two-peak mountain and sun silhouette with no badge in the lower right, representing mountains, nature, or a plain image/photo rather than editing one."
 }

@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "photograph, image, or print",
+   "meaning": "art print, poster, or framed photograph",
    "strength": "primary"
   },
   {
-   "meaning": "art gallery or exhibition",
+   "meaning": "art gallery or museum exhibition",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can overlap with a generic digital image/photo file icon, though the top hanging wire distinguishes it as physical wall art or a framed print.",
+ "ambiguity": "Semantically interchangeable with the square hanging picture frame without a sun; both represent physical wall art as opposed to the stacked digital photo gallery or photo folder icons.",
  "modifier_semantics": [
   {
    "modifier": "triangular hanging wire on top",
@@ -163,14 +163,19 @@
  ],
  "near_misses": [
   {
+   "task": "Back up vacation photos to the cloud photo library",
+   "better": "stacked photos / photo gallery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sort raw product shots into client image folders",
+   "better": "stacked photo folders",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Frame out the basement partition wall with 2x4 studs",
    "better": "hammer or construction wall",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Charge camera batteries and clear SD card before the hike",
-   "better": "camera or battery",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Hike the twin peaks trail before sunrise",
@@ -183,7 +188,7 @@
    "trap": "property"
   },
   {
-   "task": "Pay the framer's invoice by bank transfer",
+   "task": "Pay the custom framer's invoice by bank transfer",
    "better": "invoice / payment",
    "trap": "parent_topic"
   },
@@ -196,7 +201,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a landscape image inside a frame hanging from a wire. It is the ideal icon for tasks about hanging wall art, framing prints or photos, and art exhibitions, and the hanging wire clearly distinguishes it from a generic digital image file or outdoor mountain icon.",
@@ -214,6 +219,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "framed picture, wall art, or hanging painting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photograph, image, or print",
+     "strength": "primary"
+    },
+    {
+     "meaning": "art gallery or exhibition",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "picture frame",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can overlap with a generic digital image/photo file icon, though the top hanging wire distinguishes it as physical wall art or a framed print.",
+   "near_misses": [
+    {
+     "task": "Frame out the basement partition wall with 2x4 studs",
+     "better": "hammer or construction wall",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge camera batteries and clear SD card before the hike",
+     "better": "camera or battery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hike the twin peaks trail before sunrise",
+     "better": "mountain / hiking boot",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send high-resolution headshots to the conference organizer",
+     "better": "email / send or portrait user",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the framer's invoice by bank transfer",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the big picture on Q3 department staffing",
+     "better": "chart or people/team",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hallway",
+   "perm_media",
+   "collections"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6725,
+    "output": 2080,
+    "thoughts": 0,
+    "total": 8805
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Shows a wide landscape picture frame hanging from a top wire with both two mountains and a sun inside, making it virtually interchangeable in meaning with the square hanging frame that lacks a sun."
 }

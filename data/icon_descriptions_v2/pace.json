@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "clock, time, or specific scheduled time",
+   "meaning": "clock, time, or scheduled time",
    "strength": "primary"
   },
   {
-   "meaning": "time-based reminder, alert, or overdue deadline",
+   "meaning": "time-based reminder, alert, or deadline",
    "strength": "primary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the dot in the lower-right rim blends into the circle, making it look like a plain clock icon, or the angled hand plus dot can read as a bent exclamation mark for an overdue alert.",
+ "ambiguity": "At small sizes the small dot in the lower-right rim blends into the circle so it reads as a plain clock, and it can be confused with the counterclockwise history clock if the viewer only registers a gap in the outer ring.",
  "modifier_semantics": [
   {
    "modifier": "solid dot on the lower-right rim",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Revert the production database to last night's backup snapshot",
+   "better": "clock with counterclockwise arrow for history or restore",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Adjust dashboard clocks and watches for Daylight Saving Time",
+   "better": "overlapping double clock for time change or multiple time zones",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a 15-minute sand timer for the kids' toothbrushing",
    "better": "hourglass",
    "trap": "lookalike_glyph"
@@ -174,11 +184,6 @@
    "task": "Watch the new Dune movie this weekend",
    "better": "film clapperboard or tv",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order replacement leather strap for my Seiko diver",
-   "better": "wristwatch",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Schedule the quarterly team offsite on everyone's calendar",
@@ -209,6 +214,91 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "clock, time, or specific scheduled time",
+     "strength": "primary"
+    },
+    {
+     "meaning": "time-based reminder, alert, or overdue deadline",
+     "strength": "primary"
+    },
+    {
+     "meaning": "time tracking, hours log, or timesheet",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the dot in the lower-right rim blends into the circle, making it look like a plain clock icon, or the angled hand plus dot can read as a bent exclamation mark for an overdue alert.",
+   "near_misses": [
+    {
+     "task": "Buy a 15-minute sand timer for the kids' toothbrushing",
+     "better": "hourglass",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the overdue water bill before the late fee hits",
+     "better": "bill or water droplet with card",
+     "trap": "property"
+    },
+    {
+     "task": "Book a 30-minute dentist cleaning for next month",
+     "better": "tooth",
+     "trap": "property"
+    },
+    {
+     "task": "Watch the new Dune movie this weekend",
+     "better": "film clapperboard or tv",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement leather strap for my Seiko diver",
+     "better": "wristwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule the quarterly team offsite on everyone's calendar",
+     "better": "calendar",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "browse_gallery",
+   "history_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5375,
+    "output": 1673,
+    "thoughts": 0,
+    "total": 7048
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:23Z"
+  }
+ },
+ "distinguishing": "Unlike the stacked clock with a trailing arc or the clock inside a counterclockwise arrow, this is a single round clock face with a small solid dot breaking the bottom-right rim, functioning as a standard clock or time reminder."
 }

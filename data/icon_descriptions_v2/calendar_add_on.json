@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "add event to calendar / schedule an appointment",
+   "meaning": "add event to calendar or schedule an appointment",
    "strength": "primary"
   },
   {
-   "meaning": "create new calendar or shared schedule",
+   "meaning": "create a new calendar or shared schedule",
    "strength": "primary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "In a to-do app, it could be misread as UI chrome for setting a due date on the task itself rather than a task about scheduling.",
+ "ambiguity": "At small sizes, the two top binding tabs can be overlooked, making it look like the flat-topped browser window or credit card icon with a plus badge.",
  "modifier_semantics": [
   {
    "modifier": "plus sign badge at bottom right",
@@ -158,45 +158,40 @@
  ],
  "near_misses": [
   {
+   "task": "Build the new onboarding modal window for the web app",
+   "better": "rectangular browser window with header bar and plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add the new corporate Visa card to the expense portal",
+   "better": "rectangular card with stripe and plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book 6-month dental cleaning with Dr. Patel",
-   "better": "tooth / dentist",
+   "better": "tooth",
    "trap": "generic_verb"
   },
   {
    "task": "Schedule furnace inspection before November",
-   "better": "furnace / heating flame",
+   "better": "furnace or heating flame",
    "trap": "generic_verb"
   },
   {
    "task": "Pay quarterly estimated taxes before the April 15 deadline",
-   "better": "taxes / money",
+   "better": "tax form or money",
    "trap": "property"
-  },
-  {
-   "task": "Renew passport at least 6 months before the Japan trip",
-   "better": "passport",
-   "trap": "property"
-  },
-  {
-   "task": "Cancel the duplicate Tuesday standup on the team calendar",
-   "better": "calendar with minus or cross (remove event)",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy dry-erase markers for the kitchen fridge calendar",
-   "better": "marker / pen",
+   "better": "marker or pen",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Reserve a 4-top at Bavel for our anniversary",
-   "better": "restaurant / fork and knife",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a calendar with a plus badge, universally understood as 'add event' or 'create calendar'. It fits tasks specifically about maintaining calendars, blocking time, or sending calendar invites, though for booking specific appointments (dentist, dinner, haircut) an icon of the subject itself is better.",
@@ -214,6 +209,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add event to calendar / schedule an appointment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "create new calendar or shared schedule",
+     "strength": "primary"
+    },
+    {
+     "meaning": "book a date or reservation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "In a to-do app, it could be misread as UI chrome for setting a due date on the task itself rather than a task about scheduling.",
+   "near_misses": [
+    {
+     "task": "Book 6-month dental cleaning with Dr. Patel",
+     "better": "tooth / dentist",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Schedule furnace inspection before November",
+     "better": "furnace / heating flame",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay quarterly estimated taxes before the April 15 deadline",
+     "better": "taxes / money",
+     "trap": "property"
+    },
+    {
+     "task": "Cancel the duplicate Tuesday standup on the team calendar",
+     "better": "calendar with minus or cross (remove event)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy dry-erase markers for the kitchen fridge calendar",
+     "better": "marker / pen",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Reserve a 4-top at Bavel for our anniversary",
+     "better": "restaurant / fork and knife",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "add_ad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4087,
+    "output": 1015,
+    "thoughts": 0,
+    "total": 5102
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Unlike the flat-topped browser window or card icon, this icon has two vertical binding tabs protruding from the top edge of a squarer frame, clearly identifying it as a calendar with a plus sign."
 }

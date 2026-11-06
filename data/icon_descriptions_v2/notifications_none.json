@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "notification or alert",
+   "meaning": "notification or app alert settings",
    "strength": "primary"
   },
   {
-   "meaning": "physical bell or doorbell",
+   "meaning": "physical bell, handbell, or chime",
    "strength": "primary"
   },
   {
-   "meaning": "reminder or alarm",
+   "meaning": "general reminder or scheduled chime",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Overlaps with the bell with an exclamation mark on tasks involving alerts, alarms, or notifications where urgency is not specified.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -150,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Investigate critical PagerDuty production outage alert",
+   "better": "bell with exclamation mark (urgent alert)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test the building's emergency evacuation alarm system",
+   "better": "bell with exclamation mark or emergency siren",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Roast red and yellow bell peppers for the pasta sauce",
    "better": "bell pepper",
    "trap": "shared_vocabulary"
@@ -165,25 +175,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Read The Bell Jar before book club on Thursday",
-   "better": "book",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Remind Sam to bring the folding chairs on Saturday",
-   "better": "message or chat bubble",
+   "better": "message bubble or chair",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Order a 12V relay and soldering wick from Mouser",
-   "better": "electronic component or package",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic bell, universally understood as either a literal bell/doorbell or digital notifications, alerts, and reminders. It fits a wide range of tasks from configuring app notifications and financial alerts to repairing a home doorbell or mounting a bike bell.",
@@ -201,6 +201,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "notifications"
- }
+  "alias_of": "notifications",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "notification or alert",
+     "strength": "primary"
+    },
+    {
+     "meaning": "physical bell or doorbell",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reminder or alarm",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Roast red and yellow bell peppers for the pasta sauce",
+     "better": "bell pepper",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Do 5 sets of 20 kettlebell swings and goblet squats",
+     "better": "kettlebell",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call Bell Canada to dispute the fiber internet bill",
+     "better": "phone or bill",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read The Bell Jar before book club on Thursday",
+     "better": "book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Remind Sam to bring the folding chairs on Saturday",
+     "better": "message or chat bubble",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a 12V relay and soldering wick from Mouser",
+     "better": "electronic component or package",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "notification_important"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4008,
+    "output": 967,
+    "thoughts": 0,
+    "total": 4975
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Unlike the bell containing an exclamation mark, this is an empty, unmodified outlined bell, representing standard notifications, reminders, or a literal physical bell rather than an urgent warning."
 }

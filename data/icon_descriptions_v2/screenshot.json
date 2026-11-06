@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "screenshot / screen capture on mobile device",
+   "meaning": "mobile screenshot or screen capture",
    "strength": "primary"
   },
   {
-   "meaning": "smartphone screen size / display framing",
+   "meaning": "smartphone screen size, viewport, or display framing",
    "strength": "secondary"
   },
   {
-   "meaning": "smartwatch face or wearable screen",
+   "meaning": "scanning or framing content on a phone screen",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because of the prominent side button and slightly chunky aspect ratio, it can look like an Apple Watch case, a phone case, or a generic resize-screen toggle.",
+ "ambiguity": "At small sizes, the internal corner brackets can blur into the thick frame, making it look like a generic smartphone outline or a smartwatch casing without straps.",
  "modifier_semantics": [
   {
    "modifier": "inner corner brackets",
@@ -159,7 +159,12 @@
  "near_misses": [
   {
    "task": "Buy a new MagSafe silicone case for iPhone 15",
-   "better": "smartphone or phone case icon",
+   "better": "plain smartphone with home bar or camera dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up a bedside wireless charging stand for my phone",
+   "better": "smartphone over a horizontal dock bar",
    "trap": "lookalike_glyph"
   },
   {
@@ -191,7 +196,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a mobile device outline with a side button and two inner corner crop brackets, which is the standard symbol for a mobile screenshot or screen capture. It fits specific tasks around taking, sending, or cleaning up screenshots (for app stores, bug reports, receipts, or photo hygiene), though its boxy shape and side button can easily be mistaken for a smartwatch face or a generic smartphone.",
@@ -209,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "screenshot / screen capture on mobile device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smartphone screen size / display framing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smartwatch face or wearable screen",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because of the prominent side button and slightly chunky aspect ratio, it can look like an Apple Watch case, a phone case, or a generic resize-screen toggle.",
+   "near_misses": [
+    {
+     "task": "Buy a new MagSafe silicone case for iPhone 15",
+     "better": "smartphone or phone case icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a nylon sport band for Apple Watch",
+     "better": "smartwatch with wrist straps icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call T-Mobile to ask about international roaming",
+     "better": "telephone handset icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take headshots for the company team page",
+     "better": "camera or portrait person icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write marketing copy for the 5-slide promo carousel",
+     "better": "document or text editing icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace the torn mesh screen on the patio door",
+     "better": "door or window grid icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "phone_iphone",
+   "phone_android",
+   "smartphone",
+   "dock",
+   "settings_cell"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9431,
+    "output": 2014,
+    "thoughts": 0,
+    "total": 11445
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Unlike the plain smartphone outlines in the group, this icon contains two L-shaped corner brackets inside the screen, specifically denoting a mobile screenshot, screen capture, or display framing rather than the phone device itself."
 }

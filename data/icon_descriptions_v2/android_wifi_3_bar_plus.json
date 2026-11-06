@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "add or set up a Wi-Fi network",
+   "meaning": "add or set up a new Wi-Fi network",
    "strength": "primary"
   },
   {
-   "meaning": "extend wireless coverage or install mesh node",
+   "meaning": "extend wireless coverage or install a mesh node",
    "strength": "primary"
-  },
-  {
-   "meaning": "new internet connection or hotspot",
-   "strength": "secondary"
   },
   {
    "meaning": "connect a new device to Wi-Fi",
    "strength": "secondary"
+  },
+  {
+   "meaning": "enable a new internet connection or hotspot",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "May be indistinguishable from a plain Wi-Fi symbol at very small sizes, or mistaken for an RSS feed plus icon.",
+ "ambiguity": "Interchangeable with the three-arc Wi-Fi with a plus sign; at small sizes the plus sign may be missed, making it look like the plain two-arc Wi-Fi icon.",
  "modifier_semantics": [
   {
    "modifier": "plus sign",
@@ -59,11 +59,6 @@
    "task": "Add backyard mesh node",
    "parent": "",
    "domain": "tech"
-  },
-  {
-   "task": "Configure tomorrow's schedule",
-   "parent": "Home Wi-Fi Upgrade",
-   "domain": "home"
   },
   {
    "task": "Compare three local providers",
@@ -161,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Call ISP support about the blinking red internet outage light",
+   "better": "Wi-Fi with exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Look up the hotel Wi-Fi login details in the welcome binder",
+   "better": "plain Wi-Fi icon without plus badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small waterproof Wi-Fi meat thermometer for the smoker",
    "better": "thermometer",
    "trap": "property"
@@ -169,16 +174,6 @@
    "task": "Pay the monthly Comcast internet bill ($65)",
    "better": "bill or credit card",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Cancel the old DSL internet account and return the modem",
-   "better": "Wi-Fi with slash or return box",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Subscribe to three new woodworking blogs in NetNewsWire",
-   "better": "RSS feed icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Drill a cable pass-through hole behind the living room bookcase",
@@ -194,7 +189,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a standard Wi-Fi signal icon with a plus badge in the lower right, clearly meaning adding, setting up, or extending a wireless network or internet service. It fits a solid niche of home tech, office IT, and travel connectivity tasks, though at tiny sizes the plus could blur into the base Wi-Fi glyph.",
@@ -212,6 +207,102 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add or set up a Wi-Fi network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "extend wireless coverage or install mesh node",
+     "strength": "primary"
+    },
+    {
+     "meaning": "new internet connection or hotspot",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "connect a new device to Wi-Fi",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "May be indistinguishable from a plain Wi-Fi symbol at very small sizes, or mistaken for an RSS feed plus icon.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof Wi-Fi meat thermometer for the smoker",
+     "better": "thermometer",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly Comcast internet bill ($65)",
+     "better": "bill or credit card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Cancel the old DSL internet account and return the modem",
+     "better": "Wi-Fi with slash or return box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Subscribe to three new woodworking blogs in NetNewsWire",
+     "better": "RSS feed icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Drill a cable pass-through hole behind the living room bookcase",
+     "better": "drill",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Reconnect with old college roommates over drinks next Thursday",
+     "better": "people or drinks",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_4_bar_plus",
+   "android_wifi_3_bar_alert",
+   "android_wifi_4_bar_alert",
+   "android_wifi_4_bar",
+   "wifi",
+   "android_wifi_3_bar",
+   "nest_remote_comfort_sensor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12117,
+    "output": 4047,
+    "thoughts": 0,
+    "total": 16164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Shows a two-arc Wi-Fi signal with a plus sign badge in the bottom right, differing from the three-arc plus variant only by having one fewer arc while remaining identical in meaning."
 }

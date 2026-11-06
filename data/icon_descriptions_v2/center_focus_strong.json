@@ -7,15 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "camera focus or viewfinder",
+   "meaning": "camera viewfinder, wide focus zone, or screenshot capture",
    "strength": "primary"
   },
   {
-   "meaning": "screenshot or screen capture",
+   "meaning": "visual search or document scan",
    "strength": "primary"
   },
   {
-   "meaning": "scan document or visual search",
+   "meaning": "camera or photography capture",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can be mistaken for the Instagram logo, a generic camera icon, a QR code scanner, or a fullscreen toggle.",
+ "ambiguity": "Easily confused with the corner-bracket viewfinder icons with a small or medium central ring, as well as the Instagram camera logo, a generic camera icon, or a QR scanner.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -157,13 +157,23 @@
  ],
  "near_misses": [
   {
+   "task": "Calibrate pinpoint spot metering on the DSLR",
+   "better": "viewfinder brackets with a small central ring",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Post the summer reel on Instagram",
    "better": "Instagram brand logo or clapperboard",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Scan the QR code on the restaurant table",
+   "better": "QR code",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new 35mm prime lens for portraits",
-   "better": "camera lens",
+   "better": "camera lens barrel",
    "trap": "shared_vocabulary"
   },
   {
@@ -175,22 +185,12 @@
    "task": "Check the security camera feed from last night",
    "better": "CCTV security camera",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Order a replacement battery",
-   "better": "battery",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Scan the QR code on the restaurant table",
-   "better": "QR code",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon shows a central ring surrounded by four corner framing brackets, the standard UI symbol for camera focus, viewfinder, or screen capture/scanning. It fits tasks about taking screenshots, scanning items with a phone camera, or adjusting camera focus, though it closely resembles the Instagram logo and generic camera or QR scanner icons.",
@@ -210,6 +210,95 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera focus or viewfinder",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screenshot or screen capture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "scan document or visual search",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "center or target alignment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can be mistaken for the Instagram logo, a generic camera icon, a QR code scanner, or a fullscreen toggle.",
+   "near_misses": [
+    {
+     "task": "Post the summer reel on Instagram",
+     "better": "Instagram brand logo or clapperboard",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new 35mm prime lens for portraits",
+     "better": "camera lens",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Focus on finishing the quarterly report today",
+     "better": "document or target bullseye",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the security camera feed from last night",
+     "better": "CCTV security camera",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a replacement battery",
+     "better": "battery",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Scan the QR code on the restaurant table",
+     "better": "QR code",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "filter_center_focus",
+   "center_focus_weak"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5369,
+    "output": 1541,
+    "thoughts": 186,
+    "total": 7096
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Features the largest central ring inside the four corner brackets (resembling a wide camera lens barrel or broad focus zone), though it remains nearly interchangeable with the small-ring and medium-ring viewfinder icons."
 }

@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "shared inbox or collaborative mailbox",
+   "meaning": "shared inbox or collaborative team mailbox",
    "strength": "primary"
   },
   {
-   "meaning": "share document, message, or file",
+   "meaning": "share or forward an inbox message or document",
    "strength": "primary"
   },
   {
-   "meaning": "shared archive or team document repository",
+   "meaning": "shared archive or team message repository",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the inbox tray can look like a generic document or note card with a share badge, or a floppy disk with a network node.",
+ "ambiguity": "Shares the exact rounded-square inbox tray base (two text lines above a curved notch) with the person-badged inbox icon, and at tiny sizes its share node badge could be confused with the person badge.",
  "modifier_semantics": [
   {
    "modifier": "three-node branching share symbol in bottom-right corner",
@@ -157,18 +157,23 @@
  ],
  "near_misses": [
   {
+   "task": "Clear out my personal email inbox before Friday",
+   "better": "inbox tray with a person badge (personal inbox)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update my resume and personal bio for the company site",
+   "better": "three-line text card with a person badge (personal profile/resume)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Share the Airbnb listing link with Sarah on WhatsApp",
    "better": "link or chat bubble icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a plastic letter tray for the hallway desk",
-   "better": "desk organizer or shopping cart icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check my personal email for the flight confirmation code",
-   "better": "airplane or plain envelope icon",
+   "task": "Check my email for the flight confirmation code",
+   "better": "airplane or ticket icon",
    "trap": "generic_verb"
   },
   {
@@ -180,11 +185,6 @@
    "task": "Order a new headset for the support agent",
    "better": "headset icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Split the restaurant bill with the group on Venmo",
-   "better": "money or receipt split icon",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -208,6 +208,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shared inbox or collaborative mailbox",
+     "strength": "primary"
+    },
+    {
+     "meaning": "share document, message, or file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shared archive or team document repository",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the inbox tray can look like a generic document or note card with a share badge, or a floppy disk with a network node.",
+   "near_misses": [
+    {
+     "task": "Share the Airbnb listing link with Sarah on WhatsApp",
+     "better": "link or chat bubble icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a plastic letter tray for the hallway desk",
+     "better": "desk organizer or shopping cart icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check my personal email for the flight confirmation code",
+     "better": "airplane or plain envelope icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a conference room for the shared inbox workflow training",
+     "better": "meeting room or calendar icon",
+     "trap": "property"
+    },
+    {
+     "task": "Order a new headset for the support agent",
+     "better": "headset icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Split the restaurant bill with the group on Venmo",
+     "better": "money or receipt split icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "inbox_text_person",
+   "article_person"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5445,
+    "output": 1559,
+    "thoughts": 0,
+    "total": 7004,
+    "seconds": 22.73,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:57:36Z"
+  }
+ },
+ "distinguishing": "Unlike the person-badged icons, this combines the notched inbox tray with a three-node branching share symbol in the bottom right, meaning a shared inbox or sharing an inbox item."
 }

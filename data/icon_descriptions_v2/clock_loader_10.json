@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "progress / completion percentage (one-eighth)",
+   "meaning": "progress / completion percentage (small fraction or just started)",
    "strength": "primary"
   },
   {
-   "meaning": "elapsed time / timer / clock face (~7-8 minutes)",
+   "meaning": "storage usage / quota meter",
    "strength": "secondary"
   },
   {
-   "meaning": "storage usage / quota",
+   "meaning": "elapsed time / short timer",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Reads interchangeably as a pie chart, a 1/8 progress indicator, a clock or timer slice, or a moon/shadow phase; distinct from standard segmented pie charts only because the outer ring is continuous.",
+ "ambiguity": "Nearly interchangeable for general progress or timer tasks with the circle containing an inset five-eighths wedge, and easily confused with a standard clock face or segmented pie chart.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -153,9 +153,14 @@
  ],
  "near_misses": [
   {
-   "task": "Bake a cherry pie for Sunday dinner",
-   "better": "pie / pastry dish",
-   "trap": "shared_vocabulary"
+   "task": "Edit the sunset timelapse video from the trip",
+   "better": "circle with an inset five-eighths wedge (timelapse)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new wall clock for the kitchen",
+   "better": "clock face with two hands",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up a large pepperoni pizza on the way home",
@@ -163,14 +168,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a new wall clock for the kitchen",
-   "better": "clock with two hands",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Set a 10-minute timer for the soft-boiled eggs",
-   "better": "stopwatch or kitchen timer",
-   "trap": "lookalike_glyph"
+   "task": "Bake a cherry pie for Sunday dinner",
+   "better": "pie / pastry dish",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Finish the remaining 15% of the paint job in the hallway",
@@ -204,6 +204,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pie chart / proportion / breakdown",
+     "strength": "primary"
+    },
+    {
+     "meaning": "progress / completion percentage (one-eighth)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "elapsed time / timer / clock face (~7-8 minutes)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "storage usage / quota",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Reads interchangeably as a pie chart, a 1/8 progress indicator, a clock or timer slice, or a moon/shadow phase; distinct from standard segmented pie charts only because the outer ring is continuous.",
+   "near_misses": [
+    {
+     "task": "Bake a cherry pie for Sunday dinner",
+     "better": "pie / pastry dish",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a large pepperoni pizza on the way home",
+     "better": "pizza slice",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new wall clock for the kitchen",
+     "better": "clock with two hands",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Set a 10-minute timer for the soft-boiled eggs",
+     "better": "stopwatch or kitchen timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Finish the remaining 15% of the paint job in the hallway",
+     "better": "paint roller or brush",
+     "trap": "property"
+    },
+    {
+     "task": "Send the signed tax withholding form to HR",
+     "better": "document / signature",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "timelapse"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4101,
+    "output": 1039,
+    "thoughts": 211,
+    "total": 5351
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:18Z"
+  }
+ },
+ "distinguishing": "Shows a small one-eighth wedge at the top right that connects flush to the outer ring with no gap, reading more as a pie chart or a small fraction/percentage than as a timelapse dial."
 }

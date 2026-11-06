@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the rear boom could be mistaken for an open dump truck bed or a small mobile crane.",
+ "ambiguity": "At a quick glance at small sizes, its truck cab and two-wheel chassis could be confused with the box delivery truck, or the angled boom could be mistaken for a raised dump-truck bed.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -154,6 +154,21 @@
  ],
  "near_misses": [
   {
+   "task": "Reserve U-Haul moving truck for Saturday apartment move",
+   "better": "box truck / moving van",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wait at home for freight delivery of the new sectional sofa",
+   "better": "box delivery truck",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a yard of gravel for the front walkway",
+   "better": "dump truck / gravel",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a toy tow truck for Leo's fourth birthday",
    "better": "toy / gift",
    "trap": "shared_vocabulary"
@@ -169,19 +184,9 @@
    "trap": "property"
   },
   {
-   "task": "Order a yard of gravel for the front walkway",
-   "better": "dump truck / gravel",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Replace dead alternator on the Honda",
    "better": "car repair / wrench",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Review monthly auto insurance statement",
-   "better": "invoice / document",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "tow truck / vehicle towing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "roadside assistance / breakdown recovery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "impound lot / parked car removal",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "crane truck / heavy lifting vehicle",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the rear boom could be mistaken for an open dump truck bed or a small mobile crane.",
+   "near_misses": [
+    {
+     "task": "Buy a toy tow truck for Leo's fourth birthday",
+     "better": "toy / gift",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install a trailer tow hitch receiver on the Outback",
+     "better": "car / trailer hitch",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check towing capacity specs before renting the camper trailer",
+     "better": "camper trailer",
+     "trap": "property"
+    },
+    {
+     "task": "Order a yard of gravel for the front walkway",
+     "better": "dump truck / gravel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace dead alternator on the Honda",
+     "better": "car repair / wrench",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Review monthly auto insurance statement",
+     "better": "invoice / document",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "local_shipping"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 3991,
+    "output": 1061,
+    "thoughts": 0,
+    "total": 5052
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "Shows an angled lifting boom extending from an open rear flatbed instead of an enclosed rectangular cargo box, indicating vehicle towing and roadside recovery rather than freight delivery or moving."
 }

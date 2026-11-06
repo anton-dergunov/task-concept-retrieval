@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "person / individual / human",
+   "meaning": "person, individual, or human",
    "strength": "primary"
   },
   {
-   "meaning": "man / male",
+   "meaning": "man, male figure, or men's restroom",
    "strength": "primary"
   },
   {
-   "meaning": "standing / posture / body",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "men's restroom / toilet sign",
+   "meaning": "standing posture or human body",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Commonly read both as a generic standing person and specifically as a male or men's restroom pictogram; very close to user/avatar bust icons.",
+ "ambiguity": "Indistinguishable at a glance and identical in meaning to the other two symmetric standing person figures; differs from the pregnant person silhouette by having a symmetric torso instead of a protruding belly.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -147,8 +143,7 @@
  ],
  "example_tasks_ru": [
   "Снять мерки роста и обхвата груди для пошива пальто",
-  "Провести индивидуальную встречу один на один с новым разработчиком",
-  "Записаться на ежегодный мужской медосмотр в поликлинику"
+  "Провести индивидуальную встречу один на один с новым разработчиком"
  ],
  "context_tasks": [
   {
@@ -170,6 +165,16 @@
  ],
  "near_misses": [
   {
+   "task": "Register for hospital childbirth and prenatal class",
+   "better": "pregnant person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack hospital bag for labor and delivery",
+   "better": "pregnant person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Mark about the weekend carpool",
    "better": "phone handset",
    "trap": "generic_verb"
@@ -185,16 +190,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a wooden artist mannequin for sketching poses",
-   "better": "art palette or pencil",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book flights to Chicago",
-   "better": "airplane",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Reset password for my personal user account",
    "better": "key or lock",
    "trap": "shared_vocabulary"
@@ -203,7 +198,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognizable standing human/male pictogram. It fits tasks centered on a specific person, 1-on-1 check-ins, body measurements, standing posture, or men's health, though many tasks involving people are better served by a specific action or object icon (like a phone for calling someone) and it overlaps with user-bust avatars.",
@@ -223,6 +218,98 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_ru": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "person / individual / human",
+     "strength": "primary"
+    },
+    {
+     "meaning": "man / male",
+     "strength": "primary"
+    },
+    {
+     "meaning": "standing / posture / body",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "men's restroom / toilet sign",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Commonly read both as a generic standing person and specifically as a male or men's restroom pictogram; very close to user/avatar bust icons.",
+   "near_misses": [
+    {
+     "task": "Call Mark about the weekend carpool",
+     "better": "phone handset",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a single-person ultralight backpacking tent",
+     "better": "tent",
+     "trap": "property"
+    },
+    {
+     "task": "Fix the leaking toilet flush valve in the men's bathroom",
+     "better": "toilet or wrench",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a wooden artist mannequin for sketching poses",
+     "better": "art palette or pencil",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights to Chicago",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Reset password for my personal user account",
+     "better": "key or lock",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pregnant_woman",
+   "man_2",
+   "boy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6619,
+    "output": 1855,
+    "thoughts": 168,
+    "total": 8642
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "A symmetric front-facing standing figure with a slightly wider leg column than the narrow-legged variant; completely interchangeable in meaning with the other two symmetric standing person icons."
 }

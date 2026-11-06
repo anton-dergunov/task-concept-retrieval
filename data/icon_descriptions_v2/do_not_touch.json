@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "An open raised hand commonly means 'stop' on its own, so crossing it out can create a confusing double negative ('don't stop' vs 'don't touch' vs 'lower hand').",
+ "ambiguity": "Closely resembles the slashed waving hand with motion arcs at small list sizes, and an open palm already means 'stop' on its own so the slash can read as a confusing double negative.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off hand-wave gesture controls on the smart TV",
+   "better": "slashed waving hand with motion arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Disable wake-on-wave motion sensor on the kitchen faucet",
+   "better": "slashed waving hand with motion arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy touchless soap dispenser for the guest bathroom",
    "better": "soap dispenser",
    "trap": "property"
@@ -168,17 +178,12 @@
   {
    "task": "Buy disposable nitrile gloves for resin casting",
    "better": "gloves",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Hand off the Q3 billing spreadsheet to Priya before Friday",
    "better": "spreadsheet or document transfer",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Stop the lawn irrigation schedule while it rains all week",
-   "better": "sprinkler or water drop",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Stay out of touch with work Slack during the cabin trip",
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a raised hand with a diagonal prohibition slash, representing 'do not touch', 'disable touch input', or 'lower hand' in video calls. While visually distinct, it fits only a narrow set of real to-do tasks—mostly disabling touchscreens, making 'do not touch' signs, or breaking nail-biting and face-touching habits—and carries slight ambiguity because an unslashed open hand already signals 'stop'.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "do not touch / hands-off / no touching",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lower hand / disable raise-hand in video call",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disable touch input / turn off touchscreen or palm rejection",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "stop nail-biting or face-touching habit",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "An open raised hand commonly means 'stop' on its own, so crossing it out can create a confusing double negative ('don't stop' vs 'don't touch' vs 'lower hand').",
+   "near_misses": [
+    {
+     "task": "Buy touchless soap dispenser for the guest bathroom",
+     "better": "soap dispenser",
+     "trap": "property"
+    },
+    {
+     "task": "Buy disposable nitrile gloves for resin casting",
+     "better": "gloves",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hand off the Q3 billing spreadsheet to Priya before Friday",
+     "better": "spreadsheet or document transfer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Stop the lawn irrigation schedule while it rains all week",
+     "better": "sprinkler or water drop",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Stay out of touch with work Slack during the cabin trip",
+     "better": "chat bubble with slash or cabin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy acrylic sign holders from Staples",
+     "better": "sign holder / frame",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hand_gesture_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4089,
+    "output": 1114,
+    "thoughts": 129,
+    "total": 5332
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Shows a static open raised hand with a diagonal slash and no motion lines around it, indicating 'do not touch', 'lower hand', or disabled touch input rather than disabled waving or gesture control."
 }

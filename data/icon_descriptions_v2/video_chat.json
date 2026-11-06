@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "video call / video chat / online meeting",
+   "meaning": "video call, video chat, or online meeting (Zoom, FaceTime, Meet)",
    "strength": "primary"
   },
   {
-   "meaning": "video message / Loom recording",
-   "strength": "primary"
-  },
-  {
-   "meaning": "telehealth or remote consultation",
+   "meaning": "telehealth appointment or remote video consultation",
    "strength": "secondary"
   },
   {
-   "meaning": "remote interview or webinar",
+   "meaning": "remote video interview or live webinar",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "recorded video message in chat",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a plain video camera icon or a general chat bubble at very small sizes.",
+ "ambiguity": "Can be confused with the speech bubble containing a play button for tasks about asynchronous video messages, or with a plain video camera icon when the chat bubble outline isn't noticed.",
  "modifier_semantics": [
   {
    "modifier": "video camera glyph inside bubble",
@@ -163,28 +163,28 @@
  ],
  "near_misses": [
   {
+   "task": "Listen to Sarah's 3-minute WhatsApp voice note about the trip",
+   "better": "speech bubble containing a play triangle (playable audio/media message, not video camera)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Watch the async Loom walkthrough Chris posted in Slack",
+   "better": "speech bubble containing a play triangle (playback of a posted clip rather than a live video call)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Edit the GoPro footage from our Dolomites trip",
-   "better": "video camera or film clapperboard",
+   "better": "standalone video camera or film clapperboard without a speech bubble",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Text Dave the gate code before he arrives",
-   "better": "speech bubble / text message icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Call the pharmacy to check if the prescription is ready",
-   "better": "telephone handset",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Leave a comment on Mark's YouTube video",
-   "better": "play button or text comment bubble",
+   "better": "plain speech bubble with text lines",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new USB-C cable for the webcam",
-   "better": "cable / plug icon",
+   "better": "cable or plug icon",
    "trap": "parent_topic"
   },
   {
@@ -196,7 +196,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A speech bubble containing a video camera universally represents video calls (Zoom, FaceTime, Meet, telehealth) and asynchronous video messages (Loom, video chats). These are very common everyday tasks across work, family, learning, and healthcare, and the speech bubble clearly distinguishes it from filming or watching video.",
@@ -214,6 +214,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video call / video chat / online meeting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video message / Loom recording",
+     "strength": "primary"
+    },
+    {
+     "meaning": "telehealth or remote consultation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "remote interview or webinar",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a plain video camera icon or a general chat bubble at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Edit the GoPro footage from our Dolomites trip",
+     "better": "video camera or film clapperboard",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Text Dave the gate code before he arrives",
+     "better": "speech bubble / text message icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Leave a comment on Mark's YouTube video",
+     "better": "play button or text comment bubble",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new USB-C cable for the webcam",
+     "better": "cable / plug icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order the baby monitor with night-vision video",
+     "better": "baby monitor or baby icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "auto_read_play"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 1172,
+    "thoughts": 0,
+    "total": 5245
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Contains a solid video camera (camcorder body plus lens cone) inside the speech bubble rather than a play triangle, specifically signaling a live video call, FaceTime, or video chat."
 }

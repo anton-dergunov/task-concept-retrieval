@@ -14,15 +14,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "broken or unresponsive locked keyboard",
+   "meaning": "turn off child-safety or cleaning input lock",
    "strength": "secondary"
   },
   {
-   "meaning": "turn off child safety input lock",
+   "meaning": "fix unresponsive or locked-out keyboard",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the padlock is cut in half by the diagonal slash and looks like an unreadable blob, making the icon indistinguishable from a generic 'keyboard disabled' or 'hide on-screen keyboard' icon.",
+ "ambiguity": "Because the diagonal slash cuts straight through the padlock badge in the bottom-right corner, at list size the padlock looks like a tiny smudge and this icon is easily mistaken for the plain slashed keyboard (keyboard disabled/disconnected).",
  "modifier_semantics": [
   {
    "modifier": "padlock badge in bottom right corner",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Disable laptop built-in keyboard in Device Manager",
+   "better": "slashed keyboard without a padlock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix disconnected Bluetooth keyboard that won't pair",
+   "better": "slashed keyboard without a padlock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new mechanical keyboard with Cherry MX Brown switches",
    "better": "plain keyboard without slash or lock",
    "trap": "lookalike_glyph"
@@ -170,7 +180,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order replacement USB-C cable",
+   "task": "Order replacement USB-C cable for keyboard",
    "better": "USB cable icon",
    "trap": "parent_topic"
   },
@@ -178,11 +188,6 @@
    "task": "Take dictation notes using voice typing instead of keyboard",
    "better": "microphone icon",
    "trap": "property"
-  },
-  {
-   "task": "Check if caps lock light is working",
-   "better": "plain keyboard or caps lock key icon",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -206,6 +211,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unlock keyboard / disable keyboard lock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken or unresponsive locked keyboard",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "turn off child safety input lock",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the padlock is cut in half by the diagonal slash and looks like an unreadable blob, making the icon indistinguishable from a generic 'keyboard disabled' or 'hide on-screen keyboard' icon.",
+   "near_misses": [
+    {
+     "task": "Buy a new mechanical keyboard with Cherry MX Brown switches",
+     "better": "plain keyboard without slash or lock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Change master password in 1Password vault",
+     "better": "key or padlock icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice C major scales on the MIDI keyboard for 20 minutes",
+     "better": "piano keys icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement USB-C cable",
+     "better": "USB cable icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Take dictation notes using voice typing instead of keyboard",
+     "better": "microphone icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check if caps lock light is working",
+     "better": "plain keyboard or caps lock key icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "keyboard_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4110,
+    "output": 1141,
+    "thoughts": 118,
+    "total": 5369
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:27Z"
+  }
+ },
+ "distinguishing": "Unlike the plain slashed keyboard, this icon includes a small padlock badge in the bottom-right corner (partially bisected by the diagonal slash), specifically signifying disabling a keyboard lock or unlocking input rather than disabling the keyboard itself."
 }

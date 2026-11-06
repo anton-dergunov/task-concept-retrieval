@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "cloud computing / virtual machine / remote desktop",
+   "meaning": "cloud computing / cloud service / SaaS on desktop",
    "strength": "primary"
   },
   {
-   "meaning": "cloud storage / online backup / desktop sync",
+   "meaning": "desktop cloud backup / online sync client",
    "strength": "primary"
   },
   {
-   "meaning": "online streaming / web service / SaaS",
+   "meaning": "single cloud PC / virtual desktop",
    "strength": "secondary"
   },
   {
-   "meaning": "weather forecast on computer / TV",
+   "meaning": "weather forecast on TV or computer",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read as a television showing the weather report or a generic computer monitor if the cloud isn't noticed as a technical symbol.",
+ "ambiguity": "Easily confused with the double-layered cloud monitor (which implies multiple virtual machines or remote desktop sessions) or a plain computer monitor.",
  "modifier_semantics": [
   {
    "modifier": "cloud inside screen",
@@ -161,13 +161,18 @@
  ],
  "near_misses": [
   {
-   "task": "Wipe smudges off the 27-inch Dell monitor with microfiber cloth",
-   "better": "plain computer monitor or cleaning spray",
+   "task": "Spin up a cluster of three virtual machines for load testing",
+   "better": "cloud monitor with overlapping second screen frame behind it",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a dual monitor arm for the standing desk",
-   "better": "plain monitor or desk",
+   "task": "Connect to office workstation via remote desktop session",
+   "better": "cloud monitor with overlapping second screen frame behind it",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wipe smudges off the 27-inch Dell monitor with microfiber cloth",
+   "better": "plain computer monitor without a cloud",
    "trap": "lookalike_glyph"
   },
   {
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a desktop monitor displaying a cloud symbol, universally understood as cloud computing, cloud storage/backup, or remote virtual desktops. It fits a solid set of personal and professional tech tasks (backups, Drive/iCloud sync, VMs, cloud hosting) while remaining distinct from a plain monitor or a standalone weather cloud.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cloud computing / virtual machine / remote desktop",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cloud storage / online backup / desktop sync",
+     "strength": "primary"
+    },
+    {
+     "meaning": "online streaming / web service / SaaS",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "weather forecast on computer / TV",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read as a television showing the weather report or a generic computer monitor if the cloud isn't noticed as a technical symbol.",
+   "near_misses": [
+    {
+     "task": "Wipe smudges off the 27-inch Dell monitor with microfiber cloth",
+     "better": "plain computer monitor or cleaning spray",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a dual monitor arm for the standing desk",
+     "better": "plain monitor or desk",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wash the white cloud-soft bath mat on gentle cycle",
+     "better": "washing machine / laundry",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the vendor NDA in DocuSign",
+     "better": "signature / contract document",
+     "trap": "property"
+    },
+    {
+     "task": "Email Sarah the link to the shared Drive folder",
+     "better": "email / envelope",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Call IT helpdesk about VPN token",
+     "better": "phone call / headset",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_cloud_stack"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4075,
+    "output": 1070,
+    "thoughts": 193,
+    "total": 5338
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "Shows a single standalone monitor containing a cloud, without the second overlapping screen frame behind it, representing general cloud computing, a single cloud desktop, or online backup on a computer."
 }

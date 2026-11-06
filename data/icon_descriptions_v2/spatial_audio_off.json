@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "speaking, voice command, or talking aloud",
+   "meaning": "audiology, hearing aid, or ear check",
    "strength": "primary"
   },
   {
-   "meaning": "audiology, hearing aid, or ear check",
+   "meaning": "audio comprehension or language listening practice",
    "strength": "secondary"
   },
   {
-   "meaning": "contactless or proximity sensor on a person",
+   "meaning": "speaking or voice command (when the inward wave direction goes unnoticed)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the larger arc is closer to the head and the smaller arc is further out, the waves literally point inward (listening/receiving), but at small sizes it is almost indistinguishable from outward sound waves (speaking/voice).",
+ "ambiguity": "Pixel-for-pixel interchangeable with the other person with inward-facing waves, and frequently confused with the person with outward-radiating waves (speaking) when viewed at small icon sizes.",
  "modifier_semantics": [
   {
    "modifier": "two curved wave arcs oriented toward the head",
@@ -162,13 +162,13 @@
  ],
  "near_misses": [
   {
-   "task": "Call the plumber about the leaking shutoff valve",
-   "better": "telephone handset",
+   "task": "Rehearse keynote speech for Friday's all-hands",
+   "better": "person with outward-radiating sound waves (speaking)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Test the living room Wi-Fi signal strength behind the TV",
-   "better": "wifi router or signal bars",
+   "task": "Set up Siri voice commands on the iPad",
+   "better": "person with outward-radiating sound waves (speaking)",
    "trap": "lookalike_glyph"
   },
   {
@@ -183,7 +183,7 @@
   },
   {
    "task": "Hear back from the escrow officer on the closing date",
-   "better": "email or house document",
+   "better": "email envelope or house document",
    "trap": "generic_verb"
   },
   {
@@ -195,7 +195,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a person's head and shoulders with sound/signal arcs beside the head, immediately evoking speaking aloud, voice input, or listening/hearing. It fits tasks around rehearsing speeches, language listening or pronunciation practice, voice recording, and hearing care, though at small sizes it closely resembles the reverse-wave 'user speaking' glyph.",
@@ -213,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "listening, hearing, or receiving audio",
+     "strength": "primary"
+    },
+    {
+     "meaning": "speaking, voice command, or talking aloud",
+     "strength": "primary"
+    },
+    {
+     "meaning": "audiology, hearing aid, or ear check",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "contactless or proximity sensor on a person",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the larger arc is closer to the head and the smaller arc is further out, the waves literally point inward (listening/receiving), but at small sizes it is almost indistinguishable from outward sound waves (speaking/voice).",
+   "near_misses": [
+    {
+     "task": "Call the plumber about the leaking shutoff valve",
+     "better": "telephone handset",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Test the living room Wi-Fi signal strength behind the TV",
+     "better": "wifi router or signal bars",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a quieter voice-controlled tower fan for the bedroom",
+     "better": "electric fan",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the blown tweeter in the bookshelf speaker",
+     "better": "audio speaker cabinet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hear back from the escrow officer on the closing date",
+     "better": "email or house document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the $150 invoice for the conference room deposit",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "transcribe",
+   "record_voice_over"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5440,
+    "output": 1739,
+    "thoughts": 0,
+    "total": 7179
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "Visually identical and completely interchangeable with the other person-with-inward-waves icon; the two wave arcs on the right open away from the head (larger arc inside, smaller arc outside) to indicate incoming sound (listening), as opposed to the person with outward-radiating waves (speaking)."
 }

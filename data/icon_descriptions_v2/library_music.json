@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "playlist or music albums",
+   "meaning": "music albums, discography, or playlist",
    "strength": "primary"
   },
   {
-   "meaning": "multiple audio tracks or sound files",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "music app or streaming catalog",
+   "meaning": "multiple audio tracks or batch of sound files",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Close in meaning to a plain musical note or a list-style playlist icon; the stacked squares specifically emphasize a library, albums, or multiple audio files.",
+ "ambiguity": "Easily confused at small sizes with the single horizontal frame with a musical note or the folded-corner audio document when the L-shaped backing layer is overlooked.",
  "modifier_semantics": [
   {
    "modifier": "stacked L-shaped backing line",
@@ -140,7 +136,6 @@
  ],
  "example_tasks_ru": [
   "Скачать альбомы в телефон перед поездом до Казани",
-  "Собрать бодрый плейлист для утренних пробежек",
   "Разобрать папку со старыми MP3 на внешнем жёстком диске"
  ],
  "context_tasks": [
@@ -163,6 +158,21 @@
  ],
  "near_misses": [
   {
+   "task": "Export the final podcast intro WAV file for the editor",
+   "better": "vertical folded-corner document with a musical note (single audio file)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Watch the live concert broadcast on the living room TV",
+   "better": "horizontal screen frame with a musical note (music video / broadcast)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Deduplicate the vacation photo library in Lightroom",
+   "better": "photo library (stacked image tiles)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Write a thank-you note to Aunt Clara for the birthday check",
    "better": "envelope or note card",
    "trap": "shared_vocabulary"
@@ -181,16 +191,6 @@
    "task": "Buy a greeting card that plays music when opened",
    "better": "greeting card",
    "trap": "property"
-  },
-  {
-   "task": "Deduplicate the vacation photo library in Lightroom",
-   "better": "photo library (stacked images)",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Record voice memo ideas for the keynote speech",
-   "better": "microphone",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -214,6 +214,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_ru": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "music library or audio collection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "playlist or music albums",
+     "strength": "primary"
+    },
+    {
+     "meaning": "multiple audio tracks or sound files",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "music app or streaming catalog",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Close in meaning to a plain musical note or a list-style playlist icon; the stacked squares specifically emphasize a library, albums, or multiple audio files.",
+   "near_misses": [
+    {
+     "task": "Write a thank-you note to Aunt Clara for the birthday check",
+     "better": "envelope or note card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a new set of phosphor bronze strings for the acoustic guitar",
+     "better": "guitar",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the soundbar HDMI ARC connection on the living room TV",
+     "better": "speaker or TV",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a greeting card that plays music when opened",
+     "better": "greeting card",
+     "trap": "property"
+    },
+    {
+     "task": "Deduplicate the vacation photo library in Lightroom",
+     "better": "photo library (stacked images)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Record voice memo ideas for the keynote speech",
+     "better": "microphone",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "audio_file",
+   "music_video"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5410,
+    "output": 1603,
+    "thoughts": 154,
+    "total": 7167
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Shows a square album tile with an eighth note layered in front of an L-shaped second tile, denoting a plural music library, album collection, or playlist rather than a single file page or video screen."
 }

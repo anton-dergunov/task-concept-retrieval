@@ -15,7 +15,7 @@
    "strength": "secondary"
   },
   {
-   "meaning": "outbound call, export, or send out",
+   "meaning": "outbound action, export, or send out",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "As a bare directional arrow, it is generic UI chrome that could mean external link, export, share, maximize, increase, or simply point in a direction.",
+ "ambiguity": "Visually and semantically interchangeable with the other diagonal up-right arrow with a slightly smaller arrowhead; as a bare directional arrow, it is also generic UI chrome easily confused with external link, export, share, or trend icons.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -153,19 +153,24 @@
  ],
  "near_misses": [
   {
+   "task": "Audit all external links on the company blog for broken URLs",
+   "better": "square with diagonal arrow pointing out of top-right corner, or interchangeable with the other diagonal up-right arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the signed tax forms to the accountant's portal",
+   "better": "upload tray or cloud with upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Send the signed lease agreement back to the landlord",
-   "better": "document or paper airplane / send icon",
+   "better": "document or paper airplane send icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Book flights to the Pacific Northwest for August",
+   "task": "Book flights to the Northeast for Thanksgiving",
    "better": "airplane",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a brass pocket compass for the backpacking trip",
-   "better": "compass",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Upgrade home internet plan to higher upload speeds",
@@ -174,19 +179,14 @@
   },
   {
    "task": "Write newsletter issue on website link building strategies",
-   "better": "newsletter / envelope or chain link icon",
+   "better": "newsletter envelope or chain link icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Share the baby photo album with grandparents",
-   "better": "photo album or share icon",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": true,
  "reasoning": "The icon is a plain north-east arrow, which is standard UI chrome for opening an external link or expanding a view rather than a concrete object or task subject. Without a box, chain, or chart axis, it is too abstract to reliably cue a task topic at a glance.",
@@ -204,6 +204,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "external link or open in new window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "upward trend, increase, or growth",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "outbound call, export, or send out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "northeast direction",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "As a bare directional arrow, it is generic UI chrome that could mean external link, export, share, maximize, increase, or simply point in a direction.",
+   "near_misses": [
+    {
+     "task": "Send the signed lease agreement back to the landlord",
+     "better": "document or paper airplane / send icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book flights to the Pacific Northwest for August",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a brass pocket compass for the backpacking trip",
+     "better": "compass",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upgrade home internet plan to higher upload speeds",
+     "better": "wifi or router icon",
+     "trap": "property"
+    },
+    {
+     "task": "Write newsletter issue on website link building strategies",
+     "better": "newsletter / envelope or chain link icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Share the baby photo album with grandparents",
+     "better": "photo album or share icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "north_east"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4047,
+    "output": 1086,
+    "thoughts": 0,
+    "total": 5133
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:31Z"
+  }
+ },
+ "distinguishing": "This diagonal up-right arrow has a larger, wider arrowhead whose wings extend nearly as far as the shaft, making it completely interchangeable in meaning with the slightly longer-shafted diagonal up-right arrow."
 }

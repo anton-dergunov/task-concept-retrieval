@@ -19,13 +19,9 @@
   {
    "meaning": "put live broadcast or feed on hold",
    "strength": "secondary"
-  },
-  {
-   "meaning": "troubleshoot freezing or paused Chromecast stream",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the pause bars inside the badge can look like the number 11, Roman numeral II, or a power/plug socket, and the base icon may be confused with a generic Wi-Fi or RSS icon.",
+ "ambiguity": "At small list sizes, the top-right circular badge with two pause bars can be mistaken for the screen-cast icon with an exclamation-mark error badge, or the base wireless waves can be confused with a generic Wi-Fi or RSS icon.",
  "modifier_semantics": [
   {
    "modifier": "circular badge with two vertical pause bars",
@@ -170,6 +166,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix Chromecast not connecting to the living room TV",
+   "better": "screen cast icon with exclamation mark error badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Troubleshoot AirPlay dropping out during presentations",
+   "better": "screen cast icon with exclamation mark error badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call ISP to pause home internet service while house is being renovated",
    "better": "Wi-Fi router or phone call icon",
    "trap": "lookalike_glyph"
@@ -178,11 +184,6 @@
    "task": "Buy a new Google Chromecast 4K for the basement projector",
    "better": "plain cast screen icon without pause badge, or shopping cart",
    "trap": "property"
-  },
-  {
-   "task": "Put my podcast RSS feed syndication on hold",
-   "better": "RSS feed icon or microphone icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pause biweekly automatic transfers to the brokerage account",
@@ -203,7 +204,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts the standard wireless screen-casting symbol combined with a pause badge in the upper right. While originally an UI state control for pausing an active cast session, in a task manager it fits niche tasks around pausing streaming TV subscriptions, fixing casting playback freezes, or managing live-stream holds. Its corner waves can be mistaken for Wi-Fi or RSS at small sizes.",
@@ -223,6 +224,94 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pause screen casting or wireless mirroring",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pause streaming subscription or media service",
+     "strength": "primary"
+    },
+    {
+     "meaning": "put live broadcast or feed on hold",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "troubleshoot freezing or paused Chromecast stream",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the pause bars inside the badge can look like the number 11, Roman numeral II, or a power/plug socket, and the base icon may be confused with a generic Wi-Fi or RSS icon.",
+   "near_misses": [
+    {
+     "task": "Call ISP to pause home internet service while house is being renovated",
+     "better": "Wi-Fi router or phone call icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new Google Chromecast 4K for the basement projector",
+     "better": "plain cast screen icon without pause badge, or shopping cart",
+     "trap": "property"
+    },
+    {
+     "task": "Put my podcast RSS feed syndication on hold",
+     "better": "RSS feed icon or microphone icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pause biweekly automatic transfers to the brokerage account",
+     "better": "bank transfer or currency icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a 15-foot HDMI cable for the conference room screen",
+     "better": "cable or monitor icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check what movies are streaming this weekend",
+     "better": "film clapperboard or TV icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cast_warning"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4148,
+    "output": 1174,
+    "thoughts": 0,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Shows two vertical pause bars inside the top-right circular badge on the screen-cast frame, representing intentionally pausing a stream or subscription rather than a connection error (which has an exclamation mark in the badge)."
 }

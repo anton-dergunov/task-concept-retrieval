@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "book or reading material",
+   "meaning": "book, notebook, or journal",
    "strength": "primary"
   },
   {
-   "meaning": "notebook, journal, or logbook",
-   "strength": "primary"
-  },
-  {
-   "meaning": "manual, handbook, or guide",
+   "meaning": "folded newspaper, magazine, or program",
    "strength": "secondary"
   },
   {
-   "meaning": "photo album or binder",
+   "meaning": "manual, binder, or multi-page album",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "folded towel or fabric",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the offset back cover line on the right and bottom can make it look like a folded towel, a rolled blueprint, or a stacked document icon.",
+ "ambiguity": "Largely interchangeable with the closed hardcover book icon for general reading tasks, and at small sizes the offset right edge can also be mistaken for a folded newspaper or folded towel.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Return library hardcover novel before Friday",
+   "better": "closed hardcover book with recessed page block",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write daily entry in bedside diary",
+   "better": "single closed hardcover book",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book flights to Lisbon for October",
    "better": "airplane or ticket",
    "trap": "shared_vocabulary"
@@ -172,11 +182,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Fold the bath towels in the dryer",
-   "better": "towel or laundry",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a bottle of Malbec and crackers for book club tonight",
    "better": "wine bottle",
    "trap": "parent_topic"
@@ -190,7 +195,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a closed hardcover book, notebook, or manual with a visible spine band and wrapping cover. It is a top choice for common personal and work tasks involving reading books, library errands, studying textbooks, journaling, or consulting manuals, though its square geometric lines could occasionally be mistaken for a folded towel at tiny sizes.",
@@ -208,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "book or reading material",
+     "strength": "primary"
+    },
+    {
+     "meaning": "notebook, journal, or logbook",
+     "strength": "primary"
+    },
+    {
+     "meaning": "manual, handbook, or guide",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "photo album or binder",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the offset back cover line on the right and bottom can make it look like a folded towel, a rolled blueprint, or a stacked document icon.",
+   "near_misses": [
+    {
+     "task": "Book flights to Lisbon for October",
+     "better": "airplane or ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a table for four at Trattoria Roma",
+     "better": "restaurant / cutlery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the water meter reading in the basement",
+     "better": "gauge or water meter",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fold the bath towels in the dryer",
+     "better": "towel or laundry",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a bottle of Malbec and crackers for book club tonight",
+     "better": "wine bottle",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Balance the monthly bookkeeping spreadsheet in Excel",
+     "better": "spreadsheet or calculator",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "book_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4030,
+    "output": 1144,
+    "thoughts": 0,
+    "total": 5174
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Features an outer L-shaped line wrapping the bottom and right edges like an open back cover, a slipcase, or a folded sheet, unlike the single closed book with a recessed page block."
 }

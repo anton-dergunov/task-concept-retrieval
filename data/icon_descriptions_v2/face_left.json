@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "return or go back to a person / previous user / sender",
+   "meaning": "return to previous user, revert assignment, or reply to sender",
    "strength": "primary"
   },
   {
-   "meaning": "switch back account, revert profile, or log out user",
+   "meaning": "switch back to previous account or log out user",
    "strength": "primary"
   },
   {
-   "meaning": "child or person leaving / going back (e.g., school pickup or return)",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "undo user action or reassign task back to previous owner",
+   "meaning": "person or child returning / going back",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The left arrow under a face has no single universal convention; it can be read as returning to someone, a person leaving, switching back to a profile, or importing a contact.",
+ "ambiguity": "Easily confused at a glance with the face with a right-pointing arrow when scanning horizontal arrows, and the left arrow itself is ambiguous between returning to a person vs. a person leaving.",
  "modifier_semantics": [
   {
    "modifier": "left-pointing arrow",
@@ -160,8 +156,18 @@
  ],
  "near_misses": [
   {
-   "task": "Book a haircut to trim my bangs on Friday",
-   "better": "scissors or comb",
+   "task": "Delegate the quarterly report to Sarah",
+   "better": "face with right-pointing arrow for assigning or forwarding to a person",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download the client contact vCard to my phone",
+   "better": "face with downward-pointing arrow for downloading a profile or contact",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload a new profile avatar to Slack",
+   "better": "face with upward-pointing arrow for uploading a profile or upgrading a user",
    "trap": "lookalike_glyph"
   },
   {
@@ -175,25 +181,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a baby monitor for the nursery",
-   "better": "baby monitor or crib",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a farewell cake from the bakery",
    "better": "cake",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Back up the customer database to cold storage",
-   "better": "database or cloud backup",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a cute face outline (with parted bangs) and a left-pointing arrow at the bottom, suggesting returning to a person, switching back to a user profile, or reassigning/handing something back to someone. While visually distinct, the exact meaning of the left arrow on a person glyph is somewhat open to interpretation compared to standard add/remove user icons.",
@@ -211,6 +207,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "return or go back to a person / previous user / sender",
+     "strength": "primary"
+    },
+    {
+     "meaning": "switch back account, revert profile, or log out user",
+     "strength": "primary"
+    },
+    {
+     "meaning": "child or person leaving / going back (e.g., school pickup or return)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "undo user action or reassign task back to previous owner",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The left arrow under a face has no single universal convention; it can be read as returning to someone, a person leaving, switching back to a profile, or importing a contact.",
+   "near_misses": [
+    {
+     "task": "Book a haircut to trim my bangs on Friday",
+     "better": "scissors or comb",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return the defective toaster to Target for a refund",
+     "better": "package with return arrow or receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the user profile settings in the dashboard",
+     "better": "plain user avatar or gear",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a baby monitor for the nursery",
+     "better": "baby monitor or crib",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a farewell cake from the bakery",
+     "better": "cake",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Back up the customer database to cold storage",
+     "better": "database or cloud backup",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "face_right",
+   "face_down",
+   "face_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6802,
+    "output": 2060,
+    "thoughts": 0,
+    "total": 8862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The arrow below the cartoon face points left, indicating returning to a previous user, reverting an assignment, or a person going back/leaving, as opposed to the right, down, or up arrows on the other faces."
 }

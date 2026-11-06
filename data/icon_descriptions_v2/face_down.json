@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "download user profile or contact data",
+   "meaning": "download user profile, avatar, or contact vCard",
    "strength": "primary"
   },
   {
-   "meaning": "save avatar or profile picture",
+   "meaning": "save or import contact into address book",
    "strength": "primary"
   },
   {
-   "meaning": "import contacts or people",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "person looking down or nodding",
+   "meaning": "demote user or downgrade account tier",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The downward arrow exiting the bottom of the face can look like a pointed beard, a necktie, or someone sticking out their tongue or vomiting at small sizes.",
+ "ambiguity": "Can be confused with the face with an upward-pointing arrow if not inspected closely; at small sizes the downward arrow beneath the chin also resembles a necktie, goatee, or sticking out a tongue.",
  "modifier_semantics": [
   {
    "modifier": "downward-pointing arrow",
@@ -159,18 +155,18 @@
  ],
  "near_misses": [
   {
-   "task": "Upload a new profile picture to GitHub",
-   "better": "face or user icon with an upward arrow",
+   "task": "Upload a new headshot to my LinkedIn profile",
+   "better": "face with upward-pointing arrow for uploading a profile picture or upgrading a user",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Call Maya about her graduation party",
-   "better": "phone handset icon",
-   "trap": "shared_vocabulary"
+   "task": "Forward the customer inquiry to the account manager",
+   "better": "face with right-pointing arrow for forwarding or assigning to a person",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Book a haircut for Leo before school picture day",
-   "better": "scissors or comb icon",
+   "task": "Switch back to my personal user account",
+   "better": "face with left-pointing arrow for returning to a previous user account",
    "trap": "lookalike_glyph"
   },
   {
@@ -180,19 +176,19 @@
   },
   {
    "task": "Send the signed NDA back to the new contractor",
-   "better": "document with signature or send icon",
+   "better": "document with signature",
    "trap": "parent_topic"
   },
   {
    "task": "Look down the stairwell for the dropped earring",
-   "better": "magnifying glass or eye icon",
+   "better": "magnifying glass or earring",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a stylized human face with a downward arrow at the chin, signifying downloading or exporting user profiles, avatars, or contact records. It fits a narrow slice of tech and admin tasks around backing up personal data or contact lists, though at small sizes the arrow can look like a goatee or necktie.",
@@ -210,6 +206,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download user profile or contact data",
+     "strength": "primary"
+    },
+    {
+     "meaning": "save avatar or profile picture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "import contacts or people",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "person looking down or nodding",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The downward arrow exiting the bottom of the face can look like a pointed beard, a necktie, or someone sticking out their tongue or vomiting at small sizes.",
+   "near_misses": [
+    {
+     "task": "Upload a new profile picture to GitHub",
+     "better": "face or user icon with an upward arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Maya about her graduation party",
+     "better": "phone handset icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a haircut for Leo before school picture day",
+     "better": "scissors or comb icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my mailing address in the HR portal",
+     "better": "house or address card icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Send the signed NDA back to the new contractor",
+     "better": "document with signature or send icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Look down the stairwell for the dropped earring",
+     "better": "magnifying glass or eye icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "face_left",
+   "face_right",
+   "face_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6802,
+    "output": 2060,
+    "thoughts": 0,
+    "total": 8862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The arrow at the bottom of the cartoon face points straight down away from the head, signifying downloading or saving user/contact data, unlike the upward arrow pointing into the head or the horizontal arrows."
 }

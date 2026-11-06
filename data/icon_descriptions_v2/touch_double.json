@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "double tap / double click gesture",
+   "meaning": "double tap or double click gesture",
    "strength": "primary"
   },
   {
-   "meaning": "touchscreen interaction / tap gesture",
+   "meaning": "touchscreen gesture or haptic feedback",
    "strength": "primary"
   },
   {
-   "meaning": "interactive UI prototype or button action",
+   "meaning": "contactless tap or NFC interaction",
    "strength": "secondary"
   },
   {
-   "meaning": "contactless tap / NFC tap",
+   "meaning": "interactive UI prototype action",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the extra outer arc on the right might blend with the main arc or look like a wireless signal wave.",
+ "ambiguity": "At list size, the extra arc on the right is easy to miss, making it look almost identical to the single-arc tap hand unless specifically contrasting single vs. double tap.",
  "modifier_semantics": [
   {
    "modifier": "curved arc over fingertip",
@@ -165,6 +165,16 @@
  ],
  "near_misses": [
   {
+   "task": "Test single-tap button states on the mobile checkout screen",
+   "better": "pointing hand with a single arc over the fingertip (single tap)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Calibrate touchscreen responsiveness on the kiosk display",
+   "better": "pointing hand with a single arc over the fingertip (touchscreen)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy touchscreen-compatible winter gloves for running",
    "better": "gloves",
    "trap": "property"
@@ -180,16 +190,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book keg of pale ale on tap for the party",
-   "better": "beer mug or keg",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Apply nail strengthener to index fingernail",
-   "better": "nail polish / fingernail",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order 24-inch capacitive touch monitor for the studio",
    "better": "monitor / display",
    "trap": "property"
@@ -198,7 +198,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a hand with an extended index finger and two concentric arcs indicating a tap or double-tap gesture. It fits tasks centered on touchscreen interactions, UI prototyping, double-click bugs, and gesture shortcuts, though it shares a silhouette with single-tap or generic pointer icons.",
@@ -216,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "double tap / double click gesture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "touchscreen interaction / tap gesture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "interactive UI prototype or button action",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "contactless tap / NFC tap",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the extra outer arc on the right might blend with the main arc or look like a wireless signal wave.",
+   "near_misses": [
+    {
+     "task": "Buy touchscreen-compatible winter gloves for running",
+     "better": "gloves",
+     "trap": "property"
+    },
+    {
+     "task": "Touch base with Marcus about the Q3 budget",
+     "better": "chat bubble or person",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install new kitchen sink tap",
+     "better": "faucet / water tap",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book keg of pale ale on tap for the party",
+     "better": "beer mug or keg",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Apply nail strengthener to index fingernail",
+     "better": "nail polish / fingernail",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order 24-inch capacitive touch monitor for the studio",
+     "better": "monitor / display",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "touch_app"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4029,
+    "output": 1008,
+    "thoughts": 173,
+    "total": 5210
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:53Z"
+  }
+ },
+ "distinguishing": "Adds a second concentric arc segment to the right of the fingertip arc, indicating a double-tap, double-click, or repeated/haptic touch rather than a single tap."
 }

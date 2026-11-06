@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable from a plain bookmark icon at list-row size when the plus badge blends into the ribbon corner.",
+ "ambiguity": "At small list-row sizes, the plus badge can blur into the ribbon's top-right corner, making it easy to confuse with the bookmark with a minus sign or a plain bookmark.",
  "modifier_semantics": [
   {
    "modifier": "plus sign",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Clean up dead links and old folders in Chrome bookmarks",
+   "better": "bookmark with a minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Remove outdated articles from my Pocket reading list",
+   "better": "bookmark with a minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Finish reading chapter 7 of Designing Data-Intensive Applications",
    "better": "open book",
    "trap": "shared_vocabulary"
@@ -168,23 +178,18 @@
   },
   {
    "task": "Tag all untagged PDFs in Zotero with project labels",
-   "better": "price/label tag",
+   "better": "price or label tag",
    "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Flag the suspicious credit card charge for the bank dispute",
-   "better": "warning flag or credit card",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a hardcover copy of The Hobbit for Leo's birthday",
-   "better": "book or gift",
-   "trap": "parent_topic"
   },
   {
    "task": "Check the saved flight prices to Lisbon on Google Flights",
    "better": "airplane",
    "trap": "generic_verb"
+  },
+  {
+   "task": "Buy a hardcover copy of The Hobbit for Leo's birthday",
+   "better": "book or gift",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -210,6 +215,90 @@
    "example_tasks with parent: 2 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add bookmark / save link or page",
+     "strength": "primary"
+    },
+    {
+     "meaning": "save to reading list or favorites",
+     "strength": "primary"
+    },
+    {
+     "meaning": "physical book bookmark",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable from a plain bookmark icon at list-row size when the plus badge blends into the ribbon corner.",
+   "near_misses": [
+    {
+     "task": "Finish reading chapter 7 of Designing Data-Intensive Applications",
+     "better": "open book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Save $400 into the emergency high-yield account on payday",
+     "better": "piggy bank or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Tag all untagged PDFs in Zotero with project labels",
+     "better": "price/label tag",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Flag the suspicious credit card charge for the bank dispute",
+     "better": "warning flag or credit card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a hardcover copy of The Hobbit for Leo's birthday",
+     "better": "book or gift",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the saved flight prices to Lisbon on Google Flights",
+     "better": "airplane",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bookmark_remove"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 603,
+    "thoughts": 0,
+    "total": 4662
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Has a plus sign (+) in the top-right corner rather than a minus sign (-), denoting adding or saving a bookmark rather than removing one."
 }

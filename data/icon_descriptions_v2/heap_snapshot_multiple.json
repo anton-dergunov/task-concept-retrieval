@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "tax documents or tax return",
+   "meaning": "multiple tax documents, tax return packet, or W-2/1099 forms",
    "strength": "primary"
   },
   {
-   "meaning": "interest rate or loan statements",
+   "meaning": "interest rate statements or loan closing paperwork",
    "strength": "primary"
   },
   {
-   "meaning": "discount coupons or promo vouchers",
+   "meaning": "stack of discount coupons or promo vouchers",
    "strength": "secondary"
   },
   {
-   "meaning": "commission or financial rate reports",
+   "meaning": "duplicate or copy tax and financial rate forms",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read as either tax paperwork, mortgage/interest statements, or printed discount coupons depending on context.",
+ "ambiguity": "Essentially interchangeable with the single document with a percent sign for most tax, interest, or coupon tasks, and easily confused with generic copy/duplicate files if the percent sign is overlooked.",
  "modifier_semantics": [
   {
    "modifier": "percent sign inside front page",
@@ -165,14 +165,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy 2% milk on the way home",
-   "better": "milk carton",
-   "trap": "property"
+   "task": "Search the PDF manual for the warranty clause",
+   "better": "document with a magnifying glass",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Charge laptop to 100% before flight",
-   "better": "battery or laptop",
-   "trap": "property"
+   "task": "Print single-page promo code voucher",
+   "better": "single document with a percent sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Copy two-sided handout for Monday class",
+   "better": "plain stacked duplicate documents without a percent sign",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Calculate tip percentage for catering crew",
@@ -180,25 +185,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Copy two-sided handout for Monday class",
-   "better": "plain duplicate documents without percent sign",
-   "trap": "lookalike_glyph"
+   "task": "Charge laptop to 100% before flight",
+   "better": "battery or laptop",
+   "trap": "property"
   },
   {
    "task": "Book flight to Austin for tax conference",
    "better": "airplane",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check savings account balance",
-   "better": "bank or piggy bank",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows stacked documents with a bold percent sign on the front page. It naturally fits tasks involving tax forms, interest/APR rate sheets, commission statements, or printed discount coupons, though at very small sizes it could be confused with a generic copy/files icon.",
@@ -216,6 +216,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "tax documents or tax return",
+     "strength": "primary"
+    },
+    {
+     "meaning": "interest rate or loan statements",
+     "strength": "primary"
+    },
+    {
+     "meaning": "discount coupons or promo vouchers",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "commission or financial rate reports",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read as either tax paperwork, mortgage/interest statements, or printed discount coupons depending on context.",
+   "near_misses": [
+    {
+     "task": "Buy 2% milk on the way home",
+     "better": "milk carton",
+     "trap": "property"
+    },
+    {
+     "task": "Charge laptop to 100% before flight",
+     "better": "battery or laptop",
+     "trap": "property"
+    },
+    {
+     "task": "Calculate tip percentage for catering crew",
+     "better": "calculator or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Copy two-sided handout for Monday class",
+     "better": "plain duplicate documents without percent sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flight to Austin for tax conference",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check savings account balance",
+     "better": "bank or piggy bank",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "plagiarism",
+   "heap_snapshot_large"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5384,
+    "output": 1522,
+    "thoughts": 185,
+    "total": 7091
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:27Z"
+  }
+ },
+ "distinguishing": "Adds an L-shaped second page outline behind the document with a percent sign to show multiple pages or copies, though it is largely interchangeable in meaning with the single-page percent document."
 }

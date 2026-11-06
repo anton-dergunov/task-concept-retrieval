@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be slightly confused with a desktop monitor on a wide stand, though the wide base clearly signals a laptop.",
+ "ambiguity": "Interchangeable in meaning with the other two open laptop icons; the stepped neck under the screen can also look slightly like a wide monitor stand at tiny sizes.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,29 +152,29 @@
  ],
  "near_misses": [
   {
+   "task": "Mount the 27-inch external monitor on the VESA arm",
+   "better": "desktop monitor on a stand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hook up the Apple TV box to the living room television",
+   "better": "television or monitor on a stand",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "File state and federal tax returns online",
-   "better": "tax form or money / document with dollar sign",
+   "better": "tax form or document with dollar sign",
    "trap": "property"
   },
   {
    "task": "Join the 3pm Zoom call with the design team",
-   "better": "video call / video camera or headset",
+   "better": "video camera or headset",
    "trap": "generic_verb"
   },
   {
-   "task": "Mount the 27-inch external monitor on the VESA arm",
-   "better": "desktop monitor on stand",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a gridded spiral notebook for chemistry lab",
-   "better": "paper notebook with spiral binding",
+   "better": "spiral paper notebook",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay the monthly home fiber internet bill",
-   "better": "wi-fi router or invoice",
-   "trap": "parent_topic"
   },
   {
    "task": "Replace AA batteries in the wireless mouse",
@@ -185,7 +185,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A universally recognizable front-view laptop icon. It fits a wide range of everyday tasks centered on a personal or work computer (buying, repairing, backing up, cleaning, configuring) and is easily distinguished from phones, tablets, and desktop monitors.",
@@ -203,6 +203,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "laptop or notebook computer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "personal computer or workstation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "online or remote computer work",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be slightly confused with a desktop monitor on a wide stand, though the wide base clearly signals a laptop.",
+   "near_misses": [
+    {
+     "task": "File state and federal tax returns online",
+     "better": "tax form or money / document with dollar sign",
+     "trap": "property"
+    },
+    {
+     "task": "Join the 3pm Zoom call with the design team",
+     "better": "video call / video camera or headset",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Mount the 27-inch external monitor on the VESA arm",
+     "better": "desktop monitor on stand",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a gridded spiral notebook for chemistry lab",
+     "better": "paper notebook with spiral binding",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly home fiber internet bill",
+     "better": "wi-fi router or invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace AA batteries in the wireless mouse",
+     "better": "computer mouse or battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "jamboard_kiosk",
+   "desktop_windows",
+   "monitor",
+   "desktop_mac",
+   "laptop_mac",
+   "laptop_chromebook"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10537,
+    "output": 3307,
+    "thoughts": 0,
+    "total": 13844
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "An open laptop with a rounded screen bezel sitting atop a stepped, solid rectangular base without any center cutout, distinguishing it from the pedestal monitors while remaining interchangeable in meaning with the other two laptops."
 }

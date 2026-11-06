@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "battery power and charging devices",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "energy or electricity storage",
+   "meaning": "half-charged battery or storage charge level",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the half-empty top of the battery could slightly resemble a medicine bottle or water bottle with a label.",
+ "ambiguity": "Indistinguishable at a glance from the ~50% and ~75% filled charging battery icons, and interchangeable with all charging-battery level variants in general task use.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt in lower-right cutout",
@@ -161,9 +157,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Plug in the dead tablet before the flight",
+   "better": "empty charging battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Top off the power bank to 100% before camping",
+   "better": "nearly full charging battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly ConEd electric bill before the 15th",
@@ -174,11 +175,6 @@
    "task": "Book a massage to recharge after the product launch week",
    "better": "massage or spa",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Fix the loose wall outlet behind the living room sofa",
-   "better": "electrical outlet or plug",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a braided 2-meter USB-C cable for the nightstand",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a half-full vertical battery with a lightning bolt badge indicating charging or power. It fits common real-life tasks around charging devices, packing power banks, and replacing or recycling batteries across home, tech, hobbies, and travel. It is slightly similar to other battery state icons (full, empty, alert), though the charging bolt makes the charging/power bank concept clear.",
@@ -212,6 +208,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "charging battery or rechargeable battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank or portable charger",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery power and charging devices",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "energy or electricity storage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the half-empty top of the battery could slightly resemble a medicine bottle or water bottle with a label.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly ConEd electric bill before the 15th",
+     "better": "bill or invoice with lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a massage to recharge after the product launch week",
+     "better": "massage or spa",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the loose wall outlet behind the living room sofa",
+     "better": "electrical outlet or plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a braided 2-meter USB-C cable for the nightstand",
+     "better": "cable or cord",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Call the dealership about the alternator whining noise",
+     "better": "car or engine",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_90",
+   "battery_charging_80",
+   "battery_charging_50",
+   "battery_charging_30",
+   "battery_charging_20",
+   "battery_charging_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10582,
+    "output": 3519,
+    "thoughts": 0,
+    "total": 14101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Filled just over halfway (~60%), where the horizontal fill line sits right at the top arc of the bottom-right lightning bolt cutout; functionally interchangeable with the adjacent partial-fill charging batteries."
 }

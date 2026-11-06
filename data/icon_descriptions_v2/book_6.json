@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "language textbook, grammar guide, or spelling resource",
+   "meaning": "language textbook, grammar guide, or study booklet",
    "strength": "primary"
   },
   {
-   "meaning": "font book or typography specimen",
+   "meaning": "font book, typography specimen, or manual",
    "strength": "secondary"
   },
   {
-   "meaning": "general book or reading material",
+   "meaning": "article, pamphlet, or reading material",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic book icon, a contact/address book, or a font/typeface catalog.",
+ "ambiguity": "Virtually interchangeable with the single closed bound book with 'A' on the cover; can also be mistaken for a newspaper/article icon or a generic book.",
  "modifier_semantics": [
   {
    "modifier": "capital letter A on the front cover",
@@ -161,40 +161,40 @@
  ],
  "near_misses": [
   {
+   "task": "Look up the etymology of 'serendipity' in the Oxford English Dictionary",
+   "better": "classic closed bound dictionary book icon with curved bottom pages",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update Grandma's new apartment address in the address book",
-   "better": "contact book with person or @ symbol",
+   "better": "contact book with a person silhouette or @ symbol",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up the Sunday newspaper from the driveway",
+   "better": "folded newspaper icon with text lines instead of a single letter A",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Get an A on the organic chemistry midterm",
-   "better": "exam paper or grade badge",
+   "better": "exam paper or grade badge icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Book the hotel in Amsterdam for four nights",
-   "better": "hotel bed or building",
+   "better": "hotel bed or building icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Sort the spice jars in alphabetical order",
-   "better": "spice jar or A-Z sort arrows",
-   "trap": "property"
-  },
-  {
    "task": "Pay the monthly subscription for the language tutor on iTalki",
-   "better": "credit card or currency symbol",
+   "better": "credit card or currency symbol icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check the meaning of the warning light on the dashboard",
-   "better": "car dashboard warning icon",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a book or booklet with a capital 'A' on the cover, which strongly signals a dictionary, glossary, vocabulary book, or language textbook. It fits tasks involving language study, reference books, and glossaries well, though it can occasionally overlap with generic books or address books.",
@@ -212,6 +212,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "dictionary, glossary, or vocabulary book",
+     "strength": "primary"
+    },
+    {
+     "meaning": "language textbook, grammar guide, or spelling resource",
+     "strength": "primary"
+    },
+    {
+     "meaning": "font book or typography specimen",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "general book or reading material",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic book icon, a contact/address book, or a font/typeface catalog.",
+   "near_misses": [
+    {
+     "task": "Update Grandma's new apartment address in the address book",
+     "better": "contact book with person or @ symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Get an A on the organic chemistry midterm",
+     "better": "exam paper or grade badge",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the hotel in Amsterdam for four nights",
+     "better": "hotel bed or building",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sort the spice jars in alphabetical order",
+     "better": "spice jar or A-Z sort arrows",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly subscription for the language tutor on iTalki",
+     "better": "credit card or currency symbol",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the meaning of the warning light on the dashboard",
+     "better": "car dashboard warning icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "book_3"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4093,
+    "output": 1115,
+    "thoughts": 250,
+    "total": 5458
+   },
+   "soft_problems": [
+    "refers to a letter 1x"
+   ],
+   "created": "2026-11-06T12:38:16Z"
+  }
+ },
+ "distinguishing": "Features an exposed back cover or second page layer extending to the right of the 'A' front cover, looking slightly more like a folded booklet, pamphlet, or multi-layered reference than the single closed bound book, though the two are largely interchangeable."
 }

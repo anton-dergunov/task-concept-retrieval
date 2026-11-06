@@ -9,19 +9,19 @@
  },
  "readings": [
   {
+   "meaning": "low battery / critically low charge / needs charging soon",
+   "strength": "primary"
+  },
+  {
    "meaning": "battery / rechargeable cell / power bank",
    "strength": "primary"
   },
   {
-   "meaning": "low battery / needs charging / battery replacement",
-   "strength": "primary"
-  },
-  {
-   "meaning": "energy level / personal stamina",
+   "meaning": "low personal energy / running on fumes",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable from other partial-fill battery level icons (10%, 20%, 25%, 33%) in an icon picker.",
+ "ambiguity": "Nearly indistinguishable from the one-third-filled and half-filled battery icons at small sizes, and functionally interchangeable with the one-third-filled battery for any 'low battery' task.",
  "modifier_semantics": [
   {
    "modifier": "quarter fill on left",
@@ -158,9 +158,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof battery-powered headlamp for summer backpacking trips",
-   "better": "headlamp / flashlight",
-   "trap": "property"
+   "task": "Recycle the box of completely dead AA alkaline batteries at the hardware store",
+   "better": "empty battery outline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Charge the drone LiPo packs to 50% storage voltage before putting them away",
+   "better": "half-filled battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly electric utility bill before the 15th",
@@ -191,7 +196,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognizable horizontal battery icon showing roughly a quarter charge. It fits concrete household, tech, and travel tasks around charging, buying, replacing, or recycling batteries and power banks, though it overlaps with other battery fill-level glyphs.",
@@ -209,6 +214,89 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / rechargeable cell / power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low battery / needs charging / battery replacement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "energy level / personal stamina",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable from other partial-fill battery level icons (10%, 20%, 25%, 33%) in an icon picker.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric utility bill before the 15th",
+     "better": "invoice / lightning bolt / plug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice rudiments on the drum kit for thirty minutes",
+     "better": "drum / music",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the full neuropsych test battery results with Dr. Patel",
+     "better": "medical chart / brain / clipboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a braided 2-meter USB-C cable for the bedroom nightstand",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the campsite has 30-amp shore power hookups",
+     "better": "electrical plug / tent",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_0",
+   "battery_android_2",
+   "battery_android_3"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6701,
+    "output": 1411,
+    "thoughts": 165,
+    "total": 8277
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:41Z"
+  }
+ },
+ "distinguishing": "Has the narrowest solid black fill on the left (roughly one-sixth of the interior), indicating a critically low battery, though it is practically interchangeable with the one-third-filled battery at list sizes."
 }

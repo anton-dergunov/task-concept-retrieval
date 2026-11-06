@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "person, contact, or user profile",
+   "meaning": "woman / female contact / person with curly hair",
    "strength": "primary"
   },
   {
-   "meaning": "woman, female contact, or person with curly hair",
+   "meaning": "person / contact / user profile",
    "strength": "primary"
   },
   {
-   "meaning": "haircut, hair styling, or salon appointment",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "personal self-care or individual account",
+   "meaning": "haircut / hair styling / salon appointment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks identical to a generic user avatar, while the scalloped head can also be read as curly hair, a bonnet, or a cloud-shaped head.",
+ "ambiguity": "At small sizes it is easily confused with the smooth-headed user avatar, functioning almost interchangeably for general person or profile tasks.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -154,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Update my generic user profile settings and password",
+   "better": "smooth-headed generic user avatar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Assign a default guest account to the new contractor",
+   "better": "smooth-headed generic user avatar",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a wireless headset with a noise-cancelling mic for Zoom calls",
    "better": "headset with microphone",
    "trap": "lookalike_glyph"
@@ -169,16 +175,6 @@
    "trap": "property"
   },
   {
-   "task": "Bake two loaves of white sandwich bread for the week",
-   "better": "bread loaf",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the quarterly water bill online",
-   "better": "water drop or bill receipt",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Check who viewed our shared project folder yesterday",
    "better": "folder or eye",
    "trap": "generic_verb"
@@ -187,7 +183,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a human bust with a wavy or curly head outline, reading readily as a person, female contact, user profile, or hair-related topic. It fits many tasks centered on specific people, personal profiles, or hair care, though at small sizes it is hard to distinguish from a standard round-headed user avatar.",
@@ -205,6 +201,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "person, contact, or user profile",
+     "strength": "primary"
+    },
+    {
+     "meaning": "woman, female contact, or person with curly hair",
+     "strength": "primary"
+    },
+    {
+     "meaning": "haircut, hair styling, or salon appointment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal self-care or individual account",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks identical to a generic user avatar, while the scalloped head can also be read as curly hair, a bonnet, or a cloud-shaped head.",
+   "near_misses": [
+    {
+     "task": "Buy a wireless headset with a noise-cancelling mic for Zoom calls",
+     "better": "headset with microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew our family gym membership for all four people",
+     "better": "group of people or dumbbell",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Open a personal savings account with a 4.5% APY at Ally",
+     "better": "bank or piggy bank",
+     "trap": "property"
+    },
+    {
+     "task": "Bake two loaves of white sandwich bread for the week",
+     "better": "bread loaf",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the quarterly water bill online",
+     "better": "water drop or bill receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check who viewed our shared project folder yesterday",
+     "better": "folder or eye",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "person_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4071,
+    "output": 750,
+    "thoughts": 0,
+    "total": 4821
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Unlike the smooth dome head of the standard user avatar, this icon features a wavy, scalloped head outline indicating curly hair, a feminine hairstyle, or hair care."
 }

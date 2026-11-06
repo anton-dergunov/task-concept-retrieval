@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "saved places or collection of locations",
+   "meaning": "saved places list or collection of locations",
    "strength": "primary"
   },
   {
-   "meaning": "geotagged photos or photo album by location",
+   "meaning": "geotagged photo album or photos grouped by place",
    "strength": "primary"
   },
   {
-   "meaning": "multiple addresses or branches",
+   "meaning": "multiple addresses, branches, or stops",
    "strength": "secondary"
   },
   {
-   "meaning": "map layers or location cards",
+   "meaning": "map layers or stacked location cards",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read either as a list of saved map places or as a stack of geotagged photos.",
+ "ambiguity": "Easily confused with the single square-framed map pin at small sizes, or read as either a list of saved map places or a stack of geotagged photos.",
  "modifier_semantics": [
   {
    "modifier": "stacked L-shaped frame behind bottom-left",
@@ -163,19 +163,24 @@
  ],
  "near_misses": [
   {
-   "task": "Look up the postcode for the dentist on High Street",
-   "better": "single map pin",
+   "task": "Look up the street address for the dentist on High Street",
+   "better": "single square-framed map pin or standalone map pin",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update the Garmin GPS screen in the car before the road trip",
+   "better": "landscape rectangular frame with map pin",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Copy the billing address to the clipboard",
+   "better": "clipboard or copy icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a wall map of Scotland with wooden pushpins",
    "better": "folded map or pushpin",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Copy the billing address to the clipboard",
-   "better": "clipboard or copy icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book flights to the three European office locations",
@@ -196,7 +201,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a stacked-square frame (indicating multiple items, an album, or cards) with a central map pin. It fits tasks about managing collections of saved places, multiple locations, or geotagged photo albums, though it can be confused with a single location pin or a generic copy icon at tiny sizes.",
@@ -214,6 +219,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "saved places or collection of locations",
+     "strength": "primary"
+    },
+    {
+     "meaning": "geotagged photos or photo album by location",
+     "strength": "primary"
+    },
+    {
+     "meaning": "multiple addresses or branches",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "map layers or location cards",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read either as a list of saved map places or as a stack of geotagged photos.",
+   "near_misses": [
+    {
+     "task": "Look up the postcode for the dentist on High Street",
+     "better": "single map pin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a wall map of Scotland with wooden pushpins",
+     "better": "folded map or pushpin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Copy the billing address to the clipboard",
+     "better": "clipboard or copy icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights to the three European office locations",
+     "better": "airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the restaurant is still at the old location",
+     "better": "restaurant or fork and knife",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new SD card for the camera",
+     "better": "SD memory card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_map",
+   "universal_local"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5389,
+    "output": 1039,
+    "thoughts": 210,
+    "total": 6638
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:53Z"
+  }
+ },
+ "distinguishing": "Unlike the single-frame icons, this has a second L-shaped border stacked behind the bottom-left of the square frame, indicating a collection, album, or multiple locations rather than a single place."
 }

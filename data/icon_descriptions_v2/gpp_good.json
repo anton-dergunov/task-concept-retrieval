@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "security, protection, or cybersecurity",
+   "meaning": "verified security, active protection, or passed safety check",
    "strength": "primary"
   },
   {
-   "meaning": "insurance policy or warranty coverage",
+   "meaning": "insurance policy coverage or active warranty",
    "strength": "primary"
   },
   {
-   "meaning": "antivirus scan, firewall, or privacy checkup",
+   "meaning": "antivirus scan, firewall status, or privacy checkup",
    "strength": "secondary"
   },
   {
-   "meaning": "compliance, safety audit, or identity verification",
+   "meaning": "regulatory compliance or safety audit approval",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely overlaps with a plain shield or a padlock icon; the checkmark can make it look like a task completion badge at a quick glance.",
+ "ambiguity": "Broadly overlaps in general security meaning with the shield with a padlock or keyhole, though the checkmark is visually distinct.",
  "modifier_semantics": [
   {
    "modifier": "checkmark centered inside the shield",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Freeze credit reports after the bank data breach notification",
+   "better": "shield with exclamation mark (security breach or fraud warning) ",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Store the master recovery passphrase in the password manager",
+   "better": "shield with padlock (password lock or encryption) ",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a waterproof and shockproof case for the iPad",
    "better": "tablet case",
    "trap": "property"
@@ -177,18 +187,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Change the combination on the backyard shed padlock",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Schedule annual mole check with the dermatologist",
-   "better": "doctor / dermatology",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Apply UV-protective clear coat to the cedar bench",
-   "better": "paint roller / bench",
+   "better": "paint roller or bench",
    "trap": "property"
   }
  ],
@@ -213,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "verified_user"
- }
+  "alias_of": "verified_user",
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "security, protection, or cybersecurity",
+     "strength": "primary"
+    },
+    {
+     "meaning": "insurance policy or warranty coverage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "antivirus scan, firewall, or privacy checkup",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "compliance, safety audit, or identity verification",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely overlaps with a plain shield or a padlock icon; the checkmark can make it look like a task completion badge at a quick glance.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof and shockproof case for the iPad",
+     "better": "tablet case",
+     "trap": "property"
+    },
+    {
+     "task": "Verify that the rent transfer went through",
+     "better": "bank transfer",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Paint the wooden shield for Leo's medieval knight costume",
+     "better": "costume or paintbrush",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change the combination on the backyard shed padlock",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Apply UV-protective clear coat to the cedar bench",
+     "better": "paint roller / bench",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shield_lock",
+   "encrypted",
+   "gpp_maybe",
+   "privacy_tip",
+   "shield_moon"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9379,
+    "output": 1838,
+    "thoughts": 0,
+    "total": 11217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Contains a checkmark inside the shield, signifying verified protection, active insurance coverage, passed security audits, or safe status."
 }

@@ -195,6 +195,24 @@ is cheap.
    distance between the v1 and v2 readings).
 5. **Guard and statistics** (§4, §6), then freeze v2 with the prompt version in `_meta`.
 
+**What was run (2026-11-06).** All with Gemini 4 Argon.
+
+- Pass 1: one batch job over 3,619 glyphs (the review's rejects skipped), $43.95.
+  `scripts/describe_v2_pass1.py`.
+- Pass 2: 350 look-alike groups of 2–8 (951 glyphs, 33%), from CLIP glyph embeddings at
+  cosine ≥ 0.975, checked on contact sheets; one batch job, $4.15.
+  `scripts/describe_v2_pass2.py`; the replaced pass-1 fields stay in `_meta.pass1`.
+  Distinctiveness of those glyphs went from mostly 4 to an even spread (229 kept glyphs
+  now score 1).
+- Pass 3: the blind QA below; the 18 glyphs whose v2 reading was judged wrong or partly
+  were re-described with the judge's fix as a reviewer note, and their groups
+  contrasted again. `scripts/v2_qa.py`.
+- Guard: 0.4% of the generated strings dropped (8 exact matches; the rest within e5
+  cosine 0.95, mostly common chores and admin tasks). `scripts/v2_guard.py`.
+
+The loader (`tcr.data.load_icons(version="v2")`, or `TCR_DESC=v2`) keeps 2,862 glyphs:
+v2's own discards, except the 32 glyphs the review calls useful or somewhat.
+
 **Cost:** per icon, about 2k input tokens and about 2.5k output (JSON plus thinking); ~4k
 icons:
 
@@ -220,6 +238,32 @@ icons:
 - *Discriminability:* the bootstrap eval (hold out one example per icon, retrieve among all
   icons) run with v1 and v2 descriptions. Only suggestive: both sides come from the same
   generator.
+
+**Intrinsic results (2026-11-06).** Full tables: `results/v2_stats/report.md`,
+`results/v2_qa/report.md`.
+
+- *Glyph reading*, judged blind by Claude Opus subagents (v1 and v2 in shuffled
+  slots, one common format). Random 200 glyphs kept by v1 or v2:
+
+  | | wrong (95% CI) | wrong or partly (95% CI) |
+  |---|---|---|
+  | v1 | 2.5% (1.1–5.7%) | 27.0% (21.3–33.5%) |
+  | v2 (after pass 2) | 0.0% (0–1.9%) | 0.5% (0.1–2.8%) |
+
+  On 302 doubtful glyphs (low recognizability, review overrides, largest v1/v2
+  disagreement) v2 was wrong or partly right on 5.6% and v1 on 65.9%. v1's partly
+  verdicts are mostly a missed modifier (a slash read as a generic "off", a badge
+  ignored). Caveat: the blinding is imperfect, since v1's keyword lists look different
+  from v2's sentences, and v2's several hedged readings are easier to accept as fair.
+- *Diversity* (kept glyphs): v2's example tasks have median 9 words (v1: 4) and a
+  length mix of 0.37 / 0.46 / 0.17 against the 0.31 / 0.50 / 0.19 target. Strings reused
+  across glyphs fell from 5,671 to 1,087, and the top-20 negatives' share from 36% to
+  0.9%. The domain entropy is 0.92 of the maximum, though food, career and
+  communication are thin.
+- *Discriminability* (bootstrap eval, `python -m tcr.eval --desc v1|v2`, seed 0):
+  M3 nDCG@10 0.106 → 0.261, M1 0.092 → 0.246, B1 0.139 → 0.201. This is only
+  suggestive: the held-out queries come from the same generator, and v2 has fewer
+  icons (2,862 vs 3,486).
 
 **Extrinsic** (the decision metric, on human labels, **dev split only**):
 

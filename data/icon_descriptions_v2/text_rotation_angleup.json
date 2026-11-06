@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "angled or rotated text formatting (spreadsheet cell orientation)",
+   "meaning": "angle text counterclockwise / rotate text diagonally up",
    "strength": "primary"
   },
   {
-   "meaning": "diagonal text direction or typography layout",
+   "meaning": "text orientation or spreadsheet cell alignment",
    "strength": "secondary"
   },
   {
-   "meaning": "increase font size or scale text upward",
+   "meaning": "typography formatting or diagonal labels",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Outside of a spreadsheet toolbar, it looks like a paper airplane, a compass needle pointing north, or an increase-font-size button.",
+ "ambiguity": "Easily confused at a glance with the downward-angled text icon (tilted A with arrow pointing down-right) for general text rotation or formatting tasks; also resembles an increase-font-size icon or a compass needle.",
  "modifier_semantics": [
   {
    "modifier": "diagonal up-right arrow",
@@ -155,13 +155,18 @@
  ],
  "near_misses": [
   {
+   "task": "Format the table headers to slant diagonally downward to the right",
+   "better": "tilted A with diagonal arrow pointing down and right (angle text clockwise)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Make the font bigger on Grandma's Kindle so she can read without glasses",
-   "better": "e-reader or magnifier / font size icon",
+   "better": "upright letter A with upward arrow or plus sign (increase font size)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Translate the warranty card from German to English",
-   "better": "translation / two speech bubbles or language glyph",
+   "better": "translation glyph with two scripts or speech bubbles",
    "trap": "lookalike_glyph"
   },
   {
@@ -171,19 +176,19 @@
   },
   {
    "task": "Rotate the living room rug 90 degrees to hide the coffee stain",
-   "better": "rug or furniture rotation icon",
+   "better": "rug or circular rotation arrow",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Send the updated font files to the printer",
-   "better": "email or file upload icon",
+   "better": "email envelope or file upload",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 1,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": true,
  "reasoning": "This is a spreadsheet UI toolbar glyph for rotating cell text counterclockwise at a 45-degree angle. It represents a microscopic formatting property rather than a real-world object or task subject, and outside of an Excel toolbar its meaning is unclear.",
@@ -203,6 +208,87 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "angled or rotated text formatting (spreadsheet cell orientation)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "diagonal text direction or typography layout",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "increase font size or scale text upward",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Outside of a spreadsheet toolbar, it looks like a paper airplane, a compass needle pointing north, or an increase-font-size button.",
+   "near_misses": [
+    {
+     "task": "Make the font bigger on Grandma's Kindle so she can read without glasses",
+     "better": "e-reader or magnifier / font size icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Translate the warranty card from German to English",
+     "better": "translation / two speech bubbles or language glyph",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write the introduction section for the annual report",
+     "better": "document with pen or text page",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Rotate the living room rug 90 degrees to hide the coffee stain",
+     "better": "rug or furniture rotation icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the updated font files to the printer",
+     "better": "email or file upload icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "text_rotation_angledown"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4057,
+    "output": 1105,
+    "thoughts": 0,
+    "total": 5162
+   },
+   "soft_problems": [
+    "refers to a letter 1x"
+   ],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Shows a capital A tilted 45 degrees counterclockwise above a diagonal arrow pointing up and right, representing upward-angled text orientation (as opposed to downward-angled text)."
 }

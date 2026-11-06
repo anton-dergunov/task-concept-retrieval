@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "cutlery / silverware / tableware / utensils",
+   "meaning": "cutlery / silverware / tableware / full utensil set",
    "strength": "primary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Semantically interchangeable with the two-utensil fork-and-spoon icon; visually distinguished only by the added table knife on the right.",
  "modifier_semantics": [],
  "domains": [
   "food",
@@ -151,6 +151,11 @@
  ],
  "near_misses": [
   {
+   "task": "Pack a travel fork and spoon set for the toddler's daycare lunchbox",
+   "better": "fork and spoon without a knife",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Sharpen the 8-inch chef's knife on the whetstone",
    "better": "chef's knife / kitchen blade",
    "trap": "lookalike_glyph"
@@ -174,17 +179,12 @@
    "task": "Pick up a bottle of Pinot Noir for tonight's dinner",
    "better": "wine bottle / glass",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Bake sourdough boule for Sunday lunch",
-   "better": "bread loaf / oven",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a fork, spoon, and knife side-by-side, universally understood as cutlery/silverware or dining and restaurants. It fits a wide range of everyday tasks from buying or organizing kitchen utensils to booking restaurant tables and planning meals. It may overlap slightly with other fork-and-knife variants (such as a fork and knife with a plate), but remains highly recognizable at any size.",
@@ -202,6 +202,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cutlery / silverware / tableware / utensils",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dining / restaurant / eating out",
+     "strength": "primary"
+    },
+    {
+     "meaning": "meal / food / dinner",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Sharpen the 8-inch chef's knife on the whetstone",
+     "better": "chef's knife / kitchen blade",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fork the open-source markdown repository on GitHub and fix the build script",
+     "better": "git branch / code fork",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the bent front fork on the commuter bicycle",
+     "better": "bicycle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a food-grade silicone mat for the toddler's highchair",
+     "better": "baby / highchair",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up a bottle of Pinot Noir for tonight's dinner",
+     "better": "wine bottle / glass",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Bake sourdough boule for Sunday lunch",
+     "better": "bread loaf / oven",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fork_spoon"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 642,
+    "thoughts": 0,
+    "total": 4677
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Shows three utensils (fork, spoon, and table knife) rather than just a fork and spoon, though the two icons are semantically interchangeable for dining, meals, and cutlery."
 }

@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "cellular signal strength or mobile network coverage",
+   "meaning": "cellular signal strength / mobile network reception",
    "strength": "primary"
   },
   {
-   "meaning": "bar chart, statistics, or upward growth metrics",
+   "meaning": "upward growth / rising bar chart",
    "strength": "primary"
   },
   {
-   "meaning": "priority, intensity, or difficulty level",
+   "meaning": "priority, intensity, or volume level steps",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable from a simple 4-column bar chart without axes, so it sits right between 'mobile reception / cell carrier' and 'analytics / statistics'.",
+ "ambiguity": "Interchangeable with the three-bar and five-bar ascending signal icons; can also be mistaken for the four-bar chart icon if the viewer overlooks the missing baseline and strictly linear rise.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -150,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Build a bar chart of irregular monthly expenses",
+   "better": "four non-monotonic bars above a horizontal baseline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Tally the three-candidate survey results",
+   "better": "three non-monotonic vertical bars (poll icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Install Signal on Mum's new iPhone",
    "better": "chat bubble or messaging app icon",
    "trap": "shared_vocabulary"
@@ -173,17 +183,12 @@
    "task": "Track daily protein intake for a month",
    "better": "food, meat, or nutrition scale icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Turn down the master volume on the mixer",
-   "better": "speaker or audio fader sliders icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Four ascending vertical bars represent either mobile cellular signal strength (status-bar style) or a rising bar chart for statistics and analytics. While originally a UI status indicator for full reception, in a task list it cleanly cues either cellular coverage/carrier tasks or data/metrics reporting tasks, though it blurs the line between the two.",
@@ -201,6 +206,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cellular signal strength or mobile network coverage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bar chart, statistics, or upward growth metrics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "priority, intensity, or difficulty level",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable from a simple 4-column bar chart without axes, so it sits right between 'mobile reception / cell carrier' and 'analytics / statistics'.",
+   "near_misses": [
+    {
+     "task": "Install Signal on Mum's new iPhone",
+     "better": "chat bubble or messaging app icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set task priority to high in Jira",
+     "better": "flag or exclamation mark",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the Wi-Fi router in the hallway",
+     "better": "Wi-Fi arcs or router box icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly phone bill",
+     "better": "invoice, receipt, or credit card icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Track daily protein intake for a month",
+     "better": "food, meat, or nutrition scale icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Turn down the master volume on the mixer",
+     "better": "speaker or audio fader sliders icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bar_chart_4_bars",
+   "grouped_bar_chart",
+   "bar_chart",
+   "equalizer",
+   "signal_cellular_alt",
+   "android_cell_5_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10730,
+    "output": 3931,
+    "thoughts": 361,
+    "total": 15022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Shows four bars ascending steadily from left to right without a baseline—the classic four-bar mobile phone signal indicator, interchangeable in meaning with the three-bar and five-bar ascending icons."
 }

@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "pause, suspend, or put on hold",
+   "meaning": "pause video, media playback, or subscription",
    "strength": "primary"
   },
   {
-   "meaning": "pause video, media playback, or subscription",
+   "meaning": "pause, suspend, or put on hold",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a standard two-slot North American electrical outlet or wall socket, as well as a generic media player pause button.",
+ "ambiguity": "At small sizes, the vertical bars inside a rounded frame can be glanced as the three unequal columns of a Kanban board; also strongly resembles a two-slot North American electrical wall outlet.",
  "modifier_semantics": [
   {
    "modifier": "pause symbol (two vertical bars)",
@@ -162,19 +162,24 @@
  ],
  "near_misses": [
   {
+   "task": "Move the blocked tickets into the 'In Progress' column on Trello",
+   "better": "Kanban board with three unequal top-aligned vertical bars in a square",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up a three-column Kanban board for the Q3 product roadmap",
+   "better": "Kanban board with three unequal top-aligned vertical bars in a square",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cancel Adobe Creative Cloud before the annual renewal hits",
-   "better": "cross or trash / cancel icon",
+   "better": "cross or cancel / trash icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Watch the paused documentary on deep-sea vents tonight",
    "better": "television or film / video icon",
    "trap": "property"
-  },
-  {
-   "task": "Buy a dual-port USB wall charger for the guest bedroom",
-   "better": "power plug or charger adapter icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check which streaming subscriptions we actually used last month",
@@ -185,17 +190,12 @@
    "task": "Call customer support to ask for a refund on the extra box",
    "better": "phone call icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Equalize the two stereo channels on the podcast intro track",
-   "better": "audio sliders or waveform icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows a pause symbol (two vertical bars) inside a rectangular screen or button frame. It works well for tasks about pausing subscriptions, freezing memberships, or putting deliveries and campaigns on hold, though it can also be read as a two-slot electrical wall outlet.",
@@ -213,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pause, suspend, or put on hold",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pause video, media playback, or subscription",
+     "strength": "primary"
+    },
+    {
+     "meaning": "two-pronged electrical wall outlet or socket",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "take a break or screen-time pause",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a standard two-slot North American electrical outlet or wall socket, as well as a generic media player pause button.",
+   "near_misses": [
+    {
+     "task": "Cancel Adobe Creative Cloud before the annual renewal hits",
+     "better": "cross or trash / cancel icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Watch the paused documentary on deep-sea vents tonight",
+     "better": "television or film / video icon",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a dual-port USB wall charger for the guest bedroom",
+     "better": "power plug or charger adapter icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check which streaming subscriptions we actually used last month",
+     "better": "list or receipt / credit card icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Call customer support to ask for a refund on the extra box",
+     "better": "phone call icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Equalize the two stereo channels on the podcast intro track",
+     "better": "audio sliders or waveform icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "view_kanban"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4071,
+    "output": 705,
+    "thoughts": 0,
+    "total": 4776
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "Shows a wider rectangular frame containing exactly two equal-length centered vertical bars (a pause symbol or two-slot outlet), whereas the look-alike is a square frame containing three top-aligned vertical bars of unequal length (a Kanban board)."
 }

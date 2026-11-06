@@ -18,15 +18,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "medical bed / inpatient care",
+   "meaning": "enter inpatient care / hospital stay",
    "strength": "secondary"
   },
   {
-   "meaning": "return to sickbed or rest",
+   "meaning": "return to sickbed or bed rest",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the bed frame with the head and curved blanket edge can look like a smartphone screen showing a user profile avatar with an add button, or a voice recorder / intercom unit.",
+ "ambiguity": "Easily confused at a glance with the hospital bed with an outward-pointing arrow (hospital discharge); at small sizes, the top-down bed with a head circle and cross also resembles a smartphone showing a user avatar with an add button or a classic gamepad.",
  "modifier_semantics": [
   {
    "modifier": "medical cross on blanket",
@@ -166,12 +166,17 @@
  "near_misses": [
   {
    "task": "Pick up brother after his hospital discharge at noon",
-   "better": "hospital bed with outward arrow (hospital discharge)",
+   "better": "hospital bed with outward-pointing arrow (hospital discharge)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sign post-op discharge papers and collect recovery instructions",
+   "better": "hospital bed with outward-pointing arrow (hospital discharge)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy new linen sheets for the guest bed",
-   "better": "regular bed",
+   "better": "regular bed without medical cross",
    "trap": "shared_vocabulary"
   },
   {
@@ -180,8 +185,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Add new emergency contact to my phone address book",
-   "better": "contact card with plus sign",
+   "task": "Import emergency contacts into my phone address book",
+   "better": "contact card with inward arrow or plus sign",
    "trap": "lookalike_glyph"
   },
   {
@@ -198,7 +203,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a top-down view of a patient in a medical bed (head at top, medical cross on the blanket) with an inward-pointing arrow indicating hospital admission or inpatient check-in. It fits tasks around checking into a hospital, preparing inpatient paperwork, or admitting patients, though at small sizes the bed silhouette can resemble a smartphone with a user avatar.",
@@ -216,6 +221,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hospital admission / inpatient check-in",
+     "strength": "primary"
+    },
+    {
+     "meaning": "admit patient to ward or clinic",
+     "strength": "primary"
+    },
+    {
+     "meaning": "medical bed / inpatient care",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "return to sickbed or rest",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the bed frame with the head and curved blanket edge can look like a smartphone screen showing a user profile avatar with an add button, or a voice recorder / intercom unit.",
+   "near_misses": [
+    {
+     "task": "Pick up brother after his hospital discharge at noon",
+     "better": "hospital bed with outward arrow (hospital discharge)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy new linen sheets for the guest bed",
+     "better": "regular bed",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Submit college admission application before the January deadline",
+     "better": "graduation cap or university building",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add new emergency contact to my phone address book",
+     "better": "contact card with plus sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up post-op pain medication from the pharmacy",
+     "better": "pill bottle or pharmacy mortar",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check blood pressure before going to bed",
+     "better": "blood pressure cuff or heart monitor",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "moving_beds"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4115,
+    "output": 1146,
+    "thoughts": 0,
+    "total": 5261
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "The arrow on the right points inward toward the medical bed, signifying admission or entering inpatient care rather than leaving it."
 }

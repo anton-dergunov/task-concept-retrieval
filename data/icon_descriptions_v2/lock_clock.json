@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "auto-lock timeout or scheduled lock",
+   "meaning": "auto-lock timeout / scheduled lock / session expiration",
    "strength": "primary"
   },
   {
-   "meaning": "temporary access, expiring password, or session timeout",
+   "meaning": "temporary access / expiring credentials / time-locked state",
    "strength": "primary"
   },
   {
-   "meaning": "time-locked savings or freeze period",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "parental screen-time lock or downtime schedule",
+   "meaning": "parental screen-time downtime / app time limit",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a keyhole on the padlock body, the base outline can resemble a shopping bag or handbag with a clock badge (scheduled order or store hours) at small sizes.",
+ "ambiguity": "Closely resembles the person-badged padlock because both omit the central keyhole and place a solid dark circle at the bottom right; without a keyhole, the base shape can also be misread as a shopping bag with a clock (scheduled pickup).",
  "modifier_semantics": [
   {
    "modifier": "clock badge",
@@ -163,8 +159,18 @@
  "near_misses": [
   {
    "task": "Buy a heavy-duty combination padlock for the gym locker",
-   "better": "plain padlock without clock",
-   "trap": "property"
+   "better": "plain closed padlock with keyhole",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Audit admin user permissions in AWS IAM",
+   "better": "padlock with person badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unlock the garden shed before the landscapers arrive",
+   "better": "open padlock",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up click-and-collect grocery order at 5pm",
@@ -182,13 +188,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy 9V batteries for the backup terminal",
-   "better": "battery",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Check security camera footage from last night",
-   "better": "security camera / CCTV",
+   "better": "security camera",
    "trap": "generic_verb"
   }
  ],
@@ -213,6 +214,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "auto-lock timeout or scheduled lock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "temporary access, expiring password, or session timeout",
+     "strength": "primary"
+    },
+    {
+     "meaning": "time-locked savings or freeze period",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "parental screen-time lock or downtime schedule",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a keyhole on the padlock body, the base outline can resemble a shopping bag or handbag with a clock badge (scheduled order or store hours) at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a heavy-duty combination padlock for the gym locker",
+     "better": "plain padlock without clock",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up click-and-collect grocery order at 5pm",
+     "better": "shopping bag with clock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix deadlock bug in the payment worker queue",
+     "better": "bug or code brackets",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Lock in flight prices for Thanksgiving before Tuesday",
+     "better": "airplane or ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy 9V batteries for the backup terminal",
+     "better": "battery",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check security camera footage from last night",
+     "better": "security camera / CCTV",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "lock_open_right",
+   "water_lock",
+   "lock_open",
+   "lock",
+   "lock_person"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9438,
+    "output": 1901,
+    "thoughts": 210,
+    "total": 11549
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Lacks a central keyhole and carries a solid circular clock badge at the bottom right, specifically denoting time-based locking, auto-lock timeouts, or scheduled restrictions."
 }

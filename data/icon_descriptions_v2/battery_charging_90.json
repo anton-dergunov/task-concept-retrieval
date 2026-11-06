@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "battery charger or charging station",
+   "meaning": "nearly full charging battery or topping off charge",
    "strength": "secondary"
   },
   {
-   "meaning": "power management or energy level",
+   "meaning": "battery charger or charging station",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Distinguishable from plain battery icons only by the lightning bolt badge; at very small sizes the top empty bar can make it look like a bottle or canister with a label.",
+ "ambiguity": "Visually almost indistinguishable at small sizes from the other charging-battery icons with slightly lower fill levels (80%, 60%, 50%, 30%, 20%, or empty), and functionally interchangeable with them for general battery-charging tasks; the thin white rectangle near the top can also make it resemble a bottle with a neck label.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt badge in bottom right corner",
@@ -161,19 +161,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small rechargeable headlamp for the Dolomites trip",
-   "better": "headlamp or flashlight",
-   "trap": "property"
+   "task": "Plug in the completely dead phone before it shuts off",
+   "better": "empty charging battery or low battery alert",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Store LiPo drone batteries at 50% storage charge for winter",
+   "better": "half-full charging battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Dispute the duplicate $45 charge on the Amex statement",
    "better": "credit card or receipt",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a 1L insulated water bottle for the gym bag",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Switch monthly electricity direct debit to Octopus Energy",
@@ -194,7 +194,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a nearly full upright battery with a lightning bolt badge indicating charging or power. It fits concrete everyday tasks around charging devices, power banks, rechargeable batteries, and battery replacement. It is very clear, though closely related to other battery-level icons in the same family.",
@@ -212,6 +212,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery charging or rechargeable battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "portable power bank or backup battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery charger or charging station",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "power management or energy level",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Distinguishable from plain battery icons only by the lightning bolt badge; at very small sizes the top empty bar can make it look like a bottle or canister with a label.",
+   "near_misses": [
+    {
+     "task": "Dispute the duplicate $45 charge on the Amex statement",
+     "better": "credit card or receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 1L insulated water bottle for the gym bag",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Switch monthly electricity direct debit to Octopus Energy",
+     "better": "utility bill or house with lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the contacts on the Sony mirrorless camera body",
+     "better": "camera",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the cordless lawnmower blade needs sharpening",
+     "better": "lawnmower or blade",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_80",
+   "battery_charging_60",
+   "battery_charging_50",
+   "battery_charging_30",
+   "battery_charging_20",
+   "battery_charging_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10582,
+    "output": 3519,
+    "thoughts": 0,
+    "total": 14101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Filled almost completely to the top (~90%) with only a thin empty slot under the terminal and a lightning bolt badge in the bottom-right corner; in a task list it is practically interchangeable with the other charging battery icons except when specifically indicating a nearly full charge."
 }

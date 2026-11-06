@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "settings, preferences, or configuration",
+   "meaning": "settings, preferences, or routine configuration",
    "strength": "primary"
   },
   {
@@ -15,11 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "system setup, maintenance, or automation",
+   "meaning": "standard system setup, maintenance, or automation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the six teeth and solid center can vaguely resemble a stylized sun or flower.",
+ "ambiguity": "At small list sizes, it can be confused with the gear containing an exclamation mark if the viewer overlooks the center shape, or vaguely resemble a stylized sun.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -150,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the critical configuration error blocking production deployment",
+   "better": "gear with exclamation mark / system error",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Diagnose the grinding transmission malfunction in the lathe",
+   "better": "gear with exclamation mark / mechanical malfunction",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pack rain gear and gaiters for the Highlands trip",
    "better": "raincoat or backpack",
    "trap": "shared_vocabulary"
@@ -163,11 +173,6 @@
    "task": "Buy bright yellow gear oil for the boat lower unit",
    "better": "oil can / bottle",
    "trap": "property"
-  },
-  {
-   "task": "Check brightness outside at noon",
-   "better": "sun / brightness",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Renew the SSL certificate before Tuesday",
@@ -201,6 +206,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "settings, preferences, or configuration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mechanical gear, machinery, or hardware",
+     "strength": "primary"
+    },
+    {
+     "meaning": "system setup, maintenance, or automation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the six teeth and solid center can vaguely resemble a stylized sun or flower.",
+   "near_misses": [
+    {
+     "task": "Pack rain gear and gaiters for the Highlands trip",
+     "better": "raincoat or backpack",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set the dining table before guests arrive at seven",
+     "better": "cutlery / dining table",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy bright yellow gear oil for the boat lower unit",
+     "better": "oil can / bottle",
+     "trap": "property"
+    },
+    {
+     "task": "Check brightness outside at noon",
+     "better": "sun / brightness",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew the SSL certificate before Tuesday",
+     "better": "certificate / lock",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up a coffee chat with the new product manager",
+     "better": "coffee cup or calendar",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_alert"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4046,
+    "output": 1063,
+    "thoughts": 117,
+    "total": 5226
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Has a plain solid circle in the center of the six-toothed gear rather than an exclamation mark, representing normal settings, configuration, or machinery rather than an error or malfunction."
 }

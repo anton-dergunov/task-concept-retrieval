@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "gamepad D-pad / directional pad (up pressed)",
+   "meaning": "D-pad up button pressed / upward directional input",
    "strength": "primary"
   },
   {
-   "meaning": "video gaming / console controller",
+   "meaning": "video game controller / gaming",
    "strength": "primary"
   },
   {
-   "meaning": "remote control navigation buttons",
+   "meaning": "remote control navigation buttons (up)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can look like a generic plus sign, a medical cross, or a four-way move/pan cursor.",
+ "ambiguity": "At small list sizes, easily mistaken for the neutral four-way D-pad or the D-pads with down, left, or right pressed, as well as a generic cross or four-way move cursor.",
  "modifier_semantics": [
   {
    "modifier": "solid filled top button",
@@ -157,29 +157,29 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the stuck down button on the retro game controller",
+   "better": "D-pad with bottom button filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bind crouch action to D-pad left in game settings",
+   "better": "D-pad with left button filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean dust out of the controller directional pad",
+   "better": "neutral D-pad with all four buttons outlined",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Look up driving directions to the north cabin",
    "better": "compass or map pin",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Restock band-aids and antiseptic in the first aid kit",
-   "better": "medical cross or first aid kit",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay yearly PlayStation Plus subscription renewal",
    "better": "credit card or receipt",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Upload the new build to the Steam store page",
-   "better": "cloud upload arrow",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Move the living room rug four inches to the left",
-   "better": "rug or tape measure",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a gaming chair with adjustable lumbar support",
@@ -190,7 +190,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a PlayStation-style segmented directional pad (D-pad) with the top/up button filled in. It fits tasks about game controllers, button mapping, game input development, and video gaming, though a full gamepad silhouette is more immediately recognizable for general gaming.",
@@ -208,6 +208,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "gamepad D-pad / directional pad (up pressed)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video gaming / console controller",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remote control navigation buttons",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can look like a generic plus sign, a medical cross, or a four-way move/pan cursor.",
+   "near_misses": [
+    {
+     "task": "Look up driving directions to the north cabin",
+     "better": "compass or map pin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Restock band-aids and antiseptic in the first aid kit",
+     "better": "medical cross or first aid kit",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay yearly PlayStation Plus subscription renewal",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Upload the new build to the Steam store page",
+     "better": "cloud upload arrow",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Move the living room rug four inches to the left",
+     "better": "rug or tape measure",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a gaming chair with adjustable lumbar support",
+     "better": "office chair",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "gamepad_down",
+   "gamepad_left",
+   "gamepad_right",
+   "games"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8076,
+    "output": 2572,
+    "thoughts": 0,
+    "total": 10648
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "The top button of the four-way directional pad is solid black while the bottom, left, and right buttons are outlined, indicating the 'up' direction is pressed; for general gaming tasks without a directional focus, it is virtually interchangeable with the others."
 }

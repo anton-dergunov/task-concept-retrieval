@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "jump to start / go to first page or beginning",
+   "meaning": "jump to beginning / first page / start",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with a plain back arrow, media skip-back button, or uppercase letter K at very small sizes.",
+ "ambiguity": "Interchangeable with the left-pointing arrow facing a taller vertical bar; because the bar and chevron tips share the exact same height, it is even more easily mistaken for an uppercase letter K at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "vertical bar on left",
@@ -164,12 +164,17 @@
   },
   {
    "task": "Go back to the old dentist on Elm Street",
-   "better": "tooth / dentist",
+   "better": "tooth or dental chair",
    "trap": "generic_verb"
   },
   {
    "task": "Buy potassium supplements at the pharmacy",
-   "better": "pill bottle",
+   "better": "pill bottle or capsule",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Skip to the previous track in the rehearsal playlist",
+   "better": "double left triangles with vertical bar (media skip-back icon Input/Media control Usage)",
    "trap": "lookalike_glyph"
   },
   {
@@ -179,19 +184,19 @@
   },
   {
    "task": "Export left-aligned CSV report for accounting",
-   "better": "spreadsheet / CSV file",
+   "better": "spreadsheet or CSV file",
    "trap": "property"
   },
   {
-   "task": "Rewrite the database query for faster offset loading",
-   "better": "database",
+   "task": "Rewrite the database query for faster pagination",
+   "better": "database cylinder",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 1,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": true,
  "reasoning": "This is pure UI navigation/formatting chrome (arrow to left bar: jump to start, outdent, backtab, or collapse left panel) rather than a real-world object or task topic. It has virtually no utility as a glanceable subject reminder in a general to-do list and is easily mistaken for a simple back arrow or the letter K.",
@@ -209,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "jump to start / go to first page or beginning",
+     "strength": "primary"
+    },
+    {
+     "meaning": "collapse left sidebar / dock to left margin",
+     "strength": "primary"
+    },
+    {
+     "meaning": "outdent / decrease text indentation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "backtab / shift-tab key",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with a plain back arrow, media skip-back button, or uppercase letter K at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Return defective headphones to the store",
+     "better": "package with return arrow or headphones",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Go back to the old dentist on Elm Street",
+     "better": "tooth / dentist",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy potassium supplements at the pharmacy",
+     "better": "pill bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Start the morning routine 30 minutes earlier",
+     "better": "alarm clock or sunrise",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Export left-aligned CSV report for accounting",
+     "better": "spreadsheet / CSV file",
+     "trap": "property"
+    },
+    {
+     "task": "Rewrite the database query for faster offset loading",
+     "better": "database",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "horizontal_align_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4052,
+    "output": 693,
+    "thoughts": 0,
+    "total": 4745
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "Has a shorter vertical bar whose top and bottom align flush with the outer tips of a wider left-pointing arrowhead, though in meaning it is completely interchangeable with the taller-bar version."
 }

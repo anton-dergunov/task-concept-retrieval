@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "portrait photos, headshots, or passport photos",
-   "strength": "primary"
-  },
-  {
    "meaning": "multiple user profiles, accounts, or contacts",
    "strength": "primary"
   },
   {
-   "meaning": "photo album of people or face gallery",
-   "strength": "secondary"
+   "meaning": "photo album of people, face gallery, or batch of headshots",
+   "strength": "primary"
   },
   {
    "meaning": "duplicate contact or copied profile",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic landscape photo stack at very small sizes if the head circle and shoulder arc are misread as sun and hill.",
+ "ambiguity": "Can be confused with the single square user profile icon if the L-shaped backing layer isn't noticed, or with a generic landscape image gallery if the head and shoulders are misread as sun and hill.",
  "modifier_semantics": [
   {
    "modifier": "stacked card outline behind bottom-left edge",
@@ -163,6 +159,16 @@
  ],
  "near_misses": [
   {
+   "task": "Update my personal profile picture on Slack",
+   "better": "single square frame with person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Assign employee shifts on the weekly roster calendar",
+   "better": "calendar page with top tabs and person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Renew passport at the post office before the May trip",
    "better": "passport booklet",
    "trap": "parent_topic"
@@ -186,11 +192,6 @@
    "task": "Check who has access to the shared drive",
    "better": "folder with lock or key",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Copy text from the bio document into the website",
-   "better": "clipboard or duplicate documents",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -214,6 +215,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "portrait photos, headshots, or passport photos",
+     "strength": "primary"
+    },
+    {
+     "meaning": "multiple user profiles, accounts, or contacts",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo album of people or face gallery",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "duplicate contact or copied profile",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic landscape photo stack at very small sizes if the head circle and shoulder arc are misread as sun and hill.",
+   "near_misses": [
+    {
+     "task": "Renew passport at the post office before the May trip",
+     "better": "passport booklet",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Export vacation landscape photos from Lightroom",
+     "better": "mountain-and-sun image gallery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Sarah to confirm dinner plans",
+     "better": "telephone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the 50mm portrait lens before Saturday's gig",
+     "better": "camera lens",
+     "trap": "property"
+    },
+    {
+     "task": "Check who has access to the shared drive",
+     "better": "folder with lock or key",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Copy text from the bio document into the website",
+     "better": "clipboard or duplicate documents",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "perm_contact_calendar",
+   "person_book",
+   "account_box"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6728,
+    "output": 2165,
+    "thoughts": 0,
+    "total": 8893
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:16Z"
+  }
+ },
+ "distinguishing": "An L-shaped backing line along the left and bottom edges makes this a stack of multiple square portrait cards, representing a collection, album, or multiple profiles rather than a single one."
 }

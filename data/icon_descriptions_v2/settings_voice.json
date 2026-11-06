@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "voice input, dictation, or speech-to-text",
+   "meaning": "dictation, speech-to-text, or transcription",
    "strength": "primary"
   },
   {
-   "meaning": "microphone, voice recording, or podcasting",
+   "meaning": "voice assistant or voice command input",
    "strength": "primary"
   },
   {
-   "meaning": "voice assistant or active listening",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "voice memo or audio note",
+   "meaning": "audio settings or more microphone options",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the three dots at the bottom blend into a flat microphone base, making it indistinguishable from a plain microphone icon.",
+ "ambiguity": "At small sizes, the three dots below the stem look like a flat microphone stand base, making it easy to mistake for the plain microphone icon.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal dots below the stem",
@@ -162,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pack the USB condenser microphone for the trip",
+   "better": "plain microphone without dots",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Record the intro for episode 12 of the podcast",
+   "better": "plain microphone without dots",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the dentist to move Thursday's cleaning",
    "better": "telephone handset",
    "trap": "shared_vocabulary"
@@ -185,11 +191,6 @@
    "task": "Buy a headlamp with voice control for night runs",
    "better": "headlamp",
    "trap": "property"
-  },
-  {
-   "task": "Put a bell on the front gate",
-   "better": "bell",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -213,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "voice input, dictation, or speech-to-text",
+     "strength": "primary"
+    },
+    {
+     "meaning": "microphone, voice recording, or podcasting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "voice assistant or active listening",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "voice memo or audio note",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the three dots at the bottom blend into a flat microphone base, making it indistinguishable from a plain microphone icon.",
+   "near_misses": [
+    {
+     "task": "Call the dentist to move Thursday's cleaning",
+     "better": "telephone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Listen to the new Rest is History episode on the train",
+     "better": "headphones",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a waterproof Bluetooth speaker for the patio",
+     "better": "speaker",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the studio invoice for October",
+     "better": "invoice or money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a headlamp with voice control for night runs",
+     "better": "headlamp",
+     "trap": "property"
+    },
+    {
+     "task": "Put a bell on the front gate",
+     "better": "bell",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mic"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4000,
+    "output": 1018,
+    "thoughts": 76,
+    "total": 5094
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Adds a row of three horizontal dots below the microphone stem, indicating speech-to-text dictation, transcription, or an actively listening voice assistant rather than a plain microphone."
 }

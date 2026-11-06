@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "folder containing files or documents",
+   "meaning": "folder containing files or documents / populated dossier or case file",
    "strength": "primary"
   },
   {
-   "meaning": "filing, archiving, or organizing paperwork",
+   "meaning": "filing, archiving, or storing paperwork in a folder",
    "strength": "primary"
-  },
-  {
-   "meaning": "project dossier or case file",
-   "strength": "secondary"
   },
   {
    "meaning": "computer directory with files",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the inner document shape can look like a letter D or a memory card inside a folder.",
+ "ambiguity": "Often interchangeable with a plain empty folder for general folder/directory tasks; at very small sizes the inner dog-eared page can also look like the letter D or an SD card.",
  "modifier_semantics": [
   {
    "modifier": "small document page inside on the right",
@@ -162,18 +158,33 @@
  ],
  "near_misses": [
   {
+   "task": "Buy a box of empty manila folders for the office supply closet",
+   "better": "plain empty folder",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Create the new root directory structure on the shared drive",
+   "better": "plain empty folder",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Write the quarterly sales report in Google Docs",
-   "better": "document with text lines or pen",
+   "better": "document page with text lines or pen",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Format the 128GB SD card for the camera",
+   "better": "SD memory card",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Send the signed NDA PDF to the new contractor",
-   "better": "paper plane / send or signature icon",
+   "better": "paper plane / send or signature",
    "trap": "generic_verb"
   },
   {
    "task": "File state income taxes before the April 15 deadline",
-   "better": "tax / government building or money icon",
+   "better": "tax form / government building",
    "trap": "shared_vocabulary"
   },
   {
@@ -185,17 +196,12 @@
    "task": "Book the notary appointment for the house closing",
    "better": "calendar or stamp",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Format the 128GB SD card for the camera",
-   "better": "SD memory card",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a folder with a document page inside, universally understood as a file folder, document directory, or paperwork dossier. It fits a wide range of common digital and physical filing tasks across admin, finance, home, and work, though it is close in meaning to plain folder and plain document icons.",
@@ -213,6 +219,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "folder containing files or documents",
+     "strength": "primary"
+    },
+    {
+     "meaning": "filing, archiving, or organizing paperwork",
+     "strength": "primary"
+    },
+    {
+     "meaning": "project dossier or case file",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "computer directory with files",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the inner document shape can look like a letter D or a memory card inside a folder.",
+   "near_misses": [
+    {
+     "task": "Write the quarterly sales report in Google Docs",
+     "better": "document with text lines or pen",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send the signed NDA PDF to the new contractor",
+     "better": "paper plane / send or signature icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "File state income taxes before the April 15 deadline",
+     "better": "tax / government building or money icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a fireproof document safe for passports and deeds",
+     "better": "safe / lockbox",
+     "trap": "property"
+    },
+    {
+     "task": "Book the notary appointment for the house closing",
+     "better": "calendar or stamp",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Format the 128GB SD card for the camera",
+     "better": "SD memory card",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "folder"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4026,
+    "output": 685,
+    "thoughts": 0,
+    "total": 4711
+   },
+   "soft_problems": [
+    "refers to a letter 1x"
+   ],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "Has a small dog-eared document page drawn inside the right side of the folder, emphasizing documents/files stored inside a folder, a populated dossier, or the act of filing paperwork."
 }

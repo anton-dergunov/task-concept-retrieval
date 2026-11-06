@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "mood, happiness, or emotional wellbeing",
+   "meaning": "happiness, good mood, or emotional wellbeing",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with other facial expression icons (neutral, grinning, or laughing faces) when used in a mood scale at very small sizes.",
+ "ambiguity": "Frequently interchangeable with the open-mouthed grinning face and chevron-eyed laughing face for generic mood or emoji tasks.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -152,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Do a 15-minute guided mindfulness meditation on Headspace",
+   "better": "serene face with downward-closed eyes and a gentle smile",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule 6-month pediatrician checkup for the baby",
+   "better": "baby face with a single hair curl",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Schedule teeth whitening and dental cleaning",
    "better": "tooth",
    "trap": "shared_vocabulary"
@@ -167,25 +177,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Update user profile avatar photo on GitHub",
-   "better": "user person silhouette",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the monthly co-pay for the psychiatrist invoice",
    "better": "credit card or receipt",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Order a happy birthday cake for Maya",
-   "better": "birthday cake",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon is a universally recognizable classic smiley face. It fits tasks centered on mood tracking, emotional wellbeing, customer satisfaction ratings (CSAT), and managing emojis or reactions in software, though it can slightly overlap with other facial expression icons in a full mood scale.",
@@ -203,6 +203,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "mood, happiness, or emotional wellbeing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "emoji, emoticon, or message reaction",
+     "strength": "primary"
+    },
+    {
+     "meaning": "customer satisfaction (CSAT) or positive feedback",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "self-care, gratitude, or mental health check-in",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with other facial expression icons (neutral, grinning, or laughing faces) when used in a mood scale at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Schedule teeth whitening and dental cleaning",
+     "better": "tooth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a friendly dog muzzle for vet visits",
+     "better": "dog",
+     "trap": "property"
+    },
+    {
+     "task": "Wash face and apply retinol serum before bed",
+     "better": "dropper bottle or soap",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update user profile avatar photo on GitHub",
+     "better": "user person silhouette",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly co-pay for the psychiatrist invoice",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a happy birthday cake for Maya",
+     "better": "birthday cake",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_content",
+   "sentiment_neutral",
+   "insert_emoticon",
+   "sentiment_calm",
+   "child_care",
+   "sentiment_very_satisfied"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10675,
+    "output": 3460,
+    "thoughts": 0,
+    "total": 14135
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "The classic smiley face with two round dot eyes and a simple curved-stroke smile (not filled D-shaped), representing general happiness, friendliness, or a standard positive mood/rating."
 }

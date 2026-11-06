@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "add or install a printer",
+   "meaning": "add, install, or set up a new printer",
    "strength": "primary"
   },
   {
-   "meaning": "new print job or print document",
+   "meaning": "add a new print job or queue a document to print",
    "strength": "primary"
   },
   {
-   "meaning": "buy a new printer",
+   "meaning": "buy a new printer or replenish printer supplies",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the cutout around the plus sign breaks the bottom sheet so it resembles a briefcase with a handle or a fax machine.",
+ "ambiguity": "Share the exact same cutaway printer base as the printer with an exclamation mark and the printer with a checkmark; at tiny sizes the plus badge can blur into the checkmark badge.",
  "modifier_semantics": [
   {
    "modifier": "plus sign",
@@ -159,6 +159,16 @@
  ],
  "near_misses": [
   {
+   "task": "Clear the paper jam in the office Brother laser printer",
+   "better": "printer with exclamation mark icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up completed architectural blueprints from the print shop",
+   "better": "printer with checkmark icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Read the fine print on the dental insurance renewal policy",
    "better": "document with magnifying glass or contract icon",
    "trap": "shared_vocabulary"
@@ -172,11 +182,6 @@
    "task": "Buy a floral print dress for Maya's summer wedding",
    "better": "dress icon",
    "trap": "property"
-  },
-  {
-   "task": "Pack the leather briefcase with laptop charger for the Frankfurt flight",
-   "better": "briefcase icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Shred old bank statements by the printer stand",
@@ -210,6 +215,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add or install a printer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "new print job or print document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "buy a new printer",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the cutout around the plus sign breaks the bottom sheet so it resembles a briefcase with a handle or a fax machine.",
+   "near_misses": [
+    {
+     "task": "Read the fine print on the dental insurance renewal policy",
+     "better": "document with magnifying glass or contract icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Frame the botanical linocut print for the hallway wall",
+     "better": "picture frame or artwork icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a floral print dress for Maya's summer wedding",
+     "better": "dress icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pack the leather briefcase with laptop charger for the Frankfurt flight",
+     "better": "briefcase icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Shred old bank statements by the printer stand",
+     "better": "paper shredder icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Remove the dead Epson printer from Windows devices list",
+     "better": "printer with minus or trash icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "print_error",
+   "print_connect"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5392,
+    "output": 1552,
+    "thoughts": 0,
+    "total": 6944
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "This printer has a plus sign (+) in the bottom-right corner, meaning adding or installing a printer or creating a new print job, as opposed to the exclamation mark (error) or checkmark (completed/ready)."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "unsubscribe from emails or mailing lists",
+   "meaning": "remove email address from a list or unsubscribe",
    "strength": "primary"
   },
   {
-   "meaning": "remove or delete emails and messages",
+   "meaning": "delete or remove emails from inbox",
    "strength": "primary"
   },
   {
-   "meaning": "block email sender or stop unwanted mail",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "remove email address from an account or list",
+   "meaning": "block email sender",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the minus badge can resemble a do-not-enter sign or be hard to distinguish from other small circular corner badges on an envelope.",
+ "ambiguity": "Semantically overlaps with the diagonally slashed envelope for unsubscribing or stopping mail, and visually shares the bottom-right corner badge layout with the attachment, checkmark, and arrow envelopes.",
  "modifier_semantics": [
   {
    "modifier": "circle badge with minus sign",
@@ -161,34 +157,34 @@
  ],
  "near_misses": [
   {
-   "task": "Send the signed lease renewal back to the landlord by email",
-   "better": "envelope with send arrow or plain envelope",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Add Sarah's new address to the family holiday card list",
-   "better": "envelope with plus sign",
+   "task": "Turn off all email push notifications on my phone",
+   "better": "diagonally slashed envelope",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Verify my email address using the confirmation link",
+   "better": "envelope with checkmark badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Send the signed lease renewal back to the landlord by email",
+   "better": "envelope with right-pointing arrow or plain envelope",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Buy a box of security envelopes without the plastic window",
-   "better": "plain envelope or shopping cart",
+   "better": "plain envelope or shopping cart icon",
    "trap": "property"
   },
   {
    "task": "Check whether the tax refund notice arrived in the mail",
-   "better": "mailbox or tax document",
+   "better": "mailbox or tax document icon",
    "trap": "generic_verb"
   },
   {
    "task": "Draft the pricing update announcement for existing customers",
-   "better": "document with pen or megaphone",
+   "better": "document with pen or megaphone icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Set up a vacation auto-responder for the week of Thanksgiving",
-   "better": "envelope with clock or out-of-office calendar",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -212,6 +208,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unsubscribe from emails or mailing lists",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remove or delete emails and messages",
+     "strength": "primary"
+    },
+    {
+     "meaning": "block email sender or stop unwanted mail",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "remove email address from an account or list",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the minus badge can resemble a do-not-enter sign or be hard to distinguish from other small circular corner badges on an envelope.",
+   "near_misses": [
+    {
+     "task": "Send the signed lease renewal back to the landlord by email",
+     "better": "envelope with send arrow or plain envelope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add Sarah's new address to the family holiday card list",
+     "better": "envelope with plus sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a box of security envelopes without the plastic window",
+     "better": "plain envelope or shopping cart",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the tax refund notice arrived in the mail",
+     "better": "mailbox or tax document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Draft the pricing update announcement for existing customers",
+     "better": "document with pen or megaphone",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up a vacation auto-responder for the week of Thanksgiving",
+     "better": "envelope with clock or out-of-office calendar",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mail_off",
+   "attach_email",
+   "stacked_email",
+   "mail",
+   "mark_email_read",
+   "forward_to_inbox",
+   "outgoing_mail"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12060,
+    "output": 2435,
+    "thoughts": 63,
+    "total": 14558
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "A solid circular badge with a horizontal minus sign sits at the bottom-right corner of the envelope, indicating removing an email, deleting messages, or removing an address from a mailing list."
 }

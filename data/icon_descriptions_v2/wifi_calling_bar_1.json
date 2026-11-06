@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "return a missed call or unread phone notification",
+   "meaning": "unread phone notification or missed call to return",
    "strength": "primary"
   },
   {
-   "meaning": "make a phone call",
+   "meaning": "make a general phone call",
    "strength": "primary"
   },
   {
-   "meaning": "check voicemail or active call indicator",
+   "meaning": "active call or line indicator",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the tiny dot is easily overlooked or mistaken for a stray pixel, making it indistinguishable from a plain telephone handset icon.",
+ "ambiguity": "The single dot is in the exact same spot as the base of the Wi-Fi symbol on the handset with a dot and arc, and at list size the tiny dot is easily overlooked as a plain telephone handset.",
  "modifier_semantics": [
   {
    "modifier": "single small filled circular dot",
@@ -158,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Enable Wi-Fi calling on my new Android phone",
+   "better": "telephone handset with a Wi-Fi arc and dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Answer the incoming interview call from HR at 2pm",
+   "better": "telephone handset with an inward-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a braided USB-C charging cable for my phone",
    "better": "charging cable",
    "trap": "shared_vocabulary"
@@ -173,13 +183,8 @@
    "trap": "property"
   },
   {
-   "task": "Pick up a fresh bunch of bananas at Trader Joe's",
-   "better": "banana",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the monthly AT&T cell phone bill",
-   "better": "bill / invoice / credit card",
+   "better": "invoice or credit card",
    "trap": "parent_topic"
   },
   {
@@ -191,7 +196,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic telephone handset with a single notification dot, making it ideal for tasks about making phone calls, returning missed calls, or checking voicemails. While the handset is universally recognizable and fits one of the most common to-do actions ('call...'), the tiny single dot barely distinguishes it from a standard phone handset icon.",
@@ -209,6 +214,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "return a missed call or unread phone notification",
+     "strength": "primary"
+    },
+    {
+     "meaning": "make a phone call",
+     "strength": "primary"
+    },
+    {
+     "meaning": "check voicemail or active call indicator",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the tiny dot is easily overlooked or mistaken for a stray pixel, making it indistinguishable from a plain telephone handset icon.",
+   "near_misses": [
+    {
+     "task": "Buy a braided USB-C charging cable for my phone",
+     "better": "charging cable",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Join the weekly product design video call on Zoom",
+     "better": "video camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a waterproof phone pouch for kayaking",
+     "better": "smartphone case or pouch",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up a fresh bunch of bananas at Trader Joe's",
+     "better": "banana",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly AT&T cell phone bill",
+     "better": "bill / invoice / credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the new iPhone screen protector fits",
+     "better": "smartphone",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wifi_calling_bar_2",
+   "phone_callback",
+   "phone_paused"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6758,
+    "output": 2173,
+    "thoughts": 0,
+    "total": 8931
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:27Z"
+  }
+ },
+ "distinguishing": "It shows only a single small filled dot in the upper right of the handset without the curved Wi-Fi arc above it, the inward arrow, or the two vertical pause bars."
 }

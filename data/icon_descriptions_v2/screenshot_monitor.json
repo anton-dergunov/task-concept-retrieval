@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "computer monitor or desktop display",
+   "meaning": "screen size, resolution, aspect ratio, or fullscreen/overscan bounds",
    "strength": "primary"
   },
   {
-   "meaning": "screen size, resolution, aspect ratio, or display scaling",
+   "meaning": "computer monitor, external display, or television screen",
    "strength": "primary"
   },
   {
-   "meaning": "television or smart TV",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "screenshot, screen capture, or fullscreen mode",
+   "meaning": "screenshot or screen capture area",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read simply as a generic computer monitor or TV, or specifically as display calibration/overscan/resolution because of the corner brackets.",
+ "ambiguity": "Can be confused with the monitor containing horizontal sliders when both are used for display/monitor tasks, or read simply as a generic TV/monitor whose corner brackets look like screen reflection marks.",
  "modifier_semantics": [
   {
    "modifier": "two opposite corner brackets inside screen",
@@ -161,34 +157,39 @@
  ],
  "near_misses": [
   {
+   "task": "Calibrate monitor brightness, contrast, and color profile",
+   "better": "monitor with horizontal adjustment sliders inside the screen",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update macOS system preferences and startup settings",
+   "better": "monitor with horizontal settings sliders or gear icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Watch the season finale of Severance tonight",
-   "better": "video / clapperboard / play button",
+   "better": "play button, clapperboard, or TV with play symbol",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Monitor blood pressure every morning for two weeks",
-   "better": "heart rate / blood pressure cuff",
+   "better": "heart rate monitor or blood pressure cuff",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Frame the 16x20 charcoal sketch from Lisbon",
-   "better": "picture frame / artwork",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book dermatologist skin screening for May",
-   "better": "doctor / stethoscope",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the cracked glass screen protector on my iPhone",
-   "better": "smartphone",
+   "better": "picture frame or artwork icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the monthly electricity bill for the home office",
-   "better": "invoice / bolt / money",
+   "better": "invoice, currency, or lightning bolt",
    "trap": "parent_topic"
+  },
+  {
+   "task": "Buy a braided 6-foot HDMI 2.1 cable",
+   "better": "cable/plug icon",
+   "trap": "property"
   }
  ],
  "scores": {
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "computer monitor or desktop display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen size, resolution, aspect ratio, or display scaling",
+     "strength": "primary"
+    },
+    {
+     "meaning": "television or smart TV",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "screenshot, screen capture, or fullscreen mode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read simply as a generic computer monitor or TV, or specifically as display calibration/overscan/resolution because of the corner brackets.",
+   "near_misses": [
+    {
+     "task": "Watch the season finale of Severance tonight",
+     "better": "video / clapperboard / play button",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Monitor blood pressure every morning for two weeks",
+     "better": "heart rate / blood pressure cuff",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Frame the 16x20 charcoal sketch from Lisbon",
+     "better": "picture frame / artwork",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book dermatologist skin screening for May",
+     "better": "doctor / stethoscope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the cracked glass screen protector on my iPhone",
+     "better": "smartphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly electricity bill for the home office",
+     "better": "invoice / bolt / money",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "display_settings"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4106,
+    "output": 716,
+    "thoughts": 107,
+    "total": 4929
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "Shows top-left and bottom-right L-shaped corner brackets inside the monitor screen (signaling screen size, resolution, fullscreen, or a general display) rather than adjustment sliders."
 }

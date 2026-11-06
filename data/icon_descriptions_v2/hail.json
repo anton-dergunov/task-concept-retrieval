@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "traveler waving hello or goodbye",
+   "meaning": "traveler arriving or departing",
    "strength": "secondary"
   },
   {
-   "meaning": "throwing trash into a small bin",
+   "meaning": "dropping litter into a small bin",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The rectangular block on the left represents a suitcase, but without a handle it can look like a small trash bin or bollard, or the figure can be mistaken for someone simply waving or stretching.",
+ "ambiguity": "Readily mistaken for the standalone waving figure if the small rectangular block isn't noticed, and the block itself looks like a small trash bin or bollard because it lacks a suitcase handle.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -153,6 +153,16 @@
  ],
  "near_misses": [
   {
+   "task": "Welcome the new hires at Monday orientation",
+   "better": "person waving without luggage",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Volunteer to help at the school bake sale",
+   "better": "person raising a hand without luggage",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Take the kitchen trash out to the curb before Tuesday morning",
    "better": "trash bin",
    "trap": "lookalike_glyph"
@@ -171,11 +181,6 @@
    "task": "Download offline maps of the city",
    "better": "map",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Ask a question during the town hall Q&A session",
-   "better": "raised hand or microphone",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check Uber credit card charges on the monthly statement",
@@ -204,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hailing a taxi, cab, or rideshare with luggage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "passenger waiting for pickup or airport transfer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "traveler waving hello or goodbye",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "throwing trash into a small bin",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The rectangular block on the left represents a suitcase, but without a handle it can look like a small trash bin or bollard, or the figure can be mistaken for someone simply waving or stretching.",
+   "near_misses": [
+    {
+     "task": "Take the kitchen trash out to the curb before Tuesday morning",
+     "better": "trash bin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new hard-shell carry-on suitcase with spinner wheels",
+     "better": "suitcase",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew my rideshare driver commercial insurance policy",
+     "better": "shield or document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download offline maps of the city",
+     "better": "map",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Ask a question during the town hall Q&A session",
+     "better": "raised hand or microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check Uber credit card charges on the monthly statement",
+     "better": "credit card or receipt",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "emoji_people"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4053,
+    "output": 1105,
+    "thoughts": 0,
+    "total": 5158
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "Includes a vertical rectangular block (luggage or bin) on the left below a curved downward arm while the right arm is raised, specifically indicating a traveler with a bag hailing a ride."
 }

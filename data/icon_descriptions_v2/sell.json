@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Completely interchangeable with the right-facing price tag icon; the two differ only by horizontal mirroring and carry identical meaning.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -178,15 +178,20 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Replace the battery in my bike AirTag",
-   "better": "battery or bicycle",
-   "trap": "shared_vocabulary"
+   "task": "Apply a 20% discount coupon at checkout",
+   "better": "percentage sign or coupon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bookmark the recipe page for later",
+   "better": "bookmark ribbon",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic hang tag with an eyelet hole, universally understood as a price tag, physical label, or digital metadata tag. It fits tasks centered on labeling items, pricing goods for sale, attaching luggage/gift tags, or organizing digital tags, though care must be taken not to overuse it for every shopping task where the specific item bought is a better subject.",
@@ -204,6 +209,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "local_offer"
- }
+  "alias_of": "local_offer",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "price tag, retail sale, or discount",
+     "strength": "primary"
+    },
+    {
+     "meaning": "label, category tag, or metadata",
+     "strength": "primary"
+    },
+    {
+     "meaning": "physical luggage tag or gift tag",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Renew car license plate tags at the DMV",
+     "better": "car or license plate",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new leather wallet on sale",
+     "better": "wallet",
+     "trap": "property"
+    },
+    {
+     "task": "Tag Sarah in the team retreat photos",
+     "better": "photo or person",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the price of flights to Lisbon",
+     "better": "airplane",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up folding tables from Mike's garage",
+     "better": "table",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace the battery in my bike AirTag",
+     "better": "battery or bicycle",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shoppingmode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 3976,
+    "output": 1058,
+    "thoughts": 93,
+    "total": 5127
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:44Z"
+  }
+ },
+ "distinguishing": "Visually, the tag's eyelet hole is in the upper-left corner with the body angled down to the right, making it a horizontal mirror image of the other tag and completely interchangeable in meaning."
 }

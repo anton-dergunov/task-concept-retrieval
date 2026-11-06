@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "verification, fact-check, or background check",
+   "meaning": "verification, fact-checking, or background check",
    "strength": "primary"
   },
   {
-   "meaning": "completed search or found result",
+   "meaning": "proofreading or detailed review pass",
    "strength": "secondary"
   },
   {
-   "meaning": "proofreading or review pass",
+   "meaning": "search complete or found item",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a plain search/magnifying glass icon or a generic checkmark/done icon at very small sizes.",
+ "ambiguity": "Completely interchangeable with the magnifying glass with a smaller lens and smaller checkmark; also easily confused at small sizes with a plain magnifying glass (search) or a magnifying glass with a plus sign (zoom in).",
  "modifier_semantics": [
   {
    "modifier": "checkmark inside lens",
@@ -162,7 +162,7 @@
  "near_misses": [
   {
    "task": "Check on the sourdough starter before bed",
-   "better": "bread / jar",
+   "better": "bread or jar",
    "trap": "generic_verb"
   },
   {
@@ -171,35 +171,35 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Look for a waterproof winter coat in the attic",
-   "better": "coat / jacket",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Take the Honda in for its state emissions inspection",
-   "better": "car",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Write a 5-star review for the neighborhood plumber",
-   "better": "star / rating",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Zoom in on the garden plot map to measure the raised beds",
-   "better": "map / garden bed",
+   "task": "Search the attic for the box of winter coats",
+   "better": "plain magnifying glass without checkmark or coat",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Zoom in on the garden plot map to measure the raised beds",
+   "better": "magnifying glass with a plus sign (zoom in) or map",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write a 5-star review for the neighborhood plumber",
+   "better": "star rating",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Order background-checked pet sitters for the holiday trip",
+   "better": "dog / pet",
+   "trap": "property"
+  },
+  {
    "task": "Pay the $450 invoice to the termite inspector",
-   "better": "invoice / payment",
+   "better": "invoice or payment",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A magnifying glass containing a checkmark clearly communicates inspection, verification, auditing, or quality assurance. It fits tasks where a formal inspection, audit, QA pass, or background check is the central activity, though care must be taken not to overuse it for everyday tasks that merely start with the generic verb 'check' or 'verify'.",
@@ -217,6 +217,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "inspection, audit, or quality assurance check",
+     "strength": "primary"
+    },
+    {
+     "meaning": "verification, fact-check, or background check",
+     "strength": "primary"
+    },
+    {
+     "meaning": "completed search or found result",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "proofreading or review pass",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain search/magnifying glass icon or a generic checkmark/done icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Check on the sourdough starter before bed",
+     "better": "bread / jar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Verify flight departure terminal for tomorrow morning",
+     "better": "airplane",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Look for a waterproof winter coat in the attic",
+     "better": "coat / jacket",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Take the Honda in for its state emissions inspection",
+     "better": "car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write a 5-star review for the neighborhood plumber",
+     "better": "star / rating",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Zoom in on the garden plot map to measure the raised beds",
+     "better": "map / garden bed",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $450 invoice to the termite inspector",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "search_check"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4063,
+    "output": 1088,
+    "thoughts": 0,
+    "total": 5151
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "Visually shows a wider circular lens and larger checkmark relative to the handle compared to the smaller-lensed magnifying glass with checkmark, but the two icons are completely interchangeable in meaning."
 }

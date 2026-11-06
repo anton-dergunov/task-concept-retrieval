@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "battery / batteries",
+   "meaning": "empty or dead battery / needs recharging or replacement",
    "strength": "primary"
   },
   {
-   "meaning": "empty or dead battery / recharge needed",
+   "meaning": "battery / batteries (generic outline icon for cells or packs Check/buy/recycle batteries Task subject = battery itself, or drained energy / burnout",
    "strength": "primary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "personal energy / burnout",
+   "meaning": "exhaustion / zero personal energy / burnout",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Identical or nearly identical to full, half, or charging battery icons except for the empty interior.",
+ "ambiguity": "Easily confused with partially filled battery icons when used generically for any battery task, though visually distinct at a glance because the interior is completely white.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Keep the spare lithium-ion cells at a 50% storage charge for winter",
+   "better": "half-filled battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plug in the tablet when the low-battery warning hits 20%",
+   "better": "low-filled battery with small left bar",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a battery-powered milk frother for camping",
    "better": "milk frother / whisk",
    "trap": "property"
@@ -172,11 +182,6 @@
    "task": "Visit the coastal artillery battery at Fort Point",
    "better": "cannon / fortress",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new rolling carry-on suitcase for work trips",
-   "better": "suitcase",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order a wall-mounted organizer rack for the garage",
@@ -207,6 +212,96 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "empty or dead battery / recharge needed",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / portable charger",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy / burnout",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Identical or nearly identical to full, half, or charging battery icons except for the empty interior.",
+   "near_misses": [
+    {
+     "task": "Buy a battery-powered milk frother for camping",
+     "better": "milk frother / whisk",
+     "trap": "property"
+    },
+    {
+     "task": "Practice the snare and bass battery rudiments with a metronome",
+     "better": "drum",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly electric bill before the 15th",
+     "better": "lightning bolt / bill invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Visit the coastal artillery battery at Fort Point",
+     "better": "cannon / fortress",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new rolling carry-on suitcase for work trips",
+     "better": "suitcase",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a wall-mounted organizer rack for the garage",
+     "better": "shelving / rack",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_1",
+   "battery_android_2",
+   "battery_android_3"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6701,
+    "output": 1411,
+    "thoughts": 165,
+    "total": 8277
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:41Z"
+  }
+ },
+ "distinguishing": "Completely hollow interior with zero fill, representing an empty or dead battery rather than the partial charge levels shown in the other icons."
 }

@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with log-in, import, or generic 'next/forward' arrow icons, especially when users differ on whether the arc represents the system or the outside.",
+ "ambiguity": "Completely interchangeable in meaning with the rectangular-bracket exit arrow; also easily confused with log-in or import icons where the arrow points into the enclosure rather than out of it.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow",
@@ -159,14 +159,19 @@
  ],
  "near_misses": [
   {
-   "task": "Check Emergency Exit signs in the warehouse hallway",
-   "better": "running person exit sign",
-   "trap": "shared_vocabulary"
+   "task": "Check out of the hotel room by 11 AM and return keycards",
+   "better": "doorway bracket with right-pointing arrow (when representing a physical room doorway) or keycard",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Log in to the new health insurance portal and set up 2FA",
-   "better": "log in (arrow pointing into bracket/arc)",
+   "better": "log-in icon with arrow pointing into an arc or bracket",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check Emergency Exit signs in the warehouse hallway",
+   "better": "running person exit sign",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy an export-grade wooden shipping crate",
@@ -179,20 +184,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Pack charger and toiletries into the carry-on bag",
+   "task": "Pack charger and toiletries into the carry-on bag before check-out",
    "better": "suitcase / luggage",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Share the wedding photo album link with relatives",
-   "better": "share icon or photo album",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon shows an arrow pointing right out of a semicircular arc, standardly recognized as 'log out', 'sign out', 'exit', or 'export'. While originally a UI action glyph, it maps well to concrete tasks around signing out of shared devices, exporting data files, leaving workspaces, or checking out.",
@@ -210,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "log out / sign out",
+     "strength": "primary"
+    },
+    {
+     "meaning": "exit / leave",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export / extract data",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "check out (hotel or rental)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with log-in, import, or generic 'next/forward' arrow icons, especially when users differ on whether the arc represents the system or the outside.",
+   "near_misses": [
+    {
+     "task": "Check Emergency Exit signs in the warehouse hallway",
+     "better": "running person exit sign",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Log in to the new health insurance portal and set up 2FA",
+     "better": "log in (arrow pointing into bracket/arc)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy an export-grade wooden shipping crate",
+     "better": "wooden crate / box",
+     "trap": "property"
+    },
+    {
+     "task": "Check out the new bakery on 5th Street",
+     "better": "croissant / bakery",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pack charger and toiletries into the carry-on bag",
+     "better": "suitcase / luggage",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Share the wedding photo album link with relatives",
+     "better": "share icon or photo album",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "logout"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1078,
+    "thoughts": 0,
+    "total": 5169
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "Uses a curved semicircular arc on the left instead of a rectangular bracket, though both icons are functionally interchangeable symbols for logging out, exiting, or exporting."
 }

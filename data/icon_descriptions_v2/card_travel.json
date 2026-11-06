@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "briefcase / work / business",
+   "meaning": "carry-on bag / duffel / travel luggage",
    "strength": "primary"
   },
   {
-   "meaning": "suitcase / luggage / travel bag",
+   "meaning": "briefcase / work bag / business",
    "strength": "primary"
-  },
-  {
-   "meaning": "toolbox / utility kit",
-   "strength": "secondary"
   },
   {
    "meaning": "tote bag / shopping bag",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the handle straps extend down into the top face and the horizontal band sits near the bottom rather than the top, it reads halfway between a business briefcase, a piece of carry-on luggage, a toolbox, and a canvas tote bag.",
+ "ambiguity": "Easily confused at a glance with the latched toolbox or hard briefcase, especially for general work, packing, or storage tasks.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -156,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Organize loose sockets and wrenches in the garage toolbox",
+   "better": "latched toolbox",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack extra lures and fishing line in the tackle box",
+   "better": "latched toolbox / tackle box",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy travel-sized toothpaste and deodorant for the carry-on",
    "better": "toiletries / toothbrush",
    "trap": "property"
@@ -174,16 +180,6 @@
    "task": "Check work email before the 9am standup",
    "better": "envelope / email",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Unlock the back gate padlock for the meter reader",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Print 15 copies of my resume for the career fair",
-   "better": "document / printer",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -207,6 +203,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "briefcase / work / business",
+     "strength": "primary"
+    },
+    {
+     "meaning": "suitcase / luggage / travel bag",
+     "strength": "primary"
+    },
+    {
+     "meaning": "toolbox / utility kit",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tote bag / shopping bag",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the handle straps extend down into the top face and the horizontal band sits near the bottom rather than the top, it reads halfway between a business briefcase, a piece of carry-on luggage, a toolbox, and a canvas tote bag.",
+   "near_misses": [
+    {
+     "task": "Buy travel-sized toothpaste and deodorant for the carry-on",
+     "better": "toiletries / toothbrush",
+     "trap": "property"
+    },
+    {
+     "task": "Check in for the 7am United flight to Chicago",
+     "better": "airplane / boarding pass",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Bag up the raked oak leaves in the backyard",
+     "better": "leaf / trash bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check work email before the 9am standup",
+     "better": "envelope / email",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Unlock the back gate padlock for the meter reader",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Print 15 copies of my resume for the career fair",
+     "better": "document / printer",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "home_repair_service"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4104,
+    "output": 1046,
+    "thoughts": 99,
+    "total": 5249
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:39Z"
+  }
+ },
+ "distinguishing": "Has rounded bottom corners, handle straps extending into the upper body, and a plain lower horizontal stripe with no latches, reading as a soft carry-on bag, tote, or briefcase rather than a latched toolbox."
 }

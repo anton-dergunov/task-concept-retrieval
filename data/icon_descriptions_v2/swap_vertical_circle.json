@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "mobile data / cellular connection / data transfer",
+   "meaning": "mobile data, cellular connection, or two-way data transfer",
    "strength": "primary"
   },
   {
-   "meaning": "exchange / swap / trade",
+   "meaning": "exchange, swap, or trade",
    "strength": "primary"
   },
   {
-   "meaning": "sync / synchronize / import and export",
+   "meaning": "sync, synchronize, or import and export",
    "strength": "secondary"
   },
   {
-   "meaning": "sort / reorder",
+   "meaning": "sort or reorder",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be seen as mobile data toggle, currency/item exchange, file transfer/sync, or UI sort control depending on context.",
+ "ambiguity": "Can be confused with the single upward arrow in a circle if the task is only about one-way uploading or upgrading rather than bidirectional transfer.",
  "modifier_semantics": [
   {
    "modifier": "enclosing circle",
@@ -174,6 +174,16 @@
  ],
  "near_misses": [
   {
+   "task": "Upload the final video cut to the client portal",
+   "better": "single upward arrow in a circle for upload",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upgrade cloud storage subscription to the 2TB tier",
+   "better": "single upward arrow in a circle for upgrade",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Take the elevator to the 14th floor",
    "better": "elevator",
    "trap": "shared_vocabulary"
@@ -189,25 +199,15 @@
    "trap": "property"
   },
   {
-   "task": "Recycle the cardboard boxes in the garage",
-   "better": "recycling arrows",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update the team org chart after the reorg",
-   "better": "org chart",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Return the wrong size boots for a 9.5",
-   "better": "boots / return box",
+   "better": "boots or return package",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon shows opposing vertical arrows in a circle, the standard glyph for mobile cellular data as well as two-way transfer, sync, or exchange. While somewhat abstract and shared with UI sort controls, it fits real tasks around money transfers, currency exchange, data syncing, and mobile data plans.",
@@ -227,6 +227,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "mobile data / cellular connection / data transfer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "exchange / swap / trade",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sync / synchronize / import and export",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sort / reorder",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be seen as mobile data toggle, currency/item exchange, file transfer/sync, or UI sort control depending on context.",
+   "near_misses": [
+    {
+     "task": "Take the elevator to the 14th floor",
+     "better": "elevator",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sort the bookshelf by author last name",
+     "better": "bookshelf",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a fast-charging USB-C data cable",
+     "better": "cable",
+     "trap": "property"
+    },
+    {
+     "task": "Recycle the cardboard boxes in the garage",
+     "better": "recycling arrows",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the team org chart after the reorg",
+     "better": "org chart",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Return the wrong size boots for a 9.5",
+     "better": "boots / return box",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arrow_circle_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4021,
+    "output": 1039,
+    "thoughts": 0,
+    "total": 5060
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "Shows two offset vertical arrows pointing in opposite directions (up and down) inside a circle, indicating two-way data transfer, cellular data, or exchange, rather than the single upward arrow's one-way upload or upgrade."
 }

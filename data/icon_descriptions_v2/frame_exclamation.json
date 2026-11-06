@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "scan error or barcode failure",
+   "meaning": "scan error, unreadable barcode, or QR failure",
    "strength": "primary"
   },
   {
-   "meaning": "camera or focus error",
+   "meaning": "camera, viewfinder, or autofocus error",
    "strength": "primary"
   },
   {
-   "meaning": "important focus area or critical target",
+   "meaning": "fullscreen or display alert",
    "strength": "secondary"
   },
   {
-   "meaning": "screen capture or fullscreen alert",
+   "meaning": "critical focus area or high-priority target",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read as a generic alert icon, a camera autofocus warning, a QR/barcode scanner failure, or a fullscreen error.",
+ "ambiguity": "Could be mistaken for the plain four-corner frame if a user only notices the outer brackets, or for a general warning icon if they only notice the exclamation mark.",
  "modifier_semantics": [
   {
    "modifier": "centered exclamation mark",
@@ -159,6 +159,16 @@
  ],
  "near_misses": [
   {
+   "task": "Take a screenshot of the receipts for the expense report",
+   "better": "corner brackets with bottom-right plus crosshair",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Watch the keynote livestream in fullscreen view",
+   "better": "plain four-corner fullscreen frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay overdue electricity bill urgently!",
    "better": "invoice or lightning bolt",
    "trap": "property"
@@ -174,18 +184,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Frame the botanical prints for the hallway wall",
-   "better": "picture frame",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check the tire pressure warning light on the dashboard",
-   "better": "car or tire",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order replacement USB cable for the barcode reader",
-   "better": "cable",
+   "better": "cable or plug",
    "trap": "parent_topic"
   }
  ],
@@ -210,6 +210,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "scan error or barcode failure",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera or focus error",
+     "strength": "primary"
+    },
+    {
+     "meaning": "important focus area or critical target",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "screen capture or fullscreen alert",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read as a generic alert icon, a camera autofocus warning, a QR/barcode scanner failure, or a fullscreen error.",
+   "near_misses": [
+    {
+     "task": "Pay overdue electricity bill urgently!",
+     "better": "invoice or lightning bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new mirrorless camera body for the safari trip",
+     "better": "camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Focus on finishing the Q3 marketing presentation today",
+     "better": "presentation slides",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Frame the botanical prints for the hallway wall",
+     "better": "picture frame",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the tire pressure warning light on the dashboard",
+     "better": "car or tire",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order replacement USB cable for the barcode reader",
+     "better": "cable",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screenshot_region",
+   "screenshot_frame_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5366,
+    "output": 939,
+    "thoughts": 153,
+    "total": 6458
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Set apart from the empty frame and the bottom-right crosshair frame by the bold exclamation mark centered inside the four rounded corner brackets, signifying an error, warning, or alert during scanning, focusing, or viewing."
 }

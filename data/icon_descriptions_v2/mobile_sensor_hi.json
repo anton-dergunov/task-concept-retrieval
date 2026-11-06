@@ -10,23 +10,19 @@
  },
  "readings": [
   {
+   "meaning": "vibrating phone or haptic shake alert",
+   "strength": "primary"
+  },
+  {
    "meaning": "smartphone or mobile phone",
    "strength": "primary"
   },
   {
-   "meaning": "vibrating phone or haptic notifications",
-   "strength": "primary"
-  },
-  {
-   "meaning": "incoming phone call or ring",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "multi-screen or app carousel switcher",
+   "meaning": "incoming phone call or notification",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the rectangle with a top dot resembles a hanging price tag or luggage tag flanked by bars, or a simplified door with a peephole.",
+ "ambiguity": "Virtually interchangeable with the smartphone flanked by centered stepped bars for any vibrating or ringing phone task; at tiny sizes the rectangle with a top dot can also resemble a luggage tag.",
  "modifier_semantics": [
   {
    "modifier": "staggered vertical bars on both sides",
@@ -164,13 +160,18 @@
  ],
  "near_misses": [
   {
-   "task": "Order brass engraved luggage tags for the checked suitcases",
-   "better": "luggage tag",
+   "task": "Design the horizontal card carousel for the mobile app onboarding screen",
+   "better": "smartphone with centered stepped bars or card carousel layout",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Sand down the bathroom door so it stops sticking in humid weather",
-   "better": "door",
+   "task": "Test speaker volume and sound wave output on the test device",
+   "better": "smartphone with centered stepped bars or speaker icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order brass engraved luggage tags for the checked suitcases",
+   "better": "luggage tag",
    "trap": "lookalike_glyph"
   },
   {
@@ -180,29 +181,24 @@
   },
   {
    "task": "Balance the front wheels to stop the steering wheel vibration at 65 mph",
-   "better": "car / wheel",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a mobile baby crib for the guest bedroom",
-   "better": "baby crib",
+   "better": "car or wheel",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Download the airline boarding pass to my phone wallet",
-   "better": "boarding pass / ticket",
+   "better": "boarding pass or ticket",
    "trap": "property"
   },
   {
-   "task": "Buy a leather wallet case for Dad's birthday",
-   "better": "gift / wallet",
+   "task": "Buy a leather phone case for Dad's birthday",
+   "better": "gift",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a smartphone with a front camera punch-hole flanked by staggered vertical bars indicating vibration or ringing. It is a strong fit for tasks centered on mobile phones, notification settings, carrier plans, or handset repairs, though at tiny sizes the rectangle with a top dot can slightly resemble a price tag.",
@@ -220,6 +216,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "edgesensor_high"
- }
+  "alias_of": "edgesensor_high",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone or mobile phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vibrating phone or haptic notifications",
+     "strength": "primary"
+    },
+    {
+     "meaning": "incoming phone call or ring",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "multi-screen or app carousel switcher",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the rectangle with a top dot resembles a hanging price tag or luggage tag flanked by bars, or a simplified door with a peephole.",
+   "near_misses": [
+    {
+     "task": "Order brass engraved luggage tags for the checked suitcases",
+     "better": "luggage tag",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sand down the bathroom door so it stops sticking in humid weather",
+     "better": "door",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the dentist appointment time on my phone calendar",
+     "better": "calendar or tooth",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Balance the front wheels to stop the steering wheel vibration at 65 mph",
+     "better": "car / wheel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a mobile baby crib for the guest bedroom",
+     "better": "baby crib",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download the airline boarding pass to my phone wallet",
+     "better": "boarding pass / ticket",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a leather wallet case for Dad's birthday",
+     "better": "gift / wallet",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "vibration"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4116,
+    "output": 1095,
+    "thoughts": 177,
+    "total": 5388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:28Z"
+  }
+ },
+ "distinguishing": "The two flanking bars on each side are equal in length but vertically staggered (offset up and down) to suggest physical shaking, whereas the look-alike has vertically centered bars of stepped lengths; in practice the two are largely interchangeable for a vibrating phone."
 }

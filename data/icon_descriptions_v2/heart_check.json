@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "health checkup, medical screening, or cardiologist visit",
+   "meaning": "health checkup, medical screening, or cardiologist clearance",
    "strength": "primary"
   },
   {
-   "meaning": "saved favorite, wishlist item, or bookmarked preference",
+   "meaning": "saved favorite, confirmed wishlist item, or approved preference",
    "strength": "primary"
   },
   {
-   "meaning": "organ donor registration or blood donation check",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "dating profile verification or relationship milestone",
+   "meaning": "organ donor registration or blood donation verification",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as medical/heart health verification or as saving/confirming a favorite item in a list or store.",
+ "ambiguity": "Shares the open lower-right corner layout with the heart-minus icon, and for general wishlist or romance tasks it can be mistaken for the plain outlined heart.",
  "modifier_semantics": [
   {
    "modifier": "checkmark at bottom right",
@@ -136,7 +132,6 @@
   "Anotar la presión arterial y el pulso de la mañana"
  ],
  "example_tasks_ru": [
-  "Записаться на плановый осмотр к кардиологу и ЭКГ",
   "Почистить избранное на Авито от проданных объявлений",
   "Отметить понравившиеся варианты отелей в Букинге"
  ],
@@ -160,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Delete discontinued shoes from my shopping wishlist",
+   "better": "heart with minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write an anniversary love letter to my spouse",
+   "better": "plain outlined heart",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a heart-shaped cake pan for Valentine's Day",
    "better": "cake pan or baking tin",
    "trap": "property"
@@ -178,11 +183,6 @@
    "task": "Buy new running shoes for the cardio block",
    "better": "running shoe",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Replace the spade and heart cards missing from the poker deck",
-   "better": "playing cards",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Learn the wedding toast by heart before Saturday",
@@ -211,6 +211,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_ru": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "health checkup, medical screening, or cardiologist visit",
+     "strength": "primary"
+    },
+    {
+     "meaning": "saved favorite, wishlist item, or bookmarked preference",
+     "strength": "primary"
+    },
+    {
+     "meaning": "organ donor registration or blood donation check",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "dating profile verification or relationship milestone",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as medical/heart health verification or as saving/confirming a favorite item in a list or store.",
+   "near_misses": [
+    {
+     "task": "Buy a heart-shaped cake pan for Valentine's Day",
+     "better": "cake pan or baking tin",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the pharmacy refilled dad's statin",
+     "better": "pill bottle or medication",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Roast canned artichoke hearts with garlic and lemon",
+     "better": "artichoke or vegetable",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy new running shoes for the cardio block",
+     "better": "running shoe",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace the spade and heart cards missing from the poker deck",
+     "better": "playing cards",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Learn the wedding toast by heart before Saturday",
+     "better": "champagne glass or speech bubble",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hr_resting",
+   "favorite",
+   "heart_minus"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6749,
+    "output": 2043,
+    "thoughts": 0,
+    "total": 8792
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "The lower-right wall of the heart is open and replaced by a checkmark, indicating a completed health screening, verified wellness, or confirmed favorite."
 }

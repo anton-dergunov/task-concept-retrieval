@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "timer off or disabled timer",
+   "meaning": "timer off or disable countdown timer",
    "strength": "primary"
   },
   {
-   "meaning": "turn off auto-sleep or screen timeout",
+   "meaning": "turn off auto-sleep, screen timeout, or scheduled delay",
    "strength": "primary"
   },
   {
-   "meaning": "cancel countdown or scheduled delay",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "stop tracking time or untimed mode",
+   "meaning": "stop time tracking or untimed mode",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with alarm off (alarm clock with slash) or general 'unavailable/out of time' at small sizes.",
+ "ambiguity": "Easily mistaken for the slashed alarm clock at a glance since both are circular timepieces with small top protrusions crossed out by an identical diagonal slash.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,13 +157,18 @@
  ],
  "near_misses": [
   {
-   "task": "Turn off 6am weekday alarm for the holiday",
-   "better": "alarm clock with slash or bell off",
+   "task": "Turn off 6am weekday wake-up alarm for the holiday",
+   "better": "slashed alarm clock with two angled top bells",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel gym membership before the next monthly billing cycle",
+   "better": "plain slashed circle or membership card",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new digital kitchen timer with a loud beep",
-   "better": "stopwatch / timer (without slash)",
+   "better": "unslashed stopwatch or timer",
    "trap": "shared_vocabulary"
   },
   {
@@ -176,17 +177,12 @@
    "trap": "property"
   },
   {
-   "task": "Cancel dentist appointment on Thursday at 2pm",
-   "better": "calendar with cross or tooth",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check why the dryer stops before the timed cycle finishes",
    "better": "tumble dryer",
    "trap": "generic_verb"
   },
   {
-   "task": "Buy fresh AA batteries for the display",
+   "task": "Buy fresh AA batteries for the kitchen timer display",
    "better": "battery",
    "trap": "parent_topic"
   }
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a stopwatch or timer struck through with a diagonal slash, meaning 'timer off', 'disable timeout', or 'untimed'. While originally a camera/UI glyph for disabling a self-timer, in a task list it fits concrete tasks about turning off appliance timers, irrigation timers, or device sleep timeouts. It can be confused with turning off a morning wake-up alarm (alarm clock off).",
@@ -214,6 +210,95 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "timer off or disabled timer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "turn off auto-sleep or screen timeout",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel countdown or scheduled delay",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "stop tracking time or untimed mode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with alarm off (alarm clock with slash) or general 'unavailable/out of time' at small sizes.",
+   "near_misses": [
+    {
+     "task": "Turn off 6am weekday alarm for the holiday",
+     "better": "alarm clock with slash or bell off",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new digital kitchen timer with a loud beep",
+     "better": "stopwatch / timer (without slash)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the broken mechanical timer switch on the bathroom exhaust fan",
+     "better": "fan or electrical switch",
+     "trap": "property"
+    },
+    {
+     "task": "Cancel dentist appointment on Thursday at 2pm",
+     "better": "calendar with cross or tooth",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check why the dryer stops before the timed cycle finishes",
+     "better": "tumble dryer",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy fresh AA batteries for the display",
+     "better": "battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hide_source",
+   "alarm_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5445,
+    "output": 1290,
+    "thoughts": 0,
+    "total": 6735
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:29Z"
+  }
+ },
+ "distinguishing": "It features a flat horizontal plunger button centered at 12 o'clock, a small angled side button at 2 o'clock, and a visible inner hand stub above the slash, specifically depicting a disabled stopwatch or countdown timer rather than an alarm clock."
 }

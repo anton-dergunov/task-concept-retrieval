@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "phone call / calling someone",
+   "meaning": "phone call / make a call",
    "strength": "primary"
   },
   {
-   "meaning": "telephone / landline / voice contact",
+   "meaning": "telephone / landline / telecom service",
    "strength": "primary"
   },
   {
-   "meaning": "customer support / helpline",
+   "meaning": "contact / customer support",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Virtually identical and interchangeable in meaning with the left-tilted telephone handset.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -41,11 +41,6 @@
   "update contact phone numbers"
  ],
  "example_tasks": [
-  {
-   "task": "Call Mom back",
-   "parent": "",
-   "domain": "social_family"
-  },
   {
    "task": "Ring the plumber",
    "parent": "",
@@ -124,7 +119,6 @@
  ],
  "example_tasks_es": [
   "Llamar a la abuela por su santo",
-  "Llamar al seguro para dar parte del golpe en el parachoques",
   "Hablar con Movistar para dar de baja la línea fija antes del viernes"
  ],
  "example_tasks_ru": [
@@ -157,14 +151,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Back up iPhone photos to external drive",
-   "better": "smartphone or photos",
+   "task": "Order a tempered glass screen protector for the Pixel",
+   "better": "smartphone",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Clear out old WhatsApp voice notes to free up storage",
-   "better": "smartphone or storage",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Call it a day on the garage shelving project and pack up tools",
@@ -172,20 +161,25 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a tempered glass screen protector for the Pixel",
-   "better": "smartphone",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Send the signed lease PDF to the landlord",
    "better": "document or email",
    "trap": "parent_topic"
+  },
+  {
+   "task": "Hang up the conference line after the standup ends",
+   "better": "downward-facing hang-up telephone handset",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Return the missed call from the dentist's office",
+   "better": "telephone handset with an incoming or callback arrow badge",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A classic telephone handset receiver is universally understood as making a phone call or voice communication. Calling is one of the most common action-oriented task categories in personal and work to-do lists, distinct from smartphone device maintenance tasks which fit a rectangular mobile phone icon.",
@@ -203,6 +197,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1,
+    "example_tasks_es": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "phone call / calling someone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "telephone / landline / voice contact",
+     "strength": "primary"
+    },
+    {
+     "meaning": "customer support / helpline",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a new braided USB-C phone charger for the bedroom",
+     "better": "charging cable or battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Back up iPhone photos to external drive",
+     "better": "smartphone or photos",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clear out old WhatsApp voice notes to free up storage",
+     "better": "smartphone or storage",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call it a day on the garage shelving project and pack up tools",
+     "better": "tools or shelving",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a tempered glass screen protector for the Pixel",
+     "better": "smartphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the signed lease PDF to the landlord",
+     "better": "document or email",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "call"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 3979,
+    "output": 599,
+    "thoughts": 0,
+    "total": 4578
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:31Z"
+  }
+ },
+ "distinguishing": "This telephone handset is tilted from top-right to bottom-left with its inner side facing up and left, making it a horizontal mirror image of the other handset and completely interchangeable in meaning."
 }

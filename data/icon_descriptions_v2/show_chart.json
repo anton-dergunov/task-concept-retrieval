@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "line chart / trend / analytics",
+   "meaning": "line chart, sparkline, or data series",
    "strength": "primary"
   },
   {
-   "meaning": "stock market / investments / growth",
+   "meaning": "analytics, statistics, or metrics",
    "strength": "primary"
   },
   {
-   "meaning": "progress / statistics / metrics",
+   "meaning": "upward trend, stock market, or growth",
    "strength": "secondary"
   },
   {
-   "meaning": "zigzag line / sparkline",
+   "meaning": "zigzag line or polyline drawing tool",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without axes or a trending arrowhead, it can look like a generic zigzag drawing tool, a lightning bolt at very small sizes, or a checkmark with an extra bend.",
+ "ambiguity": "Very easily mistaken for the sharp-cornered upward trend arrow when scanned quickly, since only the missing arrowhead at the top-right sets them apart.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -153,23 +153,28 @@
  ],
  "near_misses": [
   {
-   "task": "Buy chicken stock and celery for the soup",
-   "better": "soup pot / broth carton",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check off the remaining packing list items",
-   "better": "checkmark / checklist",
+   "task": "Increase monthly 401(k) contribution rate by 2%",
+   "better": "upward-pointing zigzag trend arrow",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Track weekly cloud hosting cost reductions",
+   "better": "downward-pointing zigzag trend arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy chicken stock and celery for the soup",
+   "better": "soup pot or broth carton",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Sew a zigzag stitch along the frayed hem",
-   "better": "sewing machine / needle and thread",
+   "better": "sewing machine or needle and thread",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Track the UPS package from B&H Photo",
-   "better": "parcel box / delivery truck",
+   "better": "parcel box or delivery truck",
    "trap": "generic_verb"
   },
   {
@@ -186,7 +191,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A simple three-segment upward-sloping zigzag line universally reads as a line chart, trend line, or stock ticker. It fits tasks about financial investments, analytics, metrics, and tracking trends over time, though it overlaps slightly with versions that include axes or an arrowhead.",
@@ -204,6 +209,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "line chart / trend / analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stock market / investments / growth",
+     "strength": "primary"
+    },
+    {
+     "meaning": "progress / statistics / metrics",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "zigzag line / sparkline",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without axes or a trending arrowhead, it can look like a generic zigzag drawing tool, a lightning bolt at very small sizes, or a checkmark with an extra bend.",
+   "near_misses": [
+    {
+     "task": "Buy chicken stock and celery for the soup",
+     "better": "soup pot / broth carton",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check off the remaining packing list items",
+     "better": "checkmark / checklist",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sew a zigzag stitch along the frayed hem",
+     "better": "sewing machine / needle and thread",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Track the UPS package from B&H Photo",
+     "better": "parcel box / delivery truck",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a high-growth potting mix for the monstera",
+     "better": "potted plant",
+     "trap": "property"
+    },
+    {
+     "task": "Print the tax forms at FedEx",
+     "better": "printer",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "moving",
+   "trending_up",
+   "trending_down"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6713,
+    "output": 1309,
+    "thoughts": 180,
+    "total": 8202
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Lacks an arrowhead altogether, showing a plain three-segment upward-sloping zigzag line that reads as a line graph, sparkline, or vector polyline rather than an explicit directional arrow."
 }

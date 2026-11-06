@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "folder or directory (digital or physical)",
+   "meaning": "folder or directory (digital or physical document folder_",
    "strength": "primary"
   },
   {
-   "meaning": "filing, organizing, or archiving documents",
+   "meaning": "filing, organizing, or browsing documents",
    "strength": "primary"
   },
   {
-   "meaning": "project or case file",
+   "meaning": "project files or case dossier",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a closed folder icon, though both usually carry the same meaning in task lists.",
+ "ambiguity": "The slanted parallelogram of the open front cover shares a diagonal geometry with the tilted awning flap, and its role in filing documents overlaps conceptually with the archive storage box.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -151,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Box up last decade's paper tax binders for basement storage",
+   "better": "storage box with overhanging lid and handle slot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Open the basementhopper window to air out the laundry room",
+   "better": "square frame with tilted awning flap",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "File state and federal tax return before April 15",
    "better": "tax form or government building",
    "trap": "shared_vocabulary"
@@ -161,11 +171,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a new leather briefcase for client meetings",
-   "better": "briefcase",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Send the signed NDA PDF to legal",
    "better": "contract or signature",
    "trap": "parent_topic"
@@ -174,11 +179,6 @@
    "task": "Organize the spice rack in alphabetical order",
    "better": "spice jar or kitchen rack",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Renew passport at the post office",
-   "better": "passport",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -202,6 +202,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "folder or directory (digital or physical)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "filing, organizing, or archiving documents",
+     "strength": "primary"
+    },
+    {
+     "meaning": "project or case file",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a closed folder icon, though both usually carry the same meaning in task lists.",
+   "near_misses": [
+    {
+     "task": "File state and federal tax return before April 15",
+     "better": "tax form or government building",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy folding chairs for the backyard party",
+     "better": "chair",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a new leather briefcase for client meetings",
+     "better": "briefcase",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send the signed NDA PDF to legal",
+     "better": "contract or signature",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Organize the spice rack in alphabetical order",
+     "better": "spice jar or kitchen rack",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Renew passport at the post office",
+     "better": "passport",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "inventory_2",
+   "devices_fold_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5395,
+    "output": 968,
+    "thoughts": 107,
+    "total": 6470
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "Unlike the upright storage box or the awning-topped square frame, this icon is wider than it is tall, features a stepped folder tab on the top left, and has its front cover hinged open from the bottom edge."
 }

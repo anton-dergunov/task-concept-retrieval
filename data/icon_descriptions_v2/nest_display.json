@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "smart display or bedside hub (Nest Hub, Echo Show)",
+   "meaning": "smart home display or bedside hub (without camera, like standard Nest Hub)",
    "strength": "primary"
   },
   {
-   "meaning": "computer monitor or desktop display",
+   "meaning": "digital photo frame or tabletop display",
    "strength": "primary"
-  },
-  {
-   "meaning": "digital photo frame or tabletop tablet",
-   "strength": "secondary"
   },
   {
    "meaning": "checkout terminal or POS kiosk screen",
    "strength": "secondary"
+  },
+  {
+   "meaning": "computer monitor or desktop display",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a standard desktop monitor, TV, or retro CRT computer at small sizes, though the tilted trapezoidal bezel and wide low base specifically depict a smart home display.",
+ "ambiguity": "Nearly identical to the smart display with a top camera dot, differing only by the absence of the dot; unless a task specifically involves a camera or video calling, the two are largely interchangeable for general smart display tasks.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -158,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set up Nest Hub Max camera for home security monitoring",
+   "better": "smart display with top camera dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Video call Grandma from the kitchen smart display",
+   "better": "smart display with top camera dot",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Schedule annual mole and skin screen with dermatologist",
    "better": "medical / doctor icon",
    "trap": "shared_vocabulary"
@@ -178,11 +188,6 @@
    "trap": "property"
   },
   {
-   "task": "Replace the cracked screen protector on my phone",
-   "better": "smartphone icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Cancel Netflix before the billing date on Friday",
    "better": "subscription / TV / credit card icon",
    "trap": "parent_topic"
@@ -191,7 +196,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon shows a slightly tilted rectangular screen on a wide low base, the signature silhouette of a smart home display (like a Nest Hub or Echo Show) or digital photo frame, while also reading generally as a desktop monitor. It fits tasks about smart home hubs, bedside displays, digital frames, and computer monitors, though at tiny sizes it blends in with standard monitor or TV icons.",
@@ -211,6 +216,94 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smart display or bedside hub (Nest Hub, Echo Show)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "computer monitor or desktop display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital photo frame or tabletop tablet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "checkout terminal or POS kiosk screen",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a standard desktop monitor, TV, or retro CRT computer at small sizes, though the tilted trapezoidal bezel and wide low base specifically depict a smart home display.",
+   "near_misses": [
+    {
+     "task": "Schedule annual mole and skin screen with dermatologist",
+     "better": "medical / doctor icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Monitor blood pressure every morning for two weeks",
+     "better": "heart / blood pressure cuff icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Patch the torn window screen on the back porch",
+     "better": "window / home repair icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a laptop bag that fits a 16-inch screen",
+     "better": "bag / laptop icon",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the cracked screen protector on my phone",
+     "better": "smartphone icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel Netflix before the billing date on Friday",
+     "better": "subscription / TV / credit card icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nest_display_max"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4110,
+    "output": 1212,
+    "thoughts": 0,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "This icon shows an empty, blank tilted screen on a rounded base without a camera dot, representing a standard camera-less smart display (like a Nest Hub), digital photo frame, or checkout terminal."
 }

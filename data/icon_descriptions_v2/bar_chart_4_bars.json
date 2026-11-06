@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "data visualization / poll results",
+   "meaning": "data visualization / poll or survey results",
    "strength": "secondary"
   },
   {
-   "meaning": "financial growth / revenue trends",
+   "meaning": "financial or business trends",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for cellular signal strength bars or an audio equalizer if not for the uneven bar heights and the solid bottom baseline.",
+ "ambiguity": "Easily confused at a glance with the three-bar non-monotonic chart icons that lack a baseline, though its bottom axis makes it the clearest chart in the set.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -155,7 +155,12 @@
  "near_misses": [
   {
    "task": "Switch phone to a carrier with better cell reception at the cabin",
-   "better": "signal bars / antenna",
+   "better": "ascending cellular signal bars without a baseline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check why my phone only gets three bars of LTE in the office",
+   "better": "three or four ascending signal bars",
    "trap": "lookalike_glyph"
   },
   {
@@ -205,6 +210,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bar chart / graph / statistics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "analytics / metrics / performance report",
+     "strength": "primary"
+    },
+    {
+     "meaning": "data visualization / poll results",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "financial growth / revenue trends",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for cellular signal strength bars or an audio equalizer if not for the uneven bar heights and the solid bottom baseline.",
+   "near_misses": [
+    {
+     "task": "Switch phone to a carrier with better cell reception at the cabin",
+     "better": "signal bars / antenna",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Adjust bass and treble levels on the living room receiver",
+     "better": "equalizer sliders / speaker",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the new backup drive has enough free space",
+     "better": "hard drive / storage",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a high-ranking chess opening book for beginners",
+     "better": "book / chess piece",
+     "trap": "property"
+    },
+    {
+     "task": "Book flights to Chicago for the data science conference",
+     "better": "airplane / ticket",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the statistical consultant's October invoice",
+     "better": "invoice / money",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "grouped_bar_chart",
+   "bar_chart",
+   "equalizer",
+   "signal_cellular_alt",
+   "android_cell_4_bar",
+   "android_cell_5_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10730,
+    "output": 3931,
+    "thoughts": 361,
+    "total": 15022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "The only icon in the group with a horizontal baseline axis under four non-monotonic bars (short, medium-tall, medium-short, tall), making it unambiguously a data bar chart rather than signal bars."
 }

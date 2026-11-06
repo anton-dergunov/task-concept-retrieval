@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "photo or photograph",
+   "meaning": "camera roll or photo capture",
    "strength": "primary"
   },
   {
-   "meaning": "camera roll or photo gallery",
+   "meaning": "photography or taking pictures",
    "strength": "primary"
   },
   {
-   "meaning": "camera or photography",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "landscape photography",
+   "meaning": "photo gallery or camera app",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Combines a camera body with the standard mountain-peaks image glyph, making it slightly overlap with plain camera icons and plain picture-frame icons.",
+ "ambiguity": "Could be confused with the plain landscape picture frame if the top viewfinder bump is overlooked at a quick glance.",
  "modifier_semantics": [
   {
    "modifier": "two overlapping triangle mountain peaks inside the camera frame",
@@ -169,9 +165,19 @@
  ],
  "near_misses": [
   {
+   "task": "Set up the digital photo frame on Grandma's credenza",
+   "better": "screen on a flat base with mountain peaks",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hang the matted landscape print above the mantelpiece",
+   "better": "framed picture with an inner mat border",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book mountain hut for the Dolomites trek",
    "better": "mountain or cabin",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Install security camera above the garage door",
@@ -182,11 +188,6 @@
    "task": "Buy photo-safe acid-free glue sticks",
    "better": "glue",
    "trap": "property"
-  },
-  {
-   "task": "Get the big Picture of Dorian Gray paperback from the library",
-   "better": "book",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the wedding photographer's second deposit invoice",
@@ -222,6 +223,98 @@
    "domains: 9 not in 1-8"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photo or photograph",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera roll or photo gallery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera or photography",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "landscape photography",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Combines a camera body with the standard mountain-peaks image glyph, making it slightly overlap with plain camera icons and plain picture-frame icons.",
+   "near_misses": [
+    {
+     "task": "Book mountain hut for the Dolomites trek",
+     "better": "mountain or cabin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install security camera above the garage door",
+     "better": "CCTV security camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy photo-safe acid-free glue sticks",
+     "better": "glue",
+     "trap": "property"
+    },
+    {
+     "task": "Get the big Picture of Dorian Gray paperback from the library",
+     "better": "book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the wedding photographer's second deposit invoice",
+     "better": "money or invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Look at the big picture for Q3 hiring budget",
+     "better": "budget or chart",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "photo_frame",
+   "image",
+   "panorama",
+   "image_inset",
+   "planner_banner_ad_pt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9297,
+    "output": 3033,
+    "thoughts": 0,
+    "total": 12330
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "The top edge rises into a trapezoidal camera viewfinder hump, turning the mountain-peaks picture frame into a camera body for taking photos or accessing a camera roll."
 }

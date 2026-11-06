@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "tap, touch, or click",
+   "meaning": "single tap, touch, or click",
    "strength": "primary"
   },
   {
-   "meaning": "touchscreen or gesture control",
+   "meaning": "touchscreen or interactive UI control",
    "strength": "primary"
   },
   {
-   "meaning": "interactive UI or user action",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "push button or trigger",
+   "meaning": "select or press button action",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Similar to double-tap, long-press, or generic pointer hand icons at small sizes.",
+ "ambiguity": "Easily confused at small sizes with the pointing hand that has a second outer arc on the right (double tap), and in general tasks both are nearly interchangeable as generic touch/interaction icons.",
  "modifier_semantics": [
   {
    "modifier": "curved arc above fingertip",
@@ -159,14 +155,19 @@
  ],
  "near_misses": [
   {
+   "task": "Fix double-tap to zoom bug on the photo viewer",
+   "better": "pointing hand with two arcs over the fingertip (double tap)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change trackpad double-click speed in system settings",
+   "better": "pointing hand with two arcs over the fingertip (double click)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Keep in touch with college roommates every month",
    "better": "chat bubble or phone",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new wireless mouse for the desk",
-   "better": "computer mouse",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Touch up chipped white paint on the baseboards",
@@ -174,17 +175,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book a 60-minute deep tissue massage",
-   "better": "massage or spa",
+   "task": "Buy a new wireless mouse for the desk",
+   "better": "computer mouse",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Apply for TSA PreCheck before the June flight",
-   "better": "fingerprint or ID card",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Write copy for the newsletter signup modal",
+   "task": "Write copy for the newsletter signup button",
    "better": "text document or email",
    "trap": "parent_topic"
   }
@@ -192,7 +188,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a hand with an extended index finger and a contact arc, universally recognized as a tap, touch, or click gesture. It fits tasks centered on touchscreens, digitizers, UI click/tap interactions, and smart home touch controls, though it is somewhat narrow outside tech and design contexts.",
@@ -210,6 +206,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "tap, touch, or click",
+     "strength": "primary"
+    },
+    {
+     "meaning": "touchscreen or gesture control",
+     "strength": "primary"
+    },
+    {
+     "meaning": "interactive UI or user action",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "push button or trigger",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Similar to double-tap, long-press, or generic pointer hand icons at small sizes.",
+   "near_misses": [
+    {
+     "task": "Keep in touch with college roommates every month",
+     "better": "chat bubble or phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new wireless mouse for the desk",
+     "better": "computer mouse",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Touch up chipped white paint on the baseboards",
+     "better": "paintbrush",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a 60-minute deep tissue massage",
+     "better": "massage or spa",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Apply for TSA PreCheck before the June flight",
+     "better": "fingerprint or ID card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write copy for the newsletter signup modal",
+     "better": "text document or email",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "touch_double"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4029,
+    "output": 1008,
+    "thoughts": 173,
+    "total": 5210
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:53Z"
+  }
+ },
+ "distinguishing": "Shows a pointing hand with a single curved arc over the index fingertip, representing a single tap, touch, or click rather than the double-arc double-tap gesture."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "hand / palm / manicure / skin care",
+   "meaning": "open palm, hand care, dermatology, or palm reading",
    "strength": "primary"
   },
   {
-   "meaning": "stop / halt / block / hold",
+   "meaning": "stop, halt, block, or hold",
    "strength": "primary"
   },
   {
-   "meaning": "raise hand / volunteer / pledge / oath",
+   "meaning": "pledge, oath, swear in, or volunteer",
    "strength": "secondary"
   },
   {
-   "meaning": "gloves / hand protection / manual work",
+   "meaning": "gloves or hand protection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the stylized disconnected vertical fingers and palm crease can look like a barcode, pitchfork, or a hand holding a checkmark.",
+ "ambiguity": "Very similar in meaning to the two plain open-hand icons without a palm line; the angled thumb crease can also be misread as a checkmark inside a hand.",
  "modifier_semantics": [
   {
    "modifier": "bent palm crease line",
@@ -164,8 +164,18 @@
  ],
  "near_misses": [
   {
+   "task": "Wave to the kids from the finish line bleacher",
+   "better": "waving hand with motion arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Select the default shipping address in account settings",
+   "better": "pointing index-finger hand",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Stop by the dry cleaners on the way home from work",
-   "better": "shirt on hanger or store",
+   "better": "shirt on hanger or storefront",
    "trap": "shared_vocabulary"
   },
   {
@@ -187,22 +197,12 @@
    "task": "Replace the broken door handle on the pantry",
    "better": "door handle",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Scan the return barcode at the UPS dropoff kiosk",
-   "better": "barcode or package",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Bake four dozen chocolate chip cookies for the bake sale",
-   "better": "cookie or oven",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an open raised hand with the palm crease visible, making it suitable for literal hand-related tasks (hand care, manicure, gloves, physical therapy) as well as symbolic gestures (stop/hold, volunteering). Its stylized disconnected vertical fingers could briefly look like vertical bars at tiny sizes, but the thumb silhouette keeps it recognizable.",
@@ -220,6 +220,102 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hand / palm / manicure / skin care",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stop / halt / block / hold",
+     "strength": "primary"
+    },
+    {
+     "meaning": "raise hand / volunteer / pledge / oath",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "gloves / hand protection / manual work",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the stylized disconnected vertical fingers and palm crease can look like a barcode, pitchfork, or a hand holding a checkmark.",
+   "near_misses": [
+    {
+     "task": "Stop by the dry cleaners on the way home from work",
+     "better": "shirt on hanger or store",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hand in the signed permission slip to Mrs. Gable",
+     "better": "signed document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a second-hand standing desk off Craigslist",
+     "better": "desk",
+     "trap": "property"
+    },
+    {
+     "task": "Hold interviews for the junior frontend role",
+     "better": "people talking or candidate profile",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace the broken door handle on the pantry",
+     "better": "door handle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Scan the return barcode at the UPS dropoff kiosk",
+     "better": "barcode or package",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Bake four dozen chocolate chip cookies for the bake sale",
+     "better": "cookie or oven",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "back_hand",
+   "pan_tool_alt",
+   "hand_gesture",
+   "pan_tool"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8102,
+    "output": 1643,
+    "thoughts": 0,
+    "total": 9745
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "Unlike the other hands whose thumbs are on the left with an empty palm, this hand has the thumb on the right with an angled crease line drawn across the palm showing the front of an open palm (or a checkmark-like fold)."
 }

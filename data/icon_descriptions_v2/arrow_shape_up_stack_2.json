@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "upward arrow with double chevron (boost / upgrade)",
+   "meaning": "triple-tier boost, maximum upgrade, or fast-forward upward",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly resembles an upward-pointing block arrow topped by two chevrons (indicating upgrade, boost, or level up) because the trunk and lowest tier form a hollow arrow shape.",
+ "ambiguity": "Easily mistaken for the two-tiered upward arrow with a single chevron cap, and its hollow arrow base makes it look like a multi-chevron boost or upgrade arrow as much as a tree.",
  "modifier_semantics": [],
  "domains": [
   "outdoors",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Upgrade cloud storage subscription to the pro tier",
+   "better": "upward arrow with single chevron",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Remap the Page Up key on the mechanical keyboard",
+   "better": "upward arrow with single chevron",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy pine-scented floor cleaner for the kitchen",
    "better": "cleaning spray bottle",
    "trap": "property"
@@ -164,23 +174,13 @@
    "trap": "property"
   },
   {
-   "task": "Fix the schema for the binary search tree homework",
-   "better": "code / hierarchy diagram",
+   "task": "Fix the balancing logic for the binary search tree homework",
+   "better": "code or hierarchy diagram",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Upgrade home internet plan to higher upload speed",
-   "better": "up arrow / gauge",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Add maternal great-grandparents to the family tree on Ancestry",
-   "better": "family / genealogy chart",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy toasted pine nuts for tonight's pesto",
-   "better": "nuts / food ingredient",
+   "task": "Add maternal great-grandparents to the family tree",
+   "better": "family or genealogy chart",
    "trap": "shared_vocabulary"
   }
  ],
@@ -205,6 +205,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pine tree, evergreen tree, or conifer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "forest, woods, nature, or outdoors",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Christmas tree",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upward arrow with double chevron (boost / upgrade)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly resembles an upward-pointing block arrow topped by two chevrons (indicating upgrade, boost, or level up) because the trunk and lowest tier form a hollow arrow shape.",
+   "near_misses": [
+    {
+     "task": "Buy pine-scented floor cleaner for the kitchen",
+     "better": "cleaning spray bottle",
+     "trap": "property"
+    },
+    {
+     "task": "Sand and stain the pine bookshelf in the hallway",
+     "better": "bookshelf",
+     "trap": "property"
+    },
+    {
+     "task": "Fix the schema for the binary search tree homework",
+     "better": "code / hierarchy diagram",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upgrade home internet plan to higher upload speed",
+     "better": "up arrow / gauge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Add maternal great-grandparents to the family tree on Ancestry",
+     "better": "family / genealogy chart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy toasted pine nuts for tonight's pesto",
+     "better": "nuts / food ingredient",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arrow_shape_up_stack"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 621,
+    "thoughts": 105,
+    "total": 4785
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Has two chevrons stacked above the hollow upward block arrow (three tiers total), giving it the taller silhouette of a classic three-tiered evergreen or pine tree."
 }

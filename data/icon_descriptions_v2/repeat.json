@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "repeat, recurring, loop, or cycle",
+   "meaning": "repeat, recurring loop, or cycle",
    "strength": "primary"
-  },
-  {
-   "meaning": "sync, refresh, or update",
-   "strength": "primary"
-  },
-  {
-   "meaning": "swap, exchange, or switch",
-   "strength": "secondary"
   },
   {
    "meaning": "repost or retweet",
+   "strength": "primary"
+  },
+  {
+   "meaning": "sync or continuous refresh",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles circular refresh/sync arrows, swap/transfer arrows, and social media repost icons; abstract arrow geometry makes it refer to an action or schedule rather than a concrete object.",
+ "ambiguity": "Can be confused with the straight horizontal swap arrows if the short vertical legs at the ends of the shafts are overlooked at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -127,7 +123,6 @@
  ],
  "example_tasks_es": [
   "Cambiar las sábanas de franela por las de verano",
-  "Configurar la transferencia automática mensual a la cuenta de ahorro",
   "Sincronizar el calendario del trabajo con el móvil nuevo"
  ],
  "example_tasks_ru": [
@@ -155,6 +150,21 @@
  ],
  "near_misses": [
   {
+   "task": "Convert USD to JPY for the Tokyo trip",
+   "better": "two straight opposite horizontal swap arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Randomize the flashcard deck order before studying",
+   "better": "crossed diagonal shuffle arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the old cardboard boxes to the recycling center",
+   "better": "three-arrow triangular recycling symbol or cardboard box",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the recurring gym membership invoice",
    "better": "dumbbell or invoice/credit card icon",
    "trap": "property"
@@ -165,19 +175,9 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Take the old cardboard boxes to the recycling center",
-   "better": "three-arrow triangular recycling symbol or cardboard box",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new power switch for the garage workbench",
    "better": "electrical toggle switch or plug icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Repeat the third piano sonata movement at full tempo",
-   "better": "piano keys or musical note icon",
-   "trap": "generic_verb"
   },
   {
    "task": "Clean the lint trap on the dryer",
@@ -188,7 +188,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The two rectangular looping arrows are universally recognized as repeat, cycle, sync, swap, or repost. Because it is an abstract relational symbol rather than a concrete noun, it fits best when the core point of the task is swapping/exchanging items, syncing data, or setting up recurring cycles, though concrete object icons usually beat it whenever a specific noun is present.",
@@ -206,6 +206,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_es": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "repeat, recurring, loop, or cycle",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sync, refresh, or update",
+     "strength": "primary"
+    },
+    {
+     "meaning": "swap, exchange, or switch",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "repost or retweet",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles circular refresh/sync arrows, swap/transfer arrows, and social media repost icons; abstract arrow geometry makes it refer to an action or schedule rather than a concrete object.",
+   "near_misses": [
+    {
+     "task": "Pay the recurring gym membership invoice",
+     "better": "dumbbell or invoice/credit card icon",
+     "trap": "property"
+    },
+    {
+     "task": "Update my resume with the latest contract role",
+     "better": "document or CV icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Take the old cardboard boxes to the recycling center",
+     "better": "three-arrow triangular recycling symbol or cardboard box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new power switch for the garage workbench",
+     "better": "electrical toggle switch or plug icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Repeat the third piano sonata movement at full tempo",
+     "better": "piano keys or musical note icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Clean the lint trap on the dryer",
+     "better": "washing machine / dryer appliance icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shuffle",
+   "arrow_split",
+   "sync_alt",
+   "swap_horiz"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8029,
+    "output": 1556,
+    "thoughts": 0,
+    "total": 9585
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "The two horizontal arrows have 90-degree vertical tails that turn them into a closed clockwise rectangular loop, meaning repeat, cycle, or repost rather than a simple left-right swap."
 }

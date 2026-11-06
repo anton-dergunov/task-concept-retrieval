@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "find or locate a missing file or document",
+   "meaning": "find, locate, or search for a file or document",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "search inside a document or file system",
-   "strength": "secondary"
-  },
-  {
    "meaning": "document preview or print preview",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a folder search icon or a generic document icon at very small sizes.",
+ "ambiguity": "Easily confused with the square frame with a top-right magnifier when a task is generally about previewing or inspecting, though this icon specifically cues a text document or file.",
  "modifier_semantics": [
   {
    "modifier": "magnifying glass in bottom-right corner",
@@ -138,7 +134,6 @@
   "Encontrar el PDF de la declaración de la renta de 2022"
  ],
  "example_tasks_ru": [
-  "Найти оригинал свидетельства о рождении в папке с документами",
   "Вычитать договор подряда перед отправкой юристу",
   "Проверить смету на ремонт по каждому пункту"
  ],
@@ -162,9 +157,14 @@
  ],
  "near_misses": [
   {
-   "task": "Check passport expiration date before booking flights",
-   "better": "passport",
-   "trap": "generic_verb"
+   "task": "Inspect the app dashboard layout in preview mode",
+   "better": "square window or frame with magnifying glass",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the image crop boundaries before exporting",
+   "better": "square canvas frame with magnifying glass",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Sign and mail the vehicle title transfer form",
@@ -185,17 +185,12 @@
    "task": "Shred expired bank statements",
    "better": "shredder",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Search Google Scholar for papers on sleep deprivation",
-   "better": "academic cap / journal article",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly combines a folded-corner document with a magnifying glass, universally understood as finding, searching inside, or closely inspecting a file or paper. It fits common real-life tasks like hunting down lost paperwork, auditing statements, or reading contract fine print, though it shares visual territory with plain document and folder-search icons.",
@@ -213,6 +208,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_ru": 1,
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "find or locate a missing file or document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "inspect, audit, or proofread a document closely",
+     "strength": "primary"
+    },
+    {
+     "meaning": "search inside a document or file system",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "document preview or print preview",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a folder search icon or a generic document icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Sign and mail the vehicle title transfer form",
+     "better": "signature / pen signing document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Find a cheap rental car in Denver for July",
+     "better": "car",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy acid-free archival paper for wedding photos",
+     "better": "photo / paper stack",
+     "trap": "property"
+    },
+    {
+     "task": "Shred expired bank statements",
+     "better": "shredder",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Search Google Scholar for papers on sleep deprivation",
+     "better": "academic cap / journal article",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "feature_search"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4015,
+    "output": 988,
+    "thoughts": 98,
+    "total": 5101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:26Z"
+  }
+ },
+ "distinguishing": "Shows a tall document page with a folded top-right corner and the magnifying glass at the bottom-right, specifically representing a file or text document rather than a generic square window or frame."
 }

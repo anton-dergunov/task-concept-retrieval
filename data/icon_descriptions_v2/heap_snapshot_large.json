@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic invoice, receipt, or a retail coupon icon depending on whether the user associates the percent sign with taxes, interest, or discounts.",
+ "ambiguity": "Nearly interchangeable with the stacked documents with a percent sign; unless a task specifically contrasts a single form with a multi-page packet, users will treat them as the same icon.",
  "modifier_semantics": [
   {
    "modifier": "percentage sign",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Proofread the draft contract for typos",
+   "better": "document with a magnifying glass",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Compile all quarterly tax filings and rate schedules into a packet",
+   "better": "stacked documents with a percent sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy 2% milk on the way home",
    "better": "milk carton",
    "trap": "property"
@@ -171,35 +181,20 @@
    "trap": "property"
   },
   {
-   "task": "Review the signed apartment lease PDF",
-   "better": "plain document or contract with signature",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check why laptop CPU usage is stuck at 99%",
    "better": "CPU or laptop",
    "trap": "generic_verb"
   },
   {
-   "task": "Book the hotel using the corporate discount code",
-   "better": "hotel bed or building",
-   "trap": "property"
-  },
-  {
-   "task": "Pay the plumber's invoice",
-   "better": "invoice with dollar sign or wrench",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book appointment with the notary",
-   "better": "calendar or stamp",
+   "task": "Book appointment with the tax advisor",
+   "better": "calendar",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a document with a percentage sign, making it a strong visual cue for tax forms, interest rate statements, commission sheets, and paper coupons. It covers common personal finance, administrative, and shopping tasks while remaining distinct from generic text documents or currency-based invoices.",
@@ -219,6 +214,100 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "tax form or tax return document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "interest rate sheet, loan agreement, or mortgage statement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "discount voucher, coupon, or promotional flyer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "commission report or financial rate schedule",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic invoice, receipt, or a retail coupon icon depending on whether the user associates the percent sign with taxes, interest, or discounts.",
+   "near_misses": [
+    {
+     "task": "Buy 2% milk on the way home",
+     "better": "milk carton",
+     "trap": "property"
+    },
+    {
+     "task": "Charge Kindle to 100% before the flight",
+     "better": "battery or e-reader",
+     "trap": "property"
+    },
+    {
+     "task": "Review the signed apartment lease PDF",
+     "better": "plain document or contract with signature",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check why laptop CPU usage is stuck at 99%",
+     "better": "CPU or laptop",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book the hotel using the corporate discount code",
+     "better": "hotel bed or building",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the plumber's invoice",
+     "better": "invoice with dollar sign or wrench",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book appointment with the notary",
+     "better": "calendar or stamp",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "plagiarism",
+   "heap_snapshot_multiple"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5384,
+    "output": 1522,
+    "thoughts": 185,
+    "total": 7091
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:27Z"
+  }
+ },
+ "distinguishing": "Shows a percentage sign inside a single document page (with no backing page outline), representing a tax form, rate sheet, or discount voucher; virtually interchangeable in meaning with the stacked version."
 }

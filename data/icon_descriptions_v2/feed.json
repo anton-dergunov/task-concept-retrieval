@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "document, page, or text file",
+   "meaning": "short document, note page, or text file",
    "strength": "primary"
   },
   {
-   "meaning": "written note or memo",
+   "meaning": "written memo, draft, or summary",
    "strength": "primary"
   },
   {
-   "meaning": "report, form, or official paperwork",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "draft or article",
+   "meaning": "form or paperwork",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because of its square proportions, it can also read as a sticky note or SD memory card outline at very small sizes, though the folded corner and text lines clearly make it a document/note.",
+ "ambiguity": "Practically interchangeable with the square page whose top-right corner is diagonally clipped rather than folded inward, and easily confused with the tall portrait dog-eared document or plain square note.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -157,24 +153,24 @@
  ],
  "near_misses": [
   {
-   "task": "File quarterly estimated taxes with the IRS",
-   "better": "tax / bank / money icon",
-   "trap": "shared_vocabulary"
+   "task": "Move the signed PDFs into the client project directory",
+   "better": "file folder with a top-left tab",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy concert tickets before the presale code expires",
-   "better": "ticket icon",
+   "task": "Copy the standard disclaimer block into all three proposals",
+   "better": "overlapping double square text cards",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "File quarterly estimated taxes with the IRS",
+   "better": "tax, bank, or money icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pick up a paperbacks-only tote bag for the beach",
-   "better": "bag / tote icon",
+   "better": "bag or tote icon",
    "trap": "property"
-  },
-  {
-   "task": "Format the 64GB SD card from the trail camera",
-   "better": "SD memory card icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Call the county clerk about the missing apostille stamp",
@@ -183,14 +179,14 @@
   },
   {
    "task": "Note down the water meter reading in the basement",
-   "better": "gauge / meter icon",
+   "better": "gauge or meter icon",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a squarish page with a dog-eared top-right corner and three horizontal lines of text, universally understood as a document, note, or text file. It fits a wide range of everyday tasks involving forms, paperwork, notes, reports, and drafts, though its compact square shape is slightly closer to a note icon than a tall A4 sheet.",
@@ -208,6 +204,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "document, page, or text file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "written note or memo",
+     "strength": "primary"
+    },
+    {
+     "meaning": "report, form, or official paperwork",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "draft or article",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because of its square proportions, it can also read as a sticky note or SD memory card outline at very small sizes, though the folded corner and text lines clearly make it a document/note.",
+   "near_misses": [
+    {
+     "task": "File quarterly estimated taxes with the IRS",
+     "better": "tax / bank / money icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy concert tickets before the presale code expires",
+     "better": "ticket icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a paperbacks-only tote bag for the beach",
+     "better": "bag / tote icon",
+     "trap": "property"
+    },
+    {
+     "task": "Format the 64GB SD card from the trail camera",
+     "better": "SD memory card icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the county clerk about the missing apostille stamp",
+     "better": "phone call icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Note down the water meter reading in the basement",
+     "better": "gauge / meter icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "description",
+   "text_snippet",
+   "chrome_reader_mode",
+   "article",
+   "library_books",
+   "source",
+   "text_ad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12132,
+    "output": 4025,
+    "thoughts": 352,
+    "total": 16509
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "A square document with a solid filled triangular fold in the top-right corner and three lines (one short top line, two full lines), practically interchangeable with the clipped-corner square page and distinguished from the portrait document by its square aspect ratio and third line."
 }

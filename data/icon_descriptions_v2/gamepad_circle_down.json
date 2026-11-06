@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "gamepad face buttons (bottom button pressed)",
+   "meaning": "gamepad action buttons with bottom (south) button pressed",
    "strength": "primary"
   },
   {
-   "meaning": "video gaming or game controller",
+   "meaning": "video gaming or console controller",
    "strength": "primary"
   },
   {
-   "meaning": "stove burner indicator",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "loading spinner or status indicator",
+   "meaning": "four-way indicator with bottom position active",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Outside a gaming context it looks like an abstract loading spinner, a paw print, or a stove burner diagram.",
+ "ambiguity": "Easily confused at a glance with the other three four-circle gamepad button icons (with right, left, or top circle filled), and interchangeable with them for generic gaming tasks.",
  "modifier_semantics": [
   {
    "modifier": "solid filled bottom circle",
@@ -158,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Test why the top face button on the controller isn't registering",
+   "better": "four gamepad buttons in a diamond with the top circle filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the six worn rubber o-rings on the hose nozzle",
+   "better": "six hollow rings arranged in a circle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Sew the loose button back onto my winter coat",
    "better": "clothing button with thread holes",
    "trap": "shared_vocabulary"
@@ -168,18 +174,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Replace the front left igniter on the gas stove",
-   "better": "stove flame or cooktop",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Trim the dog's front paw pads",
-   "better": "animal paw print",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay annual PlayStation Plus subscription renewal",
-   "better": "credit card or subscription receipt",
+   "better": "credit card or receipt",
    "trap": "parent_topic"
   },
   {
@@ -191,7 +187,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts the four-button diamond cluster of a video game controller with the bottom action button filled in. It fits tasks specifically about controller button mapping, hardware repair, or game UI prompts, though out of context its four simple circles are easily mistaken for an abstract spinner or stove burner diagram.",
@@ -209,6 +205,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "gamepad face buttons (bottom button pressed)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video gaming or game controller",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stove burner indicator",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "loading spinner or status indicator",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Outside a gaming context it looks like an abstract loading spinner, a paw print, or a stove burner diagram.",
+   "near_misses": [
+    {
+     "task": "Sew the loose button back onto my winter coat",
+     "better": "clothing button with thread holes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Make the checkout button bigger on mobile screens",
+     "better": "UI rectangle button or cursor click",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the front left igniter on the gas stove",
+     "better": "stove flame or cooktop",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Trim the dog's front paw pads",
+     "better": "animal paw print",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay annual PlayStation Plus subscription renewal",
+     "better": "credit card or subscription receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the new monitor supports 120Hz for console gaming",
+     "better": "monitor display",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "graph_6",
+   "gamepad_circle_right",
+   "gamepad_circle_left",
+   "gamepad_circle_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8107,
+    "output": 2567,
+    "thoughts": 233,
+    "total": 10907
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "Shows four circles in a diamond with the bottom (south) circle filled solid, distinguishing it from the right-, left-, and top-filled four-button icons and the six-ring spinner; for general gaming tasks the four diamond icons are largely interchangeable."
 }

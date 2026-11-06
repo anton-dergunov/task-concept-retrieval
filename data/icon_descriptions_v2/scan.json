@@ -13,15 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "page break / split document",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "shred or cut paper",
+   "meaning": "split document or section divider",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read Either as a scanner beam passing over a page or as a page break / document split indicator in a word processor.",
+ "ambiguity": "Easily confused at a glance with the document with a dashed horizontal line across the middle, which represents a page break or perforated cut line.",
  "modifier_semantics": [
   {
    "modifier": "horizontal bar across middle",
@@ -159,45 +155,45 @@
  ],
  "near_misses": [
   {
+   "task": "Insert page breaks before each chapter heading in the manuscript",
+   "better": "document with a dashed horizontal page-break line across the middle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Split the 200-page PDF deposition into separate exhibit files",
+   "better": "document with a dashed horizontal cut line across the middle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Delete the obsolete draft file from Google Drive",
+   "better": "document with minus badge or trash can",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Schedule MRI scan for left knee at the imaging center",
-   "better": "medical imaging / hospital / knee",
+   "better": "medical imaging or hospital icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Scan the QR code on the return label at the drop-off kiosk",
-   "better": "QR code / barcode",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Run `nmap` port scan against the home router from outside",
-   "better": "network / security shield / terminal",
+   "better": "QR code or barcode icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Quickly scan through the Q3 board deck before the 2pm call",
-   "better": "presentation slides",
+   "better": "presentation slides icon",
    "trap": "generic_verb"
   },
   {
    "task": "Print 5 copies of the scanned birth certificate",
-   "better": "printer",
+   "better": "printer icon",
    "trap": "property"
-  },
-  {
-   "task": "Buy a 3-pack of banker boxes at Staples",
-   "better": "storage box / shopping",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Delete the obsolete draft file from Google Drive",
-   "better": "document with minus or trash can",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a document page bisected horizontally by a solid bar, standard iconography for scanning a document (or splitting a page). It fits well for common administrative tasks like scanning receipts, signed forms, and IDs, or splitting PDFs, though it could occasionally be confused with a page-break or 'remove file' (minus) icon.",
@@ -215,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "scan document / document scanner",
+     "strength": "primary"
+    },
+    {
+     "meaning": "page break / split document",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "shred or cut paper",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read Either as a scanner beam passing over a page or as a page break / document split indicator in a word processor.",
+   "near_misses": [
+    {
+     "task": "Schedule MRI scan for left knee at the imaging center",
+     "better": "medical imaging / hospital / knee",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Scan the QR code on the return label at the drop-off kiosk",
+     "better": "QR code / barcode",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Run `nmap` port scan against the home router from outside",
+     "better": "network / security shield / terminal",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Quickly scan through the Q3 board deck before the 2pm call",
+     "better": "presentation slides",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Print 5 copies of the scanned birth certificate",
+     "better": "printer",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a 3-pack of banker boxes at Staples",
+     "better": "storage box / shopping",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Delete the obsolete draft file from Google Drive",
+     "better": "document with minus or trash can",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "insert_page_break"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4090,
+    "output": 793,
+    "thoughts": 0,
+    "total": 4883
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "This icon has a single continuous solid horizontal bar bisecting the page rather than a dashed line, representing a scanner beam passing across a document."
 }

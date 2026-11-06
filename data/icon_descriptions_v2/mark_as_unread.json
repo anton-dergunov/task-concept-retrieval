@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "multiple emails, inbox, or mail stack (both read and unread)",
+   "meaning": "multiple emails, inbox stack, or batch of read and unread mail",
    "strength": "primary"
   },
   {
-   "meaning": "postal mail, pile of letters, or invitations",
+   "meaning": "toggle read/unread status or triage email inbox",
    "strength": "primary"
   },
   {
-   "meaning": "email thread, conversation, or newsletter batch",
+   "meaning": "pile of postal letters or bulk mailings",
    "strength": "secondary"
   },
   {
-   "meaning": "mark as read / unread or process mail",
+   "meaning": "email thread or conversation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the back open envelope can look like a simple roof or house outline behind a single envelope.",
+ "ambiguity": "Can be mistaken for the single open envelope at a quick glance because the rear open flap forms a very similar peaked top outline above the rectangular body.",
  "modifier_semantics": [
   {
    "modifier": "second open envelope behind",
@@ -162,40 +162,40 @@
  ],
  "near_misses": [
   {
+   "task": "Read the acceptance letter from the university",
+   "better": "single open envelope Icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Open today's piece of certified mail from the IRS",
+   "better": "single open envelope Icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the overdue water bill that came in the mail yesterday",
-   "better": "water drop or bill / invoice",
+   "better": "water drop or bill / invoice Icon",
    "trap": "property"
   },
   {
    "task": "Email the signed lease PDF back to the agent",
-   "better": "contract / signature / document",
+   "better": "contract / signature / document Icon",
    "trap": "generic_verb"
   },
   {
    "task": "Fix the rusty hinge on the front porch mailbox",
-   "better": "physical mailbox / tools",
+   "better": "physical mailbox / tools Icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Get quotes for replacing the garage roof shingles",
-   "better": "house / roof",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Update my credit card on the Substack billing page",
-   "better": "credit card",
+   "better": "credit card Icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a chainmail scrubber for the cast iron skillet",
-   "better": "frying pan / kitchen sponge",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a closed envelope in front of an opened envelope, representing multiple emails, an inbox containing both read and unread messages, or a stack of physical mail. It is highly useful for everyday inbox triage, batch emailing, and sorting postal mail, though at tiny sizes the upper open flap can slightly resemble a house roof.",
@@ -213,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple emails, inbox, or mail stack (both read and unread)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "postal mail, pile of letters, or invitations",
+     "strength": "primary"
+    },
+    {
+     "meaning": "email thread, conversation, or newsletter batch",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "mark as read / unread or process mail",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the back open envelope can look like a simple roof or house outline behind a single envelope.",
+   "near_misses": [
+    {
+     "task": "Pay the overdue water bill that came in the mail yesterday",
+     "better": "water drop or bill / invoice",
+     "trap": "property"
+    },
+    {
+     "task": "Email the signed lease PDF back to the agent",
+     "better": "contract / signature / document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the rusty hinge on the front porch mailbox",
+     "better": "physical mailbox / tools",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Get quotes for replacing the garage roof shingles",
+     "better": "house / roof",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my credit card on the Substack billing page",
+     "better": "credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a chainmail scrubber for the cast iron skillet",
+     "better": "frying pan / kitchen sponge",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "drafts"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4086,
+    "output": 649,
+    "thoughts": 0,
+    "total": 4735
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Shows two overlapping envelopes—a closed envelope in front of an open envelope with a raised flap—representing multiple messages, an inbox batch, or toggling read/unread states rather than a single open letter."
 }

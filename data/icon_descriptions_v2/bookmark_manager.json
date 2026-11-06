@@ -13,15 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "reorganize or update project files and folders",
+   "meaning": "reorganize or update project folders and filing systems",
    "strength": "primary"
   },
   {
-   "meaning": "write or draft project documentation",
+   "meaning": "update project archive or repository structure",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the small pencil modifier can resemble a link chain, paperclip, or forward slash.",
+ "ambiguity": "Can be confused with the document page with a pencil when tasks ambiguously say 'file' (meaning a single document rather than a folder) or at a quick glance due to the identical pencil badge.",
  "modifier_semantics": [
   {
    "modifier": "small diagonal pencil at bottom right",
@@ -158,24 +158,29 @@
  ],
  "near_misses": [
   {
+   "task": "Draft and edit the Q3 board report document",
+   "better": "document page with pencil",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sign and fill out the apartment lease agreement",
+   "better": "document page with pencil",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a box of 100 Pendaflex hanging file folders",
    "better": "plain folder or shopping cart",
    "trap": "generic_verb"
   },
   {
    "task": "Buy sharpies and mechanical pencils for the desk drawer",
-   "better": "pencil / pen",
+   "better": "pencil or pen",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Edit the Q3 marketing budget spreadsheet before Friday",
    "better": "spreadsheet or table",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Attach the zipped project folder to the client email",
-   "better": "folder with paperclip or email",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Scan the signed lease agreement into the apartment folder",
@@ -209,6 +214,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "edit, rename, or label a folder or directory",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reorganize or update project files and folders",
+     "strength": "primary"
+    },
+    {
+     "meaning": "write or draft project documentation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the small pencil modifier can resemble a link chain, paperclip, or forward slash.",
+   "near_misses": [
+    {
+     "task": "Buy a box of 100 Pendaflex hanging file folders",
+     "better": "plain folder or shopping cart",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy sharpies and mechanical pencils for the desk drawer",
+     "better": "pencil / pen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Edit the Q3 marketing budget spreadsheet before Friday",
+     "better": "spreadsheet or table",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Attach the zipped project folder to the client email",
+     "better": "folder with paperclip or email",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Scan the signed lease agreement into the apartment folder",
+     "better": "scanner or contract document",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick out a nice leather portfolio folder for interviews",
+     "better": "briefcase or plain folder",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "edit_document"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4057,
+    "output": 691,
+    "thoughts": 0,
+    "total": 4748
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:45Z"
+  }
+ },
+ "distinguishing": "Shows a wide horizontal file folder with a top-left tab alongside the bottom-right pencil, representing editing or renaming a folder or directory rather than a single document page."
 }

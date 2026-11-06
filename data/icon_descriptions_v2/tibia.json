@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "bone / orthopedic / skeleton",
+   "meaning": "bone / tibia / orthopedic / skeleton",
+   "strength": "primary"
+  },
+  {
+   "meaning": "cut soup bone / marrow bone / bone broth",
    "strength": "primary"
   },
   {
    "meaning": "dog bone / pet chew treat",
-   "strength": "primary"
-  },
-  {
-   "meaning": "meat bone / soup bone / broth",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "Apple AirPod / wireless earbud stem",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the top end is flat rather than bi-lobed like a classic cartoon dog bone, it can be mistaken at small sizes for a keyhole, an hourglass, a chess pawn, a bollard, or a single wireless earbud.",
+ "ambiguity": "Largely interchangeable with the two-lobed anatomical bone for general bone tasks, though the flat top makes it less immediately recognizable as a classic dog bone and easier to mistake for an hourglass, chess pawn, or keyhole at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -153,6 +149,21 @@
  ],
  "near_misses": [
   {
+   "task": "Buy a bag of rawhide dog bones at the pet store",
+   "better": "two-lobed dog bone",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Review femur X-ray results with orthopedic specialist",
+   "better": "anatomical femur bone with rounded joint head",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put 3-minute sand timer next to kids' bathroom sink",
+   "better": "hourglass / timer",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy bone-colored linen curtains for the guest bedroom",
    "better": "curtains / window",
    "trap": "property"
@@ -168,16 +179,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Clean earwax out of left AirPod speaker mesh",
-   "better": "earbuds / headphones",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Put 3-minute sand timer next to kids' bathroom sink",
-   "better": "hourglass / timer",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay orthopedic surgeon copay online with HSA card",
    "better": "credit card / payment",
    "trap": "parent_topic"
@@ -186,7 +187,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon shows an upright half-bone with one flat end and one bi-lobed joint end. It fits tasks centered on dog chew bones, orthopedic/bone health (fractures, DEXA scans), anatomy, or making bone broth, though its flat top makes it slightly less recognizable than a classic double-ended bone and somewhat similar to an hourglass or earbud stem.",
@@ -204,6 +205,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bone / orthopedic / skeleton",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dog bone / pet chew treat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "meat bone / soup bone / broth",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Apple AirPod / wireless earbud stem",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the top end is flat rather than bi-lobed like a classic cartoon dog bone, it can be mistaken at small sizes for a keyhole, an hourglass, a chess pawn, a bollard, or a single wireless earbud.",
+   "near_misses": [
+    {
+     "task": "Buy bone-colored linen curtains for the guest bedroom",
+     "better": "curtains / window",
+     "trap": "property"
+    },
+    {
+     "task": "Buy fine bone china teacups for wedding gift",
+     "better": "teacup / gift",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Bone up on Spanish subjunctive before Madrid trip",
+     "better": "language / book / flag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean earwax out of left AirPod speaker mesh",
+     "better": "earbuds / headphones",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Put 3-minute sand timer next to kids' bathroom sink",
+     "better": "hourglass / timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay orthopedic surgeon copay online with HSA card",
+     "better": "credit card / payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "humerus"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4088,
+    "output": 1115,
+    "thoughts": 176,
+    "total": 5379
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Has a flat horizontal top edge instead of two upper lobes, looking like a tibia (shinbone), a cut soup/marrow bone, or a simplified geometric bone."
 }

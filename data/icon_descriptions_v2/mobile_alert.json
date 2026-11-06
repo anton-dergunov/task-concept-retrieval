@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "smartphone alert, error, or broken phone",
+   "meaning": "smartphone or smartwatch error, malfunction, or broken device",
    "strength": "primary"
   },
   {
-   "meaning": "smartwatch warning or device issue",
+   "meaning": "urgent mobile push notification, emergency alert, or system warning",
    "strength": "primary"
   },
   {
-   "meaning": "mobile push notification or emergency alert",
+   "meaning": "action required on mobile device (e.g. critical OS update or storage full)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a wristband or speaker cutout, the rectangular body with a prominent side crown can be read as either a smartphone with a power button or a smartwatch case.",
+ "ambiguity": "Easily confused at a glance with the device showing a lowercase 'i' info symbol, as the only difference is the vertical flip of the dot and bar; the outer body with a side button can also be read as either a smartphone or a smartwatch face.",
  "modifier_semantics": [
   {
    "modifier": "centered exclamation mark inside screen",
@@ -157,19 +157,19 @@
  ],
  "near_misses": [
   {
-   "task": "Call plumber urgently about leaking pipe",
-   "better": "phone handset or plumbing wrench",
-   "trap": "property"
-  },
-  {
-   "task": "Buy a new smartphone for dad",
-   "better": "plain smartphone without exclamation mark",
+   "task": "Look up phone IMEI and serial number in settings",
+   "better": "device screen with a lowercase 'i' info symbol",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Check voicemail messages",
-   "better": "voicemail tape icon or phone handset",
-   "trap": "generic_verb"
+   "task": "Read the digital user manual for the new tablet",
+   "better": "device screen with a lowercase 'i' info symbol",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call plumber urgently about leaking pipe",
+   "better": "phone handset or plumbing wrench",
+   "trap": "property"
   },
   {
    "task": "Pay overdue cell phone bill",
@@ -177,20 +177,20 @@
    "trap": "shared_vocabulary"
   },
   {
+   "task": "Check voicemail messages",
+   "better": "voicemail icon or phone handset",
+   "trap": "generic_verb"
+  },
+  {
    "task": "Order replacement watch strap",
    "better": "watch strap or shopping bag",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Important: email signed contract to client",
-   "better": "envelope or contract document",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a mobile device (smartphone or smartwatch) displaying an exclamation mark, representing a device error, broken phone, or urgent mobile notification. It fits tasks centered on phone/watch repairs, troubleshooting device warnings, and managing push alerts, though the base shape slightly blurs the line between a phone and a watch case.",
@@ -208,6 +208,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "stay_primary_portrait"
- }
+  "alias_of": "stay_primary_portrait",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone alert, error, or broken phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smartwatch warning or device issue",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile push notification or emergency alert",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a wristband or speaker cutout, the rectangular body with a prominent side crown can be read as either a smartphone with a power button or a smartwatch case.",
+   "near_misses": [
+    {
+     "task": "Call plumber urgently about leaking pipe",
+     "better": "phone handset or plumbing wrench",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new smartphone for dad",
+     "better": "plain smartphone without exclamation mark",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check voicemail messages",
+     "better": "voicemail tape icon or phone handset",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay overdue cell phone bill",
+     "better": "bill / invoice or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement watch strap",
+     "better": "watch strap or shopping bag",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Important: email signed contract to client",
+     "better": "envelope or contract document",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "perm_device_information"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4093,
+    "output": 1040,
+    "thoughts": 0,
+    "total": 5133
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "Displays an exclamation mark (vertical bar on top, dot below) inside the screen to indicate a device error, warning, or urgent mobile alert, rather than an 'i' for general information."
 }

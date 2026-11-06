@@ -7,19 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "shopping / groceries / buying",
+   "meaning": "shopping, groceries, or supermarket run",
    "strength": "primary"
   },
   {
-   "meaning": "online cart / checkout / e-commerce",
+   "meaning": "online shopping cart or general buying",
    "strength": "primary"
-  },
-  {
-   "meaning": "supermarket / store run",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Easily confused at a glance with the shopping cart containing a horizontal minus bar, since the minus bar mimics the horizontal top edge of this closed basket.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -151,23 +147,28 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp / flashlight",
-   "trap": "generic_verb"
+   "task": "Delete the impulse items from our online target cart to stay under budget",
+   "better": "shopping cart with a minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update the expired credit card holding up our pending Amazon cart",
+   "better": "shopping cart with an exclamation mark",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Purchase flight tickets to Lisbon for October",
-   "better": "airplane / ticket",
+   "better": "airplane or ticket",
    "trap": "generic_verb"
   },
   {
    "task": "Lubricate the squeaky wheels on the garden utility cart",
-   "better": "wheelbarrow / garden cart",
+   "better": "wheelbarrow or garden cart",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Book a golf cart for Saturday morning's round with Dad",
-   "better": "golf cart / golf flag",
+   "better": "golf cart or golf flag",
    "trap": "shared_vocabulary"
   },
   {
@@ -177,14 +178,14 @@
   },
   {
    "task": "Set up Apple Pay on the new phone for faster store checkout",
-   "better": "credit card / contactless payment",
+   "better": "credit card or contactless payment",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A universally recognizable outlined shopping cart. It is the ideal icon for general grocery runs, supermarket errands, shopping lists, and e-commerce cart checkout tasks, though tasks about buying a single specific item (like a headlamp or plane ticket) should use that item's icon instead.",
@@ -202,6 +203,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "shopping_cart"
- }
+  "alias_of": "shopping_cart",
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shopping / groceries / buying",
+     "strength": "primary"
+    },
+    {
+     "meaning": "online cart / checkout / e-commerce",
+     "strength": "primary"
+    },
+    {
+     "meaning": "supermarket / store run",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Purchase flight tickets to Lisbon for October",
+     "better": "airplane / ticket",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Lubricate the squeaky wheels on the garden utility cart",
+     "better": "wheelbarrow / garden cart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a golf cart for Saturday morning's round with Dad",
+     "better": "golf cart / golf flag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up birthday cake from the bakery at 4pm",
+     "better": "birthday cake",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up Apple Pay on the new phone for faster store checkout",
+     "better": "credit card / contactless payment",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "production_quantity_limits",
+   "add_shopping_cart",
+   "shopping_cart_checkout",
+   "remove_shopping_cart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8105,
+    "output": 2466,
+    "thoughts": 0,
+    "total": 10571
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "A plain shopping cart with a continuous closed top rail and no interior symbol, representing general grocery shopping, store runs, or buying."
 }

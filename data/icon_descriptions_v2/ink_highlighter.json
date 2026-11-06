@@ -7,15 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "highlighter or marker pen",
-   "strength": "primary"
-  },
-  {
-   "meaning": "highlighting, annotating, or marking up text",
+   "meaning": "highlighter or felt-tip marker pen (the physical stationery item)",
    "strength": "primary"
   },
   {
    "meaning": "dry-erase whiteboard marker or permanent marker (Sharpie)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "highlighting, annotating, or marking up",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic pen, pencil, eyedropper, or scalpel/craft knife at very small sizes due to the diagonal shaft and angled tip.",
+ "ambiguity": "Easily confused with the highlighter-over-bar icon for text highlighting tasks, and at small sizes can look like a generic pencil, eyedropper, or craft knife.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -169,6 +169,21 @@
  ],
  "near_misses": [
   {
+   "task": "Highlight the key clauses in the lease PDF before the call",
+   "better": "highlighter marker with horizontal text bar underneath",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the yellow text background highlight color in the rich-text editor toolbar",
+   "better": "highlighter marker with horizontal bar underneath",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Use the eyedropper tool to sample the brand hex colors",
+   "better": "eyedropper / pipette",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book haircut and blonde highlights for Saturday",
    "better": "scissors or hair salon",
    "trap": "shared_vocabulary"
@@ -179,27 +194,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Write Q3 project highlights for the newsletter",
-   "better": "document or megaphone",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Sign the mortgage closing papers in blue ink",
-   "better": "signature pen or contract document",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Use the eyedropper tool to sample the brand hex colors",
-   "better": "eyedropper / pipette",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a neon yellow hi-vis running vest",
    "better": "safety vest or running shirt",
    "trap": "property"
   },
   {
-   "task": "Mount the new magnetic glass board on the study wall",
+   "task": "Mount the new magnetic glass whiteboard on the study wall",
    "better": "whiteboard or drill",
    "trap": "parent_topic"
   }
@@ -207,7 +207,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a thick barrel pen with an angled chisel nib, universally read as a highlighter or permanent/whiteboard marker. It fits tasks centered on buying markers, labeling items, or highlighting study/work texts, though at tiny sizes it must be distinguished from a regular pen or eyedropper.",
@@ -227,6 +227,99 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "highlighter or marker pen",
+     "strength": "primary"
+    },
+    {
+     "meaning": "highlighting, annotating, or marking up text",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dry-erase whiteboard marker or permanent marker (Sharpie)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "stationery, art supplies, or drawing markers",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic pen, pencil, eyedropper, or scalpel/craft knife at very small sizes due to the diagonal shaft and angled tip.",
+   "near_misses": [
+    {
+     "task": "Book haircut and blonde highlights for Saturday",
+     "better": "scissors or hair salon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Watch Champions League match highlights",
+     "better": "video play button or soccer ball",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write Q3 project highlights for the newsletter",
+     "better": "document or megaphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the mortgage closing papers in blue ink",
+     "better": "signature pen or contract document",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Use the eyedropper tool to sample the brand hex colors",
+     "better": "eyedropper / pipette",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a neon yellow hi-vis running vest",
+     "better": "safety vest or running shirt",
+     "trap": "property"
+    },
+    {
+     "task": "Mount the new magnetic glass board on the study wall",
+     "better": "whiteboard or drill",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "format_ink_highlighter"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4127,
+    "output": 1179,
+    "thoughts": 0,
+    "total": 5306
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "Shows the diagonal chisel-tip marker by itself without a horizontal bar underneath, making it better suited for the physical stationary item (marker, Sharpie, dry-erase pen, highlighter) than the text-highlighting UI action."
 }

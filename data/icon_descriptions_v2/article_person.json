@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "contact card / vCard / contact details",
+   "meaning": "contact card, vCard, or personal profile",
    "strength": "primary"
   },
   {
-   "meaning": "resume / CV / personal profile",
+   "meaning": "resume, CV, or personal bio document",
    "strength": "primary"
   },
   {
-   "meaning": "account details / user record / dossier",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "author bio / personal statement",
+   "meaning": "user account details, employee file, or client dossier",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles ID card, badge, or generic address book icons; the square frame with text lines and person overlay can be read either as a contact entry or a personal document like a resume.",
+ "ambiguity": "Nearly identical at a glance to the inbox tray with a person badge: both feature a rounded square frame, horizontal text lines, and a bottom-right person silhouette, differing only in having a third text line instead of the curved inbox tray divider at the bottom.",
  "modifier_semantics": [
   {
    "modifier": "person bust silhouette in bottom right corner",
@@ -161,40 +157,40 @@
  ],
  "near_misses": [
   {
-   "task": "Renew driver's license at the DMV before it expires in May",
-   "better": "ID card / driver's license",
+   "task": "Reach inbox zero in my personal work email",
+   "better": "inbox tray with a person badge (personal inbox)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up a shared inbox for the sales team",
+   "better": "inbox tray with a three-node share badge (shared inbox)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Renew driver's license at the DMV before May",
+   "better": "ID card or driver's license icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Call Mom about Thanksgiving flight times",
-   "better": "phone handset",
+   "better": "phone handset icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a leather business card holder for the trade show",
-   "better": "card case / wallet",
+   "better": "card case or wallet icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Write the quarterly product roadmap document",
-   "better": "plain document / roadmap",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a new office keycard from building security",
-   "better": "keycard / badge",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Practice answers for the behavioral interview questions",
-   "better": "speech bubbles / interview",
+   "better": "speech bubbles or interview icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A lined square card with a person silhouette in the corner clearly reads as a personal document, contact card, user profile, or resume/CV. It fits common tasks around updating a resume, editing a bio, or managing contact records, though it shares visual territory with ID badge and plain document icons.",
@@ -212,6 +208,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "contact card / vCard / contact details",
+     "strength": "primary"
+    },
+    {
+     "meaning": "resume / CV / personal profile",
+     "strength": "primary"
+    },
+    {
+     "meaning": "account details / user record / dossier",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "author bio / personal statement",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles ID card, badge, or generic address book icons; the square frame with text lines and person overlay can be read either as a contact entry or a personal document like a resume.",
+   "near_misses": [
+    {
+     "task": "Renew driver's license at the DMV before it expires in May",
+     "better": "ID card / driver's license",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Mom about Thanksgiving flight times",
+     "better": "phone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a leather business card holder for the trade show",
+     "better": "card case / wallet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write the quarterly product roadmap document",
+     "better": "plain document / roadmap",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a new office keycard from building security",
+     "better": "keycard / badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Practice answers for the behavioral interview questions",
+     "better": "speech bubbles / interview",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "inbox_text_share",
+   "inbox_text_person"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5445,
+    "output": 1559,
+    "thoughts": 0,
+    "total": 7004,
+    "seconds": 22.73,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:57:36Z"
+  }
+ },
+ "distinguishing": "Shows three uniform horizontal text lines inside a plain square card without an inbox tray notch, paired with a person bust badge, representing a personal document, resume, or contact profile rather than an inbox."
 }

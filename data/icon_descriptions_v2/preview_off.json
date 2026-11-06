@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "hide preview / preview disabled / private browsing window",
+   "meaning": "hide preview / preview disabled",
    "strength": "primary"
   },
   {
-   "meaning": "hide window / invisible app / hidden view",
+   "meaning": "private browsing / incognito window / hidden view",
    "strength": "primary"
   },
   {
-   "meaning": "screen privacy / block screen capture",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "calendar or washing machine disabled (misreading at small size)",
+   "meaning": "screen privacy / block screen capture or visibility",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the top bar of the window frame plus the circular eye center looks like a washing machine with a slash, a camera with a slash, or a calendar page with a slash.",
+ "ambiguity": "Shares the exact outer frame and solid top bar of the empty slashed browser window, and its central eye shape resembles the circular lens of the slashed photo camera at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "eye inside window",
@@ -164,13 +160,13 @@
  ],
  "near_misses": [
   {
-   "task": "Book overdue eye exam with Dr. Patel",
-   "better": "eye or glasses",
+   "task": "Run end-to-end tests in headless browser mode without a window",
+   "better": "empty slashed browser window",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Skip laundry load tonight because of peak electricity rates",
-   "better": "washing machine",
+   "task": "Turn off camera permission for Instagram",
+   "better": "slashed photo camera",
    "trap": "lookalike_glyph"
   },
   {
@@ -180,18 +176,18 @@
   },
   {
    "task": "Review the design preview with Maya before sign-off",
-   "better": "design / mockup",
+   "better": "design mockup",
    "trap": "generic_verb"
   },
   {
-   "task": "Clean the bathroom mirror and shower glass",
-   "better": "spray bottle or mirror",
-   "trap": "shared_vocabulary"
+   "task": "Renew VPN subscription for another year",
+   "better": "VPN shield or credit card",
+   "trap": "parent_topic"
   },
   {
-   "task": "Renew Mullvad VPN subscription for another year",
-   "better": "credit card or VPN shield",
-   "trap": "parent_topic"
+   "task": "Send confidential draft to legal team",
+   "better": "document with lock",
+   "trap": "property"
   }
  ],
  "scores": {
@@ -217,6 +213,100 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hide preview / preview disabled / private browsing window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hide window / invisible app / hidden view",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen privacy / block screen capture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "calendar or washing machine disabled (misreading at small size)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the top bar of the window frame plus the circular eye center looks like a washing machine with a slash, a camera with a slash, or a calendar page with a slash.",
+   "near_misses": [
+    {
+     "task": "Book overdue eye exam with Dr. Patel",
+     "better": "eye or glasses",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Skip laundry load tonight because of peak electricity rates",
+     "better": "washing machine",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install blackout roller blinds in the nursery",
+     "better": "curtains or house window",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the design preview with Maya before sign-off",
+     "better": "design / mockup",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Clean the bathroom mirror and shower glass",
+     "better": "spray bottle or mirror",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew Mullvad VPN subscription for another year",
+     "better": "credit card or VPN shield",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_hand_off",
+   "file_copy_off",
+   "video_camera_front_off",
+   "privacy",
+   "no_photography",
+   "ad_group_off",
+   "ad_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12129,
+    "output": 3883,
+    "thoughts": 0,
+    "total": 16012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "A single browser window with a solid top bar and an eye outline in the center under a diagonal slash, unlike the empty slashed browser window or the photo camera with a circular lens."
 }

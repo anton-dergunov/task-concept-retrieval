@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "webcam or round desktop camera",
+   "meaning": "railway tunnel with approaching tracks",
    "strength": "primary"
   },
   {
-   "meaning": "railway tunnel",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "smart home security camera",
+   "meaning": "webcam or security camera on a tripod stand",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly split between a front-facing train inside a circular metro tunnel (with track dots and a top headlight) and a round desktop webcam on a stand.",
+ "ambiguity": "Closely resembles the plain circular look-alike without external bottom dots, and remains split between a front-facing train in a tunnel (with headlight and tracks) and a round webcam on dotted legs.",
  "modifier_semantics": [
   {
    "modifier": "two pairs of diagonal dots extending from bottom",
@@ -161,14 +157,24 @@
  ],
  "near_misses": [
   {
-   "task": "Set up SSH tunnel to the staging database server",
-   "better": "server or terminal",
-   "trap": "shared_vocabulary"
+   "task": "Plug the external USB webcam into the laptop before the interview",
+   "better": "plain round webcam icon without external bottom dots",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test webcam framing and microphone levels on Zoom",
+   "better": "round webcam inside a clean circle without trailing dots",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Take daily photos of the garden with the DSLR",
-   "better": "handheld camera",
+   "better": "handheld photo camera",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up SSH tunnel to the staging database server",
+   "better": "server or terminal",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Listen to the new transit history podcast episode",
@@ -181,20 +187,15 @@
    "trap": "property"
   },
   {
-   "task": "Check who is attending the afternoon Zoom sync",
+   "task": "Check who is attending the afternoon commuter board meeting",
    "better": "calendar or people",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Put fresh AA batteries in the kids' wooden toy train",
-   "better": "battery",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The glyph depicts concentric circles with an upper dot, two angled struts, and four trailing dots, representing a front-facing train emerging from a round tunnel, though many viewers immediately read it as a round webcam on a stand. It fits metro commute or webcam tasks well, but its strong visual ambiguity between transit and computer hardware lowers its glanceability.",
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "subway, metro, or train in a tunnel",
+     "strength": "primary"
+    },
+    {
+     "meaning": "webcam or round desktop camera",
+     "strength": "primary"
+    },
+    {
+     "meaning": "railway tunnel",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smart home security camera",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly split between a front-facing train inside a circular metro tunnel (with track dots and a top headlight) and a round desktop webcam on a stand.",
+   "near_misses": [
+    {
+     "task": "Set up SSH tunnel to the staging database server",
+     "better": "server or terminal",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take daily photos of the garden with the DSLR",
+     "better": "handheld camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Listen to the new transit history podcast episode",
+     "better": "headphones or podcast",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book a camera-ready haircut before the conference",
+     "better": "scissors or haircut",
+     "trap": "property"
+    },
+    {
+     "task": "Check who is attending the afternoon Zoom sync",
+     "better": "calendar or people",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Put fresh AA batteries in the kids' wooden toy train",
+     "better": "battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "vacuum_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4064,
+    "output": 1120,
+    "thoughts": 135,
+    "total": 5319
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "Two pairs of diagonal dots extend outward from the bottom of the outer ring, continuing the two inner diagonal strokes so it reads as tracks emerging from a railway tunnel or a camera on a splayed tripod stand."
 }

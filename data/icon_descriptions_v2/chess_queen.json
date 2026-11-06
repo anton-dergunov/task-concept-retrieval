@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Interchangeable with the angular three-pointed crown with a base bar underneath; both represent a generic royal crown or VIP status.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -181,20 +181,20 @@
    "trap": "property"
   },
   {
-   "task": "Measure the living room ceiling for crown molding installation",
-   "better": "measuring tape / ruler",
-   "trap": "shared_vocabulary"
+   "task": "Replace the missing white queen from the wooden chess set",
+   "better": "chess queen piece with base collar",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Finish watching season 4 of The Crown on Netflix",
-   "better": "TV / video",
-   "trap": "shared_vocabulary"
+   "task": "Practice queen endgame checkmates on Lichess",
+   "better": "chess piece / chessboard",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear, unmistakable three-pointed crown. It fits literal tasks about costume/bridal crowns, royalty history, or chess, as well as the universal UI metaphor for 'Premium/VIP/Pro' subscriptions and admin ownership, though 'crown' has many verbal traps (dental crown, tree crown, crown molding).",
@@ -214,6 +214,99 @@
    "near_misses use 2 traps (< 3)"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "crown / tiara / royal headgear",
+     "strength": "primary"
+    },
+    {
+     "meaning": "VIP / premium / pro tier membership",
+     "strength": "primary"
+    },
+    {
+     "meaning": "royalty / monarchy / king or queen",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "chess queen or king / game ranking",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Call the dentist to reschedule getting the permanent porcelain crown fitted",
+     "better": "tooth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Prune dead branches from the oak tree crown before autumn storms",
+     "better": "tree",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a six-pack of Corona and limes for the barbecue",
+     "better": "beer bottle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Exchange leftover Swedish kronor and Czech koruna at the currency booth",
+     "better": "currency / banknotes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy premium roast coffee beans from the roastery",
+     "better": "coffee beans",
+     "trap": "property"
+    },
+    {
+     "task": "Measure the living room ceiling for crown molding installation",
+     "better": "measuring tape / ruler",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Finish watching season 4 of The Crown on Netflix",
+     "better": "TV / video",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "crown"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4063,
+    "output": 1113,
+    "thoughts": 134,
+    "total": 5310
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Drawn with curved swoops between the three ball-tipped peaks and no detached base bar underneath, though it is interchangeable in meaning with the angular crown with a base bar."
 }

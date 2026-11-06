@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "merge or combine two paths into one",
+   "meaning": "merge / combine / consolidate",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "road or lane merge ahead",
+   "meaning": "traffic or lane merge from the left",
    "strength": "secondary"
   },
   {
-   "meaning": "consolidate or unify separate items",
+   "meaning": "unify or join separate items",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a git fork/branch icon with arrows reversed, or a stick figure without a head at very small sizes.",
+ "ambiguity": "Virtually identical to and interchangeable with the upward merge arrow with the gap on the right for any non-directional merging task; at small sizes it can also be confused with a plain up arrow or a headless stick figure.",
  "modifier_semantics": [
   {
    "modifier": "gap in the lower-left stem",
@@ -161,6 +161,11 @@
  ],
  "near_misses": [
   {
+   "task": "Inspect the right-lane on-ramp merge markings",
+   "better": "upward merge arrow with the gap on the lower-right branch",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a USB-C splitter for the monitor and charger",
    "better": "fork / split arrow or USB cable",
    "trap": "lookalike_glyph"
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts two angled paths joining into a single upward arrow, universally recognized as 'merge' (in traffic, file management, and version control). It fits action-oriented tasks about merging branches, combining files, or consolidating accounts, though it can be confused with split/fork arrows if glanced at carelessly.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "merge or combine two paths into one",
+     "strength": "primary"
+    },
+    {
+     "meaning": "git merge or branch integration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "road or lane merge ahead",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "consolidate or unify separate items",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a git fork/branch icon with arrows reversed, or a stick figure without a head at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a USB-C splitter for the monitor and charger",
+     "better": "fork / split arrow or USB cable",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upload the signed tax return to the portal",
+     "better": "upload arrow with tray or document",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write the mail merge template for wedding thank-you cards",
+     "better": "envelope / mail",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice highway merging with Leo before his driving test",
+     "better": "car / steering wheel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email legal about the Acme merger press release",
+     "better": "email / press document",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Review the consolidated balance sheet for Q3",
+     "better": "spreadsheet / financial chart",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "call_merge"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 1119,
+    "thoughts": 177,
+    "total": 5331
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:45Z"
+  }
+ },
+ "distinguishing": "The lower-right branch flows continuously into the main upward arrow shaft while the lower-left branch is separated by a gap (merging from the left), making it virtually interchangeable with its mirror-image counterpart for general merge tasks."
 }

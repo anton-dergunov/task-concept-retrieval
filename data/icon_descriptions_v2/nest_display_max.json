@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "smart display or home hub (like Nest Hub or Echo Show)",
+   "meaning": "smart display with built-in camera (like Nest Hub Max or Echo Show)",
    "strength": "primary"
   },
   {
-   "meaning": "digital photo frame",
+   "meaning": "video calling hub or tabletop video phone",
    "strength": "secondary"
   },
   {
-   "meaning": "computer monitor or all-in-one desktop with webcam",
+   "meaning": "all-in-one computer monitor with webcam",
    "strength": "secondary"
   },
   {
-   "meaning": "point-of-sale terminal or kiosk screen",
+   "meaning": "digital photo frame or smart home hub",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a generic desktop monitor, a webcam, or even an upside-down purse/bag with a clasp at very small sizes.",
+ "ambiguity": "Easily confused with the blank smart display without a camera dot at small sizes, and largely interchangeable with it for general smart display tasks that do not specifically emphasize the camera. Also resembles a handbag or purse with a circular clasp at a glance.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,8 +152,23 @@
  ],
  "near_misses": [
   {
+   "task": "Put a camera-free smart display on the nightstand for sleep tracking",
+   "better": "smart display with blank screen and no camera dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Load wedding photos onto the digital photo frame for Mom",
+   "better": "smart display with blank screen and no camera dot",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a 27-inch 4K monitor for the home office desk",
    "better": "desktop computer monitor on stand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Record a 5-minute Loom video walking through the Q3 deck",
+   "better": "video camera or webcam",
    "trap": "lookalike_glyph"
   },
   {
@@ -162,30 +177,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Record a 5-minute Loom video walking through the Q3 deck",
-   "better": "video camera or webcam",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Call Mom on FaceTime to show her the backyard garden",
-   "better": "video call / phone with video camera",
-   "trap": "generic_verb"
+   "task": "Pick up a smart plug for the living room floor lamp",
+   "better": "smart plug or electrical outlet",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy fresh basil and cherry tomatoes for tonight's pasta",
    "better": "tomato or herbs",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Pick up a smart plug for the living room floor lamp",
-   "better": "smart plug or electrical outlet",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a tilted countertop smart display or digital photo frame with a top-centered camera dot sitting on a low curved speaker base. It fits tasks involving smart home hubs, bedside/kitchen displays, and digital photo frames, though at small sizes it can be confused with a regular desktop monitor or a small handbag.",
@@ -203,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smart display or home hub (like Nest Hub or Echo Show)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital photo frame",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "computer monitor or all-in-one desktop with webcam",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "point-of-sale terminal or kiosk screen",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a generic desktop monitor, a webcam, or even an upside-down purse/bag with a clasp at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a 27-inch 4K monitor for the home office desk",
+     "better": "desktop computer monitor on stand",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Frame the signed concert poster from last Friday",
+     "better": "picture frame with artwork",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Record a 5-minute Loom video walking through the Q3 deck",
+     "better": "video camera or webcam",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Mom on FaceTime to show her the backyard garden",
+     "better": "video call / phone with video camera",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy fresh basil and cherry tomatoes for tonight's pasta",
+     "better": "tomato or herbs",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up a smart plug for the living room floor lamp",
+     "better": "smart plug or electrical outlet",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nest_display"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4110,
+    "output": 1212,
+    "thoughts": 0,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "This icon features a prominent circular dot near the top of the tilted screen representing a built-in camera, setting it apart from the blank-screen version as a camera-equipped smart display (like a Nest Hub Max or Echo Show) used for video calls or home monitoring."
 }

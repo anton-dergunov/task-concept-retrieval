@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "waterproof / keep dry",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "drought / dry spell / no watering",
+   "meaning": "drought / no watering / keep dry",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the crossed-out droplet can resemble a crossed-out location pin or a generic prohibition circle.",
+ "ambiguity": "Easily confused with the vertically half-filled crossed-out droplet (invert colors off) if the solid right half is overlooked, and at tiny sizes can resemble a crossed-out location pin.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash from top-left to bottom-right",
@@ -162,40 +158,40 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Turn off color inversion in phone accessibility settings",
+   "better": "half-filled droplet with slash (invert colors off)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Pick up dry cleaning from the corner shop before 6pm",
-   "better": "clothes hanger / shirt",
-   "trap": "shared_vocabulary"
+   "task": "Convert product screenshots to grayscale before printing",
+   "better": "half-filled droplet with slash or contrast icon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Drink 2 liters of water every day this week",
-   "better": "water droplet / glass of water",
+   "better": "plain water droplet or glass of water",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Turn off location services on the kids' tablets",
-   "better": "crossed-out map pin",
-   "trap": "lookalike_glyph"
+   "task": "Pick up dry cleaning from the corner shop before 6pm",
+   "better": "clothes hanger or shirt",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a waterproof case for my new phone",
-   "better": "phone case / smartphone",
+   "better": "phone case or smartphone",
    "trap": "property"
   },
   {
-   "task": "Check why the basement dehumidifier is making a rattling noise",
-   "better": "wrench / repair",
+   "task": "Check why the basement dehumidifier is rattling",
+   "better": "wrench or repair tool",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a liquid droplet crossed out by a diagonal slash, signifying no water, shutting off water, draining, or dehumidifying. It fits well for home maintenance tasks like shutting off water valves, winterizing plumbing, preparing for water outages, or managing dehumidifiers, though it must not be used merely for the adjective 'waterproof' when a specific object is the subject.",
@@ -213,6 +209,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shut off water / no water / water outage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dehumidify / dry / remove moisture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "waterproof / keep dry",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "drought / dry spell / no watering",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the crossed-out droplet can resemble a crossed-out location pin or a generic prohibition circle.",
+   "near_misses": [
+    {
+     "task": "Pick up dry cleaning from the corner shop before 6pm",
+     "better": "clothes hanger / shirt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drink 2 liters of water every day this week",
+     "better": "water droplet / glass of water",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn off location services on the kids' tablets",
+     "better": "crossed-out map pin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof case for my new phone",
+     "better": "phone case / smartphone",
+     "trap": "property"
+    },
+    {
+     "task": "Check why the basement dehumidifier is making a rattling noise",
+     "better": "wrench / repair",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "invert_colors_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4053,
+    "output": 1014,
+    "thoughts": 112,
+    "total": 5179
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:42Z"
+  }
+ },
+ "distinguishing": "Unlike the vertically half-filled droplet that represents disabling color inversion, this droplet is a simple hollow outline with a diagonal slash, strictly representing no water, dryness, or water shutoff."
 }

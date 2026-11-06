@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "pop-up blocked / no window / close window",
+   "meaning": "close window / no window / application closed",
    "strength": "primary"
   },
   {
    "meaning": "headless browser mode / no UI",
-   "strength": "secondary"
+   "strength": "primary"
   },
   {
-   "meaning": "website or web app down / offline",
+   "meaning": "website or web app down / unavailable",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a crossed-out calendar, credit card, or empty checkbox.",
+ "ambiguity": "Can be confused with the slashed overlapping browser windows (pop-up blocker) or the slashed window with an eye if the interior or bottom-left offset isn't noticed.",
  "modifier_semantics": [
   {
    "modifier": "diagonal strike-through slash",
@@ -170,23 +170,23 @@
  ],
  "near_misses": [
   {
+   "task": "Block spam pop-up windows in Safari",
+   "better": "slashed overlapping browser windows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Disable window preview in the taskbar",
+   "better": "slashed browser window with eye",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Wash the living room windows before guests arrive",
-   "better": "house window pane with glass",
+   "better": "house window pane",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Cancel the credit card ending in 4412",
-   "better": "credit card with a slash",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Clear my calendar for Friday afternoon",
-   "better": "calendar with a slash or cross",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Build the new user profile web page",
-   "better": "intact browser window without slash",
+   "better": "unslashed browser window",
    "trap": "property"
   },
   {
@@ -196,7 +196,7 @@
   },
   {
    "task": "Write copy for the exit-intent modal",
-   "better": "document or text editor icon",
+   "better": "document or text editor",
    "trap": "parent_topic"
   }
  ],
@@ -223,6 +223,96 @@
    "example_tasks: 20 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pop-up blocked / no window / close window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "headless browser mode / no UI",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "website or web app down / offline",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a crossed-out calendar, credit card, or empty checkbox.",
+   "near_misses": [
+    {
+     "task": "Wash the living room windows before guests arrive",
+     "better": "house window pane with glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel the credit card ending in 4412",
+     "better": "credit card with a slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clear my calendar for Friday afternoon",
+     "better": "calendar with a slash or cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Build the new user profile web page",
+     "better": "intact browser window without slash",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the contractor sealed the basement window",
+     "better": "house window",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Write copy for the exit-intent modal",
+     "better": "document or text editor icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_hand_off",
+   "file_copy_off",
+   "video_camera_front_off",
+   "privacy",
+   "no_photography",
+   "preview_off",
+   "ad_group_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12129,
+    "output": 3883,
+    "thoughts": 0,
+    "total": 16012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "A single empty application window with a solid top header bar and an open interior crossed out by a slash, lacking the second offset layer or the inner eye of the other window icons."
 }

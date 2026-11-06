@@ -10,19 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "photo albums or image folders",
+   "meaning": "image folders, photo directories, or media asset folders",
    "strength": "primary"
   },
   {
-   "meaning": "photo library or picture collection",
+   "meaning": "photo albums or organized picture collections",
    "strength": "primary"
   },
   {
-   "meaning": "media directories or graphics assets",
+   "meaning": "photo library or graphics archive",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a single photo icon or a generic multiple-folders icon at very small sizes.",
+ "ambiguity": "Close in meaning and silhouette to the stacked square photos icon, as only the top-left folder tab separates 'image folders' from a 'photo stack/gallery'.",
  "modifier_semantics": [
   {
    "modifier": "mountain image glyph inside folder",
@@ -163,14 +163,14 @@
  ],
  "near_misses": [
   {
-   "task": "Frame the 8x10 portrait of the kids for the hallway",
-   "better": "picture frame",
-   "trap": "shared_vocabulary"
+   "task": "Hang the framed landscape print above the living room sofa",
+   "better": "hanging framed picture",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Clean the sensor on the Fuji X-T4 before Saturday's shoot",
-   "better": "camera",
-   "trap": "parent_topic"
+   "task": "Delete blurry burst shots from phone camera roll",
+   "better": "stacked photos / photo gallery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Organize tax receipts and PDF invoices into quarterly folders",
@@ -178,9 +178,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Hike the Twin Peaks trail before sunrise on Sunday",
-   "better": "mountain / hiking",
-   "trap": "lookalike_glyph"
+   "task": "Clean the sensor on the Fuji X-T4 before Saturday's shoot",
+   "better": "camera",
+   "trap": "parent_topic"
   },
   {
    "task": "Take passport photo at the pharmacy on Elm Street",
@@ -196,7 +196,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts stacked folders with a mountain landscape inside, universally understood as photo albums, image folders, or a picture library. It fits common personal and professional tasks around organizing, backing up, and curating photo collections, though at tiny sizes it can resemble a generic folder or single image icon.",
@@ -214,6 +214,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photo albums or image folders",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo library or picture collection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "media directories or graphics assets",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a single photo icon or a generic multiple-folders icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Frame the 8x10 portrait of the kids for the hallway",
+     "better": "picture frame",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the sensor on the Fuji X-T4 before Saturday's shoot",
+     "better": "camera",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Organize tax receipts and PDF invoices into quarterly folders",
+     "better": "document folder",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hike the Twin Peaks trail before sunrise on Sunday",
+     "better": "mountain / hiking",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take passport photo at the pharmacy on Elm Street",
+     "better": "ID card / portrait photo",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Listen to the new Kendrick Lamar album all the way through",
+     "better": "music album / vinyl / headphones",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wall_art",
+   "hallway",
+   "collections"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6725,
+    "output": 2080,
+    "thoughts": 0,
+    "total": 8805
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Combines a tabbed file folder outline with the mountain landscape glyph and a stacked backing line, signifying image folders or media directories rather than loose photos or hanging wall art."
 }

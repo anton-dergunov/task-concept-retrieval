@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "speedometer / gauge / meter",
+   "meaning": "speedometer, gauge, or meter (general or low-to-moderate reading)",
    "strength": "primary"
   },
   {
-   "meaning": "dashboard / metrics / KPIs",
+   "meaning": "dashboard, metrics, or KPIs",
    "strength": "primary"
   },
   {
-   "meaning": "speed / performance / benchmark",
+   "meaning": "below-average speed, moderate load, or idle baseline",
    "strength": "secondary"
   },
   {
-   "meaning": "pressure gauge / tire pressure / boiler pressure",
+   "meaning": "pressure gauge (tire pressure, boiler pressure)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to sibling gauge icons where the needle points upright or to the right (low/medium/high gauge variants).",
+ "ambiguity": "Virtually interchangeable at list size with the sibling gauges pointing at 10 o'clock, 1 o'clock, and 2 o'clock unless the four are shown side by side as a 4-step scale.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Benchmark maximum GPU overclock speed under full stress test",
+   "better": "gauge with needle pointing far right (high/max speed)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Diagnose why home Wi-Fi download speed dropped to near zero",
+   "better": "gauge with needle pointing far left (lowest/slowest reading)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Quick 15-minute tidy of the living room before guests arrive",
    "better": "broom / cleaning",
    "trap": "property"
@@ -177,17 +187,12 @@
    "task": "Order 12-gauge speaker wire for the living room surrounds",
    "better": "cable / speaker",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Email screenshots of the broken chart to the client",
-   "better": "email / envelope",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear semicircular dial gauge with its needle pointing upper-left. It strongly cues physical gauges and meters (tire pressure, boiler pressure, utility meters, speedometers) as well as software dashboards, speed tests, and performance benchmarks. Distinctiveness is moderate only because icon sets usually include two or three nearly identical gauges with different needle angles.",
@@ -205,6 +210,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "speedometer / gauge / meter",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dashboard / metrics / KPIs",
+     "strength": "primary"
+    },
+    {
+     "meaning": "speed / performance / benchmark",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pressure gauge / tire pressure / boiler pressure",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to sibling gauge icons where the needle points upright or to the right (low/medium/high gauge variants).",
+   "near_misses": [
+    {
+     "task": "Quick 15-minute tidy of the living room before guests arrive",
+     "better": "broom / cleaning",
+     "trap": "property"
+    },
+    {
+     "task": "Pay speeding ticket online before the 14-day discount expires",
+     "better": "ticket / fine / receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set kitchen timer for 45 minutes once the loaf goes in",
+     "better": "stopwatch / timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book annual performance review meeting with Sarah",
+     "better": "calendar / meeting / people",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order 12-gauge speaker wire for the living room surrounds",
+     "better": "cable / speaker",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email screenshots of the broken chart to the client",
+     "better": "email / envelope",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speed_4",
+   "speed",
+   "speed_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6734,
+    "output": 2400,
+    "thoughts": 231,
+    "total": 9365
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "The needle points slightly left of vertical (around 11 o'clock, low-medium position), whereas the other gauges point farther left (10 o'clock), slightly right (1 o'clock), or farther right (2 o'clock); for general gauge or speedometer tasks all four are nearly interchangeable."
 }

@@ -7,15 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "spreadsheet or data table",
+   "meaning": "spreadsheet, data table, or grid layout",
    "strength": "primary"
   },
   {
-   "meaning": "grid layout or matrix",
+   "meaning": "sudoku, tic-tac-toe, or 3x3 logic puzzle",
    "strength": "primary"
   },
   {
-   "meaning": "sudoku, crossword, or grid puzzle",
+   "meaning": "Rubik's cube face or 9-button keypad / app launcher",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as a generic UI grid-view toggle, a calendar without a header, a Rubik's cube face, or a multi-pane window.",
+ "ambiguity": "Nearly interchangeable with the 4x4 grid icon for general spreadsheet, table, or tiling tasks; also easily mistaken for a headerless calendar or window frame.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -155,6 +155,21 @@
  ],
  "near_misses": [
   {
+   "task": "Make Belgian waffles for Sunday brunch",
+   "better": "4x4 sixteen-cell waffle grid",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Map drum samples to the 16-pad MIDI controller",
+   "better": "4x4 sixteen-cell grid",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Move dentist appointment to next Wednesday on the calendar",
+   "better": "calendar page with header and rings",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the electric utility about the smart grid outage",
    "better": "lightning bolt or power plug",
    "trap": "shared_vocabulary"
@@ -170,25 +185,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Move dentist appointment to next Wednesday on the calendar",
-   "better": "calendar page with header and rings",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Email the accountant the signed tax authorization PDF",
    "better": "envelope or tax document",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Wash the waffle iron plates before putting it away",
-   "better": "waffle or kitchen appliance",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A 3x3 bordered grid directly represents spreadsheets, data tables, matrices, tiles, cube shelving, and grid puzzles like Sudoku. While it doubles as a generic UI grid-view toggle, in a task list it strongly cues spreadsheet and tiling tasks, though it can be confused with a simplified calendar or window icon.",
@@ -206,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "spreadsheet or data table",
+     "strength": "primary"
+    },
+    {
+     "meaning": "grid layout or matrix",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sudoku, crossword, or grid puzzle",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "window panes or tile pattern",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as a generic UI grid-view toggle, a calendar without a header, a Rubik's cube face, or a multi-pane window.",
+   "near_misses": [
+    {
+     "task": "Call the electric utility about the smart grid outage",
+     "better": "lightning bolt or power plug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a cabin filter for the off-grid solar setup",
+     "better": "solar panel or sun",
+     "trap": "property"
+    },
+    {
+     "task": "Book a corner table at the trattoria for Friday night",
+     "better": "restaurant fork and knife or dining table",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Move dentist appointment to next Wednesday on the calendar",
+     "better": "calendar page with header and rings",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Email the accountant the signed tax authorization PDF",
+     "better": "envelope or tax document",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Wash the waffle iron plates before putting it away",
+     "better": "waffle or kitchen appliance",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "background_grid_small"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4064,
+    "output": 815,
+    "thoughts": 0,
+    "total": 4879
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Shows a 3x3 grid of 9 larger squares inside a rounded frame rather than the 4x4 grid of 16 squares; interchangeable with the 4x4 grid for generic tables and spreadsheets, but specifically suits 3x3 subjects like sudoku, tic-tac-toe, a Rubik's cube face, or a 9-square app keypad."
 }

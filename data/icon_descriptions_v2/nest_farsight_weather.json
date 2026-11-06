@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "cloud storage / cloud service",
+   "meaning": "cloud storage, cloud backup, or online sync",
    "strength": "primary"
   },
   {
-   "meaning": "weather / forecast / overcast",
+   "meaning": "cloud computing or hosting infrastructure",
    "strength": "primary"
   },
   {
-   "meaning": "cloud computing / server infrastructure",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "online sync / backup",
+   "meaning": "weather, overcast sky, or meteorology",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the inner cloud has a small central bump with two side lobes, which can slightly resemble a stylized hat, a moustache, or a three-pronged crown inside a coin.",
+ "ambiguity": "Visually and semantically interchangeable with the other encircled cloud outline icon; at small sizes, the more compact three-lobed shape inside the ring can also resemble a fedora hat or a moustache icon.",
  "modifier_semantics": [
   {
    "modifier": "circular border enclosure",
@@ -169,7 +165,7 @@
   },
   {
    "task": "Order a bag of pillow stuffing for the plush cloud cushion",
-   "better": "pillow / sewing",
+   "better": "pillow or sewing needle",
    "trap": "property"
   },
   {
@@ -178,7 +174,7 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Update credit card expiring this month",
+   "task": "Update credit card expiring this month for iCloud subscription",
    "better": "credit card",
    "trap": "parent_topic"
   },
@@ -188,15 +184,15 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the quarterly water and sewer bill",
-   "better": "water drop / invoice",
-   "trap": "shared_vocabulary"
+   "task": "Trim moustache and beard before family photos",
+   "better": "moustache or grooming razor",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon shows a simple cloud outline framed inside a bold circle, making it an immediate cue for cloud storage, backups, cloud infrastructure, or weather checks. It is slightly less distinct than an unframed cloud because the heavy circular border crowds the small inner shape at tiny list sizes.",
@@ -214,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cloud storage / cloud service",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weather / forecast / overcast",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cloud computing / server infrastructure",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "online sync / backup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the inner cloud has a small central bump with two side lobes, which can slightly resemble a stylized hat, a moustache, or a three-pronged crown inside a coin.",
+   "near_misses": [
+    {
+     "task": "Buy Cloudfoam running shoes at the outlet store",
+     "better": "running shoe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a bag of pillow stuffing for the plush cloud cushion",
+     "better": "pillow / sewing",
+     "trap": "property"
+    },
+    {
+     "task": "Sync Garmin watch after morning run",
+     "better": "smartwatch",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Update credit card expiring this month",
+     "better": "credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Dry clean the grey wool fedora before the wedding",
+     "better": "hat",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the quarterly water and sewer bill",
+     "better": "water drop / invoice",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cloud_circle"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4050,
+    "output": 1009,
+    "thoughts": 66,
+    "total": 5125
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "Shows a slightly narrower, more compact outlined cloud inside a circle with angled inner bump walls, making it completely interchangeable in meaning with the slightly wider encircled cloud."
 }

@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "voice message or audio comment (on pause)",
+   "meaning": "Twitch or live-stream chat (resembles Twitch logo with two vertical eyes in a speech bubble Header/chatbox shape) ",
    "strength": "secondary"
   },
   {
-   "meaning": "Twitch or live-stream chat (resembles Twitch logo)",
+   "meaning": "voice message or audio comment on pause",
    "strength": "secondary"
   },
   {
-   "meaning": "quotation marks in a speech bubble (quote / citation)",
+   "meaning": "quotation marks in a speech bubble (quote / citation) ",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles the Twitch logo (speech bubble with two vertical eyes) or a quote bubble at small sizes.",
+ "ambiguity": "Can be mistaken for the speech bubble with a bookmark ribbon if only the speech bubble silhouette is noticed at a quick glance, or for the Twitch logo / a quotation-mark bubble.",
  "modifier_semantics": [
   {
    "modifier": "two vertical parallel bars (pause symbol) inside",
@@ -165,19 +165,14 @@
  ],
  "near_misses": [
   {
-   "task": "Text Allan about the weekend cabin booking",
-   "better": "plain speech bubble / message icon",
-   "trap": "generic_verb"
+   "task": "Save the contractor's text message with the paint color codes",
+   "better": "speech bubble with bookmark ribbon",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Pause gym membership for July and August",
-   "better": "dumbbell / gym or pause circle icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pause Spotify family subscription before renewal date",
-   "better": "music / subscription icon",
-   "trap": "shared_vocabulary"
+   "task": "Bookmark the Slack thread on Q3 deployment steps",
+   "better": "speech bubble with bookmark ribbon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pull three good quotes from the interview transcript",
@@ -185,9 +180,19 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the monthly phone bill for all four lines",
-   "better": "invoice / phone bill icon",
-   "trap": "parent_topic"
+   "task": "Text Allan about the weekend cabin booking",
+   "better": "plain speech bubble / message icon",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Pause gym membership for July and August",
+   "better": "dumbbell / gym or standalone pause circle icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pause Spotify family subscription before renewal date",
+   "better": "music or subscription icon",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a quiet mechanical keyboard for late-night chatting",
@@ -218,6 +223,94 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pause chat / mute conversation / snooze notifications",
+     "strength": "primary"
+    },
+    {
+     "meaning": "voice message or audio comment (on pause)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Twitch or live-stream chat (resembles Twitch logo)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "quotation marks in a speech bubble (quote / citation)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles the Twitch logo (speech bubble with two vertical eyes) or a quote bubble at small sizes.",
+   "near_misses": [
+    {
+     "task": "Text Allan about the weekend cabin booking",
+     "better": "plain speech bubble / message icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pause gym membership for July and August",
+     "better": "dumbbell / gym or pause circle icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pause Spotify family subscription before renewal date",
+     "better": "music / subscription icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pull three good quotes from the interview transcript",
+     "better": "quotation marks icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly phone bill for all four lines",
+     "better": "invoice / phone bill icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a quiet mechanical keyboard for late-night chatting",
+     "better": "keyboard icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "comment_bank"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4084,
+    "output": 719,
+    "thoughts": 0,
+    "total": 4803
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:31Z"
+  }
+ },
+ "distinguishing": "Shows two centered vertical parallel bars (a pause symbol) inside the rectangular speech bubble, rather than a solid bookmark ribbon hanging from the top edge; means pausing or snoozing chat notifications rather than saving or bookmarking a message."
 }

@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "highway lane merge or traffic convergence",
+   "meaning": "traffic or lane merge from the right",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a plain up arrow or a stick-figure torso with legs.",
+ "ambiguity": "Virtually identical to and interchangeable with the upward merge arrow with the gap on the left for any non-directional merging task; at small sizes it also looks like a plain up arrow or a headless stick figure.",
  "modifier_semantics": [
   {
    "modifier": "converging secondary lower-right branch",
@@ -156,6 +156,21 @@
  ],
  "near_misses": [
   {
+   "task": "Check signage for the left-lane highway merge on Route 9",
+   "better": "upward merge arrow with the gap on the lower-left branch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the final video upward to the cloud server",
+   "better": "cloud upload arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a Y-splitter adapter for the garden hose",
+   "better": "hose or downward fork/split arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Practice highway merging before the driving test on Thursday",
    "better": "car / steering wheel",
    "trap": "shared_vocabulary"
@@ -166,25 +181,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Upload the final video upward to the cloud server",
-   "better": "cloud upload",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Email legal team about the NDA",
    "better": "envelope / email",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a Y-splitter adapter for the garden hose",
-   "better": "hose / cable adapter",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts two lines converging into a single upward arrow, the standard symbol for 'merge' or 'consolidate'. It fits tasks centered on merging code branches, combining files, or consolidating accounts/records, though at very small sizes it could be misread as a plain up arrow or a stick figure.",
@@ -202,6 +207,89 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "merge / combine / consolidate",
+     "strength": "primary"
+    },
+    {
+     "meaning": "git merge or branch integration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "highway lane merge or traffic convergence",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "unify or join streams",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a plain up arrow or a stick-figure torso with legs.",
+   "near_misses": [
+    {
+     "task": "Practice highway merging before the driving test on Thursday",
+     "better": "car / steering wheel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read the news article about the airline merger",
+     "better": "newspaper / airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upload the final video upward to the cloud server",
+     "better": "cloud upload",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Email legal team about the NDA",
+     "better": "envelope / email",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a Y-splitter adapter for the garden hose",
+     "better": "hose / cable adapter",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "merge_type"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 1119,
+    "thoughts": 177,
+    "total": 5331
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:45Z"
+  }
+ },
+ "distinguishing": "The lower-left branch flows continuously into the main upward arrow shaft while the lower-right branch is separated by a gap (merging from the right), making it virtually interchangeable with its mirror-image counterpart for general merge tasks."
 }

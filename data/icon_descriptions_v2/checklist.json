@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to clipboard checklist icons or bulleted list icons; inside a to-do app it is self-referential UI chrome unless the task itself is specifically about making or reviewing a checklist.",
+ "ambiguity": "Interchangeable at a glance with the checklist icon that places the checkmarks on the right of the text lines; also self-referential inside a to-do app unless the task itself is specifically about creating or reviewing a checklist.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -153,8 +153,18 @@
  ],
  "near_misses": [
   {
+   "task": "Grade student quizzes and mark answers correct on the right margin",
+   "better": "checklist with checkmarks on the right / grading rubric",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix right-to-left Hebrew checklist alignment in the mobile app",
+   "better": "checklist with checkmarks on the right (RTL layout)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check tire pressure before driving to Denver",
-   "better": "tire / gauge",
+   "better": "tire / pressure gauge",
    "trap": "generic_verb"
   },
   {
@@ -168,16 +178,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Verify bank routing number with payroll",
-   "better": "bank",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Buy milk, eggs, and sourdough from Trader Joe's",
-   "better": "shopping cart / groceries",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order 4 AA lithium batteries for the headlamp",
    "better": "battery",
    "trap": "parent_topic"
@@ -186,7 +186,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows two stacked checkmarks beside horizontal lines, universally understood as a checklist or to-do list. Because every item in a task manager is already a task, this icon is only useful when the task's actual object is a checklist, packing list, or set of acceptance criteria, rather than generic tasks beginning with 'check'.",
@@ -204,6 +204,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "checklist / to-do list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tasks / subtasks",
+     "strength": "primary"
+    },
+    {
+     "meaning": "requirements / acceptance criteria",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "completed items / audit",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to clipboard checklist icons or bulleted list icons; inside a to-do app it is self-referential UI chrome unless the task itself is specifically about making or reviewing a checklist.",
+   "near_misses": [
+    {
+     "task": "Check tire pressure before driving to Denver",
+     "better": "tire / gauge",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check in for the Lufthansa flight at 14:00",
+     "better": "airplane / boarding pass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write a check to the plumber for the water heater",
+     "better": "bank check / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Verify bank routing number with payroll",
+     "better": "bank",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy milk, eggs, and sourdough from Trader Joe's",
+     "better": "shopping cart / groceries",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order 4 AA lithium batteries for the headlamp",
+     "better": "battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "checklist_rtl"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4057,
+    "output": 1058,
+    "thoughts": 112,
+    "total": 5227
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "Places the two checkmarks on the left and the horizontal text lines on the right (standard left-to-right checklist layout), making it virtually interchangeable in meaning with the version that puts checkmarks on the right."
 }

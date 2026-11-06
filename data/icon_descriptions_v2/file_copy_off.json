@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as 'no copying / copy disabled' or 'delete duplicate files / deduplicate', or simply 'no documents' at small sizes.",
+ "ambiguity": "Closely resembles the slashed overlapping browser windows due to the identical L-shaped offset back layer, differing only in portrait orientation and the folded page corner.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,8 +161,13 @@
  ],
  "near_misses": [
   {
-   "task": "Make 30 photocopies of the flyer for the neighborhood meeting",
-   "better": "copy / duplicate documents (without slash)",
+   "task": "Enable pop-up blocker in Chrome settings",
+   "better": "slashed overlapping browser windows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Close unused browser windows to free up RAM",
+   "better": "slashed single browser window",
    "trap": "lookalike_glyph"
   },
   {
@@ -172,29 +177,24 @@
   },
   {
    "task": "Send an uneditable copy of the budget to the board",
-   "better": "budget / spreadsheet or send",
+   "better": "budget spreadsheet or send icon",
    "trap": "property"
   },
   {
    "task": "Check if the contractor sent the missing permit paperwork",
-   "better": "permit / document",
+   "better": "permit document",
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a new 2TB SSD for backups",
+   "task": "Buy a new 2TB SSD for file backups",
    "better": "hard drive / SSD",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Cancel the magazine subscription before it renews",
-   "better": "magazine / subscription",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts two overlapping document pages (the standard glyph for copy/duplicate) crossed out with a diagonal slash. While originally a UI icon for 'copy disabled' or 'no files', in a task manager it fits tasks about deleting duplicate files, cleaning up redundant document copies, or going paperless.",
@@ -212,6 +212,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "deduplicate or remove duplicate files",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disable copying or copy protection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "missing, deleted, or unavailable documents",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "paperless or stop printing copies",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as 'no copying / copy disabled' or 'delete duplicate files / deduplicate', or simply 'no documents' at small sizes.",
+   "near_misses": [
+    {
+     "task": "Make 30 photocopies of the flyer for the neighborhood meeting",
+     "better": "copy / duplicate documents (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a shredder that handles ten sheets at a time",
+     "better": "paper shredder",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send an uneditable copy of the budget to the board",
+     "better": "budget / spreadsheet or send",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the contractor sent the missing permit paperwork",
+     "better": "permit / document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new 2TB SSD for backups",
+     "better": "hard drive / SSD",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Cancel the magazine subscription before it renews",
+     "better": "magazine / subscription",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_hand_off",
+   "video_camera_front_off",
+   "privacy",
+   "no_photography",
+   "preview_off",
+   "ad_group_off",
+   "ad_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12129,
+    "output": 3883,
+    "thoughts": 0,
+    "total": 16012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "Shows two stacked portrait pages with a dog-eared top-right corner and an L-shaped back page outline under a slash, unlike the landscape stacked browser windows with a solid header bar."
 }

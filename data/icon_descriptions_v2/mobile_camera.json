@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "take a photo or scan with phone",
+   "meaning": "take a photo or scan a document/QR code with a phone",
    "strength": "primary"
   },
   {
-   "meaning": "screenshot or screen capture",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "phone camera roll or photos app",
+   "meaning": "screenshot, screen capture, or phone camera roll",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as taking a photo with a phone camera or taking a screenshot of the phone screen.",
+ "ambiguity": "At a glance in a dense list, the dark blocky camera badge on the smartphone outline can be confused with the dark rectangular speech bubble badge on the same smartphone base.",
  "modifier_semantics": [
   {
    "modifier": "camera badge",
@@ -164,28 +160,28 @@
  ],
  "near_misses": [
   {
-   "task": "Pack the Sony A7III and 35mm prime lens for Yosemite",
-   "better": "standalone DSLR camera",
+   "task": "Send an SMS reminder to the babysitter about Friday night",
+   "better": "smartphone with speech bubble badge",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Call Mom on WhatsApp video tonight",
-   "better": "video call / phone handset",
+   "task": "Set up Apple Pay contactless payment on my new iPhone",
+   "better": "smartphone with wireless signal waves",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the Sony A7III and 35mm prime lens for Yosemite",
+   "better": "standalone camera",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a phone with a better telephoto camera before our Japan trip",
-   "better": "smartphone",
+   "better": "plain smartphone",
    "trap": "property"
   },
   {
-   "task": "Replace the cracked screen protector on Daniel's iPhone",
-   "better": "smartphone",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order 4x6 matte prints of the wedding portraits",
-   "better": "framed picture / photo print",
+   "better": "framed picture or photo print",
    "trap": "parent_topic"
   },
   {
@@ -215,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone camera or mobile photography",
+     "strength": "primary"
+    },
+    {
+     "meaning": "take a photo or scan with phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screenshot or screen capture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "phone camera roll or photos app",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as taking a photo with a phone camera or taking a screenshot of the phone screen.",
+   "near_misses": [
+    {
+     "task": "Pack the Sony A7III and 35mm prime lens for Yosemite",
+     "better": "standalone DSLR camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Mom on WhatsApp video tonight",
+     "better": "video call / phone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a phone with a better telephoto camera before our Japan trip",
+     "better": "smartphone",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the cracked screen protector on Daniel's iPhone",
+     "better": "smartphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order 4x6 matte prints of the wedding portraits",
+     "better": "framed picture / photo print",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the backyard security camera feed on my phone",
+     "better": "CCTV security camera",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "phonelink_ring",
+   "mobile_chat"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5431,
+    "output": 1498,
+    "thoughts": 128,
+    "total": 7057
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Instead of signal waves or a chat bubble on the right side of the smartphone outline, this icon features a solid camera glyph, specifically meaning mobile photography, scanning with a phone, or taking a screenshot."
 }

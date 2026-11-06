@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "export or share document / list",
+   "meaning": "export or share a document, note, or list",
    "strength": "primary"
   },
   {
-   "meaning": "external link to an article, page, or note",
+   "meaning": "open an external link to an article, page, or form",
    "strength": "primary"
   },
   {
-   "meaning": "publish or submit a written post or form",
+   "meaning": "publish or submit a written post",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with generic document, note, list, or UI menu icons; at small sizes the diagonal arrow badge looks like a generic share, upload, or external-link indicator.",
+ "ambiguity": "Shares the identical rounded-square three-line base with the user-badge, ellipsis-badge, and plus-badge variants, and at small sizes its diagonal arrow inside the dark circle can blur into the plus sign of the add-note icon.",
  "modifier_semantics": [
   {
    "modifier": "circular badge with upward-right diagonal arrow",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Draft a new blog post for Monday's newsletter",
+   "better": "square note frame with a plus badge (create new note or post)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update my personal bio and contact details on the company portal",
+   "better": "square note frame with a person avatar badge (user profile or bio)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy printer paper for the home office",
    "better": "paper ream or printer icon",
    "trap": "shared_vocabulary"
@@ -170,16 +180,6 @@
    "task": "Check the grocery list before leaving work",
    "better": "shopping list or cart icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Take the cardboard boxes out to the recycling bin",
-   "better": "recycling or box icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Import bank statements into the budgeting app",
-   "better": "document with inward/downward arrow (import)",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Call the illustrator about the cover art",
@@ -215,6 +215,96 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "export or share document / list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "external link to an article, page, or note",
+     "strength": "primary"
+    },
+    {
+     "meaning": "publish or submit a written post or form",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "shortcut to a list or menu",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with generic document, note, list, or UI menu icons; at small sizes the diagonal arrow badge looks like a generic share, upload, or external-link indicator.",
+   "near_misses": [
+    {
+     "task": "Buy printer paper for the home office",
+     "better": "paper ream or printer icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the grocery list before leaving work",
+     "better": "shopping list or cart icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Take the cardboard boxes out to the recycling bin",
+     "better": "recycling or box icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Import bank statements into the budgeting app",
+     "better": "document with inward/downward arrow (import)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the illustrator about the cover art",
+     "better": "phone or artwork icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick an open-source license for the new repository",
+     "better": "license certificate or code repository icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "demography",
+   "other_admission",
+   "add_notes"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6721,
+    "output": 2153,
+    "thoughts": 0,
+    "total": 8874
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Unlike the user, ellipsis, or plus badges on the same three-line square note frame, the bottom-right badge contains an upward-right diagonal arrow for exporting, sharing, or opening an external link."
 }

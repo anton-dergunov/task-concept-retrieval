@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "edit image, photo, or graphic",
+   "meaning": "edit image, retouch photo, or modify graphic",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "plan or customize outdoor route or trail",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "sign or hand-write (scribble with sun/dot)",
+   "meaning": "plan or customize an outdoor route or trail",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the peaks are rounded, the mountain outline can look like a freehand squiggle or signature line with a stray circle above it, especially at small sizes without a picture frame.",
+ "ambiguity": "Easily mistaken at small sizes for the plain mountain-and-sun icon without a pencil if the corner badge is overlooked, or read as a freehand squiggle being drawn by a pen.",
  "modifier_semantics": [
   {
    "modifier": "small diagonal pencil in bottom right",
@@ -161,19 +157,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy 5x7 wooden picture frames at Ikea",
-   "better": "picture frame or shopping bag",
-   "trap": "shared_vocabulary"
+   "task": "Hike the Franconia Ridge loop on Saturday",
+   "better": "mountain peaks with sun and no pencil badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Back up all vacation photos to the external drive",
+   "better": "plain image/mountain icon without edit pencil or hard drive",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Sign the lease renewal PDF and send it back",
    "better": "document with signature or pen",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Hike the Franconia Ridge loop on Saturday",
-   "better": "mountain or hiker without edit pencil",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Update the copy on the About Us page",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon combines an unframed sun-and-mountains landscape glyph with a pencil badge, signaling editing an image/photo or sketching a drawing. Because the peaks are rounded and lack a rectangular picture frame, it can also be mistaken at small sizes for a freehand squiggle or signature line.",
@@ -212,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "edit image, photo, or graphic",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sketch, draw, or illustrate a scene",
+     "strength": "primary"
+    },
+    {
+     "meaning": "plan or customize outdoor route or trail",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sign or hand-write (scribble with sun/dot)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the peaks are rounded, the mountain outline can look like a freehand squiggle or signature line with a stray circle above it, especially at small sizes without a picture frame.",
+   "near_misses": [
+    {
+     "task": "Buy 5x7 wooden picture frames at Ikea",
+     "better": "picture frame or shopping bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the lease renewal PDF and send it back",
+     "better": "document with signature or pen",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hike the Franconia Ridge loop on Saturday",
+     "better": "mountain or hiker without edit pencil",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the copy on the About Us page",
+     "better": "text document with pencil",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a hotel room with a mountain view in Banff",
+     "better": "hotel or bed",
+     "trap": "property"
+    },
+    {
+     "task": "Order a replacement lens cap for the 35mm prime",
+     "better": "camera lens",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "landscape_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1011,
+    "thoughts": 130,
+    "total": 5232
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "Adds a diagonal pencil badge at the bottom right of the mountain-and-sun graphic, turning the landscape/image symbol specifically into editing a photo, retouching an image, or sketching."
 }

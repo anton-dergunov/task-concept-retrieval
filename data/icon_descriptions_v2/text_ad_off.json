@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "subtitles off or closed captions disabled",
+   "meaning": "turn off closed captions or disable subtitles",
    "strength": "primary"
   },
   {
-   "meaning": "hide text card or disable note",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cancel card or invalid ID",
+   "meaning": "hide text card, transcript, or UI details panel",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like a generic cancelled card, credit card, or hidden UI panel rather than specifically video subtitles if the viewer does not recognize the standard media player caption glyph.",
+ "ambiguity": "Nearly interchangeable with the two-line slashed subtitle box, and very easily mistaken for the three-line slashed speech bubble since the speech bubble's bottom-right tail is small and right next to the slash.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -151,24 +147,29 @@
  ],
  "near_misses": [
   {
-   "task": "Cancel stolen Chase credit card",
-   "better": "credit card with magnetic stripe or chip and slash",
+   "task": "Turn off comments on the shared Google Doc",
+   "better": "slashed speech bubble with bottom-right tail and three solid lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Freeze stolen Mastercard in the banking app",
+   "better": "slashed credit card with solid horizontal magnetic stripe",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hide speaker notes from the external projector screen",
+   "better": "slashed speech bubble with bottom-left tail and two dots",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Add English SRT subtitles to the tutorial video",
    "better": "subtitles/captions icon without slash",
-   "trap": "property"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Check why the video player is muted",
    "better": "speaker with slash (mute)",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Delete old flashcards from Anki deck",
-   "better": "flashcard deck or trash can",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy HDMI cable for the living room TV",
@@ -179,7 +180,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "This is the standard media-player UI glyph for 'subtitles/captions off' (a rectangular frame with lines of text crossed out by a diagonal slash). While it fits a narrow niche of tasks around language-learning listening practice, clean video exports, or fixing TV caption settings, it can easily be mistaken for a generic cancelled card or hidden note.",
@@ -197,6 +198,89 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "subtitles off or closed captions disabled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hide text card or disable note",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cancel card or invalid ID",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like a generic cancelled card, credit card, or hidden UI panel rather than specifically video subtitles if the viewer does not recognize the standard media player caption glyph.",
+   "near_misses": [
+    {
+     "task": "Cancel stolen Chase credit card",
+     "better": "credit card with magnetic stripe or chip and slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Add English SRT subtitles to the tutorial video",
+     "better": "subtitles/captions icon without slash",
+     "trap": "property"
+    },
+    {
+     "task": "Check why the video player is muted",
+     "better": "speaker with slash (mute)",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Delete old flashcards from Anki deck",
+     "better": "flashcard deck or trash can",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy HDMI cable for the living room TV",
+     "better": "cable or plug icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speaker_notes_off",
+   "credit_card_off",
+   "stack_off",
+   "subtitles_off",
+   "comments_disabled"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9498,
+    "output": 3020,
+    "thoughts": 0,
+    "total": 12518
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Shows a tailless rounded rectangle filled with three rows of segmented horizontal bars from top to bottom, distinguishing it from the two-row subtitle box (empty top) and the three-line speech bubble (which has a pointed tail on the bottom right and solid lines)."
 }

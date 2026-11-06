@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "more list options or details",
+   "meaning": "more list options, menu, or document properties",
    "strength": "primary"
   },
   {
-   "meaning": "document or note properties menu",
+   "meaning": "additional details or metadata on a note",
    "strength": "primary"
   },
   {
-   "meaning": "comment or chat on a document",
+   "meaning": "comment thread or discussion on a document",
    "strength": "secondary"
   },
   {
-   "meaning": "pending or in-progress form",
+   "meaning": "pending or in-progress form or checklist",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like generic UI chrome for 'more options on a list/note' rather than a distinct real-world object; the ellipsis badge can also be read as a typing/chat bubble or a pending status.",
+ "ambiguity": "Shares the identical rounded-square three-line base with the arrow, user, and plus variants, and also looks like generic UI chrome for 'more options' or a chat bubble rather than a concrete task object.",
  "modifier_semantics": [
   {
    "modifier": "circle badge with three horizontal dots (ellipsis)",
@@ -170,35 +170,40 @@
  ],
  "near_misses": [
   {
-   "task": "Text Sam back about dinner plans",
-   "better": "speech bubble or phone message icon",
+   "task": "Start a new packing checklist for the ski trip",
+   "better": "square note frame with a plus badge (create new list or note)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Check the grocery list before leaving work",
-   "better": "shopping cart or plain checklist icon",
-   "trap": "generic_verb"
+   "task": "Publish the release notes to the public changelog",
+   "better": "square note frame with an upward-right arrow badge (publish or export note)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a new lined notepad for the desk",
-   "better": "spiral notebook or stationery icon",
+   "task": "Text Sam back about dinner plans",
+   "better": "speech bubble or phone message icon",
    "trap": "shared_vocabulary"
   },
   {
+   "task": "Check the grocery list before leaving work",
+   "better": "shopping cart or checklist icon",
+   "trap": "generic_verb"
+  },
+  {
    "task": "Call the airline about the pending refund",
-   "better": "phone or airplane/refund icon",
+   "better": "phone or airplane icon",
    "trap": "property"
   },
   {
    "task": "Print the signed lease agreement",
-   "better": "printer or contract with signature icon",
+   "better": "printer or signed contract icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows a lined square document or list with an ellipsis ('more') badge in the corner. It is primarily UI chrome for 'list/note options' or 'more details on a document', making it weak and generic compared to plain document or checklist icons, though usable for tasks about expanding notes or filling in extra form details.",
@@ -218,6 +223,91 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "more list options or details",
+     "strength": "primary"
+    },
+    {
+     "meaning": "document or note properties menu",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comment or chat on a document",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pending or in-progress form",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like generic UI chrome for 'more options on a list/note' rather than a distinct real-world object; the ellipsis badge can also be read as a typing/chat bubble or a pending status.",
+   "near_misses": [
+    {
+     "task": "Text Sam back about dinner plans",
+     "better": "speech bubble or phone message icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the grocery list before leaving work",
+     "better": "shopping cart or plain checklist icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new lined notepad for the desk",
+     "better": "spiral notebook or stationery icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the airline about the pending refund",
+     "better": "phone or airplane/refund icon",
+     "trap": "property"
+    },
+    {
+     "task": "Print the signed lease agreement",
+     "better": "printer or contract with signature icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "export_notes",
+   "demography",
+   "add_notes"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6721,
+    "output": 2153,
+    "thoughts": 0,
+    "total": 8874
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Unlike the arrow, user, or plus badges on the same three-line square frame, the bottom-right badge contains a horizontal three-dot ellipsis indicating more options, additional details, or a pending/comment state on a note."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "speaking / talking / speech",
+   "meaning": "speaking, talking, or speech",
    "strength": "primary"
   },
   {
-   "meaning": "voice command / voice assistant / dictation",
+   "meaning": "voice command, dictation, or voice assistant",
    "strength": "primary"
   },
   {
-   "meaning": "speaker / presenter / public speaking",
+   "meaning": "speaker, presenter, or public speaking",
    "strength": "secondary"
   },
   {
-   "meaning": "contactless / NFC user / broadcasting",
+   "meaning": "speech therapy, vocal coaching, or pronunciation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic user profile, an audio volume icon, or a contactless/RFID badge icon.",
+ "ambiguity": "At small sizes it is easily confused with the person with inward-curving waves (listening/hearing), as both show an outlined person bust with two arcs to the upper right.",
  "modifier_semantics": [
   {
    "modifier": "two curved arcs on the right",
@@ -178,8 +178,18 @@
  ],
  "near_misses": [
   {
-   "task": "Call the dentist to reschedule cleaning",
-   "better": "telephone handset",
+   "task": "Schedule annual hearing test with the audiologist",
+   "better": "person with inward-facing sound waves (listening/hearing) or ear",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Complete the French listening comprehension exercise",
+   "better": "person with inward-facing sound waves (listening) or headphones",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update profile picture on Slack",
+   "better": "plain user bust or camera",
    "trap": "lookalike_glyph"
   },
   {
@@ -194,16 +204,11 @@
   },
   {
    "task": "Check voicemail from the auto shop",
-   "better": "voicemail tape icon",
+   "better": "voicemail tape icon or phone handset",
    "trap": "generic_verb"
   },
   {
-   "task": "Update profile picture on Slack",
-   "better": "plain user bust or camera",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy HDMI adapter for the projector",
+   "task": "Buy HDMI adapter for the conference presenter's laptop",
    "better": "cable or plug",
    "trap": "parent_topic"
   }
@@ -211,7 +216,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a person's head and shoulders with sound waves radiating from the head, clearly signifying speaking, voice, or talking in person. It fits tasks centered on verbal communication, rehearsing speeches, language pronunciation, and voice control, while remaining distinct from phone calls (handset) or written messages (chat bubble).",
@@ -231,6 +236,95 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "speaking / talking / speech",
+     "strength": "primary"
+    },
+    {
+     "meaning": "voice command / voice assistant / dictation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "speaker / presenter / public speaking",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "contactless / NFC user / broadcasting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic user profile, an audio volume icon, or a contactless/RFID badge icon.",
+   "near_misses": [
+    {
+     "task": "Call the dentist to reschedule cleaning",
+     "better": "telephone handset",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write thank-you notes to the wedding guests",
+     "better": "envelope or pen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a portable Bluetooth speaker for the patio",
+     "better": "audio speaker box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check voicemail from the auto shop",
+     "better": "voicemail tape icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Update profile picture on Slack",
+     "better": "plain user bust or camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy HDMI adapter for the projector",
+     "better": "cable or plug",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "transcribe",
+   "spatial_audio_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5440,
+    "output": 1739,
+    "thoughts": 0,
+    "total": 7179
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "Unlike the two icons whose arcs curve inward toward the head, this icon's two arcs curve concave to the left (shorter arc near the head, longer arc on the outside), radiating outward from the person to represent speaking or emitting voice."
 }

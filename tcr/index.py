@@ -35,11 +35,16 @@ def _normalize(mat: np.ndarray) -> np.ndarray:
     return mat / norms
 
 
-def _cache_path(model_name: str, view: str, names: Sequence[str]) -> "object":
+def _cache_path(model_name: str, view: str, names: Sequence[str],
+                texts: Optional[Sequence[str]] = None) -> "object":
+    """Cache file for one (model, view, icon set). `texts` are the encoded documents:
+    keying on them keeps v1 and v2 descriptions (and any edit to either) apart."""
     h = hashlib.sha1()
     h.update(model_name.encode())
     h.update(view.encode())
     h.update("\n".join(names).encode())
+    if texts is not None:
+        h.update(b"\0texts\0" + "\n".join(texts).encode())
     digest = h.hexdigest()[:16]
     safe_model = model_name.replace("/", "_")
     return config.CACHE_DIR / f"{safe_model}__{view}__{digest}.npz"
@@ -76,7 +81,8 @@ class IconIndex:
         icons = list(icons)
         names = [ic.name for ic in icons]
         view_key = f"{view}{'' if include_examples else '_noex'}"
-        path = _cache_path(model_name, view_key, names)
+        texts = [_doc_text(ic, view, include_examples) for ic in icons]
+        path = _cache_path(model_name, view_key, names, texts)
         if use_cache and path.exists():
             try:
                 data = np.load(path)
@@ -85,7 +91,6 @@ class IconIndex:
             except Exception:
                 pass
 
-        texts = [_doc_text(ic, view, include_examples) for ic in icons]
         model = get_model(model_name)
         prefix = config.doc_prefix_for(model_name)
         payload = [prefix + t for t in texts] if prefix else texts

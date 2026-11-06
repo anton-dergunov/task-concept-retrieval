@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "price tag, sale, or pricing",
+   "meaning": "price tag, retail sale, or discount",
    "strength": "primary"
   },
   {
-   "meaning": "label, tag, or category keyword",
+   "meaning": "label, category tag, or metadata",
    "strength": "primary"
   },
   {
-   "meaning": "luggage tag or gift tag",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "brand or retail merchandise",
+   "meaning": "physical luggage tag or gift tag",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Completely interchangeable with the left-facing price tag icon; the two differ only by horizontal mirroring and carry identical meaning.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -185,12 +181,22 @@
    "task": "Rent two folding tables from the community center",
    "better": "table",
    "trap": "parent_topic"
+  },
+  {
+   "task": "Print barcode stickers for the warehouse bins",
+   "better": "barcode",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Save the article to my reading list bookmarks",
+   "better": "bookmark ribbon",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic hang tag with an eyelet hole, universally understood as a price tag, physical label, or digital metadata tag. It fits concrete tasks about labeling household items, pricing goods for sale, writing gift/luggage tags, and managing digital tags, and its silhouette is unmistakable even at tiny sizes.",
@@ -208,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "price tag, sale, or pricing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "label, tag, or category keyword",
+     "strength": "primary"
+    },
+    {
+     "meaning": "luggage tag or gift tag",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "brand or retail merchandise",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Renew the car registration tags at the DMV before the end of the month",
+     "better": "car or license plate",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Play laser tag with the nephews on Saturday afternoon",
+     "better": "game controller or target",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Have dermatologist freeze off that annoying skin tag on my neck",
+     "better": "doctor or medical cross",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Tag Sarah in the wedding photos on Instagram",
+     "better": "camera or photo",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a brand-name winter parka that holds up in minus twenty",
+     "better": "coat or jacket",
+     "trap": "property"
+    },
+    {
+     "task": "Rent two folding tables from the community center",
+     "better": "table",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "local_offer"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 3976,
+    "output": 1058,
+    "thoughts": 93,
+    "total": 5127
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:44Z"
+  }
+ },
+ "distinguishing": "Visually, the tag's eyelet hole is in the upper-right corner with the body angled down to the left, making it a horizontal mirror image of the other tag and completely interchangeable in meaning."
 }

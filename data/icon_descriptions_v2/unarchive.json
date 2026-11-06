@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "package, parcel, or shipping box (this side up / outbound shipment / unpack / return package / unarchive / upgrade package / export / upload package / take out of box / send parcel) -> specifically shipping box, parcel, unpack, return item, or upgrade software package",
+   "meaning": "shipping box, parcel, outbound shipment, or return package",
    "strength": "primary"
   },
   {
-   "meaning": "unarchive, extract, or unpack files/items",
+   "meaning": "unpack, unbox, extract, or unarchive items/files",
    "strength": "primary"
   },
   {
-   "meaning": "return a package or send a shipment out",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "upgrade or update a software package",
+   "meaning": "upgrade or publish a software package",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a generic upload icon, an archive box, a ballot box, or an oven/appliance at very small sizes.",
+ "ambiguity": "Easily confused at small sizes with the application window with a thick top bar and up arrow, or the square outbox tray with an up arrow.",
  "modifier_semantics": [
   {
    "modifier": "upward-pointing arrow on the front face",
@@ -172,14 +168,24 @@
  ],
  "near_misses": [
   {
+   "task": "Upload the signed tax PDF to the accountant's folder",
+   "better": "document page with folded corner and upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Process and empty the physical mail outbox tray on my desk",
+   "better": "square outbox tray with curved notch and upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Import the backup configuration into the browser window",
+   "better": "application window frame with upward arrow entering bottom",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order a box of 12 protein bars from Costco",
    "better": "protein bar / food",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Upload the final slide deck to Google Drive",
-   "better": "cloud upload",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book the holiday package to Mallorca for September",
@@ -190,22 +196,12 @@
    "task": "Check the breaker box in the basement to see why the kitchen outlets tripped",
    "better": "electrical panel / lightning bolt",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pick up a six-pack of moving blankets from Harbor Freight",
-   "better": "blanket / truck",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Verify that the new dresser came with all the screws in the hardware bag",
-   "better": "screws / dresser",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a cardboard shipping box with a 'this side up' / outbound arrow on its side. It is an ideal, everyday icon for shipping parcels, online shopping returns, picking up deliveries, unpacking moving boxes, and managing software packages, though it should be distinguished from generic file upload or archive icons.",
@@ -225,6 +221,98 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "package, parcel, or shipping box (this side up / outbound shipment / unpack / return package / unarchive / upgrade package / export / upload package / take out of box / send parcel) -> specifically shipping box, parcel, unpack, return item, or upgrade software package",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unarchive, extract, or unpack files/items",
+     "strength": "primary"
+    },
+    {
+     "meaning": "return a package or send a shipment out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upgrade or update a software package",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a generic upload icon, an archive box, a ballot box, or an oven/appliance at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Order a box of 12 protein bars from Costco",
+     "better": "protein bar / food",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upload the final slide deck to Google Drive",
+     "better": "cloud upload",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the holiday package to Mallorca for September",
+     "better": "airplane / beach / travel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the breaker box in the basement to see why the kitchen outlets tripped",
+     "better": "electrical panel / lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a six-pack of moving blankets from Harbor Freight",
+     "better": "blanket / truck",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify that the new dresser came with all the screws in the hardware bag",
+     "better": "screws / dresser",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "outbox",
+   "open_in_browser",
+   "upload_file"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6788,
+    "output": 1969,
+    "thoughts": 0,
+    "total": 8757,
+    "seconds": 33.49,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:40:18Z"
+  }
+ },
+ "distinguishing": "Has a trapezoidal top panel in perspective showing the top face of a 3D cube or cardboard box, representing a physical parcel, unpacking, unarchiving, or a software package rather than a flat UI tray or window."
 }

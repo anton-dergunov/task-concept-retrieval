@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "no disposable cutlery",
+   "meaning": "opt out of disposable cutlery",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the thick vertical shapes and slash might look like an abstract 'N' or broken fence posts.",
+ "ambiguity": "At very small sizes, the vertical fork tines, stems, and knife blade cut by the diagonal slash can be mistaken for the crossed-out vertical bars of the disabled bar chart icon.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -160,40 +160,45 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off usage analytics and crash reporting in app settings",
+   "better": "crossed-out bar chart icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hide the sales metrics chart from the client dashboard",
+   "better": "crossed-out bar chart icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book a table for four at the new ramen place",
-   "better": "fork and knife (without slash)",
+   "better": "fork and knife without slash",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new set of stainless steel steak knives",
-   "better": "knife / cutlery",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Wash all the dirty silverware after the dinner party",
-   "better": "dishwashing / sink",
+   "better": "knife or cutlery icon without slash",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Schedule annual fasting blood glucose lab appointment",
-   "better": "blood drop / syringe / calendar",
+   "better": "blood drop, syringe, or calendar icon",
    "trap": "property"
   },
   {
    "task": "Check if the new cafe on Main Street is open",
-   "better": "cafe / storefront",
+   "better": "cafe or storefront icon",
    "trap": "generic_verb"
   },
   {
    "task": "Drink 2 liters of plain water during the day",
-   "better": "water bottle / glass of water",
+   "better": "water bottle or glass of water icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a fork and knife crossed out with a diagonal slash, universally understood as 'no food', 'fasting', 'no dining', or 'cancel meal/reservation'. It fits concrete personal tasks like pre-medical fasting, intermittent fasting, cancelling restaurant reservations, or doing no-takeout challenges.",
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "fasting or no eating",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel restaurant reservation or meal plan",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no disposable cutlery",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "dietary restriction or food ban",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the thick vertical shapes and slash might look like an abstract 'N' or broken fence posts.",
+   "near_misses": [
+    {
+     "task": "Book a table for four at the new ramen place",
+     "better": "fork and knife (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new set of stainless steel steak knives",
+     "better": "knife / cutlery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wash all the dirty silverware after the dinner party",
+     "better": "dishwashing / sink",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule annual fasting blood glucose lab appointment",
+     "better": "blood drop / syringe / calendar",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the new cafe on Main Street is open",
+     "better": "cafe / storefront",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Drink 2 liters of plain water during the day",
+     "better": "water bottle / glass of water",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bar_chart_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4108,
+    "output": 740,
+    "thoughts": 196,
+    "total": 5044
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "Shows a three-tined fork with a rounded bowl and a curved-blade knife crossed out by a diagonal slash (fasting, no eating, or no cutlery), rather than three flat-topped rectangular chart bars with a slash."
 }

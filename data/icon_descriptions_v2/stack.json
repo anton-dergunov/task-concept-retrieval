@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "copy or duplicate",
+   "meaning": "copy, duplicate, or clone",
    "strength": "primary"
   },
   {
-   "meaning": "clone or backup",
+   "meaning": "clipboard copy or backup item",
    "strength": "secondary"
   },
   {
-   "meaning": "multiple windows or tabs",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "layers or overlapping items",
+   "meaning": "overlapping layers or multiple items",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as browser tabs, window restore/unmaximize UI chrome, or graphic design layers rather than copying.",
+ "ambiguity": "Functionally and visually very close to the plain overlapping horizontal rectangles, and easily confused with the dual-monitor icon which has the same top-left L-shaped back outline.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -153,6 +149,21 @@
  ],
  "near_misses": [
   {
+   "task": "Extend laptop desktop across dual monitors",
+   "better": "computer monitor on a stand with a second screen outline behind",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Close unused browser windows to free up RAM",
+   "better": "overlapping windows with solid top title bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Merge the duplicate project folders on the shared drive",
+   "better": "file folder with stacked corner line behind",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Have three spare brass keys cut for the back door",
    "better": "key",
    "trap": "property"
@@ -166,27 +177,12 @@
    "task": "Buy two boxes of A4 copy paper for the home office",
    "better": "paper sheets or printer",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the cracked double-pane window in the guest bedroom",
-   "better": "house window",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pick up some black cardstock while near the shop",
-   "better": "shopping bag or paper",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Apply for a duplicate vehicle title at the DMV",
-   "better": "car or certificate",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Two overlapping rounded squares are the universal UI pictogram for 'copy' or 'duplicate'. While originally interface chrome (also used for browser tab switching or window restore), it works well for concrete tasks whose central action is photocopying documents, cloning drives/databases, duplicating templates, or cleaning up duplicates.",
@@ -204,6 +200,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "copy or duplicate",
+     "strength": "primary"
+    },
+    {
+     "meaning": "clone or backup",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "multiple windows or tabs",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "layers or overlapping items",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as browser tabs, window restore/unmaximize UI chrome, or graphic design layers rather than copying.",
+   "near_misses": [
+    {
+     "task": "Have three spare brass keys cut for the back door",
+     "better": "key",
+     "trap": "property"
+    },
+    {
+     "task": "Write website landing page copy for the new pricing tier",
+     "better": "text document or pen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy two boxes of A4 copy paper for the home office",
+     "better": "paper sheets or printer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the cracked double-pane window in the guest bedroom",
+     "better": "house window",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up some black cardstock while near the shop",
+     "better": "shopping bag or paper",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Apply for a duplicate vehicle title at the DMV",
+     "better": "car or certificate",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "select_window",
+   "select_window_2",
+   "markunread_mailbox",
+   "folder_copy",
+   "tv_displays"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9395,
+    "output": 2955,
+    "thoughts": 262,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "It shows two plain 1:1 rounded squares with the front square at the bottom-right and a clean gap separating the disconnected L-shaped back square at the top-left, the standard UI symbol for copy or duplicate."
 }

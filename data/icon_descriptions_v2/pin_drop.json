@@ -9,23 +9,19 @@
  },
  "readings": [
   {
+   "meaning": "dropped pin, specific spot, or pinned destination",
+   "strength": "primary"
+  },
+  {
    "meaning": "location, place, or address",
    "strength": "primary"
   },
   {
-   "meaning": "dropped pin or waypoint on a map",
-   "strength": "primary"
-  },
-  {
-   "meaning": "check-in spot or destination",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "distance or route endpoint",
+   "meaning": "check-in point or arrival endpoint",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Hardly distinguishable from a standard map pin without the bottom bar.",
+ "ambiguity": "Easily mistaken for the plain outlined map pin without a bottom bar and the map pin inside a filled black circle; all three convey general location or place.",
  "modifier_semantics": [
   {
    "modifier": "horizontal bar beneath the pin point",
@@ -162,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Look up the general neighborhood for the new office",
+   "better": "plain map pin without ground bar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Enable location services badge in app settings",
+   "better": "map pin inside a solid circle badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy brass push pins for the corkboard",
    "better": "thumbtack / pushpin",
    "trap": "shared_vocabulary"
@@ -185,17 +191,12 @@
    "task": "Renew passport before the October trip",
    "better": "passport",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Pick up dry cleaning on the way home",
-   "better": "coat hanger / shirt",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a standard map pin over a short horizontal base line representing a dropped pin or specific location. It fits tasks centered on addresses, coordinates, meeting spots, and map waypoints across travel, errands, and outdoors, though it is nearly interchangeable with a plain map marker.",
@@ -213,6 +214,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "location, place, or address",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dropped pin or waypoint on a map",
+     "strength": "primary"
+    },
+    {
+     "meaning": "check-in spot or destination",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "distance or route endpoint",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Hardly distinguishable from a standard map pin without the bottom bar.",
+   "near_misses": [
+    {
+     "task": "Buy brass push pins for the corkboard",
+     "better": "thumbtack / pushpin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reset 4-digit debit card PIN at the ATM",
+     "better": "keypad or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a local SIM card at Lisbon airport",
+     "better": "SIM card",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the parcel has arrived yet",
+     "better": "package / box",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Renew passport before the October trip",
+     "better": "passport",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up dry cleaning on the way home",
+     "better": "coat hanger / shirt",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "location_on",
+   "explore_nearby"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5309,
+    "output": 1567,
+    "thoughts": 0,
+    "total": 6876
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Adds a horizontal ground bar beneath the point of the outlined teardrop map pin, suggesting a dropped pin landing on a specific spot, destination, or check-in point, though in practice it is nearly interchangeable with the plain map pin."
 }

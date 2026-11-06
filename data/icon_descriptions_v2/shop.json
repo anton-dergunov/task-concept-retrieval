@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "video portfolio, demo reel, or showreel",
+   "meaning": "single demo reel, showreel, or video portfolio piece",
    "strength": "primary"
   },
   {
-   "meaning": "work training video or corporate presentation recording",
+   "meaning": "work training video or recorded corporate presentation",
    "strength": "secondary"
   },
   {
-   "meaning": "portable media player or offline travel videos",
+   "meaning": "purchased movie or digital video download",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as a shopping bag with a play button (Google Play / app store) or as a briefcase with a play button (video portfolio / work video).",
+ "ambiguity": "Reads either as a shopping bag with a play button (app store / digital shop) or a briefcase with a play button (work video); easily confused with the stacked version having an L-shaped backing line when the distinction between a single item/store and a collection/library is overlooked.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing play triangle",
@@ -163,24 +163,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a padded hardshell case for the Sony FX3 camera before the shoot",
-   "better": "camera case or camera",
-   "trap": "shared_vocabulary"
+   "task": "Organize our library of past client demo reels and training courses",
+   "better": "stacked play-briefcase / video collection with backing layer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Audit all purchased app subscriptions across our family accounts",
+   "better": "stacked play-bag / multi-item digital library with backing layer",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pack the leather briefcase for tomorrow's deposition",
-   "better": "plain briefcase",
+   "better": "plain briefcase without play button",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Fix the broken zipper on my carry-on bag",
-   "better": "suitcase / luggage",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Watch the new Dune movie with Maya tonight",
-   "better": "film clapperboard or tv screen",
-   "trap": "lookalike_glyph"
+   "task": "Buy a padded hardshell case for the Sony FX3 camera before the shoot",
+   "better": "camera case or camera",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Check whether the client opened the pitch deck",
@@ -189,14 +189,14 @@
   },
   {
    "task": "Invoice the agency for the three commercial edits",
-   "better": "invoice / receipt",
+   "better": "invoice or receipt",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a bag or briefcase silhouette with a centered play triangle, closely matching both the Google Play / app store bag glyph and a 'video briefcase' (showreel, video portfolio, or work training video). It fits tasks around publishing or buying apps on a digital store, editing a professional demo reel, or watching work videos, though it can be confused with a plain video player or standard briefcase at tiny sizes.",
@@ -214,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "app store, Google Play, or digital media marketplace",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video portfolio, demo reel, or showreel",
+     "strength": "primary"
+    },
+    {
+     "meaning": "work training video or corporate presentation recording",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "portable media player or offline travel videos",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as a shopping bag with a play button (Google Play / app store) or as a briefcase with a play button (video portfolio / work video).",
+   "near_misses": [
+    {
+     "task": "Buy a padded hardshell case for the Sony FX3 camera before the shoot",
+     "better": "camera case or camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the leather briefcase for tomorrow's deposition",
+     "better": "plain briefcase",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix the broken zipper on my carry-on bag",
+     "better": "suitcase / luggage",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Watch the new Dune movie with Maya tonight",
+     "better": "film clapperboard or tv screen",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check whether the client opened the pitch deck",
+     "better": "presentation slide or email",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Invoice the agency for the three commercial edits",
+     "better": "invoice / receipt",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shop_two"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4107,
+    "output": 1132,
+    "thoughts": 83,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "Shows a single bag or briefcase with a play triangle inside and no backing layer, representing the app store / media marketplace itself or a single work video / demo reel rather than a multi-item library or collection."
 }

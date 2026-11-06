@@ -9,23 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "accessibility settings, options, or universal access",
+   "meaning": "accessibility settings, options, or assistive menu",
    "strength": "primary"
   },
   {
-   "meaning": "body stretching, calisthenics, or warm-up exercises",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "acrobatics, balancing act, or gymnastics",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "personal profile options or user settings",
+   "meaning": "more accessibility features or system preferences",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The outstretched figure is the standard modern icon for digital accessibility, while the three dots denote 'more options' or settings; together it looks either like an accessibility menu or someone balancing/jumping over dots.",
+ "ambiguity": "Functionally interchangeable with the curved-arm accessibility figure with three vertical dots on the right, and easily confused with the undotted accessibility figures when the bottom dots are small.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal dots underneath",
@@ -160,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Do 10 minutes of morning full-body posture stretches",
+   "better": "curved-arm standing figure without dots",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Log full-body anatomy measurements in fitness tracker",
+   "better": "straight-armed standing human figure without dots",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check if the Airbnb in Lisbon is wheelchair accessible",
    "better": "wheelchair symbol",
    "trap": "property"
@@ -168,16 +170,6 @@
    "task": "Make the shared tax spreadsheet accessible to the accountant",
    "better": "spreadsheet or share/key icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new yoga mat for floor stretches",
-   "better": "rolled yoga mat",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Order a tailor dummy for pinning jacket sleeves",
-   "better": "mannequin / dress form",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check the user settings page for broken links",
@@ -193,7 +185,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows the standard open-armed human figure used for digital accessibility (and bodily stretching) paired with a three-dot 'more/settings' ellipsis underneath. It fits tasks around device accessibility options, web a11y audits, and basic stretching routines, though it can be confused with a generic user profile menu.",
@@ -211,6 +203,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "accessibility settings, options, or universal access",
+     "strength": "primary"
+    },
+    {
+     "meaning": "body stretching, calisthenics, or warm-up exercises",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "acrobatics, balancing act, or gymnastics",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal profile options or user settings",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The outstretched figure is the standard modern icon for digital accessibility, while the three dots denote 'more options' or settings; together it looks either like an accessibility menu or someone balancing/jumping over dots.",
+   "near_misses": [
+    {
+     "task": "Check if the Airbnb in Lisbon is wheelchair accessible",
+     "better": "wheelchair symbol",
+     "trap": "property"
+    },
+    {
+     "task": "Make the shared tax spreadsheet accessible to the accountant",
+     "better": "spreadsheet or share/key icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new yoga mat for floor stretches",
+     "better": "rolled yoga mat",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a tailor dummy for pinning jacket sleeves",
+     "better": "mannequin / dress form",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the user settings page for broken links",
+     "better": "gear / cog or link icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Renew disabled parking placard at the DMV",
+     "better": "car or wheelchair placard",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "accessibility",
+   "accessible_menu",
+   "accessibility_new"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6727,
+    "output": 1942,
+    "thoughts": 193,
+    "total": 8862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Combines the curved-arm accessibility figure with three horizontal dots underneath to indicate accessibility options or more settings, making it functionally interchangeable with the variant that has three vertical dots on the right."
 }

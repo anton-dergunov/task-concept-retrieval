@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "male or men's health symbol (rotated Mars glyph)",
+   "meaning": "male / man / men's health (Mars symbol)",
    "strength": "primary"
   },
   {
-   "meaning": "gender identity / neuter or third-gender symbol",
+   "meaning": "urology / andrology / prostate check",
+   "strength": "primary"
+  },
+  {
+   "meaning": "gender symbol / masculine identity",
    "strength": "secondary"
   },
   {
-   "meaning": "move down, drop, or pull downward",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "location pin or drop marker",
+   "meaning": "drag or pull node downward",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Commonly mistaken for the standard female symbol (circle with a cross below) at small sizes, or interpreted as the standard male symbol despite the arrow pointing straight down instead of top-right.",
+ "ambiguity": "Because the arrow points straight down where the female symbol's cross usually sits (instead of top-right), it is very easily mistaken at a glance for the female symbol (circle with a cross below).",
  "modifier_semantics": [
   {
    "modifier": "downward arrow",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Book annual gynecologist and Pap smear appointment",
+   "better": "female symbol (circle with cross)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up birth control prescription from the pharmacy",
+   "better": "female symbol (circle with cross) or pills",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Download the statement PDFs from the bank portal",
    "better": "download arrow into tray",
    "trap": "lookalike_glyph"
@@ -167,16 +177,6 @@
   {
    "task": "Drop a pin on the campsite location before losing cell service",
    "better": "map pin marker",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check the tire pressure with the hand gauge",
-   "better": "pressure gauge or tire",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book annual gynecologist appointment",
-   "better": "female symbol (circle with cross)",
    "trap": "lookalike_glyph"
   },
   {
@@ -193,7 +193,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows a circle with an arrow pointing straight down, most commonly read as a variant of the male (Mars) symbol or a neuter/third-gender symbol. It fits tasks centered on men's health, urology, or gender marker admin, though its non-standard downward orientation makes it easy to confuse with the female symbol, a map pin, or a generic pull-down arrow at small sizes.",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "male or men's health symbol (rotated Mars glyph)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "gender identity / neuter or third-gender symbol",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "move down, drop, or pull downward",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "location pin or drop marker",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Commonly mistaken for the standard female symbol (circle with a cross below) at small sizes, or interpreted as the standard male symbol despite the arrow pointing straight down instead of top-right.",
+   "near_misses": [
+    {
+     "task": "Download the statement PDFs from the bank portal",
+     "better": "download arrow into tray",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Drop a pin on the campsite location before losing cell service",
+     "better": "map pin marker",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the tire pressure with the hand gauge",
+     "better": "pressure gauge or tire",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book annual gynecologist appointment",
+     "better": "female symbol (circle with cross)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy men's running shoes for marathon training",
+     "better": "running shoe",
+     "trap": "property"
+    },
+    {
+     "task": "Watch the documentary on the Mars rover landing",
+     "better": "planet or rover",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "female"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4036,
+    "output": 1015,
+    "thoughts": 0,
+    "total": 5051
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "Has a downward-pointing arrow attached to the bottom of the circle (a vertically oriented male/Mars symbol), rather than a cross with a horizontal bar."
 }

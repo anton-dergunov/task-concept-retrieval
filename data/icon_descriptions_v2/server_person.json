@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "portrait photo or framed picture",
+   "meaning": "ID badge, employee access card, or visitor pass",
    "strength": "primary"
   },
   {
-   "meaning": "ID badge or employee access card",
+   "meaning": "portrait photo or framed tabletop picture",
    "strength": "primary"
   },
   {
-   "meaning": "contact card or user profile",
+   "meaning": "contact card or address book entry",
    "strength": "secondary"
   },
   {
-   "meaning": "SD card with photos",
+   "meaning": "user profile card or account badge",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The bottom notch resembles an easel stand, a camera film cartridge, an SD card notch, or an upside-down lanyard slot, making it blend together portrait frames, ID badges, and contact cards.",
+ "ambiguity": "Could be mistaken at a quick glance for the horizontal computer monitor with a person inside, though the vertical card orientation and inward bottom notch distinguish it from a desktop screen with a protruding stand.",
  "modifier_semantics": [
   {
    "modifier": "person silhouette inside",
@@ -183,18 +183,23 @@
  ],
  "near_misses": [
   {
-   "task": "Call Mom to catch up this weekend",
-   "better": "phone",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a 128GB microSD card for the dashcam",
-   "better": "memory card",
+   "task": "Join the 3pm Zoom video interview with the design candidate",
+   "better": "computer monitor with person inside",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Log into my desktop user account to check system settings",
+   "better": "computer monitor with person inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call Mom to catch up this weekend",
+   "better": "telephone handset",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Hang the large landscape painting over the sofa",
-   "better": "landscape picture frame",
+   "better": "landscape picture frame with mountains",
    "trap": "shared_vocabulary"
   },
   {
@@ -204,19 +209,19 @@
   },
   {
    "task": "Pay the invoice for the wedding photographer",
-   "better": "money / credit card",
+   "better": "money or credit card",
    "trap": "parent_topic"
   },
   {
    "task": "Buy photo-quality matte paper for the inkjet printer",
-   "better": "paper / printer",
+   "better": "printer or paper sheet",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a vertical rectangular card or frame containing a person's bust, with a trapezoidal notch at the bottom. It fits tasks involving headshots, passport photos, framed portraits, and ID badges, though it can be confused with generic contact or user profile icons.",
@@ -236,6 +241,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "portrait photo or framed picture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ID badge or employee access card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contact card or user profile",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "SD card with photos",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The bottom notch resembles an easel stand, a camera film cartridge, an SD card notch, or an upside-down lanyard slot, making it blend together portrait frames, ID badges, and contact cards.",
+   "near_misses": [
+    {
+     "task": "Call Mom to catch up this weekend",
+     "better": "phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 128GB microSD card for the dashcam",
+     "better": "memory card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hang the large landscape painting over the sofa",
+     "better": "landscape picture frame",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if my driver's license is in my wallet",
+     "better": "wallet",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the invoice for the wedding photographer",
+     "better": "money / credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy photo-quality matte paper for the inkjet printer",
+     "better": "paper / printer",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "tv_signin"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4094,
+    "output": 720,
+    "thoughts": 114,
+    "total": 4928
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "Vertical portrait card with an inward trapezoidal cutout at the bottom edge (for an ID badge, contact card, or portrait photo frame), whereas the look-alike is a horizontal computer monitor with a protruding pedestal stand."
 }

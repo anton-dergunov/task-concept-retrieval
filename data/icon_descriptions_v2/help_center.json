@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "question, inquiry, or FAQ",
-   "strength": "primary"
-  },
-  {
-   "meaning": "help or customer support",
+   "meaning": "help center, documentation, or FAQ",
    "strength": "primary"
   },
   {
    "meaning": "quiz, trivia, or riddle",
-   "strength": "secondary"
+   "strength": "primary"
   },
   {
    "meaning": "unknown, undecided, or mystery item",
    "strength": "secondary"
+  },
+  {
+   "meaning": "general question or inquiry",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Nearly identical to circular or unframed question mark icons, and easily confused with generic placeholder icons for missing graphics.",
+ "ambiguity": "Easily confused at small sizes with the question-mark speech bubble icon, which differs only by a small triangular tail at the bottom center; also resembles a missing-image placeholder.",
  "modifier_semantics": [
   {
    "modifier": "rounded square border",
@@ -176,6 +176,16 @@
  ],
  "near_misses": [
   {
+   "task": "Message live customer support chat about the delayed shipment",
+   "better": "question mark inside a speech bubble",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Host the live Q&A session with the product team on Slack",
+   "better": "question mark inside a speech bubble",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Ask the landlord to replace the corroded shutoff valve under the kitchen sink",
    "better": "pipe, wrench, or faucet",
    "trap": "generic_verb"
@@ -194,11 +204,6 @@
    "task": "Help Sam carry his sleeper sofa up to the third-floor apartment",
    "better": "sofa or moving box",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy an unbranded mystery box of keycaps from the mechanical keyboard sale",
-   "better": "keyboard or package box",
-   "trap": "property"
   },
   {
    "task": "Record a 2-minute Loom video showing how to export CSV reports",
@@ -230,6 +235,94 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "question, inquiry, or FAQ",
+     "strength": "primary"
+    },
+    {
+     "meaning": "help or customer support",
+     "strength": "primary"
+    },
+    {
+     "meaning": "quiz, trivia, or riddle",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "unknown, undecided, or mystery item",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Nearly identical to circular or unframed question mark icons, and easily confused with generic placeholder icons for missing graphics.",
+   "near_misses": [
+    {
+     "task": "Ask the landlord to replace the corroded shutoff valve under the kitchen sink",
+     "better": "pipe, wrench, or faucet",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Read a mystery novel on the train to Chicago",
+     "better": "book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Question the extra $45 roaming fee on this month's cell phone bill",
+     "better": "invoice, receipt, or phone bill",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Help Sam carry his sleeper sofa up to the third-floor apartment",
+     "better": "sofa or moving box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an unbranded mystery box of keycaps from the mechanical keyboard sale",
+     "better": "keyboard or package box",
+     "trap": "property"
+    },
+    {
+     "task": "Record a 2-minute Loom video showing how to export CSV reports",
+     "better": "video camera or screen recording",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "live_help"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4069,
+    "output": 874,
+    "thoughts": 148,
+    "total": 5091
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "Enclosed in a plain rounded square with a flat bottom rather than a speech bubble with a downward tail, making it a general symbol for help documentation, quizzes, or unknown/mystery items rather than live chat or spoken questions, though the two are largely interchangeable for general FAQ tasks."
 }

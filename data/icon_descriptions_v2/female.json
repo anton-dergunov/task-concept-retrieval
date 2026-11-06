@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, could briefly resemble a hand mirror, a key, or an ankh symbol.",
+ "ambiguity": "At small sizes, easily mistaken for the circle with a downward-pointing arrow below it (male/Mars symbol).",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -154,14 +154,19 @@
  ],
  "near_misses": [
   {
+   "task": "Schedule annual men's health physical and PSA blood test",
+   "better": "male symbol (circle with arrow)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Refill testosterone gel prescription at the pharmacy",
+   "better": "male symbol (circle with arrow) or pill bottle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy women's trail running shoes size 8",
    "better": "running shoe",
    "trap": "property"
-  },
-  {
-   "task": "Hang the round brass mirror in the hallway",
-   "better": "mirror",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Replace Venus razor blades in the shower",
@@ -174,20 +179,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pay $45 copay Invoice #8821",
+   "task": "Pay $45 OB-GYN copay Invoice #8821",
    "better": "invoice / credit card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Cut spare brass key for the back door",
-   "better": "key",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon is the universally recognized Venus or female symbol. It is a strong, unambiguous choice for tasks about women's health, gynecology, cycle tracking, gender documentation, women's organizations, or astronomy/astrology concerning Venus. At tiny sizes it slightly resembles a hand mirror or key, and it should not be used when 'women's' or 'female' is merely an adjective on clothing or gear.",
@@ -205,6 +205,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "female / woman / women's health",
+     "strength": "primary"
+    },
+    {
+     "meaning": "gynecology / reproductive health",
+     "strength": "primary"
+    },
+    {
+     "meaning": "planet Venus / astrology",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "feminism / women's event or group",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, could briefly resemble a hand mirror, a key, or an ankh symbol.",
+   "near_misses": [
+    {
+     "task": "Buy women's trail running shoes size 8",
+     "better": "running shoe",
+     "trap": "property"
+    },
+    {
+     "task": "Replace Venus razor blades in the shower",
+     "better": "razor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Water the Venus flytrap on the kitchen windowsill",
+     "better": "houseplant",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay $45 copay Invoice #8821",
+     "better": "invoice / credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Cut spare brass key for the back door",
+     "better": "key",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "swipe_down_alt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4036,
+    "output": 1015,
+    "thoughts": 0,
+    "total": 5051
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "Has a horizontal crossbar below the circle forming a downward cross (the female/Venus symbol), rather than a downward-pointing arrowhead."
 }

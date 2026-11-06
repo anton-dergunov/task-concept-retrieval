@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the hand gripping the phone combined with the diagonal slash creates a dense tangle of strokes in the lower-left that can look like an abstract geometric symbol or a crossed-out tag/badge.",
+ "ambiguity": "At small list sizes, the rounded contour of the hand on the left combined with the vertical body and diagonal slash can somewhat resemble the crossed-out rounded backpack, or look like an abstract tangled geometric badge.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Leave backpack in the museum locker before entering the gallery",
+   "better": "crossed-out backpack icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unpack hiking daypack and air it out after the weekend trip",
+   "better": "crossed-out backpack or plain backpack icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cancel T-Mobile monthly cellular plan before next billing cycle",
    "better": "SIM card, bill/invoice, or carrier signal icon",
    "trap": "shared_vocabulary"
@@ -177,23 +187,13 @@
    "trap": "property"
   },
   {
-   "task": "Call the dentist back to decline the Tuesday appointment",
-   "better": "telephone handset or missed/declined call icon",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Check why the mobile app keeps crashing on startup",
    "better": "bug or mobile app window icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Download offline trail maps for the canyon hike",
-   "better": "map or download arrow icon",
-   "trap": "property"
-  },
-  {
    "task": "Pay the remaining device balance on the old phone contract",
-   "better": "money/credit card icon",
+   "better": "money or credit card icon",
    "trap": "parent_topic"
   }
  ],
@@ -218,6 +218,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no phone / put phone away / digital detox",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen-free time / limit smartphone usage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disable mobile access / offline mode",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "broken or unusable mobile phone",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the hand gripping the phone combined with the diagonal slash creates a dense tangle of strokes in the lower-left that can look like an abstract geometric symbol or a crossed-out tag/badge.",
+   "near_misses": [
+    {
+     "task": "Cancel T-Mobile monthly cellular plan before next billing cycle",
+     "better": "SIM card, bill/invoice, or carrier signal icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take cracked iPhone 14 screen to the repair shop on 5th Ave",
+     "better": "smartphone with wrench/tools or cracked screen icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a non-slip silicone case for my new phone",
+     "better": "smartphone case or shopping bag icon",
+     "trap": "property"
+    },
+    {
+     "task": "Call the dentist back to decline the Tuesday appointment",
+     "better": "telephone handset or missed/declined call icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check why the mobile app keeps crashing on startup",
+     "better": "bug or mobile app window icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Download offline trail maps for the canyon hike",
+     "better": "map or download arrow icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the remaining device balance on the old phone contract",
+     "better": "money/credit card icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "personal_bag_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4166,
+    "output": 1156,
+    "thoughts": 0,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Shows a rectangular smartphone with a top camera dot held in a hand on the left, crossed out by a diagonal slash, meaning no phone use or digital detox, whereas the other icon shows a rounded backpack with a top loop handle."
 }

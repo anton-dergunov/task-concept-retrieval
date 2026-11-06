@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "speaker pair, stereo speakers, or multi-room audio group",
+   "meaning": "speaker group / multi-room audio system",
    "strength": "primary"
   },
   {
-   "meaning": "loudspeaker or studio monitor",
+   "meaning": "stereo speaker pair / surround sound speakers",
    "strength": "primary"
   },
   {
-   "meaning": "home sound system or audio output devices",
+   "meaning": "home sound system / multiple audio outputs",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the circle and dot inside the rectangle can resemble an iPod, a washing machine, or a copy/duplicate document icon because of the stacked L-border.",
+ "ambiguity": "Often interchangeable at a glance with the single speaker box icon for general audio hardware tasks, and the L-shaped backing frame can resemble a copy/duplicate document icon at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "offset L-shaped backing frame",
@@ -157,9 +157,14 @@
  ],
  "near_misses": [
   {
-   "task": "Email the keynote speakers their stage times and mic check schedule",
-   "better": "person at podium or microphone",
-   "trap": "shared_vocabulary"
+   "task": "Charge the portable JBL Bluetooth speaker before the beach trip",
+   "better": "single speaker box",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unplug the smart speaker in the guest bedroom",
+   "better": "single speaker box",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Duplicate the Q3 slide deck for the regional sales team",
@@ -167,19 +172,14 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Email the keynote speakers their stage times and mic check schedule",
+   "better": "person at podium or microphone",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Listen to the new Hardcore History episode on the flight",
    "better": "headphones or podcast mic",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Clean the rubber door seal on the front-load washing machine",
-   "better": "washing machine with porthole door",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a waterproof portable Bluetooth radio for the kayak",
-   "better": "portable radio or kayak",
-   "trap": "property"
   },
   {
    "task": "Check the volume levels before joining the client Zoom call",
@@ -190,7 +190,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a speaker box with an offset backing line signifying a stereo pair or multi-room speaker group. It fits tasks about buying, wiring, pairing, or positioning physical audio speakers and studio monitors, though at tiny sizes the stacked border resembles a copy/duplicate icon and the speaker face resembles a front-load washer.",
@@ -208,6 +208,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "speaker pair, stereo speakers, or multi-room audio group",
+     "strength": "primary"
+    },
+    {
+     "meaning": "loudspeaker or studio monitor",
+     "strength": "primary"
+    },
+    {
+     "meaning": "home sound system or audio output devices",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the circle and dot inside the rectangle can resemble an iPod, a washing machine, or a copy/duplicate document icon because of the stacked L-border.",
+   "near_misses": [
+    {
+     "task": "Email the keynote speakers their stage times and mic check schedule",
+     "better": "person at podium or microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Duplicate the Q3 slide deck for the regional sales team",
+     "better": "two overlapping document pages (copy icon)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Listen to the new Hardcore History episode on the flight",
+     "better": "headphones or podcast mic",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Clean the rubber door seal on the front-load washing machine",
+     "better": "washing machine with porthole door",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof portable Bluetooth radio for the kayak",
+     "better": "portable radio or kayak",
+     "trap": "property"
+    },
+    {
+     "task": "Check the volume levels before joining the client Zoom call",
+     "better": "video call camera or headset",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speaker"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4101,
+    "output": 1013,
+    "thoughts": 0,
+    "total": 5114
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:23Z"
+  }
+ },
+ "distinguishing": "Features an L-shaped backing outline behind the bottom-left of the speaker box, indicating multiple speakers, a stereo pair, or a multi-room audio group rather than a single speaker."
 }

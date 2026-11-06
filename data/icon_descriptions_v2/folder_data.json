@@ -19,13 +19,9 @@
   {
    "meaning": "Subfolders or directory tree structure",
    "strength": "secondary"
-  },
-  {
-   "meaning": "Shared or networked project folder",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "For non-programmers unfamiliar with the Git branch glyph, the modifier might look like a generic network or hierarchy icon.",
+ "ambiguity": "At small sizes, the bottom-right badge sits in the exact same cut-out position as the person badge on a shared/user folder; for non-programmers, the branch glyph can also be misread as a generic network or sharing icon.",
  "modifier_semantics": [
   {
    "modifier": "three-node branching graph symbol",
@@ -161,6 +157,21 @@
  ],
  "near_misses": [
   {
+   "task": "Share the Q3 tax documents folder with the accountant",
+   "better": "file folder with a person silhouette badge for shared or user folders",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean up old downloads in my personal user directory",
+   "better": "file folder with a person silhouette badge for user/home directory",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a pack of manila folders for the tax receipts",
+   "better": "plain file folder without a badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cut the dead branches off the apple tree by the shed",
    "better": "tree or pruning shears",
    "trap": "shared_vocabulary"
@@ -171,18 +182,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a pack of manila folders for the tax receipts",
-   "better": "plain file folder without git symbol",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check if the latest hotfix was merged",
-   "better": "git merge or checkmark",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Renew domain name for the project showcase site",
-   "better": "globe or domain",
+   "better": "globe or domain icon",
    "trap": "parent_topic"
   },
   {
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Git repository or version-controlled code directory",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Software source code project or codebase",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Subfolders or directory tree structure",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Shared or networked project folder",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "For non-programmers unfamiliar with the Git branch glyph, the modifier might look like a generic network or hierarchy icon.",
+   "near_misses": [
+    {
+     "task": "Cut the dead branches off the apple tree by the shed",
+     "better": "tree or pruning shears",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Walk to the high street branch of Barclays to deposit the cheque",
+     "better": "bank building",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a pack of manila folders for the tax receipts",
+     "better": "plain file folder without git symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the latest hotfix was merged",
+     "better": "git merge or checkmark",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Renew domain name for the project showcase site",
+     "better": "globe or domain",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy an open-source router that supports OpenWrt",
+     "better": "Wi-Fi router",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "folder_supervised"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4110,
+    "output": 1153,
+    "thoughts": 0,
+    "total": 5263
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "This outlined file folder has a three-node Git branch symbol in the bottom right corner, signifying a version-controlled code repository or subfolder tree, unlike the folder with a person silhouette."
 }

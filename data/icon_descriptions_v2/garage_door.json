@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "garage or garage door",
+   "meaning": "garage or closed garage door",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the slatted door can look like a ladder inside a house or a generic home icon.",
+ "ambiguity": "Easily confused at a glance with the open garage icon (where only the top slat of the door is visible), and for general garage tasks the two are nearly interchangeable; at tiny sizes it can also look like a generic house.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Leave the garage door open for the parcel courier to drop off the packages",
+   "better": "open garage with raised roll-up door",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Adjust the upper limit switch so the garage door opens all the way",
+   "better": "open garage with raised roll-up door",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Take the Subaru to the garage on Elm Street for its 60k service",
    "better": "car or wrench (auto repair shop)",
    "trap": "shared_vocabulary"
@@ -179,17 +189,12 @@
    "task": "Sell the kids' old stroller and crib at Saturday's garage sale",
    "better": "price tag or stroller",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Take the dull lawnmower blade to be sharpened",
-   "better": "lawnmower or blade",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The peaked roof combined with the wide slatted roll-up door clearly depicts a residential garage, shed, or storage unit. It fits a common family of home maintenance, decluttering, and self-storage tasks, while remaining visually distinct from a standard house icon due to the wide segmented door.",
@@ -207,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "garage or garage door",
+     "strength": "primary"
+    },
+    {
+     "meaning": "storage unit or self-storage locker",
+     "strength": "primary"
+    },
+    {
+     "meaning": "garden shed or outbuilding",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "warehouse or depot",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the slatted door can look like a ladder inside a house or a generic home icon.",
+   "near_misses": [
+    {
+     "task": "Take the Subaru to the garage on Elm Street for its 60k service",
+     "better": "car or wrench (auto repair shop)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Price out 30-year architectural shingles for the main house roof",
+     "better": "house or roof",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Free up 40 GB of cloud storage on Google Drive",
+     "better": "cloud or hard drive",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a garage-ready upright freezer from Costco",
+     "better": "freezer or appliance",
+     "trap": "property"
+    },
+    {
+     "task": "Sell the kids' old stroller and crib at Saturday's garage sale",
+     "better": "price tag or stroller",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take the dull lawnmower blade to be sharpened",
+     "better": "lawnmower or blade",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "garage_door_open"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4064,
+    "output": 1178,
+    "thoughts": 139,
+    "total": 5381
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "Shows the roll-up door fully lowered to the ground with three horizontal slats and a closed bottom sill, representing a closed garage or a general garage/storage unit, unlike the look-alike with an open doorway."
 }

@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "block, unfollow, or remove contact/user",
+   "meaning": "block, unfollow, or remove contact or user",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the inner head and shoulder arcs cut by the slash can resemble a crossed-out Wi-Fi symbol, peace sign, or generic prohibition sign.",
+ "ambiguity": "At small list sizes, the slashed circle with two interior marks can be confused with the slashed speedometer gauge or a slashed Wi-Fi symbol if the viewer does not notice the curved head and shoulder arcs.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -162,14 +162,14 @@
  ],
  "near_misses": [
   {
-   "task": "Update profile picture on LinkedIn",
-   "better": "user avatar / camera",
-   "trap": "shared_vocabulary"
+   "task": "Fix broken speedometer cable on the vintage motorcycle",
+   "better": "slashed speedometer gauge icon",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Cancel Netflix monthly billing subscription",
-   "better": "credit card or recurring payment slash",
-   "trap": "shared_vocabulary"
+   "task": "Disable bandwidth throttling and speed limits on the home router",
+   "better": "slashed speedometer gauge icon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Fix Wi-Fi dead zone in the upstairs bedroom",
@@ -177,25 +177,30 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Create new user account for the new designer",
+   "task": "Update profile picture on LinkedIn",
+   "better": "unslashed user avatar or camera icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Create new user account for the incoming designer",
    "better": "user avatar with plus sign",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Use a throwaway anonymous email address for the newsletter signup",
-   "better": "email envelope",
+   "better": "email envelope icon",
    "trap": "property"
   },
   {
-   "task": "Download 1099 PDF before closing the account",
-   "better": "PDF document / tax form",
+   "task": "Download 1099 PDF before closing the brokerage account",
+   "better": "PDF document or tax form icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a circular user profile avatar crossed out by a diagonal slash, universally understood as 'no account', 'delete/deactivate account', 'revoke user access', or 'block user'. These are common, concrete tasks in digital housekeeping, privacy cleanup, and workplace offboarding, though at tiny sizes the arcs inside the circle can briefly resemble a crossed-out radar or Wi-Fi symbol.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "delete, close, or deactivate user account",
+     "strength": "primary"
+    },
+    {
+     "meaning": "block, unfollow, or remove contact/user",
+     "strength": "primary"
+    },
+    {
+     "meaning": "anonymous, signed out, or guest mode",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "revoke user access or permissions",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the inner head and shoulder arcs cut by the slash can resemble a crossed-out Wi-Fi symbol, peace sign, or generic prohibition sign.",
+   "near_misses": [
+    {
+     "task": "Update profile picture on LinkedIn",
+     "better": "user avatar / camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel Netflix monthly billing subscription",
+     "better": "credit card or recurring payment slash",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix Wi-Fi dead zone in the upstairs bedroom",
+     "better": "wifi off icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Create new user account for the new designer",
+     "better": "user avatar with plus sign",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Use a throwaway anonymous email address for the newsletter signup",
+     "better": "email envelope",
+     "trap": "property"
+    },
+    {
+     "task": "Download 1099 PDF before closing the account",
+     "better": "PDF document / tax form",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "offline_pin_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4090,
+    "output": 1144,
+    "thoughts": 79,
+    "total": 5313
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:25Z"
+  }
+ },
+ "distinguishing": "Inside the slashed circle, this icon shows a curved head arc above a curved shoulder arc (a person avatar), whereas the look-alike shows a straight diagonal needle and flat horizontal baseline (a speedometer gauge)."
 }

@@ -7,19 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "cricket (sport, match, or gear)",
+   "meaning": "cricket bat and ball (sport, match, or gear_",
    "strength": "primary"
   },
   {
-   "meaning": "baseball or bat-and-ball game",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "paddle sport or table tennis",
+   "meaning": "bat-and-ball game",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes or to viewers unfamiliar with cricket, the rectangular blade and detached handle can look like a magnifying glass, a popsicle, a microphone, or a generic paddle.",
+ "ambiguity": "Easily mistaken for the wide pickleball or table tennis paddle and ball, especially by viewers unfamiliar with cricket or at small icon sizes.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -148,6 +144,16 @@
  ],
  "near_misses": [
   {
+   "task": "Reserve a pickleball court at the rec center for Thursday evening",
+   "better": "wide squared pickleball or ping-pong paddle and ball",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the rubber sheets on my table tennis paddle",
+   "better": "wide squared pickleball or ping-pong paddle and ball",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Get rid of the noisy cricket chirping behind the washing machine",
    "better": "insect / bug",
    "trap": "shared_vocabulary"
@@ -159,7 +165,7 @@
   },
   {
    "task": "Call exterminator about bats roosting in the attic rafters",
-   "better": "flying bat (animal)",
+   "better": "flying bat (animal_",
    "trap": "shared_vocabulary"
   },
   {
@@ -171,17 +177,12 @@
    "task": "Book dermatology checkup after standing in the sun at the oval all day",
    "better": "doctor / skin check",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a bottle of raw linseed oil at the hardware store",
-   "better": "bottle / hardware",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a flat-bladed cricket bat and ball. It is an ideal match for tasks related to playing, watching, or buying gear for cricket (and more broadly bat-and-ball sports), though the detached geometric handle could briefly resemble a popsicle or paddle at tiny sizes.",
@@ -199,6 +200,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cricket (sport, match, or gear)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "baseball or bat-and-ball game",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "paddle sport or table tennis",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes or to viewers unfamiliar with cricket, the rectangular blade and detached handle can look like a magnifying glass, a popsicle, a microphone, or a generic paddle.",
+   "near_misses": [
+    {
+     "task": "Get rid of the noisy cricket chirping behind the washing machine",
+     "better": "insect / bug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Switch phone plan over to Cricket Wireless prepaid",
+     "better": "SIM card / mobile phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call exterminator about bats roosting in the attic rafters",
+     "better": "flying bat (animal)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy wooden popsicle sticks for the kids craft project",
+     "better": "popsicle / craft supplies",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book dermatology checkup after standing in the sun at the oval all day",
+     "better": "doctor / skin check",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a bottle of raw linseed oil at the hardware store",
+     "better": "bottle / hardware",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pickleball"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4077,
+    "output": 661,
+    "thoughts": 152,
+    "total": 4890
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:53Z"
+  }
+ },
+ "distinguishing": "Features a narrow, elongated rectangular blade separated from its handle by a small gap, representing a cricket bat rather than a wide pickleball or table tennis paddle."
 }

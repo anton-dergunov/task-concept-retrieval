@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "download disabled / cannot download",
+   "meaning": "download disabled / block or restrict file downloads",
    "strength": "primary"
   },
   {
-   "meaning": "turn off auto-downloads / stop downloading",
+   "meaning": "turn off auto-downloads / stop background downloading",
    "strength": "primary"
   },
   {
-   "meaning": "remove downloaded files / offline content",
+   "meaning": "fix broken download link or failed download",
    "strength": "secondary"
   },
   {
-   "meaning": "block file imports or saves",
+   "meaning": "remove downloaded offline files",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the slashed arrow and tray break into small disconnected fragments that can look like an abstract geometric logo or a broken upload/export icon.",
+ "ambiguity": "Easily confused with the slashed upward-arrow-in-tray icon (upload disabled) because the diagonal slash cuts directly through the downward arrowhead, reducing it to small geometric fragments at list size.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -155,40 +155,45 @@
  ],
  "near_misses": [
   {
-   "task": "Download the offline map of Kyoto before leaving the hotel",
-   "better": "download arrow (unslashed) or map",
+   "task": "Disable automatic photo uploads to iCloud on cellular data",
+   "better": "slashed upward arrow in tray (upload disabled)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Download tax return PDFs from the accountant's portal",
-   "better": "download arrow or tax document",
+   "task": "Fix failed video upload on the client portal",
+   "better": "slashed upward arrow in tray (upload disabled)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download the offline map of Kyoto before leaving the hotel",
+   "better": "unslashed downward arrow in tray (download) or map icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Cancel the Adobe Creative Cloud subscription before renewal",
-   "better": "subscription / credit card with slash",
+   "better": "credit card or subscription icon with slash",
    "trap": "generic_verb"
   },
   {
    "task": "Buy a new inbox tray for the home office desk",
-   "better": "inbox tray / desk organizer",
+   "better": "inbox tray / desk organizer icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Export the final slides for the offline workshop",
-   "better": "presentation slides or export icon",
+   "better": "presentation slides icon",
    "trap": "property"
   },
   {
    "task": "Ask IT for a new YubiKey",
-   "better": "security key",
+   "better": "security key icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a standard download symbol (downward arrow into a tray) crossed out by a diagonal slash, meaning download disabled, blocked, or offline downloads removed. Because the slash heavily fragments the arrow head into tiny disconnected triangles, it is somewhat hard to read at small sizes and fits only a narrow set of tech/settings tasks around stopping auto-downloads or restricting file downloads.",
@@ -208,6 +213,94 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download disabled / cannot download",
+     "strength": "primary"
+    },
+    {
+     "meaning": "turn off auto-downloads / stop downloading",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remove downloaded files / offline content",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "block file imports or saves",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the slashed arrow and tray break into small disconnected fragments that can look like an abstract geometric logo or a broken upload/export icon.",
+   "near_misses": [
+    {
+     "task": "Download the offline map of Kyoto before leaving the hotel",
+     "better": "download arrow (unslashed) or map",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download tax return PDFs from the accountant's portal",
+     "better": "download arrow or tax document",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel the Adobe Creative Cloud subscription before renewal",
+     "better": "subscription / credit card with slash",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new inbox tray for the home office desk",
+     "better": "inbox tray / desk organizer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Export the final slides for the offline workshop",
+     "better": "presentation slides or export icon",
+     "trap": "property"
+    },
+    {
+     "task": "Ask IT for a new YubiKey",
+     "better": "security key",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_upload_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4098,
+    "output": 1190,
+    "thoughts": 86,
+    "total": 5374
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Shows a downward-pointing arrow into a tray crossed out by a diagonal slash (representing disabled or blocked downloads), whereas the look-alike has an upward-pointing arrowhead above the slash for disabled uploads."
 }

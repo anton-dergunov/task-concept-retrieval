@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "house, home, or residence",
+   "meaning": "house, home, or household chores",
    "strength": "primary"
   },
   {
-   "meaning": "real estate, housing, or property",
-   "strength": "primary"
-  },
-  {
-   "meaning": "home page or main dashboard",
+   "meaning": "home page, main dashboard, or starting screen",
    "strength": "secondary"
   },
   {
-   "meaning": "doghouse or small shelter",
+   "meaning": "real estate or residential property",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Nearly interchangeable with the house with a chimney and attic window for everyday home and household tasks; at tiny sizes its doorway can also resemble the stem of the 'i' inside the house-info icon.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -159,6 +155,21 @@
  ],
  "near_misses": [
   {
+   "task": "Pick up a city map at the tourist information booth",
+   "better": "house outline with information letter i inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set my hybrid work schedule between home and the downtown office",
+   "better": "house in front of a tall office building",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule the annual chimney sweep before winter",
+   "better": "house with chimney and overhanging eaves",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a home espresso machine with a built-in grinder",
    "better": "espresso machine or coffee cup",
    "trap": "property"
@@ -174,25 +185,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Listen to the new House music mix on SoundCloud",
-   "better": "headphones or music note",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Replace the rotting boards on the backyard fence",
    "better": "fence or hammer",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Upload the product catalog to the server",
-   "better": "upload arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A classic, universally recognizable outline of a house with a pitched roof and doorway. It serves as the primary icon for whole-house tasks, real estate, mortgages, rentals, and website homepages, as well as a broad fallback for general household chores when no specific tool or appliance icon applies.",
@@ -210,6 +211,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "house, home, or residence",
+     "strength": "primary"
+    },
+    {
+     "meaning": "real estate, housing, or property",
+     "strength": "primary"
+    },
+    {
+     "meaning": "home page or main dashboard",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "doghouse or small shelter",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a home espresso machine with a built-in grinder",
+     "better": "espresso machine or coffee cup",
+     "trap": "property"
+    },
+    {
+     "task": "Do a 30-minute home HIIT workout before breakfast",
+     "better": "dumbbell or person exercising",
+     "trap": "property"
+    },
+    {
+     "task": "Call the nursing home about Grandma's physical therapy schedule",
+     "better": "phone or medical care facility",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Listen to the new House music mix on SoundCloud",
+     "better": "headphones or music note",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the rotting boards on the backyard fence",
+     "better": "fence or hammer",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Upload the product catalog to the server",
+     "better": "upload arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "help_clinic",
+   "maps_home_work",
+   "house"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6657,
+    "output": 2167,
+    "thoughts": 0,
+    "total": 8824
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:46Z"
+  }
+ },
+ "distinguishing": "A minimal, flush-walled pentagonal house with an open doorway and no eaves, chimney, window, or secondary building; largely interchangeable with the chimneyed house for general home tasks, though slightly more abstract and suited to UI 'home' or basic household topics."
 }

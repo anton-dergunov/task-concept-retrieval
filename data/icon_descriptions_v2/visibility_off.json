@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "privacy / confidential / incognito",
+   "meaning": "privacy / confidential / incognito view",
    "strength": "primary"
   },
   {
-   "meaning": "spoiler warning / sensitive content",
+   "meaning": "spoiler warning / sensitive visual content",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "At very small sizes, the slashed curved outline can momentarily resemble the crossed-out map pin, particularly on digital privacy tasks where 'hiding' could mean hiding location versus hiding visual content.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -179,8 +179,18 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off location services for social media apps on phone",
+   "better": "crossed-out map pin (location off)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Remove home address from public domain registration",
+   "better": "crossed-out map pin (remove location/address)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book annual eye exam with the optometrist",
-   "better": "open eye or eyeglasses",
+   "better": "open eye without slash or eyeglasses",
    "trap": "lookalike_glyph"
   },
   {
@@ -191,16 +201,6 @@
   {
    "task": "Order a silk sleep mask for the overnight flight to Tokyo",
    "better": "sleep mask / bed",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Reset master password in 1Password",
-   "better": "key or padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Install wooden blinds in the living room",
-   "better": "window blinds",
    "trap": "shared_vocabulary"
   },
   {
@@ -217,7 +217,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows an eye crossed out with a diagonal slash, the universal UI symbol for 'hide', 'invisible', or 'privacy'. While originates as a password-visibility toggle in interfaces, in a task list it strongly cues privacy audits, hiding/unpublishing content, redacting sensitive info, or low-vision accessibility tasks. Must not be confused with an unslashed eye used for optometry or viewing/reviewing.",
@@ -238,6 +238,99 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hide / make invisible / unpublish",
+     "strength": "primary"
+    },
+    {
+     "meaning": "privacy / confidential / incognito",
+     "strength": "primary"
+    },
+    {
+     "meaning": "spoiler warning / sensitive content",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "blindness / low vision accessibility",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Book annual eye exam with the optometrist",
+     "better": "open eye or eyeglasses",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy blackout curtains for the baby's nursery",
+     "better": "curtains / window",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a silk sleep mask for the overnight flight to Tokyo",
+     "better": "sleep mask / bed",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reset master password in 1Password",
+     "better": "key or padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install wooden blinds in the living room",
+     "better": "window blinds",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an invisible zipper foot for the sewing machine",
+     "better": "sewing machine or zipper",
+     "trap": "property"
+    },
+    {
+     "task": "Pay yearly invoice for ProtonVPN subscription",
+     "better": "credit card / receipt",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "location_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4074,
+    "output": 1136,
+    "thoughts": 107,
+    "total": 5317
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Shows a wide horizontal almond-shaped eye with left and right corners and a large central iris/pupil crossed by a slash, meaning hide, invisible, or private visibility, rather than a vertical teardrop map pin for disabling location."
 }

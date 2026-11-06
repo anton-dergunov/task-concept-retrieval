@@ -15,11 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "woman / female figure (due to hair-like dome head shape)",
+   "meaning": "woman / person with straight bob hair",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The flat-bottomed dome head can look like bob-cut hair (suggesting a female avatar) or a padlock shackle above a base at very small sizes.",
+ "ambiguity": "Nearly interchangeable at list size with the curly-haired person avatar, as both represent a single person or user profile and differ only in the wavy versus smooth contour of the head.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -150,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Book a curly hair trim and deep conditioning appointment at the salon",
+   "better": "person with wavy/curly hair or scissors",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up curl defining cream for my hair routine",
+   "better": "person with wavy/curly hair or lotion bottle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book a solo cabin in Vermont for the long weekend",
    "better": "cabin / house or luggage",
    "trap": "property"
@@ -173,17 +183,12 @@
    "task": "Check with Dan if the server migration finished",
    "better": "server / message",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Pay the personal property tax bill online",
-   "better": "receipt / bank / money",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a standard single-user avatar (head and shoulders outline, with a slightly bell-shaped head). It fits tasks centered on user profiles, accounts, contacts, or specific individuals, though it shares space with circular-head user icons.",
@@ -201,6 +206,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "person / individual / contact",
+     "strength": "primary"
+    },
+    {
+     "meaning": "user account / profile",
+     "strength": "primary"
+    },
+    {
+     "meaning": "woman / female figure (due to hair-like dome head shape)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The flat-bottomed dome head can look like bob-cut hair (suggesting a female avatar) or a padlock shackle above a base at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Book a solo cabin in Vermont for the long weekend",
+     "better": "cabin / house or luggage",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new padlock for the gym locker",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Draft the Q3 headcount budget spreadsheet for finance",
+     "better": "spreadsheet / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order business cards for the new sales reps",
+     "better": "id card / business card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check with Dan if the server migration finished",
+     "better": "server / message",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the personal property tax bill online",
+     "better": "receipt / bank / money",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "person_3"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4071,
+    "output": 750,
+    "thoughts": 0,
+    "total": 4821
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Unlike the scalloped, wavy head of the curly-haired person icon, this icon has a smooth, flat-bottomed dome head, functioning as a standard generic user avatar or a person with a straight bob."
 }

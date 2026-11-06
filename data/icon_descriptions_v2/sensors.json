@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "wireless signal / hotspot / connectivity",
+   "meaning": "wireless hotspot / signal / connectivity",
    "strength": "primary"
   },
   {
-   "meaning": "live broadcast / streaming",
+   "meaning": "live stream / going live",
    "strength": "primary"
   },
   {
-   "meaning": "radio waves / beacon / sensor",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "podcast / audio feed",
+   "meaning": "sensor beacon / NFC / radio waves",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with Wi-Fi (which usually points upward), NFC/contactless payment, or a generic speaker/sound wave icon.",
+ "ambiguity": "Easily confused with the stemmed antenna icon for broadcast or wireless tasks, as well as upward-facing Wi-Fi fans or contactless payment symbols.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,19 +150,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy wireless mouse for the travel laptop",
-   "better": "computer mouse",
-   "trap": "property"
+   "task": "Publish new podcast episode to Apple Podcasts",
+   "better": "antenna mast with radio waves",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Listen to the new Hardcore History podcast episode",
-   "better": "headphones or microphone",
-   "trap": "shared_vocabulary"
+   "task": "Mount the HDTV antenna on the roof",
+   "better": "antenna mast with radio waves",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay with Apple Pay at the parking meter",
    "better": "contactless card / NFC",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy wireless mouse for the travel laptop",
+   "better": "computer mouse",
+   "trap": "property"
   },
   {
    "task": "Order a new Wi-Fi 6 router from Amazon",
@@ -175,13 +176,8 @@
   },
   {
    "task": "Check why the Bluetooth speaker keeps crackling",
-   "better": "speaker or Bluetooth symbol",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update podcast cover art in Figma",
-   "better": "image / artwork",
-   "trap": "parent_topic"
+   "better": "speaker",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -205,6 +201,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "wireless signal / hotspot / connectivity",
+     "strength": "primary"
+    },
+    {
+     "meaning": "live broadcast / streaming",
+     "strength": "primary"
+    },
+    {
+     "meaning": "radio waves / beacon / sensor",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "podcast / audio feed",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with Wi-Fi (which usually points upward), NFC/contactless payment, or a generic speaker/sound wave icon.",
+   "near_misses": [
+    {
+     "task": "Buy wireless mouse for the travel laptop",
+     "better": "computer mouse",
+     "trap": "property"
+    },
+    {
+     "task": "Listen to the new Hardcore History podcast episode",
+     "better": "headphones or microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay with Apple Pay at the parking meter",
+     "better": "contactless card / NFC",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a new Wi-Fi 6 router from Amazon",
+     "better": "router box with antennas",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the Bluetooth speaker keeps crackling",
+     "better": "speaker or Bluetooth symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update podcast cover art in Figma",
+     "better": "image / artwork",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bigtop_updates"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4028,
+    "output": 682,
+    "thoughts": 58,
+    "total": 4768
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:08Z"
+  }
+ },
+ "distinguishing": "Has only a floating central dot without a vertical mast, representing a wireless hotspot, live stream indicator, or sensor beacon rather than a physical antenna tower or podcast."
 }

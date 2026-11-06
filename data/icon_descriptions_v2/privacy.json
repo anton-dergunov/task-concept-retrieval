@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "revoke camera and microphone permissions",
+   "meaning": "revoke audio and video recording permissions",
    "strength": "primary"
-  },
-  {
-   "meaning": "cancelled video call or online meeting",
-   "strength": "secondary"
   },
   {
    "meaning": "no audio-video recording allowed",
    "strength": "secondary"
+  },
+  {
+   "meaning": "cancelled video call or online meeting",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the inner microphone detail merges with the diagonal slash, making it look like a plain 'video off' icon.",
+ "ambiguity": "Very easily confused with the slashed video camera containing a person silhouette because the outer camcorder frame is identical and the slash obscures the microphone.",
  "modifier_semantics": [
   {
    "modifier": "inner microphone symbol",
@@ -165,8 +165,13 @@
  ],
  "near_misses": [
   {
-   "task": "Record the 10-minute product walkthrough on Loom with voiceover",
-   "better": "video camera with microphone (unslashed)",
+   "task": "Join the Zoom meeting with video turned off",
+   "better": "slashed video camera with person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn off smartphone during the movie screening",
+   "better": "slashed smartphone in hand",
    "trap": "lookalike_glyph"
   },
   {
@@ -175,13 +180,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Mute phone ringer and notifications during the afternoon exam",
-   "better": "muted bell or silent phone",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Join the quarterly all-hands webinar as a silent listener",
-   "better": "video conference or headphones",
+   "better": "headphones or webinar icon",
    "trap": "property"
   },
   {
@@ -198,7 +198,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a video camera enclosing a microphone, crossed out by a diagonal slash to mean disabled AV (both camera and mic off/blocked). While originated as a UI toggle state in calling apps, it fits specific tasks around revoking camera/mic privacy permissions, troubleshooting dead AV input, disabling recording, or cancelling video calls. At tiny list sizes the nested microphone can blur into the slash, making it look like a standard 'camera off' icon.",
@@ -216,6 +216,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera and microphone disabled or muted",
+     "strength": "primary"
+    },
+    {
+     "meaning": "revoke camera and microphone permissions",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancelled video call or online meeting",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "no audio-video recording allowed",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the inner microphone detail merges with the diagonal slash, making it look like a plain 'video off' icon.",
+   "near_misses": [
+    {
+     "task": "Record the 10-minute product walkthrough on Loom with voiceover",
+     "better": "video camera with microphone (unslashed)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a Rode USB condenser microphone for podcast interviews",
+     "better": "microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mute phone ringer and notifications during the afternoon exam",
+     "better": "muted bell or silent phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Join the quarterly all-hands webinar as a silent listener",
+     "better": "video conference or headphones",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the webcam lens needs wiping before the interview",
+     "better": "webcam / video camera",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a 2-meter braided USB-C cable for the desk setup",
+     "better": "USB cable",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_hand_off",
+   "file_copy_off",
+   "video_camera_front_off",
+   "no_photography",
+   "preview_off",
+   "ad_group_off",
+   "ad_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12129,
+    "output": 3883,
+    "thoughts": 0,
+    "total": 16012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "A slashed camcorder with a triangular lens cone on the right that encloses a microphone glyph inside the camera body, unlike the version with a person silhouette inside."
 }

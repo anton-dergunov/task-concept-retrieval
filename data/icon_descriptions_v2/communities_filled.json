@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "Asana app or project workspace",
+   "meaning": "Asana app or project management workspace",
+   "strength": "primary"
+  },
+  {
+   "meaning": "three-pin round audio connector (XLR) or electrical socket",
    "strength": "secondary"
   },
   {
-   "meaning": "three-pin round electrical socket or XLR connector",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "mathematical therefore symbol or logic proof",
+   "meaning": "Banner of Peace (Pax Cultura) symbol or logic therefore sign",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Highly geometric and abstract; looks simultaneously like a stylized centered bowling ball, the Asana logo, the Banner of Peace symbol, a 3-pin audio connector, or a button.",
+ "ambiguity": "Virtually identical to and interchangeable with the circle containing three slightly wider-spaced dots; also easily confused with a shirt button, a bowling ball, the Asana logo, or a 3-pin XLR socket.",
  "modifier_semantics": [],
  "domains": [
   "hobbies",
@@ -153,13 +153,18 @@
  ],
  "near_misses": [
   {
-   "task": "Sew loose button back onto navy blazer",
-   "better": "four-hole shirt button with thread",
+   "task": "Plug microphone into the 3-pin XLR input on the mixer",
+   "better": "circle with three wider-spaced pin holes or microphone icon",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Install child safety covers on living room wall outlets",
-   "better": "standard electrical wall outlet",
+   "task": "Update sprint tasks in the Asana workspace",
+   "better": "three-dot triangle symbol with wider spacing",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sew loose button back onto navy blazer",
+   "better": "four-hole shirt button with thread",
    "trap": "lookalike_glyph"
   },
   {
@@ -173,20 +178,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Check more options in the account settings menu",
-   "better": "gear or horizontal three-dots menu icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Inflate basketballs and soccer balls in the garage",
-   "better": "basketball or soccer ball",
-   "trap": "shared_vocabulary"
+   "task": "Check the three main points of the presentation",
+   "better": "presentation slide",
+   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The glyph shows three dots in an equilateral triangle inside a circle, which can be read as a stylized bowling ball, the Asana logo, the mathematical 'therefore' symbol, or a 3-pin round connector. Because the dots are centered rather than offset like a real bowling ball, it is somewhat ambiguous at a glance, fitting a niche set of tasks around bowling, project management, or electronics.",
@@ -204,6 +204,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": "communities"
- }
+  "alias_of": "communities",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bowling ball or bowling",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Asana app or project workspace",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "three-pin round electrical socket or XLR connector",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "mathematical therefore symbol or logic proof",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Highly geometric and abstract; looks simultaneously like a stylized centered bowling ball, the Asana logo, the Banner of Peace symbol, a 3-pin audio connector, or a button.",
+   "near_misses": [
+    {
+     "task": "Sew loose button back onto navy blazer",
+     "better": "four-hole shirt button with thread",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install child safety covers on living room wall outlets",
+     "better": "standard electrical wall outlet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new wooden salad bowl for the dining table",
+     "better": "kitchen bowl",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up arcade prizes after the bowling party",
+     "better": "gift or trophy",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check more options in the account settings menu",
+     "better": "gear or horizontal three-dots menu icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Inflate basketballs and soccer balls in the garage",
+     "better": "basketball or soccer ball",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "group_work"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4087,
+    "output": 663,
+    "thoughts": 109,
+    "total": 4859
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "The three interior dots are clustered slightly closer together in the center of the circle than in the other icon, though at list size the two icons are visually and functionally interchangeable."
 }

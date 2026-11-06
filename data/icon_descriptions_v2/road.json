@@ -11,15 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "lane keeping or driving route",
+   "meaning": "lane keeping, road trip route, or asphalt paving",
    "strength": "secondary"
   },
   {
-   "meaning": "vertical split or column divider",
+   "meaning": "vertical split or two-column divider",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can look like a generic barcode, pause/menu bars, or a UI column-split toggle rather than a road.",
+ "ambiguity": "Could be confused at a glance with the pair of square brackets because both have strong left and right vertical bars, or mistaken for a barcode or column-split icon.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -150,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the off-by-one indexing bug in the JavaScript array parser",
+   "better": "pair of square brackets (array or code syntax)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add markdown square brackets around all broken wiki links",
+   "better": "pair of square brackets (brackets or markdown syntax)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new pair of road running shoes before the half marathon",
    "better": "running shoe",
    "trap": "property"
@@ -161,7 +171,7 @@
   },
   {
    "task": "Update the Q3 product roadmap slides for the leadership review",
-   "better": "presentation or map/timeline",
+   "better": "presentation or timeline",
    "trap": "shared_vocabulary"
   },
   {
@@ -170,20 +180,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Fix the two-column layout bug on the pricing page",
-   "better": "layout / code",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check the street address on Anna's wedding invitation",
-   "better": "envelope / invitation",
+   "better": "envelope or invitation",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The two solid outer lines and central dashed line depict a top-down view of a two-lane road or street. It fits tasks centered on roads, highways, driveways, tolls, and driving routes, though its minimal geometric style can be confused with a UI column divider or pause bars at small sizes.",
@@ -201,6 +206,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "road, street, highway, or driving lane",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lane keeping or driving route",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "vertical split or column divider",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can look like a generic barcode, pause/menu bars, or a UI column-split toggle rather than a road.",
+   "near_misses": [
+    {
+     "task": "Buy a new pair of road running shoes before the half marathon",
+     "better": "running shoe",
+     "trap": "property"
+    },
+    {
+     "task": "Read The Road by Cormac McCarthy for Thursday's book club",
+     "better": "book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update the Q3 product roadmap slides for the leadership review",
+     "better": "presentation or map/timeline",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book oil change and tire rotation before the summer road trip",
+     "better": "car or wrench",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix the two-column layout bug on the pricing page",
+     "better": "layout / code",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the street address on Anna's wedding invitation",
+     "better": "envelope / invitation",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "data_array"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4090,
+    "output": 1139,
+    "thoughts": 93,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Shows two straight vertical lines with no corner serifs and a three-dash vertical line down the middle, depicting a two-lane road or column divider rather than square brackets."
 }

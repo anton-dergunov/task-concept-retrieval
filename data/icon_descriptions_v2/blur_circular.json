@@ -7,7 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "speaker grille or smart speaker",
+   "meaning": "blur or halftone filter icon",
+   "strength": "primary"
+  },
+  {
+   "meaning": "round speaker grille or smart speaker",
    "strength": "primary"
   },
   {
@@ -15,15 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "blur or halftone filter icon",
-   "strength": "secondary"
-  },
-  {
    "meaning": "sewing button or round cracker",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a generic button, a sink drain, a shower head, a crackers/biscuit icon, or an abstract dot-matrix/blur symbol.",
+ "ambiguity": "At small sizes it is easily confused with the 3x3 nine-dot keypad/app-launcher circle, or taken for a generic button, drain strainer, or smart speaker top.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -151,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Change the 4-digit PIN code on the front door keypad",
+   "better": "3x3 nine-dot keypad grid inside a circle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Organize the app launcher grid on my home screen",
+   "better": "3x3 nine-dot keypad grid inside a circle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new plunger for the downstairs toilet",
    "better": "plunger or toilet",
    "trap": "shared_vocabulary"
@@ -166,11 +176,6 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Turn down the alarm volume on my phone",
-   "better": "alarm clock or speaker cone with waves",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a waterproof Bluetooth radio for the boat",
    "better": "radio",
    "trap": "property"
@@ -179,7 +184,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a circle with a symmetrical grid of four inner large dots and eight outer small dots, resembling a speaker grille, drain strainer, shower head face, sewing button, or blur/halftone UI symbol. Because it lacks distinguishing features like sound waves, water drops, or thread, it is highly ambiguous at glanceable sizes, though usable for smart speaker, drain, or button tasks.",
@@ -197,6 +202,89 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "speaker grille or smart speaker",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shower head or sink drain strainer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "blur or halftone filter icon",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sewing button or round cracker",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a generic button, a sink drain, a shower head, a crackers/biscuit icon, or an abstract dot-matrix/blur symbol.",
+   "near_misses": [
+    {
+     "task": "Buy a new plunger for the downstairs toilet",
+     "better": "plunger or toilet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Listen to the new audiobook chapter on the commute",
+     "better": "headphones or book",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a plumber to inspect the main sewer line",
+     "better": "wrench or pipe",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Turn down the alarm volume on my phone",
+     "better": "alarm clock or speaker cone with waves",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof Bluetooth radio for the boat",
+     "better": "radio",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nest_secure_alarm"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4033,
+    "output": 680,
+    "thoughts": 0,
+    "total": 4713
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:26Z"
+  }
+ },
+ "distinguishing": "Shows 12 dots of two sizes (four large central dots surrounded by eight smaller outer dots) inside a thick circle, evoking a halftone blur effect, round speaker grille, or drain strainer rather than the uniform 3x3 keypad/app-launcher grid."
 }

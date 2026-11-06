@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "screen sharing or presenting",
+   "meaning": "screen sharing or presenting to a display",
    "strength": "primary"
   },
   {
-   "meaning": "casting or mirroring to TV/display",
+   "meaning": "casting, AirPlay, or mirroring to an external monitor or TV",
    "strength": "primary"
   },
   {
-   "meaning": "TV/monitor input source",
+   "meaning": "TV or monitor video input source",
    "strength": "secondary"
   },
   {
-   "meaning": "uploading to computer or remote desktop",
+   "meaning": "uploading to a desktop workstation or remote server",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic file upload icon (arrow into box) if the horizontal stand bar is taken for an upload tray rather than a monitor base.",
+ "ambiguity": "Visually very close to the laptop with an enclosed upward arrow, and shares screen-sharing meaning with both the upward-arrow laptop and the curved-arrow laptop.",
  "modifier_semantics": [
   {
    "modifier": "upward-pointing arrow entering screen",
@@ -161,40 +161,40 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a 27-inch 4K monitor for the home office",
-   "better": "plain computer monitor without arrow",
+   "task": "Run the pending Windows update on my laptop before traveling",
+   "better": "laptop with an enclosed upward arrow inside the screen",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Upload the signed tax forms to the accountant's portal",
-   "better": "cloud upload or document with up arrow",
+   "task": "Transfer photos from my old laptop to the external drive",
+   "better": "laptop with a curved right-pointing export arrow",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Update the graphics card drivers on the gaming PC",
-   "better": "GPU / chip or settings gear",
+   "better": "GPU chip or settings gear icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Write the speaker notes for slide 4",
-   "better": "presentation slide or notes document",
+   "better": "presentation slide or notes document icon",
    "trap": "parent_topic"
   },
   {
    "task": "Clean dust and fingerprints off the TV screen",
-   "better": "television or spray bottle / cloth",
+   "better": "plain television or spray bottle icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Order a 2-meter braided HDMI 2.1 cable",
-   "better": "cable / plug",
+   "better": "cable or plug icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a display screen with an upward arrow entering from the base, the standard UI glyph for screen sharing, casting to a display, or selecting a video input. It fits specific tech and meeting-prep tasks around presenting, AirPlay/Chromecast, and display inputs, though it can look like a generic upload icon at tiny sizes.",
@@ -212,6 +212,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "screen sharing or presenting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "casting or mirroring to TV/display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "TV/monitor input source",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "uploading to computer or remote desktop",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic file upload icon (arrow into box) if the horizontal stand bar is taken for an upload tray rather than a monitor base.",
+   "near_misses": [
+    {
+     "task": "Buy a 27-inch 4K monitor for the home office",
+     "better": "plain computer monitor without arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upload the signed tax forms to the accountant's portal",
+     "better": "cloud upload or document with up arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the graphics card drivers on the gaming PC",
+     "better": "GPU / chip or settings gear",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write the speaker notes for slide 4",
+     "better": "presentation slide or notes document",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Clean dust and fingerprints off the TV screen",
+     "better": "television or spray bottle / cloth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a 2-meter braided HDMI 2.1 cable",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screen_share",
+   "computer_arrow_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5425,
+    "output": 1634,
+    "thoughts": 146,
+    "total": 7205
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "Instead of a laptop with a separate base bar, the upward arrow's shaft merges with a shorter monitor stand and breaks through the bottom border of the screen, showing content being sent into an external display or presented."
 }

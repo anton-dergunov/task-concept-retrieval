@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "sun / sunlight / sunny weather",
+   "meaning": "sun, sunlight, or sunny weather",
    "strength": "primary"
   },
   {
-   "meaning": "daytime / morning routine",
+   "meaning": "daytime or morning routine",
    "strength": "primary"
   },
   {
-   "meaning": "screen brightness / light mode",
+   "meaning": "screen brightness or light mode",
    "strength": "secondary"
   },
   {
-   "meaning": "summer / warm season",
+   "meaning": "summer or warm season",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the ring and eight spokes can briefly resemble a gear or cogwheel.",
+ "ambiguity": "Nearly identical to the wider-ring hollow sun icons and interchangeable with all three other sun icons in this group; also resembles a gear or cogwheel at tiny sizes.",
  "modifier_semantics": [],
  "domains": [
   "outdoors",
@@ -160,40 +160,40 @@
  ],
  "near_misses": [
   {
+   "task": "Turn tablet backlight down to minimum low brightness for night reading",
+   "better": "hollow sun with short stubby rays (low brightness)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update system settings and preferences on work laptop",
+   "better": "gear / cogwheel icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a bright yellow raincoat for bike commuting",
-   "better": "raincoat or jacket",
+   "better": "raincoat or jacket icon",
    "trap": "property"
   },
   {
    "task": "Book flights to Sun Valley for February ski trip",
-   "better": "airplane or skis",
+   "better": "airplane or skis icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Update system settings and preferences on work laptop",
-   "better": "gear / cogwheel",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the Sunday paper delivery bill",
-   "better": "newspaper or bill",
+   "better": "newspaper or bill icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a new basketball for the outdoor court",
-   "better": "basketball",
+   "task": "Buy a new basketball for the outdoor summer league",
+   "better": "basketball icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Highlight the main takeaways in the quarterly report",
-   "better": "highlighter or document",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a sun (a circle with eight radiating rays), universally understood as sun, daylight, summer, or screen brightness/light mode. It fits tasks about sun exposure, solar power, morning routines, weather, and UI light themes, though at very tiny sizes its eight blocky rays bear a slight resemblance to a settings gear.",
@@ -211,6 +211,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sun / sunlight / sunny weather",
+     "strength": "primary"
+    },
+    {
+     "meaning": "daytime / morning routine",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen brightness / light mode",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "summer / warm season",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the ring and eight spokes can briefly resemble a gear or cogwheel.",
+   "near_misses": [
+    {
+     "task": "Buy a bright yellow raincoat for bike commuting",
+     "better": "raincoat or jacket",
+     "trap": "property"
+    },
+    {
+     "task": "Book flights to Sun Valley for February ski trip",
+     "better": "airplane or skis",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update system settings and preferences on work laptop",
+     "better": "gear / cogwheel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the Sunday paper delivery bill",
+     "better": "newspaper or bill",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new basketball for the outdoor court",
+     "better": "basketball",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Highlight the main takeaways in the quarterly report",
+     "better": "highlighter or document",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "flare",
+   "sunny",
+   "wb_sunny"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6663,
+    "output": 2133,
+    "thoughts": 242,
+    "total": 9038
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Shows a slightly smaller hollow ring with wider spacing before its eight equal-length rays, making it visually and semantically interchangeable with the other hollow-ring sun icons."
 }

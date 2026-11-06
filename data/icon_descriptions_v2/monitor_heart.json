@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "ECG / heart rate monitor / medical monitor",
+   "meaning": "ECG, EKG, heart rate monitor, or vital signs display",
    "strength": "primary"
   },
   {
-   "meaning": "system monitoring / activity log / diagnostics",
+   "meaning": "medical telemetry, pulse readout, or patient health monitoring",
    "strength": "primary"
   },
   {
-   "meaning": "vital signs / health check / pulse",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "oscilloscope / signal waveform",
+   "meaning": "oscilloscope, signal waveform, or general activity monitor",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic line chart, stock ticker, or audio waveform at very small sizes, though the single dip-and-spike is characteristic of a heartbeat/pulse.",
+ "ambiguity": "Close in shape to the laptop with a pulse line on its screen, and can be mistaken for computer diagnostics if the viewer misses the absence of the bottom laptop base.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -169,13 +165,18 @@
  ],
  "near_misses": [
   {
-   "task": "Check the stock market dip in my retirement portfolio",
-   "better": "stock chart / line graph with trend arrow",
+   "task": "Run hardware diagnostics and CPU stress test on slow MacBook",
+   "better": "laptop computer with a pulse waveform on screen",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Edit the podcast audio waveform in Audacity",
-   "better": "audio waveform / sound bars",
+   "task": "Log into the online patient portal on my laptop to message Dr. Patel",
+   "better": "laptop computer with a pulse waveform on screen",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the stock market dip in my retirement portfolio",
+   "better": "stock chart / line graph with trend arrow",
    "trap": "lookalike_glyph"
   },
   {
@@ -202,7 +203,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an ECG/pulse waveform inside a rectangular screen frame, universally understood as a heart rate monitor, medical vital signs display, or system health/activity monitor. It fits tasks involving cardiology tests (ECG/Holter), fitness heart-rate tracking, electronics oscilloscopes, and IT server monitoring. It is distinct from financial line charts because the line enters and exits horizontally at the midline with a single classic heartbeat deflection.",
@@ -222,6 +223,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "ECG / heart rate monitor / medical monitor",
+     "strength": "primary"
+    },
+    {
+     "meaning": "system monitoring / activity log / diagnostics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vital signs / health check / pulse",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "oscilloscope / signal waveform",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic line chart, stock ticker, or audio waveform at very small sizes, though the single dip-and-spike is characteristic of a heartbeat/pulse.",
+   "near_misses": [
+    {
+     "task": "Check the stock market dip in my retirement portfolio",
+     "better": "stock chart / line graph with trend arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Edit the podcast audio waveform in Audacity",
+     "better": "audio waveform / sound bars",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Monitor kids' screen time on the iPad this week",
+     "better": "tablet / screen time hourglass",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a second 27-inch Dell monitor for the home office desk",
+     "better": "computer display / desktop monitor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Donate to the earthquake relief fund in Turkey",
+     "better": "donation / heart in hand",
+     "trap": "property"
+    },
+    {
+     "task": "Pack running shoes and water bottle",
+     "better": "running shoe",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "browse_activity"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4112,
+    "output": 1161,
+    "thoughts": 0,
+    "total": 5273
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Lacks the bottom laptop base bar and has gaps in the left and right vertical edges where the pulse line passes through, making it a standalone ECG/vital signs screen or signal monitor rather than a laptop computer."
 }

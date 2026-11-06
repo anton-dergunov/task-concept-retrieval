@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "battery",
+   "meaning": "empty or dead battery (0% charge)",
    "strength": "primary"
   },
   {
-   "meaning": "empty battery / low power",
+   "meaning": "battery / batteries (generic)",
    "strength": "primary"
   },
   {
-   "meaning": "charge or recharge",
+   "meaning": "needs charging / out of power",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could slightly resemble a simplified bottle, flask, or clipboard at very small sizes, though the battery shape is standard.",
+ "ambiguity": "Nearly indistinguishable at small list sizes from the very-low-fill battery icons (10% to 30% charge), and functionally interchangeable with them for general battery or charging tasks.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -82,11 +82,6 @@
    "task": "Pick up rechargeable Eneloop AAs for the kids' controllers",
    "parent": "",
    "domain": "shopping"
-  },
-  {
-   "task": "Test the car battery voltage with the multimeter before winter",
-   "parent": "",
-   "domain": "home"
   },
   {
    "task": "Pack the 20000mAh Anker power bank in carry-on bag",
@@ -164,14 +159,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Keep the spare LiPo drone batteries at 30% storage charge for winter",
+   "better": "partially filled battery (around one-third full)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the monthly electricity bill",
-   "better": "invoice or lightning bolt",
-   "trap": "shared_vocabulary"
+   "task": "Enable low-power mode automation when phone battery drops to 20%",
+   "better": "low battery with a small bottom fill bar",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Take a rest day to recharge after the busy week",
@@ -184,20 +179,20 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Clean the corrosion off the car windshield wipers",
-   "better": "car or wiper",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Check why the kitchen outlet isn't working",
    "better": "power outlet / plug",
    "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a small waterproof battery-powered fan for the tent",
+   "better": "fan",
+   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a vertical battery with an empty interior, universally recognized as a battery or low charge. It fits many everyday tasks around buying AA/AAA/coin cells, charging power banks or tool packs, replacing dead batteries in household devices, and battery recycling. It is distinct from full/half battery icons only by fill level, and could faintly resemble a simple bottle at tiny sizes.",
@@ -217,6 +212,86 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1,
+    "near_misses": 2
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "empty battery / low power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charge or recharge",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could slightly resemble a simplified bottle, flask, or clipboard at very small sizes, though the battery shape is standard.",
+   "near_misses": [
+    {
+     "task": "Take a rest day to recharge after the busy week",
+     "better": "bed or person relaxing",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new stainless steel water bottle",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean the corrosion off the car windshield wipers",
+     "better": "car or wiper",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the kitchen outlet isn't working",
+     "better": "power outlet / plug",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_vert_005",
+   "battery_1_bar",
+   "battery_vert_020",
+   "battery_2_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7952,
+    "output": 2508,
+    "thoughts": 196,
+    "total": 10656
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Completely hollow battery outline with uniform wall thickness and zero bottom fill (0% / dead battery), whereas the others in the group have progressively thicker solid fills at the bottom; practically interchangeable with the barely-filled batteries in a task list."
 }

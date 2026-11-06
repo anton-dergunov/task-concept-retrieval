@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "photo gallery, image album, or picture collection",
+   "meaning": "photo gallery with thumbnails, image collage, or picture grid layout",
    "strength": "primary"
   },
   {
-   "meaning": "gallery layout, thumbnail view, or collage",
+   "meaning": "photo album or picture collection",
    "strength": "primary"
   },
   {
-   "meaning": "slideshow or presentation deck",
+   "meaning": "frame wall arrangement or multi-photo print layout",
    "strength": "secondary"
   },
   {
-   "meaning": "frame wall arrangement",
+   "meaning": "presentation deck with thumbnail sidebar",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be seen as a UI layout toggle or dashboard widget arrangement rather than a real-world object.",
+ "ambiguity": "For general 'photo album' or 'gallery' tasks, it overlaps heavily with the icons showing vertical bars next to the picture frame, though the two stacked squares specifically read as thumbnails or a grid rather than a horizontal carousel or slide strip.",
  "modifier_semantics": [
   {
    "modifier": "two stacked small square thumbnails on right",
@@ -162,14 +162,24 @@
  ],
  "near_misses": [
   {
+   "task": "Set up auto-advancing photo carousel on the homepage",
+   "better": "picture frame with vertical bars on the side (carousel strip / slideshow view)itched",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pause the lobby slideshow during the keynote",
+   "better": "picture frame with two vertical bars on the right (pause symbol next to image) or a standalone pause button",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Charge camera batteries before Saturday's shoot",
    "better": "battery or camera",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Hike the twin peaks trail before noon",
-   "better": "mountain",
-   "trap": "lookalike_glyph"
+   "better": "mountain peaks",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Take passport photo at the pharmacy",
@@ -177,17 +187,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book tickets for the National Portrait Gallery",
-   "better": "museum building or ticket",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Ask Sarah for the high-res logo file",
-   "better": "message / person",
+   "better": "message bubble or person",
    "trap": "property"
   },
   {
-   "task": "Buy glass cleaner for the frames",
+   "task": "Buy glass cleaner for the hallway frames",
    "better": "spray bottle",
    "trap": "parent_topic"
   }
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a framed mountain picture alongside two small square thumbnails, clearly representing a photo gallery, album, collage, or image grid layout. It fits tasks about organizing photos, curating portfolios, or hanging a gallery wall, though it slightly resembles a generic UI layout toggle.",
@@ -213,6 +218,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photo gallery, image album, or picture collection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "gallery layout, thumbnail view, or collage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "slideshow or presentation deck",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "frame wall arrangement",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be seen as a UI layout toggle or dashboard widget arrangement rather than a real-world object.",
+   "near_misses": [
+    {
+     "task": "Charge camera batteries before Saturday's shoot",
+     "better": "battery or camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hike the twin peaks trail before noon",
+     "better": "mountain",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take passport photo at the pharmacy",
+     "better": "single portrait / ID card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book tickets for the National Portrait Gallery",
+     "better": "museum building or ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Ask Sarah for the high-res logo file",
+     "better": "message / person",
+     "trap": "property"
+    },
+    {
+     "task": "Buy glass cleaner for the frames",
+     "better": "spray bottle",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "art_track",
+   "burst_mode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5380,
+    "output": 1161,
+    "thoughts": 0,
+    "total": 6541
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "Shows two small hollow squares stacked to the right of the main picture frame (representing thumbnails or a grid collage), whereas the other two show two tall vertical bars on the right or left (representing edge-on cards in a carousel/album or a pause symbol)."
 }

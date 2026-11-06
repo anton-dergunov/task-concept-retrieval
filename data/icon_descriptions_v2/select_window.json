@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "browser tabs or application windows",
+   "meaning": "application windows or browser tabs",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "duplicate, copy, or restore down window control",
+   "meaning": "restore down or cascade windows control",
    "strength": "secondary"
   },
   {
-   "meaning": "credit cards or ID cards with top magnetic stripes",
+   "meaning": "overlapping cards with top magnetic stripes",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like the OS window restore/maximize button, a copy/duplicate icon, or two overlapping payment cards with top stripes.",
+ "ambiguity": "Easily confused at small sizes with the plain overlapping rectangles (which lack title bars) or the overlapping squares used for copy/duplicate, as well as the dual-monitor icon.",
  "modifier_semantics": [
   {
    "modifier": "second stacked window behind and to the upper right",
@@ -175,24 +175,24 @@
  ],
  "near_misses": [
   {
+   "task": "Duplicate the Q4 budget template in Google Sheets",
+   "better": "two overlapping plain squares for copy/duplicate",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up the second Dell monitor on the desk mount",
+   "better": "overlapping computer monitors with a stand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Organize client invoices into separate project folders",
+   "better": "stacked file folders with tabs",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Wash the living room windows before the guests arrive",
    "better": "house window with glass panes",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Upgrade home PC from Windows 10 to Windows 11",
-   "better": "OS logo or desktop computer",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order a duplicate house key for the pet sitter",
-   "better": "key",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay off the two Visa credit cards before the statement closes",
-   "better": "credit card with chip",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Open a new browser tab and check the flight status to Chicago",
@@ -200,9 +200,9 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Buy thermal blackout curtains for the bedroom",
-   "better": "curtains or house window",
-   "trap": "parent_topic"
+   "task": "Pay off the two Visa credit cards before the statement closes",
+   "better": "credit card with chip",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -228,6 +228,98 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "browser tabs or application windows",
+     "strength": "primary"
+    },
+    {
+     "meaning": "software interface, web app, or desktop workspace",
+     "strength": "primary"
+    },
+    {
+     "meaning": "duplicate, copy, or restore down window control",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "credit cards or ID cards with top magnetic stripes",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like the OS window restore/maximize button, a copy/duplicate icon, or two overlapping payment cards with top stripes.",
+   "near_misses": [
+    {
+     "task": "Wash the living room windows before the guests arrive",
+     "better": "house window with glass panes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upgrade home PC from Windows 10 to Windows 11",
+     "better": "OS logo or desktop computer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a duplicate house key for the pet sitter",
+     "better": "key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay off the two Visa credit cards before the statement closes",
+     "better": "credit card with chip",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Open a new browser tab and check the flight status to Chicago",
+     "better": "airplane",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy thermal blackout curtains for the bedroom",
+     "better": "curtains or house window",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "select_window_2",
+   "markunread_mailbox",
+   "stack",
+   "folder_copy",
+   "tv_displays"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9395,
+    "output": 2955,
+    "thoughts": 262,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "Unlike the plain overlapping rectangles or squares, both overlapping frames have thick solid black top title bars, marking them specifically as software application windows or browser tabs."
 }

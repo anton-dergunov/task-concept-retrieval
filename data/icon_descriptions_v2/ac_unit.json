@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "snow / winter / cold weather",
+   "meaning": "snow, winter, or freezing weather",
    "strength": "primary"
   },
   {
-   "meaning": "air conditioning / cooling system",
+   "meaning": "air conditioning or active cooling",
    "strength": "primary"
   },
   {
-   "meaning": "freezer / frozen food / defrosting",
+   "meaning": "freezer, refrigeration, or freezing food",
    "strength": "primary"
   },
   {
-   "meaning": "winterizing / frost protection",
+   "meaning": "winterizing or frost protection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the four-armed layout rather than six-armed can briefly look like four inward-pointing arrows or a decorative asterisk.",
+ "ambiguity": "Completely interchangeable with the rounded-cap plain snowflake; at small list sizes, it can also be confused with the slashed snowflake if the slash blends into the diagonal chevron branches.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -159,6 +159,21 @@
  ],
  "near_misses": [
   {
+   "task": "Defrost the chest freezer in the garage before moving",
+   "better": "slashed snowflake for defrosting / unfreezing",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn off the bedroom AC unit before leaving for the weekend",
+   "better": "slashed snowflake for cooling off",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Thaw frozen turkey breast in the fridge for Thursday dinner",
+   "better": "slashed snowflake for thawing",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Freeze Equifax and TransUnion credit reports online",
    "better": "lock or shield icon",
    "trap": "shared_vocabulary"
@@ -177,22 +192,12 @@
    "task": "Pick up cold brew coffee concentrate at Trader Joe's",
    "better": "coffee cup or bottle icon",
    "trap": "property"
-  },
-  {
-   "task": "Take daytime cold and flu tablets before the meeting",
-   "better": "pill or medicine icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Renew cabin insurance policy before Friday",
-   "better": "document or shield icon",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear, universally recognizable snowflake symbol used across appliances, cars, and weather apps. It fits a concrete set of everyday household tasks around freezers, air conditioning, snow removal, and winterization, though its four-armed geometry should not be confused with an inward-arrows collapse icon at tiny sizes.",
@@ -210,6 +215,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "snow / winter / cold weather",
+     "strength": "primary"
+    },
+    {
+     "meaning": "air conditioning / cooling system",
+     "strength": "primary"
+    },
+    {
+     "meaning": "freezer / frozen food / defrosting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "winterizing / frost protection",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the four-armed layout rather than six-armed can briefly look like four inward-pointing arrows or a decorative asterisk.",
+   "near_misses": [
+    {
+     "task": "Freeze Equifax and TransUnion credit reports online",
+     "better": "lock or shield icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Migrate analytics warehouse tables to Snowflake",
+     "better": "database cylinder or cloud icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an insulated cold-weather sleeping bag for autumn camping",
+     "better": "sleeping bag or tent icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up cold brew coffee concentrate at Trader Joe's",
+     "better": "coffee cup or bottle icon",
+     "trap": "property"
+    },
+    {
+     "task": "Take daytime cold and flu tablets before the meeting",
+     "better": "pill or medicine icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew cabin insurance policy before Friday",
+     "better": "document or shield icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mode_cool",
+   "mode_cool_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5405,
+    "output": 1693,
+    "thoughts": 53,
+    "total": 7151,
+    "seconds": 59.93,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:12:56Z"
+  }
+ },
+ "distinguishing": "A plain four-armed snowflake with flat, square-cut stroke ends and no diagonal slash; it is visually and semantically interchangeable with the rounded-cap plain snowflake."
 }

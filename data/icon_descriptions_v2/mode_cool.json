@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "air conditioning or cooling",
+   "meaning": "air conditioning or active cooling",
    "strength": "primary"
   },
   {
-   "meaning": "freezer, refrigeration, or frozen food",
-   "strength": "secondary"
+   "meaning": "freezer, refrigeration, or freezing food",
+   "strength": "primary"
   },
   {
-   "meaning": "account freeze or credit freeze",
+   "meaning": "winterizing or frost protection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "It has four main axes instead of six, so at very small sizes it could briefly look like a four-way inward arrow or an asterisk.",
+ "ambiguity": "Completely interchangeable with the square-capped plain snowflake; at small sizes, it can also be mistaken for the slashed snowflake because the diagonal slash parallels the angled prongs.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -46,11 +46,6 @@
  "example_tasks": [
   {
    "task": "Defrost garage chest freezer",
-   "parent": "",
-   "domain": "home"
-  },
-  {
-   "task": "Clean bedroom AC filter",
    "parent": "",
    "domain": "home"
   },
@@ -155,40 +150,45 @@
  ],
  "near_misses": [
   {
+   "task": "Thaw two packages of chicken stock for tonight's soup",
+   "better": "slashed snowflake for thawing / defrosting",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Shut off the central air conditioning for the season",
+   "better": "slashed snowflake for cooling turned off",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "De-ice the car windshield before the morning commute",
+   "better": "slashed snowflake for de-icing",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a waterproof winter parka for the commute",
-   "better": "coat or jacket",
+   "better": "coat or jacket icon",
    "trap": "property"
   },
   {
    "task": "Run a schema migration on the Snowflake data warehouse",
-   "better": "database cylinder",
+   "better": "database cylinder icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy six bags of frozen peas and corn at Trader Joe's",
-   "better": "shopping cart or vegetables",
-   "trap": "property"
-  },
-  {
-   "task": "Replace the cracked furnace filter in the basement",
-   "better": "flame or heater",
-   "trap": "parent_topic"
   },
   {
    "task": "Fix the app UI freeze when loading large attachments",
-   "better": "bug or code",
+   "better": "bug or code icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Add footnote asterisks to the pricing table",
-   "better": "text or table",
-   "trap": "lookalike_glyph"
+   "task": "Replace the cracked furnace filter in the basement",
+   "better": "flame or heater icon",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear snowflake glyph universally recognized for snow, winter weather, air conditioning, and freezers. It fits a wide set of everyday household, food storage, and seasonal maintenance tasks, though its four-fold symmetry slightly resembles an asterisk or inward arrows at tiny sizes.",
@@ -206,6 +206,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "snow, winter, or freezing weather",
+     "strength": "primary"
+    },
+    {
+     "meaning": "air conditioning or cooling",
+     "strength": "primary"
+    },
+    {
+     "meaning": "freezer, refrigeration, or frozen food",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "account freeze or credit freeze",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "It has four main axes instead of six, so at very small sizes it could briefly look like a four-way inward arrow or an asterisk.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof winter parka for the commute",
+     "better": "coat or jacket",
+     "trap": "property"
+    },
+    {
+     "task": "Run a schema migration on the Snowflake data warehouse",
+     "better": "database cylinder",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy six bags of frozen peas and corn at Trader Joe's",
+     "better": "shopping cart or vegetables",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the cracked furnace filter in the basement",
+     "better": "flame or heater",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix the app UI freeze when loading large attachments",
+     "better": "bug or code",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add footnote asterisks to the pricing table",
+     "better": "text or table",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ac_unit",
+   "mode_cool_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5405,
+    "output": 1693,
+    "thoughts": 53,
+    "total": 7151,
+    "seconds": 59.93,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:12:56Z"
+  }
+ },
+ "distinguishing": "A plain four-armed snowflake with rounded stroke caps and no slash; it is semantically interchangeable with the square-capped plain snowflake and contrasts with the slashed version."
 }

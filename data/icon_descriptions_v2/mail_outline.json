@@ -15,7 +15,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "inbox or messaging",
+   "meaning": "inbox or correspondence",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Covers both digital email and physical paper letters or envelopes equally well.",
+ "ambiguity": "Can be confused with the stacked envelopes icon at small sizes, and is easily overused when a more specific envelope variant (attachment, send/forward arrow, verified checkmark, or unsubscribe) fits better.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -91,11 +91,6 @@
    "domain": "social_family"
   },
   {
-   "task": "Unsubscribe from retail newsletters clogging up the personal address",
-   "parent": "",
-   "domain": "tech"
-  },
-  {
    "task": "Drop the certified letter to the HOA at the post office before 5pm",
    "parent": "",
    "domain": "home"
@@ -156,40 +151,45 @@
  ],
  "near_misses": [
   {
+   "task": "Attach the updated resume PDF to the job application email",
+   "better": "envelope with paperclip badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unsubscribe from daily retail marketing newsletters",
+   "better": "slashed envelope or envelope with minus-circle badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Forward the contractor's quote to my spouse",
+   "better": "envelope with right-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Ship the broken espresso machine back to Seattle in a padded box",
-   "better": "parcel box / package",
+   "better": "parcel box or package icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Change my email address on the airline loyalty account",
-   "better": "airplane / user profile",
+   "better": "airplane or user profile icon",
    "trap": "property"
   },
   {
    "task": "Pay the electricity bill that came in the mail yesterday",
-   "better": "bill / lightning bolt / money",
+   "better": "bill, lightning bolt, or money icon",
    "trap": "property"
   },
   {
-   "task": "Buy chain mail coif for the renaissance faire costume",
-   "better": "armor / costume",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Call the plumber who emailed the estimate for the water heater",
-   "better": "phone handset / water heater",
+   "better": "phone handset or water heater icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Order a leather wallet with a snapped coin pouch",
-   "better": "wallet",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "A classic closed envelope icon, universally understood as email, messaging, or physical postal mail. It directly represents one of the most frequent action verbs and objects in personal and work to-do lists (emailing someone, clearing the inbox, mailing a letter or card).",
@@ -209,6 +209,102 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "mail"
- }
+  "alias_of": "mail",
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "email or electronic message",
+     "strength": "primary"
+    },
+    {
+     "meaning": "physical letter, envelope, or postal mail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "inbox or messaging",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "invitation or greeting card",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Covers both digital email and physical paper letters or envelopes equally well.",
+   "near_misses": [
+    {
+     "task": "Ship the broken espresso machine back to Seattle in a padded box",
+     "better": "parcel box / package",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change my email address on the airline loyalty account",
+     "better": "airplane / user profile",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the electricity bill that came in the mail yesterday",
+     "better": "bill / lightning bolt / money",
+     "trap": "property"
+    },
+    {
+     "task": "Buy chain mail coif for the renaissance faire costume",
+     "better": "armor / costume",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the plumber who emailed the estimate for the water heater",
+     "better": "phone handset / water heater",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a leather wallet with a snapped coin pouch",
+     "better": "wallet",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mail_off",
+   "attach_email",
+   "stacked_email",
+   "unsubscribe",
+   "mark_email_read",
+   "forward_to_inbox",
+   "outgoing_mail"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12060,
+    "output": 2435,
+    "thoughts": 63,
+    "total": 14558
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "A plain closed envelope with no slash, stacking lines, or corner badges, serving as the general icon for any standard email or physical letter."
 }

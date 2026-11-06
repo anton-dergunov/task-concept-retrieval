@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "window blinds or shades",
+   "meaning": "window blinds or Venetian blinds",
    "strength": "primary"
   },
   {
-   "meaning": "roller shutters or window covering",
+   "meaning": "closed or tilted window shades",
    "strength": "secondary"
   },
   {
-   "meaning": "smart home window shade automation",
+   "meaning": "smart home window blind automation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, it could be mistaken for a trash bin, a market stall awning, a radiator, or a chest of drawers.",
+ "ambiguity": "Virtually interchangeable at list size with the window blinds icon that has rectangular slats and a short pull cord; only close inspection shows the angled slats and longer cord.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -149,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Open the living room roller shades to let the morning sun in",
+   "better": "open window blinds with rectangular slats and short cord",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Print the client dossier and put it in a presentation pocket folder",
+   "better": "document folder with interior pocket flap",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Prep snacks for the blind wine tasting on Friday",
    "better": "wine glass",
    "trap": "shared_vocabulary"
@@ -157,16 +167,6 @@
    "task": "Check the blind spot mirror on the passenger side door",
    "better": "car or side mirror",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Take the kitchen trash bin out to the curb",
-   "better": "trash can",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Clean the bathroom exhaust fan cover",
-   "better": "fan or vent",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a glare shield for my laptop screen so I can work by the window",
@@ -182,7 +182,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts venetian window blinds with a rounded top headrail, three horizontal slats, and a vertical pull cord on the right. It fits household maintenance, shopping, and smart-home tasks involving blinds, shades, or shutters, though at very small sizes its boxy shape can resemble a trash can or vent.",
@@ -200,6 +200,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "window blinds or shades",
+     "strength": "primary"
+    },
+    {
+     "meaning": "roller shutters or window covering",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smart home window shade automation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, it could be mistaken for a trash bin, a market stall awning, a radiator, or a chest of drawers.",
+   "near_misses": [
+    {
+     "task": "Prep snacks for the blind wine tasting on Friday",
+     "better": "wine glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the blind spot mirror on the passenger side door",
+     "better": "car or side mirror",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take the kitchen trash bin out to the curb",
+     "better": "trash can",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean the bathroom exhaust fan cover",
+     "better": "fan or vent",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a glare shield for my laptop screen so I can work by the window",
+     "better": "laptop",
+     "trap": "property"
+    },
+    {
+     "task": "Call the electrician to run wiring for the motorized shade header",
+     "better": "phone call or electrician",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "blinds_2",
+   "lab_profile",
+   "contract"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6688,
+    "output": 1173,
+    "thoughts": 0,
+    "total": 7861
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "Shows window blinds with slanted trapezoidal slats and a long pull cord reaching the bottom slat, representing tilted or closed Venetian blinds, though practically interchangeable with the flat-slatted blinds icon for general window-blind tasks."
 }

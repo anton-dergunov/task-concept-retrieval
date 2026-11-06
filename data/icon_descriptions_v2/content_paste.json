@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the top loop can make it resemble a padlock, a shopping bag, or a hanging weight.",
+ "ambiguity": "At a quick glance the top clip with a hole can be confused with the top handle of the briefcases, or with a padlock.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -155,14 +155,19 @@
  ],
  "near_misses": [
   {
+   "task": "Pack leather briefcase for the board meeting",
+   "better": "single plain briefcase",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch between freelance work portfolios",
+   "better": "stacked briefcases",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy hair clips and bobby pins for the recital",
    "better": "hair clip / grooming accessory",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the broken padlock on the garden shed",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check whether the garage door closes properly",
@@ -178,11 +183,6 @@
    "task": "Order a clipboard-sized cutting board for camping",
    "better": "cutting board / knife",
    "trap": "property"
-  },
-  {
-   "task": "Clip the dog's nails before Saturday",
-   "better": "dog / nail clippers",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -206,6 +206,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "clipboard / paste from clipboard",
+     "strength": "primary"
+    },
+    {
+     "meaning": "form / questionnaire / intake sheet",
+     "strength": "primary"
+    },
+    {
+     "meaning": "inspection / survey / audit log",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "task list / assignment board",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the top loop can make it resemble a padlock, a shopping bag, or a hanging weight.",
+   "near_misses": [
+    {
+     "task": "Buy hair clips and bobby pins for the recital",
+     "better": "hair clip / grooming accessory",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the broken padlock on the garden shed",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check whether the garage door closes properly",
+     "better": "garage / door",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book flight to Chicago for the annual compliance audit",
+     "better": "airplane / flight",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a clipboard-sized cutting board for camping",
+     "better": "cutting board / knife",
+     "trap": "property"
+    },
+    {
+     "task": "Clip the dog's nails before Saturday",
+     "better": "dog / nail clippers",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cases",
+   "work",
+   "enterprise"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6697,
+    "output": 1916,
+    "thoughts": 115,
+    "total": 8728
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:56Z"
+  }
+ },
+ "distinguishing": "Drawn as a vertical/square board with a solid top clamp and hanging hole (a clipboard), rather than a horizontal case with a hollow rectangular handle."
 }

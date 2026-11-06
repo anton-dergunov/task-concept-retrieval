@@ -7,19 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "desktop computer / PC / iMac",
+   "meaning": "all-in-one desktop computer, iMac, or PC workstation",
    "strength": "primary"
   },
   {
-   "meaning": "external monitor / display screen",
-   "strength": "primary"
-  },
-  {
-   "meaning": "television set",
+   "meaning": "external computer monitor or display",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a television icon or another plain monitor variant, though the thick chin strongly suggests an all-in-one desktop computer.",
+ "ambiguity": "At glance sizes it can still blend in with the plain thin-bezel desktop monitors, especially the one with a similar trapezoidal base.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -151,40 +147,40 @@
  ],
  "near_misses": [
   {
+   "task": "Pack the MacBook Air and charger in carry-on bag",
+   "better": "laptop computer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mount the living room flat-screen TV on the wall bracket",
+   "better": "thin-bezel television or monitor screen",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Monitor blood pressure every morning for two weeks",
    "better": "blood pressure cuff or heart",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a baby monitor with two cameras for the nursery",
-   "better": "baby monitor / baby",
+   "better": "baby monitor or baby icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pack the MacBook Air and charger in carry-on bag",
-   "better": "laptop",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Cancel Netflix before the billing date on the 18th",
-   "better": "subscription / credit card / TV",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a mechanical keyboard with quieter tactile switches",
-   "better": "keyboard",
+   "better": "computer keyboard",
    "trap": "parent_topic"
   },
   {
-   "task": "Download wallpapers in 5K desktop resolution",
-   "better": "image / wallpaper",
+   "task": "Download nature wallpapers in 5K desktop resolution",
+   "better": "image or landscape photo",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an all-in-one desktop computer or computer monitor with a prominent bottom bezel and stand. It is a strong fit for tasks about desktop computers, external monitors, and workstation hardware, though at a quick glance it overlaps slightly with television or plain monitor icons.",
@@ -202,6 +198,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "desktop computer / PC / iMac",
+     "strength": "primary"
+    },
+    {
+     "meaning": "external monitor / display screen",
+     "strength": "primary"
+    },
+    {
+     "meaning": "television set",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a television icon or another plain monitor variant, though the thick chin strongly suggests an all-in-one desktop computer.",
+   "near_misses": [
+    {
+     "task": "Monitor blood pressure every morning for two weeks",
+     "better": "blood pressure cuff or heart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a baby monitor with two cameras for the nursery",
+     "better": "baby monitor / baby",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the MacBook Air and charger in carry-on bag",
+     "better": "laptop",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel Netflix before the billing date on the 18th",
+     "better": "subscription / credit card / TV",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a mechanical keyboard with quieter tactile switches",
+     "better": "keyboard",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Download wallpapers in 5K desktop resolution",
+     "better": "image / wallpaper",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "jamboard_kiosk",
+   "desktop_windows",
+   "monitor",
+   "laptop_mac",
+   "laptop_windows",
+   "laptop_chromebook"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10537,
+    "output": 3307,
+    "thoughts": 0,
+    "total": 13844
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "Unlike the uniform-bezel monitors and the wide-base laptops, this screen has a heavy solid black bottom chin above a tapered stand, distinctly evoking an all-in-one desktop computer (like an iMac) rather than a TV."
 }

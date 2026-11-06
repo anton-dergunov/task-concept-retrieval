@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "photo or picture",
+   "meaning": "portrait-oriented photo, vertical poster, or upright print",
    "strength": "primary"
   },
   {
-   "meaning": "framed poster or art print",
+   "meaning": "photo, picture, or image file",
    "strength": "primary"
   },
   {
-   "meaning": "portrait orientation or vertical image",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "image file or gallery",
+   "meaning": "phone wallpaper or vertical story graphic",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles generic square or landscape image icons; could also be mistaken for a tablet screen showing a wallpaper.",
+ "ambiguity": "Interchangeable with the plain square and landscape frames for general photo tasks unless orientation matters.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -156,18 +152,23 @@
  ],
  "near_misses": [
   {
-   "task": "Charge the DSLR camera batteries for tomorrow",
-   "better": "camera or battery",
-   "trap": "shared_vocabulary"
+   "task": "Crop the banner image to 16:9 widescreen",
+   "better": "wide landscape frame with mountain peaks",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Hike up to the twin mountain ridge before sunrise",
-   "better": "mountain / hiking",
+   "task": "Set up the tabletop digital photo frame in the kitchen",
+   "better": "screen on a flat base with mountain peaks",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take headshots of the new team members",
+   "better": "camera body with mountain peaks or person portrait",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Switch the external monitor to portrait mode for coding",
-   "better": "monitor / display",
+   "better": "computer monitor",
    "trap": "property"
   },
   {
@@ -207,6 +208,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photo or picture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "framed poster or art print",
+     "strength": "primary"
+    },
+    {
+     "meaning": "portrait orientation or vertical image",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "image file or gallery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles generic square or landscape image icons; could also be mistaken for a tablet screen showing a wallpaper.",
+   "near_misses": [
+    {
+     "task": "Charge the DSLR camera batteries for tomorrow",
+     "better": "camera or battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hike up to the twin mountain ridge before sunrise",
+     "better": "mountain / hiking",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Switch the external monitor to portrait mode for coding",
+     "better": "monitor / display",
+     "trap": "property"
+    },
+    {
+     "task": "Frame out the basement partition wall with 2x4 studs",
+     "better": "hammer / construction wall",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up new eyeglass frames from the optician",
+     "better": "eyeglasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Denver for the photography workshop",
+     "better": "airplane / flight",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "photo_frame",
+   "photo_camera_back",
+   "image",
+   "panorama",
+   "image_inset"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9297,
+    "output": 3033,
+    "thoughts": 0,
+    "total": 12330
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "The only tall, vertically oriented frame in the group, representing a portrait-mode image, vertical poster, or upright print."
 }

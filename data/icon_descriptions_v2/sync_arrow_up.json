@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "upgrade or update software to a newer version",
+   "meaning": "sync up / push changes to server or cloud",
    "strength": "primary"
   },
   {
-   "meaning": "sync and upload changes",
+   "meaning": "upgrade software to a newer version",
    "strength": "primary"
   },
   {
-   "meaning": "increase recurring rate or cycle",
+   "meaning": "upload backup on a recurring cycle",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Combines a generic sync/refresh loop with an up arrow, making it hard to distinguish from plain sync, plain upload, or rotate-and-move-up UI controls.",
+ "ambiguity": "Easily confused with the sync-and-down-arrow icon because both combine a sync loop with a vertical arrow and can both be read as 'update'.",
  "modifier_semantics": [
   {
    "modifier": "vertical upward arrow on the right",
@@ -151,19 +151,19 @@
  ],
  "near_misses": [
   {
+   "task": "Pull the latest changes down from the main branch",
+   "better": "sync cycle with a downward arrow (sync down / pull)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download the offline map update before the road trip",
+   "better": "sync cycle with a downward arrow (download update)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update passport before the Mexico trip",
    "better": "passport",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Update resume with the Q3 project numbers",
-   "better": "resume / document",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Recycle the stack of cardboard boxes in the garage",
-   "better": "recycling symbol / cardboard box",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Ask the airline desk about a seat upgrade at check-in",
@@ -176,15 +176,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Rotate the couch and carry it upstairs",
-   "better": "couch / stairs",
-   "trap": "lookalike_glyph"
+   "task": "Choose a cloud storage plan with automatic sync",
+   "better": "cloud",
+   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows two counter-clockwise curved arrows forming a cycle alongside an upward straight arrow, suggesting an update/upgrade or sync-and-upload action. It fits software/firmware upgrades and cloud sync tasks, though it is somewhat abstract and easily confused with generic sync, rotate, or upload icons.",
@@ -202,6 +202,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upgrade or update software to a newer version",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sync and upload changes",
+     "strength": "primary"
+    },
+    {
+     "meaning": "increase recurring rate or cycle",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Combines a generic sync/refresh loop with an up arrow, making it hard to distinguish from plain sync, plain upload, or rotate-and-move-up UI controls.",
+   "near_misses": [
+    {
+     "task": "Update passport before the Mexico trip",
+     "better": "passport",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Update resume with the Q3 project numbers",
+     "better": "resume / document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Recycle the stack of cardboard boxes in the garage",
+     "better": "recycling symbol / cardboard box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Ask the airline desk about a seat upgrade at check-in",
+     "better": "airplane seat / airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new USB stick for the BIOS update",
+     "better": "USB flash drive",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Rotate the couch and carry it upstairs",
+     "better": "couch / stairs",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sync_arrow_down"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4006,
+    "output": 974,
+    "thoughts": 0,
+    "total": 4980
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Shows a straight upward arrow on the right beside the circular sync arrows, signifying pushing changes up to a server or upgrading to a higher version, rather than pulling down or downloading."
 }

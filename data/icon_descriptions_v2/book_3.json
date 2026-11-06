@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "textbook or school subject (grade A)",
+   "meaning": "textbook or font book",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic book or notebook icon at very small sizes, or an address book/contacts icon if the 'A' is read as an alphabetical tab.",
+ "ambiguity": "Virtually interchangeable with the book with 'A' and an offset right-hand back cover; also easily confused at small sizes with a generic closed book or an address/contact book.",
  "modifier_semantics": [
   {
    "modifier": "capital letter A on the front cover",
@@ -164,12 +164,17 @@
  "near_misses": [
   {
    "task": "Read three chapters of Dune before bed",
-   "better": "plain open book or novel icon (without letter A)",
+   "better": "plain book icon without a letter on the cover",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Clean up duplicate phone numbers in my address book",
-   "better": "contact book icon with person silhouette",
+   "better": "contact book icon with a person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Design the layout for the magazine article drop caps",
+   "better": "folded booklet or article icon with letter A and offset page layer, or a typography icon",
    "trap": "lookalike_glyph"
   },
   {
@@ -183,11 +188,6 @@
    "trap": "property"
   },
   {
-   "task": "Buy a new USB-C charger for the tablet",
-   "better": "charger or cable icon",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Check the vitamin A dosage on the supplement bottle",
    "better": "pill bottle icon",
    "trap": "shared_vocabulary"
@@ -196,7 +196,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a thick book with a capital 'A' on the cover, the standard visual metaphor for a dictionary, glossary, encyclopedia, or vocabulary study. It fits language learning, reference lookup, and documentation tasks well, though it sits close to general book and contact-book icons.",
@@ -214,6 +214,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "dictionary, glossary, or lexicon",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vocabulary, spelling, or language learning",
+     "strength": "primary"
+    },
+    {
+     "meaning": "encyclopedia or reference book",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "textbook or school subject (grade A)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic book or notebook icon at very small sizes, or an address book/contacts icon if the 'A' is read as an alphabetical tab.",
+   "near_misses": [
+    {
+     "task": "Read three chapters of Dune before bed",
+     "better": "plain open book or novel icon (without letter A)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean up duplicate phone numbers in my address book",
+     "better": "contact book icon with person silhouette",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a window seat on the morning train to Lyon",
+     "better": "train or ticket icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sort the spice jars in alphabetical order on the rack",
+     "better": "spice jar or kitchen shelf icon",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new USB-C charger for the tablet",
+     "better": "charger or cable icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the vitamin A dosage on the supplement bottle",
+     "better": "pill bottle icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "book_6"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4093,
+    "output": 1115,
+    "thoughts": 250,
+    "total": 5458
+   },
+   "soft_problems": [
+    "refers to a letter 1x"
+   ],
+   "created": "2026-11-06T12:38:16Z"
+  }
+ },
+ "distinguishing": "Shows a single closed bound book with a curved page edge at the bottom right and the letter 'A' on the cover, whereas the look-alike has an offset second layer or back cover extending along the right side; the two are nearly interchangeable in meaning as a dictionary or vocabulary book."
 }

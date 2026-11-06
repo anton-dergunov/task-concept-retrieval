@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "cloud storage, cloud computing, or online sync",
+   "meaning": "cloud storage, cloud computing, or online backup",
    "strength": "primary"
   },
   {
@@ -15,11 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "remote server or hosting infrastructure",
+   "meaning": "online sync or remote server hosting",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a directional arrow or weather symbol (like a sun or raindrop), it sits squarely between tech cloud storage and meteorology.",
+ "ambiguity": "Completely interchangeable with the cloud outline that has an inner curved contour line; without an arrow or weather modifier, both sit squarely between digital cloud services and meteorological weather.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -184,7 +184,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clean, universally recognized cloud outline. It serves two common task categories equally well: managing cloud storage/computing (iCloud, Drive, AWS, backups) and checking weather forecasts for outdoor plans or travel. It is distinct, though more specialized variants with arrows or rain exist for specific actions.",
@@ -202,6 +202,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cloud storage, cloud computing, or online sync",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weather, forecast, or overcast sky",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remote server or hosting infrastructure",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a directional arrow or weather symbol (like a sun or raindrop), it sits squarely between tech cloud storage and meteorology.",
+   "near_misses": [
+    {
+     "task": "Buy On Cloud running shoes in size 43",
+     "better": "running shoe / sneaker",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order cloud bread ingredients for keto baking",
+     "better": "bread / baking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Paint soft white clouds on nursery ceiling",
+     "better": "paint roller / paintbrush",
+     "trap": "property"
+    },
+    {
+     "task": "Fix Wi-Fi router dropping connection in bedroom",
+     "better": "Wi-Fi signal / router",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay quarterly accountant invoice",
+     "better": "invoice / receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why kitchen smoke detector keeps chirping",
+     "better": "smoke / alarm",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "filter_drama"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4012,
+    "output": 992,
+    "thoughts": 0,
+    "total": 5004
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "A simple continuous outline of a cloud with an empty interior, whereas the other cloud icon has an inward-curling contour stroke on the left puff, though both are functionally interchangeable in meaning."
 }

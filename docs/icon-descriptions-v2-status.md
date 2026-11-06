@@ -47,32 +47,56 @@ python scripts/describe_v2_pass1.py run 2>&1 | tee -a .cache/v2_pass1/pass1.log
 - **Start over** (rarely needed): delete `.cache/v2_pass1/pass1/state.json`, which makes
   `run` submit a new job.
 
+## Done (2026-11-06, second session)
+
+- **Pass 1 checked**: 3,619 glyphs + 339 alias copies, all valid ($43.95). 18% have soft
+  problems (mostly 17–20 examples instead of 16, or the wrong parent count): harmless.
+  v2 keeps 2,831 glyphs; it discards 27% of the review's "unsure", 20 of 832 "useful"
+  and all 12 "somewhat". Report: `scripts/v2_report.py` → `results/v2_stats/report.md`.
+- **Contamination guard** (`scripts/v2_guard.py`): dropped 483 generated strings within
+  e5 cosine 0.95 of an eval title (8 exact), of 125,536. The files record only the
+  counts (`_meta.guard`), never the text (Personal is private). Idempotent; rerun after
+  every pass.
+- **v2 is matchable**: `load_icons(version="v1"|"v2")`, default `TCR_DESC` (v1).
+  v2 maps depiction → `visual_concepts`, readings → a new `readings` view,
+  examples → EN ("Parent: task") + ES + RU, near-misses → `poor_matches`; usefulness =
+  (recognizability + task_fit) / 10 until fitted on labels. The review overrides v2's
+  discard for useful/somewhat glyphs (2,862 kept). `python -m tcr.eval --desc v2`.
+  The embedding caches are now keyed on the encoded texts (before, v2 would have
+  reused v1's vectors). Bootstrap eval after all passes (suggestive only): M3 nDCG@10
+  0.106 (v1) → 0.261 (v2).
+- **Pass 2 (contrast)** (`scripts/describe_v2_pass2.py`): look-alike groups from CLIP
+  glyph embeddings at cosine ≥ 0.975: 350 groups of 2–8, 951 glyphs (33%), checked
+  on contact sheets. All 350 groups merged (348 by batch, 1 retried and 2 test groups
+  online; $4.15). Distinctiveness of the 951 glyphs moved from mostly 4 to an even
+  spread (239 now score 1). 10 entries name a sibling by letter ("icon B"); harmless.
+  The guard then dropped 5 new near-misses.
+- **Pass 3 (QA)** (`scripts/v2_qa.py`): 485 glyphs judged blind, v1 vs v2, by four
+  Opus subagents (12 packets each). Random 200: v1 wrong or partly 27%, v2 0.5%.
+  The 18 v2 readings judged wrong or partly were re-described with the judge's fix
+  and their groups contrasted again. Results in icon-descriptions-v2.md §6.
+- **v2 frozen** (prompts `v2.0`, `v2.1-contrast`, `v2.0-qa` in `_meta`).
+- **The labelling pools** (`scripts/build_label_bundle.py`) now draw from every matcher
+  on both versions (provenance `M3.v2@1`), over the union of the kept icons. Not
+  rebuilt yet.
+
 ## Left to do
 
-1. **Check pass 1**: count files against 3,619 + aliases. Look at the share with soft
-   problems, the discard rate (vs the human levels), and the cost from the usage sums.
-2. **Pass 2 (contrast)**: look-alike groups by image embedding (`tcr/glyphs.py`
-   `glyph_embeddings` / `lookalike_order`; never names). Send 3–8 glyphs together and
-   rewrite `readings`, `near_misses` and `distinctiveness` for the ~30% in families.
-   The pilot's misreadings were exactly this kind of glyph (small badges, frames
-   defined by one detail, two plausible readings).
-3. **Pass 3 (QA)**: a second look at glyphs with low recognizability or high ambiguity,
-   or where v1 and v2 readings disagree most. Judge: an Opus subagent, blind, as in the
-   pilot (the author prefers Opus when the cost is a few % of a 5-hour window).
-4. **Guard and statistics** (§4, §6): drop example tasks that equal an eval title or are
-   within e5 cosine 0.95 of one (the pilot found 2–10 per 50 glyphs per model; the code
-   is in `scripts/v2_pilot.py` `contamination()`). Then report length mix, cross-icon
-   reuse, top-20 negative share and domain entropy, and freeze v2.
-5. **Make v2 matchable**: `tcr/data.py` reads only the v1 fields. Add a v2 loader that
-   maps readings, intents, examples (+ ES/RU) and depiction to the IconDoc field views,
-   and a switch between v1 and v2. Then rebuild the labelling pools over v1 + v2
-   (§6, pool fairness).
+1. Rebuild the labelling pools: `python scripts/build_label_bundle.py --refresh`.
+   Without `--refresh`, existing grids are kept and get no v2 candidates. Check first
+   that no task labels exist on the NAS; grids someone already labelled must not change.
+2. Delete the batch files in `gs://<project>-tcr-batch/v2_pass1/` and `v2_pass2/`.
+3. Then label, and compare v1 vs v2 on dev labels (icon-descriptions-v2.md §6,
+   extrinsic). Delete this file once the pools are rebuilt.
 
 ## Decisions
 
 - One model for all glyphs (no split by usefulness or difficulty), for clean
   comparisons: Argon.
-- Batch mode for pass 1: half price, no rate limits (Argon hit 429 at 10 parallel
+- Look-alike threshold: CLIP cosine 0.975 (0.95 put 71% of glyphs in groups; CLIP
+  sees all thin black glyphs as similar).
+- The review's useful/somewhat level overrides v2's discard (32 glyphs).
+- Batch mode for passes 1–2: half price, no rate limits (Argon hit 429 at 10 parallel
   online requests).
 - Default media resolution (1,120 image tokens); lower resolution would save ~$1–3.
 - The schema carries no array or integer bounds (Vertex rejects it with them); counts

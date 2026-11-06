@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "all mail / email accounts",
+   "meaning": "all mail or multiple email accounts",
    "strength": "primary"
   },
   {
-   "meaning": "archive or stacked file drawers",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "incoming queues or task trays",
+   "meaning": "archive drawers or stacked task queues",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with copy/duplicate icons, photo library stacks, or physical dresser drawers.",
+ "ambiguity": "Virtually identical to the slightly wider landscape stacked inbox tray, and easily confused at a glance with the single inbox tray (which lacks the bottom-left L-frame).",
  "modifier_semantics": [
   {
    "modifier": "stacked L-shaped frame behind bottom-left",
@@ -160,14 +156,19 @@
  ],
  "near_misses": [
   {
+   "task": "Update the color theme on the pitch deck slides",
+   "better": "stacked frames with paintbrush",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Empty the physical incoming mail tray on my desk",
+   "better": "single square inbox tray",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Send the signed lease back to the landlord",
    "better": "paper airplane or envelope with outgoing arrow",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Copy the project folder to the backup drive",
-   "better": "two overlapping document pages or folders",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check if the new router firmware arrived",
@@ -180,11 +181,6 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Sort duplicate photos from the wedding album",
-   "better": "stacked photo frames with mountain/sun",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Fix the stuck kitchen silverware drawer",
    "better": "tools or cabinet with handle",
    "trap": "shared_vocabulary"
@@ -193,7 +189,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a standard inbox tray stacked over a second frame, representing multiple inboxes, 'all mail', or stacked paper trays. It fits tasks about triaging email across accounts, reaching inbox zero, or clearing physical desk trays, though at small sizes it slightly resembles generic 'copy' or 'photo stack' icons.",
@@ -211,6 +207,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple inboxes or unified inbox",
+     "strength": "primary"
+    },
+    {
+     "meaning": "all mail / email accounts",
+     "strength": "primary"
+    },
+    {
+     "meaning": "archive or stacked file drawers",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "incoming queues or task trays",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with copy/duplicate icons, photo library stacks, or physical dresser drawers.",
+   "near_misses": [
+    {
+     "task": "Send the signed lease back to the landlord",
+     "better": "paper airplane or envelope with outgoing arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Copy the project folder to the backup drive",
+     "better": "two overlapping document pages or folders",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the new router firmware arrived",
+     "better": "router",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the accountant's invoice from the inbox",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Sort duplicate photos from the wedding album",
+     "better": "stacked photo frames with mountain/sun",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix the stuck kitchen silverware drawer",
+     "better": "tools or cabinet with handle",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "slide_library",
+   "stacked_inbox",
+   "inbox"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6675,
+    "output": 1949,
+    "thoughts": 0,
+    "total": 8624
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Shows a nearly square inbox tray with a semicircular front notch and a stacked L-shaped corner behind the bottom-left; visually and semantically interchangeable with the slightly wider landscape stacked inbox tray, and distinct from the single unstacked inbox tray or the paintbrush slide icon."
 }

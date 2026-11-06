@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "open book, booklet, brochure, or greeting card",
+   "meaning": "postcard, greeting card, or open two-page booklet",
    "strength": "primary"
   },
   {
-   "meaning": "two-column page layout or split-pane window",
+   "meaning": "two-column page layout, brochure, or split-pane view",
    "strength": "primary"
   },
   {
-   "meaning": "postcard or ID card",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "fridge or double-door cabinet",
+   "meaning": "ID badge or badge card with photo pane and text lines",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Reads interchangeably as a UI split-pane layout toggle, an open flat booklet or greeting card, or a postcard; at very small sizes it looks like a generic table cell or window.",
+ "ambiguity": "Clearly distinct from the single-pane documents, though at tiny sizes the vertical divider can blur into the wider landscape index card.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal bars in right pane",
@@ -160,13 +156,18 @@
  ],
  "near_misses": [
   {
-   "task": "Pay the Chase sapphire credit card statement before the 15th",
-   "better": "credit card with magnetic stripe or chip",
-   "trap": "shared_vocabulary"
+   "task": "Write study definitions on 3x5 index cards for the biology exam",
+   "better": "single-pane landscape card with three text lines",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Renew my expired state ID card at the DMV",
-   "better": "ID badge with person silhouette",
+   "task": "Print the two-page lease addendum on letter paper",
+   "better": "tall portrait page with folded corner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the Chase Sapphire credit card statement before the 15th",
+   "better": "credit card with magnetic stripe or chip",
    "trap": "shared_vocabulary"
   },
   {
@@ -175,25 +176,20 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Read chapter 4 of Designing Data-Intensive Applications",
-   "better": "classic angled open book with curved pages",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update my phone number on the business cards",
-   "better": "contact card with user avatar and phone",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Order 200 envelopes from Moo",
    "better": "envelope icon",
    "trap": "parent_topic"
+  },
+  {
+   "task": "Note the serial number on the back of the router",
+   "better": "router or network icon",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The glyph shows a flat two-pane rectangle with text lines on the right, representing either an open greeting card/bifold brochure or a split-pane UI layout. While usable for tasks about greeting cards, booklets, or two-column layouts, its stiff geometric boxiness makes it look like a UI layout toggle and easy to confuse with generic window chrome.",
@@ -211,6 +207,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "open book, booklet, brochure, or greeting card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "two-column page layout or split-pane window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "postcard or ID card",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "fridge or double-door cabinet",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Reads interchangeably as a UI split-pane layout toggle, an open flat booklet or greeting card, or a postcard; at very small sizes it looks like a generic table cell or window.",
+   "near_misses": [
+    {
+     "task": "Pay the Chase sapphire credit card statement before the 15th",
+     "better": "credit card with magnetic stripe or chip",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew my expired state ID card at the DMV",
+     "better": "ID badge with person silhouette",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean out the side-by-side fridge and wipe the shelves",
+     "better": "refrigerator appliance icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Read chapter 4 of Designing Data-Intensive Applications",
+     "better": "classic angled open book with curved pages",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my phone number on the business cards",
+     "better": "contact card with user avatar and phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order 200 envelopes from Moo",
+     "better": "envelope icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "description",
+   "feed",
+   "text_snippet",
+   "article",
+   "library_books",
+   "source",
+   "text_ad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12132,
+    "output": 4025,
+    "thoughts": 352,
+    "total": 16509
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "The only icon in the group divided by a vertical center bar into two side-by-side panes, with the left pane blank and three short horizontal lines in the right pane, reading as a postcard, folded booklet/card, or two-column layout rather than a single sheet."
 }

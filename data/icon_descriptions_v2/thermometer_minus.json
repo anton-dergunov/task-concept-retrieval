@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "cold / sub-zero / freezing temperature",
+   "meaning": "cold / low or sub-zero temperature",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the thermometer bulb can momentarily resemble a keyhole or padlock, though the minus sign clarifies it as a temperature decrease.",
+ "ambiguity": "Virtually interchangeable with the completely empty outline thermometer with a minus sign; both convey lowering temperature or cold conditions.",
  "modifier_semantics": [
   {
    "modifier": "horizontal minus sign to upper right",
@@ -163,6 +163,21 @@
  ],
  "near_misses": [
   {
+   "task": "Remove the broken outdoor temperature sensor from the home automation hub",
+   "better": "completely empty outline thermometer with minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Drain the outdoor pipes before the extreme sub-zero freeze tonight",
+   "better": "completely empty outline thermometer with minus sign or snowflake (interchangeable",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn the living room radiator up a couple of degrees",
+   "better": "thermometer with plus sign or high fill",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a -10C rated down sleeping bag for the autumn trek",
    "better": "sleeping bag",
    "trap": "property"
@@ -178,16 +193,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Turn the living room radiator up a couple of degrees",
-   "better": "thermometer with plus sign or radiator",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a replacement brass padlock for the garden shed",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order 4 bags of pet-safe sidewalk salt",
    "better": "salt bag / snow shovel",
    "trap": "parent_topic"
@@ -196,7 +201,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a thermometer with a low bulb level and a minus sign, universally understood as lowering the temperature or sub-zero cold. It fits tasks about turning down thermostats, chilling food or drinks, cold-crashing brews, and preparing for freezing weather, though it must be distinguished from general temperature checking or raising the heat.",
@@ -216,6 +221,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "lower temperature / cool down / decrease thermostat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cold / sub-zero / freezing temperature",
+     "strength": "primary"
+    },
+    {
+     "meaning": "air conditioning / cooling system",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "reduce fever",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the thermometer bulb can momentarily resemble a keyhole or padlock, though the minus sign clarifies it as a temperature decrease.",
+   "near_misses": [
+    {
+     "task": "Buy a -10C rated down sleeping bag for the autumn trek",
+     "better": "sleeping bag",
+     "trap": "property"
+    },
+    {
+     "task": "Check the baby's temperature again before midnight",
+     "better": "plain thermometer without minus sign",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Put a cold pack on my twisted ankle for 20 minutes",
+     "better": "ice pack / bandage",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Turn the living room radiator up a couple of degrees",
+     "better": "thermometer with plus sign or radiator",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a replacement brass padlock for the garden shed",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order 4 bags of pet-safe sidewalk salt",
+     "better": "salt bag / snow shovel",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "thermometer_loss"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4095,
+    "output": 782,
+    "thoughts": 0,
+    "total": 4877
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "This thermometer shows a dark fluid level filling the bottom half of the bulb, making it look slightly more like an active thermometer at a low reading than the completely empty outline version, though the two are functionally interchangeable."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / rechargeable battery",
+   "meaning": "charge empty battery or battery charging",
    "strength": "primary"
   },
   {
-   "meaning": "charging / charge a device or power bank",
+   "meaning": "rechargeable battery or portable power bank",
    "strength": "primary"
   },
   {
-   "meaning": "power bank / portable charger",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "electric power / battery replacement",
+   "meaning": "dead battery needing recharge or replacement",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to other battery status icons (full, low, half-charged), though all represent the same core battery/charging concept in a task list.",
+ "ambiguity": "Very close to the ~15-20% low-fill charging battery at small sizes, and interchangeable with the rest of the charging-battery series for general battery or charging tasks.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt",
@@ -161,29 +157,29 @@
  ],
  "near_misses": [
   {
+   "task": "Verify all drone batteries are charged above 90% before departure",
+   "better": "nearly full charging battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set EV charging limit to 80% for daily commuting",
+   "better": "mostly full charging battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the monthly ConEd electricity bill before the 15th",
-   "better": "invoice / bill / money",
+   "better": "invoice or bill",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a small waterproof rechargeable headlamp for summer hikes",
-   "better": "headlamp / flashlight",
-   "trap": "property"
-  },
-  {
    "task": "Do a quick 15-minute yoga flow to recharge after work",
-   "better": "yoga / person stretching",
+   "better": "yoga or person stretching",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Dispute the $45 duplicate charge from the hotel on Visa card",
    "better": "credit card",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Unplug sensitive electronics before the evening thunderstorm hits",
-   "better": "weather / storm cloud",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Take the Nikon DSLR body in for sensor cleaning",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows an upright battery outline with a lightning bolt at the bottom right, universally recognized as a battery or charging. It fits common everyday tasks around charging gear, buying or swapping household batteries, packing power banks, and recycling old cells, though it closely resembles other battery-level variants.",
@@ -212,6 +208,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / rechargeable battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / charge a device or power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / portable charger",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "electric power / battery replacement",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to other battery status icons (full, low, half-charged), though all represent the same core battery/charging concept in a task list.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly ConEd electricity bill before the 15th",
+     "better": "invoice / bill / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Do a quick 15-minute yoga flow to recharge after work",
+     "better": "yoga / person stretching",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the $45 duplicate charge from the hotel on Visa card",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Unplug sensitive electronics before the evening thunderstorm hits",
+     "better": "weather / storm cloud",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the Nikon DSLR body in for sensor cleaning",
+     "better": "camera",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_90",
+   "battery_charging_80",
+   "battery_charging_60",
+   "battery_charging_50",
+   "battery_charging_30",
+   "battery_charging_20"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10582,
+    "output": 3519,
+    "thoughts": 0,
+    "total": 14101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "The interior of the battery is completely empty (0% fill, crisp rectangular inner bottom corner) with the lightning bolt badge at the bottom right, setting it apart from the partially filled versions as an uncharged/dead battery being charged or a clean outline charging icon."
 }

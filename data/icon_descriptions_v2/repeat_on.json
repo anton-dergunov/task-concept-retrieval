@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "synchronize or two-way sync",
+   "meaning": "two-way sync or cycle",
    "strength": "secondary"
   },
   {
-   "meaning": "swap, exchange, or rotate",
+   "meaning": "swap or exchange back and forth",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely overlaps with unboxed repeat/loop arrows, curved refresh/sync icons, and swap/exchange arrows; in task lists it looks like a task-recurrence status badge rather than a task topic.",
+ "ambiguity": "Pairs directly with the boxed crossing-arrows shuffle icon as media playback controls, and can be confused with it when both are used loosely for 'swap' or 'switch'; also looks like a recurring-task status badge rather than a task subject.",
  "modifier_semantics": [
   {
    "modifier": "filled rounded square background",
@@ -175,14 +175,24 @@
  ],
  "near_misses": [
   {
+   "task": "Randomize the question order in the practice quiz",
+   "better": "crossing shuffle arrows in a square",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Shuffle the dinner party playlist before guests arrive",
+   "better": "crossing shuffle arrows in a square or music note",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Repeat daily ankle mobility exercises every morning",
    "better": "exercise / foot / stretching",
    "trap": "property"
   },
   {
-   "task": "Put out the plastic and glass recycling bins",
-   "better": "recycling trefoil or trash bin",
-   "trap": "lookalike_glyph"
+   "task": "Pay the recurring monthly electric bill",
+   "better": "electricity bolt / bill / invoice",
+   "trap": "property"
   },
   {
    "task": "Replace kitchen sink faucet cartridge",
@@ -198,17 +208,12 @@
    "task": "Order replacement HEPA filter for the bedroom purifier",
    "better": "air filter / fan",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Pay the recurring monthly electric bill",
-   "better": "electricity bolt / bill / invoice",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows two right-angled arrows forming a cycle inside a filled rounded square, universally recognized as repeat/loop, repost/retweet, sync, or swap. While it is also a media-player repeat-mode toggle, it maps cleanly to action-centric tasks where syncing, reposting, exchanging, or swapping is the main point, though it competes closely with unboxed repeat or curved sync icons.",
@@ -228,6 +233,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "repeat or recurring loop",
+     "strength": "primary"
+    },
+    {
+     "meaning": "repost or retweet",
+     "strength": "primary"
+    },
+    {
+     "meaning": "synchronize or two-way sync",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "swap, exchange, or rotate",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely overlaps with unboxed repeat/loop arrows, curved refresh/sync icons, and swap/exchange arrows; in task lists it looks like a task-recurrence status badge rather than a task topic.",
+   "near_misses": [
+    {
+     "task": "Repeat daily ankle mobility exercises every morning",
+     "better": "exercise / foot / stretching",
+     "trap": "property"
+    },
+    {
+     "task": "Put out the plastic and glass recycling bins",
+     "better": "recycling trefoil or trash bin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace kitchen sink faucet cartridge",
+     "better": "faucet / plumbing / wrench",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new network switch for the home lab rack",
+     "better": "network switch / router hardware",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement HEPA filter for the bedroom purifier",
+     "better": "air filter / fan",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the recurring monthly electric bill",
+     "better": "electricity bolt / bill / invoice",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shuffle_on"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4061,
+    "output": 1105,
+    "thoughts": 131,
+    "total": 5297
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "Shows two right-angled arrows pointing in opposite directions to form a closed rectangular loop (repeat, repost, or cycle), whereas the crossing-arrows icon shows two diagonal arrows intersecting and both pointing right (shuffle or randomize)."
 }

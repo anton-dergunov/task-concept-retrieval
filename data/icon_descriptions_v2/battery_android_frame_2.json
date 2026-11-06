@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "battery or rechargeable cells",
+   "meaning": "low battery (~25%) or needing a charge",
    "strength": "primary"
   },
   {
-   "meaning": "low battery or needing a charge",
+   "meaning": "battery or rechargeable cells",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "personal energy or fatigue level",
+   "meaning": "low personal energy or fatigue",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Indistinguishable from other battery level icons (25%, 50%, empty) when scanning a list quickly.",
+ "ambiguity": "Interchangeable at a glance with the ~15% critical battery and the ~40% battery icons.",
  "modifier_semantics": [
   {
    "modifier": "single solid vertical bar inside on left",
@@ -96,11 +96,6 @@
    "domain": "outdoors"
   },
   {
-   "task": "Test the car battery voltage with the multimeter before winter hits",
-   "parent": "",
-   "domain": "home"
-  },
-  {
    "task": "Charge all four Eneloop AAAs for the headlamps before leaving on Friday",
    "parent": "",
    "domain": "outdoors"
@@ -143,10 +138,6 @@
  ],
  "context_tasks": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "central": "headlamp"
-  },
-  {
    "task": "Pick up a 2-meter braided USB-C charging cable",
    "central": "cable"
   },
@@ -161,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pack the fully charged AA batteries for the camera flash",
+   "better": "fully charged 100% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Discharge lipo battery packs to 50% for safe storage",
+   "better": "half-filled 50% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a cordless battery-powered leaf blower for the yard",
    "better": "leaf blower or garden tool",
    "trap": "property"
@@ -171,19 +172,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Switch the kitchen light bulbs to warm LEDs",
-   "better": "light bulb",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Schedule a 20-minute afternoon nap to recharge",
    "better": "bed or sleep",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pack the GoPro case and mounts",
-   "better": "action camera",
-   "trap": "parent_topic"
   },
   {
    "task": "Check if the garage freezer is still running",
@@ -194,7 +185,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a horizontal battery with a low charge bar. It is a great fit for common tasks about buying household batteries, charging devices or power banks, and replacing dead cells, though its specific '25% charge' state is redundant with other battery icons.",
@@ -212,6 +203,102 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1,
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery or rechargeable cells",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low battery or needing a charge",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank or portable charger",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy or fatigue level",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Indistinguishable from other battery level icons (25%, 50%, empty) when scanning a list quickly.",
+   "near_misses": [
+    {
+     "task": "Buy a cordless battery-powered leaf blower for the yard",
+     "better": "leaf blower or garden tool",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before the 15th",
+     "better": "invoice, lightning bolt, or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Switch the kitchen light bulbs to warm LEDs",
+     "better": "light bulb",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule a 20-minute afternoon nap to recharge",
+     "better": "bed or sleep",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the GoPro case and mounts",
+     "better": "action camera",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the garage freezer is still running",
+     "better": "fridge or snowflake",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_1",
+   "battery_android_frame_3",
+   "battery_android_frame_4",
+   "battery_android_frame_5",
+   "battery_android_frame_6",
+   "battery_android_frame_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10606,
+    "output": 3427,
+    "thoughts": 0,
+    "total": 14033
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The interior fill block occupies roughly one-quarter (~25%) of the battery, slightly wider than the ~15% sliver and narrower than the ~40% block, making it functionally interchangeable with those neighboring low-battery icons."
 }

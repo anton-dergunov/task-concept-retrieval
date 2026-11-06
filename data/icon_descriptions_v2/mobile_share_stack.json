@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "transfer or mirror between mobile devices or watch",
+   "meaning": "mirror or duplicate mobile display to another screen",
    "strength": "primary"
   },
   {
-   "meaning": "create app shortcut or forward on phone",
+   "meaning": "transfer or migrate data between two mobile devices",
    "strength": "primary"
   },
   {
-   "meaning": "switch or migrate phone data",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "share screen or duplicate mobile display",
+   "meaning": "share across multiple mobile apps or windows",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a generic 'copy document' icon or a phone with a forward/share arrow; the small side button (suggesting a phone case or smartwatch crown) is easy to miss.",
+ "ambiguity": "Could be confused with the single mobile screen with a bent right arrow if the L-shaped backing layer is overlooked, or with a generic 'copy document' icon if the small side button bump is missed.",
  "modifier_semantics": [
   {
    "modifier": "right-turning arrow inside screen",
@@ -164,8 +160,8 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new rugged case with clicky side buttons for my phone",
-   "better": "smartphone case",
+   "task": "Set up call forwarding on my work cell phone",
+   "better": "single mobile screen with bent or straight right arrow",
    "trap": "lookalike_glyph"
   },
   {
@@ -215,6 +211,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "offline_share"
- }
+  "alias_of": "offline_share",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "transfer or mirror between mobile devices or watch",
+     "strength": "primary"
+    },
+    {
+     "meaning": "create app shortcut or forward on phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "switch or migrate phone data",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "share screen or duplicate mobile display",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a generic 'copy document' icon or a phone with a forward/share arrow; the small side button (suggesting a phone case or smartwatch crown) is easy to miss.",
+   "near_misses": [
+    {
+     "task": "Buy a new rugged case with clicky side buttons for my phone",
+     "better": "smartphone case",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Photocopy two sets of the signed lease agreement at the library",
+     "better": "copied document / paper sheets",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Forward the contractor's invoice email to accounting",
+     "better": "email envelope with forward arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the new phone battery lasts a full day",
+     "better": "battery icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order tempered glass screen protector",
+     "better": "smartphone screen / shield",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick a mobile-friendly template for the newsletter",
+     "better": "newsletter / layout template",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "app_shortcut",
+   "send_to_mobile",
+   "add_to_home_screen"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6817,
+    "output": 2095,
+    "thoughts": 227,
+    "total": 9139
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Uniquely features an L-shaped second layer behind the bottom-left of the mobile device alongside the bent right arrow, indicating multiple screens, device-to-device migration, or screen mirroring/duplication."
 }

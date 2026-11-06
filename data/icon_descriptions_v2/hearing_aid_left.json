@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "hearing aid or assistive listening device",
-   "strength": "primary"
-  },
-  {
-   "meaning": "earbud or in-ear headphone",
+   "meaning": "hearing aid or assistive listening device (or specifically a right-ear hearing aid)",
    "strength": "primary"
   },
   {
    "meaning": "audiology, hearing test, or ear health",
+   "strength": "primary"
+  },
+  {
+   "meaning": "earbud, in-ear headphone, or Bluetooth earpiece (or specifically right earbud)",
    "strength": "secondary"
   },
   {
-   "meaning": "audio listening or accessibility setting",
+   "meaning": "audio accessibility or hard-of-hearing support",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as a medical hearing aid (standard accessibility symbol) or as a wireless earbud; at very small sizes the inner device looks like a keyhole inside an ear.",
+ "ambiguity": "Identical in meaning to the left-facing ear with hearing aid icon except for orientation (right ear vs. left ear); can also be read as either a medical hearing aid or a wireless earbud, and at small sizes the inner device looks like a keyhole.",
  "modifier_semantics": [
   {
    "modifier": "curved sound wave line to the left",
@@ -181,6 +181,16 @@
  ],
  "near_misses": [
   {
+   "task": "Send the left-ear hearing aid back to the clinic for repair",
+   "better": "left-facing ear with hearing aid",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pair replacement left earbud with the charging case",
+   "better": "left-facing ear with earpiece or single left earbud",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy fresh ears of sweet corn for Saturday's barbecue",
    "better": "corn cob",
    "trap": "shared_vocabulary"
@@ -201,20 +211,15 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the $85 copay invoice by credit card",
+   "task": "Pay the $85 audiology copay invoice by credit card",
    "better": "credit card or invoice",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Hear back from the contractor about the roof quote",
-   "better": "phone or message bubble",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an ear with an in-ear device and an outer sound wave arc, standard for a hearing aid, assistive listening, or wireless earbud. It fits concrete personal tasks around audiology appointments, hearing aid maintenance, and earbud care, though the inner shape can briefly resemble a keyhole at tiny sizes.",
@@ -234,6 +239,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hearing aid or assistive listening device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "earbud or in-ear headphone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "audiology, hearing test, or ear health",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audio listening or accessibility setting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as a medical hearing aid (standard accessibility symbol) or as a wireless earbud; at very small sizes the inner device looks like a keyhole inside an ear.",
+   "near_misses": [
+    {
+     "task": "Buy fresh ears of sweet corn for Saturday's barbecue",
+     "better": "corn cob",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Listen to the new History of Rome podcast episode on the walk",
+     "better": "podcast microphone or over-ear headphones",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy quiet dishwasher under 44 dB for the open kitchen",
+     "better": "dishwasher",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up a spare brass key for the back padlock",
+     "better": "key or keyhole",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $85 copay invoice by credit card",
+     "better": "credit card or invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Hear back from the contractor about the roof quote",
+     "better": "phone or message bubble",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hearing_aid"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4128,
+    "output": 964,
+    "thoughts": 0,
+    "total": 5092
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Shows a right-facing ear (right ear in profile) with the curved behind-the-ear arc on the left; it is the exact horizontal mirror image of the left-facing ear icon and is functionally interchangeable for general hearing aid or earbud tasks unless right vs. left ear matters."
 }

@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "The square clipboard with a single round loop at the top looks somewhat like a hanging sign, a weight/mass, or a generic 'compose/edit' button frame at small sizes.",
+ "ambiguity": "At small sizes, the diagonal pencil inside the square clipboard frame can be confused with the clipboard containing a diagonal capsule pill, or the outer frame with its top loop can resemble a calibration weight or hanging sign.",
  "modifier_semantics": [
   {
    "modifier": "diagonal pencil centered inside",
@@ -153,32 +153,18 @@
   {
    "task": "Gather last year's 1099s for the mortgage application",
    "central": "tax documents / mortgage"
-  },
-  {
-   "task": "Log daily blood pressure readings for two weeks",
-   "central": "blood pressure"
   }
  ],
  "near_misses": [
   {
-   "task": "Buy #2 pencils and erasers for the SAT",
-   "better": "standalone pencil or stationery icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check the bathroom scale battery",
-   "better": "weighing scale or battery icon",
+   "task": "Update my daily prescription and vitamin dosage chart",
+   "better": "clipboard with a capsule pill icon",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Update my email address in the airline profile",
-   "better": "email / envelope or user profile icon",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Take a passport photo at Walgreens",
-   "better": "camera or passport icon",
-   "trap": "parent_topic"
+   "task": "Pick up the pre-sorted daily medication pouches from the pharmacy",
+   "better": "clipboard with a capsule pill icon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Order a 16kg kettlebell for home workouts",
@@ -186,9 +172,24 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Write a birthday card for Grandma",
-   "better": "greeting card or gift icon",
+   "task": "Buy #2 pencils and erasers for the SAT",
+   "better": "standalone pencil or stationery icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Update my email address in the airline profile",
+   "better": "email / envelope or user profile icon",
    "trap": "generic_verb"
+  },
+  {
+   "task": "Take a passport photo at Walgreens for the renewal application",
+   "better": "camera or passport icon",
+   "trap": "parent_topic"
+  },
+  {
+   "task": "Send the signed PDF contract back to the client",
+   "better": "document with signature or send icon",
+   "trap": "property"
   }
  ],
  "scores": {
@@ -214,6 +215,96 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "fill out a form, questionnaire, survey, or intake sheet",
+     "strength": "primary"
+    },
+    {
+     "meaning": "write or edit a task, note, or assignment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sign up, register, or complete an application",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "whiteboard or noticeboard for writing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The square clipboard with a single round loop at the top looks somewhat like a hanging sign, a weight/mass, or a generic 'compose/edit' button frame at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy #2 pencils and erasers for the SAT",
+     "better": "standalone pencil or stationery icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the bathroom scale battery",
+     "better": "weighing scale or battery icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my email address in the airline profile",
+     "better": "email / envelope or user profile icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Take a passport photo at Walgreens",
+     "better": "camera or passport icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a 16kg kettlebell for home workouts",
+     "better": "kettlebell or dumbbell icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write a birthday card for Grandma",
+     "better": "greeting card or gift icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "admin_meds"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4120,
+    "output": 754,
+    "thoughts": 0,
+    "total": 4874
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "Inside the square clipboard frame with a top loop, this icon contains a solid diagonal pencil with a pointed tip and eraser band rather than a rounded two-part capsule pill, representing filling out forms, writing notes, or editing rather than medication."
 }

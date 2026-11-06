@@ -11,19 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "hard disk drive (HDD)",
+   "meaning": "smart home camera / nanny cam",
    "strength": "secondary"
   },
   {
-   "meaning": "desktop speaker or subwoofer",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "front-loading washing machine",
+   "meaning": "desktop speaker or satellite speaker",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can easily be mistaken for a hard drive, a desktop audio speaker, a washing machine, or the Instagram logo at small sizes because of the rounded box with a central circle and corner dot.",
+ "ambiguity": "Easily confused at small sizes with the rectangular hard drive or bookshelf speaker icon, as well as a front-loading washing machine.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -155,9 +151,14 @@
  ],
  "near_misses": [
   {
-   "task": "Hire a wedding photographer for June",
-   "better": "DSLR photo camera",
-   "trap": "shared_vocabulary"
+   "task": "Back up photos to the external hard drive",
+   "better": "rectangular hard drive with platter ring and bottom bar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Connect the new bookshelf speakers to the amplifier",
+   "better": "rectangular speaker cabinet with woofer and bottom port bar",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Run a tub clean cycle on the washing machine with vinegar",
@@ -165,9 +166,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Schedule five Instagram reels for the product launch",
-   "better": "Instagram logo or social media icon",
-   "trap": "lookalike_glyph"
+   "task": "Hire a wedding photographer for June",
+   "better": "DSLR photo camera",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the quarterly ADT alarm monitoring invoice",
@@ -188,7 +189,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a tabletop indoor smart camera, webcam, or baby monitor with a central lens, indicator LED, and heavy base. It fits tasks about home security cameras, baby/pet monitors, and webcams, though its simplified geometry can be mistaken for a hard drive, speaker, or washing machine at small sizes.",
@@ -206,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "indoor security camera / webcam / baby monitor",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hard disk drive (HDD)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "desktop speaker or subwoofer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "front-loading washing machine",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can easily be mistaken for a hard drive, a desktop audio speaker, a washing machine, or the Instagram logo at small sizes because of the rounded box with a central circle and corner dot.",
+   "near_misses": [
+    {
+     "task": "Hire a wedding photographer for June",
+     "better": "DSLR photo camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Run a tub clean cycle on the washing machine with vinegar",
+     "better": "washing machine",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule five Instagram reels for the product launch",
+     "better": "Instagram logo or social media icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the quarterly ADT alarm monitoring invoice",
+     "better": "invoice / credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a camera-friendly solid blue shirt for the keynote",
+     "better": "shirt",
+     "trap": "property"
+    },
+    {
+     "task": "Monitor blood pressure every morning for two weeks",
+     "better": "blood pressure cuff / heart",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hard_disk"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4069,
+    "output": 1124,
+    "thoughts": 141,
+    "total": 5334
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:28Z"
+  }
+ },
+ "distinguishing": "Has an arch-shaped top, a thick solid black base stand, and a small indicator dot in the lower-right corner, depicting a tabletop indoor security camera or webcam rather than the symmetrical rectangular hard drive or speaker box with a bottom bar."
 }

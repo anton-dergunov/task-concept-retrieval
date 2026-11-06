@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "sync or two-way data flow",
+   "meaning": "compare or contrast two sides",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with generic navigation arrows, sync/refresh arrows, or compare icons.",
+ "ambiguity": "Interchangeable in meaning with the full-length stacked opposite horizontal arrows, and only differs visually by having shorter, diagonally offset shafts.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set the workout playlist to loop infinitely",
+   "better": "right-angled rectangular repeat loop arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Shuffle the party playlist tracks",
+   "better": "crossed diagonal shuffle arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Swap out the dead smoke detector battery",
    "better": "battery or smoke detector",
    "trap": "generic_verb"
@@ -174,11 +184,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Shuffle the party playlist tracks",
-   "better": "crossed shuffle arrows or music note",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new USB-C flash drive",
    "better": "USB flash drive",
    "trap": "parent_topic"
@@ -187,7 +192,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Two opposite horizontal arrows represent swapping, exchanging, or transferring (especially money, currency, or shifts). While abstract, it fits tasks where the exchange or transfer itself is the core action, though tasks involving a concrete physical item are better served by that item's icon.",
@@ -205,6 +210,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "swap, exchange, or trade",
+     "strength": "primary"
+    },
+    {
+     "meaning": "transfer between accounts or devices",
+     "strength": "primary"
+    },
+    {
+     "meaning": "currency exchange or conversion",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sync or two-way data flow",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with generic navigation arrows, sync/refresh arrows, or compare icons.",
+   "near_misses": [
+    {
+     "task": "Swap out the dead smoke detector battery",
+     "better": "battery or smoke detector",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Switch the laundry from washer to dryer",
+     "better": "washing machine / laundry",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a Nintendo Switch charger for the road trip",
+     "better": "game controller or charger",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the dimmer switch in the dining room",
+     "better": "light switch",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Shuffle the party playlist tracks",
+     "better": "crossed shuffle arrows or music note",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new USB-C flash drive",
+     "better": "USB flash drive",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shuffle",
+   "arrow_split",
+   "repeat",
+   "sync_alt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8029,
+    "output": 1556,
+    "thoughts": 0,
+    "total": 9585
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "Two short, straight horizontal arrows point in opposite directions and are staggered diagonally (top-right and bottom-left) rather than stacked full-width, though it is functionally interchangeable with the full-width stacked swap arrows."
 }

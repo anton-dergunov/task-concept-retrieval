@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "battery / power bank",
+   "meaning": "empty or low battery needing charge",
    "strength": "primary"
   },
   {
-   "meaning": "charger / power adapter",
+   "meaning": "battery / power bank / charger",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the open C-shaped battery outline with the bolt might look like a magnet with a spark or a stylized 'C' logo.",
+ "ambiguity": "Virtually interchangeable with the filled charging battery icon; also, because the interior is empty and the right end is open, at small sizes the C-shaped frame can look less like a battery and more like a magnet or letter C next to a bolt.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt on right end",
@@ -163,13 +163,18 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp / flashlight",
-   "trap": "property"
+   "task": "Check how much charge is left in the camping power station",
+   "better": "charging battery with filled charge block inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the fully charged spare camera batteries",
+   "better": "filled battery or charging battery with inner fill block",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly electric bill before Friday",
-   "better": "invoice / bill / money",
+   "better": "invoice / utility bill",
    "trap": "shared_vocabulary"
   },
   {
@@ -178,25 +183,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Call electrician about the flickering kitchen breaker",
-   "better": "phone call or electrical panel",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a magnetic knife strip for the backsplash",
-   "better": "knife / magnet",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a wireless charging nightstand lamp for the guest room",
    "better": "desk lamp",
    "trap": "property"
+  },
+  {
+   "task": "Order a magnetic knife strip for the kitchen backsplash",
+   "better": "knife or horseshoe magnet",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a horizontal battery outline with a lightning bolt at the terminal end, universally understood as battery charging, batteries, or portable power. It fits a common, concrete family of everyday tasks (charging devices/batteries before trips, buying or replacing batteries, EV charging) though it competes with fuller battery icons in the set.",
@@ -214,6 +214,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery charging / recharge",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery / power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charger / power adapter",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "EV charging",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the open C-shaped battery outline with the bolt might look like a magnet with a spark or a stylized 'C' logo.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric bill before Friday",
+     "better": "invoice / bill / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the double charge from the hotel on Visa",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call electrician about the flickering kitchen breaker",
+     "better": "phone call or electrical panel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a magnetic knife strip for the backsplash",
+     "better": "knife / magnet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a wireless charging nightstand lamp for the guest room",
+     "better": "desk lamp",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_bolt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4024,
+    "output": 1037,
+    "thoughts": 106,
+    "total": 5167
+   },
+   "soft_problems": [
+    "refers to a letter 1x"
+   ],
+   "created": "2026-11-06T12:38:14Z"
+  }
+ },
+ "distinguishing": "This is the hollow outline version with an empty interior, which is functionally interchangeable with the filled version for general charging tasks, though it slightly emphasizes an empty or depleted battery needing to be recharged."
 }

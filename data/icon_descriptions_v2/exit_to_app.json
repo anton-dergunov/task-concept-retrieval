@@ -14,7 +14,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "import / bring in",
+   "meaning": "import / bring in data",
    "strength": "primary"
   },
   {
@@ -26,7 +26,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with log out / export icons where the arrow points out of the box, or TV AV input source symbols.",
+ "ambiguity": "Nearly identical to the horizontal rectangle with a left-entering arrow, differing only slightly in aspect ratio; also easily confused with the application window with a left-entering arrow or the square frame where the arrow exits to the right.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow entering box",
@@ -163,39 +163,39 @@
  "near_misses": [
   {
    "task": "Export Q3 transactions to CSV for the accountant",
-   "better": "export / arrow pointing out of box",
+   "better": "square frame with a right-pointing arrow exiting through the right side",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Log out of Netflix on the Airbnb TV before leaving",
-   "better": "log out / arrow exiting box",
+   "better": "square frame with a right-pointing arrow exiting through the right side",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy imported olive oil and pecorino from the Italian market",
-   "better": "olive oil bottle / shopping bag",
+   "better": "olive oil bottle or shopping bag",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Cut cedar logs into 16-inch firewood rounds",
-   "better": "wood log / axe",
+   "better": "wood log or axe",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Enter the watercolor painting into the county fair contest",
-   "better": "painting / trophy",
+   "better": "painting palette or trophy",
    "trap": "generic_verb"
   },
   {
    "task": "Update company logo on the login screen",
-   "better": "image / brand logo",
+   "better": "image or brand logo icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows an arrow entering a square box from the left, the standard UI glyph for log in, sign in, data import, or AV input. It fits tasks centered on logging into portals, importing files/data, or checking in, though it is easily confused with log-out/export icons at a fast glance.",
@@ -215,6 +215,100 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "log in / sign in",
+     "strength": "primary"
+    },
+    {
+     "meaning": "import / bring in",
+     "strength": "primary"
+    },
+    {
+     "meaning": "input / video or audio source",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "check in / enter",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with log out / export icons where the arrow points out of the box, or TV AV input source symbols.",
+   "near_misses": [
+    {
+     "task": "Export Q3 transactions to CSV for the accountant",
+     "better": "export / arrow pointing out of box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Log out of Netflix on the Airbnb TV before leaving",
+     "better": "log out / arrow exiting box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy imported olive oil and pecorino from the Italian market",
+     "better": "olive oil bottle / shopping bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cut cedar logs into 16-inch firewood rounds",
+     "better": "wood log / axe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Enter the watercolor painting into the county fair contest",
+     "better": "painting / trophy",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Update company logo on the login screen",
+     "better": "image / brand logo",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "business_messages",
+   "output",
+   "tab_move",
+   "input",
+   "drive_file_move",
+   "drive_folder_upload",
+   "present_to_all"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12136,
+    "output": 4252,
+    "thoughts": 0,
+    "total": 16388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "A 1:1 square frame with a uniform thin top border and a gap on the left through which a right-pointing arrow enters; it is virtually interchangeable with the slightly wider horizontal rectangle version with an entering arrow, and differs from the window version by lacking a thick title bar."
 }

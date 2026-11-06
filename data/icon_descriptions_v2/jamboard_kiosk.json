@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "computer monitor or display",
-   "strength": "primary"
-  },
-  {
-   "meaning": "desktop computer or PC",
+   "meaning": "computer monitor or external display",
    "strength": "primary"
   },
   {
    "meaning": "television or TV screen",
+   "strength": "primary"
+  },
+  {
+   "meaning": "desktop computer or PC workstation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can easily be read as either a computer monitor or a flat-screen television.",
+ "ambiguity": "Visually and semantically interchangeable with the other thin-bezel pedestal monitors (with slightly narrower or trapezoidal stands), and easily read as either a desktop monitor or a flat-screen TV.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -150,8 +150,18 @@
  ],
  "near_misses": [
   {
+   "task": "Take the MacBook to the Apple Store for battery replacement",
+   "better": "laptop computer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Migrate old photo library onto the new iMac",
+   "better": "all-in-one desktop computer with thick chin bezel",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Monitor blood pressure every morning for two weeks",
-   "better": "heart or blood pressure cuff",
+   "better": "blood pressure cuff or heart",
    "trap": "shared_vocabulary"
   },
   {
@@ -160,22 +170,12 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Book a window seat on the flight to Chicago",
-   "better": "airplane",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Take the MacBook to the Apple Store for battery replacement",
-   "better": "laptop",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a silent wireless mouse",
+   "task": "Order a silent wireless mouse for the study",
    "better": "computer mouse",
    "trap": "parent_topic"
   },
   {
-   "task": "Pick up screen protector for the new iPhone",
+   "task": "Pick up tempered glass screen protector for the new iPhone",
    "better": "smartphone",
    "trap": "shared_vocabulary"
   }
@@ -183,7 +183,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognizable outline of a computer monitor, desktop display, or flat-screen TV on a stand. It fits tasks centered on buying, mounting, cleaning, calibrating, or troubleshooting a monitor, PC, or television, though it can overlap with dedicated TV or laptop icons.",
@@ -201,6 +201,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "computer monitor or display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "desktop computer or PC",
+     "strength": "primary"
+    },
+    {
+     "meaning": "television or TV screen",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can easily be read as either a computer monitor or a flat-screen television.",
+   "near_misses": [
+    {
+     "task": "Monitor blood pressure every morning for two weeks",
+     "better": "heart or blood pressure cuff",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Watch the new season of Severance with Sarah",
+     "better": "film clapperboard or play button",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a window seat on the flight to Chicago",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take the MacBook to the Apple Store for battery replacement",
+     "better": "laptop",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a silent wireless mouse",
+     "better": "computer mouse",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up screen protector for the new iPhone",
+     "better": "smartphone",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_windows",
+   "monitor",
+   "desktop_mac",
+   "laptop_mac",
+   "laptop_windows",
+   "laptop_chromebook"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10537,
+    "output": 3307,
+    "thoughts": 0,
+    "total": 13844
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "Shows a rectangular screen on a thin vertical neck with a wide horizontal base, making it a standard desktop monitor or TV and virtually interchangeable in meaning with the other thin-bezel pedestal monitors."
 }

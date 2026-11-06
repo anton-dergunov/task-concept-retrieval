@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "hierarchy, org chart, or tree structure",
+   "meaning": "share, distribute, or connect",
    "strength": "secondary"
   },
   {
-   "meaning": "share, distribute, or connect",
+   "meaning": "routing, junction, or branching",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles standard 'share' icons, git branch/merge glyphs, mind-map diagrams, and ball-and-stick molecule icons.",
+ "ambiguity": "Easily confused at list size with the four-node hierarchy trees (one top ring connected to three bottom rings) or standard three-node share and git-branch icons.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,23 +154,28 @@
  ],
  "near_misses": [
   {
+   "task": "Update the engineering department org chart with the three new leads",
+   "better": "top parent node connected to three child nodes (hierarchy / org chart)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Map out the parent-child category taxonomy for the online store",
+   "better": "top parent node branching to three bottom child nodes (tree hierarchy)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Share the vacation photo album with Aunt Linda",
-   "better": "photo album or share arrow",
+   "better": "photo album or outward share arrow",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Attend the alumni networking mixer on Thursday evening",
-   "better": "people / cocktail glass",
+   "better": "people or cocktail glass",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Trim the low branches over the driveway",
-   "better": "tree or pruning shears",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Connect the Bluetooth speaker to the projector",
-   "better": "Bluetooth or speaker",
+   "task": "Connect the Bluetooth speaker to the living room projector",
+   "better": "Bluetooth symbol or speaker",
    "trap": "generic_verb"
   },
   {
@@ -205,6 +210,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "network, nodes, or graph topology",
+     "strength": "primary"
+    },
+    {
+     "meaning": "molecule, chemistry, or chemical bond",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hierarchy, org chart, or tree structure",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "share, distribute, or connect",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles standard 'share' icons, git branch/merge glyphs, mind-map diagrams, and ball-and-stick molecule icons.",
+   "near_misses": [
+    {
+     "task": "Share the vacation photo album with Aunt Linda",
+     "better": "photo album or share arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Attend the alumni networking mixer on Thursday evening",
+     "better": "people / cocktail glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Trim the low branches over the driveway",
+     "better": "tree or pruning shears",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Connect the Bluetooth speaker to the projector",
+     "better": "Bluetooth or speaker",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a tri-band router at Best Buy",
+     "better": "Wi-Fi router",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly fiber internet bill",
+     "better": "bill / receipt or money",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "graph_4",
+   "tenancy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5365,
+    "output": 1778,
+    "thoughts": 185,
+    "total": 7328
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Shows only three equal rings meeting at an uncircled central Y-junction (rather than a top parent ring branching down to three child rings), reading as a peer-to-peer network, chemical molecule, or three-way connection rather than a top-down hierarchy."
 }

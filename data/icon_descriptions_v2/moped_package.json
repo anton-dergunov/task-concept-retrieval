@@ -9,15 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "food or local courier delivery",
+   "meaning": "food delivery or local scooter courier",
    "strength": "primary"
   },
   {
-   "meaning": "motor scooter or moped",
-   "strength": "primary"
-  },
-  {
-   "meaning": "takeout or meal order",
+   "meaning": "takeout order or local drop-off errand",
    "strength": "secondary"
   },
   {
@@ -25,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a standard motor scooter without a box; the detached front wheel is stylized.",
+ "ambiguity": "Closely resembles the plain motor scooter with a flat seat bar, and can be mistaken for a regular personal moped if the top box isn't noticed.",
  "modifier_semantics": [
   {
    "modifier": "rectangular box on the rear",
@@ -162,13 +158,18 @@
  ],
  "near_misses": [
   {
-   "task": "Track the DHL freight pallet coming from the Shenzhen warehouse",
-   "better": "shipping truck or cardboard box",
-   "trap": "shared_vocabulary"
+   "task": "Renew the annual registration and insurance for the Vespa",
+   "better": "plain motor scooter without a cargo box",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Fix the rattle on the kid's Razor kick scooter",
-   "better": "kick scooter",
+   "task": "Rent a moped to tour the coastal road in Amalfi",
+   "better": "plain motor scooter without a cargo box",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Track the DHL freight pallet coming from the Shenzhen warehouse",
+   "better": "shipping truck or cardboard box",
    "trap": "shared_vocabulary"
   },
   {
@@ -182,25 +183,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Replace the worn rear tire on the Harley",
-   "better": "motorcycle or tire",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a waterproof rain cover that fits over the rear cargo box",
    "better": "protective cover or tarp",
    "trap": "property"
   },
   {
-   "task": "Pay the $65 city parking ticket online before the late fee kicks in",
-   "better": "ticket or fine",
-   "trap": "parent_topic"
+   "task": "Order pad thai and green curry for dinner tonight",
+   "better": "noodles or takeout food container",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a step-through motor scooter (moped) with a rectangular cargo box over the rear wheel, the universal icon for food/local courier delivery and mopeds. It fits tasks about ordering takeout, local couriers, scooter rental, and moped maintenance, though it sits close to plain scooter or package delivery icons.",
@@ -218,6 +214,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "food or local courier delivery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "motor scooter or moped",
+     "strength": "primary"
+    },
+    {
+     "meaning": "takeout or meal order",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "scooter cargo box or top case",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a standard motor scooter without a box; the detached front wheel is stylized.",
+   "near_misses": [
+    {
+     "task": "Track the DHL freight pallet coming from the Shenzhen warehouse",
+     "better": "shipping truck or cardboard box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the rattle on the kid's Razor kick scooter",
+     "better": "kick scooter",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice my 5-minute product pitch delivery for the board meeting",
+     "better": "microphone or presentation podium",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the hospital bag for the baby's delivery date",
+     "better": "baby or hospital bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the worn rear tire on the Harley",
+     "better": "motorcycle or tire",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof rain cover that fits over the rear cargo box",
+     "better": "protective cover or tarp",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $65 city parking ticket online before the late fee kicks in",
+     "better": "ticket or fine",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "delivery_dining"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4079,
+    "output": 625,
+    "thoughts": 0,
+    "total": 4704
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "Features a tall hollow rectangular cargo box above the rear fender instead of a flat seat bar, specifically signaling food delivery, local courier errands, or a top case."
 }

@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "luggage, bags, or multiple suitcases",
+   "meaning": "multiple suitcases, bags, or checked luggage",
    "strength": "primary"
   },
   {
-   "meaning": "work workspace or business profile",
+   "meaning": "duplicate or copy project / workspace",
    "strength": "secondary"
   },
   {
-   "meaning": "duplicate or copy project/case",
+   "meaning": "work workspace or business profile collection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as work/business projects (briefcase) or travel luggage (suitcases), and the stacked line is indistinguishable from a plain briefcase at very small sizes.",
+ "ambiguity": "Easily mistaken for the plain single briefcase or the briefcase with a center dot when a task refers to a single job, work item, or carry-on bag.",
  "modifier_semantics": [
   {
    "modifier": "L-shaped backing line at bottom-left",
@@ -177,6 +177,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pack my carry-on briefcase for tomorrow's client meeting",
+   "better": "single plain briefcase",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fill out the new patient intake form on the clipboard",
+   "better": "clipboard with top clip",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a pocket-sized travel umbrella that fits in a carry-on",
    "better": "umbrella",
    "trap": "property"
@@ -192,25 +202,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Take forty photos of the apartment for the rental listing",
-   "better": "camera",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book window seat on the morning train to Munich",
    "better": "train",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a case of sparkling water at Costco",
-   "better": "water bottle or crate",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a briefcase or suitcase with an L-shaped stacking line behind it, clearly signaling multiple bags/luggage or multiple work projects/portfolios. It fits well for travel baggage tasks and managing multiple client projects or jobs, though it closely resembles a plain briefcase or even a camera outline at tiny sizes.",
@@ -230,6 +230,96 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple jobs, projects, or work portfolios",
+     "strength": "primary"
+    },
+    {
+     "meaning": "luggage, bags, or multiple suitcases",
+     "strength": "primary"
+    },
+    {
+     "meaning": "work workspace or business profile",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "duplicate or copy project/case",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as work/business projects (briefcase) or travel luggage (suitcases), and the stacked line is indistinguishable from a plain briefcase at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a pocket-sized travel umbrella that fits in a carry-on",
+     "better": "umbrella",
+     "trap": "property"
+    },
+    {
+     "task": "Check status of the quarterly budget spreadsheet",
+     "better": "spreadsheet or chart",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a protective silicone case for the new iPhone",
+     "better": "phone case / smartphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take forty photos of the apartment for the rental listing",
+     "better": "camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book window seat on the morning train to Munich",
+     "better": "train",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a case of sparkling water at Costco",
+     "better": "water bottle or crate",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "content_paste",
+   "work",
+   "enterprise"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6697,
+    "output": 1916,
+    "thoughts": 115,
+    "total": 8728
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:56Z"
+  }
+ },
+ "distinguishing": "Has an L-shaped backing line along the left and bottom edges indicating stacked or multiple cases, whereas the others are single objects."
 }

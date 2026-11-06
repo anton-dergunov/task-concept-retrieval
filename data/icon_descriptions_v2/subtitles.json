@@ -11,7 +11,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "card, badge, or postcard",
+   "meaning": "card, badge, or postcard with printed text fields",
    "strength": "secondary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Often confused with a credit card, business card, or generic text box because the subtitle bars at the bottom of the screen frame look like printed fields on a card.",
+ "ambiguity": "Can be mistaken for a credit card, business card, or generic text box, and at very small sizes its outer rectangular frame resembles the aspect-ratio and screenshot frames.",
  "modifier_semantics": [],
  "domains": [
   "creative",
@@ -150,9 +150,14 @@
  ],
  "near_misses": [
   {
-   "task": "Write Instagram caption for the bakery launch photo",
-   "better": "social media post or text edit icon",
-   "trap": "shared_vocabulary"
+   "task": "Resize the video export to a 16:9 widescreen aspect ratio",
+   "better": "frame with opposite corner brackets for aspect ratio",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take screenshots of the mobile checkout bug on iOS",
+   "better": "horizontal phone screen with side bezels and capture brackets",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay off the Visa credit card balance before the 15th",
@@ -160,9 +165,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Order 200 matte business cards before the conference",
-   "better": "contact card or badge icon with person silhouette",
-   "trap": "lookalike_glyph"
+   "task": "Write Instagram caption for the bakery launch photo",
+   "better": "social media post or text edit icon",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Record the voiceover narration for the tutorial video",
@@ -183,7 +188,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a screen frame with two lines of segmented bars at the bottom, the standard UI glyph for subtitles or closed captions. It fits tasks around captioning, SRT files, and video accessibility well, though out of media context it is easily mistaken for a credit card or generic text card.",
@@ -201,6 +206,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "subtitles or closed captions",
+     "strength": "primary"
+    },
+    {
+     "meaning": "card, badge, or postcard",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "text snippet or dialog box",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Often confused with a credit card, business card, or generic text box because the subtitle bars at the bottom of the screen frame look like printed fields on a card.",
+   "near_misses": [
+    {
+     "task": "Write Instagram caption for the bakery launch photo",
+     "better": "social media post or text edit icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay off the Visa credit card balance before the 15th",
+     "better": "credit card icon with magnetic stripe and chip",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order 200 matte business cards before the conference",
+     "better": "contact card or badge icon with person silhouette",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Record the voiceover narration for the tutorial video",
+     "better": "microphone icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy tickets for the subtitled screening on Thursday night",
+     "better": "movie ticket or cinema icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check the transcript of yesterday's client call",
+     "better": "document or call log icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screenshot_tablet",
+   "aspect_ratio"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5445,
+    "output": 1547,
+    "thoughts": 119,
+    "total": 7111
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:14Z"
+  }
+ },
+ "distinguishing": "Unlike the two icons with diagonal corner brackets, this horizontal frame contains two bottom rows of short and long horizontal dashes representing subtitles or text lines."
 }

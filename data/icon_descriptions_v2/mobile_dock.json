@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "phone dock or charging stand",
+   "meaning": "phone dock, charging stand, or desk cradle",
+   "strength": "primary"
+  },
+  {
+   "meaning": "wireless charger or docked smartphone",
    "strength": "primary"
   },
   {
    "meaning": "smartphone or mobile phone",
-   "strength": "primary"
-  },
-  {
-   "meaning": "wireless charger or desk cradle",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the bottom bar blends in or looks like an underline, making it indistinguishable from a plain smartphone icon, or the side bump makes the body look like a smartwatch.",
+ "ambiguity": "Easily confused with the plain smartphone with a top camera dot if the underline bar is overlooked, or with the smartphone with three dots below it at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "horizontal rectangular bar below the device",
@@ -156,14 +156,24 @@
  ],
  "near_misses": [
   {
+   "task": "Clean the front camera lens on my smartphone",
+   "better": "plain smartphone with a top camera dot and no base bar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take a mobile screenshot of the receipt",
+   "better": "smartphone with corner capture brackets inside the screen",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Review mobile onboarding screen carousel dots",
+   "better": "smartphone with three horizontal dots underneath",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the dentist to move Thursday's cleaning",
    "better": "telephone receiver",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the leather strap on my Apple Watch",
-   "better": "wristwatch",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly boat dock fee at the marina",
@@ -207,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "dock"
- }
+  "alias_of": "dock",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "phone dock or charging stand",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smartphone or mobile phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wireless charger or desk cradle",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the bottom bar blends in or looks like an underline, making it indistinguishable from a plain smartphone icon, or the side bump makes the body look like a smartwatch.",
+   "near_misses": [
+    {
+     "task": "Call the dentist to move Thursday's cleaning",
+     "better": "telephone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the leather strap on my Apple Watch",
+     "better": "wristwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly boat dock fee at the marina",
+     "better": "boat or anchor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the mobile version of the checkout page loads fast",
+     "better": "shopping cart or webpage",
+     "trap": "property"
+    },
+    {
+     "task": "Order a 65W GaN wall adapter for the laptop",
+     "better": "power plug or laptop",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify my phone number on the bank security page",
+     "better": "shield or bank",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screenshot",
+   "phone_iphone",
+   "phone_android",
+   "smartphone",
+   "settings_cell"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9431,
+    "output": 2014,
+    "thoughts": 0,
+    "total": 11445
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Adds a solid horizontal rectangular bar underneath the top-camera smartphone body, setting it apart from the plain phones to represent a phone dock, charging stand, or resting base."
 }

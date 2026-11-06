@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "The plus sign functions both as an 'add/new' action badge for a building/company and as a medical cross indicating a hospital or clinic.",
+ "ambiguity": "Shares the exact same two-wing building silhouette as the plain office building icon, and its plus sign is itself ambiguous between an 'add/new' action badge and a medical cross.",
  "modifier_semantics": [
   {
    "modifier": "plus sign in bottom right corner",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pay the quarterly HOA dues for the condo building",
+   "better": "plain multi-story building without plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up the security badge at the main corporate office",
+   "better": "plain office building without plus sign (or ID badge)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the building superintendent about the leaking radiator",
    "better": "phone call or radiator/plumbing",
    "trap": "parent_topic"
@@ -176,12 +186,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Calculate the monthly mortgage payment on the spreadsheet",
-   "better": "calculator or spreadsheet",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check company slack channels before standup",
+   "task": "Check company Slack channels before morning standup",
    "better": "chat bubble / messaging",
    "trap": "generic_verb"
   },
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add a building, office, or company location",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hospital or medical clinic (building with cross)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "register a new business or organization",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "new apartment, property, or real estate listing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The plus sign functions both as an 'add/new' action badge for a building/company and as a medical cross indicating a hospital or clinic.",
+   "near_misses": [
+    {
+     "task": "Call the building superintendent about the leaking radiator",
+     "better": "phone call or radiator/plumbing",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy Lego Architecture Empire State Building set for nephew",
+     "better": "toy brick / gift",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Start building the cedar garden planter boxes",
+     "better": "hammer / woodworking or plant",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Calculate the monthly mortgage payment on the spreadsheet",
+     "better": "calculator or spreadsheet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check company slack channels before standup",
+     "better": "chat bubble / messaging",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy hospital-grade disinfectant wipes for the bathroom",
+     "better": "cleaning spray / wipes",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "business"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4070,
+    "output": 1129,
+    "thoughts": 134,
+    "total": 5333
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Has a plus sign replacing the bottom-right corner of the building's side wing, signifying either adding a new building/company/office or a hospital/medical clinic, unlike the plain unmodified building."
 }

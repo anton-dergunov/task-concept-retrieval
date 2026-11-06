@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "photos, photo library, or image gallery",
+   "meaning": "photos, photo library, or camera roll",
    "strength": "primary"
   },
   {
-   "meaning": "photo album or slideshow",
+   "meaning": "image gallery, photo album, or slideshow",
    "strength": "primary"
   },
   {
-   "meaning": "image files or graphics assets",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "framed art prints or pictures",
+   "meaning": "multiple image files or graphics",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very close to a single-image icon, and at tiny sizes the mountain silhouette can blur into a generic copy/duplicate two-squares glyph.",
+ "ambiguity": "Easily confused at a glance with the stacked image folders icon (which adds a small folder tab on top) or the single hanging frames.",
  "modifier_semantics": [
   {
    "modifier": "second frame edge behind the front picture",
@@ -164,14 +160,19 @@
  ],
  "near_misses": [
   {
+   "task": "Mount the framed poster on the hallway wall",
+   "better": "hanging framed picture",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Restructure the shared drive folders for Q4 marketing graphics",
+   "better": "stacked photo folders",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pack the 35mm film camera and two rolls of Portra",
    "better": "camera",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book the hiking hut below the two peaks in the Dolomites",
-   "better": "mountain / hiking",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Duplicate the quarterly budget spreadsheet before editing",
@@ -197,7 +198,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The stacked mountain-landscape squares are the universal UI glyph for a photo library, image gallery, or set of pictures. It fits tasks centered on organizing, printing, backing up, or editing photos and visual assets, though it closely borders a single-image icon and the generic two-squares 'copy' icon.",
@@ -215,6 +216,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "collections"
- }
+  "alias_of": "collections",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photos, photo library, or image gallery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo album or slideshow",
+     "strength": "primary"
+    },
+    {
+     "meaning": "image files or graphics assets",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "framed art prints or pictures",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very close to a single-image icon, and at tiny sizes the mountain silhouette can blur into a generic copy/duplicate two-squares glyph.",
+   "near_misses": [
+    {
+     "task": "Pack the 35mm film camera and two rolls of Portra",
+     "better": "camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the hiking hut below the two peaks in the Dolomites",
+     "better": "mountain / hiking",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Duplicate the quarterly budget spreadsheet before editing",
+     "better": "copy / duplicate documents",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Get passport photo taken at Walgreens",
+     "better": "passport / ID card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy AA batteries for the flash trigger",
+     "better": "battery",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Take a picture of the serial number behind the fridge",
+     "better": "fridge / barcode",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wall_art",
+   "hallway",
+   "perm_media"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6725,
+    "output": 2080,
+    "thoughts": 0,
+    "total": 8805
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Shows a square mountain image with an L-shaped stack shadow behind it and no folder tab or hanging wire, representing multiple digital photos, a camera roll, or an image gallery."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "multiple inboxes or all inboxes",
+   "meaning": "multiple inboxes or unified inbox",
    "strength": "primary"
   },
   {
-   "meaning": "email accounts or mail trays",
+   "meaning": "all mail or multiple email accounts",
    "strength": "primary"
   },
   {
-   "meaning": "file drawers or storage bins",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "apple wallet / card passes",
+   "meaning": "archive drawers or stacked task queues",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a wallet, credit card holder, or stacked picture frames at small sizes.",
+ "ambiguity": "Interchangeable with the square-proportioned stacked inbox tray, and shares the exact same outer landscape frame silhouette as the stacked frames with paintbrush.",
  "modifier_semantics": [
   {
    "modifier": "stacked L-shaped corner outline behind bottom-left",
@@ -161,19 +157,19 @@
  ],
  "near_misses": [
   {
+   "task": "Customize the master slide layout and colors",
+   "better": "stacked frames with paintbrush",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reach inbox zero in my personal email account",
+   "better": "single square inbox tray",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Email Wanli about the Tuesday deadline",
    "better": "envelope or paper plane (send single email)",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Delete expired credit card from Apple Wallet",
-   "better": "credit card or wallet",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Fix the sticking kitchen silverware drawer",
-   "better": "chest of drawers or wrench",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check if the passport renewal confirmation arrived",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a standard inbox tray with a stacked backing layer indicating multiple inboxes ('all inboxes'). It fits tasks about clearing email backlogs, inbox zero, managing multiple email accounts, or sorting desk mail trays, though it slightly resembles a wallet pass icon or drawer.",
@@ -212,6 +208,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple inboxes or all inboxes",
+     "strength": "primary"
+    },
+    {
+     "meaning": "email accounts or mail trays",
+     "strength": "primary"
+    },
+    {
+     "meaning": "file drawers or storage bins",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "apple wallet / card passes",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a wallet, credit card holder, or stacked picture frames at small sizes.",
+   "near_misses": [
+    {
+     "task": "Email Wanli about the Tuesday deadline",
+     "better": "envelope or paper plane (send single email)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Delete expired credit card from Apple Wallet",
+     "better": "credit card or wallet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix the sticking kitchen silverware drawer",
+     "better": "chest of drawers or wrench",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the passport renewal confirmation arrived",
+     "better": "passport",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Call the accountant back about the quarterly filing",
+     "better": "phone",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Write an inbox-friendly short pitch for the podcast",
+     "better": "microphone or document",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "slide_library",
+   "all_inbox",
+   "inbox"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6675,
+    "output": 1949,
+    "thoughts": 0,
+    "total": 8624
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Shows a wider landscape-proportioned inbox tray with a semicircular notch and a stacked L-shaped corner behind the bottom-left; completely interchangeable in meaning and nearly identical in appearance to the squarer stacked inbox icon."
 }

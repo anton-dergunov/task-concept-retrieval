@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "unlocked phone or carrier unlocking",
+   "meaning": "unlocking a phone or carrier SIM unlock",
    "strength": "primary"
   },
   {
-   "meaning": "phone screen lock, passcode, or device access",
+   "meaning": "disabling screen lock, bypassing a passcode, or granting device access",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "smart lock or mobile access key app",
+   "meaning": "unlocking a smart lock or door via a mobile app",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the open shackle can be missed, making it look like a locked phone or a briefcase/shopping bag icon on a screen.",
+ "ambiguity": "Easily mistaken at small sizes for the phone with a closed padlock if the tiny gap and rightward offset of the open shackle are not noticed.",
  "modifier_semantics": [
   {
    "modifier": "open padlock",
@@ -161,14 +161,19 @@
  ],
  "near_misses": [
   {
+   "task": "Lock down lost iPhone remotely via Find My",
+   "better": "smartphone with a closed padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up a stronger screen lock passcode and 2FA on my phone",
+   "better": "smartphone with a closed padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Unlock the back gate before the meter reader comes",
    "better": "padlock or gate",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Lock DOWN lost iPhone via Find My",
-   "better": "phone with closed padlock",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new silicone case for my unlocked Pixel 8",
@@ -176,17 +181,12 @@
    "trap": "property"
   },
   {
-   "task": "Check phone bill for roaming charges",
+   "task": "Check phone bill for international roaming charges",
    "better": "receipt or invoice",
    "trap": "generic_verb"
   },
   {
-   "task": "Replace cracked screen on the kids' unlocked iPad",
-   "better": "broken screen or repair tool",
-   "trap": "property"
-  },
-  {
-   "task": "Order a local prepaid eSIM for Italy",
+   "task": "Order a local prepaid eSIM for Italy trip",
    "better": "SIM card",
    "trap": "parent_topic"
   }
@@ -194,7 +194,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a smartphone with an open padlock on the screen, directly representing unlocking a phone (carrier SIM unlock, screen passcode removal, or bootloader unlock). It fits a real, specific set of tech and travel preparation tasks, though it could be confused at tiny sizes with a locked phone icon.",
@@ -212,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unlocked phone or carrier unlocking",
+     "strength": "primary"
+    },
+    {
+     "meaning": "phone screen lock, passcode, or device access",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bootloader unlock or rooting a mobile device",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smart lock or mobile access key app",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the open shackle can be missed, making it look like a locked phone or a briefcase/shopping bag icon on a screen.",
+   "near_misses": [
+    {
+     "task": "Unlock the back gate before the meter reader comes",
+     "better": "padlock or gate",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Lock DOWN lost iPhone via Find My",
+     "better": "phone with closed padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new silicone case for my unlocked Pixel 8",
+     "better": "phone case",
+     "trap": "property"
+    },
+    {
+     "task": "Check phone bill for roaming charges",
+     "better": "receipt or invoice",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace cracked screen on the kids' unlocked iPad",
+     "better": "broken screen or repair tool",
+     "trap": "property"
+    },
+    {
+     "task": "Order a local prepaid eSIM for Italy",
+     "better": "SIM card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "phonelink_lock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4048,
+    "output": 1016,
+    "thoughts": 75,
+    "total": 5139
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:27Z"
+  }
+ },
+ "distinguishing": "Shows an open padlock with the shackle swung to the right on the phone screen, representing unlocking or open access rather than locking or securing a phone."
 }

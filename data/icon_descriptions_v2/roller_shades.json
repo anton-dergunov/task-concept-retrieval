@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "window blind or roller shade",
+   "meaning": "window blind or roller shade (general or half-open)",
+   "strength": "primary"
+  },
+  {
+   "meaning": "open or raise window shades",
    "strength": "primary"
   },
   {
    "meaning": "window or window covering",
-   "strength": "primary"
+   "strength": "secondary"
   },
   {
    "meaning": "smart home shade control",
    "strength": "secondary"
-  },
-  {
-   "meaning": " guillotine or hanging weight in a frame",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the pull cord with the round knob inside the frame can resemble a pendulum clock, a gong in a stand, or a guillotine.",
+ "ambiguity": "Easily confused at a glance with the closed roller blind icon (which only lowers the horizontal bar and pull-cord to the windowsill), and at small sizes the hanging knob inside the frame resembles a pendulum or gong.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -153,6 +153,21 @@
  ],
  "near_misses": [
   {
+   "task": "Close all the blackout blinds in the nursery before nap time",
+   "better": "closed window shade (lowered to the sill)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pull down the projection screen in the conference room",
+   "better": "fully lowered roller shade or projector screen",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Regulate the pendulum on the grandfather clock in the hall",
+   "better": "clock or pendulum",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Upgrade laptop from Windows 10 to Windows 11 Pro",
    "better": "computer or OS logo",
    "trap": "shared_vocabulary"
@@ -168,16 +183,6 @@
    "trap": "property"
   },
   {
-   "task": "Regulate the pendulum on the grandfather clock in the hall",
-   "better": "clock or pendulum",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Double-blind review of the three conference submissions",
-   "better": "document or peer review",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Pay the glass installer's invoice via bank transfer",
    "better": "invoice or payment",
    "trap": "parent_topic"
@@ -186,7 +191,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a framed window with a half-drawn roller blind and center pull cord resting on a sill. It is a specific and recognizable match for home improvement, cleaning, shopping, and smart-home tasks involving window shades, blinds, or windows, though at tiny sizes the hanging pull knob could vaguely suggest a pendulum.",
@@ -204,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "window blind or roller shade",
+     "strength": "primary"
+    },
+    {
+     "meaning": "window or window covering",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smart home shade control",
+     "strength": "secondary"
+    },
+    {
+     "meaning": " guillotine or hanging weight in a frame",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the pull cord with the round knob inside the frame can resemble a pendulum clock, a gong in a stand, or a guillotine.",
+   "near_misses": [
+    {
+     "task": "Upgrade laptop from Windows 10 to Windows 11 Pro",
+     "better": "computer or OS logo",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up polarized sunglasses for driving in bright glare",
+     "better": "sunglasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a window seat on the morning flight to Seattle",
+     "better": "airplane or seat",
+     "trap": "property"
+    },
+    {
+     "task": "Regulate the pendulum on the grandfather clock in the hall",
+     "better": "clock or pendulum",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Double-blind review of the three conference submissions",
+     "better": "document or peer review",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the glass installer's invoice via bank transfer",
+     "better": "invoice or payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "roller_shades_closed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4122,
+    "output": 1178,
+    "thoughts": 0,
+    "total": 5300
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Shows the roller shade halfway up the window frame with the pull-cord knob hanging inside the lower pane, whereas the look-alike has the shade pulled nearly all the way down with the knob extending below the windowsill."
 }

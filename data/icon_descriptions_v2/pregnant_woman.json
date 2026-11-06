@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the protruding belly might look like a person carrying a backpack in front or an overweight figure, though the standard public-signage silhouette is widely known.",
+ "ambiguity": "At tiny sizes, its asymmetric silhouette could briefly be confused with the symmetric standing person figures, though the protruding belly is distinct on look.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -151,40 +151,40 @@
  ],
  "near_misses": [
   {
+   "task": "Update emergency contact person in HR portal",
+   "better": "symmetric standing person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace paper towel dispenser in the men's restroom",
+   "better": "symmetric standing male restroom figure",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a baby stroller that folds with one hand",
    "better": "baby stroller",
    "trap": "parent_topic"
   },
   {
    "task": "Schedule 6-month pediatrician checkup for Leo",
-   "better": "baby / stethoscope",
+   "better": "baby or stethoscope",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check if the soft cheese in the fridge is pregnancy-safe",
-   "better": "cheese / food",
+   "better": "cheese or food",
    "trap": "property"
   },
   {
-   "task": "Weigh myself every Monday morning before breakfast",
-   "better": "bathroom scale",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update family tree with new birth dates",
-   "better": "family tree / people",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Assemble the IKEA Sniglar crib in the spare room",
-   "better": "crib / baby bed",
+   "better": "crib or baby bed",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the universal side-profile silhouette of a pregnant person. It is an ideal, unmistakable match for tasks related to pregnancy, prenatal medical care, maternity shopping, and maternity leave, while distinct from general baby or parenting icons.",
@@ -202,6 +202,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pregnancy or maternity",
+     "strength": "primary"
+    },
+    {
+     "meaning": "expecting mother or prenatal care",
+     "strength": "primary"
+    },
+    {
+     "meaning": "parental leave or childbirth preparation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the protruding belly might look like a person carrying a backpack in front or an overweight figure, though the standard public-signage silhouette is widely known.",
+   "near_misses": [
+    {
+     "task": "Buy a baby stroller that folds with one hand",
+     "better": "baby stroller",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Schedule 6-month pediatrician checkup for Leo",
+     "better": "baby / stethoscope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the soft cheese in the fridge is pregnancy-safe",
+     "better": "cheese / food",
+     "trap": "property"
+    },
+    {
+     "task": "Weigh myself every Monday morning before breakfast",
+     "better": "bathroom scale",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update family tree with new birth dates",
+     "better": "family tree / people",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Assemble the IKEA Sniglar crib in the spare room",
+     "better": "crib / baby bed",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "man_2",
+   "man",
+   "boy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6619,
+    "output": 1855,
+    "thoughts": 168,
+    "total": 8642
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Shown in side profile with a prominent rounded belly protruding to the right, specifically representing pregnancy or maternity rather than a generic standing person."
 }

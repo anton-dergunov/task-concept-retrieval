@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "ramen or noodle soup",
+   "meaning": "ramen or noodles",
    "strength": "primary"
   },
   {
-   "meaning": "Asian cuisine or takeout meal",
+   "meaning": "Asian food or takeout",
    "strength": "primary"
   },
   {
-   "meaning": "eating out or dining at a restaurant",
+   "meaning": "soup or hot bowl meal",
    "strength": "secondary"
   },
   {
-   "meaning": "cooking pasta or noodles",
+   "meaning": "chopsticks or dining out",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the crossed grid of chopsticks and vertical noodle strands could briefly resemble a small building or scaffolding sitting on a boat hull.",
+ "ambiguity": "Completely interchangeable in meaning and nearly identical at list size to the footed plain noodle bowl with chopsticks.",
  "modifier_semantics": [],
  "domains": [
   "food",
@@ -159,35 +159,40 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pay the monthly bill for the fiber internet line",
-   "better": "receipt or router",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Fix the loose wooden slats on the backyard fence",
-   "better": "fence",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a ramen-themed graphic t-shirt for Leo's birthday",
    "better": "t-shirt or gift",
    "trap": "property"
   },
   {
-   "task": "Renew passport before we fly",
+   "task": "Split the 890 yen ramen bill with Maya on Splitwise",
+   "better": "money or receipt",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Renew passport before the Tokyo trip",
    "better": "passport",
    "trap": "parent_topic"
   },
   {
-   "task": "Untangle the bundle of cables behind the TV stand",
-   "better": "cables",
+   "task": "Noodle around on the acoustic guitar after dinner",
+   "better": "guitar",
    "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Replace the cracked mixing bowl from the baking set",
+   "better": "plain mixing bowl or whisk",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wash the rice in the strainer before starting the cooker",
+   "better": "rice bowl without noodles or colander",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a bowl with chopsticks lifting noodles, universally understood as ramen, noodle soup, or Asian takeout. It fits food preparation, grocery shopping, and dining tasks well and is visually distinct from generic plates or cutlery.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "ramen or noodle soup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Asian cuisine or takeout meal",
+     "strength": "primary"
+    },
+    {
+     "meaning": "eating out or dining at a restaurant",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cooking pasta or noodles",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the crossed grid of chopsticks and vertical noodle strands could briefly resemble a small building or scaffolding sitting on a boat hull.",
+   "near_misses": [
+    {
+     "task": "Buy a foam pool noodle for the kids' swimming lessons",
+     "better": "swimming pool or float",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly bill for the fiber internet line",
+     "better": "receipt or router",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the loose wooden slats on the backyard fence",
+     "better": "fence",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a ramen-themed graphic t-shirt for Leo's birthday",
+     "better": "t-shirt or gift",
+     "trap": "property"
+    },
+    {
+     "task": "Renew passport before we fly",
+     "better": "passport",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Untangle the bundle of cables behind the TV stand",
+     "better": "cables",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ramen_dining"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4024,
+    "output": 1106,
+    "thoughts": 83,
+    "total": 5213
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "Visually shows a round-bottomed bowl without a foot and adds a horizontal decorative stripe across the bowl's body, unlike the footed plain bowl; in meaning, the two icons are completely interchangeable."
 }

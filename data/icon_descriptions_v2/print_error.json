@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "printer error, jam, or maintenance issue",
+   "meaning": "fix printer error, paper jam, or hardware malfunction",
    "strength": "primary"
   },
   {
-   "meaning": "low ink, toner, or paper alert",
+   "meaning": "replace low ink cartridge, toner, or empty paper tray",
    "strength": "primary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the cutout printer body with the exclamation mark could look like an abstract geometric shape or a broken folder icon.",
+ "ambiguity": "Shares the identical cutaway printer outline with the printer with a plus sign and the printer with a checkmark, distinguished only by the vertical exclamation point in the bottom right.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -156,34 +156,34 @@
  ],
  "near_misses": [
   {
-   "task": "Print boarding passes for Saturday's flight to Lisbon",
-   "better": "regular printer without exclamation mark, or boarding pass / ticket",
-   "trap": "generic_verb"
+   "task": "Add the new Wi-Fi laser printer to my work MacBook",
+   "better": "printer with plus sign icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Collect the printed and bound quarterly board packets from the copy room",
+   "better": "printer with checkmark icon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Send the wedding photos to the print shop for 5x7 matte prints",
-   "better": "photograph / picture frame",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Fix clogged 0.4mm nozzle on the Bambu Lab 3D printer",
-   "better": "3D printer nozzle / 3D cube",
+   "better": "photograph or picture frame icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the urgent overdue electricity bill before 5pm",
-   "better": "invoice / lightning bolt with alert",
+   "better": "invoice or lightning bolt with alert icon",
    "trap": "property"
   },
   {
-   "task": "Fax the signed insurance claim form to the clinic",
-   "better": "fax machine / document with arrow",
-   "trap": "lookalike_glyph"
+   "task": "Order a 10ft braided USB-B printer cable from Amazon",
+   "better": "USB cable icon",
+   "trap": "parent_topic"
   },
   {
-   "task": "Order a 10ft braided USB-B cable from Amazon",
-   "better": "USB cable",
-   "trap": "parent_topic"
+   "task": "Print boarding passes for Saturday's flight to Lisbon",
+   "better": "boarding pass or plain printer icon",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -207,6 +207,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "printer error, jam, or maintenance issue",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low ink, toner, or paper alert",
+     "strength": "primary"
+    },
+    {
+     "meaning": "urgent printing task",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the cutout printer body with the exclamation mark could look like an abstract geometric shape or a broken folder icon.",
+   "near_misses": [
+    {
+     "task": "Print boarding passes for Saturday's flight to Lisbon",
+     "better": "regular printer without exclamation mark, or boarding pass / ticket",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Send the wedding photos to the print shop for 5x7 matte prints",
+     "better": "photograph / picture frame",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix clogged 0.4mm nozzle on the Bambu Lab 3D printer",
+     "better": "3D printer nozzle / 3D cube",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the urgent overdue electricity bill before 5pm",
+     "better": "invoice / lightning bolt with alert",
+     "trap": "property"
+    },
+    {
+     "task": "Fax the signed insurance claim form to the clinic",
+     "better": "fax machine / document with arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 10ft braided USB-B cable from Amazon",
+     "better": "USB cable",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "print_add",
+   "print_connect"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5392,
+    "output": 1552,
+    "thoughts": 0,
+    "total": 6944
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "This printer has an exclamation mark (!) in the bottom-right corner, indicating a printer error, paper jam, low ink/toner, or maintenance need, rather than adding a printer (plus) or a completed print (checkmark)."
 }

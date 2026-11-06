@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "empty set or zero / nothing",
+   "meaning": "empty set, zero, or none",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks identical to a standard prohibition/no sign, the mathematical empty-set symbol (∅), or a generic 'disabled' UI toggle.",
+ "ambiguity": "At small list sizes, the missing top buttons on this plain slashed circle may go unnoticed next to the slashed alarm clock or slashed stopwatch, or it looks like a generic prohibition sign or empty-set symbol.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off the 6:00 AM weekday wake-up alarm for Monday's holiday",
+   "better": "slashed alarm clock with two top bells",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Disable the 15-minute auto-shutoff timer on the coffee maker",
+   "better": "slashed stopwatch with top plunger button",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cancel Tuesday's dentist appointment and rebook for next week",
    "better": "tooth or calendar with cross",
    "trap": "generic_verb"
@@ -175,13 +185,8 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Replace the cracked hula hoop in the garage",
-   "better": "ring or hoop without slash",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Mail back the cable modem to Xfinity via UPS",
-   "better": "router / package",
+   "better": "router or package",
    "trap": "parent_topic"
   },
   {
@@ -193,7 +198,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon shows an outlined circle crossed by a diagonal slash, universally read as 'cancel', 'prohibited/blocked', 'disabled', or the empty set (∅). While a concrete noun icon (like a flight, phone, or card) beats it when a specific object is named, it serves well when the action of cancelling subscriptions, blocking access, or opting out is the core point of the task. It is easily confused with standard ban/no icons and generic 'off' state toggles.",
@@ -211,6 +216,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "hide_source"
- }
+  "alias_of": "hide_source",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cancel, stop, or discontinue something",
+     "strength": "primary"
+    },
+    {
+     "meaning": "block, ban, or prohibit access",
+     "strength": "primary"
+    },
+    {
+     "meaning": "empty set or zero / nothing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "disabled option or deselected state",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks identical to a standard prohibition/no sign, the mathematical empty-set symbol (∅), or a generic 'disabled' UI toggle.",
+   "near_misses": [
+    {
+     "task": "Cancel Tuesday's dentist appointment and rebook for next week",
+     "better": "tooth or calendar with cross",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy caffeine-free herbal tea for the evening",
+     "better": "teacup or tea bag",
+     "trap": "property"
+    },
+    {
+     "task": "Cancel Delta flight to Chicago and request eCredit",
+     "better": "airplane",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace the cracked hula hoop in the garage",
+     "better": "ring or hoop without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Mail back the cable modem to Xfinity via UPS",
+     "better": "router / package",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up zero-sugar tonic water for Saturday's dinner",
+     "better": "bottle or drink",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "alarm_off",
+   "timer_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5445,
+    "output": 1290,
+    "thoughts": 0,
+    "total": 6735
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:29Z"
+  }
+ },
+ "distinguishing": "Unlike the crossed-out alarm clock and stopwatch, this is a plain empty circle with a diagonal slash and no top buttons, bells, or hands, representing general cancellation, prohibition, or nothingness rather than timekeeping."
 }

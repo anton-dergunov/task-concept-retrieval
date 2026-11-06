@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "dice / board game / tabletop gaming",
+   "meaning": "dice, board game, or tabletop gaming",
    "strength": "primary"
   },
   {
-   "meaning": "random / chance / shuffle / luck",
+   "meaning": "random, chance, shuffle, or luck",
    "strength": "secondary"
   },
   {
-   "meaning": "gambling / casino / betting",
+   "meaning": "gambling, casino, or betting",
    "strength": "secondary"
   },
   {
-   "meaning": "probability / statistics",
+   "meaning": "die roll or value of 5",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, could briefly resemble a square button, socket, or domino half, though the five-pip pattern is unmistakably a die.",
+ "ambiguity": "Interchangeable with the three-pip and four-pip die faces as a general symbol for dice or board games.",
  "modifier_semantics": [],
  "domains": [
   "hobbies",
@@ -154,40 +154,40 @@
  ],
  "near_misses": [
   {
+   "task": "Score the Threes row on the Yahtzee pad",
+   "better": "die face showing three pips",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Paint the four-pip face on the wooden yard dice",
+   "better": "die face showing four pips",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Dice two yellow onions and bell peppers for the chili",
-   "better": "knife or onion / cooking",
+   "better": "knife or onion",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Take 5 mg melatonin before bed",
-   "better": "pill / medication",
+   "better": "pill or medication",
    "trap": "property"
   },
   {
-   "task": "Fix the bathroom GFCI outlet",
-   "better": "electrical outlet / plug",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay $25 entry fee to Mark on Venmo",
-   "better": "money / payment",
+   "task": "Pay $25 poker night entry fee to Mark on Venmo",
+   "better": "money or payment",
    "trap": "parent_topic"
   },
   {
-   "task": "Install Baldur's Gate 3 patch on Steam",
-   "better": "video game controller / PC",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pick a random podcast episode for the drive",
-   "better": "podcast / headphones",
+   "better": "podcast or headphones",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the 5-pip face of a standard six-sided die. It is the ideal symbol for tasks involving board games, tabletop RPGs, dice, gambling, probability, or random selection, and is only distinct from other dice icons that show a different number of pips.",
@@ -205,6 +205,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "dice / board game / tabletop gaming",
+     "strength": "primary"
+    },
+    {
+     "meaning": "random / chance / shuffle / luck",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "gambling / casino / betting",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "probability / statistics",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, could briefly resemble a square button, socket, or domino half, though the five-pip pattern is unmistakably a die.",
+   "near_misses": [
+    {
+     "task": "Dice two yellow onions and bell peppers for the chili",
+     "better": "knife or onion / cooking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take 5 mg melatonin before bed",
+     "better": "pill / medication",
+     "trap": "property"
+    },
+    {
+     "task": "Fix the bathroom GFCI outlet",
+     "better": "electrical outlet / plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay $25 entry fee to Mark on Venmo",
+     "better": "money / payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Install Baldur's Gate 3 patch on Steam",
+     "better": "video game controller / PC",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick a random podcast episode for the drive",
+     "better": "podcast / headphones",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ifl",
+   "background_dot_large"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5363,
+    "output": 1626,
+    "thoughts": 0,
+    "total": 6989
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "Shows five pips arranged in an X (four corners plus a center dot) instead of three diagonal pips or four corner pips; makes the most recognizable generic die icon of the group, though largely interchangeable with the others for board games."
 }

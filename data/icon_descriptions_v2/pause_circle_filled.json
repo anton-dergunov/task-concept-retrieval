@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, it can resemble a simple round electrical socket with two vertical slots or a badge for the Roman numeral II.",
+ "ambiguity": "Easily confused at small sizes with the pause icon whose outer ring has a top-left gap and dot, as well as a simple round two-slot electrical socket or a Roman numeral II badge.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -149,9 +149,14 @@
  ],
  "near_misses": [
   {
-   "task": "Cancel Netflix subscription permanently",
-   "better": "cross / cancel mark or television",
-   "trap": "shared_vocabulary"
+   "task": "Pause the Pomodoro focus timer during the phone call",
+   "better": "pause icon with circular progress ring and dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Log paused billable time in the time-tracking app",
+   "better": "pause icon with circular progress ring and dot or stopwatch",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Replace two-prong outlet in the hallway",
@@ -159,14 +164,14 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Fix the sticking pause button on the cassette deck",
-   "better": "cassette deck / stereo",
-   "trap": "property"
-  },
-  {
    "task": "Read chapter II of the Roman history book",
    "better": "book",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel Netflix subscription permanently",
+   "better": "cross / cancel mark or television",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Listen to the new podcast episode during lunch break",
@@ -182,7 +187,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon is the universally recognized media pause symbol (two vertical bars inside a circle). While originally a media control, in a task manager it serves well for tasks whose primary action is pausing, suspending, or putting a recurring service, subscription, delivery, or campaign on hold. At tiny sizes it could slightly resemble a two-prong wall socket.",
@@ -200,6 +205,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": "pause_circle"
- }
+  "alias_of": "pause_circle",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pause, suspend, or put on hold",
+     "strength": "primary"
+    },
+    {
+     "meaning": "break, hiatus, or temporary stop",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "two-slot electrical outlet or Roman numeral II",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, it can resemble a simple round electrical socket with two vertical slots or a badge for the Roman numeral II.",
+   "near_misses": [
+    {
+     "task": "Cancel Netflix subscription permanently",
+     "better": "cross / cancel mark or television",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace two-prong outlet in the hallway",
+     "better": "electrical outlet / plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix the sticking pause button on the cassette deck",
+     "better": "cassette deck / stereo",
+     "trap": "property"
+    },
+    {
+     "task": "Read chapter II of the Roman history book",
+     "better": "book",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Listen to the new podcast episode during lunch break",
+     "better": "headphones / podcast",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Lisbon",
+     "better": "airplane",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "motion_photos_paused"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 1092,
+    "thoughts": 0,
+    "total": 5127
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Unlike the version with a broken ring and dot at the top-left, this icon has a clean, unbroken circular outline around the two vertical bars, making it the standard pause button symbol (though the two are largely interchangeable in practice)."
 }

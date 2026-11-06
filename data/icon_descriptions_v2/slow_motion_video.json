@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "watch or resume video / media playback",
+   "meaning": "slow-motion video, time-lapse, or playback speed",
    "strength": "primary"
   },
   {
-   "meaning": "slow-motion video or playback speed",
+   "meaning": "ephemeral story, status clip, or in-progress media",
    "strength": "primary"
   },
   {
-   "meaning": "ephemeral story or status clip",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "in-progress course lecture or tutorial",
+   "meaning": "watch or resume video playback",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the dashed left half of the ring blends together, making it look almost identical to a standard circled play button; its specific UI meaning (slow-mo vs. story vs. resume playback) is not universally known outside camera and media apps.",
+ "ambiguity": "Easily mistaken for the three-segment play button, the dot-ring play button, or the plain circled play button at small sizes when the dashes on the left side blur together.",
  "modifier_semantics": [
   {
    "modifier": "half-dashed circular ring",
@@ -162,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Watch the standard-speed recording of yesterday's town hall",
+   "better": "plain solid circled play button",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up the audiobook episode right at the timestamp where I paused",
+   "better": "play button with a progress dot on the ring",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new 4K webcam for streaming",
    "better": "camera or webcam",
    "trap": "shared_vocabulary"
@@ -185,11 +191,6 @@
    "task": "Start the dishwasher before going to bed",
    "better": "dishwasher or dishes",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Download an audiobook for the drive to Denver",
-   "better": "headphones or book",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -213,6 +214,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "watch or resume video / media playback",
+     "strength": "primary"
+    },
+    {
+     "meaning": "slow-motion video or playback speed",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ephemeral story or status clip",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "in-progress course lecture or tutorial",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the dashed left half of the ring blends together, making it look almost identical to a standard circled play button; its specific UI meaning (slow-mo vs. story vs. resume playback) is not universally known outside camera and media apps.",
+   "near_misses": [
+    {
+     "task": "Buy a new 4K webcam for streaming",
+     "better": "camera or webcam",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel Netflix subscription before renewal on the 14th",
+     "better": "credit card or subscription slash",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up a 25-minute Pomodoro timer for deep work",
+     "better": "stopwatch or timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy AA batteries for the TV remote",
+     "better": "battery or remote control",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Start the dishwasher before going to bed",
+     "better": "dishwasher or dishes",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Download an audiobook for the drive to Denver",
+     "better": "headphones or book",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "motion_play",
+   "play_circle",
+   "sound_sampler"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6779,
+    "output": 1381,
+    "thoughts": 0,
+    "total": 8160
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "The right half of the circle is a solid arc while the left half is broken into four short dashes, a standard UI glyph for slow-motion video, playback speed, or ephemeral status clips."
 }

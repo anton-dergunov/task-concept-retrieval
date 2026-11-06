@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "crown / tiara / costume headpiece",
+   "meaning": "crown / tiara / royal headgear",
    "strength": "primary"
   },
   {
@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "royalty / monarchy / king or queen",
+   "meaning": "chess queen piece / chess",
    "strength": "secondary"
   },
   {
-   "meaning": "chess queen piece / chess",
+   "meaning": "royalty / monarchy / king or queen",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Interchangeable with the curved three-pointed crown without a base bar; both depict the same crown/VIP concept in slightly different line styles.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -175,25 +175,25 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check how many British pounds and Czech korunas we have left in the travel wallet",
-   "better": "currency / banknotes",
+   "task": "Measure the living room ceiling for crown molding installation",
+   "better": "measuring tape / ruler",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Review the top-priority bugs for the sprint",
-   "better": "bug / exclamation mark",
-   "trap": "property"
+   "task": "Glue the loose gold paper crown for the birthday costume",
+   "better": "simple one-piece crown without base bar",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Order folding chairs for the backyard",
-   "better": "chair",
-   "trap": "parent_topic"
+   "task": "Order rhinestone bridal tiara for the wedding",
+   "better": "simple tiara / curved crown",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic three-pointed crown with round finials. In a task manager, it directly fits costumes/tiaras, chess, royal history, or VIP/premium subscriptions (where the crown is the standard UI metaphor), though it must be avoided for dental crowns or king-sized bedding.",
@@ -211,6 +211,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "crown / tiara / costume headpiece",
+     "strength": "primary"
+    },
+    {
+     "meaning": "VIP / premium membership / upgrade",
+     "strength": "primary"
+    },
+    {
+     "meaning": "royalty / monarchy / king or queen",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "chess queen piece / chess",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Book appointment to get the permanent zirconia crown cemented on molar #19",
+     "better": "tooth / dentist",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new king-size linen duvet cover for the guest bed",
+     "better": "bed / bedding",
+     "trap": "property"
+    },
+    {
+     "task": "Thin out the upper crown of the old apple tree before spring",
+     "better": "tree / pruning shears",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a bottle of Crown Royal for Dave's retirement party",
+     "better": "whiskey bottle / liquor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check how many British pounds and Czech korunas we have left in the travel wallet",
+     "better": "currency / banknotes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the top-priority bugs for the sprint",
+     "better": "bug / exclamation mark",
+     "trap": "property"
+    },
+    {
+     "task": "Order folding chairs for the backyard",
+     "better": "chair",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "chess_queen"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4063,
+    "output": 1113,
+    "thoughts": 134,
+    "total": 5310
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Drawn with straight angular V-notches between the three ball-tipped peaks and a detached horizontal bar under the base, though it is interchangeable in meaning with the curved-swoop crown."
 }

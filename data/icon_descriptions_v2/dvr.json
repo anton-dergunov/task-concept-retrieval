@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "presentation slide or deck",
+   "meaning": "presentation slide deck or keynote talk on a screen",
    "strength": "primary"
   },
   {
-   "meaning": "on-screen menu, TV guide, or queue",
+   "meaning": "on-screen menu, TV guide, or digital directory board",
    "strength": "primary"
   },
   {
-   "meaning": "digital checklist, task app, or online form",
+   "meaning": "digital checklist, online agenda, or task board on a computer",
    "strength": "secondary"
   },
   {
-   "meaning": "dashboard, system log, or status display",
+   "meaning": "system log, status dashboard, or queue display",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can look like a generic computer monitor, a server rack inside a box, or a speech bubble with a flat bottom.",
+ "ambiguity": "At small sizes, the two vertical bullet dots can blur into an exclamation mark like the alert card, and the small bottom stand is easy to overlook next to the standless cards.",
  "modifier_semantics": [
   {
    "modifier": "two bulleted list lines inside the screen",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pick up my new employee security badge from reception",
+   "better": "ID card with person silhouette and two bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Investigate the system alert notification from the server",
+   "better": "rectangular card with exclamation mark and two bars",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a 27-inch 4K monitor for the home office",
    "better": "plain computer monitor without list",
    "trap": "lookalike_glyph"
@@ -172,29 +182,24 @@
   },
   {
    "task": "Mount the bedroom TV on the drywall",
-   "better": "TV screen or drill",
+   "better": "plain TV screen or drill",
    "trap": "parent_topic"
   },
   {
    "task": "Check the presentation room booking for Tuesday",
-   "better": "calendar or room/door",
+   "better": "calendar or room door",
    "trap": "generic_verb"
   },
   {
    "task": "Record a screencast walkthrough of the new feature",
    "better": "video camera or screen recording icon",
    "trap": "property"
-  },
-  {
-   "task": "Rack the two new 1U servers in the data center",
-   "better": "server rack stack",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows a monitor or TV screen containing two bulleted lines, naturally reading as presentation slides, an on-screen menu/guide, or a digital task list. It fits work and school tasks around slide decks and UI/screen lists well, though it overlaps somewhat with plain monitor and checklist icons.",
@@ -212,6 +217,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "presentation slide or deck",
+     "strength": "primary"
+    },
+    {
+     "meaning": "on-screen menu, TV guide, or queue",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital checklist, task app, or online form",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "dashboard, system log, or status display",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can look like a generic computer monitor, a server rack inside a box, or a speech bubble with a flat bottom.",
+   "near_misses": [
+    {
+     "task": "Buy a 27-inch 4K monitor for the home office",
+     "better": "plain computer monitor without list",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write the grocery shopping list for Saturday",
+     "better": "paper checklist or shopping cart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mount the bedroom TV on the drywall",
+     "better": "TV screen or drill",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the presentation room booking for Tuesday",
+     "better": "calendar or room/door",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Record a screencast walkthrough of the new feature",
+     "better": "video camera or screen recording icon",
+     "trap": "property"
+    },
+    {
+     "task": "Rack the two new 1U servers in the data center",
+     "better": "server rack stack",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "id_card",
+   "problem"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5417,
+    "output": 1059,
+    "thoughts": 232,
+    "total": 6708
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Has a short rectangular stand centered underneath the frame—turning the rectangle into a monitor, TV, or kiosk screen—and displays two round bullet dots aligned with the two horizontal bars instead of a person silhouette or an exclamation mark."
 }

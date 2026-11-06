@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "video or media playback",
+   "meaning": "continue watching, resume playback, or scrub media",
    "strength": "primary"
   },
   {
-   "meaning": "continue watching or resume media",
+   "meaning": "new or unread media episode / live stream",
    "strength": "primary"
   },
   {
-   "meaning": "live stream or unread media episode",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "motion photo or live photo",
+   "meaning": "motion photo or live photo clip",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Extremely similar to a standard play button; the small dot on the ring could represent a scrub bar handle, an unread badge, or Android's Motion Photo symbol.",
+ "ambiguity": "At small sizes it looks nearly identical to the plain circled play button, as well as the three-segment and half-dashed play buttons.",
  "modifier_semantics": [
   {
    "modifier": "dot in broken ring",
@@ -159,6 +155,21 @@
  ],
  "near_misses": [
   {
+   "task": "Watch the recorded keynote video from yesterday",
+   "better": "plain circled play button",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Review the slow-motion golf swing footage from the range",
+   "better": "play button in a half-dashed circle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Post a 3-part Instagram Story for the product launch",
+   "better": "play button in a three-segment ring",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Edit the B-roll sequence in DaVinci Resolve",
    "better": "film clapperboard or timeline scissors",
    "trap": "shared_vocabulary"
@@ -172,11 +183,6 @@
    "task": "Renew Netflix and Criterion Channel subscriptions",
    "better": "credit card or receipt",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Start the 25-minute Pomodoro timer for deep work",
-   "better": "stopwatch or timer",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Upload final 4K render to the client's Google Drive",
@@ -210,6 +216,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video or media playback",
+     "strength": "primary"
+    },
+    {
+     "meaning": "continue watching or resume media",
+     "strength": "primary"
+    },
+    {
+     "meaning": "live stream or unread media episode",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "motion photo or live photo",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Extremely similar to a standard play button; the small dot on the ring could represent a scrub bar handle, an unread badge, or Android's Motion Photo symbol.",
+   "near_misses": [
+    {
+     "task": "Edit the B-roll sequence in DaVinci Resolve",
+     "better": "film clapperboard or timeline scissors",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Record a 5-minute Loom walkthrough for the design handoff",
+     "better": "video camera or microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew Netflix and Criterion Channel subscriptions",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Start the 25-minute Pomodoro timer for deep work",
+     "better": "stopwatch or timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upload final 4K render to the client's Google Drive",
+     "better": "cloud upload arrow",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Download offline movies onto the iPad for the flight to Tokyo",
+     "better": "download arrow or tablet",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "play_circle",
+   "sound_sampler",
+   "slow_motion_video"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6779,
+    "output": 1381,
+    "thoughts": 0,
+    "total": 8160
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "Unlike the solid, 3-segment, or half-dashed rings, this circle has a single gap at the upper-left holding a round dot, resembling a circular scrub bar handle or unread media indicator."
 }

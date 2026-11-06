@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "wireless camera or Wi-Fi connected camera",
+   "meaning": "wireless camera / Wi-Fi connected camera",
    "strength": "primary"
   },
   {
-   "meaning": "wireless photo transfer or remote camera shutter",
+   "meaning": "wireless photo transfer / remote camera shutter",
    "strength": "primary"
   },
   {
-   "meaning": "smart home security camera or baby monitor",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "live photo stream or tethered shooting",
+   "meaning": "tethered shooting / live photo stream",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the corner arcs can blend into the camera outline or look like a motion blur or flash effect, making it look like a plain camera icon.",
+ "ambiguity": "At small sizes the two arcs at the top-right corner blend into the rectangular outline, making it look like the plain photo camera.",
  "modifier_semantics": [
   {
    "modifier": "two concentric curved signal arcs at top right corner",
@@ -161,9 +157,14 @@
  ],
  "near_misses": [
   {
-   "task": "Develop two rolls of Ilford HP5 from the coast trip",
-   "better": "film roll or plain camera",
-   "trap": "shared_vocabulary"
+   "task": "Take passport photos at the pharmacy",
+   "better": "plain photo camera",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Develop two rolls of Ilford HP5 black-and-white film from the coast trip",
+   "better": "half-black half-white monochrome camera or film roll",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Upgrade home Wi-Fi mesh router in the upstairs hallway",
@@ -174,11 +175,6 @@
    "task": "Check if the Airbnb in Lisbon has decent Wi-Fi and a quiet desk",
    "better": "Wi-Fi signal or house",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Clean sensor dust off the 35mm prime lens before the wedding",
-   "better": "camera lens or plain camera",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the annual Ring Protect subscription invoice on Visa",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly combines a standard camera outline with wireless signal arcs in the top-right corner, indicating a Wi-Fi camera, wireless photo transfer, or connected security/baby camera. It fits a specific but genuine set of photography and smart-home tasks, though at very small sizes it may be confused with a standard camera icon.",
@@ -212,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "wireless camera or Wi-Fi connected camera",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wireless photo transfer or remote camera shutter",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smart home security camera or baby monitor",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "live photo stream or tethered shooting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the corner arcs can blend into the camera outline or look like a motion blur or flash effect, making it look like a plain camera icon.",
+   "near_misses": [
+    {
+     "task": "Develop two rolls of Ilford HP5 from the coast trip",
+     "better": "film roll or plain camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upgrade home Wi-Fi mesh router in the upstairs hallway",
+     "better": "Wi-Fi router",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the Airbnb in Lisbon has decent Wi-Fi and a quiet desk",
+     "better": "Wi-Fi signal or house",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Clean sensor dust off the 35mm prime lens before the wedding",
+     "better": "camera lens or plain camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the annual Ring Protect subscription invoice on Visa",
+     "better": "credit card or invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a waterproof floating hand grip for the action camera",
+     "better": "camera grip or waterproof case",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "monochrome_photos",
+   "camera_alt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5398,
+    "output": 1081,
+    "thoughts": 140,
+    "total": 6619
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Unlike the plain outlined camera or the half-filled monochrome camera, this camera has two concentric radio signal arcs replacing its top-right corner, indicating wireless connectivity, Wi-Fi photo transfer, or remote shooting."
 }

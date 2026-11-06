@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "Wi-Fi calling or VoIP phone call",
+   "meaning": "Wi-Fi calling or VoIP internet phone call",
    "strength": "primary"
   },
   {
-   "meaning": "telephone call (general)",
+   "meaning": "ringing phone or active telephone call",
    "strength": "primary"
   },
   {
-   "meaning": "internet phone service or SIP trunk",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "ringing phone or active call",
+   "meaning": "configure internet phone service or SIP trunk",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the Wi-Fi arc and dot look like generic ringing waves or sound waves coming from a standard phone handset.",
+ "ambiguity": "Shares the exact handset outline and dot position with the handset with a single dot, and at small sizes the curved arc can blur into the dot or be mistaken for generic sound waves on any phone call icon.",
  "modifier_semantics": [
   {
    "modifier": "Wi-Fi symbol (dot and arc)",
@@ -163,9 +159,24 @@
  ],
  "near_misses": [
   {
+   "task": "Return the missed call notification from the dentist",
+   "better": "telephone handset with a notification dot or incoming arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put my mobile phone plan on hold while traveling abroad",
+   "better": "telephone handset with pause bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wait for the incoming confirmation call from the courier",
+   "better": "telephone handset with an inward-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Restart the living room Wi-Fi router",
    "better": "Wi-Fi router",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a waterproof phone case for kayaking",
@@ -174,22 +185,12 @@
   },
   {
    "task": "Check voicemail messages from yesterday",
-   "better": "voicemail tape icon",
+   "better": "voicemail double-loop tape icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Send a text message to the landlord about the leak",
-   "better": "speech bubble / SMS",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Download offline maps onto my phone before the hike",
-   "better": "map",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Compare fiber internet plans for the apartment",
-   "better": "Wi-Fi symbol or globe",
+   "better": "standalone Wi-Fi symbol or globe",
    "trap": "parent_topic"
   }
  ],
@@ -214,6 +215,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi calling or VoIP phone call",
+     "strength": "primary"
+    },
+    {
+     "meaning": "telephone call (general)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "internet phone service or SIP trunk",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "ringing phone or active call",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the Wi-Fi arc and dot look like generic ringing waves or sound waves coming from a standard phone handset.",
+   "near_misses": [
+    {
+     "task": "Restart the living room Wi-Fi router",
+     "better": "Wi-Fi router",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof phone case for kayaking",
+     "better": "smartphone case",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check voicemail messages from yesterday",
+     "better": "voicemail tape icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Send a text message to the landlord about the leak",
+     "better": "speech bubble / SMS",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download offline maps onto my phone before the hike",
+     "better": "map",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Compare fiber internet plans for the apartment",
+     "better": "Wi-Fi symbol or globe",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wifi_calling_bar_1",
+   "phone_callback",
+   "phone_paused"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6758,
+    "output": 2173,
+    "thoughts": 0,
+    "total": 8931
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:27Z"
+  }
+ },
+ "distinguishing": "Unlike the other telephone handsets, this one has a curved arc over the dot in the upper right, representing a wireless/Wi-Fi signal or ringing wave rather than a plain notification dot, incoming arrow, or pause bars."
 }

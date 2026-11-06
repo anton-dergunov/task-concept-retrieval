@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "cloud download / fetch from cloud storage",
+   "meaning": "download files from cloud storage or the internet",
    "strength": "primary"
   },
   {
-   "meaning": "save for offline access",
+   "meaning": "save online content for offline access",
    "strength": "primary"
   },
   {
-   "meaning": "restore backup from cloud",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "export data archive from online service",
+   "meaning": "restore backup or export data archive from cloud service",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the arrow points down into the center of the cloud rather than out below the bottom edge, a few viewers might briefly read it as importing into the cloud, though the downward arrow universally cues download.",
+ "ambiguity": "Can be mistaken for the cloud-upload icon if the arrow direction is misread at small sizes, or for the cloud-checkmark icon because the downward arrowhead sits in the same central position as the checkmark's vertex.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow",
@@ -169,14 +165,14 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Check tomorrow's rain forecast before committing to pouring the concrete pad",
-   "better": "weather cloud with rain",
-   "trap": "shared_vocabulary"
+   "task": "Confirm all desktop documents are synced to OneDrive before wiping the laptop",
+   "better": "cloud with checkmark (cloud sync verified)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Compare annual pricing for iCloud+, Backblaze, and Proton Drive",
-   "better": "plain cloud or price tag icon",
-   "trap": "generic_verb"
+   "task": "Check tomorrow's rain forecast before committing to pouring the concrete pad",
+   "better": "weather cloud with rain icon",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Read the downloaded PDF of the espresso machine service manual",
@@ -184,7 +180,7 @@
    "trap": "property"
   },
   {
-   "task": "Update credit card on file so storage doesn't lapse",
+   "task": "Update credit card on file so cloud storage doesn't lapse",
    "better": "credit card icon",
    "trap": "parent_topic"
   },
@@ -215,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cloud download / fetch from cloud storage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "save for offline access",
+     "strength": "primary"
+    },
+    {
+     "meaning": "restore backup from cloud",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "export data archive from online service",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the arrow points down into the center of the cloud rather than out below the bottom edge, a few viewers might briefly read it as importing into the cloud, though the downward arrow universally cues download.",
+   "near_misses": [
+    {
+     "task": "Upload finished tax return PDFs to the accountant's SharePoint",
+     "better": "cloud with upward arrow (cloud upload)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check tomorrow's rain forecast before committing to pouring the concrete pad",
+     "better": "weather cloud with rain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Compare annual pricing for iCloud+, Backblaze, and Proton Drive",
+     "better": "plain cloud or price tag icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Read the downloaded PDF of the espresso machine service manual",
+     "better": "document / book / espresso machine icon",
+     "trap": "property"
+    },
+    {
+     "task": "Update credit card on file so storage doesn't lapse",
+     "better": "credit card icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy cloud-soft memory foam pillows for the guest bedroom",
+     "better": "bed or pillow icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cloud_done",
+   "cloud_upload"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5450,
+    "output": 1573,
+    "thoughts": 0,
+    "total": 7023
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "The top contour of the cloud turns downward into a vertical arrow pointing down, specifically meaning downloading, fetching, or restoring files from the cloud to a local device."
 }

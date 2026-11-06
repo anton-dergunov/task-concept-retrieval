@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "distress, anxiety, or emotional overwhelm",
+   "meaning": "distress, anguish, or emotional overwhelm",
    "strength": "primary"
   },
   {
-   "meaning": "exhaustion, burnout, or fatigue",
+   "meaning": "wailing, crying, or tantrum",
    "strength": "primary"
   },
   {
-   "meaning": "pain, suffering, or complaint",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "weary or crying emoji reaction",
+   "meaning": "burnout, pain, or suffering",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with other negative emotion faces (sad, crying, fearful, or sick) at small sizes, and the open mouth can briefly resemble a mustache or nose.",
+ "ambiguity": "Very easily confused with the open-oval-mouth tired face at small sizes, and overlaps heavily with the single-line frowning face for general negative emotions.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -153,40 +149,40 @@
  ],
  "near_misses": [
   {
+   "task": "Track afternoon fatigue and yawning after lunch",
+   "better": "tired face with an open oval yawning mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Submit negative dissatisfaction rating for customer support",
+   "better": "sad face with a single-line deep frown",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Do the dreaded quarterly tax filing",
-   "better": "tax form or calculator",
-   "trap": "property"
-  },
-  {
-   "task": "Watch a scary horror movie on Friday night",
-   "better": "film clapperboard or TV",
-   "trap": "property"
-  },
-  {
-   "task": "Fix the annoying squeaky bathroom door hinge",
-   "better": "door or oil can",
+   "better": "tax form or calculator icon",
    "trap": "property"
   },
   {
    "task": "Run stress test on the production database server",
-   "better": "server rack",
+   "better": "server rack icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the $120 therapy copay invoice",
-   "better": "credit card or invoice",
+   "better": "credit card or invoice icon",
    "trap": "parent_topic"
   },
   {
-   "task": "Apply night cream to tired eyes before sleeping",
-   "better": "cosmetic jar or eye",
+   "task": "Fix the annoying squeaky bathroom door hinge",
+   "better": "door or oil can icon",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a weary or distressed emoticon face, making it suitable for tasks centered on mental health, anxiety tracking, burnout, or emotional complaints. However, because to-do items are usually about concrete objects or actions rather than feelings, its overall task fit is narrow and it risks being misused for tasks that merely contain emotional adjectives like 'dreaded' or 'annoying'.",
@@ -204,6 +200,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "distress, anxiety, or emotional overwhelm",
+     "strength": "primary"
+    },
+    {
+     "meaning": "exhaustion, burnout, or fatigue",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pain, suffering, or complaint",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "weary or crying emoji reaction",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with other negative emotion faces (sad, crying, fearful, or sick) at small sizes, and the open mouth can briefly resemble a mustache or nose.",
+   "near_misses": [
+    {
+     "task": "Do the dreaded quarterly tax filing",
+     "better": "tax form or calculator",
+     "trap": "property"
+    },
+    {
+     "task": "Watch a scary horror movie on Friday night",
+     "better": "film clapperboard or TV",
+     "trap": "property"
+    },
+    {
+     "task": "Fix the annoying squeaky bathroom door hinge",
+     "better": "door or oil can",
+     "trap": "property"
+    },
+    {
+     "task": "Run stress test on the production database server",
+     "better": "server rack",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $120 therapy copay invoice",
+     "better": "credit card or invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Apply night cream to tired eyes before sleeping",
+     "better": "cosmetic jar or eye",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_worried",
+   "sentiment_sad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5404,
+    "output": 1500,
+    "thoughts": 108,
+    "total": 7012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Features an open, downward-curved kidney-shaped wailing mouth rather than a smooth oval mouth or a closed single-line frown, conveying active crying, anguish, or acute distress."
 }

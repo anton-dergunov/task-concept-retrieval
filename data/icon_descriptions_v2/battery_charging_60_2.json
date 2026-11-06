@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "charging battery or recharging a device",
+   "meaning": "charging battery / recharge a device",
    "strength": "primary"
   },
   {
-   "meaning": "power bank, portable charger, or battery pack",
+   "meaning": "power bank / portable charger / battery pack",
    "strength": "primary"
+  },
+  {
+   "meaning": "EV or e-bike charging",
+   "strength": "secondary"
   },
   {
    "meaning": "battery replacement or battery health",
    "strength": "secondary"
-  },
-  {
-   "meaning": "electric power or energy management",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Because the lightning bolt cuts off the right cap of the battery, at very small sizes the open right side can look like a C-shaped magnet or a broken plug.",
+ "ambiguity": "Completely interchangeable with the 45%-filled and 75%-filled horizontal charging battery icons, as OS-style battery percentage steps do not distinguish different kinds of tasks.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt",
@@ -162,11 +162,6 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping trips",
-   "better": "headlamp or flashlight",
-   "trap": "property"
-  },
-  {
    "task": "Dispute the $45 double charge from the hotel on my Visa statement",
    "better": "credit card or receipt",
    "trap": "shared_vocabulary"
@@ -178,7 +173,7 @@
   },
   {
    "task": "Pay the monthly ConEd electricity bill before Friday",
-   "better": "bill / invoice or house with lightning bolt",
+   "better": "bill / invoice",
    "trap": "lookalike_glyph"
   },
   {
@@ -190,12 +185,17 @@
    "task": "Check the weather forecast for lightning storms before our ridge hike",
    "better": "storm cloud with lightning",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a battery-powered lawn mower for the backyard",
+   "better": "lawn mower",
+   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a half-full battery with a lightning bolt indicating charging. It is an ideal, glanceable symbol for tasks about charging devices, managing rechargeable batteries, or buying/packing power banks, though it shares visual elements with other battery-level and electrical-power icons.",
@@ -215,6 +215,92 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "charging battery or recharging a device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank, portable charger, or battery pack",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery replacement or battery health",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "electric power or energy management",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the lightning bolt cuts off the right cap of the battery, at very small sizes the open right side can look like a C-shaped magnet or a broken plug.",
+   "near_misses": [
+    {
+     "task": "Dispute the $45 double charge from the hotel on my Visa statement",
+     "better": "credit card or receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the electrician to install a 240V outlet in the garage",
+     "better": "electrical outlet or plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly ConEd electricity bill before Friday",
+     "better": "bill / invoice or house with lightning bolt",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 6-foot braided USB-C cable for the bedroom",
+     "better": "cable / cord",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the weather forecast for lightning storms before our ridge hike",
+     "better": "storm cloud with lightning",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_50_2",
+   "battery_charging_80_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5379,
+    "output": 1595,
+    "thoughts": 118,
+    "total": 7092
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Shows a medium interior fill bar (roughly 55–60% full) inside the horizontal battery, making it practically indistinguishable from and interchangeable with the slightly less-full (45%) and more-full (75%) charging battery icons."
 }

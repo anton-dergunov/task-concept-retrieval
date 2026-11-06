@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "cellular signal strength bars or mobile network reception",
+   "meaning": "cellular signal strength / 5-bar mobile reception",
    "strength": "primary"
   },
   {
-   "meaning": "bar chart, growth metrics, or rising statistics",
+   "meaning": "upward growth / rising metrics",
    "strength": "primary"
   },
   {
-   "meaning": "level indicator, volume, or intensity steps",
+   "meaning": "5-step level, volume, or intensity indicator",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly dual-purpose: reads equally as a 5-bar cellular reception indicator and as a simple ascending bar chart without axes.",
+ "ambiguity": "Interchangeable with the four-bar and three-bar strictly ascending icons for cellular reception or level indicators.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -150,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Prepare the statistical bar graph for the board deck",
+   "better": "four non-monotonic bars with a horizontal baseline axis",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Compare the top three poll winners side by side",
+   "better": "three non-monotonic bars (tallest in center)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a high-gain Wi-Fi router for the upstairs hallway",
    "better": "wifi symbol or router",
    "trap": "lookalike_glyph"
@@ -183,7 +193,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows five solid vertical bars ascending monotonically from left to right, the classic UI glyph for full 5-bar cellular signal strength as well as a minimal rising bar chart. While derived from status-bar chrome, it fits real tasks around cellular coverage/boosters and growth statistics or charts, though it competes closely with chart icons that have axes and with Wi-Fi/antenna icons.",
@@ -201,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cellular signal strength bars or mobile network reception",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bar chart, growth metrics, or rising statistics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "level indicator, volume, or intensity steps",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly dual-purpose: reads equally as a 5-bar cellular reception indicator and as a simple ascending bar chart without axes.",
+   "near_misses": [
+    {
+     "task": "Buy a high-gain Wi-Fi router for the upstairs hallway",
+     "better": "wifi symbol or router",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order protein bars for the hiking trip",
+     "better": "snack bar or food",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the annual state bar association dues",
+     "better": "scales of justice or gavel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download offline trail maps for spots with no cell bars",
+     "better": "map",
+     "trap": "property"
+    },
+    {
+     "task": "Track baby's height on the bedroom wall growth chart",
+     "better": "ruler or baby",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email Sarah the updated sales PDF",
+     "better": "email or PDF document",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bar_chart_4_bars",
+   "grouped_bar_chart",
+   "bar_chart",
+   "equalizer",
+   "signal_cellular_alt",
+   "android_cell_4_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10730,
+    "output": 3931,
+    "thoughts": 361,
+    "total": 15022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Shows five bars ascending steadily from left to right without a baseline—the densest stair-step signal/level indicator in the group, though functionally interchangeable with the three-bar and four-bar ascending icons."
 }

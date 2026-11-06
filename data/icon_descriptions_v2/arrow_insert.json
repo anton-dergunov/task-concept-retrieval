@@ -15,11 +15,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "insert task title into search bar / autocomplete",
+   "meaning": "insert query into search bar / autocomplete suggestion",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with external link arrows, cursor pointers, or generic directional chevrons in UI chrome.",
+ "ambiguity": "Completely interchangeable with the slightly longer-shafted up-left arrow in this group; also easily confused with external link arrows (up-right), mouse cursor pointers, or generic directional chevrons.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,7 +154,7 @@
   },
   {
    "task": "Open external links in a new browser tab",
-   "better": "box with up-right arrow",
+   "better": "box with up-right external link arrow",
    "trap": "lookalike_glyph"
   },
   {
@@ -171,7 +171,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 1,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": true,
  "reasoning": "This is a generic diagonal up-left arrow used as UI chrome (such as search-suggestion fill, scroll-to-top, or the ISO symbol for the Home key). Because it represents an abstract direction or interface control rather than a real-world task subject, it has almost no fit for to-do list items and should be discarded.",
@@ -189,6 +189,85 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "up-left / northwest direction",
+     "strength": "primary"
+    },
+    {
+     "meaning": "jump to top / Home key symbol",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "insert task title into search bar / autocomplete",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with external link arrows, cursor pointers, or generic directional chevrons in UI chrome.",
+   "near_misses": [
+    {
+     "task": "Fly to Seattle for the Pacific Northwest regional conference",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Return defective bluetooth mouse to the seller",
+     "better": "package return / box with arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Open external links in a new browser tab",
+     "better": "box with up-right arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upgrade home internet plan to fiber",
+     "better": "wifi router",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy new keycaps for the mechanical keyboard",
+     "better": "keyboard",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "north_west"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 3990,
+    "output": 910,
+    "thoughts": 104,
+    "total": 5004
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Visually has slightly longer arrowhead arms relative to its diagonal shaft compared to the other up-left arrow, but the two icons are completely interchangeable in meaning."
 }

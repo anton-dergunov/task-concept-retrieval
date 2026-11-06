@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "pause timer or time tracker",
+   "meaning": "pause timer, stopwatch, or time tracker",
    "strength": "primary"
   },
   {
-   "meaning": "timed break or rest interval",
+   "meaning": "timed break or rest interval (e.g., Pomodoro or workout rest)",
    "strength": "primary"
   },
   {
-   "meaning": "put recurring subscription or schedule on hold",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "Pomodoro or interval timer",
+   "meaning": "put timed session or billable hours on hold",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the two vertical bars inside the circle can look like an electrical outlet, a pig snout, or the Roman numeral II inside a badge.",
+ "ambiguity": "Easily confused with the paused alarm clock (with two symmetrical top bells) at a glance, and at tiny sizes the two vertical bars inside the circle resemble an electrical outlet or pig snout.",
  "modifier_semantics": [
   {
    "modifier": "two vertical parallel bars (pause symbol)",
@@ -162,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Snooze morning wake-up alarm for Saturday",
+   "better": "paused alarm clock with two top bells",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mute daily 9am standup reminder while on vacation",
+   "better": "paused alarm clock with two top bells",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a waterproof stopwatch for the high school swim meet",
    "better": "plain stopwatch with clock hands (not paused)",
    "trap": "lookalike_glyph"
@@ -172,30 +178,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Install a new 220V outlet behind the dryer",
-   "better": "electrical outlet / plug icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Quick 10-minute tidy of the entryway shoe rack",
    "better": "shoes or broom icon",
    "trap": "property"
   },
   {
-   "task": "Pay the watchmaker for cleaning the vintage chronograph",
-   "better": "wristwatch or payment icon",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Send the client the invoice for Q2 tracked hours",
-   "better": "invoice / receipt icon",
+   "better": "invoice or receipt icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly combines a stopwatch silhouette with a central pause symbol, representing pausing a timer, taking a timed rest interval, or putting a recurring schedule on hold. It fits specific time-tracking, interval-training, and subscription-hold tasks well, though at tiny sizes the two vertical bars inside a circle can briefly resemble a wall socket.",
@@ -213,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pause timer or time tracker",
+     "strength": "primary"
+    },
+    {
+     "meaning": "timed break or rest interval",
+     "strength": "primary"
+    },
+    {
+     "meaning": "put recurring subscription or schedule on hold",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Pomodoro or interval timer",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the two vertical bars inside the circle can look like an electrical outlet, a pig snout, or the Roman numeral II inside a badge.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof stopwatch for the high school swim meet",
+     "better": "plain stopwatch with clock hands (not paused)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pause the audiobook before going into the dentist's office",
+     "better": "headphones or audiobook icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install a new 220V outlet behind the dryer",
+     "better": "electrical outlet / plug icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Quick 10-minute tidy of the entryway shoe rack",
+     "better": "shoes or broom icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the watchmaker for cleaning the vintage chronograph",
+     "better": "wristwatch or payment icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the client the invoice for Q2 tracked hours",
+     "better": "invoice / receipt icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "alarm_pause"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4095,
+    "output": 822,
+    "thoughts": 0,
+    "total": 4917
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:18Z"
+  }
+ },
+ "distinguishing": "Shows a stopwatch casing with a flat horizontal top crown and a single angled side button around a pause symbol (pausing a timer, stopwatch, or time tracker), whereas the look-alike has two symmetrical angled alarm bells on top (snoozing an alarm)."
 }

@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "click-through rate or web interaction",
+   "meaning": "click-through rate (CTR) or web interaction",
    "strength": "secondary"
   },
   {
-   "meaning": "call-to-action button or UI hotspot",
+   "meaning": "call-to-action (CTA) button or UI hotspot",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a plain cursor icon, a tap/touch gesture icon, or a target/bullseye icon at small sizes.",
+ "ambiguity": "Visually and semantically interchangeable with the mouse pointer with a wider, thinner ring around its tip; can also be confused with a plain cursor or bullseye target at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "partial circle ring around cursor tip",
@@ -196,12 +196,17 @@
    "task": "Practice archery target shooting on Saturday morning",
    "better": "bullseye target",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a brass compass for the hike in Dartmoor",
+   "better": "compass",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a mouse pointer clicking (arrow tip surrounded by an impact ring). While it is technically a UI/action glyph, it fits concrete tasks around web click tracking (CTR, PPC, heatmaps), UI click handlers/interactions, and cursor/mouse click settings.",
@@ -221,6 +226,94 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "mouse click or interactive action",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cursor or pointer selection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "click-through rate or web interaction",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "call-to-action button or UI hotspot",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain cursor icon, a tap/touch gesture icon, or a target/bullseye icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy AA batteries for the wireless mouse",
+     "better": "battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book one-click return flight to Chicago",
+     "better": "airplane / flight",
+     "trap": "property"
+    },
+    {
+     "task": "Check website analytics dashboard before Friday's meeting",
+     "better": "chart / analytics",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Send the clickable prototype link to Sarah on Slack",
+     "better": "message / chat",
+     "trap": "property"
+    },
+    {
+     "task": "Update billing credit card on the account",
+     "better": "credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Practice archery target shooting on Saturday morning",
+     "better": "bullseye target",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "highlight_mouse_cursor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4057,
+    "output": 1083,
+    "thoughts": 80,
+    "total": 5220
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Shows a smaller, thicker circular ring tightly hugging a slightly larger cursor arrow compared to the wider ring version, though the two icons are completely interchangeable in meaning."
 }

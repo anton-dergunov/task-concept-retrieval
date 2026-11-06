@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "moon, lunar phases, or astronomy",
+   "meaning": "moon / crescent moon / astronomy",
    "strength": "primary"
   },
   {
-   "meaning": "sleep, bedtime, or sleep hygiene",
+   "meaning": "sleep / bedtime / sleep hygiene",
    "strength": "primary"
   },
   {
-   "meaning": "nighttime or evening routine",
+   "meaning": "nighttime / evening routine",
    "strength": "secondary"
   },
   {
-   "meaning": "dark mode or do-not-disturb setting",
+   "meaning": "dark mode / Do Not Disturb setting",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can occasionally look like a stylized banana or curved horn at very small sizes, though the sharp points clearly read as a crescent moon.",
+ "ambiguity": "Indistinguishable in meaning from the more tightly curved tilted crescent moon and interchangeable in practice with the vertical crescent moon.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -160,14 +160,9 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new firm queen mattress for guest room",
-   "better": "bed",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book 3 nights at the Kyoto ryokan in November",
-   "better": "hotel / bed / calendar",
-   "trap": "property"
+   "task": "Log the vertical waning crescent phase in astronomy journal",
+   "better": "vertical waning crescent moon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy ripe bananas for banana bread",
@@ -178,6 +173,16 @@
    "task": "Order fresh croissants from the French bakery for Sunday",
    "better": "croissant",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new firm queen mattress for guest room",
+   "better": "bed",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Book 3 nights at the Kyoto ryokan in November",
+   "better": "hotel / bed / calendar",
+   "trap": "property"
   },
   {
    "task": "Swap Friday night shift with Marcus at the clinic",
@@ -193,7 +198,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clean crescent moon universally signifies sleep, nighttime routines, astronomy/lunar events, and UI dark mode or do-not-disturb settings. It fits a wide range of common personal, parenting, outdoor, and software tasks, and is distinct from a physical bed icon.",
@@ -211,6 +216,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "bedtime"
- }
+  "alias_of": "bedtime",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "moon, lunar phases, or astronomy",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sleep, bedtime, or sleep hygiene",
+     "strength": "primary"
+    },
+    {
+     "meaning": "nighttime or evening routine",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "dark mode or do-not-disturb setting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can occasionally look like a stylized banana or curved horn at very small sizes, though the sharp points clearly read as a crescent moon.",
+   "near_misses": [
+    {
+     "task": "Buy a new firm queen mattress for guest room",
+     "better": "bed",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book 3 nights at the Kyoto ryokan in November",
+     "better": "hotel / bed / calendar",
+     "trap": "property"
+    },
+    {
+     "task": "Buy ripe bananas for banana bread",
+     "better": "banana",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order fresh croissants from the French bakery for Sunday",
+     "better": "croissant",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Swap Friday night shift with Marcus at the clinic",
+     "better": "calendar / swap arrows / hospital",
+     "trap": "property"
+    },
+    {
+     "task": "Buy mouth tape and nasal strips at pharmacy",
+     "better": "shopping bag / bandage",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nightlight_round",
+   "dark_mode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5346,
+    "output": 1669,
+    "thoughts": 170,
+    "total": 7185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "This crescent moon is tilted toward the upper right with a slightly flatter, wider inner arc than the more tightly curled tilted crescent and is angled rather than upright like the vertical crescent, but it is functionally interchangeable with both."
 }

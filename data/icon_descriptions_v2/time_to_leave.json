@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "car / automobile / vehicle",
+   "meaning": "car / personal automobile / vehicle",
    "strength": "primary"
   },
   {
@@ -15,7 +15,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "taxi / rideshare / rental car",
+   "meaning": "rental car",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the rectangular body with two dots inside can faintly resemble a cassette tape, an electrical outlet, or a small robot face, though the angled windshield and tires keep it recognizable as a car.",
+ "ambiguity": "Easily confused at small sizes with the taxi icon (car with a rectangular roof sign) when the small block on top of the roof goes unnoticed.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Book an early-morning taxi to the airport for Tuesday's flight",
+   "better": "taxi / car with roof sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Submit Uber and cab receipts from the Chicago client trip",
+   "better": "taxi / car with roof sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Listen to the latest Car Talk episode while folding laundry",
    "better": "podcast / headphones",
    "trap": "shared_vocabulary"
@@ -180,22 +190,12 @@
    "task": "Book sleeper car tickets on the night train to Vienna",
    "better": "train",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Digitize the old cassette tapes from the attic box",
-   "better": "cassette tape",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Renew passport at the post office",
-   "better": "passport",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the front view of a passenger car with a trapezoid windshield, two round headlights, and two tires. It is one of the highest-utility icons for personal task lists, covering car maintenance, inspections, auto insurance, rentals, and driving errands.",
@@ -213,6 +213,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "directions_car"
- }
+  "alias_of": "directions_car",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car / automobile / vehicle",
+     "strength": "primary"
+    },
+    {
+     "meaning": "driving / road trip / commute",
+     "strength": "primary"
+    },
+    {
+     "meaning": "taxi / rideshare / rental car",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "car maintenance / auto service",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the rectangular body with two dots inside can faintly resemble a cassette tape, an electrical outlet, or a small robot face, though the angled windshield and tires keep it recognizable as a car.",
+   "near_misses": [
+    {
+     "task": "Listen to the latest Car Talk episode while folding laundry",
+     "better": "podcast / headphones",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a wooden toy car for Leo's third birthday",
+     "better": "gift / toy",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check whether the hotel in Montreal has free parking included",
+     "better": "hotel / bed or parking sign",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up dry cleaning from the drive-thru window on 5th",
+     "better": "shirt / hanger / laundry",
+     "trap": "property"
+    },
+    {
+     "task": "Book sleeper car tickets on the night train to Vienna",
+     "better": "train",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Digitize the old cassette tapes from the attic box",
+     "better": "cassette tape",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew passport at the post office",
+     "better": "passport",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "local_taxi"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4116,
+    "output": 1123,
+    "thoughts": 0,
+    "total": 5239
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:46Z"
+  }
+ },
+ "distinguishing": "Unlike the car with a rectangular roof sign, this car has a bare, flat roof, representing a standard personal passenger vehicle or general driving rather than a taxi."
 }

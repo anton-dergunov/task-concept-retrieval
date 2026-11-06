@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "sleep timer or bedtime schedule",
+   "meaning": "sleep timer or scheduled bedtime",
    "strength": "primary"
   },
   {
-   "meaning": "sleep tracking, sleep score, or sleep quality",
+   "meaning": "sleep tracking, sleep score, or sleep quality metric",
    "strength": "primary"
   },
   {
-   "meaning": "night mode or dark mode schedule",
+   "meaning": "scheduled night mode or dark mode",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the gauge needle inside the crescent can look like a plain clock face, a speedometer, or a moon with a shooting star.",
+ "ambiguity": "At a quick glance the dial needle inside the moon can be mistaken for the crescent moon with stars, or for a plain clock or speedometer.",
  "modifier_semantics": [
   {
    "modifier": "curved gauge arc with pointer needle",
@@ -160,19 +160,29 @@
  ],
  "near_misses": [
   {
+   "task": "Pack telescope for Friday night stargazing trip",
+   "better": "crescent moon with stars (night sky / stargazing)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Read a chapter before bedtime",
+   "better": "crescent moon with stars (general bedtime / night) or book",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check tire pressure before the road trip",
+   "better": "tire pressure gauge / speedometer",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book overnight train from Paris to Vienna",
    "better": "train",
    "trap": "property"
   },
   {
    "task": "Buy a new queen mattress topper for the guest bed",
-   "better": "bed",
+   "better": "bed / mattress",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check tire pressure before the road trip",
-   "better": "tire pressure gauge",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the late-night Uber receipt from Thursday",
@@ -183,11 +193,6 @@
    "task": "Order blackout curtains for the nursery",
    "better": "curtains / window",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Look up dates for the August Perseids meteor shower",
-   "better": "stars / telescope",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sleep timer or bedtime schedule",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sleep tracking, sleep score, or sleep quality",
+     "strength": "primary"
+    },
+    {
+     "meaning": "night mode or dark mode schedule",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "long-exposure night photography mode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the gauge needle inside the crescent can look like a plain clock face, a speedometer, or a moon with a shooting star.",
+   "near_misses": [
+    {
+     "task": "Book overnight train from Paris to Vienna",
+     "better": "train",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new queen mattress topper for the guest bed",
+     "better": "bed",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check tire pressure before the road trip",
+     "better": "tire pressure gauge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the late-night Uber receipt from Thursday",
+     "better": "receipt or car",
+     "trap": "property"
+    },
+    {
+     "task": "Order blackout curtains for the nursery",
+     "better": "curtains / window",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Look up dates for the August Perseids meteor shower",
+     "better": "stars / telescope",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "moon_stars"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4019,
+    "output": 1094,
+    "thoughts": 138,
+    "total": 5251
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "Replaces the stars in the hollow of the crescent moon with a curved dial arc and pointer needle, indicating a sleep timer, sleep quality score, or scheduled night mode."
 }

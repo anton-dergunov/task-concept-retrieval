@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with 'open folder', 'import into folder', or 'export from folder' because the arrow is fully enclosed rather than crossing the boundary.",
+ "ambiguity": "Can be confused with the file folder containing an upward arrow (differing only in arrow direction) or with the rectangular login/import/export frames if the top-left folder tab is overlooked.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow",
@@ -161,40 +161,40 @@
  ],
  "near_misses": [
   {
+   "task": "Upload the wedding photos folder to Google Drive",
+   "better": "file folder with an upward-pointing arrow inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Import bank statement CSV into accounting software",
+   "better": "box or window frame with a right-pointing arrow entering from the left",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Move the living room couch to the other wall",
    "better": "sofa / furniture icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Transfer $500 from checking to high-yield savings",
-   "better": "bank / money transfer icon",
+   "better": "bank or money transfer icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Forward the flight confirmation email to Sarah",
-   "better": "email with forward arrow icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check the shared folder for the updated sprint schedule",
-   "better": "calendar / schedule icon",
+   "better": "calendar or schedule icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Print the boarding passes from the travel folder",
-   "better": "printer or boarding pass icon",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Buy manila folders and sticky labels at Staples",
-   "better": "plain folder or shopping bag icon",
+   "better": "plain folder without arrow or shopping bag icon",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a file folder with a right-pointing arrow inside, universally understood in computing as moving, transferring, or navigating to a folder. It fits digital file management, backup migration, and document organization tasks well, though it can occasionally be confused with generic file export or email-to-folder actions.",
@@ -212,6 +212,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "move files or folders to another directory",
+     "strength": "primary"
+    },
+    {
+     "meaning": "transfer or migrate digital folders and documents",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export or forward a project folder",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "organize files into folders",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with 'open folder', 'import into folder', or 'export from folder' because the arrow is fully enclosed rather than crossing the boundary.",
+   "near_misses": [
+    {
+     "task": "Move the living room couch to the other wall",
+     "better": "sofa / furniture icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Transfer $500 from checking to high-yield savings",
+     "better": "bank / money transfer icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Forward the flight confirmation email to Sarah",
+     "better": "email with forward arrow icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the shared folder for the updated sprint schedule",
+     "better": "calendar / schedule icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Print the boarding passes from the travel folder",
+     "better": "printer or boarding pass icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy manila folders and sticky labels at Staples",
+     "better": "plain folder or shopping bag icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "business_messages",
+   "output",
+   "exit_to_app",
+   "tab_move",
+   "input",
+   "drive_folder_upload",
+   "present_to_all"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12136,
+    "output": 4252,
+    "thoughts": 0,
+    "total": 16388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "A closed file folder outline (with a raised tab on the top-left) containing a fully enclosed right-pointing arrow, specifically indicating moving or transferring files/folders rather than generic login/import or folder upload."
 }

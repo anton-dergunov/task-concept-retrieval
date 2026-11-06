@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "wallet or billfold",
+   "meaning": "wallet, billfold, or purse",
    "strength": "primary"
   },
   {
-   "meaning": "spending money, personal cash, or budget",
+   "meaning": "personal cash, spending money, or budget",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mildly confused with a notebook with a clasp or a small safe at very tiny sizes, though the right-side button strap is the universal glyph for a wallet.",
+ "ambiguity": "At tiny sizes, the inner square of the snap strap and single dot could be mistaken for a small safe or the window-and-knob layout of a countertop appliance.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -154,8 +154,13 @@
  ],
  "near_misses": [
   {
-   "task": "Call Chase to dispute the duplicate $84 restaurant charge on my Visa",
-   "better": "credit card",
+   "task": "Scrub the splattered turntable inside the breakroom microwave",
+   "better": "microwave oven with window and three knobs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Export and save a local copy of the tax spreadsheet",
+   "better": "floppy disk / save icon",
    "trap": "lookalike_glyph"
   },
   {
@@ -167,11 +172,6 @@
    "task": "Print wallet-size school portraits for Grandma's Christmas card",
    "better": "photo / picture frame",
    "trap": "property"
-  },
-  {
-   "task": "Pack passport and yellow fever certificate in carry-on",
-   "better": "passport",
-   "trap": "parent_topic"
   },
   {
    "task": "Drop off torn suede handbag at the cobbler on 5th Ave",
@@ -187,7 +187,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic bifold wallet with a snap clasp on the right. It fits tasks centered on physical wallets, digital/crypto wallets, and general personal spending or pocket money, while remaining distinct from specific payment instruments like credit cards, coins, or bank buildings.",
@@ -205,6 +205,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "wallet or billfold",
+     "strength": "primary"
+    },
+    {
+     "meaning": "spending money, personal cash, or budget",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital wallet or crypto wallet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "payment or account balance",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mildly confused with a notebook with a clasp or a small safe at very tiny sizes, though the right-side button strap is the universal glyph for a wallet.",
+   "near_misses": [
+    {
+     "task": "Call Chase to dispute the duplicate $84 restaurant charge on my Visa",
+     "better": "credit card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up a wallet-friendly bottle of Rioja for Friday's potluck",
+     "better": "wine bottle",
+     "trap": "property"
+    },
+    {
+     "task": "Print wallet-size school portraits for Grandma's Christmas card",
+     "better": "photo / picture frame",
+     "trap": "property"
+    },
+    {
+     "task": "Pack passport and yellow fever certificate in carry-on",
+     "better": "passport",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Drop off torn suede handbag at the cobbler on 5th Ave",
+     "better": "handbag / purse",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check whether the new dentist is in-network before booking",
+     "better": "tooth / dentist",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "microwave_gen",
+   "save"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5429,
+    "output": 1575,
+    "thoughts": 136,
+    "total": 7140
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "Square body whose right edge is overlapped by a smaller rectangular tab containing a single snap button dot, unmistakably depicting a closed folding wallet rather than an appliance with a window or a notched floppy disk."
 }

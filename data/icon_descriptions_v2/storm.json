@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "hurricane, cyclone, or typhoon",
+   "meaning": "hurricane, tropical cyclone, or typhoon (standard weather symbol)",
    "strength": "primary"
   },
   {
-   "meaning": "severe storm or extreme weather preparedness",
+   "meaning": "severe storm warning or hurricane preparedness",
    "strength": "primary"
   },
   {
-   "meaning": "vortex, whirlpool, or spiral galaxy",
+   "meaning": "two-arm barred spiral galaxy or black hole",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as a spiral galaxy, black hole, or abstract target/camera shutter at very small sizes.",
+ "ambiguity": "Very close to the four-armed swirl/cyclone icon at list scale, and both are often used interchangeably for hurricane or storm tasks, though this two-armed version is the true weather-map hurricane glyph.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -151,6 +151,21 @@
  ],
  "near_misses": [
   {
+   "task": "Unclog the slow whirlpool drain in the master bathtub",
+   "better": "four-armed whirlpool vortex or bathtub drain",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean the centrifugal impeller inside the pond pump",
+   "better": "four-armed rotary impeller or water pump",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean the front element on the 50mm camera lens",
+   "better": "camera lens",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a set of 6 hurricane glasses for making piña coladas",
    "better": "cocktail glass",
    "trap": "shared_vocabulary"
@@ -166,25 +181,15 @@
    "trap": "property"
   },
   {
-   "task": "Brainstorm feature ideas with the team",
-   "better": "lightbulb or people",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Pick up three 24-packs of bottled water at Costco",
    "better": "water bottle",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Clean the front element on the 50mm camera lens",
-   "better": "camera lens",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon is the standard meteorological symbol for a hurricane, typhoon, or tropical cyclone. It is a specific and recognizable fit for storm preparedness, severe weather tracking, and windstorm insurance tasks, though slightly niche outside coastal regions and potentially mistakable for a galaxy or vortex.",
@@ -202,6 +207,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hurricane, cyclone, or typhoon",
+     "strength": "primary"
+    },
+    {
+     "meaning": "severe storm or extreme weather preparedness",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vortex, whirlpool, or spiral galaxy",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as a spiral galaxy, black hole, or abstract target/camera shutter at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a set of 6 hurricane glasses for making piña coladas",
+     "better": "cocktail glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement HEPA filter for the Dyson Cyclone V10 vacuum",
+     "better": "vacuum cleaner",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace rusted post anchors with Simpson hurricane ties on the pergola",
+     "better": "hardware bracket or pergola",
+     "trap": "property"
+    },
+    {
+     "task": "Brainstorm feature ideas with the team",
+     "better": "lightbulb or people",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up three 24-packs of bottled water at Costco",
+     "better": "water bottle",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Clean the front element on the 50mm camera lens",
+     "better": "camera lens",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cyclone"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4077,
+    "output": 1147,
+    "thoughts": 0,
+    "total": 5224
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "Has exactly two opposing curved spiral arms extending from the outer ring—the standard meteorological symbol for a hurricane or tropical cyclone—unlike the four-armed vortex/cyclone symbol."
 }

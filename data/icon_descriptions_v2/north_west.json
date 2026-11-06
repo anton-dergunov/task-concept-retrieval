@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "insert query / autocomplete suggestion",
+   "meaning": "jump to top / Home key symbol",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "insert query into search bar / autocomplete suggestion",
    "strength": "secondary"
   },
   {
    "meaning": "return / go up one level",
    "strength": "secondary"
-  },
-  {
-   "meaning": "Home key on a keyboard",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Generic directional UI chrome; easily confused with external link arrows (usually up-right), cursor pointers, or collapse icons.",
+ "ambiguity": "Completely interchangeable with the slightly shorter-shafted up-left arrow in this group; also easily confused with external link arrows (up-right), mouse cursor pointers, or upload/collapse arrows.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -168,14 +168,14 @@
   },
   {
    "task": "Custom mouse cursor sprite sheet for the retro game",
-   "better": "mouse pointer arrow",
+   "better": "mouse pointer cursor arrow",
    "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 1,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": true,
  "reasoning": "The icon is a bare 45-degree up-left arrow, which is pure directional UI chrome (used for filling search suggestions, representing the Home key, or indicating northwest) rather than a concrete task subject. In a to-do list it carries no clear semantic subject and is easily confused with other directional or external-link arrows.",
@@ -193,6 +193,89 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "up-left / northwest direction",
+     "strength": "primary"
+    },
+    {
+     "meaning": "insert query / autocomplete suggestion",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "return / go up one level",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Home key on a keyboard",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Generic directional UI chrome; easily confused with external link arrows (usually up-right), cursor pointers, or collapse icons.",
+   "near_misses": [
+    {
+     "task": "Audit all external links on the pricing page for broken URLs",
+     "better": "external link box with up-right arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Ship the returned router back to the ISP warehouse",
+     "better": "package or return U-turn arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upload the signed lease PDF to the tenant portal",
+     "better": "upload tray with upward arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fly to Seattle for the Pacific Northwest dental conference",
+     "better": "airplane or tooth",
+     "trap": "property"
+    },
+    {
+     "task": "Custom mouse cursor sprite sheet for the retro game",
+     "better": "mouse pointer arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arrow_insert"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 3990,
+    "output": 910,
+    "thoughts": 104,
+    "total": 5004
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Visually has a slightly longer diagonal shaft and shorter arrowhead arms than the other up-left arrow, but the two icons are completely interchangeable in meaning."
 }

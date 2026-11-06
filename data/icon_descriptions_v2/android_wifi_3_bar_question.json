@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the question mark might blend with the lower signal arc or look like a lock or exclamation point.",
+ "ambiguity": "Virtually identical in meaning to the three-bar Wi-Fi icon with a question mark, differing only in stroke count; at small sizes the question mark can also look like a lock or exclamation point.",
  "modifier_semantics": [
   {
    "modifier": "question mark",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Verify full three-bar Wi-Fi signal strength in the upstairs guest room",
+   "better": "three-bar Wi-Fi symbol with question mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change the WPA3 security password on the main router",
+   "better": "Wi-Fi symbol with lock",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the monthly Xfinity internet bill before Friday",
    "better": "bill / invoice / credit card",
    "trap": "shared_vocabulary"
@@ -170,11 +180,6 @@
    "trap": "property"
   },
   {
-   "task": "Listen to the new episode of the tech podcast",
-   "better": "podcast / headphones",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check if the new smart scale is online",
    "better": "weighing scale",
    "trap": "generic_verb"
@@ -183,17 +188,12 @@
    "task": "Order a 15-foot Cat6 ethernet patch cable for the desk",
    "better": "ethernet cable / plug",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Tap to pay with contactless card at the toll booth",
-   "better": "contactless payment / credit card",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a standard Wi-Fi symbol paired with a question mark badge. It is well-suited for tasks involving troubleshooting wireless connectivity, finding out Wi-Fi passwords, or investigating network issues, though it could be confused at tiny sizes with locked Wi-Fi or alert Wi-Fi icons.",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "troubleshoot Wi-Fi or unknown internet issue",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unknown wireless network or unverified connection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "find Wi-Fi password or network details",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "questionable internet service or plan comparison",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the question mark might blend with the lower signal arc or look like a lock or exclamation point.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly Xfinity internet bill before Friday",
+     "better": "bill / invoice / credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a small waterproof wireless speaker for the shower",
+     "better": "speaker",
+     "trap": "property"
+    },
+    {
+     "task": "Listen to the new episode of the tech podcast",
+     "better": "podcast / headphones",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the new smart scale is online",
+     "better": "weighing scale",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a 15-foot Cat6 ethernet patch cable for the desk",
+     "better": "ethernet cable / plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Tap to pay with contactless card at the toll booth",
+     "better": "contactless payment / credit card",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_4_bar_question"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1074,
+    "thoughts": 276,
+    "total": 5441
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Draws the Wi-Fi fan with two thicker curved bars above the base dot instead of three, though in meaning it is interchangeable with the three-bar version."
 }

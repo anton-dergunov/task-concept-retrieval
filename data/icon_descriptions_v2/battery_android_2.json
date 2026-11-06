@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "battery / batteries",
+   "meaning": "battery / batteries / rechargeable cells",
    "strength": "primary"
   },
   {
-   "meaning": "low battery / charge needed",
+   "meaning": "low-to-medium battery charge / needs charging",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "personal energy level / fatigue",
+   "meaning": "low personal energy / fatigue",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable from other battery fill-level icons (25%, 50%, 75%) in the same icon set.",
+ "ambiguity": "Virtually indistinguishable at small sizes from the one-sixth-filled and half-filled battery icons; all three read as a partially charged battery.",
  "modifier_semantics": [
   {
    "modifier": "one-third interior fill",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Dispose of the completely drained button-cell batteries safely",
+   "better": "empty battery outline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Store the spare camera batteries at a 50% half-charge",
+   "better": "half-filled battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a battery-powered hedge trimmer for the front bushes",
    "better": "hedge trimmer or garden shears",
    "trap": "property"
@@ -181,11 +191,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Practice drum battery rudiments for 20 minutes",
-   "better": "drum or drumsticks",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Pack the braided USB-C cable in my backpack",
    "better": "cable / cord",
    "trap": "parent_topic"
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognized horizontal battery icon with a roughly one-third charge fill. It fits tasks about buying, charging, testing, replacing, or recycling batteries and power banks, though it is visually very similar to other battery-level status icons in a standard UI set.",
@@ -212,6 +217,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low battery / charge needed",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / portable charger",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy level / fatigue",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable from other battery fill-level icons (25%, 50%, 75%) in the same icon set.",
+   "near_misses": [
+    {
+     "task": "Buy a battery-powered hedge trimmer for the front bushes",
+     "better": "hedge trimmer or garden shears",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric power bill before Tuesday",
+     "better": "invoice or lightning bolt / utility bill",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check why the kitchen GFCI outlet has no power",
+     "better": "electrical outlet / plug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the unauthorized $45 charge on the Visa card",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice drum battery rudiments for 20 minutes",
+     "better": "drum or drumsticks",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the braided USB-C cable in my backpack",
+     "better": "cable / cord",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_0",
+   "battery_android_1",
+   "battery_android_3"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6701,
+    "output": 1411,
+    "thoughts": 165,
+    "total": 8277
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:41Z"
+  }
+ },
+ "distinguishing": "Filled across roughly the left third of the interior—slightly wider than the critically low battery and narrower than the half-filled battery, making it functionally interchangeable with both as a partial-charge battery icon."
 }

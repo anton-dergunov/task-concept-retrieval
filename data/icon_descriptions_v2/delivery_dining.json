@@ -11,15 +11,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "food delivery or local courier errand",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "urban commuting or short-trip rental vehicle",
+   "meaning": "scooter riding, rental, or urban commuting",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the blocky geometric lines could be briefly misread as a mobility scooter, lawnmower, or baby stroller.",
+ "ambiguity": "Easily confused at a glance with the motor scooter with a rear cargo box, especially at small list sizes where the flat seat bar and hollow box look similar.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -152,40 +148,40 @@
  ],
  "near_misses": [
   {
+   "task": "Pick up the takeout delivery from the courier at the front gate",
+   "better": "motor scooter with a rear cargo box",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mount the new insulated food delivery box onto the moped rack",
+   "better": "motor scooter with a rear cargo box",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Fix the loose handlebar stem on Leo's kick scooter",
    "better": "kick scooter",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Rent a folding mobility scooter for Grandma during the museum visit",
-   "better": "mobility scooter / wheelchair",
+   "better": "mobility scooter or wheelchair",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order pad thai and green curry for dinner via Uber Eats",
-   "better": "noodles / takeout food",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Pack waterproof overtrousers for riding the moped in rainy weather",
-   "better": "trousers / rain gear",
+   "better": "trousers or rain gear",
    "trap": "property"
   },
   {
-   "task": "Buy a new leather key fob for the garage remote",
-   "better": "key / remote",
+   "task": "Buy a new leather key fob for the scooter ignition",
+   "better": "key or key fob",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Fold up the baby stroller and put it in the trunk",
-   "better": "baby stroller",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic step-through motor scooter or moped in side profile. It is ideal for tasks involving Vespa/moped maintenance, rentals on vacation, registration, or courier vehicles, and is distinct from bicycles, motorcycles, and kick scooters.",
@@ -203,6 +199,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "motor scooter, moped, or Vespa",
+     "strength": "primary"
+    },
+    {
+     "meaning": "food delivery or local courier errand",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "urban commuting or short-trip rental vehicle",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the blocky geometric lines could be briefly misread as a mobility scooter, lawnmower, or baby stroller.",
+   "near_misses": [
+    {
+     "task": "Fix the loose handlebar stem on Leo's kick scooter",
+     "better": "kick scooter",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Rent a folding mobility scooter for Grandma during the museum visit",
+     "better": "mobility scooter / wheelchair",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order pad thai and green curry for dinner via Uber Eats",
+     "better": "noodles / takeout food",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pack waterproof overtrousers for riding the moped in rainy weather",
+     "better": "trousers / rain gear",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new leather key fob for the garage remote",
+     "better": "key / remote",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fold up the baby stroller and put it in the trunk",
+     "better": "baby stroller",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "moped_package"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4079,
+    "output": 625,
+    "thoughts": 0,
+    "total": 4704
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "Has a flat horizontal seat bar over the rear wheel instead of a tall rectangular cargo box, representing a personal passenger scooter or moped rather than a delivery courier vehicle."
 }

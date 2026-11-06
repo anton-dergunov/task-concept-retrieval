@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "accessibility settings or assistive options",
+   "meaning": "accessibility settings, menu, or assistive options",
    "strength": "primary"
   },
   {
-   "meaning": "accessibility or universal design",
-   "strength": "primary"
-  },
-  {
-   "meaning": "body metrics or personal options",
+   "meaning": "digital accessibility configuration or shortcut menu",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without familiarity with the universal accessibility figure, it can look like a person exercising, stretching, or juggling/dropping balls on one side.",
+ "ambiguity": "Semantically interchangeable with the accessibility figure with three horizontal dots underneath; can also be confused with the plain accessibility figure without dots if the small dots are overlooked.",
  "modifier_semantics": [
   {
    "modifier": "three vertical dots on the bottom right",
@@ -157,13 +153,13 @@
  ],
  "near_misses": [
   {
-   "task": "Do 10 minutes of morning shoulder and chest stretches",
-   "better": "person stretching / exercise icon",
+   "task": "Take full-body chest, waist, and inseam measurements for the tailor",
+   "better": "standing human figure with straight horizontal arms",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Practice three-ball cascade juggling for 15 minutes",
-   "better": "juggling / balls icon",
+   "task": "Review general universal design guidelines for the museum exhibit",
+   "better": "plain curved-arm accessibility figure without dots",
    "trap": "lookalike_glyph"
   },
   {
@@ -177,7 +173,7 @@
    "trap": "property"
   },
   {
-   "task": "Email Sarah the PDF report",
+   "task": "Email Sarah the accessibility audit PDF report",
    "better": "email or PDF document icon",
    "trap": "parent_topic"
   },
@@ -190,7 +186,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The outstretched-arms human figure is the standard modern glyph for accessibility (a11y), paired with a three-dot vertical ellipsis indicating options or settings. It fits tasks around configuring assistive features on devices, web accessibility audits, and disability accommodations, though people unfamiliar with the UI convention might mistake it for stretching or exercise.",
@@ -210,6 +206,92 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "accessibility settings or assistive options",
+     "strength": "primary"
+    },
+    {
+     "meaning": "accessibility or universal design",
+     "strength": "primary"
+    },
+    {
+     "meaning": "body metrics or personal options",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without familiarity with the universal accessibility figure, it can look like a person exercising, stretching, or juggling/dropping balls on one side.",
+   "near_misses": [
+    {
+     "task": "Do 10 minutes of morning shoulder and chest stretches",
+     "better": "person stretching / exercise icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Practice three-ball cascade juggling for 15 minutes",
+     "better": "juggling / balls icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Make sure the shared tax folder is accessible to the accountant",
+     "better": "folder with key or share permission icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a lightweight wheelchair-accessible folding ramp for the van",
+     "better": "wheelchair or ramp icon",
+     "trap": "property"
+    },
+    {
+     "task": "Email Sarah the PDF report",
+     "better": "email or PDF document icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check all user profile menu options before release",
+     "better": "user profile icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "accessibility",
+   "accessibility_new",
+   "settings_accessibility"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6727,
+    "output": 1942,
+    "thoughts": 193,
+    "total": 8862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Pairs the curved-arm accessibility figure with three vertical dots on the right, signifying an accessibility options menu or assistive settings, and is semantically interchangeable with the version that places the three dots horizontally underneath."
 }

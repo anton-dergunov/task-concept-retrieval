@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "radio antenna / broadcast tower / signal transmitter",
+   "meaning": "radio antenna / broadcast tower / transmitter",
    "strength": "primary"
   },
   {
-   "meaning": "podcast / live stream / broadcast",
+   "meaning": "podcast / audio broadcast",
    "strength": "primary"
   },
   {
-   "meaning": "wireless hotspot / Wi-Fi access point",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cellular network / mobile data signal",
+   "meaning": "cellular tower / mobile network",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Often used interchangeably with podcast icons (especially Apple's podcast symbol), standard Wi-Fi fan icons, or live-streaming indicators.",
+ "ambiguity": "Easily confused with the stemless dot-and-waves icon when used generally for live streaming, wireless hotspots, or radio signals.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,6 +151,21 @@
  ],
  "near_misses": [
   {
+   "task": "Turn on phone mobile hotspot for the laptop",
+   "better": "stemless signal dot with side waves",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Go live on YouTube for the Q&A session",
+   "better": "stemless signal dot with side waves",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Drop a pin on the trailhead parking lot",
+   "better": "map pin",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy waterproof Bluetooth speaker for the shower",
    "better": "speaker",
    "trap": "property"
@@ -170,25 +181,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Drop a pin on the trailhead parking lot",
-   "better": "map pin",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Write show notes and links for guest interview",
    "better": "document / notes",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Order a new USB-C wireless mouse",
-   "better": "computer mouse",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a vertical antenna mast radiating concentric waves on both sides, universally understood as radio transmission, wireless hotspot/signal, or podcasting. It fits concrete tasks around home networking, antennas, ham radio, and podcasts, though it overlaps slightly with standard Wi-Fi arcs and microphone-based podcast icons.",
@@ -206,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "radio antenna / broadcast tower / signal transmitter",
+     "strength": "primary"
+    },
+    {
+     "meaning": "podcast / live stream / broadcast",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wireless hotspot / Wi-Fi access point",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cellular network / mobile data signal",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Often used interchangeably with podcast icons (especially Apple's podcast symbol), standard Wi-Fi fan icons, or live-streaming indicators.",
+   "near_misses": [
+    {
+     "task": "Buy waterproof Bluetooth speaker for the shower",
+     "better": "speaker",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the baby monitor is charged",
+     "better": "baby monitor / battery",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the car radio volume knob",
+     "better": "car / speaker",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drop a pin on the trailhead parking lot",
+     "better": "map pin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write show notes and links for guest interview",
+     "better": "document / notes",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a new USB-C wireless mouse",
+     "better": "computer mouse",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sensors"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4028,
+    "output": 682,
+    "thoughts": 58,
+    "total": 4768
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:08Z"
+  }
+ },
+ "distinguishing": "Includes a vertical stem below the central circle, depicting a physical antenna mast or podcast microphone rather than an abstract floating signal dot."
 }

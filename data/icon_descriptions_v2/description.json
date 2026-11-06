@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "text document or written file",
+   "meaning": "text document, written file, or formal page",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "note, draft, or article",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "page with equals sign",
+   "meaning": "letter, contract draft, or printable sheet",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The two thick, even horizontal bars inside the document can look like an equals sign or a pause symbol rather than generic lines of text.",
+ "ambiguity": "Very close in meaning to the square dog-eared pages with three lines, and the two equal bars inside can momentarily read as an equals sign.",
  "modifier_semantics": [
   {
    "modifier": "two horizontal lines inside the page",
@@ -164,24 +160,24 @@
  ],
  "near_misses": [
   {
-   "task": "Order a hardcover copy of the new Murakami novel",
-   "better": "book",
+   "task": "Organize the tax receipts inside the labeled manila folder",
+   "better": "file folder with a top tab and text lines",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Balance the monthly household budget spreadsheet",
-   "better": "spreadsheet or table grid",
+   "task": "Duplicate the meeting notes template for next week's sprint",
+   "better": "stacked double square note cards",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write a holiday postcard to Grandma from Lisbon",
+   "better": "horizontally split two-pane postcard with lines on the right",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Book a paperless flight ticket to Chicago",
    "better": "airplane or ticket",
    "trap": "property"
-  },
-  {
-   "task": "File the garage door warranty card in the metal cabinet",
-   "better": "filing cabinet or folder",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Call the county clerk about the missing birth certificate",
@@ -215,6 +211,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "text document or written file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "report, form, or official paperwork",
+     "strength": "primary"
+    },
+    {
+     "meaning": "note, draft, or article",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "page with equals sign",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The two thick, even horizontal bars inside the document can look like an equals sign or a pause symbol rather than generic lines of text.",
+   "near_misses": [
+    {
+     "task": "Order a hardcover copy of the new Murakami novel",
+     "better": "book",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Balance the monthly household budget spreadsheet",
+     "better": "spreadsheet or table grid",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a paperless flight ticket to Chicago",
+     "better": "airplane or ticket",
+     "trap": "property"
+    },
+    {
+     "task": "File the garage door warranty card in the metal cabinet",
+     "better": "filing cabinet or folder",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the county clerk about the missing birth certificate",
+     "better": "phone",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the $45 notary fee via bank transfer",
+     "better": "money or bank transfer",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "feed",
+   "text_snippet",
+   "chrome_reader_mode",
+   "article",
+   "library_books",
+   "source",
+   "text_ad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12132,
+    "output": 4025,
+    "thoughts": 352,
+    "total": 16509
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Unlike the square or landscape cards in this group, this is a tall portrait page with a filled dog-ear fold at the top right and only two equal horizontal text lines in the lower half."
 }

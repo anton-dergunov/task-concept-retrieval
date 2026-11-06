@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "important notification, urgent alert, or alarm",
+   "meaning": "urgent alert, critical alarm, or emergency warning",
    "strength": "primary"
   },
   {
-   "meaning": "system warning or security alert",
+   "meaning": "system error alert or security breach notification",
    "strength": "primary"
   },
   {
-   "meaning": "reminder or scheduled alert",
+   "meaning": "high-priority notification",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a generic notification bell or an emergency siren/beacon at very small sizes.",
+ "ambiguity": "Can be confused with the plain outlined bell when the task is about general notifications or reminders rather than critical alerts, or with a flashing emergency siren.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -157,14 +157,19 @@
  ],
  "near_misses": [
   {
-   "task": "Pay the overdue electricity bill IMMEDIATELY",
-   "better": "bill / invoice or lightning bolt",
-   "trap": "property"
+   "task": "Turn off push notifications for social media apps",
+   "better": "plain outlined notification bell",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a brass bell for the kid's bicycle handlebar",
-   "better": "bicycle or plain physical bell",
-   "trap": "shared_vocabulary"
+   "better": "plain physical bell or bicycle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the overdue electricity bill IMMEDIATELY",
+   "better": "bill / invoice or lightning bolt",
+   "trap": "property"
   },
   {
    "task": "Remind Sarah to bring the folding chairs on Sunday",
@@ -173,18 +178,13 @@
   },
   {
    "task": "Fix the broken doorbell button by the front porch",
-   "better": "doorbell / door",
+   "better": "doorbell button or plain bell",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Install a flashing red beacon light on the snowplow",
    "better": "siren / beacon light",
    "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update the team on the Q3 roadmap changes",
-   "better": "presentation / roadmap",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -208,6 +208,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "important notification, urgent alert, or alarm",
+     "strength": "primary"
+    },
+    {
+     "meaning": "system warning or security alert",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reminder or scheduled alert",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a generic notification bell or an emergency siren/beacon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Pay the overdue electricity bill IMMEDIATELY",
+     "better": "bill / invoice or lightning bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a brass bell for the kid's bicycle handlebar",
+     "better": "bicycle or plain physical bell",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Remind Sarah to bring the folding chairs on Sunday",
+     "better": "person / message or chair",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the broken doorbell button by the front porch",
+     "better": "doorbell / door",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install a flashing red beacon light on the snowplow",
+     "better": "siren / beacon light",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the team on the Q3 roadmap changes",
+     "better": "presentation / roadmap",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "notifications"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4008,
+    "output": 967,
+    "thoughts": 0,
+    "total": 4975
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Unlike the plain outlined bell, this bell contains a bold exclamation mark inside its body, shifting the meaning from a general notification or physical bell to an urgent alert, critical alarm, or system warning."
 }

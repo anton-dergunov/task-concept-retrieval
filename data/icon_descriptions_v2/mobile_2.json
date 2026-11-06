@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "smartphone or mobile phone",
+   "meaning": "smartphone or mobile phone (classic home-button style/iPhone SE/iPad) ",
    "strength": "primary"
   },
   {
-   "meaning": "tablet, e-reader, or portable digital device",
+   "meaning": "portable digital device, tablet, or e-reader",
    "strength": "secondary"
   },
   {
-   "meaning": "smartwatch face or fitness tracker casing",
+   "meaning": "physical home button or Touch ID sensor",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The protruding side bump resembles the digital crown on an Apple Watch casing, and the proportions could also pass for a small tablet or e-reader.",
+ "ambiguity": "Interchangeable with the smartphone with a bottom home bar and the smartphone with a top punch-hole camera dot (which is the exact vertical flip of the inner dot); the side bump also resembles a smartwatch digital crown.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -51,11 +51,6 @@
    "task": "Tempered glass screen protector",
    "parent": "New Pixel setup",
    "domain": "shopping"
-  },
-  {
-   "task": "Fix cracked phone screen",
-   "parent": "",
-   "domain": "tech"
   },
   {
    "task": "Compare trade-in offers",
@@ -153,14 +148,19 @@
  ],
  "near_misses": [
   {
+   "task": "Capture a mobile screenshot of the bug on the checkout screen",
+   "better": "smartphone with internal corner brackets",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a wireless charging stand for the nightstand",
+   "better": "smartphone with a horizontal base bar below it",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Dr. Patel's office to reschedule the knee MRI",
    "better": "telephone handset",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the torn leather band on my Apple Watch",
-   "better": "wristwatch / smartwatch with straps",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Phone the landlord about the leaking radiator valve",
@@ -176,17 +176,12 @@
    "task": "Buy a portable camping lantern that also charges phones",
    "better": "camping lantern",
    "trap": "property"
-  },
-  {
-   "task": "Download library holds to my Kindle Paperwhite before the flight",
-   "better": "e-reader or book",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a smartphone or mobile device from the front with a home button and side power button. It is an ideal fit for a common family of everyday tasks around phone hardware, repairs, setup, accessories, and carrier plans. The prominent side button gives the frame a slight resemblance to a smartwatch casing, and it is distinct from a telephone handset icon used for making voice calls.",
@@ -204,6 +199,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "phone_android"
- }
+  "alias_of": "phone_android",
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone or mobile phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "tablet, e-reader, or portable digital device",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smartwatch face or fitness tracker casing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The protruding side bump resembles the digital crown on an Apple Watch casing, and the proportions could also pass for a small tablet or e-reader.",
+   "near_misses": [
+    {
+     "task": "Call Dr. Patel's office to reschedule the knee MRI",
+     "better": "telephone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the torn leather band on my Apple Watch",
+     "better": "wristwatch / smartwatch with straps",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Phone the landlord about the leaking radiator valve",
+     "better": "telephone handset or radiator",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Print the return shipping label for the mobile trade-in box",
+     "better": "printer or package box",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a portable camping lantern that also charges phones",
+     "better": "camping lantern",
+     "trap": "property"
+    },
+    {
+     "task": "Download library holds to my Kindle Paperwhite before the flight",
+     "better": "e-reader or book",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screenshot",
+   "phone_iphone",
+   "smartphone",
+   "dock",
+   "settings_cell"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9431,
+    "output": 2014,
+    "thoughts": 0,
+    "total": 11445
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Shows a smartphone with a single circular home button at the bottom of the screen and no top dot, making it practically interchangeable as a generic mobile phone with the bottom-bar and top-camera variants."
 }

@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "multiple personal devices / device ecosystem (tablet, watch, phone)",
+   "meaning": "personal mobile and wearable devices / gadget ecosystem (tablet, watch, phone)",
    "strength": "primary"
   },
   {
-   "meaning": "cross-device sync or multi-device setup",
+   "meaning": "multi-device sync across portable electronics and wearables",
    "strength": "primary"
   },
   {
-   "meaning": "wearables and mobile gadgets",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "responsive design across screen sizes",
+   "meaning": "smartwatch, phone, and tablet accessories / charging station",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the watch in the center might look like a keyhole or a camera lens next to a door.",
+ "ambiguity": "Easy to confuse at a glance with the laptop-and-phone icon, which shares the same outer screen frame and right-hand phone rectangle; at small sizes, the watch in the center can also look like a camera lens or keyhole.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,13 +151,23 @@
  ],
  "near_misses": [
   {
+   "task": "Test website layout on both desktop and mobile viewports",
+   "better": "laptop and smartphone (computer and phone)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hook up the new monitor to the desktop PC tower",
+   "better": "monitor and PC tower (desktop computer)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Replace cracked iPhone screen at repair shop",
    "better": "single smartphone",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new leather watch strap",
-   "better": "wristwatch",
+   "better": "single wristwatch",
    "trap": "shared_vocabulary"
   },
   {
@@ -173,22 +179,12 @@
    "task": "Check screen time stats for the week",
    "better": "chart or hourglass/clock",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Order replacement battery for hallway smoke detector",
-   "better": "battery",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Fix front door smart lock keypad",
-   "better": "door lock",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a tablet frame, a smartwatch, and a smartphone grouped together, representing a personal device ecosystem or multi-device synchronization. It fits tasks involving managing, syncing, charging, or updating all of one's personal gadgets at once, rather than tasks focused on a single phone or watch.",
@@ -206,6 +202,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple personal devices / device ecosystem (tablet, watch, phone)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cross-device sync or multi-device setup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wearables and mobile gadgets",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "responsive design across screen sizes",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the watch in the center might look like a keyhole or a camera lens next to a door.",
+   "near_misses": [
+    {
+     "task": "Replace cracked iPhone screen at repair shop",
+     "better": "single smartphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new leather watch strap",
+     "better": "wristwatch",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download mobile-friendly PDF of train tickets",
+     "better": "train ticket",
+     "trap": "property"
+    },
+    {
+     "task": "Check screen time stats for the week",
+     "better": "chart or hourglass/clock",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order replacement battery for hallway smoke detector",
+     "better": "battery",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix front door smart lock keypad",
+     "better": "door lock",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "devices"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4065,
+    "output": 1087,
+    "thoughts": 0,
+    "total": 5152
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:27Z"
+  }
+ },
+ "distinguishing": "Includes a round smartwatch in the bottom center between a tablet frame (which lacks a laptop base) and a vertical smartphone, representing a trio of personal mobile and wearable gadgets."
 }

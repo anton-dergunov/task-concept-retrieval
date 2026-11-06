@@ -10,19 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "external link / open in new window",
+   "meaning": "external link / open in new window or tab",
    "strength": "primary"
   },
   {
-   "meaning": "export / share out",
+   "meaning": "export or share out",
    "strength": "secondary"
   },
   {
-   "meaning": "expand / pop out window",
+   "meaning": "pop out or expand window",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with maximize/fullscreen icons, iOS-style share icons, or compose/edit icons (square with a diagonal pencil) at very small sizes.",
+ "ambiguity": "At very small sizes, the diagonal shaft in the open top-right corner of the square can be mistaken for the square-with-pencil compose/edit icon.",
  "modifier_semantics": [
   {
    "modifier": "up-right diagonal arrow",
@@ -158,33 +158,33 @@
  ],
  "near_misses": [
   {
+   "task": "Draft the welcome note for new subscribers",
+   "better": "square with diagonal pencil (compose / write)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Edit the about page bio before the conference",
+   "better": "square with diagonal pencil (edit)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy cufflinks for the wedding in October",
-   "better": "cufflinks or shirt icon",
+   "better": "shirt / cufflinks",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Measure the backyard chain-link fence for replacement panels",
-   "better": "fence icon",
+   "better": "fence",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Edit the about page bio before the conference",
-   "better": "pencil / edit icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Open the patio awning if Saturday is sunny",
-   "better": "awning / sunshade icon",
+   "better": "awning / sunshade",
    "trap": "generic_verb"
   },
   {
-   "task": "Buy sausage links for Sunday breakfast",
-   "better": "sausage / food icon",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Write alt text for the hero banner",
-   "better": "image / picture icon",
+   "better": "image / picture",
    "trap": "parent_topic"
   }
  ],
@@ -209,6 +209,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "open_in_new"
- }
+  "alias_of": "open_in_new",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "external link / open in new window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export / share out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "expand / pop out window",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with maximize/fullscreen icons, iOS-style share icons, or compose/edit icons (square with a diagonal pencil) at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy cufflinks for the wedding in October",
+     "better": "cufflinks or shirt icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Measure the backyard chain-link fence for replacement panels",
+     "better": "fence icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Edit the about page bio before the conference",
+     "better": "pencil / edit icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Open the patio awning if Saturday is sunny",
+     "better": "awning / sunshade icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy sausage links for Sunday breakfast",
+     "better": "sausage / food icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write alt text for the hero banner",
+     "better": "image / picture icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "edit_square"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4032,
+    "output": 998,
+    "thoughts": 0,
+    "total": 5030
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:53Z"
+  }
+ },
+ "distinguishing": "Shows a diagonal arrow pointing up and right out of the top-right corner of a square (external link, open in new window, or export), whereas the look-alike has a pencil pointing down and left into the square (write or edit)."
 }

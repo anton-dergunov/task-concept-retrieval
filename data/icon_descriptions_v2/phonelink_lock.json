@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "phone security, screen lock, or passcode",
+   "meaning": "phone security, screen lock, or passcode protection",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "parental controls or screen time limit on a phone",
+   "meaning": "parental controls, app lock, or screen time restriction on a phone",
    "strength": "secondary"
   },
   {
-   "meaning": "carrier-locked phone or SIM lock",
+   "meaning": "carrier-locked phone or remote device lockdown",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a tablet, an e-reader, or a smart door lock keypad at small sizes.",
+ "ambiguity": "Can be confused at a glance with the phone with an open padlock when rendered small, or with a standalone padlock or shopping bag on a screen.",
  "modifier_semantics": [
   {
    "modifier": "closed padlock centered on the screen",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Request carrier SIM unlock code for my old iPhone before traveling",
+   "better": "smartphone with an open padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unlock the bootloader on my Android test device",
+   "better": "smartphone with an open padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new phone case with a secure lock clasp",
    "better": "phone case",
    "trap": "property"
@@ -171,30 +181,20 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Install smart lock on the front door that opens with my phone",
-   "better": "door lock",
+   "task": "Lock in the cheaper mobile plan rate before the promo ends",
+   "better": "bill or contract",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Replace the broken padlock on the garden shed",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a new USB-C charging cable",
+   "task": "Order a new USB-C phone charging cable",
    "better": "charging cable",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Lock in the cheaper mobile plan rate before the promo ends",
-   "better": "bill / mobile plan",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a smartphone with a closed padlock on its screen and a side power button. It fits tasks centered on phone security, screen lock passcodes, mobile 2FA authenticators, parental screen locks, or carrier unlocking, though this is a fairly specific slice of tech/admin tasks.",
@@ -212,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "phone security, screen lock, or passcode",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile two-factor authentication or authenticator app",
+     "strength": "primary"
+    },
+    {
+     "meaning": "parental controls or screen time limit on a phone",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "carrier-locked phone or SIM lock",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a tablet, an e-reader, or a smart door lock keypad at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a new phone case with a secure lock clasp",
+     "better": "phone case",
+     "trap": "property"
+    },
+    {
+     "task": "Check phone before leaving the house",
+     "better": "smartphone",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Install smart lock on the front door that opens with my phone",
+     "better": "door lock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the broken padlock on the garden shed",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a new USB-C charging cable",
+     "better": "charging cable",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Lock in the cheaper mobile plan rate before the promo ends",
+     "better": "bill / mobile plan",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_unlock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4048,
+    "output": 1016,
+    "thoughts": 75,
+    "total": 5139
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:27Z"
+  }
+ },
+ "distinguishing": "Shows a closed, centered padlock shackle on the phone screen, representing locking, security, or restricted access rather than unlocking."
 }

@@ -10,23 +10,19 @@
  },
  "readings": [
   {
+   "meaning": "book, manual, or journal with a ribbon bookmark",
+   "strength": "primary"
+  },
+  {
    "meaning": "diploma, certificate, or official credential",
    "strength": "primary"
   },
   {
-   "meaning": "book or manual with a bookmark",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "computer monitor or display screen",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "loyalty card or membership pass",
+   "meaning": "saved item, bookmark, or reading list entry",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Often confused with a desktop computer monitor on a stand, a credit card with a magnetic stripe, or a closed book with a ribbon bookmark.",
+ "ambiguity": "At small sizes its rectangular body and bottom protrusion can be mistaken for the centered-pointer speech bubble, a computer monitor on a stand, or a magnetic-stripe card.",
  "modifier_semantics": [
   {
    "modifier": "ribbon tail extending below",
@@ -160,14 +156,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a $50 gift certificate for the bookstore",
-   "better": "gift card or present",
-   "trap": "shared_vocabulary"
+   "task": "Text the landlord that the rent check is in the mail",
+   "better": "speech bubble with text lines",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Renew SSL certificate on the production web server",
-   "better": "lock or server",
-   "trap": "shared_vocabulary"
+   "task": "Leave a comment on the pull request before noon",
+   "better": "speech bubble with pencil or text lines",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Calibrate the Dell ultrawide monitor colors",
@@ -175,25 +171,25 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Replace the frayed magnetic stripe credit card",
-   "better": "credit card",
-   "trap": "lookalike_glyph"
+   "task": "Buy a $50 gift certificate for the local bookstore",
+   "better": "gift card or present",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Renew SSL certificate on the production web server",
+   "better": "padlock or server",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Hire a certified electrician to rewire the garage",
-   "better": "electrician or plug",
+   "better": "electrical plug or wrench",
    "trap": "property"
-  },
-  {
-   "task": "Verify the contractor's insurance and bond",
-   "better": "shield or document",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a card or plaque with a horizontal stripe and a ribbon tail at the bottom, representing a certificate, diploma, or credential. It fits tasks around professional licensing, course completion certificates, and vital records, though its blocky shape is easily mistaken for a computer monitor or credit card.",
@@ -211,6 +207,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "diploma, certificate, or official credential",
+     "strength": "primary"
+    },
+    {
+     "meaning": "book or manual with a bookmark",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "computer monitor or display screen",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "loyalty card or membership pass",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Often confused with a desktop computer monitor on a stand, a credit card with a magnetic stripe, or a closed book with a ribbon bookmark.",
+   "near_misses": [
+    {
+     "task": "Buy a $50 gift certificate for the bookstore",
+     "better": "gift card or present",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew SSL certificate on the production web server",
+     "better": "lock or server",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Calibrate the Dell ultrawide monitor colors",
+     "better": "computer monitor",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the frayed magnetic stripe credit card",
+     "better": "credit card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hire a certified electrician to rewire the garage",
+     "better": "electrician or plug",
+     "trap": "property"
+    },
+    {
+     "task": "Verify the contractor's insurance and bond",
+     "better": "shield or document",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "tooltip_2",
+   "chat",
+   "comment",
+   "rate_review",
+   "speaker_notes"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9326,
+    "output": 2907,
+    "thoughts": 0,
+    "total": 12233
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Unlike the five speech bubbles in this group, this is a closed book or card with a horizontal band and a swallowtail ribbon bookmark sticking out the bottom center."
 }

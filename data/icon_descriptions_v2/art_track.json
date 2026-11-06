@@ -9,19 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "photo slideshow, carousel, or gallery strip",
+   "meaning": "photo carousel, slideshow, or burst photo sequence (cards stacked on the right to swipe through natively left-to-right or right-to-left, or a pause-slideshow cue) ",
    "strength": "primary"
   },
   {
-   "meaning": "pause slideshow or media presentation",
+   "meaning": "photo gallery or image album",
    "strength": "primary"
   },
   {
-   "meaning": "photo album or burst photo sequence",
+   "meaning": "pause media presentation or slideshow",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "right-hand sidebar layout beside an image",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The two vertical bars on the right look like either stacked edge-on photos in a carousel/gallery or a pause symbol next to an image.",
+ "ambiguity": "Nearly interchangeable with the icon that has two vertical bars on the left of the picture frame (both read as a photo carousel/strip or sidebar layout), and easily confused at a small size with the icon that has two stacked squares on the right.",
  "modifier_semantics": [
   {
    "modifier": "two vertical parallel bars on the right",
@@ -156,23 +160,28 @@
  ],
  "near_misses": [
   {
+   "task": "Arrange the 3-piece canvas collage on the living room wall",
+   "better": "picture frame with two small stacked squares on the right (collage / thumbnail layout) ",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Move the navigation sidebar to the left of the main image viewer",
+   "better": "picture frame with vertical bars on the left",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pause the gym membership for August",
+   "better": "standalone pause button or dumbbell icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Get passport photo taken at the pharmacy",
    "better": "single portrait / ID card icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pause the gym membership for August",
-   "better": "pause button or dumbbell icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book mountain cabin in Colorado",
    "better": "mountain or cabin icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Hang the framed print in the hallway",
-   "better": "single picture frame with hanging wire",
    "trap": "shared_vocabulary"
   },
   {
@@ -182,14 +191,14 @@
   },
   {
    "task": "Make sure the slide deck has high-resolution photos",
-   "better": "presentation chart screen",
+   "better": "presentation screen or chart",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon combines a standard landscape picture glyph with two vertical bars on the right, representing either a photo slideshow/carousel or pausing an image slideshow. It fits tasks centered on curating photo slideshows, web image carousels, or burst photo sequences, though the right-hand bars can be read either as stacked slides or a pause symbol.",
@@ -207,6 +216,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photo slideshow, carousel, or gallery strip",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pause slideshow or media presentation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo album or burst photo sequence",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The two vertical bars on the right look like either stacked edge-on photos in a carousel/gallery or a pause symbol next to an image.",
+   "near_misses": [
+    {
+     "task": "Get passport photo taken at the pharmacy",
+     "better": "single portrait / ID card icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pause the gym membership for August",
+     "better": "pause button or dumbbell icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book mountain cabin in Colorado",
+     "better": "mountain or cabin icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hang the framed print in the hallway",
+     "better": "single picture frame with hanging wire",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the photographer's final invoice",
+     "better": "invoice / receipt or money icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Make sure the slide deck has high-resolution photos",
+     "better": "presentation chart screen",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "gallery_thumbnail",
+   "burst_mode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5380,
+    "output": 1161,
+    "thoughts": 0,
+    "total": 6541
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "Has two full-height vertical bars to the RIGHT of the mountain picture frame, distinguishing it from the version with two stacked thumbnail squares on the right and the mirror-image version with the two vertical bars on the left; in practice it is nearly interchangeable with the left-bar version for photo carousel/slideshow tasks."
 }

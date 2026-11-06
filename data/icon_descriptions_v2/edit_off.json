@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "editing disabled, read-only mode, or cannot edit",
+   "meaning": "editing disabled, read-only mode, or cannot edit (as a crossed-out pencil/pen) ",
+   "strength": "primary"
+  },
+  {
+   "meaning": "color picker / eyedropper disabled, or no eye drops / liquid dropper",
    "strength": "primary"
   },
   {
    "meaning": "stop writing, cancel draft, or lock document",
    "strength": "secondary"
-  },
-  {
-   "meaning": "eyedropper / color picker disabled",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Because the slash cuts right through the middle of the barrel where the collar sits, the shape closely resembles a crossed-out eyedropper/pipette or a broken sword at small sizes.",
+ "ambiguity": "Easily confused with the crossed-out chisel-tip highlighter marker because both are diagonal writing/drawing tools struck through by a top-left to bottom-right slash; also looks equally like a crossed-out pencil and a crossed-out eyedropper/pipette because the slash hides the middle collar.",
  "modifier_semantics": [
   {
    "modifier": "diagonal strike-through slash",
@@ -156,40 +156,45 @@
  ],
  "near_misses": [
   {
-   "task": "Buy mechanical pencils and erasers for the math exam",
-   "better": "pencil / stationery",
+   "task": "Clear all yellow text highlighting from the shared PDF draft",
+   "better": "crossed-out highlighter marker",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pick up eye drops and nasal spray at the pharmacy",
-   "better": "eyedropper / medicine bottle",
+   "task": "Scrub permanent marker stains off the conference room whiteboard",
+   "better": "crossed-out highlighter marker",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy mechanical pencils and erasers for the math exam",
+   "better": "pencil without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up moisturizing eye drops at the pharmacy",
+   "better": "eyedropper or medicine bottle without slash",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Edit the introduction paragraph of the keynote speech",
-   "better": "pencil / edit",
+   "better": "pencil without slash",
    "trap": "generic_verb"
   },
   {
    "task": "Download read-only backup of the family photo album",
-   "better": "photo album / cloud download",
+   "better": "photo album or cloud download",
    "trap": "property"
   },
   {
    "task": "Write a blog post about why we stopped editing our podcast episodes",
-   "better": "microphone / blog document",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new brass padlock for the backyard tool shed",
-   "better": "padlock",
+   "better": "microphone or blog document",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a pencil crossed out by a diagonal slash, representing 'edit off', 'read-only', or disabled editing. It fits tasks centered on locking documents, revoking write permissions, or freezing forms against changes, though at small sizes the bisected pencil can easily be mistaken for a crossed-out eyedropper or pipette.",
@@ -207,6 +212,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "editing disabled, read-only mode, or cannot edit",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stop writing, cancel draft, or lock document",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "eyedropper / color picker disabled",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the slash cuts right through the middle of the barrel where the collar sits, the shape closely resembles a crossed-out eyedropper/pipette or a broken sword at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy mechanical pencils and erasers for the math exam",
+     "better": "pencil / stationery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up eye drops and nasal spray at the pharmacy",
+     "better": "eyedropper / medicine bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Edit the introduction paragraph of the keynote speech",
+     "better": "pencil / edit",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Download read-only backup of the family photo album",
+     "better": "photo album / cloud download",
+     "trap": "property"
+    },
+    {
+     "task": "Write a blog post about why we stopped editing our podcast episodes",
+     "better": "microphone / blog document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new brass padlock for the backyard tool shed",
+     "better": "padlock",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ink_highlighter_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4121,
+    "output": 778,
+    "thoughts": 0,
+    "total": 4899
+   },
+   "soft_problems": [
+    "refers to a letter 1x"
+   ],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Wait—look closely at Icon A: the top right is a solid rounded bulb and the bottom left is a narrow tapered dropper tip, making it a crossed-out eyedropper/pipette (or a narrow pencil with a solid eraser cap), whereas the other icon is a wide, hollow-barreled chisel-tip highlighter marker with a slash."
 }

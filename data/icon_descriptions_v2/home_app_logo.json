@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "Google Home / smart home ecosystem",
+   "meaning": "Google Home / Nest smart home ecosystem",
    "strength": "primary"
   },
   {
-   "meaning": "home automation / smart speaker",
+   "meaning": "home automation / smart home hub or app",
    "strength": "primary"
   },
   {
-   "meaning": "house / home",
+   "meaning": "generic house / home",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Reads as a generic modern house icon to users unfamiliar with the Google Home brand logo.",
+ "ambiguity": "Reads as a generic house icon to viewers unfamiliar with the Google Home logo, and at very small sizes its nested inner pentagon can vaguely resemble the house with an inner droplet.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -148,6 +148,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pay the quarterly municipal water bill",
+   "better": "house with a water drop inside (home water supply / water bill)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Empty the basement dehumidifier bucket",
+   "better": "house with a water drop inside (indoor humidity / water)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Work from home on Thursday",
    "better": "laptop / house with briefcase",
    "trap": "shared_vocabulary"
@@ -163,19 +173,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Call plumber about the leaking radiator",
-   "better": "wrench / plumbing / radiator",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Refinance the house mortgage before rates go up",
    "better": "bank / mortgage document",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pitch the two-person tent in the backyard to test the poles",
-   "better": "tent",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -199,6 +199,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Google Home / smart home ecosystem",
+     "strength": "primary"
+    },
+    {
+     "meaning": "home automation / smart speaker",
+     "strength": "primary"
+    },
+    {
+     "meaning": "house / home",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Reads as a generic modern house icon to users unfamiliar with the Google Home brand logo.",
+   "near_misses": [
+    {
+     "task": "Work from home on Thursday",
+     "better": "laptop / house with briefcase",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a smart watch for running",
+     "better": "smartwatch",
+     "trap": "property"
+    },
+    {
+     "task": "Check Google Drive storage quota",
+     "better": "Google Drive / cloud storage",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call plumber about the leaking radiator",
+     "better": "wrench / plumbing / radiator",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Refinance the house mortgage before rates go up",
+     "better": "bank / mortgage document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pitch the two-person tent in the backyard to test the poles",
+     "better": "tent",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "humidity_indoor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4023,
+    "output": 1017,
+    "thoughts": 0,
+    "total": 5040
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:47Z"
+  }
+ },
+ "distinguishing": "Drawn as a rounded, folded continuous ribbon forming a nested house shape (the Google Home logo), whereas the look-alike is a sharp-cornered house outline enclosing a half-filled water droplet."
 }

@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "smartphone or mobile device screen (lock screen / notifications)",
+   "meaning": "smartphone screen with notifications, lock screen, or text message",
    "strength": "primary"
   },
   {
-   "meaning": "notebook, planner, or journal with a side tab and cover title",
+   "meaning": "notebook, planner, or journal with side tab and cover title lines",
    "strength": "primary"
   },
   {
-   "meaning": "phone case or e-reader in a folio cover",
+   "meaning": "e-reader or tablet in a folio case with clasp",
    "strength": "secondary"
   },
   {
-   "meaning": "smartwatch face or fitness tracker casing",
+   "meaning": "smartwatch face showing time and date lines",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly ambiguous between a smartphone showing a lock-screen banner (with a side power button) and a closed notebook or planner with an index tab and title lines on the cover.",
+ "ambiguity": "Easily confused at a glance with the single-bar version of the same frame (which reads as a minus sign for removing or silencing a device), and ambiguous between a mobile device with a side button and a tabbed notebook.",
  "modifier_semantics": [
   {
    "modifier": "right-side bump",
@@ -167,6 +167,16 @@
  ],
  "near_misses": [
   {
+   "task": "Remove old iPhone from my Apple ID account devices list",
+   "better": "smartphone frame with a single minus bar inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set phone to Do Not Disturb mode during the exam",
+   "better": "smartphone frame with a single minus bar inside or bell with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the dentist to reschedule Wednesday's cleaning",
    "better": "phone handset receiver or tooth",
    "trap": "shared_vocabulary"
@@ -183,18 +193,8 @@
   },
   {
    "task": "Pay the monthly Verizon wireless bill",
-   "better": "bill / receipt or dollar sign",
+   "better": "bill, receipt, or dollar sign",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Paint the bedroom door frame matte white",
-   "better": "door with knob or paint roller",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Replace the AA batteries in the wall thermostat",
-   "better": "batteries or thermometer",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -218,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "aod"
- }
+  "alias_of": "aod",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone or mobile device screen (lock screen / notifications)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "notebook, planner, or journal with a side tab and cover title",
+     "strength": "primary"
+    },
+    {
+     "meaning": "phone case or e-reader in a folio cover",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smartwatch face or fitness tracker casing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly ambiguous between a smartphone showing a lock-screen banner (with a side power button) and a closed notebook or planner with an index tab and title lines on the cover.",
+   "near_misses": [
+    {
+     "task": "Call the dentist to reschedule Wednesday's cleaning",
+     "better": "phone handset receiver or tooth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download the mobile banking app for the joint account",
+     "better": "bank building or credit card",
+     "trap": "property"
+    },
+    {
+     "task": "Check notes before the quarterly budget meeting",
+     "better": "budget chart or meeting people",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the monthly Verizon wireless bill",
+     "better": "bill / receipt or dollar sign",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Paint the bedroom door frame matte white",
+     "better": "door with knob or paint roller",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the AA batteries in the wall thermostat",
+     "better": "batteries or thermometer",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ad_units"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4094,
+    "output": 1155,
+    "thoughts": 0,
+    "total": 5249
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "Has two stacked horizontal bars of unequal length inside the frame—a wider bar above a shorter centered bar—suggesting text lines, a cover title, or screen notifications rather than a minus sign."
 }

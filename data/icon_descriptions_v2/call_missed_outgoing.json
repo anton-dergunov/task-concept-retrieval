@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "missed outgoing call or bounced message",
+   "meaning": "missed outgoing call or bounced-out message",
    "strength": "primary"
   },
   {
-   "meaning": "rebound, recovery, or bounce back",
+   "meaning": "rebound, recovery, or bounce forward",
    "strength": "primary"
-  },
-  {
-   "meaning": "checkmark with an arrow tip",
-   "strength": "secondary"
   },
   {
    "meaning": "reroute or redirect path",
    "strength": "secondary"
+  },
+  {
+   "meaning": "checkmark with an arrow tip",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Easily mistaken for a standard checkmark at small sizes, or confused with a generic trending-up chart arrow.",
+ "ambiguity": "Easily confused with the left-pointing bouncing arrow (missed incoming call) since they are horizontal mirror images, and strongly resembles a standard checkmark or upward trend chart arrow at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -163,9 +163,9 @@
  ],
  "near_misses": [
   {
-   "task": "Call mom about Thanksgiving dinner plans",
-   "better": "phone receiver",
-   "trap": "generic_verb"
+   "task": "Call back the missed call from the dentist's office",
+   "better": "bouncing arrow pointing up-left (missed incoming call)",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Mark the tax filing task as completed",
@@ -173,19 +173,19 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Review quarterly steady revenue growth chart for the board deck",
+   "better": "line chart with upward trend",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call mom about Thanksgiving dinner plans",
+   "better": "phone receiver",
+   "trap": "generic_verb"
+  },
+  {
    "task": "Rent a bouncy castle for Leo's sixth birthday party",
    "better": "bouncy castle or party balloon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy dryer sheets to reduce static cling",
-   "better": "laundry or dryer",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Review quarterly revenue growth chart for the board deck",
-   "better": "line chart with upward trend",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order a new basketball with good bounce for the driveway",
@@ -216,6 +216,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "missed outgoing call or bounced message",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rebound, recovery, or bounce back",
+     "strength": "primary"
+    },
+    {
+     "meaning": "checkmark with an arrow tip",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "reroute or redirect path",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily mistaken for a standard checkmark at small sizes, or confused with a generic trending-up chart arrow.",
+   "near_misses": [
+    {
+     "task": "Call mom about Thanksgiving dinner plans",
+     "better": "phone receiver",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Mark the tax filing task as completed",
+     "better": "checkmark",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Rent a bouncy castle for Leo's sixth birthday party",
+     "better": "bouncy castle or party balloon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy dryer sheets to reduce static cling",
+     "better": "laundry or dryer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review quarterly revenue growth chart for the board deck",
+     "better": "line chart with upward trend",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a new basketball with good bounce for the driveway",
+     "better": "basketball",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "call_missed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4022,
+    "output": 1020,
+    "thoughts": 147,
+    "total": 5189
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "The V-shaped arrow travels from top-left down and bounces up-right (arrowhead on the right), representing an outgoing missed call, a forward rebound, or a checkmark-like upward trend, unlike its left-pointing mirror twin."
 }

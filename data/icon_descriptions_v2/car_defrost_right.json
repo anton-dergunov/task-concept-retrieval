@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "car climate control, cabin air vent, or seat/windshield heater",
+   "meaning": "car heater, windshield defroster, or cabin climate control",
    "strength": "primary"
   },
   {
@@ -18,15 +18,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "airplane passenger overhead air vent or cabin comfort",
+   "meaning": "overhead radiant heater, patio warmer, or passenger air vent",
    "strength": "secondary"
   },
   {
-   "meaning": "sitting near a fireplace or space heater",
+   "meaning": "salon hood hair dryer or beauty heat treatment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Combines the automotive seated-passenger glyph with a windshield defroster symbol, so viewers may read it either as car HVAC/defrost or as sitting in a sauna/steam room.",
+ "ambiguity": "Visually and semantically interchangeable with the right-facing seated person beside an arched defroster/heater symbol; also ambiguous between automotive HVAC/defrost and a sauna or overhead heater.",
  "modifier_semantics": [
   {
    "modifier": "curved arch with two wavy lines",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Adjust the passenger-side cabin heater controls",
+   "better": "seated person facing right toward an arched heater or defroster symbol (interchangeable mirror glyph)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test the heated car seat warmers before winter",
+   "better": "car seat with wavy heat lines running through the cushion",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a heat-resistant silicone mat for the kitchen counter",
    "better": "kitchen mat or pad",
    "trap": "property"
@@ -175,17 +185,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Scrape ice off the driveway before work",
-   "better": "snow shovel or ice scraper",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Pay the $380 mechanic invoice for the AC compressor repair",
    "better": "invoice, receipt, or credit card",
    "trap": "parent_topic"
   },
   {
-   "task": "Check whether the gym is open on Memorial Day",
+   "task": "Check whether the spa is open on Memorial Day",
    "better": "calendar or clock",
    "trap": "generic_verb"
   }
@@ -193,7 +198,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "This dashboard-style glyph shows a seated figure beside a windshield-defroster arch with wavy heat lines, evoking automotive cabin heating/ventilation as well as sitting in a sauna or steam room. It fits a specific niche of car HVAC maintenance and sauna/heat-therapy tasks, though it can be confused with general car-seat or defroster icons.",
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car climate control, cabin air vent, or seat/windshield heater",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sauna, steam room, or infrared heat therapy session",
+     "strength": "primary"
+    },
+    {
+     "meaning": "airplane passenger overhead air vent or cabin comfort",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sitting near a fireplace or space heater",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Combines the automotive seated-passenger glyph with a windshield defroster symbol, so viewers may read it either as car HVAC/defrost or as sitting in a sauna/steam room.",
+   "near_misses": [
+    {
+     "task": "Buy a heat-resistant silicone mat for the kitchen counter",
+     "better": "kitchen mat or pad",
+     "trap": "property"
+    },
+    {
+     "task": "Reassemble office chair armrest bolts",
+     "better": "office chair",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install smart thermostat in the upstairs hallway",
+     "better": "wall thermostat dial",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Scrape ice off the driveway before work",
+     "better": "snow shovel or ice scraper",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $380 mechanic invoice for the AC compressor repair",
+     "better": "invoice, receipt, or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the gym is open on Memorial Day",
+     "better": "calendar or clock",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_defrost_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4108,
+    "output": 1189,
+    "thoughts": 136,
+    "total": 5433
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:37Z"
+  }
+ },
+ "distinguishing": "Shows the seated person facing left with the arched defroster or heater symbol in front of them on the left, making it a horizontal mirror of the right-facing version and completely interchangeable in meaning."
 }

@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a book or notebook that happens to have a corner tab, or a generic package box with tape at very small sizes if the bottom-left speech tail is missed.",
+ "ambiguity": "Can be mistaken at tiny sizes for the speech bubble with pause bars if the inner black shape isn't resolved, or for a taped cardboard box if the bottom-left speech tail is overlooked.",
  "modifier_semantics": [
   {
    "modifier": "solid bookmark ribbon hanging from top inner edge",
@@ -161,14 +161,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a leather bookmark for Dad's birthday",
-   "better": "standalone bookmark ribbon or gift",
-   "trap": "shared_vocabulary"
+   "task": "Snooze Slack notifications while on vacation next week",
+   "better": "speech bubble with pause bars",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Clean up my Chrome browser bookmarks toolbar",
-   "better": "browser window or standalone bookmark",
-   "trap": "shared_vocabulary"
+   "task": "Mute the neighborhood group chat for the weekend",
+   "better": "speech bubble with pause bars",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Text Sarah about Saturday's carpool",
@@ -176,19 +176,24 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Buy a leather bookmark for Dad's birthday",
+   "better": "standalone bookmark ribbon or gift icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Clean up my Chrome browser bookmarks toolbar",
+   "better": "browser window or standalone bookmark icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Check if the new sofa fits through the hallway door",
-   "better": "sofa or tape measure",
+   "better": "sofa or tape measure icon",
    "trap": "generic_verb"
   },
   {
    "task": "Order a waterproof cover for my e-reader",
-   "better": "e-reader or book",
+   "better": "e-reader or book icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Ship the taped cardboard box back to Amazon",
-   "better": "cardboard package box",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "saved message or bookmarked comment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pinned chat or starred thread",
+     "strength": "primary"
+    },
+    {
+     "meaning": "saved quote or reading note",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "important feedback or annotation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a book or notebook that happens to have a corner tab, or a generic package box with tape at very small sizes if the bottom-left speech tail is missed.",
+   "near_misses": [
+    {
+     "task": "Buy a leather bookmark for Dad's birthday",
+     "better": "standalone bookmark ribbon or gift",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean up my Chrome browser bookmarks toolbar",
+     "better": "browser window or standalone bookmark",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Text Sarah about Saturday's carpool",
+     "better": "plain speech bubble without bookmark",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the new sofa fits through the hallway door",
+     "better": "sofa or tape measure",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a waterproof cover for my e-reader",
+     "better": "e-reader or book",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Ship the taped cardboard box back to Amazon",
+     "better": "cardboard package box",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "auto_read_pause"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4084,
+    "output": 719,
+    "thoughts": 0,
+    "total": 4803
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:31Z"
+  }
+ },
+ "distinguishing": "Shows a solid swallowtail bookmark ribbon hanging down from the upper-right inner edge of the speech bubble, rather than two centered vertical pause bars; means a saved, pinned, or bookmarked message rather than pausing chat."
 }

@@ -161,10 +161,6 @@
  ],
  "context_tasks": [
   {
-   "task": "Bleed the upstairs radiators before turning on the heating",
-   "central": "radiator"
-  },
-  {
    "task": "Clean the dust filters inside the bedroom mini-split AC",
    "central": "air conditioner filter"
   },
@@ -232,6 +228,20 @@
    "example_tasks: 20 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  }
  }
 }

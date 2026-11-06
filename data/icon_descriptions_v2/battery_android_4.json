@@ -17,11 +17,15 @@
    "strength": "primary"
   },
   {
+   "meaning": "half battery / medium charge / 50% storage state",
+   "strength": "secondary"
+  },
+  {
    "meaning": "energy / stamina / personal recharge",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable at small sizes from other battery-level icons (25%, 75%, full, empty).",
+ "ambiguity": "Virtually indistinguishable at task-list size from the two-thirds filled battery and three-quarters filled battery icons, and interchangeable with them for almost any battery-related task.",
  "modifier_semantics": [
   {
    "modifier": "half-filled interior bar",
@@ -156,9 +160,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp / flashlight",
-   "trap": "property"
+   "task": "Top up the drone batteries to 80% before tomorrow's shoot",
+   "better": "three-quarters filled battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check that the backup generator battery is above two-thirds charge",
+   "better": "two-thirds filled battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly electric bill before Friday",
@@ -179,22 +188,12 @@
    "task": "Practice rudiments for the drumline battery audition",
    "better": "drum / drumsticks",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Toggle Dark Mode on in system settings",
-   "better": "toggle switch",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Replace the cracked windshield wiper blades",
-   "better": "car / wiper",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognizable half-full battery icon that cleanly cues tasks about household batteries, rechargeable packs, power banks, device battery replacements, and charging. Its only weakness is visual overlap if the icon set includes multiple battery fill levels.",
@@ -212,6 +211,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / portable power / rechargeable cells",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / charge level / power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "energy / stamina / personal recharge",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable at small sizes from other battery-level icons (25%, 75%, full, empty).",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric bill before Friday",
+     "better": "invoice / lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge the consulting hours to the Acme project code",
+     "better": "invoice / money / timesheet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a battery of blood tests at Quest Diagnostics",
+     "better": "syringe / blood drop / lab tube",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice rudiments for the drumline battery audition",
+     "better": "drum / drumsticks",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Toggle Dark Mode on in system settings",
+     "better": "toggle switch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the cracked windshield wiper blades",
+     "better": "car / wiper",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_5",
+   "battery_android_6"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5291,
+    "output": 1571,
+    "thoughts": 120,
+    "total": 6982
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:29Z"
+  }
+ },
+ "distinguishing": "Filled halfway (about 50%) from the left, leaving a wide square-like empty gap on the right; in a task list it is functionally interchangeable with the two-thirds and three-quarters filled battery icons for general battery or charging tasks."
 }

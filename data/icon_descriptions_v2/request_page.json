@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "invoice, bill, or financial document",
+   "meaning": "prepaid SIM card, mobile top-up, or phone plan billing",
    "strength": "primary"
   },
   {
-   "meaning": "prepaid SIM card or mobile plan billing",
+   "meaning": "invoice, bill, or financial document",
    "strength": "primary"
   },
   {
    "meaning": "paid digital file or pricing sheet",
    "strength": "secondary"
-  },
-  {
-   "meaning": "tax form, quote, or expense report",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "The outline has a chamfered top-right corner without an inner fold line, making it look equally like a SIM card and a simplified document page.",
+ "ambiguity": "Easily mistaken for the document page with a folded top-right corner and dollar sign when used for general invoices, bills, or tax forms; without chip contacts, only the missing inner fold triangle separates the SIM card silhouette from a paper document.",
  "modifier_semantics": [
   {
    "modifier": "dollar sign centered inside",
@@ -177,19 +173,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a cheap HDMI cable for the monitor",
-   "better": "cable",
-   "trap": "property"
-  },
-  {
-   "task": "Withdraw $200 cash from the corner ATM",
-   "better": "banknotes or ATM",
+   "task": "Send the Q3 consulting invoice PDF to the client",
+   "better": "document page with folded corner and dollar sign",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Ask Bill if he still needs the lawnmower this weekend",
-   "better": "person or chat bubble",
-   "trap": "shared_vocabulary"
+   "task": "Download the annual tax statement from the portal",
+   "better": "document page with folded corner and dollar sign",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Swap the physical nano-SIM into the backup handset",
@@ -197,20 +188,30 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Withdraw $200 cash from the corner ATM",
+   "better": "banknotes or ATM",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a cheap HDMI cable for the monitor",
+   "better": "cable",
+   "trap": "property"
+  },
+  {
+   "task": "Ask Bill if he still needs the lawnmower this weekend",
+   "better": "person or chat bubble",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Buy a new wallet with RFID blocking",
    "better": "wallet",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Export the user database to a CSV file",
-   "better": "spreadsheet or database file",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a page or SIM-shaped card with a clipped corner and a bold dollar sign inside. It strongly cues tasks involving invoices, utility bills, tax forms, quotes, or prepaid mobile top-ups, which are very frequent in personal and work task lists. Because the cut corner lacks an interior fold line, it straddles the visual boundary between a document file and a SIM card.",
@@ -230,6 +231,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "invoice, bill, or financial document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "prepaid SIM card or mobile plan billing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "paid digital file or pricing sheet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tax form, quote, or expense report",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The outline has a chamfered top-right corner without an inner fold line, making it look equally like a SIM card and a simplified document page.",
+   "near_misses": [
+    {
+     "task": "Buy a cheap HDMI cable for the monitor",
+     "better": "cable",
+     "trap": "property"
+    },
+    {
+     "task": "Withdraw $200 cash from the corner ATM",
+     "better": "banknotes or ATM",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Ask Bill if he still needs the lawnmower this weekend",
+     "better": "person or chat bubble",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Swap the physical nano-SIM into the backup handset",
+     "better": "SIM card with chip contacts",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new wallet with RFID blocking",
+     "better": "wallet",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Export the user database to a CSV file",
+     "better": "spreadsheet or database file",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "request_quote"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4061,
+    "output": 696,
+    "thoughts": 0,
+    "total": 4757
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "Has a flat chamfered top-right corner with no inner dog-ear flap, making it a SIM card with a dollar sign (mobile plan billing or prepaid SIM) rather than a folded document page, though easily used interchangeably with the folded-corner financial document."
 }

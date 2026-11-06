@@ -13,15 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "audio-assisted reading or text-to-speech accessibility",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "eyeglasses or reading glasses",
+   "meaning": "audio-assisted reading / text-to-speech accessibility",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the three vertical bars cutting into the right lens can look like a broken lens, a barcode, or a generic broken-glasses icon.",
+ "ambiguity": "Can be mistaken for plain unmodified eyeglasses at small sizes, or misread as broken/cracked glasses because the badge cuts out the bottom of the right rim.",
  "modifier_semantics": [
   {
    "modifier": "three vertical audio wave bars at bottom right",
@@ -156,13 +152,18 @@
  ],
  "near_misses": [
   {
-   "task": "Book annual eye exam with Dr. Patel",
-   "better": "plain eyeglasses or eye icon",
+   "task": "Book annual eye exam and prescription check with Dr. Patel",
+   "better": "plain unmodified eyeglasses",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Replace cracked right lens on my reading glasses",
-   "better": "plain eyeglasses icon",
+   "task": "Pick up new reading glasses from the optician",
+   "better": "plain unmodified eyeglasses",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace cracked right lens on my prescription frames",
+   "better": "plain unmodified eyeglasses",
    "trap": "lookalike_glyph"
   },
   {
@@ -177,11 +178,11 @@
   },
   {
    "task": "Order polarized sunglasses for driving",
-   "better": "sunglasses icon",
+   "better": "sunglasses with dark lenses",
    "trap": "parent_topic"
   },
   {
-   "task": "Check if the new smart glasses update fixed the battery drain",
+   "task": "Check if the firmware update fixed the battery drain",
    "better": "battery icon",
    "trap": "generic_verb"
   }
@@ -207,6 +208,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smart glasses with audio or voice assistant",
+     "strength": "primary"
+    },
+    {
+     "meaning": "audio-assisted reading or text-to-speech accessibility",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "eyeglasses or reading glasses",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the three vertical bars cutting into the right lens can look like a broken lens, a barcode, or a generic broken-glasses icon.",
+   "near_misses": [
+    {
+     "task": "Book annual eye exam with Dr. Patel",
+     "better": "plain eyeglasses or eye icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace cracked right lens on my reading glasses",
+     "better": "plain eyeglasses icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy over-ear noise cancelling headphones for flights",
+     "better": "headphones icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Record voiceover audio track for the training slides",
+     "better": "microphone or waveform icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order polarized sunglasses for driving",
+     "better": "sunglasses icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the new smart glasses update fixed the battery drain",
+     "better": "battery icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "eyeglasses_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4060,
+    "output": 772,
+    "thoughts": 0,
+    "total": 4832
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Has three vertical sound-wave bars cutting into the bottom-right rim, specifically denoting audio smart glasses or read-aloud accessibility rather than regular eyewear."
 }

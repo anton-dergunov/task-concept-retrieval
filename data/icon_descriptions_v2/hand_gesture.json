@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "wave hello or greet someone",
+   "meaning": "wave hello, greet, or welcome",
    "strength": "primary"
   },
   {
-   "meaning": "welcome or onboarding",
+   "meaning": "onboarding, introduction, or meet-and-greet",
    "strength": "primary"
   },
   {
-   "meaning": "say goodbye or farewell",
+   "meaning": "wave goodbye or farewell",
    "strength": "secondary"
   },
   {
-   "meaning": "hand gesture or motion",
+   "meaning": "motion sensor or gesture control",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the motion arcs may fade, making it look like a plain stop/palm hand or raise-hand icon.",
+ "ambiguity": "At very small sizes the outer motion arcs may be overlooked, making it look like the plain open raised hand.",
  "modifier_semantics": [
   {
    "modifier": "curved motion lines",
@@ -162,7 +162,17 @@
  "near_misses": [
   {
    "task": "Raise hand to ask about the Q3 budget during the town hall",
-   "better": "raised hand without motion lines",
+   "better": "plain open raised hand without motion lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Click through the interactive onboarding prototype to check link targets",
+   "better": "pointing index-finger hand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Apply prescription steroid cream to dry skin on hands",
+   "better": "plain open hand or palm with crease",
    "trap": "lookalike_glyph"
   },
   {
@@ -171,22 +181,17 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a new microwave for the breakroom",
+   "task": "Buy a new microwave for the office breakroom",
    "better": "microwave",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Stop the recurring gym membership charge before the first of the month",
-   "better": "plain open palm stop hand or octagonal stop sign",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy winter gloves for the ski trip",
-   "better": "gloves",
+   "task": "Buy insulated winter gloves for the ski trip",
+   "better": "plain hand or pair of gloves",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Set up laptop and accounts",
+   "task": "Set up laptop and accounts for the new hire welcome day",
    "better": "laptop",
    "trap": "parent_topic"
   }
@@ -212,6 +217,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "wave hello or greet someone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "welcome or onboarding",
+     "strength": "primary"
+    },
+    {
+     "meaning": "say goodbye or farewell",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "hand gesture or motion",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the motion arcs may fade, making it look like a plain stop/palm hand or raise-hand icon.",
+   "near_misses": [
+    {
+     "task": "Raise hand to ask about the Q3 budget during the town hall",
+     "better": "raised hand without motion lines",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wash hands with antiseptic soap before changing the dressing",
+     "better": "hands with soap or water",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new microwave for the breakroom",
+     "better": "microwave",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Stop the recurring gym membership charge before the first of the month",
+     "better": "plain open palm stop hand or octagonal stop sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy winter gloves for the ski trip",
+     "better": "gloves",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up laptop and accounts",
+     "better": "laptop",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "back_hand",
+   "pan_tool_alt",
+   "pan_tool",
+   "eda"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8102,
+    "output": 1643,
+    "thoughts": 0,
+    "total": 9745
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "The only hand with two curved motion arcs (at top right and bottom left) around an open five-fingered palm, specifically showing a waving gesture for greeting or farewell."
 }

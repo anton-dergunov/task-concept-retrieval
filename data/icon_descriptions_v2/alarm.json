@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "alarm clock / wake-up alarm",
+   "meaning": "alarm clock or wake-up alarm",
    "strength": "primary"
   },
   {
-   "meaning": "timer / stopwatch",
-   "strength": "secondary"
+   "meaning": "scheduled time alert or loud reminder",
+   "strength": "primary"
   },
   {
-   "meaning": "reminder / time alert",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "clock / time",
+   "meaning": "bedtime or morning wake-up routine",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a kitchen timer or stopwatch due to the top bars resembling push buttons rather than rounded bells.",
+ "ambiguity": "Can be confused with the stopwatch when the two top bells are misread as timer push buttons, or with the plain clock if the bells are ignored.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -155,33 +151,38 @@
  ],
  "near_misses": [
   {
+   "task": "Time 30-second plank intervals during core workout",
+   "better": "stopwatch with top crown and single hand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update store opening hours on our Google business profile",
+   "better": "plain two-handed clock face",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Replace the smoke and carbon monoxide alarm in the hallway",
-   "better": "smoke detector / siren",
+   "better": "smoke detector or siren",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pay ADT home security alarm bill",
-   "better": "shield / house lock / bill",
+   "task": "Pay the monthly home security alarm monitoring bill",
+   "better": "shield, house lock, or invoice",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a digital meat thermometer with an oven timer alarm",
+   "task": "Buy a digital meat thermometer with an oven alert",
    "better": "thermometer",
    "trap": "property"
   },
   {
-   "task": "Check train departure times to Brussels",
-   "better": "train",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Book the 7 am blood test at the clinic",
-   "better": "syringe / blood drop",
+   "better": "syringe or blood drop",
    "trap": "property"
   },
   {
-   "task": "Clean the dust off the nightstand",
-   "better": "spray bottle / duster",
+   "task": "Wipe dust off the bedroom nightstand",
+   "better": "spray bottle or duster",
    "trap": "parent_topic"
   }
  ],
@@ -206,6 +207,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "alarm clock / wake-up alarm",
+     "strength": "primary"
+    },
+    {
+     "meaning": "timer / stopwatch",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "reminder / time alert",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "clock / time",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a kitchen timer or stopwatch due to the top bars resembling push buttons rather than rounded bells.",
+   "near_misses": [
+    {
+     "task": "Replace the smoke and carbon monoxide alarm in the hallway",
+     "better": "smoke detector / siren",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay ADT home security alarm bill",
+     "better": "shield / house lock / bill",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a digital meat thermometer with an oven timer alarm",
+     "better": "thermometer",
+     "trap": "property"
+    },
+    {
+     "task": "Check train departure times to Brussels",
+     "better": "train",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book the 7 am blood test at the clinic",
+     "better": "syringe / blood drop",
+     "trap": "property"
+    },
+    {
+     "task": "Clean the dust off the nightstand",
+     "better": "spray bottle / duster",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "timer",
+   "watch_later"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5325,
+    "output": 1623,
+    "thoughts": 133,
+    "total": 7081
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "Unlike the single-handed stopwatch with a center crown button or the bare wall clock, this clock face has two symmetrical angled bell bars on top and two clock hands, representing an alarm clock."
 }

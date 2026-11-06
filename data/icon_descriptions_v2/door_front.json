@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "door or doorway",
+   "meaning": "door, doorway, or entrance",
    "strength": "primary"
   },
   {
@@ -15,15 +15,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "entryway, entrance, or exit",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "leaving or arriving home",
+   "meaning": "exit, leave, or arrive home",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Virtually identical to and interchangeable with the door with a threshold and left-hand knob, and functionally interchangeable with the threshold-less door.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -158,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Reverse the cabinet door hinges so the handle sits on the left",
+   "better": "door with the doorknob on the left side",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the flush cabinet door panel in the hallway closet",
+   "better": "frameless door panel without a bottom threshold",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order DoorDash for Friday team lunch",
    "better": "food delivery bag or takeout container",
    "trap": "shared_vocabulary"
@@ -170,16 +176,6 @@
   {
    "task": "Cut spare brass keys for the front door at the hardware store",
    "better": "key",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Log out of all shared company accounts before leaving for vacation",
-   "better": "user profile or logout arrow",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy outdoor string lights for the patio",
-   "better": "string lights or lightbulb",
    "trap": "shared_vocabulary"
   },
   {
@@ -191,7 +187,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a closed door in a frame with a round knob on the right. It is an unmistakable match for home maintenance, hardware, and renovation tasks involving doors, doorways, hinges, and entryways, though slightly less specific than an open-door exit icon for logging out or leaving.",
@@ -211,6 +207,95 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "door or doorway",
+     "strength": "primary"
+    },
+    {
+     "meaning": "room, office, or interior space",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "entryway, entrance, or exit",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "leaving or arriving home",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Order DoorDash for Friday team lunch",
+     "better": "food delivery bag or takeout container",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new 4-door sedan before the lease ends",
+     "better": "car",
+     "trap": "property"
+    },
+    {
+     "task": "Cut spare brass keys for the front door at the hardware store",
+     "better": "key",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Log out of all shared company accounts before leaving for vacation",
+     "better": "user profile or logout arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy outdoor string lights for the patio",
+     "better": "string lights or lightbulb",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up mail and packages from the front porch",
+     "better": "package or envelope",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sensor_door",
+   "door_back"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5325,
+    "output": 1463,
+    "thoughts": 0,
+    "total": 6788
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:31Z"
+  }
+ },
+ "distinguishing": "Has an extending horizontal floor threshold at the base and the doorknob on the right side, making it visually grounded as a doorway but functionally interchangeable in meaning with the other two closed-door icons."
 }

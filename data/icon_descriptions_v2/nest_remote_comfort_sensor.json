@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "Wi-Fi / wireless network / internet connection",
+   "meaning": "Wi-Fi, wireless network, or internet connection",
    "strength": "primary"
   },
   {
-   "meaning": "mobile hotspot / tethering / wireless signal",
+   "meaning": "mobile hotspot, tethering, or wireless access point",
    "strength": "primary"
   },
   {
-   "meaning": "RFID / NFC / contactless sensor",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "RSS feed / broadcast stream",
+   "meaning": "RFID, NFC, or contactless sensor",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Nearly identical to standard 3-bar or solid-dot Wi-Fi icons, making it completely interchangeable with other wireless signal glyphs at small sizes.",
+ "ambiguity": "Interchangeable with the solid-dot two-arc and three-arc plain Wi-Fi icons for any general wireless or internet task.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,34 +151,34 @@
  ],
  "near_misses": [
   {
+   "task": "Add a new Wi-Fi repeater to cover the backyard",
+   "better": "Wi-Fi with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call Xfinity about the recurring internet connection drops",
+   "better": "Wi-Fi with exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small wireless mouse for the travel laptop",
    "better": "computer mouse",
    "trap": "property"
   },
   {
    "task": "Charge the wireless earbuds before going to the gym",
-   "better": "earbuds / headphones",
+   "better": "earbuds or headphones",
    "trap": "property"
   },
   {
-   "task": "Listen to the new episode of the history podcast on the drive",
-   "better": "headphones / microphone / podcast",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a 15-foot Cat6 ethernet cable for the desktop PC",
-   "better": "ethernet cable / plug",
+   "better": "ethernet cable or plug",
    "trap": "parent_topic"
   },
   {
-   "task": "Tap credit card at the metro turnstile to test Apple Pay",
-   "better": "credit card",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Replace the battery in the hallway smoke detector",
-   "better": "smoke detector / alarm bell",
-   "trap": "lookalike_glyph"
+   "task": "Catch up with industry contacts at the networking dinner",
+   "better": "people or handshake",
+   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -206,6 +202,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi / wireless network / internet connection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile hotspot / tethering / wireless signal",
+     "strength": "primary"
+    },
+    {
+     "meaning": "RFID / NFC / contactless sensor",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "RSS feed / broadcast stream",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Nearly identical to standard 3-bar or solid-dot Wi-Fi icons, making it completely interchangeable with other wireless signal glyphs at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a small wireless mouse for the travel laptop",
+     "better": "computer mouse",
+     "trap": "property"
+    },
+    {
+     "task": "Charge the wireless earbuds before going to the gym",
+     "better": "earbuds / headphones",
+     "trap": "property"
+    },
+    {
+     "task": "Listen to the new episode of the history podcast on the drive",
+     "better": "headphones / microphone / podcast",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 15-foot Cat6 ethernet cable for the desktop PC",
+     "better": "ethernet cable / plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Tap credit card at the metro turnstile to test Apple Pay",
+     "better": "credit card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the battery in the hallway smoke detector",
+     "better": "smoke detector / alarm bell",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_4_bar_plus",
+   "android_wifi_3_bar_plus",
+   "android_wifi_3_bar_alert",
+   "android_wifi_4_bar_alert",
+   "android_wifi_4_bar",
+   "wifi",
+   "android_wifi_3_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12117,
+    "output": 4047,
+    "thoughts": 0,
+    "total": 16164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Has a larger hollow ring at the base instead of a solid dot under two radiating arcs, slightly evoking a hotspot or broadcast node while remaining interchangeable with the plain Wi-Fi icons."
 }

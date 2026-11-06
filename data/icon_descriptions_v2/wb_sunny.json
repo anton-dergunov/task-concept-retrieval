@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "sun / sunlight / sunny weather",
+   "meaning": "brightness, low brightness, or screen dimming",
    "strength": "primary"
   },
   {
-   "meaning": "brightness / light mode / screen display brightness",
+   "meaning": "sun, sunlight, or sunny weather",
    "strength": "primary"
   },
   {
-   "meaning": "daytime / morning routine / summer",
+   "meaning": "daytime, morning routine, or summer",
    "strength": "secondary"
   },
   {
-   "meaning": "solar power / UV exposure",
+   "meaning": "solar power or UV exposure",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the detached rays around a hollow circle can mildly resemble a gear or cog icon used for settings.",
+ "ambiguity": "Easily mistaken for the longer-ray hollow sun icons at list size, and its stubby teeth around a hollow ring make it look even more like a mechanical gear or settings cog than the others.",
  "modifier_semantics": [],
  "domains": [
   "outdoors",
@@ -159,40 +159,40 @@
  ],
  "near_misses": [
   {
+   "task": "Calibrate HDR display peak high brightness in the studio",
+   "better": "solid-center sun with long cardinal rays (high brightness)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Open system settings and disable startup items",
+   "better": "gear / cogwheel icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy sun-dried tomatoes and feta for the pasta salad",
-   "better": "tomato / food",
+   "better": "tomato or food icon",
    "trap": "property"
   },
   {
    "task": "Order a bright yellow raincoat for the kids",
-   "better": "coat / jacket",
+   "better": "coat / jacket icon",
    "trap": "property"
   },
   {
    "task": "Change the halogen bulb in the kitchen range hood",
-   "better": "lightbulb",
+   "better": "lightbulb icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book flight to Phoenix for Sun Devil stadium game",
-   "better": "airplane / football",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Open system settings and disable startup items",
-   "better": "gear / cog",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Renew the children's passports at the post office",
-   "better": "passport",
+   "task": "Renew the children's passports before the summer trip",
+   "better": "passport icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A universally recognizable sun and brightness icon consisting of a circle with eight radiating rays. It fits tasks centered on weather, sunlight exposure, garden sun mapping, solar power, and display brightness or light themes, though at tiny sizes it can slightly resemble a settings gear.",
@@ -210,6 +210,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sun / sunlight / sunny weather",
+     "strength": "primary"
+    },
+    {
+     "meaning": "brightness / light mode / screen display brightness",
+     "strength": "primary"
+    },
+    {
+     "meaning": "daytime / morning routine / summer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "solar power / UV exposure",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the detached rays around a hollow circle can mildly resemble a gear or cog icon used for settings.",
+   "near_misses": [
+    {
+     "task": "Buy sun-dried tomatoes and feta for the pasta salad",
+     "better": "tomato / food",
+     "trap": "property"
+    },
+    {
+     "task": "Order a bright yellow raincoat for the kids",
+     "better": "coat / jacket",
+     "trap": "property"
+    },
+    {
+     "task": "Change the halogen bulb in the kitchen range hood",
+     "better": "lightbulb",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flight to Phoenix for Sun Devil stadium game",
+     "better": "airplane / football",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Open system settings and disable startup items",
+     "better": "gear / cog",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew the children's passports at the post office",
+     "better": "passport",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "flare",
+   "sunny",
+   "light_mode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6663,
+    "output": 2133,
+    "thoughts": 242,
+    "total": 9038
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Features a wide hollow ring surrounded by noticeably shorter, stubbier rays than the other three icons, often used for low brightness or dimming in UI pairs, though in a task list it is largely interchangeable with the other sun icons."
 }

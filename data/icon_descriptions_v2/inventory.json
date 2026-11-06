@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "completed form, survey, or questionnaire",
+   "meaning": "completed form, survey, or approval sign-off",
    "strength": "primary"
   },
   {
-   "meaning": "inventory count or stock check",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "task or assignment (meta to-do symbol)",
+   "meaning": "inventory count or compliance check",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic 'to-do list' or 'paste from clipboard' icon, and in a task app it risks looking like generic app chrome rather than a specific subject.",
+ "ambiguity": "Shares the identical open-corner clipboard frame with the clipboard with an outward arrow; in a task app it also risks looking like generic to-do list chrome if not reserved for inspections, forms, and audits.",
  "modifier_semantics": [
   {
    "modifier": "checkmark",
@@ -161,9 +157,14 @@
  ],
  "near_misses": [
   {
-   "task": "Check if the pharmacy has my prescription ready",
-   "better": "medicine bottle or pill",
-   "trap": "generic_verb"
+   "task": "Export project tasks to CSV for the client",
+   "better": "clipboard with outward arrow at bottom right",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hand off shift report to the night nurse",
+   "better": "clipboard with outward arrow at bottom right",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Verify bank routing number for the wire transfer",
@@ -194,7 +195,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a clipboard with a checkmark, universally understood as a checklist, inspection, audit, or completed form. While it shares visual language with generic 'to-do' app icons and clipboard-paste actions, it fits real-world tasks centred on checklists, walkthroughs, surveys, and inspections very well.",
@@ -212,6 +213,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "inspection, audit, or walkthrough checklist",
+     "strength": "primary"
+    },
+    {
+     "meaning": "completed form, survey, or questionnaire",
+     "strength": "primary"
+    },
+    {
+     "meaning": "inventory count or stock check",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "task or assignment (meta to-do symbol)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic 'to-do list' or 'paste from clipboard' icon, and in a task app it risks looking like generic app chrome rather than a specific subject.",
+   "near_misses": [
+    {
+     "task": "Verify bank routing number for the wire transfer",
+     "better": "bank building or money transfer",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Paste the copied API key into the production config",
+     "better": "key or code file",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a wooden cutting board for the kitchen",
+     "better": "cutting board or kitchen knife",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the termite inspector for next Tuesday",
+     "better": "bug or house",
+     "trap": "property"
+    },
+    {
+     "task": "Call the fire marshal about the stairwell door",
+     "better": "phone or door",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "content_paste_go"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4048,
+    "output": 1092,
+    "thoughts": 0,
+    "total": 5140
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "Shows a checkmark in the bottom-right corner of the clipboard (an inspection, audit, or completed form), rather than an outward-pointing arrow (exporting, submitting, or forwarding)."
 }

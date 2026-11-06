@@ -15,11 +15,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "exit, leave, or log out",
+   "meaning": "exit or leave",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, it could resemble a tablet or phone screen oriented horizontally with a home button, or a wall safe.",
+ "ambiguity": "Functionally interchangeable with the doors that have an extending bottom threshold sill; without the sill, it is slightly more likely at small sizes to be mistaken for a wall safe, cabinet door, or tablet screen.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -151,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Replace the rotting wooden threshold sill under the front door",
+   "better": "door with an extending bottom threshold line",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Install a rubber draft-stopper sweep along the bottom doorstep",
+   "better": "door with an extending bottom threshold line",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cut two spare house keys at the hardware store",
    "better": "key",
    "trap": "shared_vocabulary"
@@ -169,22 +179,12 @@
    "task": "Book an outdoor camping site at the state park",
    "better": "tent or pine tree",
    "trap": "property"
-  },
-  {
-   "task": "Replace the cracked screen protector on the iPad",
-   "better": "tablet",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the contractor's deposit invoice via bank transfer",
-   "better": "invoice or bank transfer",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a closed door with a round doorknob. It is an ideal match for home maintenance, renovation, and shopping tasks involving doors, doorways, or doorknobs, though at tiny sizes its simple rectangular frame could briefly look like a tablet.",
@@ -202,6 +202,88 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "door, doorway, or entrance",
+     "strength": "primary"
+    },
+    {
+     "meaning": "room, office, or closet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "exit, leave, or log out",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, it could resemble a tablet or phone screen oriented horizontally with a home button, or a wall safe.",
+   "near_misses": [
+    {
+     "task": "Cut two spare house keys at the hardware store",
+     "better": "key",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up the Ring video doorbell on the home Wi-Fi",
+     "better": "bell or security camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order food delivery from DoorDash for tonight's team dinner",
+     "better": "takeout food or delivery bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book an outdoor camping site at the state park",
+     "better": "tent or pine tree",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the contractor's deposit invoice via bank transfer",
+     "better": "invoice or bank transfer",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "door_front",
+   "door_back"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5325,
+    "output": 1463,
+    "thoughts": 0,
+    "total": 6788
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:31Z"
+  }
+ },
+ "distinguishing": "Lacks the extending horizontal floor threshold line at the bottom (showing only the rectangular door panel with a right-hand doorknob), though in meaning it is completely interchangeable with the other two closed-door icons."
 }

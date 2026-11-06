@@ -19,9 +19,13 @@
   {
    "meaning": "GPS navigation waypoint",
    "strength": "secondary"
+  },
+  {
+   "meaning": "left-hand roadside stop or pull-off",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the dashed road lines next to the pin can resemble vertical barcode stripes or an exclamation mark next to a droplet.",
+ "ambiguity": "Horizontal mirror image of the road with a map pin on the bottom-right, making them interchangeable for almost all road location or navigation tasks.",
  "modifier_semantics": [
   {
    "modifier": "map pin marker at bottom left",
@@ -158,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Stop at the rest area on the right side of the interstate",
+   "better": "road with map pin on the right",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Deliver the package to the house on the right side of the road",
+   "better": "road with map pin on the right",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a road bike helmet with MIPS protection",
    "better": "bicycle helmet",
    "trap": "shared_vocabulary"
@@ -165,11 +179,6 @@
   {
    "task": "Renew driver's license at the DMV before next month",
    "better": "ID card / driver's license",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Book flight and hotel for the Chicago conference",
-   "better": "airplane or hotel",
    "trap": "parent_topic"
   },
   {
@@ -191,7 +200,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly combines a perspective two-lane road with a location pin, making it immediately recognizable as a street address, driving route, or roadside stop. It fits tasks about planning road trips, mapping driving directions, or specifying street addresses, while being distinct from a plain map pin or a plain road.",
@@ -209,6 +218,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "street address or roadside location",
+     "strength": "primary"
+    },
+    {
+     "meaning": "driving route, directions, or road trip stop",
+     "strength": "primary"
+    },
+    {
+     "meaning": "GPS navigation waypoint",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the dashed road lines next to the pin can resemble vertical barcode stripes or an exclamation mark next to a droplet.",
+   "near_misses": [
+    {
+     "task": "Buy a road bike helmet with MIPS protection",
+     "better": "bicycle helmet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew driver's license at the DMV before next month",
+     "better": "ID card / driver's license",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book flight and hotel for the Chicago conference",
+     "better": "airplane or hotel",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Update product roadmap for Q3 engineering sprint",
+     "better": "gantt chart or project timeline",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the new running shoes are good for road running",
+     "better": "running shoe",
+     "trap": "property"
+    },
+    {
+     "task": "Track package delivery status from UPS",
+     "better": "parcel box / package",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pin_road"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4058,
+    "output": 831,
+    "thoughts": 0,
+    "total": 4889
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:47Z"
+  }
+ },
+ "distinguishing": "Places the map pin on the bottom-left side of the road rather than the bottom-right; otherwise the two icons are horizontal mirror images and semantically interchangeable for roadside location or road-trip tasks."
 }

@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a slash between the brackets, it can occasionally be read as left/right carousel arrows or a horizontal resize handle rather than a code tag.",
+ "ambiguity": "Without a slash between the brackets, it can occasionally be read as left/right carousel arrows or a horizontal resize handle; shares the angle-bracket shape with the single right-pointing chevron.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -150,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Practice greater-than and less-than inequalities on the math worksheet",
+   "better": "single greater-than chevron or math symbols icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the next-page pagination button on the photo gallery",
+   "better": "single right-pointing chevron icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Look up the building code for deck railing height",
    "better": "law book or ruler",
    "trap": "shared_vocabulary"
@@ -165,14 +175,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a new USB-C monitor for the office",
+   "task": "Order a new USB-C monitor for the developer workstation",
    "better": "monitor / display",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Compare flights to Denver vs Salt Lake City",
-   "better": "airplane",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check dress code for Saturday's charity gala",
@@ -201,6 +206,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "code, programming, HTML, or source script",
+     "strength": "primary"
+    },
+    {
+     "meaning": "embed snippet or markup tag",
+     "strength": "primary"
+    },
+    {
+     "meaning": "horizontal navigation or expand left and right",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a slash between the brackets, it can occasionally be read as left/right carousel arrows or a horizontal resize handle rather than a code tag.",
+   "near_misses": [
+    {
+     "task": "Look up the building code for deck railing height",
+     "better": "law book or ruler",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Text Mom the front door keypad code before she arrives",
+     "better": "keypad or lock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Find a promo code for the running shoes order",
+     "better": "price tag or coupon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a new USB-C monitor for the office",
+     "better": "monitor / display",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Compare flights to Denver vs Salt Lake City",
+     "better": "airplane",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check dress code for Saturday's charity gala",
+     "better": "shirt or tuxedo",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arrow_forward_ios"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4089,
+    "output": 889,
+    "thoughts": 0,
+    "total": 4978
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:44Z"
+  }
+ },
+ "distinguishing": "Shows a symmetrical pair of outward-facing angle brackets (< >) representing source code, HTML tags, or embedding, unlike the single right-pointing chevron (>) used for forward navigation or math comparison."
 }

@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "euro currency",
+   "meaning": "Euro currency or European money",
    "strength": "primary"
   },
   {
-   "meaning": "money, payment, or finance (especially in Europe)",
+   "meaning": "money, payment, budget, or finance (especially in the Eurozone)",
    "strength": "primary"
   },
   {
-   "meaning": "price, cost, or budget",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "currency exchange for European travel",
+   "meaning": "currency exchange to or from Euros",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Identical to the duplicate Euro currency symbol in this set; at very small sizes, could also be mistaken for a mathematical set membership symbol (∈) or a stylized letter C or E.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -161,35 +157,40 @@
    "trap": "property"
   },
   {
-   "task": "Renew European Health Insurance Card before June",
-   "better": "ID card / medical cross",
+   "task": "Check if the new van meets Euro 6 emission standards",
+   "better": "van or car",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Watch the Euro quarter-final at the pub on Friday",
-   "better": "soccer ball / TV",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check if the new van meets Euro 6 emission standards",
-   "better": "van / car",
+   "better": "soccer ball or TV",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Write the C-programming memory allocation exercises",
-   "better": "code brackets / laptop",
+   "better": "letter C or code brackets",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Exchange British pounds before the London trip",
+   "better": "pound sterling currency symbol",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Scan and upload the signed notarized deed for the accountant",
-   "better": "scanner / document",
+   "better": "scanner or document",
    "trap": "parent_topic"
+  },
+  {
+   "task": "Buy groceries for Sunday dinner",
+   "better": "shopping cart or grocery bag",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the Euro currency symbol (€). It is universally recognizable and serves as the primary icon for money, payments, budgeting, and pricing in Eurozone contexts, or for foreign exchange tasks when traveling to Europe.",
@@ -207,6 +208,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "euro currency",
+     "strength": "primary"
+    },
+    {
+     "meaning": "money, payment, or finance (especially in Europe)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "price, cost, or budget",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "currency exchange for European travel",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Find a decent coffee machine under €150",
+     "better": "coffee maker",
+     "trap": "property"
+    },
+    {
+     "task": "Renew European Health Insurance Card before June",
+     "better": "ID card / medical cross",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Watch the Euro quarter-final at the pub on Friday",
+     "better": "soccer ball / TV",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the new van meets Euro 6 emission standards",
+     "better": "van / car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write the C-programming memory allocation exercises",
+     "better": "code brackets / laptop",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Scan and upload the signed notarized deed for the accountant",
+     "better": "scanner / document",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "euro"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 659,
+    "thoughts": 30,
+    "total": 4724
+   },
+   "soft_problems": [
+    "refers to a letter 2x"
+   ],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Visually identical to and completely interchangeable with the other plain Euro currency symbol in this group, with no differences in stroke weight, proportions, or details."
 }

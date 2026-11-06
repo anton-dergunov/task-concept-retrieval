@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "first aid kit or medical box",
-   "strength": "secondary"
-  },
-  {
    "meaning": "open new window or tab",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because it is just a rectangle with an off-center cross/plus, it sits ambiguously between a medical/insurance card, a UI 'add slide/card' button, and a handleless first-aid box.",
+ "ambiguity": "Very easily confused with the horizontal rectangle with a centered plus sign (differing only in horizontal alignment of the cross) and with the folder with a plus sign if the folder's subtle top tab isn't noticed.",
  "modifier_semantics": [
   {
    "modifier": "plus sign inside on the right half",
@@ -160,19 +156,24 @@
  ],
  "near_misses": [
   {
+   "task": "Create a new shared folder in Dropbox for client assets",
+   "better": "file folder with top tab and plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the first-aid kit in the camping trunk",
+   "better": "horizontal rectangle or square with centered medical cross",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Activate new Visa credit card in the banking app",
    "better": "credit card with chip and magnetic stripe",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Book annual teeth cleaning with Dr. Patel",
-   "better": "tooth icon",
+   "better": "tooth",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a small waterproof first aid kit for the hiking pack",
-   "better": "first aid briefcase with top handle and centered cross",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Add extra RAM to the home server",
@@ -180,13 +181,8 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Frame the postcard from grandma",
-   "better": "picture frame with mountains/sun or postcard",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the monthly health insurance premium",
-   "better": "money / bill payment icon",
+   "better": "money or bill payment icon",
    "trap": "shared_vocabulary"
   }
  ],
@@ -211,6 +207,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "health insurance card or medical ID card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "add new slide, card, or frame",
+     "strength": "primary"
+    },
+    {
+     "meaning": "first aid kit or medical box",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "open new window or tab",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because it is just a rectangle with an off-center cross/plus, it sits ambiguously between a medical/insurance card, a UI 'add slide/card' button, and a handleless first-aid box.",
+   "near_misses": [
+    {
+     "task": "Activate new Visa credit card in the banking app",
+     "better": "credit card with chip and magnetic stripe",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book annual teeth cleaning with Dr. Patel",
+     "better": "tooth icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a small waterproof first aid kit for the hiking pack",
+     "better": "first aid briefcase with top handle and centered cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Add extra RAM to the home server",
+     "better": "RAM stick or computer chip",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Frame the postcard from grandma",
+     "better": "picture frame with mountains/sun or postcard",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly health insurance premium",
+     "better": "money / bill payment icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "create_new_folder",
+   "rectangle_add",
+   "note_add",
+   "local_hospital"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8092,
+    "output": 2462,
+    "thoughts": 0,
+    "total": 10554
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "A plain horizontal rounded rectangle with the plus sign shifted to the right side, lacking the top-left tab of the folder and the centered placement of the other rectangles."
 }

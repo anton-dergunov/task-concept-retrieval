@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "house, home, or residence",
+   "meaning": "house, home, or family residence",
    "strength": "primary"
   },
   {
@@ -17,13 +17,9 @@
   {
    "meaning": "real estate, property, or housing",
    "strength": "secondary"
-  },
-  {
-   "meaning": "homepage or dashboard",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Almost interchangeable with other generic house or home icons that lack a chimney or attic window.",
+ "ambiguity": "Almost interchangeable with the plain pentagonal house with a doorway for general home, household, or real estate tasks.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -155,6 +151,21 @@
  ],
  "near_misses": [
   {
+   "task": "Update the house manual with the new Wi-Fi password for guests",
+   "better": "house outline with information letter i inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Compare commercial and residential zoning rules in the city",
+   "better": "house in front of a tall building",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the broken link on the website home button",
+   "better": "plain minimal house icon or browser window",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Do a 30-minute home dumbbell workout in the living room",
    "better": "dumbbell",
    "trap": "property"
@@ -165,11 +176,6 @@
    "trap": "property"
   },
   {
-   "task": "Redesign the hero banner on the company homepage",
-   "better": "browser window or web page",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Finish the math homework before dinner",
    "better": "notebook or textbook",
    "trap": "shared_vocabulary"
@@ -178,17 +184,12 @@
    "task": "Replace the leaking wax ring under the guest bathroom toilet",
    "better": "toilet or wrench",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Book a pet boarding kennel for the dog over Christmas",
-   "better": "dog or doghouse",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A clear, universally understood icon of a house with a chimney, doorway, and attic window. It is ideal for tasks directly about a home, property, mortgage, cottage rental, or whole-house upkeep, though it competes with simpler house glyphs in most icon sets.",
@@ -206,6 +207,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "house, home, or residence",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cottage, cabin, or vacation rental",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "real estate, property, or housing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "homepage or dashboard",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost interchangeable with other generic house or home icons that lack a chimney or attic window.",
+   "near_misses": [
+    {
+     "task": "Do a 30-minute home dumbbell workout in the living room",
+     "better": "dumbbell",
+     "trap": "property"
+    },
+    {
+     "task": "Bake homemade sourdough bread for Sunday dinner",
+     "better": "bread loaf",
+     "trap": "property"
+    },
+    {
+     "task": "Redesign the hero banner on the company homepage",
+     "better": "browser window or web page",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Finish the math homework before dinner",
+     "better": "notebook or textbook",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the leaking wax ring under the guest bathroom toilet",
+     "better": "toilet or wrench",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book a pet boarding kennel for the dog over Christmas",
+     "better": "dog or doghouse",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "help_clinic",
+   "maps_home_work",
+   "home"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6657,
+    "output": 2167,
+    "thoughts": 0,
+    "total": 8824
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:46Z"
+  }
+ },
+ "distinguishing": "Unlike the flush-walled minimal house, this house features overhanging roof eaves, a chimney on the right, and a semicircular attic window above the door, giving it a more literal residential cottage or family-home look, though the two are largely interchangeable for general home tasks."
 }

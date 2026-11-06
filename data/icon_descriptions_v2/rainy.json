@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "rain / rainy weather / precipitation",
+   "meaning": "rain, rainy weather, or liquid precipitation",
    "strength": "primary"
   },
   {
-   "meaning": "weather forecast / meteorology",
+   "meaning": "weather forecast or meteorology",
    "strength": "primary"
   },
   {
-   "meaning": "storm / bad weather",
+   "meaning": "storm or wet weather",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Distinct from cloud computing icons because of the rain streaks; could overlap with heavier thunderstorm or hail icons.",
+ "ambiguity": "Can be confused at a quick glance with the clouds with round dots underneath (snow or hail), though the diagonal lines specifically signal liquid rain.",
  "modifier_semantics": [
   {
    "modifier": "three slanted raindrop strokes below",
@@ -160,18 +160,23 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Shovel snow from the front driveway before work",
+   "better": "cloud with round snow dots or snow shovel",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "File auto insurance claim for hail damage on the roof",
+   "better": "cloud with round hail dots or car",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Back up family photos to iCloud storage",
-   "better": "cloud storage / upload",
+   "better": "cloud storage with upload arrow",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Brainstorm ideas for the Q3 marketing campaign",
-   "better": "lightbulb / idea",
+   "better": "lightbulb",
    "trap": "shared_vocabulary"
   },
   {
@@ -180,20 +185,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a pack of disposable ponchos",
-   "better": "poncho / raincoat",
+   "task": "Buy a pack of disposable ponchos for the theme park",
+   "better": "poncho or raincoat",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Fix the leaking pipe under the kitchen sink",
-   "better": "pipe / wrench",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a cloud with three falling rain streaks, universally understood as rain or weather forecast. It fits tasks centered on checking the weather, preparing for rain, rain harvesting, or rainy-day contingency planning, while avoiding confusion with cloud computing due to the raindrops.",
@@ -213,6 +213,88 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 2
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "rain / rainy weather / precipitation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weather forecast / meteorology",
+     "strength": "primary"
+    },
+    {
+     "meaning": "storm / bad weather",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Distinct from cloud computing icons because of the rain streaks; could overlap with heavier thunderstorm or hail icons.",
+   "near_misses": [
+    {
+     "task": "Back up family photos to iCloud storage",
+     "better": "cloud storage / upload",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Brainstorm ideas for the Q3 marketing campaign",
+     "better": "lightbulb / idea",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take a shower before heading to the airport",
+     "better": "showerhead",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a pack of disposable ponchos",
+     "better": "poncho / raincoat",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix the leaking pipe under the kitchen sink",
+     "better": "pipe / wrench",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cloudy_snowing",
+   "weather_snowy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5340,
+    "output": 1468,
+    "thoughts": 125,
+    "total": 6933
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Shows three slanted linear strokes beneath the cloud rather than round dots, indicating liquid rain rather than snow or hail."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "heart / love / romance",
+   "meaning": "highlighted favorite, pinned wishlist item, or top preference",
    "strength": "primary"
   },
   {
-   "meaning": "favorites / wishlist / saved items",
-   "strength": "primary"
-  },
-  {
-   "meaning": "health / cardiology / wellness",
+   "meaning": "love, romance, or charity (stylized with an underline)",
    "strength": "secondary"
   },
   {
-   "meaning": "charity / donation / care",
+   "meaning": "baseline heart health or resting heart rate",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The underline could make it look like an active-tab UI indicator or a 'download/save to favorites' symbol; otherwise functionally identical to a standard heart icon.",
+ "ambiguity": "Almost interchangeable in general meaning with the plain outlined heart; the bottom bar can also be confused with the minus sign on the heart-minus icon if a viewer only remembers 'heart with a horizontal line'.",
  "modifier_semantics": [
   {
    "modifier": "horizontal underline bar below",
@@ -136,12 +132,10 @@
  ],
  "example_tasks_es": [
   "Reservar mesa para cenar por nuestro aniversario de bodas",
-  "Limpiar la lista de deseos de Amazon antes de mi cumpleaños",
-  "Pedir cita con el cardiólogo para revisar el electrocardiograma"
+  "Limpiar la lista de deseos de Amazon antes de mi cumpleaños"
  ],
  "example_tasks_ru": [
   "Забронировать столик в ресторане на День святого Валентина",
-  "Записаться к кардиологу на плановое УЗИ сердца в четверг",
   "Почистить список избранных товаров на маркетплейсе перед распродажей"
  ],
  "context_tasks": [
@@ -164,6 +158,21 @@
  ],
  "near_misses": [
   {
+   "task": "Remove out-of-stock jackets from my saved favorites list",
+   "better": "heart with minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Complete annual cardiovascular health checkup at the clinic",
+   "better": "heart with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plan anniversary dinner with my partner",
+   "better": "plain outlined heart",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy artichoke hearts and olive oil for tonight's pasta",
    "better": "artichoke / vegetables",
    "trap": "shared_vocabulary"
@@ -179,25 +188,15 @@
    "trap": "property"
   },
   {
-   "task": "Play ten hands of Hearts online with the college group",
-   "better": "playing cards",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Check if the new running watch tracks heart rate zones accurately",
    "better": "smartwatch",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Book flights to Paris",
-   "better": "airplane",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "An outlined heart above a horizontal bar, read immediately as love/romance, favorites/wishlists, charity, or heart health. It fits many personal tasks across relationships, shopping wishlists, and cardiology, though it is nearly interchangeable with a plain heart icon.",
@@ -217,6 +216,99 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_es": 1,
+    "example_tasks_ru": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "heart / love / romance",
+     "strength": "primary"
+    },
+    {
+     "meaning": "favorites / wishlist / saved items",
+     "strength": "primary"
+    },
+    {
+     "meaning": "health / cardiology / wellness",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "charity / donation / care",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The underline could make it look like an active-tab UI indicator or a 'download/save to favorites' symbol; otherwise functionally identical to a standard heart icon.",
+   "near_misses": [
+    {
+     "task": "Buy artichoke hearts and olive oil for tonight's pasta",
+     "better": "artichoke / vegetables",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Memorize the opening monologue by heart before Tuesday's rehearsal",
+     "better": "script / theater masks",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the batteries in my chest-strap heart rate monitor",
+     "better": "battery",
+     "trap": "property"
+    },
+    {
+     "task": "Play ten hands of Hearts online with the college group",
+     "better": "playing cards",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the new running watch tracks heart rate zones accurately",
+     "better": "smartwatch",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book flights to Paris",
+     "better": "airplane",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "favorite",
+   "heart_minus",
+   "heart_check"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6749,
+    "output": 2043,
+    "thoughts": 0,
+    "total": 8792
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "A closed outlined heart resting above a full-width horizontal underline bar, suggesting a highlighted favorite or an underlined/docked heart rather than a plain heart or one with a corner badge."
 }

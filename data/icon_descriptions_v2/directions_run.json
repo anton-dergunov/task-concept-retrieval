@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a brisk walking figure or the standard emergency exit sign figure without the doorway.",
+ "ambiguity": "Shares the exact head, torso, and arm posture with the snowshoeing figure, differing only in the lower legs and the absence of snowshoes on the feet.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -154,6 +154,21 @@
  ],
  "near_misses": [
   {
+   "task": "Rent snowshoes for the backcountry winter trail",
+   "better": "person wearing snowshoes",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Go snowshoeing around the frozen lake on Saturday",
+   "better": "person wearing snowshoes",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Walk 10,000 steps every day this week",
+   "better": "walking person / footprints",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy new cushioned running shoes at Fleet Feet",
    "better": "sneaker / running shoe",
    "trap": "parent_topic"
@@ -172,16 +187,6 @@
    "task": "Quick run to the grocery store for milk and eggs",
    "better": "shopping cart / milk carton",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Walk 10,000 steps every day this week",
-   "better": "walking person / footprints",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Charge Garmin watch before tomorrow's track session",
-   "better": "smartwatch / battery",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "running / jogging / cardio exercise",
+     "strength": "primary"
+    },
+    {
+     "meaning": "fitness / workout / athletics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "emergency exit / evacuation / fleeing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "hurry / urgent errand",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a brisk walking figure or the standard emergency exit sign figure without the doorway.",
+   "near_misses": [
+    {
+     "task": "Buy new cushioned running shoes at Fleet Feet",
+     "better": "sneaker / running shoe",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Run payroll for the part-time contractors before Friday",
+     "better": "money / paycheck",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Run a full backup of the NAS onto the external drive",
+     "better": "hard drive / database backup",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Quick run to the grocery store for milk and eggs",
+     "better": "shopping cart / milk carton",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Walk 10,000 steps every day this week",
+     "better": "walking person / footprints",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Charge Garmin watch before tomorrow's track session",
+     "better": "smartwatch / battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "snowshoeing"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4054,
+    "output": 1047,
+    "thoughts": 0,
+    "total": 5101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:35Z"
+  }
+ },
+ "distinguishing": "This figure has bare, square-ended leg tips with the back leg kicked up horizontally in a running stride, without the curved snowshoes attached to the feet in the other icon."
 }

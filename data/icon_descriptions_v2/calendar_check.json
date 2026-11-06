@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "availability check or RSVP",
+   "meaning": "RSVP yes or accept a calendar invite",
    "strength": "secondary"
   },
   {
-   "meaning": "calendar or event planning",
+   "meaning": "event or calendar planning",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with a plain calendar icon or a 'calendar with check inside' icon; in a task list where every task can have a due date, it only earns its spot when the task itself is about scheduling, booking, or confirming a date.",
+ "ambiguity": "Easily confused at a glance with the calendar containing an X inside plus a corner checkmark, or with a plain calendar icon; in a task list where every task has a due date, use it only when the task is specifically about confirming or booking a date.",
  "modifier_semantics": [
   {
    "modifier": "checkmark at bottom-right corner",
@@ -176,13 +176,23 @@
  ],
  "near_misses": [
   {
-   "task": "File quarterly estimated taxes by April 15",
-   "better": "tax form or money/bank icon",
-   "trap": "property"
+   "task": "Respond to the Doodle poll with available and unavailable dates for the team offsite",
+   "better": "calendar with both an X mark inside and a checkmark",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy birthday gift for Sam before Saturday",
-   "better": "wrapped gift box",
+   "task": "Confirm cancellation of the orthodontist appointment and clear the slot",
+   "better": "calendar with an X mark inside and a checkmark, or calendar with an X",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check off every item on the camping packing checklist",
+   "better": "clipboard or checklist with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "File quarterly estimated taxes by April 15",
+   "better": "tax form or money/bank icon",
    "trap": "property"
   },
   {
@@ -196,17 +206,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Read 'Booked' by Kwame Alexander with Ella",
-   "better": "open book",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check off every item on the camping packing checklist",
-   "better": "clipboard or checklist with checkmark",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order balloons and a helium tank",
+   "task": "Order balloons and a helium tank for Saturday's party",
    "better": "balloons",
    "trap": "parent_topic"
   }
@@ -214,7 +214,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a calendar page with a checkmark at the bottom-right corner, universally read as confirming a date, booking an appointment, or RSVPing. It fits tasks whose subject is scheduling, locking in dates, or confirming reservations—never tasks that simply happen to have a deadline. It can be confused with a plain calendar or a checklist clipboard at a glance.",
@@ -234,6 +234,99 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "confirmed appointment, booking, or reservation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "schedule confirmation or finalizing a date",
+     "strength": "primary"
+    },
+    {
+     "meaning": "availability check or RSVP",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "calendar or event planning",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with a plain calendar icon or a 'calendar with check inside' icon; in a task list where every task can have a due date, it only earns its spot when the task itself is about scheduling, booking, or confirming a date.",
+   "near_misses": [
+    {
+     "task": "File quarterly estimated taxes by April 15",
+     "better": "tax form or money/bank icon",
+     "trap": "property"
+    },
+    {
+     "task": "Buy birthday gift for Sam before Saturday",
+     "better": "wrapped gift box",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the passport renewal came in the mail today",
+     "better": "passport booklet or mailbox",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book window seats on the Tokyo flight",
+     "better": "airplane or airline seat",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read 'Booked' by Kwame Alexander with Ella",
+     "better": "open book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check off every item on the camping packing checklist",
+     "better": "clipboard or checklist with checkmark",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order balloons and a helium tank",
+     "better": "balloons",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "free_cancellation"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4129,
+    "output": 1180,
+    "thoughts": 0,
+    "total": 5309
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "Shows a blank calendar page with a bottom-right checkmark (and no X inside), representing confirming an appointment, booking, or date without any cancellation or conflict."
 }

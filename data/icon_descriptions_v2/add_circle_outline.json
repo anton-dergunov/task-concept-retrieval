@@ -11,7 +11,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "first aid, medical help, or hospital",
+   "meaning": "first aid, medical cross, or urgent care",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Commonly serves as a generic UI button to add a new task or item, which can be confused with a medical cross or first-aid symbol in monochrome.",
+ "ambiguity": "Can be mistaken for the alarm clock with a plus sign if the top bells of the clock are overlooked at small sizes, and in monochrome it doubles as a generic UI add button and a medical cross.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -153,6 +153,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set a 5:30am wake-up alarm for the airport",
+   "better": "alarm clock with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add 15 minutes to the parking meter timer",
+   "better": "alarm clock with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Add milk and eggs to the grocery list",
    "better": "grocery cart or milk carton",
    "trap": "generic_verb"
@@ -163,19 +173,9 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Add Sarah to the family calendar",
-   "better": "calendar or person icon",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Cancel Disney Plus subscription before renewal",
    "better": "TV or subscription icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book flights to Zurich for the autumn conference",
-   "better": "airplane",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up prescription refills at Walgreens",
@@ -186,7 +186,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "A plus sign in a circle is primarily a generic UI 'add/create' button, which is a poor match for specific tasks because 'add' is a generic verb and the object being added should be shown instead. However, in black-and-white it also doubles as a medical cross / first-aid symbol or a math addition sign, giving it a narrow set of valid concrete tasks.",
@@ -204,6 +204,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add, create, or new item",
+     "strength": "primary"
+    },
+    {
+     "meaning": "first aid, medical help, or hospital",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "addition or positive arithmetic",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "positive terminal of a battery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Commonly serves as a generic UI button to add a new task or item, which can be confused with a medical cross or first-aid symbol in monochrome.",
+   "near_misses": [
+    {
+     "task": "Add milk and eggs to the grocery list",
+     "better": "grocery cart or milk carton",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Create a new repository for the parser project",
+     "better": "code or git branch icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Add Sarah to the family calendar",
+     "better": "calendar or person icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Cancel Disney Plus subscription before renewal",
+     "better": "TV or subscription icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Zurich for the autumn conference",
+     "better": "airplane",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up prescription refills at Walgreens",
+     "better": "pill or pharmacy bottle",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "alarm_add"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4051,
+    "output": 1004,
+    "thoughts": 0,
+    "total": 5055
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "A plain circular outline around a plus sign with no top bells, representing generic addition, creation, or first aid rather than setting an alarm or timer."
 }

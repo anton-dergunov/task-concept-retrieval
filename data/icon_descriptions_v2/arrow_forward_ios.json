@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "It is standard UI chrome (list disclosure indicator, breadcrumb separator, or collapse/expand toggle) and looks like part of the app's interface rather than a task topic icon; also indistinguishable from a greater-than sign or angle bracket.",
+ "ambiguity": "Reads primarily as standard UI chrome (list disclosure indicator, breadcrumb separator, or expand toggle) rather than a task topic; can also be confused with the paired angle brackets icon when thinking of code, terminal prompts, or brackets.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -150,6 +150,21 @@
  ],
  "near_misses": [
   {
+   "task": "Refactor the HTML template and embed widget script on the landing page",
+   "better": "paired angle brackets code icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Review the pull request for the backend Python API",
+   "better": "paired angle brackets code icon or git branch icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fast-forward through the security camera footage from Tuesday night",
+   "better": "security camera or double fast-forward triangles icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Plan next week's dinners and grocery list",
    "better": "calendar or meal/cutlery icon",
    "trap": "shared_vocabulary"
@@ -165,11 +180,6 @@
    "trap": "property"
   },
   {
-   "task": "Fast-forward through the security camera footage from Tuesday night",
-   "better": "security camera or double fast-forward triangles icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Move forward with the kitchen contractor's second estimate",
    "better": "house renovation or contract/invoice icon",
    "trap": "generic_verb"
@@ -183,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 1,
-  "distinctiveness": 1
+  "distinctiveness": 4
  },
  "discard": true,
  "reasoning": "This is a plain right-pointing chevron (`>`), which is pure interface chrome used across apps for list disclosure, breadcrumbs, and collapse/expand toggles. In a to-do list it would be mistaken for a UI control rather than a task's subject, and almost no real-life tasks have a chevron or greater-than sign as their central object.",
@@ -201,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "right chevron / next / forward navigation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "greater-than sign (math comparison)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "command prompt or shell indicator",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "expand or collapse tree indicator",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "It is standard UI chrome (list disclosure indicator, breadcrumb separator, or collapse/expand toggle) and looks like part of the app's interface rather than a task topic icon; also indistinguishable from a greater-than sign or angle bracket.",
+   "near_misses": [
+    {
+     "task": "Plan next week's dinners and grocery list",
+     "better": "calendar or meal/cutlery icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Forward the signed lease agreement to the landlord",
+     "better": "email forward arrow or document/contract icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy chevron-patterned throw pillows for the living room couch",
+     "better": "pillow or sofa icon",
+     "trap": "property"
+    },
+    {
+     "task": "Fast-forward through the security camera footage from Tuesday night",
+     "better": "security camera or double fast-forward triangles icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Move forward with the kitchen contractor's second estimate",
+     "better": "house renovation or contract/invoice icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order brass shelf brackets for the pantry wall",
+     "better": "L-bracket or shelf icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 1
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "code"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4089,
+    "output": 889,
+    "thoughts": 0,
+    "total": 4978
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:44Z"
+  }
+ },
+ "distinguishing": "Shows a single right-pointing chevron (>), signifying forward/next navigation, a math greater-than sign, or a command-line prompt, whereas the paired outward-facing angle brackets (< >) represent HTML/markup tags or source code."
 }

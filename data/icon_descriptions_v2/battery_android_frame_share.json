@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "export or share out",
-   "strength": "primary"
-  },
-  {
-   "meaning": "forward or redirect",
+   "meaning": "export or share out from a device or file",
    "strength": "primary"
   },
   {
    "meaning": "reverse power share or battery share",
-   "strength": "secondary"
+   "strength": "primary"
   },
   {
-   "meaning": "cast or send to external display",
+   "meaning": "forward or redirect",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like generic UI chrome for 'share', 'export', 'sign out', or a half-drawn battery with a shortcut arrow; hard to tell what physical object the left rectangle represents.",
+ "ambiguity": "At small sizes, its rectangular frame and arrow can be confused with the monitor with an inward arrow or a generic sign-out button, though here the inner block is solid and the arrow points outward to the right.",
  "modifier_semantics": [
   {
    "modifier": "bent arrow pointing right in lower right",
@@ -155,18 +151,23 @@
  ],
  "near_misses": [
   {
+   "task": "Switch the living room TV to the HDMI 2 input for the console",
+   "better": "monitor or TV screen with an inward-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Transfer vacation photos from the DSLR camera to the laptop",
+   "better": "camera body with a two-way transfer arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy an external battery pack for the camping trip",
-   "better": "battery",
+   "better": "plain battery",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Share the remaining birthday cake with the neighbors",
    "better": "cake",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Look forward to the long weekend in Montreal",
-   "better": "calendar or suitcase",
    "trap": "shared_vocabulary"
   },
   {
@@ -178,17 +179,12 @@
    "task": "Check if the video export finished rendering",
    "better": "video",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Order cardboard moving boxes",
-   "better": "cardboard box",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon shows a filled rectangular container with a curved outgoing arrow, representing 'export', 'share', 'forward', or battery sharing. Because the left shape is abstract, it looks like generic UI chrome for exporting or logging out and is only moderately useful for tasks centered on exporting data or forwarding items.",
@@ -206,6 +202,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "export or share out",
+     "strength": "primary"
+    },
+    {
+     "meaning": "forward or redirect",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reverse power share or battery share",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cast or send to external display",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like generic UI chrome for 'share', 'export', 'sign out', or a half-drawn battery with a shortcut arrow; hard to tell what physical object the left rectangle represents.",
+   "near_misses": [
+    {
+     "task": "Buy an external battery pack for the camping trip",
+     "better": "battery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Share the remaining birthday cake with the neighbors",
+     "better": "cake",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Look forward to the long weekend in Montreal",
+     "better": "calendar or suitcase",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the customs export duty on the guitar shipment",
+     "better": "receipt or guitar",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the video export finished rendering",
+     "better": "video",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order cardboard moving boxes",
+     "better": "cardboard box",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "reset_tv",
+   "switch_camera"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5430,
+    "output": 1568,
+    "thoughts": 192,
+    "total": 7190
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Shows a solid-filled horizontal battery or box with a bent arrow curving outward to the right, indicating exporting or sharing out rather than sending input into a monitor or switching cameras."
 }

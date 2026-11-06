@@ -17,13 +17,9 @@
   {
    "meaning": "A/B test or route traffic two ways",
    "strength": "secondary"
-  },
-  {
-   "meaning": "redirect or forward",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with media shuffle, merge, or git branch icons, especially at small sizes where the small gap in the lower branch is barely visible.",
+ "ambiguity": "Easily mistaken for the crossed diagonal shuffle arrows at small sizes because the right half (two diagonal arrowheads pointing top-right and bottom-right) is identical.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Shuffle the dinner party playlist tracks",
+   "better": "crossed diagonal shuffle arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Transfer funds between checking and savings accounts",
+   "better": "two opposite horizontal swap arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Fix the split seam on my winter coat",
    "better": "coat or needle and thread",
    "trap": "property"
@@ -169,18 +175,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Shuffle the dinner party playlist",
-   "better": "crossed shuffle arrows or music note",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Call the local bank branch about the notary",
    "better": "bank building or phone",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Saw down the dead oak branch over the driveway",
-   "better": "tree branch or saw",
    "trap": "shared_vocabulary"
   },
   {
@@ -192,7 +188,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a single horizontal line splitting into two diverging diagonal arrows, clearly representing splitting, branching, forking, or dividing into two paths. It fits tasks centered on splitting files, expenses, networks, or code branches, though as an abstract directional symbol it can be confused with shuffle or general arrow icons.",
@@ -210,6 +206,102 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "split, fork, or branch into two paths",
+     "strength": "primary"
+    },
+    {
+     "meaning": "diverge or separate a stream or workflow",
+     "strength": "primary"
+    },
+    {
+     "meaning": "A/B test or route traffic two ways",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "redirect or forward",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with media shuffle, merge, or git branch icons, especially at small sizes where the small gap in the lower branch is barely visible.",
+   "near_misses": [
+    {
+     "task": "Fix the split seam on my winter coat",
+     "better": "coat or needle and thread",
+     "trap": "property"
+    },
+    {
+     "task": "Buy split peas for Friday's soup",
+     "better": "peas or soup bowl",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Split for the Croatia trip",
+     "better": "airplane or map pin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Shuffle the dinner party playlist",
+     "better": "crossed shuffle arrows or music note",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the local bank branch about the notary",
+     "better": "bank building or phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Saw down the dead oak branch over the driveway",
+     "better": "tree branch or saw",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write the copy for the new pricing tier card",
+     "better": "document or price tag",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shuffle",
+   "repeat",
+   "sync_alt",
+   "swap_horiz"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8029,
+    "output": 1556,
+    "thoughts": 0,
+    "total": 9585
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "A single horizontal shaft enters on the left and forks into two diverging diagonal arrows on the right, showing a 1-to-2 split or branch rather than two crossing paths (shuffle) or opposite horizontal arrows (swap/loop)."
 }

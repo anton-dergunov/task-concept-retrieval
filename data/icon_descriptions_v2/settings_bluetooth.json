@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "Bluetooth pairing or searching for devices",
+   "meaning": "Bluetooth searching, scanning, or pairing in progress",
    "strength": "primary"
   },
   {
-   "meaning": "Bluetooth settings or connection",
+   "meaning": "Bluetooth settings menu or configuration",
    "strength": "primary"
   },
   {
-   "meaning": "wireless peripheral connectivity",
+   "meaning": "general Bluetooth connectivity",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable in task meaning from a plain Bluetooth icon without the dots.",
+ "ambiguity": "At small task-list sizes, easily mistaken for the plain Bluetooth symbol or the Bluetooth symbol with flanking dots, and all three represent virtually identical task concepts.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal dots underneath",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Verify that the car audio is actively connected to Bluetooth",
+   "better": "Bluetooth symbol with two flanking dots (connected status) or car",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a USB Bluetooth dongle for the desktop PC",
+   "better": "plain Bluetooth symbol or USB adapter",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small waterproof Bluetooth speaker for the shower",
    "better": "speaker",
    "trap": "property"
@@ -171,25 +181,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Change the home Wi-Fi password on the guest network",
-   "better": "Wi-Fi symbol",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pick up a 2-pack of CR2032 coin batteries at the hardware store",
    "better": "battery",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Translate the elder futhark runes on the museum replica",
-   "better": "rune stone or book",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The Bluetooth rune with three dots underneath clearly represents Bluetooth pairing or searching for wireless connections. It is a strong fit for tech troubleshooting and device pairing tasks, though many tasks mentioning 'Bluetooth' (like buying a Bluetooth speaker) are better served by the icon of the physical device itself.",
@@ -207,6 +207,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Bluetooth pairing or searching for devices",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Bluetooth settings or connection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wireless peripheral connectivity",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable in task meaning from a plain Bluetooth icon without the dots.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof Bluetooth speaker for the shower",
+     "better": "speaker",
+     "trap": "property"
+    },
+    {
+     "task": "Order a compact Bluetooth mechanical keyboard for the iPad",
+     "better": "keyboard",
+     "trap": "property"
+    },
+    {
+     "task": "Book the dentist appointment for that chipped back tooth",
+     "better": "tooth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change the home Wi-Fi password on the guest network",
+     "better": "Wi-Fi symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up a 2-pack of CR2032 coin batteries at the hardware store",
+     "better": "battery",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Translate the elder futhark runes on the museum replica",
+     "better": "rune stone or book",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bluetooth",
+   "bluetooth_connected"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5281,
+    "output": 904,
+    "thoughts": 0,
+    "total": 6185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Has a three-dot ellipsis underneath the Bluetooth rune, indicating searching, scanning, or a settings menu, though for task lists it is practically interchangeable with the plain and flanked-dot Bluetooth icons."
 }

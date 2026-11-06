@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "upward trend, growth, or analytics chart",
+   "meaning": "upward trend, growth, or increase",
    "strength": "primary"
   },
   {
@@ -15,11 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "performance metrics, progress, or improvement",
+   "meaning": "analytics, performance metrics, or progress",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to sharp-cornered zigzag trend arrows, line chart icons, or generic northeast external-link arrows at very small sizes.",
+ "ambiguity": "Virtually interchangeable with the sharp-cornered upward trend arrow, and easily confused at a glance with the arrowhead-less upward zigzag sparkline.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -149,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Audit monthly SaaS subscriptions to cut recurring expenses",
+   "better": "downward-pointing zigzag trend arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change the series color on the dashboard sparkline widget",
+   "better": "upward zigzag line without an arrowhead",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order vegetable stock and bone broth for the soup",
    "better": "soup pot or carton",
    "trap": "shared_vocabulary"
@@ -157,11 +167,6 @@
    "task": "Buy a high-growth potting mix for the indoor ficus",
    "better": "potted plant",
    "trap": "property"
-  },
-  {
-   "task": "Hike up the switchback trail to Eagle Peak on Saturday",
-   "better": "mountain or hiking boot",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Raise the standing desk stop limit by two inches",
@@ -182,7 +187,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "An upward-trending line arrow universally represents growth, analytics, metrics, and stock market investments. It fits financial investing and work analytics tasks very well, though it is nearly identical to sharp-angled trend-up icons.",
@@ -200,6 +205,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upward trend, growth, or analytics chart",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stock market, investing, or financial returns",
+     "strength": "primary"
+    },
+    {
+     "meaning": "performance metrics, progress, or improvement",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to sharp-cornered zigzag trend arrows, line chart icons, or generic northeast external-link arrows at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Order vegetable stock and bone broth for the soup",
+     "better": "soup pot or carton",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a high-growth potting mix for the indoor ficus",
+     "better": "potted plant",
+     "trap": "property"
+    },
+    {
+     "task": "Hike up the switchback trail to Eagle Peak on Saturday",
+     "better": "mountain or hiking boot",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Raise the standing desk stop limit by two inches",
+     "better": "desk",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the signed W-9 to the accountant",
+     "better": "document or signature",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Improve kitchen lighting over the island",
+     "better": "lamp or lightbulb",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "trending_up",
+   "trending_down",
+   "show_chart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6713,
+    "output": 1309,
+    "thoughts": 180,
+    "total": 8202
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Has rounded, smooth curves at the peak and trough of the upward-pointing arrow shaft instead of sharp corners, though it is semantically interchangeable with the sharp-cornered upward trend arrow."
 }

@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "scheduled payment or autopay",
+   "meaning": "scheduled payment, recurring bill, or autopay",
    "strength": "primary"
   },
   {
-   "meaning": "payment history or past transactions",
+   "meaning": "payment history or past card transactions",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "expiring credit card or renewal",
+   "meaning": "expiring credit card or card renewal",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the card might slightly resemble a browser window or calendar header, though the thick magnetic stripe usually clarifies it as a payment card.",
+ "ambiguity": "At small sizes it can be confused with the rectangle with an upper-right block and clock badge, or with a calendar header with a clock.",
  "modifier_semantics": [
   {
    "modifier": "circular clock badge at bottom right",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Review recent files in the shared project folder",
+   "better": "folder or rectangle with upper-right block and clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check daily screen time and picture-in-picture window settings",
+   "better": "screen with upper-right inset block and clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the plumber in cash right at 2pm",
    "better": "cash bills or wallet",
    "trap": "property"
@@ -177,19 +187,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Set the oven timer for the sourdough bake",
-   "better": "timer or bread",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Call customer service to close the checking account",
    "better": "phone receiver or bank building",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check the train schedule and buy a transit pass",
-   "better": "train or ticket",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -213,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "scheduled payment or autopay",
+     "strength": "primary"
+    },
+    {
+     "meaning": "payment history or past transactions",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pending charge or delayed payment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "expiring credit card or renewal",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the card might slightly resemble a browser window or calendar header, though the thick magnetic stripe usually clarifies it as a payment card.",
+   "near_misses": [
+    {
+     "task": "Pay the plumber in cash right at 2pm",
+     "better": "cash bills or wallet",
+     "trap": "property"
+    },
+    {
+     "task": "Order a replacement debit card with a new PIN",
+     "better": "plain credit card without clock",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Schedule my annual dental cleaning before benefits expire",
+     "better": "tooth or calendar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set the oven timer for the sourdough bake",
+     "better": "timer or bread",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call customer service to close the checking account",
+     "better": "phone receiver or bank building",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the train schedule and buy a transit pass",
+     "better": "train or ticket",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "tab_recent"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4066,
+    "output": 649,
+    "thoughts": 247,
+    "total": 4962
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:46Z"
+  }
+ },
+ "distinguishing": "Has a full-width horizontal black stripe across the upper portion of the rectangle, clearly depicting a payment card with a clock badge rather than a folder or window with an upper-right block."
 }

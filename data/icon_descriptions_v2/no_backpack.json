@@ -13,15 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "no events / cancelled schedule / unavailable date",
+   "meaning": "no luggage / bag or backpack prohibited",
+   "strength": "primary"
+  },
+  {
+   "meaning": "dead or missing 9V battery",
    "strength": "secondary"
   },
   {
-   "meaning": "no luggage / bag prohibited / dead 9V battery",
+   "meaning": "no events / unavailable calendar date",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very high ambiguity: the base shape with two top prongs and a center horizontal bar could be a shopping bag, a clipboard, a calendar page, a backpack, or a 9V battery.",
+ "ambiguity": "The portrait rectangle with two top tabs and a center horizontal bar is inherently ambiguous between a backpack, a shopping bag, a calendar page, and a 9V battery, and at tiny sizes its crossed-out box shape could be confused with the crossed-out clapperboard.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,28 +165,33 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new canvas tote bag for the farmers market",
-   "better": "shopping bag (without slash)",
+   "task": "Block annoying pop-up windows in the desktop browser",
+   "better": "crossed-out overlapping browser windows",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Schedule quarterly roadmap planning session with the engineering leads",
-   "better": "calendar",
+   "task": "Cancel our monthly video streaming subscription",
+   "better": "crossed-out film clapperboard",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new canvas tote bag for the farmers market",
+   "better": "shopping bag without slash",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Order a 4-pack of rechargeable 9V batteries for the guitar pedals",
-   "better": "battery",
+   "better": "battery without slash",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Check if the corner pharmacy is closed on bank holidays",
-   "better": "pharmacy / store",
+   "better": "pharmacy or store",
    "trap": "property"
   },
   {
    "task": "Call the airline to ask about the cancelled flight refund",
-   "better": "phone / airplane",
+   "better": "phone or airplane",
    "trap": "property"
   },
   {
@@ -194,7 +203,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon shows a vertical rounded rectangle with two top tabs and a horizontal center line, crossed out by a diagonal slash. Because theslash obscures the interior, the base object is hard to identify at a glance—it reads variously as 'no shopping bag', 'cancelled calendar event', or 'dead 9V battery'. It can serve tasks about spending freezes, cancelled events, or bag restrictions, but its high visual ambiguity makes it weak.",
@@ -214,6 +223,91 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no shopping / no-buy challenge / out of stock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no events / cancelled schedule / unavailable date",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "no luggage / bag prohibited / dead 9V battery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very high ambiguity: the base shape with two top prongs and a center horizontal bar could be a shopping bag, a clipboard, a calendar page, a backpack, or a 9V battery.",
+   "near_misses": [
+    {
+     "task": "Buy a new canvas tote bag for the farmers market",
+     "better": "shopping bag (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule quarterly roadmap planning session with the engineering leads",
+     "better": "calendar",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 4-pack of rechargeable 9V batteries for the guitar pedals",
+     "better": "battery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the corner pharmacy is closed on bank holidays",
+     "better": "pharmacy / store",
+     "trap": "property"
+    },
+    {
+     "task": "Call the airline to ask about the cancelled flight refund",
+     "better": "phone / airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Read library books sitting on the nightstand",
+     "better": "book",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "select_window_off",
+   "movie_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5463,
+    "output": 1286,
+    "thoughts": 0,
+    "total": 6749
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "Unlike the two overlapping landscape window frames or the landscape film clapperboard, this is a single tall portrait rectangle with two square prongs on top and a horizontal bar inside, representing a crossed-out backpack, shopping bag, or 9V battery."
 }

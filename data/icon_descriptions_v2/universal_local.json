@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "geotagged photo, postcard, or location card",
+   "meaning": "location card, postcard, or landscape geotagged photo",
    "strength": "secondary"
   },
   {
-   "meaning": "geofence or bounded location area",
+   "meaning": "location, address, or point of interest",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without map grid lines, the plain rectangle can look like a tablet screen, a photo frame, or an envelope with a location pin on it.",
+ "ambiguity": "At small sizes it is almost interchangeable with the square-framed map pin, as only the frame's width differs; also lacks map grid lines to clearly read as a screen or map.",
  "modifier_semantics": [
   {
    "modifier": "rectangular border around pin",
@@ -168,9 +168,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a magnetic air-vent phone mount for the rental car",
-   "better": "smartphone or car mount",
-   "trap": "parent_topic"
+   "task": "Curate a list of all our favorite coffee shops across town",
+   "better": "stacked square frames with map pin",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Tag the square profile picture with our studio location",
+   "better": "single square-framed map pin",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Frame the panoramic poster from our Grand Canyon hike",
@@ -178,30 +183,30 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Mail a postcard to Grandma from the airport in Zurich",
+   "better": "postcard or mail envelope",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a magnetic air-vent phone mount for the rental car",
+   "better": "smartphone or car mount",
+   "trap": "parent_topic"
+  },
+  {
    "task": "Check the office street address on the new vendor contract",
    "better": "contract document",
    "trap": "generic_verb"
   },
   {
-   "task": "Book a locally guided walking tour in Old San Juan",
-   "better": "walking person or tour flag",
-   "trap": "property"
-  },
-  {
    "task": "Map out the Q3 product roadmap milestones with the engineering leads",
    "better": "roadmap / timeline chart",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Mail a postcard to Grandma from the airport in Zurich",
-   "better": "postcard or mail envelope",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon shows a map pin centered inside a horizontal rectangular frame, reading clearly as a map screen, GPS navigator display, embedded website map, or geotagged card/photo. It fits tasks about digital maps, sat-nav devices, geofences, and location metadata, though for general location tasks a plain map pin or folded map is more direct.",
@@ -221,6 +226,95 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "map view, embedded map, or navigation display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "GPS navigator device or car sat-nav screen",
+     "strength": "primary"
+    },
+    {
+     "meaning": "geotagged photo, postcard, or location card",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "geofence or bounded location area",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without map grid lines, the plain rectangle can look like a tablet screen, a photo frame, or an envelope with a location pin on it.",
+   "near_misses": [
+    {
+     "task": "Buy a magnetic air-vent phone mount for the rental car",
+     "better": "smartphone or car mount",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Frame the panoramic poster from our Grand Canyon hike",
+     "better": "picture frame or landscape photo",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the office street address on the new vendor contract",
+     "better": "contract document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a locally guided walking tour in Old San Juan",
+     "better": "walking person or tour flag",
+     "trap": "property"
+    },
+    {
+     "task": "Map out the Q3 product roadmap milestones with the engineering leads",
+     "better": "roadmap / timeline chart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mail a postcard to Grandma from the airport in Zurich",
+     "better": "postcard or mail envelope",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_map_stack",
+   "file_map"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5389,
+    "output": 1039,
+    "thoughts": 210,
+    "total": 6638
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:53Z"
+  }
+ },
+ "distinguishing": "Uses a wider, landscape-oriented rectangular frame around the map pin instead of a square frame, evoking a widescreen GPS display, embedded map viewport, or postcard."
 }

@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "express delivery or rush shipping",
+   "meaning": "motion blur, action shot, or animation",
    "strength": "secondary"
   },
   {
-   "meaning": "motion blur or action camera mode",
+   "meaning": "express delivery or rush shipping",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a monogram or brand logo reading 'EO' or '30', a magnifying glass with menu bars, or a stylized key.",
+ "ambiguity": "Virtually identical to and interchangeable with the version that has an extra detached segment on the middle trail line; at small sizes it can also resemble an 'EO' monogram, a key, or a magnifying glass next to menu bars.",
  "modifier_semantics": [
   {
    "modifier": "horizontal trailing bars and dot",
@@ -166,18 +166,13 @@
   },
   {
    "task": "Fast for 12 hours before Tuesday blood panel",
-   "better": "blood drop or no-food",
+   "better": "blood drop or utensils with slash",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy Comet cleanser for the bathtub ring",
-   "better": "cleaning spray bottle",
+   "better": "cleaning spray bottle or cleanser can",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay express toll lane invoice online",
-   "better": "road / toll or receipt",
-   "trap": "property"
   },
   {
    "task": "Cut a spare front door key at the hardware store",
@@ -185,15 +180,20 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Switch video export preset from medium speed to maximum high-speed motion blur",
+   "better": "speeding circle with longer doubly-segmented trail",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order replacement power cord for the router",
-   "better": "power cable",
+   "better": "power cable or plug",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a circle with three horizontal speed lines trailing to the left, representing fast motion, motion blur, velocity, or a comet. Because it is abstract and strongly resembles an 'EO' monogram, its recognizability is low, fitting mainly niche tasks about speed tests, motion photography, sprints, or meteors.",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "speed, fast motion, or velocity",
+     "strength": "primary"
+    },
+    {
+     "meaning": "express delivery or rush shipping",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "motion blur or action camera mode",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "comet, meteor, or fireball",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a monogram or brand logo reading 'EO' or '30', a magnifying glass with menu bars, or a stylized key.",
+   "near_misses": [
+    {
+     "task": "Do a quick 10-minute kitchen tidy before bed",
+     "better": "broom or kitchen",
+     "trap": "property"
+    },
+    {
+     "task": "Fast for 12 hours before Tuesday blood panel",
+     "better": "blood drop or no-food",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy Comet cleanser for the bathtub ring",
+     "better": "cleaning spray bottle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay express toll lane invoice online",
+     "better": "road / toll or receipt",
+     "trap": "property"
+    },
+    {
+     "task": "Cut a spare front door key at the hardware store",
+     "better": "house key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order replacement power cord for the router",
+     "better": "power cable",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "motion_blur"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4058,
+    "output": 1060,
+    "thoughts": 191,
+    "total": 5309
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "Has a shorter motion trail with only the bottom line broken into a detached square dot, whereas the other icon also has a detached segment on the middle line; in meaning the two are virtually interchangeable symbols for speed or motion."
 }

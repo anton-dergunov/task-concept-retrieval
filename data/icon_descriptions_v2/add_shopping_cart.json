@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "add to cart / add to shopping order",
+   "meaning": "add to cart or add items to a shopping order",
    "strength": "primary"
   },
   {
-   "meaning": "shopping / buying items",
-   "strength": "primary"
-  },
-  {
-   "meaning": "online grocery order or checkout list",
+   "meaning": "build a shopping list or restock supplies",
    "strength": "secondary"
   },
   {
-   "meaning": "pharmacy or medical shopping (cross in cart)",
+   "meaning": "pharmacy or medical supply shopping (cross in cart)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The plus sign can occasionally be read as a medical cross, suggesting pharmacy or first-aid shopping.",
+ "ambiguity": "At small sizes, can be confused with a plain shopping cart, the checkout arrow cart, or read as a medical cross for pharmacy runs.",
  "modifier_semantics": [
   {
    "modifier": "plus sign",
@@ -161,9 +157,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping trips",
-   "better": "headlamp / flashlight",
-   "trap": "generic_verb"
+   "task": "Remove the extra HDMI cable and duplicate book from the Amazon cart",
+   "better": "shopping cart with a minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Submit and pay for the pending Chewy pet food cart",
+   "better": "shopping cart with a right-pointing checkout arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Resolve the declined credit card error on the Target order",
+   "better": "shopping cart with an exclamation mark",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Order a new set of winter tires for the Subaru",
@@ -176,18 +182,13 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Refill the first-aid kit in the bathroom cabinet with bandages and antiseptic",
-   "better": "first-aid kit / medical cross",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Clean out the crisper drawers and toss expired condiments before the grocery delivery",
-   "better": "refrigerator / trash",
+   "task": "Clean out the crisper drawers before the grocery delivery arrives",
+   "better": "refrigerator",
    "trap": "property"
   },
   {
    "task": "Call the bank to dispute the double charge from the supermarket",
-   "better": "phone call / bank card",
+   "better": "phone call or bank card",
    "trap": "parent_topic"
   }
  ],
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add to cart / add to shopping order",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shopping / buying items",
+     "strength": "primary"
+    },
+    {
+     "meaning": "online grocery order or checkout list",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pharmacy or medical shopping (cross in cart)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The plus sign can occasionally be read as a medical cross, suggesting pharmacy or first-aid shopping.",
+   "near_misses": [
+    {
+     "task": "Order a new set of winter tires for the Subaru",
+     "better": "car tire / wheel",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up a folding utility wagon for hauling beach gear",
+     "better": "hand truck / beach wagon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill the first-aid kit in the bathroom cabinet with bandages and antiseptic",
+     "better": "first-aid kit / medical cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean out the crisper drawers and toss expired condiments before the grocery delivery",
+     "better": "refrigerator / trash",
+     "trap": "property"
+    },
+    {
+     "task": "Call the bank to dispute the double charge from the supermarket",
+     "better": "phone call / bank card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "production_quantity_limits",
+   "shopping_cart_checkout",
+   "remove_shopping_cart",
+   "shopping_cart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8105,
+    "output": 2466,
+    "thoughts": 0,
+    "total": 10571
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "An open-top shopping cart containing a bold plus sign, specifically indicating adding items to a cart or shopping list rather than general shopping, checkout, or removal."
 }

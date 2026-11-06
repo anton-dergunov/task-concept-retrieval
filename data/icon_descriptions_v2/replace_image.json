@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "rotate image or photo",
+   "meaning": "rotate image or photo (especially clockwise)",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "share or forward picture",
+   "meaning": "redo photo edit",
    "strength": "secondary"
   },
   {
-   "meaning": "redo photo edit",
+   "meaning": "share or forward picture",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the mountain peaks inside the square can blur, making the icon look like an open padlock or a generic redo/refresh button.",
+ "ambiguity": "Easily confused with the open-top picture frame with a counterclockwise arrow for any general photo rotation task, and at very small sizes the frame and arched arrow can resemble an open padlock.",
  "modifier_semantics": [
   {
    "modifier": "curved clockwise arrow above the frame",
@@ -156,8 +156,23 @@
  ],
  "near_misses": [
   {
+   "task": "Revert edited wedding photos back to the original RAW files",
+   "better": "picture frame with counterclockwise undo/reset arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Restore accidentally deleted vacation photos from the trash folder",
+   "better": "open-top picture frame with counterclockwise restore arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unlock the old iPad to get the photos off it",
+   "better": "padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Rotate the living room rug 180 degrees to even out sun fading",
-   "better": "rug or rotation arrows",
+   "better": "rug or generic rotation arrows",
    "trap": "shared_vocabulary"
   },
   {
@@ -167,29 +182,19 @@
   },
   {
    "task": "Buy a new 8x10 wooden picture frame for the hallway",
-   "better": "picture frame without arrow",
+   "better": "plain picture frame without arrow",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Unlock the old iPad to get the photos off it",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order glossy prints of the best holiday pictures",
    "better": "photo print or printer",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Back up the Lightroom catalog to the external hard drive",
-   "better": "hard drive or cloud backup",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a photo frame with a clockwise rotation arrow above it, representing image rotation or photo editing. While visually distinct, rotating photos is typically a quick UI action rather than a standalone to-do list item, limiting its fit to batch photo processing or fixing scanned documents. At tiny sizes, the arch over the square slightly resembles an unlocked padlock.",
@@ -207,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "rotate image or photo",
+     "strength": "primary"
+    },
+    {
+     "meaning": "fix photo orientation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "share or forward picture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "redo photo edit",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the mountain peaks inside the square can blur, making the icon look like an open padlock or a generic redo/refresh button.",
+   "near_misses": [
+    {
+     "task": "Rotate the living room rug 180 degrees to even out sun fading",
+     "better": "rug or rotation arrows",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Rotate car tires at 10,000 miles",
+     "better": "car or tire",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new 8x10 wooden picture frame for the hallway",
+     "better": "picture frame without arrow",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Unlock the old iPad to get the photos off it",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order glossy prints of the best holiday pictures",
+     "better": "photo print or printer",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Back up the Lightroom catalog to the external hard drive",
+     "better": "hard drive or cloud backup",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "reset_image"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4056,
+    "output": 1166,
+    "thoughts": 0,
+    "total": 5222
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "Shows a fully closed square picture frame beneath a clockwise (right-pointing) curved arrow, whereas the look-alike has an open-top frame and a counterclockwise (left-pointing) arrow; for general image rotation they are nearly interchangeable, though this one specifically cues rotating clockwise or redoing an edit."
 }

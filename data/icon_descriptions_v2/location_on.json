@@ -17,13 +17,9 @@
   {
    "meaning": "venue or meeting point",
    "strength": "secondary"
-  },
-  {
-   "meaning": "destination or stop on a route",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Nearly interchangeable in meaning with the map pin over a horizontal bar and the map pin enclosed in a black circle.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -156,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Drop a pin at the exact trailhead parking spot",
+   "better": "map pin landing on a horizontal ground bar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Tap the location button to center the map UI",
+   "better": "map pin inside a solid black circle button",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a box of brass push pins for the corkboard",
    "better": "thumbtack / pushpin",
    "trap": "shared_vocabulary"
@@ -179,17 +185,12 @@
    "task": "Track UPS package from B&H Photo",
    "better": "parcel box / delivery truck",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Check local weather forecast for Saturday's hike",
-   "better": "weather / cloud and sun",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon is a universally recognized map pin representing a location, address, venue, or GPS waypoint. It fits a wide variety of real-world tasks across travel, outdoors, events, and address changes, and has a distinct silhouette unless variants with inner modifiers exist in the same set.",
@@ -207,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "location, place, or address",
+     "strength": "primary"
+    },
+    {
+     "meaning": "map pin or GPS waypoint",
+     "strength": "primary"
+    },
+    {
+     "meaning": "venue or meeting point",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "destination or stop on a route",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a box of brass push pins for the corkboard",
+     "better": "thumbtack / pushpin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change the 4-digit PIN on the debit card",
+     "better": "keypad / lock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up dry cleaning on the way home from the downtown office",
+     "better": "shirt / hanger",
+     "trap": "property"
+    },
+    {
+     "task": "Book flights to Lisbon for the October conference",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Track UPS package from B&H Photo",
+     "better": "parcel box / delivery truck",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check local weather forecast for Saturday's hike",
+     "better": "weather / cloud and sun",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pin_drop",
+   "explore_nearby"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5309,
+    "output": 1567,
+    "thoughts": 0,
+    "total": 6876
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "A standalone outlined teardrop map pin with no base bar and no enclosing circle, making it the cleanest, most generic location or address marker of the three, though functionally interchangeable with the others."
 }

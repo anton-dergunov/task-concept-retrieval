@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "exclude folder from sync, backup, or search",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "close or cancel a project folder",
+   "meaning": "exclude directory from sync, backup, or search",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the crossed-out rectangle could be mistaken for a disabled camera, image, or wallet icon.",
+ "ambiguity": "Because the diagonal slash cuts right across the folder's top-left tab, at a quick glance the stepped top edge can be confused with the slashed browser window or plain monitor outlines.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -162,24 +158,24 @@
  ],
  "near_misses": [
   {
-   "task": "Organize tax receipts into monthly folders",
-   "better": "plain folder or folder with plus",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a pack of manila file folders for the cabinet",
-   "better": "plain folder or shopping cart",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check why the client folder is empty",
-   "better": "folder with magnifier or question mark",
-   "trap": "generic_verb"
+   "task": "Close all open browser windows before rebooting",
+   "better": "browser window with slash",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Turn off webcam permissions for browser",
-   "better": "camera with slash",
+   "better": "video camera with slash",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Organize tax receipts into monthly folders",
+   "better": "intact file folder",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check why the shared client folder is empty",
+   "better": "folder with magnifier",
+   "trap": "generic_verb"
   },
   {
    "task": "Send final invoice PDF to the client",
@@ -213,6 +209,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "delete, remove, or unlink a folder or directory",
+     "strength": "primary"
+    },
+    {
+     "meaning": "folder offline, unmounted, or inaccessible",
+     "strength": "primary"
+    },
+    {
+     "meaning": "exclude folder from sync, backup, or search",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "close or cancel a project folder",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the crossed-out rectangle could be mistaken for a disabled camera, image, or wallet icon.",
+   "near_misses": [
+    {
+     "task": "Organize tax receipts into monthly folders",
+     "better": "plain folder or folder with plus",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a pack of manila file folders for the cabinet",
+     "better": "plain folder or shopping cart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check why the client folder is empty",
+     "better": "folder with magnifier or question mark",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Turn off webcam permissions for browser",
+     "better": "camera with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send final invoice PDF to the client",
+     "better": "invoice or document with arrow",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up a hidden folder for private scans",
+     "better": "folder with lock or eye-off",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_access_disabled",
+   "mimo_disconnect",
+   "sync_saved_locally_off",
+   "domain_verification_off",
+   "videocam_off",
+   "web_asset_off",
+   "tv_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12219,
+    "output": 3998,
+    "thoughts": 0,
+    "total": 16217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Has a raised angled tab on the top-left edge and no bottom stand, identifying it as a file folder rather than a monitor or browser window."
 }

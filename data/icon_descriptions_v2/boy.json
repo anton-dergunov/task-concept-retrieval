@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "person / individual / contact",
+   "meaning": "person, individual, or contact",
    "strength": "primary"
   },
   {
-   "meaning": "user account / personal profile",
+   "meaning": "man, male figure, or men's restroom",
    "strength": "primary"
   },
   {
-   "meaning": "male / men's restroom",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "client / employee / candidate",
+   "meaning": "user profile, client, or employee",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely overlaps with bust-only user avatar icons, pedestrian icons, or men's restroom signage.",
+ "ambiguity": "Visually and semantically interchangeable with the other two symmetric standing person silhouettes; differs from the pregnant figure by its symmetric non-pregnant profile.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -159,13 +155,23 @@
  ],
  "near_misses": [
   {
+   "task": "Schedule OB-GYN prenatal checkup for third trimester",
+   "better": "pregnant person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy prenatal vitamins at the pharmacy",
+   "better": "pregnant person silhouette or pill bottle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay personal property tax on the Honda",
    "better": "car or tax receipt",
    "trap": "property"
   },
   {
    "task": "Call Mom about Sunday dinner",
-   "better": "phone",
+   "better": "phone handset",
    "trap": "generic_verb"
   },
   {
@@ -174,25 +180,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Fix the leaky flush valve in the men's restroom",
-   "better": "toilet or wrench",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book flights to Chicago for the client visit",
    "better": "airplane",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Renew personal domain name before November",
-   "better": "globe / web domain",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a full-body silhouette of a standing person. It fits tasks centered on a specific person, contact, candidate, or personal profile, though it competes closely with bust-style user avatars and restroom icons.",
@@ -212,6 +208,96 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "person / individual / contact",
+     "strength": "primary"
+    },
+    {
+     "meaning": "user account / personal profile",
+     "strength": "primary"
+    },
+    {
+     "meaning": "male / men's restroom",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "client / employee / candidate",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely overlaps with bust-only user avatar icons, pedestrian icons, or men's restroom signage.",
+   "near_misses": [
+    {
+     "task": "Pay personal property tax on the Honda",
+     "better": "car or tax receipt",
+     "trap": "property"
+    },
+    {
+     "task": "Call Mom about Sunday dinner",
+     "better": "phone",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a standing desk converter for the home office",
+     "better": "desk",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the leaky flush valve in the men's restroom",
+     "better": "toilet or wrench",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights to Chicago for the client visit",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Renew personal domain name before November",
+     "better": "globe / web domain",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pregnant_woman",
+   "man_2",
+   "man"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6619,
+    "output": 1855,
+    "thoughts": 168,
+    "total": 8642
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "A slightly more compact symmetric standing figure with narrower shoulders relative to its lower body, but completely interchangeable in meaning with the other two symmetric standing person icons."
 }

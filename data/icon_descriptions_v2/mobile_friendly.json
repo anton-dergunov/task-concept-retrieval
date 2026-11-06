@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "mobile verification / two-factor authentication",
+   "meaning": "mobile verification / two-factor authentication (2FA)",
    "strength": "primary"
   },
   {
-   "meaning": "smartphone setup complete or phone ready",
+   "meaning": "smartphone setup complete / device diagnostics passed",
    "strength": "primary"
   },
   {
-   "meaning": "mobile check-in (flight, hotel, event ticket, banking approval, Apple Pay confirmation, task app on phone, device checkup/diagnostics, phone settings verified, etc.)",
+   "meaning": "mobile check-in or mobile payment confirmation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a generic smartphone, a smartwatch case without straps, or a battery/clipboard with a checkmark at small sizes.",
+ "ambiguity": "Shares the identical device outline with the phone with a downward arrow; at small list sizes, the V-shaped bottom of the checkmark can resemble the tip of the down arrow.",
  "modifier_semantics": [
   {
    "modifier": "checkmark centered on the screen",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Install the latest iOS security update on my iPhone",
+   "better": "mobile phone with downward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download offline maps to my phone before the road trip",
+   "better": "mobile phone with downward arrow or map",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check missed calls from the landlord",
    "better": "phone handset with missed call arrow",
    "trap": "generic_verb"
@@ -173,13 +183,8 @@
   },
   {
    "task": "Compare iPhone 16 vs Pixel 9 camera specs",
-   "better": "camera or smartphone without checkmark",
+   "better": "camera or plain smartphone",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Tick off the grocery list on my phone",
-   "better": "shopping list or grocery cart",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Replace the cracked screen on Dad's phone",
@@ -208,6 +213,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "mobile verification / two-factor authentication",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smartphone setup complete or phone ready",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile check-in (flight, hotel, event ticket, banking approval, Apple Pay confirmation, task app on phone, device checkup/diagnostics, phone settings verified, etc.)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a generic smartphone, a smartwatch case without straps, or a battery/clipboard with a checkmark at small sizes.",
+   "near_misses": [
+    {
+     "task": "Check missed calls from the landlord",
+     "better": "phone handset with missed call arrow",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a waterproof phone pouch for kayaking",
+     "better": "waterproof pouch or kayak",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly T-Mobile bill",
+     "better": "invoice or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Compare iPhone 16 vs Pixel 9 camera specs",
+     "better": "camera or smartphone without checkmark",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Tick off the grocery list on my phone",
+     "better": "shopping list or grocery cart",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the cracked screen on Dad's phone",
+     "better": "broken smartphone or repair wrench",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "install_mobile"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4093,
+    "output": 1071,
+    "thoughts": 0,
+    "total": 5164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Shows a checkmark centered on the mobile device screen, indicating verification, approval, or completion on a phone, rather than the downward download arrow."
 }

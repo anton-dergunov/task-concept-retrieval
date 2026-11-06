@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "medication list or prescription",
+   "meaning": "medication list, prescription, or dosage schedule",
    "strength": "primary"
-  },
-  {
-   "meaning": "treatment plan or dosage schedule",
-   "strength": "primary"
-  },
-  {
-   "meaning": "medical chart or health history",
-   "strength": "secondary"
   },
   {
    "meaning": "supplement log or vitamin tracker",
+   "strength": "primary"
+  },
+  {
+   "meaning": "medical treatment plan or pharmacy order form",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the capsule pill in the corner could be mistaken for a chain link (shared clipboard) or an angled eraser/edit pencil.",
+ "ambiguity": "It shares the identical three-line clipboard base with the plus-badge and globe-badge clipboards, and its medical domain overlaps with the clipboard with a plus/cross badge when a task is about a general medical chart rather than medications; at tiny sizes the pill also resembles a chain link.",
  "modifier_semantics": [
   {
    "modifier": "capsule pill",
@@ -161,18 +157,28 @@
  ],
  "near_misses": [
   {
-   "task": "Pick up magnesium capsules at CVS on the way home",
-   "better": "single pill or pharmacy bag (buying pills, not a list or prescription)",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Copy the link to the shared project clipboard",
-   "better": "clipboard with chain link",
+   "task": "Create a new packing checklist for the cabin weekend",
+   "better": "clipboard with plus sign badge",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Fill out the online customs declaration form before landing",
+   "better": "clipboard with earth globe badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fill out the new patient intake form at the clinic",
+   "better": "clipboard with plus/medical cross badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up magnesium capsules at CVS on the way home",
+   "better": "single pill or pharmacy bag",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Buy a plastic 7-day pill organizer case for travel",
-   "better": "pill organizer box or suitcase",
+   "better": "pill organizer box",
    "trap": "shared_vocabulary"
   },
   {
@@ -184,11 +190,6 @@
    "task": "Check if the cough syrup is non-drowsy",
    "better": "medicine bottle",
    "trap": "property"
-  },
-  {
-   "task": "Review quarterly inventory checklist for the warehouse",
-   "better": "plain clipboard with checklist",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -212,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "medication list or prescription",
+     "strength": "primary"
+    },
+    {
+     "meaning": "treatment plan or dosage schedule",
+     "strength": "primary"
+    },
+    {
+     "meaning": "medical chart or health history",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "supplement log or vitamin tracker",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the capsule pill in the corner could be mistaken for a chain link (shared clipboard) or an angled eraser/edit pencil.",
+   "near_misses": [
+    {
+     "task": "Pick up magnesium capsules at CVS on the way home",
+     "better": "single pill or pharmacy bag (buying pills, not a list or prescription)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Copy the link to the shared project clipboard",
+     "better": "clipboard with chain link",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a plastic 7-day pill organizer case for travel",
+     "better": "pill organizer box or suitcase",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule annual physical exam with Dr. Lee",
+     "better": "stethoscope or calendar",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the cough syrup is non-drowsy",
+     "better": "medicine bottle",
+     "trap": "property"
+    },
+    {
+     "task": "Review quarterly inventory checklist for the warehouse",
+     "better": "plain clipboard with checklist",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "assignment_add",
+   "assignment_globe"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5406,
+    "output": 1026,
+    "thoughts": 124,
+    "total": 6556
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Unlike the clipboards with a circular plus badge or a circular earth globe badge, this clipboard has an oblong two-part capsule pill in the bottom-right corner, specifically denoting a medication list, prescription, or supplement regimen."
 }

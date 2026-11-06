@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / portable power / rechargeable cells",
+   "meaning": "mostly full / charged battery or power bank",
    "strength": "primary"
   },
   {
-   "meaning": "charge level / charging a device",
+   "meaning": "battery / portable power / rechargeable cells (interchangeable with other battery levels)",
    "strength": "primary"
   },
   {
-   "meaning": "energy / power management",
+   "meaning": "charging a device / high energy level",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with other battery fill-level icons (empty, half, full) when multiple battery variants exist in the same icon picker.",
+ "ambiguity": "Easily confused at a glance with the half-full battery, and functionally interchangeable with all other battery fill-level icons for ordinary tasks about buying, charging, or packing batteries.",
  "modifier_semantics": [
   {
    "modifier": "partial black interior fill",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Take the dead car battery to AutoZone for core recycling",
+   "better": "empty battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plug in the phone before the low battery dies completely",
+   "better": "critically low or quarter-full battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small waterproof battery-powered lantern for the tent",
    "better": "lantern or flashlight",
    "trap": "property"
@@ -172,16 +182,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Recharge over the long weekend with zero screen time",
-   "better": "hammock, nature, or spa",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pack the rolling suitcase for the Berlin conference",
-   "better": "suitcase",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a replacement USB-C braided cable for the nightstand",
    "better": "cable or plug",
    "trap": "parent_topic"
@@ -190,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a partially filled horizontal battery. While partial battery glyphs often come from UI status bars, in a task list this serves well as the standard icon for buying, charging, testing, or recycling batteries and power banks. It is only weakly ambiguous with other battery fill-state variants.",
@@ -208,6 +208,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / portable power / rechargeable cells",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charge level / charging a device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "energy / power management",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with other battery fill-level icons (empty, half, full) when multiple battery variants exist in the same icon picker.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof battery-powered lantern for the tent",
+     "better": "lantern or flashlight",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before the 15th",
+     "better": "invoice, bolt, or utility plug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the assault and battery case notes for Tuesday's hearing",
+     "better": "gavel or legal brief",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Recharge over the long weekend with zero screen time",
+     "better": "hammock, nature, or spa",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the rolling suitcase for the Berlin conference",
+     "better": "suitcase",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a replacement USB-C braided cable for the nightstand",
+     "better": "cable or plug",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_horiz_000",
+   "badge_critical_battery",
+   "battery_low",
+   "battery_horiz_050"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7940,
+    "output": 2460,
+    "thoughts": 0,
+    "total": 10400
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "This battery has roughly two-thirds to three-quarters of its right side filled solid black leaving only a narrow vertical white rectangle on the left, making it the fullest (most charged) battery in the group."
 }

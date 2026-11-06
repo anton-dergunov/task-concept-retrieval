@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "add photo / upload image / insert picture",
+   "meaning": "add photo / insert picture into document or album",
    "strength": "primary"
   },
   {
-   "meaning": "new photo album or gallery",
+   "meaning": "create new photo album or gallery",
    "strength": "secondary"
   },
   {
-   "meaning": "photograph or image",
+   "meaning": "attach image",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to plain image/photo icons at small sizes if the plus sign blends into the frame corner.",
+ "ambiguity": "Easily confused with the picture frame with an upward arrow for tasks that casually say 'add photos to website/cloud' when they really mean uploading.",
  "modifier_semantics": [
   {
    "modifier": "plus sign in top-right corner",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Upload the wedding photos to the shared cloud drive",
+   "better": "picture frame with upward arrow (upload photo)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Export the high-res product images for the printer",
+   "better": "picture frame with upward arrow (export image)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book mountain hut for the Chamonix hike",
    "better": "mountain or hiking boot icon",
    "trap": "lookalike_glyph"
@@ -171,18 +181,13 @@
   },
   {
    "task": "Hang the framed botanical print in the hallway",
-   "better": "hammer / wall frame without plus sign",
+   "better": "plain picture frame without plus sign or hammer",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a waterproof disposable camera for the beach trip",
    "better": "camera icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Back up phone to cloud storage",
-   "better": "cloud upload icon",
-   "trap": "generic_verb"
   },
   {
    "task": "Pick a picture-perfect spot for the picnic",
@@ -211,6 +216,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add photo / upload image / insert picture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "new photo album or gallery",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "photograph or image",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to plain image/photo icons at small sizes if the plus sign blends into the frame corner.",
+   "near_misses": [
+    {
+     "task": "Book mountain hut for the Chamonix hike",
+     "better": "mountain or hiking boot icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Add new user to the shared workspace",
+     "better": "user with plus sign",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Hang the framed botanical print in the hallway",
+     "better": "hammer / wall frame without plus sign",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a waterproof disposable camera for the beach trip",
+     "better": "camera icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Back up phone to cloud storage",
+     "better": "cloud upload icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick a picture-perfect spot for the picnic",
+     "better": "picnic basket or map pin",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "image_arrow_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4034,
+    "output": 1012,
+    "thoughts": 0,
+    "total": 5046
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Has a plus sign in the top-right corner of the mountain picture frame rather than an upward arrow, meaning adding, inserting, or creating a new photo/album rather than uploading or exporting an image."
 }

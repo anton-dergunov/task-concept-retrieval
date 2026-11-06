@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "secured or password-protected Wi-Fi network",
+   "meaning": "Secured or password-protected Wi-Fi network",
    "strength": "primary"
   },
   {
@@ -18,11 +18,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "weak or medium-strength locked wireless signal",
+   "meaning": "Medium-high strength locked wireless signal",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "Restricted or guest Wi-Fi access",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the partially filled wedge looks identical to a standard full Wi-Fi with lock icon; it originates from OS status bar signal-level indicators.",
+ "ambiguity": "Virtually identical to and interchangeable with the half-filled secured Wi-Fi wedge icon, as well as a full secured Wi-Fi icon, because users scanning a task list read the Wi-Fi wedge plus padlock rather than the exact fill height.",
  "modifier_semantics": [
   {
    "modifier": "closed padlock",
@@ -161,6 +165,16 @@
  ],
  "near_misses": [
   {
+   "task": "Export the 2-bar low-medium locked Wi-Fi indicator asset for the system tray",
+   "better": "half-filled Wi-Fi wedge with padlock icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put a brass padlock on the side garden gate",
+   "better": "standalone padlock icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call ISP about slow internet speeds in the evening",
    "better": "plain Wi-Fi or speedometer icon",
    "trap": "generic_verb"
@@ -184,17 +198,12 @@
    "task": "Pay the monthly fiber internet bill before the 15th",
    "better": "receipt or bill icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Put a brass padlock on the side garden gate",
-   "better": "padlock icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a three-quarter filled Wi-Fi signal wedge with a padlock badge, representing a password-protected wireless network or Wi-Fi security settings. While technically a UI status-bar state indicator (medium signal + locked), in a task list it clearly cues tasks about Wi-Fi passwords and network encryption, though it is nearly indistinguishable from a full-strength locked Wi-Fi icon.",
@@ -212,6 +221,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "secured or password-protected Wi-Fi network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Wi-Fi password or network security settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weak or medium-strength locked wireless signal",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the partially filled wedge looks identical to a standard full Wi-Fi with lock icon; it originates from OS status bar signal-level indicators.",
+   "near_misses": [
+    {
+     "task": "Call ISP about slow internet speeds in the evening",
+     "better": "plain Wi-Fi or speedometer icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Reset master password for Bitwarden vault",
+     "better": "key or padlock icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a smart lock that works over home Wi-Fi without a hub",
+     "better": "door lock icon",
+     "trap": "property"
+    },
+    {
+     "task": "Run flat CAT6 ethernet cable from the living room to the attic",
+     "better": "ethernet cable or plug icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the monthly fiber internet bill before the 15th",
+     "better": "receipt or bill icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put a brass padlock on the side garden gate",
+     "better": "padlock icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "network_wifi_3_bar_locked"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4099,
+    "output": 1245,
+    "thoughts": 173,
+    "total": 5517
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Visually, the Wi-Fi wedge is filled three-quarters of the way to the top (three signal bars) leaving only a thin unfilled band, whereas the half-filled secured Wi-Fi icon has a much thicker empty top band; in a task list, the two are functionally interchangeable."
 }

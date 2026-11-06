@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "cold or subzero weather / freezing conditions",
+   "meaning": "extreme cold / subzero weather / freezing conditions (empty thermometer with minus sign",
    "strength": "primary"
+  },
+  {
+   "meaning": "remove or deactivate temperature sensor / thermometer",
+   "strength": "secondary"
   },
   {
    "meaning": "reduce fever or body temperature",
    "strength": "secondary"
-  },
-  {
-   "meaning": "remove thermometer or temperature sensor",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the empty thermometer outline could resemble a keyhole or a laboratory flask next to a dash.",
+ "ambiguity": "Nearly identical to the thermometer with a half-filled bulb and minus sign, and interchangeable with it for almost all cooling or cold-weather tasks; at tiny sizes the empty outline also resembles a keyhole or round-bottom flask.",
  "modifier_semantics": [
   {
    "modifier": "horizontal minus sign",
@@ -162,6 +162,21 @@
  ],
  "near_misses": [
   {
+   "task": "Turn down the living room thermostat to a cool 18 degrees before bed",
+   "better": "thermometer with low fluid fill in the bulb and a minus sign (or interchangeable with this icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a 250ml borosilicate round-bottom flask for the chemistry kit",
+   "better": "laboratory flask",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Lubricate the sticky deadbolt keyhole on the back porch door",
+   "better": "keyhole / lock and key",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a digital meat thermometer with a braided probe for the smoker",
    "better": "plain thermometer without minus sign, or cooking probe",
    "trap": "generic_verb"
@@ -177,25 +192,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Lubricate the sticky deadbolt keyhole on the back porch door",
-   "better": "keyhole / lock and key",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the overdue gas heating bill online before Thursday",
    "better": "bill / credit card / flame",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Order a 250ml borosilicate round-bottom flask for the chemistry kit",
-   "better": "laboratory flask",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a thermometer with a minus sign, universally understood as lowering temperature, cooling down, or subzero weather. It fits specific tasks around adjusting thermostats, chilling food or brew batches, PC cooling, and preparing for freezes, though general temperature tasks without a 'decrease' or 'cold' aspect fit a plain thermometer better.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "lower temperature / cool down / turn down thermostat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cold or subzero weather / freezing conditions",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reduce fever or body temperature",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "remove thermometer or temperature sensor",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the empty thermometer outline could resemble a keyhole or a laboratory flask next to a dash.",
+   "near_misses": [
+    {
+     "task": "Buy a digital meat thermometer with a braided probe for the smoker",
+     "better": "plain thermometer without minus sign, or cooking probe",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Wash my cold-weather merino base layers on gentle cycle",
+     "better": "shirt / laundry machine",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up cold medicine and throat lozenges at the pharmacy",
+     "better": "pills / pharmacy cross",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Lubricate the sticky deadbolt keyhole on the back porch door",
+     "better": "keyhole / lock and key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the overdue gas heating bill online before Thursday",
+     "better": "bill / credit card / flame",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a 250ml borosilicate round-bottom flask for the chemistry kit",
+     "better": "laboratory flask",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "thermometer_minus"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4095,
+    "output": 782,
+    "thoughts": 0,
+    "total": 4877
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "This thermometer has a completely empty outline with no fluid fill inside the bulb, whereas its look-alike has the bottom half of the bulb filled in; in meaning, the two are virtually interchangeable for lowering temperature or subzero cold, though the completely empty bulb slightly emphasizes extreme freezing or a removed/inactive sensor."
 }

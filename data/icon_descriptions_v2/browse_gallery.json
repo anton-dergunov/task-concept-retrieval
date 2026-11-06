@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "snooze, delay, or rescheduled time",
+   "meaning": "snooze, delay, or shifted schedule",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the trailing arc can look like a sound wave or motion line (ringing alarm) or a generic coin stack.",
+ "ambiguity": "Can be mistaken for the single clock with a bottom-right dot when the trailing arc isn't noticed, or misread as a ringing alarm (sound wave) or coin stack at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "second overlapping circle arc",
@@ -161,34 +161,39 @@
  ],
  "near_misses": [
   {
+   "task": "Replace the AA battery in the kitchen wall clock",
+   "better": "single clock face",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clear browser history and cookies on the work laptop",
+   "better": "clock with counterclockwise arrow for history",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Count the spare quarters in the laundry jar",
+   "better": "coins or money stack",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order a new brass pendulum for the grandfather clock",
    "better": "grandfather clock or gear",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the overdue water bill before Friday at 5pm",
-   "better": "bill / invoice or water drop",
+   "better": "bill or water drop",
    "trap": "property"
   },
   {
    "task": "Check how long the brisket needs to rest in the cooler",
-   "better": "meat / cooking",
+   "better": "meat or cooking thermometer",
    "trap": "generic_verb"
   },
   {
-   "task": "Count the spare quarters in the laundry jar",
-   "better": "coins / money",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book hotel near the convention center",
-   "better": "hotel / bed",
+   "better": "hotel or bed",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Renew annual passport before the six-month window closes",
-   "better": "passport",
-   "trap": "property"
   }
  ],
  "scores": {
@@ -212,6 +217,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple time zones or world clock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "daylight saving time or clock change",
+     "strength": "primary"
+    },
+    {
+     "meaning": "snooze, delay, or rescheduled time",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "recurring schedule or shift",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the trailing arc can look like a sound wave or motion line (ringing alarm) or a generic coin stack.",
+   "near_misses": [
+    {
+     "task": "Order a new brass pendulum for the grandfather clock",
+     "better": "grandfather clock or gear",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the overdue water bill before Friday at 5pm",
+     "better": "bill / invoice or water drop",
+     "trap": "property"
+    },
+    {
+     "task": "Check how long the brisket needs to rest in the cooler",
+     "better": "meat / cooking",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Count the spare quarters in the laundry jar",
+     "better": "coins / money",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book hotel near the convention center",
+     "better": "hotel / bed",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pace",
+   "history_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5375,
+    "output": 1673,
+    "thoughts": 0,
+    "total": 7048
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:23Z"
+  }
+ },
+ "distinguishing": "Unlike the single clock with a rim dot or the counterclockwise arrow clock, this has a complete circular clock face plus a curved arc of a second circle behind it on the right, indicating multiple times, time zones, or a time shift."
 }

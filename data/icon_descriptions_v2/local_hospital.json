@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "first aid or emergency medical supplies",
+   "meaning": "add item or create new entry",
    "strength": "primary"
   },
   {
-   "meaning": "add, create new item, or expand",
+   "meaning": "first aid or emergency medical care",
    "strength": "secondary"
   },
   {
-   "meaning": "Swiss symbol or pharmacy signage",
+   "meaning": "Swiss symbol or pharmacy cross",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly dual-purpose: reads equally as a hospital or first-aid sign (a thick Greek cross in a square) and as a generic UI 'add/new' button.",
+ "ambiguity": "Very close to the horizontal rectangle with a centered cross, differing only in being square (1:1) rather than landscape (4:3).",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -155,19 +155,24 @@
  ],
  "near_misses": [
   {
+   "task": "Add a new title slide to the keynote deck",
+   "better": "horizontal rectangle with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Start a new blank text document for the essay",
+   "better": "vertical page with folded corner and plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Add milk and eggs to the weekend grocery list",
    "better": "shopping cart or grocery bag",
    "trap": "generic_verb"
   },
   {
-   "task": "Add Sarah's new mobile number to contacts",
-   "better": "address book or contact card",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Book flights to Zurich for the autumn conference",
    "better": "airplane",
-   "trap": "lookalike_glyph"
+   "trap": "parent_topic"
   },
   {
    "task": "Buy a medical-grade HEPA air purifier for the bedroom",
@@ -178,11 +183,6 @@
    "task": "Pay the $185 anesthesia co-pay online",
    "better": "credit card or bill",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Tighten the loose Phillips-head screws on the cabinet hinge",
-   "better": "screwdriver or screw",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -206,6 +206,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hospital, clinic, urgent care, or medical center",
+     "strength": "primary"
+    },
+    {
+     "meaning": "first aid or emergency medical supplies",
+     "strength": "primary"
+    },
+    {
+     "meaning": "add, create new item, or expand",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Swiss symbol or pharmacy signage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly dual-purpose: reads equally as a hospital or first-aid sign (a thick Greek cross in a square) and as a generic UI 'add/new' button.",
+   "near_misses": [
+    {
+     "task": "Add milk and eggs to the weekend grocery list",
+     "better": "shopping cart or grocery bag",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Add Sarah's new mobile number to contacts",
+     "better": "address book or contact card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book flights to Zurich for the autumn conference",
+     "better": "airplane",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a medical-grade HEPA air purifier for the bedroom",
+     "better": "air purifier or fan",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $185 anesthesia co-pay online",
+     "better": "credit card or bill",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Tighten the loose Phillips-head screws on the cabinet hinge",
+     "better": "screwdriver or screw",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "create_new_folder",
+   "magnify_fullscreen",
+   "rectangle_add",
+   "note_add"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8092,
+    "output": 2462,
+    "thoughts": 0,
+    "total": 10554
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "A 1:1 rounded square frame around a centered cross, making it read as a symmetrical button, badge, or hospital sign rather than a rectangular card, box, folder, or page."
 }

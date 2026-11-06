@@ -13,15 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "remove saved payment card or disable card payment",
+   "meaning": "remove saved payment method or disable card payments",
    "strength": "primary"
   },
   {
-   "meaning": "declined card, expired card, or cash-only payment",
+   "meaning": "declined card or cash-only payment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, could be mistaken for a crossed-out browser window, calendar, or generic rectangular label.",
+ "ambiguity": "At glanceable sizes, the rectangular frame with a slash can resemble the slashed subtitle/caption screens, though the thick solid top stripe sets it apart from thin broken text lines.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -156,13 +156,18 @@
  ],
  "near_misses": [
   {
-   "task": "Pay off the Chase credit card balance in full before Friday",
-   "better": "plain credit card without slash",
-   "trap": "shared_vocabulary"
+   "task": "Turn off subtitles on the living room Apple TV",
+   "better": "slashed rectangular screen with segmented text lines (subtitles off)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Apply for a 0% foreign transaction fee travel card before the Japan trip",
-   "better": "credit card with plus sign or plain credit card",
+   "task": "Turn off comments on the blog post",
+   "better": "slashed speech bubble with text lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay off the Chase credit card balance in full before Friday",
+   "better": "plain credit card without slash",
    "trap": "shared_vocabulary"
   },
   {
@@ -171,17 +176,12 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Disable browser pop-up windows on the testing laptop",
-   "better": "browser window with slash",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book the cabin that doesn't require a credit card deposit",
-   "better": "cabin / house",
+   "better": "cabin or house",
    "trap": "property"
   },
   {
-   "task": "File the police report at the precinct for the insurance claim",
+   "task": "File the police report at the precinct for the stolen wallet",
    "better": "police badge or document",
    "trap": "parent_topic"
   }
@@ -207,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cancel, block, or freeze a credit or debit card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remove saved payment card or disable card payment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "declined card, expired card, or cash-only payment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, could be mistaken for a crossed-out browser window, calendar, or generic rectangular label.",
+   "near_misses": [
+    {
+     "task": "Pay off the Chase credit card balance in full before Friday",
+     "better": "plain credit card without slash",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Apply for a 0% foreign transaction fee travel card before the Japan trip",
+     "better": "credit card with plus sign or plain credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check whether the replacement debit card arrived in the mail",
+     "better": "plain credit card or mailbox",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Disable browser pop-up windows on the testing laptop",
+     "better": "browser window with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the cabin that doesn't require a credit card deposit",
+     "better": "cabin / house",
+     "trap": "property"
+    },
+    {
+     "task": "File the police report at the precinct for the insurance claim",
+     "better": "police badge or document",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speaker_notes_off",
+   "stack_off",
+   "subtitles_off",
+   "text_ad_off",
+   "comments_disabled"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9498,
+    "output": 3020,
+    "thoughts": 0,
+    "total": 12518
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "The only icon with a single thick edge-to-edge horizontal band across the upper half (a magnetic stripe) inside a plain rounded rectangle, clearly depicting a payment card rather than text lines or speech bubbles."
 }

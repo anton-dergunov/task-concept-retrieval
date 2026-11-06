@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "contact card, address book, or directory entry",
+   "meaning": "address book or contact directory entry",
    "strength": "secondary"
   },
   {
-   "meaning": "employee badge or visitor pass",
+   "meaning": "employee badge or visitor pass with clips",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because it lacks the horizontal header line typical of calendar icons, it strongly resembles a top-bound contact book, a clipboard/badge with two clips, or a tagged user profile photo.",
+ "ambiguity": "Can be confused with the plain square user profile icon at small sizes if the two small top binding tabs are overlooked.",
  "modifier_semantics": [
   {
    "modifier": "person silhouette inside calendar frame",
@@ -162,19 +162,24 @@
  ],
  "near_misses": [
   {
+   "task": "Upload a new square avatar to my GitHub profile",
+   "better": "person silhouette in a plain square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sort through the album of family portrait photos",
+   "better": "stacked square frames with person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Print a vertical 2x3 inch ID card photo",
+   "better": "person silhouette in a tall vertical frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a wall calendar with big squares for the kitchen",
    "better": "plain calendar with grid",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Take a new headshot for LinkedIn and the company Slack",
-   "better": "camera or portrait photo frame",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a 5x7 wooden frame for grandma's portrait",
-   "better": "picture frame",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check the date of the next bank holiday",
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon combines a two-tabbed calendar outline with a person silhouette inside, representing personal schedules, 1-on-1 appointments, shift rosters, or contact books. It fits common tasks around booking personal appointments, setting availability, and coordinating shifts, though without a horizontal calendar header bar it can also look like an ID badge or contact card.",
@@ -213,6 +218,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "personal schedule, shift roster, or individual availability",
+     "strength": "primary"
+    },
+    {
+     "meaning": "1-on-1 appointment, consultation, or personal meeting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contact card, address book, or directory entry",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "employee badge or visitor pass",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because it lacks the horizontal header line typical of calendar icons, it strongly resembles a top-bound contact book, a clipboard/badge with two clips, or a tagged user profile photo.",
+   "near_misses": [
+    {
+     "task": "Buy a wall calendar with big squares for the kitchen",
+     "better": "plain calendar with grid",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take a new headshot for LinkedIn and the company Slack",
+     "better": "camera or portrait photo frame",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 5x7 wooden frame for grandma's portrait",
+     "better": "picture frame",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the date of the next bank holiday",
+     "better": "general calendar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the $40 missed appointment fee to the dental clinic",
+     "better": "payment / credit card / money",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a gift bottle of mezcal for Sam's birthday",
+     "better": "gift or bottle",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "person_book",
+   "account_box",
+   "switch_account"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6728,
+    "output": 2165,
+    "thoughts": 0,
+    "total": 8893
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:16Z"
+  }
+ },
+ "distinguishing": "Unlike the plain portrait frames, this square frame has two small vertical binding tabs along its top edge, marking it as a calendar page, contact book, or clipped badge rather than a plain user avatar or photo."
 }

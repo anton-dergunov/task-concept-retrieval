@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "Wi-Fi / wireless network",
+   "meaning": "Wi-Fi or wireless network",
    "strength": "primary"
   },
   {
-   "meaning": "internet connection / router",
+   "meaning": "internet connection or router",
    "strength": "primary"
   },
   {
-   "meaning": "hotspot / wireless signal",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "RSS feed / broadcast",
+   "meaning": "mobile hotspot or wireless signal",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to 3-arc Wi-Fi icons or partial signal-strength indicators, and resembles an RSS feed icon rotated.",
+ "ambiguity": "Visually almost indistinguishable from the other solid-dot two-arc Wi-Fi icon, and semantically interchangeable with both the three-arc plain Wi-Fi icon and the hollow-dot two-arc Wi-Fi icon.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -156,45 +152,40 @@
  ],
  "near_misses": [
   {
+   "task": "Diagnose the intermittent Wi-Fi outage in the home office",
+   "better": "Wi-Fi with exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Install a new mesh Wi-Fi node in the upstairs hallway",
+   "better": "Wi-Fi with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a waterproof Wi-Fi meat thermometer for the smoker",
    "better": "thermometer",
    "trap": "property"
   },
   {
    "task": "Check if the café has outlets and decent seating for working",
-   "better": "cafe / coffee cup",
+   "better": "cafe or coffee cup",
    "trap": "generic_verb"
   },
   {
-   "task": "Record the live radio broadcast on Sunday night",
-   "better": "radio / microphone",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Tap credit card at the parking meter",
-   "better": "credit card / contactless payment",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Clean up RSS feeds in NetNewsWire",
-   "better": "RSS feed icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Drill hole through the floor joists for the Cat6 ethernet cable",
-   "better": "drill / ethernet cable",
+   "better": "drill or ethernet cable",
    "trap": "parent_topic"
   },
   {
    "task": "Network with alumni at the Thursday mixer",
-   "better": "people / handshake",
+   "better": "people or handshake",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon is the universal symbol for Wi-Fi and wireless internet connectivity. It fits a common set of household, tech, travel, and billing tasks around routers, hotspots, and ISPs, though it closely resembles 3-bar Wi-Fi variants and rotated contactless/RSS symbols.",
@@ -212,6 +203,105 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi / wireless network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "internet connection / router",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hotspot / wireless signal",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "RSS feed / broadcast",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to 3-arc Wi-Fi icons or partial signal-strength indicators, and resembles an RSS feed icon rotated.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof Wi-Fi meat thermometer for the smoker",
+     "better": "thermometer",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the café has outlets and decent seating for working",
+     "better": "cafe / coffee cup",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Record the live radio broadcast on Sunday night",
+     "better": "radio / microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Tap credit card at the parking meter",
+     "better": "credit card / contactless payment",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean up RSS feeds in NetNewsWire",
+     "better": "RSS feed icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Drill hole through the floor joists for the Cat6 ethernet cable",
+     "better": "drill / ethernet cable",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Network with alumni at the Thursday mixer",
+     "better": "people / handshake",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_4_bar_plus",
+   "android_wifi_3_bar_plus",
+   "android_wifi_3_bar_alert",
+   "android_wifi_4_bar_alert",
+   "android_wifi_4_bar",
+   "android_wifi_3_bar",
+   "nest_remote_comfort_sensor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12117,
+    "output": 4047,
+    "thoughts": 0,
+    "total": 16164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Shows an unbadged two-arc Wi-Fi symbol above a solid dot, visually nearly identical to the other solid-dot two-arc icon and functionally interchangeable with all plain Wi-Fi icons in this group."
 }

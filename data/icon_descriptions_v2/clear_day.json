@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "sun / sunlight / weather",
+   "meaning": "sun, sunlight, or sunny weather",
    "strength": "primary"
   },
   {
-   "meaning": "brightness / light level",
+   "meaning": "brightness or light level",
    "strength": "primary"
   },
   {
-   "meaning": "daytime / morning",
+   "meaning": "daytime or morning routine",
    "strength": "secondary"
   },
   {
-   "meaning": "summer / warm season",
+   "meaning": "summer or warm season",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the thick ring and rectangular spokes can slightly resemble a mechanical gear or cogwheel.",
+ "ambiguity": "Virtually indistinguishable from the slightly smaller hollow-ring sun icon and the stubby-ray hollow sun icon, and interchangeable in meaning with the solid-center sun icon; also resembles a mechanical gear or cogwheel at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "outdoors",
@@ -155,40 +155,40 @@
  ],
  "near_misses": [
   {
+   "task": "Boost external monitor to maximum high-contrast brightness for outdoor editing",
+   "better": "solid-center sun with long cardinal rays (high brightness)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the cracked rear derailleur cog on the commuter bike",
+   "better": "gear / cogwheel icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy two tubes of SPF 50 mineral sunscreen for the kids",
-   "better": "lotion bottle / sunscreen",
+   "better": "lotion bottle / sunscreen icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pick up prescription polarized sunglasses from the optician",
-   "better": "sunglasses",
+   "better": "sunglasses icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Soak a jar of dried sun-dried tomatoes in olive oil",
-   "better": "tomato / jar",
+   "task": "Soak a jar of sun-dried tomatoes in olive oil",
+   "better": "tomato or jar icon",
    "trap": "property"
   },
   {
-   "task": "Replace the cracked rear derailleur cog on the commuter bike",
-   "better": "gear / cogwheel",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book the ferry tickets from Piraeus to Naxos",
-   "better": "ferry / boat",
+   "task": "Book the summer ferry tickets from Piraeus to Naxos",
+   "better": "ferry / boat icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Order a bright yellow waterproof rain jacket",
-   "better": "jacket / coat",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear, universally recognized sun and brightness glyph. It fits tasks centered on sunlight exposure, garden sun mapping, morning light routines, summer plans, and display brightness or light mode settings, though at very tiny sizes its thick spokes vaguely resemble a gear.",
@@ -206,6 +206,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "sunny"
- }
+  "alias_of": "sunny",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sun / sunlight / weather",
+     "strength": "primary"
+    },
+    {
+     "meaning": "brightness / light level",
+     "strength": "primary"
+    },
+    {
+     "meaning": "daytime / morning",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "summer / warm season",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the thick ring and rectangular spokes can slightly resemble a mechanical gear or cogwheel.",
+   "near_misses": [
+    {
+     "task": "Buy two tubes of SPF 50 mineral sunscreen for the kids",
+     "better": "lotion bottle / sunscreen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up prescription polarized sunglasses from the optician",
+     "better": "sunglasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Soak a jar of dried sun-dried tomatoes in olive oil",
+     "better": "tomato / jar",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the cracked rear derailleur cog on the commuter bike",
+     "better": "gear / cogwheel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the ferry tickets from Piraeus to Naxos",
+     "better": "ferry / boat",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a bright yellow waterproof rain jacket",
+     "better": "jacket / coat",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "flare",
+   "light_mode",
+   "wb_sunny"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6663,
+    "output": 2133,
+    "thoughts": 242,
+    "total": 9038
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "Shows a wide hollow ring with eight equal-length rectangular rays sitting close to the ring; it is visually and semantically interchangeable with the other hollow-ring sun icons for sun, weather, daytime, or brightness."
 }

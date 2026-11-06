@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "text message, chat, or SMS",
+   "meaning": "text message, SMS, or general chat",
    "strength": "primary"
   },
   {
-   "meaning": "comment, feedback, or reply",
+   "meaning": "comment or reply in a thread",
    "strength": "primary"
-  },
-  {
-   "meaning": "conversation or messaging thread",
-   "strength": "secondary"
   },
   {
    "meaning": "typing or pending response",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to other speech bubble variants (round bubble, bubble with lines instead of dots, or dual chat bubbles).",
+ "ambiguity": "Shares the identical rectangular speech bubble frame with the exclamation-mark, info, and person-silhouette bubbles, though the horizontal row of three dots is easy to distinguish from vertical symbols.",
  "modifier_semantics": [
   {
    "modifier": "three horizontal dots centered inside",
@@ -161,14 +157,24 @@
  ],
  "near_misses": [
   {
+   "task": "Submit a bug report about the login crash",
+   "better": "speech bubble with an exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Ask the hotel front desk about late checkout rules",
+   "better": "speech bubble with lowercase info letter i",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Send a contact card to the new client via chat",
+   "better": "speech bubble with a person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Grandma to wish her happy birthday",
    "better": "phone receiver",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Email the signed tax forms to the accountant",
-   "better": "envelope / email",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new prepaid SIM card with unlimited texts for the trip",
@@ -177,13 +183,8 @@
   },
   {
    "task": "Pay the monthly mobile phone bill before Friday",
-   "better": "invoice / credit card",
+   "better": "invoice or credit card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Record a 5-minute voice memo with book ideas",
-   "better": "microphone",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Mention the broken printer at tomorrow's team meeting",
@@ -212,6 +213,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "text message, chat, or SMS",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comment, feedback, or reply",
+     "strength": "primary"
+    },
+    {
+     "meaning": "conversation or messaging thread",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "typing or pending response",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to other speech bubble variants (round bubble, bubble with lines instead of dots, or dual chat bubbles).",
+   "near_misses": [
+    {
+     "task": "Call Grandma to wish her happy birthday",
+     "better": "phone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the signed tax forms to the accountant",
+     "better": "envelope / email",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new prepaid SIM card with unlimited texts for the trip",
+     "better": "SIM card",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly mobile phone bill before Friday",
+     "better": "invoice / credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Record a 5-minute voice memo with book ideas",
+     "better": "microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mention the broken printer at tomorrow's team meeting",
+     "better": "printer",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "feedback",
+   "chat_info",
+   "3p"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6707,
+    "output": 1413,
+    "thoughts": 0,
+    "total": 8120,
+    "seconds": 27.28,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:11:55Z"
+  }
+ },
+ "distinguishing": "Shows three horizontal dots inside the rectangular speech bubble, representing a general text message, chat thread, or typing indicator rather than an alert, info notice, or user-specific message."
 }

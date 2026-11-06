@@ -9,19 +9,19 @@
  },
  "readings": [
   {
+   "meaning": "add shortcut to Google Drive / link to Drive folder",
+   "strength": "primary"
+  },
+  {
    "meaning": "export to or open in Google Drive",
    "strength": "primary"
   },
   {
-   "meaning": "share or move cloud files externally",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "upload backup to cloud storage",
+   "meaning": "share Google Drive link externally",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the cutout triangle looks like a generic recycling symbol, a tent, or an abstract letter A with an external link arrow.",
+ "ambiguity": "Easily confused at small sizes with the Google Drive icon with a plus badge; the cut-off triangular ribbon can also be misread as a recycling symbol or tent.",
  "modifier_semantics": [
   {
    "modifier": "up-right diagonal arrow",
@@ -158,28 +158,33 @@
  ],
  "near_misses": [
   {
+   "task": "Create a new shared folder in Google Drive for the wedding photos",
+   "better": "Google Drive logo with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the scanned tax receipts to Google Drive",
+   "better": "Google Drive logo with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the plastic bottles and cardboard to the recycling center",
+   "better": "three-arrow recycling symbol",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Schedule annual driveway pressure washing",
    "better": "house or pressure washer",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a 2TB external SSD drive for video editing",
-   "better": "hard drive",
+   "better": "external hard drive",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Take the plastic bottles and cardboard to the recycling center",
-   "better": "recycling symbol",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Patch the torn mesh on the two-person camping tent",
-   "better": "camping tent",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Write the quarterly board report in Google Docs",
-   "better": "document / report",
+   "better": "document page with text lines",
    "trap": "property"
   },
   {
@@ -209,6 +214,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "export to or open in Google Drive",
+     "strength": "primary"
+    },
+    {
+     "meaning": "share or move cloud files externally",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upload backup to cloud storage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the cutout triangle looks like a generic recycling symbol, a tent, or an abstract letter A with an external link arrow.",
+   "near_misses": [
+    {
+     "task": "Schedule annual driveway pressure washing",
+     "better": "house or pressure washer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 2TB external SSD drive for video editing",
+     "better": "hard drive",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take the plastic bottles and cardboard to the recycling center",
+     "better": "recycling symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Patch the torn mesh on the two-person camping tent",
+     "better": "camping tent",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write the quarterly board report in Google Docs",
+     "better": "document / report",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $19.99 Google One annual invoice on the Visa card",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "add_to_drive"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4067,
+    "output": 1112,
+    "thoughts": 85,
+    "total": 5264
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "Has an up-right diagonal arrow badge in the bottom-right corner instead of a plus sign, indicating a Google Drive shortcut, external share link, or exporting/opening in Drive rather than adding a new file."
 }

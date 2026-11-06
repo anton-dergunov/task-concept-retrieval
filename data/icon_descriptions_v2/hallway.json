@@ -7,19 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "framed picture, wall art, or poster to hang",
+   "meaning": "framed picture, wall art, or hanging print",
    "strength": "primary"
   },
   {
-   "meaning": "photograph, image file, or gallery",
+   "meaning": "poster, painting, or framed photograph",
    "strength": "primary"
   },
   {
-   "meaning": "exhibition, art museum, or gallery visit",
+   "meaning": "art exhibition, museum, or gallery visit",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "picture frame",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles generic digital image/photo icons, though the hanging wire on top strongly cues a physical framed picture on a wall.",
+ "ambiguity": "Semantically interchangeable with the wider hanging picture frame with a sun; both denote physical hanging wall art rather than the stacked photo gallery or photo folders.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -152,14 +156,19 @@
  ],
  "near_misses": [
   {
+   "task": "Select 20 best snapshots from the camera roll for the shared album",
+   "better": "stacked photos / photo gallery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Move downloaded reference images into the design assets directory",
+   "better": "stacked photo folders",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy new tortoiseshell glasses frames at the optician",
    "better": "eyeglasses",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Charge camera batteries and wipe the 35mm lens before Saturday's shoot",
-   "better": "camera",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book mountain hut for the Dolomites trek in July",
@@ -185,7 +194,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a square picture frame containing two mountain peaks, suspended from a triangular hanging wire on top. It is ideal for tasks about hanging wall art, framing prints, managing photos, or art exhibitions, though at small sizes it overlaps with standard digital image icons.",
@@ -203,6 +212,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "framed picture, wall art, or poster to hang",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photograph, image file, or gallery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "exhibition, art museum, or gallery visit",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles generic digital image/photo icons, though the hanging wire on top strongly cues a physical framed picture on a wall.",
+   "near_misses": [
+    {
+     "task": "Buy new tortoiseshell glasses frames at the optician",
+     "better": "eyeglasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge camera batteries and wipe the 35mm lens before Saturday's shoot",
+     "better": "camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book mountain hut for the Dolomites trek in July",
+     "better": "mountain",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Picture how the dining table will fit if we rotate it ninety degrees",
+     "better": "table / floor plan",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the custom framer's deposit invoice via bank transfer",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy picture-perfect strawberries for the birthday tart",
+     "better": "strawberry / cake",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wall_art",
+   "perm_media",
+   "collections"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6725,
+    "output": 2080,
+    "thoughts": 0,
+    "total": 8805
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Shows a square picture frame hanging from a top wire with two mountains and no sun, making it virtually interchangeable in meaning with the wider hanging frame that includes a sun."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "share or forward",
+   "meaning": "share or forward content",
    "strength": "primary"
   },
   {
-   "meaning": "export or extract data",
+   "meaning": "export data or open in an external window",
    "strength": "primary"
   },
   {
-   "meaning": "open in external window or link",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "move out of folder or archive",
+   "meaning": "extract or move item out of a container",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with external link, reply/forward email, or log out icons depending on platform conventions.",
+ "ambiguity": "Often confused with the doorway with a straight right-pointing arrow (log out / exit) or the speech bubble with a right-pointing arrow (forward message), since all three feature a box-like frame and a right-pointing arrow.",
  "modifier_semantics": [
   {
    "modifier": "right-angled outgoing arrow",
@@ -167,40 +163,40 @@
  ],
  "near_misses": [
   {
-   "task": "Pack winter coats into storage boxes",
-   "better": "cardboard box or coat",
+   "task": "Sign out of Netflix on the hotel TV",
+   "better": "doorway rectangle with straight centered right-pointing arrow (log out icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reply to Sarah's comment on the design mockup",
+   "better": "speech bubble with right-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download the invoice PDF for expense reimbursement",
+   "better": "folded-corner document with downward arrow onto bar (file download icon)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy 50 shares of S&P 500 index fund",
-   "better": "stock chart or money",
+   "better": "stock chart or currency icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check the emergency exit signs in the hallway",
-   "better": "exit door / running figure sign",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Turn right onto Oak Street to pick up the dry cleaning",
-   "better": "laundry / shirt on hanger",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Review the exported analytics report for anomalies",
-   "better": "chart or analytics report",
+   "better": "analytics chart or magnifying glass",
    "trap": "property"
   },
   {
-   "task": "Write SQL query for the customer churn table",
-   "better": "database or code",
-   "trap": "parent_topic"
+   "task": "Pack winter coats into storage boxes",
+   "better": "cardboard box or coat",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows an open box or tray with a bent arrow pointing outward, standard UI iconography for sharing, forwarding, or exporting. While abstract and action-oriented, it fits real tasks centered on data export, file extraction, or forwarding items when no specific physical object dominates. It can be confused with external-link, upload, or log-out icons.",
@@ -220,6 +216,96 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "share or forward",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export or extract data",
+     "strength": "primary"
+    },
+    {
+     "meaning": "open in external window or link",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "move out of folder or archive",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with external link, reply/forward email, or log out icons depending on platform conventions.",
+   "near_misses": [
+    {
+     "task": "Pack winter coats into storage boxes",
+     "better": "cardboard box or coat",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy 50 shares of S&P 500 index fund",
+     "better": "stock chart or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the emergency exit signs in the hallway",
+     "better": "exit door / running figure sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn right onto Oak Street to pick up the dry cleaning",
+     "better": "laundry / shirt on hanger",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Review the exported analytics report for anomalies",
+     "better": "chart or analytics report",
+     "trap": "property"
+    },
+    {
+     "task": "Write SQL query for the customer churn table",
+     "better": "database or code",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_save",
+   "chat_paste_go_2",
+   "move_item"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6704,
+    "output": 2099,
+    "thoughts": 165,
+    "total": 8968
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "Unlike the closed-top doorway or speech bubble with straight horizontal arrows, this has an open-top U-shaped tray and an L-shaped arrow that rises up from inside and bends 90 degrees to point right, signifying sharing, forwarding, or opening externally."
 }

@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the speaker cabinet can briefly resemble a traffic light or iPod, and the headphones could look like a padlock shackle, though together they clearly read as audio gear.",
+ "ambiguity": "At small sizes, the rectangular speaker box with a top tweeter dot resembles the smartphone with a front camera dot in the hand-held phone icons, though the headphones arch is distinct from the gripping thumb.",
  "modifier_semantics": [
   {
    "modifier": "over-ear headphones",
@@ -157,24 +157,24 @@
  ],
  "near_misses": [
   {
+   "task": "Review daily screen time limits on my smartphone",
+   "better": "smartphone held in a hand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test the new mobile app layout in one-handed mode",
+   "better": "smartphone held in a hand with thumb reaching across",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Email the keynote speaker to confirm her arrival time and hotel",
    "better": "person at podium or email icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Charge my Sony noise-cancelling headphones before the flight to Tokyo",
-   "better": "single headphones icon (without speaker)",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Listen to the new Hardcore History episode on the train",
-   "better": "podcast / microphone or single headphones icon",
+   "better": "podcast microphone or single headphones icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Buy a waterproof portable Bluetooth speaker for the kayak trip",
-   "better": "single speaker icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the $450 invoice for the rehearsal studio rental",
@@ -183,7 +183,7 @@
   },
   {
    "task": "Book a quiet hotel room with good soundproofing near the venue",
-   "better": "hotel / bed icon",
+   "better": "hotel bed icon",
    "trap": "property"
   }
  ],
@@ -208,6 +208,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "audio equipment, sound gear, speakers and headphones",
+     "strength": "primary"
+    },
+    {
+     "meaning": "audio output devices or sound settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hi-fi setup, home studio monitoring, or DJ gear",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the speaker cabinet can briefly resemble a traffic light or iPod, and the headphones could look like a padlock shackle, though together they clearly read as audio gear.",
+   "near_misses": [
+    {
+     "task": "Email the keynote speaker to confirm her arrival time and hotel",
+     "better": "person at podium or email icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge my Sony noise-cancelling headphones before the flight to Tokyo",
+     "better": "single headphones icon (without speaker)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Listen to the new Hardcore History episode on the train",
+     "better": "podcast / microphone or single headphones icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a waterproof portable Bluetooth speaker for the kayak trip",
+     "better": "single speaker icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $450 invoice for the rehearsal studio rental",
+     "better": "money, invoice, or credit card icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book a quiet hotel room with good soundproofing near the venue",
+     "better": "hotel / bed icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_hand",
+   "mobile_hand_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5437,
+    "output": 1586,
+    "thoughts": 0,
+    "total": 7023
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "Shows a speaker cabinet with two round drivers paired with over-ear headphones in the bottom right, representing audio equipment rather than a smartphone held in a hand."
 }

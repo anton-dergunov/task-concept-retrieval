@@ -13,15 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "stack of physical letters, mail pile, or correspondence",
+   "meaning": "stack of physical letters or mail pile",
    "strength": "primary"
   },
   {
-   "meaning": "inbox management or newsletter batch",
+   "meaning": "batch newsletter send or inbox triage",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the L-shaped stacking line makes it look nearly identical to a single envelope icon.",
+ "ambiguity": "Easily mistaken for the plain single envelope at small sizes because there is no distinct badge symbol, only an extra outer border line on two sides.",
  "modifier_semantics": [
   {
    "modifier": "L-shaped stacking line behind bottom and left edges",
@@ -158,33 +158,33 @@
  ],
  "near_misses": [
   {
-   "task": "Email the signed lease PDF back to the landlord",
-   "better": "document / contract with signature",
-   "trap": "generic_verb"
+   "task": "Send a thank-you email to the interviewer",
+   "better": "plain single envelope or envelope with right-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Email the signed tax form PDF to the accountant",
+   "better": "envelope with paperclip attachment",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy padded shipping envelopes for the eBay orders",
-   "better": "parcel / package box",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pick up chainmail rings for the cosplay armor",
-   "better": "armor / craft supplies",
+   "better": "parcel or package box icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the $140 electric bill that arrived in the mail today",
-   "better": "bill / invoice / electricity bolt",
+   "better": "bill, invoice, or electricity bolt icon",
    "trap": "property"
   },
   {
    "task": "Call the dentist to confirm the appointment from their reminder email",
-   "better": "phone / tooth",
+   "better": "phone handset or tooth icon",
    "trap": "property"
   },
   {
    "task": "Schedule a 1-on-1 video call with the new design lead",
-   "better": "video camera / calendar",
+   "better": "video camera or calendar icon",
    "trap": "parent_topic"
   }
  ],
@@ -209,6 +209,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple emails, email threads, or bulk messages",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stack of physical letters, mail pile, or correspondence",
+     "strength": "primary"
+    },
+    {
+     "meaning": "inbox management or newsletter batch",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the L-shaped stacking line makes it look nearly identical to a single envelope icon.",
+   "near_misses": [
+    {
+     "task": "Email the signed lease PDF back to the landlord",
+     "better": "document / contract with signature",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy padded shipping envelopes for the eBay orders",
+     "better": "parcel / package box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up chainmail rings for the cosplay armor",
+     "better": "armor / craft supplies",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $140 electric bill that arrived in the mail today",
+     "better": "bill / invoice / electricity bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Call the dentist to confirm the appointment from their reminder email",
+     "better": "phone / tooth",
+     "trap": "property"
+    },
+    {
+     "task": "Schedule a 1-on-1 video call with the new design lead",
+     "better": "video camera / calendar",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mail_off",
+   "attach_email",
+   "mail",
+   "unsubscribe",
+   "mark_email_read",
+   "forward_to_inbox",
+   "outgoing_mail"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12060,
+    "output": 2435,
+    "thoughts": 63,
+    "total": 14558
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "An L-shaped backing line behind the left and bottom edges shows a stack of multiple envelopes, representing bulk mail, threads, or an inbox pile rather than a single message."
 }

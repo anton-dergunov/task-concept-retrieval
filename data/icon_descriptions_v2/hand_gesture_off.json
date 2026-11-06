@@ -10,19 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "gesture control disabled / no waving",
+   "meaning": "disable hand-wave / turn off motion gesture control",
    "strength": "primary"
+  },
+  {
+   "meaning": "no waving / disable wave-to-wake sensor",
+   "strength": "primary"
+  },
+  {
+   "meaning": "stop hand tremor / reduce shake",
+   "strength": "secondary"
   },
   {
    "meaning": "do not touch / hands-off",
    "strength": "secondary"
-  },
-  {
-   "meaning": "stop motion / no shake",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the sliced fingers and diagonal slash look like a broken bar chart, a comb, or a crossed-out Wi-Fi/signal icon.",
+ "ambiguity": "Easily mistaken for the static slashed hand without motion arcs at small sizes, and the sliced vertical fingers plus arcs can briefly resemble a crossed-out signal or bar chart icon.",
  "modifier_semantics": [
   {
    "modifier": "curved motion lines",
@@ -155,29 +159,29 @@
  ],
  "near_misses": [
   {
+   "task": "Print 'Do Not Touch' warning labels for the 3D printer",
+   "better": "static slashed hand without motion arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Lower raised hands in the town hall webinar queue",
+   "better": "static slashed hand without motion arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Disable touchscreen input on the kiosk tablet",
+   "better": "static slashed hand without motion arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Wave goodbye to Sarah at the airport gate",
-   "better": "waving hand",
+   "better": "waving hand without slash",
    "trap": "property"
   },
   {
    "task": "Wash hands with antibacterial soap before prepping dinner",
    "better": "soap / washing hands",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy winter gloves with touchscreen-compatible fingertips",
-   "better": "gloves",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check mobile data signal strength in the basement office",
-   "better": "signal bars",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update the quarterly sales bar chart with the negative growth trendline",
-   "better": "bar chart",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book a deep tissue hand and wrist massage for Friday",
@@ -208,6 +212,90 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "gesture control disabled / no waving",
+     "strength": "primary"
+    },
+    {
+     "meaning": "do not touch / hands-off",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "stop motion / no shake",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the sliced fingers and diagonal slash look like a broken bar chart, a comb, or a crossed-out Wi-Fi/signal icon.",
+   "near_misses": [
+    {
+     "task": "Wave goodbye to Sarah at the airport gate",
+     "better": "waving hand",
+     "trap": "property"
+    },
+    {
+     "task": "Wash hands with antibacterial soap before prepping dinner",
+     "better": "soap / washing hands",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy winter gloves with touchscreen-compatible fingertips",
+     "better": "gloves",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check mobile data signal strength in the basement office",
+     "better": "signal bars",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the quarterly sales bar chart with the negative growth trendline",
+     "better": "bar chart",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a deep tissue hand and wrist massage for Friday",
+     "better": "hand / massage",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "do_not_touch"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4089,
+    "output": 1114,
+    "thoughts": 129,
+    "total": 5332
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Adds two curved motion arcs at the top-right and bottom-left of the slashed open hand, showing a waving or shaking hand crossed out (no waving, disable gesture control) rather than a static raised hand."
 }

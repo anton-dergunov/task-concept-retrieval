@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "image contrast or color inversion",
+   "meaning": "image contrast, color inversion, or negative",
    "strength": "primary"
   },
   {
-   "meaning": "photo before-and-after comparison",
+   "meaning": "photo editing or before-and-after comparison",
    "strength": "primary"
   },
   {
    "meaning": "dark mode vs light mode theme toggle",
    "strength": "secondary"
-  },
-  {
-   "meaning": "mountain peak or tent icon",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a stylized mountain, camping tent, or an abstract geometric logo rather than an image contrast/invert symbol.",
+ "ambiguity": "Can be mistaken for the standard mountain picture icons at a glance because all share a rounded square frame and triangular peak geometry at the bottom, or misread as a camping tent.",
  "modifier_semantics": [
   {
    "modifier": "half-filled vertical split",
@@ -159,24 +155,19 @@
  ],
  "near_misses": [
   {
+   "task": "Upload vacation photos to the shared family album",
+   "better": "standard picture frame with two mountains and round sun",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pack the two-person tent and footprint for Yosemite",
    "better": "camping tent",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Compare electricity rates between the two winter tariffs",
-   "better": "balance scale or lightning bolt",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Buy a high-contrast baby board book for Emma's newborn",
    "better": "book or baby rattle",
    "trap": "property"
-  },
-  {
-   "task": "Check the mountain weather forecast before Friday's hike",
-   "better": "mountain with cloud",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order replacement power inverter for the camper van",
@@ -185,14 +176,14 @@
   },
   {
    "task": "Send invoice to client for the final photo retouching",
-   "better": "invoice or dollar sign",
+   "better": "invoice or currency symbol",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon is a Material-style glyph for image color inversion or photo contrast (a simplified mountain picture split vertically into negative and positive halves). While it fits narrow tasks around photo editing, B&W conversion, or dark/light theme contrast, at list size the triangle strongly resembles an abstract tent or mountain peak, making it easy to misread outside of an image editor.",
@@ -210,6 +201,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "image contrast or color inversion",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo before-and-after comparison",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dark mode vs light mode theme toggle",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "mountain peak or tent icon",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a stylized mountain, camping tent, or an abstract geometric logo rather than an image contrast/invert symbol.",
+   "near_misses": [
+    {
+     "task": "Pack the two-person tent and footprint for Yosemite",
+     "better": "camping tent",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Compare electricity rates between the two winter tariffs",
+     "better": "balance scale or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a high-contrast baby board book for Emma's newborn",
+     "better": "book or baby rattle",
+     "trap": "property"
+    },
+    {
+     "task": "Check the mountain weather forecast before Friday's hike",
+     "better": "mountain with cloud",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order replacement power inverter for the camper van",
+     "better": "car battery or electrical plug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send invoice to client for the final photo retouching",
+     "better": "invoice or dollar sign",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "package",
+   "satellite",
+   "imagesmode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6706,
+    "output": 2114,
+    "thoughts": 207,
+    "total": 9027
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:30Z"
+  }
+ },
+ "distinguishing": "Divided vertically into inverted black-and-white halves with a single centered triangle at the bottom and no sun in the upper corner, depicting image color inversion, high contrast, or before-and-after photo editing rather than a standard picture."
 }

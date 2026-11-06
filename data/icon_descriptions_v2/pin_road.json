@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "street view or road checkpoint",
+   "meaning": "right-hand roadside stop or pull-off",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the converging road lines can look like a ladder or the letter A next to a droplet.",
+ "ambiguity": "Horizontal mirror image of the road with a map pin on the bottom-left, making them interchangeable for almost all road location or navigation tasks.",
  "modifier_semantics": [
   {
    "modifier": "map pin in bottom-right corner",
@@ -163,6 +163,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pull over at the scenic viewpoint on the left side of the highway",
+   "better": "road with map pin on the left",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the street address on the left side of the avenue",
+   "better": "road with map pin on the left",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Take the car in for its 60,000-mile service before the road trip",
    "better": "car with wrench / car maintenance",
    "trap": "parent_topic"
@@ -178,11 +188,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Put the tall A-frame ladder back in the garage",
-   "better": "ladder",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Track the UPS package that is on the road to our house",
    "better": "parcel / delivery box",
    "trap": "shared_vocabulary"
@@ -196,7 +201,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon combines a perspective two-lane road with a location pin, clearly communicating a driving route, highway waypoint, or street address. It fits road trip planning, navigation, and roadside location tasks well, distinguishing them from generic map pins or cars.",
@@ -214,6 +219,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "driving route or road trip stop",
+     "strength": "primary"
+    },
+    {
+     "meaning": "street address or roadside location",
+     "strength": "primary"
+    },
+    {
+     "meaning": "GPS navigation or driving directions",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "street view or road checkpoint",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the converging road lines can look like a ladder or the letter A next to a droplet.",
+   "near_misses": [
+    {
+     "task": "Take the car in for its 60,000-mile service before the road trip",
+     "better": "car with wrench / car maintenance",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy road running shoes with better arch support",
+     "better": "running shoe",
+     "trap": "property"
+    },
+    {
+     "task": "Draft the Q3 product roadmap for the engineering team",
+     "better": "project timeline / gantt chart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put the tall A-frame ladder back in the garage",
+     "better": "ladder",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Track the UPS package that is on the road to our house",
+     "better": "parcel / delivery box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check whether the new router supports address reservation",
+     "better": "router / network",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pin_road_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4058,
+    "output": 831,
+    "thoughts": 0,
+    "total": 4889
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:47Z"
+  }
+ },
+ "distinguishing": "Places the map pin on the bottom-right side of the road rather than the bottom-left; otherwise the two icons are horizontal mirror images and semantically interchangeable for roadside location or road-trip tasks."
 }

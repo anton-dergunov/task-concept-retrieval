@@ -11,7 +11,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "public transit / commute",
+   "meaning": "public transit / bus commute",
    "strength": "primary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "campervan / van",
+   "meaning": "campervan / minibus",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a train or tram at small sizes, though the two bottom wheels and lack of tracks distinguish it as a road bus.",
+ "ambiguity": "At small sizes its rounded rectangular body and two headlights resemble the two train icons, though the single wide windshield and vertical wheels set it apart from rail vehicles.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Book the Eurostar train from St Pancras to Paris",
+   "better": "train on angled rails",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Top up my metro card for the subway commute",
+   "better": "subway car on a track base",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Schedule a coaching session with Sarah before the quarterly review",
    "better": "people talking / mentor",
    "trap": "shared_vocabulary"
@@ -164,11 +174,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book the Eurostar train from St Pancras to Paris",
-   "better": "train on tracks",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a waterproof jacket for waiting at the bus stop in winter",
    "better": "coat / jacket",
    "trap": "property"
@@ -177,17 +182,12 @@
    "task": "Renew my passport before the Balkan bus tour in September",
    "better": "passport",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Take the car in for four new tyres and alignment",
-   "better": "car / tire",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A clear front-facing pictogram of a bus with windshield, destination sign, headlights, and two tires. Ideal for tasks involving city buses, intercity coaches, airport shuttles, school buses, and transit passes. Slightly similar to a train icon at very small sizes, though the tires and absence of rails keep it distinct.",
@@ -205,6 +205,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "directions_bus"
- }
+  "alias_of": "directions_bus",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bus / coach",
+     "strength": "primary"
+    },
+    {
+     "meaning": "public transit / commute",
+     "strength": "primary"
+    },
+    {
+     "meaning": "shuttle / school bus",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "campervan / van",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a train or tram at small sizes, though the two bottom wheels and lack of tracks distinguish it as a road bus.",
+   "near_misses": [
+    {
+     "task": "Schedule a coaching session with Sarah before the quarterly review",
+     "better": "people talking / mentor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Debug the CAN bus termination issue on the prototype board",
+     "better": "microchip / circuit",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the Eurostar train from St Pancras to Paris",
+     "better": "train on tracks",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof jacket for waiting at the bus stop in winter",
+     "better": "coat / jacket",
+     "trap": "property"
+    },
+    {
+     "task": "Renew my passport before the Balkan bus tour in September",
+     "better": "passport",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Take the car in for four new tyres and alignment",
+     "better": "car / tire",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "train",
+   "directions_transit"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5374,
+    "output": 911,
+    "thoughts": 140,
+    "total": 6425
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "Unlike the two rail icons with split windshields and angled tracks, this icon has a single undivided windshield and two vertical rubber tires at the bottom, clearly depicting a road bus rather than a train."
 }

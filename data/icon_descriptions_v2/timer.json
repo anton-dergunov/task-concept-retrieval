@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "stopwatch or timer",
+   "meaning": "stopwatch or kitchen/workout timer",
    "strength": "primary"
   },
   {
-   "meaning": "timed interval, countdown, or speed measurement",
+   "meaning": "timed interval, countdown, or lap/speed measurement",
    "strength": "primary"
   },
   {
-   "meaning": "time tracking or Pomodoro session",
+   "meaning": "Pomodoro focus session or time-tracking stopwatch",
    "strength": "secondary"
   },
   {
-   "meaning": "benchmark or performance test",
+   "meaning": "benchmark or performance speed test",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with an alarm clock or regular clock at small sizes, though the single hand and top/side pushers clearly mark a stopwatch.",
+ "ambiguity": "At small sizes its top crown and side pusher can blur into the twin top bells of the alarm clock, or be overlooked like the plain wall clock.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -157,19 +157,24 @@
  ],
  "near_misses": [
   {
+   "task": "Set morning wake-up alarm for 5:15 am before the early flight",
+   "better": "alarm clock with two top bells",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hang the new wall clock in the kitchen and set the time",
+   "better": "plain two-handed clock face",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Submit weekly employee hours on the payroll timesheet",
+   "better": "plain two-handed clock face",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Quick 10-minute tidy of the living room before guests arrive",
    "better": "broom or sofa",
    "trap": "property"
-  },
-  {
-   "task": "Take watch to the jeweler for a new leather strap",
-   "better": "wristwatch",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Set morning alarm for 5:15 am before the early flight",
-   "better": "alarm clock with bells",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check train departure times to Brighton for Sunday",
@@ -177,12 +182,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Schedule dentist appointment before the end of the month",
-   "better": "tooth or calendar",
-   "trap": "property"
-  },
-  {
-   "task": "Pack running shoes and electrolyte gels in duffel bag",
+   "task": "Pack running shoes and electrolyte gels in the gym duffel bag",
    "better": "running shoe",
    "trap": "parent_topic"
   }
@@ -208,6 +208,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "stopwatch or timer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "timed interval, countdown, or speed measurement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "time tracking or Pomodoro session",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "benchmark or performance test",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with an alarm clock or regular clock at small sizes, though the single hand and top/side pushers clearly mark a stopwatch.",
+   "near_misses": [
+    {
+     "task": "Quick 10-minute tidy of the living room before guests arrive",
+     "better": "broom or sofa",
+     "trap": "property"
+    },
+    {
+     "task": "Take watch to the jeweler for a new leather strap",
+     "better": "wristwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Set morning alarm for 5:15 am before the early flight",
+     "better": "alarm clock with bells",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check train departure times to Brighton for Sunday",
+     "better": "train or schedule timetable",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack running shoes and electrolyte gels in duffel bag",
+     "better": "running shoe",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "alarm",
+   "watch_later"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5325,
+    "output": 1623,
+    "thoughts": 133,
+    "total": 7081
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "Unlike the two-handed alarm clock with twin top bells and the plain wall clock, this has a single vertical hand, a flat top crown button, and one angled side pusher, making it specifically a stopwatch or countdown timer."
 }

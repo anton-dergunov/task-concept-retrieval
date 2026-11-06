@@ -10,11 +10,11 @@
  },
  "readings": [
   {
-   "meaning": "sleet, hail, or freezing rain",
+   "meaning": "hail, ice pellets, or sleet",
    "strength": "primary"
   },
   {
-   "meaning": "winter storm or bad weather",
+   "meaning": "winter storm or severe weather",
    "strength": "primary"
   },
   {
@@ -22,7 +22,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the diamond pellets and dash look nearly identical to standard rain drops or snow dots beneath a cloud.",
+ "ambiguity": "Nearly indistinguishable at small sizes from the cloud with two diamonds, a dash, and a water droplet; also easily mistaken for standard rain or snow clouds.",
  "modifier_semantics": [
   {
    "modifier": "three solid diamond shapes below cloud",
@@ -161,9 +161,9 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a waterproof rain jacket for the autumn commute",
-   "better": "jacket / coat",
-   "trap": "property"
+   "task": "Check the forecast for mixed rain and sleet before driving home",
+   "better": "cloud with diamond pellets, dash, and water droplet",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Back up family photos to the cloud drive",
@@ -171,24 +171,24 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Buy a waterproof rain jacket for the autumn commute",
+   "better": "jacket or coat",
+   "trap": "property"
+  },
+  {
    "task": "Brainstorm new product ideas with the design team",
    "better": "lightbulb",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a case of sparkling water with lime",
-   "better": "bottle or can",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Check whether the basement dehumidifier is full",
-   "better": "water droplet / appliance",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Install storm windows on the north side of the house",
    "better": "window",
    "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check whether the basement dehumidifier is full",
+   "better": "water droplet or appliance",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -212,6 +212,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sleet, hail, or freezing rain",
+     "strength": "primary"
+    },
+    {
+     "meaning": "winter storm or bad weather",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weather forecast or precipitation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the diamond pellets and dash look nearly identical to standard rain drops or snow dots beneath a cloud.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof rain jacket for the autumn commute",
+     "better": "jacket / coat",
+     "trap": "property"
+    },
+    {
+     "task": "Back up family photos to the cloud drive",
+     "better": "cloud storage with upload arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Brainstorm new product ideas with the design team",
+     "better": "lightbulb",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a case of sparkling water with lime",
+     "better": "bottle or can",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the basement dehumidifier is full",
+     "better": "water droplet / appliance",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Install storm windows on the north side of the house",
+     "better": "window",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "weather_mix"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4034,
+    "output": 974,
+    "thoughts": 160,
+    "total": 5168
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "Shows three angular diamond pellets and one slanted dash beneath the cloud with no rounded water droplet, representing pure hail or ice pellets, though at list size it is practically interchangeable with the cloud showing a droplet mixed with diamonds."
 }

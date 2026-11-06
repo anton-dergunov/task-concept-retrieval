@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "night / evening / bedtime",
+   "meaning": "night, evening, or bedtime routine",
    "strength": "primary"
   },
   {
-   "meaning": "sleep / rest / insomnia",
+   "meaning": "sleep, rest, or do not disturb",
    "strength": "primary"
   },
   {
-   "meaning": "dark mode / do not disturb",
+   "meaning": "stargazing or astronomy",
    "strength": "secondary"
   },
   {
-   "meaning": "stargazing / astronomy",
+   "meaning": "dark mode theme",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a plain crescent moon icon or a general weather icon for clear night.",
+ "ambiguity": "Could be confused at small sizes with the crescent moon with a gauge needle when a task involves sleep tracking or a sleep timer.",
  "modifier_semantics": [
   {
    "modifier": "two solid diamond stars in upper right",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Review weekly sleep score and REM metrics in health app",
+   "better": "crescent moon with gauge needle (sleep tracking / score)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set a 30-minute sleep timer on the bedroom TV",
+   "better": "crescent moon with gauge needle (sleep timer)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book 4 nights at the Lisbon hotel in May",
    "better": "bed / hotel",
    "trap": "shared_vocabulary"
@@ -182,12 +192,7 @@
    "trap": "property"
   },
   {
-   "task": "Buy fresh croissants for Sunday breakfast",
-   "better": "croissant / bakery",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order new foam pillows",
+   "task": "Order new foam pillows for the master bedroom",
    "better": "pillow / bed",
    "trap": "parent_topic"
   }
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "night / evening / bedtime",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sleep / rest / insomnia",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dark mode / do not disturb",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "stargazing / astronomy",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a plain crescent moon icon or a general weather icon for clear night.",
+   "near_misses": [
+    {
+     "task": "Book 4 nights at the Lisbon hotel in May",
+     "better": "bed / hotel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a nightguard for teeth grinding from dentist",
+     "better": "tooth / mouthguard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay overnight shipping fee for passport renewal",
+     "better": "package / fast delivery",
+     "trap": "property"
+    },
+    {
+     "task": "Prepare overnight oats with chia seeds and berries",
+     "better": "bowl / food",
+     "trap": "property"
+    },
+    {
+     "task": "Buy fresh croissants for Sunday breakfast",
+     "better": "croissant / bakery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order new foam pillows",
+     "better": "pillow / bed",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sleep_score"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4019,
+    "output": 1094,
+    "thoughts": 138,
+    "total": 5251
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "Pairs the crescent moon with two solid diamond stars in the upper right, representing night, bedtime, or stargazing in general rather than a timed or measured sleep metric."
 }

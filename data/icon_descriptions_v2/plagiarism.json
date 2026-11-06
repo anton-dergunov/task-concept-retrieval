@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "search or find a document / file",
+   "meaning": "search or find a document or file",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with other document-plus-badge icons or a plain search icon at very small sizes.",
+ "ambiguity": "At very small sizes, the diagonal handle of the magnifying glass and its circular lens can be momentarily confused with the slash and dots of a document with a percent sign.",
  "modifier_semantics": [
   {
    "modifier": "magnifying glass",
@@ -161,8 +161,18 @@
  ],
  "near_misses": [
   {
+   "task": "File state tax return form",
+   "better": "document with a percent sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Gather W-2 and 1099 tax documents for accountant",
+   "better": "stacked documents with a percent sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a magnifying glass for grandpa to read the newspaper",
-   "better": "magnifying glass (without document)",
+   "better": "standalone magnifying glass without a document",
    "trap": "shared_vocabulary"
   },
   {
@@ -171,24 +181,14 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Sign the employment offer letter and send it back",
-   "better": "signature / pen signing document",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order acid-free archival folders for legal documents",
-   "better": "folder / binder",
+   "better": "folder or binder",
    "trap": "property"
   },
   {
    "task": "Pay the notary public fee by bank transfer",
-   "better": "money / bank transfer",
+   "better": "money or bank transfer",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Look up flights to Lisbon in October",
-   "better": "airplane",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -212,6 +212,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "search or find a document / file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "inspect, audit, or proofread a document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "document preview or print preview",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "research paper or case study",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with other document-plus-badge icons or a plain search icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a magnifying glass for grandpa to read the newspaper",
+     "better": "magnifying glass (without document)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the milk expiration date in the fridge",
+     "better": "milk carton",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Sign the employment offer letter and send it back",
+     "better": "signature / pen signing document",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order acid-free archival folders for legal documents",
+     "better": "folder / binder",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the notary public fee by bank transfer",
+     "better": "money / bank transfer",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Look up flights to Lisbon in October",
+     "better": "airplane",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "heap_snapshot_large",
+   "heap_snapshot_multiple"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5384,
+    "output": 1522,
+    "thoughts": 185,
+    "total": 7091
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:27Z"
+  }
+ },
+ "distinguishing": "Shows a magnifying glass inside a single document page, indicating searching, inspecting, or previewing a file rather than tax or percentage paperwork."
 }

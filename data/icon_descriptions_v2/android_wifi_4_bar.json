@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "mobile hotspot or signal strength",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "RSS feed or broadcast signal",
+   "meaning": "mobile hotspot or wireless signal",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can occasionally be confused with an RSS feed icon (which normally radiates from a bottom-left corner rather than bottom-center) or generic contactless/NFC waves.",
+ "ambiguity": "Interchangeable in task lists with the unbadged two-arc Wi-Fi icons (both solid-dot and hollow-ring base); easily confused with the plus or exclamation Wi-Fi variants if the small badge isn't noticed.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,29 +151,29 @@
  ],
  "near_misses": [
   {
+   "task": "Reboot the router and troubleshoot why the Wi-Fi keeps dropping",
+   "better": "Wi-Fi with exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add a new guest Wi-Fi SSID for the holiday party",
+   "better": "Wi-Fi with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small waterproof wireless speaker for the shower",
    "better": "speaker",
    "trap": "property"
   },
   {
    "task": "Order a wireless charging pad for the nightstand",
-   "better": "battery / charger",
+   "better": "battery or charger",
    "trap": "property"
   },
   {
    "task": "Attend the industry networking mixer on Thursday evening",
-   "better": "people / handshake",
+   "better": "people or handshake",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Clean up my RSS feed subscriptions in NetNewsWire",
-   "better": "RSS feed / newspaper",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Enable tap-to-pay NFC on the new debit card",
-   "better": "credit card",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Drill a hole through the floor joist for the coax line",
@@ -188,7 +184,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The universal three-arc symbol for Wi-Fi and wireless internet connectivity. It is immediately recognizable and fits a common family of household, tech, bill-paying, and travel tasks around internet service and wireless networks, though it should not be used when 'wireless' is merely an adjective on another device like headphones or a mouse.",
@@ -206,6 +202,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi or wireless network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "internet connection or broadband service",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile hotspot or signal strength",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "RSS feed or broadcast signal",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can occasionally be confused with an RSS feed icon (which normally radiates from a bottom-left corner rather than bottom-center) or generic contactless/NFC waves.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof wireless speaker for the shower",
+     "better": "speaker",
+     "trap": "property"
+    },
+    {
+     "task": "Order a wireless charging pad for the nightstand",
+     "better": "battery / charger",
+     "trap": "property"
+    },
+    {
+     "task": "Attend the industry networking mixer on Thursday evening",
+     "better": "people / handshake",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean up my RSS feed subscriptions in NetNewsWire",
+     "better": "RSS feed / newspaper",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Enable tap-to-pay NFC on the new debit card",
+     "better": "credit card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Drill a hole through the floor joist for the coax line",
+     "better": "drill",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_4_bar_plus",
+   "android_wifi_3_bar_plus",
+   "android_wifi_3_bar_alert",
+   "android_wifi_4_bar_alert",
+   "wifi",
+   "android_wifi_3_bar",
+   "nest_remote_comfort_sensor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12117,
+    "output": 4047,
+    "thoughts": 0,
+    "total": 16164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Shows a standard unbadged Wi-Fi symbol with three curved arcs above a solid dot, making it the classic full-signal wireless icon but functionally interchangeable with the two-arc plain Wi-Fi icons."
 }

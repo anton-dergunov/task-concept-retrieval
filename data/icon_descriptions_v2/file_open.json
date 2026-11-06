@@ -9,15 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "import file or document",
+   "meaning": "import file or insert content into a document",
    "strength": "primary"
   },
   {
-   "meaning": "insert content into document",
-   "strength": "primary"
-  },
-  {
-   "meaning": "open or select file",
+   "meaning": "select, click, or open a document",
    "strength": "secondary"
   },
   {
@@ -25,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the diagonal arrow can look like a mouse cursor clicking a file or be confused with an export/external-link document icon if arrow direction is missed.",
+ "ambiguity": "Essentially interchangeable with the document with a bottom-left inward arrow for file import, and can be mistaken for a mouse cursor clicking a file or an outward-arrow export icon at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "inward diagonal arrow at bottom-right",
@@ -161,40 +157,40 @@
  ],
  "near_misses": [
   {
+   "task": "Create a desktop shortcut to the shared budget spreadsheet",
+   "better": "document with bottom-left arrow pointing up-right (file shortcut badge)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Export the Q4 tax summary to PDF for the accountant",
    "better": "document with outward arrow (file export)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the customs import duty on the camera lens from Japan",
-   "better": "customs / package / payment icon",
+   "better": "customs, package, or payment icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy imported San Marzano tomatoes for Sunday's sauce",
-   "better": "tomato / grocery icon",
+   "better": "tomato or grocery icon",
    "trap": "property"
   },
   {
    "task": "Check the newly imported contacts for missing phone numbers",
-   "better": "contacts / address book icon",
+   "better": "contacts or address book icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Email Sarah about the crashed server during the migration",
-   "better": "email / person icon",
+   "task": "Email Sarah about the crashed server during the file migration",
+   "better": "email or person icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Delete corrupted temporary files from the downloads folder",
-   "better": "file with trash or cross icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon shows a standard folded-corner document with an arrow pointing diagonally inward into its lower-right corner, clearly signifying importing a file or inserting content into a document. It fits tasks centered on data/file imports and document assembly, though at small sizes it can be confused with file-export or cursor-click-file icons.",
@@ -212,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "import file or document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "insert content into document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "open or select file",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "incoming document or file submission",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the diagonal arrow can look like a mouse cursor clicking a file or be confused with an export/external-link document icon if arrow direction is missed.",
+   "near_misses": [
+    {
+     "task": "Export the Q4 tax summary to PDF for the accountant",
+     "better": "document with outward arrow (file export)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the customs import duty on the camera lens from Japan",
+     "better": "customs / package / payment icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy imported San Marzano tomatoes for Sunday's sauce",
+     "better": "tomato / grocery icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check the newly imported contacts for missing phone numbers",
+     "better": "contacts / address book icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email Sarah about the crashed server during the migration",
+     "better": "email / person icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Delete corrupted temporary files from the downloads folder",
+     "better": "file with trash or cross icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_export"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4087,
+    "output": 1106,
+    "thoughts": 157,
+    "total": 5350
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:28Z"
+  }
+ },
+ "distinguishing": "The inward diagonal arrow enters from the bottom-right corner (pointing up-left), making it largely interchangeable with the bottom-left inward-arrow variant for importing into a file, though the up-left angle also resembles a mouse pointer clicking the document."
 }

@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "work hours, timesheet, or shift schedule",
+   "meaning": "work hours, shift schedule, or office hours",
    "strength": "primary"
   },
   {
-   "meaning": "employment history or work experience",
+   "meaning": "employment history, tenure, or past jobs",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "luggage storage, baggage delay, or travel schedule",
+   "meaning": "luggage storage, baggage delay, or business trip schedule",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The base shape can be read either as an office briefcase (work/job) or a travel suitcase (luggage/trip), and at very small sizes the outline could resemble a camera body.",
+ "ambiguity": "Can be mistaken at a glance for the clipboard with a clock badge because both pair a rectangular frame and top protrusion with the identical bottom-right clock, and the base shape itself is ambiguous between an office briefcase and a travel suitcase.",
  "modifier_semantics": [
   {
    "modifier": "solid black circular clock badge at bottom right",
@@ -161,13 +161,18 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a leather briefcase for the new job",
-   "better": "plain briefcase without clock badge",
+   "task": "Fill out the hourly patient vitals log on the ward chart",
+   "better": "clipboard with clock badge",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pack carry-on suitcase for the Berlin flight",
-   "better": "suitcase or luggage icon without clock",
+   "task": "Clear clipboard history in Windows settings",
+   "better": "clipboard with clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a leather briefcase for the new job",
+   "better": "plain briefcase without clock badge",
    "trap": "lookalike_glyph"
   },
   {
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a briefcase/suitcase with a clock badge, clearly signaling work hours, timesheets, shift schedules, employment history, or timed luggage storage. It fits a solid set of recurring workplace and admin tasks (logging hours, submitting timesheets, scheduling shifts) while remaining distinct from a plain briefcase or plain clock.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "work hours, timesheet, or shift schedule",
+     "strength": "primary"
+    },
+    {
+     "meaning": "employment history or work experience",
+     "strength": "primary"
+    },
+    {
+     "meaning": "overtime, PTO, or time off from work",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "luggage storage, baggage delay, or travel schedule",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The base shape can be read either as an office briefcase (work/job) or a travel suitcase (luggage/trip), and at very small sizes the outline could resemble a camera body.",
+   "near_misses": [
+    {
+     "task": "Buy a leather briefcase for the new job",
+     "better": "plain briefcase without clock badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack carry-on suitcase for the Berlin flight",
+     "better": "suitcase or luggage icon without clock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace battery in the kitchen wall clock",
+     "better": "plain clock or battery icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Draft the Q3 product roadmap slide deck",
+     "better": "presentation slides or chart icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Look for a part-time dog walker for Tuesdays",
+     "better": "dog or paw print icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check when the leather messenger bag ships",
+     "better": "shipping box or delivery truck icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pending_actions"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4114,
+    "output": 1188,
+    "thoughts": 225,
+    "total": 5527
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:25Z"
+  }
+ },
+ "distinguishing": "Unlike the taller clipboard with a solid inner clip and round hole, this has a wider landscape box with an outlined rectangular handle on top, representing a briefcase or suitcase with a clock badge (work hours, employment history, or travel/luggage time)."
 }

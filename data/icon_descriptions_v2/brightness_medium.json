@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "brightness or medium brightness",
+   "meaning": "screen brightness / medium brightness",
    "strength": "primary"
   },
   {
-   "meaning": "dark mode / light mode toggle",
+   "meaning": "light / dark theme toggle / auto-brightness",
    "strength": "primary"
   },
   {
-   "meaning": "contrast adjustment",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "Islamic Rub el Hizb star with half moon",
+   "meaning": "display contrast / image exposure adjustment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles full/high brightness (solid circle inside), auto-brightness, or a pure contrast icon (half-filled circle without outer star points); may also look like a decorative geometric star or badge.",
+ "ambiguity": "Very easily mistaken at list size for the eight-pointed star containing a crescent moon (low brightness / dark mode / Islamic motif), as the only difference is a straight vertical inner edge versus a concave curve.",
  "modifier_semantics": [
   {
    "modifier": "filled right semicircle inside star",
@@ -159,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Shop for dates and decorations before Ramadan starts",
+   "better": "eight-pointed star with crescent moon (Islamic symbol)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up bedtime routine and night light for the toddler",
+   "better": "eight-pointed star with crescent moon or plain crescent moon (night / sleep)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a bright yellow cycling vest for winter commutes",
    "better": "safety vest or bicycle",
    "trap": "property"
@@ -167,16 +173,6 @@
    "task": "Compare contrast between the two vendor proposals before Friday",
    "better": "document comparison or scales",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pack SPF 50 sunscreen for the Mallorca trip",
-   "better": "sunscreen bottle or sun",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check weather forecast for Sunday's hike",
-   "better": "sun behind cloud / weather",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book MRI with contrast dye at the imaging center",
@@ -192,7 +188,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "An eight-pointed star outline containing a half-filled circle is a standard UI glyph for medium screen brightness, contrast, or a light/dark theme toggle. It fits tasks around display calibration, dark mode implementation, photo contrast editing, and smart lighting dimmers, though it is easily confused with general sun or full-brightness icons.",
@@ -210,6 +206,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "brightness or medium brightness",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dark mode / light mode toggle",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contrast adjustment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Islamic Rub el Hizb star with half moon",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles full/high brightness (solid circle inside), auto-brightness, or a pure contrast icon (half-filled circle without outer star points); may also look like a decorative geometric star or badge.",
+   "near_misses": [
+    {
+     "task": "Buy a bright yellow cycling vest for winter commutes",
+     "better": "safety vest or bicycle",
+     "trap": "property"
+    },
+    {
+     "task": "Compare contrast between the two vendor proposals before Friday",
+     "better": "document comparison or scales",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack SPF 50 sunscreen for the Mallorca trip",
+     "better": "sunscreen bottle or sun",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check weather forecast for Sunday's hike",
+     "better": "sun behind cloud / weather",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book MRI with contrast dye at the imaging center",
+     "better": "hospital or medical scan",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly electric bill for lighting and heating",
+     "better": "invoice or lightning bolt",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "brightness_4"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4078,
+    "output": 1106,
+    "thoughts": 0,
+    "total": 5184
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:26Z"
+  }
+ },
+ "distinguishing": "Contains a straight-edged right semicircle inside the eight-pointed star (rather than a curved crescent), representing medium brightness, contrast, or a light/dark theme toggle."
 }

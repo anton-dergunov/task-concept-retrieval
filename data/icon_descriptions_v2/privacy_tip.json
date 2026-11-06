@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "security information / privacy policy",
+   "meaning": "privacy policy, security guidelines, or terms of protection",
    "strength": "primary"
   },
   {
-   "meaning": "insurance details / warranty info",
+   "meaning": "insurance policy details, coverage info, or warranty terms",
    "strength": "primary"
   },
   {
-   "meaning": "safety instructions / guidelines",
+   "meaning": "safety instructions or compliance documentation",
    "strength": "secondary"
   },
   {
-   "meaning": "information security (infosec)",
+   "meaning": "information security (infosec) overview",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the lowercase 'i' can easily be mistaken for an upside-down exclamation mark or a standard exclamation mark (security alert/warning), or a keyhole.",
+ "ambiguity": "At small sizes, easily mistaken for the shield with an exclamation mark (which just flips the bar and dot) or the shield with a keyhole.",
  "modifier_semantics": [
   {
    "modifier": "lowercase letter i",
@@ -162,14 +162,14 @@
  ],
  "near_misses": [
   {
-   "task": "Fix critical CVE vulnerability in production auth server",
-   "better": "shield with exclamation mark (security alert)",
+   "task": "Respond to the critical CVE vulnerability in the auth server",
+   "better": "shield with exclamation mark (security alert or vulnerability) ",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Rotate SSH keys and update 1Password vault",
-   "better": "key or lock icon",
-   "trap": "shared_vocabulary"
+   "task": "Enable two-factor authentication and update the password vault",
+   "better": "shield with padlock (account lock and authentication) ",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a UV-protective sun shirt for kayaking",
@@ -213,6 +213,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "security information / privacy policy",
+     "strength": "primary"
+    },
+    {
+     "meaning": "insurance details / warranty info",
+     "strength": "primary"
+    },
+    {
+     "meaning": "safety instructions / guidelines",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "information security (infosec)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the lowercase 'i' can easily be mistaken for an upside-down exclamation mark or a standard exclamation mark (security alert/warning), or a keyhole.",
+   "near_misses": [
+    {
+     "task": "Fix critical CVE vulnerability in production auth server",
+     "better": "shield with exclamation mark (security alert)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Rotate SSH keys and update 1Password vault",
+     "better": "key or lock icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a UV-protective sun shirt for kayaking",
+     "better": "shirt or sun icon",
+     "trap": "property"
+    },
+    {
+     "task": "Ask the tourist information desk at the station for a city map",
+     "better": "plain info circle or map icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install wire mesh guard over the basement window well",
+     "better": "window or house icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify that the backup drive is encrypted",
+     "better": "hard drive or lock icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shield_lock",
+   "encrypted",
+   "gpp_maybe",
+   "verified_user",
+   "shield_moon"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9379,
+    "output": 1838,
+    "thoughts": 0,
+    "total": 11217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Contains a lowercase letter 'i' (dot above a vertical bar) inside the shield, indicating security documentation, privacy policies, or insurance details rather than active locking or a threat alert."
 }

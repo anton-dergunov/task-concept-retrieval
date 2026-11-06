@@ -11,19 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "distress, anxiety, pain, or overwhelm",
+   "meaning": "yawning, sleepiness, or grogginess",
    "strength": "primary"
   },
   {
-   "meaning": "yawning, sleepiness, or grogginess",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "crying, whining, or complaining",
+   "meaning": "sighing, groaning, or mild overwhelm",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read indiscriminately as tired/yawning, anxious/stressed, in pain, or crying, and looks similar to many other negative-emotion smiley faces at small sizes.",
+ "ambiguity": "Nearly interchangeable at list size with the wailing face with an open kidney-shaped mouth, and easily confused with the sad face with a single-line frown when used for general negative mood or burnout.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -163,13 +159,23 @@
  ],
  "near_misses": [
   {
+   "task": "Log daily depression and low mood score in therapy app",
+   "better": "sad face with a single-line deep frown",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Journal about acute panic attack and crying spell",
+   "better": "distressed face with an open wailing frowning mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Finish the exhausting 40-page compliance audit spreadsheet",
    "better": "spreadsheet or document icon",
    "trap": "property"
   },
   {
    "task": "Replace tired old sofa cushions in the den",
-   "better": "sofa / couch icon",
+   "better": "sofa or couch icon",
    "trap": "shared_vocabulary"
   },
   {
@@ -178,17 +184,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Schedule dentist appointment for toothache",
-   "better": "tooth icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Warm up voice for choir singing practice",
-   "better": "microphone or musical note icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pick up prescription from Walgreens on 5th",
+   "task": "Pick up sleep aid prescription from Walgreens",
    "better": "pill bottle or pharmacy cross icon",
    "trap": "parent_topic"
   }
@@ -216,6 +212,95 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "exhaustion, fatigue, or tiredness",
+     "strength": "primary"
+    },
+    {
+     "meaning": "distress, anxiety, pain, or overwhelm",
+     "strength": "primary"
+    },
+    {
+     "meaning": "yawning, sleepiness, or grogginess",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "crying, whining, or complaining",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read indiscriminately as tired/yawning, anxious/stressed, in pain, or crying, and looks similar to many other negative-emotion smiley faces at small sizes.",
+   "near_misses": [
+    {
+     "task": "Finish the exhausting 40-page compliance audit spreadsheet",
+     "better": "spreadsheet or document icon",
+     "trap": "property"
+    },
+    {
+     "task": "Replace tired old sofa cushions in the den",
+     "better": "sofa / couch icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check stress fractures on the garage concrete slab",
+     "better": "crack or house/garage icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule dentist appointment for toothache",
+     "better": "tooth icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Warm up voice for choir singing practice",
+     "better": "microphone or musical note icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up prescription from Walgreens on 5th",
+     "better": "pill bottle or pharmacy cross icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_frustrated",
+   "sentiment_sad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5404,
+    "output": 1500,
+    "thoughts": 108,
+    "total": 7012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Unlike the wailing kidney-shaped mouth or the single-line frown, this face has a simple rounded-oval open mouth and horizontally flattened eye ends, reading more as yawning, sighing, or physical tiredness than crying or sadness."
 }

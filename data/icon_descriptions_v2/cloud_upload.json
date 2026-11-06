@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "cloud upload / upload to cloud storage",
+   "meaning": "upload files to cloud storage",
    "strength": "primary"
   },
   {
-   "meaning": "cloud backup / online sync",
+   "meaning": "run cloud backup or push local files online",
    "strength": "primary"
   },
   {
-   "meaning": "publish or deploy to server",
+   "meaning": "publish or deploy build to remote server",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a plain cloud (weather) or cloud download at very small sizes if arrow direction is missed.",
+ "ambiguity": "Can be confused with the cloud-download icon at a quick glance since both integrate a vertical arrow into the cloud's stroke, or with the cloud-checkmark icon when a task is vaguely titled 'cloud backup'.",
  "modifier_semantics": [
   {
    "modifier": "upward-pointing arrow integrated into bottom line",
@@ -159,7 +159,12 @@
  "near_misses": [
   {
    "task": "Download the tax forms from the IRS website",
-   "better": "cloud download (arrow pointing down)",
+   "better": "cloud with downward arrow (cloud download)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Verify that iCloud photo sync is enabled and up to date on the new iPad",
+   "better": "cloud with checkmark (cloud sync verified)",
    "trap": "lookalike_glyph"
   },
   {
@@ -169,23 +174,18 @@
   },
   {
    "task": "Edit the wedding photos before uploading them",
-   "better": "photo / image editing",
+   "better": "photo / image editing icon",
    "trap": "generic_verb"
   },
   {
    "task": "Buy a cloud-connected baby monitor for the nursery",
-   "better": "baby monitor / camera",
+   "better": "baby monitor / camera icon",
    "trap": "property"
   },
   {
    "task": "Pay the monthly AWS bill on the company card",
-   "better": "credit card / invoice",
+   "better": "credit card / invoice icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Scan the old family polaroids at 600 dpi",
-   "better": "scanner / photo",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -209,6 +209,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cloud upload / upload to cloud storage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cloud backup / online sync",
+     "strength": "primary"
+    },
+    {
+     "meaning": "publish or deploy to server",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a plain cloud (weather) or cloud download at very small sizes if arrow direction is missed.",
+   "near_misses": [
+    {
+     "task": "Download the tax forms from the IRS website",
+     "better": "cloud download (arrow pointing down)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the weather forecast for Saturday's hike",
+     "better": "weather cloud / sun behind cloud",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Edit the wedding photos before uploading them",
+     "better": "photo / image editing",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a cloud-connected baby monitor for the nursery",
+     "better": "baby monitor / camera",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly AWS bill on the company card",
+     "better": "credit card / invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Scan the old family polaroids at 600 dpi",
+     "better": "scanner / photo",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cloud_done",
+   "cloud_download"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5450,
+    "output": 1573,
+    "thoughts": 0,
+    "total": 7023
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "The bottom line of the cloud turns upward into an arrow pointing into the cloud's interior, specifically meaning uploading, backing up, or deploying files to the cloud."
 }

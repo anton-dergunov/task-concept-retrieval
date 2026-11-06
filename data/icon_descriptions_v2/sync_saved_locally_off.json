@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "laptop off, no computer, or screen-free time",
+   "meaning": "laptop off, no computer, or unplug from work",
    "strength": "primary"
   },
   {
-   "meaning": "broken, offline, or disabled computer / remote desktop",
+   "meaning": "broken, offline, or decommissioned laptop",
    "strength": "primary"
   },
   {
-   "meaning": "decommission or return a laptop",
+   "meaning": "disable remote desktop or offline workstation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the small diagonal reflection tick inside the screen can look like a stray mark or part of a broken image icon, and the base can be mistaken for an underline.",
+ "ambiguity": "Could be mistaken for the slashed desktop monitors if the full-width bottom bar is read as a stand, or for a broken image icon because of the interior tick mark.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -172,23 +172,23 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new 14-inch MacBook Pro for video editing",
-   "better": "plain laptop without slash",
+   "task": "Unplug the living room TV for the weekend",
+   "better": "television or monitor with slash",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Clean dust and fingerprints off the laptop screen with microfiber cloth",
-   "better": "laptop or spray bottle / cloth",
+   "task": "Fix broken product thumbnail images on checkout page",
+   "better": "broken image / picture frame with slash",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Cancel Netflix subscription before the next billing cycle",
-   "better": "TV or subscription / credit card with slash",
+   "better": "TV or credit card",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy an anti-glare matte screen protector for my work laptop",
-   "better": "laptop or screen shield",
+   "better": "intact laptop or shield",
    "trap": "property"
   },
   {
@@ -197,15 +197,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a wooden board game for Friday night",
-   "better": "board game / dice",
+   "task": "Buy a wooden board game for screen-free Friday night",
+   "better": "board game or dice",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a laptop computer crossed out by a diagonal slash, indicating no laptop, screen-free time, disabled remote desktop, or a broken/decommissioned computer. Wait—let's make sure example_tasks has exactly 16 items!",
@@ -225,6 +225,96 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "laptop off, no computer, or screen-free time",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken, offline, or disabled computer / remote desktop",
+     "strength": "primary"
+    },
+    {
+     "meaning": "decommission or return a laptop",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the small diagonal reflection tick inside the screen can look like a stray mark or part of a broken image icon, and the base can be mistaken for an underline.",
+   "near_misses": [
+    {
+     "task": "Buy a new 14-inch MacBook Pro for video editing",
+     "better": "plain laptop without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean dust and fingerprints off the laptop screen with microfiber cloth",
+     "better": "laptop or spray bottle / cloth",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel Netflix subscription before the next billing cycle",
+     "better": "TV or subscription / credit card with slash",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an anti-glare matte screen protector for my work laptop",
+     "better": "laptop or screen shield",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the backup finished on the home server",
+     "better": "server or cloud backup",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a wooden board game for Friday night",
+     "better": "board game / dice",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_access_disabled",
+   "mimo_disconnect",
+   "domain_verification_off",
+   "videocam_off",
+   "folder_off",
+   "web_asset_off",
+   "tv_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12219,
+    "output": 3998,
+    "thoughts": 0,
+    "total": 16217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Has a full-width flat horizontal keyboard base protruding below the screen and a short diagonal reflection tick inside the screen, identifying it as a laptop rather than a desktop monitor or window."
 }

@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "lab glassware or flask",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "chemical solution or formula",
+   "meaning": "empty lab glassware or Erlenmeyer flask",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a vase, wine decanter, or inverted funnel at very small sizes due to the lack of liquid line or measurement markings.",
+ "ambiguity": "Largely interchangeable with the half-filled laboratory flask for general chemistry or testing concepts, and more easily mistaken than the filled flask for a flower vase, carafe, or inverted funnel because it lacks liquid inside.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -154,18 +150,33 @@
  ],
  "near_misses": [
   {
+   "task": "Mix the buffer solution and titrate the sample in the lab",
+   "better": "conical laboratory flask half-filled with liquid",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Dispose of the leftover chemical reagent in the hazardous waste bin",
+   "better": "conical laboratory flask half-filled with liquid",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pack the insulated hydro flask for tomorrow's hike",
    "better": "water bottle / thermos",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Deploy the Python Flask backend to Render",
-   "better": "server / code / python",
+   "better": "server / code brackets",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a glass vase for the dining room table flowers",
-   "better": "vase / flowers",
+   "better": "flower vase / flowers",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put a small funnel in the trunk for wiper fluid",
+   "better": "funnel",
    "trap": "lookalike_glyph"
   },
   {
@@ -174,12 +185,7 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Put a small funnel in the trunk for wiper fluid",
-   "better": "funnel",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the $45 lab fee by credit card",
+   "task": "Pay the $45 chemistry lab fee by credit card",
    "better": "credit card / payment",
    "trap": "parent_topic"
   }
@@ -187,7 +193,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "An outline of an empty Erlenmeyer flask, universally used to represent chemistry, laboratory work, science classes, and software experiments or beta features. Although it lacks a liquid line or graduations—making it slightly resemble a carafe or vase—its conical base and cylindrical neck are clearly recognizable.",
@@ -205,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "chemistry, laboratory, or science",
+     "strength": "primary"
+    },
+    {
+     "meaning": "experiment, testing, or beta feature",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lab glassware or flask",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "chemical solution or formula",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a vase, wine decanter, or inverted funnel at very small sizes due to the lack of liquid line or measurement markings.",
+   "near_misses": [
+    {
+     "task": "Pack the insulated hydro flask for tomorrow's hike",
+     "better": "water bottle / thermos",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Deploy the Python Flask backend to Render",
+     "better": "server / code / python",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a glass vase for the dining room table flowers",
+     "better": "vase / flowers",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Test the new running shoes on a 5k jog",
+     "better": "running shoe",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Put a small funnel in the trunk for wiper fluid",
+     "better": "funnel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $45 lab fee by credit card",
+     "better": "credit card / payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "experiment"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4060,
+    "output": 1245,
+    "thoughts": 0,
+    "total": 5305
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "This conical laboratory flask is drawn as a hollow outline with no liquid inside, unlike the flask with a filled liquid level; while practically interchangeable for general science or testing tasks, this one specifically depicts empty glassware."
 }

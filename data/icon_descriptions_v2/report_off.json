@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "disable alerts or mute warnings",
+   "meaning": "disable alerts, mute warnings, or silence error notifications",
    "strength": "primary"
   },
   {
-   "meaning": "clear error or resolve critical issue",
+   "meaning": "clear error, dismiss false alarm, or unmark as spam",
    "strength": "primary"
   },
   {
-   "meaning": "dismiss spam or false report",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "suppress error logging",
+   "meaning": "suppress error logging or ignore exceptions",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the crossed-out exclamation mark inside the octagon looks like a generic 'do not enter' or 'prohibited' circle-backslash sign.",
+ "ambiguity": "At small sizes, the crossed-out octagon with an exclamation mark can be confused with a generic 'no' circle-backslash symbol, or with the crossed-out shield with a keyhole if the outer corners blur.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -164,6 +160,21 @@
  ],
  "near_misses": [
   {
+   "task": "Temporarily disable Windows Defender firewall to test local port forwarding",
+   "better": "crossed-out shield with keyhole",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Remove password protection from the shared tax spreadsheet",
+   "better": "crossed-out shield with keyhole or unlocked padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new red octagon stop sign for the private driveway",
+   "better": "plain octagon stop sign without slash",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the overdue parking fine before the penalty doubles",
    "better": "parking sign or money/bill icon",
    "trap": "shared_vocabulary"
@@ -174,30 +185,20 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a new red octagon stop sign for the private driveway",
-   "better": "plain stop sign without slash",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Put the phone on silent mode for the theatre performance",
-   "better": "crossed-out bell or speaker icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Install an ad blocker extension in Firefox",
-   "better": "shield or stop-hand icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Schedule a 30-minute retro with the infrastructure team",
+   "task": "Schedule a 30-minute incident retrospective with the infrastructure team",
    "better": "calendar or people icon",
    "trap": "parent_topic"
+  },
+  {
+   "task": "Archive old non-critical bug tickets in Jira",
+   "better": "bug icon or archive box",
+   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts an octagonal warning/error symbol (exclamation mark) crossed out with a diagonal slash, meaning to mute alerts, suppress warnings, or clear error states. It fits specific technical and household tasks around silencing false alarms or clearing fault codes, though at small sizes the slashed exclamation mark can blur into a generic 'no/prohibited' symbol.",
@@ -215,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "disable alerts or mute warnings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "clear error or resolve critical issue",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dismiss spam or false report",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "suppress error logging",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the crossed-out exclamation mark inside the octagon looks like a generic 'do not enter' or 'prohibited' circle-backslash sign.",
+   "near_misses": [
+    {
+     "task": "Pay the overdue parking fine before the penalty doubles",
+     "better": "parking sign or money/bill icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the server error logs from last night's crash",
+     "better": "warning sign without slash or log document icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new red octagon stop sign for the private driveway",
+     "better": "plain stop sign without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Put the phone on silent mode for the theatre performance",
+     "better": "crossed-out bell or speaker icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install an ad blocker extension in Firefox",
+     "better": "shield or stop-hand icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule a 30-minute retro with the infrastructure team",
+     "better": "calendar or people icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "encrypted_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4092,
+    "output": 1163,
+    "thoughts": 0,
+    "total": 5255
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "This icon shows an eight-sided octagon with a central exclamation mark crossed out by a diagonal slash, representing muted warnings, cleared errors, or dismissed spam rather than disabled security protection (the crossed-out shield with a keyhole)."
 }

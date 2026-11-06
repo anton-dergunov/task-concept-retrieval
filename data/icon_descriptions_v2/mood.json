@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "happiness, good mood, or mental wellbeing",
+   "meaning": "big grin, excitement, orenthusiastic happiness",
    "strength": "primary"
   },
   {
@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "comedy, jokes, or fun entertainment",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "customer satisfaction or positive feedback",
+   "meaning": "fun, comedy, or positive mood",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to other smiling or grinning face icons that differ only slightly in eye shape or mouth curve.",
+ "ambiguity": "Nearly interchangeable for general happiness/emoji tasks with the simple curved-line smiley and the chevron-eyed laughing face; also identical to the baby icon except for the missing top curl.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -155,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pack diaper bag and bottles for the babysitter",
+   "better": "baby face with a curl of hair on top",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write 5 minutes of stand-up comedy material for open mic",
+   "better": "laughing face with chevron eyes and open mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book six-month dental cleaning and teeth whitening",
    "better": "tooth",
    "trap": "shared_vocabulary"
@@ -173,16 +179,6 @@
    "task": "Call grandpa on his 80th birthday",
    "better": "phone or birthday cake",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Apply hydrating hyaluronic face mask before bed",
-   "better": "skincare bottle or spa",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Update profile picture on LinkedIn",
-   "better": "user avatar silhouette or camera",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -206,6 +202,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "insert_emoticon"
- }
+  "alias_of": "insert_emoticon",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "happiness, good mood, or mental wellbeing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "emoji, emoticon, or chat sticker",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comedy, jokes, or fun entertainment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "customer satisfaction or positive feedback",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to other smiling or grinning face icons that differ only slightly in eye shape or mouth curve.",
+   "near_misses": [
+    {
+     "task": "Book six-month dental cleaning and teeth whitening",
+     "better": "tooth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up Amazon Smile charity selection on account",
+     "better": "shopping cart or charity heart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a cheerful yellow ceramic pot for the kitchen sill",
+     "better": "plant pot",
+     "trap": "property"
+    },
+    {
+     "task": "Call grandpa on his 80th birthday",
+     "better": "phone or birthday cake",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Apply hydrating hyaluronic face mask before bed",
+     "better": "skincare bottle or spa",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update profile picture on LinkedIn",
+     "better": "user avatar silhouette or camera",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_content",
+   "sentiment_neutral",
+   "sentiment_satisfied_alt",
+   "sentiment_calm",
+   "child_care",
+   "sentiment_very_satisfied"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10675,
+    "output": 3460,
+    "thoughts": 0,
+    "total": 14135
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "Shows two round dot eyes and a filled D-shaped open mouth without any hair curl, depicting an open-mouthed grin or laugh that is more excited than the simple line smile but lacks the baby curl or chevron laughing eyes."
 }

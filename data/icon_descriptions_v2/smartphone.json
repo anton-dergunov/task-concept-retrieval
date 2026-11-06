@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "smartphone or mobile phone",
+   "meaning": "smartphone or mobile phone (punch-hole front camera style) ",
    "strength": "primary"
   },
   {
-   "meaning": "phone hardware, screen, or side button",
+   "meaning": "front-facing selfie camera or face unlock",
    "strength": "secondary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it could be mistaken for a smartwatch face without straps, a power bank, or a small tablet.",
+ "ambiguity": "Virtually identical to the smartphone with a bottom home button (only the dot is at the top instead of the bottom) and interchangeable with the smartphone with a bottom home bar; also shares the identical phone body with the docked and three-dot smartphone icons.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -151,8 +151,23 @@
  ],
  "near_misses": [
   {
+   "task": "Take a screenshot of the error message on Android",
+   "better": "smartphone with corner brackets inside the screen",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Dock the phone on the kitchen charging cradle",
+   "better": "smartphone with a horizontal bar below the frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure mobile app pagination or extra phone options",
+   "better": "smartphone with three horizontal dots below the frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the dentist to reschedule Wednesday's cleaning",
-   "better": "telephone handset (call action) or tooth/dentist",
+   "better": "telephone handset or tooth icon",
    "trap": "shared_vocabulary"
   },
   {
@@ -166,16 +181,6 @@
    "trap": "property"
   },
   {
-   "task": "Replace the watch strap pin on my Apple Watch",
-   "better": "wristwatch / smartwatch",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pack the 20,000mAh USB-C power bank in carry-on",
-   "better": "battery / power bank",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check notifications from the project channel",
    "better": "bell / notification or chat bubble",
    "trap": "generic_verb"
@@ -184,7 +189,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a modern smartphone with a hole-punch front camera and a side power button. It is ideal for tasks where the phone itself is the physical object or system being bought, repaired, backed up, or configured, though voice phone calls are better served by a classic telephone handset icon.",
@@ -202,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smartphone or mobile phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "phone hardware, screen, or side button",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "mobile device or app setup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it could be mistaken for a smartwatch face without straps, a power bank, or a small tablet.",
+   "near_misses": [
+    {
+     "task": "Call the dentist to reschedule Wednesday's cleaning",
+     "better": "telephone handset (call action) or tooth/dentist",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly AT&T wireless bill before the 15th",
+     "better": "bill / invoice / payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Test checkout layout on mobile screens",
+     "better": "web layout / browser or shopping cart",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the watch strap pin on my Apple Watch",
+     "better": "wristwatch / smartwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack the 20,000mAh USB-C power bank in carry-on",
+     "better": "battery / power bank",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check notifications from the project channel",
+     "better": "bell / notification or chat bubble",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screenshot",
+   "phone_iphone",
+   "phone_android",
+   "dock",
+   "settings_cell"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9431,
+    "output": 2014,
+    "thoughts": 0,
+    "total": 11445
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Shows a smartphone with a single circular dot at the top of the screen (a punch-hole front camera) and nothing below the frame, making it interchangeable as a generic smartphone with the bottom-button and bottom-bar variants."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "calendar / schedule",
+   "meaning": "due date, deadline, or end date on a calendar",
    "strength": "primary"
   },
   {
-   "meaning": "today / specific date / event",
+   "meaning": "single event, specific date, or appointment",
    "strength": "primary"
   },
   {
-   "meaning": "appointment / booking",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "deadline / due date",
+   "meaning": "calendar or schedule",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the calendar with the off-center circle could slightly resemble a simple boxy camera or a washing machine, though the two top binding tabs clearly distinguish it as a calendar.",
+ "ambiguity": "Virtually interchangeable with the calendar with a single dot on the left for any single-date task, and easily confused with the other calendar icons at a glance.",
  "modifier_semantics": [
   {
    "modifier": "solid black circle inside the lower-right area",
@@ -178,40 +174,40 @@
  ],
  "near_misses": [
   {
+   "task": "Set the project kickoff date at the start of the month",
+   "better": "calendar with a single dot on the left",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up a recurring monthly calendar template",
+   "better": "calendar with a six-dot grid",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay electricity bill before Friday deadline",
    "better": "invoice or lightning bolt",
    "trap": "property"
   },
   {
    "task": "Schedule haircut with Marco for next Thursday",
-   "better": "scissors / haircut",
+   "better": "scissors",
    "trap": "generic_verb"
   },
   {
    "task": "Buy a dozen Medjool dates at the market",
-   "better": "fruit / groceries",
+   "better": "fruit or groceries",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Take passport photos with the digital camera",
    "better": "camera",
    "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy birthday gift for Leo",
-   "better": "gift box",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Book window seat on the morning train to Lyon",
-   "better": "train",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly shows a calendar page with a single marked day or dot, representing a calendar, schedule, specific date, or event. While most tasks have a specific subject even when they have a due date, this icon is ideal for tasks explicitly about managing calendars, schedules, availability, or picking dates. It is somewhat similar to generic calendar variants (grid, blank, checkmark).",
@@ -231,6 +227,97 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "event"
- }
+  "alias_of": "event",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "calendar / schedule",
+     "strength": "primary"
+    },
+    {
+     "meaning": "today / specific date / event",
+     "strength": "primary"
+    },
+    {
+     "meaning": "appointment / booking",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "deadline / due date",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the calendar with the off-center circle could slightly resemble a simple boxy camera or a washing machine, though the two top binding tabs clearly distinguish it as a calendar.",
+   "near_misses": [
+    {
+     "task": "Pay electricity bill before Friday deadline",
+     "better": "invoice or lightning bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Schedule haircut with Marco for next Thursday",
+     "better": "scissors / haircut",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a dozen Medjool dates at the market",
+     "better": "fruit / groceries",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take passport photos with the digital camera",
+     "better": "camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy birthday gift for Leo",
+     "better": "gift box",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book window seat on the morning train to Lyon",
+     "better": "train",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "calendar_month",
+   "date_range",
+   "today",
+   "calendar_today"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7991,
+    "output": 2433,
+    "thoughts": 238,
+    "total": 10662
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "It has one large solid dot in the lower-right corner of the calendar body, pointing to a single date or an end-of-month deadline, making it visually opposite to but semantically almost interchangeable with the calendar whose single dot is on the left."
 }

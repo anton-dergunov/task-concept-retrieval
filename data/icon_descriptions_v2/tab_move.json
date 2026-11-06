@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a calendar jump-to-date icon because of the thick top header bar, or with a generic log-out/export icon if the arrow direction is misread at small sizes.",
+ "ambiguity": "Very similar to the plain square and rectangular frames with a left-entering arrow (differing only by the thick top title bar), and can also be mistaken for the square frame with a right-exiting arrow if the gap side is missed.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow entering from the left side",
@@ -156,40 +156,40 @@
  ],
  "near_misses": [
   {
-   "task": "Export Q3 sales table from the web dashboard to CSV",
-   "better": "window with outward arrow (export / log out)",
+   "task": "Log out of all active browser sessions",
+   "better": "square frame with a right-pointing arrow exiting through the right side",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Check next month's dentist appointment on the calendar",
-   "better": "calendar page",
+   "task": "Share my application window during the team demo",
+   "better": "rectangular screen frame with an upward-pointing arrow inside",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Replace the rotting wooden frame on the basement window",
-   "better": "house window with panes",
+   "better": "house window with four panes",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a cedar log for the backyard fire pit",
-   "better": "wood log / campfire",
+   "better": "wood log or campfire",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the electric bill on the utility website",
-   "better": "bill / invoice or lightning bolt",
+   "better": "invoice or lightning bolt icon",
    "trap": "generic_verb"
   },
   {
    "task": "Print the boarding pass PDF from the airline portal",
-   "better": "printer or boarding pass",
+   "better": "printer or boarding pass icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts an application or browser window with an arrow entering from the left, a standard pictogram for logging into a web portal or importing data into an application. It fits tasks centered on account sign-in, portal access, or software imports, though at small sizes the thick top bar can resemble a calendar icon.",
@@ -207,6 +207,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "log in or sign in to an application or web portal",
+     "strength": "primary"
+    },
+    {
+     "meaning": "import data or content into an application window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "open or launch inside a browser or app window",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a calendar jump-to-date icon because of the thick top header bar, or with a generic log-out/export icon if the arrow direction is misread at small sizes.",
+   "near_misses": [
+    {
+     "task": "Export Q3 sales table from the web dashboard to CSV",
+     "better": "window with outward arrow (export / log out)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check next month's dentist appointment on the calendar",
+     "better": "calendar page",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the rotting wooden frame on the basement window",
+     "better": "house window with panes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a cedar log for the backyard fire pit",
+     "better": "wood log / campfire",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the electric bill on the utility website",
+     "better": "bill / invoice or lightning bolt",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Print the boarding pass PDF from the airline portal",
+     "better": "printer or boarding pass",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "business_messages",
+   "output",
+   "exit_to_app",
+   "input",
+   "drive_file_move",
+   "drive_folder_upload",
+   "present_to_all"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12136,
+    "output": 4252,
+    "thoughts": 0,
+    "total": 16388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "A square frame featuring a thick solid top header bar (representing an application or browser window) with a right-pointing arrow entering through a gap on the left side."
 }

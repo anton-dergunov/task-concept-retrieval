@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "tumble dry / clothes dryer / laundry",
+   "meaning": "tumble dry, clothes dryer, or laundry",
    "strength": "primary"
-  },
-  {
-   "meaning": "record button / audio-video recording",
-   "strength": "secondary"
   },
   {
    "meaning": "front-load washing machine",
    "strength": "secondary"
   },
   {
-   "meaning": "camera or lens button",
+   "meaning": "record button or phone home button",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "audio speaker or subwoofer box",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because it is purely geometric (a circle in a square), it looks identical to both the standard ISO laundry symbol for tumble drying and a generic UI record button or home button.",
+ "ambiguity": "Easily confused at a glance with the rotary dial/knob icon (circle in a square with a pointer), and inherently ambiguous between the ISO tumble-dry laundry symbol and a generic media record button.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -152,32 +152,32 @@
  ],
  "near_misses": [
   {
+   "task": "Replace the broken rotary dimmer switch in the dining room",
+   "better": "circle inside a square with a diagonal pointer (rotary knob/dial)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set the kitchen timer for 45 minutes while the sourdough bakes",
+   "better": "circle inside a square with a diagonal pointer (timer dial)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write down the combination to the office wall safe",
+   "better": "circle inside a square with a diagonal pointer (safe dial)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Blow dry hair before heading to dinner",
-   "better": "hair dryer",
+   "better": "handheld hair dryer",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a machine-washable tumble-dry-safe area rug for the hallway",
-   "better": "rug / carpet",
+   "better": "rug or carpet",
    "trap": "property"
   },
   {
-   "task": "Check the weather forecast for a dry day to mow the lawn",
-   "better": "sun / weather",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order a 32mm circular polarizing filter for the telephoto lens",
-   "better": "camera lens / filter",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Install the new smart thermostat on the living room wall",
-   "better": "thermostat / temperature",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy liquid detergent and stain remover",
+   "task": "Buy liquid laundry detergent and stain remover",
    "better": "detergent bottle",
    "trap": "parent_topic"
   }
@@ -185,7 +185,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Literally a circle inside a rounded square, which is the standard international laundry care symbol for a tumble dryer as well as a common UI glyph for a record button. It works well for laundry/dryer chores and recording tasks, though its minimal geometric shape makes it somewhat ambiguous without task text.",
@@ -203,6 +203,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "tumble dry / clothes dryer / laundry",
+     "strength": "primary"
+    },
+    {
+     "meaning": "record button / audio-video recording",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "front-load washing machine",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "camera or lens button",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because it is purely geometric (a circle in a square), it looks identical to both the standard ISO laundry symbol for tumble drying and a generic UI record button or home button.",
+   "near_misses": [
+    {
+     "task": "Blow dry hair before heading to dinner",
+     "better": "hair dryer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a machine-washable tumble-dry-safe area rug for the hallway",
+     "better": "rug / carpet",
+     "trap": "property"
+    },
+    {
+     "task": "Check the weather forecast for a dry day to mow the lawn",
+     "better": "sun / weather",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a 32mm circular polarizing filter for the telephoto lens",
+     "better": "camera lens / filter",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install the new smart thermostat on the living room wall",
+     "better": "thermostat / temperature",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy liquid detergent and stain remover",
+     "better": "detergent bottle",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "controller_gen"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4088,
+    "output": 1099,
+    "thoughts": 106,
+    "total": 5293
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:45Z"
+  }
+ },
+ "distinguishing": "The circle inside the rounded square is completely empty with no pointer or tick mark, depicting the standard tumble-dry laundry symbol, a front-load appliance door, or a UI record/home button."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "revoke key / disable access / remove credentials",
+   "meaning": "revoke key, disable access, or remove credentials",
    "strength": "primary"
   },
   {
-   "meaning": "keyless entry / passwordless login",
+   "meaning": "keyless entry or passwordless login",
    "strength": "primary"
   },
   {
-   "meaning": "lost key / missing key / locked out",
+   "meaning": "lost key, missing key, or locked out",
    "strength": "secondary"
   },
   {
-   "meaning": "unencrypted / no authentication required",
+   "meaning": "unencrypted or no authentication required",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the crossed-out circular bow on the left can resemble a hidden eye (visibility off) or a muted microphone/speaker.",
+ "ambiguity": "At list size, the circular bow with center dot and diagonal slash on the left is identical to the crossed-out eye / bevel-tipped key icon, so the two are easily mistaken for each other unless the viewer notices the squared key teeth on the right.",
  "modifier_semantics": [
   {
    "modifier": "diagonal strike-through slash",
@@ -160,40 +160,45 @@
  ],
  "near_misses": [
   {
-   "task": "Cut two spare house keys at the hardware store",
-   "better": "key (without slash)",
+   "task": "Hide password field text by default on the login form",
+   "better": "crossed-out eye (visibility off) icon",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Turn on incognito / private browsing mode",
+   "better": "crossed-out eye (hidden/privacy) icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cut two spare house keys at the hardware store",
+   "better": "unslashed key icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Hide the spare front door key under the rosemary pot",
-   "better": "key or plant pot",
+   "better": "unslashed key or plant pot icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Fix the stuck spacebar key on the mechanical keyboard",
-   "better": "keyboard",
+   "better": "keyboard icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Hide password field text by default on the login form",
-   "better": "eye with slash (visibility off)",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a waterproof key pouch for surfing",
-   "better": "key or pouch",
+   "better": "unslashed key or pouch icon",
    "trap": "property"
   },
   {
    "task": "Check the answer key for chapter 4 practice problems",
-   "better": "checklist or book",
+   "better": "checklist or book icon",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a key crossed out with a diagonal slash, representing revoked keys/credentials, disabled access, lost keys, or keyless entry. It fits a specific but realistic family of tech security (revoking API/SSH keys) and home/admin tasks (lost keys, keyless locks), though at tiny sizes the left ring and slash can briefly resemble a 'visibility off' eye icon.",
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "revoke key / disable access / remove credentials",
+     "strength": "primary"
+    },
+    {
+     "meaning": "keyless entry / passwordless login",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lost key / missing key / locked out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "unencrypted / no authentication required",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the crossed-out circular bow on the left can resemble a hidden eye (visibility off) or a muted microphone/speaker.",
+   "near_misses": [
+    {
+     "task": "Cut two spare house keys at the hardware store",
+     "better": "key (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hide the spare front door key under the rosemary pot",
+     "better": "key or plant pot",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the stuck spacebar key on the mechanical keyboard",
+     "better": "keyboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hide password field text by default on the login form",
+     "better": "eye with slash (visibility off)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof key pouch for surfing",
+     "better": "key or pouch",
+     "trap": "property"
+    },
+    {
+     "task": "Check the answer key for chapter 4 practice problems",
+     "better": "checklist or book",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "key_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4085,
+    "output": 1223,
+    "thoughts": 0,
+    "total": 5308
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "Unlike the pointed bevel tip on the right side of the other icon, this icon has a squared horizontal shaft with downward-projecting rectangular key teeth (a notched bit), making it more clearly read as a crossed-out key."
 }

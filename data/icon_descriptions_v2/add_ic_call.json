@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "phone call / make a call",
+   "meaning": "add phone number, save new contact, or add caller to conference call",
    "strength": "primary"
   },
   {
-   "meaning": "add phone number or contact",
+   "meaning": "make a new phone call",
    "strength": "primary"
   },
   {
-   "meaning": "medical helpline or emergency call",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "conference call / add caller",
+   "meaning": "medical helpline, call doctor, or emergency hotline",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The plus sign next to the handset can be read either as 'new/add phone number or call' or as a medical cross ('medical hotline / call doctor').",
+ "ambiguity": "Can be confused at a quick glance with the telephone receiver with an 'X' mark (missed/blocked call), as the only difference is a 45-degree rotation of the cross badge; the plus sign can also be read as a medical cross.",
  "modifier_semantics": [
   {
    "modifier": "plus sign at top right",
@@ -160,8 +156,18 @@
  ],
  "near_misses": [
   {
-   "task": "Text Marden about Saturday's hike",
-   "better": "speech bubble / message icon",
+   "task": "Block spam caller from the 800 number",
+   "better": "telephone handset with an X mark (blocked or rejected call)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Return missed call from the landlord",
+   "better": "telephone handset with an X mark (missed call) or incoming call arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel the old home landline service with AT&T",
+   "better": "telephone handset with an X mark (disconnect phone service)",
    "trap": "lookalike_glyph"
   },
   {
@@ -175,17 +181,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pick up antibiotic prescription from the pharmacy",
-   "better": "pill / medical cross icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update my phone number in the fidelity bank profile",
-   "better": "bank / user profile icon",
+   "task": "Update my phone number in the Fidelity bank profile",
+   "better": "bank or user profile icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Order a headset with a noise-cancelling mic",
+   "task": "Order a headset with a noise-cancelling mic for work calls",
    "better": "headset icon",
    "trap": "parent_topic"
   }
@@ -213,6 +214,94 @@
    "example_tasks with parent: 0 != 4"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "phone call / make a call",
+     "strength": "primary"
+    },
+    {
+     "meaning": "add phone number or contact",
+     "strength": "primary"
+    },
+    {
+     "meaning": "medical helpline or emergency call",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "conference call / add caller",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The plus sign next to the handset can be read either as 'new/add phone number or call' or as a medical cross ('medical hotline / call doctor').",
+   "near_misses": [
+    {
+     "task": "Text Marden about Saturday's hike",
+     "better": "speech bubble / message icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix cracked screen on the old iPhone 12",
+     "better": "smartphone device icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Join the 3pm Zoom video call with the design team",
+     "better": "video camera icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up antibiotic prescription from the pharmacy",
+     "better": "pill / medical cross icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my phone number in the fidelity bank profile",
+     "better": "bank / user profile icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a headset with a noise-cancelling mic",
+     "better": "headset icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "phone_cancel"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4088,
+    "output": 922,
+    "thoughts": 0,
+    "total": 5010
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Has an upright plus sign ('+') in the upper right next to the telephone receiver, meaning adding a phone number, initiating a new call, or calling a medical line, whereas the look-alike has a rotated 'X' mark meaning a missed, blocked, or canceled call."
 }

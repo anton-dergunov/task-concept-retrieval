@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "As a bare directional arrow without a base tray, phone handset, or chart line, it has no concrete subject and looks like generic interface navigation chrome.",
+ "ambiguity": "Completely interchangeable in meaning with the thicker down-left arrow; as a bare directional arrow without a base tray, phone handset, or chart line, it has no concrete subject and looks like generic interface navigation chrome.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -205,6 +205,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "call_received"
- }
+  "alias_of": "call_received",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "down-left or southwest direction",
+     "strength": "primary"
+    },
+    {
+     "meaning": "incoming item, import, or receive",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "decrease, drop, or downward trend",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "collapse or minimize window",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "As a bare directional arrow without a base tray, phone handset, or chart line, it has no concrete subject and looks like generic interface navigation chrome.",
+   "near_misses": [
+    {
+     "task": "Call back the missed incoming number from Chicago",
+     "better": "phone handset with incoming arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download the signed lease PDF from the tenant portal",
+     "better": "download arrow into tray or PDF document",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book Southwest flights to Denver for Thanksgiving",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a lightweight down jacket for the January camping trip",
+     "better": "winter coat or jacket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel the gym membership before the next billing cycle",
+     "better": "dumbbell or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix the low water pressure in the upstairs shower",
+     "better": "showerhead or water drop",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 1
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "transit_enterexit"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 763,
+    "thoughts": 0,
+    "total": 4812
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:44Z"
+  }
+ },
+ "distinguishing": "Drawn with a regular, medium-weight stroke and a slightly longer diagonal shaft, this icon is otherwise visually and semantically interchangeable with the bold down-left arrow."
 }

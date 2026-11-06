@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "upper body or face airflow vent mode (car climate control / HVAC symbol for air directed at head/chest of seated passenger or airline seat selection / passenger seat assignment / posture leaning back)",
+   "meaning": "car climate control upper-body / dashboard face vent airflow",
    "strength": "primary"
   },
   {
-   "meaning": "car climate control face vent / cabin airflow to upper body",
+   "meaning": "vehicle AC, cabin ventilation, or air vents",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "sit back / posture adjustment / recline seat",
+   "meaning": "sit back or adjust seating posture",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Actually a standard automotive HVAC 'face vent' icon (air blowing toward seated occupant's upper body), which outside a car dashboard can look like 'choose seat', 'push person back', or 'assign to seated passenger'.",
+ "ambiguity": "Easily confused at a glance with the bi-level (face and feet) airflow icons, and outside a car context can be misread as choosing a seat or reclining.",
  "modifier_semantics": [
   {
    "modifier": "left-pointing arrow toward seated figure",
@@ -177,19 +177,29 @@
  ],
  "near_misses": [
   {
+   "task": "Fix stuck floor heater blend door so warm air reaches both the dash and footwell vents",
+   "better": "seated person with arrows pointing to both face and feet (bi-level airflow icon Type 1 or 2, i.e., seated person with two arrows toward face and feet) -> seated figure with both upper-body and footwell arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Diagnose why the car climate control won't switch to dual face-and-floor airflow mode",
+   "better": "seated figure with arrows pointing at both upper body and feet",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book round-trip flights to Lisbon in October",
    "better": "airplane",
    "trap": "parent_topic"
   },
   {
    "task": "Fix the living room ceiling fan wobble",
-   "better": "fan",
+   "better": "ceiling fan",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new leather armchair for the reading corner",
    "better": "armchair",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Check why the car battery keeps draining overnight",
@@ -198,14 +208,14 @@
   },
   {
    "task": "Take a 20-minute nap in the back seat",
-   "better": "sleep / bed",
+   "better": "bed or sleeping symbol",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "This is the standard automotive UI glyph for upper-body/face ventilation (air blowing toward a seated passenger), though in a general task app viewers also read it as selecting a passenger seat. It fits narrow tasks around car dashboard vents/airflow and airline or train seat selection.",
@@ -226,6 +236,90 @@
    "example_tasks: 20 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upper body or face airflow vent mode (car climate control / HVAC symbol for air directed at head/chest of seated passenger or airline seat selection / passenger seat assignment / posture leaning back)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "car climate control face vent / cabin airflow to upper body",
+     "strength": "primary"
+    },
+    {
+     "meaning": "select or assign passenger seat",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sit back / posture adjustment / recline seat",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Actually a standard automotive HVAC 'face vent' icon (air blowing toward seated occupant's upper body), which outside a car dashboard can look like 'choose seat', 'push person back', or 'assign to seated passenger'.",
+   "near_misses": [
+    {
+     "task": "Book round-trip flights to Lisbon in October",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix the living room ceiling fan wobble",
+     "better": "fan",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new leather armchair for the reading corner",
+     "better": "armchair",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check why the car battery keeps draining overnight",
+     "better": "car battery",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Take a 20-minute nap in the back seat",
+     "better": "sleep / bed",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_fan_low_mid_left",
+   "car_fan_mid_low_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5472,
+    "output": 1079,
+    "thoughts": 177,
+    "total": 6728
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "Shows a seated person facing right with only a single horizontal arrow aimed at the upper body, whereas the other two icons add a second downward arrow aimed at the feet."
 }

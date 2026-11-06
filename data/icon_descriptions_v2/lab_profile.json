@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "dossier, portfolio, or presentation folder with documents",
+   "meaning": "dossier, portfolio, or pocket folder with documents",
    "strength": "primary"
   },
   {
-   "meaning": "document, page, or file",
+   "meaning": "document, file, or report",
    "strength": "primary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the bottom pocket flap looks like a weirdly folded page corner or an inbox tray inside a page, making it almost indistinguishable from a generic document icon.",
+ "ambiguity": "Can be confused at a glance with the curled-bottom scroll or receipt icon since both are vertical pages with two horizontal text lines and a shape across the bottom.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -141,42 +141,38 @@
   {
    "task": "Sign the lease renewal and mail it back to the landlord",
    "central": "signature / contract"
-  },
-  {
-   "task": "Notarize the power of attorney form at the bank",
-   "central": "stamp / notary"
   }
  ],
  "near_misses": [
   {
-   "task": "Email the signed PDF contract to legal",
-   "better": "email / envelope",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Clean up the Downloads folder on my MacBook",
-   "better": "computer folder / laptop",
+   "task": "Save the pharmacy receipt for our HSA tax records",
+   "better": "sheet of paper curled at the bottom like a receipt or scroll",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Dust the horizontal slats on the office window blinds",
+   "better": "window blinds with headrail and pull cord",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Email the signed PDF contract to legal",
+   "better": "email or envelope",
+   "trap": "generic_verb"
+  },
+  {
    "task": "Rebalance index funds in the retirement portfolio",
-   "better": "chart / investments",
+   "better": "chart or investments",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a leather briefcase that fits A4 documents",
-   "better": "briefcase / bag",
+   "better": "briefcase or bag",
    "trap": "property"
   },
   {
    "task": "Book courier pickup for Thursday morning",
-   "better": "delivery truck / package",
+   "better": "delivery truck or package",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Read chapter 4 of the history textbook",
-   "better": "book",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -200,6 +196,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "dossier, portfolio, or presentation folder with documents",
+     "strength": "primary"
+    },
+    {
+     "meaning": "document, page, or file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "case file or project packet",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the bottom pocket flap looks like a weirdly folded page corner or an inbox tray inside a page, making it almost indistinguishable from a generic document icon.",
+   "near_misses": [
+    {
+     "task": "Email the signed PDF contract to legal",
+     "better": "email / envelope",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Clean up the Downloads folder on my MacBook",
+     "better": "computer folder / laptop",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Rebalance index funds in the retirement portfolio",
+     "better": "chart / investments",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a leather briefcase that fits A4 documents",
+     "better": "briefcase / bag",
+     "trap": "property"
+    },
+    {
+     "task": "Book courier pickup for Thursday morning",
+     "better": "delivery truck / package",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Read chapter 4 of the history textbook",
+     "better": "book",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "blinds_2_closed",
+   "blinds_2",
+   "contract"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6688,
+    "output": 1173,
+    "thoughts": 0,
+    "total": 7861
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "A rounded rectangular page or folder containing two horizontal text bars above an angled interior pocket flap on the bottom left, representing a dossier or presentation folder rather than a curled scroll or receipt."
 }

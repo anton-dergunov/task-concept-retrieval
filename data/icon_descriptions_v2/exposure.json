@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "exposure compensation (camera / photography)",
+   "meaning": "exposure compensation (camera / photography), or negative EV / underexposure adjustment when paired with the plus-top-left version",
    "strength": "primary"
   },
   {
-   "meaning": "plus / minus adjustment, pros and cons, or difference",
+   "meaning": "plus / minus adjustment, pros and cons, or trade-offs",
    "strength": "primary"
+  },
+  {
+   "meaning": "contrast or brightness adjustment (dark = minus, light = plus framing, or high contrast vs low contrast",
+   "strength": "secondary"
   },
   {
    "meaning": "math or basic arithmetic",
    "strength": "secondary"
-  },
-  {
-   "meaning": "contrast or brightness adjustment",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Outside of photography, where it is the universal exposure-compensation symbol (often with + on top-left and - on bottom-right, here inverted), general users read it as a generic plus/minus, calculator, pros/cons, or contrast toggle.",
+ "ambiguity": "Virtually identical at task-list size to the diagonally split square with plus top-left and minus bottom-right; unless an app specifically pairs them for +EV vs -EV (or pros-first vs cons-first), viewers will treat both icons as interchangeable symbols for exposure compensation or pros and cons.",
  "modifier_semantics": [
   {
    "modifier": "minus sign",
@@ -166,14 +166,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new 12-volt car battery before winter hits",
-   "better": "car battery with + and - terminals",
+   "task": "Set +1.5 EV positive exposure compensation for the snowy landscape shoot",
+   "better": "diagonally split +/- square with plus in the top-left and minus in the bottom-right (standard exposure compensation / +EV icon) ",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "File quarterly estimated taxes with the accountant",
-   "better": "calculator or tax form",
+   "task": "Write a pros and cons list starting with the advantages of relocating",
+   "better": "diagonally split square with plus in the top-left and minus in the bottom-right",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new 12-volt car battery before winter hits",
+   "better": "car battery with + and - terminals",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Book dermatologist to check sun exposure spots on shoulders",
@@ -199,7 +204,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "This is the standard camera exposure-compensation symbol (with minus and plus in a diagonally split square), also read more broadly as pros/cons, delta, or basic addition/subtraction. It fits niche photography editing tasks and pros-and-cons decision tasks, though general users may confuse it with a generic math or calculator icon.",
@@ -217,6 +222,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "iso"
- }
+  "alias_of": "iso",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "exposure compensation (camera / photography)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "plus / minus adjustment, pros and cons, or difference",
+     "strength": "primary"
+    },
+    {
+     "meaning": "math or basic arithmetic",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "contrast or brightness adjustment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Outside of photography, where it is the universal exposure-compensation symbol (often with + on top-left and - on bottom-right, here inverted), general users read it as a generic plus/minus, calculator, pros/cons, or contrast toggle.",
+   "near_misses": [
+    {
+     "task": "Buy a new 12-volt car battery before winter hits",
+     "better": "car battery with + and - terminals",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "File quarterly estimated taxes with the accountant",
+     "better": "calculator or tax form",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book dermatologist to check sun exposure spots on shoulders",
+     "better": "sun or doctor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add two extra chairs to the dining room reservation",
+     "better": "chair or restaurant",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pack the 35mm prime lens for the street photography walk",
+     "better": "camera lens",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order high-contrast black and white flashcards for the newborn",
+     "better": "baby or flashcards",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "contrast_square"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4126,
+    "output": 940,
+    "thoughts": 0,
+    "total": 5066
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Places the minus sign in the top-left black half and the plus sign in the bottom-right white half (inverting the standard exposure-compensation layout, or pairing minus with dark and plus with light), though in practice it is interchangeable with the plus-top-left version."
 }

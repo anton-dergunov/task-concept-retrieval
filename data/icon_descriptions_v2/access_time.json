@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "clock / timepiece",
+   "meaning": "wall clock or timepiece",
    "strength": "primary"
   },
   {
-   "meaning": "time / hours / timesheet",
+   "meaning": "time of day, business hours, or work timesheet",
    "strength": "primary"
   },
   {
-   "meaning": "schedule / opening hours",
+   "meaning": "Adjust clocks for daylight saving time",
    "strength": "secondary"
   },
   {
-   "meaning": "duration / waiting",
+   "meaning": "waiting period or general duration",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Shares the identical two-handed dial with the alarm clock, differing only by the absence of the two top bells, and can be confused with the stopwatch if someone grabs any round timepiece for timing.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -156,22 +156,22 @@
  ],
  "near_misses": [
   {
-   "task": "Pay the urgent water bill before 5pm today",
-   "better": "water drop or invoice/bill icon",
+   "task": "Set a 6 am wake-up alarm for the airport taxi",
+   "better": "alarm clock with two top bells",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Run a 25-minute Pomodoro timer for deep writing",
+   "better": "stopwatch with top crown and single hand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the urgent water bill before 5 pm today",
+   "better": "water drop or invoice icon",
    "trap": "property"
   },
   {
-   "task": "Buy a leather strap for my Seiko wristwatch",
-   "better": "wristwatch icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Set a 6am alarm for the airport taxi",
-   "better": "alarm clock with bells or taxi icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Schedule dentist appointment for next Tuesday",
+   "task": "Schedule dentist appointment for next Tuesday afternoon",
    "better": "tooth or calendar icon",
    "trap": "generic_verb"
   },
@@ -182,12 +182,12 @@
   },
   {
    "task": "Pick up dry cleaning before closing time",
-   "better": "coat hanger / shirt icon",
+   "better": "coat hanger or shirt icon",
    "trap": "property"
   },
   {
-   "task": "Order replacement brass hands for the barometer",
-   "better": "barometer / gauge icon",
+   "task": "Order replacement brass hands for the antique barometer",
+   "better": "barometer or pressure gauge icon",
    "trap": "shared_vocabulary"
   }
  ],
@@ -212,6 +212,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "watch_later"
- }
+  "alias_of": "watch_later",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "clock / timepiece",
+     "strength": "primary"
+    },
+    {
+     "meaning": "time / hours / timesheet",
+     "strength": "primary"
+    },
+    {
+     "meaning": "schedule / opening hours",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "duration / waiting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Pay the urgent water bill before 5pm today",
+     "better": "water drop or invoice/bill icon",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a leather strap for my Seiko wristwatch",
+     "better": "wristwatch icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Set a 6am alarm for the airport taxi",
+     "better": "alarm clock with bells or taxi icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule dentist appointment for next Tuesday",
+     "better": "tooth or calendar icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book three hours of studio rehearsal for the band",
+     "better": "microphone or music note icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up dry cleaning before closing time",
+     "better": "coat hanger / shirt icon",
+     "trap": "property"
+    },
+    {
+     "task": "Order replacement brass hands for the barometer",
+     "better": "barometer / gauge icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "timer",
+   "alarm"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5325,
+    "output": 1623,
+    "thoughts": 133,
+    "total": 7081
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:01Z"
+  }
+ },
+ "distinguishing": "A completely bare circular bezel with two hands and no top buttons, bells, or pushers, representing a standard wall clock, time of day, or hours rather than an alarm or stopwatch."
 }

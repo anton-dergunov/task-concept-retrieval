@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "hearing aid or assistive listening device",
+   "meaning": "active listening, sound perception, or audio accessibility",
    "strength": "primary"
   },
   {
@@ -18,7 +18,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "listening or audio accessibility",
+   "meaning": "assistive listening system or amplified audio",
    "strength": "secondary"
   },
   {
@@ -26,7 +26,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the ear outline and dot can briefly resemble a question mark or a location pin on its side.",
+ "ambiguity": "Nearly identical to the ear with a single curved bar behind it, and easily mistaken for a physical behind-the-ear hearing aid at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "solid circle inside ear canal",
@@ -167,6 +167,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pick up new behind-the-ear hearing aid molds from the clinic",
+   "better": "ear with a single behind-the-ear hearing aid arc",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy size 312 zinc-air batteries for Grandpa's hearing aid",
+   "better": "ear with a single behind-the-ear hearing aid arc or battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Listen to the new Rest Is History podcast episode on the commute",
    "better": "podcast microphone or headphones",
    "trap": "generic_verb"
@@ -187,20 +197,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pay the $180 invoice from the clinic in full",
+   "task": "Pay the $180 invoice from the audiology clinic in full",
    "better": "invoice or credit card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Call router support to fix weak Wi-Fi signal in the bedroom",
-   "better": "Wi-Fi router or signal icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a human ear with an in-ear dot and sound waves, the standard symbol for hearing, audiology, and hearing aids. It is ideal for tasks involving ear health, hearing tests, hearing aid maintenance, audio accessibility, or musical ear training, while distinct from general headphones or speaker icons.",
@@ -218,6 +223,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hearing aid or assistive listening device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hearing, audiology, or ear checkup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "listening or audio accessibility",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "in-ear earbud or monitor",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the ear outline and dot can briefly resemble a question mark or a location pin on its side.",
+   "near_misses": [
+    {
+     "task": "Listen to the new Rest Is History podcast episode on the commute",
+     "better": "podcast microphone or headphones",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Shuck six ears of corn for the barbecue tonight",
+     "better": "corn cob",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy quiet dishwasher under 44 dB for the open-plan kitchen",
+     "better": "dishwasher",
+     "trap": "property"
+    },
+    {
+     "task": "Check when the court hearing for the parking appeal is scheduled",
+     "better": "gavel or courthouse",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $180 invoice from the clinic in full",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Call router support to fix weak Wi-Fi signal in the bedroom",
+     "better": "Wi-Fi router or signal icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hearing"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4102,
+    "output": 1198,
+    "thoughts": 0,
+    "total": 5300
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Has two concentric curved arcs behind the ear representing radiating sound waves or active listening, whereas the other icon has only a single curved bar representing a behind-the-ear hearing aid casing. For general hearing, audiology, or listening tasks, the two icons are largely interchangeable."
 }

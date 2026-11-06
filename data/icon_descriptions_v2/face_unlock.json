@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because it has no mouth and simple bangs, it reads alternately as a child, a generic user avatar, or a haircut symbol depending on surrounding context.",
+ "ambiguity": "Can be confused with the face with a curved double-headed arrow underneath if the arrow is overlooked, though this plain version lacks any sense of rotation, scanning, or switching.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -154,6 +154,21 @@
  ],
  "near_misses": [
   {
+   "task": "Set up Face ID on the new phone by scanning my head",
+   "better": "face with curved double-headed arrow underneath",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Do 5 minutes of neck rotation stretches",
+   "better": "face with curved double-headed arrow underneath",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch between personal and work user profiles",
+   "better": "face with curved double-headed arrow underneath",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a kid-friendly tablet case with a handle",
    "better": "tablet / iPad",
    "trap": "property"
@@ -169,19 +184,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a new bowling ball bag",
-   "better": "bowling ball",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy AA batteries for the baby monitor",
    "better": "battery",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Personalize the leather luggage tags with initials",
-   "better": "luggage tag",
-   "trap": "property"
   }
  ],
  "scores": {
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "face"
- }
+  "alias_of": "face",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "person, user, or profile avatar",
+     "strength": "primary"
+    },
+    {
+     "meaning": "child or kid",
+     "strength": "primary"
+    },
+    {
+     "meaning": "haircut or hairstyle",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "face or skincare",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because it has no mouth and simple bangs, it reads alternately as a child, a generic user avatar, or a haircut symbol depending on surrounding context.",
+   "near_misses": [
+    {
+     "task": "Buy a kid-friendly tablet case with a handle",
+     "better": "tablet / iPad",
+     "trap": "property"
+    },
+    {
+     "task": "Head over to the post office before it closes at 5",
+     "better": "post office / envelope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Face the label toward the front when stacking the pantry jars",
+     "better": "jar / shelving",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new bowling ball bag",
+     "better": "bowling ball",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy AA batteries for the baby monitor",
+     "better": "battery",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Personalize the leather luggage tags with initials",
+     "better": "luggage tag",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "face_shake"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4054,
+    "output": 1097,
+    "thoughts": 0,
+    "total": 5151
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "Shows only the round face with two dot eyes and parted bangs, without the curved double-headed arrow underneath, representing a person, child, or generic profile rather than head movement or account switching."
 }

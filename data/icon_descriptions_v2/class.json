@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "book, notebook, or reading material",
+   "meaning": "book, novel, or textbook",
    "strength": "primary"
   },
   {
-   "meaning": "journal, diary, or planner",
+   "meaning": "notebook, journal, diary, or planner",
    "strength": "primary"
   },
   {
-   "meaning": "bookmarked page or saved reading",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "e-book or digital manual",
+   "meaning": "e-book, manual, or single reading assignment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a standalone bookmark icon, a shipping box with tape, or a tablet/e-reader at very small sizes.",
+ "ambiguity": "Closely resembles the single square bookmark frame except for its taller aspect ratio, which is easy to miss at small list sizes.",
  "modifier_semantics": [
   {
    "modifier": "bookmark ribbon",
@@ -164,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Organize all saved browser bookmarks into folders",
+   "better": "stacked square bookmarks collection",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Tape up the return parcel for UPS drop-off",
+   "better": "single square box with top tape strip",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book the dentist appointment for next month",
    "better": "tooth or calendar",
    "trap": "shared_vocabulary"
@@ -175,29 +181,19 @@
   },
   {
    "task": "Read the electricity meter in the basement and submit the numbers",
-   "better": "gauge or utility meter",
+   "better": "utility meter or gauge",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Tape up the return parcel for UPS drop-off",
-   "better": "cardboard shipping box",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a textbook-weight backpack that fits a 16-inch laptop",
    "better": "backpack",
    "trap": "property"
-  },
-  {
-   "task": "Order a bottle of Pinot Noir and crackers for Thursday",
-   "better": "wine bottle",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a closed vertical book or notebook with a bookmark ribbon hanging from the top edge. It is an ideal, quickly recognizable cue for tasks involving books, reading, studying chapters, notebooks, journals, manuals, and bookmarks. It is distinct from open-book or plain document icons, though at tiny sizes it vaguely resembles a taped parcel box.",
@@ -215,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": "book"
- }
+  "alias_of": "book",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "book, notebook, or reading material",
+     "strength": "primary"
+    },
+    {
+     "meaning": "journal, diary, or planner",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bookmarked page or saved reading",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "e-book or digital manual",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a standalone bookmark icon, a shipping box with tape, or a tablet/e-reader at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Book the dentist appointment for next month",
+     "better": "tooth or calendar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Chicago for Thanksgiving",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read the electricity meter in the basement and submit the numbers",
+     "better": "gauge or utility meter",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Tape up the return parcel for UPS drop-off",
+     "better": "cardboard shipping box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a textbook-weight backpack that fits a 16-inch laptop",
+     "better": "backpack",
+     "trap": "property"
+    },
+    {
+     "task": "Order a bottle of Pinot Noir and crackers for Thursday",
+     "better": "wine bottle",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "collections_bookmark",
+   "developer_guide"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5378,
+    "output": 1435,
+    "thoughts": 135,
+    "total": 6948
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Its tall portrait rectangle proportions clearly depict a single closed book, notebook, or journal rather than a square card or a stacked collection."
 }

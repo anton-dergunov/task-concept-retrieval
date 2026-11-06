@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "missing, delayed, or damaged package delivery",
+   "meaning": "missing, delayed, or damaged package delivery alert",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the cube lacks internal vertical edges or tape flaps, it reads equally as a physical shipping parcel and an abstract software package or 3D module.",
+ "ambiguity": "Reads equally as a physical shipping parcel and an abstract software package; at very small sizes, the solid black circular badge with an exclamation mark can be confused at a glance with the box having a downward-arrow badge.",
  "modifier_semantics": [
   {
    "modifier": "circle badge with exclamation mark",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Download and install the latest npm package updates",
+   "better": "isometric box with a downward-pointing arrow badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up the incoming Amazon parcel from the mailroom",
+   "better": "isometric box with a downward-pointing arrow badge or plain parcel",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy heavy-duty moving boxes for the garage",
    "better": "plain cardboard box without exclamation badge",
    "trap": "lookalike_glyph"
@@ -178,18 +188,13 @@
   },
   {
    "task": "Check whether the coffee beans were delivered",
-   "better": "plain package or coffee beans",
+   "better": "coffee beans or plain package",
    "trap": "generic_verb"
   },
   {
    "task": "Buy bubble wrap and packing tape at Staples",
    "better": "tape roll or shopping cart",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Unpack the kitchen boxes into the upper cabinets",
-   "better": "open box without alert badge",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "missing, delayed, or damaged package delivery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "software package error, broken dependency, or build warning",
+     "strength": "primary"
+    },
+    {
+     "meaning": "urgent shipment or priority parcel",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "low inventory or out-of-stock item alert",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the cube lacks internal vertical edges or tape flaps, it reads equally as a physical shipping parcel and an abstract software package or 3D module.",
+   "near_misses": [
+    {
+     "task": "Buy heavy-duty moving boxes for the garage",
+     "better": "plain cardboard box without exclamation badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order fragile glass ornaments for the tree",
+     "better": "Christmas ornament or wine glass",
+     "trap": "property"
+    },
+    {
+     "task": "Review the new employee compensation package",
+     "better": "document or money / salary icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check whether the coffee beans were delivered",
+     "better": "plain package or coffee beans",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy bubble wrap and packing tape at Staples",
+     "better": "tape roll or shopping cart",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Unpack the kitchen boxes into the upper cabinets",
+     "better": "open box without alert badge",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "deployed_code_update"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1160,
+    "thoughts": 0,
+    "total": 5251
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Shows an exclamation mark inside the solid circular badge at the bottom right of the isometric box, signaling a package problem, alert, or dependency error rather than downloading or receiving a package."
 }

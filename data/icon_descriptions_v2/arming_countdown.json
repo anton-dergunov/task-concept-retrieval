@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "security scan or antivirus check",
+   "meaning": "security scan or antivirus check in progress",
    "strength": "primary"
   },
   {
-   "meaning": "security update or patch in progress",
+   "meaning": "security update or patch installation",
    "strength": "primary"
   },
   {
-   "meaning": "pending security audit or verification",
+   "meaning": "pending security verification or audit",
    "strength": "secondary"
   },
   {
-   "meaning": "insurance claim processing or pending coverage",
+   "meaning": "insurance claim processing",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the inner spinner can look like a power symbol, a crescent moon, or a letter C inside a shield.",
+ "ambiguity": "Could be mistaken for the shield with toggle switches if a user only notices the outer shield outline at list size, or for a plain circular progress spinner.",
  "modifier_semantics": [
   {
    "modifier": "circular progress spinner with three dots inside",
@@ -160,14 +160,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a medieval heater shield for the Renaissance faire costume",
-   "better": "plain shield or costume",
-   "trap": "shared_vocabulary"
+   "task": "Review iPhone app privacy permissions and tracking toggles",
+   "better": "shield with toggle switches (privacy settings / permissions) ",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure cookie consent preferences on the company website",
+   "better": "shield with toggle switches (privacy settings / permissions) ",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Set up a 25-minute Pomodoro timer for deep work",
-   "better": "timer / stopwatch",
+   "better": "timer or stopwatch",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a medieval heater shield for the Renaissance faire costume",
+   "better": "plain shield or costume",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Put a UV-protective clear coat on the garden bench",
@@ -183,11 +193,6 @@
    "task": "Order new shredder oil sheets for the office",
    "better": "paper shredder",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Replace the cracked windshield on the Subaru",
-   "better": "car windshield",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "security scan or antivirus check",
+     "strength": "primary"
+    },
+    {
+     "meaning": "security update or patch in progress",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pending security audit or verification",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "insurance claim processing or pending coverage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the inner spinner can look like a power symbol, a crescent moon, or a letter C inside a shield.",
+   "near_misses": [
+    {
+     "task": "Buy a medieval heater shield for the Renaissance faire costume",
+     "better": "plain shield or costume",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up a 25-minute Pomodoro timer for deep work",
+     "better": "timer / stopwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Put a UV-protective clear coat on the garden bench",
+     "better": "paintbrush or bench",
+     "trap": "property"
+    },
+    {
+     "task": "Verify that the backup drive is still mounted",
+     "better": "hard drive",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order new shredder oil sheets for the office",
+     "better": "paper shredder",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace the cracked windshield on the Subaru",
+     "better": "car windshield",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shield_toggle"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4074,
+    "output": 667,
+    "thoughts": 0,
+    "total": 4741
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Contains a circular dotted loading spinner inside the shield, indicating a security scan, update, or pending verification rather than configurable settings or permissions."
 }

@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "bar chart / statistics / metrics / analytics",
+   "meaning": "bar chart / statistics / analytics",
    "strength": "primary"
   },
   {
-   "meaning": "poll or survey results",
+   "meaning": "poll or survey comparison",
    "strength": "secondary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a baseline axis, the uneven gap between the second and third bar can make it look like an abstract layout icon, building skyline, or cellular signal bars at very small sizes.",
+ "ambiguity": "Interchangeable for chart/analytics tasks with the other three-bar non-monotonic icons (medium-tall-short and short-tall-medium) and the four-bar chart with a baseline; also resembles ascending signal bars at a quick glance.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -151,7 +151,12 @@
  "near_misses": [
   {
    "task": "Call Verizon about the terrible cell reception in the basement",
-   "better": "phone signal / antenna",
+   "better": "strictly ascending cellular signal bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up a 1st, 2nd, and 3rd place trophy podium for field day",
+   "better": "three bars with the tallest bar in the center (podium)",
    "trap": "lookalike_glyph"
   },
   {
@@ -183,7 +188,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Three vertical bars of unequal height are universally read as a bar chart, statistics, or analytics. It fits tasks centered on charts, metrics, data analysis, and polls across work, finance, tech, and study, though the lack of an axis and the uneven gap between bars make it slightly less crisp than a standard bar-chart glyph.",
@@ -201,6 +206,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bar chart / statistics / metrics / analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "poll or survey results",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audio equalizer / sound levels",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a baseline axis, the uneven gap between the second and third bar can make it look like an abstract layout icon, building skyline, or cellular signal bars at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Call Verizon about the terrible cell reception in the basement",
+     "better": "phone signal / antenna",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a rooftop bar for Sarah's birthday drinks",
+     "better": "cocktail glass / drinks",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy two boxes of protein bars before the road trip",
+     "better": "snack bar / food",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a data-only eSIM for the week in Tokyo",
+     "better": "SIM card / mobile phone",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the bathroom shelves are level",
+     "better": "spirit level / shelf",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email the tax accountant about the missing 1099 form",
+     "better": "email / tax document",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bar_chart_4_bars",
+   "bar_chart",
+   "equalizer",
+   "signal_cellular_alt",
+   "android_cell_4_bar",
+   "android_cell_5_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10730,
+    "output": 3931,
+    "thoughts": 361,
+    "total": 15022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Shows three vertical bars without a baseline in a medium-short-tall order with a wider gap before the third bar; functionally interchangeable as a bar chart with the other three-bar non-monotonic icons."
 }

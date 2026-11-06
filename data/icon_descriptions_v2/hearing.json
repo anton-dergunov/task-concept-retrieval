@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "hearing aid or assistive listening device",
+   "meaning": "hearing aid or behind-the-ear assistive device",
    "strength": "primary"
   },
   {
@@ -18,15 +18,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "listening or audio accessibility",
+   "meaning": "hard-of-hearing accessibility",
    "strength": "secondary"
   },
   {
-   "meaning": "in-ear earbud or ear monitor",
+   "meaning": "in-ear earbud or ear hook monitor",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The arc behind the ear represents either a behind-the-ear hearing aid body or a sound wave, and the inner dot looks like an in-ear bud or ear canal.",
+ "ambiguity": "Easily confused with the ear with two sound-wave arcs behind it, as the single bar can also be read as a single sound wave.",
  "modifier_semantics": [
   {
    "modifier": "filled circle inside ear",
@@ -166,8 +166,13 @@
  ],
  "near_misses": [
   {
-   "task": "Buy wireless noise-canceling headphones for the flight",
-   "better": "headphones icon",
+   "task": "Practice active listening exercises for the Spanish oral exam",
+   "better": "ear with two sound wave arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test room acoustics and ambient sound levels in the home studio",
+   "better": "ear with two sound wave arcs or decibel meter",
    "trap": "lookalike_glyph"
   },
   {
@@ -191,15 +196,15 @@
    "trap": "property"
   },
   {
-   "task": "Renew professional license on the state portal",
-   "better": "certificate or badge icon",
+   "task": "Submit insurance reimbursement form for the audiologist visit",
+   "better": "document or medical form icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a human ear in profile with an inner dot and outer curved arc, standard iconography for hearing, audiology, and hearing aids. It is an unmistakable match for medical ear care, hearing aid maintenance, accessibility, and ear-training tasks, with only minor overlap with generic earbud or audio icons.",
@@ -217,6 +222,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hearing aid or assistive listening device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ear, hearing, or audiology",
+     "strength": "primary"
+    },
+    {
+     "meaning": "listening or audio accessibility",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "in-ear earbud or ear monitor",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The arc behind the ear represents either a behind-the-ear hearing aid body or a sound wave, and the inner dot looks like an in-ear bud or ear canal.",
+   "near_misses": [
+    {
+     "task": "Buy wireless noise-canceling headphones for the flight",
+     "better": "headphones icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Prepare exhibits for the zoning board hearing on Thursday",
+     "better": "gavel or courthouse icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Listen to the new Kendrick album all the way through",
+     "better": "music note or album icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up six ears of sweet corn at the farm stand",
+     "better": "corn icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Compare quiet dishwashers under 44 dBA for the kitchen remodel",
+     "better": "dishwasher icon",
+     "trap": "property"
+    },
+    {
+     "task": "Renew professional license on the state portal",
+     "better": "certificate or badge icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ear_sound"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4102,
+    "output": 1198,
+    "thoughts": 0,
+    "total": 5300
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Has a single curved bar snug behind the ear representing a behind-the-ear hearing aid body, rather than the two radiating sound-wave arcs of the other icon. For general hearing or audiology tasks, the two icons are nearly interchangeable."
 }

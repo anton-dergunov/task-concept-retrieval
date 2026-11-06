@@ -11,15 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "date, event, or appointment",
+   "meaning": "free day, open schedule, or blank calendar page",
    "strength": "primary"
   },
   {
-   "meaning": "weekly or monthly planning",
+   "meaning": "date or appointment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without grid dots or numbers inside, it could momentarily resemble a small handbag or clipboard at very small sizes, though the two top tabs make calendar clear.",
+ "ambiguity": "Functions as the most generic calendar icon in the group, so it is easily swapped with the dotted calendar icons whenever a task is simply about a calendar or schedule.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -166,45 +166,40 @@
  ],
  "near_misses": [
   {
+   "task": "Lay out the full month's content calendar grid",
+   "better": "calendar with a six-dot grid",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Highlight the target launch date on the calendar",
+   "better": "calendar with a single large dot",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book dentist cleaning for next Tuesday at 9am",
-   "better": "tooth / dentist",
+   "better": "tooth or dentist",
    "trap": "property"
   },
   {
    "task": "Pay rent before the 1st of the month",
-   "better": "money / house",
+   "better": "money or house",
    "trap": "property"
   },
   {
    "task": "Schedule annual furnace maintenance call",
-   "better": "furnace / wrench",
+   "better": "furnace or wrench",
    "trap": "generic_verb"
   },
   {
    "task": "Buy fresh Medjool dates for the charcuterie board",
-   "better": "fruit / food",
+   "better": "fruit or food",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Plan a fun third date idea for Friday night",
-   "better": "heart / couple / wine glasses",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pack the leather briefcase for Monday's client visit",
-   "better": "briefcase",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book the cabin in Tahoe",
-   "better": "cabin / mountains",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a clean, universally recognizable blank calendar glyph with top rings and a header bar. It is ideal when the task is specifically about a physical or digital calendar, schedule, or availability planning, though it should not be overused for every task that merely happens on a date (where the specific subject like 'dentist' or 'flight' is much better).",
@@ -224,6 +219,98 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "calendar or schedule",
+     "strength": "primary"
+    },
+    {
+     "meaning": "date, event, or appointment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weekly or monthly planning",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without grid dots or numbers inside, it could momentarily resemble a small handbag or clipboard at very small sizes, though the two top tabs make calendar clear.",
+   "near_misses": [
+    {
+     "task": "Book dentist cleaning for next Tuesday at 9am",
+     "better": "tooth / dentist",
+     "trap": "property"
+    },
+    {
+     "task": "Pay rent before the 1st of the month",
+     "better": "money / house",
+     "trap": "property"
+    },
+    {
+     "task": "Schedule annual furnace maintenance call",
+     "better": "furnace / wrench",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy fresh Medjool dates for the charcuterie board",
+     "better": "fruit / food",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Plan a fun third date idea for Friday night",
+     "better": "heart / couple / wine glasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the leather briefcase for Monday's client visit",
+     "better": "briefcase",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the cabin in Tahoe",
+     "better": "cabin / mountains",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "calendar_month",
+   "date_range",
+   "today",
+   "event"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7991,
+    "output": 2433,
+    "thoughts": 238,
+    "total": 10662
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "Its lower page area is completely blank with no dots inside, depicting an empty calendar, an unscheduled day, or a generic tear-off day page rather than a gridded month or a marked date."
 }

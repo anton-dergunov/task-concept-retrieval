@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "pause timer or stopwatch",
+   "meaning": "snooze alarm or pause wake-up alert",
    "strength": "primary"
   },
   {
-   "meaning": "snooze alarm or pause recurring schedule",
+   "meaning": "pause recurring reminder or scheduled notification",
    "strength": "primary"
   },
   {
-   "meaning": "take a timed break or rest period",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "put a project or subscription on hold temporarily",
+   "meaning": "put a regular schedule or subscription on temporary hold",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the two vertical bars inside the circle look like a pig snout or an electrical outlet with top ears.",
+ "ambiguity": "Easily mistaken for the paused stopwatch (with top button and side stem) at small sizes, and the two vertical bars inside the circle can also resemble a pig snout or electrical outlet.",
  "modifier_semantics": [
   {
    "modifier": "pause symbol (two vertical bars)",
@@ -176,24 +172,29 @@
  ],
  "near_misses": [
   {
+   "task": "Pause Toggl time tracker during lunch break",
+   "better": "paused stopwatch with top button and side stem",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take a 5-minute rest interval between Pomodoro work blocks",
+   "better": "paused stopwatch with top button and side stem",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new bedside alarm clock with a big snooze button",
    "better": "standard alarm clock with clock hands or shopping bag",
    "trap": "property"
   },
   {
-   "task": "Set timer for 45 minutes while the sourdough bakes",
-   "better": "regular timer or bread loaf",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Cancel Netflix subscription permanently",
-   "better": "subscription or cross/cancel mark",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Install new 220V outlet in the garage",
-   "better": "electrical outlet / plug",
+   "better": "electrical outlet or plug icon",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel streaming subscription permanently",
+   "better": "cancel or cross mark icon",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Call clinic about menopause symptoms",
@@ -209,7 +210,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon combines an alarm clock silhouette with a central pause symbol, clearly communicating pausing a timer, snoozing an alarm, or temporarily suspending a recurring schedule or subscription. While literal UI timer controls aren't tasks, putting recurring deliveries, memberships, alarms, or scheduled jobs on hold is a common real-world task family.",
@@ -229,6 +230,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pause timer or stopwatch",
+     "strength": "primary"
+    },
+    {
+     "meaning": "snooze alarm or pause recurring schedule",
+     "strength": "primary"
+    },
+    {
+     "meaning": "take a timed break or rest period",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "put a project or subscription on hold temporarily",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the two vertical bars inside the circle look like a pig snout or an electrical outlet with top ears.",
+   "near_misses": [
+    {
+     "task": "Buy a new bedside alarm clock with a big snooze button",
+     "better": "standard alarm clock with clock hands or shopping bag",
+     "trap": "property"
+    },
+    {
+     "task": "Set timer for 45 minutes while the sourdough bakes",
+     "better": "regular timer or bread loaf",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel Netflix subscription permanently",
+     "better": "subscription or cross/cancel mark",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install new 220V outlet in the garage",
+     "better": "electrical outlet / plug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call clinic about menopause symptoms",
+     "better": "phone or medical symbol",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the final invoice for the video editor",
+     "better": "invoice or money icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "timer_pause"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4095,
+    "output": 822,
+    "thoughts": 0,
+    "total": 4917
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:18Z"
+  }
+ },
+ "distinguishing": "Shows an alarm clock with two symmetrical angled top bells around a pause symbol (snoozing an alarm or pausing a scheduled alert), whereas the look-alike shows a stopwatch with a flat top button and a side stem (pausing a countdown timer or time tracker)."
 }

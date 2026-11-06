@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "person / individual / somebody",
+   "meaning": "person, individual, or somebody",
    "strength": "primary"
   },
   {
-   "meaning": "man / male figure / men's restroom",
+   "meaning": "man, male figure, or men's restroom",
    "strength": "primary"
   },
   {
-   "meaning": "standing / posture / body",
+   "meaning": "standing posture or human body",
    "strength": "secondary"
   },
   {
-   "meaning": "pedestrian / visitor / guest",
+   "meaning": "visitor, guest, or pedestrian",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Standard male restroom pictogram; very generic and easily interchangeable with bust/avatar user icons.",
+ "ambiguity": "Completely interchangeable with the other two symmetric standing person silhouettes, which differ only by tiny variations in torso-to-leg width, and distinct from the pregnant figure only by lacking the side-profile belly.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -117,11 +117,6 @@
    "task": "Double-check chest and inseam",
    "parent": "Groomsmen Suits",
    "domain": "shopping"
-  },
-  {
-   "task": "Pick up from airport",
-   "parent": "Dad's Visit",
-   "domain": "social_family"
   }
  ],
  "example_tasks_es": [
@@ -154,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Book 20-week prenatal ultrasound appointment",
+   "better": "pregnant person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Submit maternity leave paperwork to HR",
+   "better": "pregnant person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Mom about Sunday dinner",
    "better": "phone handset",
    "trap": "generic_verb"
@@ -164,19 +169,9 @@
    "trap": "property"
   },
   {
-   "task": "Go for a 5km morning walk in the park",
-   "better": "walking person or sneakers",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Fix leaking toilet flapper in the guest bathroom",
    "better": "toilet",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book flights to Chicago",
-   "better": "airplane",
-   "trap": "parent_topic"
   },
   {
    "task": "Team standup meeting at 9:30",
@@ -187,7 +182,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A classic full-body standing male/person pictogram. It fits tasks centered on a specific person, 1-on-1 check-ins, standing posture, men's sizing/facilities, or guest registration, though it overlaps with bust-style user avatars.",
@@ -205,6 +200,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "person / individual / somebody",
+     "strength": "primary"
+    },
+    {
+     "meaning": "man / male figure / men's restroom",
+     "strength": "primary"
+    },
+    {
+     "meaning": "standing / posture / body",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pedestrian / visitor / guest",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Standard male restroom pictogram; very generic and easily interchangeable with bust/avatar user icons.",
+   "near_misses": [
+    {
+     "task": "Call Mom about Sunday dinner",
+     "better": "phone handset",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Set up personal budget spreadsheet for Q3",
+     "better": "spreadsheet or wallet",
+     "trap": "property"
+    },
+    {
+     "task": "Go for a 5km morning walk in the park",
+     "better": "walking person or sneakers",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix leaking toilet flapper in the guest bathroom",
+     "better": "toilet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Chicago",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Team standup meeting at 9:30",
+     "better": "group of people or calendar",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pregnant_woman",
+   "man",
+   "boy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6619,
+    "output": 1855,
+    "thoughts": 168,
+    "total": 8642
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "A symmetric front-facing standing figure with wide shoulders and a narrow leg column; visually and semantically interchangeable with the other two symmetric standing person icons."
 }

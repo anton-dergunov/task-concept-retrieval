@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "contact address or home address of a person",
+   "meaning": "contact's address or someone's whereabouts",
    "strength": "primary"
   },
   {
-   "meaning": "in-person meetup point or check-in",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "local guide or on-site representative",
+   "meaning": "in-person meetup spot or on-site person",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the shoulders and head inside the pin can merge and look like a standard generic map pin or a keyhole.",
+ "ambiguity": "At small list sizes, the head-and-shoulders inside the pin can read as a simple center dot, making it easy to confuse with a standard location pin.",
  "modifier_semantics": [
   {
    "modifier": "person head and shoulders silhouette inside the pin",
@@ -161,8 +157,18 @@
  ],
  "near_misses": [
   {
+   "task": "Pin the trailhead coordinates on Google Maps",
+   "better": "map pin over target ring",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Find the venue address for Saturday's concert",
+   "better": "map pin over target ring",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Download offline Google Maps for northern Scotland",
-   "better": "map",
+   "better": "folded map",
    "trap": "shared_vocabulary"
   },
   {
@@ -184,11 +190,6 @@
    "task": "Book a window seat on the train to Chicago",
    "better": "train",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Replace the brass keyhole cover on the front door",
-   "better": "keyhole or lock",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "person's location or live location sharing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contact address or home address of a person",
+     "strength": "primary"
+    },
+    {
+     "meaning": "in-person meetup point or check-in",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "local guide or on-site representative",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the shoulders and head inside the pin can merge and look like a standard generic map pin or a keyhole.",
+   "near_misses": [
+    {
+     "task": "Download offline Google Maps for northern Scotland",
+     "better": "map",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upload new headshot to LinkedIn profile",
+     "better": "user avatar / portrait",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the local plumber about the radiator leak",
+     "better": "phone or wrench",
+     "trap": "property"
+    },
+    {
+     "task": "Check where the package is in transit",
+     "better": "delivery truck or package",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a window seat on the train to Chicago",
+     "better": "train",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace the brass keyhole cover on the front door",
+     "better": "keyhole or lock",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "distance"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4022,
+    "output": 637,
+    "thoughts": 0,
+    "total": 4659
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "Contains a head-and-shoulders person silhouette inside the teardrop pin (and no base ring beneath), indicating a person's location, live location sharing, or a contact's address rather than a generic place."
 }

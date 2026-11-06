@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "Android pattern lock screen",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "round shower drain cover or speaker grille",
+   "meaning": "pattern lock screen",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Common UI chrome for 'all apps' or 'grid menu', easily confused with a telephone dial pad, PIN keypad, pattern lock, or a literal drain strainer.",
+ "ambiguity": "At small list sizes it looks very similar to the 12-dot two-size radial pattern inside a circle (blur filter / speaker grille / drain), and in UI contexts blurs between a phone dialer keypad and an all-apps menu.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -144,27 +140,23 @@
   {
    "task": "Unclog hair from the round shower drain cover",
    "central": "shower drain"
-  },
-  {
-   "task": "Uninstall unused apps from iPhone",
-   "central": "mobile phone"
   }
  ],
  "near_misses": [
   {
+   "task": "Blur the background of the team portrait photos",
+   "better": "circle with four large central dots and eight small outer dots (blur/halftone icon) or camera",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean hair out of the shower drain strainer",
+   "better": "circle with radial multi-size dots (drain strainer) or shower head",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the dentist to reschedule Wednesday's cleaning",
    "better": "phone handset",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a mechanical numpad for spreadsheet work",
-   "better": "keyboard",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Play daily Sudoku puzzle on the train",
-   "better": "3x3 square grid or puzzle piece",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check all apps for pending software updates",
@@ -205,6 +197,96 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "keypad, dial pad, or numeric PIN pad",
+     "strength": "primary"
+    },
+    {
+     "meaning": "app launcher or nine-dot menu grid",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Android pattern lock screen",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "round shower drain cover or speaker grille",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Common UI chrome for 'all apps' or 'grid menu', easily confused with a telephone dial pad, PIN keypad, pattern lock, or a literal drain strainer.",
+   "near_misses": [
+    {
+     "task": "Call the dentist to reschedule Wednesday's cleaning",
+     "better": "phone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a mechanical numpad for spreadsheet work",
+     "better": "keyboard",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Play daily Sudoku puzzle on the train",
+     "better": "3x3 square grid or puzzle piece",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check all apps for pending software updates",
+     "better": "download arrow or refresh icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up a spare brass key for the back deadbolt",
+     "better": "key",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a 4-digit combination padlock for the gym locker",
+     "better": "padlock",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "blur_circular"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4033,
+    "output": 680,
+    "thoughts": 0,
+    "total": 4713
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:26Z"
+  }
+ },
+ "distinguishing": "Shows a uniform 3x3 square grid of nine equal-sized dots inside a thick circle, representing a numeric dial pad, PIN keypad, or app launcher menu rather than the radial two-size dot pattern of a blur icon or speaker grille."
 }

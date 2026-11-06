@@ -10,19 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "car climate control / cabin airflow and defrost",
+   "meaning": "car climate control: windshield defroster and upper-body / dashboard vent airflow",
    "strength": "primary"
   },
   {
-   "meaning": "vehicle air conditioning / heater repair",
+   "meaning": "vehicle air conditioning, cabin vents, or HVAC repair",
    "strength": "primary"
   },
   {
-   "meaning": "windshield defroster and upper body vent mode",
+   "meaning": "cabin air filter or blower fan maintenance",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the top windshield defrost symbol can look like a small oven, toaster, or television screen above an arrow.",
+ "ambiguity": "Semantically interchangeable with its horizontal mirror (left-facing seated person with windshield defroster and right-pointing arrow to torso), and easily confused at small sizes with the two floor-vent icons where the arrow points straight down toward the feet.",
  "modifier_semantics": [
   {
    "modifier": "left-pointing arrow toward torso",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Unblock the car footwell heater duct under the driver seat",
+   "better": "seated person with windshield defroster and downward arrow toward feet",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check why no warm air blows to the car floor vents",
+   "better": "seated person with downward floor-airflow arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a portable desk fan for the home office",
    "better": "fan",
    "trap": "shared_vocabulary"
@@ -166,19 +176,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book window seat on the train to Munich",
-   "better": "train or seat",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Replace cracked front windshield through insurance",
    "better": "windshield",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Fix ergonomic posture on my office chair",
-   "better": "office chair",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check tire pressure before driving in hot weather",
@@ -189,7 +189,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "This is the standard automotive dashboard glyph for directing air to the upper body and the windshield defroster. While literally a specific vent-mode button, in a to-do app it clearly cues car climate control, cabin air filters, auto AC recharging, and heater/defroster repairs.",
@@ -207,6 +207,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "car_defrost_mid_low_left"
- }
+  "alias_of": "car_defrost_mid_low_left",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car climate control / cabin airflow and defrost",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vehicle air conditioning / heater repair",
+     "strength": "primary"
+    },
+    {
+     "meaning": "windshield defroster and upper body vent mode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the top windshield defrost symbol can look like a small oven, toaster, or television screen above an arrow.",
+   "near_misses": [
+    {
+     "task": "Buy a portable desk fan for the home office",
+     "better": "fan",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Service the house central air conditioning condenser outside",
+     "better": "house HVAC unit",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book window seat on the train to Munich",
+     "better": "train or seat",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace cracked front windshield through insurance",
+     "better": "windshield",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix ergonomic posture on my office chair",
+     "better": "office chair",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check tire pressure before driving in hot weather",
+     "better": "tire pressure gauge",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_defrost_low_right",
+   "car_defrost_low_left",
+   "car_defrost_mid_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6712,
+    "output": 2141,
+    "thoughts": 201,
+    "total": 9054
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Shows the seated person on the left facing right with a left-pointing horizontal arrow aimed at the torso (windshield defrost + upper-body/dash vent airflow), making it a horizontal mirror of the other torso-airflow icon and interchangeable with it in meaning, while differing from the two icons with a downward arrow toward the feet."
 }

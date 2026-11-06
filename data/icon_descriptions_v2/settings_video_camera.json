@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "video settings or camera configuration",
+   "meaning": "video settings or camcorder configuration",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "video rendering, encoding, or processing",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "automated surveillance or camera system maintenance",
+   "meaning": "video rendering, encoding, or recording preferences",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the small camcorder badge can blur into a generic block or tag next to the gear, looking like a plain settings icon.",
+ "ambiguity": "Easy to confuse with the gear with a still photo camera badge when tasks mention 'camera settings' without specifying video vs. photo, and at tiny sizes the solid rectangle body resembles the gear with a curved panorama rectangle.",
  "modifier_semantics": [
   {
    "modifier": "video camera badge",
@@ -165,34 +161,34 @@
  ],
  "near_misses": [
   {
+   "task": "Calibrate DSLR shutter speed and RAW photo settings",
+   "better": "gear with still photo camera badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure ultrawide curved monitor aspect ratio",
+   "better": "gear with curved panorama rectangle badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the team on Zoom to review Q3 roadmap",
-   "better": "video call / video camera without gear",
+   "better": "video call or video camera without gear",
    "trap": "parent_topic"
   },
   {
    "task": "Buy a 4K 60fps webcam for the home office",
-   "better": "webcam / shopping cart",
+   "better": "webcam or shopping cart",
    "trap": "property"
   },
   {
    "task": "Watch the tutorial on how to set up a home server",
-   "better": "play button / video player",
+   "better": "play button or video player",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Change macOS system preferences for dark mode and dock",
-   "better": "plain gear / settings",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check the security camera footage from Tuesday night",
-   "better": "video camera / eye",
+   "better": "video camera or eye",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Pack the tripod and camera batteries",
-   "better": "camera / backpack",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -216,6 +212,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video settings or camera configuration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "webcam or meeting video setup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video rendering, encoding, or processing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "automated surveillance or camera system maintenance",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the small camcorder badge can blur into a generic block or tag next to the gear, looking like a plain settings icon.",
+   "near_misses": [
+    {
+     "task": "Call the team on Zoom to review Q3 roadmap",
+     "better": "video call / video camera without gear",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a 4K 60fps webcam for the home office",
+     "better": "webcam / shopping cart",
+     "trap": "property"
+    },
+    {
+     "task": "Watch the tutorial on how to set up a home server",
+     "better": "play button / video player",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change macOS system preferences for dark mode and dock",
+     "better": "plain gear / settings",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the security camera footage from Tuesday night",
+     "better": "video camera / eye",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pack the tripod and camera batteries",
+     "better": "camera / backpack",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_panorama",
+   "settings_account_box",
+   "settings_photo_camera"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6747,
+    "output": 1937,
+    "thoughts": 0,
+    "total": 8684
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Unlike the gears with a curved panorama rectangle, a person portrait, or a still photo camera, this gear has a solid video camcorder badge with a side-protruding lens cone in the bottom right."
 }

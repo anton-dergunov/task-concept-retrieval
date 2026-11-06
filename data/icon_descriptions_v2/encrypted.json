@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "account security, passwords, or authentication",
+   "meaning": "authentication, login credentials, or access control",
    "strength": "primary"
   },
   {
-   "meaning": "data privacy, encryption, or access control",
+   "meaning": "account security, passwords, or encryption",
    "strength": "primary"
   },
   {
-   "meaning": "home security system or alarm",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cybersecurity, firewall, or antivirus software",
+   "meaning": "data privacy or identity protection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the keyhole inside the shield can look like an exclamation mark or a person silhouette.",
+ "ambiguity": "Semantically interchangeable with the shield with a padlock for password and security tasks, and visually confusable at small sizes with the shield with an exclamation mark or lowercase 'i'.",
  "modifier_semantics": [
   {
    "modifier": "centered keyhole shape inside shield",
@@ -176,14 +172,19 @@
  ],
  "near_misses": [
   {
-   "task": "Cut a spare front door key at the hardware store",
-   "better": "house key",
+   "task": "Complete the annual SOC 2 security compliance audit",
+   "better": "shield with checkmark (verified security or compliance audit) ",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a heavy-duty U-lock for the commuter bike",
-   "better": "bicycle lock or padlock",
+   "task": "Patch the zero-day vulnerability in the web server",
+   "better": "shield with exclamation mark (security vulnerability or alert) ",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cut a spare front door key at the hardware store",
+   "better": "house key",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a waterproof secure case for my passport",
@@ -199,17 +200,12 @@
    "task": "Get back security deposit from the old landlord",
    "better": "money or house",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order a replacement windshield wiper blade for the Subaru",
-   "better": "car",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A shield with a keyhole universally represents security, privacy, passwords, and access control. It is a strong fit for digital hygiene tasks (password managers, 2FA, encryption, credit freezes) and home alarm codes, though it competes closely with plain padlock or shield icons.",
@@ -229,6 +225,98 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "account security, passwords, or authentication",
+     "strength": "primary"
+    },
+    {
+     "meaning": "data privacy, encryption, or access control",
+     "strength": "primary"
+    },
+    {
+     "meaning": "home security system or alarm",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cybersecurity, firewall, or antivirus software",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the keyhole inside the shield can look like an exclamation mark or a person silhouette.",
+   "near_misses": [
+    {
+     "task": "Cut a spare front door key at the hardware store",
+     "better": "house key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a heavy-duty U-lock for the commuter bike",
+     "better": "bicycle lock or padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof secure case for my passport",
+     "better": "passport",
+     "trap": "property"
+    },
+    {
+     "task": "Secure the bookshelves to the drywall with L-brackets",
+     "better": "bookshelf or drill",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Get back security deposit from the old landlord",
+     "better": "money or house",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a replacement windshield wiper blade for the Subaru",
+     "better": "car",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shield_lock",
+   "gpp_maybe",
+   "privacy_tip",
+   "verified_user",
+   "shield_moon"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9379,
+    "output": 1838,
+    "thoughts": 0,
+    "total": 11217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Contains a solid keyhole shape (circle atop a flared trapezoid) inside the shield, representing authentication, credentials, or access control, and is largely interchangeable with the shield containing a padlock."
 }

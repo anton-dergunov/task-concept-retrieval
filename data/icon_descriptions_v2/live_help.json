@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "ask a question / inquiry",
+   "meaning": "ask a question, spoken inquiry, or Q&A session",
    "strength": "primary"
   },
   {
-   "meaning": "FAQ / Q&A / help",
+   "meaning": "customer support chat or helpdesk inquiry",
    "strength": "primary"
   },
   {
-   "meaning": "customer support / helpdesk chat",
+   "meaning": "FAQ or help forum",
    "strength": "secondary"
   },
   {
-   "meaning": "quiz / trivia question",
+   "meaning": "interview question or prompt",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Close in meaning to a plain question-mark circle, though the speech bubble specifically adds a spoken, chat, or Q&A context.",
+ "ambiguity": "Very close visually and semantically to the plain boxed question mark icon, differing only by the bottom pointer tail; also resembles a map tooltip or pin with a question mark.",
  "modifier_semantics": [
   {
    "modifier": "question mark inside",
@@ -162,14 +162,24 @@
  ],
  "near_misses": [
   {
+   "task": "Replace the missing placeholder icons in the onboarding deck",
+   "better": "question mark inside a plain square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Draft 20 multiple-choice questions for Friday's pub trivia night",
+   "better": "question mark inside a plain square frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Text Maya about what time to meet for dinner tonight",
+   "better": "plain speech bubble or message icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Question the suspicious $49 charge on the Visa statement",
    "better": "credit card or receipt",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Text Maya about dinner tonight",
-   "better": "plain speech bubble / message icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check if the passport renewal went through",
@@ -177,25 +187,20 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Fix the broken image links on the billing page",
-   "better": "broken link or image icon",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Decide on the questionable paint color in the hallway",
    "better": "paint roller or swatch",
    "trap": "property"
   },
   {
-   "task": "Pin the location of the new coffee shop on the map",
-   "better": "map pin",
-   "trap": "lookalike_glyph"
+   "task": "Fix the broken image links on the support portal",
+   "better": "broken link or image icon",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A square speech bubble containing a question mark clearly communicates asking a question, Q&A, FAQ, or help inquiries. It fits common tasks like preparing questions for a doctor or interview, writing FAQs, or asking someone a specific question, while remaining distinct from a generic chat bubble.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "ask a question / inquiry",
+     "strength": "primary"
+    },
+    {
+     "meaning": "FAQ / Q&A / help",
+     "strength": "primary"
+    },
+    {
+     "meaning": "customer support / helpdesk chat",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "quiz / trivia question",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Close in meaning to a plain question-mark circle, though the speech bubble specifically adds a spoken, chat, or Q&A context.",
+   "near_misses": [
+    {
+     "task": "Question the suspicious $49 charge on the Visa statement",
+     "better": "credit card or receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Text Maya about dinner tonight",
+     "better": "plain speech bubble / message icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the passport renewal went through",
+     "better": "passport",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the broken image links on the billing page",
+     "better": "broken link or image icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Decide on the questionable paint color in the hallway",
+     "better": "paint roller or swatch",
+     "trap": "property"
+    },
+    {
+     "task": "Pin the location of the new coffee shop on the map",
+     "better": "map pin",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "help_center"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4069,
+    "output": 874,
+    "thoughts": 148,
+    "total": 5091
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "Has a triangular speech-bubble tail pointing down from the bottom edge of the square, tying the question mark to spoken inquiry, Q&A discussions, or helpdesk chat rather than a static help box or unknown placeholder."
 }

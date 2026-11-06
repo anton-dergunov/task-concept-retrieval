@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "email with attachment",
+   "meaning": "email with file attachment",
    "strength": "primary"
   },
   {
-   "meaning": "attach file to message",
+   "meaning": "attach document or file to an email",
    "strength": "primary"
   },
   {
-   "meaning": "email document or file",
+   "meaning": "send documents or forms via email",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the paperclip could resemble a letter J, a hook, or a padlock shackle.",
+ "ambiguity": "At small list sizes, the bottom-right paperclip badge can be confused with the other bottom-right corner badges on an envelope (minus circle, checkmark, or right arrow).",
  "modifier_semantics": [
   {
    "modifier": "vertical paperclip in bottom right corner",
@@ -159,34 +159,34 @@
  ],
  "near_misses": [
   {
-   "task": "Buy two boxes of jumbo paperclips and #10 envelopes for the office",
-   "better": "office supplies or shopping cart",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Reply to Mark's email about Friday lunch plans",
-   "better": "plain envelope or reply arrow (no attachment involved)",
+   "better": "plain envelope",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Forward the client's question to the engineering lead",
+   "better": "envelope with right-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy two boxes of jumbo paperclips and #10 envelopes for the office",
+   "better": "office supplies or shopping cart icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Check inbox for new messages",
-   "better": "inbox tray or plain envelope",
+   "better": "plain envelope",
    "trap": "generic_verb"
   },
   {
    "task": "Sign the lease renewal PDF on the iPad",
-   "better": "signature pen or document",
+   "better": "signature pen or document icon",
    "trap": "parent_topic"
   },
   {
    "task": "Buy a clip-on reading light for the headboard",
-   "better": "lamp or book light",
+   "better": "lamp or book light icon",
    "trap": "property"
-  },
-  {
-   "task": "Mail the physical birthday card to Grandma with a stamp",
-   "better": "postage stamp or mailbox",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -210,6 +210,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "email with attachment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "attach file to message",
+     "strength": "primary"
+    },
+    {
+     "meaning": "email document or file",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the paperclip could resemble a letter J, a hook, or a padlock shackle.",
+   "near_misses": [
+    {
+     "task": "Buy two boxes of jumbo paperclips and #10 envelopes for the office",
+     "better": "office supplies or shopping cart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reply to Mark's email about Friday lunch plans",
+     "better": "plain envelope or reply arrow (no attachment involved)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check inbox for new messages",
+     "better": "inbox tray or plain envelope",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Sign the lease renewal PDF on the iPad",
+     "better": "signature pen or document",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a clip-on reading light for the headboard",
+     "better": "lamp or book light",
+     "trap": "property"
+    },
+    {
+     "task": "Mail the physical birthday card to Grandma with a stamp",
+     "better": "postage stamp or mailbox",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mail_off",
+   "stacked_email",
+   "mail",
+   "unsubscribe",
+   "mark_email_read",
+   "forward_to_inbox",
+   "outgoing_mail"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12060,
+    "output": 2435,
+    "thoughts": 63,
+    "total": 14558
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "A vertical paperclip badge sits at the bottom-right corner of the envelope, specifically indicating an email with a file attachment."
 }

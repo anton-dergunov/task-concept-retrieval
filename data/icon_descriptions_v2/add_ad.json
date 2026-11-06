@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "new browser tab or application window",
+   "meaning": "new browser window, tab, or web page",
    "strength": "primary"
   },
   {
-   "meaning": "new web page or website",
+   "meaning": "add credit card or payment method",
    "strength": "primary"
   },
   {
-   "meaning": "add card, modal, or UI view",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "add credit card or magnetic stripe card",
+   "meaning": "add UI modal, dialog, or dashboard widget",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without window control dots in the header, the horizontal bar resembles the magnetic stripe on the back of a credit card, or a simplified calendar page without top rings.",
+ "ambiguity": "Easily confused at a glance with the calendar-plus icon because both are rounded rectangles with an upper horizontal bar and a bottom-right plus badge; also ambiguous between a software window header and the magnetic stripe on a credit card.",
  "modifier_semantics": [
   {
    "modifier": "plus sign at bottom right",
@@ -161,23 +157,23 @@
  ],
  "near_misses": [
   {
+   "task": "Add the Q3 offsite dates to the shared team calendar",
+   "better": "calendar page with top binding tabs and plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Create a new Google Calendar for the house renovation schedule",
+   "better": "calendar page with top binding tabs and plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Replace the cracked basement window pane before winter",
    "better": "house window with four panes",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Add the new Visa card to Apple Pay",
-   "better": "credit card with chip",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Add dentist appointment on the 14th to the family calendar",
-   "better": "calendar with binding rings and plus sign",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the annual hosting invoice for the company website",
-   "better": "invoice or credit card",
+   "better": "invoice or dollar sign",
    "trap": "parent_topic"
   },
   {
@@ -212,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "new browser tab or application window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "new web page or website",
+     "strength": "primary"
+    },
+    {
+     "meaning": "add card, modal, or UI view",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "add credit card or magnetic stripe card",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without window control dots in the header, the horizontal bar resembles the magnetic stripe on the back of a credit card, or a simplified calendar page without top rings.",
+   "near_misses": [
+    {
+     "task": "Replace the cracked basement window pane before winter",
+     "better": "house window with four panes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add the new Visa card to Apple Pay",
+     "better": "credit card with chip",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Add dentist appointment on the 14th to the family calendar",
+     "better": "calendar with binding rings and plus sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the annual hosting invoice for the company website",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Wash the living room windows inside and out",
+     "better": "spray bottle or house window",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the municipal permit portal is back online",
+     "better": "permit document or government building",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "calendar_add_on"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4087,
+    "output": 1015,
+    "thoughts": 0,
+    "total": 5102
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Unlike the calendar icon which has two vertical binding tabs on top and a squarer frame, this icon has a flat top edge and a wider rectangular proportion, representing a browser window, web page, or card with a plus sign."
 }

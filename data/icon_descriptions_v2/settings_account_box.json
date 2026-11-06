@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "personalizing device or app configuration",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "contact card or user profile setup",
+   "meaning": "personalizing device or contact card configuration",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Close in meaning and look to the reverse icon (person with small gear badge), which shares almost identical user-settings semantics.",
+ "ambiguity": "At very small sizes, the round head cutout inside the dark square badge can resemble the round lens cutout on the gear with a photo camera badge.",
  "modifier_semantics": [
   {
    "modifier": "filled rounded square badge with person silhouette at bottom right",
@@ -162,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Adjust portrait mode aperture in the phone camera settings",
+   "better": "gear with photo camera badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test webcam framing and video settings before the interview",
+   "better": "gear with video camera badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Oil the rear derailleur gears on the road bike",
    "better": "bicycle or mechanical drivetrain",
    "trap": "shared_vocabulary"
@@ -180,16 +186,6 @@
    "task": "Reset Wi-Fi router to factory settings",
    "better": "Wi-Fi router",
    "trap": "property"
-  },
-  {
-   "task": "Buy a new leather badge holder for the office",
-   "better": "ID lanyard or badge holder",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Ask HR for the signed contract PDF",
-   "better": "signed contract document",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -213,6 +209,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "user account settings or profile preferences",
+     "strength": "primary"
+    },
+    {
+     "meaning": "account management or user administration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "personalizing device or app configuration",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "contact card or user profile setup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Close in meaning and look to the reverse icon (person with small gear badge), which shares almost identical user-settings semantics.",
+   "near_misses": [
+    {
+     "task": "Oil the rear derailleur gears on the road bike",
+     "better": "bicycle or mechanical drivetrain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call IT helpdesk about my locked account",
+     "better": "phone call or headset",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the accountant for last year's tax filing",
+     "better": "money, invoice, or tax document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reset Wi-Fi router to factory settings",
+     "better": "Wi-Fi router",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new leather badge holder for the office",
+     "better": "ID lanyard or badge holder",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Ask HR for the signed contract PDF",
+     "better": "signed contract document",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_panorama",
+   "settings_video_camera",
+   "settings_photo_camera"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6747,
+    "output": 1937,
+    "thoughts": 0,
+    "total": 8684
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Set apart from the media/camera gear icons by the rounded-square badge containing a white head-and-shoulders person silhouette, denoting user account or profile settings."
 }

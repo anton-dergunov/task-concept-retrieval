@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "battery charging / recharge",
+   "meaning": "charging a depleted or empty battery / recharging a dead device",
    "strength": "primary"
   },
   {
@@ -17,11 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "electrical power / charger",
+   "meaning": "electrical power / charger adapter",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a visible positive terminal nub on the right because the lightning bolt replaces the right edge, it could briefly look like a bracket with a lightning bolt, though the battery charging convention is very well known.",
+ "ambiguity": "Visually almost identical at list size to the partially filled charging battery icons (low and ~30% fill), and completely interchangeable with them in meaning for to-do tasks.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt",
@@ -158,19 +158,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Top up the partially charged power bank before leaving",
+   "better": "partially filled battery with lightning bolt",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unplug the drone battery once it reaches 30% storage charge",
+   "better": "one-third filled charging battery icon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly electric utility bill before Friday",
    "better": "invoice or bill with lightning bolt",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check the weather forecast for thunderstorms tomorrow afternoon",
-   "better": "storm cloud with lightning",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Take a quiet weekend to recharge after the product launch",
@@ -186,17 +186,12 @@
    "task": "Buy a cordless battery-powered leaf blower for the yard",
    "better": "leaf blower",
    "trap": "property"
-  },
-  {
-   "task": "Order a waterproof Pelican case for the spare camera gear",
-   "better": "protective case",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a horizontal battery with a lightning bolt indicating charging or electrical power. It fits common real-life tasks like charging devices before a trip, buying chargers or power banks, and replacing or recycling batteries. It is slightly open on the right where the bolt sits, and differs from plain battery level indicators by emphasizing active charging.",
@@ -214,6 +209,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery charging / recharge",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery / power bank / portable charger",
+     "strength": "primary"
+    },
+    {
+     "meaning": "electrical power / charger",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a visible positive terminal nub on the right because the lightning bolt replaces the right edge, it could briefly look like a bracket with a lightning bolt, though the battery charging convention is very well known.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric utility bill before Friday",
+     "better": "invoice or bill with lightning bolt",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the weather forecast for thunderstorms tomorrow afternoon",
+     "better": "storm cloud with lightning",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take a quiet weekend to recharge after the product launch",
+     "better": "person resting or hammock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the unexpected $45 charge on my Visa statement",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a cordless battery-powered leaf blower for the yard",
+     "better": "leaf blower",
+     "trap": "property"
+    },
+    {
+     "task": "Order a waterproof Pelican case for the spare camera gear",
+     "better": "protective case",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_20_2",
+   "battery_charging_30_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5352,
+    "output": 1521,
+    "thoughts": 0,
+    "total": 6873
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "Shows a completely empty battery outline (thin left wall) with a lightning bolt on the right, whereas the other two have progressively thicker solid fills on the left side; for task planning, all three are functionally interchangeable."
 }

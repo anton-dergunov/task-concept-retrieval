@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic UI 'edit item' button rather than a task about writing.",
+ "ambiguity": "At small sizes, the diagonal pencil in the top-right corner of the square can be mistaken for the outward diagonal arrow of an external-link/export icon.",
  "modifier_semantics": [
   {
    "modifier": "pencil entering from top right",
@@ -163,6 +163,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix broken external links on the resources page",
+   "better": "square with outward diagonal arrow (external link)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Export the Q3 analytics report to CSV",
+   "better": "square with outward diagonal arrow (export / share)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update credit card on file for Netflix",
    "better": "credit card",
    "trap": "generic_verb"
@@ -173,11 +183,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Sharpen all the colored pencils in the studio",
-   "better": "pencil / art supplies",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a dotted A5 notebook for bullet journaling",
    "better": "notebook",
    "trap": "property"
@@ -186,11 +191,6 @@
    "task": "Email the publisher about the cover art proofs",
    "better": "email / envelope",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Revise the monthly grocery budget for inflation",
-   "better": "money / budget",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -214,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "write, compose, or draft text",
+     "strength": "primary"
+    },
+    {
+     "meaning": "edit or revise a document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "fill out a form or sign",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "note or journal entry",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic UI 'edit item' button rather than a task about writing.",
+   "near_misses": [
+    {
+     "task": "Update credit card on file for Netflix",
+     "better": "credit card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Edit the beach trip vlog down to ten minutes",
+     "better": "video / film",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sharpen all the colored pencils in the studio",
+     "better": "pencil / art supplies",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a dotted A5 notebook for bullet journaling",
+     "better": "notebook",
+     "trap": "property"
+    },
+    {
+     "task": "Email the publisher about the cover art proofs",
+     "better": "email / envelope",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Revise the monthly grocery budget for inflation",
+     "better": "money / budget",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "open_in_new"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4032,
+    "output": 998,
+    "thoughts": 0,
+    "total": 5030
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:53Z"
+  }
+ },
+ "distinguishing": "Shows a thick diagonal pencil pointing down and left into an open square (writing or editing), whereas the look-alike shows a thin diagonal arrow pointing up and right out of the square (external link or export)."
 }

@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "movie, film, or video editing",
+   "meaning": "color grading, post-production polish, or video filters",
    "strength": "secondary"
   },
   {
-   "meaning": "new movie release or featured cinema",
+   "meaning": "new movie premiere or featured film",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a plain movie clapperboard if the sparkles are not noticed, or a calendar with stars at very small sizes.",
+ "ambiguity": "Shares the exact outer clapperboard silhouette with the clapperboard containing a person, and could also be confused with a plain movie clapperboard for general film tasks.",
  "modifier_semantics": [
   {
    "modifier": "two four-pointed sparkle stars",
@@ -162,8 +162,18 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a wooden clapperboard for the student film set",
-   "better": "plain clapperboard without sparkles",
+   "task": "Record self-tape audition for the commercial casting",
+   "better": "clapperboard with person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Film talking-head intro for the YouTube vlog",
+   "better": "clapperboard with person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Generate AI product photos for the store listing",
+   "better": "image frame with sparkles",
    "trap": "lookalike_glyph"
   },
   {
@@ -182,14 +192,9 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Buy a 4K HDR monitor for the desk",
+   "task": "Buy a 4K HDR monitor for the editing desk",
    "better": "computer monitor",
    "trap": "property"
-  },
-  {
-   "task": "Generate AI product photos for the store listing",
-   "better": "image frame with sparkles",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video effects, visual effects (VFX), or motion graphics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "AI video generation or automated video enhancement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "movie, film, or video editing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "new movie release or featured cinema",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a plain movie clapperboard if the sparkles are not noticed, or a calendar with stars at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a wooden clapperboard for the student film set",
+     "better": "plain clapperboard without sparkles",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the render queue before going to bed",
+     "better": "progress bar or computer monitor",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Clean the projector lens in the living room",
+     "better": "projector",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Record voiceover for the explainer video",
+     "better": "microphone",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a 4K HDR monitor for the desk",
+     "better": "computer monitor",
+     "trap": "property"
+    },
+    {
+     "task": "Generate AI product photos for the store listing",
+     "better": "image frame with sparkles",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cinematic_blur"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4095,
+    "output": 1145,
+    "thoughts": 0,
+    "total": 5240
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "Contains two four-pointed sparkle stars inside the clapperboard frame instead of a person silhouette, signifying visual effects, AI video generation, or video enhancement rather than a person on camera."
 }

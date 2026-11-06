@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "bowling ball",
+   "meaning": "bowling ball or bowling",
    "strength": "primary"
   },
   {
-   "meaning": "Asana logo or project management workspace",
+   "meaning": "Asana app or project management workspace",
    "strength": "primary"
   },
   {
-   "meaning": "three-pin audio connector, XLR socket, or electrical outlet",
+   "meaning": "three-pin round audio connector (XLR) or electrical socket",
    "strength": "secondary"
   },
   {
-   "meaning": "Pax Cultura symbol (Banner of Peace) or Chintamani stone",
+   "meaning": "Banner of Peace (Pax Cultura) symbol or Chintamani stone",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Highly ambiguous abstract shape; looks equally like a bowling ball with centered finger holes, a 3-pin XLR connector, the Asana app logo, a coconut, or a shirt button.",
+ "ambiguity": "Virtually identical to and interchangeable with the circle containing three tighter-clustered dots; also easily confused with a bowling ball, the Asana logo, a 3-pin XLR connector, or a shirt button.",
  "modifier_semantics": [],
  "domains": [
   "hobbies",
@@ -153,9 +153,14 @@
  ],
  "near_misses": [
   {
-   "task": "Make a big salad bowl for the potluck",
-   "better": "salad bowl",
-   "trap": "shared_vocabulary"
+   "task": "Polish bowling ball and pack bowling shoes for league night",
+   "better": "bowling ball with tighter finger holes or bowling pin",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean up completed tasks in Asana project board",
+   "better": "circle with three tighter-clustered dots",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Sew the loose button back onto my winter coat",
@@ -163,30 +168,25 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Make a big salad bowl for the potluck",
+   "better": "salad bowl",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Buy three bags of potting soil at the garden center",
    "better": "plant or soil bag",
    "trap": "property"
   },
   {
-   "task": "Order pizza and pitchers of beer for the lane",
+   "task": "Order pizza and pitchers of beer for the bowling lane",
    "better": "pizza slice or beer mug",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Pack board games and dice for cabin weekend",
-   "better": "six-sided die",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check the three main points of the presentation",
-   "better": "presentation slide",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A circle containing three dots arranged in a triangle is a classic visual pun: it represents the Banner of Peace / Pax Cultura symbol, the Asana logo, a 3-pin XLR socket, or a simplified bowling ball. While too abstract to be universally obvious without context, it serves well for bowling tasks, Asana workspace management, or audio/electrical plug tasks.",
@@ -204,6 +204,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bowling ball",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Asana logo or project management workspace",
+     "strength": "primary"
+    },
+    {
+     "meaning": "three-pin audio connector, XLR socket, or electrical outlet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Pax Cultura symbol (Banner of Peace) or Chintamani stone",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Highly ambiguous abstract shape; looks equally like a bowling ball with centered finger holes, a 3-pin XLR connector, the Asana app logo, a coconut, or a shirt button.",
+   "near_misses": [
+    {
+     "task": "Make a big salad bowl for the potluck",
+     "better": "salad bowl",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sew the loose button back onto my winter coat",
+     "better": "four-hole shirt button with thread",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy three bags of potting soil at the garden center",
+     "better": "plant or soil bag",
+     "trap": "property"
+    },
+    {
+     "task": "Order pizza and pitchers of beer for the lane",
+     "better": "pizza slice or beer mug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pack board games and dice for cabin weekend",
+     "better": "six-sided die",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the three main points of the presentation",
+     "better": "presentation slide",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "communities"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4087,
+    "output": 663,
+    "thoughts": 109,
+    "total": 4859
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "The three interior dots are spaced slightly farther apart toward the outer ring than in the other icon, though at list size the two icons are visually and functionally interchangeable."
 }

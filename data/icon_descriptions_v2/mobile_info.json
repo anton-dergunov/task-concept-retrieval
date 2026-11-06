@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "device information, phone specs, or system details (IMEI, serial number)",
+   "meaning": "device information, phone specs, or system details (IMEI, serial number, about phone)",
    "strength": "primary"
   },
   {
@@ -20,13 +20,9 @@
   {
    "meaning": "mobile app instructions, onboarding info, or help screen",
    "strength": "secondary"
-  },
-  {
-   "meaning": "information kiosk or digital directory",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as a smartphone/device showing an info symbol (device specs/IMEI) or as a tabbed notebook/manual with an 'i' on the cover; at very small sizes the 'i' can look like an upside-down exclamation mark.",
+ "ambiguity": "Easily confused at small sizes with the smartphone/smartwatch showing an exclamation mark, since the two icons share the exact same outer frame and only invert the dot and vertical bar inside; also ambiguous between a smartphone, a smartwatch case, and a tabbed notebook.",
  "modifier_semantics": [
   {
    "modifier": "lowercase 'i' symbol",
@@ -166,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix phone screen error at the repair shop",
+   "better": "device screen with an exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check urgent emergency alert on phone",
+   "better": "device screen with an exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Mom on her cell phone tonight",
    "better": "phone call handset",
    "trap": "lookalike_glyph"
@@ -184,22 +190,12 @@
    "task": "Order a clear protective case with MagSafe",
    "better": "phone case or shopping bag",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Fix cracked screen at the repair shop on 5th",
-   "better": "broken screen or wrench",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Ask the tourist information desk for a paper subway map",
-   "better": "map",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a vertical handheld device (smartphone or tablet with a side button) or a tabbed booklet displaying a prominent 'i' information symbol. It fits tasks centered on checking device specifications (IMEI, serial number, battery health, OS version) or consulting user manuals and digital guides, though it can be confused with a generic smartphone or an exclamation alert at small sizes.",
@@ -217,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": "perm_device_information"
- }
+  "alias_of": "perm_device_information",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "device information, phone specs, or system details (IMEI, serial number)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital manual, user guide, or reference handbook",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile app instructions, onboarding info, or help screen",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "information kiosk or digital directory",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as a smartphone/device showing an info symbol (device specs/IMEI) or as a tabbed notebook/manual with an 'i' on the cover; at very small sizes the 'i' can look like an upside-down exclamation mark.",
+   "near_misses": [
+    {
+     "task": "Call Mom on her cell phone tonight",
+     "better": "phone call handset",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new braided USB-C phone charger cable",
+     "better": "charging cable or plug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the flight to Lisbon is on time",
+     "better": "airplane",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a clear protective case with MagSafe",
+     "better": "phone case or shopping bag",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix cracked screen at the repair shop on 5th",
+     "better": "broken screen or wrench",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Ask the tourist information desk for a paper subway map",
+     "better": "map",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "stay_primary_portrait"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4093,
+    "output": 1040,
+    "thoughts": 0,
+    "total": 5133
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "Displays a lowercase 'i' (dot on top, vertical bar below) inside the screen to signify device information, specs, or a user guide, rather than an exclamation mark for an alert or error."
 }

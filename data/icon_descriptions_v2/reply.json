@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "turn left (navigation)",
+   "meaning": "turn left (navigation direction Only when directional routing is the point of the task, not for general travel.)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Shared across UI conventions for email reply, undo/revert, return/enter key (flipped), and left turn direction; has no concrete noun subject of its own.",
+ "ambiguity": "Easily confused at a quick glance with the right-turning arrow (forward / turn right), as well as the downward-then-left carriage return / enter key symbol.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -149,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Forward the vendor invoice email to accounting",
+   "better": "right-pointing curved forward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the right-turn lane signage at the intersection",
+   "better": "right-turning navigation arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "File 2025 federal tax return before April 15",
    "better": "tax form or document icon",
    "trap": "shared_vocabulary"
@@ -164,25 +174,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a new mechanical return spring for the screen door",
-   "better": "door or hardware tool icon",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Email the signed lease back to the broker",
-   "better": "contract / signature document icon",
+   "better": "contract or signature document icon",
    "trap": "generic_verb"
   },
   {
    "task": "Order replacement keycap for the broken Enter key",
    "better": "keyboard icon",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "A bent left-pointing arrow is the standard UI glyph for 'reply' and 'undo/return', making it a serviceable action icon for tasks centered on replying to messages, returning purchases, or reverting changes. However, it depicts no concrete object and is easily confused with generic back, undo, Enter-key, or turn-left arrows.",
@@ -200,6 +205,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "reply or respond to a message or email",
+     "strength": "primary"
+    },
+    {
+     "meaning": "undo, revert, or go back",
+     "strength": "primary"
+    },
+    {
+     "meaning": "return an item or send back",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "turn left (navigation)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Shared across UI conventions for email reply, undo/revert, return/enter key (flipped), and left turn direction; has no concrete noun subject of its own.",
+   "near_misses": [
+    {
+     "task": "File 2025 federal tax return before April 15",
+     "better": "tax form or document icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book return flight from Lisbon to Boston",
+     "better": "airplane icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Calculate expected return on the index fund portfolio",
+     "better": "chart or money icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new mechanical return spring for the screen door",
+     "better": "door or hardware tool icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the signed lease back to the broker",
+     "better": "contract / signature document icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order replacement keycap for the broken Enter key",
+     "better": "keyboard icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "turn_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4046,
+    "output": 694,
+    "thoughts": 122,
+    "total": 4862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Curves ninety degrees to the left with a wide rounded bend and short vertical tail, signifying reply, undo, or return rather than forwarding or turning right."
 }

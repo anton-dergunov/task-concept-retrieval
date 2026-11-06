@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "battery / batteries",
+   "meaning": "battery / almost full battery (approx. 90%)",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "almost full battery / high charge level",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "medicine bottle or flask with a label",
+   "meaning": "medicine bottle or flask with narrow top label",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the solid silhouette with a horizontal white rectangle near the top can look like a pill bottle, shampoo bottle, or clipboard.",
+ "ambiguity": "Easily confused with the 75% battery icon or the solid 100% battery icon at small list sizes, and interchangeable with all icons in this group for generic battery tasks.",
  "modifier_semantics": [
   {
    "modifier": "empty horizontal slot at the top of the fill",
@@ -162,6 +158,21 @@
  ],
  "near_misses": [
   {
+   "task": "Discharge lipo batteries down to 50% for safe winter storage",
+   "better": "half-full (50%) battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace dead batteries with 100% full ones in the smoke detectors",
+   "better": "solid full battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Refill daily blood pressure prescription bottle at CVS",
+   "better": "pill bottle / medicine",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small waterproof battery-powered fan for the tent",
    "better": "fan",
    "trap": "property"
@@ -172,11 +183,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Refill daily blood pressure prescription bottle at CVS",
-   "better": "pill bottle / medicine",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Charge client for the extra three hours of design revisions",
    "better": "invoice / money",
    "trap": "shared_vocabulary"
@@ -185,17 +191,12 @@
    "task": "Buy a new braided USB-C cable for the nightstand",
    "better": "cable / plug",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Schedule the full neuropsychological test battery with Dr. Patel",
-   "better": "brain or medical clipboard",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an upright battery at roughly 80-90% charge, making it a strong visual cue for tasks about buying, charging, replacing, or recycling batteries and power banks. Because it is one of several incremental battery-level status icons, it is slightly less distinct than a full battery or a battery with a lightning bolt, and at tiny sizes its white top cutout can briefly resemble a labeled bottle.",
@@ -213,6 +214,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": "battery_6_bar"
- }
+  "alias_of": "battery_6_bar",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / power bank / portable power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "almost full battery / high charge level",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "medicine bottle or flask with a label",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the solid silhouette with a horizontal white rectangle near the top can look like a pill bottle, shampoo bottle, or clipboard.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof battery-powered fan for the tent",
+     "better": "fan",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before the 15th",
+     "better": "lightning bolt or bill / invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill daily blood pressure prescription bottle at CVS",
+     "better": "pill bottle / medicine",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Charge client for the extra three hours of design revisions",
+     "better": "invoice / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new braided USB-C cable for the nightstand",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Schedule the full neuropsychological test battery with Dr. Patel",
+     "better": "brain or medical clipboard",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_full",
+   "battery_3_bar",
+   "battery_vert_050",
+   "battery_4_bar",
+   "battery_5_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9321,
+    "output": 3291,
+    "thoughts": 0,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Has only a narrow horizontal white slit near the top (representing an 85-90% almost-full battery), setting it apart from the lower half-filled batteries though still functionally interchangeable with the other battery icons."
 }

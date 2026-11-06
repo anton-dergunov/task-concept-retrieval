@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "withdraw cash or take money out",
+   "meaning": "withdraw cash or take money out of an ATM",
    "strength": "primary"
   },
   {
-   "meaning": "incoming payment, refund, or cash deposit",
+   "meaning": "cash out earnings, payout, or incoming refund",
    "strength": "primary"
   },
   {
    "meaning": "lower cost, price drop, or reduce expenses",
    "strength": "secondary"
-  },
-  {
-   "meaning": "cash out earnings or payout",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "The downward arrow can be read either as cash coming out of an ATM/account (withdrawal/payout) or money coming into the user's hand (deposit/refund), or as decreasing costs. At very small sizes the banknote can look like a camera or a ticket.",
+ "ambiguity": "Shares the identical banknote top half with the banknote with a horizontal double-headed arrow, and the downward arrow itself can be read as cash dispensing out, money coming in, or costs going down.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow",
@@ -134,7 +130,6 @@
  ],
  "example_tasks_es": [
   "Sacar 50 euros del cajero para el mercadillo del domingo",
-  "Reclamar la devolución de la fianza del piso antiguo",
   "Pasar el saldo de Bizum y Wallapop a la cuenta del banco"
  ],
  "example_tasks_ru": [
@@ -162,13 +157,18 @@
  ],
  "near_misses": [
   {
-   "task": "Pay the plumber $180 for fixing the kitchen trap",
-   "better": "banknote with upward or outward arrow (pay / send money)",
+   "task": "Exchange $300 into euros at the credit union before the trip",
+   "better": "banknote with horizontal double-headed arrow (currency exchange)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Take the old camera down from the closet shelf",
-   "better": "camera",
+   "task": "Transfer $500 from checking to the joint savings account",
+   "better": "banknote with horizontal double-headed arrow (money transfer)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the plumber $180 for fixing the kitchen trap",
+   "better": "banknote with upward or outward arrow (pay / send money)",
    "trap": "lookalike_glyph"
   },
   {
@@ -213,6 +213,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_es": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "withdraw cash or take money out",
+     "strength": "primary"
+    },
+    {
+     "meaning": "incoming payment, refund, or cash deposit",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lower cost, price drop, or reduce expenses",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cash out earnings or payout",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The downward arrow can be read either as cash coming out of an ATM/account (withdrawal/payout) or money coming into the user's hand (deposit/refund), or as decreasing costs. At very small sizes the banknote can look like a camera or a ticket.",
+   "near_misses": [
+    {
+     "task": "Pay the plumber $180 for fixing the kitchen trap",
+     "better": "banknote with upward or outward arrow (pay / send money)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the old camera down from the closet shelf",
+     "better": "camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a cheap waterproof phone pouch for kayaking",
+     "better": "phone pouch",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the corner taco truck is cash-only",
+     "better": "taco / food truck",
+     "trap": "property"
+    },
+    {
+     "task": "Update the tax withholding form in Workday",
+     "better": "tax form / document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a new debit card with a chip",
+     "better": "credit/debit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "money_range"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4083,
+    "output": 1122,
+    "thoughts": 0,
+    "total": 5205
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "Shows a single short vertical downward arrow beneath the banknote, signifying taking cash out, receiving a payout, or lowering costs rather than the two-way exchange or transfer shown by the horizontal double arrow."
 }

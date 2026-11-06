@@ -10,19 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "rotate text down / angle text clockwise",
+   "meaning": "angle text clockwise / rotate text diagonally down",
    "strength": "primary"
   },
   {
-   "meaning": "text orientation or typography formatting",
+   "meaning": "text orientation or spreadsheet cell alignment",
    "strength": "secondary"
   },
   {
-   "meaning": "slanted lettering or diagonal labels",
+   "meaning": "typography formatting or diagonal labels",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a broken arrow, a geometric compass tool, or an abstract monogram.",
+ "ambiguity": "Easily confused at a glance with the upward-angled text icon (tilted A with arrow pointing up-right) for general text rotation or formatting tasks; at small sizes it can also look like a decrease-font-size icon or a compass tool.",
  "modifier_semantics": [
   {
    "modifier": "diagonal arrow pointing down and right",
@@ -156,40 +156,45 @@
  ],
  "near_misses": [
   {
-   "task": "Translate the warranty contract from German to English",
-   "better": "translation / languages",
+   "task": "Angle the spreadsheet column headers diagonally upward so they fit",
+   "better": "tilted A with diagonal arrow pointing up and right (angle text counterclockwise)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Sort the customer list alphabetically from A to Z",
-   "better": "sort A-Z",
+   "better": "A-to-Z with downward arrow (alphabetical sort)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Decrease the font size of the footnotes in the contract",
+   "better": "letter A with small down arrow or minus sign (decrease font size)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Download the new variable font family for the website redesign",
-   "better": "font / डाउनलोड",
+   "better": "font file or download arrow",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Rotate the car tires before the winter road trip",
-   "better": "car tire",
+   "better": "car tire or wheel",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check the angle of the mitre saw blade before cutting baseboards",
-   "better": "saw / protractor",
+   "better": "saw or protractor",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Send final copy to the proofreader",
-   "better": "document / mail",
+   "better": "document or mail envelope",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 1,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": true,
  "reasoning": "This is a spreadsheet toolbar icon for rotating text downward at a 45-degree angle. It is pure UI formatting chrome rather than a real-world task subject, and outside of a toolbar it is easily confused with sort, font size, or geometry icons.",
@@ -207,6 +212,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "rotate text down / angle text clockwise",
+     "strength": "primary"
+    },
+    {
+     "meaning": "text orientation or typography formatting",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "slanted lettering or diagonal labels",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a broken arrow, a geometric compass tool, or an abstract monogram.",
+   "near_misses": [
+    {
+     "task": "Translate the warranty contract from German to English",
+     "better": "translation / languages",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sort the customer list alphabetically from A to Z",
+     "better": "sort A-Z",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download the new variable font family for the website redesign",
+     "better": "font / डाउनलोड",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Rotate the car tires before the winter road trip",
+     "better": "car tire",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the angle of the mitre saw blade before cutting baseboards",
+     "better": "saw / protractor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send final copy to the proofreader",
+     "better": "document / mail",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "text_rotation_angleup"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4057,
+    "output": 1105,
+    "thoughts": 0,
+    "total": 5162
+   },
+   "soft_problems": [
+    "refers to a letter 1x"
+   ],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Shows a capital A tilted 45 degrees clockwise above a diagonal arrow pointing down and right, representing downward-angled text orientation (as opposed to upward-angled text)."
 }

@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the rigid angular geometry can resemble an anchor, a ship's mast, a pogo stick, or the Chinese character 中 (zhōng) topped with a box.",
+ "ambiguity": "At small sizes, the rigid angular stem and side loops can resemble a nautical anchor, the Chinese character 中 topped with a box, or the branched silhouette of the USB trident symbol.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -169,9 +169,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a 5 lb bag of unbleached all-purpose flour for pizza dough",
-   "better": "flour sack or baking",
-   "trap": "shared_vocabulary"
+   "task": "Back up tax documents onto a USB flash drive",
+   "better": "USB trident symbol or flash drive",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a USB-C hub with an Ethernet port for the laptop",
+   "better": "USB trident symbol",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Drop anchor in the sheltered cove before dusk",
@@ -179,14 +184,14 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Buy a 5 lb bag of unbleached all-purpose flour for pizza dough",
+   "better": "flour sack or baking",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Pick out floral print curtains for the guest bedroom",
    "better": "curtains or window",
    "trap": "property"
-  },
-  {
-   "task": "Practice writing basic Chinese characters in the workbook",
-   "better": "language character or book",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new garden hose nozzle that doesn't leak",
@@ -202,7 +207,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a highly stylized, blocky geometric flower or plant with a rectangular bloom and angular leaves. It fits tasks about houseplants, flowers, florists, and gardening well, though its boxy proportions make it slightly ambiguous and prone to looking like an anchor or a CJK character at small sizes.",
@@ -222,6 +227,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "flower, plant, or gardening",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sprout or seedling",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "nature or botany",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "macro photography mode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the rigid angular geometry can resemble an anchor, a ship's mast, a pogo stick, or the Chinese character 中 (zhōng) topped with a box.",
+   "near_misses": [
+    {
+     "task": "Buy a 5 lb bag of unbleached all-purpose flour for pizza dough",
+     "better": "flour sack or baking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drop anchor in the sheltered cove before dusk",
+     "better": "nautical anchor",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick out floral print curtains for the guest bedroom",
+     "better": "curtains or window",
+     "trap": "property"
+    },
+    {
+     "task": "Practice writing basic Chinese characters in the workbook",
+     "better": "language character or book",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new garden hose nozzle that doesn't leak",
+     "better": "hose or nozzle",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the backyard after the windstorm",
+     "better": "house or fence",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "usb"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4018,
+    "output": 1065,
+    "thoughts": 0,
+    "total": 5083
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Shows a symmetrical geometric flower or sprout with a hollow rectangular top and closed polygonal side leaves, whereas the USB symbol is an asymmetrical three-pronged trident ending in a solid triangle, circle, and square."
 }

@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "split, fork, or branch off (code, workflow, road)",
+   "meaning": "split, fork, or branch off (workflow, code, road, path Options) — interchangeable with the right-branching arrow",
    "strength": "primary"
   },
   {
-   "meaning": "driving directions, highway exit, or turn-off",
+   "meaning": "straight or left turn lane, left highway exit, or left fork in driving directions",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a Git branch icon (which usually has nodes/circles) or generic turn arrows in navigation sets.",
+ "ambiguity": "Essentially interchangeable with the upward arrow with a right-curving branch for general tasks about forking, branching, or detours; only distinct when literal left vs. right lane direction matters. Also resembles Git branch icons (which usually have circular nodes) or merge arrows.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,6 +154,21 @@
  ],
  "near_misses": [
   {
+   "task": "Check which lane goes straight or turns right at the bridge",
+   "better": "upward arrow with right-curving branch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the right-hand exit ramp toward downtown",
+   "better": "upward arrow with right-curving branch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Merge the staging branch back into main",
+   "better": "converging merge arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new carving fork for Thanksgiving",
    "better": "cutlery fork",
    "trap": "shared_vocabulary"
@@ -169,16 +184,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Merge the staging branch back into main",
-   "better": "converging merge arrows",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pack spare tire pressure gauge",
-   "better": "tire gauge or car",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Split the Airbnb bill with Sarah and Leo",
    "better": "money or receipt",
    "trap": "shared_vocabulary"
@@ -187,7 +192,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a straight path with a left-turning branch, universally read as a road fork/detour sign or a branching workflow/code path. While somewhat abstract, it fits real tasks around Git branching, logic flows, driving directions, and trail navigation.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "split, fork, or branch off (code, workflow, road)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "driving directions, highway exit, or turn-off",
+     "strength": "primary"
+    },
+    {
+     "meaning": "detour, alternate route, or pivot",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "decision point or choosing between two paths",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a Git branch icon (which usually has nodes/circles) or generic turn arrows in navigation sets.",
+   "near_misses": [
+    {
+     "task": "Buy a new carving fork for Thanksgiving",
+     "better": "cutlery fork",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Prune the dead branches off the backyard apple tree",
+     "better": "tree or pruning shears",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the downtown bank branch about the wire fee",
+     "better": "bank building or phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Merge the staging branch back into main",
+     "better": "converging merge arrows",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack spare tire pressure gauge",
+     "better": "tire gauge or car",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Split the Airbnb bill with Sarah and Leo",
+     "better": "money or receipt",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fork_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 823,
+    "thoughts": 0,
+    "total": 4872
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:18Z"
+  }
+ },
+ "distinguishing": "The side branch curves to the left off the main vertical up-arrow (mirror image of the right-branching version); interchangeable with the right-branching arrow for generic branching, forking, or splitting, and only distinct when specifically indicating a left exit or straight-or-left lane."
 }

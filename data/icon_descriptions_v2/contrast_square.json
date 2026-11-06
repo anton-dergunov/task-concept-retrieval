@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "camera exposure compensation (+/- EV)",
+   "meaning": "camera exposure compensation (+/- EV) (standard symbol with + top-left, - bottom-right, or positive EV adjustment / overexposure if paired with the inverted version for negative EV / underexposure) ",
    "strength": "primary"
   },
   {
@@ -18,7 +18,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "math, arithmetic, or balance adjustment",
+   "meaning": "math, arithmetic, or plus/minus balance adjustment",
    "strength": "secondary"
   },
   {
@@ -26,7 +26,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Standard photography symbol for exposure compensation, but outside photography most people read the plus/minus split as pros and cons, trade-offs, or basic arithmetic.",
+ "ambiguity": "Nearly indistinguishable at a glance from the diagonally split square with minus top-left and plus bottom-right; in photography, this version is the canonical +/- EV button icon (or can represent positive exposure vs negative exposure when paired with the inverted icon), while for pros/cons or math tasks the two are completely interchangeable.",
  "modifier_semantics": [
   {
    "modifier": "plus sign",
@@ -167,6 +167,16 @@
  ],
  "near_misses": [
   {
+   "task": "Dial in -1 EV underexposure compensation on the camera for night street shots",
+   "better": "diagonally split +/- square with minus in the top-left and plus in the bottom-right (negative exposure compensation / underexposure) if contrasting +EV vs -EV",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "List the cons and downsides first before the pros in the vendor comparison doc",
+   "better": "diagonally split square with minus in the top-left and plus in the bottom-right",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new 12-volt car battery with reversed positive and negative terminals",
    "better": "car battery",
    "trap": "shared_vocabulary"
@@ -174,7 +184,7 @@
   {
    "task": "Download the scientific calculator app for the physics exam",
    "better": "calculator with four operator buttons",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Pack the 35mm prime lens for the weekend trip",
@@ -190,17 +200,12 @@
    "task": "Check whether the checking account balance went negative",
    "better": "bank account or money",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Test AA batteries with the multimeter",
-   "better": "battery or multimeter",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Literally the standard photography icon for exposure compensation (+/- EV), it is also widely read by general users as pros and cons, trade-offs, or plus/minus arithmetic. It works well for photo-editing tasks, decision-making pros/cons lists, and basic math practice, though it can be confused with a simplified calculator icon.",
@@ -218,6 +223,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera exposure compensation (+/- EV)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pros and cons / advantages and disadvantages",
+     "strength": "primary"
+    },
+    {
+     "meaning": "math, arithmetic, or balance adjustment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "brightness or contrast setting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Standard photography symbol for exposure compensation, but outside photography most people read the plus/minus split as pros and cons, trade-offs, or basic arithmetic.",
+   "near_misses": [
+    {
+     "task": "Buy a new 12-volt car battery with reversed positive and negative terminals",
+     "better": "car battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download the scientific calculator app for the physics exam",
+     "better": "calculator with four operator buttons",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack the 35mm prime lens for the weekend trip",
+     "better": "camera lens",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Print high-contrast black and white posters for the gig",
+     "better": "poster or printer",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the checking account balance went negative",
+     "better": "bank account or money",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Test AA batteries with the multimeter",
+     "better": "battery or multimeter",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "iso"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4126,
+    "output": 940,
+    "thoughts": 0,
+    "total": 5066
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Places the plus sign in the top-left black half and the minus sign in the bottom-right white half (the standard camera exposure-compensation icon), though in a task list it is practically interchangeable with the swapped version."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "block, ban, or prohibit",
+   "meaning": "prohibition, ban, or forbidden",
    "strength": "primary"
   },
   {
-   "meaning": "cancel or revoke",
+   "meaning": "block, deny, or restrict access",
    "strength": "primary"
   },
   {
-   "meaning": "disable, turn off, or opt out",
+   "meaning": "cancel, revoke, or opt out",
    "strength": "secondary"
   },
   {
-   "meaning": "stop or quit a habit",
+   "meaning": "quit or stop a habit",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a zero or empty set symbol if the slash angle is misread, or with a generic 'close/delete' X icon.",
+ "ambiguity": "Identical to the other circle-backslash prohibition icon in the group; can also be confused with a slashed zero, the mathematical empty set symbol, or a generic close/cancel X icon.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -180,45 +180,45 @@
  ],
  "near_misses": [
   {
-   "task": "Cancel dentist appointment on Thursday",
-   "better": "dentist / tooth or calendar with X",
-   "trap": "generic_verb"
+   "task": "Check whether the solution set is the null set",
+   "better": "empty set symbol (circle with forward slash piercing the ring)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Cancel flight to Chicago and get refund",
-   "better": "airplane",
+   "task": "Stop the audio track playback immediately",
+   "better": "stop button (solid square inside circle)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cancel dentist appointment on Thursday",
+   "better": "tooth or calendar with X",
    "trap": "generic_verb"
   },
   {
    "task": "Buy non-slip bath mat for the shower",
-   "better": "bath mat / shower",
+   "better": "bath mat or shower",
    "trap": "property"
   },
   {
    "task": "Find sugar-free snacks for the road trip",
-   "better": "snacks / food",
+   "better": "snacks or food",
    "trap": "property"
   },
   {
    "task": "Buy cinder blocks for the backyard garden bed",
-   "better": "brick / block",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Take a walk around the block after dinner",
-   "better": "walking / person walking",
+   "better": "brick or masonry block",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Order new blackout curtains for the nursery",
-   "better": "curtains / window",
+   "better": "curtains or window",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The universal prohibition sign (circle with a backslash) clearly communicates blocking, banning, cancelling, or opting out. While specific tasks with a concrete object (like cancelling a flight) should use the object's icon, this symbol fits tasks centered on blocking spam, revoking permissions, opting out, or cancelling generic subscriptions.",
@@ -238,6 +238,96 @@
    "example_tasks: 20 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "do_disturb_alt"
- }
+  "alias_of": "do_disturb_alt",
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "block, ban, or prohibit",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel or revoke",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disable, turn off, or opt out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "stop or quit a habit",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a zero or empty set symbol if the slash angle is misread, or with a generic 'close/delete' X icon.",
+   "near_misses": [
+    {
+     "task": "Cancel dentist appointment on Thursday",
+     "better": "dentist / tooth or calendar with X",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy non-slip bath mat for the shower",
+     "better": "bath mat / shower",
+     "trap": "property"
+    },
+    {
+     "task": "Find sugar-free snacks for the road trip",
+     "better": "snacks / food",
+     "trap": "property"
+    },
+    {
+     "task": "Buy cinder blocks for the backyard garden bed",
+     "better": "brick / block",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take a walk around the block after dinner",
+     "better": "walking / person walking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order new blackout curtains for the nursery",
+     "better": "curtains / window",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "block"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 1135,
+    "thoughts": 53,
+    "total": 5237
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Visually identical and completely interchangeable with the other circle-with-diagonal-slash prohibition icon in this group, sharing the exact same ring thickness and top-left to bottom-right slash."
 }

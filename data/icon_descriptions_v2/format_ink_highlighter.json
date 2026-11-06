@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "highlighter marker / highlight text",
+   "meaning": "highlight text / mark up passage",
    "strength": "primary"
   },
   {
-   "meaning": "felt-tip marker / whiteboard marker",
+   "meaning": "text highlight color / formatting (rich-text UI)",
    "strength": "primary"
   },
   {
-   "meaning": "annotate / mark up document",
+   "meaning": "highlighter marker (in use)",
    "strength": "secondary"
   },
   {
-   "meaning": "text background color (rich-text UI icon)",
+   "meaning": "annotate or underline document",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic edit/pencil icon, an eyedropper, or a lipstick/scalpel at small sizes, and in UI toolbars it specifically means text highlight color.",
+ "ambiguity": "Nearly interchangeable with the standalone chisel-tip marker icon for general highlighting or marker tasks, and also resembles a generic edit pencil with an underline.",
  "modifier_semantics": [
   {
    "modifier": "thick horizontal bar below tip",
@@ -161,24 +161,29 @@
  ],
  "near_misses": [
   {
+   "task": "Buy a pack of black dry-erase whiteboard markers for the conference room",
+   "better": "standalone chisel-tip marker pen (without the underline bar)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Label the moving boxes in the garage with a thick permanent marker",
+   "better": "standalone chisel-tip marker pen or cardboard box",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sign the PDF tax return and upload it to the accountant's portal",
+   "better": "fountain pen nib / signature on line",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book hair salon appointment for blonde highlights and trim",
    "better": "hair / scissors",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Cut together a 2-minute highlight reel from Saturday's soccer match",
-   "better": "video / film",
+   "better": "video / film clapperboard",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Write thank-you cards to everyone who came to the wedding",
-   "better": "pen / envelope",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Sign the PDF tax return and upload it to the accountant's portal",
-   "better": "signature / document",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a neon yellow high-visibility vest for night cycling",
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a chisel-tip highlighter or marker above a thick stroke. While originally a rich-text toolbar icon for text highlight color, in a task list it clearly cues physical highlighters/markers, buying stationery, or marking up and highlighting study notes and documents. It is somewhat narrow in scope and can blur with generic pen/pencil edit icons.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "highlighter marker / highlight text",
+     "strength": "primary"
+    },
+    {
+     "meaning": "felt-tip marker / whiteboard marker",
+     "strength": "primary"
+    },
+    {
+     "meaning": "annotate / mark up document",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "text background color (rich-text UI icon)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic edit/pencil icon, an eyedropper, or a lipstick/scalpel at small sizes, and in UI toolbars it specifically means text highlight color.",
+   "near_misses": [
+    {
+     "task": "Book hair salon appointment for blonde highlights and trim",
+     "better": "hair / scissors",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cut together a 2-minute highlight reel from Saturday's soccer match",
+     "better": "video / film",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write thank-you cards to everyone who came to the wedding",
+     "better": "pen / envelope",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sign the PDF tax return and upload it to the accountant's portal",
+     "better": "signature / document",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a neon yellow high-visibility vest for night cycling",
+     "better": "safety vest / bicycle",
+     "trap": "property"
+    },
+    {
+     "task": "Print 30 copies of the syllabus for the Monday morning lecture",
+     "better": "printer",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ink_highlighter"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4127,
+    "output": 1179,
+    "thoughts": 0,
+    "total": 5306
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "Includes a thick horizontal bar underneath the chisel-tip marker, emphasizing the action of highlighting a line of text or choosing a text-highlight color, whereas the other icon shows only the standalone marker pen."
 }

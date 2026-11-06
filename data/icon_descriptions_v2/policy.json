@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "security scan / virus scan / vulnerability check",
+   "meaning": "routine security scan / virus scan / vulnerability check",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the magnifying glass inside the shield can look like a keyhole or the letter Q.",
+ "ambiguity": "Easily confused at a glance with the shield containing a magnifying glass and an exclamation mark when any security-related task comes up; at small sizes the magnifying glass can also look like a keyhole or the letter Q.",
  "modifier_semantics": [
   {
    "modifier": "magnifying glass",
@@ -132,8 +132,7 @@
  ],
  "example_tasks_es": [
   "Pasar el antivirus completo al portátil del trabajo",
-  "Revisar permisos de aplicaciones conectadas a la cuenta de Google",
-  "Analizar la cobertura de la póliza del seguro de hogar antes de la renovación anual"
+  "Revisar permisos de aplicaciones conectadas a la cuenta de Google"
  ],
  "example_tasks_ru": [
   "Прогнать полную проверку ноутбука через Malwarebytes",
@@ -160,6 +159,16 @@
  ],
  "near_misses": [
   {
+   "task": "Investigate the suspicious login alert on my bank account",
+   "better": "shield with magnifying glass and exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Resolve the critical vulnerability warning from the malware scan",
+   "better": "shield with magnifying glass and exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the six-month GEICO car insurance bill",
    "better": "credit card or bill payment",
    "trap": "shared_vocabulary"
@@ -175,25 +184,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Find the spare house key in the kitchen junk drawer",
-   "better": "key",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a YubiKey 5C Nano for backup authentication",
    "better": "USB security key",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Search for a quiet coffee shop with reliable wifi",
-   "better": "coffee cup or wifi",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a shield (security, protection, insurance) with a magnifying glass (scan, audit, inspect, search). It fits tasks centered on virus scanning, security or privacy audits, vulnerability checks, and reviewing insurance policies, though at very small sizes the inner magnifier could be mistaken for a keyhole.",
@@ -211,6 +210,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_es": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "security scan / virus scan / vulnerability check",
+     "strength": "primary"
+    },
+    {
+     "meaning": "security audit / privacy review",
+     "strength": "primary"
+    },
+    {
+     "meaning": "safe search / protected browsing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "insurance comparison / policy review",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the magnifying glass inside the shield can look like a keyhole or the letter Q.",
+   "near_misses": [
+    {
+     "task": "Pay the six-month GEICO car insurance bill",
+     "better": "credit card or bill payment",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a privacy screen protector for my work MacBook",
+     "better": "laptop",
+     "trap": "property"
+    },
+    {
+     "task": "Verify that the back door deadbolt latches properly",
+     "better": "door lock",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Find the spare house key in the kitchen junk drawer",
+     "better": "key",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a YubiKey 5C Nano for backup authentication",
+     "better": "USB security key",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Search for a quiet coffee shop with reliable wifi",
+     "better": "coffee cup or wifi",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "policy_alert"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4053,
+    "output": 1009,
+    "thoughts": 0,
+    "total": 5062
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "Shows an intact shield with a magnifying glass inside and no exclamation mark on the right, representing a routine security scan or audit rather than an active alert or detected threat."
 }

@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "framed picture, art print, or wall artwork",
+   "meaning": "framed picture, matted print, or wall artwork",
    "strength": "primary"
   },
   {
-   "meaning": "photograph, photo album, or image file",
+   "meaning": "picture framing or gallery wall piece",
    "strength": "primary"
   },
   {
-   "meaning": "digital photo frame or gallery display",
+   "meaning": "photograph or image with a border",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to generic image-file icons, though the wide white mat border makes it look specifically like a physical framed print or matted photograph.",
+ "ambiguity": "Can be confused with the plain landscape picture frame if the viewer doesn't register the inverted inner rectangle as a mat border.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -152,14 +152,14 @@
  ],
  "near_misses": [
   {
-   "task": "Book mountain hut for the August ridge hike",
-   "better": "mountain or hiking",
+   "task": "Compress the PNG images for the blog post",
+   "better": "plain landscape or square image frame",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Charge Canon camera batteries before the airshow",
-   "better": "battery or camera",
-   "trap": "shared_vocabulary"
+   "task": "Configure the slideshow speed on the digital photo frame",
+   "better": "screen on a flat base with mountain peaks",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Paint the bedroom window frames satin white",
@@ -167,9 +167,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Mount the 55-inch TV on the living room drywall",
-   "better": "television",
-   "trap": "lookalike_glyph"
+   "task": "Buy a lightweight carbon-fiber road bike frame",
+   "better": "bicycle",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Picture how the sofa will fit if we rotate the rug",
@@ -177,9 +177,9 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a lightweight carbon-fiber road bike frame",
-   "better": "bicycle",
-   "trap": "shared_vocabulary"
+   "task": "Pay the framing shop invoice by bank transfer",
+   "better": "invoice or credit card",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -203,6 +203,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "framed picture, art print, or wall artwork",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photograph, photo album, or image file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital photo frame or gallery display",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to generic image-file icons, though the wide white mat border makes it look specifically like a physical framed print or matted photograph.",
+   "near_misses": [
+    {
+     "task": "Book mountain hut for the August ridge hike",
+     "better": "mountain or hiking",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Charge Canon camera batteries before the airshow",
+     "better": "battery or camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Paint the bedroom window frames satin white",
+     "better": "paintbrush or window",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mount the 55-inch TV on the living room drywall",
+     "better": "television",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Picture how the sofa will fit if we rotate the rug",
+     "better": "sofa or floorplan",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a lightweight carbon-fiber road bike frame",
+     "better": "bicycle",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "photo_frame",
+   "photo_camera_back",
+   "image",
+   "panorama",
+   "planner_banner_ad_pt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9297,
+    "output": 3033,
+    "thoughts": 0,
+    "total": 12330
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "Inside the outer rectangular frame, the two white mountain peaks sit inside a solid black inner rectangle surrounded by a wide white mat border, depicting a matted physical art print or framed wall picture."
 }

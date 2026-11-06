@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "remove user, member, or contact",
+   "meaning": "remove a user, member, or contact",
    "strength": "primary"
   },
   {
-   "meaning": "delete or deactivate account / profile",
+   "meaning": "revoke someone's access or offboard a departing employee",
    "strength": "primary"
   },
   {
-   "meaning": "unfollow, unfriend, or block someone",
+   "meaning": "delete or deactivate a user account or profile",
    "strength": "secondary"
   },
   {
-   "meaning": "offboard an employee or revoke access",
+   "meaning": "unfollow, unfriend, or kick someone from a group",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Distinguishable at normal sizes, though at very small sizes the minus sign can look like a stray dash or be confused with a user-edit icon.",
+ "ambiguity": "Opposite in meaning to the person-with-plus-sign icon; at tiny sizes the short horizontal bar can also resemble a pencil or dash next to a user.",
  "modifier_semantics": [
   {
    "modifier": "minus sign",
@@ -163,17 +163,22 @@
  "near_misses": [
   {
    "task": "Add new hire to the engineering 1Password vault",
-   "better": "person with plus sign (add user)",
+   "better": "person with a plus sign (add user)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Invite Sarah to the shared family calendar",
+   "better": "person with a plus sign (add user)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Cancel Adobe Creative Cloud subscription before renewal",
-   "better": "credit card or subscription icon with slash/cross",
+   "better": "credit card or receipt with a slash",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Call Mark to tell him he didn't get the spot",
-   "better": "phone receiver",
+   "better": "phone handset",
    "trap": "generic_verb"
   },
   {
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remove user, member, or contact",
+     "strength": "primary"
+    },
+    {
+     "meaning": "delete or deactivate account / profile",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unfollow, unfriend, or block someone",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "offboard an employee or revoke access",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Distinguishable at normal sizes, though at very small sizes the minus sign can look like a stray dash or be confused with a user-edit icon.",
+   "near_misses": [
+    {
+     "task": "Add new hire to the engineering 1Password vault",
+     "better": "person with plus sign (add user)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel Adobe Creative Cloud subscription before renewal",
+     "better": "credit card or subscription icon with slash/cross",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call Mark to tell him he didn't get the spot",
+     "better": "phone receiver",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Schedule exit interview with HR",
+     "better": "calendar",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy solo ticket for the comedy show",
+     "better": "ticket",
+     "trap": "property"
+    },
+    {
+     "task": "Remove wisdom teeth next Thursday",
+     "better": "tooth",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "person_add"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4055,
+    "output": 826,
+    "thoughts": 0,
+    "total": 4881
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:27Z"
+  }
+ },
+ "distinguishing": "Shows a horizontal minus sign (-) to the right of the person bust, meaning to remove, unfriend, or offboard someone, whereas the look-alike shows a plus sign (+) for adding someone."
 }

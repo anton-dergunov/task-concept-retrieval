@@ -19,13 +19,9 @@
   {
    "meaning": "charger / power adapter",
    "strength": "secondary"
-  },
-  {
-   "meaning": "personal energy / recharging oneself",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles other battery level or charging status icons in the same icon family; the exact fill level (around 30%) is an interface status distinction rather than a task distinction.",
+ "ambiguity": "Easily confused with the empty charging battery and the low-fill charging battery at small sizes; all three represent UI battery-level increments and mean the exact same thing in a task list.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt on the right end",
@@ -163,13 +159,18 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping trips",
-   "better": "headlamp / flashlight",
-   "trap": "property"
+   "task": "Put completely drained AA rechargeables into the wall charger",
+   "better": "empty battery outline with lightning bolt",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plug in laptop as soon as the low battery warning appears",
+   "better": "low-fill battery outline with lightning bolt",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Dispute the double charge from the hotel on my Visa statement",
-   "better": "credit card / receipt",
+   "better": "credit card or receipt",
    "trap": "shared_vocabulary"
   },
   {
@@ -183,20 +184,15 @@
    "trap": "property"
   },
   {
-   "task": "Check severe thunderstorm and lightning forecast for Saturday's hike",
-   "better": "storm cloud with lightning",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Clean corrosion off the battery terminals with a wire brush",
-   "better": "wire brush / car",
+   "task": "Clean corrosion off the car terminal clamps with a wire brush",
+   "better": "wire brush or car",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear horizontal battery with a partial fill and a lightning bolt indicating charging. It fits real-world tasks about charging gear, packing power banks, or buying/replacing batteries, though its distinctiveness is lowered by near-identical icons for other battery charge percentages.",
@@ -214,6 +210,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "charging a battery or device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery / portable power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charger / power adapter",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy / recharging oneself",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles other battery level or charging status icons in the same icon family; the exact fill level (around 30%) is an interface status distinction rather than a task distinction.",
+   "near_misses": [
+    {
+     "task": "Dispute the double charge from the hotel on my Visa statement",
+     "better": "credit card / receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Unplug router and check the power light",
+     "better": "wifi router",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new cordless drill for the shed",
+     "better": "power drill",
+     "trap": "property"
+    },
+    {
+     "task": "Check severe thunderstorm and lightning forecast for Saturday's hike",
+     "better": "storm cloud with lightning",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean corrosion off the battery terminals with a wire brush",
+     "better": "wire brush / car",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_full_2",
+   "battery_charging_20_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5352,
+    "output": 1521,
+    "thoughts": 0,
+    "total": 6873
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "Shows the thickest solid black fill on the left side (~30% charged) compared to the empty and barely-filled charging battery icons, but is functionally interchangeable with both for representing any battery or charging task."
 }

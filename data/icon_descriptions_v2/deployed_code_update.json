@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "incoming package, parcel delivery, or picking up an order",
+   "meaning": "install software package, download dependency, or fetch module",
    "strength": "primary"
   },
   {
-   "meaning": "install software package, download dependency, or update module",
+   "meaning": "incoming package, parcel delivery, or receiving an order",
    "strength": "primary"
   },
   {
-   "meaning": "archive items, store in boxes, or put away into storage",
+   "meaning": "archive items or put boxes down into storage",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as a physical cardboard parcel being received/stored or as a digital software package/archive being downloaded and installed.",
+ "ambiguity": "Can be read either as a physical parcel being received/stored or as a digital software package being downloaded; at tiny sizes, its solid black badge can momentarily look like the box with an exclamation mark badge.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow in circle",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "File a claim for the lost FedEx package",
+   "better": "isometric box with an exclamation mark alert badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix broken npm package dependency blocking the build",
+   "better": "isometric box with an exclamation mark alert badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Drop off the Zappos return box at UPS",
    "better": "box with upward or outgoing arrow (ship / send package)",
    "trap": "lookalike_glyph"
@@ -185,11 +195,6 @@
    "task": "Call customer service about missing refund",
    "better": "phone call",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Play Jackbox with friends on Friday night",
-   "better": "game controller or party icon",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "incoming package, parcel delivery, or picking up an order",
+     "strength": "primary"
+    },
+    {
+     "meaning": "install software package, download dependency, or update module",
+     "strength": "primary"
+    },
+    {
+     "meaning": "archive items, store in boxes, or put away into storage",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "download 3D model or compressed archive file",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as a physical cardboard parcel being received/stored or as a digital software package/archive being downloaded and installed.",
+   "near_misses": [
+    {
+     "task": "Drop off the Zappos return box at UPS",
+     "better": "box with upward or outgoing arrow (ship / send package)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a box of dishwasher tablets",
+     "better": "dishwasher or cleaning tablets",
+     "trap": "property"
+    },
+    {
+     "task": "Download the signed lease PDF from the tenant portal",
+     "better": "document / file with download arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install the new bathroom faucet",
+     "better": "faucet or wrench",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Call customer service about missing refund",
+     "better": "phone call",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Play Jackbox with friends on Friday night",
+     "better": "game controller or party icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "deployed_code_alert"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1160,
+    "thoughts": 0,
+    "total": 5251
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Shows a downward-pointing arrow inside the solid circular badge at the bottom right of the isometric box, indicating downloading, installing, or receiving a package rather than an error or alert."
 }

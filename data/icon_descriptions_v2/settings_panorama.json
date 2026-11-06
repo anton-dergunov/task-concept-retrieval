@@ -13,11 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "camera or video wide-angle configuration",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "general system or device settings",
+   "meaning": "wide-angle or panoramic mode configuration",
    "strength": "secondary"
   },
   {
@@ -25,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the curved rectangle in the corner looks like a pillow, a bandage, or a generic minus/badge shape, making the icon read simply as a generic settings gear.",
+ "ambiguity": "At small sizes the solid curved badge loses its slight concavity and can be mistaken for the video camcorder badge next to a gear, or read as a pillow or generic block on a plain settings gear.",
  "modifier_semantics": [
   {
    "modifier": "curved horizontal rectangle badge",
@@ -161,34 +157,34 @@
  ],
  "near_misses": [
   {
+   "task": "Adjust webcam resolution and frame rate for streaming",
+   "better": "gear with video camera badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure RAW photo format and ISO limits on the DSLR",
+   "better": "gear with photo camera badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update user profile privacy and account preferences",
+   "better": "gear with person portrait badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy two new memory foam pillows for the guest bedroom",
    "better": "pillow or bed icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Check if the hotel room has a panoramic ocean view",
-   "better": "hotel or beach/window view icon",
+   "better": "hotel or window view icon",
    "trap": "property"
   },
   {
    "task": "Pack bike repair gear for the weekend trail ride",
    "better": "bicycle or tool kit icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Verify account security settings on the banking portal",
-   "better": "shield or lock icon",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Order HDMI switch from Amazon",
-   "better": "cable/adapter or shopping cart icon",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Put fresh pillowcases on the sofa cushions",
-   "better": "sofa or pillow icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -212,6 +208,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "panorama or curved display settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera or video wide-angle configuration",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "general system or device settings",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "VR headset or theatre screen preferences",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the curved rectangle in the corner looks like a pillow, a bandage, or a generic minus/badge shape, making the icon read simply as a generic settings gear.",
+   "near_misses": [
+    {
+     "task": "Buy two new memory foam pillows for the guest bedroom",
+     "better": "pillow or bed icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the hotel room has a panoramic ocean view",
+     "better": "hotel or beach/window view icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pack bike repair gear for the weekend trail ride",
+     "better": "bicycle or tool kit icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Verify account security settings on the banking portal",
+     "better": "shield or lock icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order HDMI switch from Amazon",
+     "better": "cable/adapter or shopping cart icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Put fresh pillowcases on the sofa cushions",
+     "better": "sofa or pillow icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_video_camera",
+   "settings_account_box",
+   "settings_photo_camera"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6747,
+    "output": 1937,
+    "thoughts": 0,
+    "total": 8684
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Unlike the other settings gears which show a video camera, person portrait, or photo camera in the bottom-right corner, this one features a solid curved rectangle representing a panoramic view or curved screen."
 }

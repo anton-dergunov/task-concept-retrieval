@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "upload / submit file",
+   "meaning": "upload or submit file",
    "strength": "primary"
   },
   {
-   "meaning": "export / publish",
+   "meaning": "export or publish",
+   "strength": "primary"
+  },
+  {
+   "meaning": "lift off or undock from base",
    "strength": "secondary"
   },
   {
-   "meaning": "upgrade / update",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "move to top / undock",
+   "meaning": "upgrade or push out",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a plain up arrow, a shift/caps lock key symbol, or a scroll-to-top UI button.",
+ "ambiguity": "Visually and semantically interchangeable with the upload arrow rising out of a U-shaped tray; also easily confused with a download arrow over a bar or a scroll-to-top arrow.",
  "modifier_semantics": [
   {
    "modifier": "horizontal bar beneath arrow",
@@ -162,17 +162,17 @@
  "near_misses": [
   {
    "task": "Download tax statements from Vanguard",
-   "better": "download arrow (pointing down to bar)",
+   "better": "downward arrow pointing to horizontal bar",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unpack the deliveries from the open shipping box",
+   "better": "upward arrow rising out of an open tray or box",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Upgrade RAM in the home server to 64GB",
    "better": "RAM stick / computer hardware",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Put winter clothes up in the attic",
-   "better": "clothing box / house attic",
    "trap": "shared_vocabulary"
   },
   {
@@ -194,7 +194,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The upward arrow over a horizontal bar is the universal symbol for uploading or submitting files. While 'upload' is an action, it is very frequently the core point of admin, school, creative, and tech tasks (submitting documents to portals, pushing builds, backing up media). It is distinct from download (down arrow) though slightly similar to plain directional arrows.",
@@ -212,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload / submit file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export / publish",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upgrade / update",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "move to top / undock",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain up arrow, a shift/caps lock key symbol, or a scroll-to-top UI button.",
+   "near_misses": [
+    {
+     "task": "Download tax statements from Vanguard",
+     "better": "download arrow (pointing down to bar)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upgrade RAM in the home server to 64GB",
+     "better": "RAM stick / computer hardware",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put winter clothes up in the attic",
+     "better": "clothing box / house attic",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy external SSD for faster photo uploads",
+     "better": "external hard drive / SSD",
+     "trap": "property"
+    },
+    {
+     "task": "Write speaker bio and headshot description",
+     "better": "document / user profile",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Update resume with latest project metrics",
+     "better": "resume / document",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_upload"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4028,
+    "output": 1021,
+    "thoughts": 0,
+    "total": 5049
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "Has a flat, straight horizontal bar beneath the upward arrow (with no upturned side walls), making it a minimalist variant of the upload/export icon that is functionally interchangeable with the tray version."
 }

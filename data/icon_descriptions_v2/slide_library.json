@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the paintbrush can look like a pencil or pen (suggesting text editing/notes on cards rather than visual design or painting).",
+ "ambiguity": "Shares the stacked L-shaped corner outline with the multiple-inbox icons, and at very small sizes the paintbrush could be mistaken for a pencil/edit badge.",
  "modifier_semantics": [
   {
    "modifier": "stacked L-shaped corner behind rectangle",
@@ -165,6 +165,16 @@
  ],
  "near_misses": [
   {
+   "task": "Clear out unread newsletters across all email accounts",
+   "better": "stacked multiple inbox trays",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Process incoming receipts in my desk tray",
+   "better": "single square inbox tray",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Paint the garden fence before the rain starts",
    "better": "paint roller or fence",
    "trap": "shared_vocabulary"
@@ -172,7 +182,7 @@
   {
    "task": "Write speaker notes for the Q4 financial slides",
    "better": "document or microphone/speaker notes",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a picture-perfect birthday gift for Mum",
@@ -188,11 +198,6 @@
    "task": "Review the design agency's monthly invoice",
    "better": "invoice or receipt",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Brush the dog's coat outside on the patio",
-   "better": "dog or grooming comb",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -216,6 +221,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "presentation slide design or deck theme",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital illustration, graphics, or photo editing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "UI theme, wallpaper, or appearance customization",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "art prints, canvases, or framing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the paintbrush can look like a pencil or pen (suggesting text editing/notes on cards rather than visual design or painting).",
+   "near_misses": [
+    {
+     "task": "Paint the garden fence before the rain starts",
+     "better": "paint roller or fence",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write speaker notes for the Q4 financial slides",
+     "better": "document or microphone/speaker notes",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a picture-perfect birthday gift for Mum",
+     "better": "gift box",
+     "trap": "property"
+    },
+    {
+     "task": "Book flights to Madrid for the Prado museum trip",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Review the design agency's monthly invoice",
+     "better": "invoice or receipt",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Brush the dog's coat outside on the patio",
+     "better": "dog or grooming comb",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "all_inbox",
+   "stacked_inbox",
+   "inbox"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6675,
+    "output": 1949,
+    "thoughts": 0,
+    "total": 8624
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Unlike the inbox trays with semicircular cutouts, this icon shows stacked landscape frames with an angled paintbrush overlapping the top-right corner, indicating visual design, slide themes, or graphics rather than incoming mail."
 }

@@ -10,15 +10,15 @@
  },
  "readings": [
   {
-   "meaning": "unlock / open lock",
+   "meaning": "unlock or open lock",
    "strength": "primary"
   },
   {
-   "meaning": "grant access / permissions",
+   "meaning": "grant access or permissions",
    "strength": "primary"
   },
   {
-   "meaning": "unfreeze account or credit report",
+   "meaning": "unfreeze credit report or account",
    "strength": "secondary"
   },
   {
@@ -26,7 +26,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the gap in the shackle may be hard to see, making it look like a closed padlock or a shopping bag inside a circle.",
+ "ambiguity": "At small list sizes, could be mistaken for the closed padlock inside a counterclockwise circular arrow if the shackle gap and outer arrowhead aren't noticed, or for a closed padlock inside a circle.",
  "modifier_semantics": [
   {
    "modifier": "open shackle",
@@ -165,6 +165,16 @@
  ],
  "near_misses": [
   {
+   "task": "Reset the master password for the shared team vault",
+   "better": "closed padlock inside a circular reset arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn on screen rotation lock on the iPad before reading in bed",
+   "better": "closed padlock inside a circular rotation arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Lock the back gate and shed before leaving for the airport",
    "better": "closed padlock",
    "trap": "lookalike_glyph"
@@ -188,11 +198,6 @@
    "task": "Pay the annual invoice for the password manager",
    "better": "credit card or invoice",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Pick up a small canvas tote bag for library books",
-   "better": "tote bag",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -216,6 +221,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unlock / open lock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "grant access / permissions",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unfreeze account or credit report",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "carrier-unlock phone or device",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the gap in the shackle may be hard to see, making it look like a closed padlock or a shopping bag inside a circle.",
+   "near_misses": [
+    {
+     "task": "Lock the back gate and shed before leaving for the airport",
+     "better": "closed padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy an unlocked Pixel 8a for my dad's birthday",
+     "better": "smartphone",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the front door smart lock needs new AA batteries",
+     "better": "battery",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Walk along the canal locks from Camden to Little Venice",
+     "better": "canal boat or walking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the annual invoice for the password manager",
+     "better": "credit card or invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick up a small canvas tote bag for library books",
+     "better": "tote bag",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "lock_reset"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4099,
+    "output": 1124,
+    "thoughts": 108,
+    "total": 5331
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:56Z"
+  }
+ },
+ "distinguishing": "Shows an unlatched, open padlock inside a solid unbroken circle, meaning unlocking, unfreezing, or granting access, rather than a closed padlock inside a circular reset/rotation arrow."
 }

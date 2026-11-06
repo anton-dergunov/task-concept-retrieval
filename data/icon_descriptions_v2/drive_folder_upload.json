@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "export or share project folder",
+   "meaning": "move up to parent directory",
    "strength": "secondary"
   },
   {
-   "meaning": "move up to parent directory",
+   "meaning": "export or share project folder",
    "strength": "secondary"
   }
  ],
- "ambiguity": "In file manager UIs an up-arrow in a folder often means 'go to parent folder', whereas in general apps it means 'upload folder/files'.",
+ "ambiguity": "Easily confused with the plain horizontal rectangle containing an identical upward arrow (which lacks the top-left folder tab) or the file folder containing a right-pointing arrow.",
  "modifier_semantics": [
   {
    "modifier": "upward-pointing arrow inside the folder",
@@ -162,40 +162,40 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a pack of hanging manila file folders for the desk drawer",
-   "better": "plain folder or office supplies",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Download the tax forms archive from the employer portal",
-   "better": "folder with downward arrow (download)",
+   "task": "Move old client folders to the external hard drive",
+   "better": "file folder with a right-pointing arrow inside",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Share my screen during the Zoom design review",
+   "better": "rectangular screen frame with an upward-pointing arrow inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a pack of hanging manila file folders for the desk drawer",
+   "better": "plain folder without arrow or office supplies icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Upload new 4K walkthrough video to the YouTube channel",
-   "better": "video / play button icon",
+   "better": "video or play button icon",
    "trap": "generic_verb"
   },
   {
    "task": "Upgrade Dropbox storage plan to 2TB so shared folders stop failing",
-   "better": "credit card or subscription / cloud storage",
+   "better": "cloud storage or credit card icon",
    "trap": "property"
   },
   {
    "task": "Call the mortgage broker about the missing W-2 in our uploaded folder",
-   "better": "phone call",
+   "better": "telephone handset icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Sort loose medical bills on the kitchen counter into the binder",
-   "better": "binder or medical document",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a file folder containing an upward arrow, universally recognized as uploading, exporting, or backing up a folder/files. It fits digital admin, backup, and file-sharing tasks very well, though at a quick glance it must be distinguished from folder-download (down arrow) or parent-directory navigation.",
@@ -213,6 +213,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload folder or files",
+     "strength": "primary"
+    },
+    {
+     "meaning": "back up directory to cloud storage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export or share project folder",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "move up to parent directory",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "In file manager UIs an up-arrow in a folder often means 'go to parent folder', whereas in general apps it means 'upload folder/files'.",
+   "near_misses": [
+    {
+     "task": "Buy a pack of hanging manila file folders for the desk drawer",
+     "better": "plain folder or office supplies",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download the tax forms archive from the employer portal",
+     "better": "folder with downward arrow (download)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upload new 4K walkthrough video to the YouTube channel",
+     "better": "video / play button icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Upgrade Dropbox storage plan to 2TB so shared folders stop failing",
+     "better": "credit card or subscription / cloud storage",
+     "trap": "property"
+    },
+    {
+     "task": "Call the mortgage broker about the missing W-2 in our uploaded folder",
+     "better": "phone call",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Sort loose medical bills on the kitchen counter into the binder",
+     "better": "binder or medical document",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "business_messages",
+   "output",
+   "exit_to_app",
+   "tab_move",
+   "input",
+   "drive_file_move",
+   "present_to_all"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12136,
+    "output": 4252,
+    "thoughts": 0,
+    "total": 16388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "A closed file folder outline (with a raised tab on the top-left) containing an upward-pointing arrow, representing uploading a folder or navigating up a directory, unlike the folder with a right-pointing arrow or the plain rectangular screen with an upward arrow."
 }

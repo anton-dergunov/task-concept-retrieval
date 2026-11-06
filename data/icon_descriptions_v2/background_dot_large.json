@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "dice / board games / tabletop gaming",
+   "meaning": "dice, board games, or tabletop gaming",
    "strength": "primary"
   },
   {
-   "meaning": "randomness / chance / gambling",
+   "meaning": "randomness, chance, or gambling",
    "strength": "secondary"
   },
   {
-   "meaning": "shirt button with four holes",
+   "meaning": "die roll or value of 4",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a square four-hole button or an app grid / keypad icon at small sizes; indistinguishable from other single-face dice icons (1, 2, 3, 5, 6 pips) as a general symbol for games.",
+ "ambiguity": "Interchangeable with the three-pip and five-pip die faces for general dice or game tasks; lacking a center or diagonal pip, it can also be mistaken at small sizes for a four-hole shirt button or a 2x2 app grid.",
  "modifier_semantics": [],
  "domains": [
   "hobbies",
@@ -150,14 +150,24 @@
  ],
  "near_misses": [
   {
-   "task": "Dice four Roma tomatoes and a red onion for the salsa",
-   "better": "knife or tomato",
-   "trap": "shared_vocabulary"
+   "task": "Roll fives in Ship, Captain, and Crew",
+   "better": "die face showing five pips",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check probability of rolling a 3 on a single die",
+   "better": "die face showing three pips",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Sew the loose four-hole button back onto my navy blazer",
    "better": "needle and thread or coat",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Dice four Roma tomatoes and a red onion for the salsa",
+   "better": "knife or tomato",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Order pepperoni pizzas for the D&D group at 7pm",
@@ -178,7 +188,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts the four-pip face of a six-sided die, universally recognized as a symbol for dice, board games, tabletop RPGs, and randomness. It fits tasks centered on tabletop gaming or probability, though in an icon set that includes all six die faces it is redundant with the others unless specifically representing the number four.",
@@ -196,6 +206,86 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "dice / board games / tabletop gaming",
+     "strength": "primary"
+    },
+    {
+     "meaning": "randomness / chance / gambling",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "shirt button with four holes",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a square four-hole button or an app grid / keypad icon at small sizes; indistinguishable from other single-face dice icons (1, 2, 3, 5, 6 pips) as a general symbol for games.",
+   "near_misses": [
+    {
+     "task": "Dice four Roma tomatoes and a red onion for the salsa",
+     "better": "knife or tomato",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sew the loose four-hole button back onto my navy blazer",
+     "better": "needle and thread or coat",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order pepperoni pizzas for the D&D group at 7pm",
+     "better": "pizza slice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pick four random winners from the newsletter spreadsheet",
+     "better": "trophy or gift",
+     "trap": "property"
+    },
+    {
+     "task": "Play the new Zelda update on the Switch tonight",
+     "better": "gamepad controller",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ifl",
+   "casino"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5363,
+    "output": 1626,
+    "thoughts": 0,
+    "total": 6989
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "Shows four pips in a 2x2 grid without a center dot, unlike the five-pip quincunx or three-pip diagonal; functionally interchangeable with the other die faces for general gaming tasks."
 }

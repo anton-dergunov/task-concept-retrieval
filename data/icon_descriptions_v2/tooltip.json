@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "comment, feedback, or reply",
+   "meaning": "comment, annotation, or feedback",
    "strength": "primary"
   },
   {
-   "meaning": "popover or tooltip",
+   "meaning": "UI tooltip, popover, or map callout",
    "strength": "secondary"
   },
   {
-   "meaning": "caption, quote, or statement",
+   "meaning": "caption or subtitle",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the pointer is centered at the bottom rather than angled to a corner, it can also look like a UI tooltip, map callout, or monitor stand at small sizes.",
+ "ambiguity": "Virtually interchangeable as a general speech/comment bubble with the bottom-left and bottom-right corner-tailed speech bubbles, and its centered bottom point also resembles a monitor on a stand at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -156,6 +156,21 @@
  ],
  "near_misses": [
   {
+   "task": "Send a quick text message to Sarah about dinner",
+   "better": "speech bubble with corner tail (left or right) if reserved for chat vs tooltip",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reply to the client's chat message on WhatsApp",
+   "better": "speech bubble with bottom-right tail (outgoing chat bubble) if distinguished",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a 27-inch 4K monitor for the home office desk",
+   "better": "desktop monitor with flat base stand",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Dr. Patel's office to reschedule the blood test",
    "better": "phone handset",
    "trap": "shared_vocabulary"
@@ -164,11 +179,6 @@
    "task": "Email the signed lease renewal back to the agency",
    "better": "envelope / email",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a 27-inch 4K monitor for the home office desk",
-   "better": "desktop monitor with stand",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Mention the cracked bathroom tile when the plumber visits",
@@ -189,7 +199,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon is a clean rectangular speech bubble / callout with a bottom-center pointer, universally understood as a text message, chat, comment, or UI tooltip. It fits a very common family of everyday tasks around texting, replying, and commenting, though several other speech-bubble icons exist in most icon sets.",
@@ -207,6 +217,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "message, text, or chat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comment, feedback, or reply",
+     "strength": "primary"
+    },
+    {
+     "meaning": "popover or tooltip",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "caption, quote, or statement",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the pointer is centered at the bottom rather than angled to a corner, it can also look like a UI tooltip, map callout, or monitor stand at small sizes.",
+   "near_misses": [
+    {
+     "task": "Call Dr. Patel's office to reschedule the blood test",
+     "better": "phone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the signed lease renewal back to the agency",
+     "better": "envelope / email",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 27-inch 4K monitor for the home office desk",
+     "better": "desktop monitor with stand",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Mention the cracked bathroom tile when the plumber visits",
+     "better": "wrench / plumbing or tile",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the monthly Twilio SMS gateway invoice",
+     "better": "invoice / credit card / money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order custom engraved wooden quote signs for the booth",
+     "better": "signboard / woodwork",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mode_comment",
+   "chat_bubble_outline"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5378,
+    "output": 1127,
+    "thoughts": 0,
+    "total": 6505
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "Has a symmetrical triangular pointer centered on the bottom edge (rather than at the bottom-left or bottom-right corner), making it read more like a UI tooltip, popover, or map callout, though practically interchangeable with the corner-tailed speech bubbles for general messaging/comment tasks."
 }

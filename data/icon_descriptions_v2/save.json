@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "save / backup / preserve data",
+   "meaning": "save, backup, or preserve data",
    "strength": "primary"
   },
   {
-   "meaning": "floppy disk / retro storage media",
+   "meaning": "floppy disk or retro storage media",
    "strength": "primary"
   },
   {
-   "meaning": "storage / memory / archive",
+   "meaning": "digital storage, memory, or archive",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with an SD memory card due to the angled corner, or a generic washing machine / appliance icon at very small sizes because of the bottom circle.",
+ "ambiguity": "Could be confused with an SD memory card due to the chamfered corner, or at very small sizes with a washing machine or countertop appliance because of the boxy frame and circular hub.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -145,17 +145,22 @@
  ],
  "near_misses": [
   {
+   "task": "Set aside $200 in my wallet for weekend trip expenses",
+   "better": "wallet with snap clasp",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Defrost the frozen soup in the microwave before dinner",
+   "better": "microwave oven with window and three knobs",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Save $500 a month for the summer trip to Portugal",
    "better": "piggy bank or money",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a 128GB SD card for the Fuji camera",
-   "better": "SD memory card",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Save the date cards for Anna's wedding",
+   "task": "Mail the save-the-date cards for Anna's wedding",
    "better": "calendar or envelope",
    "trap": "shared_vocabulary"
   },
@@ -165,20 +170,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Fix the leaky washer door seal in the laundry room",
-   "better": "washing machine",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Slip-on brake disc rotor replacement on the civic",
-   "better": "car brake rotor or car",
-   "trap": "shared_vocabulary"
+   "task": "Check how much free space is left on the studio Mac",
+   "better": "computer / hard drive",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon depicts a classic 3.5-inch floppy disk (angled corner, upper rectangular shutter, lower circular hub). It is universally recognized both as the universal metaphor for saving/backing up data and literally as retro floppy media, though at tiny sizes the circle-in-square layout resembles a front-load washing machine or an SD card.",
@@ -198,6 +198,91 @@
    "example_tasks: 15 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "save / backup / preserve data",
+     "strength": "primary"
+    },
+    {
+     "meaning": "floppy disk / retro storage media",
+     "strength": "primary"
+    },
+    {
+     "meaning": "storage / memory / archive",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with an SD memory card due to the angled corner, or a generic washing machine / appliance icon at very small sizes because of the bottom circle.",
+   "near_misses": [
+    {
+     "task": "Save $500 a month for the summer trip to Portugal",
+     "better": "piggy bank or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 128GB SD card for the Fuji camera",
+     "better": "SD memory card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Save the date cards for Anna's wedding",
+     "better": "calendar or envelope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update the credit card on file for the Backblaze backup subscription",
+     "better": "credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Fix the leaky washer door seal in the laundry room",
+     "better": "washing machine",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Slip-on brake disc rotor replacement on the civic",
+     "better": "car brake rotor or car",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "microwave_gen",
+   "account_balance_wallet"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5429,
+    "output": 1575,
+    "thoughts": 136,
+    "total": 7140
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "Square outline with a diagonal cut-off top-right corner, a solid horizontal bar near the top, and a single large circle at bottom center, depicting a 3.5-inch floppy disk (save icon) rather than a wallet or kitchen appliance."
 }

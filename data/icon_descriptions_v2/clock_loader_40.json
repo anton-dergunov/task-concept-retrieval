@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "pie chart / data visualization",
+   "meaning": "pie chart or data visualization",
    "strength": "primary"
   },
   {
-   "meaning": "partial progress / completion status",
+   "meaning": "partial progress or completion status (three-eighths / ~37% full)",
    "strength": "primary"
   },
   {
-   "meaning": "allocation / budget breakdown / share",
+   "meaning": "allocation, budget breakdown, or share",
    "strength": "secondary"
   },
   {
-   "meaning": "elapsed time / timer / clock face",
+   "meaning": "elapsed time or timer (~22 minutes)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with a clock at ~12:20, a progress spinner UI indicator, or an Exposure/Contrast symbol.",
+ "ambiguity": "Virtually interchangeable with the five-eighths filled circle and the one-quarter filled circle for general pie chart or progress tasks; at a glance its 135-degree sector is very easily mistaken for the 90-degree quadrant of the one-quarter circle.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -153,13 +153,23 @@
  ],
  "near_misses": [
   {
+   "task": "Prepare Q1 fiscal quarter budget review",
+   "better": "circle with filled upper-right quadrant (exact one-quarter / 25% sector)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clear out disk space now that drive is over 60% full",
+   "better": "circle with five-eighths filled sector (more than half full)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Bake a pecan pie for Thanksgiving dinner",
-   "better": "pie / pastry",
+   "better": "baked pie or pastry",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new wall clock for the kitchen",
-   "better": "clock",
+   "better": "clock face with hands",
    "trap": "lookalike_glyph"
   },
   {
@@ -169,24 +179,14 @@
   },
   {
    "task": "Check progress on the bathroom tile installation",
-   "better": "tiles / bathroom",
+   "better": "tiles or bathroom renovation",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Email the tax accountant about capital gains",
-   "better": "email / tax",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Pay my half of the electric bill",
-   "better": "electricity / bill",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a circle with a filled 3/8 sector, which represents either a task progress indicator (UI state) or a pie chart / proportion. As a task subject it fits financial asset allocation, budget breakdowns, and data visualization charts, though it is less distinctive than a pie chart with an offset slice and can be mistaken for a clock or UI progress spinner.",
@@ -206,6 +206,95 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pie chart / data visualization",
+     "strength": "primary"
+    },
+    {
+     "meaning": "partial progress / completion status",
+     "strength": "primary"
+    },
+    {
+     "meaning": "allocation / budget breakdown / share",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "elapsed time / timer / clock face",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with a clock at ~12:20, a progress spinner UI indicator, or an Exposure/Contrast symbol.",
+   "near_misses": [
+    {
+     "task": "Bake a pecan pie for Thanksgiving dinner",
+     "better": "pie / pastry",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new wall clock for the kitchen",
+     "better": "clock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Finish the remaining 35% of the Rust book",
+     "better": "book",
+     "trap": "property"
+    },
+    {
+     "task": "Check progress on the bathroom tile installation",
+     "better": "tiles / bathroom",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email the tax accountant about capital gains",
+     "better": "email / tax",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay my half of the electric bill",
+     "better": "electricity / bill",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "clock_loader_60",
+   "clock_loader_20"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5391,
+    "output": 1781,
+    "thoughts": 0,
+    "total": 7172
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:39Z"
+  }
+ },
+ "distinguishing": "Filled clockwise from 12 o'clock to 4:30 (three-eighths or 37.5%), making it larger than a quarter but less than half full, though for general pie chart or progress meanings it is interchangeable with the five-eighths and one-quarter circles."
 }

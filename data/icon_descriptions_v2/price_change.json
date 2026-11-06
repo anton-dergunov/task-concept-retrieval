@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "price adjustment, rate change, or currency fluctuation",
+   "meaning": "price adjustment, rate change, or dynamic pricing",
    "strength": "primary"
   },
   {
-   "meaning": "currency exchange rate or foreign exchange",
+   "meaning": "currency exchange rate or financial fluctuation",
    "strength": "primary"
   },
   {
-   "meaning": "budget limit, bidding amount, or spending cap",
+   "meaning": "adjustable budget limit, bid amount, or spending cap",
    "strength": "secondary"
   },
   {
-   "meaning": "sort by price or price filter UI control",
+   "meaning": "sort by price or price-range filter control",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Resembles a UI numeric stepper or sort-by-price dropdown widget rather than a physical banknote; can also be confused with generic cash or billing icons at small sizes.",
+ "ambiguity": "Can be mistaken at a glance for the plain dollar-sign rectangle (cash/banknote) when the small up/down arrows are overlooked, or read as a UI numeric stepper input.",
  "modifier_semantics": [
   {
    "modifier": "up and down triangular arrows",
@@ -163,33 +163,33 @@
  "near_misses": [
   {
    "task": "Withdraw $100 in twenties from the ATM for the farmers market",
-   "better": "plain banknote or ATM icon",
+   "better": "rounded rectangle with a centered dollar sign (cash / banknote)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put $50 cash into the graduation card envelope for Maya",
+   "better": "rounded rectangle with a centered dollar sign (cash / gift money)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a cheap HDMI cable for the bedroom monitor",
-   "better": "cable or monitor icon",
+   "better": "cable or monitor",
    "trap": "property"
   },
   {
    "task": "Pay the quarterly water and sewer bill online",
-   "better": "water drop or invoice/receipt icon",
+   "better": "water drop or invoice/receipt",
    "trap": "generic_verb"
   },
   {
    "task": "Exchange the medium flannel shirt for a large at Uniqlo",
-   "better": "shirt or return package icon",
+   "better": "shirt or return package",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Sign the notary acknowledgment at the credit union",
-   "better": "signature or pen icon (even under a 'Refinance' project)",
+   "better": "signature or pen",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a new leather bi-fold wallet for Dad's birthday",
-   "better": "wallet or gift icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -213,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "price adjustment, rate change, or currency fluctuation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "currency exchange rate or foreign exchange",
+     "strength": "primary"
+    },
+    {
+     "meaning": "budget limit, bidding amount, or spending cap",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sort by price or price filter UI control",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Resembles a UI numeric stepper or sort-by-price dropdown widget rather than a physical banknote; can also be confused with generic cash or billing icons at small sizes.",
+   "near_misses": [
+    {
+     "task": "Withdraw $100 in twenties from the ATM for the farmers market",
+     "better": "plain banknote or ATM icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a cheap HDMI cable for the bedroom monitor",
+     "better": "cable or monitor icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the quarterly water and sewer bill online",
+     "better": "water drop or invoice/receipt icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Exchange the medium flannel shirt for a large at Uniqlo",
+     "better": "shirt or return package icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the notary acknowledgment at the credit union",
+     "better": "signature or pen icon (even under a 'Refinance' project)",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a new leather bi-fold wallet for Dad's birthday",
+     "better": "wallet or gift icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "local_atm"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4095,
+    "output": 1095,
+    "thoughts": 0,
+    "total": 5190
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Pairs a left-aligned dollar sign with vertical up and down triangular arrows inside a sharp-cornered rectangle, indicating price changes, adjustable rates, bidding limits, or currency fluctuation rather than static cash."
 }

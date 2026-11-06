@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "speedometer / speed / velocity",
+   "meaning": "high speed, fast velocity, or peak performance",
    "strength": "primary"
   },
   {
-   "meaning": "performance / optimization / benchmark",
+   "meaning": "speedometer, gauge, or meter",
    "strength": "primary"
   },
   {
-   "meaning": "meter / gauge reading (pressure, utility, credit)",
+   "meaning": "performance optimization, boost, or benchmark",
    "strength": "secondary"
   },
   {
-   "meaning": "dashboard / analytics overview",
+   "meaning": "high pressure or near-capacity meter reading",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can refer to literal physical gauges (car speedometer, tire pressure, gas meter) or abstract metrics (internet speed, website performance, credit score).",
+ "ambiguity": "Easily confused with the 1 o'clock medium-high gauge, and interchangeable with all three sibling gauges when used simply to represent a generic meter or dashboard.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Investigate why boiler pressure dropped into the low red zone",
+   "better": "gauge with needle pointing far left (low reading)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check idle CPU usage while background apps are closed",
+   "better": "gauge with needle pointing left (low/idle reading)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Quick 15-minute tidy of the living room before guests arrive",
    "better": "broom / cleaning",
    "trap": "property"
@@ -178,17 +188,12 @@
    "task": "Fast-track passport renewal at the regional agency",
    "better": "passport",
    "trap": "property"
-  },
-  {
-   "task": "Switch to a cheaper dual-fuel tariff with Octopus",
-   "better": "contract / currency / lightning bolt",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A clear semicircular dial gauge with an indicator needle, universally recognized as a speedometer, pressure/utility meter, or performance indicator. It fits concrete tasks across tech (speed tests, optimization), home/admin (meter readings, pressure checks), automotive, and finance (credit score), and is visually distinct from clocks and stopwatches.",
@@ -208,6 +213,96 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "speedometer / speed / velocity",
+     "strength": "primary"
+    },
+    {
+     "meaning": "performance / optimization / benchmark",
+     "strength": "primary"
+    },
+    {
+     "meaning": "meter / gauge reading (pressure, utility, credit)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "dashboard / analytics overview",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can refer to literal physical gauges (car speedometer, tire pressure, gas meter) or abstract metrics (internet speed, website performance, credit score).",
+   "near_misses": [
+    {
+     "task": "Quick 15-minute tidy of the living room before guests arrive",
+     "better": "broom / cleaning",
+     "trap": "property"
+    },
+    {
+     "task": "Buy speedo goggles and a silicone cap for lap swimming",
+     "better": "swim goggles / swimmer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set kitchen timer for 45 minutes when the sourdough goes in",
+     "better": "stopwatch / timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order 10 meters of linen fabric for the bedroom curtains",
+     "better": "measuring tape / fabric roll",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fast-track passport renewal at the regional agency",
+     "better": "passport",
+     "trap": "property"
+    },
+    {
+     "task": "Switch to a cheaper dual-fuel tariff with Octopus",
+     "better": "contract / currency / lightning bolt",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speed_3",
+   "speed_4",
+   "speed_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6734,
+    "output": 2400,
+    "thoughts": 231,
+    "total": 9365
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "The needle points farthest to the right (around 2 o'clock) of all four gauges, indicating high speed, peak performance, or a high meter reading, whereas the other three point closer to the center or to the left."
 }

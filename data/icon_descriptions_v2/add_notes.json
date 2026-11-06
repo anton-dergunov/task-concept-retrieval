@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "new note, document, or list",
+   "meaning": "create a new note, document, or list",
    "strength": "primary"
   },
   {
-   "meaning": "create post, article, or text entry",
+   "meaning": "write a new post, article, or text entry",
    "strength": "primary"
   },
   {
-   "meaning": "add item to a checklist or menu",
+   "meaning": "add an item to a checklist or menu",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to dozens of other 'new document', 'add note', or 'add list' icons that differ only in whether the frame is square or portrait.",
+ "ambiguity": "Shares the identical rounded-square three-line base with the arrow, user, and ellipsis variants; at small sizes the white plus sign inside the dark circle is easily confused with the diagonal arrow of the export-note icon.",
  "modifier_semantics": [
   {
    "modifier": "plus badge",
@@ -158,40 +158,40 @@
  ],
  "near_misses": [
   {
+   "task": "Share the meeting minutes link with the engineering team",
+   "better": "square note frame with an upward-right arrow badge (share or export note)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fill out my emergency contact form for HR",
+   "better": "square note frame with a person avatar badge (personal record or contact card)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new dotted A5 notebook for bullet journaling",
-   "better": "spiral or bound notebook",
+   "better": "spiral or bound notebook icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Sign the lease renewal PDF and return it",
-   "better": "signature / pen on document",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Add milk and eggs to the fridge",
-   "better": "milk / groceries",
+   "better": "milk carton or groceries icon",
    "trap": "generic_verb"
   },
   {
    "task": "Install the new printer driver on the home laptop",
-   "better": "printer",
+   "better": "printer or laptop icon",
    "trap": "property"
   },
   {
-   "task": "Pay the hospital bill online",
-   "better": "invoice / credit card",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Record a 3-minute voice memo for the podcast intro",
-   "better": "microphone",
+   "better": "microphone icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a square bordered text card or note with a plus badge, clearly reading as 'new note', 'new list', or 'create post/document'. It fits many everyday writing, listing, and documentation tasks, though it competes with several nearly identical document-plus icons.",
@@ -209,6 +209,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "new note, document, or list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "create post, article, or text entry",
+     "strength": "primary"
+    },
+    {
+     "meaning": "add item to a checklist or menu",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to dozens of other 'new document', 'add note', or 'add list' icons that differ only in whether the frame is square or portrait.",
+   "near_misses": [
+    {
+     "task": "Buy a new dotted A5 notebook for bullet journaling",
+     "better": "spiral or bound notebook",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the lease renewal PDF and return it",
+     "better": "signature / pen on document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Add milk and eggs to the fridge",
+     "better": "milk / groceries",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Install the new printer driver on the home laptop",
+     "better": "printer",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the hospital bill online",
+     "better": "invoice / credit card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Record a 3-minute voice memo for the podcast intro",
+     "better": "microphone",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "export_notes",
+   "demography",
+   "other_admission"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6721,
+    "output": 2153,
+    "thoughts": 0,
+    "total": 8874
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Unlike the arrow, user, or ellipsis badges on the same three-line square frame, the bottom-right badge contains a plus sign for creating a new note, document, or list."
 }

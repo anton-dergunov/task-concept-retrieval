@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "direct message or personal chat with someone",
+   "meaning": "direct message (DM) or one-on-one personal chat",
    "strength": "primary"
   },
   {
-   "meaning": "share contact card or person info in a message",
+   "meaning": "user testimonial, customer review, or personal feedback",
    "strength": "secondary"
   },
   {
-   "meaning": "user feedback, testimonial, or customer review",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "one-on-one conversation or check-in",
+   "meaning": "share contact details or mention a user in chat",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a video call window, an ID badge, or a generic contact card if the bottom-left speech tail is overlooked at small sizes.",
+ "ambiguity": "Shares the outer speech bubble frame with the three-dots, exclamation, and info bubbles, and can also resemble a video call screen or ID badge if the bottom-left tail is missed.",
  "modifier_semantics": [
   {
    "modifier": "person silhouette inside bubble",
@@ -161,18 +157,23 @@
  ],
  "near_misses": [
   {
-   "task": "Update my profile picture on Slack and GitHub",
-   "better": "user avatar / camera",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Call Mom on her landline before Sunday dinner",
-   "better": "telephone handset",
+   "task": "Send a quick SMS code to verify login",
+   "better": "speech bubble with three horizontal dots",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Submit an app crash report with logs",
+   "better": "speech bubble with an exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update my profile picture on Slack and GitHub",
+   "better": "user avatar or camera",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Check if the support chat widget loads fast on mobile",
-   "better": "smartphone / speed gauge",
+   "better": "smartphone or speed gauge",
    "trap": "generic_verb"
   },
   {
@@ -181,13 +182,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Print laminated name badges for the booth volunteers",
-   "better": "ID badge with lanyard",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book the glass conference room",
-   "better": "meeting room / calendar",
+   "better": "meeting room or calendar",
    "trap": "parent_topic"
   }
  ],
@@ -212,6 +208,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "direct message or personal chat with someone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "share contact card or person info in a message",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "user feedback, testimonial, or customer review",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "one-on-one conversation or check-in",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a video call window, an ID badge, or a generic contact card if the bottom-left speech tail is overlooked at small sizes.",
+   "near_misses": [
+    {
+     "task": "Update my profile picture on Slack and GitHub",
+     "better": "user avatar / camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call Mom on her landline before Sunday dinner",
+     "better": "telephone handset",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the support chat widget loads fast on mobile",
+     "better": "smartphone / speed gauge",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a clip-on lavalier microphone for street interviews",
+     "better": "microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Print laminated name badges for the booth volunteers",
+     "better": "ID badge with lanyard",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the glass conference room",
+     "better": "meeting room / calendar",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "textsms",
+   "feedback",
+   "chat_info"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6707,
+    "output": 1413,
+    "thoughts": 0,
+    "total": 8120,
+    "seconds": 27.28,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:11:55Z"
+  }
+ },
+ "distinguishing": "Features a solid head-and-shoulders person silhouette inside the speech bubble, indicating a direct personal message, contact sharing, or user testimonial rather than a generic text, alert, or info notice."
 }

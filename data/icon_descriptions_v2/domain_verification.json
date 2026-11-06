@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "verified web page, approved application, or completed online form",
+   "meaning": "verified web page, browser check, or website testing",
    "strength": "primary"
   },
   {
-   "meaning": "software installation, browser check, or website testing",
+   "meaning": "completed online application, portal submission, or software check",
    "strength": "primary"
   },
   {
-   "meaning": "calendar event or appointment confirmation",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "completed task or checkbox card",
+   "meaning": "confirmed calendar event or booked appointment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily mistaken for a calendar icon missing its top rings, a generic checkbox, or a credit card with a magnetic stripe on top.",
+ "ambiguity": "Could be confused with the file folder with a checkmark if the straight top header bar is misread as a folder edge, or mistaken for a calendar or credit card.",
  "modifier_semantics": [
   {
    "modifier": "checkmark",
@@ -162,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Archive the completed Q3 client project folder",
+   "better": "file folder with top-left tab and checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Complete the patient intake checklist at the clinic",
+   "better": "card with three horizontal bars and checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Clean the living room windows before guests arrive",
    "better": "four-pane glass window or spray bottle",
    "trap": "shared_vocabulary"
@@ -172,30 +178,20 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Schedule annual physical on the calendar",
-   "better": "calendar page with binding rings and date grid",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Activate new Visa credit card by phone",
-   "better": "credit card with chip",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy an Apple-certified USB-C cable",
    "better": "USB cable",
    "trap": "property"
   },
   {
-   "task": "Pay the freelance copywriter for the hero copy",
-   "better": "money or invoice icon (even under Website Launch project)",
+   "task": "Pay the freelance copywriter for the website hero copy",
+   "better": "money or invoice",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts an application or browser window with a solid title bar and a central checkmark, fitting tasks about submitting online forms, completing web check-ins, or verifying websites/software. Because the top bar lacks window control dots and calendar rings, it can easily be confused at small sizes with a simplified calendar confirmation or a generic checkbox.",
@@ -213,6 +209,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "verified web page, approved application, or completed online form",
+     "strength": "primary"
+    },
+    {
+     "meaning": "software installation, browser check, or website testing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "calendar event or appointment confirmation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "completed task or checkbox card",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily mistaken for a calendar icon missing its top rings, a generic checkbox, or a credit card with a magnetic stripe on top.",
+   "near_misses": [
+    {
+     "task": "Clean the living room windows before guests arrive",
+     "better": "four-pane glass window or spray bottle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check whether the garage door is locked",
+     "better": "padlock or garage door",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Schedule annual physical on the calendar",
+     "better": "calendar page with binding rings and date grid",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Activate new Visa credit card by phone",
+     "better": "credit card with chip",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy an Apple-certified USB-C cable",
+     "better": "USB cable",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the freelance copywriter for the hero copy",
+     "better": "money or invoice icon (even under Website Launch project)",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fact_check",
+   "select_check_box",
+   "folder_check",
+   "library_add_check",
+   "task"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9373,
+    "output": 3078,
+    "thoughts": 235,
+    "total": 12686
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "It is a landscape rectangle with a thick solid black top header bar representing an application/browser window (or calendar header) with a centered checkmark inside, lacking the folder tab of the folder icon or the list bars of the card icon."
 }

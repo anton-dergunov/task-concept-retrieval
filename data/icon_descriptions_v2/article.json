@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "note, memo, or short text block",
+   "meaning": "short note, memo, or text block",
    "strength": "primary"
   },
   {
@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "subtitles or closed captions",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "description or details field",
+   "meaning": "description field, caption box, or comment text",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a hamburger menu button, a left-align text formatting button, or a generic document icon.",
+ "ambiguity": "Directly paired with the stacked double-card version (which adds an L-shaped second card behind it) and easily confused with the wider landscape card or the square dog-eared documents.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -154,18 +150,18 @@
  ],
  "near_misses": [
   {
-   "task": "Sign the apartment lease renewal contract",
-   "better": "contract document with signature or pen",
+   "task": "Duplicate the boilerplate project brief for the new client",
+   "better": "stacked square note card with L-shaped backing layer",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Make the grocery shopping list for Sunday dinner",
-   "better": "checklist with checkboxes or bullet points",
+   "task": "Sort the scanned medical receipts into the health folder",
+   "better": "file folder with a top-left tab and lines",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the quarterly water bill online",
-   "better": "invoice or bill with currency symbol",
+   "task": "Prepare horizontal cue cards for the keynote speech",
+   "better": "wide landscape rectangle card with three lines",
    "trap": "lookalike_glyph"
   },
   {
@@ -187,7 +183,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows three left-aligned lines of text inside a rounded square, representing a short note, text block, blurb, or subtitles. It fits tasks centered on writing notes, summaries, descriptions, or blog posts, though its generic shape closely resembles tall document icons, checklists, and UI menu buttons.",
@@ -205,6 +201,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "note, memo, or short text block",
+     "strength": "primary"
+    },
+    {
+     "meaning": "article, blog post, or written entry",
+     "strength": "primary"
+    },
+    {
+     "meaning": "subtitles or closed captions",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "description or details field",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a hamburger menu button, a left-align text formatting button, or a generic document icon.",
+   "near_misses": [
+    {
+     "task": "Sign the apartment lease renewal contract",
+     "better": "contract document with signature or pen",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Make the grocery shopping list for Sunday dinner",
+     "better": "checklist with checkboxes or bullet points",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the quarterly water bill online",
+     "better": "invoice or bill with currency symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Note the water meter reading before the 25th",
+     "better": "gauge or meter",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Practice playing the high F# note cleanly on flute",
+     "better": "musical note",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Record the voiceover audio on the condenser mic",
+     "better": "microphone",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "description",
+   "feed",
+   "text_snippet",
+   "chrome_reader_mode",
+   "library_books",
+   "source",
+   "text_ad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12132,
+    "output": 4025,
+    "thoughts": 352,
+    "total": 16509
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "A plain, symmetrical rounded square frame with four intact corners containing two full horizontal lines above a shorter bottom-left line, lacking any folded corner, folder tab, or backing layer."
 }

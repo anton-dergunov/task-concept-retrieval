@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as literal hardware audio faders or as generic UI settings/filter sliders; identical in concept to horizontal slider icons and gear icons for preferences.",
+ "ambiguity": "Virtually interchangeable with the two-vertical-slider icon for general settings, preferences, or filter controls.",
  "modifier_semantics": [],
  "domains": [
   "creative",
@@ -173,6 +173,16 @@
  ],
  "near_misses": [
   {
+   "task": "Balance left and right stereo pan sliders",
+   "better": "two-slider control",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Install dual-zone dimmer switches in the dining room",
+   "better": "two-slider dimmer or light switch",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order replacement water filter for the fridge",
    "better": "water filter or droplet",
    "trap": "shared_vocabulary"
@@ -181,11 +191,6 @@
    "task": "Buy a stand mixer for making sourdough brioche",
    "better": "kitchen stand mixer",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Install dimmer switches in the dining room",
-   "better": "light switch or lightbulb",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a customizable ergonomic office chair",
@@ -206,7 +211,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows three vertical slider controls (faders), universally recognized both as an audio mixing board / equalizer and as UI settings/adjustments/filters. Fits music production, audio gear maintenance, photo editing adjustments, and software configuration tasks well, though it overlaps with gear icons for general settings.",
@@ -226,6 +231,94 @@
    "example_tasks: 20 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "audio mixer, equalizer, or sound faders",
+     "strength": "primary"
+    },
+    {
+     "meaning": "settings, preferences, or configuration controls",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo or video adjustment sliders",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "search filters or parameter tuning",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as literal hardware audio faders or as generic UI settings/filter sliders; identical in concept to horizontal slider icons and gear icons for preferences.",
+   "near_misses": [
+    {
+     "task": "Order replacement water filter for the fridge",
+     "better": "water filter or droplet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a stand mixer for making sourdough brioche",
+     "better": "kitchen stand mixer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install dimmer switches in the dining room",
+     "better": "light switch or lightbulb",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a customizable ergonomic office chair",
+     "better": "office chair",
+     "trap": "property"
+    },
+    {
+     "task": "Adjust the saddle height on the road bike",
+     "better": "bicycle",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Record acoustic guitar parts for the bridge",
+     "better": "guitar",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "discover_tune"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4013,
+    "output": 649,
+    "thoughts": 0,
+    "total": 4662
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Shows three vertical slider tracks rather than two, making it the more recognizable icon for a multi-band audio equalizer or mixing board while remaining interchangeable with the two-slider version for general settings."
 }

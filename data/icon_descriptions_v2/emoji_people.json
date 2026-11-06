@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a stretching/exercise icon or a generic person/accessibility symbol at small sizes.",
+ "ambiguity": "Easily confused at a glance with the figure hailing a ride beside a suitcase, or with a generic standing person or stretching icon.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -154,9 +154,14 @@
  ],
  "near_misses": [
   {
-   "task": "Hail a cab to the airport at 6am",
-   "better": "taxi",
-   "trap": "shared_vocabulary"
+   "task": "Hail a cab to the airport with my bags at 6am",
+   "better": "person with suitcase hailing a ride",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wait at the passenger pickup curb with luggage",
+   "better": "person with suitcase hailing a ride",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Update user profile avatar in settings",
@@ -187,7 +192,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a person waving or raising a hand. It fits tasks centered on welcoming/onboarding people, greeting neighbors or guests, volunteering, or raising questions/attendance, though it can occasionally be mistaken for stretching or a generic person symbol.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "greeting, waving hello, or welcoming someone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "raising a hand, volunteering, or asking a question",
+     "strength": "primary"
+    },
+    {
+     "meaning": "onboarding or introducing a new person",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "person, guest, or attendee",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a stretching/exercise icon or a generic person/accessibility symbol at small sizes.",
+   "near_misses": [
+    {
+     "task": "Hail a cab to the airport at 6am",
+     "better": "taxi",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update user profile avatar in settings",
+     "better": "user avatar / portrait",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a standing desk converter for the home office",
+     "better": "desk",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a welcome mat for the front porch",
+     "better": "doormat / house",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the contractor showed up at the house",
+     "better": "house / worker",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Sign the NDA and tax forms",
+     "better": "document / signature",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hail"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4053,
+    "output": 1105,
+    "thoughts": 0,
+    "total": 5158
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "Shows a standalone figure raising its left arm (viewer's left) with a straight lowered right arm and no accompanying object, representing general greeting, waving, or raising a hand."
 }

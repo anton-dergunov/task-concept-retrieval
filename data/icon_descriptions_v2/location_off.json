@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the crossed-out teardrop can briefly resemble a muted microphone, a crossed-out water drop, or a hidden-eye icon.",
+ "ambiguity": "At tiny sizes, the curved arcs broken by the diagonal slash can be briefly confused with the crossed-out eye icon, especially on privacy-related tasks that could involve either hiding visibility or disabling location.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -171,13 +171,18 @@
  ],
  "near_misses": [
   {
-   "task": "Drop a pin at the trailhead parking lot and send it to Dave",
-   "better": "map pin without slash",
+   "task": "Hide salary column in the shared budget spreadsheet",
+   "better": "crossed-out eye (hide / invisible)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Turn off water main valve before leaving for the winter",
-   "better": "water drop with slash or valve icon",
+   "task": "Set Instagram profile to private visibility",
+   "better": "crossed-out eye or padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Drop a pin at the trailhead parking lot and send it to Dave",
+   "better": "map pin without slash",
    "trap": "lookalike_glyph"
   },
   {
@@ -224,6 +229,90 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "location off / disable GPS or location sharing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "untracked location / no address or venue set",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "remove saved place or pin from map",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the crossed-out teardrop can briefly resemble a muted microphone, a crossed-out water drop, or a hidden-eye icon.",
+   "near_misses": [
+    {
+     "task": "Drop a pin at the trailhead parking lot and send it to Dave",
+     "better": "map pin without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn off water main valve before leaving for the winter",
+     "better": "water drop with slash or valve icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a GPS tracker tag for the checked luggage",
+     "better": "luggage tag or active map pin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the new coffee shop has an address listed yet",
+     "better": "coffee cup or store icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a remote cabin with no cell service for the weekend",
+     "better": "cabin or no-signal icon",
+     "trap": "property"
+    },
+    {
+     "task": "Order a replacement SIM card for the backup phone",
+     "better": "SIM card icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "visibility_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4074,
+    "output": 1136,
+    "thoughts": 107,
+    "total": 5317
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Shows a vertical teardrop map pin with a single bottom point and a small center dot crossed by a slash, meaning location off or no address, rather than a horizontal two-cornered eye for hiding content or visibility."
 }

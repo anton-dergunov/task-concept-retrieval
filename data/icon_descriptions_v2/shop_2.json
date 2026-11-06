@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "work video library / training videos / webinars",
+   "meaning": "work video library, training course catalog, or webinar archive",
    "strength": "primary"
   },
   {
-   "meaning": "video portfolio / demo reels / client pitches",
+   "meaning": "collection of demo reels, video portfolios, or client pitches",
    "strength": "primary"
   },
   {
-   "meaning": "digital store / app purchases / media subscriptions",
+   "meaning": "library of purchased apps, digital media, or store subscriptions",
    "strength": "secondary"
   },
   {
-   "meaning": "recorded presentations / slide decks with video",
+   "meaning": "series of recorded presentations or video slide decks",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Combines a briefcase handle, a video play button, and a collection stack; easily confused with a standard video library icon or the old Play Store shopping bag.",
+ "ambiguity": "Easily confused with the single unstacked play-button bag/briefcase at small sizes, and shares the same dual reading of shopping bag (app/media purchases) vs. briefcase (work videos).",
  "modifier_semantics": [
   {
    "modifier": "play triangle in center",
@@ -167,6 +167,16 @@
  ],
  "near_misses": [
   {
+   "task": "Download theauthenticator app from the Google Play Store",
+   "better": "single play-bag / app store icon without backing stack",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Export my 2026 motion design showreel for the agency application",
+   "better": "single play-briefcase / demo reel icon without backing stack",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new leather briefcase for client meetings",
    "better": "plain briefcase without play button",
    "trap": "lookalike_glyph"
@@ -174,11 +184,6 @@
   {
    "task": "Pick out two movies to watch with the kids on Saturday night",
    "better": "film clapperboard or TV screen",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check if the living room TV supports AirPlay",
-   "better": "television or cast icon",
    "trap": "shared_vocabulary"
   },
   {
@@ -190,11 +195,6 @@
    "task": "Pay the invoice for the freelance sound mixer",
    "better": "invoice or credit card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Verify that the webcam mic works before the all-hands",
-   "better": "microphone or webcam",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -218,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "shop_two"
- }
+  "alias_of": "shop_two",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "work video library / training videos / webinars",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video portfolio / demo reels / client pitches",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital store / app purchases / media subscriptions",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "recorded presentations / slide decks with video",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Combines a briefcase handle, a video play button, and a collection stack; easily confused with a standard video library icon or the old Play Store shopping bag.",
+   "near_misses": [
+    {
+     "task": "Buy a new leather briefcase for client meetings",
+     "better": "plain briefcase without play button",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick out two movies to watch with the kids on Saturday night",
+     "better": "film clapperboard or TV screen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the living room TV supports AirPlay",
+     "better": "television or cast icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights for the video production shoot in Austin",
+     "better": "airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the invoice for the freelance sound mixer",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify that the webcam mic works before the all-hands",
+     "better": "microphone or webcam",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shop"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4107,
+    "output": 1132,
+    "thoughts": 83,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "Adds an L-shaped backing layer behind the bottom-left of the play-button bag/briefcase, indicating a collection, library, or multiple stacked items rather than a single video or store."
 }

@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "incoming phone call / receive a call",
+   "meaning": "incoming phone call / receive or expect a call",
    "strength": "primary"
   },
   {
-   "meaning": "return a missed call / call back",
+   "meaning": "return a call / call back",
    "strength": "secondary"
   },
   {
-   "meaning": "phone call (general, when direction is ignored at a glance value_level=secondary, wait no just text) -> general phone call",
+   "meaning": "inbound customer support calls or call forwarding target",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic phone call icon, an outgoing call icon (arrow pointing away), or a missed call icon (bounced arrow) at small sizes.",
+ "ambiguity": "Shares the identical diagonal handset base with the other phone icons and can be confused with a generic or outgoing call icon if the arrow's inward direction is missed at a glance.",
  "modifier_semantics": [
   {
    "modifier": "diagonal arrow pointing toward handset",
@@ -158,8 +158,18 @@
  ],
  "near_misses": [
   {
-   "task": "Call grandma for her birthday",
-   "better": "outgoing phone call or plain telephone handset",
+   "task": "Call grandma to wish her a happy birthday",
+   "better": "plain telephone handset or handset with an outward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test the office VoIP phone over the guest Wi-Fi",
+   "better": "telephone handset with a Wi-Fi arc and dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update the hold music on our main support phone line",
+   "better": "telephone handset with pause bars",
    "trap": "lookalike_glyph"
   },
   {
@@ -179,19 +189,14 @@
   },
   {
    "task": "Send the signed contract PDF after our call",
-   "better": "document / contract",
+   "better": "document or contract",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Cancel the landline subscription with Verizon",
-   "better": "phone with slash or contract",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon shows a classic telephone handset with an arrow pointing into it, universally representing an incoming call. It fits tasks about waiting for a callback, taking a scheduled phone screen, returning missed calls, or staffing an inbound phone line, though at small sizes it easily blurs with generic or outgoing phone icons.",
@@ -209,6 +214,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "incoming phone call / receive a call",
+     "strength": "primary"
+    },
+    {
+     "meaning": "return a missed call / call back",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "phone call (general, when direction is ignored at a glance value_level=secondary, wait no just text) -> general phone call",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic phone call icon, an outgoing call icon (arrow pointing away), or a missed call icon (bounced arrow) at small sizes.",
+   "near_misses": [
+    {
+     "task": "Call grandma for her birthday",
+     "better": "outgoing phone call or plain telephone handset",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a shockproof phone case for the trip",
+     "better": "smartphone case",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download the on-call rotation schedule for May",
+     "better": "calendar",
+     "trap": "property"
+    },
+    {
+     "task": "Check why my phone battery drains overnight",
+     "better": "battery",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Send the signed contract PDF after our call",
+     "better": "document / contract",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Cancel the landline subscription with Verizon",
+     "better": "phone with slash or contract",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wifi_calling_bar_2",
+   "wifi_calling_bar_1",
+   "phone_paused"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6758,
+    "output": 2173,
+    "thoughts": 0,
+    "total": 8931
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:27Z"
+  }
+ },
+ "distinguishing": "A bold diagonal arrow points down and left directly into the telephone handset, indicating an incoming call rather than Wi-Fi calling, a dot badge, or call hold."
 }

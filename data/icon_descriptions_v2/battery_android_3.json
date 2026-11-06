@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "battery / portable power cell",
+   "meaning": "battery / portable power cell / battery pack",
    "strength": "primary"
   },
   {
-   "meaning": "charging / charge level",
+   "meaning": "half battery / medium charge / storage charge level",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "energy / stamina",
+   "meaning": "moderate energy / pacing stamina",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Easily confused with the one-third-filled and one-sixth-filled battery icons at small list sizes, where slight differences in fill width are hard to judge without a side-by-side comparison.",
  "modifier_semantics": [
   {
    "modifier": "left half filled in solid black",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Drop off the dead household batteries at the e-waste recycling bin",
+   "better": "empty battery outline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plug in the baby monitor before its low battery dies completely",
+   "better": "low-filled battery with narrow left bar",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small battery-powered milk frother for the office",
    "better": "milk frother or whisk",
    "trap": "property"
@@ -168,11 +178,6 @@
   {
    "task": "Pay the monthly electric utility bill before Thursday",
    "better": "lightning bolt or bill/invoice",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Clean the corroded terminals on the Honda's 12V car battery",
-   "better": "car battery with two top posts or car",
    "trap": "shared_vocabulary"
   },
   {
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A universally recognized horizontal battery icon shown half-full. It fits everyday tasks about buying, charging, testing, swapping, or recycling household batteries, rechargeable cells, and power banks, though it overlaps with other battery-level and charging-bolt icons.",
@@ -212,6 +217,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / portable power cell",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / charge level",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / portable charger",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "energy / stamina",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a small battery-powered milk frother for the office",
+     "better": "milk frother or whisk",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before Thursday",
+     "better": "lightning bolt or bill/invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the corroded terminals on the Honda's 12V car battery",
+     "better": "car battery with two top posts or car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule the neuropsych cognitive test battery for next month",
+     "better": "brain or medical clipboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Find out why the living room wall outlet has no power",
+     "better": "electrical plug or outlet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a small waterproof case for the 18650 cells",
+     "better": "storage case or box",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_0",
+   "battery_android_1",
+   "battery_android_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6701,
+    "output": 1411,
+    "thoughts": 165,
+    "total": 8277
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:41Z"
+  }
+ },
+ "distinguishing": "Filled to roughly the halfway mark of the interior, representing a medium or half charge rather than an empty or critically low battery, though still interchangeable with the other partial-fill batteries for general battery tasks."
 }

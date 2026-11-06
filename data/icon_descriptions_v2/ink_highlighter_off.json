@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "remove highlighting or clear text highlight",
+   "meaning": "remove highlighting, clear text highlight, or disable markup",
    "strength": "primary"
   },
   {
-   "meaning": "clean permanent marker or ink stain",
+   "meaning": "clean permanent marker stain or no markers allowed",
    "strength": "primary"
   },
   {
-   "meaning": "no markers, unannotated copy, or disable markup",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "dried-out or discarded marker pen",
+   "meaning": "dried-out marker pen or unannotated copy",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the crossed-out marker can be mistaken for a generic 'no edit / read-only' pencil icon, a crossed-out eyedropper, or a lipstick tube with a slash.",
+ "ambiguity": "At small list sizes, easily mistaken for the crossed-out pencil / eyedropper icon used for general 'read-only / cannot edit' states.",
  "modifier_semantics": [
   {
    "modifier": "diagonal strike-through slash",
@@ -161,19 +157,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a pack of pastel Stabilo highlighters for exam revision",
+   "task": "Lock the budget spreadsheet to read-only so nobody edits the formulas",
+   "better": "crossed-out pencil or padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Disable the eyedropper color sampling tool in the image editor",
+   "better": "crossed-out eyedropper",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a pack of pastel highlighters for exam revision",
    "better": "highlighter marker without slash",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Highlight the key clauses in the commercial lease agreement",
+   "task": "Highlight the key indemnity clauses in the commercial lease agreement",
    "better": "highlighter marker without slash",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Lock the spreadsheet to read-only so nobody edits the formulas",
-   "better": "padlock or crossed-out pencil",
-   "trap": "lookalike_glyph"
+   "trap": "generic_verb"
   },
   {
    "task": "Ask the hairdresser to tone down my blonde highlights",
@@ -181,7 +182,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Cut the boring middle section from the match highlights reel",
+   "task": "Cut the slow middle section from the match highlights reel",
    "better": "video clapperboard or film strip",
    "trap": "shared_vocabulary"
   },
@@ -194,7 +195,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a chisel-tip highlighter or marker pen with a diagonal prohibition/removal slash through it (a rich-text UI glyph for 'no highlight color'). In a task planner it fits narrow tasks about removing document highlighting, cleaning marker stains, or throwing out dried markers, though it can be confused with a generic 'no editing' pencil icon at small sizes.",
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remove highlighting or clear text highlight",
+     "strength": "primary"
+    },
+    {
+     "meaning": "clean permanent marker or ink stain",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no markers, unannotated copy, or disable markup",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "dried-out or discarded marker pen",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the crossed-out marker can be mistaken for a generic 'no edit / read-only' pencil icon, a crossed-out eyedropper, or a lipstick tube with a slash.",
+   "near_misses": [
+    {
+     "task": "Buy a pack of pastel Stabilo highlighters for exam revision",
+     "better": "highlighter marker without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Highlight the key clauses in the commercial lease agreement",
+     "better": "highlighter marker without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Lock the spreadsheet to read-only so nobody edits the formulas",
+     "better": "padlock or crossed-out pencil",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Ask the hairdresser to tone down my blonde highlights",
+     "better": "haircut scissors or comb",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cut the boring middle section from the match highlights reel",
+     "better": "video clapperboard or film strip",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy unscented non-toxic markers for the kindergarten craft table",
+     "better": "marker pen without slash",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "edit_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4121,
+    "output": 778,
+    "thoughts": 0,
+    "total": 4899
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Shows a wide, hollow cylindrical barrel with a distinct stepped, angled chisel tip protruding from the bottom-left end—a crossed-out highlighter or permanent marker—unlike the narrower crossed-out pencil/eyedropper with a solid top bulb and tapered point."
 }

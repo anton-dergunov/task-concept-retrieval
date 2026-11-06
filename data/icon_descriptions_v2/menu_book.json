@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "book or reading",
+   "meaning": "book / reading / textbook",
    "strength": "primary"
   },
   {
-   "meaning": "study, textbook, or learning material",
+   "meaning": "manual / documentation / guide / article",
    "strength": "primary"
   },
   {
-   "meaning": "manual, guide, or documentation",
+   "meaning": "lined notebook / journal / diary",
    "strength": "secondary"
   },
   {
-   "meaning": "journal, notebook, or diary",
+   "meaning": "study / course material",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to other open book icons that have lines on both pages or no lines at all.",
+ "ambiguity": "Functionally interchangeable for most book or reading tasks with the plain open book with blank pages and the open book with a turning page.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Flip through the summer furniture catalog and mark favorite sofas",
+   "better": "open book with a turning page",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the blank unlined drawing pad for the figure sketching session",
+   "better": "plain open book with blank pages",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book the boutique hotel in Kyoto for four nights in April",
    "better": "bed or hotel building",
    "trap": "shared_vocabulary"
@@ -177,20 +187,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Bake a batch of lemon bars for the Thursday meeting",
+   "task": "Bake a batch of lemon bars for the Thursday book club meeting",
    "better": "cake or baking tray",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check the car oil level and tire pressure before driving upstate",
-   "better": "car",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an open book with text lines on the right page. It is an ideal, universally recognizable icon for tasks centered on reading, books, studying textbooks, consulting manuals, or writing documentation, though it only differs slightly from other open-book variants.",
@@ -208,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "book or reading",
+     "strength": "primary"
+    },
+    {
+     "meaning": "study, textbook, or learning material",
+     "strength": "primary"
+    },
+    {
+     "meaning": "manual, guide, or documentation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "journal, notebook, or diary",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to other open book icons that have lines on both pages or no lines at all.",
+   "near_misses": [
+    {
+     "task": "Book the boutique hotel in Kyoto for four nights in April",
+     "better": "bed or hotel building",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a window seat on the morning flight to Chicago",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read the gas and electric meters and submit the numbers online",
+     "better": "gauge or meter",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Balance the household books for Q1 in the spreadsheet",
+     "better": "spreadsheet or calculator",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Bake a batch of lemon bars for the Thursday meeting",
+     "better": "cake or baking tray",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the car oil level and tire pressure before driving upstate",
+     "better": "car",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "auto_stories",
+   "import_contacts"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5343,
+    "output": 1749,
+    "thoughts": 0,
+    "total": 7092
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "The right page contains three horizontal curved bars representing lines of text while the left page is blank, emphasizing written content, documentation, or a lined notebook, though it is largely interchangeable with the other open-book icons for general reading tasks."
 }

@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "bookmark / saved item / reading list",
+   "meaning": "bookmark or single saved item",
    "strength": "primary"
   },
   {
-   "meaning": "book / journal / notebook with ribbon marker",
-   "strength": "primary"
+   "meaning": "cardboard box or square package sealed with tape",
+   "strength": "secondary"
   },
   {
-   "meaning": "cardboard box / package sealed with tape",
+   "meaning": "book, album, or note with ribbon marker",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as a bookmark/book icon or as a square shipping box with a strip of packing tape on top.",
+ "ambiguity": "Nearly interchangeable with the tall vertical book icon at a glance (differing only in height-to-width ratio), and easily confused with the stacked square bookmarks icon when referring to bookmarks in general.",
  "modifier_semantics": [
   {
    "modifier": "bookmark ribbon at top right",
@@ -157,40 +157,40 @@
  ],
  "near_misses": [
   {
+   "task": "Write three pages in my gratitude journal before bed",
+   "better": "tall vertical book or journal with ribbon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean up old reading lists and saved collections",
+   "better": "stacked square bookmarks with L-shaped backing line",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book flights to Lisbon for October",
-   "better": "airplane / flight ticket",
+   "better": "airplane or flight ticket",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Book a table for six at the Thai place on Friday",
-   "better": "restaurant / dining",
+   "better": "restaurant utensils or dining",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Ship the warranty return box back to Dell",
-   "better": "cardboard shipping package with arrows or parcel tape",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check bookmark sync status in account settings",
-   "better": "sync arrows / settings gear",
+   "better": "sync arrows or settings gear",
    "trap": "generic_verb"
   },
   {
    "task": "Buy reading glasses with anti-glare coating",
    "better": "eyeglasses",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Frame the vintage bookshop poster for the hallway",
-   "better": "picture frame",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a rounded square with a notched bookmark ribbon hanging from the top edge. It is well suited for tasks about browser bookmarks, saved-for-later reading lists, books, or journals, though its square outline can occasionally be mistaken for a sealed parcel box.",
@@ -208,6 +208,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bookmark / saved item / reading list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "book / journal / notebook with ribbon marker",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cardboard box / package sealed with tape",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as a bookmark/book icon or as a square shipping box with a strip of packing tape on top.",
+   "near_misses": [
+    {
+     "task": "Book flights to Lisbon for October",
+     "better": "airplane / flight ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a table for six at the Thai place on Friday",
+     "better": "restaurant / dining",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Ship the warranty return box back to Dell",
+     "better": "cardboard shipping package with arrows or parcel tape",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check bookmark sync status in account settings",
+     "better": "sync arrows / settings gear",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy reading glasses with anti-glare coating",
+     "better": "eyeglasses",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Frame the vintage bookshop poster for the hallway",
+     "better": "picture frame",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "collections_bookmark",
+   "book"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5378,
+    "output": 1435,
+    "thoughts": 135,
+    "total": 6948
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "It is a single 1:1 rounded square with a top ribbon and no backing stack line, reading as a standalone bookmark badge or a square taped parcel rather than a tall book or a collection."
 }

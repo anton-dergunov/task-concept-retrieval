@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "Git branch, merge, or version control",
+   "meaning": "Git merge or combining branches in version control",
    "strength": "primary"
   },
   {
-   "meaning": "fork a repository or project",
+   "meaning": "Git branch, fork, or version control repository",
    "strength": "primary"
   },
   {
-   "meaning": "decision branch, workflow split, or routing",
+   "meaning": "workflow convergence, routing split, or decision tree",
    "strength": "secondary"
   },
   {
-   "meaning": "family tree or lineage connection",
+   "meaning": "family tree or lineage descendant connection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost universally recognized by developers as a Git branch or merge symbol (specifically with the branch merging downwards or splitting downwards), though non-technical users may see a generic network node, subway line split, or lowercase letter 'h'.",
+ "ambiguity": "Easily confused with the upward-curving Git branch icon; unless a user specifically contrasts merging (two bottom nodes joining into one top node) with branching (one bottom node splitting into two top nodes), the two are largely interchangeable for general version-control tasks.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Create a new feature branch from main for the login redesign",
+   "better": "upward-curving Git branch icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fork the open-source documentation repository on GitHub",
+   "better": "upward-curving Git branch or fork icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Saw off the dead oak branch hanging over the driveway",
    "better": "tree or saw",
    "trap": "shared_vocabulary"
@@ -164,19 +174,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Polish the silver forks and spoons before Thanksgiving dinner",
-   "better": "cutlery / fork",
+   "task": "Merge the two duplicate customer contact spreadsheets into one CSV",
+   "better": "spreadsheet or table icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace leaking front fork seals on the mountain bike",
-   "better": "bicycle",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Share the trip photo album link with the family group chat",
-   "better": "share icon or photo album",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new USB-C hub for the desk setup",
@@ -184,7 +184,7 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Renew annual subscription for the team",
+   "task": "Renew annual GitHub Enterprise subscription for the engineering team",
    "better": "credit card or invoice",
    "trap": "parent_topic"
   }
@@ -192,7 +192,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts the standard three-node branching graph used across software tools for Git branches, forks, and merges. It is an ideal, high-signal cue for version control tasks (rebasing, merging, resolving conflicts, pruning branches) as well as branching logic, though it can be confused with generic network or share nodes and has strong vocabulary traps around tree branches, bank branches, and physical forks.",
@@ -210,6 +210,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Git branch, merge, or version control",
+     "strength": "primary"
+    },
+    {
+     "meaning": "fork a repository or project",
+     "strength": "primary"
+    },
+    {
+     "meaning": "decision branch, workflow split, or routing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "family tree or lineage connection",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost universally recognized by developers as a Git branch or merge symbol (specifically with the branch merging downwards or splitting downwards), though non-technical users may see a generic network node, subway line split, or lowercase letter 'h'.",
+   "near_misses": [
+    {
+     "task": "Saw off the dead oak branch hanging over the driveway",
+     "better": "tree or saw",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Stop by the downtown bank branch to deposit the cashier's check",
+     "better": "bank building",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Polish the silver forks and spoons before Thanksgiving dinner",
+     "better": "cutlery / fork",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace leaking front fork seals on the mountain bike",
+     "better": "bicycle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Share the trip photo album link with the family group chat",
+     "better": "share icon or photo album",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new USB-C hub for the desk setup",
+     "better": "USB plug or adapter",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew annual subscription for the team",
+     "better": "credit card or invoice",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "graph_8"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4108,
+    "output": 1146,
+    "thoughts": 282,
+    "total": 5536
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "The curved side arm bends downward to a bottom-right node (one node at the top, two at the bottom), representing a Git merge or downward split rather than an upward branch."
 }

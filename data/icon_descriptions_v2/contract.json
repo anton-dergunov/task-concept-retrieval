@@ -7,11 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "receipt or bill",
-   "strength": "primary"
-  },
-  {
-   "meaning": "invoice or statement",
+   "meaning": "receipt, bill, or invoice",
    "strength": "primary"
   },
   {
@@ -19,11 +15,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "text document or note",
+   "meaning": "text document or log",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read equally as a cash register receipt/bill, a formal certificate/scroll, or a general text document depending on the user's context.",
+ "ambiguity": "Could be mistaken at small sizes for the vertical document folder with a bottom pocket flap, which also has two text bars above a horizontal bottom division.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -155,33 +151,33 @@
  ],
  "near_misses": [
   {
-   "task": "Write a Python script to rename the backup files",
-   "better": "code / terminal",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a paper towel holder for under the kitchen cabinet",
-   "better": "paper towel roll",
+   "task": "Assemble the press kit into a two-pocket presentation folder",
+   "better": "vertical document folder with interior pocket flap",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Measure the bedroom window frame for new blackout roller shades",
+   "better": "window blinds with headrail and pull cord",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write a Python script to rename the backup files",
+   "better": "code or terminal",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Call the plumber about the billed hours on the kitchen leak",
-   "better": "phone call / plumber",
+   "better": "phone call or plumber",
    "trap": "property"
   },
   {
    "task": "Fix infinite scroll bug on the product archive page",
-   "better": "bug / web page",
+   "better": "bug or web page",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Cancel the Dropbox auto-renewal on my Visa card",
-   "better": "credit card",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Document the onboarding steps for the new intern",
-   "better": "checklist / guide",
+   "better": "checklist or guide",
    "trap": "generic_verb"
   }
  ],
@@ -206,6 +202,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "receipt or bill",
+     "strength": "primary"
+    },
+    {
+     "meaning": "invoice or statement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "scroll, script, or certificate",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "text document or note",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read equally as a cash register receipt/bill, a formal certificate/scroll, or a general text document depending on the user's context.",
+   "near_misses": [
+    {
+     "task": "Write a Python script to rename the backup files",
+     "better": "code / terminal",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a paper towel holder for under the kitchen cabinet",
+     "better": "paper towel roll",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the plumber about the billed hours on the kitchen leak",
+     "better": "phone call / plumber",
+     "trap": "property"
+    },
+    {
+     "task": "Fix infinite scroll bug on the product archive page",
+     "better": "bug / web page",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel the Dropbox auto-renewal on my Visa card",
+     "better": "credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Document the onboarding steps for the new intern",
+     "better": "checklist / guide",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "blinds_2_closed",
+   "blinds_2",
+   "lab_profile"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6688,
+    "output": 1173,
+    "thoughts": 0,
+    "total": 7861
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "A sharp-cornered vertical sheet with two text lines whose bottom edge rolls outward to the left into a cylindrical curl, representing a receipt, bill, or scroll rather than a flat pocket folder."
 }

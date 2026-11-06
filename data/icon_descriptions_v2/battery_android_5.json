@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "charging / charge level",
+   "meaning": "charging / charge level / power bank",
    "strength": "primary"
   },
   {
-   "meaning": "power bank / backup power",
+   "meaning": "two-thirds charge / medium-high battery level",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable from 50%, 75%, or full battery icons in a status-bar icon set.",
+ "ambiguity": "Nearly identical at small sizes to the half-filled battery and three-quarters-filled battery icons, and interchangeable with them for general battery or power tasks.",
  "modifier_semantics": [
   {
    "modifier": "two-thirds solid black fill from left",
@@ -176,9 +176,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Discharge lipo batteries to 50% storage voltage for winter",
+   "better": "half-filled battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set EV daily charge limit to 80% in the car app",
+   "better": "three-quarters filled battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly electric utility bill",
@@ -189,11 +194,6 @@
    "task": "Order a battery-powered lawn mower",
    "better": "lawn mower",
    "trap": "property"
-  },
-  {
-   "task": "Pick up a new prescription pill bottle at CVS",
-   "better": "pill bottle",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Practice drums with the jazz quartet",
@@ -209,7 +209,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognized horizontal battery icon filled to roughly two-thirds capacity. While originated as a UI status indicator for charge level, it works very well as a concrete subject icon for everyday tasks involving buying, charging, swapping, or recycling batteries and power banks. Its main weakness is low distinctiveness against other battery fill-level variants in the same icon pack.",
@@ -229,6 +229,92 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / portable power cell",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging / charge level",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / backup power",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy or stamina level",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable from 50%, 75%, or full battery icons in a status-bar icon set.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric utility bill",
+     "better": "lightning bolt or bill document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a battery-powered lawn mower",
+     "better": "lawn mower",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up a new prescription pill bottle at CVS",
+     "better": "pill bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Practice drums with the jazz quartet",
+     "better": "drum kit",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Bring the solar folding panel for the campsite",
+     "better": "solar panel",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_4",
+   "battery_android_6"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5291,
+    "output": 1571,
+    "thoughts": 120,
+    "total": 6982
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:29Z"
+  }
+ },
+ "distinguishing": "Filled about two-thirds (65%) from the left, sitting visually right between the half-filled and three-quarters-filled battery icons and functionally interchangeable with both for general battery tasks."
 }

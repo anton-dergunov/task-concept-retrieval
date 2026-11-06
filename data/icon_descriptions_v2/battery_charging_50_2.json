@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "charging battery / recharge",
+   "meaning": "charging battery / recharge a device",
    "strength": "primary"
   },
   {
-   "meaning": "battery / power bank / charger",
+   "meaning": "battery / power bank / portable charger",
    "strength": "primary"
+  },
+  {
+   "meaning": "EV or e-bike charging",
+   "strength": "secondary"
   },
   {
    "meaning": "electricity / power supply",
    "strength": "secondary"
-  },
-  {
-   "meaning": "personal energy / rest and recharge",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Among several battery-level charging icons (20%, 50%, 80%, full), the exact half-filled level is indistinguishable as a task concept and merges with general battery charging.",
+ "ambiguity": "Completely interchangeable with the slightly fuller (60% and 75%) horizontal charging battery icons; in a task list, the few-pixel difference in battery fill level carries no distinct semantic meaning.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt on the right side",
@@ -166,18 +166,13 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Dispute the $45 roaming charge on the Verizon bill",
+   "better": "invoice / receipt",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Book a quiet weekend cabin to recharge after the product launch",
    "better": "cabin / house",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Dispute the $45 roaming charge on the Verizon bill",
-   "better": "invoice / receipt",
    "trap": "shared_vocabulary"
   },
   {
@@ -187,7 +182,12 @@
   },
   {
    "task": "Check weather forecast for lightning storms before the ridge hike",
-   "better": "thunderstorm cloud",
+   "better": "storm cloud with lightning",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call the electrician to install a 240V outlet in the garage",
+   "better": "electrical outlet or plug",
    "trap": "lookalike_glyph"
   },
   {
@@ -199,7 +199,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a horizontal half-filled battery with a lightning bolt on the right, universally understood as a battery charging or a power bank. It fits tasks about charging devices, managing batteries, or buying chargers, though it shares visual space with other battery-level icons in a standard icon set.",
@@ -219,6 +219,92 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "charging battery / recharge",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery / power bank / charger",
+     "strength": "primary"
+    },
+    {
+     "meaning": "electricity / power supply",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy / rest and recharge",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Among several battery-level charging icons (20%, 50%, 80%, full), the exact half-filled level is indistinguishable as a task concept and merges with general battery charging.",
+   "near_misses": [
+    {
+     "task": "Book a quiet weekend cabin to recharge after the product launch",
+     "better": "cabin / house",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the $45 roaming charge on the Verizon bill",
+     "better": "invoice / receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a cordless drill for the shelving project",
+     "better": "drill",
+     "trap": "property"
+    },
+    {
+     "task": "Check weather forecast for lightning storms before the ridge hike",
+     "better": "thunderstorm cloud",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the car to the mechanic to fix the alternator",
+     "better": "car",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_60_2",
+   "battery_charging_80_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5379,
+    "output": 1595,
+    "thoughts": 118,
+    "total": 7092
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Shows the lowest interior fill bar (roughly 40–50% full) on the left of the battery, making it visually nearly identical and completely interchangeable in task meaning with the 60%-filled and 75%-filled charging battery icons."
 }

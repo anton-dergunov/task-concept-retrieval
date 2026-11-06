@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "upload or import into an application window",
+   "meaning": "upload or import into an application window or web portal",
    "strength": "primary"
   },
   {
-   "meaning": "open in window or dock to top",
+   "meaning": "open in window / dock window to top",
    "strength": "secondary"
   },
   {
-   "meaning": "submit or push to web portal",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "upgrade or update software application",
+   "meaning": "update or upgrade software application",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with general upload, share, or maximize/restore window UI chrome icons.",
+ "ambiguity": "Closely resembles the 3D box with an up arrow (which has an angled top face instead of a solid bar) and the outbox tray with an up arrow.",
  "modifier_semantics": [
   {
    "modifier": "upward arrow entering through bottom gap",
@@ -178,24 +174,24 @@
  ],
  "near_misses": [
   {
+   "task": "Clear out stuck emails in the Outlook outbox tray",
+   "better": "outbox tray with curved notch and upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the revised resume document to LinkedIn",
+   "better": "document page with folded corner and upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Ship the return package back to Amazon",
+   "better": "3D package box with upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Clean the bedroom windows before the guests arrive",
-   "better": "window frame / spray bottle",
+   "better": "window panes / spray bottle",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new storm door for the back porch",
-   "better": "door",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Back up photos to the external hard drive",
-   "better": "hard drive",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Download the tax forms from the IRS website",
-   "better": "download arrow (pointing down)','",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Fix the broken file upload button on the checkout page",
@@ -211,7 +207,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows an application window frame with an upward arrow entering from the bottom, representing uploading to a web portal, importing into an app, or docking/opening a window. While it is essentially UI chrome (picture-in-picture exit or window import), it serves reasonably well for tasks centered on uploading or submitting files to an online portal, though it is easily confused with standard upload or share icons.",
@@ -231,6 +227,98 @@
    "example_tasks: 20 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload or import into an application window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "open in window or dock to top",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "submit or push to web portal",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upgrade or update software application",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with general upload, share, or maximize/restore window UI chrome icons.",
+   "near_misses": [
+    {
+     "task": "Clean the bedroom windows before the guests arrive",
+     "better": "window frame / spray bottle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new storm door for the back porch",
+     "better": "door",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Back up photos to the external hard drive",
+     "better": "hard drive",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Download the tax forms from the IRS website",
+     "better": "download arrow (pointing down)','",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix the broken file upload button on the checkout page",
+     "better": "bug / code",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Send the signed contract to the lawyer by email",
+     "better": "envelope / email",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "outbox",
+   "upload_file",
+   "unarchive"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6788,
+    "output": 1969,
+    "thoughts": 0,
+    "total": 8757,
+    "seconds": 33.49,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:40:18Z"
+  }
+ },
+ "distinguishing": "Features a rounded square window with a solid thick top header bar and an upward arrow whose stem breaks through a gap in the bottom border, signifying importing into or opening in an application window."
 }

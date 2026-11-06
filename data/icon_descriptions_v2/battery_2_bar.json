@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "battery / portable power",
+   "meaning": "partially charged battery (around 30–35% full)",
    "strength": "primary"
   },
   {
-   "meaning": "low battery / needs charging",
+   "meaning": "battery / portable power / low battery",
    "strength": "primary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could slightly resemble a small rectangular bottle or flask with a cap and label at tiny sizes, though the battery silhouette is standard.",
+ "ambiguity": "Virtually identical to the quarter-full (25%) and low-fill (15%) battery icons unless compared side by side.",
  "modifier_semantics": [
   {
    "modifier": "solid fill in bottom third",
@@ -81,11 +81,6 @@
    "task": "Order two spare Canon LP-E6NH batteries before the wedding shoot",
    "parent": "",
    "domain": "hobbies"
-  },
-  {
-   "task": "Test the 12V car battery with the multimeter before winter hits",
-   "parent": "",
-   "domain": "home"
   },
   {
    "task": "Book Genius Bar appointment for iPhone 13 battery replacement",
@@ -158,6 +153,16 @@
  ],
  "near_misses": [
   {
+   "task": "Take the completely dead car battery to AutoZone for core refund",
+   "better": "completely empty 0% battery outline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure server UPS shutdown trigger at critical 10% battery",
+   "better": "critically low battery with thin bottom fill",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small battery-powered clip fan for the stroller",
    "better": "fan or stroller",
    "trap": "property"
@@ -173,16 +178,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Refill the travel shampoo bottle before packing",
-   "better": "toiletry bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the monthly electric bill before Friday",
-   "better": "invoice or lightning bolt / utility",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Order a wall-mounted toothbrush charger for the bathroom",
    "better": "toothbrush or plug",
    "trap": "parent_topic"
@@ -191,7 +186,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows an upright battery cell about one-third full. It is a clear, immediate match for tasks about buying, charging, testing, replacing, or recycling batteries and power banks, though it overlaps with other battery-level icons in a standard icon set.",
@@ -209,6 +204,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / portable power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low battery / needs charging",
+     "strength": "primary"
+    },
+    {
+     "meaning": "personal energy or stamina level",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could slightly resemble a small rectangular bottle or flask with a cap and label at tiny sizes, though the battery silhouette is standard.",
+   "near_misses": [
+    {
+     "task": "Buy a small battery-powered clip fan for the stroller",
+     "better": "fan or stroller",
+     "trap": "property"
+    },
+    {
+     "task": "Dispute the double battery disposal charge on the mechanic's invoice",
+     "better": "receipt / invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Visit the old coastal artillery battery at Fort Cronkhite",
+     "better": "fort / landmark",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill the travel shampoo bottle before packing",
+     "better": "toiletry bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly electric bill before Friday",
+     "better": "invoice or lightning bolt / utility",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a wall-mounted toothbrush charger for the bathroom",
+     "better": "toothbrush or plug",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_0_bar",
+   "battery_vert_005",
+   "battery_1_bar",
+   "battery_vert_020"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7952,
+    "output": 2508,
+    "thoughts": 196,
+    "total": 10656
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Has the highest solid fill at the bottom of the group (roughly the bottom third, ~30–35% full), visibly fuller than the empty battery on close inspection but still functionally interchangeable with the other low/partial battery icons."
 }

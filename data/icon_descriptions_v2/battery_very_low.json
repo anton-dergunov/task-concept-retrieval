@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "low battery or depleted charge",
+   "meaning": "critically low battery / nearly depleted charge",
    "strength": "primary"
   },
   {
-   "meaning": "battery or portable power",
+   "meaning": "battery / portable power (interchangeable with other battery levels)",
    "strength": "primary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "The terminal is on the left rather than the more common right side, and at very small sizes the thin fill bar on the right just looks like a thicker border on an empty battery.",
+ "ambiguity": "Nearly identical to the completely empty battery outline at list icon sizes, and easily confused with the quarter-full battery; in a task list all five battery fill steps are largely interchangeable for general battery tasks.",
  "modifier_semantics": [
   {
    "modifier": "small solid fill bar on the right end",
@@ -155,9 +155,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Drop off the box of dead alkaline AA batteries at the recycling bin",
+   "better": "completely empty battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set lithium camera batteries to 50% storage charge",
+   "better": "half-full battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly electric utility bill online",
@@ -168,11 +173,6 @@
    "task": "Book a full battery of blood tests at the clinic",
    "better": "blood drop or test tube",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new rolling pin for pie crust",
-   "better": "rolling pin",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Clean the corrosion off the car windshield wiper arms",
@@ -188,7 +188,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly shows a battery at a low charge level (oriented with the cap on the left and a sliver of charge on the right). It fits everyday tasks about buying, charging, swapping, or recycling batteries and power banks, though it overlaps closely with empty-battery and other battery-level icons in a typical icon set.",
@@ -206,6 +206,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "badge_critical_battery"
- }
+  "alias_of": "badge_critical_battery",
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "low battery or depleted charge",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery or portable power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "recharge or power management",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The terminal is on the left rather than the more common right side, and at very small sizes the thin fill bar on the right just looks like a thicker border on an empty battery.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric utility bill online",
+     "better": "invoice or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a full battery of blood tests at the clinic",
+     "better": "blood drop or test tube",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new rolling pin for pie crust",
+     "better": "rolling pin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean the corrosion off the car windshield wiper arms",
+     "better": "car or wiper",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the wireless mouse still works",
+     "better": "computer mouse",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_horiz_000",
+   "battery_low",
+   "battery_horiz_050",
+   "battery_horiz_075"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7940,
+    "output": 2460,
+    "thoughts": 0,
+    "total": 10400
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "This battery has only a sliver of black fill on the right end (looking like a slightly thicker right wall compared to the completely empty outline), representing a critically low battery."
 }

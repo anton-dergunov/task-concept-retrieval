@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the open right side can make the battery body look like a bold letter C next to a lightning bolt.",
+ "ambiguity": "Indistinguishable at a glance from the empty charging battery and the one-third filled charging battery; the slight difference in left-side bar thickness is a UI status-bar step rather than a distinct task concept.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt at the right terminal",
@@ -168,19 +168,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Plug in my completely dead phone to revive the battery",
+   "better": "empty battery outline with lightning bolt",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Charge spare LiPo batteries up to one-third capacity for storage",
+   "better": "one-third filled battery with lightning bolt",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Dispute the duplicate $45 charge on the Visa statement",
    "better": "credit card or receipt",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay the monthly electric utility bill before Friday",
-   "better": "invoice or bill with utility symbol",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Take an afternoon nap to recharge after the conference",
@@ -193,15 +193,15 @@
    "trap": "property"
   },
   {
-   "task": "Call the landlord about the refrigerator in the rental unit",
-   "better": "phone call or refrigerator",
+   "task": "Call the electrician about the broken outlet in the garage",
+   "better": "electrical outlet or plug",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a horizontal battery with a lightning bolt at its terminal, universally understood as battery charging or portable power. It fits concrete everyday tasks around charging devices, buying or replacing batteries, and managing chargers, while remaining distinct from general electricity icons thanks to the battery casing.",
@@ -221,6 +221,92 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery charging or recharging",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery, power bank, or charger",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low battery needing power",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "electrical power or energy supply",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the open right side can make the battery body look like a bold letter C next to a lightning bolt.",
+   "near_misses": [
+    {
+     "task": "Dispute the duplicate $45 charge on the Visa statement",
+     "better": "credit card or receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before Friday",
+     "better": "invoice or bill with utility symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take an afternoon nap to recharge after the conference",
+     "better": "bed or sleep icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new cordless stick vacuum for the upstairs carpet",
+     "better": "vacuum cleaner",
+     "trap": "property"
+    },
+    {
+     "task": "Call the landlord about the refrigerator in the rental unit",
+     "better": "phone call or refrigerator",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_full_2",
+   "battery_charging_30_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5352,
+    "output": 1521,
+    "thoughts": 0,
+    "total": 6873
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "Has a slightly thicker left wall (~15–20% fill) inside the battery outline compared to the completely empty outline and the ~30% filled version, though all three are interchangeable for task-list use."
 }

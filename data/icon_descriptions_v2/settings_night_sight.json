@@ -13,15 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "do not disturb, sleep mode, or quiet hours settings",
+   "meaning": "do not disturb, sleep mode, or quiet hours configuration",
    "strength": "primary"
   },
   {
-   "meaning": "nighttime automation or overnight schedule configuration",
+   "meaning": "nighttime schedule or overnight mode preferences",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the crescent moon inside the circle can look like a contrast/brightness toggle or a curved refresh arrow.",
+ "ambiguity": "At small sizes, the circular moon badge on the gear can be confused with the gear with a segmented play badge, or the crescent inside the circle can look like a contrast toggle.",
  "modifier_semantics": [
   {
    "modifier": "circular badge with crescent moon",
@@ -156,6 +156,21 @@
  ],
  "near_misses": [
   {
+   "task": "Trigger the nightly CI build pipeline",
+   "better": "gear with a segmented play badge for running an automated workflow or build",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure default video autoplay and playback quality in YouTube",
+   "better": "gear with a segmented play badge for playback and media settings",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the moon phase for Saturday's camping trip",
+   "better": "plain crescent moon or telescope icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Go to bed before 11pm all week",
    "better": "bed or sleeping person icon",
    "trap": "shared_vocabulary"
@@ -166,19 +181,9 @@
    "trap": "property"
   },
   {
-   "task": "Check the moon phase for Saturday's camping trip",
-   "better": "plain crescent moon or telescope icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a replacement derailleur gear for the road bike",
    "better": "bicycle or bike drivetrain icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book the overnight sleeper train from Milan to Palermo",
-   "better": "train icon",
-   "trap": "property"
   },
   {
    "task": "Ask Sarah for the Figma link to the new header",
@@ -207,6 +212,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "dark mode or night theme settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "do not disturb, sleep mode, or quiet hours settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "nighttime automation or overnight schedule configuration",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the crescent moon inside the circle can look like a contrast/brightness toggle or a curved refresh arrow.",
+   "near_misses": [
+    {
+     "task": "Go to bed before 11pm all week",
+     "better": "bed or sleeping person icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy blackout curtains for the nursery",
+     "better": "curtains or window icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check the moon phase for Saturday's camping trip",
+     "better": "plain crescent moon or telescope icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a replacement derailleur gear for the road bike",
+     "better": "bicycle or bike drivetrain icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the overnight sleeper train from Milan to Palermo",
+     "better": "train icon",
+     "trap": "property"
+    },
+    {
+     "task": "Ask Sarah for the Figma link to the new header",
+     "better": "chat bubble or link icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_slow_motion"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4078,
+    "output": 1127,
+    "thoughts": 104,
+    "total": 5309
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Pairs the settings gear with a solid circular badge containing a white crescent moon cutout, indicating dark mode, night theme, or sleep/quiet-hours settings rather than running an automated process or media playback settings."
 }

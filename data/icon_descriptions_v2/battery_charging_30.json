@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "charge battery / battery charging",
+   "meaning": "charge low battery or battery charging",
    "strength": "primary"
   },
   {
-   "meaning": "battery / portable power",
+   "meaning": "rechargeable battery or portable power bank",
    "strength": "primary"
   },
   {
-   "meaning": "power bank / rechargeable battery",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "low battery needing charge",
+   "meaning": "low battery needing a charge",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Similar to other battery status icons (full battery, low battery alert), though the lightning bolt clearly indicates charging or power.",
+ "ambiguity": "Almost impossible to tell apart from the ~20% filled charging battery icon without side-by-side comparison, and generally interchangeable with the other charging battery icons.",
  "modifier_semantics": [
   {
    "modifier": "lightning bolt badge",
@@ -167,18 +163,23 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp / flashlight",
-   "trap": "property"
-  },
-  {
-   "task": "Pay the monthly electric bill before the 15th",
-   "better": "invoice / bill / money",
+   "task": "Top off the nearly full camera battery before the shoot",
+   "better": "nearly full charging battery",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Jump-start or trickle-charge a completely dead 0% battery",
+   "better": "empty charging battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the monthly electric bill before the 15th",
+   "better": "invoice or bill",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Take a quiet afternoon off to recharge after the product launch",
-   "better": "rest / spa / sofa",
+   "better": "rest, spa, or sofa",
    "trap": "shared_vocabulary"
   },
   {
@@ -187,20 +188,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order replacement toothbrush heads",
+   "task": "Order replacement electric toothbrush heads",
    "better": "toothbrush",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Call electrician about the flickering kitchen dimmer switch",
-   "better": "light switch / lightbulb / phone",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a partially filled battery with a lightning bolt badge indicating charging. It is an immediate visual cue for tasks about charging batteries, power banks, or buying and replacing household and device batteries, though generic battery icons may look similar at very small sizes.",
@@ -220,6 +216,96 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "charge battery / battery charging",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery / portable power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / rechargeable battery",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "low battery needing charge",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Similar to other battery status icons (full battery, low battery alert), though the lightning bolt clearly indicates charging or power.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric bill before the 15th",
+     "better": "invoice / bill / money",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take a quiet afternoon off to recharge after the product launch",
+     "better": "rest / spa / sofa",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute the double charge from the hotel on my Visa card",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement toothbrush heads",
+     "better": "toothbrush",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Call electrician about the flickering kitchen dimmer switch",
+     "better": "light switch / lightbulb / phone",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_charging_90",
+   "battery_charging_80",
+   "battery_charging_60",
+   "battery_charging_50",
+   "battery_charging_20",
+   "battery_charging_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10582,
+    "output": 3519,
+    "thoughts": 0,
+    "total": 14101
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Filled to about one-third (~30%), showing a low solid black bar in the bottom-left cavity beside the lightning bolt badge; nearly identical to the ~20% filled charging battery icon."
 }

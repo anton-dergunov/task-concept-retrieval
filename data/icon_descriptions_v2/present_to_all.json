@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "upload or export file",
+   "meaning": "upload or export item",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with generic upload, upgrade, keyboard up-arrow key, or window dock-top UI controls.",
+ "ambiguity": "Closely resembles the file folder with an upward arrow (differing only by the absence of the top-left folder tab) and the horizontal rectangle with a left-entering arrow.",
  "modifier_semantics": [
   {
    "modifier": "upward-pointing arrow centered inside frame",
@@ -159,6 +159,16 @@
  ],
  "near_misses": [
   {
+   "task": "Upload the Q4 tax receipts folder to Google Drive",
+   "better": "file folder with an upward-pointing arrow inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Log in to the staging server dashboard",
+   "better": "rectangular or window frame with a right-pointing arrow entering from the left",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Upgrade RAM in the home server to 64GB",
    "better": "memory chip or computer tower",
    "trap": "shared_vocabulary"
@@ -169,30 +179,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a new 27-inch 4K monitor for the desk",
-   "better": "computer monitor with stand",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Update my resume with the new promotion",
-   "better": "document or resume",
+   "better": "document or resume icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Fix the broken Up arrow keycap on my mechanical keyboard",
-   "better": "keyboard",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Design the cover slide",
-   "better": "slide deck or paintbrush",
+   "task": "Design the cover slide for the screen share presentation",
+   "better": "slide deck or paintbrush icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a horizontal rectangular screen or box containing an upward arrow, which is standard UI iconography for screen sharing (presenting) or uploading/exporting. While it fits tasks around uploading files or testing screen-share setups, it is quite abstract and easily confused with generic UI chrome, keyboard arrow keys, or window management buttons.",
@@ -210,6 +210,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "screen share or present screen",
+     "strength": "primary"
+    },
+    {
+     "meaning": "upload or export file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "upgrade or update software",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "up arrow key or shift key",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with generic upload, upgrade, keyboard up-arrow key, or window dock-top UI controls.",
+   "near_misses": [
+    {
+     "task": "Upgrade RAM in the home server to 64GB",
+     "better": "memory chip or computer tower",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Move boxes up to the attic",
+     "better": "cardboard box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new 27-inch 4K monitor for the desk",
+     "better": "computer monitor with stand",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my resume with the new promotion",
+     "better": "document or resume",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the broken Up arrow keycap on my mechanical keyboard",
+     "better": "keyboard",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Design the cover slide",
+     "better": "slide deck or paintbrush",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "business_messages",
+   "output",
+   "exit_to_app",
+   "tab_move",
+   "input",
+   "drive_file_move",
+   "drive_folder_upload"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12136,
+    "output": 4252,
+    "thoughts": 0,
+    "total": 16388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "A closed horizontal rectangular frame (without a folder tab or wall gap) containing a centered upward-pointing arrow, representing screen sharing/presenting, general uploading, or an up/upgrade key."
 }

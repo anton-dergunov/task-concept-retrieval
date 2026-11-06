@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Generic UI directional button; easily confused with dedicated upload (arrow with tray/cloud) or update/sync (circular arrows) icons.",
+ "ambiguity": "Could be confused at a quick glance with the circled up-and-down arrows when used for general data transfer, or with dedicated upload (arrow with tray/cloud) icons.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -147,6 +147,16 @@
  ],
  "near_misses": [
   {
+   "task": "Top up mobile data plan before the trip",
+   "better": "up and down arrows in a circle for mobile data",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sync local files with the remote server",
+   "better": "up and down arrows in a circle for two-way transfer or sync",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Take the boxes up to the attic",
    "better": "boxes or stairs",
    "trap": "shared_vocabulary"
@@ -165,22 +175,12 @@
    "task": "Upgrade economy seat to exit row for the Tokyo flight",
    "better": "airplane or seat",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Follow up with Sarah about the contract",
-   "better": "speech bubble or phone",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Export data to CSV file",
-   "better": "spreadsheet or file export",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon is a generic upward arrow inside a circle, primarily functioning as UI chrome for 'up', 'upload', or 'upgrade'. While it can serve as an action icon for software upgrades or file uploads, a dedicated upload tray/cloud icon or a specific subject noun icon is almost always more distinctive.",
@@ -198,6 +198,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload or push data",
+     "strength": "primary"
+    },
+    {
+     "meaning": "upgrade or update software/plan",
+     "strength": "primary"
+    },
+    {
+     "meaning": "upward direction, top, or increase",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "high priority or promote",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Generic UI directional button; easily confused with dedicated upload (arrow with tray/cloud) or update/sync (circular arrows) icons.",
+   "near_misses": [
+    {
+     "task": "Take the boxes up to the attic",
+     "better": "boxes or stairs",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up the new standing desk in the study",
+     "better": "desk",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up dry cleaning on the way home",
+     "better": "shirt or hanger",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Upgrade economy seat to exit row for the Tokyo flight",
+     "better": "airplane or seat",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Follow up with Sarah about the contract",
+     "better": "speech bubble or phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Export data to CSV file",
+     "better": "spreadsheet or file export",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "swap_vertical_circle"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4021,
+    "output": 1039,
+    "thoughts": 0,
+    "total": 5060
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "Shows a single centered upward-pointing arrow inside a circle, indicating one-way upward movement, uploading, or upgrading, unlike the paired up-and-down arrows that represent two-way transfer or exchange."
 }

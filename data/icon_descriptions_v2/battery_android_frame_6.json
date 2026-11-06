@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / portable power cell",
+   "meaning": "battery or portable power cell",
    "strength": "primary"
   },
   {
-   "meaning": "charge device / power bank",
+   "meaning": "nearly full battery (~80%) or 80% charge limit",
    "strength": "primary"
   },
   {
-   "meaning": "battery level or capacity",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "personal energy or stamina",
+   "meaning": "charge device or power bank",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable at a glance from full-battery or half-battery icons in a set of battery level indicators.",
+ "ambiguity": "Easily confused at a glance with the ~60% filled battery and the 100% fully filled battery.",
  "modifier_semantics": [
   {
    "modifier": "three-quarters fill bar",
@@ -161,40 +157,40 @@
  ],
  "near_misses": [
   {
+   "task": "Recharge the blinking red low-battery smoke detector",
+   "better": "critically low ~15% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Discharge RC batteries to 50% half capacity",
+   "better": "half-filled 50% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a battery-powered lawn edger from Home Depot",
-   "better": "lawn mower / garden tool",
+   "better": "lawn mower or garden tool",
    "trap": "property"
   },
   {
    "task": "Pay the monthly electric utility bill before the 15th",
-   "better": "invoice / lightning bolt",
+   "better": "invoice or lightning bolt",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Practice rudiments with the drumline battery after school",
-   "better": "drum / music",
+   "better": "drum or music",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Complete the cognitive test battery for the ADHD assessment",
-   "better": "clipboard / brain",
+   "better": "clipboard or brain",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Refill the propane tank for the backyard grill",
-   "better": "gas cylinder / grill",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Review the new wireframes",
-   "better": "layout / design screen",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Clearly depicts a standard horizontal battery filled to about 75%, making it an obvious fit for tasks about charging devices, power banks, and buying or recycling household or vehicle batteries. Its main limitation is low distinctiveness relative to other battery fill-level icons (50%, 100%) in the same icon set.",
@@ -212,6 +208,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / portable power cell",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charge device / power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery level or capacity",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy or stamina",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable at a glance from full-battery or half-battery icons in a set of battery level indicators.",
+   "near_misses": [
+    {
+     "task": "Buy a battery-powered lawn edger from Home Depot",
+     "better": "lawn mower / garden tool",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric utility bill before the 15th",
+     "better": "invoice / lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice rudiments with the drumline battery after school",
+     "better": "drum / music",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Complete the cognitive test battery for the ADHD assessment",
+     "better": "clipboard / brain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill the propane tank for the backyard grill",
+     "better": "gas cylinder / grill",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Review the new wireframes",
+     "better": "layout / design screen",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_1",
+   "battery_android_frame_2",
+   "battery_android_frame_3",
+   "battery_android_frame_4",
+   "battery_android_frame_5",
+   "battery_android_frame_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10606,
+    "output": 3427,
+    "thoughts": 0,
+    "total": 14033
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The interior fill covers roughly four-fifths (~80%) of the battery leaving only a narrow white gap on the right, making it nearly interchangeable with the ~60% and 100% full battery icons."
 }

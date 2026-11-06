@@ -10,19 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "car climate control, HVAC airflow to windshield defroster and floor vents",
+   "meaning": "car climate control: windshield defroster and footwell / floor airflow",
    "strength": "primary"
   },
   {
-   "meaning": "car heater, defroster, or cabin ventilation repair",
+   "meaning": "car heater, floor vents, or cabin HVAC system",
    "strength": "primary"
   },
   {
-   "meaning": "vehicle cabin comfort or air conditioning system",
+   "meaning": "cabin air vent / blower motor repair",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the windshield defroster arch above the arrow can look like an umbrella, a shower head, or an overhead lamp next to a seated person.",
+ "ambiguity": "Semantically interchangeable with its horizontal mirror (left-facing seated person with windshield defroster and downward footwell arrow), and easily confused at a glance with the two torso-airflow variants that use a horizontal arrow instead of a downward arrow.",
  "modifier_semantics": [
   {
    "modifier": "windshield frame with wavy lines",
@@ -161,8 +161,13 @@
  ],
  "near_misses": [
   {
-   "task": "Adjust ergonomic lumbar support on office chair",
-   "better": "office chair",
+   "task": "Repair stuck louvers on the upper dashboard face vents",
+   "better": "seated person with windshield defroster and horizontal arrow toward torso",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clip phone mount onto the center dashboard air vent",
+   "better": "seated person with horizontal airflow arrow to upper body",
    "trap": "lookalike_glyph"
   },
   {
@@ -181,20 +186,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Install new rain showerhead in the guest bathroom",
-   "better": "showerhead",
+   "task": "Adjust ergonomic lumbar support on office chair",
+   "better": "office chair",
    "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Renew auto insurance policy before Friday",
-   "better": "document or shield",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "This is the standard automotive dashboard glyph for directing HVAC airflow to both the windshield defroster and the floor/footwell vents. It fits a narrow but real set of vehicle maintenance tasks around car heaters, defrosters, cabin air filters, and blend door actuators, though at very small sizes the defroster symbol above the arrow could be misread as an overhead light or shower.",
@@ -212,6 +212,89 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car climate control, HVAC airflow to windshield defroster and floor vents",
+     "strength": "primary"
+    },
+    {
+     "meaning": "car heater, defroster, or cabin ventilation repair",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vehicle cabin comfort or air conditioning system",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the windshield defroster arch above the arrow can look like an umbrella, a shower head, or an overhead lamp next to a seated person.",
+   "near_misses": [
+    {
+     "task": "Adjust ergonomic lumbar support on office chair",
+     "better": "office chair",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace cracked front windshield through insurance",
+     "better": "car windshield",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy heated insoles for winter ski boots",
+     "better": "boot or shoe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule annual furnace tune-up for the house",
+     "better": "home radiator or thermostat",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install new rain showerhead in the guest bathroom",
+     "better": "showerhead",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_defrost_low_right",
+   "car_defrost_mid_low_left",
+   "car_defrost_mid_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6712,
+    "output": 2141,
+    "thoughts": 201,
+    "total": 9054
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Shows the seated person on the left facing right with a downward arrow toward the feet (windshield defrost + floor/footwell airflow), making it a horizontal mirror of the left-facing floor-airflow icon and semantically interchangeable with it, while differing from the two icons whose arrow points horizontally at the torso."
 }

@@ -9,15 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "audio file or music file (MP3, WAV, FLAC)",
+   "meaning": "single audio file or music file (MP3, WAV, FLAC)",
    "strength": "primary"
   },
   {
-   "meaning": "sheet music or musical score",
+   "meaning": "sheet music, musical score, or chord chart document",
    "strength": "primary"
   },
   {
-   "meaning": "sound recording, voice memo, or podcast episode file",
+   "meaning": "sound recording or voice memo file",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can represent either a digital audio file or printed sheet music; at very small sizes it looks like a generic document until the note inside is noticed.",
+ "ambiguity": "Often confused with the horizontal screen with a musical note or the stacked square music library tiles when any task mentions digital music, though the folded-corner page specifically cues a file or printed score.",
  "modifier_semantics": [
   {
    "modifier": "eighth musical note inside the page",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Organize the entire MP3 album collection and playlists on the NAS",
+   "better": "stacked square tiles with a musical note (music library)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Edit the new band music video cut in Premiere",
+   "better": "horizontal screen frame with a musical note (music video)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy two tickets for the symphony concert on the 14th",
    "better": "ticket icon",
    "trap": "shared_vocabulary"
@@ -172,19 +182,9 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Listen to the new Kendrick Lamar album on the train",
-   "better": "headphones or standalone musical note icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Write a two-page thank-you note to Aunt Clara",
    "better": "letter / envelope or text document icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Sign the recording studio lease contract and scan it",
-   "better": "contract / signature document icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Find a quiet café with no background music for the call",
@@ -213,6 +213,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "audio file or music file (MP3, WAV, FLAC)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sheet music or musical score",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sound recording, voice memo, or podcast episode file",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "song lyrics or music project document",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can represent either a digital audio file or printed sheet music; at very small sizes it looks like a generic document until the note inside is noticed.",
+   "near_misses": [
+    {
+     "task": "Buy two tickets for the symphony concert on the 14th",
+     "better": "ticket icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the cracked bridge on the acoustic guitar",
+     "better": "guitar icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Listen to the new Kendrick Lamar album on the train",
+     "better": "headphones or standalone musical note icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write a two-page thank-you note to Aunt Clara",
+     "better": "letter / envelope or text document icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the recording studio lease contract and scan it",
+     "better": "contract / signature document icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Find a quiet café with no background music for the call",
+     "better": "coffee cup or phone call icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "music_video",
+   "library_music"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5410,
+    "output": 1603,
+    "thoughts": 154,
+    "total": 7167
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Encloses the eighth note inside a vertical document page with a folded top-right corner, denoting an individual audio file or sheet music document rather than a horizontal video screen or a stacked music library."
 }

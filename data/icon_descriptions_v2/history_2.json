@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "history / past activity / log",
+   "meaning": "history, past activity, or log",
    "strength": "primary"
   },
   {
-   "meaning": "restore / revert / roll back",
+   "meaning": "restore, revert, or roll back",
    "strength": "primary"
   },
   {
-   "meaning": "backup / time machine",
+   "meaning": "backup or version recovery",
    "strength": "secondary"
   },
   {
-   "meaning": "rewind / replay",
+   "meaning": "rewind or replay",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a regular clock, timer, or a clockwise recurring/reschedule icon at small sizes.",
+ "ambiguity": "At small sizes the counterclockwise arrowhead on the left rim can be missed, making it look like the single clock with a rim gap/dot.",
  "modifier_semantics": [
   {
    "modifier": "counterclockwise circular arrow",
@@ -62,11 +62,6 @@
    "task": "Time Machine backup",
    "parent": "",
    "domain": "tech"
-  },
-  {
-   "task": "Write down family medical history",
-   "parent": "",
-   "domain": "health_fitness"
   },
   {
    "task": "Revert staging branch",
@@ -164,18 +159,23 @@
  ],
  "near_misses": [
   {
-   "task": "Set a 25-minute Pomodoro timer for deep work",
-   "better": "timer / stopwatch",
+   "task": "Log my billable client hours for this week",
+   "better": "standard clock face with rim dot",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Replace the battery in the kitchen wall clock",
-   "better": "clock",
+   "task": "Coordinate meeting time across London and Tokyo time zones",
+   "better": "overlapping double clock for multiple time zones",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set a 25-minute Pomodoro timer for deep work",
+   "better": "timer or stopwatch",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Reschedule dentist appointment to next Wednesday",
-   "better": "calendar with arrow",
+   "better": "calendar or tooth",
    "trap": "generic_verb"
   },
   {
@@ -185,12 +185,12 @@
   },
   {
    "task": "Restore the vintage oak dining chairs with Danish oil",
-   "better": "chair / paintbrush",
+   "better": "chair or paintbrush",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy poster board and glue sticks",
-   "better": "art supplies / shopping",
+   "task": "Buy poster board and glue sticks for History Fair project",
+   "better": "art supplies or shopping bag",
    "trap": "parent_topic"
   }
  ],
@@ -215,6 +215,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "history / past activity / log",
+     "strength": "primary"
+    },
+    {
+     "meaning": "restore / revert / roll back",
+     "strength": "primary"
+    },
+    {
+     "meaning": "backup / time machine",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rewind / replay",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a regular clock, timer, or a clockwise recurring/reschedule icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Set a 25-minute Pomodoro timer for deep work",
+     "better": "timer / stopwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the battery in the kitchen wall clock",
+     "better": "clock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Reschedule dentist appointment to next Wednesday",
+     "better": "calendar with arrow",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Return the historic preservation society library books",
+     "better": "book",
+     "trap": "property"
+    },
+    {
+     "task": "Restore the vintage oak dining chairs with Danish oil",
+     "better": "chair / paintbrush",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy poster board and glue sticks",
+     "better": "art supplies / shopping",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pace",
+   "browse_gallery"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5375,
+    "output": 1673,
+    "thoughts": 0,
+    "total": 7048
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:23Z"
+  }
+ },
+ "distinguishing": "Unlike the single clock with a rim dot or the double-arc clock, the outer ring here has a gap on the left and terminates in an inward-pointing counterclockwise arrowhead, specifically meaning history, past activity, or reverting."
 }

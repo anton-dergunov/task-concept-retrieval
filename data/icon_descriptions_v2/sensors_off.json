@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "no wireless signal / offline / dead zone",
+   "meaning": "NFC, contactless, or proximity sensor disabled",
    "strength": "primary"
   },
   {
-   "meaning": "hotspot or radio transmission disabled",
+   "meaning": "no wireless signal / offline",
    "strength": "primary"
   },
   {
-   "meaning": "NFC or contactless sensor turned off",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "sound or vibration muted",
+   "meaning": "vibration or sound waves muted",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a central dot or antenna mast, the opposing arcs can be confused with muted sound waves, vibration off, or Wi-Fi off at small sizes.",
+ "ambiguity": "Easily confused with the crossed-out antenna mast with signal arcs, since the central mast in that icon is partly obscured by the slash at small sizes; both convey wireless or radio off.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash from top-left to bottom-right",
@@ -159,9 +155,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a waterproof wireless speaker for the patio",
-   "better": "speaker",
-   "trap": "property"
+   "task": "Turn off mobile hotspot after tethering on the train",
+   "better": "crossed-out antenna mast with signal waves",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "End the live stream broadcast on YouTube",
+   "better": "crossed-out broadcast antenna tower",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Mute microphone during the all-hands webinar",
@@ -169,9 +170,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Listen to the new episode of the history podcast",
-   "better": "podcast / headphones",
-   "trap": "lookalike_glyph"
+   "task": "Buy a waterproof wireless speaker for the patio",
+   "better": "speaker",
+   "trap": "property"
   },
   {
    "task": "Pay the monthly fiber internet bill",
@@ -184,7 +185,7 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Pack hiking boots and rain shell",
+   "task": "Pack hiking boots and rain shell for offline cabin trip",
    "better": "hiking boot",
    "trap": "parent_topic"
   }
@@ -192,7 +193,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon shows opposing wireless signal arcs crossed out by a diagonal slash, signifying no signal, offline mode, or disabled radio/hotspot transmission. It fits tasks about troubleshooting dead zones, preparing for offline use, or turning off wireless broadcasting, though the lack of a central dot makes it slightly easy to confuse with sound or vibration waves.",
@@ -210,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no wireless signal / offline / dead zone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hotspot or radio transmission disabled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "NFC or contactless sensor turned off",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sound or vibration muted",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a central dot or antenna mast, the opposing arcs can be confused with muted sound waves, vibration off, or Wi-Fi off at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof wireless speaker for the patio",
+     "better": "speaker",
+     "trap": "property"
+    },
+    {
+     "task": "Mute microphone during the all-hands webinar",
+     "better": "muted microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Listen to the new episode of the history podcast",
+     "better": "podcast / headphones",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly fiber internet bill",
+     "better": "bill / receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the router firmware update finished",
+     "better": "router",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pack hiking boots and rain shell",
+     "better": "hiking boot",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "signal_disconnected"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4067,
+    "output": 649,
+    "thoughts": 0,
+    "total": 4716
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:26Z"
+  }
+ },
+ "distinguishing": "Shows only two pairs of opposing curved signal arcs with a diagonal slash and no central antenna mast or dot, making it a pure wave/sensor-off symbol rather than a broadcast tower or hotspot."
 }

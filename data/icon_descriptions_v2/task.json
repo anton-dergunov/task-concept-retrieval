@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "approved, verified, or completed document",
+   "meaning": "approved, verified, or signed document or form",
    "strength": "primary"
   },
   {
-   "meaning": "certificate, permit, or clearance form",
+   "meaning": "certificate, permit, clearance, or official record",
    "strength": "primary"
-  },
-  {
-   "meaning": "checklist or task list document",
-   "strength": "secondary"
   },
   {
    "meaning": "proofread or finalized file",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a clipboard checklist or a generic 'done' checkbox icon.",
+ "ambiguity": "Distinct in shape from the other icons in this group, though functionally close to the file folder with a checkmark for document/file tasks.",
  "modifier_semantics": [
   {
    "modifier": "checkmark inside the page",
@@ -162,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Organize all tax PDFs into the completed 2025 folder",
+   "better": "file folder with top-left tab and checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fill out the 3-item safety checklist card",
+   "better": "rectangular card with three list bars and checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check the tire pressure before driving to Denver",
    "better": "tire gauge or car",
    "trap": "generic_verb"
@@ -177,25 +183,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Mark all finished tickets as done in Jira",
-   "better": "checkmark or kanban board",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book appointment with Dr. Patel",
    "better": "calendar or doctor",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Read the new sci-fi novel from the library",
-   "better": "book",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon clearly shows a document page with a folded corner and a large checkmark inside. It fits tasks centered on official forms, certificates, permits, approvals, and finalized paperwork across admin, work, and finance, though it is somewhat close to clipboard or multi-line checklist icons.",
@@ -213,6 +209,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "approved, verified, or completed document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "certificate, permit, or clearance form",
+     "strength": "primary"
+    },
+    {
+     "meaning": "checklist or task list document",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "proofread or finalized file",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a clipboard checklist or a generic 'done' checkbox icon.",
+   "near_misses": [
+    {
+     "task": "Check the tire pressure before driving to Denver",
+     "better": "tire gauge or car",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy printer paper at Staples",
+     "better": "printer or paper ream",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack everything on the camping checklist",
+     "better": "tent or backpack",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mark all finished tickets as done in Jira",
+     "better": "checkmark or kanban board",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book appointment with Dr. Patel",
+     "better": "calendar or doctor",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Read the new sci-fi novel from the library",
+     "better": "book",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fact_check",
+   "select_check_box",
+   "domain_verification",
+   "folder_check",
+   "library_add_check"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9373,
+    "output": 3078,
+    "thoughts": 235,
+    "total": 12686
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "This is the only portrait-oriented rectangle and has a dog-eared (folded) top-right corner, depicting a single document page or certificate with a checkmark rather than a folder, window, card, or square checkbox."
 }

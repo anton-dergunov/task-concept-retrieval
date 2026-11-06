@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, could slightly resemble a filing cabinet, locker, or two-row UI layout panel, though the offset handles on the left clearly mark it as a fridge.",
+ "ambiguity": "At small sizes its rounded two-compartment rectangle resembles the double-hung sash windows in this group, though the two left-side vertical handles distinguish it from their single center latch.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,6 +154,21 @@
  ],
  "near_misses": [
   {
+   "task": "Clean the exterior glass on the upstairs double-hung windows",
+   "better": "double-hung sash window",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the broken sash lock on the bedroom window",
+   "better": "double-hung sash window",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean out the two-drawer metal filing cabinet in the study",
+   "better": "filing cabinet",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy refrigerated probiotics at the pharmacy",
    "better": "pill / medicine bottle",
    "trap": "property"
@@ -169,25 +184,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Clean out the two-drawer metal filing cabinet in the study",
-   "better": "filing cabinet",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check if we still have butter and heavy cream for the pasta sauce",
    "better": "butter / dairy or cooking pot",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Pack the hard-sided cooler with ice packs and drinks for the beach",
-   "better": "cooler / beach umbrella",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "A clear, unmistakable silhouette of a two-door refrigerator with a top freezer compartment and vertical handles. It is an ideal fit for household tasks involving cleaning out the fridge, defrosting the freezer, replacing water filters, or buying/repairing kitchen appliances.",
@@ -205,6 +210,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "refrigerator / fridge",
+     "strength": "primary"
+    },
+    {
+     "meaning": "freezer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "kitchen appliance",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "two-door cabinet or locker",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, could slightly resemble a filing cabinet, locker, or two-row UI layout panel, though the offset handles on the left clearly mark it as a fridge.",
+   "near_misses": [
+    {
+     "task": "Buy refrigerated probiotics at the pharmacy",
+     "better": "pill / medicine bottle",
+     "trap": "property"
+    },
+    {
+     "task": "Weekly grocery run for milk, eggs, spinach, and Greek yogurt",
+     "better": "shopping cart / grocery bag",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Freeze Equifax and TransUnion credit reports online",
+     "better": "lock / credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean out the two-drawer metal filing cabinet in the study",
+     "better": "filing cabinet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if we still have butter and heavy cream for the pasta sauce",
+     "better": "butter / dairy or cooking pot",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pack the hard-sided cooler with ice packs and drinks for the beach",
+     "better": "cooler / beach umbrella",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sensor_window",
+   "window_closed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5398,
+    "output": 1626,
+    "thoughts": 0,
+    "total": 7024
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:21Z"
+  }
+ },
+ "distinguishing": "Unlike the two sash-window icons with a single centered horizontal latch on the crossbar, this icon has an upper-third horizontal divider and two vertical door handles on the left side, clearly representing a two-door refrigerator."
 }

@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "progress indicator or completion status",
+   "meaning": "progress indicator or majority completion status (five-eighths / ~60% full)",
    "strength": "primary"
   },
   {
@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "countdown timer or elapsed time",
+   "meaning": "storage quota or disk usage",
    "strength": "secondary"
   },
   {
-   "meaning": "storage quota or disk usage",
+   "meaning": "countdown timer or elapsed time (~37 minutes)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like a task completion state badge (62.5% or 5/8 complete) rather than a content icon; also easily confused with a clock face or a moon phase.",
+ "ambiguity": "Nearly interchangeable with the three-eighths filled circle and one-quarter filled circle when used for generic pie charts, analytics, or progress tracking; only differs if the specific fraction (more than half vs less than half or one quarter) matters. Also looks like a UI task-completion badge rather than a topic icon.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -153,6 +153,16 @@
  ],
  "near_misses": [
   {
+   "task": "Review Q1 quarterly sales report",
+   "better": "circle with filled upper-right quadrant (one-quarter / Q1)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set a 15-minute Pomodoro timer for focus",
+   "better": "circle with filled upper-right quadrant (quarter-hour / 15-minute sector)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Finish the remaining 25% of the compliance course",
    "better": "graduation cap or training course",
    "trap": "property"
@@ -163,11 +173,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Set the kitchen timer for 40 minutes while the bread proofs",
-   "better": "kitchen timer or stopwatch",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check progress on the bathroom tile installation",
    "better": "tiles or bathroom renovation",
    "trap": "generic_verb"
@@ -176,17 +181,12 @@
    "task": "Email the tax accountant about the K-1 delay",
    "better": "email or envelope",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Watch the waxing gibbous moon through the new telescope",
-   "better": "moon or telescope",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 1
+  "distinctiveness": 2
  },
  "discard": true,
  "reasoning": "This is a progress ring or radial completion gauge (specifically 5/8 full), which is UI chrome used in task managers to show how much of a task or project is done rather than what the task is about. Using it as a subject icon alongside checkboxes or progress circles is visually confusing, and true pie-chart tasks are better served by a dedicated chart icon with distinct separated slices.",
@@ -204,6 +204,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "progress indicator or completion status",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pie chart or proportion breakdown",
+     "strength": "primary"
+    },
+    {
+     "meaning": "countdown timer or elapsed time",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "storage quota or disk usage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like a task completion state badge (62.5% or 5/8 complete) rather than a content icon; also easily confused with a clock face or a moon phase.",
+   "near_misses": [
+    {
+     "task": "Finish the remaining 25% of the compliance course",
+     "better": "graduation cap or training course",
+     "trap": "property"
+    },
+    {
+     "task": "Bake a pecan pie for Thanksgiving dinner",
+     "better": "baked pie or pastry",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set the kitchen timer for 40 minutes while the bread proofs",
+     "better": "kitchen timer or stopwatch",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check progress on the bathroom tile installation",
+     "better": "tiles or bathroom renovation",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email the tax accountant about the K-1 delay",
+     "better": "email or envelope",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Watch the waxing gibbous moon through the new telescope",
+     "better": "moon or telescope",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 1
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "clock_loader_40",
+   "clock_loader_20"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5391,
+    "output": 1781,
+    "thoughts": 0,
+    "total": 7172
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:39Z"
+  }
+ },
+ "distinguishing": "Filled clockwise from 12 o'clock to 7:30 (five-eighths or 62.5%), making it the only icon in the group that is more than half full, though as a general pie chart or progress symbol it is virtually interchangeable with the three-eighths and one-quarter circles."
 }

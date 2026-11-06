@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "directions, navigation, or driving route",
+   "meaning": "turn-by-turn directions, navigation, or driving route",
    "strength": "primary"
   },
   {
-   "meaning": "road sign or traffic rules",
+   "meaning": "turn right or road sign",
    "strength": "primary"
   },
   {
    "meaning": "detour, reroute, or alternate path",
    "strength": "secondary"
-  },
-  {
-   "meaning": "turn right",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic 'share' or 'forward' action icon, though the diamond border strongly cues a traffic/navigation sign.",
+ "ambiguity": "Easily confused at a glance with the diamond sign containing a straight right-pointing arrow; both read as navigation or road signs, though the bent arrow specifically cues turning or routing.",
  "modifier_semantics": [],
  "domains": [
   "travel",
@@ -154,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Move to the next stage of the onboarding workflow",
+   "better": "diamond sign with a straight right-pointing arrow or next-step arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check one-way street rules for downtown parking",
+   "better": "diamond sign with a straight right-pointing arrow or one-way sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Forward the signed lease email to the landlord",
    "better": "email with forward arrow",
    "trap": "lookalike_glyph"
@@ -174,20 +180,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy snacks and water bottles for the car",
+   "task": "Buy snacks and water bottles for the road trip",
    "better": "snacks or water bottle",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Set up domain redirect from the old blog URL",
-   "better": "link or globe with arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The diamond frame with a 90-degree right turn arrow is the standard icon for driving directions, navigation, and traffic signs. It fits tasks about planning routes, sending directions, checking detours, or studying road signs for a driving exam, though at a glance the arrow could be mistaken for a generic 'forward' or 'share' glyph if the diamond road-sign frame is overlooked.",
@@ -205,6 +206,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "directions, navigation, or driving route",
+     "strength": "primary"
+    },
+    {
+     "meaning": "road sign or traffic rules",
+     "strength": "primary"
+    },
+    {
+     "meaning": "detour, reroute, or alternate path",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "turn right",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic 'share' or 'forward' action icon, though the diamond border strongly cues a traffic/navigation sign.",
+   "near_misses": [
+    {
+     "task": "Forward the signed lease email to the landlord",
+     "better": "email with forward arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sign the contractor agreement and return by Friday",
+     "better": "signature or pen signing document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order corrugated plastic yard signs for the garage sale",
+     "better": "yard sign on stakes or megaphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Turn the compost pile on the right side of the shed",
+     "better": "shovel, plant, or recycle bin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy snacks and water bottles for the car",
+     "better": "snacks or water bottle",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up domain redirect from the old blog URL",
+     "better": "link or globe with arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "directions_alt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4070,
+    "output": 839,
+    "thoughts": 114,
+    "total": 5023
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:36Z"
+  }
+ },
+ "distinguishing": "Shows a 90-degree bent right-turn arrow inside the diamond sign (going up then turning right), the standard symbol for getting turn-by-turn driving directions or making a turn, whereas the look-alike has a straight horizontal arrow."
 }

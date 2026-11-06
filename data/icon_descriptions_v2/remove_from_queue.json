@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "remove from watchlist or TV queue",
+   "meaning": "remove show or movie from TV watchlist or streaming queue",
    "strength": "primary"
   },
   {
-   "meaning": "disconnect or remove external monitor or display",
+   "meaning": "disconnect, remove, or decommission an external monitor or display",
    "strength": "primary"
   },
   {
-   "meaning": "decommission or retire desktop computer",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "minimize window or turn off screen",
+   "meaning": "turn off or disable secondary screen",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the short stand at the bottom is easy to miss, making it look like a generic boxed minus sign, a slot, or a mail slot.",
+ "ambiguity": "Shares the exact outer silhouette of the plain desktop monitor on a short block stand, though the centered minus bar clearly sets it apart.",
  "modifier_semantics": [
   {
    "modifier": "horizontal minus bar centered inside the screen",
@@ -160,33 +156,33 @@
  "near_misses": [
   {
    "task": "Buy a new 4K ultrawide monitor for the home office",
-   "better": "monitor with plus sign or plain monitor",
+   "better": "plain desktop monitor on short stand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wipe dust off the laptop screen before the meeting",
+   "better": "laptop with detached horizontal keyboard base",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Calibrate colors on the Dell Ultrasharp display",
-   "better": "plain computer monitor",
+   "better": "plain desktop monitor on short stand",
    "trap": "generic_verb"
   },
   {
-   "task": "Watch the season finale of Severance tonight",
-   "better": "TV or play button",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Clean fingerprints off the living room TV screen with microfiber",
-   "better": "plain TV screen or spray bottle",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Order a monitor with a matte anti-glare screen",
-   "better": "plain monitor",
+   "better": "plain desktop monitor on short stand",
    "trap": "property"
   },
   {
    "task": "Subtract hardware expenses from the Q3 IT budget",
    "better": "calculator or minus sign",
    "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Cancel monthly Netflix streaming subscription",
+   "better": "credit card or subscription cancellation",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -210,6 +206,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remove from watchlist or TV queue",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disconnect or remove external monitor or display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "decommission or retire desktop computer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "minimize window or turn off screen",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the short stand at the bottom is easy to miss, making it look like a generic boxed minus sign, a slot, or a mail slot.",
+   "near_misses": [
+    {
+     "task": "Buy a new 4K ultrawide monitor for the home office",
+     "better": "monitor with plus sign or plain monitor",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Calibrate colors on the Dell Ultrasharp display",
+     "better": "plain computer monitor",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Watch the season finale of Severance tonight",
+     "better": "TV or play button",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean fingerprints off the living room TV screen with microfiber",
+     "better": "plain TV screen or spray bottle",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a monitor with a matte anti-glare screen",
+     "better": "plain monitor",
+     "trap": "property"
+    },
+    {
+     "task": "Subtract hardware expenses from the Q3 IT budget",
+     "better": "calculator or minus sign",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "airplay",
+   "page_footer",
+   "computer",
+   "tv"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8043,
+    "output": 2357,
+    "thoughts": 160,
+    "total": 10560
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "The only screen in the group containing an inner symbol—a bold horizontal minus bar centered inside the desktop monitor—indicating removing a display or removing an item from a TV watchlist."
 }

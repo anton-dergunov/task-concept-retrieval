@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "print document or printing task",
+   "meaning": "pick up or verify a completed print job",
    "strength": "primary"
   },
   {
-   "meaning": "printer setup, verification, or test print",
+   "meaning": "print a document or run a test print",
    "strength": "primary"
   },
   {
-   "meaning": "pick up completed print job",
+   "meaning": "printer ready or setup verified",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a fax machine or scanner at a quick glance, though the top feed and bottom output tray are standard for a printer.",
+ "ambiguity": "Uses the same printer silhouette as the printer with a plus sign and the printer with an exclamation mark; at small list sizes the checkmark can be confused with the plus sign.",
  "modifier_semantics": [
   {
    "modifier": "checkmark badge in bottom right corner",
@@ -158,33 +158,33 @@
  ],
  "near_misses": [
   {
-   "task": "Order a wireless laser printer with duplex scanning",
-   "better": "shopping cart or plain printer",
-   "trap": "generic_verb"
+   "task": "Install network printer drivers on the new home office PC",
+   "better": "printer with plus sign icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Troubleshoot the offline spooler error and replace empty cyan toner",
+   "better": "printer with exclamation mark icon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Read the fine print on the dental insurance policy",
-   "better": "magnifying glass or contract document",
+   "better": "magnifying glass or contract document icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Frame the botanical prints for the hallway wall",
-   "better": "picture frame",
+   "better": "picture frame icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Scan old family receipts into PDF folders",
-   "better": "scanner",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Call Canon support about the warranty claim",
-   "better": "phone",
+   "better": "phone icon",
    "trap": "parent_topic"
   },
   {
-   "task": "Buy printer-friendly mailing labels",
-   "better": "label tag",
+   "task": "Buy printer-friendly adhesive mailing labels",
+   "better": "label tag icon",
    "trap": "property"
   }
  ],
@@ -209,6 +209,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "print document or printing task",
+     "strength": "primary"
+    },
+    {
+     "meaning": "printer setup, verification, or test print",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pick up completed print job",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a fax machine or scanner at a quick glance, though the top feed and bottom output tray are standard for a printer.",
+   "near_misses": [
+    {
+     "task": "Order a wireless laser printer with duplex scanning",
+     "better": "shopping cart or plain printer",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Read the fine print on the dental insurance policy",
+     "better": "magnifying glass or contract document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Frame the botanical prints for the hallway wall",
+     "better": "picture frame",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Scan old family receipts into PDF folders",
+     "better": "scanner",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Canon support about the warranty claim",
+     "better": "phone",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy printer-friendly mailing labels",
+     "better": "label tag",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "print_add",
+   "print_error"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5392,
+    "output": 1552,
+    "thoughts": 0,
+    "total": 6944
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "This printer has a checkmark in the bottom-right corner, signifying a completed print job, verified test page, or standard ready-to-print task, unlike the plus sign (add printer) or exclamation mark (printer error)."
 }

@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "unlink, remove hyperlink, or broken link",
+   "meaning": "unlink / remove hyperlink / broken link",
+   "strength": "primary"
+  },
+  {
+   "meaning": "NFC off / contactless or chip connection disabled",
    "strength": "primary"
   },
   {
    "meaning": "disconnect linked accounts or integrations",
-   "strength": "primary"
-  },
-  {
-   "meaning": "offline or severed connection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the parallel diagonal strokes of the link and the slash can blur together and resemble a tilted hash mark or a generic crossed-out rectangle.",
+ "ambiguity": "Almost identical in silhouette to the two slashed diamond road-sign icons in this group, differing only in having symmetrical parallel inner bars instead of a turn arrow's stem and arrowhead.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Mute turn-by-turn navigation alerts while driving",
+   "better": "slashed diamond road sign with turn arrow (directions off)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Draft the opening speech by hand",
+   "better": "pen with pocket clip",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Add canonical links to the product pages",
    "better": "intact chain link without slash",
    "trap": "lookalike_glyph"
@@ -172,16 +182,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Copy the Zoom invite link and send it to Maria",
-   "better": "intact chain link or video camera",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Email the webmaster about the missing PDF",
-   "better": "envelope or PDF file",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Write a blog post without any external links",
    "better": "document or article",
    "trap": "property"
@@ -190,7 +190,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a chain link crossed out by a diagonal slash, the standard symbol for removing a hyperlink, fixing broken links, or unlinking connected accounts. While somewhat specialized to digital admin and web maintenance, it maps directly to common tasks like fixing 404 URLs and disconnecting third-party app or bank integrations. At tiny sizes the parallel diagonal lines of the link and the slash can merge visually.",
@@ -208,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unlink, remove hyperlink, or broken link",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disconnect linked accounts or integrations",
+     "strength": "primary"
+    },
+    {
+     "meaning": "offline or severed connection",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the parallel diagonal strokes of the link and the slash can blur together and resemble a tilted hash mark or a generic crossed-out rectangle.",
+   "near_misses": [
+    {
+     "task": "Add canonical links to the product pages",
+     "better": "intact chain link without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new bike chain and master link tool",
+     "better": "bicycle or mechanical roller chain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the broken link on the backyard chain-link fence",
+     "better": "fence or pliers",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Copy the Zoom invite link and send it to Maria",
+     "better": "intact chain link or video camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Email the webmaster about the missing PDF",
+     "better": "envelope or PDF file",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Write a blog post without any external links",
+     "better": "document or article",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ink_pen",
+   "directions_alt_off",
+   "directions_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6763,
+    "output": 1993,
+    "thoughts": 1140,
+    "total": 9896,
+    "seconds": 50.07,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:58:28Z"
+  }
+ },
+ "distinguishing": "Shares the slashed 45-degree diamond outline with the other two slashed icons, but both interior halves contain straight bars parallel to the diagonal sides, giving the appearance of severed interlocked square loops or an NFC/chip symbol rather than a turn arrow."
 }

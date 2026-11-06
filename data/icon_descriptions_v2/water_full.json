@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "glass of water or hydration",
+   "meaning": "full glass of water or hydration",
    "strength": "primary"
   },
   {
@@ -15,15 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "drinking glassware or tumbler",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "rinsing cup or mouthwash cup",
+   "meaning": "drinking glass or tumbler",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, could slightly resemble a bucket, small trash bin, or plant pot with a wavy rim line.",
+ "ambiguity": "Easily mistaken for the half-full or low-filled glasses of water when not viewed side by side, since only the vertical position of the wave changes.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -153,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Buy new double-old-fashioned rocks glasses for the kitchen",
+   "better": "empty drinking glass with thick flat base",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Finish the last sip of water and take morning vitamins",
+   "better": "nearly empty glass with low water line",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the quarterly city water and sewer bill",
    "better": "invoice or water droplet with dollar sign",
    "trap": "shared_vocabulary"
@@ -168,25 +174,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Take empty glass jars and bottles out to the recycling bin",
-   "better": "recycling symbol or bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a waterproof phone pouch for the kayak trip",
    "better": "smartphone or kayak",
    "trap": "property"
-  },
-  {
-   "task": "Schedule blood draw with the doctor",
-   "better": "syringe or medical cross",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a tapered drinking glass half-filled with wavy liquid. It is the ideal visual cue for hydration habits, drinking water reminders, beverages, and kitchen glassware tasks, though at tiny sizes the tapered shape faintly resembles a small bucket or bin.",
@@ -204,6 +200,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "glass of water or hydration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cold drink or beverage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "drinking glassware or tumbler",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rinsing cup or mouthwash cup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, could slightly resemble a bucket, small trash bin, or plant pot with a wavy rim line.",
+   "near_misses": [
+    {
+     "task": "Pay the quarterly city water and sewer bill",
+     "better": "invoice or water droplet with dollar sign",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Water the porch ferns before it gets hot",
+     "better": "watering can or plant",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the crack in the garage window glass",
+     "better": "window pane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take empty glass jars and bottles out to the recycling bin",
+     "better": "recycling symbol or bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof phone pouch for the kayak trip",
+     "better": "smartphone or kayak",
+     "trap": "property"
+    },
+    {
+     "task": "Schedule blood draw with the doctor",
+     "better": "syringe or medical cross",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "water_loss",
+   "water_medium",
+   "glass_cup"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6652,
+    "output": 1188,
+    "thoughts": 0,
+    "total": 7840
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:10Z"
+  }
+ },
+ "distinguishing": "Has the wavy liquid line in the upper half of the cup (~70% full), representing a full glass of water, though closely resembling the lower fill-level variants unless compared side by side."
 }

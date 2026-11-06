@@ -15,11 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "padel, racquetball, or general paddle sport",
+   "meaning": "padel or general paddle sport",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the unpatterned paddle could be mistaken for a hand mirror, a spatula, or a magnifying glass next to a dot.",
+ "ambiguity": "Easily confused with the narrow rectangular cricket bat and ball at a glance, since both show a diagonal flat-headed striker next to a small ball.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -150,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Oil and knock in my new English willow cricket bat before Saturday's match",
+   "better": "narrow rectangular cricket bat and ball",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy tickets for the Test cricket match at Lord's",
+   "better": "narrow rectangular cricket bat and ball",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Restring my Yonex tennis racket at 52 lbs",
    "better": "strung tennis racket with oval head",
    "trap": "lookalike_glyph"
@@ -158,11 +168,6 @@
    "task": "Sand and oil the wooden kayak paddle before the river trip",
    "better": "kayak or canoe oar paddle",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new silicone spatula for the nonstick skillet",
-   "better": "kitchen spatula",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pickle two jars of cucumbers with dill and garlic",
@@ -183,7 +188,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The squared head and short handle beside a small ball distinctly depict a pickleball paddle (and also cover table tennis or padel). It is an ideal, high-precision cue for tasks about playing paddle sports, booking courts, or maintaining gear, though somewhat narrower than a general fitness icon.",
@@ -201,6 +206,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pickleball paddle and ball",
+     "strength": "primary"
+    },
+    {
+     "meaning": "table tennis or ping-pong paddle and ball",
+     "strength": "primary"
+    },
+    {
+     "meaning": "padel, racquetball, or general paddle sport",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the unpatterned paddle could be mistaken for a hand mirror, a spatula, or a magnifying glass next to a dot.",
+   "near_misses": [
+    {
+     "task": "Restring my Yonex tennis racket at 52 lbs",
+     "better": "strung tennis racket with oval head",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sand and oil the wooden kayak paddle before the river trip",
+     "better": "kayak or canoe oar paddle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new silicone spatula for the nonstick skillet",
+     "better": "kitchen spatula",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pickle two jars of cucumbers with dill and garlic",
+     "better": "mason jar or cucumber",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the hotel near the convention center in Austin",
+     "better": "hotel or bed",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Attach the stand mixer paddle attachment and cream the butter",
+     "better": "stand mixer or whisk",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sports_cricket"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4077,
+    "output": 661,
+    "thoughts": 152,
+    "total": 4890
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:53Z"
+  }
+ },
+ "distinguishing": "Has a wide, rounded-square head connected directly to the handle, representing a court or table paddle rather than the narrow elongated blade of a cricket bat."
 }

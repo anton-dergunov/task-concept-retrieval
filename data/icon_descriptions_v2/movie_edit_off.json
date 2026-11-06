@@ -26,7 +26,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the clapperboard, pencil, and slash merge into a cluttered shape that can be mistaken for a generic 'no movie/video' icon, a crossed-out calendar edit icon, or a broken image/media symbol.",
+ "ambiguity": "At small sizes, the L-shaped lower-left frame and heavy diagonal slash visually echo the slashed speaker and headphones icon, and the cluttered strokes can blur into a generic 'no video' or broken media icon.",
  "modifier_semantics": [
   {
    "modifier": "pencil in bottom-right corner",
@@ -165,23 +165,28 @@
  ],
  "near_misses": [
   {
+   "task": "Disable computer speakers and headphones before the exam starts",
+   "better": "slashed speaker and headphones",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Troubleshoot missing audio output device in system settings",
+   "better": "slashed speaker and headphones",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Edit the GoPro footage from our Dolomites ski trip",
    "better": "clapperboard with pencil (without slash)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Cancel Netflix subscription before next billing cycle",
-   "better": "clapperboard or TV with slash (no pencil)",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Turn off webcam before joining the all-hands call",
-   "better": "video camera with slash",
+   "better": "slashed video camera",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check if the exported video has any audio sync glitches",
-   "better": "speaker / waveform or video player",
+   "better": "video player or waveform",
    "trap": "generic_verb"
   },
   {
@@ -190,7 +195,7 @@
    "trap": "property"
   },
   {
-   "task": "Order replacement whiteboard markers for the studio",
+   "task": "Order replacement whiteboard markers for the editing suite",
    "better": "marker / pen",
    "trap": "parent_topic"
   }
@@ -198,7 +203,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon combines three elements—a film clapperboard, an edit pencil, and a diagonal slash—meaning 'video editing disabled' or 'cancel/lock video edits'. While it can represent niche tasks around cancelling video editor subscriptions, locking final cuts, or sending raw unedited footage, the stacked modifiers make it visually crowded and easy to confuse with a plain 'no video' icon at small list sizes.",
@@ -216,6 +221,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video editing disabled or unavailable",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel video editing or stop film cut",
+     "strength": "primary"
+    },
+    {
+     "meaning": "read-only video file or locked movie project",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cancelled film or video production",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the clapperboard, pencil, and slash merge into a cluttered shape that can be mistaken for a generic 'no movie/video' icon, a crossed-out calendar edit icon, or a broken image/media symbol.",
+   "near_misses": [
+    {
+     "task": "Edit the GoPro footage from our Dolomites ski trip",
+     "better": "clapperboard with pencil (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel Netflix subscription before next billing cycle",
+     "better": "clapperboard or TV with slash (no pencil)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn off webcam before joining the all-hands call",
+     "better": "video camera with slash",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the exported video has any audio sync glitches",
+     "better": "speaker / waveform or video player",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy an external SSD fast enough for 4K unedited video",
+     "better": "external hard drive / SSD",
+     "trap": "property"
+    },
+    {
+     "task": "Order replacement whiteboard markers for the studio",
+     "better": "marker / pen",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "media_output_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4128,
+    "output": 1182,
+    "thoughts": 0,
+    "total": 5310
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Shows a film clapperboard with diagonal stripes along the top and a small pencil in the bottom-right corner crossed out by a diagonal slash (no video editing), whereas the other icon shows a vertical speaker box and curved headphones under a slash (no audio devices)."
 }

@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Hard to tell whether it is a wide armchair or a compact two-seat loveseat/sofa, though both represent the same furniture category.",
+ "ambiguity": "Practically interchangeable with the legless sofa/armchair icon; hard to tell whether it represents a wide single armchair or a compact two-seat loveseat.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -149,14 +149,24 @@
  ],
  "near_misses": [
   {
+   "task": "Inflate the camping air sofa for the music festival",
+   "better": "legless floor sofa or inflatable couch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a low foam floor couch for the kids' playroom",
+   "better": "legless floor sofa",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Start the Couch to 5K running plan on Monday",
    "better": "running shoe or runner",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book First Class seat on the 14:10 train to Munich",
-   "better": "train",
-   "trap": "lookalike_glyph"
+   "task": "Replace the gas lift cylinder on my ergonomic desk chair",
+   "better": "office swivel chair",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Schedule first session with the new therapist",
@@ -164,25 +174,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Paint the ceiling trim and baseboards",
+   "task": "Paint the living room ceiling trim and baseboards",
    "better": "paint roller or brush",
    "trap": "parent_topic"
   },
   {
-   "task": "Replace the gas lift cylinder on my ergonomic desk chair",
-   "better": "office swivel chair",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a booster seat for the back of the car",
-   "better": "car seat or car",
-   "trap": "shared_vocabulary"
+   "task": "Buy a floor lamp to put next to the reading armchair",
+   "better": "floor lamp",
+   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear, unmistakable outline of an upholstered armchair or small sofa. It is ideal for tasks involving living room furniture, couches, upholstery, and lounge areas, and is visually distinct from beds, dining chairs, or office chairs.",
@@ -200,6 +205,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sofa, couch, or armchair",
+     "strength": "primary"
+    },
+    {
+     "meaning": "furniture or living room",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lounge, waiting area, or rest",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Hard to tell whether it is a wide armchair or a compact two-seat loveseat/sofa, though both represent the same furniture category.",
+   "near_misses": [
+    {
+     "task": "Start the Couch to 5K running plan on Monday",
+     "better": "running shoe or runner",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book First Class seat on the 14:10 train to Munich",
+     "better": "train",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule first session with the new therapist",
+     "better": "therapy or conversation",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Paint the ceiling trim and baseboards",
+     "better": "paint roller or brush",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace the gas lift cylinder on my ergonomic desk chair",
+     "better": "office swivel chair",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a booster seat for the back of the car",
+     "better": "car seat or car",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "weekend"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4043,
+    "output": 822,
+    "thoughts": 113,
+    "total": 4978
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:28Z"
+  }
+ },
+ "distinguishing": "Has two short legs underneath the base, whereas the other icon sits flat with no legs; in meaning the two are virtually interchangeable for sofa, armchair, and living-room furniture tasks, though the legs make this one slightly clearer as a standard raised couch or armchair."
 }

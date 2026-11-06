@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "sync or synchronize",
+   "meaning": "sync or two-way synchronization",
    "strength": "primary"
-  },
-  {
-   "meaning": "refresh, reload, or update",
-   "strength": "primary"
-  },
-  {
-   "meaning": "repeat, recurring, or cycle",
-   "strength": "secondary"
   },
   {
    "meaning": "exchange, swap, or convert",
+   "strength": "primary"
+  },
+  {
+   "meaning": "recurring cycle or continuous loop",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "refresh or reload",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Nearly identical to other sync, refresh, repeat, or camera-flip icons that differ only in arrow direction or the outer circle.",
+ "ambiguity": "At small sizes, easily mistaken for the single counter-clockwise arrow inside a circle (undo, revert, or reset), especially since both can be loosely used for refresh or repeat.",
  "modifier_semantics": [
   {
    "modifier": "enclosing circle",
@@ -160,9 +160,14 @@
  ],
  "near_misses": [
   {
-   "task": "Update resume with the latest contract role",
-   "better": "document or CV icon",
-   "trap": "generic_verb"
+   "task": "Revert the staging database to yesterday's snapshot",
+   "better": "single counter-clockwise circular arrow for undo/revert",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Factory reset the old iPad before selling it",
+   "better": "single counter-clockwise circular arrow for reset/restore",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Take the cardboard and glass bottles out to the recycling bin",
@@ -170,22 +175,17 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Update resume with the latest contract role",
+   "better": "document or CV icon",
+   "trap": "generic_verb"
+  },
+  {
    "task": "Have tires rotated at Discount Tire before the road trip",
    "better": "car tire or wheel icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a rechargeable headlamp for camping",
-   "better": "headlamp or flashlight icon",
-   "trap": "property"
-  },
-  {
-   "task": "Return the oversized hiking boots to REI for a size 10",
-   "better": "boots or package return box icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay the $14/month Dropbox subscription invoice",
+   "task": "Pay the $14/month Dropbox cloud sync subscription invoice",
    "better": "credit card or receipt icon",
    "trap": "parent_topic"
   }
@@ -193,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Two curved arrows forming a circle inside a ring universally denote syncing, refreshing, or cycling/swapping. It fits tasks explicitly centered on data synchronization or periodic swaps, though it is visually interchangeable with many other sync/refresh/repeat icons and easily misused for generic 'update' verbs.",
@@ -211,6 +211,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "sync or synchronize",
+     "strength": "primary"
+    },
+    {
+     "meaning": "refresh, reload, or update",
+     "strength": "primary"
+    },
+    {
+     "meaning": "repeat, recurring, or cycle",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "exchange, swap, or convert",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Nearly identical to other sync, refresh, repeat, or camera-flip icons that differ only in arrow direction or the outer circle.",
+   "near_misses": [
+    {
+     "task": "Update resume with the latest contract role",
+     "better": "document or CV icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Take the cardboard and glass bottles out to the recycling bin",
+     "better": "three-arrow triangular recycling symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Have tires rotated at Discount Tire before the road trip",
+     "better": "car tire or wheel icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Return the oversized hiking boots to REI for a size 10",
+     "better": "boots or package return box icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $14/month Dropbox subscription invoice",
+     "better": "credit card or receipt icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "replay_circle_filled"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4023,
+    "output": 1070,
+    "thoughts": 0,
+    "total": 5093
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "Shows two opposing curved arrows chasing each other inside the circle (two-way sync, exchange, or continuous cycle), whereas the look-alike has only a single counter-clockwise arrow (undo, revert, or replay)."
 }

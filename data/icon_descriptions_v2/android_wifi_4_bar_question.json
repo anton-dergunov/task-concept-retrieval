@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "ask for or find out Wi-Fi password/details",
+   "meaning": "ask for or find out Wi-Fi password or details",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the question mark can blur into a lock or exclamation mark, making it look like secured Wi-Fi or a generic connection error.",
+ "ambiguity": "Interchangeable in meaning with the two-bar Wi-Fi icon with a question mark; at very small sizes the three denser arcs and question mark can blur into a locked or error Wi-Fi icon.",
  "modifier_semantics": [
   {
    "modifier": "question mark",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Investigate why the bedroom Wi-Fi drops down to two bars at night",
+   "better": "two-bar Wi-Fi symbol with question mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change the WPA3 password on the main router",
+   "better": "Wi-Fi symbol with lock",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the monthly Comcast internet bill before the 15th",
    "better": "bill or credit card",
    "trap": "shared_vocabulary"
@@ -170,22 +180,12 @@
    "trap": "property"
   },
   {
-   "task": "Run a Cat6 ethernet cable through the attic to the office",
-   "better": "ethernet cable or plug",
-   "trap": "shared_vocabulary"
+   "task": "Check whether the robot vacuum reconnected to the app",
+   "better": "robot vacuum",
+   "trap": "generic_verb"
   },
   {
-   "task": "Change the WPA3 password on the main router",
-   "better": "Wi-Fi with lock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Listen to the new episodes of the Reply All podcast",
-   "better": "podcast or headphones",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order a wall mount bracket for the bedroom unit",
+   "task": "Order a wall mount bracket for the bedroom router unit",
    "better": "mounting bracket or hardware",
    "trap": "parent_topic"
   }
@@ -193,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a standard three-arc Wi-Fi symbol paired with a question mark in the lower right. It fits concrete tasks about troubleshooting wireless connectivity, investigating unknown networks, or finding out Wi-Fi credentials and coverage, though at tiny sizes the question mark could be mistaken for a lock or alert badge.",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unknown or unverified Wi-Fi network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "troubleshoot Wi-Fi or internet connection problem",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ask for or find out Wi-Fi password/details",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "check wireless coverage or signal status",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the question mark can blur into a lock or exclamation mark, making it look like secured Wi-Fi or a generic connection error.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly Comcast internet bill before the 15th",
+     "better": "bill or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a waterproof Wi-Fi meat thermometer for the smoker",
+     "better": "thermometer",
+     "trap": "property"
+    },
+    {
+     "task": "Run a Cat6 ethernet cable through the attic to the office",
+     "better": "ethernet cable or plug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change the WPA3 password on the main router",
+     "better": "Wi-Fi with lock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Listen to the new episodes of the Reply All podcast",
+     "better": "podcast or headphones",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a wall mount bracket for the bedroom unit",
+     "better": "mounting bracket or hardware",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_3_bar_question"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4091,
+    "output": 1074,
+    "thoughts": 276,
+    "total": 5441
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Draws the Wi-Fi fan with three curved bars above the base dot rather than two, though it is functionally interchangeable in meaning with the two-bar version."
 }

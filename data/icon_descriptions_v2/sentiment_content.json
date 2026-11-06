@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "calm, peaceful, or zen state of mind",
+   "meaning": "unbothered, stoic, or indifferent expression",
    "strength": "primary"
   },
   {
-   "meaning": "mood, emotion, or mental wellbeing",
+   "meaning": "neutral or flat mood check-in",
    "strength": "primary"
   },
   {
-   "meaning": "neutral, indifferent, or unbothered expression",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "sleeping, resting, or eyes closed",
+   "meaning": "calm, poker face, or emotional detachment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as either serene/meditative (eyes gently closed) or mildly annoyed/indifferent (flat mouth with squinted eyes); at very small sizes it looks like any generic smiley or neutral face icon.",
+ "ambiguity": "Easily confused with the dot-eyed neutral face (both share a flat bar mouth) and with the downward-closed-eyes smiling face when looking for a calm or zen icon.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -168,6 +164,16 @@
  ],
  "near_misses": [
   {
+   "task": "Do 10 minutes of guided breathing and mindfulness before bed",
+   "better": "face with gently closed downward-curved eyes and a peaceful smile",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Log daily neutral mood rating in the symptom tracker",
+   "better": "neutral face with dot eyes and a flat mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Stay calm and don't overreact when calling the insurance company",
    "better": "phone call",
    "trap": "property"
@@ -183,17 +189,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Wash cotton face masks in hot water",
-   "better": "face mask / laundry",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new alarm clock for the bedside table",
-   "better": "alarm clock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay Dr. Patel's invoice for October sessions",
+   "task": "Pay Dr. Patel's invoice for October therapy sessions",
    "better": "invoice / payment",
    "trap": "parent_topic"
   }
@@ -221,6 +217,99 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "calm, peaceful, or zen state of mind",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mood, emotion, or mental wellbeing",
+     "strength": "primary"
+    },
+    {
+     "meaning": "neutral, indifferent, or unbothered expression",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sleeping, resting, or eyes closed",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as either serene/meditative (eyes gently closed) or mildly annoyed/indifferent (flat mouth with squinted eyes); at very small sizes it looks like any generic smiley or neutral face icon.",
+   "near_misses": [
+    {
+     "task": "Stay calm and don't overreact when calling the insurance company",
+     "better": "phone call",
+     "trap": "property"
+    },
+    {
+     "task": "Book a deep-tissue facial at the spa on Saturday",
+     "better": "spa / massage / skincare",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up Face ID on the new iPhone",
+     "better": "face recognition / phone security",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wash cotton face masks in hot water",
+     "better": "face mask / laundry",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new alarm clock for the bedside table",
+     "better": "alarm clock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay Dr. Patel's invoice for October sessions",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_neutral",
+   "insert_emoticon",
+   "sentiment_satisfied_alt",
+   "sentiment_calm",
+   "child_care",
+   "sentiment_very_satisfied"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10675,
+    "output": 3460,
+    "thoughts": 0,
+    "total": 14135
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "Combines upward-arched squinted eyes with a flat horizontal bar mouth, conveying an unbothered, expressionless, or stoic face rather than the open-eyed neutral face or the smiling closed-eye meditation face."
 }

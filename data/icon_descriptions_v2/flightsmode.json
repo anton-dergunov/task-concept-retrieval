@@ -156,11 +156,6 @@
  ],
  "near_misses": [
   {
-   "task": "Renew passport six months before the Italy trip",
-   "better": "passport / ID document",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Buy an airline-approved hardside carry-on suitcase",
    "better": "suitcase / luggage",
    "trap": "property"
@@ -207,6 +202,20 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "travel"
+  "alias_of": "travel",
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  }
  }
 }

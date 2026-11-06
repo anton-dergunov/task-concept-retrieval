@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Shares the right-facing truck cab and two wheels with the tow truck, though the large rectangular cargo box makes it easy to tell apart.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -149,6 +149,21 @@
  ],
  "near_misses": [
   {
+   "task": "Call AAA to tow the stalled sedan to the mechanic",
+   "better": "tow truck",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Renew annual roadside assistance membership",
+   "better": "tow truck / roadside assistance",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Renew ambulance paramedic certification",
+   "better": "ambulance (van with medical cross)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new winter coat with free shipping",
    "better": "coat / jacket",
    "trap": "property"
@@ -164,16 +179,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Prep slide deck for Monday's project delivery review",
-   "better": "presentation slides",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Renew ambulance paramedic certification",
-   "better": "ambulance (van with medical cross)",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Forward electric utility to new address",
    "better": "electricity / lightning bolt",
    "trap": "parent_topic"
@@ -182,7 +187,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "A clear, unmistakable side-profile silhouette of a box truck. It is the universal icon for package deliveries, shipping, freight logistics, and renting moving trucks, which are all frequent everyday and business tasks.",
@@ -200,6 +205,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "delivery / shipping / courier",
+     "strength": "primary"
+    },
+    {
+     "meaning": "moving truck / relocation / hauling",
+     "strength": "primary"
+    },
+    {
+     "meaning": "freight / logistics / commercial transport",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a new winter coat with free shipping",
+     "better": "coat / jacket",
+     "trap": "property"
+    },
+    {
+     "task": "Order Thai takeout for delivery tonight",
+     "better": "takeout food / noodles",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Ship v2.4 hotfix to production before Friday",
+     "better": "rocket / code deployment",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Prep slide deck for Monday's project delivery review",
+     "better": "presentation slides",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew ambulance paramedic certification",
+     "better": "ambulance (van with medical cross)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Forward electric utility to new address",
+     "better": "electricity / lightning bolt",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "auto_towing"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 3991,
+    "output": 1061,
+    "thoughts": 0,
+    "total": 5052
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "Shows a tall, outlined rectangular cargo box behind a lower cab instead of an open flatbed with an angled boom, signifying package shipping, freight delivery, or moving rather than vehicle towing."
 }

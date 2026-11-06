@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "return, forward, or reply with a document / form",
+   "meaning": "undo changes to a text file or page",
    "strength": "secondary"
   },
   {
-   "meaning": "undo changes to a text file or page",
+   "meaning": "return, forward, or reply with a document / form",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "The curved arrow at the bottom-left can be read either as 'restore/revert version', 'export/return document', or 'rotate page', and at small sizes looks very similar to generic file-import or share-note icons.",
+ "ambiguity": "Easily confused at small sizes with the pivot-table icon that has the exact same outer corner frame and bottom-left curved arrow but contains boxed grid cells instead of text lines.",
  "modifier_semantics": [
   {
    "modifier": "curved counter-clockwise arrow in bottom-left corner",
@@ -176,9 +176,14 @@
  ],
  "near_misses": [
   {
-   "task": "Return the defective espresso machine to Amazon via UPS",
-   "better": "package / parcel return box",
-   "trap": "shared_vocabulary"
+   "task": "Build a pivot table for Q3 regional sales in Excel",
+   "better": "table grid with curved pivot arrow in bottom-left",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Transpose the rows and columns in the budget spreadsheet",
+   "better": "table grid with curved pivot arrow in bottom-left",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Write a 500-word book review for the reading group",
@@ -186,9 +191,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Reply to Sarah's email about the project timeline",
-   "better": "email envelope with reply arrow",
-   "trap": "lookalike_glyph"
+   "task": "Return the defective espresso machine to Amazon via UPS",
+   "better": "package / parcel return box",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Check the refundable booking terms on the hotel confirmation",
@@ -229,6 +234,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "restore or revert document / note to previous version",
+     "strength": "primary"
+    },
+    {
+     "meaning": "return, forward, or reply with a document / form",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "undo changes to a text file or page",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rotate page or flip document orientation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The curved arrow at the bottom-left can be read either as 'restore/revert version', 'export/return document', or 'rotate page', and at small sizes looks very similar to generic file-import or share-note icons.",
+   "near_misses": [
+    {
+     "task": "Return the defective espresso machine to Amazon via UPS",
+     "better": "package / parcel return box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write a 500-word book review for the reading group",
+     "better": "plain document or book icon without curved arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Reply to Sarah's email about the project timeline",
+     "better": "email envelope with reply arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the refundable booking terms on the hotel confirmation",
+     "better": "hotel / bed icon",
+     "trap": "property"
+    },
+    {
+     "task": "Review the quarterly sales report before the 10am sync",
+     "better": "chart or plain report document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy printer toner for the office LaserJet",
+     "better": "printer / ink cartridge",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "table_convert"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4129,
+    "output": 727,
+    "thoughts": 0,
+    "total": 4856
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "Shows three horizontal text bars inside an open document frame alongside the bottom-left curved arrow, representing restoring or reverting a text document or page rather than pivoting a spreadsheet table grid."
 }

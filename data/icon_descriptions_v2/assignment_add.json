@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "new checklist, list, or task assignment",
+   "meaning": "create new checklist, list, or task assignment",
    "strength": "primary"
   },
   {
-   "meaning": "medical chart or patient intake form (clipboard + cross)",
+   "meaning": "general medical chart or patient intake form (clipboard with medical cross icon) as opposed to a prescription list",
    "strength": "secondary"
   },
   {
-   "meaning": "create report, inspection form, or survey",
+   "meaning": "new report, inspection form, or survey",
    "strength": "secondary"
   },
   {
-   "meaning": "add to clipboard / paste",
+   "meaning": "add to clipboard",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The plus badge on a clipboard can be read either as 'add/create new list' or as a medical cross representing a clinical chart or health intake form.",
+ "ambiguity": "Shares the exact clipboard base with the pill-badge and globe-badge clipboards; when read as a medical cross, it competes directly with the pill-badge clipboard for healthcare paperwork tasks.",
  "modifier_semantics": [
   {
    "modifier": "circular badge with plus sign",
@@ -161,14 +161,19 @@
  ],
  "near_misses": [
   {
+   "task": "Update the daily blood pressure medication list for Mom",
+   "better": "clipboard with capsule pill badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Submit the online visa application form on the consulate website",
+   "better": "clipboard with earth globe badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Add extra AAA batteries to the camping headlamp",
    "better": "battery or headlamp",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Check off the remaining items on the tax prep list",
-   "better": "clipboard with checkmark",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a clipboard with a built-in calculator for the coach",
@@ -182,19 +187,14 @@
   },
   {
    "task": "Install a clipboard manager app on the new MacBook",
-   "better": "laptop or software app icon",
+   "better": "laptop or software application icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Add a new credit card to Apple Pay",
-   "better": "credit card",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a clipboard with lines of text and a plus badge, universally understood as creating a new checklist, form, or medical chart. It fits tasks centered on making checklists, filling out intake forms, or preparing inspection sheets, though it shares visual territory with plain clipboard and document-add icons.",
@@ -212,6 +212,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "new checklist, list, or task assignment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "medical chart or patient intake form (clipboard + cross)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "create report, inspection form, or survey",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "add to clipboard / paste",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The plus badge on a clipboard can be read either as 'add/create new list' or as a medical cross representing a clinical chart or health intake form.",
+   "near_misses": [
+    {
+     "task": "Add extra AAA batteries to the camping headlamp",
+     "better": "battery or headlamp",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check off the remaining items on the tax prep list",
+     "better": "clipboard with checkmark",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a clipboard with a built-in calculator for the coach",
+     "better": "plain clipboard or calculator",
+     "trap": "property"
+    },
+    {
+     "task": "Book the flight to Lisbon",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Install a clipboard manager app on the new MacBook",
+     "better": "laptop or software app icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add a new credit card to Apple Pay",
+     "better": "credit card",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "prescriptions",
+   "assignment_globe"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5406,
+    "output": 1026,
+    "thoughts": 124,
+    "total": 6556
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Unlike the clipboards with a capsule pill badge or an earth globe badge, this clipboard features a solid black circle containing a white plus sign in the bottom-right corner, indicating creating/adding a new list or a general medical chart (clipboard with cross)."
 }

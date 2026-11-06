@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "download to phone / mobile install",
+   "meaning": "download to phone / mobile app install",
    "strength": "primary"
   },
   {
@@ -19,13 +19,9 @@
   {
    "meaning": "save offline on mobile device",
    "strength": "secondary"
-  },
-  {
-   "meaning": "smartwatch case update or low battery",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Because of the side button on the right edge, it can look like a smartwatch casing without straps or a generic battery with a side terminal at very small sizes.",
+ "ambiguity": "Shares the exact same rectangular device frame with a right-side button as the phone with a checkmark, and at small sizes the downward arrow can blur with the checkmark or look like a smartwatch casing without straps.",
  "modifier_semantics": [
   {
    "modifier": "downward-pointing arrow inside screen",
@@ -163,9 +159,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new MagSafe case for my iPhone",
-   "better": "phone case or shopping bag",
-   "trap": "shared_vocabulary"
+   "task": "Approve the 2FA login prompt on my phone",
+   "better": "mobile phone with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Complete mobile check-in for tomorrow's flight",
+   "better": "mobile phone with checkmark or boarding pass",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Back up phone photos to the NAS",
@@ -178,9 +179,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Replace the swollen battery in the old Pixel 5",
-   "better": "battery",
-   "trap": "lookalike_glyph"
+   "task": "Buy a new MagSafe case for my iPhone",
+   "better": "phone case or shopping bag",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Call the mobile carrier to lower our monthly bill",
@@ -214,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download to phone / mobile install",
+     "strength": "primary"
+    },
+    {
+     "meaning": "phone software update / firmware download",
+     "strength": "primary"
+    },
+    {
+     "meaning": "save offline on mobile device",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smartwatch case update or low battery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because of the side button on the right edge, it can look like a smartwatch casing without straps or a generic battery with a side terminal at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a new MagSafe case for my iPhone",
+     "better": "phone case or shopping bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Back up phone photos to the NAS",
+     "better": "phone with up arrow or cloud upload",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download 2025 tax return PDFs onto the desktop",
+     "better": "generic download arrow or document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the swollen battery in the old Pixel 5",
+     "better": "battery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the mobile carrier to lower our monthly bill",
+     "better": "phone handset / call or money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a braided USB-C charging cable",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_friendly"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4093,
+    "output": 1071,
+    "thoughts": 0,
+    "total": 5164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Shows a downward-pointing arrow inside the mobile device frame, indicating downloading, installing, or saving to a phone, unlike the checkmark inside the identical frame."
 }

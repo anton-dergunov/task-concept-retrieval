@@ -17,11 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "urgent maintenance or required system update",
+   "meaning": "urgent maintenance alert or required system action",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the exclamation mark in the center might look like a vertical slot or keyhole, or the whole icon might be mistaken for a generic settings gear or a sunburst warning badge.",
+ "ambiguity": "At very small sizes, the interior exclamation mark can blur into a dark center and be mistaken for the standard plain settings gear with a solid center circle.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark inside the center",
@@ -155,13 +155,18 @@
  ],
  "near_misses": [
   {
-   "task": "Turn off marketing notifications in account settings",
-   "better": "plain gear / settings or bell with slash",
+   "task": "Change default language and timezone in account preferences",
+   "better": "plain gear with solid center / settings",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Lubricate the brass drive gears on the studio camera rig",
+   "better": "plain gear with solid center / mechanical gear",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new 11-speed cassette gear for the gravel bike",
-   "better": "bicycle or plain gear without exclamation",
+   "better": "bicycle or plain gear with solid center",
    "trap": "shared_vocabulary"
   },
   {
@@ -180,7 +185,7 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Verify router firewall settings after the ISP upgrade",
+   "task": "Verify router firewall rules after the ISP upgrade",
    "better": "router or shield",
    "trap": "generic_verb"
   }
@@ -206,6 +211,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "system error, configuration problem, or broken setting",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mechanical malfunction, engine trouble, or hardware breakdown",
+     "strength": "primary"
+    },
+    {
+     "meaning": "urgent maintenance or required system update",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the exclamation mark in the center might look like a vertical slot or keyhole, or the whole icon might be mistaken for a generic settings gear or a sunburst warning badge.",
+   "near_misses": [
+    {
+     "task": "Turn off marketing notifications in account settings",
+     "better": "plain gear / settings or bell with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new 11-speed cassette gear for the gravel bike",
+     "better": "bicycle or plain gear without exclamation",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Urgently renew passport before the May deadline",
+     "better": "passport",
+     "trap": "property"
+    },
+    {
+     "task": "Check all camping gear before packing the car",
+     "better": "tent or backpack",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the updated W-9 pdf to accounting",
+     "better": "document / PDF",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify router firewall settings after the ISP upgrade",
+     "better": "router or shield",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4046,
+    "output": 1063,
+    "thoughts": 117,
+    "total": 5226
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Contains an exclamation mark inside the center of the six-toothed gear instead of a solid hub circle, indicating a system error, configuration alert, or mechanical breakdown rather than general settings."
 }

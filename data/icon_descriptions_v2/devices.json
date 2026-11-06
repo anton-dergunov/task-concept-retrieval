@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "multiple devices / cross-device sync (laptop and phone)",
+   "meaning": "computer and phone / desktop and mobile devices",
    "strength": "primary"
   },
   {
@@ -15,7 +15,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "responsive web design / screen sizes",
+   "meaning": "responsive web design / cross-device sync (desktop to mobile)",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "The smaller vertical rectangle with a top dot can be read either as a smartphone with a front camera (laptop + phone / devices) or as a desktop PC tower with a power button next to a monitor.",
+ "ambiguity": "Can be confused with the three-device icon (tablet, smartwatch, and smartphone) when representing general multi-device sync, and the vertical rectangle on the right can be read either as a smartphone or as a desktop PC tower.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,18 +155,23 @@
  ],
  "near_misses": [
   {
-   "task": "Call AppleCare about the cracked iPhone screen",
-   "better": "smartphone (single phone) or phone call",
+   "task": "Pack iPad, Apple Watch, and iPhone chargers for the trip",
+   "better": "tablet, smartwatch, and smartphone (mobile device trio)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a 27-inch 4K external monitor for the desk",
-   "better": "monitor / display alone",
+   "task": "Sync fitness data across watch, phone, and tablet",
+   "better": "tablet, smartwatch, and smartphone (wearable and mobile ecosystem)",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call AppleCare about the cracked iPhone screen",
+   "better": "single smartphone or phone receiver",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Download the desktop version of Slack",
-   "better": "download arrow or chat app icon",
+   "better": "download arrow or chat bubble",
    "trap": "property"
   },
   {
@@ -188,7 +193,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts either a laptop/monitor paired with a smartphone ('devices' / cross-device sync / responsive design) or a monitor with a desktop PC tower. Both readings are common and useful for personal tech, hardware maintenance, and web development tasks, making it a strong, recognizable icon distinct from a single laptop or single phone.",
@@ -206,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple devices / cross-device sync (laptop and phone)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "desktop computer (monitor and PC tower)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "responsive web design / screen sizes",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "workstation / electronics hardware",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The smaller vertical rectangle with a top dot can be read either as a smartphone with a front camera (laptop + phone / devices) or as a desktop PC tower with a power button next to a monitor.",
+   "near_misses": [
+    {
+     "task": "Call AppleCare about the cracked iPhone screen",
+     "better": "smartphone (single phone) or phone call",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a 27-inch 4K external monitor for the desk",
+     "better": "monitor / display alone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download the desktop version of Slack",
+     "better": "download arrow or chat app icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly mobile phone bill",
+     "better": "bill / receipt or currency",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a sturdy standing desk for the study",
+     "better": "desk / furniture",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up thermal paste on the way home",
+     "better": "shopping bag or tube/syringe",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "devices_other"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4065,
+    "output": 1087,
+    "thoughts": 0,
+    "total": 5152
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:27Z"
+  }
+ },
+ "distinguishing": "Shows two devices—a laptop with a horizontal keyboard base on the left and a vertical smartphone or PC tower on the right—without the smartwatch in the center."
 }

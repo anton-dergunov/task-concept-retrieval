@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "record button or audio/video recording",
+   "meaning": "selected radio button or single-choice option",
    "strength": "primary"
   },
   {
-   "meaning": "selected radio button or single-choice option",
+   "meaning": "record button or audio/video recording",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Highly ambiguous abstract shape: reads equally as UI radio buttonchrome, a media record button, a simplified bullseye target, or an astronomical sun symbol.",
+ "ambiguity": "Easily confused at a glance with the circle with a smaller center dot; without color, both read as a UI radio button, a media record button, or a bullseye target, and in a task list either can look like a checked circular task checkbox.",
  "modifier_semantics": [],
  "domains": [
   "creative",
@@ -153,14 +153,19 @@
  ],
  "near_misses": [
   {
+   "task": "Set quarterly sales targets for the regional team",
+   "better": "circle outline with a smaller center dot (bullseye target) or multi-ring target with arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mark the exact center point on the wooden blank before drilling",
+   "better": "circle outline with a smaller center dot (center-point marker) or crosshair",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pick up dog food and laundry pods at Target on the way home",
    "better": "shopping bag or cart",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Listen to the new bill burr podcast episode on the train",
-   "better": "headphones or podcast microphone",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a vintage vinyl record of Blue Train for Dad's birthday",
@@ -204,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "record button or audio/video recording",
+     "strength": "primary"
+    },
+    {
+     "meaning": "selected radio button or single-choice option",
+     "strength": "primary"
+    },
+    {
+     "meaning": "target, bullseye, or goal",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "current location point or center marker",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Highly ambiguous abstract shape: reads equally as UI radio buttonchrome, a media record button, a simplified bullseye target, or an astronomical sun symbol.",
+   "near_misses": [
+    {
+     "task": "Pick up dog food and laundry pods at Target on the way home",
+     "better": "shopping bag or cart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Listen to the new bill burr podcast episode on the train",
+     "better": "headphones or podcast microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a vintage vinyl record of Blue Train for Dad's birthday",
+     "better": "vinyl record disc with grooves",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Request official vaccination records from the pediatric clinic",
+     "better": "medical chart or document folder",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement car radio antenna mast",
+     "better": "car or radio receiver with antenna",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check whether the back door is locked before bed",
+     "better": "lock or door",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "adjust"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4112,
+    "output": 1184,
+    "thoughts": 172,
+    "total": 5468
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Has a much larger solid dot filling most of the interior of the ring, matching the classic proportions of a selected UI radio button or media record button more closely than the version with a small center dot, though the two are nearly interchangeable."
 }

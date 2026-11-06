@@ -13,15 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "export or save a document locally",
+   "meaning": "save or export a document locally",
    "strength": "primary"
   },
   {
-   "meaning": "downloaded files or offline documents",
+   "meaning": "offline documents or downloaded files",
    "strength": "secondary"
   }
  ],
- "ambiguity": "May be confused with a generic download icon without the document, or with an import-into-file icon if the arrow direction is misread at tiny sizes.",
+ "ambiguity": "Clearly distinct in arrow direction (downward onto a bar) and base shape (folded-corner page), though conceptually overlaps with the tray-with-bent-arrow export/share icon when saving data out of an app.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow onto horizontal bar",
@@ -158,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Share the project link with the external agency",
+   "better": "open tray with bent right-pointing arrow (share / export icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Log out of all shared office computers before Friday",
+   "better": "doorway rectangle with straight right-pointing exit arrow (log out icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Upload signed contract PDF to DocuSign",
    "better": "file upload icon (document with upward arrow)",
    "trap": "lookalike_glyph"
@@ -173,16 +183,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Print two copies of the return shipping label",
-   "better": "printer icon",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Install the latest macOS security update",
-   "better": "system update or laptop icon",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Check the tax return PDF for typos in the routing number",
    "better": "tax form or magnifying glass icon",
    "trap": "generic_verb"
@@ -191,7 +191,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "Shows a document outline with a downward download arrow onto a tray bar at the bottom right. It is universally understood as downloading or exporting a file/document, fitting common admin, finance, and travel tasks where saving a local copy is the main action, though it must be distinguished from file upload or non-document media downloads.",
@@ -209,6 +209,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download a file or document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export or save a document locally",
+     "strength": "primary"
+    },
+    {
+     "meaning": "downloaded files or offline documents",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "May be confused with a generic download icon without the document, or with an import-into-file icon if the arrow direction is misread at tiny sizes.",
+   "near_misses": [
+    {
+     "task": "Upload signed contract PDF to DocuSign",
+     "better": "file upload icon (document with upward arrow)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Read the downloaded zoning report before Tuesday's meeting",
+     "better": "eyeglasses or open book / reading icon",
+     "trap": "property"
+    },
+    {
+     "task": "Download Spotify playlists for the road trip",
+     "better": "music / headphones icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Print two copies of the return shipping label",
+     "better": "printer icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Install the latest macOS security update",
+     "better": "system update or laptop icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the tax return PDF for typos in the routing number",
+     "better": "tax form or magnifying glass icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "chat_paste_go_2",
+   "move_item",
+   "share_windows"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6704,
+    "output": 2099,
+    "thoughts": 165,
+    "total": 8968
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "Unlike the right-pointing arrows exiting boxes or bubbles in the rest of the group, this shows a vertical document page with a folded top-right corner and a downward-pointing arrow above a horizontal baseline, specifically meaning file download."
 }

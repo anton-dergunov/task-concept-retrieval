@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "dark mode / theme toggle / low brightness",
+   "meaning": "dark mode / night mode / low screen brightness",
    "strength": "primary"
   },
   {
-   "meaning": "Islamic / Rub el Hizb / Ramadan / mosque",
+   "meaning": "Islamic / Ramadan / Eid / mosque / Rub el Hizb with crescent",
    "strength": "primary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "solar or lunar eclipse / astronomy",
+   "meaning": "lunar phase / eclipse / astronomy",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Serves two common but unrelated conventions: a UI glyph for screen brightness / dark mode (sunburst with crescent inside) and an Islamic motif (eight-pointed Rub el Hizb star with a crescent moon).",
+ "ambiguity": "Easily confused at small sizes with the eight-pointed star containing a half-circle (medium brightness / contrast); also split between two unrelated conventions—a UI low-brightness / dark-mode glyph and an Islamic crescent-inside-Rub-el-Hizb symbol.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -147,13 +147,19 @@
   {
    "task": "Take 3mg melatonin thirty minutes before lights out",
    "central": "pill / supplement"
-  },
-  {
-   "task": "Replace the burnt-out bulb in the hallway nightlight",
-   "central": "lightbulb"
   }
  ],
  "near_misses": [
+  {
+   "task": "Calibrate monitor contrast and gamma for photo editing",
+   "better": "eight-pointed star with half-filled circle (medium brightness / contrast)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Adjust display brightness to 50% on the office iMacs",
+   "better": "eight-pointed star with half-filled circle (medium brightness)",
+   "trap": "lookalike_glyph"
+  },
   {
    "task": "Buy blackout curtains for the baby's nursery",
    "better": "curtains / window",
@@ -171,16 +177,11 @@
   },
   {
    "task": "Order a replacement power adapter for the Dell monitor",
-   "better": "plug / power cable",
+   "better": "power plug / cable",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Clean the brass candlesticks before Friday dinner",
-   "better": "candle",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Update the README with screenshots",
+   "task": "Update the README with dark-mode screenshots",
    "better": "document / image",
    "trap": "parent_topic"
   }
@@ -188,7 +189,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "An eight-pointed star (octagram) containing a crescent moon is standard UI iconography for dark mode or night brightness, while also strongly evoking Islamic geometric art (Rub el Hizb with hilal). It works well for tasks involving UI dark themes, night/sleep routines, astronomy, or Ramadan/Islamic observances.",
@@ -206,6 +207,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "dark mode / theme toggle / low brightness",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Islamic / Rub el Hizb / Ramadan / mosque",
+     "strength": "primary"
+    },
+    {
+     "meaning": "night / sleep / evening routine",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "solar or lunar eclipse / astronomy",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Serves two common but unrelated conventions: a UI glyph for screen brightness / dark mode (sunburst with crescent inside) and an Islamic motif (eight-pointed Rub el Hizb star with a crescent moon).",
+   "near_misses": [
+    {
+     "task": "Buy blackout curtains for the baby's nursery",
+     "better": "curtains / window",
+     "trap": "property"
+    },
+    {
+     "task": "Book an overnight train from Madrid to Lisbon",
+     "better": "train",
+     "trap": "property"
+    },
+    {
+     "task": "Check why the bathroom fan runs all night",
+     "better": "ventilation fan",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a replacement power adapter for the Dell monitor",
+     "better": "plug / power cable",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the brass candlesticks before Friday dinner",
+     "better": "candle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the README with screenshots",
+     "better": "document / image",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "brightness_medium"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4078,
+    "output": 1106,
+    "thoughts": 0,
+    "total": 5184
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:26Z"
+  }
+ },
+ "distinguishing": "Contains a curved crescent moon inside the eight-pointed star (rather than a straight-edged half-circle), signaling low brightness, night/dark mode, or an Islamic crescent-and-star motif."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "system update or software upgrade on a laptop",
+   "meaning": "system update or OS upgrade on a laptop",
    "strength": "primary"
   },
   {
-   "meaning": "upload or back up files from a computer",
+   "meaning": "uploading or backing up files from a laptop",
    "strength": "primary"
   },
   {
-   "meaning": "screen sharing or casting from a laptop",
+   "meaning": "screen sharing or presenting from a laptop",
    "strength": "secondary"
   },
   {
-   "meaning": "hardware upgrade for a computer",
+   "meaning": "laptop hardware upgrade (RAM or SSD)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read equally as updating the computer itself, uploading files from it, or sharing the screen in a meeting.",
+ "ambiguity": "Easily confused at a glance with the monitor whose stand forms an upward arrow entering the bottom bezel, and overlaps functionally with the laptop containing a curved share arrow for screen-sharing tasks.",
  "modifier_semantics": [
   {
    "modifier": "upward-pointing arrow inside the screen",
@@ -161,40 +161,40 @@
  ],
  "near_misses": [
   {
-   "task": "Download the offline maps onto the laptop before the trip",
-   "better": "laptop with downward arrow",
+   "task": "Cast movie from phone to the living room TV",
+   "better": "monitor with an upward arrow entering the screen from the base",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Export browser bookmarks to a file for the new computer",
+   "better": "laptop with a curved right-pointing export/share arrow",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Clean coffee smudges off the laptop keyboard and screen",
-   "better": "plain laptop or cleaning cloth",
+   "better": "plain laptop or cleaning cloth icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Update my resume with the new title",
+   "task": "Update my resume with the new job title",
    "better": "document or CV icon",
    "trap": "generic_verb"
   },
   {
    "task": "Buy a padded 14-inch laptop sleeve for commuting",
-   "better": "bag or sleeve",
+   "better": "laptop bag or sleeve icon",
    "trap": "property"
   },
   {
    "task": "Order a replacement USB-C charger cord",
-   "better": "power plug or cable",
+   "better": "power plug or cable icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Upload receipt photo from my phone",
-   "better": "smartphone or receipt with upload arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a laptop with an upward arrow inside the screen, clearly cueing computer updates, hardware upgrades, file uploads/backups, or screen sharing. Fits common tech and work maintenance tasks well, though it can be confused with a download-to-laptop icon if scanned too quickly.",
@@ -212,6 +212,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "system update or software upgrade on a laptop",
+     "strength": "primary"
+    },
+    {
+     "meaning": "upload or back up files from a computer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen sharing or casting from a laptop",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "hardware upgrade for a computer",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read equally as updating the computer itself, uploading files from it, or sharing the screen in a meeting.",
+   "near_misses": [
+    {
+     "task": "Download the offline maps onto the laptop before the trip",
+     "better": "laptop with downward arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean coffee smudges off the laptop keyboard and screen",
+     "better": "plain laptop or cleaning cloth",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update my resume with the new title",
+     "better": "document or CV icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a padded 14-inch laptop sleeve for commuting",
+     "better": "bag or sleeve",
+     "trap": "property"
+    },
+    {
+     "task": "Order a replacement USB-C charger cord",
+     "better": "power plug or cable",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Upload receipt photo from my phone",
+     "better": "smartphone or receipt with upload arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "screen_share",
+   "open_jam"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5425,
+    "output": 1634,
+    "thoughts": 146,
+    "total": 7205
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "Shows a straight upward arrow completely enclosed inside an unbroken laptop screen above a separate wide keyboard base, pointing toward a laptop software upgrade or file upload from a laptop."
 }

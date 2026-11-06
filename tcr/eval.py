@@ -60,9 +60,10 @@ class EvalSet:
     poor_gold_bad: List[str]      # the icon each poor query should NOT match
 
 
-def build_eval_set(sample: int, min_usefulness: float, seed: int = 0) -> EvalSet:
+def build_eval_set(sample: int, min_usefulness: float, seed: int = 0,
+                   version: Optional[str] = None) -> EvalSet:
     rng = random.Random(seed)
-    icons = [ic for ic in load_icons()
+    icons = [ic for ic in load_icons(version=version)
              if ic.usefulness >= min_usefulness and len(ic.example_tasks) >= 2]
     rng.shuffle(icons)
     chosen = icons[:sample]
@@ -81,9 +82,11 @@ def build_eval_set(sample: int, min_usefulness: float, seed: int = 0) -> EvalSet
     return EvalSet(queries, gold, holdout, poor_q, poor_bad)
 
 
-def build_methods(keys: List[str], holdout: frozenset) -> Dict[str, Matcher]:
+def build_methods(keys: List[str], holdout: frozenset,
+                  version: Optional[str] = None) -> Dict[str, Matcher]:
     """Construct matchers for the eval with the example holdout applied."""
-    icons = load_icons()
+    icons = load_icons(version=version)
+    fw = config.field_weights(version)
     out: Dict[str, Matcher] = {}
     for k in keys:
         if k == "B0":
@@ -94,7 +97,7 @@ def build_methods(keys: List[str], holdout: frozenset) -> Dict[str, Matcher]:
             out[k] = BM25Matcher(icons, include_examples=False, name="B1")
         elif k == "M1":
             out[k] = BiEncoderMatcher(icons, model_name=config.MULTILINGUAL_MODEL, view="field",
-                                      field_weights=config.FIELD_WEIGHTS,
+                                      field_weights=fw,
                                       quality_weight=config.QUALITY_PRIOR_WEIGHT,
                                       include_examples=False, name="M1")
         elif k == "M2":
@@ -104,7 +107,7 @@ def build_methods(keys: List[str], holdout: frozenset) -> Dict[str, Matcher]:
         elif k == "M3":
             b1 = BM25Matcher(icons, include_examples=False, name="B1")
             m1 = BiEncoderMatcher(icons, model_name=config.MULTILINGUAL_MODEL, view="field",
-                                  field_weights=config.FIELD_WEIGHTS,
+                                  field_weights=fw,
                                   quality_weight=config.QUALITY_PRIOR_WEIGHT,
                                   include_examples=False, name="M1")
             out[k] = HybridMatcher([b1, m1], name="M3")
@@ -234,14 +237,17 @@ def main(argv=None) -> None:
     parser.add_argument("--methods", default="B0,B1,M1,M2,M3")
     parser.add_argument("-k", type=int, default=10)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--desc", default=config.DESC_VERSION, choices=["v1", "v2"],
+                        help="icon description version (default: TCR_DESC or v1)")
     args = parser.parse_args(argv)
 
     keys = [m.strip() for m in args.methods.split(",") if m.strip()]
-    es = build_eval_set(args.sample, args.min_usefulness, seed=args.seed)
-    print(f"Eval set: {len(es.queries)} positive queries, "
+    es = build_eval_set(args.sample, args.min_usefulness, seed=args.seed, version=args.desc)
+    n_icons = len(load_icons(version=args.desc))
+    print(f"Descriptions {args.desc}: {n_icons} icons. Eval set: {len(es.queries)} positive queries, "
           f"{len(es.poor_queries)} poor-match queries, {len(GIBBERISH)} gibberish.\n")
 
-    methods = build_methods(keys, es.holdout)
+    methods = build_methods(keys, es.holdout, version=args.desc)
     results: Dict[str, dict] = {}
     multiling: Dict[str, list] = {}
     for key, matcher in methods.items():
@@ -273,6 +279,7 @@ def main(argv=None) -> None:
         json.dump({
             "config": {"sample": args.sample, "min_usefulness": args.min_usefulness,
                        "methods": keys, "k": args.k, "seed": args.seed,
+                       "descriptions": args.desc, "n_icons": n_icons,
                        "multilingual_model": config.MULTILINGUAL_MODEL,
                        "english_model": config.ENGLISH_MODEL,
                        "abstain_threshold": config.ABSTAIN_THRESHOLD},

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "talking points, agenda, or topics to discuss",
+   "meaning": "talking points, discussion topics, or meeting agenda",
    "strength": "primary"
   },
   {
-   "meaning": "message or comment containing a list",
+   "meaning": "message or comment containing a bulleted list",
    "strength": "primary"
   },
   {
-   "meaning": "discussion thread, feedback summary, or meeting notes",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "poll or multiple-choice prompt in a chat",
+   "meaning": "chat poll, survey prompt, or feedback summary",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the bullets and lines merge with regular text lines, making it look like a generic message or comment bubble.",
+ "ambiguity": "At small sizes the column of three bullet dots merges visually with the three horizontal bars, making it look identical to the plain left-tailed three-line speech bubble.",
  "modifier_semantics": [
   {
    "modifier": "three bulleted lines inside the bubble",
@@ -161,29 +157,29 @@
  ],
  "near_misses": [
   {
+   "task": "Text Dave that we landed safely",
+   "better": "plain speech bubble with text lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Draft a thank-you message to the interview panel",
+   "better": "speech bubble with pencil inside",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Write grocery list for weekend tacos",
-   "better": "shopping list or cart (not a speech bubble)",
+   "better": "checklist on page or shopping cart (not inside a speech bubble)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Pack suitcase using the winter camping checklist",
-   "better": "checklist on clipboard or suitcase",
+   "better": "suitcase or clipboard checklist",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Text Dave that we landed safely",
-   "better": "plain speech bubble or phone message",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book the main conference room for the agenda review",
    "better": "calendar or meeting room",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new headset with a clearer microphone",
-   "better": "headset",
-   "trap": "parent_topic"
   },
   {
    "task": "Check all items off the moving day list",
@@ -212,6 +208,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "talking points, agenda, or topics to discuss",
+     "strength": "primary"
+    },
+    {
+     "meaning": "message or comment containing a list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "discussion thread, feedback summary, or meeting notes",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "poll or multiple-choice prompt in a chat",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the bullets and lines merge with regular text lines, making it look like a generic message or comment bubble.",
+   "near_misses": [
+    {
+     "task": "Write grocery list for weekend tacos",
+     "better": "shopping list or cart (not a speech bubble)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack suitcase using the winter camping checklist",
+     "better": "checklist on clipboard or suitcase",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Text Dave that we landed safely",
+     "better": "plain speech bubble or phone message",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the main conference room for the agenda review",
+     "better": "calendar or meeting room",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new headset with a clearer microphone",
+     "better": "headset",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check all items off the moving day list",
+     "better": "checkbox list",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "card_membership",
+   "tooltip_2",
+   "chat",
+   "comment",
+   "rate_review"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9326,
+    "output": 2907,
+    "thoughts": 0,
+    "total": 12233
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Contains three round bullet dots to the left of the three horizontal lines inside the left-tailed speech bubble, signifying talking points, a discussion agenda, or a list inside a message."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "swipe gesture (left or right)",
+   "meaning": "bidirectional swipe left or right gesture",
    "strength": "primary"
   },
   {
-   "meaning": "touchscreen gesture or touch control",
+   "meaning": "horizontal touch scrub, drag, or carousel slider control",
    "strength": "primary"
   },
   {
-   "meaning": "drag or scrub horizontally",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "interactive carousel or slider",
+   "meaning": "general touchscreen gesture or interactive UI",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a dial rotation or page-flip icon at very small sizes, or generic touch icons with different arrow directions.",
+ "ambiguity": "Can be confused at a glance with the single-direction one-finger swipe-left or swipe-right icons if the second arrowhead is overlooked at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "curved double-headed arrow above finger",
@@ -165,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Add swipe-left only gesture to delete items from the cart",
+   "better": "one-finger swipe left icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Enable two-finger clockwise rotation on the map view",
+   "better": "two-finger swipe right / rotate clockwise icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Swipe my metro card to check the remaining balance at the station",
    "better": "transit card / credit card",
    "trap": "shared_vocabulary"
@@ -180,16 +186,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a new wireless mouse for the home office",
-   "better": "computer mouse",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Apply nail oil to cuticles before bed",
-   "better": "fingernail / dropper bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Point out the billing error on the contractor's invoice",
    "better": "invoice / receipt",
    "trap": "generic_verb"
@@ -198,7 +194,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a horizontal swipe or touch gesture (pointing hand with a curved bidirectional arrow above the finger). While niche, it fits real tasks around UI/UX design, frontend development of carousels/gestures, and configuring device trackpad or touchscreen navigation settings.",
@@ -218,6 +214,97 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "swipe gesture (left or right)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "touchscreen gesture or touch control",
+     "strength": "primary"
+    },
+    {
+     "meaning": "drag or scrub horizontally",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "interactive carousel or slider",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a dial rotation or page-flip icon at very small sizes, or generic touch icons with different arrow directions.",
+   "near_misses": [
+    {
+     "task": "Swipe my metro card to check the remaining balance at the station",
+     "better": "transit card / credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy touchscreen-compatible winter gloves for running",
+     "better": "gloves",
+     "trap": "property"
+    },
+    {
+     "task": "Touch base with Sarah about the Q3 marketing budget",
+     "better": "speech bubble / person",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new wireless mouse for the home office",
+     "better": "computer mouse",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Apply nail oil to cuticles before bed",
+     "better": "fingernail / dropper bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Point out the billing error on the contractor's invoice",
+     "better": "invoice / receipt",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "swipe_left_2",
+   "swipe_right_2",
+   "swipe_right",
+   "swipe_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7990,
+    "output": 2437,
+    "thoughts": 0,
+    "total": 10427
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:08Z"
+  }
+ },
+ "distinguishing": "Shows a single extended index finger beneath a double-headed curved arrow pointing both left and right, indicating horizontal scrubbing, dragging, or bidirectional swiping rather than a one-way swipe."
 }

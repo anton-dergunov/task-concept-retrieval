@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "snow / snowfall / winter weather",
+   "meaning": "snow, snowfall, or winter weather",
    "strength": "primary"
   },
   {
-   "meaning": "hail / sleet / freezing precipitation",
+   "meaning": "hail, sleet, or freezing pellets",
    "strength": "primary"
   },
   {
-   "meaning": "rain / drizzle / weather forecast",
+   "meaning": "precipitation or weather forecast",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Round dots beneath a cloud represent snow or hail in standard weather sets, but are easily confused with rain or drizzle at small sizes when compared to slanted droplet lines.",
+ "ambiguity": "Virtually indistinguishable from the other cloud with five round dots underneath; can also be mistaken for the cloud with diagonal rain streaks at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "five solid round dots below cloud",
@@ -158,9 +158,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a waterproof rain jacket for the Scotland hike",
-   "better": "jacket / coat",
-   "trap": "property"
+   "task": "Move potted succulents indoors before tonight's rainstorm",
+   "better": "cloud with slanted rain lines or potted plant",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean wet leaves out of the rain gutters",
+   "better": "cloud with slanted rain lines or house roof",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Back up family photos to the cloud drive",
@@ -168,19 +173,14 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Brainstorm marketing ideas with the team",
-   "better": "lightbulb or people talking",
-   "trap": "shared_vocabulary"
+   "task": "Buy a waterproof rain jacket for the Scotland hike",
+   "better": "jacket or coat",
+   "trap": "property"
   },
   {
    "task": "Order new ski goggles with low-light lenses",
    "better": "goggles",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check whether the campsite has covered picnic tables",
-   "better": "tent / campsite",
-   "trap": "generic_verb"
   },
   {
    "task": "Snowball pay off the Visa balance before April",
@@ -191,7 +191,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a cloud with five round pellets falling beneath it, standard meteorological iconography for snow, hail, or sleet (and more broadly winter precipitation or weather). It fits tasks centered on snow removal, hail damage, and winter weather prep, though at small sizes it closely resembles generic rain cloud icons.",
@@ -209,6 +209,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "snow / snowfall / winter weather",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hail / sleet / freezing precipitation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rain / drizzle / weather forecast",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Round dots beneath a cloud represent snow or hail in standard weather sets, but are easily confused with rain or drizzle at small sizes when compared to slanted droplet lines.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof rain jacket for the Scotland hike",
+     "better": "jacket / coat",
+     "trap": "property"
+    },
+    {
+     "task": "Back up family photos to the cloud drive",
+     "better": "cloud storage with upload arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Brainstorm marketing ideas with the team",
+     "better": "lightbulb or people talking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order new ski goggles with low-light lenses",
+     "better": "goggles",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the campsite has covered picnic tables",
+     "better": "tent / campsite",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Snowball pay off the Visa balance before April",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "rainy",
+   "cloudy_snowing"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5340,
+    "output": 1468,
+    "thoughts": 125,
+    "total": 6933
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Shows five slightly bolder round dots in two staggered rows below the cloud for snow or hail rather than slanted rain lines; visually and semantically interchangeable with the other five-dot cloud icon."
 }

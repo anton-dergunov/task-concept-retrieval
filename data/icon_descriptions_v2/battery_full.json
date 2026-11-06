@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "battery / full battery",
+   "meaning": "full battery / 100% charged battery",
    "strength": "primary"
   },
   {
-   "meaning": "power / charging / power bank",
+   "meaning": "battery / portable power bank",
    "strength": "primary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without internal charge bars or a lightning bolt, the solid silhouette can occasionally look like a flat-sided medicine bottle, flask, or clipboard at small sizes.",
+ "ambiguity": "Interchangeable for general battery tasks with the partially filled battery icons in this group; without an interior cutout or lightning bolt, the solid black silhouette also strongly resembles a small bottle or flask.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -150,19 +150,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for camping trips",
-   "better": "headlamp / flashlight",
-   "trap": "property"
+   "task": "Plug in the iPad because the battery is down to 50%",
+   "better": "half-full battery",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Pay the monthly electric power bill before Friday",
-   "better": "invoice / electricity bolt",
-   "trap": "shared_vocabulary"
+   "task": "Set battery charge limit to 80% on the laptop to preserve battery health",
+   "better": "mostly full (80-90%) battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up a new insulated stainless steel water bottle for the gym",
    "better": "water bottle",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the monthly electric power bill before Friday",
+   "better": "invoice / electricity bolt",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Schedule the cognitive test battery with the neuropsychologist",
@@ -183,7 +188,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A classic upright battery silhouette representing a full battery cell or portable power bank. It fits common everyday tasks around buying, charging, testing, replacing, or recycling batteries across home, tech, and travel contexts, though its solid fill can slightly resemble a small bottle at tiny sizes.",
@@ -201,6 +206,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / full battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power / charging / power bank",
+     "strength": "primary"
+    },
+    {
+     "meaning": "small bottle or vial with cap",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without internal charge bars or a lightning bolt, the solid silhouette can occasionally look like a flat-sided medicine bottle, flask, or clipboard at small sizes.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly electric power bill before Friday",
+     "better": "invoice / electricity bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a new insulated stainless steel water bottle for the gym",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule the cognitive test battery with the neuropsychologist",
+     "better": "brain / medical clipboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a cordless battery-powered lawn edger from Home Depot",
+     "better": "yard trimmer / garden tool",
+     "trap": "property"
+    },
+    {
+     "task": "Mount the solar panel on the camper van roof rack",
+     "better": "solar panel / camper van",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_3_bar",
+   "battery_vert_050",
+   "battery_4_bar",
+   "battery_5_bar",
+   "battery_6_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9321,
+    "output": 3291,
+    "thoughts": 0,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Completely solid black interior with no white cutout, representing a 100% full battery (or a solid bottle silhouette), whereas the other icons in the group have an empty white rectangular space in the upper portion indicating partial charge levels."
 }

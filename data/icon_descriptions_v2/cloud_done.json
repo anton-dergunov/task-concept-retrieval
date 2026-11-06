@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "cloud backup, synced files, or cloud storage",
+   "meaning": "verify cloud backup or check synced files",
    "strength": "primary"
   },
   {
-   "meaning": "verify cloud sync or completed upload",
+   "meaning": "cloud storage service or online backup account",
    "strength": "primary"
   },
   {
-   "meaning": "cloud computing service or online account setup",
+   "meaning": "completed cloud sync or saved online state",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a plain weather cloud icon at very small sizes if the checkmark blurs into the outline, or with a cloud-upload arrow icon.",
+ "ambiguity": "At small sizes, the checkmark's V-shape can resemble the downward arrowhead of the cloud-download icon, and in task lists any of the three may be loosely chosen for general cloud backup tasks.",
  "modifier_semantics": [
   {
    "modifier": "checkmark inside",
@@ -173,6 +173,16 @@
  ],
  "near_misses": [
   {
+   "task": "Upload the raw wedding video footage to Google Drive",
+   "better": "cloud with upward arrow (cloud upload)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download the offline map of the Dolomites to my phone before the hike",
+   "better": "cloud with downward arrow (cloud download)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check whether Saturday morning will be cloudy before booking the tennis court",
    "better": "weather cloud and sun icon",
    "trap": "shared_vocabulary"
@@ -186,11 +196,6 @@
    "task": "Order a pair of On Cloud running shoes in size 10.5",
    "better": "running shoe icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Download the offline map of the Dolomites to my phone before the hike",
-   "better": "map or cloud-download arrow icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check off completed items on the camping gear packing list",
@@ -226,6 +231,91 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cloud backup, synced files, or cloud storage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "verify cloud sync or completed upload",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cloud computing service or online account setup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a plain weather cloud icon at very small sizes if the checkmark blurs into the outline, or with a cloud-upload arrow icon.",
+   "near_misses": [
+    {
+     "task": "Check whether Saturday morning will be cloudy before booking the tennis court",
+     "better": "weather cloud and sun icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 2TB Samsung T7 external SSD for local Time Machine backups",
+     "better": "external hard drive / SSD icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a pair of On Cloud running shoes in size 10.5",
+     "better": "running shoe icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download the offline map of the Dolomites to my phone before the hike",
+     "better": "map or cloud-download arrow icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check off completed items on the camping gear packing list",
+     "better": "checklist icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace the failing fan in the rackmount NAS in the basement",
+     "better": "cooling fan or server rack icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cloud_upload",
+   "cloud_download"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5450,
+    "output": 1573,
+    "thoughts": 0,
+    "total": 7023
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "Shows a closed cloud outline containing a standalone checkmark, indicating completed cloud sync, verified backup, or general cloud storage state rather than an active upload or download transfer."
 }

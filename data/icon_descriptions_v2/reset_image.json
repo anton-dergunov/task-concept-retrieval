@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "restore or recover deleted/old photos",
+   "meaning": "restore, revert, or reset image to original",
    "strength": "primary"
   },
   {
-   "meaning": "rotate or orient images",
+   "meaning": "rotate image or photo (especially counterclockwise)",
    "strength": "primary"
   },
   {
-   "meaning": "reset image edits or revert to original picture",
+   "meaning": "undo photo edit",
    "strength": "secondary"
   },
   {
-   "meaning": "change or refresh wallpaper/profile picture",
+   "meaning": "recover deleted photos",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read either as rotating a photo counterclockwise or as restoring/resetting an image to its prior state.",
+ "ambiguity": "Easily confused with the closed square picture frame with a clockwise arrow when used for fixing photo orientation or rotating pictures.",
  "modifier_semantics": [
   {
    "modifier": "curved counterclockwise arrow above the frame",
@@ -161,40 +161,45 @@
  ],
  "near_misses": [
   {
+   "task": "Rotate scanned receipts 90 degrees clockwise so they are readable",
+   "better": "closed picture frame with clockwise arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Forward the family portrait to grandma",
+   "better": "picture frame with rightward forward/clockwise arrow or share icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Book mountain hut for the August hike",
+   "better": "mountain peaks or cabin without frame and arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Rotate the living room sofa cushions so they wear evenly",
-   "better": "sofa / cushion",
+   "better": "sofa or cushion",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Schedule tire rotation before the road trip",
-   "better": "tire / car",
+   "better": "tire or car",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book mountain hut for the August hike",
-   "better": "mountain / cabin",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Take new passport photos at the pharmacy",
-   "better": "camera / ID photo",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Buy a reversible picture frame for the desk",
-   "better": "picture frame",
+   "better": "plain picture frame",
    "trap": "property"
   },
   {
    "task": "Order a new USB-C card reader for the camera",
-   "better": "card reader / cable",
+   "better": "card reader or cable",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon combines the standard mountain-in-frame symbol for an image with a counterclockwise arrow on top, clearly signifying rotating, resetting, or restoring a photo. It fits specific digital photography, scanning, and file-recovery tasks well, though general photo tasks are better served by a plain image or camera icon.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "restore or recover deleted/old photos",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rotate or orient images",
+     "strength": "primary"
+    },
+    {
+     "meaning": "reset image edits or revert to original picture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "change or refresh wallpaper/profile picture",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read either as rotating a photo counterclockwise or as restoring/resetting an image to its prior state.",
+   "near_misses": [
+    {
+     "task": "Rotate the living room sofa cushions so they wear evenly",
+     "better": "sofa / cushion",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule tire rotation before the road trip",
+     "better": "tire / car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book mountain hut for the August hike",
+     "better": "mountain / cabin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take new passport photos at the pharmacy",
+     "better": "camera / ID photo",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a reversible picture frame for the desk",
+     "better": "picture frame",
+     "trap": "property"
+    },
+    {
+     "task": "Order a new USB-C card reader for the camera",
+     "better": "card reader / cable",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "replace_image"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4056,
+    "output": 1166,
+    "thoughts": 0,
+    "total": 5222
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "Shows an open-top, U-shaped picture frame beneath a counterclockwise (left-pointing) curved arrow, unlike the closed square frame with a clockwise arrow; the leftward arrow specifically cues undoing, reverting, or restoring an image, though both icons are largely interchangeable for general photo rotation."
 }

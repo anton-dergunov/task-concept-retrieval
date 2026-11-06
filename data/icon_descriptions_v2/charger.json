@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles an unenclosed lightning bolt, a battery charging indicator, or a Thunderbolt port symbol.",
+ "ambiguity": "Virtually identical to and interchangeable with the encircled lightning bolt whose tips do not touch the ring; also easily confused with an unenclosed lightning bolt or a battery-charging symbol.",
  "modifier_semantics": [
   {
    "modifier": "enclosing circular ring",
@@ -167,14 +167,14 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Check Saturday thunderstorm forecast before booking the court",
-   "better": "storm cloud with lightning",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Replace burnt-out LED bulb over the dining table",
    "better": "lightbulb",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check Saturday thunderstorm forecast before booking the court",
+   "better": "storm cloud with lightning",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a new electric toothbrush head at the pharmacy",
@@ -195,7 +195,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A lightning bolt enclosed in a circle is universally recognized as electricity, electrical power, or energy utilities (as well as the Thunderbolt interface or charging). It fits common household tasks around electric bills, meter readings, wiring, and power management, though it overlaps visually with plain lightning bolt and battery-charging icons.",
@@ -213,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "electricity or electrical power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging or power supply",
+     "strength": "primary"
+    },
+    {
+     "meaning": "energy utility or electric bill",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "camera flash or instant action",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles an unenclosed lightning bolt, a battery charging indicator, or a Thunderbolt port symbol.",
+   "near_misses": [
+    {
+     "task": "Buy AA rechargeable batteries for the Xbox controllers",
+     "better": "battery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check Saturday thunderstorm forecast before booking the court",
+     "better": "storm cloud with lightning",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace burnt-out LED bulb over the dining table",
+     "better": "lightbulb",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new electric toothbrush head at the pharmacy",
+     "better": "toothbrush",
+     "trap": "property"
+    },
+    {
+     "task": "Practice 5-minute lightning talks with timer before the conference",
+     "better": "presentation / podium",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a replacement MagSafe phone charger for the nightstand",
+     "better": "power plug / charger",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "offline_bolt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4060,
+    "output": 1048,
+    "thoughts": 69,
+    "total": 5177
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "The top and bottom tips of the lightning bolt touch the inner edge of the circular ring, whereas in the other icon the bolt floats with a gap, though the two are completely interchangeable in meaning."
 }

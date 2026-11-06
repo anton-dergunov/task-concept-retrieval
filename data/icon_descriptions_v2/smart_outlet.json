@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "electrical outlet / wall socket",
+   "meaning": "electrical outlet, wall socket, or power receptacle",
    "strength": "primary"
   },
   {
-   "meaning": "electricity / power / electrical wiring",
+   "meaning": "electricity, power supply, or electrical wiring",
    "strength": "primary"
   },
   {
-   "meaning": "smart plug / power adapter",
+   "meaning": "smart plug or travel power adapter",
    "strength": "secondary"
   },
   {
-   "meaning": "surprised or shocked face emoji",
+   "meaning": "surprised face emoji or pig snout",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very strong pareidolia makes it look like a surprised face emoji (:o) or a pig snout, especially at small sizes or to non-North American viewers unfamiliar with Type B sockets.",
+ "ambiguity": "Interchangeable with the three-prong electrical outlet with rounded vertical slots and a larger ground hole; also triggers pareidolia as a surprised face emoji (:o) or a pig snout at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -165,34 +165,34 @@
   },
   {
    "task": "Update the SEO plugin on the company WordPress site",
-   "better": "puzzle piece / plugin",
+   "better": "puzzle piece or plugin",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Find a better outlet for stress after long hospital shifts",
-   "better": "meditation / exercise",
+   "better": "meditation or exercise",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Drive down to the Tanger Outlet mall to return the winter coat",
-   "better": "coat / shopping bag",
+   "better": "coat or shopping bag",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "React to Sarah's engagement announcement in the family group chat",
-   "better": "speech bubble / heart",
+   "task": "React with a shocked face to the announcement in the group chat",
+   "better": "surprised emoticon face or speech bubble",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a sturdy 6-foot step ladder for ceiling work",
-   "better": "ladder",
-   "trap": "parent_topic"
+   "task": "Feed the pigs at the petting zoo this Saturday",
+   "better": "pig face with ears",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a North American Type B three-prong electrical socket. It is an ideal fit for home improvement tasks involving outlets, wiring, childproofing, smart plugs, and travel adapters, though its strong resemblance to a surprised face (:o) can cause momentary confusion at small sizes.",
@@ -210,6 +210,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "electrical outlet / wall socket",
+     "strength": "primary"
+    },
+    {
+     "meaning": "electricity / power / electrical wiring",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smart plug / power adapter",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "surprised or shocked face emoji",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very strong pareidolia makes it look like a surprised face emoji (:o) or a pig snout, especially at small sizes or to non-North American viewers unfamiliar with Type B sockets.",
+   "near_misses": [
+    {
+     "task": "Buy a cordless battery-powered lawnmower instead of a plug-in one",
+     "better": "lawnmower",
+     "trap": "property"
+    },
+    {
+     "task": "Plug the new shipping rate numbers into the Q3 forecast spreadsheet",
+     "better": "spreadsheet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Update the SEO plugin on the company WordPress site",
+     "better": "puzzle piece / plugin",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Find a better outlet for stress after long hospital shifts",
+     "better": "meditation / exercise",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drive down to the Tanger Outlet mall to return the winter coat",
+     "better": "coat / shopping bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "React to Sarah's engagement announcement in the family group chat",
+     "better": "speech bubble / heart",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a sturdy 6-foot step ladder for ceiling work",
+     "better": "ladder",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "outlet"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4105,
+    "output": 733,
+    "thoughts": 0,
+    "total": 4838
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:21Z"
+  }
+ },
+ "distinguishing": "Interchangeable in meaning with the other 3-prong outlet, but drawn with sharp-cornered rectangular vertical slots set wider apart and a smaller arched ground pin hole, making it look slightly more technical and mechanical."
 }

@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "cloud storage / cloud computing / online backup",
+   "meaning": "cloud storage, cloud computing, or online backup",
    "strength": "primary"
   },
   {
-   "meaning": "weather / forecast / sky / overcast",
+   "meaning": "weather, forecast, or overcast sky",
    "strength": "primary"
   },
   {
-   "meaning": "syncing / online service",
+   "meaning": "online sync or remote service",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Standard cloud glyph used interchangeably for both digital cloud storage and meteorological weather.",
+ "ambiguity": "Completely interchangeable with the plain empty cloud outline; both represent either digital cloud storage or meteorological weather.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -178,14 +178,19 @@
   },
   {
    "task": "Whisk egg whites until stiff peaks form for the pavlova",
-   "better": "whisk / bowl",
+   "better": "whisk / mixing bowl",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bake a batch of cream puffs for the party",
+   "better": "pastry / chef hat",
    "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear, unmistakable outline of a cloud with no modifiers. It serves two common task categories equally well: digital cloud services (iCloud, Drive, AWS, backups) and checking the weather forecast for outdoor or travel plans.",
@@ -203,6 +208,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cloud storage / cloud computing / online backup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weather / forecast / sky / overcast",
+     "strength": "primary"
+    },
+    {
+     "meaning": "syncing / online service",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Standard cloud glyph used interchangeably for both digital cloud storage and meteorological weather.",
+   "near_misses": [
+    {
+     "task": "Buy Cloudfoam running shoes in size 43",
+     "better": "running shoe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Weatherproof the cedar deck railings with sealant",
+     "better": "paintbrush or deck railing",
+     "trap": "property"
+    },
+    {
+     "task": "Check why the pool water looks cloudy after shocking it",
+     "better": "swimming pool / water",
+     "trap": "property"
+    },
+    {
+     "task": "Order a bag of cloud ear mushrooms from the Asian grocer",
+     "better": "mushroom",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send signed NDA to the new DevOps contractor",
+     "better": "contract / signature",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Whisk egg whites until stiff peaks form for the pavlova",
+     "better": "whisk / bowl",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cloud"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4012,
+    "output": 992,
+    "thoughts": 0,
+    "total": 5004
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "The left puff of the cloud outline continues inward as a curved contour line, giving it a slightly more 3D/fluffy look than the plain empty cloud outline, though the two are interchangeable in meaning."
 }

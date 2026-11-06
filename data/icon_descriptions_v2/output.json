@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with import/login icons where the arrow points into the box, or external link/share icons.",
+ "ambiguity": "Very easily confused at a glance with the square or rectangular frames where a right-pointing arrow enters through a gap on the left side (log in / import), since all of them feature a right-pointing arrow.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow exiting frame",
@@ -162,7 +162,17 @@
  "near_misses": [
   {
    "task": "Import CSV of new leads into HubSpot",
-   "better": "box with inward-pointing arrow (import)",
+   "better": "square or rectangular frame with a right-pointing arrow entering from the left",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Log in to the company VPN and employee portal",
+   "better": "square or window frame with a right-pointing arrow entering from the left",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Move the Q3 invoices into the accounting folder",
+   "better": "file folder with a right-pointing arrow inside",
    "trap": "lookalike_glyph"
   },
   {
@@ -172,22 +182,12 @@
   },
   {
    "task": "Check out that new ramen place on 5th Street",
-   "better": "bowl of noodles / restaurant",
+   "better": "bowl of noodles or restaurant icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check Emergency Exit lights in the warehouse",
-   "better": "running person exit sign or light",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Share Google Doc link with the design team",
-   "better": "share icon or link chain",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Clean the oven and fridge thoroughly",
-   "better": "cleaning spray or fridge",
+   "task": "Clean the oven and fridge before moving out",
+   "better": "cleaning spray or appliance icon",
    "trap": "parent_topic"
   }
  ],
@@ -212,6 +212,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "log out / sign out",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export data or files",
+     "strength": "primary"
+    },
+    {
+     "meaning": "exit / leave / check out",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "move out / offboard",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with import/login icons where the arrow points into the box, or external link/share icons.",
+   "near_misses": [
+    {
+     "task": "Import CSV of new leads into HubSpot",
+     "better": "box with inward-pointing arrow (import)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy imported Italian olive oil for dinner",
+     "better": "olive oil bottle",
+     "trap": "property"
+    },
+    {
+     "task": "Check out that new ramen place on 5th Street",
+     "better": "bowl of noodles / restaurant",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check Emergency Exit lights in the warehouse",
+     "better": "running person exit sign or light",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Share Google Doc link with the design team",
+     "better": "share icon or link chain",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean the oven and fridge thoroughly",
+     "better": "cleaning spray or fridge",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "business_messages",
+   "exit_to_app",
+   "tab_move",
+   "input",
+   "drive_file_move",
+   "drive_folder_upload",
+   "present_to_all"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12136,
+    "output": 4252,
+    "thoughts": 0,
+    "total": 16388
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "A square frame with a gap on the right wall through which a right-pointing arrow exits outward, representing logging out, signing out, or exporting, unlike the icons where the arrow enters from the left or stays enclosed."
 }

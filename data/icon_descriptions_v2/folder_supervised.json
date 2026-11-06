@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "shared folder or collaborator directory",
+   "meaning": "Shared folder or collaborator directory",
    "strength": "primary"
   },
   {
-   "meaning": "personal folder, user directory, or home folder",
+   "meaning": "Personal folder, user directory, or home folder",
    "strength": "primary"
   },
   {
-   "meaning": "client file, patient chart, or personnel dossier",
+   "meaning": "Client file, patient chart, or personnel dossier",
    "strength": "secondary"
   },
   {
-   "meaning": "folder access permissions or ownership",
+   "meaning": "Folder access permissions or ownership",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Distinction between 'my personal folder', 'a folder shared with someone', and 'a dossier/file about a specific person' depends entirely on context.",
+ "ambiguity": "Shares the identical folder outline and bottom-right badge placement with the Git repository folder; also ambiguous between 'my personal folder', 'a folder shared with someone', and 'a dossier about a person'.",
  "modifier_semantics": [
   {
    "modifier": "person bust badge at bottom right",
@@ -176,13 +176,23 @@
  ],
  "near_misses": [
   {
+   "task": "Clone the frontend repository and set up local env",
+   "better": "file folder with a Git branch badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reorganize the component subfolder hierarchy in the codebase",
+   "better": "file folder with a branching tree/Git badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a pack of hanging file folders for the desk drawer",
-   "better": "plain folder or office supplies icon (no person badge)",
+   "better": "plain file folder without a person badge",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Update my LinkedIn profile photo and bio",
-   "better": "user profile or person avatar icon (not a file folder)",
+   "better": "user profile or person avatar icon without a folder",
    "trap": "shared_vocabulary"
   },
   {
@@ -192,18 +202,13 @@
   },
   {
    "task": "Send the signed lease PDF to the landlord",
-   "better": "document/PDF or send/mail icon",
+   "better": "document or mail/send icon",
    "trap": "generic_verb"
   },
   {
    "task": "Encrypt my personal backup drive with FileVault",
-   "better": "hard drive or lock/encryption icon ('personal' is just a property)",
+   "better": "hard drive or lock/encryption icon",
    "trap": "property"
-  },
-  {
-   "task": "Zip the project folder and upload to S3",
-   "better": "archive/zip folder or cloud upload icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -229,6 +234,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shared folder or collaborator directory",
+     "strength": "primary"
+    },
+    {
+     "meaning": "personal folder, user directory, or home folder",
+     "strength": "primary"
+    },
+    {
+     "meaning": "client file, patient chart, or personnel dossier",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "folder access permissions or ownership",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Distinction between 'my personal folder', 'a folder shared with someone', and 'a dossier/file about a specific person' depends entirely on context.",
+   "near_misses": [
+    {
+     "task": "Buy a pack of hanging file folders for the desk drawer",
+     "better": "plain folder or office supplies icon (no person badge)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my LinkedIn profile photo and bio",
+     "better": "user profile or person avatar icon (not a file folder)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the new client to go over their onboarding timeline",
+     "better": "phone call icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Send the signed lease PDF to the landlord",
+     "better": "document/PDF or send/mail icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Encrypt my personal backup drive with FileVault",
+     "better": "hard drive or lock/encryption icon ('personal' is just a property)",
+     "trap": "property"
+    },
+    {
+     "task": "Zip the project folder and upload to S3",
+     "better": "archive/zip folder or cloud upload icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "folder_data"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4110,
+    "output": 1153,
+    "thoughts": 0,
+    "total": 5263
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "This outlined file folder features a solid person bust (head and shoulders) in the bottom right corner, indicating a user, personal,client, or shared folder rather than a Git code repository."
 }

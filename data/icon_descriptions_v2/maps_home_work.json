@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "real estate, housing, or property",
+   "meaning": "real estate, housing types, or residential and commercial property",
    "strength": "primary"
   },
   {
-   "meaning": "home and work / remote or hybrid work",
+   "meaning": "home and work, hybrid work, or commuting",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read equally as general housing/real estate (house + apartment) or as the pairing of home and office (hybrid work, commute).",
+ "ambiguity": "Can be read either as general housing/real estate (house plus apartment building) or as the pairing of home and office (hybrid work), and can be confused with single-house icons for general home tasks.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,12 +154,22 @@
  ],
  "near_misses": [
   {
+   "task": "Clean out the garage rafters at home before winter",
+   "better": "single plain house with doorway",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write the welcome guide and Wi-Fi info for Airbnb guests",
+   "better": "house outline with information letter i inside",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Fix the leaky kitchen faucet",
    "better": "faucet or wrench",
    "trap": "parent_topic"
   },
   {
-   "task": "Buy a house warming gift for Maya and Sam",
+   "task": "Buy a housewarming gift for Maya and Sam",
    "better": "wrapped gift box",
    "trap": "shared_vocabulary"
   },
@@ -172,16 +182,6 @@
    "task": "Check if the mortgage payment cleared the bank",
    "better": "bank or dollar sign",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Clean out the garage rafters before winter",
-   "better": "single house or garage",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book a hotel near the convention center in Boston",
-   "better": "bed or hotel building",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -205,6 +205,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "real estate, housing, or property",
+     "strength": "primary"
+    },
+    {
+     "meaning": "home and work / remote or hybrid work",
+     "strength": "primary"
+    },
+    {
+     "meaning": "neighborhood, town, or local community",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "moving between a house and an apartment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read equally as general housing/real estate (house + apartment) or as the pairing of home and office (hybrid work, commute).",
+   "near_misses": [
+    {
+     "task": "Fix the leaky kitchen faucet",
+     "better": "faucet or wrench",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a house warming gift for Maya and Sam",
+     "better": "wrapped gift box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book an in-home dog sitter for Thanksgiving week",
+     "better": "dog",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the mortgage payment cleared the bank",
+     "better": "bank or dollar sign",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Clean out the garage rafters before winter",
+     "better": "single house or garage",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a hotel near the convention center in Boston",
+     "better": "bed or hotel building",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "help_clinic",
+   "home",
+   "house"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6657,
+    "output": 2167,
+    "thoughts": 0,
+    "total": 8824
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:46Z"
+  }
+ },
+ "distinguishing": "This is the only icon pairing a small pitched-roof house with a tall multi-story building behind it, representing real estate/property types, a neighborhood, or the pairing of home and office."
 }

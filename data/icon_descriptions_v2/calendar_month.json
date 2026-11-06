@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "calendar, schedule, or dates",
+   "meaning": "monthly calendar, full schedule, or planner",
    "strength": "primary"
   },
   {
-   "meaning": "month view or weekly planner",
+   "meaning": "month view or recurring dates",
    "strength": "primary"
-  },
-  {
-   "meaning": "appointment or event booking",
-   "strength": "secondary"
   },
   {
    "meaning": "timetable or shift roster",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Easily treated as interchangeable with the other calendar icons (three-dot row, single-dot, or blank calendar) for general scheduling tasks when the distinction between a month grid and a single day is not the point.",
  "modifier_semantics": [
   {
    "modifier": "six dots in a 3x2 grid",
@@ -162,6 +158,21 @@
  ],
  "near_misses": [
   {
+   "task": "Block out today's single appointment on the calendar",
+   "better": "calendar with a single dot for one specific date",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clear all events to create a blank schedule for next week",
+   "better": "blank calendar with an empty body",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plan the three-day weekend itinerary",
+   "better": "calendar with a single row of three dots",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the electric bill before the 15th deadline",
    "better": "invoice, bill, or lightning bolt",
    "trap": "property"
@@ -172,30 +183,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Plan our third anniversary date night at the bistro",
-   "better": "heart, wine glasses, or restaurant",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the 9V battery in the hallway smoke detector",
-   "better": "9V battery or smoke detector",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Schedule annual chimney sweep before October",
    "better": "house, fireplace, or broom",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Buy cake candles and balloons for Leo",
-   "better": "birthday cake or balloons",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A universally recognizable calendar icon with two top binding rings, a header bar, and a 3x2 grid of dots representing days. It is ideal for tasks explicitly about calendars, schedules, timetables, and date planning, though in a task app it must not be overused for any task that merely has a due date or starts with 'schedule'.",
@@ -213,6 +209,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "calendar, schedule, or dates",
+     "strength": "primary"
+    },
+    {
+     "meaning": "month view or weekly planner",
+     "strength": "primary"
+    },
+    {
+     "meaning": "appointment or event booking",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "timetable or shift roster",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Pay the electric bill before the 15th deadline",
+     "better": "invoice, bill, or lightning bolt",
+     "trap": "property"
+    },
+    {
+     "task": "Buy fresh Medjool dates for the charcuterie board",
+     "better": "fruit or grocery bag",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Plan our third anniversary date night at the bistro",
+     "better": "heart, wine glasses, or restaurant",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the 9V battery in the hallway smoke detector",
+     "better": "9V battery or smoke detector",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule annual chimney sweep before October",
+     "better": "house, fireplace, or broom",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy cake candles and balloons for Leo",
+     "better": "birthday cake or balloons",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "date_range",
+   "today",
+   "event",
+   "calendar_today"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7991,
+    "output": 2433,
+    "thoughts": 238,
+    "total": 10662
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "It shows a two-row grid of six small dots inside the calendar body, representing a full monthly calendar or multi-week schedule rather than a single row of days, a single highlighted date, or a blank page."
 }

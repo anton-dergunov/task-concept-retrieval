@@ -424,3 +424,125 @@ def build_request(name: str, key: Optional[str] = None) -> Tuple[str, str, List[
               "(unrelated to this icon). Match their naturalness and variety; do not copy "
               "or paraphrase them:\n" + "\n".join(f"- {t}" for t in refs))
     return SYSTEM, prompt, [(glyph_png(name), "image/png")]
+
+
+# --- Pass 2: contrast among look-alikes (§5) ----------------------------------------
+
+CONTRAST_VERSION = "v2.1-contrast"
+LETTERS = "ABCDEFGH"
+
+CONTRAST_SYSTEM = SYSTEM.split("## How to work")[0] + """## This request: tell look-alike icons apart
+
+You see 2-8 icons that look alike, each under a letter. Each was already described on
+its own; that earlier description follows its image. Look-alike icons get shown for
+each other's tasks, and this request fixes that. Analyze ONLY what is drawn: there are
+no names or metadata, and you must not guess them.
+
+For each icon:
+1. Compare all of them side by side, literally, before interpreting: the base object, a
+   badge, a slash, fill vs outline, the number of bars or dots, an arrow's direction, a
+   small detail. If an earlier depiction or reading is wrong, correct it.
+2. distinguishing: one sentence on what sets this icon apart from the others in the
+   group, visually and in meaning. If two icons are interchangeable, say so.
+3. readings: 1-4 meanings a viewer would take it to have, strongest first, revised to
+   say what THIS icon means as opposed to its look-alikes. Keep good earlier readings.
+4. ambiguity: which look-alikes (named by what they show, never by letter) it could be
+   mistaken for, and when; "" if none.
+5. near_misses: 5-8 hard negatives, revised; keep the good earlier ones. At least 2 are
+   "lookalike_glyph" traps: a task that is right for a look-alike in this group but not
+   for this icon, with "better" naming that look-alike's concept in words (never a
+   letter). The other traps as before: property, generic_verb, shared_vocabulary,
+   parent_topic. Never a random unrelated task.
+6. distinctiveness (integer 1-5): 1 = interchangeable with a look-alike; 3 = different
+   on a close look; 5 = unique at a glance.
+
+Return one entry per icon, with its letter as id, in the order given. Return only JSON
+that follows the schema."""
+
+CONTRAST_SCHEMA = {
+    "type": "object",
+    "properties": {"icons": {"type": "array", "items": {
+        "type": "object",
+        "properties": {
+            "id": {"type": "string", "enum": list(LETTERS)},
+            "distinguishing": _S,
+            "readings": RESPONSE_SCHEMA["properties"]["readings"],
+            "ambiguity": _S,
+            "near_misses": RESPONSE_SCHEMA["properties"]["near_misses"],
+            "distinctiveness": _SCORE,
+        },
+        "required": ["id", "distinguishing", "readings", "ambiguity", "near_misses",
+                     "distinctiveness"]}}},
+    "required": ["icons"],
+}
+
+
+def _earlier(d: dict) -> str:
+    """A pass-1 description as the contrast request shows it (no names)."""
+    dep = d["depiction"]
+    lines = [f"Earlier description: drawn: {dep['primary_object']}; modifiers: "
+             f"{'; '.join(dep.get('modifiers') or []) or 'none'}",
+             "readings: " + "; ".join(f"{r['meaning']} ({r['strength']})" for r in d["readings"]),
+             f"ambiguity: {d.get('ambiguity') or 'none'}",
+             "near_misses:"]
+    lines += [f"- {n['task']} -> better: {n['better']} ({n['trap']})" for n in d["near_misses"]]
+    return "\n".join(lines)
+
+
+def build_contrast_request(names: Sequence[str], docs: Sequence[dict]):
+    """(system, prompt, parts) for one look-alike group; `docs` are the pass-1
+    descriptions. Parts interleave each letter, its glyph and its earlier description;
+    the names only locate the glyphs."""
+    letters = LETTERS[:len(names)]
+    parts: list = [f"{len(names)} look-alike icons: {', '.join(letters)}."]
+    for letter, name, d in zip(letters, names, docs):
+        parts += [f"Icon {letter}:", (glyph_png(name), "image/png"), _earlier(d)]
+    prompt = f"Return the entries for icons {', '.join(letters)}."
+    return CONTRAST_SYSTEM, prompt, parts
+
+
+_LETTER_REF = re.compile(r"\b(?:icon|glyph|letter)\s+[A-H]\b", re.I)
+
+
+def contrast_hard_problems(d, n: int) -> List[str]:
+    """Problems that make a contrast response unusable (it is retried)."""
+    if not isinstance(d, dict) or not isinstance(d.get("icons"), list):
+        return ["no icons list"]
+    ids = [e.get("id") for e in d["icons"] if isinstance(e, dict)]
+    if sorted(ids) != list(LETTERS[:n]):
+        return [f"ids {ids} != {list(LETTERS[:n])}"]
+    out = []
+    for e in d["icons"]:
+        if not str(e.get("distinguishing", "")).strip():
+            out.append(f"{e['id']}: distinguishing empty")
+        if not isinstance(e.get("readings"), list) or not e["readings"] or not all(
+                isinstance(r, dict) and str(r.get("meaning", "")).strip() for r in e["readings"]):
+            out.append(f"{e['id']}: readings malformed")
+        nm = e.get("near_misses")
+        if not isinstance(nm, list) or len(nm) < 3 or not all(
+                isinstance(x, dict) and str(x.get("task", "")).strip() for x in nm):
+            out.append(f"{e['id']}: near_misses malformed or fewer than 3")
+        v = e.get("distinctiveness")
+        if not isinstance(v, int) or isinstance(v, bool) or not 1 <= v <= 5:
+            out.append(f"{e['id']}: distinctiveness invalid")
+    longest = max((len(s) for s in _strings(d)), default=0)
+    if longest > MAX_STRING:
+        out.append(f"runaway string of {longest} characters")
+    return out
+
+
+def contrast_soft_problems(e: dict) -> List[str]:
+    """Departures from the requested counts and rules for one icon's entry."""
+    out = []
+    if not 1 <= len(e["readings"]) <= 4:
+        out.append(f"readings: {len(e['readings'])} not in 1-4")
+    if not 5 <= len(e["near_misses"]) <= 8:
+        out.append(f"near_misses: {len(e['near_misses'])} not in 5-8")
+    n_look = sum(1 for x in e["near_misses"] if x.get("trap") == "lookalike_glyph")
+    if n_look < 2:
+        out.append(f"lookalike_glyph traps: {n_look} < 2")
+    refs = [s for s in [e.get("ambiguity", ""), e.get("distinguishing", "")]
+            + [x.get("better", "") for x in e["near_misses"]] if _LETTER_REF.search(str(s))]
+    if refs:
+        out.append(f"refers to a letter {len(refs)}x")
+    return out

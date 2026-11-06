@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "copy or duplicate",
+   "meaning": "layers, bring to front / send to back, or overlapping shapes in design",
    "strength": "primary"
   },
   {
-   "meaning": "layers or overlapping shapes in graphic design",
+   "meaning": "boolean shape operation (subtract / intersect) in vector editing",
+   "strength": "primary"
+  },
+  {
+   "meaning": "copy or duplicate",
    "strength": "secondary"
   },
   {
-   "meaning": "boolean subtract or front-minus-back shape operation",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "multiple windows or tabs",
+   "meaning": "drop shadow or offset fill effect",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with window restore/maximize icons, generic copy icons where both squares are outlined, or boolean pathfinder icons in vector editors.",
+ "ambiguity": "Easily confused with the outlined overlapping squares or rectangles used as generic 'copy/duplicate' icons,though the solid black rear shape makes it look more like a vector pathfinder or layer-order icon.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -168,6 +168,16 @@
  ],
  "near_misses": [
   {
+   "task": "Photocopy the signed lease agreement for the landlord",
+   "better": "stacked document pages with folded corner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Duplicate the social media post template in Canva",
+   "better": "overlapping outlined squares (copy/duplicate icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Write website copy for the new landing page",
    "better": "document with text or pen",
    "trap": "shared_vocabulary"
@@ -183,25 +193,15 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Register copyright for the album artwork",
-   "better": "copyright C symbol",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Buy carbon copy receipt book for the market stall",
    "better": "receipt or notebook",
    "trap": "property"
-  },
-  {
-   "task": "Pay the notary fee in cash",
-   "better": "banknote or coin",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon shows two overlapping squares (one hollow, one filled), universally read in interfaces as copy/duplicate, layers, or boolean shape operations. It fits tasks about making photocopies, duplicating digital templates, or cleaning up duplicates, though it is abstract UI chrome that can be confused with window management icons.",
@@ -221,6 +221,96 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "copy or duplicate",
+     "strength": "primary"
+    },
+    {
+     "meaning": "layers or overlapping shapes in graphic design",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "boolean subtract or front-minus-back shape operation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "multiple windows or tabs",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with window restore/maximize icons, generic copy icons where both squares are outlined, or boolean pathfinder icons in vector editors.",
+   "near_misses": [
+    {
+     "task": "Write website copy for the new landing page",
+     "better": "document with text or pen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Get a spare apartment key cut at the hardware store",
+     "better": "key",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Install double-pane windows in the bedroom",
+     "better": "house window",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Register copyright for the album artwork",
+     "better": "copyright C symbol",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy carbon copy receipt book for the market stall",
+     "better": "receipt or notebook",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the notary fee in cash",
+     "better": "banknote or coin",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "content_copy",
+   "filter_none",
+   "file_copy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6644,
+    "output": 1988,
+    "thoughts": 0,
+    "total": 8632
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Unlike the other icons which show a detached L-shaped outline in the back, this icon's back square is solid black and directly touches the outlined front square, pointing more to graphic layers, front/back arrangement, or boolean shape operations than simple document copying."
 }

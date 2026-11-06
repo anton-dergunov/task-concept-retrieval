@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "gamepad face buttons / controller button layout",
+   "meaning": "gamepad action buttons with top (north) button pressed",
    "strength": "primary"
   },
   {
-   "meaning": "video gaming / console game",
+   "meaning": "video gaming or console controller",
    "strength": "primary"
   },
   {
-   "meaning": "four-burner cooktop indicator with top burner active",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "abstract four-way selection or category cluster",
+   "meaning": "four-way indicator with top position active",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without the outline of a controller shell, it looks like an abstract geometric symbol, a loading spinner, a multi-lens phone camera array, or a stove burner diagram.",
+ "ambiguity": "Easily confused at a glance with the other three four-circle gamepad button icons (with right, left, or bottom circle filled), and interchangeable with them for generic gaming tasks.",
  "modifier_semantics": [
   {
    "modifier": "filled top circle",
@@ -161,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Clean the sticky left action button on the Xbox controller",
+   "better": "four gamepad buttons in a diamond with the left circle filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Debug why the page loading spinner never disappears",
+   "better": "six hollow rings arranged in a circle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Sew the loose button back onto my navy winter coat",
    "better": "clothing button with thread holes",
    "trap": "shared_vocabulary"
@@ -171,17 +177,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Scrub burnt grease off the back stove burner ring",
-   "better": "stove / flame burner",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Wipe smudges off the three rear iPhone camera lenses",
-   "better": "camera / phone",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order pizza and drinks for the guys",
+   "task": "Order pizza and drinks for game night",
    "better": "pizza slice",
    "trap": "parent_topic"
   },
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts the classic four-button diamond cluster of a video game controller with the top button filled in. It fits tasks about controller configuration, button repair, and console gaming, though without the controller body it can be mistaken for an abstract symbol, a stove burner diagram, or camera lenses.",
@@ -214,6 +210,97 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "gamepad face buttons / controller button layout",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video gaming / console game",
+     "strength": "primary"
+    },
+    {
+     "meaning": "four-burner cooktop indicator with top burner active",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "abstract four-way selection or category cluster",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without the outline of a controller shell, it looks like an abstract geometric symbol, a loading spinner, a multi-lens phone camera array, or a stove burner diagram.",
+   "near_misses": [
+    {
+     "task": "Sew the loose button back onto my navy winter coat",
+     "better": "clothing button with thread holes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change the primary CTA button color on the checkout page",
+     "better": "UI rectangle button or palette",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Scrub burnt grease off the back stove burner ring",
+     "better": "stove / flame burner",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wipe smudges off the three rear iPhone camera lenses",
+     "better": "camera / phone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order pizza and drinks for the guys",
+     "better": "pizza slice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the garage door keypad button isn't lighting up",
+     "better": "numeric keypad or garage door",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "graph_6",
+   "gamepad_circle_right",
+   "gamepad_circle_left",
+   "gamepad_circle_down"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8107,
+    "output": 2567,
+    "thoughts": 233,
+    "total": 10907
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "Shows four circles in a diamond with the top (north) circle filled solid, distinguishing it from the right-, left-, and bottom-filled four-button icons and the six-ring spinner; for general gaming tasks the four diamond icons are largely interchangeable."
 }

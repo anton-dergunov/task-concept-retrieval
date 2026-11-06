@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a military flag or badge at very small sizes, though the side notches clearly read as a ticket stub.",
+ "ambiguity": "At small sizes, could be mistaken for the star inside a rounded square frame if the side notches are overlooked.",
  "modifier_semantics": [
   {
    "modifier": "five-pointed star in center",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Write a 5-star review for the plumber on Google",
+   "better": "star in a rounded square frame or star rating icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean up my starred bookmarks folder in Chrome",
+   "better": "star in a rounded square frame or bookmark icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Close Jira ticket PROJ-482 after deploying the hotfix",
    "better": "bug or issue tracker icon",
    "trap": "shared_vocabulary"
@@ -181,11 +191,6 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Write a 5-star review for the plumber on Google",
-   "better": "star rating icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check if the museum requires advance ticketed entry on Sundays",
    "better": "museum building icon",
    "trap": "property"
@@ -194,7 +199,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "A classic notched admission ticket stub with a centered star, immediately recognizable as an event, movie, or show ticket, or a voucher/coupon. It fits common real-life tasks around booking seats, printing passes, or redeeming vouchers, though software issues and traffic citations share the English word 'ticket' and belong elsewhere.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "admission ticket or event pass",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cinema, concert, theater, or show",
+     "strength": "primary"
+    },
+    {
+     "meaning": "coupon, voucher, or promotional pass",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "VIP pass or loyalty reward",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a military flag or badge at very small sizes, though the side notches clearly read as a ticket stub.",
+   "near_misses": [
+    {
+     "task": "Close Jira ticket PROJ-482 after deploying the hotfix",
+     "better": "bug or issue tracker icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $85 parking ticket online before the late fee kicks in",
+     "better": "car or fine/invoice icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book round-trip flights to Tokyo for October",
+     "better": "airplane icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order popcorn and soda for the movie night at home",
+     "better": "popcorn or drink icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Write a 5-star review for the plumber on Google",
+     "better": "star rating icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the museum requires advance ticketed entry on Sundays",
+     "better": "museum building icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "pages"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4062,
+    "output": 660,
+    "thoughts": 0,
+    "total": 4722
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:25Z"
+  }
+ },
+ "distinguishing": "Has a wider horizontal rectangular outline with semicircular punch-out notches on the left and right sides, making it an admission ticket or voucher rather than a framed star badge."
 }

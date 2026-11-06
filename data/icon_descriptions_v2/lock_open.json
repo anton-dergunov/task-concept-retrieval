@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "unlock, unfreeze, or open access",
+   "meaning": "unlock / unfreeze / open access",
    "strength": "primary"
   },
   {
-   "meaning": "physical padlock or lock",
+   "meaning": "unencrypted or public state / remove restriction",
    "strength": "primary"
   },
   {
-   "meaning": "account access, permissions, or security",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "unencrypted or public state",
+   "meaning": "open physical padlock",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the small gap under the left side of the shackle can blur, making it look identical to a closed padlock.",
+ "ambiguity": "Interchangeable in meaning with the swung-out open padlock, and easily mistaken for the plain closed padlock at small sizes when the small gap under the left leg of the shackle blurs.",
  "modifier_semantics": [
   {
    "modifier": "open shackle",
@@ -163,7 +159,17 @@
  "near_misses": [
   {
    "task": "Freeze all three credit bureaus after the data breach",
-   "better": "closed padlock",
+   "better": "plain closed padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure 15-minute auto-lock timeout on work laptop",
+   "better": "padlock with clock badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put a weatherproof padlock on the outdoor pool pump box",
+   "better": "padlock with water droplet badge",
    "trap": "lookalike_glyph"
   },
   {
@@ -177,30 +183,20 @@
    "trap": "property"
   },
   {
-   "task": "Lock the chicken coop before dark",
-   "better": "closed padlock or chicken",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pick up brown leather tote bag from the cobbler",
-   "better": "handbag / shopping bag",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a YubiKey 5C Nano for work laptop",
    "better": "USB security key",
    "trap": "parent_topic"
   },
   {
    "task": "Check whether the back patio door is locked",
-   "better": "door or closed padlock",
+   "better": "door or plain closed padlock",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows an unlocked padlock with a lifted shackle, universally understood as unlocking, opening access, unfreezing, or a physical padlock. It fits concrete tasks like lifting credit freezes, unlocking phones or cards, granting permissions, and maintaining or buying padlocks, though at tiny sizes the small gap in the shackle can be confused with a closed lock or a handbag.",
@@ -218,6 +214,103 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "unlock, unfreeze, or open access",
+     "strength": "primary"
+    },
+    {
+     "meaning": "physical padlock or lock",
+     "strength": "primary"
+    },
+    {
+     "meaning": "account access, permissions, or security",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "unencrypted or public state",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the small gap under the left side of the shackle can blur, making it look identical to a closed padlock.",
+   "near_misses": [
+    {
+     "task": "Freeze all three credit bureaus after the data breach",
+     "better": "closed padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cut a spare front door key for the dog walker",
+     "better": "key",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an unlocked Pixel 8a for Mom's birthday",
+     "better": "smartphone",
+     "trap": "property"
+    },
+    {
+     "task": "Lock the chicken coop before dark",
+     "better": "closed padlock or chicken",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up brown leather tote bag from the cobbler",
+     "better": "handbag / shopping bag",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a YubiKey 5C Nano for work laptop",
+     "better": "USB security key",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the back patio door is locked",
+     "better": "door or closed padlock",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "lock_open_right",
+   "water_lock",
+   "lock",
+   "lock_person",
+   "lock_clock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9438,
+    "output": 1901,
+    "thoughts": 210,
+    "total": 11549
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "The shackle remains centered over the padlock body with only a small gap above the left corner, making it visually subtler than the swung-out open padlock while sharing the exact same meaning."
 }

@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "contrast / brightness adjustment",
+   "meaning": "contrast or brightness adjustment",
    "strength": "primary"
   },
   {
@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "half moon / first quarter moon phase",
+   "meaning": "half-complete / 50% progress status",
    "strength": "secondary"
   },
   {
-   "meaning": "half-complete / 50% progress",
+   "meaning": "half moon / quarter moon phase",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Often interpreted interchangeably as photo/screen contrast, dark/light theme toggle, a half-moon phase, or a half-filled progress indicator.",
+ "ambiguity": "As a progress indicator, it only differs by one quadrant from the three-quarters filled circle; also reads interchangeably as contrast, dark mode, or a half moon.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Create a pie chart of Q3 marketing expenses",
+   "better": "three-quarters filled circle / pie chart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set a 45-minute timer for the laundry",
+   "better": "three-quarters filled circle or stopwatch",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy blackout curtains for the baby's nursery",
    "better": "curtains / window",
    "trap": "shared_vocabulary"
@@ -162,11 +172,6 @@
    "trap": "property"
   },
   {
-   "task": "Compare prices between the two hosting providers",
-   "better": "scale / comparison",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Order a high-contrast board book for the newborn",
    "better": "book",
    "trap": "property"
@@ -175,11 +180,6 @@
    "task": "Fix flickering backlight on the studio display",
    "better": "monitor",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Take vitamin D supplement every morning",
-   "better": "pill",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -203,6 +203,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "contrast / brightness adjustment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dark mode / light-dark theme toggle",
+     "strength": "primary"
+    },
+    {
+     "meaning": "half moon / first quarter moon phase",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "half-complete / 50% progress",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Often interpreted interchangeably as photo/screen contrast, dark/light theme toggle, a half-moon phase, or a half-filled progress indicator.",
+   "near_misses": [
+    {
+     "task": "Buy blackout curtains for the baby's nursery",
+     "better": "curtains / window",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay half of the deposit to the roofing contractor",
+     "better": "money / invoice",
+     "trap": "property"
+    },
+    {
+     "task": "Compare prices between the two hosting providers",
+     "better": "scale / comparison",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a high-contrast board book for the newborn",
+     "better": "book",
+     "trap": "property"
+    },
+    {
+     "task": "Fix flickering backlight on the studio display",
+     "better": "monitor",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Take vitamin D supplement every morning",
+     "better": "pill",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "clock_loader_80"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4061,
+    "output": 1025,
+    "thoughts": 0,
+    "total": 5086
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "Split evenly down the vertical center into a solid black left half and an open right half, which is the standard symbol for contrast, light/dark theme toggle, or 50% completion rather than a pie chart or 75% progress."
 }

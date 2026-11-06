@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "grid / matrix / table",
+   "meaning": "spreadsheet, data table, or matrix",
    "strength": "primary"
   },
   {
-   "meaning": "spreadsheet / data sheet",
+   "meaning": "grid layout or tile mosaic",
    "strength": "primary"
   },
   {
-   "meaning": "waffle / square waffle",
+   "meaning": "square waffle or waffle iron",
    "strength": "secondary"
   },
   {
-   "meaning": "tile work / floor grate / ice cube tray",
+   "meaning": "16-pad MIDI drum controller or floor grate",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read as a calendar without a header bar, an app launcher menu, a waffle, a MIDI drum pad controller, or bathroom tiles.",
+ "ambiguity": "Nearly interchangeable at small sizes with the 3x3 grid icon for general table, spreadsheet, or grid tasks; only distinguishable when a 3x3 structure (tic-tac-toe, Rubik's cube, 9-key keypad, sudoku block) is specifically meant.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Solve the daily sudoku or tic-tac-toe puzzle",
+   "better": "3x3 nine-cell grid",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Lubricate and re-sticker my 3x3 Rubik's cube",
+   "better": "3x3 nine-cell grid or cube",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book dentist appointment for next Tuesday on the calendar",
    "better": "calendar with header and date",
    "trap": "lookalike_glyph"
@@ -180,17 +190,12 @@
    "task": "Call the contractor about the cracked shower pan",
    "better": "phone or shower",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Install the new calculator app on my phone",
-   "better": "calculator with display screen",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a thick rounded square divided into a 4x4 grid of 16 smaller squares. It works well for tasks involving tables, matrices, spreadsheets, CSS grids, tile work, floor grates, or waffles, though at small sizes it can be confused with a calendar or generic UI grid.",
@@ -208,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "grid / matrix / table",
+     "strength": "primary"
+    },
+    {
+     "meaning": "spreadsheet / data sheet",
+     "strength": "primary"
+    },
+    {
+     "meaning": "waffle / square waffle",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tile work / floor grate / ice cube tray",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read as a calendar without a header bar, an app launcher menu, a waffle, a MIDI drum pad controller, or bathroom tiles.",
+   "near_misses": [
+    {
+     "task": "Book dentist appointment for next Tuesday on the calendar",
+     "better": "calendar with header and date",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the national grid electric bill before Friday",
+     "better": "lightning bolt or bill/invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a gridded notebook for math class",
+     "better": "notebook",
+     "trap": "property"
+    },
+    {
+     "task": "Rewatch The Matrix with Sam tonight",
+     "better": "movie clapperboard or TV screen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the contractor about the cracked shower pan",
+     "better": "phone or shower",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Install the new calculator app on my phone",
+     "better": "calculator with display screen",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "grid_on"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4064,
+    "output": 815,
+    "thoughts": 0,
+    "total": 4879
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Shows a denser 4x4 grid of 16 small squares inside a rounded frame, whereas the look-alike has a 3x3 grid of 9 larger squares; for general spreadsheet, table, or grid tasks the two are nearly interchangeable, though 4x4 leans slightly more toward a waffle, 16-pad MIDI controller, or fine mesh/tile mosaic."
 }

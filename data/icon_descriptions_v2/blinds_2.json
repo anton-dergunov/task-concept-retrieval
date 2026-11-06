@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "window blinds, shades, or roller shutters",
+   "meaning": "window blinds, roller shades, or shutters",
    "strength": "primary"
+  },
+  {
+   "meaning": "open window blinds",
+   "strength": "secondary"
   },
   {
    "meaning": "garage door or roll-up storefront shutter",
    "strength": "secondary"
-  },
-  {
-   "meaning": "storage box or chest of drawers",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a paint can with a drip running down the side, a beehive super, a 3-drawer nightstand, or a calendar icon.",
+ "ambiguity": "Virtually interchangeable at list size with the window blinds icon that has slanted trapezoidal slats and a longer pull cord.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -150,23 +150,23 @@
  ],
  "near_misses": [
   {
+   "task": "Tilt the bedroom Venetian blinds shut for privacy at night",
+   "better": "closed window blinds with angled slats and long cord",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Submit the itemized hotel receipt for travel reimbursement",
+   "better": "curled paper receipt or scroll",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Set up double-blind peer review form for the workshop submissions",
-   "better": "eye-off / anonymous review",
+   "better": "eye-off or anonymous review",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Hem the new linen living room curtains",
-   "better": "curtains / sewing machine",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pick up a gallon of eggshell white wall paint",
-   "better": "paint bucket / roller",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Wash the outside of the conservatory windows with a squeegee",
-   "better": "window / spray bottle",
+   "better": "window or spray bottle",
    "trap": "parent_topic"
   },
   {
@@ -176,14 +176,14 @@
   },
   {
    "task": "Pay the window treatment installer's final invoice",
-   "better": "invoice / payment",
+   "better": "invoice or payment",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a window with horizontal slats, a top valance, and a pull cord, representing window blinds, shades, or roller shutters. It is a strong fit for a specific family of home maintenance, decorating, and smart-home tasks, though at very small sizes the hanging cord can look like a drip on a paint can or a small chest of drawers.",
@@ -201,6 +201,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "window blinds, shades, or roller shutters",
+     "strength": "primary"
+    },
+    {
+     "meaning": "garage door or roll-up storefront shutter",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "storage box or chest of drawers",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a paint can with a drip running down the side, a beehive super, a 3-drawer nightstand, or a calendar icon.",
+   "near_misses": [
+    {
+     "task": "Set up double-blind peer review form for the workshop submissions",
+     "better": "eye-off / anonymous review",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hem the new linen living room curtains",
+     "better": "curtains / sewing machine",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up a gallon of eggshell white wall paint",
+     "better": "paint bucket / roller",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wash the outside of the conservatory windows with a squeegee",
+     "better": "window / spray bottle",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a pair of polarized sunglasses for driving",
+     "better": "sunglasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the window treatment installer's final invoice",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "blinds_2_closed",
+   "lab_profile",
+   "contract"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6688,
+    "output": 1173,
+    "thoughts": 0,
+    "total": 7861
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "Shows window blinds with flat rectangular slats and a short pull cord stopping at the middle bar, suggesting open blinds or a roller shutter, though nearly interchangeable with the slanted-slat blinds icon."
 }

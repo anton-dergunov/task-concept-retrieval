@@ -10,23 +10,23 @@
  },
  "readings": [
   {
-   "meaning": "car heater, defroster, or cabin climate control",
+   "meaning": "car heater, windshield defroster, or cabin climate control",
    "strength": "primary"
   },
   {
-   "meaning": "sauna, steam room, or infrared heat therapy",
+   "meaning": "sauna, steam room, or infrared heat therapy session",
    "strength": "primary"
   },
   {
-   "meaning": "overhead radiant heater or patio warmer",
+   "meaning": "overhead radiant heater, patio warmer, or passenger air vent",
    "strength": "secondary"
   },
   {
-   "meaning": "salon hood hair dryer or beauty treatment",
+   "meaning": "salon hood hair dryer or beauty heat treatment",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The arched shape with wavy lines can be read either as an automotive windshield defroster icon next to a passenger or as an overhead radiant heater, sauna emitter, or salon dryer hood.",
+ "ambiguity": "Visually and semantically interchangeable with the left-facing seated person beside an arched defroster/heater symbol; also ambiguous between automotive HVAC/defrost and a sauna or overhead heater.",
  "modifier_semantics": [
   {
    "modifier": "arched vent or windshield outline",
@@ -164,8 +164,18 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the driver-side cabin heater vent on a right-hand-drive car",
+   "better": "seated person facing left toward an arched heater or defroster symbol (interchangeable mirror glyph)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the rear window defroster fuse in the sedan",
+   "better": "rectangular rear defroster grid with wavy lines (without a seated person)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pick up a waterproof windshield cover for icy mornings",
-   "better": "car windshield",
+   "better": "car windshield with wipers",
    "trap": "shared_vocabulary"
   },
   {
@@ -179,25 +189,20 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Select window seats for both legs of the flight to Denver",
-   "better": "airplane seat",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a travel hair dryer with a diffuser attachment",
    "better": "handheld hair dryer",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Wash the microfiber towels",
-   "better": "towel or laundry",
+   "task": "Wash the microfiber sauna towels",
+   "better": "towel or washing machine",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon combines a seated passenger silhouette with a windshield defroster or overhead radiant heat symbol. It fits tasks centered on vehicle cabin heating/defrosting, overhead patio warmers, or sauna sessions, though at small sizes it can be confused with generic car seat or airline seat icons.",
@@ -215,6 +220,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car heater, defroster, or cabin climate control",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sauna, steam room, or infrared heat therapy",
+     "strength": "primary"
+    },
+    {
+     "meaning": "overhead radiant heater or patio warmer",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "salon hood hair dryer or beauty treatment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The arched shape with wavy lines can be read either as an automotive windshield defroster icon next to a passenger or as an overhead radiant heater, sauna emitter, or salon dryer hood.",
+   "near_misses": [
+    {
+     "task": "Pick up a waterproof windshield cover for icy mornings",
+     "better": "car windshield",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly natural gas heating bill before Friday",
+     "better": "bill or invoice",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Choose an ergonomic office chair with lumbar support",
+     "better": "office chair",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Select window seats for both legs of the flight to Denver",
+     "better": "airplane seat",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a travel hair dryer with a diffuser attachment",
+     "better": "handheld hair dryer",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wash the microfiber towels",
+     "better": "towel or laundry",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_defrost_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4108,
+    "output": 1189,
+    "thoughts": 136,
+    "total": 5433
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:37Z"
+  }
+ },
+ "distinguishing": "Shows the seated person facing right with the arched defroster or heater symbol in front of them on the right, making it a horizontal mirror of the left-facing version and completely interchangeable in meaning."
 }

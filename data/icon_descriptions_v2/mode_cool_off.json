@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "cooling or air conditioning turned off",
+   "meaning": "air conditioning or cooling turned off",
    "strength": "primary"
   },
   {
-   "meaning": "unfreeze (account, credit, or software state)",
+   "meaning": "unfreeze (food, pipes, or a frozen state)",
    "strength": "secondary"
   },
   {
-   "meaning": "frost protection or anti-freeze",
+   "meaning": "no frost or frost-free mode",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the thick diagonal slash blends with the snowflake branches, making it look like a plain snowflake or a spiky asterisk.",
+ "ambiguity": "At small sizes, the diagonal slash aligns with the 45-degree chevron branches of the plain snowflakes, making it easy to misread as an unslashed snowflake.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -160,40 +160,45 @@
  ],
  "near_misses": [
   {
+   "task": "Freeze leftover bone broth in silicone cubes",
+   "better": "plain unslashed snowflake for freezing",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Service the bedroom air conditioner before summer hits",
+   "better": "plain unslashed snowflake for air conditioning",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the mountain snow report before driving up to Tahoe",
+   "better": "plain unslashed snowflake for snow weather",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy frost-free outdoor sillcock valves for the hose bibs",
-   "better": "faucet or valve",
+   "better": "faucet or valve icon",
    "trap": "property"
   },
   {
    "task": "Check if the freezer door seal is leaking cold air",
-   "better": "refrigerator / freezer",
+   "better": "refrigerator or plain snowflake icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Freeze leftover bone broth in silicone cubes",
-   "better": "plain snowflake (without slash)",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book ski lessons at Whistler for the February trip",
-   "better": "skis or plain snowflake",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Prepare a quick icebreaker activity for Monday's team onboarding",
-   "better": "people / chat bubbles",
+   "better": "people or chat bubbles icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Wipe down the sticky shelves with warm baking soda water",
-   "better": "sponge / spray bottle",
+   "task": "Wipe down the sticky freezer shelves with warm baking soda water",
+   "better": "sponge or spray bottle icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A snowflake with a diagonal slash universally signifies defrosting, thawing, de-icing, or turning off cooling/AC. It maps cleanly to common household chores (defrosting a freezer, thawing meat, shutting down AC for winter, de-icing a car) and metaphorical unfreezing (lifting a credit freeze), though at tiny sizes the slash can merge with the snowflake's arms.",
@@ -211,6 +216,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "defrost, thaw, or de-ice",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cooling or air conditioning turned off",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unfreeze (account, credit, or software state)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "frost protection or anti-freeze",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the thick diagonal slash blends with the snowflake branches, making it look like a plain snowflake or a spiky asterisk.",
+   "near_misses": [
+    {
+     "task": "Buy frost-free outdoor sillcock valves for the hose bibs",
+     "better": "faucet or valve",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the freezer door seal is leaking cold air",
+     "better": "refrigerator / freezer",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Freeze leftover bone broth in silicone cubes",
+     "better": "plain snowflake (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book ski lessons at Whistler for the February trip",
+     "better": "skis or plain snowflake",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Prepare a quick icebreaker activity for Monday's team onboarding",
+     "better": "people / chat bubbles",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wipe down the sticky shelves with warm baking soda water",
+     "better": "sponge / spray bottle",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ac_unit",
+   "mode_cool"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5405,
+    "output": 1693,
+    "thoughts": 53,
+    "total": 7151,
+    "seconds": 59.93,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:12:56Z"
+  }
+ },
+ "distinguishing": "A diagonal slash cuts across the four-armed snowflake from top-left to bottom-right, reversing the meaning from snow/cooling/freezing to defrosting, thawing, or turning cooling off."
 }

@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "picture-in-picture mode or floating video window",
+   "meaning": "picture-in-picture mode or floating video overlay on a screen",
    "strength": "primary"
   },
   {
-   "meaning": "postcard or envelope with a postage stamp",
+   "meaning": "postcard or letter with a postage stamp in the top-right corner",
    "strength": "secondary"
   },
   {
-   "meaning": "screen or display layout with corner inset",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "action camera or GoPro housing",
+   "meaning": "display layout with corner inset or webcam overlay",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with a postcard or stamped letter, a credit card with a chip, or a minimal action camera like a GoPro.",
+ "ambiguity": "Nearly interchangeable at small sizes with the thick-header browser window with a right-side inset rectangle; also frequently read as a stamped postcard or envelope.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -45,11 +41,6 @@
    "task": "Fix PiP playback bug",
    "parent": "",
    "domain": "tech"
-  },
-  {
-   "task": "Mail postcard to Grandma",
-   "parent": "",
-   "domain": "communication"
   },
   {
    "task": "Webcam overlay positioning",
@@ -152,13 +143,18 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new 27-inch 4K monitor for the home office desk",
-   "better": "desktop monitor with stand",
+   "task": "Fix CSS layout of the embedded modal in the web browser window",
+   "better": "browser window with thick top bar and inset rectangle",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Activate the new Visa credit card with contactless chip",
-   "better": "credit card with magnetic stripe and chip",
+   "task": "Sign the back of the new corporate credit card",
+   "better": "card with top magnetic stripe and signature box",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new 27-inch 4K monitor for the home office desk",
+   "better": "desktop monitor with stand",
    "trap": "lookalike_glyph"
   },
   {
@@ -185,7 +181,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a large rounded rectangle with a smaller rectangle in the upper-right corner, which is the standard UI glyph for picture-in-picture (PiP) mode or video overlay, though outside of a software context it strongly resembles a postcard with a stamp. It fits niche technical and video-editing tasks around floating players or webcam overlays, as well as mailing postcards, but is somewhat abstract at a glance.",
@@ -203,6 +199,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "picture-in-picture mode or floating video window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "postcard or envelope with a postage stamp",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "screen or display layout with corner inset",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "action camera or GoPro housing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with a postcard or stamped letter, a credit card with a chip, or a minimal action camera like a GoPro.",
+   "near_misses": [
+    {
+     "task": "Buy a new 27-inch 4K monitor for the home office desk",
+     "better": "desktop monitor with stand",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Activate the new Visa credit card with contactless chip",
+     "better": "credit card with magnetic stripe and chip",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Frame the 8x10 family portrait for the hallway wall",
+     "better": "picture frame with mountain and sun",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Watch the new documentary on Netflix tonight",
+     "better": "television or play button",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Wash the living room windows before the guests arrive",
+     "better": "window panes with curtains or sparkles",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a replacement microphone for the webcam",
+     "better": "microphone",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "iframe"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4083,
+    "output": 698,
+    "thoughts": 144,
+    "total": 4925
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Has a uniform outer border with no thick top header bar, and the smaller outlined rectangle sits in the upper-right corner like a screen PiP overlay or a postage stamp."
 }

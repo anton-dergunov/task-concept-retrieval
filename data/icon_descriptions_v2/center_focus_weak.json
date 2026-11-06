@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "camera focus, viewfinder, or screenshot capture",
+   "meaning": "camera focus, viewfinder, or center-weighted metering",
    "strength": "primary"
   },
   {
@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "scan document, QR code, or receipt",
+   "meaning": "screenshot or screen capture",
    "strength": "secondary"
   },
   {
-   "meaning": "center alignment or target focus",
+   "meaning": "scan document or receipt",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a full-screen UI toggle, a generic camera icon, a QR code scanner, or a record button.",
+ "ambiguity": "Nearly identical to the corner-bracket viewfinder icons with a smaller or larger central ring; also easily mistaken for a generic camera icon, QR code scanner, or fullscreen toggle.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -169,8 +169,18 @@
  ],
  "near_misses": [
   {
+   "task": "Test single-point spot autofocus on macro subjects",
+   "better": "viewfinder brackets with a small central ring",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order printed QR code stickers for the café tables",
+   "better": "QR code",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Focus on finishing the Q3 marketing proposal today",
-   "better": "document or target",
+   "better": "document or target bullseye",
    "trap": "shared_vocabulary"
   },
   {
@@ -184,16 +194,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Fix full-screen video playback bug on Safari",
-   "better": "video player or bug",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order printed QR code stickers for the café tables",
-   "better": "QR code",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the invoice from the freelance photographer",
    "better": "invoice or money",
    "trap": "parent_topic"
@@ -202,7 +202,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a camera viewfinder reticle or focus frame (four corner brackets around a center ring), widely used for camera autofocus, screenshots, mobile document scanning, and visual search (like Google Lens). It fits a solid niche of photography, screen-capture, and scanning tasks, though it can be confused with full-screen UI toggles or generic camera icons.",
@@ -222,6 +222,95 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera focus, viewfinder, or screenshot capture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "visual search, image recognition, or Google Lens",
+     "strength": "primary"
+    },
+    {
+     "meaning": "scan document, QR code, or receipt",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "center alignment or target focus",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a full-screen UI toggle, a generic camera icon, a QR code scanner, or a record button.",
+   "near_misses": [
+    {
+     "task": "Focus on finishing the Q3 marketing proposal today",
+     "better": "document or target",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule annual eye exam and contact lens fitting",
+     "better": "eye or glasses",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new 50mm prime camera lens",
+     "better": "camera lens barrel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix full-screen video playback bug on Safari",
+     "better": "video player or bug",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order printed QR code stickers for the café tables",
+     "better": "QR code",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the invoice from the freelance photographer",
+     "better": "invoice or money",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "filter_center_focus",
+   "center_focus_strong"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5369,
+    "output": 1541,
+    "thoughts": 186,
+    "total": 7096
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Features a medium-sized central ring inside the four corner brackets, sitting visually between the small-ring and large-ring variants and essentially interchangeable with both for general tasks."
 }

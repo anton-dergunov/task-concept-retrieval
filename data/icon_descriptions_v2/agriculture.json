@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Equally readable as an open-cab farm tractor or a riding lawnmower; lack of visible mower deck beneath the chassis leans toward tractor, while lack of exhaust stack or enclosed cab leans toward riding mower.",
+ "ambiguity": "At a tiny size, its two unequal wheels could briefly be confused with the two-wheeled cycle attachment or walk-behind machine, though the large wheel is on the left here and it has a clear seat and steering wheel.",
  "modifier_semantics": [],
  "domains": [
   "outdoors",
@@ -37,11 +37,6 @@
   "rent compact utility tractor"
  ],
  "example_tasks": [
-  {
-   "task": "Change tractor oil",
-   "parent": "",
-   "domain": "outdoors"
-  },
   {
    "task": "Mow the back two acres",
    "parent": "",
@@ -148,6 +143,16 @@
  ],
  "near_misses": [
   {
+   "task": "Attach the front handcycle power-assist to the wheelchair before the park trip",
+   "better": "wheelchair front bike attachment / handcycle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hitch the kid's tag-along trailer bike to the commuter frame",
+   "better": "two-part cycle / bicycle trailer attachment",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Push-mow the narrow strip along the sidewalk",
    "better": "push lawnmower",
    "trap": "lookalike_glyph"
@@ -171,11 +176,6 @@
    "task": "Read chapters 4-6 on tractor-trailer air brake systems",
    "better": "semi-truck / book",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Weed the raised strawberry beds by hand",
-   "better": "plant / trowel",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -199,6 +199,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "tractor",
+     "strength": "primary"
+    },
+    {
+     "meaning": "riding lawnmower / garden tractor",
+     "strength": "primary"
+    },
+    {
+     "meaning": "farming / agriculture / yard work",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Equally readable as an open-cab farm tractor or a riding lawnmower; lack of visible mower deck beneath the chassis leans toward tractor, while lack of exhaust stack or enclosed cab leans toward riding mower.",
+   "near_misses": [
+    {
+     "task": "Push-mow the narrow strip along the sidewalk",
+     "better": "push lawnmower",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a toy tractor for Leo's 4th birthday",
+     "better": "gift / toy",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book tickets for the county agricultural fair",
+     "better": "ticket",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Renew farm liability insurance policy",
+     "better": "shield / insurance document",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Read chapters 4-6 on tractor-trailer air brake systems",
+     "better": "semi-truck / book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Weed the raised strawberry beds by hand",
+     "better": "plant / trowel",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bike_scooter"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 1146,
+    "thoughts": 245,
+    "total": 5464
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "Shows a single-piece riding vehicle with a large rear wheel on the left, a smaller front wheel on the right, a seat, an angled steering wheel, and a boxy front hood, representing a tractor or riding lawnmower rather than a two-part cycle or walk-behind attachment."
 }

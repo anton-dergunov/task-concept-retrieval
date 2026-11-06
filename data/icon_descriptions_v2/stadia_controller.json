@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Completely interchangeable with the two-button video game controller for any gaming or controller task.",
  "modifier_semantics": [],
  "domains": [
   "hobbies",
@@ -171,7 +171,12 @@
   },
   {
    "task": "Calibrate the DJI drone controller before the mountain trip",
-   "better": "drone",
+   "better": "drone or RC transmitter with antennas",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean the A and B buttons on the vintage 8-bit NES two-button controller",
+   "better": "video game controller with two buttons",
    "trap": "lookalike_glyph"
   },
   {
@@ -185,7 +190,7 @@
    "trap": "property"
   },
   {
-   "task": "Book flights to Cologne",
+   "task": "Book flights to Cologne for Gamescom",
    "better": "airplane / flight",
    "trap": "parent_topic"
   }
@@ -193,7 +198,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "An immediately recognizable gamepad silhouette that cleanly represents video games, consoles, and controllers. It fits personal hobby, tech setup, shopping, and game-development tasks well, though non-video 'games' (board games, sports games) should use more specific icons like dice or a ball.",
@@ -211,6 +216,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video game controller / gamepad",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video games / gaming",
+     "strength": "primary"
+    },
+    {
+     "meaning": "game console (PlayStation, Xbox, Nintendo)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "game development or testing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Bring Catan and Ticket to Ride to Friday board game night",
+     "better": "dice or board game",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy four tickets for Saturday's Lakers game",
+     "better": "ticket or basketball",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the batteries in the garage door remote control",
+     "better": "remote control / garage",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Calibrate the DJI drone controller before the mountain trip",
+     "better": "drone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Meet the financial controller to sign off on Q3 expenses",
+     "better": "accounting / document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order an ergonomic desk chair for the gaming setup",
+     "better": "office chair",
+     "trap": "property"
+    },
+    {
+     "task": "Book flights to Cologne",
+     "better": "airplane / flight",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sports_esports"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4003,
+    "output": 1088,
+    "thoughts": 0,
+    "total": 5091
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:50Z"
+  }
+ },
+ "distinguishing": "Shows four round action buttons in a diamond pattern and rounded D-pad arms, though in meaning it is completely interchangeable with the two-button gamepad."
 }

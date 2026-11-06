@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "read email or inbox zero",
-   "strength": "primary"
-  },
-  {
    "meaning": "verified email address or confirmation email",
    "strength": "primary"
   },
   {
-   "meaning": "sent or delivered message",
-   "strength": "secondary"
+   "meaning": "inbox zero or all emails read and completed",
+   "strength": "primary"
   },
   {
-   "meaning": "RSVP or invitation confirmation",
+   "meaning": "delivered message or RSVP confirmation",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Minimal; could be confused with a plain email icon at very small sizes if the checkmark blends into the corner.",
+ "ambiguity": "At small sizes, the bottom-right checkmark can look similar to the right-pointing arrow at the same corner of the envelope.",
  "modifier_semantics": [
   {
    "modifier": "checkmark badge at bottom right corner",
@@ -160,33 +156,33 @@
  ],
  "near_misses": [
   {
-   "task": "Buy padded shipping envelopes for Etsy orders",
-   "better": "package or plain envelope",
-   "trap": "shared_vocabulary"
+   "task": "Forward the signed contract to the legal team",
+   "better": "envelope with right-pointing arrow",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Check the physical mailbox at the end of the driveway",
-   "better": "postbox",
+   "task": "Send a quick email to the landlord about the leaky faucet",
+   "better": "plain envelope or envelope with right-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy padded shipping envelopes for Etsy orders",
+   "better": "package or plain envelope icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check with Dave about the Q3 server budget",
-   "better": "person or speech bubble",
+   "better": "person or speech bubble icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Write a condolence card to Aunt Clara",
-   "better": "greeting card or pen",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the graphic designer for the email template",
-   "better": "money or credit card",
+   "better": "money or credit card icon",
    "trap": "parent_topic"
   },
   {
    "task": "Verify my identity with a passport scan",
-   "better": "passport or ID card",
+   "better": "passport or ID card icon",
    "trap": "generic_verb"
   }
  ],
@@ -211,6 +207,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "read email or inbox zero",
+     "strength": "primary"
+    },
+    {
+     "meaning": "verified email address or confirmation email",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sent or delivered message",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "RSVP or invitation confirmation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Minimal; could be confused with a plain email icon at very small sizes if the checkmark blends into the corner.",
+   "near_misses": [
+    {
+     "task": "Buy padded shipping envelopes for Etsy orders",
+     "better": "package or plain envelope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the physical mailbox at the end of the driveway",
+     "better": "postbox",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check with Dave about the Q3 server budget",
+     "better": "person or speech bubble",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Write a condolence card to Aunt Clara",
+     "better": "greeting card or pen",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the graphic designer for the email template",
+     "better": "money or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify my identity with a passport scan",
+     "better": "passport or ID card",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mail_off",
+   "attach_email",
+   "stacked_email",
+   "mail",
+   "unsubscribe",
+   "forward_to_inbox",
+   "outgoing_mail"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12060,
+    "output": 2435,
+    "thoughts": 63,
+    "total": 14558
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "A checkmark badge at the bottom-right corner of the envelope indicates a verified email, read/completed inbox, or confirmed delivery."
 }

@@ -9,19 +9,19 @@
  },
  "readings": [
   {
+   "meaning": "three-finger gesture or multi-touch trackpad gesture",
+   "strength": "primary"
+  },
+  {
    "meaning": "touchpad or trackpad",
    "strength": "primary"
   },
   {
-   "meaning": "multi-touch gesture (three-finger swipe or tap)",
-   "strength": "primary"
-  },
-  {
-   "meaning": "touchscreen interaction or tablet input",
+   "meaning": "touchscreen or interactive tablet display",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the three fingers can look like vertical bars or a chart inside a box, or be confused with a generic hand/stop icon.",
+ "ambiguity": "At list size it is almost indistinguishable from the two-finger and one-finger touchpad icons unless the viewer counts the raised fingers.",
  "modifier_semantics": [
   {
    "modifier": "three-finger hand overlay",
@@ -155,14 +155,19 @@
  ],
  "near_misses": [
   {
+   "task": "Fix inverted two-finger scroll direction in laptop settings",
+   "better": "touchpad with two-finger hand gesture",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check in at the airport self-service touchscreen kiosk",
+   "better": "touchscreen with single pointing finger",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy new wireless gaming mouse for desktop",
    "better": "computer mouse",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace cracked iPad glass screen",
-   "better": "tablet",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy touchscreen-compatible winter gloves",
@@ -170,17 +175,12 @@
    "trap": "property"
   },
   {
-   "task": "Wacom drawing tablet nib replacement",
+   "task": "Replace worn Wacom drawing tablet stylus nibs",
    "better": "stylus and drawing tablet",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Wash hands before kneading dough",
-   "better": "hand with water/soap",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order replacement AA rechargeable batteries",
+   "task": "Order replacement AA rechargeable batteries for wireless trackpad",
    "better": "battery",
    "trap": "parent_topic"
   }
@@ -188,7 +188,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a rectangular touchpad or screen with a three-finger hand gesture, standardly representing a laptop trackpad or multi-touch gestures. It fits a narrow but real set of tech tasks around configuring, fixing, or buying a trackpad/touchpad, though at small sizes the three fingers can be slightly busy.",
@@ -206,6 +206,88 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "touchpad or trackpad",
+     "strength": "primary"
+    },
+    {
+     "meaning": "multi-touch gesture (three-finger swipe or tap)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "touchscreen interaction or tablet input",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the three fingers can look like vertical bars or a chart inside a box, or be confused with a generic hand/stop icon.",
+   "near_misses": [
+    {
+     "task": "Buy new wireless gaming mouse for desktop",
+     "better": "computer mouse",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy touchscreen-compatible winter gloves",
+     "better": "gloves",
+     "trap": "property"
+    },
+    {
+     "task": "Wacom drawing tablet nib replacement",
+     "better": "stylus and drawing tablet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wash hands before kneading dough",
+     "better": "hand with water/soap",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order replacement AA rechargeable batteries",
+     "better": "battery",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "trackpad_input_2",
+   "trackpad_input"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5304,
+    "output": 1473,
+    "thoughts": 158,
+    "total": 6935
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:15Z"
+  }
+ },
+ "distinguishing": "Three fingers (index, middle, and ring) are extended upward over the rectangular pad, compared to two extended fingers or a single pointing finger in the look-alikes; for general touchpad or touchscreen tasks they are nearly interchangeable, though this specifically cues three-finger multi-touch gestures."
 }

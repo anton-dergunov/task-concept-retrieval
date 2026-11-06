@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic photo frame or contact card at very small sizes if the top clapper stripes blur together, or with a live video call icon.",
+ "ambiguity": "Shares the exact outer clapperboard frame with the clapperboard with sparkle stars, and could be confused at tiny sizes if the inner silhouette blurs, or mistaken for a live video call or contact card icon.",
  "modifier_semantics": [
   {
    "modifier": "person silhouette",
@@ -163,6 +163,16 @@
  ],
  "near_misses": [
   {
+   "task": "Add sparkle transitions and VFX to the promo clip",
+   "better": "clapperboard with sparkle stars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Generate AI B-roll footage using Sora",
+   "better": "clapperboard with sparkle stars",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Hop on Zoom with Alex at 3pm",
    "better": "video camera or phone call",
    "trap": "lookalike_glyph"
@@ -170,7 +180,7 @@
   {
    "task": "Update my LinkedIn profile headshot",
    "better": "user avatar or camera photo",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy two IMAX tickets for Dune on Friday night",
@@ -183,14 +193,9 @@
    "trap": "property"
   },
   {
-   "task": "Back up raw B-roll of the mountain hike to the NAS",
+   "task": "Back up raw footage of the interview to the NAS",
    "better": "hard drive or cloud storage",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Watch the new Studio Ghibli movie with the kids",
-   "better": "plain film clapperboard or TV screen",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -214,6 +219,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "personal video, vlog, or talking-head recording",
+     "strength": "primary"
+    },
+    {
+     "meaning": "actor, casting, or self-tape audition",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video interview, recorded lecture, or webinar speaker",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "creator channel or video profile",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic photo frame or contact card at very small sizes if the top clapper stripes blur together, or with a live video call icon.",
+   "near_misses": [
+    {
+     "task": "Hop on Zoom with Alex at 3pm",
+     "better": "video camera or phone call",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my LinkedIn profile headshot",
+     "better": "user avatar or camera photo",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy two IMAX tickets for Dune on Friday night",
+     "better": "movie ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the new monitor supports 4K video playback",
+     "better": "computer monitor",
+     "trap": "property"
+    },
+    {
+     "task": "Back up raw B-roll of the mountain hike to the NAS",
+     "better": "hard drive or cloud storage",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Watch the new Studio Ghibli movie with the kids",
+     "better": "plain film clapperboard or TV screen",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "movie_filter"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4095,
+    "output": 1145,
+    "thoughts": 0,
+    "total": 5240
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:16Z"
+  }
+ },
+ "distinguishing": "Shows a person's head-and-shoulders silhouette inside the clapperboard frame rather than two four-pointed sparkle stars, pointing to a person on video (vlog, self-tape, speaker, actor) rather than visual effects or AI video."
 }

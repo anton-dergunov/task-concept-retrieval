@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "North American Type B travel plug adapter",
+   "meaning": "North American Type B travel plug adapter or smart plug",
    "strength": "primary"
+  },
+  {
+   "meaning": "surprised, shocked, or gasping face emoji",
+   "strength": "secondary"
   },
   {
    "meaning": "household electricity, wiring, or power supply",
    "strength": "secondary"
-  },
-  {
-   "meaning": "surprised or shocked face emoji",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly resembles a surprised or gasping cartoon face (pareidolia), especially outside of a home or hardware context.",
+ "ambiguity": "Virtually identical in meaning to the three-prong electrical outlet with squared rectangular slots and a smaller ground hole; also strongly resembles a surprised or gasping cartoon face (pareidolia).",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -170,7 +170,12 @@
   },
   {
    "task": "Practice my surprised expression for the drama club audition",
-   "better": "theater masks or face",
+   "better": "theater masks or emoticon face with eyebrows",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Send a shocked reaction emoji to Sarah's engagement text",
+   "better": "speech bubble or surprised emoticon face",
    "trap": "lookalike_glyph"
   },
   {
@@ -187,7 +192,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a North American Type B three-prong electrical socket. It is ideal for home electrical maintenance, smart plugs, babyproofing outlets, and travel power adapters, though its strong pareidolia makes it look like a surprised emoji face out of context.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "electrical outlet, wall socket, or power receptacle",
+     "strength": "primary"
+    },
+    {
+     "meaning": "North American Type B travel plug adapter",
+     "strength": "primary"
+    },
+    {
+     "meaning": "household electricity, wiring, or power supply",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "surprised or shocked face emoji",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly resembles a surprised or gasping cartoon face (pareidolia), especially outside of a home or hardware context.",
+   "near_misses": [
+    {
+     "task": "Buy a cordless drill so we don't need an outlet in the shed",
+     "better": "power drill",
+     "trap": "property"
+    },
+    {
+     "task": "Drive out to the Tanger Outlet Mall for winter coats",
+     "better": "shopping bag or coat",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Unblock the washing machine drain outlet hose",
+     "better": "washing machine or pipe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice my surprised expression for the drama club audition",
+     "better": "theater masks or face",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Plug the new numbers into the Q3 revenue spreadsheet",
+     "better": "spreadsheet or chart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a tall brass floor lamp for the reading corner",
+     "better": "floor lamp",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "smart_outlet"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4105,
+    "output": 733,
+    "thoughts": 0,
+    "total": 4838
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:21Z"
+  }
+ },
+ "distinguishing": "Interchangeable in meaning as a North American 3-prong electrical outlet, though its rounded pill-shaped vertical slots and larger arched bottom opening make it look slightly more like a gasping or surprised face emoji than the squared-slot version."
 }

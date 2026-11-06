@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "smart display / home hub / Echo Show / Nest Hub",
+   "meaning": "smart display / home hub (Echo Show, Nest Hub) with four voice-assistant dots",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "digital clock / bedside alarm display",
+   "meaning": "digital bedside clock or alarm display",
    "strength": "secondary"
   },
   {
-   "meaning": "TV / monitor loading or waiting",
+   "meaning": "TV or monitor loading / buffering",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like a generic PIN/password field, a chat bubble with typing indicator, or a smart home display (like Google Nest Hub showing four assistant dots).",
+ "ambiguity": "Virtually indistinguishable at small sizes from the sharper-cornered monitor on a curved base; also resembles a chat typing bubble or a generic PIN input box.",
  "modifier_semantics": [
   {
    "modifier": "four horizontal dots inside screen",
@@ -160,8 +160,18 @@
  ],
  "near_misses": [
   {
+   "task": "Reset the Windows login PIN on my desktop PC",
+   "better": "sharper-cornered desktop monitor with four password dots (if distinguishing desktop monitor from rounded smart hub, though the two glyphs are nearly interchangeable at small sizes) or a lock/password icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Text Sarah about Saturday dinner plans",
    "better": "speech bubble / message icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a 27-inch 4K monitor for the home office desk",
+   "better": "plain desktop monitor icon without dots",
    "trap": "lookalike_glyph"
   },
   {
@@ -170,30 +180,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a 27-inch 4K monitor for the home office desk",
-   "better": "desktop monitor icon without dots",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check why the website is stuck loading on the homepage",
-   "better": "browser or spinner icon",
+   "better": "browser or loading spinner icon",
    "trap": "generic_verb"
   },
   {
    "task": "Order a smart plug for the espresso machine",
    "better": "electrical plug / outlet icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Mount the 65-inch OLED TV on the living room brick wall",
-   "better": "wide flatscreen TV icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a thick rounded screen on a low pedestal base with four horizontal dots inside, closely matching a smart home display (like a Google Nest Hub) or a screen showing a 4-digit PIN/loading indicator. It fits tasks around smart displays, digital photo frames, or TV/screen PIN codes, though at small sizes it can be confused with a chat typing bubble or a generic password box.",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smart display / home hub / Echo Show / Nest Hub",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen with password / PIN entry / locked monitor or TV",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital clock / bedside alarm display",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "TV / monitor loading or waiting",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like a generic PIN/password field, a chat bubble with typing indicator, or a smart home display (like Google Nest Hub showing four assistant dots).",
+   "near_misses": [
+    {
+     "task": "Text Sarah about Saturday dinner plans",
+     "better": "speech bubble / message icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Change my debit card PIN at the ATM",
+     "better": "credit card or keypad icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 27-inch 4K monitor for the home office desk",
+     "better": "desktop monitor icon without dots",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check why the website is stuck loading on the homepage",
+     "better": "browser or spinner icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a smart plug for the espresso machine",
+     "better": "electrical plug / outlet icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Mount the 65-inch OLED TV on the living room brick wall",
+     "better": "wide flatscreen TV icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "assistant_on_hub"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4127,
+    "output": 792,
+    "thoughts": 0,
+    "total": 4919
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:21Z"
+  }
+ },
+ "distinguishing": "Has a wider, more pill-rounded screen bezel (both inner and outer corners rounded) and a flat-bottomed rectangular stand, though it is practically interchangeable with the sharper-cornered screen on a curved base."
 }

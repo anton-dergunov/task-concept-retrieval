@@ -11,7 +11,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "archive / file storage",
+   "meaning": "archive / long-term file storage",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the front handle slot could be misread as a minus sign on a container, or the box could be confused with a shipping parcel or trash bin.",
+ "ambiguity": "At small sizes, its boxy outline could be glanced as the awning-topped square frame, though the centered handle slot and symmetrical lid distinguish it.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,13 +154,18 @@
  ],
  "near_misses": [
   {
-   "task": "Track the Amazon package that was supposed to arrive yesterday",
-   "better": "shipping parcel / delivery box with tape",
+   "task": "Sort desktop downloads into project folders",
+   "better": "open file folder with tab",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Take the kitchen trash bin out to the curb before 7am",
-   "better": "trash can / wastebasket",
+   "task": "Replace the torn canvas awning over the patio window",
+   "better": "square frame with tilted awning flap",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Track the Amazon package that was supposed to arrive yesterday",
+   "better": "shipping parcel / delivery box with tape",
    "trap": "lookalike_glyph"
   },
   {
@@ -205,6 +210,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "storage box / banker's box / moving bin",
+     "strength": "primary"
+    },
+    {
+     "meaning": "archive / file storage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "packing / decluttering / putting things away",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "inventory / stored items",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the front handle slot could be misread as a minus sign on a container, or the box could be confused with a shipping parcel or trash bin.",
+   "near_misses": [
+    {
+     "task": "Track the Amazon package that was supposed to arrive yesterday",
+     "better": "shipping parcel / delivery box with tape",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the kitchen trash bin out to the curb before 7am",
+     "better": "trash can / wastebasket",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book a box at the opera for Mom's sixtieth birthday",
+     "better": "theater masks or ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a box of 100 nitrile gloves for cleaning",
+     "better": "gloves",
+     "trap": "property"
+    },
+    {
+     "task": "Call the landlord about returning the apartment keys",
+     "better": "phone or key",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Wrap the birthday gift in a nice box with ribbon",
+     "better": "gift box with bow",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "devices_fold_2",
+   "folder_open"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5395,
+    "output": 968,
+    "thoughts": 107,
+    "total": 6470
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "Unlike the tilted awning frame or the tabbed file folder, this icon shows a symmetrical box with a flat overhanging lid and a horizontal front handle slot, representing a storage box or archive bin."
 }

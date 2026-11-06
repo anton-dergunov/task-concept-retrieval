@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "slideshow on a TV or monitor",
+   "meaning": "slideshow on a TV or computer monitor",
    "strength": "secondary"
   },
   {
-   "meaning": "display calibration or image output",
+   "meaning": "display calibration or screen image settings",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the base is subtle, making it look like a standard flat image/photo file icon or a generic computer monitor.",
+ "ambiguity": "At small sizes, the bottom pedestal base is subtle, so it can be mistaken for the plain landscape picture frame.",
  "modifier_semantics": [
   {
    "modifier": "two triangular mountain peaks inside the screen",
@@ -161,24 +161,29 @@
  ],
  "near_misses": [
   {
-   "task": "Hike up Twin Peaks before sunrise on Saturday",
-   "better": "mountain / hiking",
+   "task": "Export the wedding photos as high-res JPEGs",
+   "better": "plain landscape or square image frame",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Hang the oak picture frames in the upstairs hallway",
-   "better": "wall picture frame",
-   "trap": "shared_vocabulary"
+   "task": "Get the charcoal drawing custom-matted and framed",
+   "better": "framed picture with an inner mat border",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Take passport photos at Walgreens",
-   "better": "camera / ID photo",
+   "better": "camera body with mountain peaks or ID photo",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Hike up Twin Peaks before sunrise on Saturday",
+   "better": "mountain peaks without a frame",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a dual monitor arm for the standing desk",
-   "better": "computer monitor",
-   "trap": "lookalike_glyph"
+   "better": "plain computer monitor",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Mail the receipt to warranty support",
@@ -187,7 +192,7 @@
   },
   {
    "task": "Check if the new monitor has an IPS panel",
-   "better": "computer monitor",
+   "better": "plain computer monitor",
    "trap": "generic_verb"
   }
  ],
@@ -212,6 +217,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "digital photo frame or smart display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "desktop wallpaper or screensaver",
+     "strength": "primary"
+    },
+    {
+     "meaning": "slideshow on a TV or monitor",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "display calibration or image output",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the base is subtle, making it look like a standard flat image/photo file icon or a generic computer monitor.",
+   "near_misses": [
+    {
+     "task": "Hike up Twin Peaks before sunrise on Saturday",
+     "better": "mountain / hiking",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hang the oak picture frames in the upstairs hallway",
+     "better": "wall picture frame",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take passport photos at Walgreens",
+     "better": "camera / ID photo",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a dual monitor arm for the standing desk",
+     "better": "computer monitor",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Mail the receipt to warranty support",
+     "better": "envelope / mail",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the new monitor has an IPS panel",
+     "better": "computer monitor",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "photo_camera_back",
+   "image",
+   "panorama",
+   "image_inset",
+   "planner_banner_ad_pt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9297,
+    "output": 3033,
+    "thoughts": 0,
+    "total": 12330
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "Unlike the plain frames in the group, this landscape frame rests on a flat horizontal pedestal base, making it a standing digital photo frame, smart display, or desktop monitor showing a wallpaper."
 }

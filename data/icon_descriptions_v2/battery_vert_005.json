@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "battery",
+   "meaning": "critically low or empty battery (around 10% charge)",
    "strength": "primary"
   },
   {
-   "meaning": "empty battery / needs charging",
+   "meaning": "battery / needs charging",
    "strength": "primary"
   },
   {
    "meaning": "power / energy level",
    "strength": "secondary"
-  },
-  {
-   "meaning": "small bottle or flask",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Because the interior is completely hollow, it specifically reads as a dead or empty battery compared to filled battery icons, and at very small sizes could briefly resemble a rectangular pill bottle or clipboard.",
+ "ambiguity": "Visually interchangeable with the completely empty 0% battery outline and the ~15%–25% low-battery icons at normal UI sizes.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -153,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Recycle the box of completely dead alkaline batteries in the garage",
+   "better": "completely empty 0% battery outline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Discharge the RC car battery packs to 30% storage voltage",
+   "better": "battery filled to bottom third",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small waterproof battery-powered fan for the tent",
    "better": "fan",
    "trap": "property"
@@ -163,11 +169,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Refill the glass water bottle before leaving for the gym",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a new USB-C braided charging cable for the car",
    "better": "cable or plug",
    "trap": "parent_topic"
@@ -176,17 +177,12 @@
    "task": "Book a 30-minute power nap on the calendar after lunch",
    "better": "bed or sleep",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Check why the cordless drill chuck is wobbling",
-   "better": "drill",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a vertical battery with an empty interior, universally understood as a battery or a depleted charge. It fits a common, concrete family of tasks around buying, charging, swapping, and recycling batteries across home, tech, and travel domains. It is only slightly less distinctive than a segmented battery icon because the plain hollow rectangle could briefly resemble a small bottle.",
@@ -204,6 +200,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "empty battery / needs charging",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power / energy level",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "small bottle or flask",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the interior is completely hollow, it specifically reads as a dead or empty battery compared to filled battery icons, and at very small sizes could briefly resemble a rectangular pill bottle or clipboard.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof battery-powered fan for the tent",
+     "better": "fan",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric bill before Friday",
+     "better": "invoice or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill the glass water bottle before leaving for the gym",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a new USB-C braided charging cable for the car",
+     "better": "cable or plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book a 30-minute power nap on the calendar after lunch",
+     "better": "bed or sleep",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check why the cordless drill chuck is wobbling",
+     "better": "drill",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_0_bar",
+   "battery_1_bar",
+   "battery_vert_020",
+   "battery_2_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7952,
+    "output": 2508,
+    "thoughts": 196,
+    "total": 10656
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Has a barely perceptible extra thickness at the inner bottom edge (about 5–10% fill), making it almost identical to the completely empty battery and the slightly higher low-battery steps."
 }

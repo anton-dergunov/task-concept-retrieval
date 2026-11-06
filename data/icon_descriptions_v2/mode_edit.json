@@ -11,11 +11,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "write, draft, or compose text",
+   "meaning": "edit, revise, or rewrite",
    "strength": "primary"
   },
   {
-   "meaning": "edit, revise, or rewrite",
+   "meaning": "write, draft, or compose text",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Standard UI edit icon; nearly indistinguishable from other pencil or stylus glyphs.",
+ "ambiguity": "Easily confused at a glance with the pencil trailing a beveled stroke to its right or the pencil above a thick bottom bar, as all three share the exact same pencil glyph.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -157,14 +157,19 @@
  ],
  "near_misses": [
   {
+   "task": "Sign the apartment lease renewal on DocuSign",
+   "better": "pencil above a signature line bar or pencil making a stroke",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Highlight key passages in the textbook chapter",
+   "better": "pencil with a thick beveled highlighter stroke",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update my billing address in Spotify account settings",
    "better": "credit card or house address icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Buy a new Apple Pencil tip for the iPad",
-   "better": "digital stylus or tablet icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up a brow pencil at Sephora",
@@ -185,17 +190,12 @@
    "task": "Pay the freelance copyeditor her invoice",
    "better": "money / invoice icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Look for a dry-erase board with a marker tray",
-   "better": "whiteboard icon",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A classic diagonal pencil icon, universally recognized both literally as stationery (pencils, drawing supplies) and as the action of writing, drafting, sketching, or editing text. It fits a wide range of writing and creative tasks, though it shouldn't be overused for generic software 'update' tasks where a specific object (like an address or profile) is the real subject.",
@@ -213,6 +213,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "edit"
- }
+  "alias_of": "edit",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pencil or pen (stationery)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "write, draft, or compose text",
+     "strength": "primary"
+    },
+    {
+     "meaning": "edit, revise, or rewrite",
+     "strength": "primary"
+    },
+    {
+     "meaning": "draw or sketch",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Standard UI edit icon; nearly indistinguishable from other pencil or stylus glyphs.",
+   "near_misses": [
+    {
+     "task": "Update my billing address in Spotify account settings",
+     "better": "credit card or house address icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new Apple Pencil tip for the iPad",
+     "better": "digital stylus or tablet icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up a brow pencil at Sephora",
+     "better": "cosmetics / makeup icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hem the navy pencil skirt before the interview",
+     "better": "skirt / needle and thread icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pencil in dinner with Sarah next Tuesday",
+     "better": "calendar or restaurant icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the freelance copyeditor her invoice",
+     "better": "money / invoice icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Look for a dry-erase board with a marker tray",
+     "better": "whiteboard icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "drive_file_rename_outline",
+   "border_color"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5359,
+    "output": 1563,
+    "thoughts": 0,
+    "total": 6922
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "Shows the diagonal pencil alone with no stroke or bar beneath it, representing the writing instrument itself or generic editing and drafting."
 }

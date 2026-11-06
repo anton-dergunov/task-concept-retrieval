@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "video, movie, or media clip",
+   "meaning": "play media, video clip, or audio-visual recording",
    "strength": "primary"
   },
   {
-   "meaning": "play or watch recording",
+   "meaning": "start playback or run slideshow",
    "strength": "primary"
   },
   {
-   "meaning": "slideshow or presentation playback",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "YouTube or streaming platform",
+   "meaning": "single media file or episode",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a generic play button, a circle-play icon, a YouTube logo, or a right-pointing navigation chevron inside a box.",
+ "ambiguity": "Virtually interchangeable in meaning with the horizontal rectangular play button, and easily confused at a glance with the stacked square play icons if the backing layer is overlooked.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -154,9 +150,19 @@
  ],
  "near_misses": [
   {
-   "task": "Schedule a Zoom video call with the Lisbon contractor",
-   "better": "video camera or phone call icon",
-   "trap": "shared_vocabulary"
+   "task": "Join the 3pm Zoom video call with the Lisbon contractor",
+   "better": "framed video camera icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Organize the saved playlist of workout videos",
+   "better": "stacked square play icon for video playlist",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Stream the new season finale on the living room TV",
+   "better": "TV or monitor screen with play triangle",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Play board games with the kids after dinner",
@@ -177,17 +183,12 @@
    "task": "Pay the freelance invoice for the voiceover mic rental",
    "better": "invoice, money, or microphone icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Move the next-step button to the right side of the modal",
-   "better": "UI layout or code icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A play triangle inside a rounded square is universally recognized as video playback or a media clip. It fits many real tasks around watching lectures, movies, and recordings, or editing and uploading videos, though it competes closely with other play-button and film/clapperboard icons.",
@@ -205,6 +206,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video, movie, or media clip",
+     "strength": "primary"
+    },
+    {
+     "meaning": "play or watch recording",
+     "strength": "primary"
+    },
+    {
+     "meaning": "slideshow or presentation playback",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "YouTube or streaming platform",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a generic play button, a circle-play icon, a YouTube logo, or a right-pointing navigation chevron inside a box.",
+   "near_misses": [
+    {
+     "task": "Schedule a Zoom video call with the Lisbon contractor",
+     "better": "video camera or phone call icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Play board games with the kids after dinner",
+     "better": "dice or game controller icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice playing the B-minor barre chord transition",
+     "better": "guitar or musical note icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mount the rear dashcam and tuck the wire under the headliner",
+     "better": "camera or car icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the freelance invoice for the voiceover mic rental",
+     "better": "invoice, money, or microphone icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Move the next-step button to the right side of the modal",
+     "better": "UI layout or code icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hangout_video",
+   "smart_display",
+   "video_library",
+   "live_tv",
+   "animated_images"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9468,
+    "output": 3165,
+    "thoughts": 0,
+    "total": 12633
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "Features a single right-pointing play triangle inside a 1:1 rounded square frame without any stacked backing layer or monitor stand; it is nearly interchangeable in meaning with the wider rectangular play button."
 }

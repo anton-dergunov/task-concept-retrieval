@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "copy / duplicate / clone",
+   "meaning": "multiple windows, tabs, or restore window size",
    "strength": "primary"
   },
   {
-   "meaning": "multiple windows / tabs / restore down",
+   "meaning": "copy, duplicate, or clone item",
    "strength": "primary"
   },
   {
-   "meaning": "slides / presentation deck / cards",
+   "meaning": "presentation slides, flashcards, or index cards",
    "strength": "secondary"
   },
   {
-   "meaning": "overlapping layers / dual screens",
+   "meaning": "overlapping layers or screens",
    "strength": "secondary"
   }
  ],
- "ambiguity": "It is essentially an abstract UI glyph (restore window, copy, or tabs) rather than a concrete physical object, and can easily be confused with flashcards, presentation slides, or dual monitors.",
+ "ambiguity": "Nearly interchangeable with the two overlapping squares (copy/duplicate) and very close to the overlapping application windows with top title bars.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -153,13 +153,18 @@
  ],
  "near_misses": [
   {
-   "task": "Replace the cracked window pane in the garage",
-   "better": "house window with cross panes",
-   "trap": "shared_vocabulary"
+   "task": "Test the web app layout across multiple browser windows",
+   "better": "overlapping application windows with top title bars",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Wash the living room windows before Sunday",
-   "better": "spray bottle or house window",
+   "task": "Mirror laptop display to the conference room monitor",
+   "better": "computer monitor with second screen outline behind",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the cracked window pane in the garage",
+   "better": "house window with cross panes",
    "trap": "shared_vocabulary"
   },
   {
@@ -171,11 +176,6 @@
    "task": "Settle my bar tab at O'Malley's from Friday night",
    "better": "receipt or credit card",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Mail the signed birthday card to Grandma in Florida",
-   "better": "greeting card / envelope",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book the conference room with the projector for the pitch deck review",
@@ -204,6 +204,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "copy / duplicate / clone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "multiple windows / tabs / restore down",
+     "strength": "primary"
+    },
+    {
+     "meaning": "slides / presentation deck / cards",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "overlapping layers / dual screens",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "It is essentially an abstract UI glyph (restore window, copy, or tabs) rather than a concrete physical object, and can easily be confused with flashcards, presentation slides, or dual monitors.",
+   "near_misses": [
+    {
+     "task": "Replace the cracked window pane in the garage",
+     "better": "house window with cross panes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wash the living room windows before Sunday",
+     "better": "spray bottle or house window",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the broken backyard slide before the kids' party",
+     "better": "playground slide",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Settle my bar tab at O'Malley's from Friday night",
+     "better": "receipt or credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mail the signed birthday card to Grandma in Florida",
+     "better": "greeting card / envelope",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the conference room with the projector for the pitch deck review",
+     "better": "projector or meeting room",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "select_window",
+   "markunread_mailbox",
+   "stack",
+   "folder_copy",
+   "tv_displays"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9395,
+    "output": 2955,
+    "thoughts": 262,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "It has the exact same layout as the overlapping application windows (front bottom-left, back top-right) but lacks the thick top title bars, making it plain overlapping horizontal rectangles for slides, cards, or generic copy/restore."
 }

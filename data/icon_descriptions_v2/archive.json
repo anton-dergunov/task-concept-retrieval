@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "archive or store away",
+   "meaning": "archive emails, documents, or completed projects",
    "strength": "primary"
   },
   {
-   "meaning": "pack into a box",
+   "meaning": "pack or put physical items into storage boxes",
    "strength": "primary"
   },
   {
-   "meaning": "download or install software package",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "receive or drop off parcel",
+   "meaning": "store away or compress into an archive file",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Standard UI icon for 'Archive' in email and productivity apps, which can blur with physical packing, storing items in bins, or downloading software packages.",
+ "ambiguity": "Can be mistaken at small sizes for the inbox tray or the download bracket since all three feature a downward arrow centered in a square or rectangular outline.",
  "modifier_semantics": [
   {
    "modifier": "downward-pointing arrow inside front face",
@@ -161,40 +157,40 @@
  ],
  "near_misses": [
   {
+   "task": "Triage incoming client requests in the team inbox",
+   "better": "inbox tray with semicircular thumb notch and downward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download offline maps for the road trip",
+   "better": "download bracket with downward arrow entering through top gap",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Unpack the kitchen boxes and set up the coffee maker",
-   "better": "box with upward arrow (unbox/unpack icon) or coffee maker",
+   "better": "box with upward arrow (unpack icon) or coffee maker",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Ship the defective router back to Verizon via UPS",
-   "better": "delivery truck or package with outward arrow",
+   "better": "delivery truck or parcel with outward arrow",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Delete spam emails and empty the trash folder",
-   "better": "trash can icon",
-   "trap": "lookalike_glyph"
+   "task": "Check the archived bank statement from March for the refund",
+   "better": "bank statement, document, or receipt icon",
+   "trap": "property"
   },
   {
    "task": "Order a 64GB USB flash drive for the photo backup",
    "better": "USB flash drive icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check the archived bank statement from March for the refund",
-   "better": "bank statement / document or receipt icon",
-   "trap": "property"
-  },
-  {
-   "task": "Backup Postgres database to AWS S3 bucket",
-   "better": "database or cloud upload icon",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts an open-top box with a downward arrow on its front face, universally recognized in interfaces as 'Archive' and literally representing packing or putting items into a box. It fits both digital archiving/package downloads and physical packing/storage tasks well, though it must be distinguished from unpacking (up arrow) or shipping.",
@@ -212,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "archive or store away",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pack into a box",
+     "strength": "primary"
+    },
+    {
+     "meaning": "download or install software package",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "receive or drop off parcel",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Standard UI icon for 'Archive' in email and productivity apps, which can blur with physical packing, storing items in bins, or downloading software packages.",
+   "near_misses": [
+    {
+     "task": "Unpack the kitchen boxes and set up the coffee maker",
+     "better": "box with upward arrow (unbox/unpack icon) or coffee maker",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Ship the defective router back to Verizon via UPS",
+     "better": "delivery truck or package with outward arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Delete spam emails and empty the trash folder",
+     "better": "trash can icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 64GB USB flash drive for the photo backup",
+     "better": "USB flash drive icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the archived bank statement from March for the refund",
+     "better": "bank statement / document or receipt icon",
+     "trap": "property"
+    },
+    {
+     "task": "Backup Postgres database to AWS S3 bucket",
+     "better": "database or cloud upload icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "move_to_inbox",
+   "system_update_alt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5463,
+    "output": 1553,
+    "thoughts": 169,
+    "total": 7185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "Unlike the flat inbox tray with a thumb notch or the open-top download bracket, this icon shows a 3D box with an angled top rim and a downward arrow on its front face, representing archiving or packing items into a storage box."
 }

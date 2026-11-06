@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "camera disabled / off",
+   "meaning": "no photography / no photos allowed",
    "strength": "primary"
   },
   {
-   "meaning": "no photography / no photos allowed",
+   "meaning": "photo camera disabled / off",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "delete or hide photos",
+   "meaning": "missing image / failed photo load",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Distinguishable from video-off icon which uses a camcorder silhouette rather than a still photo camera.",
+ "ambiguity": "At small sizes, the central circular lens under the slash can be mistaken for the eye inside the slashed browser window.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -160,40 +160,40 @@
  ],
  "near_misses": [
   {
-   "task": "Take passport photos at the pharmacy",
-   "better": "camera (without slash)",
+   "task": "Turn off video camera during the Zoom call",
+   "better": "slashed video camera with person",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Disable link preview thumbnails in chat app",
+   "better": "slashed browser window with eye",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new lens cap for the Sony DSLR",
-   "better": "camera / lens",
+   "better": "camera lens",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Clean smudges off the rear phone camera",
-   "better": "camera / cleaning",
+   "better": "camera or cleaning cloth",
    "trap": "generic_verb"
   },
   {
    "task": "Order cakes and flowers for the unplugged wedding",
-   "better": "cake / flowers",
+   "better": "cake or flowers",
    "trap": "property"
   },
   {
-   "task": "Book flights to Munich",
+   "task": "Book flights to Munich for photography trip",
    "better": "airplane",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Back up SD card photos to external hard drive",
-   "better": "photo / hard drive",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a still camera with a diagonal prohibition/disabled slash. While primarily an interface state toggle, it fits specific tasks around webcam privacy, revoking camera permissions, troubleshooting broken cameras, and enforcing 'no photography' rules.",
@@ -211,6 +211,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera disabled / off",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no photography / no photos allowed",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken camera / camera not working",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "delete or hide photos",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Distinguishable from video-off icon which uses a camcorder silhouette rather than a still photo camera.",
+   "near_misses": [
+    {
+     "task": "Take passport photos at the pharmacy",
+     "better": "camera (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new lens cap for the Sony DSLR",
+     "better": "camera / lens",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean smudges off the rear phone camera",
+     "better": "camera / cleaning",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order cakes and flowers for the unplugged wedding",
+     "better": "cake / flowers",
+     "trap": "property"
+    },
+    {
+     "task": "Book flights to Munich",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Back up SD card photos to external hard drive",
+     "better": "photo / hard drive",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_hand_off",
+   "file_copy_off",
+   "video_camera_front_off",
+   "privacy",
+   "preview_off",
+   "ad_group_off",
+   "ad_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12129,
+    "output": 3883,
+    "thoughts": 0,
+    "total": 16012
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:48Z"
+  }
+ },
+ "distinguishing": "A slashed still photo camera with a top viewfinder hump and central circular lens, distinct from the camcorders with right-side cones and the browser window with an eye."
 }

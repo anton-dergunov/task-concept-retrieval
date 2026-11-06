@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "drinking glass, tumbler, or cup",
+   "meaning": "nearly empty glass or low water level",
    "strength": "primary"
   },
   {
-   "meaning": "beverage or cold drink",
+   "meaning": "drinking glass, tumbler, or cup",
    "strength": "secondary"
   },
   {
-   "meaning": "running low on water or nearly empty cup",
+   "meaning": "small drink or rinse cup",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a small wastebasket or plant pot at tiny sizes if the wavy liquid line blurs into a horizontal stripe.",
+ "ambiguity": "Easily confused at list size with the half-full and three-quarters-full glasses of water since only the vertical height of the wave differs, and with the empty heavy-base tumbler if the slight wave flattens out.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -153,24 +153,24 @@
  ],
  "near_misses": [
   {
+   "task": "Buy a set of heavy-bottomed whiskey tumblers for the bar cart",
+   "better": "empty drinking glass with thick flat base",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Drink a full glass of water right after waking up",
+   "better": "glass filled high with water",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the quarterly city water utility bill online",
-   "better": "faucet or water droplet with bill/dollar",
+   "better": "faucet or water droplet with bill",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Fix the cracked glass pane in the greenhouse door",
    "better": "window pane",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Empty the bathroom trash bin before guests arrive",
-   "better": "trash can",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pack the insulated Hydro Flask bottle for the trail hike",
-   "better": "water bottle",
-   "trap": "parent_topic"
   },
   {
    "task": "Buy a waterproof cover for the patio loveseat",
@@ -186,7 +186,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a tapered tumbler or drinking glass containing a small amount of liquid indicated by a wavy line. It is ideal for daily hydration habits, beverage preparation, and buying or organizing kitchen glassware, though at very small sizes the outline somewhat resembles a simple wastebasket.",
@@ -204,6 +204,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "glass of water or hydration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "drinking glass, tumbler, or cup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "beverage or cold drink",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "running low on water or nearly empty cup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a small wastebasket or plant pot at tiny sizes if the wavy liquid line blurs into a horizontal stripe.",
+   "near_misses": [
+    {
+     "task": "Pay the quarterly city water utility bill online",
+     "better": "faucet or water droplet with bill/dollar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the cracked glass pane in the greenhouse door",
+     "better": "window pane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Empty the bathroom trash bin before guests arrive",
+     "better": "trash can",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack the insulated Hydro Flask bottle for the trail hike",
+     "better": "water bottle",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a waterproof cover for the patio loveseat",
+     "better": "sofa or protective cover",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up my new prescription reading glasses from the optometrist",
+     "better": "eyeglasses",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "water_medium",
+   "water_full",
+   "glass_cup"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6652,
+    "output": 1188,
+    "thoughts": 0,
+    "total": 7840
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:10Z"
+  }
+ },
+ "distinguishing": "Has a wavy liquid line positioned low near the bottom (~25% full), representing a nearly empty glass or a small splash of water, though at a glance it is nearly interchangeable with the half-full and three-quarters-full glasses."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "water / hydration / liquid level",
+   "meaning": "liquid level, fluid refill, or printer ink supply",
    "strength": "primary"
   },
   {
-   "meaning": "humidity / moisture",
+   "meaning": "humidity level or moisture percentage",
    "strength": "primary"
   },
   {
-   "meaning": "printer ink / toner / color saturation",
+   "meaning": "opacity, color saturation, or contrast in design",
    "strength": "secondary"
   },
   {
-   "meaning": "blood / medical fluid / oil",
+   "meaning": "water or hydration tracking",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles an plain outlined or solid water droplet at small sizes; also used in graphics software for opacity, contrast, or color saturation.",
+ "ambiguity": "Visually identical to the other half-filled droplet in the group, and easily confused with the plain outlined droplet when used for general water or hydration.",
  "modifier_semantics": [
   {
    "modifier": "half-filled bottom section",
@@ -162,9 +162,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Drink 2 liters of plain water every day this week",
+   "better": "plain outlined water droplet",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up lubricating eye drops from the pharmacy",
+   "better": "plain outlined liquid droplet",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pin the trailhead location on Google Maps for Saturday's group hike",
+   "better": "map pin",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Wash the car and vacuum the trunk before Friday",
@@ -173,29 +183,19 @@
   },
   {
    "task": "Drop the kids' backpacks off at school before 8am",
-   "better": "backpack / school",
+   "better": "backpack or school",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pin the trailhead location on Google Maps for Saturday's group hike",
-   "better": "map pin",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy new goggles and a silicone cap for Tuesday lap sessions",
-   "better": "goggles / swimmer",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Check whether the rain jacket needs re-waterproofing spray",
-   "better": "jacket / coat",
+   "better": "jacket or coat",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A half-filled droplet clearly communicates water, hydration, humidity, or liquid levels (like ink or oil). It fits a solid range of everyday tasks across health, home maintenance, gardening, and utilities, though it is slightly less distinct than a plain droplet and could be confused with an upside-down map pin at tiny sizes.",
@@ -213,6 +213,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "water / hydration / liquid level",
+     "strength": "primary"
+    },
+    {
+     "meaning": "humidity / moisture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "printer ink / toner / color saturation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "blood / medical fluid / oil",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles an plain outlined or solid water droplet at small sizes; also used in graphics software for opacity, contrast, or color saturation.",
+   "near_misses": [
+    {
+     "task": "Wash the car and vacuum the trunk before Friday",
+     "better": "car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drop the kids' backpacks off at school before 8am",
+     "better": "backpack / school",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pin the trailhead location on Google Maps for Saturday's group hike",
+     "better": "map pin",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy new goggles and a silicone cap for Tuesday lap sessions",
+     "better": "goggles / swimmer",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the rain jacket needs re-waterproofing spray",
+     "better": "jacket / coat",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "humidity_low",
+   "humidity_mid"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5297,
+    "output": 1531,
+    "thoughts": 96,
+    "total": 6924
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "Unlike the plain outlined droplet, this droplet is half-filled with solid black at the bottom to suggest a liquid level, humidity percentage, ink supply, or image opacity/saturation, and it is visually identical to and interchangeable with the other half-filled droplet in this group."
 }

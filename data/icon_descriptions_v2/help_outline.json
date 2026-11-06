@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "question, inquiry, or FAQ",
+   "meaning": "help / support documentation / FAQ",
    "strength": "primary"
   },
   {
-   "meaning": "help, support, or customer service",
+   "meaning": "question / general inquiry",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Easily confused with the question mark inside a speech bubble at small sizes, and overlaps heavily for general inquiry or support tasks.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -156,29 +156,14 @@
  ],
  "near_misses": [
   {
-   "task": "Ask mom for her sour cherry pie recipe",
-   "better": "pie or recipe book",
-   "trap": "generic_verb"
+   "task": "Message customer support chat about delayed package",
+   "better": "question mark in a speech bubble (support chat) or package",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Find out if the library has the new Murakami novel",
-   "better": "book",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Call airline support about lost checked bag",
-   "better": "suitcase or phone",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy ankle support brace at the pharmacy",
-   "better": "medical brace or bandage",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Read Murder on the Orient Express",
-   "better": "book",
-   "trap": "property"
+   "task": "Ask the landlord whether utilities are included in the lease",
+   "better": "question mark in a speech bubble (ask a question) or house",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Check important travel info before flying to Tokyo",
@@ -186,7 +171,22 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Refund stripe charge for order #4821",
+   "task": "Ask mom for her sour cherry pie recipe",
+   "better": "pie or recipe book",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Buy ankle support brace at the pharmacy",
+   "better": "medical brace or bandage",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Read Murder on the Orient Express mystery novel",
+   "better": "book",
+   "trap": "property"
+  },
+  {
+   "task": "Refund Stripe charge for support ticket #4821",
    "better": "credit card or refund arrow",
    "trap": "parent_topic"
   }
@@ -194,7 +194,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A universally recognizable question mark inside a circle representing questions, FAQs, quizzes, and help/support documentation. It fits tasks centered on preparing questions, writing FAQs or trivia, or managing help desk inquiries, though for specific topic inquiries the topic itself is a better icon.",
@@ -212,6 +212,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "question, inquiry, or FAQ",
+     "strength": "primary"
+    },
+    {
+     "meaning": "help, support, or customer service",
+     "strength": "primary"
+    },
+    {
+     "meaning": "quiz, trivia, or riddle",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "unknown, mystery, or undecided item",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Ask mom for her sour cherry pie recipe",
+     "better": "pie or recipe book",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Find out if the library has the new Murakami novel",
+     "better": "book",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Call airline support about lost checked bag",
+     "better": "suitcase or phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy ankle support brace at the pharmacy",
+     "better": "medical brace or bandage",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read Murder on the Orient Express",
+     "better": "book",
+     "trap": "property"
+    },
+    {
+     "task": "Check important travel info before flying to Tokyo",
+     "better": "info symbol (i in circle) or airplane",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Refund stripe charge for order #4821",
+     "better": "credit card or refund arrow",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "contact_support"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4045,
+    "output": 707,
+    "thoughts": 0,
+    "total": 4752
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:30Z"
+  }
+ },
+ "distinguishing": "A plain circular outline without a tail enclosing a question mark, representing general help, documentation, unknowns, or quizzes rather than specifically a chat or spoken question (though largely interchangeable with the speech-bubble question mark)."
 }

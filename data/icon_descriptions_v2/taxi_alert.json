@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "taxi or rideshare alert, issue, or urgent booking",
+   "meaning": "taxi, cab, or rideshare alert, dispute, or lost item",
    "strength": "primary"
   },
   {
-   "meaning": "car trouble, breakdown, or vehicle warning light",
+   "meaning": "urgent airport transfer or cab booking problem",
    "strength": "primary"
   },
   {
-   "meaning": "urgent airport transfer or cab reminder",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "traffic incident or emergency vehicle notice",
+   "meaning": "commercial vehicle or fleet issue",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the small roof sign is easily missed or blends into the badge cutout, making it look like a regular car with an alert badge rather than specifically a taxi.",
+ "ambiguity": "Easily mistaken for the regular car with an exclamation badge because the small roof sign is partially cut off by the badge and barely visible at list size.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark in circle badge",
@@ -160,12 +156,27 @@
  ],
  "near_misses": [
   {
+   "task": "Get check engine light diagnosed at the mechanic",
+   "better": "regular car with exclamation mark badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay overdue parking ticket on the Honda",
+   "better": "regular car with exclamation mark badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Schedule routine 60,000-mile car service",
+   "better": "car with wrench icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book a taxi to the train station for Friday",
    "better": "plain taxi icon without exclamation mark",
    "trap": "property"
   },
   {
-   "task": "Check Uber rating",
+   "task": "Check Uber passenger rating",
    "better": "star rating or plain taxi icon",
    "trap": "generic_verb"
   },
@@ -173,27 +184,12 @@
    "task": "Pay annual car tax before the deadline",
    "better": "tax document or money icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new car battery",
-   "better": "car battery icon",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Renew roadside assistance membership",
-   "better": "tow truck or shield icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Schedule routine 60,000-mile car service",
-   "better": "car with wrench icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts the front of a taxi cab (indicated by the roof light) overlaid with a prominent exclamation mark badge, though at small sizes it easily reads as a generic car with an alert. It fits tasks centered on rideshare/taxi issues (fare disputes, lost items, urgent bookings) or vehicle warnings (check engine light, breakdowns). It should not be used for routine taxi bookings or standard car maintenance where no problem or alert is involved.",
@@ -211,6 +207,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "taxi or rideshare alert, issue, or urgent booking",
+     "strength": "primary"
+    },
+    {
+     "meaning": "car trouble, breakdown, or vehicle warning light",
+     "strength": "primary"
+    },
+    {
+     "meaning": "urgent airport transfer or cab reminder",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "traffic incident or emergency vehicle notice",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the small roof sign is easily missed or blends into the badge cutout, making it look like a regular car with an alert badge rather than specifically a taxi.",
+   "near_misses": [
+    {
+     "task": "Book a taxi to the train station for Friday",
+     "better": "plain taxi icon without exclamation mark",
+     "trap": "property"
+    },
+    {
+     "task": "Check Uber rating",
+     "better": "star rating or plain taxi icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay annual car tax before the deadline",
+     "better": "tax document or money icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew roadside assistance membership",
+     "better": "tow truck or shield icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule routine 60,000-mile car service",
+     "better": "car with wrench icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_crash"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4035,
+    "output": 758,
+    "thoughts": 0,
+    "total": 4793
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:25Z"
+  }
+ },
+ "distinguishing": "Has a small rectangular taxi sign on top of the car roof just to the left of the exclamation badge, indicating a taxi, cab, or rideshare alert rather than a personal car issue."
 }

@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "go to the doctor / clinic visit",
+   "meaning": "transfer medical records or change doctors",
    "strength": "primary"
   },
   {
-   "meaning": "transfer medical records or change doctors",
+   "meaning": "go to the doctor or outpatient clinic visit",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without the circular chestpiece of a standard stethoscope, the top loop can faintly resemble headphones or calipers at very small sizes.",
+ "ambiguity": "Easily confused at a glance with the stethoscope with a checkmark when both represent general doctor visits, and without the circular chestpiece the top U-loop can faintly resemble headphones or calipers at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow",
@@ -162,18 +162,23 @@
  ],
  "near_misses": [
   {
+   "task": "Complete annual physical exam and wellness checkup",
+   "better": "stethoscope with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Get sports physical clearance form signed by the pediatrician",
+   "better": "stethoscope with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a Littmann Classic III stethoscope for clinical rotations",
    "better": "plain stethoscope without arrow",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Fix the frayed cable on my wired studio headphones",
-   "better": "headphones",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Submit employee referral for Sarah in the engineering portal",
-   "better": "person with arrow / badge",
+   "better": "person with arrow or badge",
    "trap": "shared_vocabulary"
   },
   {
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a stethoscope with an outward-pointing arrow in place of the chestpiece, clearly signaling a medical referral, transferring medical records, or heading to a doctor. It fits a concrete slice of healthcare and admin tasks well, though without the round chestpiece it is slightly less immediate than a standard stethoscope.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "medical referral or specialist referral",
+     "strength": "primary"
+    },
+    {
+     "meaning": "go to the doctor / clinic visit",
+     "strength": "primary"
+    },
+    {
+     "meaning": "transfer medical records or change doctors",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "export diagnostic log or send health data",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without the circular chestpiece of a standard stethoscope, the top loop can faintly resemble headphones or calipers at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a Littmann Classic III stethoscope for clinical rotations",
+     "better": "plain stethoscope without arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Fix the frayed cable on my wired studio headphones",
+     "better": "headphones",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Submit employee referral for Sarah in the engineering portal",
+     "better": "person with arrow / badge",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the new ergonomic office chair has medical-grade lumbar support",
+     "better": "office chair",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $45 copay invoice on the clinic website",
+     "better": "credit card or bill",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Diagnose why the garage door sensor keeps blinking red",
+     "better": "garage door or wrench",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "stethoscope_check"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4064,
+    "output": 674,
+    "thoughts": 59,
+    "total": 4797
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "Has a right-pointing arrow at the bottom right instead of a checkmark, indicating a medical referral, forwarding records, or going to a specialist rather than a completed checkup or health clearance."
 }

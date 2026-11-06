@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the pulse line might look like a strikethrough or a broken heart.",
+ "ambiguity": "Completely interchangeable in meaning and nearly identical at a glance to the heart outline with an enclosed pulse line; at very small sizes, the extending horizontal line might also look like a strikethrough.",
  "modifier_semantics": [
   {
    "modifier": "horizontal jagged pulse waveform",
@@ -165,6 +165,11 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Heart my favorite photos from the wedding album",
+   "better": "plain heart or photo",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cook a heart-healthy salmon dinner with steamed broccoli",
    "better": "fish or plate of food",
    "trap": "property"
@@ -175,25 +180,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy garlic and chickpeas for roasted vegetable salad",
-   "better": "vegetables or shopping cart",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Check why the espresso machine pump is pulsing weirdly",
    "better": "coffee machine or wrench",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Heart my favorite photos from the wedding album",
-   "better": "plain heart or photo",
-   "trap": "lookalike_glyph"
+   "task": "Buy garlic and chickpeas for roasted vegetable salad",
+   "better": "vegetables or shopping cart",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A heart crossed by an ECG waveform is the universal symbol for heart rate, cardiology, vital signs, and general health or cardio fitness. It fits medical checkups, blood pressure/pulse logging, heart rate monitors, and cardio training, while remaining distinct from a plain love/favorite heart.",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "heart rate, pulse, or cardiology",
+     "strength": "primary"
+    },
+    {
+     "meaning": "health, medical checkup, or vital signs",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cardio workout or aerobic fitness",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "system health or uptime monitoring",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the pulse line might look like a strikethrough or a broken heart.",
+   "near_misses": [
+    {
+     "task": "Buy heart-shaped box of chocolates for Valentine's Day",
+     "better": "plain heart or gift box",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cook a heart-healthy salmon dinner with steamed broccoli",
+     "better": "fish or plate of food",
+     "trap": "property"
+    },
+    {
+     "task": "Take the pulse of the engineering team after the reorg",
+     "better": "people or survey",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy garlic and chickpeas for roasted vegetable salad",
+     "better": "vegetables or shopping cart",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the espresso machine pump is pulsing weirdly",
+     "better": "coffee machine or wrench",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Heart my favorite photos from the wedding album",
+     "better": "plain heart or photo",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ecg_heart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4079,
+    "output": 665,
+    "thoughts": 0,
+    "total": 4744
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "The ECG pulse line extends horizontally beyond the sides of the heart outline with a white gap cutting through the heart's border, whereas the other icon keeps the pulse line completely enclosed inside an unbroken heart outline; the two icons are completely interchangeable in meaning."
 }

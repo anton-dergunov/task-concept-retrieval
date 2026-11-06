@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "accessibility or universal design",
+   "meaning": "accessibility, universal design, or inclusion",
    "strength": "primary"
   },
   {
-   "meaning": "stretching, posture, or full-body movement",
-   "strength": "primary"
-  },
-  {
-   "meaning": "human body, anatomy, or biometrics",
+   "meaning": "stretching, posture, or full-body warm-up",
    "strength": "secondary"
   },
   {
-   "meaning": "person, child, or welcoming gesture",
+   "meaning": "human body or general wellness",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Shared glyph for both digital accessibility settings and physical stretching or body measurements.",
+ "ambiguity": "Almost indistinguishable at small sizes from the straight-armed standing figure without dots, and differs from the two dotted variants only by the absence of the three ellipsis dots.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,8 +148,13 @@
  ],
  "near_misses": [
   {
-   "task": "Call Sam about Friday dinner",
-   "better": "phone or single user profile icon",
+   "task": "Customize iOS VoiceOver and assistive touch menu options",
+   "better": "accessibility figure with three ellipsis dots",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Rig the 3D character mesh in a neutral T-pose in Blender",
+   "better": "standing figure with straight horizontal arms",
    "trap": "lookalike_glyph"
   },
   {
@@ -175,17 +176,12 @@
    "task": "Check team headcount for Q3 budget",
    "better": "group of people or spreadsheet",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Paint the wooden scarecrow for the front porch",
-   "better": "paintbrush or pumpkin/autumn icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The Vitruvian-style figure with outstretched arms is widely recognized both as the universal accessibility (a11y) symbol in software and as a literal depiction of full-body stretching, posture, or body measurements. It is distinct from standard user/profile icons because the full body and wide arms are shown.",
@@ -203,6 +199,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "accessibility or universal design",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stretching, posture, or full-body movement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "human body, anatomy, or biometrics",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "person, child, or welcoming gesture",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Shared glyph for both digital accessibility settings and physical stretching or body measurements.",
+   "near_misses": [
+    {
+     "task": "Call Sam about Friday dinner",
+     "better": "phone or single user profile icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Reserve accessible hotel room near the convention center",
+     "better": "hotel bed or wheelchair symbol",
+     "trap": "property"
+    },
+    {
+     "task": "Stretch the sourdough dough every 30 minutes",
+     "better": "bread loaf or bowl",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new yoga mat for floor exercises",
+     "better": "rolled yoga mat",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check team headcount for Q3 budget",
+     "better": "group of people or spreadsheet",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Paint the wooden scarecrow for the front porch",
+     "better": "paintbrush or pumpkin/autumn icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "accessibility",
+   "accessible_menu",
+   "settings_accessibility"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6727,
+    "output": 1942,
+    "thoughts": 193,
+    "total": 8862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Shows the standard accessibility figure with slightly upward-curved arms and no ellipsis dots, representing general accessibility, inclusion, or stretching rather than a specific settings menu, though it looks very close to the straight-armed T-pose figure."
 }

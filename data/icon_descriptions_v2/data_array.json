@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "array, list structure, or data array in programming",
+   "meaning": "array, list structure, or JSON array in programming",
    "strength": "primary"
   },
   {
@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "camera viewfinder or crop frame",
+   "meaning": "camera viewfinder or focus frame",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily mistaken for a camera focus frame, crop box, fullscreen toggle, or a broken empty checkbox at small sizes.",
+ "ambiguity": "At small sizes the inward-pointing top and bottom serifs can visually blur into the center gap, making it resemble the two vertical lines with a dashed centerline (road or lane icon), or look like a camera focus box or broken checkbox.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -151,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Repaint the faded dashed lane markings on the private driveway",
+   "better": "two vertical lines flanking a dashed centerline (road or driving lane)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the highway road conditions before driving up to Tahoe",
+   "better": "two vertical lines flanking a dashed centerline (road or highway)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Mount the floating shelf brackets in the laundry room",
    "better": "wall shelf or hardware bracket",
    "trap": "shared_vocabulary"
@@ -166,16 +176,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Crop the team headshots to a 1:1 square aspect ratio",
-   "better": "crop tool or photo icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Scan the QR code on the return label at the drop-off kiosk",
-   "better": "QR code scanner icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a spare solar panel for the roof array",
    "better": "solar panel",
    "trap": "shared_vocabulary"
@@ -189,7 +189,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows a pair of square brackets `[ ]`, which specifically represents data arrays in programming, matrices in math, or bracketed syntax/citations in editing. It is only useful for a narrow slice of technical and academic tasks and can look like a crop frame or viewfinder out of context.",
@@ -207,6 +207,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "array, list structure, or data array in programming",
+     "strength": "primary"
+    },
+    {
+     "meaning": "square brackets, markdown syntax, or editorial insertion",
+     "strength": "primary"
+    },
+    {
+     "meaning": "matrix in mathematics or linear algebra",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "camera viewfinder or crop frame",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily mistaken for a camera focus frame, crop box, fullscreen toggle, or a broken empty checkbox at small sizes.",
+   "near_misses": [
+    {
+     "task": "Mount the floating shelf brackets in the laundry room",
+     "better": "wall shelf or hardware bracket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fill out our March Madness tournament bracket before Thursday",
+     "better": "tournament tree or basketball icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check which tax bracket we land in after the bonus",
+     "better": "tax form or currency symbol",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Crop the team headshots to a 1:1 square aspect ratio",
+     "better": "crop tool or photo icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Scan the QR code on the return label at the drop-off kiosk",
+     "better": "QR code scanner icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a spare solar panel for the roof array",
+     "better": "solar panel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new textbook for the linear algebra course",
+     "better": "book",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "road"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4090,
+    "output": 1139,
+    "thoughts": 93,
+    "total": 5322
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:15Z"
+  }
+ },
+ "distinguishing": "Shows two inward-facing square brackets with horizontal top and bottom serifs and an empty center, representing code arrays, brackets, or matrices rather than a road with a dashed centerline."
 }

@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the three bars with a slash can be mistaken for a no-cell-signal icon, a muted audio equalizer, or a crossed-out building silhouette.",
+ "ambiguity": "At small sizes, the vertical columns cut by a heavy diagonal slash can briefly resemble the crossed-out fork and knife icon, a no-cell-signal icon, or a muted audio equalizer.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -159,13 +159,18 @@
  ],
  "near_misses": [
   {
-   "task": "Build the monthly revenue bar chart for the board deck",
-   "better": "bar chart without slash",
+   "task": "Start 16-hour intermittent fasting window at 8pm",
+   "better": "crossed-out fork and knife icon",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Download offline maps for the canyon hike with no cell signal",
-   "better": "map or cellular signal bars with slash",
+   "task": "Cancel dinner reservation at the Italian bistro",
+   "better": "crossed-out fork and knife icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Build the monthly revenue bar chart for the board deck",
+   "better": "bar chart without slash",
    "trap": "lookalike_glyph"
   },
   {
@@ -192,7 +197,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a three-bar chart crossed out by a diagonal slash, representing disabled analytics/telemetry, hidden charts, or missing metrics. It fits niche technical and privacy tasks around turning off tracking or handling empty chart states, though at small sizes it is easily confused with no-signal bars or a muted equalizer.",
@@ -210,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "analytics or tracking disabled / opt out of statistics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no chart data / hide bar chart or metrics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "audio equalizer or sound visualization turned off",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "no cellular signal or offline status",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the three bars with a slash can be mistaken for a no-cell-signal icon, a muted audio equalizer, or a crossed-out building silhouette.",
+   "near_misses": [
+    {
+     "task": "Build the monthly revenue bar chart for the board deck",
+     "better": "bar chart without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download offline maps for the canyon hike with no cell signal",
+     "better": "map or cellular signal bars with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check why Q3 website traffic dropped by 40 percent",
+     "better": "trending down chart or analytics chart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a privacy screen protector for my 14-inch laptop",
+     "better": "laptop or shield icon",
+     "trap": "property"
+    },
+    {
+     "task": "Email legal the updated data retention schedule PDF",
+     "better": "email or document icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Review the quarterly KPI numbers before the 2pm sync",
+     "better": "bar chart or spreadsheet icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "no_meals"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4108,
+    "output": 740,
+    "thoughts": 196,
+    "total": 5044
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "Shows three plain, flat-topped vertical rectangular columns of varying heights resting on a common baseline with a diagonal slash (disabled bar chart or statistics), whereas the look-alike shows a fork with tines and a curved knife blade with a slash (no food or fasting)."
 }

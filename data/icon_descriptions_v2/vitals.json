@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "electrical signal, audio waveform, or seismograph reading",
+   "meaning": "electrical signal pulse or oscilloscope trace",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as either human health vitals (pulse/ECG) or technical system telemetry/activity monitoring; also resembles an electronic resistor schematic symbol.",
+ "ambiguity": "Virtually interchangeable with the multi-peak jagged pulse waveform for health vitals and system activity monitoring; also resembles a simplified electronic resistor schematic symbol.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -109,11 +109,6 @@
    "domain": "learning"
   },
   {
-   "task": "Log resting pulse and blood oxygen every morning for two weeks before the cardiology visit",
-   "parent": "",
-   "domain": "health_fitness"
-  },
-  {
    "task": "Investigate why the worker node heartbeat check keeps timing out during the nightly backup job",
    "parent": "",
    "domain": "tech"
@@ -154,6 +149,21 @@
  ],
  "near_misses": [
   {
+   "task": "Review the full multi-wave ECG rhythm strip with the cardiologist",
+   "better": "multi-peak ECG pulse waveform",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check recent earthquake seismograph readings from the USGS feed",
+   "better": "multi-peak jagged waveform or seismograph",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy 10k ohm resistors for the breadboard project",
+   "better": "electronic component / circuit",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy canned kidney beans and chickpeas for chili",
    "better": "can or beans / groceries",
    "trap": "shared_vocabulary"
@@ -169,16 +179,6 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Analyze Q3 stock portfolio volatility and index dips",
-   "better": "financial trend chart with axes",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy 10k ohm resistors for the breadboard project",
-   "better": "electronic component / circuit",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the $140 copay invoice on the clinic website",
    "better": "credit card or bill/receipt",
    "trap": "parent_topic"
@@ -192,7 +192,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an ECG/pulse waveform (a flat baseline with a sharp dip and peak). It is the standard visual symbol for heart rate, cardiology, vitals tracking, and system activity/health monitoring, though it can occasionally be confused with a generic line chart or an electrical waveform.",
@@ -210,6 +210,101 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "vital_signs"
- }
+  "alias_of": "vital_signs",
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "heartbeat, pulse, or ECG / EKG waveform",
+     "strength": "primary"
+    },
+    {
+     "meaning": "system activity, server monitoring, or performance trace",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vital signs, cardiology, or medical checkup",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "electrical signal, audio waveform, or seismograph reading",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as either human health vitals (pulse/ECG) or technical system telemetry/activity monitoring; also resembles an electronic resistor schematic symbol.",
+   "near_misses": [
+    {
+     "task": "Buy canned kidney beans and chickpeas for chili",
+     "better": "can or beans / groceries",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send out the quarterly employee pulse survey on Slack",
+     "better": "survey form or chat bubble",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the staging deployment finished",
+     "better": "checkmark or server/rocket",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Analyze Q3 stock portfolio volatility and index dips",
+     "better": "financial trend chart with axes",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy 10k ohm resistors for the breadboard project",
+     "better": "electronic component / circuit",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $140 copay invoice on the clinic website",
+     "better": "credit card or bill/receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Listen to the new dark ambient synth album",
+     "better": "headphones or musical note",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "earthquake"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4166,
+    "output": 958,
+    "thoughts": 0,
+    "total": 5124
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:35Z"
+  }
+ },
+ "distinguishing": "Shows a minimal two-vertex pulse line with just one downward trough followed by one upward peak, whereas the look-alike has four vertices with a second trough and smaller peak, though the two are largely interchangeable in meaning."
 }

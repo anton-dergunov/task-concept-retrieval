@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "git branch comparison, rebase, or cherry-picking commits between branches",
+   "meaning": "git branch comparison, pull request diff, rebase, or cherry-picking commits between branches",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with standard git pull request, git merge, or generic swap/transfer arrows at small sizes.",
+ "ambiguity": "Could be mistaken for the node-path icon with an edit pencil at tiny sizes if the bottom-right pencil isn't noticed, or for standard git merge / pull-request icons.",
  "modifier_semantics": [
   {
    "modifier": "two rightward arrows",
@@ -160,6 +160,16 @@
  ],
  "near_misses": [
   {
+   "task": "Edit the multi-stop delivery route for tomorrow's driver",
+   "better": "node path with edit pencil icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Modify the approval workflow steps in Jira",
+   "better": "workflow path with edit pencil icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Wire $2,500 from checking to high-yield savings account",
    "better": "bank or money transfer icon",
    "trap": "shared_vocabulary"
@@ -175,19 +185,9 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Move boxes from the garage to the basement storage rack",
-   "better": "cardboard box icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Renew SSL certificate for the git server",
    "better": "security certificate or lock icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Compare health insurance plans for open enrollment",
-   "better": "health shield or medical clipboard icon",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -211,6 +211,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "git branch comparison, rebase, or cherry-picking commits between branches",
+     "strength": "primary"
+    },
+    {
+     "meaning": "data mapping, schema migration, or syncing between source and target",
+     "strength": "primary"
+    },
+    {
+     "meaning": "offsetting or translating a line segment in CAD or vector graphics",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "transferring or shifting a sequence or timeline to a new track",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with standard git pull request, git merge, or generic swap/transfer arrows at small sizes.",
+   "near_misses": [
+    {
+     "task": "Wire $2,500 from checking to high-yield savings account",
+     "better": "bank or money transfer icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Prune dead branches off the backyard apple tree",
+     "better": "tree or pruning shears icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the staging server is up",
+     "better": "server icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Move boxes from the garage to the basement storage rack",
+     "better": "cardboard box icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew SSL certificate for the git server",
+     "better": "security certificate or lock icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "rebase_edit"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4055,
+    "output": 696,
+    "thoughts": 0,
+    "total": 4751
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:13Z"
+  }
+ },
+ "distinguishing": "Shows two full vertical node-ended segments with two rightward arrows connecting both top and bottom nodes, representing comparing, syncing, or migrating between two parallel branches or pipelines, whereas the look-alike has a pencil in the bottom right for editing a path or workflow."
 }

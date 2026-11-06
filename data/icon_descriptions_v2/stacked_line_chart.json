@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "line chart / multi-series graph / comparative trends",
+   "meaning": "multi-line chart / parallel upward trends / comparative graph",
    "strength": "primary"
   },
   {
-   "meaning": "analytics / metrics / statistics / stock market performance",
+   "meaning": "analytics / metrics / stock market growth",
    "strength": "primary"
   },
   {
-   "meaning": "window glass glare / shiny surface reflection mark",
+   "meaning": "window glass glare / shiny reflection mark",
    "strength": "secondary"
   },
   {
-   "meaning": "zigzag stitch / decorative wave pattern",
+   "meaning": "zigzag stitch / parallel lightning bolts",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without chart axes or an arrow head, the two parallel jagged strokes can resemble the stylized glare mark on glass or mirrors, a sewing zigzag stitch, or an electrical/radio wave symbol.",
+ "ambiguity": "Virtually interchangeable with the two diverging jagged trend lines for general analytics or chart tasks; without chart axes, the twin parallel diagonal zigzags also resemble glass reflection marks or a sewing stitch.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -154,6 +154,11 @@
  ],
  "near_misses": [
   {
+   "task": "Compare diverging Q3 revenue vs. flat baseline expenses in the deck",
+   "better": "two diverging jagged trend lines",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Windex the bathroom mirror and shower glass",
    "better": "mirror or spray bottle",
    "trap": "lookalike_glyph"
@@ -174,11 +179,6 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Check why the living room dimmer switch is buzzing",
-   "better": "light switch or lightning bolt",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a high-growth potting mix for the monstera",
    "better": "potted plant",
    "trap": "property"
@@ -187,7 +187,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts two parallel jagged lines sloping upward, standardly used for a multi-series line chart, comparative trends, or stock/analytics performance. It fits tasks centered on charting, comparing metrics, or tracking financial and personal trends, though without axes or arrowheads it is somewhat abstract and can resemble a glass reflection mark or zigzag stitch.",
@@ -205,6 +205,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "line chart / multi-series graph / comparative trends",
+     "strength": "primary"
+    },
+    {
+     "meaning": "analytics / metrics / statistics / stock market performance",
+     "strength": "primary"
+    },
+    {
+     "meaning": "window glass glare / shiny surface reflection mark",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "zigzag stitch / decorative wave pattern",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without chart axes or an arrow head, the two parallel jagged strokes can resemble the stylized glare mark on glass or mirrors, a sewing zigzag stitch, or an electrical/radio wave symbol.",
+   "near_misses": [
+    {
+     "task": "Windex the bathroom mirror and shower glass",
+     "better": "mirror or spray bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Practice the zigzag stitch on scrap denim before hemming the jeans",
+     "better": "sewing machine or needle and thread",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy chicken stock and mirepoix for tonight's soup",
+     "better": "soup pot or broth carton",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the accountant's invoice for the quarterly financial review",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the living room dimmer switch is buzzing",
+     "better": "light switch or lightning bolt",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a high-growth potting mix for the monstera",
+     "better": "potted plant",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "ssid_chart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4081,
+    "output": 824,
+    "thoughts": 0,
+    "total": 4905
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Unlike the two diverging trend lines where the bottom line levels off horizontally, both of these jagged lines are identical, strictly parallel, and angle steeply upward with perpendicular end caps, though both icons are largely interchangeable as multi-line trend charts."
 }

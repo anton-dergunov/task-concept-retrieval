@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "framed artwork or wall print",
-   "strength": "primary"
-  },
-  {
-   "meaning": "live photo, wireless image share, or photo stream",
+   "meaning": "photo stream, wireless image casting, or live photo",
    "strength": "secondary"
   },
   {
-   "meaning": "photo album or gallery",
+   "meaning": "image brightness, exposure, or HDR photo",
+   "strength": "secondary"
+  },
+  {
+   "meaning": "framed artwork or wall print",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The concentric quarter-circle in the top left looks both like a stylized radiating sun and like a Wi-Fi/RSS broadcast symbol inside a picture frame.",
+ "ambiguity": "Nearly interchangeable with the standard mountain-and-sun picture icon—differing only in the corner arc versus a floating circle—and its corner waves also resemble a Wi-Fi or RSS signal.",
  "modifier_semantics": [
   {
    "modifier": "quarter-circle dot and concentric arc in top-left corner",
@@ -164,28 +164,28 @@
  ],
  "near_misses": [
   {
-   "task": "Clean the front element of the 35mm prime lens with blower",
-   "better": "camera or camera lens",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book mountain hut for the Dolomites traverse in July",
-   "better": "mountain peaks or hiking",
+   "task": "Adjust black-and-white contrast levels on the portrait",
+   "better": "vertically split inverted-color square",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Reset the living room Wi-Fi mesh node",
-   "better": "wifi router or wireless signal",
+   "better": "wifi router or wireless signal waves",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Strip the floral wallpaper in the downstairs powder room",
-   "better": "paint roller, wall, or home renovation tool",
+   "task": "Book mountain hut for the Dolomites traverse in July",
+   "better": "unframed mountain peaks or hiker",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean the front element of the 35mm prime lens",
+   "better": "camera or camera lens",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pay the wedding photographer's second deposit invoice",
-   "better": "invoice, credit card, or money",
+   "better": "invoice or credit card",
    "trap": "parent_topic"
   },
   {
@@ -197,7 +197,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a framed landscape image with two mountains and a radiating corner sun (which also suggests a live or streamed photo). It is immediately recognizable as a photo, image file, or framed picture, making it a strong fit for photography, digital asset, and home framing tasks.",
@@ -215,6 +215,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photo, image, picture, or wallpaper",
+     "strength": "primary"
+    },
+    {
+     "meaning": "framed artwork or wall print",
+     "strength": "primary"
+    },
+    {
+     "meaning": "live photo, wireless image share, or photo stream",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "photo album or gallery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The concentric quarter-circle in the top left looks both like a stylized radiating sun and like a Wi-Fi/RSS broadcast symbol inside a picture frame.",
+   "near_misses": [
+    {
+     "task": "Clean the front element of the 35mm prime lens with blower",
+     "better": "camera or camera lens",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book mountain hut for the Dolomites traverse in July",
+     "better": "mountain peaks or hiking",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Reset the living room Wi-Fi mesh node",
+     "better": "wifi router or wireless signal",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Strip the floral wallpaper in the downstairs powder room",
+     "better": "paint roller, wall, or home renovation tool",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the wedding photographer's second deposit invoice",
+     "better": "invoice, credit card, or money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Picture how the sofa will fit if we rotate the rug",
+     "better": "sofa or floor plan",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "package",
+   "filter_b_and_w",
+   "imagesmode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6706,
+    "output": 2114,
+    "thoughts": 207,
+    "total": 9027
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:30Z"
+  }
+ },
+ "distinguishing": "Shows two mountain peaks inside a square frame like the standard picture icon, but replaces the solid round sun with a quarter-circle and concentric arc tucked into the top-left corner, suggesting a radiating sun, HDR/bright photo, or wireless photo stream."
 }

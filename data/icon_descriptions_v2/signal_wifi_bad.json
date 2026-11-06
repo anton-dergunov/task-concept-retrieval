@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "cancel internet service or disable Wi-Fi",
+   "meaning": "cancel internet service or disable/remove Wi-Fi network",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken at tiny sizes for a slice of pizza or pie wedge, or confused with a generic Wi-Fi icon if the X badge isn't noticed.",
+ "ambiguity": "At small list sizes, the diagonal X badge is easily confused with the upright plus badge on the add-Wi-Fi icon, and the hollow wedge without inner signal arcs can resemble a pie or pizza slice.",
  "modifier_semantics": [
   {
    "modifier": "small X cross mark at bottom right",
@@ -161,13 +161,18 @@
  ],
  "near_misses": [
   {
-   "task": "Set up the new Wi-Fi 6 router in the living room",
-   "better": "connected Wi-Fi or router icon",
+   "task": "Add a guest Wi-Fi SSID on the office router",
+   "better": "Wi-Fi wedge with plus sign (add Wi-Fi network)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up a new mesh Wi-Fi extender in the upstairs hallway",
+   "better": "Wi-Fi wedge with plus sign (add/extend Wi-Fi) or router icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Share the guest Wi-Fi password with Sarah's parents",
-   "better": "Wi-Fi or key/password icon",
+   "better": "connected Wi-Fi or key/password icon",
    "trap": "lookalike_glyph"
   },
   {
@@ -187,14 +192,14 @@
   },
   {
    "task": "Order a 50ft spool of white Cat6 cable",
-   "better": "cable / shopping cart icon",
+   "better": "Ethernet cable or plug icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an empty Wi-Fi wedge with an 'X' badge, universally read as 'no Wi-Fi' or 'disconnected wireless'. While originally a system status indicator, it fits real household and tech tasks about troubleshooting Wi-Fi outages, fixing dead zones, disabling wireless radios, or cancelling internet service, and must be distinguished from a normal connected Wi-Fi icon.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no Wi-Fi connection / disconnected wireless network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Wi-Fi outage or broken internet to troubleshoot",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel internet service or disable Wi-Fi",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "offline mode / work without internet",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken at tiny sizes for a slice of pizza or pie wedge, or confused with a generic Wi-Fi icon if the X badge isn't noticed.",
+   "near_misses": [
+    {
+     "task": "Set up the new Wi-Fi 6 router in the living room",
+     "better": "connected Wi-Fi or router icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Share the guest Wi-Fi password with Sarah's parents",
+     "better": "Wi-Fi or key/password icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a waterproof offline GPS handheld for backcountry hikes",
+     "better": "GPS device or compass icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check monthly internet speed test results",
+     "better": "speedometer / gauge icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Cancel Netflix subscription before renewal",
+     "better": "TV / streaming subscription icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a 50ft spool of white Cat6 cable",
+     "better": "cable / shopping cart icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wifi_add"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4109,
+    "output": 915,
+    "thoughts": 0,
+    "total": 5024
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Has a diagonal X cross badge in the bottom-right corner of the Wi-Fi wedge instead of an upright plus sign, signifying a disconnected, failed, or canceled wireless network rather than adding one."
 }

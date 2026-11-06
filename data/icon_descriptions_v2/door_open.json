@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "log out / sign out",
+   "meaning": "open / welcome / access",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic 'log out' or 'exit' action icon, though those usually include an arrow.",
+ "ambiguity": "Essentially interchangeable with the flat rectangular open door / sliding door icon for any general door, room, or entrance task; only on close inspection does this one read specifically as a hinged swinging door rather than a sliding door.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Clean the tracks on the sliding pocket door in the bathroom",
+   "better": "sliding or flat rectangular door in offset frame",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the rollers on the patio sliding door",
+   "better": "sliding or flat rectangular door in offset frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order a 6-pack of outdoor solar pathway lights",
    "better": "light / lamp",
    "trap": "property"
@@ -178,17 +188,12 @@
    "task": "Open a high-yield savings account at Ally",
    "better": "bank / piggy bank",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Check boarding gate for the Madrid flight",
-   "better": "airplane / ticket",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a partially open door in a frame with a doorknob. It is an immediate, unmistakable match for home maintenance tasks involving doors, doorways, hinges, and frames, and can secondarily serve room-booking or exit/logout tasks.",
@@ -206,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "door / doorway / entrance",
+     "strength": "primary"
+    },
+    {
+     "meaning": "room / office / space",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "exit / leaving / departure",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "log out / sign out",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic 'log out' or 'exit' action icon, though those usually include an arrow.",
+   "near_misses": [
+    {
+     "task": "Order a 6-pack of outdoor solar pathway lights",
+     "better": "light / lamp",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new coir welcome mat for the porch",
+     "better": "rug / mat",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace the dead battery in the Ring doorbell",
+     "better": "bell / camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Get two duplicate keys cut for the front door",
+     "better": "key",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Open a high-yield savings account at Ally",
+     "better": "bank / piggy bank",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check boarding gate for the Madrid flight",
+     "better": "airplane / ticket",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "meeting_room"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4026,
+    "output": 1143,
+    "thoughts": 0,
+    "total": 5169
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:23Z"
+  }
+ },
+ "distinguishing": "This icon shows a hinged door angled slightly open in perspective inside a rounded doorframe over a continuous floor line, whereas the other shows a flat rectangular sliding or pocket door with sharp corners and a split floor line; in meaning, both represent an open door or doorway and are largely interchangeable."
 }

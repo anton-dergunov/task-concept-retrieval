@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "battery warranty or insurance",
+   "meaning": "uninterruptible power supply (UPS) or backup battery protection",
    "strength": "secondary"
   },
   {
-   "meaning": "uninterruptible power supply (UPS) or backup battery protection",
+   "meaning": "battery warranty or device power insurance",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the shield covers the positive terminal nub on the right, the left side looks like a generic rounded rectangle or credit card / phone screen with a security shield.",
+ "ambiguity": "Easily confused at small sizes with the hollow rectangular outline with a shield; also, because the shield hides the battery terminal nub, it can look like a filled screen or card with a security badge.",
  "modifier_semantics": [
   {
    "modifier": "half-shaded shield badge",
@@ -166,6 +166,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set up low-battery auto-shutdown threshold on the server",
+   "better": "empty battery outline with shield icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Put tempered glass screen protector on the new tablet",
+   "better": "hollow rectangular screen outline with shield icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a pack of AA batteries for the kitchen scale",
    "better": "plain battery icon",
    "trap": "shared_vocabulary"
@@ -176,27 +186,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Enable BitLocker encryption on the external drive",
-   "better": "shield or padlock icon on drive",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Put tempered glass screen protector on new phone",
-   "better": "smartphone with shield icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Renew home contents insurance policy",
-   "better": "house with shield icon",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Order waterproof battery case for the kayak trolling motor",
    "better": "box or boat motor icon",
    "trap": "property"
   },
   {
-   "task": "Recycle swollen old laptop battery at Best Buy drop-off",
+   "task": "Recycle swollen old laptop battery at electronics drop-off",
    "better": "recycling or battery disposal icon",
    "trap": "parent_topic"
   }
@@ -204,7 +199,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon shows a horizontal battery cell with its right terminal overlapped by a half-shaded security shield, representing battery protection, charge-limiting health care, or battery backup/warranty. Because the shield hides the battery's nub, the left portion can be mistaken at small sizes for a generic rectangle, card, or screen with a shield. It fits a specific niche of tech and hardware tasks around battery health, charge limits, safe LiPo storage, and UPS protection.",
@@ -224,6 +219,99 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery protection or battery health care",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery saver or power protection mode",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery warranty or insurance",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "uninterruptible power supply (UPS) or backup battery protection",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the shield covers the positive terminal nub on the right, the left side looks like a generic rounded rectangle or credit card / phone screen with a security shield.",
+   "near_misses": [
+    {
+     "task": "Buy a pack of AA batteries for the kitchen scale",
+     "better": "plain battery icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge power bank before Saturday hike",
+     "better": "battery charging icon with lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Enable BitLocker encryption on the external drive",
+     "better": "shield or padlock icon on drive",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Put tempered glass screen protector on new phone",
+     "better": "smartphone with shield icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew home contents insurance policy",
+     "better": "house with shield icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order waterproof battery case for the kayak trolling motor",
+     "better": "box or boat motor icon",
+     "trap": "property"
+    },
+    {
+     "task": "Recycle swollen old laptop battery at Best Buy drop-off",
+     "better": "recycling or battery disposal icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_shield"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4109,
+    "output": 1043,
+    "thoughts": 159,
+    "total": 5311
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:25Z"
+  }
+ },
+ "distinguishing": "Has a solid black inner block inside the rectangular outline indicating battery charge, making it clearly read as a charged battery with a protection shield rather than an empty battery or hollow frame."
 }

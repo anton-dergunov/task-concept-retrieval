@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the two pill-shaped switches inside the shield can look like server blades or an equals sign.",
+ "ambiguity": "Could be mistaken for the shield with a loading spinner if only the shield outline registers at a glance, or the two pill toggles could look like stacked server blades at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "two toggle switches",
@@ -162,13 +162,23 @@
  ],
  "near_misses": [
   {
+   "task": "Run a full Malwarebytes antivirus scan on the laptop",
+   "better": "shield with loading spinner (security scan in progress) ",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wait for Windows Defender security definitions to finish updating",
+   "better": "shield with loading spinner (security update in progress) ",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a privacy screen protector for the 14-inch MacBook",
    "better": "laptop or screen protector",
    "trap": "property"
   },
   {
    "task": "Plant a row of arborvitae along the back fence for privacy",
-   "better": "tree / hedge / fence",
+   "better": "tree, hedge, or fence",
    "trap": "shared_vocabulary"
   },
   {
@@ -178,13 +188,8 @@
   },
   {
    "task": "Verify bank account routing number before wire transfer",
-   "better": "bank / money transfer",
+   "better": "bank or money transfer",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Pay the annual home insurance premium by Tuesday",
-   "better": "house with shield or bill/payment",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order a YubiKey 5C Nano from Amazon",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "privacy settings or security preferences",
+     "strength": "primary"
+    },
+    {
+     "meaning": "app permissions or access controls",
+     "strength": "primary"
+    },
+    {
+     "meaning": "parental controls or safety filters",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cookie consent or tracking options",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the two pill-shaped switches inside the shield can look like server blades or an equals sign.",
+   "near_misses": [
+    {
+     "task": "Buy a privacy screen protector for the 14-inch MacBook",
+     "better": "laptop or screen protector",
+     "trap": "property"
+    },
+    {
+     "task": "Plant a row of arborvitae along the back fence for privacy",
+     "better": "tree / hedge / fence",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install two dimmer switches in the dining room",
+     "better": "wall light switch",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Verify bank account routing number before wire transfer",
+     "better": "bank / money transfer",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the annual home insurance premium by Tuesday",
+     "better": "house with shield or bill/payment",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a YubiKey 5C Nano from Amazon",
+     "better": "USB security key",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "arming_countdown"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4074,
+    "output": 667,
+    "thoughts": 0,
+    "total": 4741
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Contains two horizontal pill-shaped toggle switches inside the shield, representing configurable privacy settings, permissions, or access controls rather than an active scan or update."
 }

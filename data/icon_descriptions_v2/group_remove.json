@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "delete user account or revoke team access",
+   "meaning": "revoke team access or kick user from workspace",
    "strength": "primary"
   },
   {
-   "meaning": "trim guest list or unfollow contacts",
+   "meaning": "trim guest list or roster",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the partial rear figure can look like a sound wave or parenthesis next to a single user with a minus sign.",
+ "ambiguity": "Can be mistaken for the group with plus sign icon on a fast scan since both share the identical two-person base, or misread as a speaking person with a sound wave at tiny sizes.",
  "modifier_semantics": [
   {
    "modifier": "horizontal minus bar on the right",
@@ -177,7 +177,12 @@
  "near_misses": [
   {
    "task": "Add the two new designers to the Figma team",
-   "better": "group with plus sign",
+   "better": "group of people with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Invite Sarah and Mike to the family Slack channel",
+   "better": "group of people with plus sign",
    "trap": "lookalike_glyph"
   },
   {
@@ -199,11 +204,6 @@
    "task": "Buy a smaller dining table for four people instead of eight",
    "better": "table / furniture",
    "trap": "property"
-  },
-  {
-   "task": "Turn on noise cancellation on my headphones",
-   "better": "headphones or speaker with slash",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -229,6 +229,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remove member from a group or team",
+     "strength": "primary"
+    },
+    {
+     "meaning": "delete user account or revoke team access",
+     "strength": "primary"
+    },
+    {
+     "meaning": "trim guest list or unfollow contacts",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "leave a group or club",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the partial rear figure can look like a sound wave or parenthesis next to a single user with a minus sign.",
+   "near_misses": [
+    {
+     "task": "Add the two new designers to the Figma team",
+     "better": "group with plus sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Delete my old Twitter account permanently",
+     "better": "single user with minus or trash can",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check who still has admin access to the AWS console",
+     "better": "shield or key",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Schedule the exit interview with HR for Tuesday",
+     "better": "calendar",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a smaller dining table for four people instead of eight",
+     "better": "table / furniture",
+     "trap": "property"
+    },
+    {
+     "task": "Turn on noise cancellation on my headphones",
+     "better": "headphones or speaker with slash",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "group_add"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 1067,
+    "thoughts": 0,
+    "total": 5140
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "Features a horizontal minus sign (-) to the right of the two overlapping person silhouettes, indicating removing someone from a group or revoking access rather than adding."
 }

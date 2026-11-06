@@ -15,11 +15,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "SIM card or SD memory card (due to clipped corner silhouette)",
+   "meaning": "SIM card or SD memory card (from the clipped-corner silhouette)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Its square shape with a diagonally cut top-right corner strongly resembles a SIM card or SD card, though the three horizontal bars inside represent lines of text on a note or document.",
+ "ambiguity": "Visual twin of the square page with a filled folded corner; only the lack of the inner fold triangle separates them, and at small sizes it also overlaps with the plain rounded square note.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -151,28 +151,28 @@
  ],
  "near_misses": [
   {
+   "task": "Archive last year's utility bills in the household dossier",
+   "better": "tabbed file folder with lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Mail a thank-you postcard from the national park",
+   "better": "two-column split rectangle with lines on the right",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a local eSIM or physical SIM card at Narita airport",
    "better": "SIM card icon with metallic chip contact pads",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Format the 128GB SD card before the wedding shoot",
-   "better": "SD memory card icon with contact pins",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Note the water meter reading before calling the utility company",
-   "better": "gauge / meter or phone icon",
+   "better": "gauge, meter, or phone icon",
    "trap": "generic_verb"
   },
   {
    "task": "Practice hitting the high F# note cleanly on the flute",
    "better": "musical note or flute icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy paper towels and toilet paper at Costco",
-   "better": "paper roll or shopping cart icon",
    "trap": "shared_vocabulary"
   },
   {
@@ -184,7 +184,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 5,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a compact page or note with a clipped top-right corner and three horizontal text lines. It fits a wide range of everyday tasks centered on writing, editing, or organizing notes, memos, essays, and documents, though its compact chamfered outline can occasionally be mistaken for a SIM or SD card at a quick glance.",
@@ -202,6 +202,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "note, text document, or memo",
+     "strength": "primary"
+    },
+    {
+     "meaning": "article, summary, or written draft",
+     "strength": "primary"
+    },
+    {
+     "meaning": "SIM card or SD memory card (due to clipped corner silhouette)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Its square shape with a diagonally cut top-right corner strongly resembles a SIM card or SD card, though the three horizontal bars inside represent lines of text on a note or document.",
+   "near_misses": [
+    {
+     "task": "Buy a local eSIM or physical SIM card at Narita airport",
+     "better": "SIM card icon with metallic chip contact pads",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Format the 128GB SD card before the wedding shoot",
+     "better": "SD memory card icon with contact pins",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Note the water meter reading before calling the utility company",
+     "better": "gauge / meter or phone icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Practice hitting the high F# note cleanly on the flute",
+     "better": "musical note or flute icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy paper towels and toilet paper at Costco",
+     "better": "paper roll or shopping cart icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the photographer for the author headshot",
+     "better": "camera icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "description",
+   "feed",
+   "chrome_reader_mode",
+   "article",
+   "library_books",
+   "source",
+   "text_ad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12132,
+    "output": 4025,
+    "thoughts": 352,
+    "total": 16509
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "A square page with three horizontal bars whose top-right corner is diagonally cut off with a straight border rather than an inward-folded triangle, making it nearly interchangeable with the dog-eared square document while also resembling a SIM or memory card outline."
 }

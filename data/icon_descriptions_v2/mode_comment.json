@@ -7,11 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "message, text, SMS, or chat",
-   "strength": "primary"
-  },
-  {
-   "meaning": "comment, feedback, or reply",
+   "meaning": "message, text, SMS, or chat (especially outgoing / sent reply)','strength':'primary'},{'meaning':'comment, feedback, or reply",
    "strength": "primary"
   },
   {
@@ -19,7 +15,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very generic speech bubble; interchangeable with other chat, comment, or callout icons.",
+ "ambiguity": "Interchangeable with the bottom-left tailed speech bubble (its exact horizontal mirror) and the center-pointed speech bubble for almost all messaging or comment tasks.",
  "modifier_semantics": [],
  "domains": [
   "communication",
@@ -151,6 +147,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the positioning of the hover tooltip on the pricing page",
+   "better": "rectangular callout bubble with centered bottom pointer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Read incoming customer support messages in the inbox",
+   "better": "speech bubble with bottom-left tail (if left/right distinguishes incoming vs outgoing) or inbox tray",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Grandma for her birthday",
    "better": "phone handset",
    "trap": "shared_vocabulary"
@@ -159,11 +165,6 @@
    "task": "Email the signed lease back to the agency",
    "better": "envelope / email",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new 27-inch 4K monitor for the home office",
-   "better": "computer monitor",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Practice my 5-minute lightning talk on database indexing",
@@ -184,7 +185,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a clean, empty rectangular speech bubble, the universal symbol for messaging, texting, chatting, or commenting. It fits a huge range of everyday communication tasks across personal and work life, though it overlaps with other speech-bubble variants.",
@@ -202,6 +203,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "message, text, SMS, or chat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "comment, feedback, or reply",
+     "strength": "primary"
+    },
+    {
+     "meaning": "conversation or talk with someone",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very generic speech bubble; interchangeable with other chat, comment, or callout icons.",
+   "near_misses": [
+    {
+     "task": "Call Grandma for her birthday",
+     "better": "phone handset",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the signed lease back to the agency",
+     "better": "envelope / email",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new 27-inch 4K monitor for the home office",
+     "better": "computer monitor",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Practice my 5-minute lightning talk on database indexing",
+     "better": "podium or microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the $45 international roaming SMS fee on the phone bill",
+     "better": "money or bill",
+     "trap": "property"
+    },
+    {
+     "task": "Book the conference room for the feedback session",
+     "better": "calendar or meeting room",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "tooltip",
+   "chat_bubble_outline"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5378,
+    "output": 1127,
+    "thoughts": 0,
+    "total": 6505
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "The triangular tail extends vertically down from the right edge at the bottom-right corner (mirroring the bottom-left version), which in chat interfaces can suggest an outgoing/sent message, though in general task lists all three bubbles are functionally interchangeable."
 }

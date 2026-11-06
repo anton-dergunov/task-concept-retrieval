@@ -10,7 +10,7 @@
  },
  "readings": [
   {
-   "meaning": "hearing aid or assistive listening device",
+   "meaning": "hearing aid or assistive listening device (or specifically a left-ear hearing aid)",
    "strength": "primary"
   },
   {
@@ -18,7 +18,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "earbud, in-ear monitor, or Bluetooth headset",
+   "meaning": "earbud, in-ear monitor, or Bluetooth earpiece (or specifically left earbud)",
    "strength": "secondary"
   },
   {
@@ -26,7 +26,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the earpiece inside the ear can resemble a keyhole or a generic sound-wave ear icon, or be read as a wireless earbud rather than a medical hearing aid.",
+ "ambiguity": "Identical in meaning to the right-facing ear with hearing aid icon except for orientation (left ear vs. right ear); at small sizes the in-ear piece can also resemble a keyhole or wireless earbud.",
  "modifier_semantics": [
   {
    "modifier": "in-ear piece inside the ear canal",
@@ -168,6 +168,16 @@
  ],
  "near_misses": [
   {
+   "task": "Order replacement silicone dome for the right-ear hearing aid",
+   "better": "right-facing ear with hearing aid",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Find the lost right AirPod under the living room couch",
+   "better": "right-facing ear with earpiece or single right earbud",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Listen to the two-hour quarterly earnings call recording",
    "better": "headphones or play audio button",
    "trap": "generic_verb"
@@ -188,12 +198,7 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pick up wireless charging case for AirPods Pro",
-   "better": "earbuds in charging case",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Send thank-you flowers to the receptionist at the clinic",
+   "task": "Send thank-you flowers to the receptionist at the audiology clinic",
    "better": "bouquet of flowers",
    "trap": "parent_topic"
   }
@@ -201,7 +206,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a human ear fitted with an in-ear receiver and a behind-the-ear arc, which is the standard symbol for a hearing aid or assistive listening. It fits tasks around audiology appointments, hearing aid maintenance, batteries, and audio accessibility very well, though at tiny sizes the inner piece can slightly resemble a keyhole or generic earbud.",
@@ -219,6 +224,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "hearing aid or assistive listening device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "audiology, hearing test, or ear health",
+     "strength": "primary"
+    },
+    {
+     "meaning": "earbud, in-ear monitor, or Bluetooth headset",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audio accessibility or hard-of-hearing support",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the earpiece inside the ear can resemble a keyhole or a generic sound-wave ear icon, or be read as a wireless earbud rather than a medical hearing aid.",
+   "near_misses": [
+    {
+     "task": "Listen to the two-hour quarterly earnings call recording",
+     "better": "headphones or play audio button",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy noise-cancelling over-ear headphones for long flights",
+     "better": "over-ear headphones",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule court hearing date with the county clerk",
+     "better": "gavel or courthouse",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Unlock the back garden gate with the spare brass key",
+     "better": "key or keyhole",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up wireless charging case for AirPods Pro",
+     "better": "earbuds in charging case",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Send thank-you flowers to the receptionist at the clinic",
+     "better": "bouquet of flowers",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hearing_aid_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4128,
+    "output": 964,
+    "thoughts": 0,
+    "total": 5092
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Shows a left-facing ear (left ear in profile) with the curved behind-the-ear arc on the right; it is the exact horizontal mirror image of the right-facing ear icon and is functionally interchangeable for general hearing aid or earbud tasks unless left vs. right ear matters."
 }

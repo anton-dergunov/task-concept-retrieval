@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "no signal / offline / cellular or hotspot disabled",
+   "meaning": "hotspot, cellular data, or radio transmitter disabled",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "digital detox / disconnect from internet",
+   "meaning": "no signal / offline / dead zone",
    "strength": "secondary"
   },
   {
-   "meaning": "radio or Wi-Fi outage",
+   "meaning": "digital detox / disconnect from internet",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a crossed-out Wi-Fi icon (which usually points upward in a fan rather than radiating horizontally from a mast) or a muted microphone at very small sizes.",
+ "ambiguity": "At small sizes the diagonal slash cuts right across the central dot and stem, making it nearly interchangeable with the bare crossed-out opposing signal arcs.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -162,8 +162,18 @@
  ],
  "near_misses": [
   {
+   "task": "Disable NFC contactless tap-to-pay on phone while traveling",
+   "better": "crossed-out wireless waves without antenna mast",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn off phone vibration for incoming notifications",
+   "better": "crossed-out vibration waves",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order new Wi-Fi mesh router for the upstairs hallway",
-   "better": "wifi router (active, not crossed out)",
+   "better": "wifi router (active, not crossed out,",
    "trap": "lookalike_glyph"
   },
   {
@@ -177,17 +187,12 @@
    "trap": "property"
   },
   {
-   "task": "Mute microphone during the all-hands town hall",
-   "better": "muted microphone",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check why the podcast audio sounds muffled",
    "better": "waveform / headphones",
    "trap": "generic_verb"
   },
   {
-   "task": "Pack board games and cards for the cabin",
+   "task": "Pack board games and cards for the unplugged cabin weekend",
    "better": "board game / dice",
    "trap": "parent_topic"
   }
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a radio/hotspot antenna with concentric signal waves crossed out by a diagonal slash, meaning 'no signal', 'offline', 'hotspot off', or 'broadcast stopped'. It fits tasks about troubleshooting outages, disabling roaming/hotspots for travel, testing offline functionality, or unplugging for a digital detox. It is distinct from standard upward-fanning Wi-Fi icons, though closely related in meaning.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no signal / offline / cellular or hotspot disabled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stop broadcasting / livestream off",
+     "strength": "primary"
+    },
+    {
+     "meaning": "digital detox / disconnect from internet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "radio or Wi-Fi outage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a crossed-out Wi-Fi icon (which usually points upward in a fan rather than radiating horizontally from a mast) or a muted microphone at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Order new Wi-Fi mesh router for the upstairs hallway",
+     "better": "wifi router (active, not crossed out)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel monthly Spotify subscription before renewal",
+     "better": "music / subscription cancel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an offline-capable e-reader for the beach",
+     "better": "e-reader / book",
+     "trap": "property"
+    },
+    {
+     "task": "Mute microphone during the all-hands town hall",
+     "better": "muted microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check why the podcast audio sounds muffled",
+     "better": "waveform / headphones",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pack board games and cards for the cabin",
+     "better": "board game / dice",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sensors_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4067,
+    "output": 649,
+    "thoughts": 0,
+    "total": 4716
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:26Z"
+  }
+ },
+ "distinguishing": "Includes a central vertical antenna mast topped with a round transmitter dot between the radiating arcs, specifically depicting a broadcast tower, cellular radio, or hotspot turned off rather than bare signal waves."
 }

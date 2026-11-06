@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "click, select, or interactive UI element",
+   "meaning": "mouse click, select, or interactive UI element",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the circle and angled arrow can resemble a 'Q', a power/reset symbol, or a compass dial.",
+ "ambiguity": "Visually and semantically interchangeable with the mouse pointer with a smaller, thicker ring around its tip; at small sizes it can also resemble a compass dial or target.",
  "modifier_semantics": [
   {
    "modifier": "circular ripple or target ring",
@@ -180,6 +180,11 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Practice archery target shooting on Saturday morning",
+   "better": "bullseye target",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Write the copy for the new landing page hero section",
    "better": "document / text writing",
    "trap": "parent_topic"
@@ -193,7 +198,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a mouse cursor arrow clicking inside a circular ripple. While primarily a UI action glyph, it fits tasks specifically about pointer/trackpad configuration, UI click handlers, interactive states, and click-through analytics, though it is narrower than concrete everyday objects.",
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "click, select, or interactive UI element",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mouse cursor or pointer settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "call-to-action (CTA) button or click-through rate (CTR)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "website link or online portal",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the circle and angled arrow can resemble a 'Q', a power/reset symbol, or a compass dial.",
+   "near_misses": [
+    {
+     "task": "Buy AAA batteries for the wireless mouse",
+     "better": "battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set a humane mousetrap behind the pantry shelves",
+     "better": "rodent / mouse animal",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book click-and-collect grocery slot at Tesco for Thursday evening",
+     "better": "shopping bag or grocery cart",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a brass compass for the hike in Dartmoor",
+     "better": "compass",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write the copy for the new landing page hero section",
+     "better": "document / text writing",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Select three photos from the wedding to frame for the hallway",
+     "better": "photo frame / image",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "left_click"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4057,
+    "output": 1083,
+    "thoughts": 80,
+    "total": 5220
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Shows a wider, slightly thinner circular ring around the cursor tip compared to the smaller, thicker ring version, though the two icons are semantically interchangeable."
 }

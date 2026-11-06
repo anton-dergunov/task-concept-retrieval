@@ -38,11 +38,11 @@ def curation_audit() -> None:
     count per distinct glyph."""
     hashes = glyph_hashes()
     human = {hashes.get(n): lab for n, lab in icon_labels().items()}
-    kept_by_model = {hashes[ic.name] for ic in load_icons()}
+    kept_by_model = {hashes[ic.name] for ic in load_icons(version="v1")}
     cols = ("discard", "≤6", "7", "≥8")
     rows = CURATION_LABELS + ("unlabelled",)
     cell = {(r, c): 0 for r in rows for c in cols}
-    for ic in load_icons(include_discarded=True):
+    for ic in load_icons(include_discarded=True, version="v1"):
         g, u = hashes[ic.name], round(ic.usefulness * 10)
         col = "discard" if g not in kept_by_model else "≤6" if u <= 6 else "7" if u == 7 else "≥8"
         cell[(human.get(g, "unlabelled"), col)] += 1

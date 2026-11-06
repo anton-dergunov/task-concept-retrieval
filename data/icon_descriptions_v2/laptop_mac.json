@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "laptop computer / notebook PC",
+   "meaning": "laptop or notebook computer",
    "strength": "primary"
   },
   {
-   "meaning": "personal computer / PC hardware",
+   "meaning": "personal computer or portable PC",
    "strength": "primary"
   },
   {
-   "meaning": "remote work / digital task on computer",
+   "meaning": "remote work or computer task",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could slightly resemble a tablet in a dock or a portable DVD player at very small sizes, though the wider bottom lip clearly reads as a laptop.",
+ "ambiguity": "Functionally interchangeable with the other two open laptop icons (plain flat base and sharp-cornered with rectangular notch).",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -151,40 +151,40 @@
  ],
  "near_misses": [
   {
+   "task": "Mount the 27-inch external monitor on the VESA arm",
+   "better": "desktop monitor on a stand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up the new iMac on the home office desk",
+   "better": "all-in-one desktop computer on a stand",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Email the signed lease back to the landlord",
-   "better": "envelope / email icon",
+   "better": "envelope or email icon",
    "trap": "generic_verb"
   },
   {
    "task": "Buy a padded leather laptop backpack for the commute",
-   "better": "backpack / bag icon",
+   "better": "backpack or bag icon",
    "trap": "property"
   },
   {
-   "task": "Mount the 27-inch external monitor on the VESA arm",
-   "better": "desktop monitor icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Wipe down the walnut computer desk in the study",
-   "better": "desk / furniture icon",
+   "better": "desk or furniture icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book flight to the developer conference in Austin",
-   "better": "airplane / ticket icon",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Renew annual 1Password family subscription",
-   "better": "key / lock / password icon",
+   "better": "key or lock icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A clear, universally recognizable front-facing open laptop icon. It is ideal for tasks centered on a portable computer (buying, repairing, backing up, cleaning, configuring) and serves well as a secondary fallback for general computer-based digital chores, though it should not replace more specific icons like email, documents, or desktop monitors.",
@@ -202,6 +202,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "laptop computer / notebook PC",
+     "strength": "primary"
+    },
+    {
+     "meaning": "personal computer / PC hardware",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remote work / digital task on computer",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could slightly resemble a tablet in a dock or a portable DVD player at very small sizes, though the wider bottom lip clearly reads as a laptop.",
+   "near_misses": [
+    {
+     "task": "Email the signed lease back to the landlord",
+     "better": "envelope / email icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a padded leather laptop backpack for the commute",
+     "better": "backpack / bag icon",
+     "trap": "property"
+    },
+    {
+     "task": "Mount the 27-inch external monitor on the VESA arm",
+     "better": "desktop monitor icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wipe down the walnut computer desk in the study",
+     "better": "desk / furniture icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flight to the developer conference in Austin",
+     "better": "airplane / ticket icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Renew annual 1Password family subscription",
+     "better": "key / lock / password icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "jamboard_kiosk",
+   "desktop_windows",
+   "monitor",
+   "desktop_mac",
+   "laptop_windows",
+   "laptop_chromebook"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10537,
+    "output": 3307,
+    "thoughts": 0,
+    "total": 13844
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "An open laptop with a rounded screen bezel, a curved bottom deck extending past the sides, and a circular center button or cutout on the hinge, setting it apart from the pedestal monitors and semantically interchangeable with the other two laptops."
 }

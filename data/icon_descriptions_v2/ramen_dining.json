@@ -11,7 +11,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "Asian food or Chinese takeout",
+   "meaning": "Asian food or takeout",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Completely interchangeable in meaning and nearly identical at list size to the striped round-bottomed noodle bowl with chopsticks.",
  "modifier_semantics": [],
  "domains": [
   "food",
@@ -169,25 +169,30 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Replace the cracked mixing bowl from the baking set",
-   "better": "mixing bowl or whisk",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pick up a 20lb bag of jasmine rice at Costco",
-   "better": "rice bag or grain",
-   "trap": "lookalike_glyph"
+   "task": "Buy a ramen-themed graphic t-shirt for Leo's birthday",
+   "better": "t-shirt or gift",
+   "trap": "property"
   },
   {
    "task": "Clean the grease trap behind the stove",
    "better": "stove or cleaning spray",
    "trap": "parent_topic"
+  },
+  {
+   "task": "Replace the cracked mixing bowl from the baking set",
+   "better": "plain mixing bowl or whisk",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pick up a 20lb bag of jasmine rice at Costco",
+   "better": "rice bowl without noodles or grain sack",
+   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a bowl with chopsticks lifting vertical strands of noodles. It is universally recognizable for ramen, pho, noodles, and Asian takeout or cooking tasks, and its chopsticks-and-noodles silhouette easily distinguishes it from plain bowls or general restaurant icons.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "ramen or noodles",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Asian food or Chinese takeout",
+     "strength": "primary"
+    },
+    {
+     "meaning": "soup or hot bowl meal",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "chopsticks or dining out",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy pool noodles for the kids' swim party on Saturday",
+     "better": "swimming pool or float",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Noodle around on the Stratocaster for 20 minutes after work",
+     "better": "electric guitar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Split the 890 yen ramen bill with Maya on Splitwise",
+     "better": "money or receipt",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace the cracked mixing bowl from the baking set",
+     "better": "mixing bowl or whisk",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up a 20lb bag of jasmine rice at Costco",
+     "better": "rice bag or grain",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean the grease trap behind the stove",
+     "better": "stove or cleaning spray",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "udon"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4024,
+    "output": 1106,
+    "thoughts": 83,
+    "total": 5213
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "Visually shows a plain bowl with a flat foot at the bottom and no stripe on the side, whereas the other icon has a rounded bottom and a horizontal stripe across the bowl; in meaning, the two icons are completely interchangeable."
 }

@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "Git branch or version control repository",
+   "meaning": "Git branch, checkout, or version control repository",
    "strength": "primary"
   },
   {
-   "meaning": "fork, split, or branching workflow",
+   "meaning": "fork a repository or split a project workflow",
    "strength": "primary"
   },
   {
@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a share/network node icon, a USB symbol, or a manual car gear shift diagram by non-technical users.",
+ "ambiguity": "Very easily mistaken for the downward-curving Git merge icon (vertical flip of the side arm), and often used interchangeably with it for general Git or coding tasks.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -149,40 +149,45 @@
  ],
  "near_misses": [
   {
+   "task": "Merge the approved hotfix pull request into production",
+   "better": "downward-curving Git merge icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Resolve the merge conflicts in the release branch",
+   "better": "downward-curving Git merge icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cut the dead oak branch overhanging the greenhouse roof",
-   "better": "tree / saw / pruning shears",
+   "better": "tree or pruning saw",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Drop off the signed mortgage forms at the Barclays high street branch",
+   "task": "Drop off the signed mortgage forms at the high street bank branch",
    "better": "bank building",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy matching dessert forks for the Christmas dinner table",
-   "better": "fork / cutlery",
+   "better": "cutlery fork",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Fix the stiff second gear on the manual gearbox",
-   "better": "car / gearstick",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a powered 4-port USB hub for the desk setup",
-   "better": "USB plug / hub",
+   "better": "USB plug or hub",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Email the security audit report to the compliance officer",
-   "better": "email / shield / report",
+   "task": "Email the security audit report for the main repository to compliance",
+   "better": "email or shield",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "This is the standard icon for a Git branch or version control fork (a vertical line with a diverging curved path and three commit nodes). It is an unmistakable and top-choice visual cue for software development tasks involving branching, merging, rebasing, and repositories, as well as branching logic or genealogy, though it is domain-specific and can trap literal 'tree branch' or 'bank branch' tasks via shared vocabulary.",
@@ -200,6 +205,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Git branch or version control repository",
+     "strength": "primary"
+    },
+    {
+     "meaning": "fork, split, or branching workflow",
+     "strength": "primary"
+    },
+    {
+     "meaning": "genealogy tree or lineage branch",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a share/network node icon, a USB symbol, or a manual car gear shift diagram by non-technical users.",
+   "near_misses": [
+    {
+     "task": "Cut the dead oak branch overhanging the greenhouse roof",
+     "better": "tree / saw / pruning shears",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Drop off the signed mortgage forms at the Barclays high street branch",
+     "better": "bank building",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy matching dessert forks for the Christmas dinner table",
+     "better": "fork / cutlery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the stiff second gear on the manual gearbox",
+     "better": "car / gearstick",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a powered 4-port USB hub for the desk setup",
+     "better": "USB plug / hub",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Email the security audit report to the compliance officer",
+     "better": "email / shield / report",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "graph_1"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4108,
+    "output": 1146,
+    "thoughts": 282,
+    "total": 5536
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "The curved side arm bends upward to a top-right node (one node at the bottom, two at the top), the standard glyph for creating a Git branch or forking a repository as opposed to the downward-curving merge icon."
 }

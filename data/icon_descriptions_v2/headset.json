@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "customer support or helpdesk",
+   "meaning": "hearing protection earmuffs",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a customer service headset, though it lacks a microphone boom, or hearing protection earmuffs.",
+ "ambiguity": "Easily confused at small sizes with the headset with a microphone boom if the viewer does not notice the missing boom at the bottom right.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Contact customer support about the billing error",
+   "better": "headset with microphone boom",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new USB headset with mic for remote work calls",
+   "better": "headset with microphone boom",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a waterproof Bluetooth speaker for the patio",
    "better": "speaker",
    "trap": "shared_vocabulary"
@@ -168,16 +178,6 @@
    "task": "Book an appointment with the audiologist for a hearing test",
    "better": "ear",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a heavy-duty U-lock for the commuter bike",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Write a support ticket about the billing error",
-   "better": "helpdesk headset with mic or ticket",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the monthly Spotify family plan invoice",
@@ -206,6 +206,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "headphones"
- }
+  "alias_of": "headphones",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "headphones or earphones",
+     "strength": "primary"
+    },
+    {
+     "meaning": "audio listening, music, or podcasts",
+     "strength": "primary"
+    },
+    {
+     "meaning": "audiobook",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "customer support or helpdesk",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a customer service headset, though it lacks a microphone boom, or hearing protection earmuffs.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof Bluetooth speaker for the patio",
+     "better": "speaker",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Record the voiceover for the onboarding video",
+     "better": "microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book an appointment with the audiologist for a hearing test",
+     "better": "ear",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a heavy-duty U-lock for the commuter bike",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write a support ticket about the billing error",
+     "better": "helpdesk headset with mic or ticket",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly Spotify family plan invoice",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "headset_mic"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4031,
+    "output": 960,
+    "thoughts": 0,
+    "total": 4991
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "Symmetric over-ear headphones without a microphone boom, representing audio listening (music, podcasts, audiobooks) or hearing protection rather than two-way voice calls or customer support."
 }

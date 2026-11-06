@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "error log or diagnostic report",
+   "meaning": "error log, crash report, or diagnostic notice",
    "strength": "primary"
   },
   {
-   "meaning": "urgent note, important notice, or high-priority checklist",
+   "meaning": "urgent note, important notice, or high-priority list",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a generic postcard, ID badge, or split-column layout at very small sizes if the dot of the exclamation mark blends into a line.",
+ "ambiguity": "At small sizes, the gap above the exclamation point's dot can blur, making it look like the three-block dashboard layout icon with two horizontal blocks and one solid vertical sidebar.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -161,13 +161,18 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a birthday card for Aunt Linda!",
-   "better": "greeting card or gift",
+   "task": "Mock up the new two-column dashboard wireframe in Figma",
+   "better": "card with two horizontal blocks and one solid vertical block (page layout)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Rearrange widget panels on the analytics home screen",
+   "better": "card with two horizontal blocks and one solid vertical block (dashboard layout)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "URGENT: buy coffee filters before tomorrow morning",
-   "better": "coffee / shopping bag",
+   "better": "coffee cup or shopping bag",
    "trap": "property"
   },
   {
@@ -181,20 +186,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Renew driver's license at the DMV",
-   "better": "ID card",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Order new HDMI cable for the monitor",
-   "better": "cable",
+   "task": "Order new HDMI cable for the external monitor",
+   "better": "cable or plug",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a card, dialog box, or document with text lines alongside a prominent exclamation mark, communicating an error log, alert modal, warning notice, or urgent checklist. It fits technical tasks around error handling and logs as well as administrative tasks involving official notices or emergency cards, though it shouldn't be used merely to mark a mundane task as high-priority.",
@@ -212,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "error message, alert dialog, or system warning",
+     "strength": "primary"
+    },
+    {
+     "meaning": "error log or diagnostic report",
+     "strength": "primary"
+    },
+    {
+     "meaning": "urgent note, important notice, or high-priority checklist",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "form validation error or missing required fields",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a generic postcard, ID badge, or split-column layout at very small sizes if the dot of the exclamation mark blends into a line.",
+   "near_misses": [
+    {
+     "task": "Buy a birthday card for Aunt Linda!",
+     "better": "greeting card or gift",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "URGENT: buy coffee filters before tomorrow morning",
+     "better": "coffee / shopping bag",
+     "trap": "property"
+    },
+    {
+     "task": "Check credit card statement for double charges",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Verify all items on the camping packing list",
+     "better": "checklist or tent",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Renew driver's license at the DMV",
+     "better": "ID card",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order new HDMI cable for the monitor",
+     "better": "cable",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "contextual_token"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4040,
+    "output": 1038,
+    "thoughts": 91,
+    "total": 5169
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Shows three thinner horizontal text lines on the left and an exclamation mark (bar plus dot) on the right, representing an error alert, warning dialog, or urgent notice rather than a block layout."
 }

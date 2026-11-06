@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "subtitles off / closed captions disabled",
+   "meaning": "turn off subtitles or disable closed captions",
    "strength": "primary"
   },
   {
-   "meaning": "hide text overlay or on-screen prompts",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cancel or block credit card / ID card",
+   "meaning": "hide lower-third text overlay or on-screen prompts",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the screen with horizontal bars looks very similar to a credit card, ID badge, or chat message box with a slash through it.",
+ "ambiguity": "Virtually interchangeable in meaning and appearance with the three-line slashed subtitle screen, and easily confused with the slashed speech bubbles or slashed credit card at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -151,28 +147,28 @@
  ],
  "near_misses": [
   {
-   "task": "Add English subtitles to the keynote recording",
-   "better": "subtitles / closed captions icon without slash",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Cancel lost Visa credit card and order replacement",
-   "better": "credit card with magnetic stripe and slash",
+   "better": "slashed credit card with solid horizontal magnetic stripe",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Translate the SRT file into Spanish before Friday",
-   "better": "translation / languages icon or regular subtitles icon",
+   "task": "Turn off speaker notes display in Keynote presenter view",
+   "better": "slashed speech bubble with bottom-left tail, two dots, and two lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Disable user comments on the company announcement post",
+   "better": "slashed speech bubble with bottom-right tail and three lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add English subtitles to the keynote recording",
+   "better": "subtitles or closed captions icon without slash",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Turn off pop-up notifications on MacBook during screen share",
-   "better": "bell with slash (notifications off)",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a monitor with an anti-glare matte screen",
-   "better": "computer monitor icon",
+   "better": "computer monitor",
    "trap": "property"
   },
   {
@@ -184,7 +180,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a screen frame with two horizontal lines of text at the bottom crossed out by a diagonal slash, standard UI iconography for 'subtitles off' or 'hide captions'. It fits narrow tasks around disabling closed captions, exporting textless video masters, or language listening without subtitles, though at small sizes it can be confused with a cancelled credit card or muted chat box.",
@@ -202,6 +198,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "subtitles off / closed captions disabled",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hide text overlay or on-screen prompts",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cancel or block credit card / ID card",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the screen with horizontal bars looks very similar to a credit card, ID badge, or chat message box with a slash through it.",
+   "near_misses": [
+    {
+     "task": "Add English subtitles to the keynote recording",
+     "better": "subtitles / closed captions icon without slash",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel lost Visa credit card and order replacement",
+     "better": "credit card with magnetic stripe and slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Translate the SRT file into Spanish before Friday",
+     "better": "translation / languages icon or regular subtitles icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Turn off pop-up notifications on MacBook during screen share",
+     "better": "bell with slash (notifications off)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a monitor with an anti-glare matte screen",
+     "better": "computer monitor icon",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the freelance captioner's invoice",
+     "better": "invoice or money icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speaker_notes_off",
+   "credit_card_off",
+   "stack_off",
+   "text_ad_off",
+   "comments_disabled"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9498,
+    "output": 3020,
+    "thoughts": 0,
+    "total": 12518
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Shows a tailless rounded rectangle containing only two rows of segmented horizontal bars in the lower half (leaving the top empty), representing bottom-screen video subtitles rather than a full three-line caption card or tailed speech bubble."
 }

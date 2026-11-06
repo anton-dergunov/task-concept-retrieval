@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "remove smartphone or mobile device",
+   "meaning": "remove, unpair, or deactivate smartphone / mobile device",
    "strength": "primary"
   },
   {
-   "meaning": "do not disturb or silence phone",
+   "meaning": "do not disturb, silence, or block phone",
+   "strength": "primary"
+  },
+  {
+   "meaning": "notebook or planner with a single title label and side tab",
    "strength": "secondary"
   },
   {
-   "meaning": "smartwatch or wearable case with minus",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "low battery or discharge battery",
+   "meaning": "smartwatch or wearable casing with minus symbol",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks simultaneously like a smartphone with a side power button, an Apple Watch case without straps, a battery with a minus terminal, or a refrigerator door.",
+ "ambiguity": "Easily mistaken at small sizes for the same vertical frame with two horizontal lines inside (representing a phone lock screen with notifications or a titled notebook), as well as a battery or plain smartphone.",
  "modifier_semantics": [
   {
    "modifier": "horizontal minus bar centered inside",
@@ -159,18 +159,23 @@
  ],
  "near_misses": [
   {
+   "task": "Turn off lock-screen notification previews on my phone",
+   "better": "smartphone frame with two horizontal text/notification lines inside",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a new Moleskine journal with an index tab for daily notes",
+   "better": "notebook or frame with two cover title lines and side tab",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a new MagSafe case for my iPhone 15",
-   "better": "smartphone or phone case without minus",
+   "better": "plain smartphone or phone case without minus bar",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Replace AA batteries in the thermostat",
-   "better": "battery icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Clean out expired condiments from the fridge door",
-   "better": "refrigerator icon",
+   "task": "Replace AA batteries in the hallway thermostat",
+   "better": "battery icon with top terminal",
    "trap": "lookalike_glyph"
   },
   {
@@ -179,12 +184,12 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Check phone for the verification code",
-   "better": "key or shield icon",
+   "task": "Check phone for the two-factor verification code",
+   "better": "key or security shield icon",
    "trap": "generic_verb"
   },
   {
-   "task": "Download offline maps on phone before the hike",
+   "task": "Download offline trail maps on phone before the hike",
    "better": "map icon",
    "trap": "property"
   }
@@ -192,7 +197,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a vertical rectangular device with a side button (a smartphone or watch body) and a minus sign in the center. It fits tasks about removing a device from an account, canceling a mobile line, silencing a phone (Do Not Disturb), or reducing screen time, though its minimalism makes it easy to confuse with a battery or a plain rectangle.",
@@ -210,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remove smartphone or mobile device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "do not disturb or silence phone",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smartwatch or wearable case with minus",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "low battery or discharge battery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks simultaneously like a smartphone with a side power button, an Apple Watch case without straps, a battery with a minus terminal, or a refrigerator door.",
+   "near_misses": [
+    {
+     "task": "Buy a new MagSafe case for my iPhone 15",
+     "better": "smartphone or phone case without minus",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace AA batteries in the thermostat",
+     "better": "battery icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Clean out expired condiments from the fridge door",
+     "better": "refrigerator icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay monthly AT&T wireless bill",
+     "better": "bill, receipt, or credit card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check phone for the verification code",
+     "better": "key or shield icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Download offline maps on phone before the hike",
+     "better": "map icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "aod"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4094,
+    "output": 1155,
+    "thoughts": 0,
+    "total": 5249
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "Has a single horizontal bar centered inside the vertical rectangular frame, reading as a minus sign (remove/block device or do-not-disturb) rather than lines of text or notifications."
 }

@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "laptop / notebook computer",
+   "meaning": "laptop or notebook computer",
    "strength": "primary"
   },
   {
-   "meaning": "computer / PC",
+   "meaning": "personal computer or PC",
    "strength": "primary"
   },
   {
-   "meaning": "desk work / remote work / online task",
+   "meaning": "desk work or online task",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Semantically interchangeable with the other two open laptop icons (one with a round button cutout, one with a solid base).",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,13 +152,13 @@
  "near_misses": [
   {
    "task": "Buy a 27-inch external 4K monitor for the desk",
-   "better": "desktop monitor",
+   "better": "desktop monitor on a stand",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Cancel Netflix subscription before it renews",
-   "better": "TV / subscription",
-   "trap": "generic_verb"
+   "task": "Unpack and set up the desktop iMac in the office",
+   "better": "all-in-one desktop computer on a stand",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up a padded backpack with a 15-inch laptop compartment",
@@ -167,7 +167,7 @@
   },
   {
    "task": "Book a quiet table at a laptop-friendly cafe in Soho",
-   "better": "cafe / coffee cup",
+   "better": "coffee cup or cafe",
    "trap": "property"
   },
   {
@@ -176,7 +176,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order ergonomic wireless mouse",
+   "task": "Order an ergonomic vertical wireless mouse",
    "better": "computer mouse",
    "trap": "parent_topic"
   }
@@ -184,7 +184,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A clear, unmistakable front view of an open laptop computer. It is the ideal icon for hardware tasks involving a laptop (repair, cleaning, buying, setting up, backing up) and a strong secondary context icon for general computer-based work, distinguishable from a standalone desktop monitor by its wide keyboard base.",
@@ -202,6 +202,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "laptop / notebook computer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "computer / PC",
+     "strength": "primary"
+    },
+    {
+     "meaning": "desk work / remote work / online task",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Buy a 27-inch external 4K monitor for the desk",
+     "better": "desktop monitor",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel Netflix subscription before it renews",
+     "better": "TV / subscription",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up a padded backpack with a 15-inch laptop compartment",
+     "better": "backpack",
+     "trap": "property"
+    },
+    {
+     "task": "Book a quiet table at a laptop-friendly cafe in Soho",
+     "better": "cafe / coffee cup",
+     "trap": "property"
+    },
+    {
+     "task": "Buy notebook and graph paper for chemistry lab",
+     "better": "paper notebook",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order ergonomic wireless mouse",
+     "better": "computer mouse",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "jamboard_kiosk",
+   "desktop_windows",
+   "monitor",
+   "desktop_mac",
+   "laptop_mac",
+   "laptop_windows"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10537,
+    "output": 3307,
+    "thoughts": 0,
+    "total": 13844
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "An open laptop drawn with sharp 90-degree corners and a small horizontal rectangular thumb-notch cutout in the center of the base, making it a geometric variant of the other two laptops."
 }

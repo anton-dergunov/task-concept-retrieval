@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "assign or delegate to a person, forward to user",
+   "meaning": "assign, delegate, or forward to a person",
    "strength": "primary"
   },
   {
-   "meaning": "refer a person, transfer ownership or account",
+   "meaning": "refer a contact or transfer account ownership",
    "strength": "primary"
   },
   {
-   "meaning": "switch user profile or log in as someone",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "child or kid going somewhere (drop-off / handoff)",
+   "meaning": "switch to next user profile or log in as user",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read either as a generic user avatar or specifically as a child's face because of the round head and bangs; the arrow can mean incoming (assign to) or outgoing (transfer/forward).",
+ "ambiguity": "Easily confused with the face with a left-pointing arrow at small sizes, and the right-pointing arrow can be read either as incoming (assign to user) or outgoing (forward from user).",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow",
@@ -162,40 +158,40 @@
  ],
  "near_misses": [
   {
-   "task": "Book a haircut for the kids before school starts",
-   "better": "scissors or comb",
+   "task": "Reassign the bug ticket back to the original reporter",
+   "better": "face with left-pointing arrow for returning or reverting to a previous person",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Promote the junior developer to team lead in the HR system",
+   "better": "face with upward-pointing arrow for promoting or upgrading a user",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Save the contractor's contact info for offline access",
+   "better": "face with downward-pointing arrow for downloading or saving a contact",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Wire $200 to the landlord for utilities",
-   "better": "money transfer / bank notes",
+   "better": "money transfer or banknotes",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Export contacts to a CSV file",
-   "better": "spreadsheet or file export",
+   "task": "Set up a mail forwarding address with the post office",
+   "better": "envelope with forwarding arrow",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check in with the new intern on Friday",
    "better": "chat bubble or calendar",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Buy a gift card for the outgoing manager",
-   "better": "gift box or card",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Set up a forwarding address with the post office",
-   "better": "envelope or mailbox with arrow",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a stylized face (resembling a person or child) with a right-pointing arrow at the bottom, naturally representing delegating, referring a person, transferring an account/user, or child drop-off/handoff. It fits handover and referral tasks well, though the youthful face can be mistaken for a child-specific icon rather than a general user action.",
@@ -213,6 +209,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "assign or delegate to a person, forward to user",
+     "strength": "primary"
+    },
+    {
+     "meaning": "refer a person, transfer ownership or account",
+     "strength": "primary"
+    },
+    {
+     "meaning": "switch user profile or log in as someone",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "child or kid going somewhere (drop-off / handoff)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read either as a generic user avatar or specifically as a child's face because of the round head and bangs; the arrow can mean incoming (assign to) or outgoing (transfer/forward).",
+   "near_misses": [
+    {
+     "task": "Book a haircut for the kids before school starts",
+     "better": "scissors or comb",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wire $200 to the landlord for utilities",
+     "better": "money transfer / bank notes",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Export contacts to a CSV file",
+     "better": "spreadsheet or file export",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check in with the new intern on Friday",
+     "better": "chat bubble or calendar",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a gift card for the outgoing manager",
+     "better": "gift box or card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up a forwarding address with the post office",
+     "better": "envelope or mailbox with arrow",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "face_left",
+   "face_down",
+   "face_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6802,
+    "output": 2060,
+    "thoughts": 0,
+    "total": 8862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The arrow below the cartoon face points right, indicating forwarding, assigning, or transferring to a person, in contrast to the left (return), down (download), or up (upload/promote) arrows."
 }

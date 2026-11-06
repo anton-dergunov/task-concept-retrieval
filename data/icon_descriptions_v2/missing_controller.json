@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "remote control / TV remote / streaming remote",
+   "meaning": "remote control / streaming or TV remote",
    "strength": "primary"
   },
   {
-   "meaning": "wireless clicker / presentation remote",
+   "meaning": "wireless presentation clicker / slide pointer",
    "strength": "primary"
   },
   {
-   "meaning": "garage door opener / car key fob",
+   "meaning": "key fob / garage door opener",
    "strength": "secondary"
   },
   {
-   "meaning": "smart home wireless switch / panic button",
+   "meaning": "smart wireless button / panic button",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can look like a Wi-Fi symbol with an elongated dot, a smart doorbell, or a microphone.",
+ "ambiguity": "Virtually interchangeable with the outlined rectangular remote control; at small sizes it can also resemble a smart doorbell, a microphone, or a Wi-Fi symbol.",
  "modifier_semantics": [
   {
    "modifier": "two concentric curved signal arcs",
@@ -160,6 +160,21 @@
  ],
  "near_misses": [
   {
+   "task": "Replace the cracked plastic casing on the rectangular wall doorbell unit",
+   "better": "outlined rectangular remote or doorbell box",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Restart the Wi-Fi router upstairs to fix the weak signal",
+   "better": "Wi-Fi router box with antennas",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Record the voiceover with the USB condenser microphone",
+   "better": "microphone on stand",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Sign the remote work agreement with HR before Monday",
    "better": "contract / document with pen",
    "trap": "shared_vocabulary"
@@ -170,30 +185,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Restart the Wi-Fi router upstairs to fix the weak signal",
-   "better": "Wi-Fi router",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a smart plug that can be controlled remotely from my phone",
    "better": "electrical plug / outlet",
    "trap": "property"
-  },
-  {
-   "task": "Record the voiceover with the USB condenser microphone",
-   "better": "microphone",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Mount the video doorbell next to the front porch light",
-   "better": "doorbell with camera",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a minimalist handheld remote control or wireless clicker emitting signal waves. It fits everyday household and tech tasks involving TV remotes, garage door fobs, presentation clickers, and smart switches, though at very small sizes its silhouette somewhat resembles a Wi-Fi icon or a video doorbell.",
@@ -211,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remote control / TV remote / streaming remote",
+     "strength": "primary"
+    },
+    {
+     "meaning": "wireless clicker / presentation remote",
+     "strength": "primary"
+    },
+    {
+     "meaning": "garage door opener / car key fob",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smart home wireless switch / panic button",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can look like a Wi-Fi symbol with an elongated dot, a smart doorbell, or a microphone.",
+   "near_misses": [
+    {
+     "task": "Sign the remote work agreement with HR before Monday",
+     "better": "contract / document with pen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up remote desktop access to the office workstation",
+     "better": "desktop computer / monitor",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Restart the Wi-Fi router upstairs to fix the weak signal",
+     "better": "Wi-Fi router",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a smart plug that can be controlled remotely from my phone",
+     "better": "electrical plug / outlet",
+     "trap": "property"
+    },
+    {
+     "task": "Record the voiceover with the USB condenser microphone",
+     "better": "microphone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Mount the video doorbell next to the front porch light",
+     "better": "doorbell with camera",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_remote"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4086,
+    "output": 1044,
+    "thoughts": 188,
+    "total": 5318
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Drawn as a solid black capsule/pill shape with a white circular cutout button, making it a filled, rounded stylistic variant that is nearly interchangeable in meaning with the outlined rectangular remote."
 }

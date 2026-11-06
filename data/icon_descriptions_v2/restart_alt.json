@@ -10,15 +10,15 @@
  },
  "readings": [
   {
-   "meaning": "reset, revert, or restore to previous state",
+   "meaning": "reset, revert, or restore to a previous state",
+   "strength": "primary"
+  },
+  {
+   "meaning": "restart, reboot, or replay from the beginning",
    "strength": "primary"
   },
   {
    "meaning": "undo, roll back, or reverse an action",
-   "strength": "primary"
-  },
-  {
-   "meaning": "restart, replay, or repeat a cycle",
    "strength": "secondary"
   },
   {
@@ -26,7 +26,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with generic refresh, reload, sync, or recurring-task arrows, especially at small sizes where the bottom gap and counter-clockwise direction blend with standard circular arrows.",
+ "ambiguity": "Virtually interchangeable at list size with the counter-clockwise circular arrow with a dashed left tail, and easily confused with generic refresh, reload, or recurring-task arrows.",
  "modifier_semantics": [
   {
    "modifier": "counter-clockwise arrowhead",
@@ -166,6 +166,16 @@
  ],
  "near_misses": [
   {
+   "task": "Step back through the version history log to find the deleted paragraph",
+   "better": "counter-clockwise circular arrow with dashed tail or clock with reverse arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Rotate the scanned PDF pages counter-clockwise by 90 degrees",
+   "better": "counter-clockwise circular arrow with dashed tail or page rotation icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a reversible belt for the wedding trip",
    "better": "belt",
    "trap": "property"
@@ -178,7 +188,7 @@
   {
    "task": "Pay the recurring monthly storage unit invoice",
    "better": "invoice or bill",
-   "trap": "lookalike_glyph"
+   "trap": "property"
   },
   {
    "task": "Review the quarterly habits and routines checklist",
@@ -189,11 +199,6 @@
    "task": "Buy a new USB-C flash drive for the system recovery image",
    "better": "USB flash drive",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Take the empty glass bottles down to the recycling bin",
-   "better": "recycling symbol or bottle",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -217,6 +222,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "reset, revert, or restore to previous state",
+     "strength": "primary"
+    },
+    {
+     "meaning": "undo, roll back, or reverse an action",
+     "strength": "primary"
+    },
+    {
+     "meaning": "restart, replay, or repeat a cycle",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rotate counter-clockwise",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with generic refresh, reload, sync, or recurring-task arrows, especially at small sizes where the bottom gap and counter-clockwise direction blend with standard circular arrows.",
+   "near_misses": [
+    {
+     "task": "Buy a reversible belt for the wedding trip",
+     "better": "belt",
+     "trap": "property"
+    },
+    {
+     "task": "Return the borrowed circular saw to Dave on Saturday",
+     "better": "circular saw",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the recurring monthly storage unit invoice",
+     "better": "invoice or bill",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Review the quarterly habits and routines checklist",
+     "better": "checklist",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new USB-C flash drive for the system recovery image",
+     "better": "USB flash drive",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Take the empty glass bottles down to the recycling bin",
+     "better": "recycling symbol or bottle",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "rotate_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 810,
+    "thoughts": 329,
+    "total": 5188
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:56Z"
+  }
+ },
+ "distinguishing": "Has a solid left arc separated only by a single gap at the bottom, whereas the look-alike breaks the left arc into three short dashes; in a task list the two are nearly interchangeable for reset, restart, or undo."
 }

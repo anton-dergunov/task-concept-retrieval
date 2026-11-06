@@ -11,19 +11,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "framed art, print, or poster",
+   "meaning": "photo gallery, album, or thumbnail",
    "strength": "primary"
   },
   {
-   "meaning": "photo gallery or album",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "landscape or wallpaper graphic",
+   "meaning": "square photo print or social media post image",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to other standard photo icons that include a small sun circle above the peaks.",
+ "ambiguity": "Nearly interchangeable with the plain landscape frame and plain portrait frame, differing only in aspect ratio.",
  "modifier_semantics": [],
  "domains": [
   "creative",
@@ -157,14 +153,24 @@
  ],
  "near_misses": [
   {
-   "task": "Clean dust off the 50mm camera lens",
-   "better": "camera or lens",
-   "trap": "shared_vocabulary"
+   "task": "Change the desktop wallpaper on my external monitor",
+   "better": "screen on a flat base with mountain peaks",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Hike the Twin Peaks trail on Saturday morning",
-   "better": "mountain / hiking",
+   "task": "Snap photos of the scratched bumper for insurance",
+   "better": "camera body with mountain peaks",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cut a white mat board for the watercolor painting",
+   "better": "framed picture with an inner mat border",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean dust off the 50mm camera lens",
+   "better": "camera lens",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a picture-perfect bouquet of peonies for anniversary",
@@ -177,11 +183,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book the photographer's flights and hotel",
-   "better": "airplane / hotel",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Picture how the sofa fits in the bay window",
    "better": "sofa / tape measure",
    "trap": "generic_verb"
@@ -190,7 +191,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The rounded square frame with two mountain peaks is the universal UI glyph for an image, photo, or framed picture. It fits a wide range of everyday tasks around photography, organizing camera rolls, web graphics, and hanging wall art, and is only slightly less distinct than variants that include a small sun circle.",
@@ -208,6 +209,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "image, photo, or picture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "framed art, print, or poster",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo gallery or album",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "landscape or wallpaper graphic",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to other standard photo icons that include a small sun circle above the peaks.",
+   "near_misses": [
+    {
+     "task": "Clean dust off the 50mm camera lens",
+     "better": "camera or lens",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hike the Twin Peaks trail on Saturday morning",
+     "better": "mountain / hiking",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a picture-perfect bouquet of peonies for anniversary",
+     "better": "flowers / bouquet",
+     "trap": "property"
+    },
+    {
+     "task": "Frame out the basement laundry room partition wall",
+     "better": "hammer / construction",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the photographer's flights and hotel",
+     "better": "airplane / hotel",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Picture how the sofa fits in the bay window",
+     "better": "sofa / tape measure",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "photo_frame",
+   "photo_camera_back",
+   "panorama",
+   "image_inset",
+   "planner_banner_ad_pt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9297,
+    "output": 3033,
+    "thoughts": 0,
+    "total": 12330
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "A plain 1:1 square frame around two mountain peaks with no base, camera bump, or inner mat—interchangeable with the plain landscape and portrait frames for general image tasks, or specifically a square photo/thumbnail."
 }

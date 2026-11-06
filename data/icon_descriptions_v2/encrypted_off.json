@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the central keyhole is partially obscured by the slash and can look like a plain crossed-out shield or a broken badge.",
+ "ambiguity": "At small sizes, the crossed-out shield with a keyhole can resemble the crossed-out octagon with an exclamation mark because the diagonal slash cuts through both central vertical symbols in a very similar way.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash across the entire icon",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Mute critical server error alerts in PagerDuty during the maintenance window",
+   "better": "crossed-out octagon with exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clear false-positive spam reports in the moderation queue",
+   "better": "crossed-out octagon with exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Set up 2FA and hardware security keys on GitHub",
    "better": "intact shield with keyhole or lock",
    "trap": "lookalike_glyph"
@@ -184,11 +194,6 @@
    "task": "Pay the annual invoice for 1Password family plan",
    "better": "credit card or receipt",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Renew SSL certificate for the company blog",
-   "better": "shield with checkmark or lock",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "disable security, protection, firewall, or antivirus",
+     "strength": "primary"
+    },
+    {
+     "meaning": "remove password protection, lock, or encryption",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unsecured connection, vulnerability, or bypassed security",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cancel insurance policy or warranty coverage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the central keyhole is partially obscured by the slash and can look like a plain crossed-out shield or a broken badge.",
+   "near_misses": [
+    {
+     "task": "Set up 2FA and hardware security keys on GitHub",
+     "better": "intact shield with keyhole or lock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new U-lock for the commuter bike",
+     "better": "padlock or bicycle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download the unredacted board meeting minutes",
+     "better": "document or file icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the back door lock is jamming again",
+     "better": "door or padlock",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the annual invoice for 1Password family plan",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Renew SSL certificate for the company blog",
+     "better": "shield with checkmark or lock",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "report_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4092,
+    "output": 1163,
+    "thoughts": 0,
+    "total": 5255
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "This icon shows a pointed shield with a central keyhole crossed out by a diagonal slash, representing disabled security or protection rather than silenced error alerts (the crossed-out octagon with an exclamation mark)."
 }

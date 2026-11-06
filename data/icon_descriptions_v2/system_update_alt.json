@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "download or save locally",
+   "meaning": "download files, media, or software from the internet",
    "strength": "primary"
   },
   {
-   "meaning": "import or bring data in",
+   "meaning": "import data or save locally into a folder",
    "strength": "primary"
   },
   {
-   "meaning": "inbox or incoming items",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "install or update software",
+   "meaning": "install or fetch software update",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to other download, archive, or inbox glyphs; can be confused with 'move to folder' or 'minimize to tray'.",
+ "ambiguity": "Closely resembles the inbox tray with a thumb notch and the 3D archive box, as all three place a downward arrow inside a rectangular frame.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow entering container",
@@ -162,33 +158,33 @@
  ],
  "near_misses": [
   {
-   "task": "Upload the signed tax return to the accountant's portal",
-   "better": "upload arrow (arrow pointing up out of box)",
+   "task": "Clear out unread emails and reach inbox zero",
+   "better": "inbox tray with semicircular thumb notch",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Put winter sweaters into the under-bed storage bins",
-   "better": "storage box or sweater",
-   "trap": "shared_vocabulary"
+   "task": "Pack winter clothes into basement storage boxes",
+   "better": "3D storage or archive box with downward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the signed tax return to the accountant's portal",
+   "better": "upload arrow pointing up out of a bracket or cloud",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay customs duty on the imported Japanese kitchen knife",
-   "better": "customs / money / kitchen knife",
+   "better": "customs, money, or kitchen knife",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Read the downloaded PDF paper on transformer architectures",
-   "better": "document / reading / academic paper",
+   "better": "document, book, or academic paper",
    "trap": "property"
   },
   {
-   "task": "Buy a new inbox tray for the home office desk",
-   "better": "desk organizer / shopping",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Email Sarah the receipt for the software subscription",
-   "better": "email / receipt",
+   "better": "email envelope or receipt",
    "trap": "parent_topic"
   }
  ],
@@ -213,6 +209,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download or save locally",
+     "strength": "primary"
+    },
+    {
+     "meaning": "import or bring data in",
+     "strength": "primary"
+    },
+    {
+     "meaning": "inbox or incoming items",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "install or update software",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to other download, archive, or inbox glyphs; can be confused with 'move to folder' or 'minimize to tray'.",
+   "near_misses": [
+    {
+     "task": "Upload the signed tax return to the accountant's portal",
+     "better": "upload arrow (arrow pointing up out of box)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Put winter sweaters into the under-bed storage bins",
+     "better": "storage box or sweater",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay customs duty on the imported Japanese kitchen knife",
+     "better": "customs / money / kitchen knife",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read the downloaded PDF paper on transformer architectures",
+     "better": "document / reading / academic paper",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new inbox tray for the home office desk",
+     "better": "desk organizer / shopping",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Email Sarah the receipt for the software subscription",
+     "better": "email / receipt",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "move_to_inbox",
+   "archive"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5463,
+    "output": 1553,
+    "thoughts": 169,
+    "total": 7185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:24Z"
+  }
+ },
+ "distinguishing": "Unlike the notched inbox tray or the 3D archive box, this is a single-chamber rectangle with a break in the top border where the downward arrow enters from outside, representing downloading, importing, or saving into a system."
 }

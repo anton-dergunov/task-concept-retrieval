@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "tablet computer / iPad",
+   "meaning": "tablet computer or iPad",
    "strength": "primary"
   },
   {
-   "meaning": "e-reader / Kindle",
+   "meaning": "e-reader or Kindle",
    "strength": "primary"
   },
   {
-   "meaning": "mobile device / smartphone",
+   "meaning": "mobile device or smartphone",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with a smartphone icon at small sizes, though its wider aspect ratio points to a tablet or e-reader; could also slightly resemble a Polaroid frame or small window.",
+ "ambiguity": "Virtually identical to and interchangeable with the tablet with a rectangular bar button at the bottom; also easily confused with a smartphone at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -153,40 +153,40 @@
  ],
  "near_misses": [
   {
-   "task": "Pick up allergy tablets from Walgreens before 6pm",
-   "better": "pill / medicine",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy Dishwasher salt and Finish Powerball tablets",
-   "better": "cleaning / dishwasher",
-   "trap": "shared_vocabulary"
+   "task": "Tighten the loose flat handle on the nightstand drawer",
+   "better": "cabinet or drawer with a horizontal bar handle",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Call Mom on her cell tonight",
-   "better": "phone call / handset",
+   "better": "phone handset",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Frame the 8x10 wedding photo for the hallway",
-   "better": "picture frame / image",
-   "trap": "lookalike_glyph"
+   "task": "Pick up allergy tablets from Walgreens before 6pm",
+   "better": "pill or medicine",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy dishwasher salt and Finish Powerball tablets",
+   "better": "cleaning or dishwasher",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Make sure the client landing page is tablet-friendly",
-   "better": "web page / layout",
+   "better": "web page or layout",
    "trap": "property"
   },
   {
    "task": "Cancel the monthly AppleCare+ subscription on the Visa card",
-   "better": "credit card / subscription",
+   "better": "credit card or subscription",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a portrait-oriented tablet computer or e-reader with a home button. It fits tasks centered on an iPad, Android tablet, or Kindle (charging, repairing, configuring, packing, or buying accessories), though at small sizes it overlaps visually with smartphone icons.",
@@ -204,6 +204,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "tablet computer / iPad",
+     "strength": "primary"
+    },
+    {
+     "meaning": "e-reader / Kindle",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile device / smartphone",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with a smartphone icon at small sizes, though its wider aspect ratio points to a tablet or e-reader; could also slightly resemble a Polaroid frame or small window.",
+   "near_misses": [
+    {
+     "task": "Pick up allergy tablets from Walgreens before 6pm",
+     "better": "pill / medicine",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy Dishwasher salt and Finish Powerball tablets",
+     "better": "cleaning / dishwasher",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call Mom on her cell tonight",
+     "better": "phone call / handset",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Frame the 8x10 wedding photo for the hallway",
+     "better": "picture frame / image",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Make sure the client landing page is tablet-friendly",
+     "better": "web page / layout",
+     "trap": "property"
+    },
+    {
+     "task": "Cancel the monthly AppleCare+ subscription on the Visa card",
+     "better": "credit card / subscription",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "tablet_android"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4029,
+    "output": 1000,
+    "thoughts": 0,
+    "total": 5029
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:16Z"
+  }
+ },
+ "distinguishing": "This tablet icon has a round circular dot for its bottom home button (classic iPad style) instead of a horizontal bar, though in practice the two icons are virtually interchangeable."
 }

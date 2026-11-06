@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "money transfer or funds transfer",
-   "strength": "primary"
-  },
-  {
    "meaning": "currency exchange or foreign exchange",
    "strength": "primary"
   },
   {
-   "meaning": "financial transaction, reimbursement, or cash flow",
+   "meaning": "money transfer or moving funds between accounts",
+   "strength": "primary"
+  },
+  {
+   "meaning": "reimbursement, splitting a bill, or cash transaction",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the banknote could briefly resemble a camera or audio cassette above a resize arrow.",
+ "ambiguity": "Shares the identical banknote top half with the banknote with a downward arrow; at small sizes, only the arrow shape below tells a two-way exchange/transfer apart from a cash withdrawal or payout.",
  "modifier_semantics": [
   {
    "modifier": "horizontal double-headed arrow",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Withdraw $60 in twenties from the corner ATM",
+   "better": "banknote with downward arrow (cash withdrawal)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cash out the $120 Venmo balance to checking",
+   "better": "banknote with downward arrow (payout / cash out)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a slim leather wallet that fits foreign bills",
    "better": "wallet",
    "trap": "property"
@@ -180,11 +190,6 @@
    "task": "Book the window seat on the Tokyo flight",
    "better": "airplane / seat",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Withdraw $60 in twenties from the corner ATM",
-   "better": "ATM / cash withdrawal",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -208,6 +213,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "money transfer or funds transfer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "currency exchange or foreign exchange",
+     "strength": "primary"
+    },
+    {
+     "meaning": "financial transaction, reimbursement, or cash flow",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the banknote could briefly resemble a camera or audio cassette above a resize arrow.",
+   "near_misses": [
+    {
+     "task": "Buy a slim leather wallet that fits foreign bills",
+     "better": "wallet",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the tax refund hit the bank account",
+     "better": "bank / account balance",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Change the oil and filter on the Honda Civic",
+     "better": "car / oil can",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Resize the product photos to 1200px wide for the shop",
+     "better": "image resize",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the window seat on the Tokyo flight",
+     "better": "airplane / seat",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Withdraw $60 in twenties from the corner ATM",
+     "better": "ATM / cash withdrawal",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "payment_arrow_down"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4083,
+    "output": 1122,
+    "thoughts": 0,
+    "total": 5205
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "Shows a wide horizontal double-headed left-right arrow beneath the banknote, signifying two-way money exchange or peer-to-peer transfer rather than the one-way withdrawal or payout shown by the downward arrow."
 }

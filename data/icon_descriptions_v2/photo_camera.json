@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Can be confused with the wireless camera with corner signal arcs at small sizes where the top-right corner detail is hard to resolve.",
  "modifier_semantics": [],
  "domains": [
   "hobbies",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Convert the portrait series to high-contrast black and white in Lightroom",
+   "better": "half-black half-white contrast camera",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pair the Sony camera with the smartphone remote shutter app via Wi-Fi",
+   "better": "wireless camera with signal arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Install the backyard Ring security camera above the garage",
    "better": "security camera / CCTV",
    "trap": "shared_vocabulary"
@@ -172,22 +182,12 @@
    "task": "Look at the bigger picture for Q3 product strategy",
    "better": "strategy / chart",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book the train tickets to Kyoto",
-   "better": "train",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Record a 60-second walkthrough video of the apartment",
-   "better": "video camera",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "A universally recognizable outline of a still photo camera. It fits a wide range of common personal and work tasks involving cameras, taking pictures, ID photos, and photography gear, and is clearly distinct from video or security camera icons.",
@@ -207,6 +207,91 @@
    "example_tasks_es: 4 not in 3-3"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "camera_alt"
- }
+  "alias_of": "camera_alt",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "photo camera",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photography / taking a photo",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photos / pictures",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Install the backyard Ring security camera above the garage",
+     "better": "security camera / CCTV",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Test webcam and microphone before the 10am Zoom interview",
+     "better": "webcam / video camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a camera-ready matte setting powder at Sephora",
+     "better": "cosmetics / makeup",
+     "trap": "property"
+    },
+    {
+     "task": "Look at the bigger picture for Q3 product strategy",
+     "better": "strategy / chart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the train tickets to Kyoto",
+     "better": "train",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Record a 60-second walkthrough video of the apartment",
+     "better": "video camera",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "monochrome_photos",
+   "linked_camera"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5398,
+    "output": 1081,
+    "thoughts": 140,
+    "total": 6619
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "This is the unadorned outlined photo camera with a complete rectangular body and no half-black contrast split or corner wireless arcs, representing cameras and photography in general."
 }

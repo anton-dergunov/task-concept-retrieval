@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "multiple folders / directory stack / projects",
+   "meaning": "multiple folders, directories, or file archives",
+   "strength": "primary"
+  },
+  {
+   "meaning": "organize files, projects, or binders",
    "strength": "primary"
   },
   {
    "meaning": "copy or duplicate folder",
-   "strength": "primary"
-  },
-  {
-   "meaning": "subfolders / file archives / binders",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a plain single folder, or a generic copy/duplicate files icon.",
+ "ambiguity": "At very small sizes the angled folder tab can flatten out, making it look like the plain overlapping rectangles or the overlapping squares.",
  "modifier_semantics": [
   {
    "modifier": "stacked L-shaped corner line behind on bottom-left",
@@ -172,40 +172,40 @@
  ],
  "near_misses": [
   {
+   "task": "Copy the API key to the clipboard",
+   "better": "two overlapping plain squares for copy",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Arrange open application windows side by side",
+   "better": "overlapping windows with top title bars",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a folding Brompton bike for the train commute",
    "better": "bicycle",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Fold the clean laundry sitting on the bed",
-   "better": "laundry / clothes / shirt",
+   "better": "laundry or shirt",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Sign the PDF contract and return it to legal",
-   "better": "document with signature / pen",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the monthly Dropbox subscription invoice",
-   "better": "credit card / invoice / receipt",
+   "better": "credit card or invoice",
    "trap": "parent_topic"
   },
   {
-   "task": "Order a folder-style leather wallet for Dad's birthday",
-   "better": "wallet / gift",
-   "trap": "property"
-  },
-  {
    "task": "File state income taxes before the April deadline",
-   "better": "tax form / government building / money",
+   "better": "tax form or money",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a file folder with a stacked L-line behind it indicating multiple folders or duplicating a folder. It fits digital file management and physical filing tasks well, though it is only mildly distinct from a standard single folder icon.",
@@ -225,6 +225,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple folders / directory stack / projects",
+     "strength": "primary"
+    },
+    {
+     "meaning": "copy or duplicate folder",
+     "strength": "primary"
+    },
+    {
+     "meaning": "subfolders / file archives / binders",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a plain single folder, or a generic copy/duplicate files icon.",
+   "near_misses": [
+    {
+     "task": "Buy a folding Brompton bike for the train commute",
+     "better": "bicycle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fold the clean laundry sitting on the bed",
+     "better": "laundry / clothes / shirt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the PDF contract and return it to legal",
+     "better": "document with signature / pen",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly Dropbox subscription invoice",
+     "better": "credit card / invoice / receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a folder-style leather wallet for Dad's birthday",
+     "better": "wallet / gift",
+     "trap": "property"
+    },
+    {
+     "task": "File state income taxes before the April deadline",
+     "better": "tax form / government building / money",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "select_window",
+   "select_window_2",
+   "markunread_mailbox",
+   "stack",
+   "tv_displays"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9395,
+    "output": 2955,
+    "thoughts": 262,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "The front shape has an angled top-left tab identifying it as a file folder, with an L-shaped corner line tucked behind its bottom-left edge to show multiple or stacked folders."
 }

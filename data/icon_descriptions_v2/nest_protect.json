@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "camera lens or app icon (resembling Instagram without the flash dot)",
+   "meaning": "screen recording, capture button, or iOS-style AssistiveTouch / home button",
    "strength": "primary"
   },
   {
-   "meaning": "screen recording or capture target",
+   "meaning": "subwoofer, smart speaker, or audio monitor cone",
    "strength": "secondary"
   },
   {
-   "meaning": "front-loading washing machine or dryer door",
+   "meaning": "minimalist camera lens or photo app icon",
    "strength": "secondary"
   },
   {
-   "meaning": "audio speaker or subwoofer",
+   "meaning": "front-loading washing machine or dryer drum",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to the Instagram logo (only missing the small top-right dot), also looks like a generic record button, radio button, or a washing machine from the front.",
+ "ambiguity": "Easily mistaken for the rounded square with a ring and top-center dot (which reads more specifically as a security webcam, Instagram-like camera, or dial knob), or for a generic checkbox/radio button.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -153,40 +153,40 @@
  ],
  "near_misses": [
   {
-   "task": "Run a hot cycle with vinegar to clean the washing machine",
-   "better": "washing machine with control dial/panel",
+   "task": "Mount the indoor baby monitor camera above the crib",
+   "better": "rounded square camera with lens ring and top indicator dot",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy the dress I saw on an Instagram ad yesterday",
-   "better": "dress / clothing",
+   "task": "Schedule three Instagram Reels for the product launch",
+   "better": "rounded square camera icon with top flash/sensor dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Run a hot cycle with vinegar to clean the washing machine",
+   "better": "washing machine with control dial and top panel",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy the dress I saw on a social media ad yesterday",
+   "better": "dress or clothing icon",
    "trap": "property"
   },
   {
-   "task": "Check Instagram while waiting for the dentist",
-   "better": "dentist / tooth",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Pair the Bluetooth speaker with the living room TV",
-   "better": "speaker with sound waves",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Design invoice template for sponsored posts",
-   "better": "invoice / document",
+   "better": "invoice or document icon",
    "trap": "parent_topic"
   },
   {
-   "task": "Frame the botanical prints for the hallway wall",
-   "better": "picture frame with image",
+   "task": "Frame the round mirror for the hallway wall",
+   "better": "picture frame or mirror icon",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon is a rounded square containing a circle, which closely resembles the Instagram logo (minus the top-right viewfinder dot) or a minimalist camera/record icon. It fits social media, photography, and content tasks well, though its extreme geometric simplicity makes it easy to confuse with a generic button, speaker, or washer.",
@@ -204,6 +204,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera lens or app icon (resembling Instagram without the flash dot)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen recording or capture target",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "front-loading washing machine or dryer door",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audio speaker or subwoofer",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to the Instagram logo (only missing the small top-right dot), also looks like a generic record button, radio button, or a washing machine from the front.",
+   "near_misses": [
+    {
+     "task": "Run a hot cycle with vinegar to clean the washing machine",
+     "better": "washing machine with control dial/panel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy the dress I saw on an Instagram ad yesterday",
+     "better": "dress / clothing",
+     "trap": "property"
+    },
+    {
+     "task": "Check Instagram while waiting for the dentist",
+     "better": "dentist / tooth",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pair the Bluetooth speaker with the living room TV",
+     "better": "speaker with sound waves",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Design invoice template for sponsored posts",
+     "better": "invoice / document",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Frame the botanical prints for the hallway wall",
+     "better": "picture frame with image",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nest_heat_link_gen_3"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4122,
+    "output": 1156,
+    "thoughts": 0,
+    "total": 5278
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Unlike the version with a top-center dot, this icon is simply a concentric circular ring centered inside a rounded square with no indicator dot, reading as a screen-recording button, device home button, or speaker cone."
 }

@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "star, rating, or customer review",
-   "strength": "primary"
-  },
-  {
    "meaning": "favorite, bookmark, or featured item",
    "strength": "primary"
   },
   {
-   "meaning": "astronomy, night sky, or stargazing",
-   "strength": "secondary"
+   "meaning": "star, astronomy, or stargazing",
+   "strength": "primary"
   },
   {
    "meaning": "reward, achievement, or decorative star",
    "strength": "secondary"
+  },
+  {
+   "meaning": "rating or customer review",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Can mean either a rating/favorite action in software, a literal astronomical star, or a priority marker depending on context.",
+ "ambiguity": "Easily confused at small sizes with the half-filled rating star, and also ambiguous between a software bookmark/favorite action and a literal astronomical or decorative star.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Leave a 3.5-star review for the plumber on Yelp",
+   "better": "half-filled rating star",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Calculate average customer satisfaction score from survey responses",
+   "better": "half-filled rating star",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Important: pay quarterly estimated taxes before Friday",
    "better": "tax document or dollar sign",
    "trap": "property"
@@ -177,16 +187,6 @@
    "trap": "property"
   },
   {
-   "task": "Pay the Texas Lone Star toll tag bill online",
-   "better": "toll road or receipt",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Order replacement sheriff badge for Halloween costume",
-   "better": "police badge",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Replace the cracked lens cap on the 50mm camera lens",
    "better": "camera lens",
    "trap": "parent_topic"
@@ -195,7 +195,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "A classic five-pointed outlined star, universally recognized at any size. It fits tasks centered on leaving ratings/reviews, curating favorites/bookmarks, stargazing/astronomy, or literal star decorations, though users must avoid applying it merely as a priority marker when a task has a concrete subject.",
@@ -213,6 +213,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "star, rating, or customer review",
+     "strength": "primary"
+    },
+    {
+     "meaning": "favorite, bookmark, or featured item",
+     "strength": "primary"
+    },
+    {
+     "meaning": "astronomy, night sky, or stargazing",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "reward, achievement, or decorative star",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can mean either a rating/favorite action in software, a literal astronomical star, or a priority marker depending on context.",
+   "near_misses": [
+    {
+     "task": "Important: pay quarterly estimated taxes before Friday",
+     "better": "tax document or dollar sign",
+     "trap": "property"
+    },
+    {
+     "task": "Review Q3 marketing budget spreadsheet with Sarah",
+     "better": "spreadsheet or budget chart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy Star Wars Lego set for nephew's birthday",
+     "better": "toy blocks or gift box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check Energy Star rating on the Bosch dishwasher",
+     "better": "dishwasher",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the Texas Lone Star toll tag bill online",
+     "better": "toll road or receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement sheriff badge for Halloween costume",
+     "better": "police badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the cracked lens cap on the 50mm camera lens",
+     "better": "camera lens",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "star_rate_half"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4062,
+    "output": 1061,
+    "thoughts": 0,
+    "total": 5123
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:38Z"
+  }
+ },
+ "distinguishing": "Symmetrically outlined five-pointed star with a completely open white center, representing a general star, favorite/bookmark, or stargazing, unlike the half-filled star specifically used for ratings and reviews."
 }

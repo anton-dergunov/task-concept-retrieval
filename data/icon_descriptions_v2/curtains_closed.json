@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "balcony railing, balustrade, or barred window",
+   "meaning": "French window, casement window, or balcony door on a sill",
    "strength": "primary"
   },
   {
-   "meaning": "radiator or room heater",
-   "strength": "secondary"
+   "meaning": "balcony railing, balustrade, or barred window",
+   "strength": "primary"
   },
   {
    "meaning": "architectural columns or pillars on a plinth",
    "strength": "secondary"
   },
   {
-   "meaning": "three-column layout or CJK character 皿 (dish)",
+   "meaning": "CJK character 皿 (dish / vessel)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Highly schematic geometric shape; easily taken for a balcony railing, a window with security bars, a radiator, classical columns, a fence gate, or the CJK character 皿.",
+ "ambiguity": "Nearly interchangeable at small sizes with the five-bar, four-slot railing/radiator icon; also easily read as the CJK character 皿, classical pillars, or a radiator.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -123,7 +123,6 @@
   }
  ],
  "example_tasks_es": [
-  "Purgar los radiadores del pasillo y del dormitorio antes de que empiece el frío",
   "Lijar y pintar de negro la barandilla del balcón",
   "Instalar rejas de seguridad en la ventana de la planta baja"
  ],
@@ -152,6 +151,11 @@
  ],
  "near_misses": [
   {
+   "task": "Install a child safety gate with narrow vertical bars at the top of the stairs",
+   "better": "the five-bar, four-slot railing/gate icon with narrower, even gaps",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the monthly gas heating bill online",
    "better": "bill, receipt, or flame icon",
    "trap": "shared_vocabulary"
@@ -167,17 +171,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a warm space heater with tip-over protection",
-   "better": "plug or fan heater icon, not radiator",
-   "trap": "property"
-  },
-  {
    "task": "Wash the stack of dinner plates after the party",
    "better": "plate and cutlery icon",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
-   "task": "Water the cherry tomatoes in the pots",
+   "task": "Water the cherry tomatoes in the balcony pots",
    "better": "plant or watering can icon",
    "trap": "parent_topic"
   }
@@ -203,6 +202,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_es": 1,
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "balcony railing, balustrade, or barred window",
+     "strength": "primary"
+    },
+    {
+     "meaning": "radiator or room heater",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "architectural columns or pillars on a plinth",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "three-column layout or CJK character 皿 (dish)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Highly schematic geometric shape; easily taken for a balcony railing, a window with security bars, a radiator, classical columns, a fence gate, or the CJK character 皿.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly gas heating bill online",
+     "better": "bill, receipt, or flame icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add a new column for tax rate in the budget spreadsheet",
+     "better": "spreadsheet or table icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write the monthly op-ed column for the alumni magazine",
+     "better": "document, pen, or newspaper icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a warm space heater with tip-over protection",
+     "better": "plug or fan heater icon, not radiator",
+     "trap": "property"
+    },
+    {
+     "task": "Wash the stack of dinner plates after the party",
+     "better": "plate and cutlery icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Water the cherry tomatoes in the pots",
+     "better": "plant or watering can icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "vertical_shades_closed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4061,
+    "output": 882,
+    "thoughts": 0,
+    "total": 4943
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:14Z"
+  }
+ },
+ "distinguishing": "Shows three vertical window panes (two inner mullions) where the side panes are wider than the narrow center gap, looking more like a three-pane casement or French window on a sill than the evenly spaced five-bar railing or radiator."
 }

@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "heart health, cardiology, pulse, or cardiovascular checkup",
+   "meaning": "favorites, wishlist, or liked items",
    "strength": "primary"
   },
   {
-   "meaning": "favorites, wishlist, liked items, or saved bookmarks",
+   "meaning": "heart health, cardiology, or general wellness",
    "strength": "secondary"
   },
   {
-   "meaning": "charity, organ donation, care, or gratitude",
+   "meaning": "charity, care, or gratitude",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Easily interchangeable with the underlined heart for general love or favorite tasks, and differs from the minus and checkmark hearts only by lacking a lower-right modifier.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Clear old items out of my bookmarked favorites",
+   "better": "heart with minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Get medical clearance from the cardiologist for the marathon",
+   "better": "heart with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Learn the Queen of Hearts card trick for the kids' party",
    "better": "playing cards",
    "trap": "shared_vocabulary"
@@ -173,22 +183,12 @@
    "task": "Buy a heart-shaped waffle iron for Sunday breakfast",
    "better": "waffle / kitchen appliance",
    "trap": "property"
-  },
-  {
-   "task": "Memorize the opening poem by heart before Tuesday's class",
-   "better": "book / script / brain",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Look for a spades deck with large print for grandma",
-   "better": "spade / playing cards",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "A universally recognizable outlined heart symbol. It fits tasks centered on romance, relationships, anniversaries, cardiovascular health/cardiology, and managing wishlists or favorites, though plain outlines versus filled or ECG-modified hearts can overlap.",
@@ -206,6 +206,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "favorite"
- }
+  "alias_of": "favorite",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "love, romance, dating, partner, or anniversary",
+     "strength": "primary"
+    },
+    {
+     "meaning": "heart health, cardiology, pulse, or cardiovascular checkup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "favorites, wishlist, liked items, or saved bookmarks",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "charity, organ donation, care, or gratitude",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Learn the Queen of Hearts card trick for the kids' party",
+     "better": "playing cards",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a bag of romaine hearts and cherry tomatoes",
+     "better": "lettuce / vegetable",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace batteries in the digital blood pressure cuff",
+     "better": "battery or blood pressure cuff",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a heart-shaped waffle iron for Sunday breakfast",
+     "better": "waffle / kitchen appliance",
+     "trap": "property"
+    },
+    {
+     "task": "Memorize the opening poem by heart before Tuesday's class",
+     "better": "book / script / brain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Look for a spades deck with large print for grandma",
+     "better": "spade / playing cards",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hr_resting",
+   "heart_minus",
+   "heart_check"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6749,
+    "output": 2043,
+    "thoughts": 0,
+    "total": 8792
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "A plain, complete outlined heart with no underline bar and no corner badge, serving as the general-purpose symbol for love, favorites, or heart health."
 }

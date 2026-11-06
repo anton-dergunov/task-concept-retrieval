@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "water, hydration, or liquid",
+   "meaning": "water, hydration, or drinking water",
    "strength": "primary"
   },
   {
-   "meaning": "humidity or moisture",
+   "meaning": "general liquid, moisture, or plumbing",
+   "strength": "primary"
+  },
+  {
+   "meaning": "blood donation or medical fluid",
    "strength": "secondary"
   },
   {
-   "meaning": "blood or medical fluid",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "oil, ink, or eye drops",
+   "meaning": "eye drops, oil, or serum",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for an upside-down map pin or a simple flame at very small sizes, or confused with a filled droplet if the app differentiates filled vs. outline states.",
+ "ambiguity": "Easily confused at a glance with the half-filled droplets when used for general water or humidity tasks.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -154,28 +154,28 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Check the remaining cyan and magenta ink levels on the printer",
+   "better": "half-filled droplet for liquid or ink level",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Adjust the background watermark opacity in the presentation slides",
+   "better": "half-filled droplet for opacity or saturation",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Check the weather forecast for rain this weekend",
-   "better": "rain cloud / umbrella",
+   "better": "rain cloud or umbrella",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up dry cleaning on the way home",
-   "better": "shirt / hanger",
+   "better": "shirt or hanger",
    "trap": "property"
   },
   {
-   "task": "Order cyan and magenta ink cartridges for the Epson printer",
-   "better": "printer / ink cartridge",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Fix the leaking radiator hose in the garage",
-   "better": "car / wrench",
+   "better": "car or wrench",
    "trap": "parent_topic"
   },
   {
@@ -187,7 +187,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon is a universally recognizable liquid droplet. It fits many everyday tasks around hydration, watering plants, plumbing/water utilities, humidity, and liquid drops (like eye drops), though tasks about specific containers (bottles), fixtures (faucets), or weather (rain) are better served by more specific icons.",
@@ -205,6 +205,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "water, hydration, or liquid",
+     "strength": "primary"
+    },
+    {
+     "meaning": "humidity or moisture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "blood or medical fluid",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "oil, ink, or eye drops",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for an upside-down map pin or a simple flame at very small sizes, or confused with a filled droplet if the app differentiates filled vs. outline states.",
+   "near_misses": [
+    {
+     "task": "Check the weather forecast for rain this weekend",
+     "better": "rain cloud / umbrella",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up dry cleaning on the way home",
+     "better": "shirt / hanger",
+     "trap": "property"
+    },
+    {
+     "task": "Order cyan and magenta ink cartridges for the Epson printer",
+     "better": "printer / ink cartridge",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the leaking radiator hose in the garage",
+     "better": "car / wrench",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Wash the muddy dog towels at 60 degrees",
+     "better": "washing machine",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "opacity",
+   "humidity_mid"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5297,
+    "output": 1531,
+    "thoughts": 96,
+    "total": 6924
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:32Z"
+  }
+ },
+ "distinguishing": "This droplet is a completely empty outline with no interior fill line, representing general water, hydration, or a drop of liquid rather than a measured fluid level, ink level, or opacity."
 }

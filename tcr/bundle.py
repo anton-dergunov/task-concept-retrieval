@@ -233,7 +233,8 @@ def export(out_dir: Path, icons: Sequence[IconDoc], encoder: OnnxEncoder,
         raise ValueError("only M1 and M3 can be bundled")
     out_dir.mkdir(parents=True, exist_ok=True)
     names = [ic.name for ic in icons]
-    dense = fused_dense(icons, encoder, config.FIELD_WEIGHTS).astype(np.float16)
+    version = icons[0].version if icons else config.DESC_VERSION
+    dense = fused_dense(icons, encoder, config.field_weights(version)).astype(np.float16)
     prior = (config.QUALITY_PRIOR_WEIGHT *
              np.array([ic.usefulness for ic in icons], dtype=np.float32))
     (out_dir / "names.txt").write_text("\n".join(names) + "\n", encoding="utf-8")
@@ -253,6 +254,7 @@ def export(out_dir: Path, icons: Sequence[IconDoc], encoder: OnnxEncoder,
         "format": BUNDLE_FORMAT,
         "method": method,
         "source": source,
+        "descriptions": version,
         "icons": "names.txt",
         "encoder": {k: v for k, v in encoder.spec.items() if k != "doc_prefix"},
         "query": {"inputs": ["title"], "normalize": "org-plain", "body_chars": 400},

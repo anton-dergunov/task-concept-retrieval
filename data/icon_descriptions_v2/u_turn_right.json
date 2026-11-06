@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "U-turn / turn back / return",
+   "meaning": "return item, send back, or turn back",
    "strength": "primary"
   },
   {
-   "meaning": "undo / revert / roll back",
+   "meaning": "U-turn (especially a right U-turn) or turn around",
    "strength": "primary"
   },
   {
-   "meaning": "return item / send back",
+   "meaning": "redo, reapply, or repeat action",
    "strength": "secondary"
   },
   {
-   "meaning": "reverse / go back",
+   "meaning": "revert or roll back",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with undo/redo UI icons, refresh/reload arrows, or a candy cane hook at very small sizes.",
+ "ambiguity": "Easily confused with the left-curving U-turn arrow; for general 'return' tasks they are nearly interchangeable, though in left-to-right UI conventions a leftward curve reads more strongly as 'undo/revert' while this rightward curve can read as 'redo' or a right U-turn.",
  "modifier_semantics": [],
  "domains": [
   "shopping",
@@ -154,13 +154,23 @@
  ],
  "near_misses": [
   {
+   "task": "Revert the broken production deployment to the previous release",
+   "better": "counter-clockwise left-curving U-turn or undo arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if a left U-turn is legal at the main intersection",
+   "better": "left-curving U-turn arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "File state and federal tax return before April 15",
-   "better": "tax document / form icon",
+   "better": "tax document or form icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Calculate expected return on investment for the solar panels",
-   "better": "chart / money / solar panel icon",
+   "better": "chart or money icon",
    "trap": "shared_vocabulary"
   },
   {
@@ -169,25 +179,20 @@
    "trap": "property"
   },
   {
-   "task": "Download the monthly PDF statements",
-   "better": "download arrow / document icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new winter coat to replace the one we returned",
-   "better": "coat / jacket icon",
+   "better": "coat or jacket icon",
    "trap": "parent_topic"
   },
   {
    "task": "Review the store's return policy before ordering the sofa",
-   "better": "sofa / document icon",
+   "better": "sofa or document icon",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon is a literal U-turn arrow pointing back down, universally read as U-turn, return, revert, or rollback. While directional arrows can act as UI chrome, a U-turn arrow effectively cues the action-heavy task categories of returning merchandise and rolling back software or financial transactions. However, whenever a task names a concrete object (like a book, jacket, or ticket), that specific object's icon is preferred.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "U-turn / turn back / return",
+     "strength": "primary"
+    },
+    {
+     "meaning": "undo / revert / roll back",
+     "strength": "primary"
+    },
+    {
+     "meaning": "return item / send back",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "reverse / go back",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with undo/redo UI icons, refresh/reload arrows, or a candy cane hook at very small sizes.",
+   "near_misses": [
+    {
+     "task": "File state and federal tax return before April 15",
+     "better": "tax document / form icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Calculate expected return on investment for the solar panels",
+     "better": "chart / money / solar panel icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a round-trip flight to Tokyo in October",
+     "better": "airplane icon",
+     "trap": "property"
+    },
+    {
+     "task": "Download the monthly PDF statements",
+     "better": "download arrow / document icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new winter coat to replace the one we returned",
+     "better": "coat / jacket icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Review the store's return policy before ordering the sofa",
+     "better": "sofa / document icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "u_turn_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4058,
+    "output": 933,
+    "thoughts": 0,
+    "total": 4991
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "This vertical U-turn arrow curves clockwise to the right (stem on the left, arrowhead pointing down on the right), which is the mirror image of the left-curving U-turn arrow and slightly favors redo/reapply or right-hand U-turns, though the two are largely interchangeable for general 'return' tasks."
 }

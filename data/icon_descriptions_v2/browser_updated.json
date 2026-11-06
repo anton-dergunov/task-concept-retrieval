@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "download file or app to computer",
+   "meaning": "download file or application to computer",
    "strength": "primary"
   },
   {
@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic download icon (arrow into a tray) or a television input icon at very small sizes.",
+ "ambiguity": "Completely interchangeable with the monitor-with-downward-arrow on a rectangular stand; also easily mistaken for a generic download tray icon or an upload-to-monitor icon at a quick glance.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow into screen",
@@ -159,39 +159,39 @@
  "near_misses": [
   {
    "task": "Buy a low-profile monitor arm that clamps to the back of the desk",
-   "better": "monitor or desk mount",
-   "trap": "shared_vocabulary"
+   "better": "plain desktop monitor without an arrow or desk mount icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Upload the finished slide deck to the client portal",
+   "better": "monitor or cloud with an upward-pointing upload arrow",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Check if the new tax software supports automatic bank imports",
-   "better": "question mark or bank/tax icon",
+   "better": "bank or tax document icon",
    "trap": "generic_verb"
   },
   {
    "task": "Order a downloadable PDF sewing pattern for the linen trousers",
-   "better": "sewing pattern or trousers",
+   "better": "sewing pattern or trousers icon",
    "trap": "property"
   },
   {
-   "task": "Upload the finished slide deck to the client portal",
-   "better": "upload icon (upward arrow) or presentation slides",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Call IT support for the admin password",
+   "task": "Call IT support for the admin password to the workstation",
    "better": "phone call or key/password icon",
    "trap": "parent_topic"
   },
   {
    "task": "Calibrate the Dell monitor colors with the SpyderX sensor",
-   "better": "color palette or plain monitor",
+   "better": "color palette or plain monitor without download arrow",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a desktop monitor with a downward arrow entering the screen, universally understood as downloading to a computer or installing desktop software. It fits a concrete and common set of tech, work, and personal admin tasks (installing apps, updating drivers, saving files locally), though it can slightly overlap with generic download trays or plain monitor icons.",
@@ -209,6 +209,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "install desktop software or update operating system",
+     "strength": "primary"
+    },
+    {
+     "meaning": "download file or app to computer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "save data locally to PC",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic download icon (arrow into a tray) or a television input icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a low-profile monitor arm that clamps to the back of the desk",
+     "better": "monitor or desk mount",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the new tax software supports automatic bank imports",
+     "better": "question mark or bank/tax icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a downloadable PDF sewing pattern for the linen trousers",
+     "better": "sewing pattern or trousers",
+     "trap": "property"
+    },
+    {
+     "task": "Upload the finished slide deck to the client portal",
+     "better": "upload icon (upward arrow) or presentation slides",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call IT support for the admin password",
+     "better": "phone call or key/password icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Calibrate the Dell monitor colors with the SpyderX sensor",
+     "better": "color palette or plain monitor",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "install_desktop"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4117,
+    "output": 776,
+    "thoughts": 97,
+    "total": 4990
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "Visually differs only by having a slightly wider, beveled trapezoidal monitor stand and a slightly shorter screen bezel, making it completely interchangeable in meaning with the rectangular-stand version."
 }

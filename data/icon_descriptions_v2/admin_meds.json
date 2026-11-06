@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "The outer frame can read as either a medical clipboard/chart or a sealed single-dose medicine pouch/sachet; at very small sizes the inner capsule can faintly resemble a chain link.",
+ "ambiguity": "At small sizes, the diagonal capsule inside the clipboard frame can be mistaken for the clipboard with a diagonal pencil, or the capsule can look like a single chain link (copy link to clipboard).",
  "modifier_semantics": [
   {
    "modifier": "diagonal two-part capsule pill inside",
@@ -162,6 +162,21 @@
  ],
  "near_misses": [
   {
+   "task": "Fill out the new-patient intake questionnaire before the appointment",
+   "better": "clipboard with a diagonal pencil icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write up the shift handover notes on the ward clipboard",
+   "better": "clipboard with a diagonal pencil icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Copy the shared project URL link onto the clipboard for the team doc",
+   "better": "chain link or copy-paste icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Listen to the new medical thriller audiobook on the commute",
    "better": "headphones or audiobook icon",
    "trap": "property"
@@ -177,25 +192,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Copy the shared project URL link onto the clipboard for the team doc",
-   "better": "chain link or copy-paste icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Schedule annual dental cleaning and bitewing X-rays",
    "better": "tooth icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a hanging canvas organizer for the bedroom closet door",
-   "better": "closet or storage hanger icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a capsule pill inside a clipboard or hanging packet frame, making it an unmistakable cue for prescriptions, medication lists, pharmacy orders, and pill schedules. It fits a very common family of everyday health and caregiving tasks, with only minor visual overlap with a chain-link-on-clipboard 'copy link' icon at tiny sizes.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "prescription, medication chart, or drug list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "medicine packet, unit-dose pouch, or pill pack",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pharmacy order or medication log",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "medical treatment plan or dosage instructions",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The outer frame can read as either a medical clipboard/chart or a sealed single-dose medicine pouch/sachet; at very small sizes the inner capsule can faintly resemble a chain link.",
+   "near_misses": [
+    {
+     "task": "Listen to the new medical thriller audiobook on the commute",
+     "better": "headphones or audiobook icon",
+     "trap": "property"
+    },
+    {
+     "task": "Check whether the pharmacy next to the grocery store is open on Sundays",
+     "better": "clock / store hours icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Put together my spring capsule wardrobe checklist before shopping",
+     "better": "clothes hanger or shirt icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Copy the shared project URL link onto the clipboard for the team doc",
+     "better": "chain link or copy-paste icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule annual dental cleaning and bitewing X-rays",
+     "better": "tooth icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a hanging canvas organizer for the bedroom closet door",
+     "better": "closet or storage hanger icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "note_alt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4120,
+    "output": 754,
+    "thoughts": 0,
+    "total": 4874
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "Inside the square clipboard frame with a top loop, this icon shows a thick outlined two-part oval capsule pill rather than a solid pointed pencil, indicating prescriptions, medication charts, or pill packets rather than general form-filling or note-taking."
 }

@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "add or connect a secondary monitor / display",
+   "meaning": "add or set up a monitor, TV, or secondary display",
    "strength": "primary"
   },
   {
-   "meaning": "telemedicine, telehealth, or online medical portal",
+   "meaning": "telemedicine, telehealth appointment, or online medical portal",
    "strength": "primary"
   },
   {
-   "meaning": "buy or set up a new computer or TV",
+   "meaning": "add a show or video to a watchlist or library",
    "strength": "secondary"
   },
   {
-   "meaning": "create a new slide, window, or workspace",
+   "meaning": "create a new desktop workspace, window, or slide",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The plus sign inside the screen reads equally well as 'add a display/device' in a tech context or as a medical cross representing 'telehealth / online doctor' in a health context; at small sizes it can also resemble a first-aid kit with a bottom clasp.",
+ "ambiguity": "Read equally as 'add display / add to watchlist' in tech/media contexts or 'telehealth / medical portal' when the plus is seen as a medical cross; easily confused with the monitor with a plus and right-pointing chevron when queuing or forwarding media.",
  "modifier_semantics": [
   {
    "modifier": "plus sign inside screen",
@@ -160,40 +160,45 @@
  ],
  "near_misses": [
   {
-   "task": "Pack the small first-aid kit in the trunk",
-   "better": "first-aid kit / medical bag",
+   "task": "Queue the next episode of the documentary to play right after this one",
+   "better": "monitor with a plus sign and right-pointing chevron",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Extend laptop presentation output to the conference room projector next",
+   "better": "monitor with a plus sign and right-pointing chevron",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pack the small first-aid kit in the car trunk",
+   "better": "first-aid kit briefcase with handle",
    "trap": "lookalike_glyph"
   },
   {
    "task": "See Dr. Patel in person at the downtown clinic",
-   "better": "hospital / doctor / stethoscope",
+   "better": "stethoscope or clinic building",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Wipe fingerprints off the TV screen with microfiber",
-   "better": "cleaning / spray bottle",
+   "task": "Wipe fingerprints off the TV screen with a microfiber cloth",
+   "better": "spray bottle or cleaning cloth",
    "trap": "generic_verb"
   },
   {
    "task": "Fix the flickering backlight on my old monitor",
-   "better": "wrench / repair monitor",
+   "better": "wrench or screwdriver for repair",
    "trap": "property"
   },
   {
    "task": "Buy a wireless mouse for the new workstation",
    "better": "computer mouse",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Add a new column to the budget spreadsheet",
-   "better": "table / spreadsheet",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a monitor or TV screen with a bold plus/cross symbol inside. It fits tasks about adding or buying a new display/second monitor, as well as telehealth and online medical portal tasks where the cross reads as health-related. At small sizes it could be mistaken for a first-aid box or a generic 'new slide' UI button.",
@@ -211,6 +216,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add or connect a secondary monitor / display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "telemedicine, telehealth, or online medical portal",
+     "strength": "primary"
+    },
+    {
+     "meaning": "buy or set up a new computer or TV",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "create a new slide, window, or workspace",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The plus sign inside the screen reads equally well as 'add a display/device' in a tech context or as a medical cross representing 'telehealth / online doctor' in a health context; at small sizes it can also resemble a first-aid kit with a bottom clasp.",
+   "near_misses": [
+    {
+     "task": "Pack the small first-aid kit in the trunk",
+     "better": "first-aid kit / medical bag",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "See Dr. Patel in person at the downtown clinic",
+     "better": "hospital / doctor / stethoscope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wipe fingerprints off the TV screen with microfiber",
+     "better": "cleaning / spray bottle",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Fix the flickering backlight on my old monitor",
+     "better": "wrench / repair monitor",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a wireless mouse for the new workstation",
+     "better": "computer mouse",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Add a new column to the budget spreadsheet",
+     "better": "table / spreadsheet",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "queue_play_next"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4169,
+    "output": 1147,
+    "thoughts": 261,
+    "total": 5577
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "Shows a complete, unbroken monitor frame with a centered plus sign and no corner badge, representing adding a display, adding to a watchlist, or a telehealth portal without any 'play next' or forwarding action."
 }

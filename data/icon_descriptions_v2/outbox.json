@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "outbox / outgoing items / pending sends",
+   "meaning": "outbox / outgoing mail or messages / pending sends",
    "strength": "primary"
   },
   {
-   "meaning": "upload / export / submit",
+   "meaning": "export or upload from tray",
    "strength": "primary"
   },
   {
-   "meaning": "unarchive / restore from tray",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "process and empty inbox",
+   "meaning": "empty or process inbox tray",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles an inbox (down arrow), plain upload tray, or share icon at small sizes.",
+ "ambiguity": "At small sizes, can be confused with the 3D package box with an up arrow or the application window with an up arrow entering from the bottom.",
  "modifier_semantics": [
   {
    "modifier": "upward arrow inside the tray",
@@ -162,8 +158,18 @@
  ],
  "near_misses": [
   {
-   "task": "Reach inbox zero before Friday afternoon",
-   "better": "inbox tray with downward arrow",
+   "task": "Upload the signed lease PDF to the tenant portal",
+   "better": "document page with upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unpack the kitchenware boxes in the new apartment",
+   "better": "3D cardboard box with upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Import the CSV dataset into the analytics app window",
+   "better": "application window with upward arrow entering from bottom",
    "trap": "lookalike_glyph"
   },
   {
@@ -180,16 +186,6 @@
    "task": "Upgrade home internet plan for faster upload speeds",
    "better": "router / wifi signal",
    "trap": "property"
-  },
-  {
-   "task": "Print shipping labels for the Etsy orders",
-   "better": "printer / shipping label",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Download bank statements for all of 2023",
-   "better": "download / inbox with down arrow",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -213,6 +209,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "outbox / outgoing items / pending sends",
+     "strength": "primary"
+    },
+    {
+     "meaning": "upload / export / submit",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unarchive / restore from tray",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "process and empty inbox",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles an inbox (down arrow), plain upload tray, or share icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Reach inbox zero before Friday afternoon",
+     "better": "inbox tray with downward arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy an ergonomic standing desk with an under-mount cable tray",
+     "better": "desk",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the tax return submission went through",
+     "better": "tax document / checkmark",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Upgrade home internet plan for faster upload speeds",
+     "better": "router / wifi signal",
+     "trap": "property"
+    },
+    {
+     "task": "Print shipping labels for the Etsy orders",
+     "better": "printer / shipping label",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Download bank statements for all of 2023",
+     "better": "download / inbox with down arrow",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "open_in_browser",
+   "upload_file",
+   "unarchive"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6788,
+    "output": 1969,
+    "thoughts": 0,
+    "total": 8757,
+    "seconds": 33.49,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:40:18Z"
+  }
+ },
+ "distinguishing": "Unlike the window, document, or 3D box, this is a square inbox/outbox tray with an interior horizontal ledge that dips in a curved semicircle at the center below the upward arrow."
 }

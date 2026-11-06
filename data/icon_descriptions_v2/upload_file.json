@@ -19,13 +19,9 @@
   {
    "meaning": "export or publish document",
    "strength": "secondary"
-  },
-  {
-   "meaning": "upgrade or update file",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with exporting a file or simply moving a document up in a list, and at very small sizes may blend with a download file icon.",
+ "ambiguity": "Much more distinct than the square containers due to its vertical page shape and folded corner, though it shares the general 'upload' meaning with the tray and window icons.",
  "modifier_semantics": [
   {
    "modifier": "upward-pointing arrow",
@@ -164,14 +160,14 @@
  ],
  "near_misses": [
   {
-   "task": "Download the monthly credit card statement PDF from Chase",
-   "better": "document with downward arrow (download file)",
+   "task": "Send all queued messages waiting in the outbox",
+   "better": "square outbox tray with upward arrow",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Upload the 4K wedding raw video footage to Frame.io",
-   "better": "video file or clapperboard with upload arrow",
-   "trap": "shared_vocabulary"
+   "task": "Unarchive the old tax records from the storage box",
+   "better": "3D box with upward arrow",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Mail the notarized power of attorney form via certified post",
@@ -215,6 +211,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload file or document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "submit form or paperwork online",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export or publish document",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "upgrade or update file",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with exporting a file or simply moving a document up in a list, and at very small sizes may blend with a download file icon.",
+   "near_misses": [
+    {
+     "task": "Download the monthly credit card statement PDF from Chase",
+     "better": "document with downward arrow (download file)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upload the 4K wedding raw video footage to Frame.io",
+     "better": "video file or clapperboard with upload arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mail the notarized power of attorney form via certified post",
+     "better": "envelope or mailbox",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the uploaded vendor contracts before Friday's meeting",
+     "better": "contract / signature document",
+     "trap": "property"
+    },
+    {
+     "task": "Book the notary appointment for the citizenship paperwork",
+     "better": "calendar or stamp/seal",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Update the project README with the new installation steps",
+     "better": "document with pencil (edit document)",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "outbox",
+   "open_in_browser",
+   "unarchive"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "online",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6788,
+    "output": 1969,
+    "thoughts": 0,
+    "total": 8757,
+    "seconds": 33.49,
+    "attempts": 1
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:40:18Z"
+  }
+ },
+ "distinguishing": "The only vertical rectangle with a folded dog-ear top-right corner, explicitly representing a document or file being uploaded rather than a tray, window, or physical box."
 }

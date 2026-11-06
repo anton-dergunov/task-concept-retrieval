@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "add person, contact, user, or member",
+   "meaning": "add a person, contact, user, or member",
    "strength": "primary"
   },
   {
-   "meaning": "invite someone or send friend request",
+   "meaning": "invite someone, send a friend request, or share access with a new user",
    "strength": "primary"
   },
   {
-   "meaning": "hire, recruit, or onboard a new person",
+   "meaning": "hire, recruit, or onboard a new employee",
    "strength": "secondary"
   },
   {
-   "meaning": "create or register a new user account",
+   "meaning": "register or create a new user account",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a doctor or medical worker if the plus sign is misread as a medical cross, though standard placement here clearly means 'add person'.",
+ "ambiguity": "Opposite in meaning to the person-with-minus-sign icon; at very small sizes the plus sign could be misread as a medical cross (doctor) or overlooked when scanning quickly alongside other user-action icons.",
  "modifier_semantics": [
   {
    "modifier": "plus sign on the right",
@@ -163,6 +163,16 @@
  ],
  "near_misses": [
   {
+   "task": "Revoke former contractor's access to the GitHub repo",
+   "better": "person with a minus sign (remove user)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Delete duplicate contacts from my phone address book",
+   "better": "person with a minus sign (remove user)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book annual checkup with Dr. Patel",
    "better": "stethoscope or medical cross",
    "trap": "lookalike_glyph"
@@ -186,17 +196,12 @@
    "task": "Set up a user-friendly folder structure on Google Drive",
    "better": "folder",
    "trap": "property"
-  },
-  {
-   "task": "Update my profile picture on Slack",
-   "better": "person silhouette or camera",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon is the universal UI glyph for 'add person' (a user bust with a plus sign). It fits a common set of tasks across life and work: saving a new contact, inviting someone to a group or event, adding a family member to a policy or account, and onboarding or hiring.",
@@ -214,6 +219,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "person_add"
- }
+  "alias_of": "person_add",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add person, contact, user, or member",
+     "strength": "primary"
+    },
+    {
+     "meaning": "invite someone or send friend request",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hire, recruit, or onboard a new person",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "create or register a new user account",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a doctor or medical worker if the plus sign is misread as a medical cross, though standard placement here clearly means 'add person'.",
+   "near_misses": [
+    {
+     "task": "Book annual checkup with Dr. Patel",
+     "better": "stethoscope or medical cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Mom about Thanksgiving",
+     "better": "phone handset",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Renew my gym membership for another year",
+     "better": "dumbbell or ID card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a desk chair for the new hire",
+     "better": "office chair",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up a user-friendly folder structure on Google Drive",
+     "better": "folder",
+     "trap": "property"
+    },
+    {
+     "task": "Update my profile picture on Slack",
+     "better": "person silhouette or camera",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "person_remove"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4055,
+    "output": 826,
+    "thoughts": 0,
+    "total": 4881
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:27Z"
+  }
+ },
+ "distinguishing": "Shows a plus sign (+) to the right of the person bust, meaning to add, invite, or hire someone, whereas the look-alike shows a minus sign (-) for removing someone."
 }

@@ -29,7 +29,7 @@ _BUILDERS: Dict[str, Callable] = {
     "B1": lambda icons, inc: BM25Matcher(icons, include_examples=inc, name="B1"),
     "M1": lambda icons, inc: BiEncoderMatcher(
         icons, model_name=config.MULTILINGUAL_MODEL, view="field",
-        field_weights=config.FIELD_WEIGHTS, quality_weight=config.QUALITY_PRIOR_WEIGHT,
+        field_weights=_fw(icons), quality_weight=config.QUALITY_PRIOR_WEIGHT,
         include_examples=inc, name="M1"),
     "M2": lambda icons, inc: NearestExampleMatcher(
         icons, model_name=config.MULTILINGUAL_MODEL,
@@ -37,12 +37,17 @@ _BUILDERS: Dict[str, Callable] = {
     "M3": lambda icons, inc: HybridMatcher(
         [BM25Matcher(icons, include_examples=inc, name="B1"),
          BiEncoderMatcher(icons, model_name=config.MULTILINGUAL_MODEL, view="field",
-                          field_weights=config.FIELD_WEIGHTS,
+                          field_weights=_fw(icons),
                           quality_weight=config.QUALITY_PRIOR_WEIGHT,
                           include_examples=inc, name="M1")],
         name="M3"),
     "M3x": lambda icons, inc: _bundle_matcher(),
 }
+
+
+def _fw(icons) -> dict:
+    """M1's field weights for the description version of `icons`."""
+    return config.field_weights(icons[0].version if icons else None)
 
 
 def _bundle_matcher() -> Matcher:

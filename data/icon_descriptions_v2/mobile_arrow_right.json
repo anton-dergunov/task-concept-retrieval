@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "switch or migrate to a new phone",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "smartwatch or wearable screen navigation",
+   "meaning": "next step or slide action on mobile screen",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read as either a smartphone with a side power button or a strap-less smartwatch case, and the right arrow could mean export, forward, slide to unlock, or next step on mobile.",
+ "ambiguity": "Largely interchangeable with the mobile screen with a bent right arrow and the mobile screen with a diagonal northeast arrow, as the small difference in arrow shaft geometry disappears at list-icon sizes.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow inside the screen",
@@ -161,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Cast my phone screen to the living room TV",
+   "better": "mobile screen with bent share arrow or stacked screens with bent arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix deep links that launch external apps on iOS",
+   "better": "mobile screen with diagonal northeast external-link arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a tempered glass screen protector for my phone",
    "better": "plain smartphone or shield icon without transfer arrow",
    "trap": "shared_vocabulary"
@@ -181,11 +187,6 @@
    "trap": "property"
   },
   {
-   "task": "Walk through the exit door at Terminal 2",
-   "better": "door with exit arrow icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new leather watch strap for the Apple Watch",
    "better": "wristwatch with straps icon",
    "trap": "parent_topic"
@@ -194,7 +195,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a smartphone (or wearable screen) with a side button and a prominent right-pointing arrow inside, clearly suggesting transferring data out of a phone, call forwarding, or migrating between mobile devices. While somewhat specific, phone migration, offloading photos, and number porting are distinct real-world tasks where this icon fits well.",
@@ -212,6 +213,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "send_to_mobile"
- }
+  "alias_of": "send_to_mobile",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "transfer or export data from a smartphone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "call or message forwarding on a mobile phone",
+     "strength": "primary"
+    },
+    {
+     "meaning": "switch or migrate to a new phone",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smartwatch or wearable screen navigation",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read as either a smartphone with a side power button or a strap-less smartwatch case, and the right arrow could mean export, forward, slide to unlock, or next step on mobile.",
+   "near_misses": [
+    {
+     "task": "Buy a tempered glass screen protector for my phone",
+     "better": "plain smartphone or shield icon without transfer arrow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the dentist to move my appointment forward",
+     "better": "telephone receiver or tooth / calendar icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check my phone for the verification code",
+     "better": "key, lock, or SMS message icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a mobile-friendly template for the bakery website",
+     "better": "website / browser layout icon",
+     "trap": "property"
+    },
+    {
+     "task": "Walk through the exit door at Terminal 2",
+     "better": "door with exit arrow icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new leather watch strap for the Apple Watch",
+     "better": "wristwatch with straps icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "app_shortcut",
+   "offline_share",
+   "add_to_home_screen"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6817,
+    "output": 2095,
+    "thoughts": 227,
+    "total": 9139
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "Shows a single mobile screen containing a straight horizontal right-pointing arrow (instead of a bent turn arrow or diagonal northeast arrow), suggesting direct transfer, next step, or slide-to-unlock on a single device."
 }

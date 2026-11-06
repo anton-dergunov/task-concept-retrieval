@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "mailbox / postbox / incoming physical mail",
+   "meaning": "mailbox, postbox, or physical mail delivery",
    "strength": "primary"
   },
   {
-   "meaning": "email inbox / message box",
-   "strength": "secondary"
+   "meaning": "incoming mail or post office errand",
+   "strength": "primary"
   },
   {
-   "meaning": "postal delivery / sending mail",
+   "meaning": "email inbox or message queue",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Outside regions that use rural US-style mailboxes with signal flags, the rectangular outline with an L-shaped flag could be mistaken for a generic folder, battery, or tank with a spout.",
+ "ambiguity": "At a quick glance the raised flag above the rectangular box can resemble the protruding back corner of the overlapping rectangles or folder icons, especially to viewers unfamiliar with US-style flagged mailboxes.",
  "modifier_semantics": [
   {
    "modifier": "raised flag",
@@ -158,33 +158,33 @@
  ],
  "near_misses": [
   {
-   "task": "Buy six plastic storage bins for the garage shelves",
-   "better": "storage box / crate",
+   "task": "Move old tax receipts into the archive folders",
+   "better": "stacked file folders with top tab",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Duplicate the mailing list spreadsheet before cleaning rows",
+   "better": "two overlapping squares for copy/duplicate",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Flag the three suspicious charges on the Amex statement",
-   "better": "flag / credit card",
+   "better": "flag or credit card",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Mail grandma's birthday sweater via UPS Ground",
-   "better": "parcel / shipping box",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Pay the water bill that came in the mail yesterday",
-   "better": "bill / invoice / water drop",
+   "better": "bill, invoice, or water drop",
    "trap": "property"
   },
   {
    "task": "Install a cedar planter box around the mailbox post",
-   "better": "planter / flowers",
+   "better": "planter or flowers",
    "trap": "parent_topic"
   },
   {
    "task": "Reply to Sarah's text message about Saturday dinner",
-   "better": "speech bubble / chat",
+   "better": "speech bubble or chat",
    "trap": "shared_vocabulary"
   }
  ],
@@ -209,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "mailbox / postbox / incoming physical mail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "email inbox / message box",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "postal delivery / sending mail",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Outside regions that use rural US-style mailboxes with signal flags, the rectangular outline with an L-shaped flag could be mistaken for a generic folder, battery, or tank with a spout.",
+   "near_misses": [
+    {
+     "task": "Buy six plastic storage bins for the garage shelves",
+     "better": "storage box / crate",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Flag the three suspicious charges on the Amex statement",
+     "better": "flag / credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mail grandma's birthday sweater via UPS Ground",
+     "better": "parcel / shipping box",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the water bill that came in the mail yesterday",
+     "better": "bill / invoice / water drop",
+     "trap": "property"
+    },
+    {
+     "task": "Install a cedar planter box around the mailbox post",
+     "better": "planter / flowers",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Reply to Sarah's text message about Saturday dinner",
+     "better": "speech bubble / chat",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "select_window",
+   "select_window_2",
+   "stack",
+   "folder_copy",
+   "tv_displays"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9395,
+    "output": 2955,
+    "thoughts": 262,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "Instead of a second overlapping rectangle behind, this single horizontal rectangle has a vertical post and raised rectangular flag breaking through its top-left edge, depicting a mailbox."
 }

@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "call on hold / pause phone call",
+   "meaning": "call on hold / pause an active phone call",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "call waiting / hold music or queue",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "postpone or hold off on a phone call",
+   "meaning": "configure call waiting or hold queue settings",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the two vertical bars might be misread as quotation marks, the Roman numeral II (line 2), or exclamation marks without dots.",
+ "ambiguity": "Shares the same tilted handset base as the other phone icons; at very small sizes the two bars might read as Roman numeral II (line 2) or generic badge marks.",
  "modifier_semantics": [
   {
    "modifier": "two vertical parallel bars (pause icon)",
@@ -166,40 +162,45 @@
  ],
  "near_misses": [
   {
+   "task": "Wait for the plumber's incoming call between 1 and 3 PM",
+   "better": "telephone handset with an inward-pointing arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch home calls to Wi-Fi calling in the basement",
+   "better": "telephone handset with a Wi-Fi arc and dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clear the unread missed call badge on my phone app",
+   "better": "telephone handset with a single notification dot",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call Mom to tell her what time we're arriving on Sunday",
-   "better": "plain phone handset without pause bars",
+   "better": "plain telephone handset without pause bars",
    "trap": "generic_verb"
   },
   {
    "task": "Pause Netflix and Spotify subscriptions for the summer",
-   "better": "pause button or subscription/tv icon",
+   "better": "standalone pause button or TV/music icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Put the kitchen remodel on hold until we pay off the car",
-   "better": "pause icon or home/construction icon",
+   "better": "standalone pause icon or house/construction icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Set up a second phone line on my dual-SIM iPhone",
-   "better": "SIM card icon or phone with number 2",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new USB headset for the support team",
-   "better": "headset with microphone icon",
+   "better": "headset with microphone",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Listen to the two missed voicemails from the dentist",
-   "better": "voicemail tape icon or phone with exclamation/notification",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a telephone handset paired with a pause symbol, universally recognized in telephony UIs as 'call on hold'. While it is mostly an in-call UI state, in a task manager it fits a specific niche of tasks: temporarily suspending/pausing a mobile or landline phone plan, configuring PBX hold music/queues, or waiting on hold.",
@@ -219,6 +220,96 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "call on hold / pause phone call",
+     "strength": "primary"
+    },
+    {
+     "meaning": "suspend phone service / pause mobile plan",
+     "strength": "primary"
+    },
+    {
+     "meaning": "call waiting / hold music or queue",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "postpone or hold off on a phone call",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the two vertical bars might be misread as quotation marks, the Roman numeral II (line 2), or exclamation marks without dots.",
+   "near_misses": [
+    {
+     "task": "Call Mom to tell her what time we're arriving on Sunday",
+     "better": "plain phone handset without pause bars",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pause Netflix and Spotify subscriptions for the summer",
+     "better": "pause button or subscription/tv icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put the kitchen remodel on hold until we pay off the car",
+     "better": "pause icon or home/construction icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up a second phone line on my dual-SIM iPhone",
+     "better": "SIM card icon or phone with number 2",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new USB headset for the support team",
+     "better": "headset with microphone icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Listen to the two missed voicemails from the dentist",
+     "better": "voicemail tape icon or phone with exclamation/notification",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wifi_calling_bar_2",
+   "wifi_calling_bar_1",
+   "phone_callback"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6758,
+    "output": 2173,
+    "thoughts": 0,
+    "total": 8931
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:27Z"
+  }
+ },
+ "distinguishing": "Two thick vertical parallel bars (a pause symbol) sit in the upper right of the handset, signifying a call on hold or paused phone service rather than Wi-Fi calling, a dot badge, or an incoming call."
 }

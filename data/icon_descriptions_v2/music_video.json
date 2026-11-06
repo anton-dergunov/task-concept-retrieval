@@ -11,19 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "audio or music media file",
+   "meaning": "media player screen or music streaming display",
    "strength": "primary"
   },
   {
-   "meaning": "music streaming app or media player",
+   "meaning": "background music or soundtrack for a video or slide deck",
    "strength": "secondary"
   },
   {
-   "meaning": "background music or soundtrack for a slide/video",
+   "meaning": "single audio media card or clip",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with a plain musical note icon; the rectangular frame suggests a screen, video, slide, or media card rather than live music alone.",
+ "ambiguity": "Can be mistaken for the folded-corner audio file document or the stacked square music library icon, since all three frame a single eighth note inside a border.",
  "modifier_semantics": [],
  "domains": [
   "creative",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Print the PDF sheet music for tomorrow's choir rehearsal",
+   "better": "vertical folded-corner page with a musical note (sheet music / audio file)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Back up the full Apple Music album library to the external drive",
+   "better": "stacked square tiles with a musical note (music library)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy new acoustic guitar strings before rehearsal",
    "better": "guitar",
    "trap": "shared_vocabulary"
@@ -164,11 +174,6 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Frame the signed vinyl sleeve for the hallway wall",
-   "better": "picture frame or vinyl record",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book flights to Berlin for the summer music festival",
    "better": "airplane",
    "trap": "parent_topic"
@@ -177,11 +182,6 @@
    "task": "Buy a quiet mechanical keyboard with media keys",
    "better": "keyboard",
    "trap": "property"
-  },
-  {
-   "task": "Practice C-sharp minor scales on the piano for 20 minutes",
-   "better": "piano keys",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -205,6 +205,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "music video or concert video",
+     "strength": "primary"
+    },
+    {
+     "meaning": "audio or music media file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "music streaming app or media player",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "background music or soundtrack for a slide/video",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with a plain musical note icon; the rectangular frame suggests a screen, video, slide, or media card rather than live music alone.",
+   "near_misses": [
+    {
+     "task": "Buy new acoustic guitar strings before rehearsal",
+     "better": "guitar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check Spotify subscription renewal date",
+     "better": "calendar or credit card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Frame the signed vinyl sleeve for the hallway wall",
+     "better": "picture frame or vinyl record",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book flights to Berlin for the summer music festival",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a quiet mechanical keyboard with media keys",
+     "better": "keyboard",
+     "trap": "property"
+    },
+    {
+     "task": "Practice C-sharp minor scales on the piano for 20 minutes",
+     "better": "piano keys",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "audio_file",
+   "library_music"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5410,
+    "output": 1603,
+    "thoughts": 154,
+    "total": 7167
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:34Z"
+  }
+ },
+ "distinguishing": "Places the eighth note inside a single horizontal rectangular screen or slide frame without a folded corner or stacked backing, pointing to a music video, media player display, or presentation audio."
 }

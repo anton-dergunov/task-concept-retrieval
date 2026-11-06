@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "important announcement, bulletin, or notice board item",
+   "meaning": "important announcement, bulletin, or incident report",
    "strength": "primary"
   },
   {
-   "meaning": "urgent details card or incident report",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "toast notification or pop-up alert dialog",
+   "meaning": "urgent notification card or pop-up alert details",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be mistaken for a generic contact card, ID badge, or layout template at very small sizes if the exclamation mark blurs into a profile silhouette.",
+ "ambiguity": "At small list sizes, the exclamation mark on the left blends into the three stacked bullet dots of the framed bulleted list icon, making the two look nearly identical at a quick glance.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -161,19 +157,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy milk and eggs urgently before dinner",
-   "better": "shopping cart or milk carton",
-   "trap": "property"
-  },
-  {
-   "task": "Update my driver's license address at the DMV",
-   "better": "ID card with person silhouette",
+   "task": "Review the meeting agenda with the product team",
+   "better": "plain framed bulleted list with three dots",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Check the grocery list on the fridge",
-   "better": "checklist or shopping list",
-   "trap": "generic_verb"
+   "task": "Add new feature requests to the product backlog list",
+   "better": "framed bulleted list with a plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy milk and eggs urgently before dinner",
+   "better": "shopping cart or milk carton",
+   "trap": "property"
   },
   {
    "task": "Give two weeks notice to my manager on Monday",
@@ -186,15 +182,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Order 200 matte business cards from Moo",
-   "better": "business card with contact icon",
-   "trap": "lookalike_glyph"
+   "task": "Check the server status dashboard before logging off",
+   "better": "server or monitor dashboard",
+   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a bordered card or screen containing an exclamation mark alongside lines of text, strongly conveying an error log, warning notice, alert banner, or urgent bulletin. It fits tasks centered on reviewing logs, handling official notices, or designing alert UI, though care must be taken not to misuse it as a generic 'urgent' priority marker on unrelated tasks.",
@@ -212,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "error log, system alert message, or warning notice",
+     "strength": "primary"
+    },
+    {
+     "meaning": "important announcement, bulletin, or notice board item",
+     "strength": "primary"
+    },
+    {
+     "meaning": "urgent details card or incident report",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "toast notification or pop-up alert dialog",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be mistaken for a generic contact card, ID badge, or layout template at very small sizes if the exclamation mark blurs into a profile silhouette.",
+   "near_misses": [
+    {
+     "task": "Buy milk and eggs urgently before dinner",
+     "better": "shopping cart or milk carton",
+     "trap": "property"
+    },
+    {
+     "task": "Update my driver's license address at the DMV",
+     "better": "ID card with person silhouette",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the grocery list on the fridge",
+     "better": "checklist or shopping list",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Give two weeks notice to my manager on Monday",
+     "better": "resignation letter or person talking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the dead AA batteries in the carbon monoxide alarm",
+     "better": "battery",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order 200 matte business cards from Moo",
+     "better": "business card with contact icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "list_alt_add",
+   "list_alt"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5392,
+    "output": 1520,
+    "thoughts": 147,
+    "total": 7059
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:02Z"
+  }
+ },
+ "distinguishing": "Instead of three round bullet points down the left side, the top two dots are replaced by a vertical bar to form a bold exclamation mark beside the three text lines, turning the list into an alert notice or error log."
 }

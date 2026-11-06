@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery or rechargeable cell",
+   "meaning": "low battery (around 15% charge) / needs charging",
    "strength": "primary"
   },
   {
-   "meaning": "low battery or need to recharge",
+   "meaning": "battery or rechargeable cell",
    "strength": "primary"
   },
   {
    "meaning": "power bank or portable charger",
    "strength": "secondary"
-  },
-  {
-   "meaning": "personal energy or burnout recovery",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Could be slightly confused with a bottle or flask with a thick bottom at tiny sizes, though the rectangular shape and terminal nub are standard for a battery.",
+ "ambiguity": "Interchangeable with the adjacent low-fill battery icons (10%, 25%, and 30% fill) and easily mistaken for the empty battery outline at glanceable list sizes.",
  "modifier_semantics": [
   {
    "modifier": "low bottom fill bar",
@@ -162,9 +158,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Drop off the dead UPS battery at the hazardous waste depot",
+   "better": "completely empty 0% battery outline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Charge spare camera batteries to 30% before long-term storage",
+   "better": "battery filled to bottom third",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Dispute the double charge from the hotel on my Visa statement",
@@ -175,11 +176,6 @@
    "task": "Pay the monthly electric bill before Friday",
    "better": "invoice or lightning bolt",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Refill the glass water bottle for my desk",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pack the braided USB-C cable in my tech pouch",
@@ -195,7 +191,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a vertical battery with a low charge level. It fits everyday tasks about buying, charging, testing, or recycling household batteries, device batteries, and power banks. It is only slightly less distinctive than a full battery set because many battery level variants exist, and at very small sizes its silhouette loosely resembles a bottle.",
@@ -213,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "battery_1_bar"
- }
+  "alias_of": "battery_1_bar",
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery or rechargeable cell",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low battery or need to recharge",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank or portable charger",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy or burnout recovery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be slightly confused with a bottle or flask with a thick bottom at tiny sizes, though the rectangular shape and terminal nub are standard for a battery.",
+   "near_misses": [
+    {
+     "task": "Dispute the double charge from the hotel on my Visa statement",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly electric bill before Friday",
+     "better": "invoice or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill the glass water bottle for my desk",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pack the braided USB-C cable in my tech pouch",
+     "better": "cable",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a cordless drill for the shelving project",
+     "better": "drill",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_0_bar",
+   "battery_vert_005",
+   "battery_vert_020",
+   "battery_2_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7952,
+    "output": 2508,
+    "thoughts": 196,
+    "total": 10656
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Shows a small solid fill at the bottom (roughly 15% of the interior), sitting halfway between the nearly empty 10% battery and the 25% filled battery, and interchangeable with both in practice."
 }

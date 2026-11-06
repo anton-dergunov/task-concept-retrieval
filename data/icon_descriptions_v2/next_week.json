@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be read as a generic suitcase for vacation travel, or a 'move to work folder' UI action icon.",
+ "ambiguity": "Can be mistaken for the standard latched briefcase if the user just wants a general work icon, or read as a command-line prompt inside a window.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing chevron",
@@ -106,11 +106,6 @@
    "domain": "work"
   },
   {
-   "task": "Pick up dry cleaning",
-   "parent": "London Client Visit",
-   "domain": "travel"
-  },
-  {
    "task": "Fill out I-9 and direct deposit forms",
    "parent": "New Role Onboarding",
    "domain": "admin"
@@ -161,6 +156,21 @@
  ],
  "near_misses": [
   {
+   "task": "Condition the leather on my brown work briefcase",
+   "better": "standard briefcase with center latch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Update employment history on my resume",
+   "better": "standard briefcase with center latch for general work/career",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Open terminal and run the deployment script",
+   "better": "command prompt terminal with >_",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a portable travel steamer for dresses",
    "better": "garment steamer or iron",
    "trap": "property"
@@ -176,18 +186,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Open terminal and run the deployment script",
-   "better": "command prompt terminal with >_",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Renew passport at the post office",
    "better": "passport booklet",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Print 200 business cards for the conference",
-   "better": "business card / ID card",
    "trap": "parent_topic"
   }
  ],
@@ -212,6 +212,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "business trip or work travel",
+     "strength": "primary"
+    },
+    {
+     "meaning": "next job, career move, or job transition",
+     "strength": "primary"
+    },
+    {
+     "meaning": "commute or go to work",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pack or forward luggage",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be read as a generic suitcase for vacation travel, or a 'move to work folder' UI action icon.",
+   "near_misses": [
+    {
+     "task": "Buy a portable travel steamer for dresses",
+     "better": "garment steamer or iron",
+     "trap": "property"
+    },
+    {
+     "task": "Check work email before breakfast",
+     "better": "email envelope",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Watch the season finale of Succession",
+     "better": "television or play screen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Open terminal and run the deployment script",
+     "better": "command prompt terminal with >_",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew passport at the post office",
+     "better": "passport booklet",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Print 200 business cards for the conference",
+     "better": "business card / ID card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "business_center"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4041,
+    "output": 1101,
+    "thoughts": 75,
+    "total": 5217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "Replaces the briefcase's horizontal seam and latch with a large right-pointing chevron inside the case, indicating forward movement such as a business trip, commuting, or a job transition rather than static work or a physical briefcase."
 }

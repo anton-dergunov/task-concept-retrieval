@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "scan a photo or image",
+   "meaning": "scan or capture a single photo",
    "strength": "primary"
   },
   {
-   "meaning": "crop or frame an image",
+   "meaning": "crop or select an image area",
    "strength": "secondary"
   },
   {
-   "meaning": "image search or visual lookup",
+   "meaning": "visual lookup or reverse image search",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the gaps in the frame barely register and it looks identical to a standard photo or gallery icon.",
+ "ambiguity": "Easily confused with the stacked bracketed-photo icon when tasks don't distinguish between one image and multiple images, and at tiny sizes the corner gaps disappear so it looks like a plain single photo icon.",
  "modifier_semantics": [
   {
    "modifier": "four corner brackets",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Select the best 20 photos from the wedding album for the photobook",
+   "better": "stacked bracketed photos icon for multi-photo selection",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Batch-crop all product screenshots to square format",
+   "better": "stacked bracketed photos icon for multiple images",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Scan signed lease agreement to PDF",
    "better": "document scanner icon (page with scan line)",
    "trap": "shared_vocabulary"
@@ -171,19 +181,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Hang the framed mountain print in the upstairs guest bedroom",
-   "better": "picture frame with hanging wire or hammer",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy 500GB external SSD",
+   "task": "Buy 500GB external SSD for photo backups",
    "better": "hard drive / SSD icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Book campsite with a good mountain view for Labor Day",
-   "better": "tent or mountain landscape icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Order a high-resolution print of the group photo",
@@ -212,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "screenshot or screen capture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "scan a photo or image",
+     "strength": "primary"
+    },
+    {
+     "meaning": "crop or frame an image",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "image search or visual lookup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the gaps in the frame barely register and it looks identical to a standard photo or gallery icon.",
+   "near_misses": [
+    {
+     "task": "Scan signed lease agreement to PDF",
+     "better": "document scanner icon (page with scan line)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule MRI scan at the imaging clinic",
+     "better": "medical / hospital icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hang the framed mountain print in the upstairs guest bedroom",
+     "better": "picture frame with hanging wire or hammer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy 500GB external SSD",
+     "better": "hard drive / SSD icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book campsite with a good mountain view for Labor Day",
+     "better": "tent or mountain landscape icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a high-resolution print of the group photo",
+     "better": "printer or standard photo icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wallpaper_slideshow"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4107,
+    "output": 1067,
+    "thoughts": 100,
+    "total": 5274
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:18Z"
+  }
+ },
+ "distinguishing": "Shows a single landscape picture inside four corner brackets with no backing layer, representing a single screenshot, image scan, or single-photo selection rather than a batch or multi-photo selection."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "remove duplicates / deduplicate",
+   "meaning": "remove duplicates or deduplicate files/contacts",
    "strength": "primary"
   },
   {
-   "meaning": "no copying / copy protection / disable copy",
+   "meaning": "disable copying or apply copy protection",
    "strength": "primary"
   },
   {
-   "meaning": "disable multi-window or cloning",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "ungroup or separate overlapping items",
+   "meaning": "disable multi-window or picture-in-picture mode",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, it can be confused with a crop icon, a broken link icon, or a generic 'no layers' or 'hide windows' UI toggle.",
+ "ambiguity": "Visually distinct from the single-rectangle icons in this group, though at tiny sizes the overlapping corners plus diagonal slash can momentarily look like a crop tool.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash from top-left to bottom-right",
@@ -162,19 +158,24 @@
  ],
  "near_misses": [
   {
-   "task": "Make three copies of the house key at the hardware store",
-   "better": "key (or regular copy/duplicate icon without slash)",
-   "trap": "shared_vocabulary"
+   "task": "Cancel duplicate Chase credit card sent by mistake",
+   "better": "slashed credit card with horizontal magnetic stripe",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Photocopy passport and visa pages for the carry-on folder",
-   "better": "passport or printer/copier",
+   "task": "Disable closed captions on the training video",
+   "better": "slashed rectangular screen with text lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Make three copies of the house key at the hardware store",
+   "better": "key or unslashed copy/duplicate icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Crop the headshots to a 1:1 square for Slack profiles",
    "better": "crop tool",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Check if the backup drive finished cloning overnight",
@@ -182,20 +183,15 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Buy a non-stick baking sheet that doesn't warp",
-   "better": "baking sheet / cookware",
-   "trap": "property"
-  },
-  {
    "task": "Buy a 4TB external SSD for the photo archive",
-   "better": "hard drive / SSD",
+   "better": "hard drive or SSD",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon depicts the standard overlapping-squares 'copy/duplicate' symbol crossed out with a diagonal slash, meaning 'no duplicates', 'deduplicate', or 'disable copying'. While originally a UI state icon, it maps well to common digital and physical cleanup tasks centered on removing duplicates (photos, contacts, files, records), though at tiny sizes it can resemble a crop mark.",
@@ -213,6 +209,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remove duplicates / deduplicate",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no copying / copy protection / disable copy",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disable multi-window or cloning",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "ungroup or separate overlapping items",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, it can be confused with a crop icon, a broken link icon, or a generic 'no layers' or 'hide windows' UI toggle.",
+   "near_misses": [
+    {
+     "task": "Make three copies of the house key at the hardware store",
+     "better": "key (or regular copy/duplicate icon without slash)",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Photocopy passport and visa pages for the carry-on folder",
+     "better": "passport or printer/copier",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Crop the headshots to a 1:1 square for Slack profiles",
+     "better": "crop tool",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the backup drive finished cloning overnight",
+     "better": "hard drive",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a non-stick baking sheet that doesn't warp",
+     "better": "baking sheet / cookware",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a 4TB external SSD for the photo archive",
+     "better": "hard drive / SSD",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speaker_notes_off",
+   "credit_card_off",
+   "subtitles_off",
+   "text_ad_off",
+   "comments_disabled"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9498,
+    "output": 3020,
+    "thoughts": 0,
+    "total": 12518
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "The only icon composed of two offset overlapping square outlines instead of a single rectangular card or speech bubble, representing duplicates or copying rather than cards, captions, or comments."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "snow or snowfall",
+   "meaning": "snow, snowfall, or winter weather",
    "strength": "primary"
   },
   {
-   "meaning": "rain, drizzle, or precipitation",
+   "meaning": "hail, sleet, or freezing precipitation",
    "strength": "primary"
   },
   {
-   "meaning": "hail or sleet",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "weather forecast",
+   "meaning": "light drizzle or weather forecast",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Round dots below a cloud can be read equally as snow, hail, or light rain/drizzle, especially at small sizes where snowflakes cannot be drawn in detail.",
+ "ambiguity": "Virtually identical and interchangeable with the other cloud with five round dots underneath; also easily confused with the cloud with slanted rain lines when general precipitation is meant.",
  "modifier_semantics": [
   {
    "modifier": "five solid dots below cloud",
@@ -161,29 +157,29 @@
  ],
  "near_misses": [
   {
+   "task": "Check the weekend rain forecast before Reserving the patio",
+   "better": "cloud with slanted rain lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Empty the plastic rain gauge in the vegetable garden",
+   "better": "cloud with slanted rain lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Back up old family photos to iCloud Drive",
+   "better": "cloud with upload arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small waterproof rain jacket for the Scotland hiking trip",
    "better": "jacket or coat",
    "trap": "property"
   },
   {
-   "task": "Back up old family photos to iCloud Drive",
-   "better": "cloud upload or photo gallery",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Brainstorm twenty new product ideas with the design team",
-   "better": "lightbulb",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Pick up dry-cleaned wool winter coats from the cleaner on 5th",
    "better": "coat or hanger",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Migrate staging Postgres database to AWS cloud",
-   "better": "database or server",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy snow peas and baby corn for tonight's stir-fry",
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a cloud with five round dots falling from it, universally understood as precipitation (snow, hail, or light rain) and weather forecasts. It fits tasks centered on snow removal, storm preparation, and checking weather conditions, though the round dots leave slight visual overlap between snow, hail, and rain.",
@@ -212,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "snow or snowfall",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rain, drizzle, or precipitation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hail or sleet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "weather forecast",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Round dots below a cloud can be read equally as snow, hail, or light rain/drizzle, especially at small sizes where snowflakes cannot be drawn in detail.",
+   "near_misses": [
+    {
+     "task": "Buy a small waterproof rain jacket for the Scotland hiking trip",
+     "better": "jacket or coat",
+     "trap": "property"
+    },
+    {
+     "task": "Back up old family photos to iCloud Drive",
+     "better": "cloud upload or photo gallery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Brainstorm twenty new product ideas with the design team",
+     "better": "lightbulb",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up dry-cleaned wool winter coats from the cleaner on 5th",
+     "better": "coat or hanger",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Migrate staging Postgres database to AWS cloud",
+     "better": "database or server",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy snow peas and baby corn for tonight's stir-fry",
+     "better": "vegetables or shopping basket",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "rainy",
+   "weather_snowy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5340,
+    "output": 1468,
+    "thoughts": 125,
+    "total": 6933
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Shows five small round dots in two staggered rows below the cloud for snow or hail instead of diagonal rain streaks; visually and semantically interchangeable with the other five-dot cloud icon, having only negligibly smaller dots."
 }

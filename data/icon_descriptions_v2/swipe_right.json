@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "swipe right or flick gesture",
+   "meaning": "one-finger swipe right or flick right gesture",
    "strength": "primary"
   },
   {
-   "meaning": "rotate or turn gesture",
+   "meaning": "touchscreen gesture or mobile UI interaction",
    "strength": "primary"
   },
   {
-   "meaning": "touchscreen interaction or UI gesture",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "turn page or flip forward",
+   "meaning": "flip page forward or advance card",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with other directional swipe icons (swipe left, two-finger rotate) or generic redo/forward arrows at very small sizes.",
+ "ambiguity": "Easily mistaken for the two-finger swipe-right icon at small sizes, or confused with the one-finger swipe-left and bidirectional swipe icons when scanning quickly.",
  "modifier_semantics": [
   {
    "modifier": "curved clockwise arrow arched above the finger",
@@ -158,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Add two-finger clockwise canvas rotation to the drawing app",
+   "better": "two-finger swipe right / rotate clockwise icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Build swipe-left to archive gesture on notification items",
+   "better": "one-finger swipe left icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Rotate the living room rug 180 degrees so it wears evenly",
    "better": "rug or furniture icon",
    "trap": "shared_vocabulary"
@@ -166,16 +172,6 @@
    "task": "Buy a new badge swipe card holder for the office lanyard",
    "better": "ID badge icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book manicure appointment before Friday's wedding",
-   "better": "nail polish or fingernail icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Redo the bathroom caulking around the tub",
-   "better": "bathtub or caulk gun icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a touch-sensitive bedside lamp for the guest room",
@@ -191,7 +187,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a touchscreen swipe-right or rotate gesture (a pointing hand beneath a clockwise curved arrow). While mostly an interface gesture glyph, it legitimately serves as the central subject for UI/UX design, mobile development, and device configuration tasks involving touch gestures, though its everyday task fit outside tech and digital art is narrow.",
@@ -209,6 +205,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "swipe right or flick gesture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rotate or turn gesture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "touchscreen interaction or UI gesture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "turn page or flip forward",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with other directional swipe icons (swipe left, two-finger rotate) or generic redo/forward arrows at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Rotate the living room rug 180 degrees so it wears evenly",
+     "better": "rug or furniture icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new badge swipe card holder for the office lanyard",
+     "better": "ID badge icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book manicure appointment before Friday's wedding",
+     "better": "nail polish or fingernail icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Redo the bathroom caulking around the tub",
+     "better": "bathtub or caulk gun icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a touch-sensitive bedside lamp for the guest room",
+     "better": "table lamp icon",
+     "trap": "property"
+    },
+    {
+     "task": "Write copy for the app store screenshots",
+     "better": "document or smartphone icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "swipe_left_2",
+   "swipe_right_2",
+   "swipe_left",
+   "swipe"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7990,
+    "output": 2437,
+    "thoughts": 0,
+    "total": 10427
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:08Z"
+  }
+ },
+ "distinguishing": "Shows a single extended index finger beneath a curved arrow pointing right, representing a one-finger swipe right or flick forward rather than a two-finger, leftward, or bidirectional gesture."
 }

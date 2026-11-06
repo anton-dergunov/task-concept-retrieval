@@ -13,19 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "business cards or ID badges",
+   "meaning": "stack of business cards or contact cards",
    "strength": "primary"
   },
   {
    "meaning": "news articles, blog posts, or newsletters",
    "strength": "secondary"
-  },
-  {
-   "meaning": "page layouts or UI templates",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read equally as a presentation slide deck, a stack of business cards, or news/article cards, and at small sizes looks similar to a browser window or generic copy/duplicate icon.",
+ "ambiguity": "Easily mistaken for the single ID/article card (which lacks the bottom-left L-line and adds a third full-width bottom bar) or the stacked layout templates icon (which shares the L-line but has hollow grid panes instead of solid content blocks).",
  "modifier_semantics": [
   {
    "modifier": "second card corner stacked underneath at bottom-left",
@@ -163,6 +159,16 @@
  ],
  "near_misses": [
   {
+   "task": "Renew my driver's license before my birthday",
+   "better": "single horizontal card with a photo block and three text bars",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Choose a 3-photo collage template for the anniversary print",
+   "better": "stacked square divided into three hollow grid panes",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call the bank to replace my expired debit card",
    "better": "credit card with magnetic stripe or chip",
    "trap": "shared_vocabulary"
@@ -173,23 +179,13 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a birthday card for Mom on the way home",
-   "better": "folded greeting card with heart or envelope",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Book a window seat on the flight to Chicago",
-   "better": "airplane or seat",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book the main conference room and projector for the client pitch",
    "better": "meeting room or projector",
    "trap": "parent_topic"
   },
   {
    "task": "Present the signed lease agreement to the building manager",
-   "better": "contract / signed document",
+   "better": "contract or signed document",
    "trap": "generic_verb"
   }
  ],
@@ -214,6 +210,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "presentation slides or slide deck",
+     "strength": "primary"
+    },
+    {
+     "meaning": "business cards or ID badges",
+     "strength": "primary"
+    },
+    {
+     "meaning": "news articles, blog posts, or newsletters",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "page layouts or UI templates",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read equally as a presentation slide deck, a stack of business cards, or news/article cards, and at small sizes looks similar to a browser window or generic copy/duplicate icon.",
+   "near_misses": [
+    {
+     "task": "Call the bank to replace my expired debit card",
+     "better": "credit card with magnetic stripe or chip",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the broken playground slide in the backyard",
+     "better": "playground slide or wrench",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a window seat on the flight to Chicago",
+     "better": "airplane or seat",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the main conference room and projector for the client pitch",
+     "better": "meeting room or projector",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Present the signed lease agreement to the building manager",
+     "better": "contract / signed document",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "view_quilt",
+   "backup_table",
+   "newsmode"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6730,
+    "output": 2225,
+    "thoughts": 242,
+    "total": 9197
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:09Z"
+  }
+ },
+ "distinguishing": "Pairs the bottom-left L-shaped stack line with floating interior content—a solid square on the left and two horizontal text bars on the right—representing a stack of presentation slides, business cards, or news articles rather than empty wireframe grids or a single ID card."
 }

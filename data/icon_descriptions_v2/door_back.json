@@ -15,11 +15,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "exit, leave, or log out",
+   "meaning": "exit or leave",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the simple outline with a dot could slightly resemble a gravestone or tablet on a stand, though the left-aligned knob clearly marks it as a door.",
+ "ambiguity": "Virtually identical to and interchangeable with the door with a threshold and right-hand knob, and functionally interchangeable with the threshold-less door.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -151,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Install a right-handed lever handle on the bedroom door",
+   "better": "door with the doorknob on the right side",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sand and repaint the unframed closet door slab",
+   "better": "door panel without a bottom threshold line",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Get two spare front door keys cut at the hardware store",
    "better": "key",
    "trap": "shared_vocabulary"
@@ -166,16 +176,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy an outdoor coir doormat for muddy boots",
-   "better": "mat / rug or boots",
-   "trap": "property"
-  },
-  {
-   "task": "Buy 2-inch angled paintbrush and primer at Lowe's",
-   "better": "paintbrush",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Check that all downstairs doors and windows are locked before leaving for the airport",
    "better": "lock",
    "trap": "generic_verb"
@@ -184,7 +184,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a closed door with a knob on a threshold line. It is an immediate, unmistakable match for home maintenance, carpentry, and hardware tasks involving doors, doorways, hinges, and knobs, while tasks specifically about keys, locks, or doorbells are better served by those dedicated icons.",
@@ -202,6 +202,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "door, doorway, or entrance",
+     "strength": "primary"
+    },
+    {
+     "meaning": "room, office, or hotel room",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "exit, leave, or log out",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the simple outline with a dot could slightly resemble a gravestone or tablet on a stand, though the left-aligned knob clearly marks it as a door.",
+   "near_misses": [
+    {
+     "task": "Get two spare front door keys cut at the hardware store",
+     "better": "key",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace dead AA batteries in the Schlage smart deadbolt",
+     "better": "lock or battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Wire up the new Ring video doorbell at the front entrance",
+     "better": "doorbell or camera",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an outdoor coir doormat for muddy boots",
+     "better": "mat / rug or boots",
+     "trap": "property"
+    },
+    {
+     "task": "Buy 2-inch angled paintbrush and primer at Lowe's",
+     "better": "paintbrush",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check that all downstairs doors and windows are locked before leaving for the airport",
+     "better": "lock",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sensor_door",
+   "door_front"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5325,
+    "output": 1463,
+    "thoughts": 0,
+    "total": 6788
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:31Z"
+  }
+ },
+ "distinguishing": "Places the round doorknob on the left side instead of the right while keeping the extending bottom threshold, though in meaning it is completely interchangeable with the right-knob door icons."
 }

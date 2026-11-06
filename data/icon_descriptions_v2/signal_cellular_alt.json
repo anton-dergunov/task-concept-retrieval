@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "bar chart / statistics / analytics",
-   "strength": "primary"
-  },
-  {
    "meaning": "cellular signal strength / mobile reception",
    "strength": "primary"
   },
   {
-   "meaning": "growth / increase / progress",
-   "strength": "secondary"
+   "meaning": "upward growth / rising statistics / bar chart",
+   "strength": "primary"
   },
   {
-   "meaning": "difficulty or intensity level indicator",
+   "meaning": "difficulty, priority, or intensity level (low-medium-high)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly ambiguous between a 3-bar ascending bar chart (statistics/metrics) and a cellular reception signal indicator.",
+ "ambiguity": "Virtually interchangeable with the four-bar and five-bar strictly ascending icons for signal strength or rising metrics; also easily confused with the three-bar non-monotonic chart icons.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -154,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Compare Q1, Q2, Q3, and Q4 revenue fluctuations in a bar chart",
+   "better": "four non-monotonic bars with a horizontal baseline axis",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Create a 3-option poll where option B is winning",
+   "better": "three bars with the tallest bar in the middle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Find a quiet cocktail bar for Friday night drinks",
    "better": "cocktail glass",
    "trap": "shared_vocabulary"
@@ -167,11 +173,6 @@
    "task": "Call Mom when I have full bars again",
    "better": "phone call handset",
    "trap": "property"
-  },
-  {
-   "task": "Adjust the bass and treble on the living room equalizer",
-   "better": "audio sliders / speaker",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Email Sarah the PDF of the Q2 analytics report",
@@ -205,6 +206,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bar chart / statistics / analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cellular signal strength / mobile reception",
+     "strength": "primary"
+    },
+    {
+     "meaning": "growth / increase / progress",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "difficulty or intensity level indicator",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly ambiguous between a 3-bar ascending bar chart (statistics/metrics) and a cellular reception signal indicator.",
+   "near_misses": [
+    {
+     "task": "Find a quiet cocktail bar for Friday night drinks",
+     "better": "cocktail glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy two boxes of protein bars at Trader Joe's",
+     "better": "snack bar / shopping cart",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call Mom when I have full bars again",
+     "better": "phone call handset",
+     "trap": "property"
+    },
+    {
+     "task": "Adjust the bass and treble on the living room equalizer",
+     "better": "audio sliders / speaker",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Email Sarah the PDF of the Q2 analytics report",
+     "better": "email envelope",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Sign up for the state bar exam prep course",
+     "better": "gavel / scales of justice",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "bar_chart_4_bars",
+   "grouped_bar_chart",
+   "bar_chart",
+   "equalizer",
+   "android_cell_4_bar",
+   "android_cell_5_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10730,
+    "output": 3931,
+    "thoughts": 361,
+    "total": 15022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Shows three bars ascending steadily from left to right without a baseline, reading as cellular signal strength, level/intensity steps, or upward growth (interchangeable with the 4-bar and 5-bar ascending icons)."
 }

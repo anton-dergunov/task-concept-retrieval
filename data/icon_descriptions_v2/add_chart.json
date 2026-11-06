@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "new chart, add graph, or create analytics report",
+   "meaning": "create new chart, add graph, or build analytics report",
    "strength": "primary"
   },
   {
-   "meaning": "add data point, log metric, or track statistics",
+   "meaning": "log new metric, add data point, or record statistics",
    "strength": "primary"
   },
   {
-   "meaning": "poll or survey creation",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "audio equalizer preset",
+   "meaning": "create a new poll or survey",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a plain bar chart icon at small sizes, or mistaken for cell signal bars or an audio equalizer.",
+ "ambiguity": "At small sizes the plus sign in the corner can blend into the frame, making it easy to confuse with the plain framed bar chart or the segmented ascending bar chart used for viewing existing statistics.",
  "modifier_semantics": [
   {
    "modifier": "plus sign in top right corner",
@@ -163,8 +159,18 @@
  ],
  "near_misses": [
   {
+   "task": "Review Q3 website traffic statistics before the board meeting",
+   "better": "plain bar chart in a closed square frame (viewing existing stats, not adding)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the segmented conversion breakdown on the analytics dashboard",
+   "better": "ascending bar chart with a split middle bar in a closed frame",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call AT&T about the awful cell signal in the basement",
-   "better": "phone or signal antenna icon",
+   "better": "phone or cellular signal antenna icon",
    "trap": "lookalike_glyph"
   },
   {
@@ -186,11 +192,6 @@
    "task": "Print laminated nautical charts for the San Juan Islands trip",
    "better": "map / nautical compass icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Email the PDF to the accountant",
-   "better": "email / envelope icon",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -214,6 +215,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "addchart"
- }
+  "alias_of": "addchart",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "new chart, add graph, or create analytics report",
+     "strength": "primary"
+    },
+    {
+     "meaning": "add data point, log metric, or track statistics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "poll or survey creation",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "audio equalizer preset",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a plain bar chart icon at small sizes, or mistaken for cell signal bars or an audio equalizer.",
+   "near_misses": [
+    {
+     "task": "Call AT&T about the awful cell signal in the basement",
+     "better": "phone or signal antenna icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Tweak the bass equalizer settings on the car stereo",
+     "better": "audio sliders / equalizer icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the high-interest credit card balance first",
+     "better": "credit card icon",
+     "trap": "property"
+    },
+    {
+     "task": "Book a dermatology checkup to get the new mole charted",
+     "better": "doctor / medical examination icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Print laminated nautical charts for the San Juan Islands trip",
+     "better": "map / nautical compass icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the PDF to the accountant",
+     "better": "email / envelope icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "analytics",
+   "assessment"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5457,
+    "output": 1742,
+    "thoughts": 246,
+    "total": 7445
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "Unlike the two closed-frame bar chart icons, this icon has a plus sign breaking the top-right corner of the square frame, specifically indicating creating a new chart, adding a report, or logging a new metric."
 }

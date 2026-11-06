@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "pie chart / data breakdown / proportions",
+   "meaning": "quarter, 25% share, or fiscal quarter (Q1)",
    "strength": "primary"
   },
   {
-   "meaning": "quarter / 25% progress indicator",
+   "meaning": "pie chart, data breakdown, or proportions",
    "strength": "primary"
   },
   {
-   "meaning": "15-minute timer / quarter hour",
+   "meaning": "25% progress indicator",
    "strength": "secondary"
   },
   {
-   "meaning": "fiscal quarter (Q1)",
+   "meaning": "15-minute timer or quarter hour",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as a pie chart for data/analytics or as a UI progress indicator for 25% task completion, or even a clock face showing 3:00 or a 15-minute timer.",
+ "ambiguity": "Interchangeable with the three-eighths and five-eighths filled circles when used as a generic pie chart icon, and easily confused at a small size with the three-eighths filled circle if the viewer doesn't notice the 90-degree horizontal edge versus the 135-degree diagonal edge.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -153,13 +153,23 @@
  ],
  "near_misses": [
   {
+   "task": "Follow up on projects that are more than halfway done",
+   "better": "circle with five-eighths filled sector (majority filled)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set alarm for 3:00 PM to pick up the kids",
+   "better": "alarm clock or clock face with hands",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Bake a pecan pie for Thanksgiving dinner",
-   "better": "pie / baking",
+   "better": "baked pie or pastry",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Get a roll of quarters from the bank for the laundry machine",
-   "better": "coins / money",
+   "better": "coins or money",
    "trap": "shared_vocabulary"
   },
   {
@@ -168,25 +178,15 @@
    "trap": "property"
   },
   {
-   "task": "Set alarm for 3:00 PM to pick up the kids",
-   "better": "alarm clock",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book hotel in New Orleans near the French Quarter",
-   "better": "hotel / bed",
+   "better": "hotel or bed",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Email Sarah the speaker notes",
-   "better": "email",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a circle with its upper-right quadrant filled in, representing either a pie chart, a 25% progress ring, or a quarter-hour timer. In a task list, it works well for tasks involving data breakdowns, pie charts, portfolio allocations, or quarterly reporting, though it can be confused with a task-completion status indicator or a simple clock icon.",
@@ -204,6 +204,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pie chart / data breakdown / proportions",
+     "strength": "primary"
+    },
+    {
+     "meaning": "quarter / 25% progress indicator",
+     "strength": "primary"
+    },
+    {
+     "meaning": "15-minute timer / quarter hour",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "fiscal quarter (Q1)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as a pie chart for data/analytics or as a UI progress indicator for 25% task completion, or even a clock face showing 3:00 or a 15-minute timer.",
+   "near_misses": [
+    {
+     "task": "Bake a pecan pie for Thanksgiving dinner",
+     "better": "pie / baking",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Get a roll of quarters from the bank for the laundry machine",
+     "better": "coins / money",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Finish the remaining 25% of the ceiling painting",
+     "better": "paint roller",
+     "trap": "property"
+    },
+    {
+     "task": "Set alarm for 3:00 PM to pick up the kids",
+     "better": "alarm clock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book hotel in New Orleans near the French Quarter",
+     "better": "hotel / bed",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email Sarah the speaker notes",
+     "better": "email",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "clock_loader_60",
+   "clock_loader_40"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5391,
+    "output": 1781,
+    "thoughts": 0,
+    "total": 7172
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:39Z"
+  }
+ },
+ "distinguishing": "Filled strictly in the upper-right 90-degree quadrant (12 o'clock to 3 o'clock, exactly 25%), giving it a crisp right-angle corner that specifically cues a quarter, Q1, or 15 minutes unlike the angled 45-degree cuts of the three-eighths and five-eighths circles."
 }

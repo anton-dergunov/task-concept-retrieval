@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "missed call, rejected call, or blocked phone number",
+   "meaning": "missed call, rejected call, or block spam phone number",
    "strength": "primary"
   },
   {
@@ -17,7 +17,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "do not call list or stop telemarketing calls",
+   "meaning": "register on do-not-call list or stop telemarketing calls",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the X mark can look like a plus sign (add call) or an asterisk.",
+ "ambiguity": "Easily confused at small sizes with the telephone receiver with an upright '+' sign (add call/number or medical hotline), since the 'X' is the exact same cross shape rotated 45 degrees.",
  "modifier_semantics": [
   {
    "modifier": "x mark in top right corner",
@@ -162,40 +162,45 @@
  ],
  "near_misses": [
   {
-   "task": "Call dentist to reschedule Tuesday cleaning",
-   "better": "regular phone handset without X (active call) or tooth",
+   "task": "Add Sarah's new cell number to my contacts",
+   "better": "telephone handset with a plus sign (add phone number)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Add new salesperson to the support call rotation",
-   "better": "phone handset with plus sign",
+   "task": "Call the nurse advice hotline about fever symptoms",
+   "better": "telephone handset with a plus sign (medical helpline)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Conference in the legal team on the client call",
+   "better": "telephone handset with a plus sign (add caller)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new shockproof case for my iPhone 15",
-   "better": "smartphone case or smartphone",
+   "better": "smartphone case or smartphone icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Cancel Netflix subscription before it renews on the 12th",
-   "better": "TV / streaming icon or subscription cancel icon",
+   "better": "TV / streaming icon or general cancel icon",
    "trap": "generic_verb"
   },
   {
    "task": "Pay final Verizon bill of $48.20",
-   "better": "credit card or bill / invoice",
+   "better": "credit card or bill / invoice icon",
    "trap": "parent_topic"
   },
   {
    "task": "Set up hands-free phone mount in the Subaru",
-   "better": "car or smartphone mount",
+   "better": "car or smartphone mount icon",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "Shows a classic telephone handset with an 'X' badge in the upper right, universally understood as a missed, rejected, blocked, or cancelled phone call/line. It fits specific tasks around returning missed calls, blocking spam callers, or cancelling phone service, though it can be confused with a regular phone icon or 'add call' (+) at tiny sizes.",
@@ -215,6 +220,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "missed call, rejected call, or blocked phone number",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel phone service or disconnect landline",
+     "strength": "primary"
+    },
+    {
+     "meaning": "do not call list or stop telemarketing calls",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "phone line down or no phone service",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the X mark can look like a plus sign (add call) or an asterisk.",
+   "near_misses": [
+    {
+     "task": "Call dentist to reschedule Tuesday cleaning",
+     "better": "regular phone handset without X (active call) or tooth",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Add new salesperson to the support call rotation",
+     "better": "phone handset with plus sign",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new shockproof case for my iPhone 15",
+     "better": "smartphone case or smartphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel Netflix subscription before it renews on the 12th",
+     "better": "TV / streaming icon or subscription cancel icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay final Verizon bill of $48.20",
+     "better": "credit card or bill / invoice",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Set up hands-free phone mount in the Subaru",
+     "better": "car or smartphone mount",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "add_ic_call"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4088,
+    "output": 922,
+    "thoughts": 0,
+    "total": 5010
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Has a diagonal 'X' mark in the upper right next to the telephone receiver, indicating a missed, rejected, blocked, or disconnected phone call, rather than the upright '+' sign used for adding a call or number."
 }

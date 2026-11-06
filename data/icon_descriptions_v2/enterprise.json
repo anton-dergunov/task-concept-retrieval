@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "briefcase / work / business",
+   "meaning": "briefcase with clasp / work / business",
    "strength": "primary"
   },
   {
@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "camera (rectangular body with top viewfinder and small lens)",
+   "meaning": "carrying case / locked portfolio / toolkit",
    "strength": "secondary"
   },
   {
-   "meaning": "carrying case / toolkit / portfolio",
+   "meaning": "camera (rectangular body with top viewfinder and small lens)",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a flap line on the case, the central dot can read either as a briefcase clasp/badge or as a small camera lens with a top viewfinder.",
+ "ambiguity": "Functionally nearly interchangeable with the plain empty briefcase for work and luggage tasks, and can also be misread as a simplified camera.",
  "modifier_semantics": [
   {
    "modifier": "solid circle in the center",
@@ -161,14 +161,19 @@
  ],
  "near_misses": [
   {
+   "task": "Duplicate the client project template for Q3",
+   "better": "stacked briefcases",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Review the patient intake sheet on the clipboard",
+   "better": "clipboard with top clip",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book return flight from Chicago",
    "better": "airplane",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Clean the 35mm camera lens before the shoot",
-   "better": "camera with large lens",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a pocket-sized travel umbrella",
@@ -181,11 +186,6 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Replace bandages and antiseptic wipes in the first aid kit",
-   "better": "first aid case with cross",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Check work email before 9am",
    "better": "envelope / email",
    "trap": "generic_verb"
@@ -194,7 +194,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a rectangular case with a top handle and a center dot, universally read as a briefcase or small suitcase. It is a strong fit for tasks about luggage, packing, work bags, and general job/career items, though the centered dot makes it slightly resemble a simplified camera or lockbox.",
@@ -212,6 +212,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "briefcase / work / business",
+     "strength": "primary"
+    },
+    {
+     "meaning": "suitcase / luggage / travel bag",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera (rectangular body with top viewfinder and small lens)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "carrying case / toolkit / portfolio",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a flap line on the case, the central dot can read either as a briefcase clasp/badge or as a small camera lens with a top viewfinder.",
+   "near_misses": [
+    {
+     "task": "Book return flight from Chicago",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the 35mm camera lens before the shoot",
+     "better": "camera with large lens",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a pocket-sized travel umbrella",
+     "better": "umbrella",
+     "trap": "property"
+    },
+    {
+     "task": "Sign the new employment contract PDF",
+     "better": "contract document with pen or signature",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Replace bandages and antiseptic wipes in the first aid kit",
+     "better": "first aid case with cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check work email before 9am",
+     "better": "envelope / email",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "cases",
+   "content_paste",
+   "work"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6697,
+    "output": 1916,
+    "thoughts": 115,
+    "total": 8728
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:56Z"
+  }
+ },
+ "distinguishing": "Features a solid black circle in the center of the rectangular case (suggesting a central clasp, lock, or lens), unlike the blank briefcase or stacked briefcases."
 }

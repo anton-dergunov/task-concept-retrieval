@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with 'add single user/contact' (one person + plus) at small sizes if the second silhouette's crescent head and shoulder blend in.",
+ "ambiguity": "Can be confused at a quick glance with the group with minus sign icon if the vertical bar of the plus isn't noticed, or with a single user plus icon if the rear crescent silhouette blends in.",
  "modifier_semantics": [
   {
    "modifier": "plus sign on the right",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Remove ex-contractor from the Google Drive shared folder",
+   "better": "group of people with minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Trim ten people from the wedding guest list",
+   "better": "group of people with minus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Save the plumber's phone number to my contacts",
    "better": "single contact / address book",
    "trap": "lookalike_glyph"
@@ -184,17 +194,12 @@
    "task": "Order matching t-shirts for everyone",
    "better": "t-shirt",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Remove ex-contractor from the Google Drive shared folder",
-   "better": "remove user / group minus",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a group of people (one full silhouette and a second partial silhouette behind it) with a plus sign, universally understood as adding someone to a group, inviting members, or creating a group. It fits common real-life tasks like adding people to group chats, onboarding teammates, or expanding guest lists, though at small sizes it closely resembles the single 'add user/contact' icon.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add person to group / invite members",
+     "strength": "primary"
+    },
+    {
+     "meaning": "create a new group or team",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hire or onboard new team members",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "expand guest list or roster",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with 'add single user/contact' (one person + plus) at small sizes if the second silhouette's crescent head and shoulder blend in.",
+   "near_misses": [
+    {
+     "task": "Save the plumber's phone number to my contacts",
+     "better": "single contact / address book",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the team together for a quick 10-minute sync",
+     "better": "meeting / phone call",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if everyone RSVP'd to the dinner",
+     "better": "checklist / RSVP",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a table for a group of eight at the Thai place",
+     "better": "restaurant / table reservation",
+     "trap": "property"
+    },
+    {
+     "task": "Order matching t-shirts for everyone",
+     "better": "t-shirt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Remove ex-contractor from the Google Drive shared folder",
+     "better": "remove user / group minus",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "group_remove"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4073,
+    "output": 1067,
+    "thoughts": 0,
+    "total": 5140
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:33Z"
+  }
+ },
+ "distinguishing": "Features a plus sign (+) to the right of the two overlapping person silhouettes, indicating adding or inviting someone to a group rather than removing them."
 }

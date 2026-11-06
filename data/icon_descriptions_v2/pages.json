@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily interchangeable with a plain star, bookmark ribbon, or military/police badge icon.",
+ "ambiguity": "Could be mistaken for the notched admission ticket with a star at small sizes, or interchangeable with a plain unframed star.",
  "modifier_semantics": [
   {
    "modifier": "rounded square frame",
@@ -170,40 +170,45 @@
  ],
  "near_misses": [
   {
+   "task": "Buy two tickets for the Friday night comedy show",
+   "better": "notched admission ticket with a star",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Redeem the free movie pass before it expires",
+   "better": "notched admission ticket with a star",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a five-star hotel voucher for Mom's anniversary",
-   "better": "hotel building or gift voucher",
+   "better": "hotel building icon",
    "trap": "property"
   },
   {
    "task": "Look at the stars with the kids tonight",
-   "better": "telescope or night sky",
+   "better": "telescope or night sky icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Star the important messages in Slack",
-   "better": "chat bubble or Slack message",
+   "better": "chat bubble icon",
    "trap": "generic_verb"
   },
   {
    "task": "Watch the new Star Wars series on Disney+",
-   "better": "tv screen or clapperboard",
+   "better": "tv screen or clapperboard icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a wooden star topper for the Christmas tree",
-   "better": "christmas tree",
+   "better": "christmas tree icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay the Somerton sheriff department citation",
-   "better": "police shield or ticket",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "A five-pointed star enclosed in a rounded square outline, representing favorites, bookmarks, ratings/reviews, or reward points. It fits tasks centered on writing reviews, managing bookmarks, or redeeming loyalty points, though it is nearly interchangeable with an unframed star icon.",
@@ -223,6 +228,94 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "favorite or bookmarked item",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rating or customer review",
+     "strength": "primary"
+    },
+    {
+     "meaning": "featured highlight or special pick",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "reward points or loyalty status",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily interchangeable with a plain star, bookmark ribbon, or military/police badge icon.",
+   "near_misses": [
+    {
+     "task": "Buy a five-star hotel voucher for Mom's anniversary",
+     "better": "hotel building or gift voucher",
+     "trap": "property"
+    },
+    {
+     "task": "Look at the stars with the kids tonight",
+     "better": "telescope or night sky",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Star the important messages in Slack",
+     "better": "chat bubble or Slack message",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Watch the new Star Wars series on Disney+",
+     "better": "tv screen or clapperboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a wooden star topper for the Christmas tree",
+     "better": "christmas tree",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the Somerton sheriff department citation",
+     "better": "police shield or ticket",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "local_activity"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4062,
+    "output": 660,
+    "thoughts": 0,
+    "total": 4722
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:25Z"
+  }
+ },
+ "distinguishing": "Has an unnotched 1:1 rounded square border around the star, making it a generic favorite, rating, or featured badge rather than an event ticket."
 }

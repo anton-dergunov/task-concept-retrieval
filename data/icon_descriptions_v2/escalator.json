@@ -17,11 +17,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "step change / transition",
+   "meaning": "step change or level transition",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a person standing on it or directional arrows, it easily looks like an audio/signal gate curve, a mathematical step function, or an abstract Z/S shape.",
+ "ambiguity": "Without a person standing on it or directional arrows, it easily looks like an audio gate/limiter curve, a mathematical step function, or an abstract Z/S shape; completely distinct from the video file document.",
  "modifier_semantics": [
   {
    "modifier": "rounded square frame",
@@ -160,40 +160,45 @@
  ],
  "near_misses": [
   {
+   "task": "Export the mall escalator safety video as an MP4 file",
+   "better": "document page with a video camera inside (video file)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Compress the raw screen recording before uploading to Drive",
+   "better": "document page with a video camera inside (video file)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Escalate the billing ticket to tier 3 support",
    "better": "upward arrow or alert megaphone",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Build a wooden wheelchair ramp for the front porch step",
-   "better": "wheelchair ramp",
+   "better": "wheelchair accessibility ramp",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Take the stairs every morning instead of the elevator",
-   "better": "stairs",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Apply a high-pass filter to the vocal track at 80Hz",
-   "better": "audio equalizer or waveform",
+   "better": "stepped stairs",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Renew the elevator inspection certificate for building B",
-   "better": "elevator box with arrows",
+   "better": "elevator cab with up/down arrows",
    "trap": "parent_topic"
   },
   {
    "task": "Check the escalation matrix for weekend server incidents",
-   "better": "org chart or alert hierarchy",
+   "better": "organization chart or alert hierarchy",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon shows a thick diagonal ramp with horizontal landings at the top and bottom inside a rounded square, which is the standard pictographic base for an escalator (without the rider) or a step/ramp transition curve. It fits tasks for facilities management, transit accessibility, or building design involving escalators, though without a human figure it is easily confused with a signal filter curve or an abstract graphic.",
@@ -213,6 +218,90 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "escalator",
+     "strength": "primary"
+    },
+    {
+     "meaning": "high-pass / low-pass filter curve or threshold ramp",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "step change / transition",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a person standing on it or directional arrows, it easily looks like an audio/signal gate curve, a mathematical step function, or an abstract Z/S shape.",
+   "near_misses": [
+    {
+     "task": "Escalate the billing ticket to tier 3 support",
+     "better": "upward arrow or alert megaphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Build a wooden wheelchair ramp for the front porch step",
+     "better": "wheelchair ramp",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the stairs every morning instead of the elevator",
+     "better": "stairs",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Apply a high-pass filter to the vocal track at 80Hz",
+     "better": "audio equalizer or waveform",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew the elevator inspection certificate for building B",
+     "better": "elevator box with arrows",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check the escalation matrix for weekend server incidents",
+     "better": "org chart or alert hierarchy",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "video_file"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 1077,
+    "thoughts": 59,
+    "total": 5185
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:59Z"
+  }
+ },
+ "distinguishing": "Shows a diagonal escalator belt with horizontal landings inside a square sign frame, representing an escalator or step-ramp rather than a document file with a video camera."
 }

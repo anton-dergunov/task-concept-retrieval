@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "gamepad action buttons (right button pressed)",
+   "meaning": "gamepad action buttons with right (east) button pressed",
    "strength": "primary"
   },
   {
-   "meaning": "video gaming / console controller",
+   "meaning": "video gaming or console controller",
    "strength": "primary"
   },
   {
-   "meaning": "stove burner indicator (right burner active)",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "loading spinner or abstract four-dot pattern",
+   "meaning": "four-way indicator with right position active",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without a controller outline, the four circles look very abstract and can be mistaken for a loading spinner, camera lens array, or stove burner diagram, especially at small list sizes.",
+ "ambiguity": "Easily confused at a glance with the other three four-circle gamepad button icons (with left, bottom, or top circle filled), and interchangeable with them for generic gaming tasks.",
  "modifier_semantics": [
   {
    "modifier": "solid filled right circle",
@@ -158,33 +154,33 @@
  ],
  "near_misses": [
   {
-   "task": "Scrub burnt grease off the front right stove burner",
-   "better": "stove / cooktop icon",
+   "task": "Replace the stuck bottom jump button membrane on the gamepad",
+   "better": "four gamepad buttons in a diamond with the bottom circle filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the infinite loading spinner on the login screen",
+   "better": "six hollow rings arranged in a circle",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Sew the loose button back onto my navy winter coat",
-   "better": "clothing button or needle and thread icon",
+   "better": "clothing button or needle and thread",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Fix the hover color on the checkout submit button",
-   "better": "UI button / cursor click icon",
+   "better": "UI button rectangle or cursor click",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a 6-foot braided HDMI 2.1 cable for the PS5",
-   "better": "cable / plug icon",
+   "better": "cable or plug",
    "trap": "parent_topic"
   },
   {
-   "task": "Check why the webpage loading spinner freezes on Safari",
-   "better": "spinner / browser icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pick a game with full controller support for the flight",
-   "better": "full gamepad or airplane icon",
+   "better": "full gamepad or airplane",
    "trap": "property"
   }
  ],
@@ -209,6 +205,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "gamepad action buttons (right button pressed)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video gaming / console controller",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stove burner indicator (right burner active)",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "loading spinner or abstract four-dot pattern",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a controller outline, the four circles look very abstract and can be mistaken for a loading spinner, camera lens array, or stove burner diagram, especially at small list sizes.",
+   "near_misses": [
+    {
+     "task": "Scrub burnt grease off the front right stove burner",
+     "better": "stove / cooktop icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Sew the loose button back onto my navy winter coat",
+     "better": "clothing button or needle and thread icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the hover color on the checkout submit button",
+     "better": "UI button / cursor click icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 6-foot braided HDMI 2.1 cable for the PS5",
+     "better": "cable / plug icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check why the webpage loading spinner freezes on Safari",
+     "better": "spinner / browser icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick a game with full controller support for the flight",
+     "better": "full gamepad or airplane icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "graph_6",
+   "gamepad_circle_left",
+   "gamepad_circle_down",
+   "gamepad_circle_up"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8107,
+    "output": 2567,
+    "thoughts": 233,
+    "total": 10907
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:12Z"
+  }
+ },
+ "distinguishing": "Shows four circles in a diamond with the right (east) circle filled solid, distinguishing it from the left-, bottom-, and top-filled four-button icons and the six-ring spinner; for general gaming tasks the four diamond icons are largely interchangeable."
 }

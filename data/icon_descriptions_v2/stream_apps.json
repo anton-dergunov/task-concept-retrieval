@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "text message / SMS / mobile chat",
+   "meaning": "text message, SMS, or mobile chat",
    "strength": "primary"
   },
   {
-   "meaning": "mobile notification or push alert",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "messaging app (WhatsApp, iMessage, Signal, Telegram)",
+   "meaning": "mobile messaging app (iMessage, WhatsApp, Signal) or push notification",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the top dot and rectangular outline can resemble a door with a peephole or a clipboard with a label.",
+ "ambiguity": "At small sizes, the heavy rectangular speech bubble on the right edge of the phone looks very similar in mass and position to the camera badge on the phone-with-camera icon.",
  "modifier_semantics": [
   {
    "modifier": "speech bubble",
@@ -158,18 +154,23 @@
  ],
  "near_misses": [
   {
-   "task": "Call the air conditioning guy about the rattling compressor",
-   "better": "phone handset / call",
+   "task": "Snap a picture of the whiteboard notes with my phone after the meeting",
+   "better": "smartphone with camera badge",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a tempered glass screen protector for the new iPhone",
-   "better": "plain smartphone",
+   "task": "Turn on personal hotspot on my phone so the laptop can connect",
+   "better": "smartphone with wireless signal waves",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call the air conditioning guy about the rattling compressor",
+   "better": "telephone receiver handset",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Check if the text on the landing page is readable on mobile screens",
-   "better": "webpage / typography",
+   "task": "Check if the body text on the landing page is readable on mobile screens",
+   "better": "webpage or typography icon",
    "trap": "shared_vocabulary"
   },
   {
@@ -178,13 +179,8 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Email the signed lease renewal PDF back to the property manager",
-   "better": "envelope / email",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the monthly AT&T wireless bill before Friday",
-   "better": "receipt / bill / credit card",
+   "better": "receipt or bill",
    "trap": "parent_topic"
   }
  ],
@@ -209,6 +205,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "mobile_chat"
- }
+  "alias_of": "mobile_chat",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "text message / SMS / mobile chat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile notification or push alert",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "messaging app (WhatsApp, iMessage, Signal, Telegram)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the top dot and rectangular outline can resemble a door with a peephole or a clipboard with a label.",
+   "near_misses": [
+    {
+     "task": "Call the air conditioning guy about the rattling compressor",
+     "better": "phone handset / call",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a tempered glass screen protector for the new iPhone",
+     "better": "plain smartphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the text on the landing page is readable on mobile screens",
+     "better": "webpage / typography",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order the paperback textbook for next semester's chemistry class",
+     "better": "book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the signed lease renewal PDF back to the property manager",
+     "better": "envelope / email",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly AT&T wireless bill before Friday",
+     "better": "receipt / bill / credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "phonelink_ring",
+   "mobile_camera"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5431,
+    "output": 1498,
+    "thoughts": 128,
+    "total": 7057
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Set apart from the wireless-wave and camera variants by the rectangular speech bubble overlapping the right side of the smartphone outline, specifically signaling SMS, text messaging, or mobile chat."
 }

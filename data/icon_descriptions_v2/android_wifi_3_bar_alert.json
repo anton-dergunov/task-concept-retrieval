@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "Wi-Fi problem / internet outage / network error",
+   "meaning": "Wi-Fi problem, internet outage, or network error",
    "strength": "primary"
   },
   {
-   "meaning": "troubleshoot wireless connection",
+   "meaning": "troubleshoot or fix wireless connection",
    "strength": "primary"
   },
   {
-   "meaning": "weak Wi-Fi signal / dead zone",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "Wi-Fi / wireless network (general)",
+   "meaning": "weak Wi-Fi signal or dead zone",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the exclamation mark might blend into the arcs, making it look like a standard Wi-Fi icon.",
+ "ambiguity": "Interchangeable in meaning with the three-arc Wi-Fi with an exclamation mark; at tiny sizes the exclamation mark can be confused with the plus badge or overlooked as a plain Wi-Fi icon.",
  "modifier_semantics": [
   {
    "modifier": "exclamation mark",
@@ -160,14 +156,19 @@
  ],
  "near_misses": [
   {
+   "task": "Set up a new guest Wi-Fi network on the router for visitors",
+   "better": "Wi-Fi with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Compare monthly fiber internet plans for the new apartment",
+   "better": "plain Wi-Fi icon without alert badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a waterproof Wi-Fi speaker for the patio",
    "better": "speaker",
    "trap": "property"
-  },
-  {
-   "task": "Listen to the new episode of the Reply All podcast",
-   "better": "podcast / headphones",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check whether the new printer has wireless support",
@@ -175,25 +176,20 @@
    "trap": "property"
   },
   {
-   "task": "Tap credit card at the contactless terminal",
-   "better": "credit card / contactless payment",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Network with other product managers at the mixer",
-   "better": "people / handshake",
+   "better": "people or handshake",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Return the rented cable modem to the UPS store",
-   "better": "package / shipping box",
+   "better": "package or shipping box",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a Wi-Fi symbol with an exclamation mark badge, universally understood as a wireless network error, internet outage, or weak connection. It fits real-world tasks around troubleshooting home or office Wi-Fi, fixing dead zones, or contacting an ISP about connection drops, while remaining distinct from a normal Wi-Fi or RSS/contactless icon.",
@@ -211,6 +207,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi problem / internet outage / network error",
+     "strength": "primary"
+    },
+    {
+     "meaning": "troubleshoot wireless connection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "weak Wi-Fi signal / dead zone",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "Wi-Fi / wireless network (general)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the exclamation mark might blend into the arcs, making it look like a standard Wi-Fi icon.",
+   "near_misses": [
+    {
+     "task": "Buy a waterproof Wi-Fi speaker for the patio",
+     "better": "speaker",
+     "trap": "property"
+    },
+    {
+     "task": "Listen to the new episode of the Reply All podcast",
+     "better": "podcast / headphones",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check whether the new printer has wireless support",
+     "better": "printer",
+     "trap": "property"
+    },
+    {
+     "task": "Tap credit card at the contactless terminal",
+     "better": "credit card / contactless payment",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Network with other product managers at the mixer",
+     "better": "people / handshake",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Return the rented cable modem to the UPS store",
+     "better": "package / shipping box",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_4_bar_plus",
+   "android_wifi_3_bar_plus",
+   "android_wifi_4_bar_alert",
+   "android_wifi_4_bar",
+   "wifi",
+   "android_wifi_3_bar",
+   "nest_remote_comfort_sensor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12117,
+    "output": 4047,
+    "thoughts": 0,
+    "total": 16164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Shows a two-arc Wi-Fi signal with an exclamation mark in the bottom right, semantically interchangeable with the three-arc exclamation variant for network errors or internet outages."
 }

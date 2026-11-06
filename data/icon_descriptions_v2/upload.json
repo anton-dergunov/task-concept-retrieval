@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "share or send out",
+   "meaning": "share or send out from container",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily confused with the iOS share icon or a generic cloud backup icon; inverse of the download icon.",
+ "ambiguity": "Visually and semantically interchangeable with the upload arrow over a flat horizontal bar; also easily confused with the iOS share icon or the inverse download-into-tray icon.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -170,7 +170,12 @@
  "near_misses": [
   {
    "task": "Download the offline maps for the Dolomites trip",
-   "better": "download arrow into tray or map",
+   "better": "downward arrow into tray or map",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Scroll to the top of the long changelog",
+   "better": "upward arrow with horizontal bar at the top",
    "trap": "lookalike_glyph"
   },
   {
@@ -179,17 +184,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Take the cardboard boxes out of the recycling bin",
-   "better": "cardboard box or recycling symbol",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a faster USB-C cable for large file uploads",
    "better": "USB cable",
    "trap": "property"
   },
   {
-   "task": "Edit the thumbnail in Photoshop",
+   "task": "Edit the video thumbnail in Photoshop",
    "better": "image / photo editing",
    "trap": "parent_topic"
   },
@@ -202,7 +202,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The upward arrow leaving a tray is the universal UI pictogram for uploading or exporting data. While it represents an action rather than a concrete physical object, uploading files to portals and exporting data are very common, self-contained digital tasks where the transfer action itself is the point of the task.",
@@ -222,6 +222,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "file_upload"
- }
+  "alias_of": "file_upload",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "upload file or data",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export data or document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "submit or publish online",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "share or send out",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily confused with the iOS share icon or a generic cloud backup icon; inverse of the download icon.",
+   "near_misses": [
+    {
+     "task": "Download the offline maps for the Dolomites trip",
+     "better": "download arrow into tray or map",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Put the winter clothes up on the top closet shelf",
+     "better": "clothes or closet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take the cardboard boxes out of the recycling bin",
+     "better": "cardboard box or recycling symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a faster USB-C cable for large file uploads",
+     "better": "USB cable",
+     "trap": "property"
+    },
+    {
+     "task": "Edit the thumbnail in Photoshop",
+     "better": "image / photo editing",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the new firmware update is out",
+     "better": "microchip / update cycle arrows",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "upgrade"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4028,
+    "output": 1021,
+    "thoughts": 0,
+    "total": 5049
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "Has an open U-shaped tray at the bottom with upturned side walls (rather than a flat horizontal bar), making it a visual variant of the upload/export icon that is functionally interchangeable with the flat-bar version."
 }

@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "romanization, pinyin, or input method settings",
+   "meaning": "line height, line spacing, or ruby/romanization text settings",
    "strength": "secondary"
   }
  ],
- "ambiguity": " consists solely of two bare characters without speech bubbles or arrows, and uses 行 instead of the more standard 文 or あ, so at a glance it can look like a font sample or text-formatting button.",
+ "ambiguity": "Virtually interchangeable for language and translation tasks with the icon showing the character 大 beside 'a'; in CJK typography UI, 行a specifically denotes line spacing while 大a denotes font size.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -154,6 +154,11 @@
  ],
  "near_misses": [
   {
+   "task": "Increase the heading font size on the landing page to 32px",
+   "better": "font size icon with character 大 ('large') and 'a', or 'Aa' text size icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Change body font in the quarterly report to Arial 11pt",
    "better": "typography / font",
    "trap": "lookalike_glyph"
@@ -177,17 +182,12 @@
    "task": "Book flights to Tokyo for the autumn trip",
    "better": "airplane / flight",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Review the new intern's pull request on GitHub",
-   "better": "code / pull request",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The side-by-side East Asian character (行) and Latin letter (a) represent translation, foreign language learning, and localization. It fits tasks about translating documents, studying languages (especially Chinese or Japanese), and localizing software, though it can be confused with typography or font-selection icons at small sizes.",
@@ -205,6 +205,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "translation or translating between languages",
+     "strength": "primary"
+    },
+    {
+     "meaning": "foreign language study, Chinese or Japanese language",
+     "strength": "primary"
+    },
+    {
+     "meaning": "localization, internationalization, or dual-script text",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "romanization, pinyin, or input method settings",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": " consists solely of two bare characters without speech bubbles or arrows, and uses 行 instead of the more standard 文 or あ, so at a glance it can look like a font sample or text-formatting button.",
+   "near_misses": [
+    {
+     "task": "Change body font in the quarterly report to Arial 11pt",
+     "better": "typography / font",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check spelling and grammar on the cover letter",
+     "better": "spellcheck / document",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy headphones with good microphone for the tutor calls",
+     "better": "headphones / headset",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a bilingual edition of Borges short stories",
+     "better": "book",
+     "trap": "property"
+    },
+    {
+     "task": "Book flights to Tokyo for the autumn trip",
+     "better": "airplane / flight",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Review the new intern's pull request on GitHub",
+     "better": "code / pull request",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "language_chinese_dayi"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4047,
+    "output": 1129,
+    "thoughts": 0,
+    "total": 5176
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:16Z"
+  }
+ },
+ "distinguishing": "Pairs the lowercase Latin 'a' with the six-stroke character 行 ('line/row' or 'go') rather than the three-stroke character 大 ('big/large'), though in a general to-do list both function interchangeably as translation or dual-script language icons (while in typography 行 marks line height/spacing)."
 }

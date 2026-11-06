@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "page break",
+   "meaning": "page break in a document",
    "strength": "primary"
   },
   {
-   "meaning": "split document or PDF",
+   "meaning": "split document or PDF file",
    "strength": "primary"
-  },
-  {
-   "meaning": "scan document",
-   "strength": "secondary"
   },
   {
    "meaning": "perforated or tear-off form",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as inserting a page break in a word processor, splitting a PDF file into parts, or scanning a physical page.",
+ "ambiguity": "Easily mistaken at small sizes for the document with a solid horizontal bar across the middle, which represents scanning a document with a scanner beam; both can also be used interchangeably by users for splitting or breaking a page.",
  "modifier_semantics": [
   {
    "modifier": "horizontal three-dash line cutting across the middle",
@@ -161,6 +157,21 @@
  ],
  "near_misses": [
   {
+   "task": "Scan the signed lease agreement to PDF on the office flatbed scanner",
+   "better": "document with a solid horizontal scanner bar across the middle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Digitize the box of old tax receipts with the document scanner",
+   "better": "document with a solid horizontal scanner bar across the middle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Delete the old draft files from the shared drive",
+   "better": "document with trash can or minus",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Take a week-long break after the product launch",
    "better": "beach chair or vacation icon",
    "trap": "shared_vocabulary"
@@ -169,16 +180,6 @@
    "task": "Split the Airbnb bill with Maya and Devon on Splitwise",
    "better": "money or bill splitting icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Schedule the MRI scan at the imaging center",
-   "better": "medical imaging or hospital icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Delete the old draft files from the shared drive",
-   "better": "document with trash can or minus",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Read through the 20-page HOA bylaws",
@@ -194,7 +195,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a document split horizontally by a dashed line, standardly representing a page break, splitting a PDF/file, or scanning a page. It fits concrete document-processing and administrative tasks well, though it is somewhat specialized.",
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "page break",
+     "strength": "primary"
+    },
+    {
+     "meaning": "split document or PDF",
+     "strength": "primary"
+    },
+    {
+     "meaning": "scan document",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "perforated or tear-off form",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as inserting a page break in a word processor, splitting a PDF file into parts, or scanning a physical page.",
+   "near_misses": [
+    {
+     "task": "Take a week-long break after the product launch",
+     "better": "beach chair or vacation icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Split the Airbnb bill with Maya and Devon on Splitwise",
+     "better": "money or bill splitting icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule the MRI scan at the imaging center",
+     "better": "medical imaging or hospital icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Delete the old draft files from the shared drive",
+     "better": "document with trash can or minus",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Read through the 20-page HOA bylaws",
+     "better": "plain document or glasses icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy perforated cardstock for printing event tickets",
+     "better": "ticket or shopping cart icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "scan"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4090,
+    "output": 793,
+    "thoughts": 0,
+    "total": 4883
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "This icon has a dashed three-segment horizontal line cutting across the page rather than a solid bar, specifically indicating a page break, perforation, or splitting a document in two."
 }

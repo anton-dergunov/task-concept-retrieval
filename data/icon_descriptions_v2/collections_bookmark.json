@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "bookmarks / saved items collection",
+   "meaning": "bookmarks collection, saved items list, or reading list",
    "strength": "primary"
   },
   {
-   "meaning": "books / reading list",
+   "meaning": "multiple books, series, or albums",
    "strength": "primary"
   },
   {
-   "meaning": "collections / albums",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "cardboard boxes / packages (visual lookalike at small size Date/Tape on top)](#",
+   "meaning": "archived collections or saved folders",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The square with a top vertical ribbon closely resembles a sealed cardboard box or shipping package with packing tape on top, especially at small sizes.",
+ "ambiguity": "Easily confused with the single square bookmark card or single vertical book when the plural vs. singular distinction is subtle, and at tiny sizes the square with a top tab can resemble stacked shipping boxes.",
  "modifier_semantics": [
   {
    "modifier": "L-shaped backing line indicating stacked items",
@@ -164,40 +160,40 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a leather bookmark for Mum's birthday",
-   "better": "single bookmark ribbon",
+   "task": "Read chapter 4 of The Pragmatic Programmer tonight",
+   "better": "single vertical book with bookmark ribbon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bookmark the new payroll portal URL in Chrome",
+   "better": "single square bookmark icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Return two Amazon packages at the UPS drop-off",
-   "better": "cardboard box / package",
+   "better": "cardboard shipping box",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Book the flights to Madrid before prices go up",
-   "better": "airplane / ticket",
+   "better": "airplane or flight ticket",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check the saved password for the router login",
-   "better": "key / lock",
+   "better": "key or padlock",
    "trap": "property"
   },
   {
    "task": "Buy a new bookshelf for the hallway",
-   "better": "bookshelf / furniture",
+   "better": "bookshelf or furniture",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Read chapter 4 of The Pragmatic Programmer",
-   "better": "open book",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon shows a stacked square with a bookmark ribbon, representing bookmarks, saved collections, or a reading list. It fits tasks about organizing browser bookmarks, saved links, or reading queues, though at small sizes the square with a top ribbon can easily be mistaken for a taped cardboard shipping box.",
@@ -215,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bookmarks / saved items collection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "books / reading list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "collections / albums",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cardboard boxes / packages (visual lookalike at small size Date/Tape on top)](#",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The square with a top vertical ribbon closely resembles a sealed cardboard box or shipping package with packing tape on top, especially at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a leather bookmark for Mum's birthday",
+     "better": "single bookmark ribbon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Return two Amazon packages at the UPS drop-off",
+     "better": "cardboard box / package",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book the flights to Madrid before prices go up",
+     "better": "airplane / ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the saved password for the router login",
+     "better": "key / lock",
+     "trap": "property"
+    },
+    {
+     "task": "Buy a new bookshelf for the hallway",
+     "better": "bookshelf / furniture",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Read chapter 4 of The Pragmatic Programmer",
+     "better": "open book",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "book",
+   "developer_guide"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5378,
+    "output": 1435,
+    "thoughts": 135,
+    "total": 6948
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "Unlike the single vertical rectangle or single square, this icon has an L-shaped backing line behind the square to show a stack or collection of multiple bookmarked items."
 }

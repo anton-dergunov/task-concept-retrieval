@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "woman, female person, mother, wife, daughter, or sister",
+   "meaning": "woman / female person (mother, wife, daughter, sister)",
    "strength": "primary"
   },
   {
-   "meaning": "women's health or gynecology",
+   "meaning": "women's restroom / toilet",
+   "strength": "primary"
+  },
+  {
+   "meaning": "women's health / gynecology",
    "strength": "secondary"
   },
   {
-   "meaning": "women's restroom or ladies' room",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "dress or women's clothing",
+   "meaning": "dress / women's clothing",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the body is a sharp triangle on a rectangular base, at very small sizes it can momentarily resemble an upward arrow beneath a dot or a simplified evergreen tree.",
+ "ambiguity": "Completely interchangeable with the other two female figure silhouettes in this group; at very small sizes, the triangular body on a rectangular base can resemble an upward arrow beneath a dot or a simplified evergreen tree.",
  "modifier_semantics": [],
  "domains": [
   "social_family",
@@ -168,17 +168,17 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Call Mom back about Thanksgiving flights",
-   "better": "phone",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Order 6-foot Noble fir for the living room",
    "better": "Christmas tree",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Bake a lemon olive oil cake for Sunday",
+   "task": "Call Mom back about Thanksgiving flights",
+   "better": "phone",
+   "trap": "generic_verb"
+  },
+  {
+   "task": "Bake a lemon olive oil cake for Mother's Day",
    "better": "cake",
    "trap": "parent_topic"
   }
@@ -186,7 +186,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon is the universal restroom-style pictogram of a standing female figure in a triangular dress. It works well for tasks centered on a female family member (mom, daughter, grandmother, sister), women's health appointments, or women's organizations, though at tiny sizes the triangular torso on a narrow base can momentarily look like an evergreen tree or an upward arrow with a dot.",
@@ -204,6 +204,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "woman, female person, mother, wife, daughter, or sister",
+     "strength": "primary"
+    },
+    {
+     "meaning": "women's health or gynecology",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "women's restroom or ladies' room",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "dress or women's clothing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the body is a sharp triangle on a rectangular base, at very small sizes it can momentarily resemble an upward arrow beneath a dot or a simplified evergreen tree.",
+   "near_misses": [
+    {
+     "task": "Buy women's size 8 trail running shoes before the Moab trip",
+     "better": "running shoe",
+     "trap": "property"
+    },
+    {
+     "task": "Fix the leaking flush valve in the downstairs bathroom",
+     "better": "toilet or wrench",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Plant two dwarf spruce trees along the back fence",
+     "better": "pine tree",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Mom back about Thanksgiving flights",
+     "better": "phone",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order 6-foot Noble fir for the living room",
+     "better": "Christmas tree",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Bake a lemon olive oil cake for Sunday",
+     "better": "cake",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "girl",
+   "woman_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5353,
+    "output": 1576,
+    "thoughts": 131,
+    "total": 7060
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:20Z"
+  }
+ },
+ "distinguishing": "Combines the taller stature and wider skirt with a thicker leg column than the thin-stemmed variant, but is completely interchangeable with the other two female figures in meaning."
 }

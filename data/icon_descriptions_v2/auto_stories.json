@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "book / reading",
+   "meaning": "reading / book in progress / flipping pages",
    "strength": "primary"
   },
   {
-   "meaning": "study / textbook",
+   "meaning": "book / textbook / study",
    "strength": "primary"
   },
   {
-   "meaning": "manual / documentation / guide",
+   "meaning": "magazine / catalog / browse",
    "strength": "secondary"
   },
   {
-   "meaning": "magazine / journal / catalog",
+   "meaning": "bookmark / saved page",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Nearly indistinguishable from a plain open book icon at small sizes; the turning page could also be mistaken for a bookmark.",
+ "ambiguity": "Essentially interchangeable for general book/reading tasks with the plain open book with blank pages and the open book with text lines on the right page; the angled solid page can also be mistaken for a bookmark.",
  "modifier_semantics": [
   {
    "modifier": "angled solid page on right side",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Write a three-paragraph reflection in the daily gratitude journal",
+   "better": "open book with text lines on the right page",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a blank unlined sketchbook for the watercolor class",
+   "better": "plain open book with blank pages",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book a window seat on the morning train to Chicago",
    "better": "train / ticket",
    "trap": "shared_vocabulary"
@@ -195,7 +205,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts an open book with a page turning, making it universally recognizable for tasks involving books, reading, studying, and manuals. It fits a very common family of personal, academic, and work tasks, though it shares visual space with standard open-book or bookmark icons.",
@@ -213,6 +223,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "book / reading",
+     "strength": "primary"
+    },
+    {
+     "meaning": "study / textbook",
+     "strength": "primary"
+    },
+    {
+     "meaning": "manual / documentation / guide",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "magazine / journal / catalog",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Nearly indistinguishable from a plain open book icon at small sizes; the turning page could also be mistaken for a bookmark.",
+   "near_misses": [
+    {
+     "task": "Book a window seat on the morning train to Chicago",
+     "better": "train / ticket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book a table for four at Trattoria Stella for Friday night",
+     "better": "restaurant / utensils",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Balance the company books before the quarterly tax deadline",
+     "better": "accounting / ledger / calculator",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read the electricity meter in the basement and submit the numbers",
+     "better": "gauge / meter",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Reserve the glass conference room for the Tuesday reading group",
+     "better": "meeting room / calendar",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a leather passport cover that looks like a miniature vintage book",
+     "better": "passport",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "menu_book",
+   "import_contacts"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5343,
+    "output": 1749,
+    "thoughts": 0,
+    "total": 7092
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "The right side shows a solid black parallelogram angled upward to represent a turning page (with the top edge of the right cover left open), visually suggesting active reading, flipping through pages, or a bookmark, though it is largely interchangeable with the other open-book icons for general book tasks."
 }

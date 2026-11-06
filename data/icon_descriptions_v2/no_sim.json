@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Without interior contact pads or a folded-corner flap, the notched rectangle looks identically like a SIM card, an SD memory card, or a minimalist document page with a cut corner.",
+ "ambiguity": "Because the diagonal slash crosses right near the notched top-left corner, at small sizes it can look like a plain slashed rectangle and be confused with the slashed speech bubble or slashed label tag.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -158,18 +158,23 @@
  ],
  "near_misses": [
   {
+   "task": "Delete broken image links from the product catalog",
+   "better": "slashed picture frame with mountain silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Remove the clearance price tags from the gift items",
+   "better": "slashed right-pointing label tag",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a 10GB local SIM card at Narita airport arrival hall",
-   "better": "SIM card without slash",
+   "better": "unslashed SIM card",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Order a 256GB SanDisk Extreme microSD card for the Switch",
-   "better": "SD memory card without slash",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Delete the corrupted tax return PDF from the shared drive",
-   "better": "document or file with slash or trash can",
+   "better": "unslashed SD memory card",
    "trap": "lookalike_glyph"
   },
   {
@@ -191,7 +196,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The notched rectangle with a diagonal slash represents 'no SIM card' or 'no SD card' (or removing/deactivating one). It fits specific tech, travel, and phone-handover tasks like removing a SIM before selling a phone or troubleshooting a missing card error, though the bare outline without contact pads can be confused with a crossed-out document page.",
@@ -209,6 +214,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no SIM card / remove or cancel SIM card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no SD card / remove or eject memory card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "missing or corrupted file / document",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without interior contact pads or a folded-corner flap, the notched rectangle looks identically like a SIM card, an SD memory card, or a minimalist document page with a cut corner.",
+   "near_misses": [
+    {
+     "task": "Buy a 10GB local SIM card at Narita airport arrival hall",
+     "better": "SIM card without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a 256GB SanDisk Extreme microSD card for the Switch",
+     "better": "SD memory card without slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Delete the corrupted tax return PDF from the shared drive",
+     "better": "document or file with slash or trash can",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn on airplane mode during the transatlantic flight",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy an unlocked SIM-free iPhone 15 for grandma",
+     "better": "smartphone",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly AT&T wireless bill before Friday",
+     "better": "invoice or credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "chat_bubble_off",
+   "hide_image",
+   "image_not_supported",
+   "label_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8093,
+    "output": 2769,
+    "thoughts": 160,
+    "total": 11022
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:24Z"
+  }
+ },
+ "distinguishing": "This is the only taller-than-wide vertical rectangle in the group and features a diagonal cut notch on the top-left corner, depicting a missing or removed SIM card or SD memory card rather than a chat bubble, photo frame, or horizontal tag."
 }

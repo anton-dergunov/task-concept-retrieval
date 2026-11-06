@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "VPN or secure connection",
+   "meaning": "VPN or secure wireless connection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with a plain Wi-Fi icon if the small padlock isn't noticed, or could mean either 'secure the network' or 'locked out of Wi-Fi'.",
+ "ambiguity": "Interchangeable with the two-arc locked Wi-Fi icons in this group, and easy to confuse with a plain three-bar Wi-Fi icon at small sizes.",
  "modifier_semantics": [
   {
    "modifier": "closed padlock",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Change master password for Bitwarden vault",
+   "better": "standalone key or padlock without Wi-Fi arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Troubleshoot weak Wi-Fi signal in the upstairs bedroom",
+   "better": "plain Wi-Fi signal bars without a padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Call ISP to lower our monthly internet bill",
    "better": "money or phone",
    "trap": "shared_vocabulary"
@@ -172,30 +182,20 @@
    "trap": "property"
   },
   {
-   "task": "Change master password for Bitwarden vault",
-   "better": "key or vault",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Run an ethernet cable from the study to the living room TV",
    "better": "ethernet cable or plug",
    "trap": "parent_topic"
   },
   {
-   "task": "Subscribe to five new podcasts in Overcast",
-   "better": "podcast or RSS icon",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check if the internet is back up at the cabin",
-   "better": "plain Wi-Fi or router",
+   "task": "Restart the router before the afternoon Zoom call",
+   "better": "router box or plain Wi-Fi icon",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a standard Wi-Fi signal icon with a closed padlock badge, universally understood as a password-protected or secure wireless network. It fits tasks specifically about Wi-Fi passwords, guest network credentials, router encryption, or restricting wireless access, as well as general Wi-Fi setup tasks when no plain Wi-Fi icon is preferred.",
@@ -215,6 +215,95 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi password or protected wireless network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "network security or router encryption settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "locked or restricted internet access / parental controls",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "VPN or secure connection",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with a plain Wi-Fi icon if the small padlock isn't noticed, or could mean either 'secure the network' or 'locked out of Wi-Fi'.",
+   "near_misses": [
+    {
+     "task": "Call ISP to lower our monthly internet bill",
+     "better": "money or phone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a smart deadbolt with Wi-Fi for the front door",
+     "better": "door lock",
+     "trap": "property"
+    },
+    {
+     "task": "Change master password for Bitwarden vault",
+     "better": "key or vault",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Run an ethernet cable from the study to the living room TV",
+     "better": "ethernet cable or plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Subscribe to five new podcasts in Overcast",
+     "better": "podcast or RSS icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check if the internet is back up at the cabin",
+     "better": "plain Wi-Fi or router",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wifi_password",
+   "android_wifi_3_bar_lock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5434,
+    "output": 977,
+    "thoughts": 134,
+    "total": 6545
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "Shows three radiating arcs above the dot with the lower two clipped around the padlock badge, rather than only two arcs, though all three icons in this group are completely interchangeable in meaning."
 }

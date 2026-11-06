@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "cyclone, hurricane, typhoon, or severe tropical storm",
+   "meaning": "vortex, whirlpool, maelstrom, or swirling eddy",
    "strength": "primary"
   },
   {
-   "meaning": "vortex, whirlpool, or black hole",
+   "meaning": "cyclone, typhoon, or swirling storm",
+   "strength": "primary"
+  },
+  {
+   "meaning": "spiral galaxy, black hole, or deep-space astronomy",
    "strength": "secondary"
   },
   {
-   "meaning": "spiral galaxy or astronomy",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "rotary fan, impeller, or ventilation turbine",
+   "meaning": "rotary impeller, turbine, or centrifugal fan",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a camera aperture, a cooling fan, a spiral galaxy, or an abstract AI/tech logo at small sizes because of its four-arm geometric symmetry rather than the standard two-arm meteorological hurricane symbol.",
+ "ambiguity": "Easily confused with the two-armed meteorological hurricane symbol, and for storm or hurricane tasks the two-armed version is more standard; also resembles a camera aperture or fan impeller at small sizes.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Review the family hurricane evacuation route before August",
+   "better": "two-armed meteorological hurricane symbol",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check NOAA tropical storm and hurricane forecast for the Gulf Coast",
+   "better": "two-armed meteorological hurricane symbol",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Replace the noisy 120mm case fan in the desktop PC",
    "better": "computer cooling fan with blades",
    "trap": "lookalike_glyph"
@@ -165,7 +175,7 @@
   },
   {
    "task": "Order a replacement cyclone dust separator for the shop vac",
-   "better": "vacuum cleaner or shop dust桶",
+   "better": "vacuum cleaner or dust collector",
    "trap": "shared_vocabulary"
   },
   {
@@ -177,17 +187,12 @@
    "task": "Install hurricane-rated impact glass in the bedroom",
    "better": "window",
    "trap": "property"
-  },
-  {
-   "task": "Pick up prescriptions from Walgreens before Friday",
-   "better": "pill bottle / pharmacy",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a four-armed swirling vortex around concentric circles, standard for a cyclone or typhoon symbol in icon sets. It fits tasks centered on hurricane/cyclone preparedness, severe weather tracking, storm insurance, or astrophysics vortices, though its four-arm symmetry can resemble a cooling fan or camera shutter at small sizes.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cyclone, hurricane, typhoon, or severe tropical storm",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vortex, whirlpool, or black hole",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "spiral galaxy or astronomy",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rotary fan, impeller, or ventilation turbine",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a camera aperture, a cooling fan, a spiral galaxy, or an abstract AI/tech logo at small sizes because of its four-arm geometric symmetry rather than the standard two-arm meteorological hurricane symbol.",
+   "near_misses": [
+    {
+     "task": "Replace the noisy 120mm case fan in the desktop PC",
+     "better": "computer cooling fan with blades",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Practice shooting portraits at wide f/1.8 aperture",
+     "better": "camera lens aperture blades",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a replacement cyclone dust separator for the shop vac",
+     "better": "vacuum cleaner or shop dust桶",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy hurricane glasses for the tiki cocktail party",
+     "better": "cocktail glass",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install hurricane-rated impact glass in the bedroom",
+     "better": "window",
+     "trap": "property"
+    },
+    {
+     "task": "Pick up prescriptions from Walgreens before Friday",
+     "better": "pill bottle / pharmacy",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "storm"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4077,
+    "output": 1147,
+    "thoughts": 0,
+    "total": 5224
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "Has four curved tangential arms around the concentric rings rather than two, making it read more like a generic vortex, whirlpool, spiral galaxy, or rotary turbine than the standard two-armed meteorological hurricane symbol."
 }

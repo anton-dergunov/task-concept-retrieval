@@ -18,11 +18,15 @@
    "strength": "primary"
   },
   {
+   "meaning": "Weak or medium-low secured wireless signal",
+   "strength": "secondary"
+  },
+  {
    "meaning": "Restricted or parental-controlled internet access",
    "strength": "secondary"
   }
  ],
- "ambiguity": "This specific icon shows a half-strength secured Wi-Fi status bar indicator, which in a task list is indistinguishable in purpose from a general secured Wi-Fi icon.",
+ "ambiguity": "Virtually identical to and interchangeable with the three-quarters-filled secured Wi-Fi wedge icon, as well as any full-strength secured Wi-Fi icon, since signal-level graduations do not distinguish task subjects.",
  "modifier_semantics": [
   {
    "modifier": "closed padlock in bottom right corner",
@@ -161,14 +165,24 @@
  ],
  "near_misses": [
   {
-   "task": "Pay the monthly fiber internet bill before Friday",
-   "better": "bill / receipt or money icon",
-   "trap": "shared_vocabulary"
+   "task": "Mock up the 3-bar medium-high secured Wi-Fi status bar state for the Android UI kit",
+   "better": "three-quarters-filled Wi-Fi wedge with padlock icon",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a padlock for the gym locker",
-   "better": "padlock icon",
+   "better": "standalone padlock icon",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check if the internet is back up at the cabin",
+   "better": "plain Wi-Fi icon without padlock",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Pay the monthly fiber internet bill before Friday",
+   "better": "bill / receipt or money icon",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Download offline maps for the cabin trip with weak Wi-Fi",
@@ -184,17 +198,12 @@
    "task": "Mount the second Eero node on the upstairs hallway wall",
    "better": "router / hardware device icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check if the internet is back up at the cabin",
-   "better": "plain Wi-Fi or globe icon",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a half-filled Wi-Fi wedge with a padlock badge, universally recognized from Android status bars as a secured wireless network. Although originally a signal-strength state icon, in a task list it works well for tasks about Wi-Fi passwords, guest network logins, and router security, though it closely overlaps with a full-strength secured Wi-Fi icon.",
@@ -212,6 +221,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi password or secured wireless network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Network security or router encryption settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Restricted or parental-controlled internet access",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "This specific icon shows a half-strength secured Wi-Fi status bar indicator, which in a task list is indistinguishable in purpose from a general secured Wi-Fi icon.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly fiber internet bill before Friday",
+     "better": "bill / receipt or money icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a padlock for the gym locker",
+     "better": "padlock icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download offline maps for the cabin trip with weak Wi-Fi",
+     "better": "map icon",
+     "trap": "property"
+    },
+    {
+     "task": "Reset the master password for 1Password",
+     "better": "key or password asterisk icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mount the second Eero node on the upstairs hallway wall",
+     "better": "router / hardware device icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the internet is back up at the cabin",
+     "better": "plain Wi-Fi or globe icon",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "network_wifi_locked"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4099,
+    "output": 1245,
+    "thoughts": 173,
+    "total": 5517
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:12Z"
+  }
+ },
+ "distinguishing": "Visually, the Wi-Fi wedge is filled only halfway up (two signal bars) with a large white arc left empty at the top, whereas the three-quarters-filled secured Wi-Fi icon is filled higher up; in a task list, however, the two icons are completely interchangeable in meaning."
 }

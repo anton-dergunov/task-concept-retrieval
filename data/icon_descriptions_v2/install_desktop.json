@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "install or download desktop application / software",
+   "meaning": "install desktop software or update operating system",
    "strength": "primary"
   },
   {
-   "meaning": "save or download file to computer",
+   "meaning": "download file or application to computer",
    "strength": "primary"
   },
   {
-   "meaning": "system or firmware update download",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "remote desktop incoming connection or import to PC",
+   "meaning": "save data locally to PC",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be confused with a generic download icon, an inbox/tray icon, or a picture-in-picture/minimize window icon at small sizes.",
+ "ambiguity": "Completely interchangeable with the monitor-with-downward-arrow on a beveled trapezoidal stand; can also be confused with a plain monitor, a generic download tray icon, or a screen-sharing/upload icon.",
  "modifier_semantics": [
   {
    "modifier": "downward arrow into screen",
@@ -163,22 +159,22 @@
  "near_misses": [
   {
    "task": "Buy a 27-inch 4K Dell monitor for the home office",
-   "better": "plain monitor or display screen without download arrow",
+   "better": "plain desktop monitor screen without a download arrow",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Upload the final cut to the client's Frame.io folder",
-   "better": "upload icon (upward arrow or cloud upload)",
+   "task": "Upload the final video cut to the client's shared folder",
+   "better": "screen or cloud with an upward-pointing upload arrow",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Install the new floating shelves in the living room",
-   "better": "shelf, drill, or tools icon",
+   "better": "shelf, drill, or hand tools icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Mount the TV lower on the bedroom wall bracket",
-   "better": "television or wall mount icon",
+   "better": "plain television screen or wall mount icon",
    "trap": "shared_vocabulary"
   },
   {
@@ -187,7 +183,7 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Check if the downloaded tax return has the right routing number",
+   "task": "Verify that the downloaded tax return has the right routing number",
    "better": "tax document or bank check icon",
    "trap": "property"
   }
@@ -195,7 +191,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly shows a computer monitor with an incoming downward arrow, universally understood as downloading to a computer or installing desktop software. It fits common digital tasks like installing programs, updating drivers, or saving files locally, while being more specific than a generic download tray icon.",
@@ -213,6 +209,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "install or download desktop application / software",
+     "strength": "primary"
+    },
+    {
+     "meaning": "save or download file to computer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "system or firmware update download",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "remote desktop incoming connection or import to PC",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a generic download icon, an inbox/tray icon, or a picture-in-picture/minimize window icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a 27-inch 4K Dell monitor for the home office",
+     "better": "plain monitor or display screen without download arrow",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Upload the final cut to the client's Frame.io folder",
+     "better": "upload icon (upward arrow or cloud upload)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install the new floating shelves in the living room",
+     "better": "shelf, drill, or tools icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mount the TV lower on the bedroom wall bracket",
+     "better": "television or wall mount icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a USB-C to DisplayPort cable for the new Mac",
+     "better": "cable or adapter plug icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the downloaded tax return has the right routing number",
+     "better": "tax document or bank check icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "browser_updated"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4117,
+    "output": 776,
+    "thoughts": 97,
+    "total": 4990
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:22Z"
+  }
+ },
+ "distinguishing": "Visually differs only by having a simple flat rectangular block stand and a slightly taller screen with the arrow further right, making it completely interchangeable in meaning with the beveled-stand version."
 }

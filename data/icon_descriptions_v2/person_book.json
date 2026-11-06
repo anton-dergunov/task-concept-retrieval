@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "portrait photo or headshot",
+   "meaning": "vertical portrait photo, headshot, or passport/ID picture",
    "strength": "primary"
   },
   {
-   "meaning": "user profile card or contact entry",
+   "meaning": "contact card or badge portrait",
    "strength": "primary"
-  },
-  {
-   "meaning": "ID photo or badge picture",
-   "strength": "secondary"
   },
   {
    "meaning": "portrait orientation mode",
    "strength": "secondary"
+  },
+  {
+   "meaning": "single user profile",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, it could be mistaken for a generic speaker box or a passport cover.",
+ "ambiguity": "Nearly interchangeable in meaning with the plain square user profile frame, differing only in its taller aspect ratio; also resembles a bookshelf speaker box.",
  "modifier_semantics": [],
  "domains": [
   "admin",
@@ -170,6 +170,16 @@
  ],
  "near_misses": [
   {
+   "task": "Book a 1-on-1 career check-in with my manager",
+   "better": "calendar page with top tabs and person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch between multiple user accounts on the family tablet",
+   "better": "stacked square frames with person silhouette",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Renew expiring passport at the post office",
    "better": "passport booklet",
    "trap": "parent_topic"
@@ -178,11 +188,6 @@
    "task": "Print 50 copies of the event flyer in portrait orientation",
    "better": "document or printer",
    "trap": "property"
-  },
-  {
-   "task": "FaceTime Mom on Sunday evening",
-   "better": "video call camera",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pair the Bluetooth bookshelf speaker in the study",
@@ -203,7 +208,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a person's head and shoulders inside a vertical rectangular frame, clearly representing a portrait photo, headshot, ID picture, or contact card. It fits common tasks around getting passport/ID photos, updating profile avatars, or framing portraits, though at very small sizes the circle-and-arc inside a rectangle can slightly resemble a speaker cone.",
@@ -223,6 +228,96 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "portrait photo or headshot",
+     "strength": "primary"
+    },
+    {
+     "meaning": "user profile card or contact entry",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ID photo or badge picture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "portrait orientation mode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, it could be mistaken for a generic speaker box or a passport cover.",
+   "near_misses": [
+    {
+     "task": "Renew expiring passport at the post office",
+     "better": "passport booklet",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Print 50 copies of the event flyer in portrait orientation",
+     "better": "document or printer",
+     "trap": "property"
+    },
+    {
+     "task": "FaceTime Mom on Sunday evening",
+     "better": "video call camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pair the Bluetooth bookshelf speaker in the study",
+     "better": "audio speaker",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up the visitor security badge from reception",
+     "better": "lanyard badge with clip",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check who viewed my profile this week",
+     "better": "analytics or eye",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "perm_contact_calendar",
+   "account_box",
+   "switch_account"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6728,
+    "output": 2165,
+    "thoughts": 0,
+    "total": 8893
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:16Z"
+  }
+ },
+ "distinguishing": "Its outer frame is a tall vertical rectangle (portrait aspect ratio) with no tabs or backing layers, whereas the others use a 1:1 square frame."
 }

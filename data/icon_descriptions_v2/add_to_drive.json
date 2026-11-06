@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "add or upload to Google Drive",
+   "meaning": "add to Google Drive / upload to cloud storage",
+   "strength": "primary"
+  },
+  {
+   "meaning": "create new file or folder in Google Drive",
    "strength": "primary"
   },
   {
    "meaning": "Google Drive / cloud storage",
-   "strength": "primary"
-  },
-  {
-   "meaning": "create new shared folder or cloud file",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the triangular ribbon shape can be mistaken for a recycling symbol, a tent, or a stylized letter A.",
+ "ambiguity": "Easily confused at list scale with the Google Drive icon with a diagonal up-right arrow; the base triangular ribbon can also look like a recycling symbol or a camping tent.",
  "modifier_semantics": [
   {
    "modifier": "plus sign in bottom right corner",
@@ -158,6 +158,21 @@
  ],
  "near_misses": [
   {
+   "task": "Add a shortcut to the shared Q3 taxes folder into My Drive",
+   "better": "Google Drive logo with a diagonal up-right arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Export the finished client video directly to the external Google Drive link",
+   "better": "Google Drive logo with a diagonal up-right arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the old printer and batteries to the e-waste recycling center",
+   "better": "three-arrow recycling symbol",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a 2TB external hard drive for Time Machine backups",
    "better": "external hard drive enclosure",
    "trap": "shared_vocabulary"
@@ -168,30 +183,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Take the old printer and batteries to the e-waste recycling center",
-   "better": "three-arrow recycling symbol",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pitch the new 3-person tent in the backyard to check for missing stakes",
-   "better": "camping tent",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Write the Q4 budget proposal in Google Docs",
    "better": "document page with text lines",
    "trap": "parent_topic"
   },
   {
    "task": "Delete old huge video files to free up Google Drive space",
-   "better": "Google Drive with minus or trash icon",
+   "better": "trash can or Google Drive with minus sign",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts the distinctive three-band triangular Google Drive logo paired with a plus sign for adding, creating, or uploading. It fits tasks centered on uploading backups, creating shared cloud folders, or organizing files in Google Drive, though at tiny sizes its triangular bands can vaguely resemble a recycling symbol or an A-frame tent.",
@@ -209,6 +214,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add or upload to Google Drive",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Google Drive / cloud storage",
+     "strength": "primary"
+    },
+    {
+     "meaning": "create new shared folder or cloud file",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the triangular ribbon shape can be mistaken for a recycling symbol, a tent, or a stylized letter A.",
+   "near_misses": [
+    {
+     "task": "Buy a 2TB external hard drive for Time Machine backups",
+     "better": "external hard drive enclosure",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule a test drive at the Mazda dealership on Saturday",
+     "better": "car or steering wheel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Take the old printer and batteries to the e-waste recycling center",
+     "better": "three-arrow recycling symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pitch the new 3-person tent in the backyard to check for missing stakes",
+     "better": "camping tent",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write the Q4 budget proposal in Google Docs",
+     "better": "document page with text lines",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Delete old huge video files to free up Google Drive space",
+     "better": "Google Drive with minus or trash icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "drive_export"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4067,
+    "output": 1112,
+    "thoughts": 85,
+    "total": 5264
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "Has a plus sign badge in the bottom-right corner instead of a diagonal up-right arrow, meaning adding or creating files in Google Drive rather than creating a Drive shortcut or exporting."
 }

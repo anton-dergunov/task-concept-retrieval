@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "accessibility or universal design",
-   "strength": "primary"
-  },
-  {
    "meaning": "human body, anatomy, or full-body measurements",
    "strength": "primary"
   },
   {
-   "meaning": "stretching, posture, or physical exercise",
-   "strength": "secondary"
+   "meaning": "accessibility or universal design",
+   "strength": "primary"
   },
   {
    "meaning": "3D character rigging or T-pose model",
    "strength": "secondary"
+  },
+  {
+   "meaning": "standing posture or physical therapy",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "Closely matches the standard digital accessibility symbol (often enclosed in a circle), a generic person/child icon, or a 3D modeling T-pose.",
+ "ambiguity": "Nearly interchangeable at glance size with the curved-arm figure without dots; only a close look reveals the flat horizontal arms versus upward-curved arms.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,24 +154,24 @@
  ],
  "near_misses": [
   {
+   "task": "Configure screen reader and high-contrast accessibility options",
+   "better": "accessibility figure with three dots",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Audit website WCAG accessibility compliance",
+   "better": "curved-arm accessibility figure",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Order an accessible-height bathroom vanity for the guest bath",
    "better": "sink or bathroom vanity",
    "trap": "property"
   },
   {
-   "task": "Check if the restaurant has step-free wheelchair entrance",
-   "better": "wheelchair symbol",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Write the body of the quarterly investor update email",
    "better": "email or document",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Hang the wooden scarecrow frame in the vegetable garden",
-   "better": "plant or garden",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Add closed captions to the product demo video",
@@ -187,7 +187,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a blocky human figure standing in a T-pose with arms outstretched horizontally. It is widely recognized as the modern digital accessibility (a11y) glyph as well as a literal representation of the whole human body, posture, body measurements, or 3D character rigging. It is distinct from standard neutral-arm person icons that mean 'user' or 'contact'.",
@@ -205,6 +205,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "accessibility or universal design",
+     "strength": "primary"
+    },
+    {
+     "meaning": "human body, anatomy, or full-body measurements",
+     "strength": "primary"
+    },
+    {
+     "meaning": "stretching, posture, or physical exercise",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "3D character rigging or T-pose model",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely matches the standard digital accessibility symbol (often enclosed in a circle), a generic person/child icon, or a 3D modeling T-pose.",
+   "near_misses": [
+    {
+     "task": "Order an accessible-height bathroom vanity for the guest bath",
+     "better": "sink or bathroom vanity",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the restaurant has step-free wheelchair entrance",
+     "better": "wheelchair symbol",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Write the body of the quarterly investor update email",
+     "better": "email or document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hang the wooden scarecrow frame in the vegetable garden",
+     "better": "plant or garden",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Add closed captions to the product demo video",
+     "better": "subtitles / CC icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify the new hire's background check cleared",
+     "better": "badge or checkmark",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "accessible_menu",
+   "accessibility_new",
+   "settings_accessibility"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6727,
+    "output": 1942,
+    "thoughts": 193,
+    "total": 8862
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Unlike the curved-arm figures, this figure has rigid, straight horizontal arms and no ellipsis dots, making it read more as a 3D T-pose, anatomy/body diagram, or generic standing figure, though it is nearly interchangeable with the plain curved-arm accessibility figure at small sizes."
 }

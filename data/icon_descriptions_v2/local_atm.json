@@ -19,11 +19,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "budget, finance, or pricing",
+   "meaning": "general budget or finance",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Lacks classic banknote corner flourishes, so it can also read as a gift card, payment button, or generic money badge.",
+ "ambiguity": "At small sizes it can be confused with the rectangular dollar-and-up/down-arrows icon, or read as a gift card or generic money badge since it lacks decorative banknote corners.",
  "modifier_semantics": [],
  "domains": [
   "finance",
@@ -142,10 +142,6 @@
    "central": "HR / career conversation"
   },
   {
-   "task": "Cancel the unused streaming subscriptions before renewal",
-   "central": "streaming service / TV"
-  },
-  {
    "task": "Download the 1099-INT forms for the accountant",
    "central": "tax document / form"
   },
@@ -155,6 +151,16 @@
   }
  ],
  "near_misses": [
+  {
+   "task": "Adjust the nightly rental rate on our Airbnb listing for summer",
+   "better": "rectangular frame with dollar sign and up/down arrows (price adjustment / rate change)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check the USD to JPY exchange rate before transferring trip funds",
+   "better": "rectangular frame with dollar sign and up/down arrows (currency fluctuation / exchange rate)",
+   "trap": "lookalike_glyph"
+  },
   {
    "task": "Find a cheap flight to Lisbon in October",
    "better": "airplane",
@@ -171,19 +177,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Clean the fingerprints off the living room TV screen",
-   "better": "television / monitor",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy a shredder for old bank statements",
+   "task": "Buy a cross-cut shredder for old bank statements",
    "better": "shredder",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Look for a budget hotel near Penn Station",
-   "better": "hotel / bed",
-   "trap": "property"
   }
  ],
  "scores": {
@@ -207,6 +203,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "cash, paper money, or banknote",
+     "strength": "primary"
+    },
+    {
+     "meaning": "payment, bill, or expense",
+     "strength": "primary"
+    },
+    {
+     "meaning": "gift card, voucher, or prepaid card",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "budget, finance, or pricing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Lacks classic banknote corner flourishes, so it can also read as a gift card, payment button, or generic money badge.",
+   "near_misses": [
+    {
+     "task": "Find a cheap flight to Lisbon in October",
+     "better": "airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Check the price of 3/4-inch birch plywood at Home Depot",
+     "better": "wood / hardware / lumber",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Prune the overgrown money tree in the living room",
+     "better": "houseplant / potted plant",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Clean the fingerprints off the living room TV screen",
+     "better": "television / monitor",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a shredder for old bank statements",
+     "better": "shredder",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Look for a budget hotel near Penn Station",
+     "better": "hotel / bed",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "price_change"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4095,
+    "output": 1095,
+    "thoughts": 0,
+    "total": 5190
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:57Z"
+  }
+ },
+ "distinguishing": "Shows a single centered dollar sign inside a rounded rectangle with no arrows, representing cash, a banknote, a gift card, or a simple payment rather than fluctuating rates or price adjustments."
 }

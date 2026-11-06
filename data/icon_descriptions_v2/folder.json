@@ -7,19 +7,15 @@
  },
  "readings": [
   {
-   "meaning": "folder / directory (digital or physical)",
+   "meaning": "folder / directory (digital or physical, general or empty framing container) ",
    "strength": "primary"
   },
   {
-   "meaning": "project / portfolio / case file",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "filing / organizing documents",
+   "meaning": "project / portfolio / workspace container",
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Easily interchangeable with a folder containing a document page when used generically for filing or directories.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -153,14 +149,24 @@
  ],
  "near_misses": [
   {
-   "task": "File state and federal tax returns before April 15",
-   "better": "tax form / government building / calendar",
-   "trap": "shared_vocabulary"
+   "task": "Put the signed lease and inspection report into the apartment dossier",
+   "better": "folder containing a document page",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Gather all medical receipts and lab results into the insurance claim file",
+   "better": "folder containing a document page",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Collapse the scattered bread notes into one sourdough.org file",
-   "better": "document / bread",
+   "better": "single document page or bread",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "File state and federal tax returns before April 15",
+   "better": "tax form / government building / calendar",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a folding table for the garage sale",
@@ -186,7 +192,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a standard tabbed file folder. It is universally recognizable and fits tasks about organizing digital directories, filing physical paperwork, managing client dossiers, or buying office folders, though generic 'organize' or single-document tasks are better served by more specific icons.",
@@ -204,6 +210,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "folder / directory (digital or physical)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "project / portfolio / case file",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "filing / organizing documents",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "File state and federal tax returns before April 15",
+     "better": "tax form / government building / calendar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Collapse the scattered bread notes into one sourdough.org file",
+     "better": "document / bread",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a folding table for the garage sale",
+     "better": "table",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the accountant's invoice for Q2 bookkeeping",
+     "better": "invoice / money",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Organize the spice rack alphabetically",
+     "better": "spice jar / kitchen",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy pocket-folder-size envelopes for mailing contracts",
+     "better": "envelope",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "snippet_folder"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4026,
+    "output": 685,
+    "thoughts": 0,
+    "total": 4711
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "A plain, empty folder outline with no inner glyph, representing a general folder, directory, or empty container rather than a folder specifically holding a document."
 }

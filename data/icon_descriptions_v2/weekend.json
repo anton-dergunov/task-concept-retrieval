@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "lounge or waiting area",
+   "meaning": "floor sofa, modular lounge seating, or sofa bed",
    "strength": "secondary"
   },
   {
-   "meaning": "resting or relaxing",
+   "meaning": "lounge, waiting area, or resting",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as either a wide armchair or a small loveseat/sofa; at tiny sizes it vaguely resembles a printer or inbox tray.",
+ "ambiguity": "Practically interchangeable with the legged sofa/armchair icon; without legs, at tiny sizes it can also vaguely resemble a desktop printer or inbox tray.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -159,6 +159,21 @@
  ],
  "near_misses": [
   {
+   "task": "Screw the four wooden legs onto the new armchair",
+   "better": "sofa or armchair with legs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Stick felt pads under the couch feet to protect the hardwood floor",
+   "better": "sofa or armchair with legs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Unclog the black ink cartridge on the desk printer",
+   "better": "printer",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Start Week 3 of the Couch to 5K running plan",
    "better": "running shoe or runner",
    "trap": "shared_vocabulary"
@@ -169,22 +184,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a floor lamp to put next to the reading armchair",
-   "better": "floor lamp",
-   "trap": "property"
-  },
-  {
    "task": "Read fifty pages of my novel on the couch tonight",
    "better": "open book",
    "trap": "property"
   },
   {
-   "task": "Unclog the black ink cartridge on the desk printer",
-   "better": "printer",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Hang the framed family photos over the fireplace",
+   "task": "Hang the framed family photos in the living room",
    "better": "picture frame",
    "trap": "parent_topic"
   }
@@ -192,7 +197,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Clearly depicts a front-facing armchair or small sofa with thick rounded armrests and backrest. It is an immediate, unmistakable fit for tasks involving couches, armchairs, upholstery, living room furniture, and home staging, with only minor overlap between armchair and sofa readings.",
@@ -210,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "couch, sofa, or armchair",
+     "strength": "primary"
+    },
+    {
+     "meaning": "furniture or living room",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lounge or waiting area",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "resting or relaxing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as either a wide armchair or a small loveseat/sofa; at tiny sizes it vaguely resembles a printer or inbox tray.",
+   "near_misses": [
+    {
+     "task": "Start Week 3 of the Couch to 5K running plan",
+     "better": "running shoe or runner",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Message Barcelona Couchsurfing host with our train arrival time",
+     "better": "chat message or traveller",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a floor lamp to put next to the reading armchair",
+     "better": "floor lamp",
+     "trap": "property"
+    },
+    {
+     "task": "Read fifty pages of my novel on the couch tonight",
+     "better": "open book",
+     "trap": "property"
+    },
+    {
+     "task": "Unclog the black ink cartridge on the desk printer",
+     "better": "printer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Hang the framed family photos over the fireplace",
+     "better": "picture frame",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "chair"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4043,
+    "output": 822,
+    "thoughts": 113,
+    "total": 4978
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:28Z"
+  }
+ },
+ "distinguishing": "Lacks the two bottom legs seen on the other icon, giving it a flat base; the two are nearly interchangeable in meaning for couch, armchair, or furniture tasks, though without legs this icon is slightly more easily misread at small sizes as a printer or inbox tray."
 }

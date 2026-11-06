@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be interpreted either as a digital folder shared with others (like in Google Drive) or as a folder containing a specific person's records (HR file, client dossier, user home directory).",
+ "ambiguity": "At small sizes, the folder outline with a person silhouette inside can be mistaken for the camera outline with a person silhouette inside (portrait photo/selfie), and internally it is ambiguous between a folder shared with others versus a folder holding one person's records.",
  "modifier_semantics": [
   {
    "modifier": "person silhouette",
@@ -162,40 +162,40 @@
  ],
  "near_misses": [
   {
+   "task": "Take new headshots for the company website bio",
+   "better": "camera with a person silhouette inside (portrait photo / headshot icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take passport photos at the pharmacy on lunch break",
+   "better": "camera with a person silhouette inside (portrait or ID photo icon)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Update my LinkedIn profile photo before starting the job hunt",
-   "better": "user profile / avatar or camera icon",
+   "better": "camera with a person silhouette inside (profile picture icon)",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a pack of hanging manila folders for the filing cabinet",
-   "better": "plain folder or shopping cart icon",
+   "better": "plain file folder or shopping cart icon",
    "trap": "property"
   },
   {
-   "task": "Take passport photos at the pharmacy on lunch break",
-   "better": "camera or ID card icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Call the new client to confirm Friday's kickoff time",
-   "better": "phone icon",
+   "better": "phone receiver icon",
    "trap": "parent_topic"
   },
   {
    "task": "Check with Sarah whether she reviewed the budget spreadsheet",
-   "better": "spreadsheet or chat/message icon",
+   "better": "spreadsheet or chat bubble icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Merge duplicate contacts in my phone address book",
-   "better": "address book or contacts icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a file folder with a person silhouette inside, universally understood in modern UIs (like Google Drive or OS file managers) as a shared folder, user home directory, or personal/client dossier. It fits tasks centered on sharing directories, managing permissions, or organizing a person's records, though it sits close to plain folder and user-profile icons.",
@@ -213,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "shared folder or collaborator directory",
+     "strength": "primary"
+    },
+    {
+     "meaning": "personal folder, user directory, or home folder",
+     "strength": "primary"
+    },
+    {
+     "meaning": "client file, patient chart, or personnel dossier",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "contact directory or address book",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be interpreted either as a digital folder shared with others (like in Google Drive) or as a folder containing a specific person's records (HR file, client dossier, user home directory).",
+   "near_misses": [
+    {
+     "task": "Update my LinkedIn profile photo before starting the job hunt",
+     "better": "user profile / avatar or camera icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a pack of hanging manila folders for the filing cabinet",
+     "better": "plain folder or shopping cart icon",
+     "trap": "property"
+    },
+    {
+     "task": "Take passport photos at the pharmacy on lunch break",
+     "better": "camera or ID card icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the new client to confirm Friday's kickoff time",
+     "better": "phone icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check with Sarah whether she reviewed the budget spreadsheet",
+     "better": "spreadsheet or chat/message icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Merge duplicate contacts in my phone address book",
+     "better": "address book or contacts icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "photo_camera_front"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4088,
+    "output": 1157,
+    "thoughts": 0,
+    "total": 5245
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:58Z"
+  }
+ },
+ "distinguishing": "This icon shows a file folder outline (with an asymmetric top-left tab) and a person silhouette shifted to the bottom right, representing a shared or personal folder rather than a camera for portrait photos."
 }

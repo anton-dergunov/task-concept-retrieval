@@ -11,15 +11,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "foreign language learning (especially Asian languages)",
+   "meaning": "foreign language learning (especially Chinese or Japanese)",
    "strength": "primary"
+  },
+  {
+   "meaning": "font size or text scaling (from 大 meaning 'large')",
+   "strength": "secondary"
   },
   {
    "meaning": "input method editor (IME) or character encoding",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a typography or font-size icon, or the standard translation icon using the character Wen (文) and A.",
+ "ambiguity": "Virtually interchangeable for general translation or language tasks with the icon showing the character 行 beside 'a'; also easily confused with a standard typography or font-size icon.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -150,8 +154,13 @@
  ],
  "near_misses": [
   {
-   "task": "Change the heading font size on the landing page to 32px",
-   "better": "typography / text size",
+   "task": "Adjust line spacing in the essay to 1.5 lines",
+   "better": "line-spacing icon with character 行 ('line/row') and 'a', or vertical arrows with text lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch the resume template font from Times New Roman to Helvetica",
+   "better": "typeface / font family icon",
    "trap": "lookalike_glyph"
   },
   {
@@ -178,7 +187,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The juxtaposition of the CJK character '大' and the Latin letter 'a' clearly signifies translation, language switching, or foreign language study. It fits tasks related to learning languages, translating documents, and software localization, though it closely resembles typography/font icons and the more common '文A' translation glyph.",
@@ -196,6 +205,85 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "translation or language switching",
+     "strength": "primary"
+    },
+    {
+     "meaning": "foreign language learning (especially Asian languages)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "input method editor (IME) or character encoding",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a typography or font-size icon, or the standard translation icon using the character Wen (文) and A.",
+   "near_misses": [
+    {
+     "task": "Change the heading font size on the landing page to 32px",
+     "better": "typography / text size",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order takeout from the Chinese restaurant on 5th Street",
+     "better": "takeout box / noodles",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Tokyo for the cherry blossom season",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a bilingual picture book for Maya's birthday",
+     "better": "book / gift",
+     "trap": "property"
+    },
+    {
+     "task": "Check the French press for cracks before making coffee",
+     "better": "coffee maker",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "language_chinese_array"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4047,
+    "output": 1129,
+    "thoughts": 0,
+    "total": 5176
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:16Z"
+  }
+ },
+ "distinguishing": "Pairs the lowercase Latin 'a' with the simple three-stroke character 大 ('big/large') rather than the six-stroke character 行 ('line/row'), though for general tasks both serve interchangeably as translation or Asian-language icons (while in CJK typography 大 specifically cues font size)."
 }

@@ -7,23 +7,23 @@
  },
  "readings": [
   {
+   "meaning": "SQL left join / full left set in a Venn diagram",
+   "strength": "primary"
+  },
+  {
    "meaning": "Venn diagram or set theory operation",
    "strength": "primary"
   },
   {
-   "meaning": "SQL left join in databases",
-   "strength": "primary"
-  },
-  {
-   "meaning": "Mastercard payment card or logo",
+   "meaning": "boolean shape operation or blend mode in graphic design",
    "strength": "secondary"
   },
   {
-   "meaning": "boolean shape operation or blend mode in graphic design",
+   "meaning": "solar eclipse / moon phases",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easily mistaken for the Mastercard logo, a solar eclipse, or generic overlapping rings at small sizes.",
+ "ambiguity": "Very easily mistaken for the two overlapping circles with only the center lens filled (intersection/inner join), or for a solar eclipse or Mastercard logo.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -152,9 +152,14 @@
  ],
  "near_misses": [
   {
-   "task": "Join the neighborhood running club on Saturday morning",
-   "better": "running shoe or group of people",
-   "trap": "shared_vocabulary"
+   "task": "Find the common overlap between the two customer segments for the campaign",
+   "better": "two overlapping circles with only the center intersection filled",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Change the database query to an inner join to filter out null records",
+   "better": "two overlapping circles with only the center intersection filled",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy eclipse glasses for the family before April",
@@ -162,9 +167,9 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Pick up wedding rings from the jeweler on Main Street",
-   "better": "pair of wedding bands with diamond",
-   "trap": "lookalike_glyph"
+   "task": "Join the neighborhood running club on Saturday morning",
+   "better": "running shoe or group of people",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Check whether the new monitor supports high contrast mode",
@@ -175,17 +180,12 @@
    "task": "Book conference room for the database team sync",
    "better": "meeting room or calendar",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Verify all foreign keys in the production schema",
-   "better": "database cylinder or key",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts two intersecting circles with the entire left circle filled black and the remaining right crescent outlined, directly representing a Venn diagram for set A / SQL LEFT JOIN, or visually echoing vector boolean operations and the Mastercard mark. It fits niche technical, math, or design tasks well, though outside those contexts it is easily confused with generic overlapping rings, an eclipse, or a credit card logo.",
@@ -203,6 +203,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Venn diagram or set theory operation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "SQL left join in databases",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Mastercard payment card or logo",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "boolean shape operation or blend mode in graphic design",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easily mistaken for the Mastercard logo, a solar eclipse, or generic overlapping rings at small sizes.",
+   "near_misses": [
+    {
+     "task": "Join the neighborhood running club on Saturday morning",
+     "better": "running shoe or group of people",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy eclipse glasses for the family before April",
+     "better": "sun and moon solar eclipse",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up wedding rings from the jeweler on Main Street",
+     "better": "pair of wedding bands with diamond",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check whether the new monitor supports high contrast mode",
+     "better": "computer monitor",
+     "trap": "property"
+    },
+    {
+     "task": "Book conference room for the database team sync",
+     "better": "meeting room or calendar",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify all foreign keys in the production schema",
+     "better": "database cylinder or key",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "join_inner"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4043,
+    "output": 680,
+    "thoughts": 85,
+    "total": 4808
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Both the left crescent and the central lens are filled solid black (filling the entire left circle) while the right crescent is outlined, representing a SQL left join or full left set rather than just the intersection."
 }

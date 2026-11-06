@@ -10,19 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "car climate control / windshield defroster and footwell airflow",
+   "meaning": "car climate control: windshield defroster and footwell / floor airflow",
    "strength": "primary"
   },
   {
-   "meaning": "car heater / HVAC system",
+   "meaning": "car heater, floor vents, or cabin HVAC system",
    "strength": "primary"
   },
   {
-   "meaning": "cabin air vent / blower motor",
+   "meaning": "cabin air vent / blower motor repair",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Specialized automotive dashboard symbol (defrost + floor airflow mode); at small sizes the windshield arch and wavy lines look like an abstract box or shower head above an arrow.",
+ "ambiguity": "Semantically interchangeable with its horizontal mirror (right-facing seated person with windshield defroster and downward footwell arrow), and easily confused at a glance with the two torso-airflow variants that have a horizontal arrow instead of a downward arrow.",
  "modifier_semantics": [
   {
    "modifier": "windshield frame with wavy lines",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the dashboard center face vents not blowing air",
+   "better": "seated person with windshield defroster and horizontal arrow toward torso",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean dust out of the upper cabin air conditioning vents",
+   "better": "seated person with horizontal airflow arrow to upper body",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Defrost chicken thighs for dinner tonight",
    "better": "chicken / meat / snowflake",
    "trap": "shared_vocabulary"
@@ -163,16 +173,6 @@
    "task": "Defrost the upright chest freezer in the garage",
    "better": "freezer / snowflake",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Fix the broken ergonomic office chair lever",
-   "better": "office chair",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Book window seat on the flight to Chicago",
-   "better": "airplane seat / ticket",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the glass shop for the windshield chip repair",
@@ -188,7 +188,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "This is the standard automotive dashboard glyph for the defrost-and-floor airflow mode (windshield defroster symbol above a downward arrow next to a seated passenger). It fits narrow car HVAC, defroster, or cabin heater repair tasks, though outside a dashboard context it can look like a puzzling combination of a person sitting and an arrow.",
@@ -206,6 +206,92 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "car climate control / windshield defroster and footwell airflow",
+     "strength": "primary"
+    },
+    {
+     "meaning": "car heater / HVAC system",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cabin air vent / blower motor",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Specialized automotive dashboard symbol (defrost + floor airflow mode); at small sizes the windshield arch and wavy lines look like an abstract box or shower head above an arrow.",
+   "near_misses": [
+    {
+     "task": "Defrost chicken thighs for dinner tonight",
+     "better": "chicken / meat / snowflake",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Defrost the upright chest freezer in the garage",
+     "better": "freezer / snowflake",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix the broken ergonomic office chair lever",
+     "better": "office chair",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book window seat on the flight to Chicago",
+     "better": "airplane seat / ticket",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the glass shop for the windshield chip repair",
+     "better": "credit card / car windshield",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Call the dealership about the heated seat recall",
+     "better": "phone / car seat",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_defrost_low_left",
+   "car_defrost_mid_low_left",
+   "car_defrost_mid_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6712,
+    "output": 2141,
+    "thoughts": 201,
+    "total": 9054
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:04Z"
+  }
+ },
+ "distinguishing": "Shows the seated person on the right facing left with a downward arrow toward the feet (windshield defrost + floor/footwell airflow), making it a horizontal mirror of the right-facing floor-airflow icon and semantically interchangeable with it, while differing from the other two icons which point the arrow horizontally at the torso."
 }

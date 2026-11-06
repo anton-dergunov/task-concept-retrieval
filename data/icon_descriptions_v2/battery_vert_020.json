@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / batteries",
+   "meaning": "low or quarter-full battery (around 25% charge)",
    "strength": "primary"
   },
   {
-   "meaning": "low battery / needs charging",
+   "meaning": "battery / batteries / needs charging",
    "strength": "primary"
   },
   {
    "meaning": "portable power bank or rechargeable cell",
    "strength": "secondary"
-  },
-  {
-   "meaning": "personal energy level / fatigue",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Almost indistinguishable from other partial-fill battery level icons (like 10%, 20%, or 30% battery) at list-icon sizes; could also faintly resemble a small bottle or flask with a thick base.",
+ "ambiguity": "Indistinguishable at a glance from the ~15% and ~33% partial-fill battery icons in this group, and interchangeable with them for any battery-related task.",
  "modifier_semantics": [
   {
    "modifier": "low solid fill bar at the bottom",
@@ -168,6 +164,16 @@
  ],
  "near_misses": [
   {
+   "task": "Test which AA batteries in the drawer are completely dead (0V)",
+   "better": "completely empty 0% battery outline",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set phone alert for critical 5% battery warning",
+   "better": "nearly empty battery with hairline bottom fill",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small battery-powered milk frother for the office",
    "better": "milk frother or coffee cup",
    "trap": "property"
@@ -183,25 +189,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a stainless steel insulated water bottle with a narrow cap",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pick up the cordless leaf blower from the repair shop",
    "better": "leaf blower or garden tool",
    "trap": "property"
-  },
-  {
-   "task": "Mount the new lens hood on the 85mm prime",
-   "better": "camera lens",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a vertical battery with a low charge bar at the bottom. It is a strong, immediate cue for real-world tasks involving buying, charging, swapping, or recycling batteries and power banks, though it shares visual space with other battery-level indicator glyphs.",
@@ -221,6 +217,97 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low battery / needs charging",
+     "strength": "primary"
+    },
+    {
+     "meaning": "portable power bank or rechargeable cell",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal energy level / fatigue",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost indistinguishable from other partial-fill battery level icons (like 10%, 20%, or 30% battery) at list-icon sizes; could also faintly resemble a small bottle or flask with a thick base.",
+   "near_misses": [
+    {
+     "task": "Buy a small battery-powered milk frother for the office",
+     "better": "milk frother or coffee cup",
+     "trap": "property"
+    },
+    {
+     "task": "Find the doctor's order for the neuropsychological test battery",
+     "better": "medical clipboard or brain",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice rudiments for the drumline battery audition",
+     "better": "drum or drumsticks",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a stainless steel insulated water bottle with a narrow cap",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pick up the cordless leaf blower from the repair shop",
+     "better": "leaf blower or garden tool",
+     "trap": "property"
+    },
+    {
+     "task": "Mount the new lens hood on the 85mm prime",
+     "better": "camera lens",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_0_bar",
+   "battery_vert_005",
+   "battery_1_bar",
+   "battery_2_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7952,
+    "output": 2508,
+    "thoughts": 196,
+    "total": 10656
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:36Z"
+  }
+ },
+ "distinguishing": "Filled across roughly the bottom quarter (20–25%) of the interior cavity, slightly fuller than the 10–15% low-battery icons and slightly lower than the one-third-filled battery, making all of them interchangeable in a task list."
 }

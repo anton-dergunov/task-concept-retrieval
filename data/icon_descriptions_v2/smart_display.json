@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "video / video clip / watching a video",
+   "meaning": "YouTube video or online streaming clip",
    "strength": "primary"
   },
   {
-   "meaning": "YouTube / streaming platform",
+   "meaning": "watch a video, tutorial, or recorded lecture",
    "strength": "primary"
   },
   {
-   "meaning": "movie / episode / recorded lecture",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "media player / screencast",
+   "meaning": "widescreen video file or movie playback",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Closely overlaps with the YouTube logo, film/cinema icons, and generic 'play/start' buttons.",
+ "ambiguity": "Functionally interchangeable with the square play button for general video tasks, and very close to the TV/monitor with a play triangle except it lacks the bottom stand.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -156,40 +152,45 @@
  ],
  "near_misses": [
   {
-   "task": "Join the 3pm Zoom video call with the design team",
-   "better": "video camera / webcam or meeting icon",
-   "trap": "shared_vocabulary"
+   "task": "Hop on the afternoon video call with the design team",
+   "better": "framed video camera icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set up Apple TV streaming on the bedroom television",
+   "better": "TV or monitor with bottom stand and play triangle",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Queue up the full 12-part video course playlist",
+   "better": "stacked square play icon for video series",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a new HDMI cable for the video monitor",
-   "better": "cable / plug or monitor icon",
+   "better": "cable or plug icon",
    "trap": "property"
   },
   {
    "task": "Play board games with the kids after dinner",
-   "better": "dice / board game icon",
+   "better": "dice or board game icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Listen to the latest Hard Fork podcast episode on the walk",
-   "better": "headphones / podcast microphone icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Order a ring light and tripod for the studio corner",
-   "better": "lamp / tripod icon",
+   "better": "lamp or tripod icon",
    "trap": "parent_topic"
   },
   {
    "task": "Book four seats at the IMAX theatre for Dune on Saturday",
-   "better": "movie ticket / cinema clapperboard icon",
+   "better": "movie ticket or cinema clapperboard icon",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "A framed play button is the universal symbol for online video, tutorials, screencasts, and YouTube. It fits a very common family of everyday tasks around watching, editing, recording, or uploading videos, though it sits close to film-strip/clapperboard icons for movies and camera icons for video calls.",
@@ -207,6 +208,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "video / video clip / watching a video",
+     "strength": "primary"
+    },
+    {
+     "meaning": "YouTube / streaming platform",
+     "strength": "primary"
+    },
+    {
+     "meaning": "movie / episode / recorded lecture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "media player / screencast",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely overlaps with the YouTube logo, film/cinema icons, and generic 'play/start' buttons.",
+   "near_misses": [
+    {
+     "task": "Join the 3pm Zoom video call with the design team",
+     "better": "video camera / webcam or meeting icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new HDMI cable for the video monitor",
+     "better": "cable / plug or monitor icon",
+     "trap": "property"
+    },
+    {
+     "task": "Play board games with the kids after dinner",
+     "better": "dice / board game icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Listen to the latest Hard Fork podcast episode on the walk",
+     "better": "headphones / podcast microphone icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a ring light and tripod for the studio corner",
+     "better": "lamp / tripod icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Book four seats at the IMAX theatre for Dune on Saturday",
+     "better": "movie ticket / cinema clapperboard icon",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "hangout_video",
+   "slideshow",
+   "video_library",
+   "live_tv",
+   "animated_images"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9468,
+    "output": 3165,
+    "thoughts": 0,
+    "total": 12633
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:17Z"
+  }
+ },
+ "distinguishing": "Shows a single right-pointing play triangle inside a wide horizontal (16:9-style) rounded rectangle without a stand, strongly evoking YouTube or a widescreen video player, though largely interchangeable with the square single play button."
 }

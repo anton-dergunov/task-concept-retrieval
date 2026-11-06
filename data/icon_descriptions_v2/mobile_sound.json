@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "NFC, tap-to-pay, or contactless mobile transaction",
+   "meaning": "NFC, tap-to-pay, or contactless mobile wallet transaction",
    "strength": "primary"
   },
   {
-   "meaning": "mobile hotspot, tethering, or wireless phone connection",
+   "meaning": "mobile hotspot, Wi-Fi tethering, or wireless phone connection",
    "strength": "primary"
   },
   {
-   "meaning": "ringing phone, speakerphone, or mobile audio alert",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "smart home sensor or IoT transmitter",
+   "meaning": "ringing phone, speakerphone, or mobile sound/vibration alert",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as NFC/contactless payment, mobile hotspot/Wi-Fi tethering, or a phone ringing/vibrating; at very small sizes it resembles a door with a sensor.",
+ "ambiguity": "Shares the identical smartphone outline with the phone-with-camera and phone-with-speech-bubble icons, differing only in the right-side badge; the arcs themselves can mean NFC payment, hotspot signal, or ringing sound.",
  "modifier_semantics": [
   {
    "modifier": "two curved wireless signal waves on the right side",
@@ -161,19 +157,19 @@
  ],
  "near_misses": [
   {
-   "task": "Call mom to ask about Sunday dinner",
-   "better": "telephone receiver",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a new leather bi-fold wallet for dad's birthday",
-   "better": "physical wallet or gift",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Reboot the TP-Link Wi-Fi router in the hallway closet",
-   "better": "Wi-Fi router with antennas",
+   "task": "Text the landlord a photo of the leaking kitchen pipe",
+   "better": "smartphone with speech bubble or smartphone with camera",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take photos of the old sofa with my phone to list on Craigslist",
+   "better": "smartphone with camera badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Call mom to ask about Sunday dinner",
+   "better": "telephone receiver handset",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Order an RFID-blocking passport sleeve for the Europe trip",
@@ -187,7 +183,7 @@
   },
   {
    "task": "Check notifications from the team on Slack",
-   "better": "chat bubble or bell",
+   "better": "chat bubble or notification bell",
    "trap": "generic_verb"
   }
  ],
@@ -212,6 +208,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "phonelink_ring"
- }
+  "alias_of": "phonelink_ring",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "NFC, tap-to-pay, or contactless mobile transaction",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile hotspot, tethering, or wireless phone connection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "ringing phone, speakerphone, or mobile audio alert",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smart home sensor or IoT transmitter",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as NFC/contactless payment, mobile hotspot/Wi-Fi tethering, or a phone ringing/vibrating; at very small sizes it resembles a door with a sensor.",
+   "near_misses": [
+    {
+     "task": "Call mom to ask about Sunday dinner",
+     "better": "telephone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new leather bi-fold wallet for dad's birthday",
+     "better": "physical wallet or gift",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reboot the TP-Link Wi-Fi router in the hallway closet",
+     "better": "Wi-Fi router with antennas",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order an RFID-blocking passport sleeve for the Europe trip",
+     "better": "passport",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly AT&T wireless bill online",
+     "better": "invoice or bill receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check notifications from the team on Slack",
+     "better": "chat bubble or bell",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mobile_camera",
+   "mobile_chat"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5431,
+    "output": 1498,
+    "thoughts": 128,
+    "total": 7057
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Unlike the other smartphone outlines that have a camera or speech bubble badge on the right, this one emits two curved signal arcs from the right edge, denoting wireless transmission, NFC/tap-to-pay, mobile hotspot, or ringing."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "folder settings or directory configuration",
+   "meaning": "folder settings, directory configuration, or shared folder permissions",
    "strength": "primary"
   },
   {
-   "meaning": "file management or directory structure setup",
+   "meaning": "automated folder actions, watched directory, or sync rules",
    "strength": "primary"
   },
   {
-   "meaning": "automated folder or watched directory",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "project administration or workspace setup",
+   "meaning": "project workspace setup or file management administration",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the gear could look like a starburst, flower, or sun badge next to the folder.",
+ "ambiguity": "At very small sizes the top-left tab step is subtle, so the empty outline can be mistaken for the inbox tray or credit card with a gear.",
  "modifier_semantics": [
   {
    "modifier": "gear badge in bottom-right corner",
@@ -162,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Update auto-pay billing settings on the corporate credit card",
+   "better": "credit card with gear",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure inbox forwarding rules in Gmail",
+   "better": "inbox tray with gear",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Change router Wi-Fi password and channel settings",
    "better": "router or Wi-Fi icon",
    "trap": "shared_vocabulary"
@@ -173,23 +179,13 @@
   },
   {
    "task": "Order a waterproof document folder for the kayaking trip",
-   "better": "kayak or shopping cart icon",
+   "better": "kayak or plain folder icon",
    "trap": "property"
-  },
-  {
-   "task": "Oil the bike derailleur gears before Saturday's ride",
-   "better": "bicycle icon",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Send the signed lease PDF to the landlord",
    "better": "contract or email icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Delete duplicate vacation photos from the shared folder",
-   "better": "photo / image icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -213,6 +209,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "folder settings or directory configuration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "file management or directory structure setup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "automated folder or watched directory",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "project administration or workspace setup",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the gear could look like a starburst, flower, or sun badge next to the folder.",
+   "near_misses": [
+    {
+     "task": "Change router Wi-Fi password and channel settings",
+     "better": "router or Wi-Fi icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check the folder of dental receipts before calling the insurer",
+     "better": "tooth, receipt, or phone icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a waterproof document folder for the kayaking trip",
+     "better": "kayak or shopping cart icon",
+     "trap": "property"
+    },
+    {
+     "task": "Oil the bike derailleur gears before Saturday's ride",
+     "better": "bicycle icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Send the signed lease PDF to the landlord",
+     "better": "contract or email icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Delete duplicate vacation photos from the shared folder",
+     "better": "photo / image icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "credit_card_gear",
+   "inbox_customize",
+   "subtitles_gear"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6793,
+    "output": 2058,
+    "thoughts": 257,
+    "total": 9108
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:18Z"
+  }
+ },
+ "distinguishing": "This is the only icon in the group with a stepped folder tab along the top edge and a completely empty interior, depicting a file folder with a gear rather than a card, inbox tray, or captioned screen."
 }

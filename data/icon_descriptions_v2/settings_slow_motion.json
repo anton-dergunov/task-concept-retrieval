@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "automation, workflow, or scheduled job",
-   "strength": "primary"
-  },
-  {
-   "meaning": "run process, script, or build pipeline",
+   "meaning": "workflow automation, run script, or build pipeline",
    "strength": "primary"
   },
   {
    "meaning": "video, media, or playback settings",
-   "strength": "secondary"
+   "strength": "primary"
   },
   {
-   "meaning": "continuous integration or background service",
+   "meaning": "continuous integration or background job execution",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as running an automated process/workflow or as configuring media/playback settings; at small sizes the segmented ring around the play triangle looks like a plain play button.",
+ "ambiguity": "At small sizes, the segmented play badge on the gear can look similar to the gear with a circular crescent-moon badge, and the icon itself can mean either executing an automated job or configuring media playback.",
  "modifier_semantics": [
   {
    "modifier": "play triangle inside segmented circle",
@@ -160,34 +156,39 @@
  ],
  "near_misses": [
   {
+   "task": "Turn on scheduled dark mode and Night Shift on the iPad",
+   "better": "gear with a crescent moon badge for dark mode or night settings",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure Do Not Disturb quiet hours on my phone",
+   "better": "gear with a crescent moon badge for sleep mode and quiet hours",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Watch the new Dune trailer on YouTube",
-   "better": "video / play button",
+   "better": "plain play button or video icon",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Oil the rusty chain and rear gears on the commuter bike",
-   "better": "bicycle",
+   "better": "bicycle icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Set up a standing monthly transfer of £300 to the ISA",
-   "better": "money transfer / bank",
+   "better": "money transfer or bank icon",
    "trap": "property"
   },
   {
    "task": "Check the oven timer settings in the manual",
-   "better": "oven / manual",
+   "better": "oven or book/manual icon",
    "trap": "generic_verb"
   },
   {
    "task": "Order a replacement Zigbee hub from Amazon",
-   "better": "shopping / router hub",
+   "better": "shopping cart or smart home hub icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Reset my master password in 1Password settings",
-   "better": "key / password",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -211,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "automation, workflow, or scheduled job",
+     "strength": "primary"
+    },
+    {
+     "meaning": "run process, script, or build pipeline",
+     "strength": "primary"
+    },
+    {
+     "meaning": "video, media, or playback settings",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "continuous integration or background service",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as running an automated process/workflow or as configuring media/playback settings; at small sizes the segmented ring around the play triangle looks like a plain play button.",
+   "near_misses": [
+    {
+     "task": "Watch the new Dune trailer on YouTube",
+     "better": "video / play button",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Oil the rusty chain and rear gears on the commuter bike",
+     "better": "bicycle",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up a standing monthly transfer of £300 to the ISA",
+     "better": "money transfer / bank",
+     "trap": "property"
+    },
+    {
+     "task": "Check the oven timer settings in the manual",
+     "better": "oven / manual",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a replacement Zigbee hub from Amazon",
+     "better": "shopping / router hub",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Reset my master password in 1Password settings",
+     "better": "key / password",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_night_sight"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4078,
+    "output": 1127,
+    "thoughts": 104,
+    "total": 5309
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:33Z"
+  }
+ },
+ "distinguishing": "Pairs the settings gear with a three-segment dashed ring around a right-pointing play triangle, indicating workflow automation, running a build/script, or playback settings rather than dark mode or quiet hours."
 }

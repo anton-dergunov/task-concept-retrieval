@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "fork or split path / detour / alternative route",
+   "meaning": "split, fork, or branch off (workflow, code, road, path options) — interchangeable with the left-branching arrow",
    "strength": "primary"
   },
   {
-   "meaning": "git branch or code fork",
+   "meaning": "straight or right turn lane, right highway exit, or right fork in driving directions",
    "strength": "primary"
   },
   {
-   "meaning": "straight or right turn lane direction",
+   "meaning": "detour, alternate route, or pivot",
    "strength": "secondary"
   },
   {
-   "meaning": "decision point / two options",
+   "meaning": "decision point or choosing between two paths",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a generic share/forward arrow or a shuffle/merge icon at small sizes, or mistaken for pure navigation UI chrome.",
+ "ambiguity": "Essentially interchangeable with the upward arrow with a left-curving branch for general tasks about forking, branching, or detours; only distinct when literal right vs. left lane direction matters. Also resembles Git branch icons (which usually have circular nodes) or merge arrows.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -167,6 +167,21 @@
  ],
  "near_misses": [
   {
+   "task": "Stay in the straight-or-left lane at the tunnel approach",
+   "better": "upward arrow with left-curving branch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the left fork on the trail to the overlook",
+   "better": "upward arrow with left-curving branch",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Merge the feature branch back into main",
+   "better": "converging merge arrows",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Prune the low branches on the backyard apple tree",
    "better": "tree or pruning shears",
    "trap": "shared_vocabulary"
@@ -177,19 +192,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a Y-splitter for the garden hose",
-   "better": "hose or pipe fitting",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Update the README file in the new branch",
-   "better": "document / text file",
+   "better": "document or text file",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check if the road to the cabin is paved",
-   "better": "road",
-   "trap": "generic_verb"
   },
   {
    "task": "Book a flexible ticket that allows route changes",
@@ -200,7 +205,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a straight upward arrow with a second arrow branching off to the right, standard on road signs (straight or right) and for branching/forking. In a task list it fits git branching/forking tasks, route detours, trail junctions, and workflow splits, though it is somewhat abstract outside software and navigation.",
@@ -220,6 +225,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "fork or split path / detour / alternative route",
+     "strength": "primary"
+    },
+    {
+     "meaning": "git branch or code fork",
+     "strength": "primary"
+    },
+    {
+     "meaning": "straight or right turn lane direction",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "decision point / two options",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a generic share/forward arrow or a shuffle/merge icon at small sizes, or mistaken for pure navigation UI chrome.",
+   "near_misses": [
+    {
+     "task": "Prune the low branches on the backyard apple tree",
+     "better": "tree or pruning shears",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the local bank branch about notarizing the deed",
+     "better": "bank building",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a Y-splitter for the garden hose",
+     "better": "hose or pipe fitting",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the README file in the new branch",
+     "better": "document / text file",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the road to the cabin is paved",
+     "better": "road",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a flexible ticket that allows route changes",
+     "better": "ticket",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fork_left"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 823,
+    "thoughts": 0,
+    "total": 4872
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:18Z"
+  }
+ },
+ "distinguishing": "The side branch curves to the right off the main vertical up-arrow (mirror image of the left-branching version); interchangeable with the left-branching arrow for generic branching, forking, or splitting, and only distinct when specifically indicating a right exit or straight-or-right lane."
 }

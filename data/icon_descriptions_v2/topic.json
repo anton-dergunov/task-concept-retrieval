@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "folder or directory of documents",
+   "meaning": "file folder, directory, or document collection",
    "strength": "primary"
   },
   {
-   "meaning": "labeled file folder or index card",
+   "meaning": "project dossier, case file, or labeled archive folder",
    "strength": "primary"
   },
   {
-   "meaning": "project dossier or case file",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "filing and paper organization",
+   "meaning": "filing and organizing paperwork",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it is almost indistinguishable from a plain folder icon or a generic document card.",
+ "ambiguity": "At very small sizes the top-left folder tab could be mistaken for the plain landscape index card, though the stepped top edge is distinct on inspection.",
  "modifier_semantics": [
   {
    "modifier": "two horizontal text lines inside",
@@ -163,40 +159,40 @@
  ],
  "near_misses": [
   {
-   "task": "Pay the quarterly estimated tax bill online",
-   "better": "money / bank / tax",
-   "trap": "parent_topic"
-  },
-  {
-   "task": "Buy a folding camp table for the tailgate",
-   "better": "table / camping",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Write the introduction section of the Q4 report",
-   "better": "document / pen",
+   "task": "Write the one-page cover letter for the grant application",
+   "better": "tall portrait document page with folded corner",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Review the vocabulary flashcards on the train",
+   "better": "landscape rectangular index card with three lines",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a folding camp table for the tailgate",
+   "better": "table or camping icon",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Pay the quarterly estimated tax bill online",
+   "better": "money, bank, or tax icon",
+   "trap": "parent_topic"
+  },
+  {
    "task": "Put the clean laundry away in the bedroom drawers",
-   "better": "clothing / laundry",
+   "better": "clothing or laundry icon",
    "trap": "generic_verb"
   },
   {
    "task": "Renew my passport before the October trip",
-   "better": "passport",
+   "better": "passport icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Order a new 3-drawer metal cabinet from IKEA",
-   "better": "cabinet / furniture",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a tabbed file folder containing two lines of text, representing a labeled folder, directory, or document dossier. It fits digital file management and physical paperwork filing tasks well, though it closely resembles a standard plain folder icon.",
@@ -214,6 +210,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "source"
- }
+  "alias_of": "source",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "folder or directory of documents",
+     "strength": "primary"
+    },
+    {
+     "meaning": "labeled file folder or index card",
+     "strength": "primary"
+    },
+    {
+     "meaning": "project dossier or case file",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "filing and paper organization",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it is almost indistinguishable from a plain folder icon or a generic document card.",
+   "near_misses": [
+    {
+     "task": "Pay the quarterly estimated tax bill online",
+     "better": "money / bank / tax",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a folding camp table for the tailgate",
+     "better": "table / camping",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write the introduction section of the Q4 report",
+     "better": "document / pen",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Put the clean laundry away in the bedroom drawers",
+     "better": "clothing / laundry",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Renew my passport before the October trip",
+     "better": "passport",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a new 3-drawer metal cabinet from IKEA",
+     "better": "cabinet / furniture",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "description",
+   "feed",
+   "text_snippet",
+   "chrome_reader_mode",
+   "article",
+   "library_books",
+   "text_ad"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12132,
+    "output": 4025,
+    "thoughts": 352,
+    "total": 16509
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:51Z"
+  }
+ },
+ "distinguishing": "The only icon shaped as a horizontal file folder with a raised tab on the top-left edge and two uneven text lines inside, representing a folder, directory, or dossier rather than an individual page or card."
 }

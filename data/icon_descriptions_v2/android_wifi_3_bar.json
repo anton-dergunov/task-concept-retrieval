@@ -17,13 +17,9 @@
   {
    "meaning": "mobile hotspot or portable router",
    "strength": "secondary"
-  },
-  {
-   "meaning": "RSS feed or broadcast signal",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Closely resembles a 3-arc Wi-Fi strength indicator (medium signal) or an RSS feed symbol if tilted.",
+ "ambiguity": "Virtually identical to the other solid-dot two-arc Wi-Fi icon, and interchangeable in meaning with the three-arc plain Wi-Fi icon and the hollow-dot two-arc Wi-Fi icon.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -155,40 +151,40 @@
  ],
  "near_misses": [
   {
+   "task": "Set up a new Wi-Fi network for the smart home devices",
+   "better": "Wi-Fi with plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Fix the DNS error preventing the laptop from joining Wi-Fi",
+   "better": "Wi-Fi with exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a wireless mechanical keyboard for the desk setup",
    "better": "keyboard",
    "trap": "property"
   },
   {
    "task": "Check if the cafe on 4th Street has decent Wi-Fi for working",
-   "better": "cafe / coffee cup",
+   "better": "cafe or coffee cup",
    "trap": "generic_verb"
   },
   {
    "task": "Order a 15-meter Cat6 ethernet cable to wire the office PC",
-   "better": "ethernet cable / plug",
+   "better": "ethernet cable or plug",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Add three new tech blogs to my RSS reader",
-   "better": "RSS feed icon / newspaper",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Drill a cable pass-through hole behind the TV cabinet",
    "better": "drill",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Pair wireless noise-canceling headphones with the new tablet",
-   "better": "headphones",
-   "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows the universally recognized Wi-Fi symbol (a dot with two concentric radiating arcs). It is the clearest icon for tasks about home internet service, wireless networks, routers, hotspots, and ISP accounts, though it can be confused with specific Wi-Fi signal-strength variants.",
@@ -206,6 +202,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi or wireless network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "internet connection or broadband service",
+     "strength": "primary"
+    },
+    {
+     "meaning": "mobile hotspot or portable router",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "RSS feed or broadcast signal",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Closely resembles a 3-arc Wi-Fi strength indicator (medium signal) or an RSS feed symbol if tilted.",
+   "near_misses": [
+    {
+     "task": "Buy a wireless mechanical keyboard for the desk setup",
+     "better": "keyboard",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the cafe on 4th Street has decent Wi-Fi for working",
+     "better": "cafe / coffee cup",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a 15-meter Cat6 ethernet cable to wire the office PC",
+     "better": "ethernet cable / plug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Add three new tech blogs to my RSS reader",
+     "better": "RSS feed icon / newspaper",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Drill a cable pass-through hole behind the TV cabinet",
+     "better": "drill",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pair wireless noise-canceling headphones with the new tablet",
+     "better": "headphones",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_4_bar_plus",
+   "android_wifi_3_bar_plus",
+   "android_wifi_3_bar_alert",
+   "android_wifi_4_bar_alert",
+   "android_wifi_4_bar",
+   "wifi",
+   "nest_remote_comfort_sensor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12117,
+    "output": 4047,
+    "thoughts": 0,
+    "total": 16164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Shows an unbadged two-arc Wi-Fi symbol above a slightly smaller solid dot with slightly wider spacing than the other solid-dot two-arc icon, making the two completely interchangeable."
 }

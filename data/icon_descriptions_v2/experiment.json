@@ -7,11 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "chemistry, laboratory flask, or chemical solution",
+   "meaning": "chemistry, laboratory work, or scientific experiment",
    "strength": "primary"
   },
   {
-   "meaning": "science class, lab work, or scientific experiment",
+   "meaning": "chemical solution, reagent, or liquid mixture",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could briefly resemble a flower vase or potion bottle in fantasy game contexts, or a generic filter funnel inverted.",
+ "ambiguity": "Nearly interchangeable with the empty conical laboratory flask for general science or testing tasks; only when specifically contrasting full vs. empty lab glassware does the liquid fill carry distinct meaning.",
  "modifier_semantics": [],
  "domains": [
   "learning",
@@ -156,6 +156,16 @@
  ],
  "near_misses": [
   {
+   "task": "Wash and dry the empty lab glassware before putting it away",
+   "better": "empty conical laboratory flask",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Order a pack of clean empty 250ml Erlenmeyer flasks for the stockroom",
+   "better": "empty conical laboratory flask",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Wash the insulated hydro flask before hiking tomorrow",
    "better": "water bottle / thermos",
    "trap": "shared_vocabulary"
@@ -181,7 +191,7 @@
    "trap": "property"
   },
   {
-   "task": "Email Professor Lin about missing Tuesday's lecture",
+   "task": "Email Professor Lin about missing Tuesday's chemistry lecture",
    "better": "email / envelope",
    "trap": "parent_topic"
   }
@@ -189,7 +199,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a conical Erlenmeyer laboratory flask containing liquid, universally understood as chemistry, lab work, science education, or experimentation (including tech A/B testing and beta features). It is highly distinctive and only mildly confusable with a flower vase or thermos flask by word association.",
@@ -207,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "chemistry, laboratory flask, or chemical solution",
+     "strength": "primary"
+    },
+    {
+     "meaning": "science class, lab work, or scientific experiment",
+     "strength": "primary"
+    },
+    {
+     "meaning": "software testing, beta feature, or A/B experiment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "potion, alchemy, or home brewing mix",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could briefly resemble a flower vase or potion bottle in fantasy game contexts, or a generic filter funnel inverted.",
+   "near_misses": [
+    {
+     "task": "Wash the insulated hydro flask before hiking tomorrow",
+     "better": "water bottle / thermos",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Deploy the Python Flask backend to Render",
+     "better": "server or Python snake / code brackets",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put fresh water and plant food in the tulip vase",
+     "better": "flower vase / bouquet",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Test the smoke detectors in the upstairs hallway",
+     "better": "smoke detector / alarm bell",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy acid-free archival boxes for old family photos",
+     "better": "storage box / photographs",
+     "trap": "property"
+    },
+    {
+     "task": "Email Professor Lin about missing Tuesday's lecture",
+     "better": "email / envelope",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "science"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4060,
+    "output": 1245,
+    "thoughts": 0,
+    "total": 5305
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:11Z"
+  }
+ },
+ "distinguishing": "This conical laboratory flask contains a solid black trapezoid of liquid at the bottom, whereas the other flask is a completely empty outline; both are largely interchangeable as general symbols for chemistry, lab work, and experiments, though this filled version is slightly clearer as a lab flask at small sizes and better fits liquid solutions or reagents."
 }

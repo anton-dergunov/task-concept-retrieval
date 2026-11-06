@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "multiple documents, files, or pages",
+   "meaning": "multiple documents, files, or pages (paperwork, dossier)",
    "strength": "primary"
   },
   {
-   "meaning": "copy or duplicate a document",
+   "meaning": "copy, photocopy, or duplicate a document",
    "strength": "primary"
-  },
-  {
-   "meaning": "paperwork or dossier",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Very similar to a generic copy/clipboard icon or a single blank document icon at small sizes.",
+ "ambiguity": "At very small sizes, the dog-ear fold can blur into the plain portrait overlapping rectangles, though it remains the clearest icon for literal files and paperwork.",
  "modifier_semantics": [
   {
    "modifier": "overlapping back sheet corner",
@@ -134,7 +130,6 @@
  ],
  "example_tasks_ru": [
   "Сделать ксерокопии паспорта и СНИЛС для поликлиники",
-  "Собрать все документы на налоговый вычет за прошлый год",
   "Размножить раздаточные материалы на всю группу перед семинаром"
  ],
  "context_tasks": [
@@ -157,6 +152,16 @@
  ],
  "near_misses": [
   {
+   "task": "Copy the API key to the clipboard",
+   "better": "plain overlapping rectangles or clipboard",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bring the text layer to the front of the poster design",
+   "better": "overlapping solid and outlined squares",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cut two spare house keys at the hardware store",
    "better": "key",
    "trap": "shared_vocabulary"
@@ -175,22 +180,12 @@
    "task": "Book the notary appointment for Thursday afternoon",
    "better": "calendar / stamp",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Read chapter 4 of the history textbook",
-   "better": "open book",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check the figures in the quarterly report",
-   "better": "chart / spreadsheet",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows a blank document page with a folded corner stacked above a second page, universally understood as multiple documents, paperwork, or making a copy/duplicate. It fits common admin and office tasks around photocopying, gathering paperwork packets, and duplicating files, though it overlaps visually with generic single-document and clipboard-copy icons.",
@@ -208,6 +203,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "example_tasks_ru": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple documents, files, or pages",
+     "strength": "primary"
+    },
+    {
+     "meaning": "copy or duplicate a document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "paperwork or dossier",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very similar to a generic copy/clipboard icon or a single blank document icon at small sizes.",
+   "near_misses": [
+    {
+     "task": "Cut two spare house keys at the hardware store",
+     "better": "key",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write copy for the summer sale landing page",
+     "better": "text / writing pen",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a paper shredder for the home office",
+     "better": "shredder",
+     "trap": "property"
+    },
+    {
+     "task": "Book the notary appointment for Thursday afternoon",
+     "better": "calendar / stamp",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Read chapter 4 of the history textbook",
+     "better": "open book",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check the figures in the quarterly report",
+     "better": "chart / spreadsheet",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "shadow",
+   "content_copy",
+   "filter_none"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6644,
+    "output": 1988,
+    "thoughts": 0,
+    "total": 8632
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:35Z"
+  }
+ },
+ "distinguishing": "The folded dog-ear corner on the front rectangle unmistakably identifies it as a stack of paper documents or files, rather than an abstract geometric shape, layer, or UI window."
 }

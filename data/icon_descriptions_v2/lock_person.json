@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "account security, login credentials, or personal privacy settings",
+   "meaning": "user account security / login credentials / personal privacy",
    "strength": "primary"
   },
   {
-   "meaning": "user permissions, access control, or authentication",
+   "meaning": "user permissions / role access control / authentication",
    "strength": "primary"
   },
   {
    "meaning": "locked or suspended user profile",
    "strength": "secondary"
-  },
-  {
-   "meaning": "personal shopping bag or customer order (if padlock is misread as a tote bag)",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "Without a keyhole on the body, the padlock strongly resembles a shopping tote bag with a top handle, especially at small sizes.",
+ "ambiguity": "Shares the exact same keyhole-less padlock outline and dark circular badge footprint as the clock-badged padlock, requiring a close look to tell the person silhouette from clock hands; without the keyhole, the body also resembles a shopping tote bag.",
  "modifier_semantics": [
   {
    "modifier": "person avatar badge",
@@ -162,8 +158,13 @@
  "near_misses": [
   {
    "task": "Buy a heavy-duty combination padlock for the gym locker",
-   "better": "physical padlock without person badge",
-   "trap": "shared_vocabulary"
+   "better": "plain closed padlock with keyhole",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set temporary 24-hour guest access code for the Airbnb lock",
+   "better": "padlock with clock badge",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Pick up my online clothing order from Zara customer service",
@@ -172,7 +173,7 @@
   },
   {
    "task": "Update my headshot photo and bio on LinkedIn profile",
-   "better": "user profile / person avatar",
+   "better": "user profile avatar without lock",
    "trap": "shared_vocabulary"
   },
   {
@@ -181,12 +182,7 @@
    "trap": "property"
   },
   {
-   "task": "Install smart deadbolt on the front door",
-   "better": "door lock or house with lock",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay annual $36 renewal invoice on Visa card",
+   "task": "Pay annual $36 password manager renewal on Visa card",
    "better": "credit card or invoice",
    "trap": "parent_topic"
   }
@@ -214,6 +210,98 @@
    "example_tasks with parent: 1 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "account security, login credentials, or personal privacy settings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "user permissions, access control, or authentication",
+     "strength": "primary"
+    },
+    {
+     "meaning": "locked or suspended user profile",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "personal shopping bag or customer order (if padlock is misread as a tote bag)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Without a keyhole on the body, the padlock strongly resembles a shopping tote bag with a top handle, especially at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a heavy-duty combination padlock for the gym locker",
+     "better": "physical padlock without person badge",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up my online clothing order from Zara customer service",
+     "better": "shopping bag",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my headshot photo and bio on LinkedIn profile",
+     "better": "user profile / person avatar",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a secure lockable filing cabinet for home office",
+     "better": "filing cabinet",
+     "trap": "property"
+    },
+    {
+     "task": "Install smart deadbolt on the front door",
+     "better": "door lock or house with lock",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay annual $36 renewal invoice on Visa card",
+     "better": "credit card or invoice",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "lock_open_right",
+   "water_lock",
+   "lock_open",
+   "lock",
+   "lock_clock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9438,
+    "output": 1901,
+    "thoughts": 210,
+    "total": 11549
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:29Z"
+  }
+ },
+ "distinguishing": "Lacks a central keyhole and features a circular person-avatar badge at the bottom right, specifying personal account security, user permissions, or profile privacy rather than a physical lock."
 }

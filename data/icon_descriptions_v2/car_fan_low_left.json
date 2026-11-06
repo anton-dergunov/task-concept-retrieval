@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "seat selection or reservation",
+   "meaning": "seat selection, reservation, or sitting down",
    "strength": "primary"
   },
   {
-   "meaning": "sit down or seating arrangement",
+   "meaning": "car climate control floor or footwell airflow",
    "strength": "primary"
   },
   {
-   "meaning": "lower seat height or ergonomic adjustment",
+   "meaning": "lower seat height or ergonomic chair adjustment",
    "strength": "secondary"
   },
   {
-   "meaning": "passenger or occupant",
+   "meaning": "passenger or vehicle occupant",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with car climate control airflow icons or an accessibility/wheelchair symbol at very small sizes.",
+ "ambiguity": "Completely interchangeable with the left-facing seated person with a downward arrow (its exact horizontal mirror image); also easily confused at small sizes with a wheelchair accessibility symbol or a generic download arrow.",
  "modifier_semantics": [
   {
    "modifier": "large downward arrow on upper right",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix left-side driver footwell vent actuator",
+   "better": "left-facing seated person with downward arrow (if left/right orientation is used literally) or fan icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Raise desk chair height for better posture",
+   "better": "seated person with upward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Vacuum under the back seat of the Honda",
    "better": "vacuum cleaner or car",
    "trap": "shared_vocabulary"
@@ -176,25 +186,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Fix cabin AC blowing only on the floor vents",
-   "better": "air conditioning / fan",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Download boarding passes to Apple Wallet",
    "better": "ticket or QR code",
    "trap": "parent_topic"
   },
   {
    "task": "Buy folding camp chairs for the beach trip",
-   "better": "chair",
+   "better": "folding chair",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a seated figure with a downward arrow, directly evoking sitting down, selecting/assigning a seat, or lowering seat height. It works well for travel seat selection, event seating charts, and workspace ergonomics, though it resembles automotive climate-zone icons.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "seat selection or reservation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sit down or seating arrangement",
+     "strength": "primary"
+    },
+    {
+     "meaning": "lower seat height or ergonomic adjustment",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "passenger or occupant",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with car climate control airflow icons or an accessibility/wheelchair symbol at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Vacuum under the back seat of the Honda",
+     "better": "vacuum cleaner or car",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book house sitter for the two weeks in August",
+     "better": "house or person with key",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order replacement wooden toilet seat for downstairs bath",
+     "better": "toilet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Fix cabin AC blowing only on the floor vents",
+     "better": "air conditioning / fan",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Download boarding passes to Apple Wallet",
+     "better": "ticket or QR code",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy folding camp chairs for the beach trip",
+     "better": "chair",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "car_fan_low_right"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4038,
+    "output": 1138,
+    "thoughts": 0,
+    "total": 5176
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "The seated person faces right with the downward arrow on the upper right; it is an exact horizontal mirror image of the left-facing seated person with a downward arrow, and the two icons are completely interchangeable in meaning."
 }

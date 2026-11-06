@@ -19,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a generic happy smiley face, and the downward-curved closed eyes can be misread as sleepy or sad eyes.",
+ "ambiguity": "Can be confused with the upward-arched-eye flat-mouth face if a user misreads which eye curve means 'calm/zen', or with the standard smiley face at tiny sizes.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -150,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Add a standard smiley emoji to the welcome email template",
+   "better": "open-eyed smiley face with dot eyes and curved smile",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Log a flat, indifferent mood in the daily journal",
+   "better": "face with flat horizontal mouth",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Book a calm cabin in the woods for Labor Day weekend",
    "better": "cabin or house",
    "trap": "property"
@@ -165,19 +175,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Schedule 6-month facial skin check with the dermatologist",
-   "better": "doctor or medical cross",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the $70 invoice for theCalmApp yearly family plan",
+   "task": "Pay the $70 invoice for the Calm app yearly family plan",
    "better": "credit card or receipt",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Add emoji reactions to the team Slack channel",
-   "better": "chat bubble",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
@@ -201,6 +201,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "calm, relaxation, mindfulness, or meditation",
+     "strength": "primary"
+    },
+    {
+     "meaning": "rest, nap, or sleep",
+     "strength": "primary"
+    },
+    {
+     "meaning": "relief, peace, or mental wellness",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a generic happy smiley face, and the downward-curved closed eyes can be misread as sleepy or sad eyes.",
+   "near_misses": [
+    {
+     "task": "Book a calm cabin in the woods for Labor Day weekend",
+     "better": "cabin or house",
+     "trap": "property"
+    },
+    {
+     "task": "Check on how Sarah is feeling after her wisdom teeth surgery",
+     "better": "phone call or message",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Order a new ergonomic memory foam pillow for neck pain",
+     "better": "bed or pillow",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule 6-month facial skin check with the dermatologist",
+     "better": "doctor or medical cross",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $70 invoice for theCalmApp yearly family plan",
+     "better": "credit card or receipt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Add emoji reactions to the team Slack channel",
+     "better": "chat bubble",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "sentiment_content",
+   "sentiment_neutral",
+   "insert_emoticon",
+   "sentiment_satisfied_alt",
+   "child_care",
+   "sentiment_very_satisfied"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10675,
+    "output": 3460,
+    "thoughts": 0,
+    "total": 14135
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:13Z"
+  }
+ },
+ "distinguishing": "The only face with downward-curving U-shaped closed eyelids paired with a gentle curved smile, unmistakably depicting peaceful sleep, rest, relaxation, or meditation."
 }

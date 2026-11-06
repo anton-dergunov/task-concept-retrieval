@@ -13,19 +13,19 @@
    "strength": "primary"
   },
   {
-   "meaning": "upload or submit a document",
+   "meaning": "file shortcut, alias, or symlink",
    "strength": "primary"
   },
   {
-   "meaning": "open file or follow document shortcut",
+   "meaning": "upload or submit a document",
    "strength": "secondary"
   },
   {
-   "meaning": "insert content into a file",
+   "meaning": "open file or insert content into a file",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Easy to confuse with export/external-link document icons (where the arrow points outward) or general upload icons at small sizes.",
+ "ambiguity": "Nearly interchangeable with the document with a bottom-right inward arrow for importing files; also easily confused at small sizes with export or external-link document icons where the arrow points outward.",
  "modifier_semantics": [
   {
    "modifier": "diagonal arrow pointing inward",
@@ -161,8 +161,13 @@
  ],
  "near_misses": [
   {
+   "task": "Click to select the tax form template in the portal",
+   "better": "document with bottom-right arrow pointing up-left like a cursor or pointer",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Export Q4 sales table to CSV for the accountant",
-   "better": "document with outward arrow (export)",
+   "better": "document with outward arrow (file export)",
    "trap": "lookalike_glyph"
   },
   {
@@ -177,7 +182,7 @@
   },
   {
    "task": "Sign the NDA on DocuSign",
-   "better": "pen / signature icon",
+   "better": "pen or signature icon",
    "trap": "generic_verb"
   },
   {
@@ -187,14 +192,14 @@
   },
   {
    "task": "Check if the PDF attachment is readable on mobile",
-   "better": "smartphone or eye/preview icon",
+   "better": "smartphone or eye preview icon",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a document page with an inward-pointing diagonal arrow, universally understood as importing, uploading, or inserting into a file. It fits many common digital admin, finance, and work tasks (uploading forms, importing CSVs), though at small sizes the arrow direction can be confused with export or external-link document icons.",
@@ -212,6 +217,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "import file or data into a document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "upload or submit a document",
+     "strength": "primary"
+    },
+    {
+     "meaning": "open file or follow document shortcut",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "insert content into a file",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Easy to confuse with export/external-link document icons (where the arrow points outward) or general upload icons at small sizes.",
+   "near_misses": [
+    {
+     "task": "Export Q4 sales table to CSV for the accountant",
+     "better": "document with outward arrow (export)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Import coffee beans from Colombia for the tasting",
+     "better": "coffee beans or shipping box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy printer paper for the home office",
+     "better": "printer or paper stack",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Sign the NDA on DocuSign",
+     "better": "pen / signature icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Call the customs broker about the import fee",
+     "better": "phone icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check if the PDF attachment is readable on mobile",
+     "better": "smartphone or eye/preview icon",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "file_open"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4087,
+    "output": 1106,
+    "thoughts": 157,
+    "total": 5350
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:28Z"
+  }
+ },
+ "distinguishing": "The inward diagonal arrow enters from the bottom-left corner (pointing up-right), making it essentially interchangeable with the bottom-right inward-arrow variant for file import, though the bottom-left placement also matches a desktop file shortcut or alias badge."
 }

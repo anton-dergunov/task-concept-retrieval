@@ -124,11 +124,6 @@
    "domain": "home"
   },
   {
-   "task": "Update checklist",
-   "parent": "Evening Shutdown",
-   "domain": "home"
-  },
-  {
    "task": "Log hours for Tuesday",
    "parent": "Sleep Tracking",
    "domain": "health_fitness"
@@ -231,6 +226,20 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": "nights_stay"
+  "alias_of": "nights_stay",
+  "guard": {
+   "dropped": {
+    "example_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  }
  }
 }

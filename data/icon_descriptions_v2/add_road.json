@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "add road, street, or route",
+   "meaning": "add road, street, route, or lane",
    "strength": "primary"
   },
   {
    "meaning": "road, highway, or traffic lane",
-   "strength": "primary"
-  },
-  {
-   "meaning": "insert column or vertical border divider",
    "strength": "secondary"
   },
   {
-   "meaning": "add barcode or vertical stripe",
+   "meaning": "insert column or vertical divider",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Very abstract at small sizes; easily mistaken for a spreadsheet column/border tool, barcode, or pause/menu lines rather than a road.",
+ "ambiguity": "At small list sizes, the upright plus badge is easily confused with the rotated X badge on the road-with-X icon; the parallel vertical lines also look like a spreadsheet column or barcode.",
  "modifier_semantics": [
   {
    "modifier": "plus sign in bottom right corner",
@@ -159,13 +155,18 @@
  ],
  "near_misses": [
   {
-   "task": "Insert a new column for Q3 projections in the budget sheet",
-   "better": "table or spreadsheet column",
+   "task": "Check for highway closures before driving through the mountain pass",
+   "better": "road with an X mark (road closed)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Generate SKU barcodes for the new ceramic mugs",
-   "better": "barcode",
+   "task": "Delete the unused vertical divider column from the layout",
+   "better": "vertical lines with an X mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Insert a new column for Q3 projections in the budget sheet",
+   "better": "table or spreadsheet column",
    "trap": "lookalike_glyph"
   },
   {
@@ -179,7 +180,7 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Book the hotel in Barstow for the first night",
+   "task": "Book the hotel in Barstow for the first night of the road trip",
    "better": "hotel or bed",
    "trap": "parent_topic"
   },
@@ -192,7 +193,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a top-down two-lane road (solid outer lines, dashed center line) with a plus sign in the lower right ('add road'). It fits tasks about mapping missing streets, planning driving routes, or driveway/road work, though its minimal geometric lines are easily mistaken for spreadsheet borders or a barcode at small sizes.",
@@ -210,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add road, street, or route",
+     "strength": "primary"
+    },
+    {
+     "meaning": "road, highway, or traffic lane",
+     "strength": "primary"
+    },
+    {
+     "meaning": "insert column or vertical border divider",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "add barcode or vertical stripe",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Very abstract at small sizes; easily mistaken for a spreadsheet column/border tool, barcode, or pause/menu lines rather than a road.",
+   "near_misses": [
+    {
+     "task": "Insert a new column for Q3 projections in the budget sheet",
+     "better": "table or spreadsheet column",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Generate SKU barcodes for the new ceramic mugs",
+     "better": "barcode",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy road running shoes with extra cushioning",
+     "better": "running shoe",
+     "trap": "property"
+    },
+    {
+     "task": "Read Cormac McCarthy's The Road before book club",
+     "better": "book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the hotel in Barstow for the first night",
+     "better": "hotel or bed",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check tire pressure before hitting the highway",
+     "better": "car tire or pressure gauge",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "remove_road"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4031,
+    "output": 1067,
+    "thoughts": 0,
+    "total": 5098
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:08Z"
+  }
+ },
+ "distinguishing": "Has an upright plus sign (+) in the bottom-right corner instead of a diagonal X mark, meaning adding a road, route, or column rather than closing or removing one."
 }

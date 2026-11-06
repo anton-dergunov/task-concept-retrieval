@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "multiple monitors / dual-screen display setup",
+   "meaning": "dual monitors or multiple display setup",
    "strength": "primary"
   },
   {
-   "meaning": "screen mirroring / extended display / remote desktop",
+   "meaning": "screen mirroring, extended display, or casting",
    "strength": "primary"
   },
   {
-   "meaning": "virtual desktops / workspaces",
+   "meaning": "remote desktop or virtual workspaces",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can be confused with a generic 'copy/duplicate' icon or overlapping browser windows, though the monitor stand distinguishes it as hardware displays.",
+ "ambiguity": "Shares the exact same top-left L-shaped background bracket as the overlapping squares (copy/duplicate); if the small bottom stand is missed, it reads as generic copy or windows.",
  "modifier_semantics": [
   {
    "modifier": "overlapping second screen outline behind",
@@ -159,33 +159,33 @@
  "near_misses": [
   {
    "task": "Make a duplicate copy of the Q3 tax spreadsheet before editing",
-   "better": "copy / duplicate documents",
+   "better": "two overlapping plain squares without a monitor stand",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check how the website renders in multiple browser windows",
+   "better": "overlapping application windows with top title bars",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Wipe fingerprints off the TV screen in the living room",
-   "better": "single TV / television",
+   "better": "single television or spray bottle",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Pick up a 2m braided HDMI 2.1 cable from Micro Center",
-   "better": "cable / plug",
+   "better": "cable or plug",
    "trap": "parent_topic"
   },
   {
    "task": "Screen the new backyard tenant applications before Saturday",
-   "better": "candidate resume / checklist",
+   "better": "candidate resume or checklist",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Monitor blood pressure every morning for two weeks",
-   "better": "heart rate / blood pressure cuff",
+   "better": "heart rate or blood pressure cuff",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a wireless mechanical keyboard that switches between two computers",
-   "better": "keyboard",
-   "trap": "property"
   }
  ],
  "scores": {
@@ -211,6 +211,94 @@
    "example_tasks_es: 4 not in 3-3"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "multiple monitors / dual-screen display setup",
+     "strength": "primary"
+    },
+    {
+     "meaning": "screen mirroring / extended display / remote desktop",
+     "strength": "primary"
+    },
+    {
+     "meaning": "virtual desktops / workspaces",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can be confused with a generic 'copy/duplicate' icon or overlapping browser windows, though the monitor stand distinguishes it as hardware displays.",
+   "near_misses": [
+    {
+     "task": "Make a duplicate copy of the Q3 tax spreadsheet before editing",
+     "better": "copy / duplicate documents",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wipe fingerprints off the TV screen in the living room",
+     "better": "single TV / television",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up a 2m braided HDMI 2.1 cable from Micro Center",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Screen the new backyard tenant applications before Saturday",
+     "better": "candidate resume / checklist",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Monitor blood pressure every morning for two weeks",
+     "better": "heart rate / blood pressure cuff",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a wireless mechanical keyboard that switches between two computers",
+     "better": "keyboard",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "select_window",
+   "select_window_2",
+   "markunread_mailbox",
+   "stack",
+   "folder_copy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9395,
+    "output": 2955,
+    "thoughts": 262,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:49Z"
+  }
+ },
+ "distinguishing": "The front rectangle sits on a solid rectangular pedestal base at the bottom center, making it a hardware computer monitor with a second screen's top-left corner behind it."
 }

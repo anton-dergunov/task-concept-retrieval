@@ -17,15 +17,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "account information or membership record",
+   "meaning": "candidate summary, resume, or membership record",
    "strength": "secondary"
   },
   {
-   "meaning": "candidate summary or resume",
+   "meaning": "ranked user attributes or tiered personal stats",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Close to framed ID card or badge icons, and could be confused with a contact list or speaker notes icon at very small sizes.",
+ "ambiguity": "Virtually interchangeable with the person bust with three equal-length horizontal bars at the upper right, and easily confused with a framed ID card or badge icon.",
  "modifier_semantics": [
   {
    "modifier": "three right-aligned horizontal text lines",
@@ -178,6 +178,16 @@
  ],
  "near_misses": [
   {
+   "task": "Export the full customer contact list and directory for the sales team",
+   "better": "person bust with three equal-length list bars at the upper right, or address book",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Configure user account menu options and personal task list view",
+   "better": "person bust with three equal-length menu bars at the upper right",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Renew driver's license at the DMV before it expires in May",
    "better": "framed ID card or license badge",
    "trap": "lookalike_glyph"
@@ -198,11 +208,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Send the signed employment contract back to HR",
-   "better": "signed document with pen",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Pay personal property tax bill online",
    "better": "receipt, bill, or currency symbol",
    "trap": "property"
@@ -211,7 +216,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a person silhouette alongside three lines of text, the standard visual metaphor for a user profile, bio, or contact details. It fits tasks about updating online profiles, filling in personal information, or managing contacts, though it closely overlaps with framed ID card and address book icons.",
@@ -231,6 +236,91 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "user profile, bio, or personal details",
+     "strength": "primary"
+    },
+    {
+     "meaning": "contact card or address book entry",
+     "strength": "primary"
+    },
+    {
+     "meaning": "account information or membership record",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "candidate summary or resume",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Close to framed ID card or badge icons, and could be confused with a contact list or speaker notes icon at very small sizes.",
+   "near_misses": [
+    {
+     "task": "Renew driver's license at the DMV before it expires in May",
+     "better": "framed ID card or license badge",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call Mom to ask about Sunday dinner",
+     "better": "telephone receiver",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy new contact lenses and saline solution",
+     "better": "eye or contact lens case",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read biography of Marie Curie",
+     "better": "book",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay personal property tax bill online",
+     "better": "receipt, bill, or currency symbol",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "user_attributes"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4051,
+    "output": 1190,
+    "thoughts": 196,
+    "total": 5437
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:35Z"
+  }
+ },
+ "distinguishing": "The three horizontal bars to the right decrease in length from top to bottom and span the full height of the person bust, wrapping around the shoulder like an unframed ID card or bio text, whereas the look-alike has three equal-length bars shifted to the upper right; in practice the two are nearly interchangeable."
 }

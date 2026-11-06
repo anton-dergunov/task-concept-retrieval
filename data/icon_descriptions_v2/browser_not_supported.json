@@ -9,7 +9,7 @@
  },
  "readings": [
   {
-   "meaning": "block pop-ups or disable browser windows",
+   "meaning": "block pop-ups or disable application/browser windows",
    "strength": "primary"
   },
   {
@@ -17,15 +17,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "close browser tabs or screen-free digital detox",
-   "strength": "secondary"
-  },
-  {
    "meaning": "headless browser or no-GUI mode",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a generic 'no credit card' (missing magnetic stripe position) or 'calendar off' icon at very small sizes, or confused with a 'screen off / monitor disabled' icon.",
+ "ambiguity": "Easily confused with the slashed browser window containing interior marks, and at small sizes its thick top bar is subtle enough to look like the slashed monitors or slashed folder.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,13 +157,8 @@
  ],
  "near_misses": [
   {
-   "task": "Replace cracked glass on the bedroom window",
-   "better": "house window / glass pane",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Cancel expired Visa credit card",
-   "better": "credit card with slash",
+   "task": "Fix broken image placeholders on the blog",
+   "better": "slashed window/frame with interior image marks",
    "trap": "lookalike_glyph"
   },
   {
@@ -176,18 +167,23 @@
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy blackout curtains for the nursery window",
-   "better": "curtains / window blinds",
+   "task": "Remove node_modules folder from Git tracking",
+   "better": "file folder with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace cracked glass on the bedroom window",
+   "better": "house window pane",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Read downloaded articles on the offline flight to Tokyo",
-   "better": "article / airplane",
+   "better": "article or airplane",
    "trap": "property"
   },
   {
    "task": "Pay annual domain renewal invoice for the website",
-   "better": "invoice / payment",
+   "better": "invoice or payment",
    "trap": "parent_topic"
   }
  ],
@@ -212,6 +208,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "web_asset_off"
- }
+  "alias_of": "web_asset_off",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "block pop-ups or disable browser windows",
+     "strength": "primary"
+    },
+    {
+     "meaning": "website down, offline page, or blocked site",
+     "strength": "primary"
+    },
+    {
+     "meaning": "close browser tabs or screen-free digital detox",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "headless browser or no-GUI mode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a generic 'no credit card' (missing magnetic stripe position) or 'calendar off' icon at very small sizes, or confused with a 'screen off / monitor disabled' icon.",
+   "near_misses": [
+    {
+     "task": "Replace cracked glass on the bedroom window",
+     "better": "house window / glass pane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cancel expired Visa credit card",
+     "better": "credit card with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Turn off external Dell monitor overnight",
+     "better": "desktop monitor with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy blackout curtains for the nursery window",
+     "better": "curtains / window blinds",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Read downloaded articles on the offline flight to Tokyo",
+     "better": "article / airplane",
+     "trap": "property"
+    },
+    {
+     "task": "Pay annual domain renewal invoice for the website",
+     "better": "invoice / payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_access_disabled",
+   "mimo_disconnect",
+   "sync_saved_locally_off",
+   "domain_verification_off",
+   "videocam_off",
+   "folder_off",
+   "tv_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12219,
+    "output": 3998,
+    "thoughts": 0,
+    "total": 16217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "A standless rectangle with a thick solid top header bar and a completely empty interior, representing a plain browser or application window rather than a monitor (which has a stand) or the marked window (which has interior shapes)."
 }

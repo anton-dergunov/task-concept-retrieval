@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "bed / double bed / mattress / bedroom",
+   "meaning": "double or king bed, mattress, bedroom furniture",
    "strength": "primary"
   },
   {
-   "meaning": "sofa / couch / living room furniture",
+   "meaning": "full-size sofa, couch, living room seating",
    "strength": "primary"
   },
   {
-   "meaning": "hotel / lodging / overnight stay",
+   "meaning": "hotel room, lodging, overnight stay",
    "strength": "secondary"
   },
   {
-   "meaning": "sleep / rest",
+   "meaning": "sleep, rest, nap",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read equally as a front-facing double bed with two pillows or as a two-seater sofa/couch; at tiny sizes it can also slightly resemble a car rear or printer.",
+ "ambiguity": "Nearly identical to the narrower two-cushion loveseat/bed icon (differing only in horizontal width and pillow aspect ratio), and inherently ambiguous between a front-facing bed with two pillows and a two-cushion sofa; at tiny sizes the silhouette can also suggest the front/rear of a car.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -154,40 +154,45 @@
  ],
  "near_misses": [
   {
+   "task": "Measure the studio alcove for a compact loveseat",
+   "better": "narrower loveseat / compact two-cushion sofa icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace the rear brake pads on the sedan",
+   "better": "car or brake icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Plant perennials along the sunny south garden bed",
    "better": "seedling or shovel / garden icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Refill melatonin gummies at the pharmacy",
-   "better": "pill / medicine bottle icon",
+   "better": "pill or medicine bottle icon",
    "trap": "property"
   },
   {
    "task": "Spray the new suede boots with stain and upholstery protector",
-   "better": "boot / shoe icon",
+   "better": "boot or shoe icon",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Install blackout roller blinds on the east window",
-   "better": "window / blinds icon",
+   "task": "Install blackout roller blinds on the bedroom east window",
+   "better": "window or blinds icon",
    "trap": "parent_topic"
   },
   {
    "task": "Pay the Airbnb cleaning deposit by card",
-   "better": "credit card / payment icon",
+   "better": "credit card or payment icon",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Replace the rear brake pads on the sedan",
-   "better": "car / brake icon",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A clear front-facing glyph of a double bed with two pillows or a two-cushion sofa on short legs. It is an everyday match for tasks about beds, mattresses, bedding, couches, upholstery cleaning, furniture shopping, and hotel bookings, with mild visual overlap between a bed and a couch.",
@@ -205,6 +210,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "bed / double bed / mattress / bedroom",
+     "strength": "primary"
+    },
+    {
+     "meaning": "sofa / couch / living room furniture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "hotel / lodging / overnight stay",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sleep / rest",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read equally as a front-facing double bed with two pillows or as a two-seater sofa/couch; at tiny sizes it can also slightly resemble a car rear or printer.",
+   "near_misses": [
+    {
+     "task": "Plant perennials along the sunny south garden bed",
+     "better": "seedling or shovel / garden icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill melatonin gummies at the pharmacy",
+     "better": "pill / medicine bottle icon",
+     "trap": "property"
+    },
+    {
+     "task": "Spray the new suede boots with stain and upholstery protector",
+     "better": "boot / shoe icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Install blackout roller blinds on the east window",
+     "better": "window / blinds icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the Airbnb cleaning deposit by card",
+     "better": "credit card / payment icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace the rear brake pads on the sedan",
+     "better": "car / brake icon",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "single_bed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4078,
+    "output": 1190,
+    "thoughts": 271,
+    "total": 5539
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:55Z"
+  }
+ },
+ "distinguishing": "Wide horizontal proportions with two broad rectangular pillow/cushion cutouts, reading slightly more like a wide king/queen bed or full-size sofa than the narrower square-cushion version, though the two are nearly interchangeable at small sizes."
 }

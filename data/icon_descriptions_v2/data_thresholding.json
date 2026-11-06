@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "line chart, graph, or analytics",
+   "meaning": "line chart with a baseline, floor limit, or lower threshold zone",
    "strength": "primary"
   },
   {
-   "meaning": "threshold, baseline, or floor limit on a chart",
+   "meaning": "line graph, data plot, or analytics dashboard",
    "strength": "primary"
-  },
-  {
-   "meaning": "financial stock chart or investment performance",
-   "strength": "secondary"
   },
   {
    "meaning": "metrics monitoring or system performance telemetry",
    "strength": "secondary"
+  },
+  {
+   "meaning": "financial chart or stock performance above a minimum",
+   "strength": "secondary"
   }
  ],
- "ambiguity": "The hatched bottom section is a specialized charting convention (baseline, threshold, or shaded area) that most viewers will simply read as a generic line graph or stock chart.",
+ "ambiguity": "Readily mistaken for the boxed upward zigzag trend arrow (which has an arrowhead and no bottom hatching) whenever a task is generically about charts, analytics, or stocks.",
  "modifier_semantics": [
   {
    "modifier": "four diagonal hatch marks along the bottom edge",
@@ -162,19 +162,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy chicken stock for the risotto",
-   "better": "broth carton or soup pot",
-   "trap": "shared_vocabulary"
+   "task": "Review Q3 sales growth projections",
+   "better": "boxed upward zigzag trend arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Rebalance index funds in brokerage account",
+   "better": "boxed upward zigzag trend arrow",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Frame the vintage botanical print for the hallway",
-   "better": "picture frame with artwork or mountain/sun landscape",
+   "better": "picture frame with mountain and sun landscape",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a surge protector for the home theater rack",
-   "better": "power strip or lightning bolt",
-   "trap": "lookalike_glyph"
+   "task": "Buy chicken stock for the risotto",
+   "better": "broth carton or soup pot",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Track the DHL package from Germany",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "line chart, graph, or analytics",
+     "strength": "primary"
+    },
+    {
+     "meaning": "threshold, baseline, or floor limit on a chart",
+     "strength": "primary"
+    },
+    {
+     "meaning": "financial stock chart or investment performance",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "metrics monitoring or system performance telemetry",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The hatched bottom section is a specialized charting convention (baseline, threshold, or shaded area) that most viewers will simply read as a generic line graph or stock chart.",
+   "near_misses": [
+    {
+     "task": "Buy chicken stock for the risotto",
+     "better": "broth carton or soup pot",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Frame the vintage botanical print for the hallway",
+     "better": "picture frame with artwork or mountain/sun landscape",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a surge protector for the home theater rack",
+     "better": "power strip or lightning bolt",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Track the DHL package from Germany",
+     "better": "parcel box or delivery truck",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email the accountant our signed engagement letter",
+     "better": "envelope or signature pen",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a high-performance SD card for the mirrorless camera",
+     "better": "SD memory card",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "chart_data"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4082,
+    "output": 1207,
+    "thoughts": 0,
+    "total": 5289
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "Shows a rising zigzag polyline without an arrowhead and adds a band of four diagonal hatch marks along the bottom edge of the square frame, indicating a chart with a baseline, threshold floor, or shaded lower zone rather than a pure upward-trend arrow."
 }

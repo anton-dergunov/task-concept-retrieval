@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "pointing hand / click / tap",
+   "meaning": "point, click, tap, or select",
    "strength": "primary"
   },
   {
-   "meaning": "touch gesture / interactive element",
+   "meaning": "touch gesture, button press, or interactive UI element",
    "strength": "primary"
   },
   {
-   "meaning": "bar chart with trend line",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "glove / hand care",
+   "meaning": "number one or first choice",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the fingertips are open vertical bars rather than closed loops, at small sizes it looks strongly like a four-bar chart or signal-strength bars inside a bracket.",
+ "ambiguity": "At small sizes the open vertical finger bars can look like a four-bar chart inside a bracket or one of the plain open-palm hands.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,8 +150,23 @@
  ],
  "near_misses": [
   {
+   "task": "Volunteer to chaperone the fifth-grade science museum field trip",
+   "better": "open raised hand with all fingers up",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Say goodbye to departing summer interns at Friday happy hour",
+   "better": "waving hand with motion arcs",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plot monthly revenue bars on the Q4 investor chart",
+   "better": "bar chart",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Hand in the signed lease renewal at the management office",
-   "better": "document / contract with signature",
+   "better": "document or contract with signature",
    "trap": "shared_vocabulary"
   },
   {
@@ -169,16 +180,6 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Plot monthly revenue bars on the Q4 investor chart",
-   "better": "bar chart",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Pay the invoice for the new salon UV lamp",
-   "better": "receipt / invoice or UV lamp",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Point the backyard security camera slightly lower toward the gate",
    "better": "security camera",
    "trap": "shared_vocabulary"
@@ -187,7 +188,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The glyph depicts a stylized pointing hand constructed from a single bottom outline and four open vertical bars for fingers. It fits tasks centered on touch gestures, clicking/UI interaction, fingerprints, or hand care and gloves, though its open-top geometry makes it easy to confuse with a bar chart at list-icon sizes.",
@@ -205,6 +206,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "pointing hand / click / tap",
+     "strength": "primary"
+    },
+    {
+     "meaning": "touch gesture / interactive element",
+     "strength": "primary"
+    },
+    {
+     "meaning": "bar chart with trend line",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "glove / hand care",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the fingertips are open vertical bars rather than closed loops, at small sizes it looks strongly like a four-bar chart or signal-strength bars inside a bracket.",
+   "near_misses": [
+    {
+     "task": "Hand in the signed lease renewal at the management office",
+     "better": "document / contract with signature",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a second-hand bookshelf for the hallway",
+     "better": "bookshelf",
+     "trap": "property"
+    },
+    {
+     "task": "Touch base with Marcus about the Q3 budget numbers",
+     "better": "chat bubble or phone call",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Plot monthly revenue bars on the Q4 investor chart",
+     "better": "bar chart",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the invoice for the new salon UV lamp",
+     "better": "receipt / invoice or UV lamp",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Point the backyard security camera slightly lower toward the gate",
+     "better": "security camera",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "back_hand",
+   "hand_gesture",
+   "pan_tool",
+   "eda"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8102,
+    "output": 1643,
+    "thoughts": 0,
+    "total": 9745
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:11Z"
+  }
+ },
+ "distinguishing": "Unlike the four open-palm hands with all fingers raised, this hand has only the index finger extended tall while the other three fingers are short and curled down, indicating pointing, clicking, or tapping."
 }

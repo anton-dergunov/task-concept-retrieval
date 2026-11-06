@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "in-progress status or partial completion indicator",
+   "meaning": "timelapse / timer / countdown / elapsed time",
    "strength": "primary"
   },
   {
-   "meaning": "timer, countdown, or elapsed time (timelapse)",
+   "meaning": "in-progress status / partial completion indicator",
    "strength": "primary"
   },
   {
-   "meaning": "pie chart or proportion breakdown",
+   "meaning": "pie chart / majority share or proportion",
    "strength": "secondary"
   },
   {
-   "meaning": "storage quota or capacity usage meter",
+   "meaning": "storage quota / capacity usage meter",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Looks like a task's completion status checkbox (half-done / in-progress) in a to-do list rather than a subject icon; also easily confused with a clock face, pie chart, or moon phase at small sizes.",
+ "ambiguity": "Easily confused with the circle with a flush one-eighth wedge when used for general progress or proportions, and looks like a task completion checkbox in a to-do list.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -165,19 +165,24 @@
  ],
  "near_misses": [
   {
-   "task": "Bake a cherry pie for Sunday dinner",
-   "better": "pie / pastry",
-   "trap": "shared_vocabulary"
+   "task": "Add a revenue breakdown pie chart to the slide deck",
+   "better": "circle with a flush one-eighth wedge or segmented pie chart",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Replace the battery in the hallway wall clock",
-   "better": "clock with hands",
+   "better": "clock face with two hands",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Check when the next full moon is for night hiking",
-   "better": "moon phase",
+   "better": "moon phase icon",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Bake a cherry pie for Sunday dinner",
+   "better": "pie / pastry dish",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Finish the half-done tax return before Friday",
@@ -188,11 +193,6 @@
    "task": "Check progress on the bathroom tiling",
    "better": "tiles / bathroom",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Buy a new tripod for the camera",
-   "better": "tripod",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -218,6 +218,94 @@
    "example_tasks: 18 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "in-progress status or partial completion indicator",
+     "strength": "primary"
+    },
+    {
+     "meaning": "timer, countdown, or elapsed time (timelapse)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "pie chart or proportion breakdown",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "storage quota or capacity usage meter",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Looks like a task's completion status checkbox (half-done / in-progress) in a to-do list rather than a subject icon; also easily confused with a clock face, pie chart, or moon phase at small sizes.",
+   "near_misses": [
+    {
+     "task": "Bake a cherry pie for Sunday dinner",
+     "better": "pie / pastry",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the battery in the hallway wall clock",
+     "better": "clock with hands",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check when the next full moon is for night hiking",
+     "better": "moon phase",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Finish the half-done tax return before Friday",
+     "better": "tax form / document",
+     "trap": "property"
+    },
+    {
+     "task": "Check progress on the bathroom tiling",
+     "better": "tiles / bathroom",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new tripod for the camera",
+     "better": "tripod",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "clock_loader_10"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4101,
+    "output": 1039,
+    "thoughts": 211,
+    "total": 5351
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:18Z"
+  }
+ },
+ "distinguishing": "Shows a five-eighths wedge inset from the outer ring by a clear white gap, which is the standard glyph for timelapse, countdown timer, or past-halfway progress."
 }

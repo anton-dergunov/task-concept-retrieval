@@ -12,7 +12,11 @@ labeller/bundle/  (gitignored — includes private tasks)
 
 Candidates per task: a round-robin union of several matchers' rankings (diverse
 pool) plus uniformly random icons (a control for pool bias), shuffled with a
-per-task seed so every device shows the same grid. "More icons" extends it to
+per-task seed so every device shows the same grid. Every matcher runs on both
+description versions (v1 and v2; docs/icon-descriptions-v2.md §6, pool fairness):
+provenance says which version proposed an icon ("M3.v2@1"), so each version's
+recall of the labels can be measured; the icon set is the union of both versions'
+kept icons. "More icons" extends it to
 ~100 with the matchers' next-best icons and more random ones. Icons are distinct
 glyphs (aliases collapsed in tcr.data). Existing grids are reused on rebuild so
 what the labeller saw never changes (--refresh to redo).
@@ -52,6 +56,7 @@ N_RANDOM = 6        # … plus uniformly random icons (30 in total)
 N_MORE_METHOD = 56  # "More icons": the matchers' next-best icons …
 N_MORE_RANDOM = 14  # … plus more random ones (70 more, ~100 in total)
 DEPTH = 120         # how deep to read each matcher's ranking
+VERSIONS = ("v1", "v2")   # icon description versions; every source runs on each
 
 
 def _seed(*parts: str) -> int:
@@ -71,14 +76,19 @@ def alt_titles(rec):
 
 
 def rankings(rec, matchers):
+    """[(provenance label, ranked names)] for every source × version. Which version
+    comes first at each depth of the round-robin is drawn per task."""
     title, body, parents = rec["title"], rec.get("body", ""), rec.get("parents") or []
+    versions = list(VERSIONS)
+    random.Random(_seed("versions", rec["id"])).shuffle(versions)
     out = []
     for label, key, view in SOURCES:
         if view == "parent" and not parents:
             continue   # would duplicate the title-only query
         q = query_text(title, body, with_body=(view == "body"),
                        parents=parents if view == "parent" else ())
-        out.append((label, [n for n, _ in matchers[key].rank(q, top_k=DEPTH)]))
+        for ver in versions:
+            out.append((f"{label}.{ver}", [n for n, _ in matchers[key, ver].rank(q, top_k=DEPTH)]))
     return out
 
 
@@ -129,11 +139,15 @@ def main() -> None:
         keys = args.datasets.split(",")
         dsets = [DATASETS[k] for k in keys]
 
-    icons = load_icons()   # non-discarded, one per distinct glyph, no blank renders
-    all_names = [ic.name for ic in icons]
+    # Non-discarded, one per distinct glyph, no blank renders; a glyph has the same
+    # name in both versions.
+    icons = {ver: load_icons(version=ver) for ver in VERSIONS}
+    all_names = sorted({ic.name for ver in VERSIONS for ic in icons[ver]})
     names = set(all_names)
-    print(f"{len(icons)} distinct icons; building matchers {sorted({k for _, k, _ in SOURCES})} …")
-    matchers = {key: build_method(key, icons) for key in {k for _, k, _ in SOURCES}}
+    keys = sorted({k for _, k, _ in SOURCES})
+    print(f"{len(all_names)} distinct icons (" + ", ".join(f"{v}: {len(icons[v])}" for v in VERSIONS)
+          + f"); building matchers {keys} on each version …")
+    matchers = {(key, ver): build_method(key, icons[ver]) for key in keys for ver in VERSIONS}
 
     (BUNDLE / "tasks").mkdir(parents=True, exist_ok=True)
     for ds in dsets:
@@ -184,7 +198,12 @@ def main() -> None:
             copied += 1
 
     # Search matches descriptions only — never icon names (CLAUDE.md hard rule 1).
-    index = {ic.name: ic.document(include_examples=True) for ic in icons}
+    # An icon's text is both versions' documents (v2 adds ES/RU examples).
+    docs = {}
+    for ver in VERSIONS:
+        for ic in icons[ver]:
+            docs.setdefault(ic.name, []).append(ic.document(include_examples=True))
+    index = {name: " ".join(d) for name, d in docs.items()}
     (BUNDLE / "search_index.json").write_text(json.dumps(index, ensure_ascii=False))
     print(f"icons: {len(all_names)} ({copied} copied); search index -> {BUNDLE / 'search_index.json'}")
 

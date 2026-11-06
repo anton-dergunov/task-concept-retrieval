@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the padlock badge might be hard to distinguish from a generic Wi-Fi warning or settings badge.",
+ "ambiguity": "Interchangeable with both the unclipped two-arc and the three-arc locked Wi-Fi icons, and easily mistaken for a plain Wi-Fi icon when small.",
  "modifier_semantics": [
   {
    "modifier": "closed padlock in the bottom right corner",
@@ -160,13 +160,13 @@
  ],
  "near_misses": [
   {
-   "task": "Call ISP about the internet dropping every afternoon",
-   "better": "plain Wi-Fi icon without lock or phone icon",
-   "trap": "shared_vocabulary"
+   "task": "Buy a new padlock for the garden shed door",
+   "better": "standalone padlock without Wi-Fi waves",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a new padlock for the garden shed door",
-   "better": "padlock",
+   "task": "Call ISP about the internet dropping every afternoon",
+   "better": "plain Wi-Fi icon without a lock, or a phone icon",
    "trap": "lookalike_glyph"
   },
   {
@@ -181,7 +181,7 @@
   },
   {
    "task": "Unplug the router in the hallway before the painters arrive",
-   "better": "router box or plug",
+   "better": "router box or electrical plug",
    "trap": "parent_topic"
   },
   {
@@ -193,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a Wi-Fi symbol combined with a closed padlock, universally understood as a password-protected or secured wireless network. It fits a specific but recurring set of household and tech tasks around changing, sharing, or securing Wi-Fi passwords, while being distinct from plain connectivity icons due to the lock modifier.",
@@ -211,6 +211,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "Wi-Fi password or secured wireless network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "network security or router encryption",
+     "strength": "primary"
+    },
+    {
+     "meaning": "VPN or private internet connection",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "parental controls or restricted internet access",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the padlock badge might be hard to distinguish from a generic Wi-Fi warning or settings badge.",
+   "near_misses": [
+    {
+     "task": "Call ISP about the internet dropping every afternoon",
+     "better": "plain Wi-Fi icon without lock or phone icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new padlock for the garden shed door",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Reset my bank account password before the statement comes out",
+     "better": "key or padlock with bank",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a Wi-Fi enabled meat thermometer for the smoker",
+     "better": "thermometer",
+     "trap": "property"
+    },
+    {
+     "task": "Unplug the router in the hallway before the painters arrive",
+     "better": "router box or plug",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the monthly fiber internet bill",
+     "better": "bill or credit card",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "wifi_password",
+   "android_wifi_4_bar_lock"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5434,
+    "output": 977,
+    "thoughts": 134,
+    "total": 6545
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:52Z"
+  }
+ },
+ "distinguishing": "Shows two signal arcs whose right tips are clipped by a circular cutout around the padlock, unlike the unclipped two-arc version and the three-arc version, but is completely interchangeable in meaning with both."
 }

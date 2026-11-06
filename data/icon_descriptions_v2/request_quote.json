@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "invoice or bill",
+   "meaning": "invoice, bill, or price quote",
    "strength": "primary"
   },
   {
-   "meaning": "financial statement, tax form, or quote",
+   "meaning": "financial statement, tax form, or expense report",
    "strength": "primary"
   },
   {
-   "meaning": "expense report or budget sheet",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "payslip or salary document",
+   "meaning": "budget sheet, payslip, or salary document",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Close in meaning to a receipt icon (which usually has a jagged bottom edge) or a generic money/payment icon.",
+ "ambiguity": "At small sizes it looks nearly identical to the chamfered SIM-card outline with a dollar sign, and could be confused with a jagged-edge store receipt.",
  "modifier_semantics": [
   {
    "modifier": "dollar sign",
@@ -162,14 +158,24 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a cheap printer paper ream for the office",
-   "better": "paper stack or printer",
-   "trap": "property"
+   "task": "Top up the prepaid travel SIM card with $20 credit",
+   "better": "chamfered SIM card with dollar sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Check roaming rates on my mobile data plan",
+   "better": "chamfered SIM card with dollar sign",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Withdraw $200 cash from the ATM for the flea market",
    "better": "banknote or ATM",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a cheap printer paper ream for the office",
+   "better": "paper stack or printer",
+   "trap": "property"
   },
   {
    "task": "Order a new leather wallet with a coin pocket",
@@ -185,17 +191,12 @@
    "task": "Verify the routing number on the voided check",
    "better": "bank check",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Install a bash script to clean up temp files",
-   "better": "terminal or code file ($ prompt)",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a document page with a dollar sign on it, universally understood as an invoice, bill, financial statement, quote, or tax form. It fits a very common set of everyday personal and work tasks around paying bills, invoicing clients, and handling financial paperwork.",
@@ -213,6 +214,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "invoice or bill",
+     "strength": "primary"
+    },
+    {
+     "meaning": "financial statement, tax form, or quote",
+     "strength": "primary"
+    },
+    {
+     "meaning": "expense report or budget sheet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "payslip or salary document",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Close in meaning to a receipt icon (which usually has a jagged bottom edge) or a generic money/payment icon.",
+   "near_misses": [
+    {
+     "task": "Buy a cheap printer paper ream for the office",
+     "better": "paper stack or printer",
+     "trap": "property"
+    },
+    {
+     "task": "Withdraw $200 cash from the ATM for the flea market",
+     "better": "banknote or ATM",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Order a new leather wallet with a coin pocket",
+     "better": "wallet",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Call the accountant to schedule our April meeting",
+     "better": "phone or calendar",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Verify the routing number on the voided check",
+     "better": "bank check",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Install a bash script to clean up temp files",
+     "better": "terminal or code file ($ prompt)",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "request_page"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4061,
+    "output": 696,
+    "thoughts": 0,
+    "total": 4757
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:00Z"
+  }
+ },
+ "distinguishing": "Features a solid triangular dog-ear fold in the top-right corner, clearly marking it as a paper document or digital file (invoice, bill, financial statement) rather than a chamfered SIM card."
 }

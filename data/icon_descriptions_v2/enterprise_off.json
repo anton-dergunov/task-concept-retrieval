@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "off work, time off, PTO, vacation, or leave of absence",
+   "meaning": "off work, time off, PTO, leave of absence, or work profile off",
    "strength": "primary"
   },
   {
-   "meaning": "no luggage, carry-on banned, or travel without bags",
+   "meaning": "no luggage, no carry-on bags, or bag-free policy",
    "strength": "primary"
   },
   {
-   "meaning": "unemployment, quitting a job, retirement, or sabbatical",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "work profile disabled or personal/non-work mode",
+   "meaning": "unemployment, quitting a job, sabbatical, or retirement",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it can be confused with a crossed-out camera icon (no photos) because the top handle looks like a camera viewfinder hump.",
+ "ambiguity": "At small sizes, it can be confused with the crossed-out clipboard icon (whose top clip with a hole resembles the handle) or a crossed-out camera icon.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -161,8 +157,13 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new hard-shell carry-on suitcase before the Tokyo trip",
-   "better": "suitcase or briefcase (without slash)",
+   "task": "Clear clipboard history and disable paste access in browser settings",
+   "better": "crossed-out clipboard",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Review the backlog of unassigned tasks before sprint planning",
+   "better": "crossed-out clipboard",
    "trap": "lookalike_glyph"
   },
   {
@@ -171,8 +172,13 @@
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Buy a new hard-shell carry-on suitcase before the Tokyo trip",
+   "better": "suitcase or briefcase (without slash)",
+   "trap": "generic_verb"
+  },
+  {
    "task": "Update my portfolio website with the three latest freelance projects",
-   "better": "briefcase or website globe",
+   "better": "briefcase (without slash) or website globe",
    "trap": "shared_vocabulary"
   },
   {
@@ -184,11 +190,6 @@
    "task": "Find a non-business casual linen shirt for the summer party",
    "better": "shirt",
    "trap": "property"
-  },
-  {
-   "task": "Check my remaining PTO balance in BambooHR",
-   "better": "calendar or clock",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
@@ -212,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": "work_off"
- }
+  "alias_of": "work_off",
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "off work, time off, PTO, vacation, or leave of absence",
+     "strength": "primary"
+    },
+    {
+     "meaning": "no luggage, carry-on banned, or travel without bags",
+     "strength": "primary"
+    },
+    {
+     "meaning": "unemployment, quitting a job, retirement, or sabbatical",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "work profile disabled or personal/non-work mode",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it can be confused with a crossed-out camera icon (no photos) because the top handle looks like a camera viewfinder hump.",
+   "near_misses": [
+    {
+     "task": "Buy a new hard-shell carry-on suitcase before the Tokyo trip",
+     "better": "suitcase or briefcase (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check whether the museum allows cameras inside the exhibition hall",
+     "better": "crossed-out camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update my portfolio website with the three latest freelance projects",
+     "better": "briefcase or website globe",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Lisbon for the June vacation",
+     "better": "airplane",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Find a non-business casual linen shirt for the summer party",
+     "better": "shirt",
+     "trap": "property"
+    },
+    {
+     "task": "Check my remaining PTO balance in BambooHR",
+     "better": "calendar or clock",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "content_paste_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4101,
+    "output": 835,
+    "thoughts": 0,
+    "total": 4936
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:05Z"
+  }
+ },
+ "distinguishing": "Unlike the taller crossed-out clipboard with a solid clip and circular pinhole, this is a wider horizontal box with an open rectangular loop handle on top, representing a crossed-out briefcase or suitcase."
 }

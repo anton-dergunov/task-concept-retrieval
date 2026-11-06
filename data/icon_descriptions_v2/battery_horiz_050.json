@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery",
+   "meaning": "battery / rechargeable batteries / power bank (standard generic choice)",
    "strength": "primary"
   },
   {
-   "meaning": "charging or power",
+   "meaning": "half-charged battery / medium power level / storage charge",
    "strength": "primary"
   },
   {
-   "meaning": "portable power bank",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "energy level",
+   "meaning": "charging or power management",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The terminal is on the left side rather than the more common right or top, which at tiny sizes might momentarily look like a USB flash drive with its connector sticking out.",
+ "ambiguity": "Blends in with the quarter-full and three-quarters-full battery icons unless inspected closely, and is functionally interchangeable with the other battery icons for general battery tasks.",
  "modifier_semantics": [
   {
    "modifier": "half-filled black block on the right side",
@@ -175,9 +171,14 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Replace the dead 9V battery in the hallway smoke detector",
+   "better": "empty or critically low battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Top off the nearly full portable power station before the camping trip",
+   "better": "mostly full battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Copy tax PDFs onto the SanDisk USB thumb drive",
@@ -198,17 +199,12 @@
    "task": "Order a cordless Makita impact driver for the deck build",
    "better": "power drill",
    "trap": "property"
-  },
-  {
-   "task": "Replace the blown fuse in the garage subpanel",
-   "better": "fuse or electrical panel",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a horizontal battery half-filled with charge. It is a strong, literal fit for tasks about buying, charging, replacing, or recycling batteries and power banks across home, tech, and travel, though the left-side terminal makes it slightly resemble a USB stick at tiny sizes.",
@@ -228,6 +224,94 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging or power",
+     "strength": "primary"
+    },
+    {
+     "meaning": "portable power bank",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "energy level",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The terminal is on the left side rather than the more common right or top, which at tiny sizes might momentarily look like a USB flash drive with its connector sticking out.",
+   "near_misses": [
+    {
+     "task": "Copy tax PDFs onto the SanDisk USB thumb drive",
+     "better": "USB flash drive",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the monthly ConEd electricity bill before the 15th",
+     "better": "invoice or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Schedule a quiet afternoon to recharge after the conference week",
+     "better": "rest or sofa",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a cordless Makita impact driver for the deck build",
+     "better": "power drill",
+     "trap": "property"
+    },
+    {
+     "task": "Replace the blown fuse in the garage subpanel",
+     "better": "fuse or electrical panel",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_horiz_000",
+   "badge_critical_battery",
+   "battery_low",
+   "battery_horiz_075"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 7940,
+    "output": 2460,
+    "thoughts": 0,
+    "total": 10400
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:32Z"
+  }
+ },
+ "distinguishing": "This battery has its interior split evenly with the right half filled solid black and the left half white, representing a half-charged (50%) or standard battery."
 }

@@ -22,10 +22,11 @@ from ..index import embed_texts, get_model
 from .base import Matcher, Ranked
 
 
-def _cache_path(model_name: str, names: Sequence[str]) -> "object":
+def _cache_path(model_name: str, names: Sequence[str], texts: Sequence[str]) -> "object":
     h = hashlib.sha1()
     h.update(model_name.encode())
     h.update("\n".join(names).encode())
+    h.update(b"\0texts\0" + "\n".join(texts).encode())   # v1 vs v2, and any edit
     safe = model_name.replace("/", "_")
     return config.CACHE_DIR / f"{safe}__examples__{h.hexdigest()[:16]}.npz"
 
@@ -57,7 +58,7 @@ class NearestExampleMatcher(Matcher):
         self.owners = np.array(owners, dtype=np.int32)
 
         # Skip the on-disk cache when a holdout is active (the matrix is run-specific).
-        path = _cache_path(self.model_name, self.names)
+        path = _cache_path(self.model_name, self.names, texts)
         matrix = None
         if not self.exclude_examples and path.exists():
             try:

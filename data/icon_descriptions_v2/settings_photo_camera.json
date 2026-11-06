@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "camera settings or configuration",
+   "meaning": "still camera or photography settings",
    "strength": "primary"
   },
   {
-   "meaning": "camera setup, calibration, or maintenance",
+   "meaning": "camera setup, calibration, or photo app preferences",
    "strength": "primary"
   },
   {
-   "meaning": "photo app preferences or image processing options",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "photography gear and equipment",
+   "meaning": "image processing or capture configuration",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the camera badge could be mistaken for a generic folder or briefcase icon next to a gear.",
+ "ambiguity": "Frequently confused conceptually with the gear with a video camera badge for general camera tasks, and visually at glance size with the gear with a person portrait badge because both have a dark rectangular badge with a white circular center.",
  "modifier_semantics": [
   {
    "modifier": "small camera badge in bottom right corner",
@@ -161,14 +157,24 @@
  ],
  "near_misses": [
   {
-   "task": "Take passport photos at Walgreens",
-   "better": "camera or ID photo",
-   "trap": "generic_verb"
+   "task": "Configure Zoom webcam and video recording settings",
+   "better": "gear with video camera badge",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Buy a new 35mm prime lens for low light",
-   "better": "camera lens",
-   "trap": "shared_vocabulary"
+   "task": "Change profile picture and account privacy settings",
+   "better": "gear with person portrait badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Adjust panoramic stitching settings in the camera app",
+   "better": "gear with curved panorama badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take passport photos at Walgreens",
+   "better": "camera or ID photo without gear",
+   "trap": "generic_verb"
   },
   {
    "task": "Pack the camera bag and tripod for Yellowstone",
@@ -176,19 +182,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Change macOS system settings for dark mode",
-   "better": "settings gear",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay the wedding photographer's deposit invoice",
    "better": "invoice or payment",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Print and frame 5x7 family photos for grandma",
-   "better": "picture frame or photo print",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -212,6 +208,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "camera settings or configuration",
+     "strength": "primary"
+    },
+    {
+     "meaning": "camera setup, calibration, or maintenance",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo app preferences or image processing options",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "photography gear and equipment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the camera badge could be mistaken for a generic folder or briefcase icon next to a gear.",
+   "near_misses": [
+    {
+     "task": "Take passport photos at Walgreens",
+     "better": "camera or ID photo",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new 35mm prime lens for low light",
+     "better": "camera lens",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pack the camera bag and tripod for Yellowstone",
+     "better": "camera bag or tripod",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Change macOS system settings for dark mode",
+     "better": "settings gear",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the wedding photographer's deposit invoice",
+     "better": "invoice or payment",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Print and frame 5x7 family photos for grandma",
+     "better": "picture frame or photo print",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "settings_panorama",
+   "settings_video_camera",
+   "settings_account_box"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6747,
+    "output": 1937,
+    "thoughts": 0,
+    "total": 8684
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:21Z"
+  }
+ },
+ "distinguishing": "Distinguished from the video camcorder, panorama, and user-profile gears by its still photo camera badge with a top viewfinder hump and a circular center lens cutout."
 }

@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "select all / multiple selection",
+   "meaning": "select all, batch selection, or bulk action",
    "strength": "primary"
   },
   {
-   "meaning": "checklist / multiple tasks or sub-tasks",
+   "meaning": "multiple tasks, subtask batch, or multi-step checklist",
    "strength": "primary"
   },
   {
-   "meaning": "batch approval or verification",
+   "meaning": "batch approval or bulk verification",
    "strength": "secondary"
   }
  ],
- "ambiguity": "In a to-do app, a checkbox icon looks identical to the task completion toggle itself, and the stacked edge also resembles 'copy to clipboard'.",
+ "ambiguity": "Frequently confused with the single checkbox with a checkmark when the user doesn't distinguish single vs. multiple items, and also resembles a 'copy to clipboard' icon.",
  "modifier_semantics": [
   {
    "modifier": "checkmark inside box",
@@ -155,19 +155,24 @@
  ],
  "near_misses": [
   {
-   "task": "Check the tire pressure before driving to Bristol",
-   "better": "tire pressure gauge or car tire",
-   "trap": "generic_verb"
+   "task": "Cast ballot in the local school board election",
+   "better": "single square checkbox with checkmark",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Check if the passport renewal came in the mail",
-   "better": "passport or mailbox",
-   "trap": "generic_verb"
+   "task": "Review the itemized inspection card with three lines",
+   "better": "card with three horizontal bars and checkmark",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Copy all photos from the SD card to the backup drive",
    "better": "SD card or hard drive",
-   "trap": "lookalike_glyph"
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Check the tire pressure before driving to Bristol",
+   "better": "tire pressure gauge or car tire",
+   "trap": "generic_verb"
   },
   {
    "task": "Buy a checkered tablecloth for the backyard picnic",
@@ -175,20 +180,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy a small digital luggage scale",
-   "better": "luggage scale or suitcase",
-   "trap": "parent_topic"
-  },
-  {
    "task": "Order a book of personal checks from the credit union",
    "better": "bank checkbook",
    "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a small digital luggage scale for the trip",
+   "better": "luggage scale or suitcase",
+   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 2,
-  "distinctiveness": 2
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts a checked box stacked over another box edge, universally used for 'select all', multi-select, or checklists/sub-tasks. While useful for tasks specifically about creating checklists or batch-approving items, in a to-do list UI it visually collides with the app's own task-completion checkboxes and with 'copy' icons.",
@@ -206,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "select all / multiple selection",
+     "strength": "primary"
+    },
+    {
+     "meaning": "checklist / multiple tasks or sub-tasks",
+     "strength": "primary"
+    },
+    {
+     "meaning": "batch approval or verification",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "In a to-do app, a checkbox icon looks identical to the task completion toggle itself, and the stacked edge also resembles 'copy to clipboard'.",
+   "near_misses": [
+    {
+     "task": "Check the tire pressure before driving to Bristol",
+     "better": "tire pressure gauge or car tire",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Check if the passport renewal came in the mail",
+     "better": "passport or mailbox",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Copy all photos from the SD card to the backup drive",
+     "better": "SD card or hard drive",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a checkered tablecloth for the backyard picnic",
+     "better": "tablecloth or picnic basket",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a small digital luggage scale",
+     "better": "luggage scale or suitcase",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order a book of personal checks from the credit union",
+     "better": "bank checkbook",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fact_check",
+   "select_check_box",
+   "domain_verification",
+   "folder_check",
+   "task"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9373,
+    "output": 3078,
+    "thoughts": 235,
+    "total": 12686
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "It shows a square checkbox with a second L-shaped frame offset behind its bottom-left edges, indicating multiple checkboxes ('select all' or batch tasks) rather than a single checkbox."
 }

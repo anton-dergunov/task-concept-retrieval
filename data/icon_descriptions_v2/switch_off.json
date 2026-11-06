@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "light switch or wall switch",
+   "meaning": "wall light switch or dimmer switch (especially in the on/up position)",
    "strength": "primary"
   },
   {
-   "meaning": "smart home switch / electrical wiring",
+   "meaning": "turn on lights or electrical switches",
    "strength": "secondary"
   },
   {
-   "meaning": "tablet or iPad (at a quick glance due to top/bottom dots and rectangular frame, with a square on screen, or Polaroid inside a frame, though it's clearly a Decora rocker switch plate with two screws and the rocker pushed up/downD-style or toggle in the middle, wait: it has a black rectangle inside with a white square in the upper half - that represents a rocker switch in the ON/OFF position, and two screw dots above and below it!)",
+   "meaning": "smart home wall switch or electrical wall plate",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the outer rounded rectangle and two vertical dots strongly resemble an old-style tablet/smartphone (camera at top, home button at bottom) displaying a Polaroid photo or square graphic on the screen.",
+ "ambiguity": "Nearly identical to the wall switch with the toggle in the lower (off) position, and at small sizes the outer rounded rectangle and two vertical screw dots resemble a tablet displaying a Polaroid photo.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -152,40 +152,45 @@
  ],
  "near_misses": [
   {
-   "task": "Switch car insurance before the renewal date in May",
-   "better": "car or document/shield icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Buy a carrying case for the Nintendo Switch before our flight",
-   "better": "game controller / handheld console icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Charge the iPad mini and download episodes for the road trip",
-   "better": "tablet icon",
+   "task": "Turn off all downstairs light switches before leaving for vacation",
+   "better": "wall light switch toggled down (off position)",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Frame the Polaroid photos from Sarah's wedding",
-   "better": "photo / picture frame icon",
+   "better": "photo or picture frame",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Charge the iPad mini and download episodes for the road trip",
+   "better": "tablet computer",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Switch car insurance before the renewal date in May",
+   "better": "car or insurance shield",
+   "trap": "shared_vocabulary"
+  },
+  {
+   "task": "Buy a carrying case for the Nintendo Switch before our flight",
+   "better": "game controller or handheld console",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Replace the burnt-out GU10 bulb in the kitchen track light",
-   "better": "lightbulb icon",
+   "better": "light bulb",
    "trap": "parent_topic"
   },
   {
    "task": "Pay the monthly ConEd electric bill online",
-   "better": "invoice / lightning bolt / money icon",
+   "better": "invoice or lightning bolt",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon depicts a single-gang wall light switch (specifically a rocker switch with top and bottom mounting screws and a shaded lower half showing the rocker's tilt). It fits home improvement, electrical DIY, and smart-home tasks well, though at small sizes the rounded outer frame and two dots can easily be misread as a tablet or smartphone with a camera and home button.",
@@ -205,6 +210,90 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "light switch or wall switch",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smart home switch / electrical wiring",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "tablet or iPad (at a quick glance due to top/bottom dots and rectangular frame, with a square on screen, or Polaroid inside a frame, though it's clearly a Decora rocker switch plate with two screws and the rocker pushed up/downD-style or toggle in the middle, wait: it has a black rectangle inside with a white square in the upper half - that represents a rocker switch in the ON/OFF position, and two screw dots above and below it!)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the outer rounded rectangle and two vertical dots strongly resemble an old-style tablet/smartphone (camera at top, home button at bottom) displaying a Polaroid photo or square graphic on the screen.",
+   "near_misses": [
+    {
+     "task": "Switch car insurance before the renewal date in May",
+     "better": "car or document/shield icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a carrying case for the Nintendo Switch before our flight",
+     "better": "game controller / handheld console icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Charge the iPad mini and download episodes for the road trip",
+     "better": "tablet icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Frame the Polaroid photos from Sarah's wedding",
+     "better": "photo / picture frame icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Replace the burnt-out GU10 bulb in the kitchen track light",
+     "better": "lightbulb icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Pay the monthly ConEd electric bill online",
+     "better": "invoice / lightning bolt / money icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "switch"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4157,
+    "output": 1144,
+    "thoughts": 120,
+    "total": 5421
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:43Z"
+  }
+ },
+ "distinguishing": "The inner white square of the rocker/toggle is in the top half (switched up / ON position), whereas the other icon has it in the bottom half (switched down / OFF position); for general wall switch tasks the two are nearly interchangeable."
 }

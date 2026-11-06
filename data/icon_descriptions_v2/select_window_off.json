@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "close browser tabs or clean up open windows",
+   "meaning": "close browser tabs or clean up open application windows",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "cancel or block credit cards",
+   "meaning": "cancel or block bank credit cards",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Because the window title bar looks like the magnetic stripe on a card, the overlapping rectangles can easily be read as two bank cards being cancelled or blocked.",
+ "ambiguity": "Because the window title bar looks like the magnetic stripe on a card, the two overlapping rectangles can be read as bank cards being cancelled; at a glance, the crossed-out rectangular frame also resembles the crossed-out film clapperboard.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -158,6 +158,16 @@
  ],
  "near_misses": [
   {
+   "task": "Start a 30-day no-buy shopping freeze",
+   "better": "crossed-out shopping bag",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Cut the deleted scenes from the rough video edit",
+   "better": "crossed-out film clapperboard",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Cancel both expired Visa credit cards and cut them up",
    "better": "credit card with slash",
    "trap": "lookalike_glyph"
@@ -166,11 +176,6 @@
    "task": "Wash the living room and bedroom windows before winter",
    "better": "house window or squeegee",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Delete duplicate photos from the camera roll backup folder",
-   "better": "duplicate files or trash",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Renew SSL certificate for the company website before Friday",
@@ -191,7 +196,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 2,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon depicts two overlapping application or browser windows crossed out by a diagonal slash, representing blocked pop-ups, closed tabs, or disabled multi-window views. It fits a narrow niche of browser cleanup and UI configuration tasks, and at small sizes it can easily be mistaken for cancelled credit cards or unlinked duplicate files.",
@@ -209,6 +214,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "block pop-up windows or disable multiple windows",
+     "strength": "primary"
+    },
+    {
+     "meaning": "close browser tabs or clean up open windows",
+     "strength": "primary"
+    },
+    {
+     "meaning": "disable screen sharing or window capture",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "cancel or block credit cards",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Because the window title bar looks like the magnetic stripe on a card, the overlapping rectangles can easily be read as two bank cards being cancelled or blocked.",
+   "near_misses": [
+    {
+     "task": "Cancel both expired Visa credit cards and cut them up",
+     "better": "credit card with slash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Wash the living room and bedroom windows before winter",
+     "better": "house window or squeegee",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Delete duplicate photos from the camera roll backup folder",
+     "better": "duplicate files or trash",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew SSL certificate for the company website before Friday",
+     "better": "padlock or certificate",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Buy a pop-up canopy tent for the Saturday farmers market",
+     "better": "tent or canopy",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check all open browser tabs for the flight confirmation code",
+     "better": "airplane or ticket",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "no_backpack",
+   "movie_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5463,
+    "output": 1286,
+    "thoughts": 0,
+    "total": 6749
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "It is the only icon composed of two overlapping landscape rectangles with solid top title bars, representing blocked pop-up windows or disabled multiple windows rather than a single bag or clapperboard."
 }

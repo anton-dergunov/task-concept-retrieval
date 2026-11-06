@@ -7,23 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "page layout, wireframe, or template",
+   "meaning": "page layout, wireframe, or bento grid template",
    "strength": "primary"
   },
   {
-   "meaning": "dashboard or widget board",
+   "meaning": "dashboard, widget board, or split-pane UI",
    "strength": "primary"
   },
   {
-   "meaning": "website or app UI design",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "identification card or badge (rotated/abstract)",
+   "meaning": "website or app interface design",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be mistaken for a generic UI view-switcher button, an ID card or postcard layout, or an abstract architectural floor plan at small sizes.",
+ "ambiguity": "Can be confused at a glance with the alert card icon that has three lines on the left and an exclamation mark on the right, or mistaken for an abstract ID badge.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -153,33 +149,33 @@
  ],
  "near_misses": [
   {
-   "task": "Replace cracked dashboard trim in the Civic",
-   "better": "car / steering wheel",
-   "trap": "shared_vocabulary"
+   "task": "Fix the unhandled exception dialog crashing the checkout page",
+   "better": "card with text lines and exclamation mark (error alert)",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Renew driver's license at the DMV before Friday",
-   "better": "ID card with person portrait",
+   "task": "Review server error logs from last night's outage",
+   "better": "card with text lines and exclamation mark (error log)",
    "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Replace cracked dashboard trim in the Civic",
+   "better": "car or steering wheel",
+   "trap": "shared_vocabulary"
   },
   {
    "task": "Draw backyard garden bed layout for spring tomatoes",
-   "better": "plant / garden",
+   "better": "plant or sprout",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy stamps for the holiday postcards",
-   "better": "postage stamp / envelope",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check sales numbers before the Monday standup",
-   "better": "bar chart / analytics",
+   "task": "Check weekly sales numbers before the Monday standup",
+   "better": "bar chart or analytics",
    "trap": "generic_verb"
   },
   {
    "task": "Send invoice to client for the wireframe milestone",
-   "better": "invoice / receipt with currency sign",
+   "better": "invoice or receipt with currency sign",
    "trap": "parent_topic"
   }
  ],
@@ -204,6 +200,91 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "page layout, wireframe, or template",
+     "strength": "primary"
+    },
+    {
+     "meaning": "dashboard or widget board",
+     "strength": "primary"
+    },
+    {
+     "meaning": "website or app UI design",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "identification card or badge (rotated/abstract)",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be mistaken for a generic UI view-switcher button, an ID card or postcard layout, or an abstract architectural floor plan at small sizes.",
+   "near_misses": [
+    {
+     "task": "Replace cracked dashboard trim in the Civic",
+     "better": "car / steering wheel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Renew driver's license at the DMV before Friday",
+     "better": "ID card with person portrait",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Draw backyard garden bed layout for spring tomatoes",
+     "better": "plant / garden",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check sales numbers before the Monday standup",
+     "better": "bar chart / analytics",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Send invoice to client for the wireframe milestone",
+     "better": "invoice / receipt with currency sign",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "breaking_news_alt_1"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4040,
+    "output": 1038,
+    "thoughts": 91,
+    "total": 5169
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Shows two thick horizontal blocks on the left and a single solid vertical block on the right with no exclamation dot, depicting a bento grid, UI wireframe, or dashboard layout rather than an alert."
 }

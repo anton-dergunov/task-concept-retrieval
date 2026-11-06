@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "heartbeat, pulse, or ECG / EKG reading",
+   "meaning": "heartbeat, pulse, or multi-peak ECG / EKG reading",
    "strength": "primary"
   },
   {
@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "system activity monitor, diagnostics, or status check",
+   "meaning": "seismograph trace, earthquake tremor, or audio waveform",
    "strength": "secondary"
   },
   {
-   "meaning": "sound wave, audio waveform, or seismograph reading",
+   "meaning": "system activity monitor, diagnostics, or status check",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as an audio waveform, an earthquake seismograph trace, or a generic line chart spike depending on whether the user is thinking of health, music, or tech monitoring.",
+ "ambiguity": "Virtually interchangeable with the single-trough-and-peak pulse line for heartbeat, ECG, and system activity; having two peaks makes this one slightly more suggestive of a detailed ECG complex, audio waveform, or seismograph trace.",
  "modifier_semantics": [],
  "domains": [
   "health_fitness",
@@ -154,6 +154,16 @@
  ],
  "near_misses": [
   {
+   "task": "Check a simple binary ping or single voltage pulse on the oscilloscope",
+   "better": "single trough-and-peak pulse line",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Plot monthly index fund returns in the retirement spreadsheet",
+   "better": "line chart with axes or dollar/finance icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Donate blood at the Red Cross drive on Thursday",
    "better": "blood drop or medical cross",
    "trap": "shared_vocabulary"
@@ -167,11 +177,6 @@
    "task": "Cook a batch of smoky red lentil and tomato pulse soup",
    "better": "soup bowl or pot",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Plot monthly index fund returns in the retirement spreadsheet",
-   "better": "line chart with axes or dollar/finance icon",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Check on Grandpa after his cardiology appointment",
@@ -192,7 +197,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a classic ECG/heartbeat pulse waveform. It is an immediate, unmistakable cue for cardiology appointments, ECG tests, heart-rate training, system health/uptime monitoring, and audio waveforms, though it somewhat overlaps with heart-plus-pulse and multi-bar audio wave icons.",
@@ -210,6 +215,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "heartbeat, pulse, or ECG / EKG reading",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cardio exercise, heart rate, or vital signs",
+     "strength": "primary"
+    },
+    {
+     "meaning": "system activity monitor, diagnostics, or status check",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "sound wave, audio waveform, or seismograph reading",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as an audio waveform, an earthquake seismograph trace, or a generic line chart spike depending on whether the user is thinking of health, music, or tech monitoring.",
+   "near_misses": [
+    {
+     "task": "Donate blood at the Red Cross drive on Thursday",
+     "better": "blood drop or medical cross",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a heart-shaped box of chocolates for Valentine's Day",
+     "better": "heart shape or gift box",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Cook a batch of smoky red lentil and tomato pulse soup",
+     "better": "soup bowl or pot",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Plot monthly index fund returns in the retirement spreadsheet",
+     "better": "line chart with axes or dollar/finance icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Check on Grandpa after his cardiology appointment",
+     "better": "phone call or person/family icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up a waterproof heart-rate-compatible gym shirt",
+     "better": "t-shirt",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the $140 copay invoice from the clinic",
+     "better": "invoice, receipt, or credit card",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "vital_signs"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4166,
+    "output": 958,
+    "thoughts": 0,
+    "total": 5124
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:35Z"
+  }
+ },
+ "distinguishing": "Shows a four-vertex jagged waveform with two troughs and two peaks of varying height, compared to the simpler two-vertex single trough-and-peak pulse line, though both are essentially interchangeable representations of a pulse, ECG, or activity trace."
 }

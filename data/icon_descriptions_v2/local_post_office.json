@@ -13,11 +13,11 @@
    "strength": "primary"
   },
   {
-   "meaning": "postal mail and letters",
+   "meaning": "postal mail and physical letters",
    "strength": "primary"
   },
   {
-   "meaning": "post office errand",
+   "meaning": "post office errand or dropping off letters",
    "strength": "secondary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the rounded postbox behind the envelope could be mistaken for a tombstone, a doorway, or a generic backpack.",
+ "ambiguity": "Could be confused with a plain email icon if only the envelope is noticed, or at tiny sizes the postbox arch might resemble a headstone or doorway.",
  "modifier_semantics": [
   {
    "modifier": "closed envelope in bottom-left foreground",
@@ -162,8 +162,18 @@
  ],
  "near_misses": [
   {
+   "task": "Set up PGP encryption and DMARC records for the company email domain",
+   "better": "envelope with a security shield",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn on spam and phishing protection in ProtonMail",
+   "better": "envelope with a security shield",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Clear out unread newsletters in Gmail inbox",
-   "better": "email inbox tray or @ symbol",
+   "better": "email inbox tray or plain envelope",
    "trap": "shared_vocabulary"
   },
   {
@@ -172,30 +182,20 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Order a mail-order bride mystery novel from the bookshop",
+   "task": "Order a mail-order mystery novel from the bookshop",
    "better": "book",
    "trap": "property"
-  },
-  {
-   "task": "Clean the moss off Grandpa's headstone at Oakwood Cemetery",
-   "better": "headstone or memorial",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Pay the $18 customs duty online for the DHL parcel",
    "better": "credit card or package box",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Check whether the check from the client cleared the bank",
-   "better": "bank or check",
-   "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon combines a slotted pillar postbox with an envelope in front, clearly distinguishing physical postal mail and mailboxes from digital email (which typically uses a standalone envelope). It fits everyday tasks around posting letters, checking the physical mailbox, PO boxes, and mail holds, though the arched postbox shape alone could look slightly like a tombstone without the envelope.",
@@ -213,6 +213,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "physical mailbox or postbox",
+     "strength": "primary"
+    },
+    {
+     "meaning": "postal mail and letters",
+     "strength": "primary"
+    },
+    {
+     "meaning": "post office errand",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "mail forwarding or postal delivery",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the rounded postbox behind the envelope could be mistaken for a tombstone, a doorway, or a generic backpack.",
+   "near_misses": [
+    {
+     "task": "Clear out unread newsletters in Gmail inbox",
+     "better": "email inbox tray or @ symbol",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Configure Postfix mail server relay on the Ubuntu VPS",
+     "better": "server rack or terminal",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a mail-order bride mystery novel from the bookshop",
+     "better": "book",
+     "trap": "property"
+    },
+    {
+     "task": "Clean the moss off Grandpa's headstone at Oakwood Cemetery",
+     "better": "headstone or memorial",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay the $18 customs duty online for the DHL parcel",
+     "better": "credit card or package box",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Check whether the check from the client cleared the bank",
+     "better": "bank or check",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mail_shield"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4084,
+    "output": 1046,
+    "thoughts": 0,
+    "total": 5130
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:31Z"
+  }
+ },
+ "distinguishing": "Pairs a small closed envelope in the bottom-left with a tall rounded-top physical postbox containing a horizontal mail slot behind it, representing physical postal mail rather than digital email security."
 }

@@ -21,7 +21,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with a plain email icon, a reply icon (which usually has a curved left-pointing arrow), or a physical mail/shipping icon.",
+ "ambiguity": "Virtually identical to and interchangeable with the other envelope with a bottom-right arrow; at small sizes the arrow badge can also be confused with the bottom-right checkmark badge.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing arrow at bottom right",
@@ -157,40 +157,45 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a roll of Forever stamps at the post office",
-   "better": "postage stamp",
-   "trap": "shared_vocabulary"
+   "task": "Mark all unread newsletters in the inbox as read",
+   "better": "envelope with checkmark badge",
+   "trap": "lookalike_glyph"
   },
   {
-   "task": "Order padded mailers for the Etsy shop",
-   "better": "package / parcel",
+   "task": "Send the spreadsheet as an email attachment to the client",
+   "better": "envelope with paperclip badge",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Sort through the pile of unopened letters on the hall table",
+   "better": "stacked envelopes icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a roll of Forever stamps at the post office",
+   "better": "postage stamp icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Check if the tax refund arrived in checking",
-   "better": "bank / money",
+   "better": "bank or money icon",
    "trap": "generic_verb"
   },
   {
    "task": "Pay the electric bill before the 15th",
-   "better": "bill / invoice or lightning bolt",
+   "better": "bill, invoice, or lightning bolt icon",
    "trap": "parent_topic"
   },
   {
-   "task": "Call the airline about the baggage fee refund",
-   "better": "phone",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Update the mail server DNS records in Cloudflare",
-   "better": "server / DNS settings",
+   "better": "server or DNS settings icon",
    "trap": "property"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly shows an envelope with an outward right-pointing arrow, universally understood as sending or forwarding an email/message. Sending and forwarding emails are among the most common action-oriented tasks across work and personal life, though it sits close to other envelope variants (plain mail, reply, unread).",
@@ -208,6 +213,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "forward email or message",
+     "strength": "primary"
+    },
+    {
+     "meaning": "send email or outgoing mail",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export or move messages",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with a plain email icon, a reply icon (which usually has a curved left-pointing arrow), or a physical mail/shipping icon.",
+   "near_misses": [
+    {
+     "task": "Buy a roll of Forever stamps at the post office",
+     "better": "postage stamp",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order padded mailers for the Etsy shop",
+     "better": "package / parcel",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the tax refund arrived in checking",
+     "better": "bank / money",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pay the electric bill before the 15th",
+     "better": "bill / invoice or lightning bolt",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Call the airline about the baggage fee refund",
+     "better": "phone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Update the mail server DNS records in Cloudflare",
+     "better": "server / DNS settings",
+     "trap": "property"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mail_off",
+   "attach_email",
+   "stacked_email",
+   "mail",
+   "unsubscribe",
+   "mark_email_read",
+   "forward_to_inbox"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12060,
+    "output": 2435,
+    "thoughts": 63,
+    "total": 14558
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:26Z"
+  }
+ },
+ "distinguishing": "Shows an envelope with a right-pointing arrow at the bottom-right corner for sending or forwarding mail, making it visually and semantically interchangeable with the other right-arrow envelope in the set."
 }

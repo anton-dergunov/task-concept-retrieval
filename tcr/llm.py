@@ -85,7 +85,8 @@ def _call_genai(backend: str, model: str, system: str, prompt: str, schema, temp
                 images: Optional[Sequence[Tuple[bytes, str]]] = None,
                 gen: Optional[dict] = None) -> Tuple[str, dict]:
     """(response text, usage). `images` are (bytes, mime type) pairs sent before the
-    prompt; `gen` takes `thinking_level` (minimal/low/medium/high) and
+    prompt; an item may also be a str, sent as a text part in place, to label the
+    image that follows ("Glyph A:"). `gen` takes `thinking_level` (minimal/low/medium/high) and
     `media_resolution` (low/medium/high)."""
     from google.genai import types
     with _CLIENTS_LOCK:
@@ -103,8 +104,8 @@ def _call_genai(backend: str, model: str, system: str, prompt: str, schema, temp
         temperature=temperature, response_mime_type="application/json",
         system_instruction=system or None,
         response_json_schema=schema if schema else None, **extra)
-    contents = ([types.Part.from_bytes(data=b, mime_type=m) for b, m in images] + [prompt]
-                if images else prompt)
+    contents = ([it if isinstance(it, str) else types.Part.from_bytes(data=it[0], mime_type=it[1])
+                 for it in images] + [prompt] if images else prompt)
     t0 = time.time()
     resp = _CLIENTS[backend].models.generate_content(model=model, contents=contents, config=cfg)
     um = resp.usage_metadata
@@ -171,7 +172,8 @@ def complete_json(prompt: str, *, validate: Callable[[object], bool] = lambda d:
         raise ValueError("images / gen are supported on the gemini and vertex backends only")
     extra = None
     if images or gen:
-        extra = {"images": [hashlib.sha1(b).hexdigest() for b, _ in images or []],
+        extra = {"images": [it if isinstance(it, str) else hashlib.sha1(it[0]).hexdigest()
+                            for it in images or []],
                  "gen": gen or {}}
     path = _cache_path(backend, system, prompt + ("\n#" + tag if tag else ""), schema, extra)
     if path.exists():

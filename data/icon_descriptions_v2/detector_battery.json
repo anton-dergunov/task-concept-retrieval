@@ -9,19 +9,15 @@
  },
  "readings": [
   {
-   "meaning": "smoke detector battery / low battery in smoke alarm",
+   "meaning": "replace smoke detector battery / low battery in smoke or CO alarm",
    "strength": "primary"
   },
   {
-   "meaning": "replace battery in ceiling sensor or CO detector",
-   "strength": "primary"
-  },
-  {
-   "meaning": "battery-powered smart home sensor maintenance",
+   "meaning": "battery-powered ceiling sensor maintenance",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the top ceiling-mounted detector can look like a flush-mount ceiling light fixture or a UFO-shaped bowl above a battery.",
+ "ambiguity": "Shares the exact top ceiling-sensor housing with the smoke detector / ceiling sensor with signal waves, and at tiny sizes the top housing can also resemble a flush-mount ceiling light above a battery.",
  "modifier_semantics": [
   {
    "modifier": "partially depleted battery icon below",
@@ -155,6 +151,16 @@
  ],
  "near_misses": [
   {
+   "task": "Mount new hardwired smoke detectors in the bedrooms",
+   "better": "ceiling smoke detector with sound waves below",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Test the ceiling motion sensor and Wi-Fi access point in the office",
+   "better": "ceiling sensor with signal waves below",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Charge my phone before heading to the airport",
    "better": "smartphone with battery",
    "trap": "lookalike_glyph"
@@ -163,16 +169,6 @@
    "task": "Buy a fire extinguisher for under the kitchen sink",
    "better": "fire extinguisher",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Install a new recessed LED light in the hallway ceiling",
-   "better": "ceiling light / lightbulb",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Check car battery voltage with the multimeter before winter",
-   "better": "car battery",
-   "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a battery-powered camping lantern for the Adirondacks trip",
@@ -188,7 +184,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 5
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "The icon clearly combines a ceiling-mounted smoke/CO detector with a low-battery gauge underneath. While specific to a narrow household maintenance family, replacing chirping smoke alarm batteries is a classic recurring home task for which this glyph is an unmistakable match.",
@@ -206,6 +202,87 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smoke detector battery / low battery in smoke alarm",
+     "strength": "primary"
+    },
+    {
+     "meaning": "replace battery in ceiling sensor or CO detector",
+     "strength": "primary"
+    },
+    {
+     "meaning": "battery-powered smart home sensor maintenance",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the top ceiling-mounted detector can look like a flush-mount ceiling light fixture or a UFO-shaped bowl above a battery.",
+   "near_misses": [
+    {
+     "task": "Charge my phone before heading to the airport",
+     "better": "smartphone with battery",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a fire extinguisher for under the kitchen sink",
+     "better": "fire extinguisher",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Install a new recessed LED light in the hallway ceiling",
+     "better": "ceiling light / lightbulb",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a battery-powered camping lantern for the Adirondacks trip",
+     "better": "camping lantern",
+     "trap": "property"
+    },
+    {
+     "task": "Verify homeowner insurance discount for monitored fire alarms",
+     "better": "insurance policy / shield",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "detector"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4036,
+    "output": 616,
+    "thoughts": 0,
+    "total": 4652
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:19Z"
+  }
+ },
+ "distinguishing": "Shows a horizontal partially-depleted battery symbol below the ceiling-mounted detector housing instead of curved signal arcs, specifically indicating smoke/CO detector battery replacement or low-battery maintenance."
 }

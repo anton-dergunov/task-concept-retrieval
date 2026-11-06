@@ -7,15 +7,11 @@
  },
  "readings": [
   {
-   "meaning": "audio speaker / loudspeaker / studio monitor",
+   "meaning": "single audio speaker / loudspeaker / studio monitor",
    "strength": "primary"
   },
   {
-   "meaning": "home stereo / sound system",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "smart speaker / Bluetooth speaker",
+   "meaning": "Bluetooth speaker / smart speaker",
    "strength": "secondary"
   },
   {
@@ -23,7 +19,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, could be mistaken for a classic iPod/MP3 player or a video doorbell.",
+ "ambiguity": "Easily confused with the stacked speaker group icon when tasks mention speakers generically without distinguishing between a single unit and a stereo pair or multi-room setup; at tiny sizes it also resembles an iPod or video doorbell.",
  "modifier_semantics": [],
  "domains": [
   "tech",
@@ -154,6 +150,16 @@
  ],
  "near_misses": [
   {
+   "task": "Pair the living room and kitchen Sonos into a multi-room speaker group",
+   "better": "stacked speaker boxes / speaker group",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Wire the left and right bookshelf speakers to the stereo receiver",
+   "better": "stacked speaker boxes / stereo speaker pair",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Email the keynote speaker to confirm her slide deck and travel dates",
    "better": "person at podium / presenter",
    "trap": "shared_vocabulary"
@@ -169,16 +175,6 @@
    "trap": "generic_verb"
   },
   {
-   "task": "Replace the cracked screen on my old iPod Classic",
-   "better": "portable media player",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Install the Ring video doorbell by the front entrance",
-   "better": "doorbell / security camera",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new turntable needle for the Audio-Technica",
    "better": "turntable / record player",
    "trap": "parent_topic"
@@ -187,7 +183,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic two-way loudspeaker cabinet with a tweeter and woofer. It fits tasks centered on physical speakers, studio monitors, home stereo setups, and portable Bluetooth speakers, though at tiny sizes it bears a slight resemblance to an old scroll-wheel MP3 player or smart doorbell.",
@@ -205,6 +201,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "audio speaker / loudspeaker / studio monitor",
+     "strength": "primary"
+    },
+    {
+     "meaning": "home stereo / sound system",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "smart speaker / Bluetooth speaker",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "subwoofer",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, could be mistaken for a classic iPod/MP3 player or a video doorbell.",
+   "near_misses": [
+    {
+     "task": "Email the keynote speaker to confirm her slide deck and travel dates",
+     "better": "person at podium / presenter",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice daily 15-minute conversation with a native Spanish speaker",
+     "better": "speech bubbles / language",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mute notification sounds on my laptop during the afternoon workshop",
+     "better": "muted volume cone / bell with slash",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace the cracked screen on my old iPod Classic",
+     "better": "portable media player",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install the Ring video doorbell by the front entrance",
+     "better": "doorbell / security camera",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new turntable needle for the Audio-Technica",
+     "better": "turntable / record player",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "speaker_group"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4101,
+    "output": 1013,
+    "thoughts": 0,
+    "total": 5114
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:23Z"
+  }
+ },
+ "distinguishing": "Depicts a single standalone speaker box without a backing frame, representing an individual speaker, monitor, or subwoofer rather than a stereo pair or multi-room speaker group."
 }

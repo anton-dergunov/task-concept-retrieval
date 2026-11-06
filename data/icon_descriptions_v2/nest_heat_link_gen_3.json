@@ -7,23 +7,23 @@
  },
  "readings": [
   {
-   "meaning": "smart home camera or indoor security cam",
+   "meaning": "smart home camera, webcam, or indoor security cam",
    "strength": "primary"
   },
   {
-   "meaning": "Instagram or social photo app (dot centered instead of top-right)",
+   "meaning": "Instagram or photo-sharing app (stylized camera with top indicator dot)",
    "strength": "primary"
   },
   {
-   "meaning": "subwoofer, smart speaker, or Apple TV / Mac mini",
+   "meaning": "rotary dial, volume knob, or smart thermostat",
    "strength": "secondary"
   },
   {
-   "meaning": "rotary dial or smart thermostat",
+   "meaning": "kitchen timer or countdown dial at the 12 o'clock mark",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Strongly resembles the Instagram logo (though Instagram places the dot in the upper right rather than top center), and also looks like an indoor Wi-Fi security camera, a smart thermostat, or a compact speaker.",
+ "ambiguity": "Easily confused at small sizes with the plain rounded square containing a centered ring (which lacks the top dot and reads more as a screen-record button, home button, or subwoofer), as well as the Instagram logo (which places the dot in the upper right).",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -156,18 +156,23 @@
  ],
  "near_misses": [
   {
+   "task": "Record a 2-minute screen capture of the checkout bug",
+   "better": "rounded square with centered ring (screen record button without top dot)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Calibrate the home theater subwoofer crossover frequency",
+   "better": "rounded square with centered speaker ring and no top indicator dot",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pack the 35mm film SLR and three rolls of Portra 400",
    "better": "traditional viewfinder camera with top prism",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Start a 25-minute timer for the sourdough autolyse",
-   "better": "stopwatch or kitchen timer",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Load the washing machine with the muddy soccer uniforms",
-   "better": "washing machine with door latch and control panel",
+   "better": "washing machine with door latch and top control panel",
    "trap": "lookalike_glyph"
   },
   {
@@ -179,11 +184,6 @@
    "task": "Pay the photographer the remaining 50% deposit by wire transfer",
    "better": "bank transfer or money icon",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Monitor blood pressure every morning for two weeks",
-   "better": "heart rate or blood pressure cuff",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
@@ -207,6 +207,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "smart home camera or indoor security cam",
+     "strength": "primary"
+    },
+    {
+     "meaning": "Instagram or social photo app (dot centered instead of top-right)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "subwoofer, smart speaker, or Apple TV / Mac mini",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rotary dial or smart thermostat",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Strongly resembles the Instagram logo (though Instagram places the dot in the upper right rather than top center), and also looks like an indoor Wi-Fi security camera, a smart thermostat, or a compact speaker.",
+   "near_misses": [
+    {
+     "task": "Pack the 35mm film SLR and three rolls of Portra 400",
+     "better": "traditional viewfinder camera with top prism",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Start a 25-minute timer for the sourdough autolyse",
+     "better": "stopwatch or kitchen timer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Load the washing machine with the muddy soccer uniforms",
+     "better": "washing machine with door latch and control panel",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Look for a camera-friendly crossbody bag for the Tokyo trip",
+     "better": "shoulder bag or backpack",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the photographer the remaining 50% deposit by wire transfer",
+     "better": "bank transfer or money icon",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Monitor blood pressure every morning for two weeks",
+     "better": "heart rate or blood pressure cuff",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "nest_protect"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4122,
+    "output": 1156,
+    "thoughts": 0,
+    "total": 5278
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Unlike the plain ring inside a rounded square, this icon includes a small solid dot at top-center above the inner ring, evoking a camera sensor/flash, rotary dial position indicator, or smart home camera."
 }

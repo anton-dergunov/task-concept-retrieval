@@ -9,19 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "download / save to device",
+   "meaning": "download or save to device",
    "strength": "primary"
   },
   {
-   "meaning": "export / extract data",
+   "meaning": "install or fetch update package",
    "strength": "secondary"
   },
   {
-   "meaning": "import / bring in files",
+   "meaning": "export or extract data to local file",
    "strength": "secondary"
   },
   {
-   "meaning": "move to bottom / align bottom",
+   "meaning": "move to bottom or align bottom",
    "strength": "secondary"
   }
  ],
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Set up 301 redirects for the old blog URLs",
+   "better": "curved arrow bouncing off a bottom bar (redirect / bounce)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Clean up hard-bounced email addresses from the newsletter list",
+   "better": "curved arrow bouncing off a bottom bar (bounce)",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Upload the signed tax return to the CPA's portal",
    "better": "upload arrow (pointing up)",
    "trap": "lookalike_glyph"
@@ -182,11 +192,6 @@
    "trap": "property"
   },
   {
-   "task": "Pay the invoice for the new internet download speed upgrade",
-   "better": "invoice / payment or router",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Buy a 2TB external SSD for game downloads",
    "better": "hard drive / SSD",
    "trap": "parent_topic"
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "A downward arrow pointing to a horizontal bar is the universal glyph for downloading or saving files locally. In a task list, it fits action-centric tasks where downloading, exporting, or cleaning up the Downloads folder is the core work, though tasks about a specific object (like a book or map) often prefer that object's icon.",
@@ -215,6 +220,94 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download / save to device",
+     "strength": "primary"
+    },
+    {
+     "meaning": "export / extract data",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "import / bring in files",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "move to bottom / align bottom",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be confused with a plain down arrow, scroll-to-bottom control, or keyboard 'End' / 'Page Down' key.",
+   "near_misses": [
+    {
+     "task": "Upload the signed tax return to the CPA's portal",
+     "better": "upload arrow (pointing up)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Lower the standing desk minimum height limit",
+     "better": "desk",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Print the downloadable sewing pattern for the linen shirt",
+     "better": "printer or sewing pattern",
+     "trap": "property"
+    },
+    {
+     "task": "Read the PDF report I downloaded yesterday",
+     "better": "document / book",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the invoice for the new internet download speed upgrade",
+     "better": "invoice / payment or router",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 2TB external SSD for game downloads",
+     "better": "hard drive / SSD",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "airline_stops"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4066,
+    "output": 1142,
+    "thoughts": 0,
+    "total": 5208
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:23Z"
+  }
+ },
+ "distinguishing": "Shows a thick hollow vertical arrow pointing straight down at a horizontal base bar (download/save), whereas the look-alike is a thin curved arrow bouncing off a small base up and to the right (bounce/redirect)."
 }

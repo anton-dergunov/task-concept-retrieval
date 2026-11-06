@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "highlighter or marker pen tool",
+   "meaning": "highlighter or marker pen",
    "strength": "primary"
   },
   {
-   "meaning": "text highlight color or stroke color",
+   "meaning": "text highlight or stroke color tool",
    "strength": "primary"
   },
   {
-   "meaning": "glue bottle or nozzle applicator",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "traffic cone or warning pylon",
+   "meaning": "glue bottle or applicator nozzle",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it strongly resembles a traffic cone, a glue bottle tip, an oil can, or a chess piece.",
+ "ambiguity": "Easily confused at small sizes with the smooth-sided traffic cone icon because both share the exact same flared pedestal base and overall triangular silhouette.",
  "modifier_semantics": [
   {
    "modifier": "horizontal bottom bar",
@@ -161,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Put traffic cones in front of the freshly sealed driveway",
+   "better": "traffic cone with smooth triangular sides",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Block off the pothole in the parking lot with a safety pylon",
+   "better": "traffic cone with smooth triangular sides",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Ask hair stylist for subtle caramel highlights",
    "better": "haircut / scissors",
    "trap": "shared_vocabulary"
@@ -171,22 +177,12 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Put traffic cones in front of the freshly sealed driveway",
-   "better": "traffic cone",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Buy wood glue for the broken chair leg",
-   "better": "glue bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a washable rug for the mudroom",
    "better": "rug / carpet",
    "trap": "property"
   },
   {
-   "task": "Pay the invoice for the new Copic set",
+   "task": "Pay the invoice for the new Copic marker set",
    "better": "credit card / payment",
    "trap": "parent_topic"
   }
@@ -194,7 +190,7 @@
  "scores": {
   "recognizability": 2,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon is a UI toolbar glyph for text highlight color (an upright marker nib above a color bar). Outside of a rich-text editor toolbar it looks blocky and ambiguous—easily mistaken for a traffic cone, glue nozzle, or stamp—though it can still serve tasks about markers, highlighters, or annotating readings.",
@@ -212,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "highlighter or marker pen tool",
+     "strength": "primary"
+    },
+    {
+     "meaning": "text highlight color or stroke color",
+     "strength": "primary"
+    },
+    {
+     "meaning": "glue bottle or nozzle applicator",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "traffic cone or warning pylon",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it strongly resembles a traffic cone, a glue bottle tip, an oil can, or a chess piece.",
+   "near_misses": [
+    {
+     "task": "Ask hair stylist for subtle caramel highlights",
+     "better": "haircut / scissors",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Watch the Champions League match highlights",
+     "better": "video / soccer ball",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put traffic cones in front of the freshly sealed driveway",
+     "better": "traffic cone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy wood glue for the broken chair leg",
+     "better": "glue bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a washable rug for the mudroom",
+     "better": "rug / carpet",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the invoice for the new Copic set",
+     "better": "credit card / payment",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "stylus_pencil"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4074,
+    "output": 995,
+    "thoughts": 272,
+    "total": 5341
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "Has a stepped body with a narrower nib protruding from the flat top of a hollow trapezoid above the base, depicting a marker, highlighter, or applicator nozzle rather than the smooth, continuous triangle of the traffic cone."
 }

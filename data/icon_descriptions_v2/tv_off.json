@@ -13,7 +13,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "broken, dead, or disconnected monitor or TV",
+   "meaning": "broken, dead, or disconnected TV or monitor",
    "strength": "primary"
   },
   {
@@ -25,7 +25,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "It can mean either a computer monitor or a television set; in tech contexts it looks like 'stop screen share' or 'display off', while in personal life it reads as 'no screens / screen time limit' or 'broken TV'.",
+ "ambiguity": "Interchangeable with the slashed monitor with a T-stand and the slashed monitor with a wide chamfered base.",
  "modifier_semantics": [
   {
    "modifier": "diagonal slash",
@@ -177,32 +177,37 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new 27-inch 4K monitor for the home office",
-   "better": "computer monitor (without slash)",
+   "task": "Disable laptop use in the bedroom after 10pm",
+   "better": "laptop with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Block distracting websites during deep work hours",
+   "better": "browser window with slash",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Turn off video camera during all-hands call",
+   "better": "video camera with slash",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Cancel Netflix and Disney+ monthly subscriptions",
-   "better": "subscription / streaming / credit card with slash",
+   "better": "subscription or credit card",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Mount the living room TV on the drywall",
-   "better": "television (without slash)",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy an anti-glare matte screen protector for my laptop",
-   "better": "laptop or shield",
+   "better": "intact laptop or shield",
    "trap": "property"
   },
   {
    "task": "Check the server logs while running headless",
-   "better": "log file / terminal",
+   "better": "log file or terminal",
    "trap": "property"
   },
   {
-   "task": "Buy Annie a wooden puzzle for the weekend",
+   "task": "Buy Annie a wooden puzzle for the screen-free weekend",
    "better": "puzzle piece",
    "trap": "parent_topic"
   }
@@ -210,7 +215,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a TV or computer monitor crossed out with a diagonal slash. While originally a UI symbol for 'display off' or 'stop screen sharing', in a task manager it fits well for digital detox / screen-free habits, fixing a blank/disconnected display, or disposing of a broken TV or monitor.",
@@ -230,6 +235,100 @@
    "example_tasks: 19 != 16"
   ],
   "created": "2026-11-06T02:55:47Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "no screen / screen-free / digital detox",
+     "strength": "primary"
+    },
+    {
+     "meaning": "broken, dead, or disconnected monitor or TV",
+     "strength": "primary"
+    },
+    {
+     "meaning": "turn off or disable display / headless mode",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "stop screen sharing",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "It can mean either a computer monitor or a television set; in tech contexts it looks like 'stop screen share' or 'display off', while in personal life it reads as 'no screens / screen time limit' or 'broken TV'.",
+   "near_misses": [
+    {
+     "task": "Buy a new 27-inch 4K monitor for the home office",
+     "better": "computer monitor (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Cancel Netflix and Disney+ monthly subscriptions",
+     "better": "subscription / streaming / credit card with slash",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Mount the living room TV on the drywall",
+     "better": "television (without slash)",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy an anti-glare matte screen protector for my laptop",
+     "better": "laptop or shield",
+     "trap": "property"
+    },
+    {
+     "task": "Check the server logs while running headless",
+     "better": "log file / terminal",
+     "trap": "property"
+    },
+    {
+     "task": "Buy Annie a wooden puzzle for the weekend",
+     "better": "puzzle piece",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "desktop_access_disabled",
+   "mimo_disconnect",
+   "sync_saved_locally_off",
+   "domain_verification_off",
+   "videocam_off",
+   "folder_off",
+   "web_asset_off"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12219,
+    "output": 3998,
+    "thoughts": 0,
+    "total": 16217
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "Shows a monitor or TV with a simple, narrow rectangular block base flush against the bottom edge (no neck and no beveled corners), functionally interchangeable with the other two slashed monitor/TV icons."
 }

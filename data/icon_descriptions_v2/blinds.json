@@ -7,19 +7,19 @@
  },
  "readings": [
   {
-   "meaning": "window blinds or roller shade",
+   "meaning": "window blinds or roller shade (general or open/raised)",
    "strength": "primary"
+  },
+  {
+   "meaning": "opening blinds or letting light in",
+   "strength": "secondary"
   },
   {
    "meaning": "smart blinds or automated window covering",
    "strength": "secondary"
-  },
-  {
-   "meaning": "window or window sill",
-   "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it could look like a guillotine, an abstract shelf unit, or a Japanese kanji character due to the thick grid lines and hanging circle.",
+ "ambiguity": "Easily interchangeable with the fully closed blinds icon for general window-covering tasks, though this partially raised version is clearer at small sizes because the pull-cord toggle sits in open white space.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -149,6 +149,16 @@
  ],
  "near_misses": [
   {
+   "task": "Close the bedroom blinds before turning on the projector",
+   "better": "closed window blinds with slats all the way down",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Set smart home schedule to lower the shades at sunset",
+   "better": "closed window blinds with slats all the way down",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Sign up for the double-blind clinical trial at the university hospital",
    "better": "medical cross or clipboard",
    "trap": "shared_vocabulary"
@@ -169,20 +179,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pay the deposit invoice via bank transfer",
+   "task": "Pay the deposit invoice to the window treatment installer",
    "better": "invoice or bank card",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Clean the outside of the living room glass panes with a squeegee",
-   "better": "spray bottle or standard window pane",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a window with partially drawn horizontal blinds and a pull cord. It is a strong, literal fit for household, shopping, and smart-home tasks involving blinds, roller shades, and window coverings, though slightly boxy at small sizes.",
@@ -200,6 +205,90 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "window blinds or roller shade",
+     "strength": "primary"
+    },
+    {
+     "meaning": "smart blinds or automated window covering",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "window or window sill",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it could look like a guillotine, an abstract shelf unit, or a Japanese kanji character due to the thick grid lines and hanging circle.",
+   "near_misses": [
+    {
+     "task": "Sign up for the double-blind clinical trial at the university hospital",
+     "better": "medical cross or clipboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice blind contour drawing in my sketchbook for 20 minutes",
+     "better": "pencil or sketchbook",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a shade-tolerant fern for the north-facing corner",
+     "better": "potted plant",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Put the reflective sun shade on the car windshield",
+     "better": "car or sun",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the deposit invoice via bank transfer",
+     "better": "invoice or bank card",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Clean the outside of the living room glass panes with a squeegee",
+     "better": "spray bottle or standard window pane",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "blinds_closed"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4055,
+    "output": 1065,
+    "thoughts": 99,
+    "total": 5219
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:17Z"
+  }
+ },
+ "distinguishing": "Shows only two horizontal slats in the upper half of the window with the pull-cord knob hanging in the open lower space, representing raised or open window blinds (and is cleaner and more recognizable as general window blinds than the fully lowered version)."
 }

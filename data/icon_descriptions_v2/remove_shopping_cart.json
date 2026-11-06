@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "remove item from shopping cart or list",
+   "meaning": "remove item from shopping cart or trim order",
    "strength": "primary"
   },
   {
-   "meaning": "cancel order or return purchase",
+   "meaning": "cancel order or empty online shopping cart",
    "strength": "primary"
   },
   {
-   "meaning": "cut back on spending or shopping",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "clear or empty online shopping cart",
+   "meaning": "cut back on spending or impulse purchases",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes, the minus bar inside the open basket can simply look like the top edge of a closed shopping cart or an item sitting inside the cart.",
+ "ambiguity": "High visual overlap with the plain closed-top shopping cart because the floating horizontal minus bar sits just below where the plain cart's continuous top rim is drawn.",
  "modifier_semantics": [
   {
    "modifier": "horizontal minus sign inside basket",
@@ -160,19 +156,19 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a new folding utility cart for hauling groceries from the car",
-   "better": "folding hand truck or plain shopping cart without minus",
-   "trap": "shared_vocabulary"
+   "task": "Go grocery shopping for dinner ingredients at Whole Foods",
+   "better": "plain closed-top shopping cart",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Add printer ink and copy paper to the Staples cart",
+   "better": "shopping cart with a plus sign",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a replacement laptop charger on Amazon",
    "better": "power adapter / charger plug",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Pick up a gallon of whole milk and two dozen eggs on the way home",
-   "better": "milk carton or eggs",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Bring reusable canvas bags to Trader Joe's",
@@ -185,15 +181,15 @@
    "trap": "property"
   },
   {
-   "task": "Return the scratched frying pan to Target customer service",
-   "better": "frying pan or return package arrow",
+   "task": "Buy a new folding utility cart for hauling groceries from the car",
+   "better": "folding hand truck",
    "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 3
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "An open shopping cart with a horizontal minus sign inside represents removing items from a cart, trimming an online order, or cutting back on purchases. While originally an e-commerce UI action icon, in a to-do list it fits tasks about pruning a shared grocery order, cancelling pending purchases, or cutting impulse buys, though at small sizes it is easily confused with a standard shopping cart.",
@@ -211,6 +207,97 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "remove item from shopping cart or list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cancel order or return purchase",
+     "strength": "primary"
+    },
+    {
+     "meaning": "cut back on spending or shopping",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "clear or empty online shopping cart",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes, the minus bar inside the open basket can simply look like the top edge of a closed shopping cart or an item sitting inside the cart.",
+   "near_misses": [
+    {
+     "task": "Buy a new folding utility cart for hauling groceries from the car",
+     "better": "folding hand truck or plain shopping cart without minus",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a replacement laptop charger on Amazon",
+     "better": "power adapter / charger plug",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up a gallon of whole milk and two dozen eggs on the way home",
+     "better": "milk carton or eggs",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Bring reusable canvas bags to Trader Joe's",
+     "better": "tote bag",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Use the $15 off coupon code on the pet supply order",
+     "better": "coupon / discount tag",
+     "trap": "property"
+    },
+    {
+     "task": "Return the scratched frying pan to Target customer service",
+     "better": "frying pan or return package arrow",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "production_quantity_limits",
+   "add_shopping_cart",
+   "shopping_cart_checkout",
+   "shopping_cart"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8105,
+    "output": 2466,
+    "thoughts": 0,
+    "total": 10571
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:54Z"
+  }
+ },
+ "distinguishing": "An open-top shopping cart with a horizontal minus bar inside, meaning removing items from a cart or trimming an order, though it closely resembles the closed top rail of the plain cart."
 }

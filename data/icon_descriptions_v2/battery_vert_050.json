@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / portable power cell",
+   "meaning": "battery / half-full battery (approx. 50-55%)",
    "strength": "primary"
   },
   {
-   "meaning": "charging or power level",
+   "meaning": "charging / power level / power bank",
    "strength": "primary"
   },
   {
-   "meaning": "power bank / rechargeable battery pack",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "bottle or small flask",
+   "meaning": "bottle or small flask with label",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Almost identical to other partial battery level icons (30%, 50%, 60%); at small sizes can slightly resemble a small bottle with a cap or a USB drive.",
+ "ambiguity": "Indistinguishable at normal icon sizes from the adjacent half-full battery icons (approx. 45% and 60% fill) and interchangeable with any partial battery icon.",
  "modifier_semantics": [
   {
    "modifier": "half-filled interior level",
@@ -164,6 +160,21 @@
  ],
  "near_misses": [
   {
+   "task": "Pack fully charged 100% spare batteries for the wedding shoot",
+   "better": "solid full battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Top off the power bank from 90% to full before the flight",
+   "better": "nearly full (90%) battery with thin top slit",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Refill the glass water bottle before heading to the gym",
+   "better": "water bottle",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a small battery-powered desk fan for the bedroom",
    "better": "fan",
    "trap": "property"
@@ -179,25 +190,15 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Refill the glass water bottle before heading to the gym",
-   "better": "water bottle",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Buy a new soldering iron with temperature control",
    "better": "soldering iron / tool",
    "trap": "parent_topic"
-  },
-  {
-   "task": "Schedule a low-key recharge day after the conference week",
-   "better": "spa / rest / calendar",
-   "trap": "shared_vocabulary"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Clearly depicts a standard half-charged vertical battery, universally understood for tasks about household batteries, rechargeable packs, power banks, and charging. While UI icon sets often include many nearly identical fill levels (20%, 50%, 80%), this generic half-full glyph works well as the canonical battery icon in a task list.",
@@ -215,6 +216,98 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / portable power cell",
+     "strength": "primary"
+    },
+    {
+     "meaning": "charging or power level",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / rechargeable battery pack",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "bottle or small flask",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Almost identical to other partial battery level icons (30%, 50%, 60%); at small sizes can slightly resemble a small bottle with a cap or a USB drive.",
+   "near_misses": [
+    {
+     "task": "Buy a small battery-powered desk fan for the bedroom",
+     "better": "fan",
+     "trap": "property"
+    },
+    {
+     "task": "Pay the monthly electric power bill before Friday",
+     "better": "receipt or lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Dispute unauthorized charge on the Visa card statement",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Refill the glass water bottle before heading to the gym",
+     "better": "water bottle",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a new soldering iron with temperature control",
+     "better": "soldering iron / tool",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Schedule a low-key recharge day after the conference week",
+     "better": "spa / rest / calendar",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_full",
+   "battery_3_bar",
+   "battery_4_bar",
+   "battery_5_bar",
+   "battery_6_bar"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9321,
+    "output": 3291,
+    "thoughts": 0,
+    "total": 12612
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:28Z"
+  }
+ },
+ "distinguishing": "Shows a battery filled slightly past halfway (roughly 50-55%) with a medium-tall white cutout above it, differing by only a few pixels from the neighboring 45% and 60% battery icons and interchangeable with them."
 }

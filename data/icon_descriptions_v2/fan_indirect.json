@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "air conditioner, air vent, or airflow",
+   "meaning": "air conditioner, wide airflow dispersion, or room ventilation",
    "strength": "primary"
   },
   {
-   "meaning": "distribute, broadcast, or export to multiple outputs",
+   "meaning": "distribute, broadcast, or fan out from one source to multiple targets",
    "strength": "primary"
   },
   {
-   "meaning": "range hood or exhaust fan",
+   "meaning": "unpack, scatter, or extract items outward from a container",
    "strength": "secondary"
   },
   {
-   "meaning": "unpack or extract from container",
+   "meaning": "HVAC diffuser or wide-angle vent",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read either as physical airflow from a ceiling/wall AC unit or as an abstract diagram for distributing/exporting items from a single source.",
+ "ambiguity": "Easily confused with the top bracket with three straight parallel downward arrows for general air vent or AC tasks; also ambiguous between physical air diffusion and abstract data distribution.",
  "modifier_semantics": [
   {
    "modifier": "three diverging arrows from top enclosure",
@@ -159,40 +159,45 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a breathable mesh running shirt for summer",
-   "better": "shirt / t-shirt",
-   "trap": "property"
-  },
-  {
-   "task": "Check why the basement dehumidifier bucket keeps overflowing",
-   "better": "water droplet / dehumidifier",
-   "trap": "generic_verb"
-  },
-  {
-   "task": "Book flights on Delta Air Lines for the Chicago conference",
-   "better": "airplane",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Download the tax forms from the IRS portal",
-   "better": "download arrow into tray",
+   "task": "Batch download all wedding photos from the shared cloud folder",
+   "better": "top bracket with three parallel straight-down arrows",
    "trap": "lookalike_glyph"
   },
   {
+   "task": "Descale the overhead rain shower head in the master bath",
+   "better": "top bracket with three parallel straight-down arrows or shower icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Download the tax forms from the IRS portal",
+   "better": "single download arrow into tray",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a breathable mesh running shirt for summer",
+   "better": "shirt or t-shirt icon",
+   "trap": "property"
+  },
+  {
+   "task": "Book flights on Delta Air Lines for the Chicago conference",
+   "better": "airplane icon",
+   "trap": "shared_vocabulary"
+  },
+  {
    "task": "Apply for an export license with the chamber of commerce",
-   "better": "certificate / document",
+   "better": "certificate or document icon",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Buy a 12-foot copper refrigerant line set at the supply house",
-   "better": "pipe / coil",
+   "better": "pipe or coil icon",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts an open-bottom enclosure with three arrows spreading downward and outward, commonly representing an air-conditioning vent/airflow or multi-target distribution/export. It fits HVAC/ventilation chores and data fan-out tasks well, though it can be confused with generic download or unpack icons.",
@@ -210,6 +215,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "air conditioner, air vent, or airflow",
+     "strength": "primary"
+    },
+    {
+     "meaning": "distribute, broadcast, or export to multiple outputs",
+     "strength": "primary"
+    },
+    {
+     "meaning": "range hood or exhaust fan",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "unpack or extract from container",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read either as physical airflow from a ceiling/wall AC unit or as an abstract diagram for distributing/exporting items from a single source.",
+   "near_misses": [
+    {
+     "task": "Buy a breathable mesh running shirt for summer",
+     "better": "shirt / t-shirt",
+     "trap": "property"
+    },
+    {
+     "task": "Check why the basement dehumidifier bucket keeps overflowing",
+     "better": "water droplet / dehumidifier",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book flights on Delta Air Lines for the Chicago conference",
+     "better": "airplane",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Download the tax forms from the IRS portal",
+     "better": "download arrow into tray",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Apply for an export license with the chamber of commerce",
+     "better": "certificate / document",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a 12-foot copper refrigerant line set at the supply house",
+     "better": "pipe / coil",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "fan_focus"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4097,
+    "output": 1158,
+    "thoughts": 0,
+    "total": 5255
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:22Z"
+  }
+ },
+ "distinguishing": "The outer two arrows bend outward to the left and right while the center arrow points straight down, showing wide air dispersion/circulation or fanning out to multiple destinations rather than straight parallel downward flow."
 }

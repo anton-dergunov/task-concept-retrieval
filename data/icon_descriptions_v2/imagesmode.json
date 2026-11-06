@@ -15,7 +15,7 @@
    "strength": "primary"
   },
   {
-   "meaning": "framed artwork or poster",
+   "meaning": "framed artwork, print, or poster",
    "strength": "secondary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Almost interchangeable with the picture icon that has a corner quarter-circle and arc instead of a round sun; both read primarily as a generic image or photo.",
  "modifier_semantics": [],
  "domains": [
   "creative",
@@ -157,40 +157,45 @@
  ],
  "near_misses": [
   {
-   "task": "Charge DSLR batteries before Saturday's shoot",
-   "better": "camera or battery",
-   "trap": "shared_vocabulary"
+   "task": "Stream slideshow photos to the living room TV",
+   "better": "picture frame with wireless signal arcs in top-left corner",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Invert dark and light tones on the logo proof",
+   "better": "vertically split black-and-white contrast square",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Ship the framed print to the buyer via courier",
+   "better": "cardboard shipping box with tape and label",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Hike the Twin Peaks trail before sunrise",
-   "better": "mountain / hiking",
+   "better": "unframed mountain peaks or hiking boot",
    "trap": "lookalike_glyph"
   },
   {
    "task": "Schedule chest X-ray imaging at the clinic",
-   "better": "medical / x-ray / hospital",
+   "better": "medical cross or x-ray",
    "trap": "shared_vocabulary"
   },
   {
    "task": "Picture what the kitchen layout looks like without the island",
-   "better": "floor plan / home",
+   "better": "floor plan or house",
    "trap": "generic_verb"
   },
   {
-   "task": "Replace cracked glass on the bedroom window frame",
-   "better": "window / repair",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Book flights to Denver for the photography workshop",
-   "better": "airplane / flight",
+   "better": "airplane",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The standard universal glyph for an image, photo, picture, or framed artwork (a square frame with mountains and a sun). It fits a wide range of common personal and work tasks around managing photos, printing pictures, hanging framed art, and preparing graphics, though users shouldn't confuse the inner mountain motif with actual outdoor hiking.",
@@ -208,6 +213,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "image, photo, or picture",
+     "strength": "primary"
+    },
+    {
+     "meaning": "photo gallery or album",
+     "strength": "primary"
+    },
+    {
+     "meaning": "framed artwork or poster",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "graphic asset or illustration",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Charge DSLR batteries before Saturday's shoot",
+     "better": "camera or battery",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Hike the Twin Peaks trail before sunrise",
+     "better": "mountain / hiking",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Schedule chest X-ray imaging at the clinic",
+     "better": "medical / x-ray / hospital",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Picture what the kitchen layout looks like without the island",
+     "better": "floor plan / home",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Replace cracked glass on the bedroom window frame",
+     "better": "window / repair",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book flights to Denver for the photography workshop",
+     "better": "airplane / flight",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "package",
+   "filter_b_and_w",
+   "satellite"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6706,
+    "output": 2114,
+    "thoughts": 207,
+    "total": 9027
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:30Z"
+  }
+ },
+ "distinguishing": "Features a simple, detached solid circle for the sun above two mountain peaks inside the square frame, making it the classic, unmodified icon for a photo, image, or artwork."
 }

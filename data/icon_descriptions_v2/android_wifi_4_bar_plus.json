@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "add or set up Wi-Fi network",
+   "meaning": "add or set up a new Wi-Fi network",
    "strength": "primary"
   },
   {
-   "meaning": "extend wireless coverage or boost signal",
+   "meaning": "extend wireless coverage or install a mesh node",
    "strength": "primary"
   },
   {
-   "meaning": "connect new device to Wi-Fi",
+   "meaning": "connect a new device to Wi-Fi",
    "strength": "secondary"
   },
   {
-   "meaning": "new internet plan or hotspot",
+   "meaning": "enable a new internet plan or mobile hotspot",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Distinguishable only by the small plus sign from a plain Wi-Fi icon.",
+ "ambiguity": "Interchangeable in meaning with the two-arc Wi-Fi with a plus sign; at very small sizes, the plus badge can blur into the arcs and look like a plain Wi-Fi icon or the Wi-Fi with an exclamation mark.",
  "modifier_semantics": [
   {
    "modifier": "plus sign",
@@ -162,6 +162,16 @@
  ],
  "near_misses": [
   {
+   "task": "Fix the dropping Wi-Fi connection in the upstairs bedroom",
+   "better": "Wi-Fi with exclamation mark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Send the guest Wi-Fi password to Sarah before she arrives",
+   "better": "plain Wi-Fi icon without plus badge",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the monthly Xfinity internet bill before the 15th",
    "better": "receipt or credit card",
    "trap": "generic_verb"
@@ -170,16 +180,6 @@
    "task": "Buy a small Wi-Fi enabled meat thermometer for the smoker",
    "better": "thermometer",
    "trap": "property"
-  },
-  {
-   "task": "Cancel the old DSL internet subscription and return the modem",
-   "better": "Wi-Fi with slash or minus",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Add 3 new podcasts to the Overcast queue for the drive",
-   "better": "podcast or headphones",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Buy a 15m spool of Cat6 cable for the office drop",
@@ -195,7 +195,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "Shows a standard Wi-Fi signal symbol with a plus badge in the lower right. It fits concrete tasks about setting up a new wireless network, adding a guest SSID, installing a range extender, or adding a hotspot plan, though a plain Wi-Fi or router icon covers neighboring tasks.",
@@ -213,6 +213,100 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "add or set up Wi-Fi network",
+     "strength": "primary"
+    },
+    {
+     "meaning": "extend wireless coverage or boost signal",
+     "strength": "primary"
+    },
+    {
+     "meaning": "connect new device to Wi-Fi",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "new internet plan or hotspot",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Distinguishable only by the small plus sign from a plain Wi-Fi icon.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly Xfinity internet bill before the 15th",
+     "better": "receipt or credit card",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a small Wi-Fi enabled meat thermometer for the smoker",
+     "better": "thermometer",
+     "trap": "property"
+    },
+    {
+     "task": "Cancel the old DSL internet subscription and return the modem",
+     "better": "Wi-Fi with slash or minus",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Add 3 new podcasts to the Overcast queue for the drive",
+     "better": "podcast or headphones",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a 15m spool of Cat6 cable for the office drop",
+     "better": "ethernet cable",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Go to the networking mixer for local founders on Thursday",
+     "better": "people or handshake",
+     "trap": "shared_vocabulary"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "android_wifi_3_bar_plus",
+   "android_wifi_3_bar_alert",
+   "android_wifi_4_bar_alert",
+   "android_wifi_4_bar",
+   "wifi",
+   "android_wifi_3_bar",
+   "nest_remote_comfort_sensor"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 8,
+   "usage": {
+    "prompt": 12117,
+    "output": 4047,
+    "thoughts": 0,
+    "total": 16164
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:06Z"
+  }
+ },
+ "distinguishing": "Shows a three-arc Wi-Fi signal with a plus sign badge in the bottom right, making it semantically interchangeable with the two-arc Wi-Fi with plus icon for adding or extending a wireless network."
 }

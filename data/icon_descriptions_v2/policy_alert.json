@@ -10,23 +10,19 @@
  },
  "readings": [
   {
-   "meaning": "security scan alert or threat detected",
+   "meaning": "security scan alert / threat or malware detected",
    "strength": "primary"
   },
   {
-   "meaning": "vulnerability assessment or security audit warning",
+   "meaning": "investigate suspicious account activity or breach warning",
    "strength": "primary"
   },
   {
-   "meaning": "malware or virus scan needed",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "investigate suspicious account activity or breach",
+   "meaning": "urgent vulnerability assessment or failed security audit",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes, the magnifying glass inside the shield can look like a keyhole or power symbol, making it resemble a generic security warning icon.",
+ "ambiguity": "Can be mistaken for the plain shield with a magnifying glass if the exclamation mark on the right isn't noticed as a warning indicator; at tiny sizes the magnifying glass also resembles a keyhole.",
  "modifier_semantics": [
   {
    "modifier": "magnifying glass centered inside shield",
@@ -165,13 +161,13 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a magnifying glass with LED light for reading small print",
-   "better": "magnifying glass",
+   "task": "Run a routine weekly antivirus scan on the family desktop",
+   "better": "shield with magnifying glass (no exclamation mark)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Renew annual homeowner insurance policy before May 1st",
-   "better": "house with shield or insurance document",
+   "task": "Review app privacy permissions on my iPhone",
+   "better": "shield with magnifying glass (no exclamation mark)",
    "trap": "lookalike_glyph"
   },
   {
@@ -198,7 +194,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 3,
-  "distinctiveness": 4
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon combines a shield, a magnifying glass, and an exclamation mark, clearly communicating a security scan alert, threat detection, or vulnerability audit warning. It fits technical and personal cybersecurity tasks well (like malware scans, breach checks, and CVE triage), though it is somewhat specialized and could blur into a generic security warning at tiny sizes.",
@@ -216,6 +212,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "security scan alert or threat detected",
+     "strength": "primary"
+    },
+    {
+     "meaning": "vulnerability assessment or security audit warning",
+     "strength": "primary"
+    },
+    {
+     "meaning": "malware or virus scan needed",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "investigate suspicious account activity or breach",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes, the magnifying glass inside the shield can look like a keyhole or power symbol, making it resemble a generic security warning icon.",
+   "near_misses": [
+    {
+     "task": "Buy a magnifying glass with LED light for reading small print",
+     "better": "magnifying glass",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Renew annual homeowner insurance policy before May 1st",
+     "better": "house with shield or insurance document",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a medieval heater shield for the Renaissance faire costume",
+     "better": "plain shield or costume",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Order a privacy screen protector for work laptop",
+     "better": "laptop screen",
+     "trap": "property"
+    },
+    {
+     "task": "Verify that the backup hard drive mounts properly",
+     "better": "hard drive",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Email the compliance invoice to accounting",
+     "better": "invoice or email",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "policy"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4053,
+    "output": 1009,
+    "thoughts": 0,
+    "total": 5062
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:34Z"
+  }
+ },
+ "distinguishing": "Adds a bold exclamation mark cutting into the lower-right side of the shield with the magnifying glass, indicating a detected threat, security warning, or urgent breach investigation rather than a normal scan."
 }

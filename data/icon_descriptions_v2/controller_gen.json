@@ -15,15 +15,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "safe or vault door with combination dial",
+   "meaning": "safe or vault with combination dial",
    "strength": "secondary"
   },
   {
-   "meaning": "pressure gauge, meter, or bathroom scale dial",
+   "meaning": "pressure gauge or analog meter",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes it looks like a washing machine, a speaker box, an app icon for a clock, or a camera lens.",
+ "ambiguity": "At small sizes the inner pointer can be overlooked, making it look like the plain circle-in-a-square icon used for tumble drying, laundry appliances, or a record button.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -146,21 +146,22 @@
   {
    "task": "Clean the sticky grease off the stove front panel",
    "central": "stove / cleaning"
-  },
-  {
-   "task": "Bleed the bedroom radiators if the upstairs stays cold",
-   "central": "radiator"
   }
  ],
  "near_misses": [
   {
-   "task": "Move the laundry from the washer to the dryer before heading out",
-   "better": "washing machine with door details and detergent drawer",
+   "task": "Move the wet clothes into the tumble dryer",
+   "better": "plain circle inside a square without a pointer (tumble dry symbol)",
    "trap": "lookalike_glyph"
   },
   {
-   "task": "Take the vintage Seiko watch to the jeweler for a new battery",
-   "better": "wristwatch with straps",
+   "task": "Clean out the dryer lint trap before running the next load",
+   "better": "plain circle inside a square without a pointer (clothes dryer)",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Press the record button on the field recorder before the interview starts",
+   "better": "plain circle inside a square without a pointer (record button)",
    "trap": "lookalike_glyph"
   },
   {
@@ -169,14 +170,9 @@
    "trap": "property"
   },
   {
-   "task": "Check how much time is left on the parking meter",
-   "better": "car or parking sign",
+   "task": "Take the vintage Seiko watch to the jeweler for a new battery",
+   "better": "wristwatch with straps",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Set up the center channel speaker under the TV",
-   "better": "speaker cone",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Call the HVAC company to book the annual furnace tune-up",
@@ -187,7 +183,7 @@
  "scores": {
   "recognizability": 3,
   "task_fit": 3,
-  "distinctiveness": 2
+  "distinctiveness": 3
  },
  "discard": false,
  "reasoning": "The icon depicts a round dial or pointer knob inside a square housing, fitting wall dimmer switches, thermostats, kitchen timers, utility meters, and small safes. Because the geometry is very minimal (a circle and tick inside a rounded square), it is easily confused with a timer app icon, washing machine, or speaker.",
@@ -207,6 +203,96 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "context_tasks": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "rotary dial or control knob (dimmer switch, volume knob, thermostat)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "kitchen timer or countdown timer",
+     "strength": "primary"
+    },
+    {
+     "meaning": "safe or vault door with combination dial",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pressure gauge, meter, or bathroom scale dial",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes it looks like a washing machine, a speaker box, an app icon for a clock, or a camera lens.",
+   "near_misses": [
+    {
+     "task": "Move the laundry from the washer to the dryer before heading out",
+     "better": "washing machine with door details and detergent drawer",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the vintage Seiko watch to the jeweler for a new battery",
+     "better": "wristwatch with straps",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Buy a warm dimmable bulb for the bedside lamp",
+     "better": "lightbulb",
+     "trap": "property"
+    },
+    {
+     "task": "Check how much time is left on the parking meter",
+     "better": "car or parking sign",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up the center channel speaker under the TV",
+     "better": "speaker cone",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Call the HVAC company to book the annual furnace tune-up",
+     "better": "phone or furnace flame/fan",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 2
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "vignette_2"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4088,
+    "output": 1099,
+    "thoughts": 106,
+    "total": 5293
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:45Z"
+  }
+ },
+ "distinguishing": "Has a diagonal pointer or indicator mark inside the inner circle, turning the shape into a rotary control knob, dial, or timer rather than an empty drum or button."
 }

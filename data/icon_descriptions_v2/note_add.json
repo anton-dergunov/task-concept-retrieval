@@ -13,15 +13,15 @@
    "strength": "primary"
   },
   {
-   "meaning": "medical record or health chart",
-   "strength": "secondary"
+   "meaning": "add page or attachment",
+   "strength": "primary"
   },
   {
-   "meaning": "add page or attachment",
+   "meaning": "medical record, lab report, or health form",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The centered plus sign resembles a medical cross, so it can be read as either 'create a new document' or a 'medical record / hospital form'.",
+ "ambiguity": "Visually distinct in shape from the horizontal folders and rectangles, though conceptually it overlaps with the folder with a plus sign for file-creation tasks and with the medical cross icons when read as a health chart.",
  "modifier_semantics": [
   {
    "modifier": "plus sign inside page",
@@ -158,40 +158,40 @@
  ],
  "near_misses": [
   {
+   "task": "Create a new directory for 2025 tax receipts",
+   "better": "file folder with top tab and plus sign",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Go to the urgent care clinic for a strep test",
+   "better": "square with centered medical cross",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Sign the lease renewal PDF and email it back",
-   "better": "signature / pen signing document",
+   "better": "pen signing document",
    "trap": "generic_verb"
   },
   {
    "task": "Buy two reams of A4 printer paper at Staples",
-   "better": "printer / stack of paper",
+   "better": "printer or stack of paper",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Pick up prescription at the pharmacy with the plus sign logo",
-   "better": "pill / pharmacy mortar",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book annual physical with Dr. Patel",
-   "better": "stethoscope / doctor",
+   "better": "stethoscope or doctor",
    "trap": "parent_topic"
   },
   {
    "task": "Order acid-free archival paper for framing the prints",
-   "better": "picture frame / artwork",
+   "better": "picture frame",
    "trap": "property"
-  },
-  {
-   "task": "Delete old scratch files from the desktop folder",
-   "better": "trash can / document with minus or X",
-   "trap": "lookalike_glyph"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 5
  },
  "discard": false,
  "reasoning": "The icon shows a dog-eared document page with a large plus sign in the center. It fits tasks centered on creating a new file/document or handling medical records and patient forms (since the centered cross also reads as a medical symbol). It can be confused with generic document icons or a medical cross badge.",
@@ -209,6 +209,93 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "new document or create file",
+     "strength": "primary"
+    },
+    {
+     "meaning": "medical record or health chart",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "add page or attachment",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The centered plus sign resembles a medical cross, so it can be read as either 'create a new document' or a 'medical record / hospital form'.",
+   "near_misses": [
+    {
+     "task": "Sign the lease renewal PDF and email it back",
+     "better": "signature / pen signing document",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy two reams of A4 printer paper at Staples",
+     "better": "printer / stack of paper",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pick up prescription at the pharmacy with the plus sign logo",
+     "better": "pill / pharmacy mortar",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book annual physical with Dr. Patel",
+     "better": "stethoscope / doctor",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Order acid-free archival paper for framing the prints",
+     "better": "picture frame / artwork",
+     "trap": "property"
+    },
+    {
+     "task": "Delete old scratch files from the desktop folder",
+     "better": "trash can / document with minus or X",
+     "trap": "lookalike_glyph"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "create_new_folder",
+   "magnify_fullscreen",
+   "rectangle_add",
+   "local_hospital"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 5,
+   "usage": {
+    "prompt": 8092,
+    "output": 2462,
+    "thoughts": 0,
+    "total": 10554
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:03Z"
+  }
+ },
+ "distinguishing": "The only vertical portrait shape in the group, featuring a folded top-right dog-ear corner that unmistakably marks it as a single document or page."
 }

@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "reviews and star ratings",
+   "meaning": "collection of favorites, saved items list, or bookmarks folder",
    "strength": "primary"
   },
   {
-   "meaning": "favorites, bookmarks, or saved items list",
+   "meaning": "multiple customer reviews or batch of ratings",
    "strength": "primary"
   },
   {
-   "meaning": "featured highlights or top picks",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "rewards, loyalty points, or achievements",
+   "meaning": "loyalty points, rewards tier, or achievements collection",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At very small sizes the partial second star on the right can look like motion lines (a shooting star) or a broken outline.",
+ "ambiguity": "Closely interchangeable in meaning with the plain outlined star or the star with a small top-right star for general favorites and review tasks, and at tiny sizes the overlapping edge can look like motion lines.",
  "modifier_semantics": [
   {
    "modifier": "offset duplicate star silhouette on the right",
@@ -167,6 +163,21 @@
  ],
  "near_misses": [
   {
+   "task": "Leave a 3.5-star rating for the plumber on Yelp",
+   "better": "half-filled rating star icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Learn summer constellations for the camping stargazing trip",
+   "better": "star with small companion star in the sky icon",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Buy a wooden star tree topper for Christmas",
+   "better": "single plain star or Christmas tree icon",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Review Q3 marketing budget spreadsheet before Friday",
    "better": "spreadsheet or budget document icon",
    "trap": "generic_verb"
@@ -177,30 +188,15 @@
    "trap": "property"
   },
   {
-   "task": "Buy wooden star tree topper for Christmas",
-   "better": "Christmas tree or holiday ornament icon",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Set up backyard telescope for the Perseid meteor shower",
-   "better": "telescope or night sky astronomy icon",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Pay annual Texas Lone Star toll tag balance",
    "better": "road toll or car payment icon",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Email the dentist to dispute the billing charge",
-   "better": "email or invoice icon",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "The icon depicts a five-pointed star with a second partial star echoed behind it, clearly signaling multiple stars, ratings, reviews, or saved favorites. It fits a common family of tasks around writing product/service reviews, rating media, or organizing bookmarks, though it can be confused with a single favorite star or shooting star at small sizes.",
@@ -220,6 +216,96 @@
    "example_tasks: 17 != 16"
   ],
   "created": "2026-11-06T02:55:45Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "reviews and star ratings",
+     "strength": "primary"
+    },
+    {
+     "meaning": "favorites, bookmarks, or saved items list",
+     "strength": "primary"
+    },
+    {
+     "meaning": "featured highlights or top picks",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "rewards, loyalty points, or achievements",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At very small sizes the partial second star on the right can look like motion lines (a shooting star) or a broken outline.",
+   "near_misses": [
+    {
+     "task": "Review Q3 marketing budget spreadsheet before Friday",
+     "better": "spreadsheet or budget document icon",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Book a four-star hotel near the convention center in Chicago",
+     "better": "hotel bed or building icon",
+     "trap": "property"
+    },
+    {
+     "task": "Buy wooden star tree topper for Christmas",
+     "better": "Christmas tree or holiday ornament icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Set up backyard telescope for the Perseid meteor shower",
+     "better": "telescope or night sky astronomy icon",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Pay annual Texas Lone Star toll tag balance",
+     "better": "road toll or car payment icon",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Email the dentist to dispute the billing charge",
+     "better": "email or invoice icon",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "stars_2",
+   "star",
+   "star_half"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 4,
+   "usage": {
+    "prompt": 6734,
+    "output": 2179,
+    "thoughts": 180,
+    "total": 9093
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:19Z"
+  }
+ },
+ "distinguishing": "Shows a second partial star tucked closely behind the right edge of the main outlined star, suggesting a stack or collection of stars (a favorites list or batch of reviews) rather than a single star, a small floating companion star, or a half-filled rating star."
 }

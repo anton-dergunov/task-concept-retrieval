@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "battery / batteries",
+   "meaning": "partially charged battery or medium-low battery level",
    "strength": "primary"
   },
   {
-   "meaning": "low battery / needs charging",
+   "meaning": "battery or batteries",
    "strength": "primary"
   },
   {
-   "meaning": "power bank / portable charger",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "low energy / fatigue",
+   "meaning": "power bank or portable charger",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could be confused with full, half, or empty battery icons if multiple battery level glyphs exist in the same icon set.",
+ "ambiguity": "Indistinguishable at normal icon sizes from the ~25%, ~50%, and ~60% partial-fill battery icons.",
  "modifier_semantics": [
   {
    "modifier": "single filled block on left inside battery",
@@ -163,23 +159,23 @@
  ],
  "near_misses": [
   {
-   "task": "Buy a small waterproof rechargeable headlamp for trips",
-   "better": "headlamp",
-   "trap": "property"
+   "task": "Plug in the dead phone before the 10% battery dies",
+   "better": "critically low ~15% battery",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Take the fully charged e-bike battery off the charger",
+   "better": "fully charged 100% battery",
+   "trap": "lookalike_glyph"
   },
   {
    "task": "Compare battery-powered string trimmers at Home Depot",
-   "better": "string trimmer / yard tool",
+   "better": "string trimmer or yard tool",
    "trap": "property"
   },
   {
    "task": "Dispute the unexpected $45 charge on the Chase Visa",
    "better": "credit card",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Pay the monthly electric bill before the 15th",
-   "better": "invoice / lightning bolt",
    "trap": "shared_vocabulary"
   },
   {
@@ -189,14 +185,14 @@
   },
   {
    "task": "Buy a new USB-C wall cable for the bedroom",
-   "better": "cable / plug",
+   "better": "cable or plug",
    "trap": "parent_topic"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A universally recognizable horizontal battery icon showing a low-to-partial charge block. It is an ideal fit for everyday tasks involving buying, charging, testing, or recycling household, camera, device, or vehicle batteries, though its distinctiveness dips slightly if an icon set includes multiple charge-level variants.",
@@ -214,6 +210,96 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "battery / batteries",
+     "strength": "primary"
+    },
+    {
+     "meaning": "low battery / needs charging",
+     "strength": "primary"
+    },
+    {
+     "meaning": "power bank / portable charger",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "low energy / fatigue",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could be confused with full, half, or empty battery icons if multiple battery level glyphs exist in the same icon set.",
+   "near_misses": [
+    {
+     "task": "Compare battery-powered string trimmers at Home Depot",
+     "better": "string trimmer / yard tool",
+     "trap": "property"
+    },
+    {
+     "task": "Dispute the unexpected $45 charge on the Chase Visa",
+     "better": "credit card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Pay the monthly electric bill before the 15th",
+     "better": "invoice / lightning bolt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Practice drums with the jazz battery on Tuesday",
+     "better": "drum kit",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy a new USB-C wall cable for the bedroom",
+     "better": "cable / plug",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "battery_android_frame_1",
+   "battery_android_frame_2",
+   "battery_android_frame_4",
+   "battery_android_frame_5",
+   "battery_android_frame_6",
+   "battery_android_frame_full"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 7,
+   "usage": {
+    "prompt": 10606,
+    "output": 3427,
+    "thoughts": 0,
+    "total": 14033
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "The solid fill block covers roughly two-fifths (~40%) of the interior, sitting just below the midpoint and making it virtually indistinguishable from the ~25% and ~50% battery icons."
 }

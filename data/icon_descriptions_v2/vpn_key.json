@@ -7,7 +7,7 @@
  },
  "readings": [
   {
-   "meaning": "physical key (house key, car key, spare key)",
+   "meaning": "physical key (house key, cabinet key, spare key)",
    "strength": "primary"
   },
   {
@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "",
+ "ambiguity": "Interchangeable with the serrated two-toothed key for nearly all physical and digital key tasks; only distinct if specifically contrasting an old-fashioned single-bit warded key with a modern notched cylinder key.",
  "modifier_semantics": [],
  "domains": [
   "home",
@@ -155,6 +155,16 @@
  ],
  "near_misses": [
   {
+   "task": "Get a duplicate brass house key cut for the front deadbolt",
+   "better": "modern serrated key with notched teeth",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Have the locksmith rekey the serrated pin-tumbler cylinder",
+   "better": "modern serrated key with notched teeth",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Practice scales in the key of F sharp minor on piano",
    "better": "piano keyboard or musical note",
    "trap": "shared_vocabulary"
@@ -175,11 +185,6 @@
    "trap": "property"
   },
   {
-   "task": "Buy combination padlock for the gym locker",
-   "better": "padlock",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Install smart video doorbell at the front entrance",
    "better": "doorbell or camera",
    "trap": "parent_topic"
@@ -188,7 +193,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 5,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "The icon clearly depicts a classic skeleton/house key in profile. It is universally recognizable and maps directly to common real-world tasks involving physical keys (duplicating, handing over, organizing) as well as digital credentials (passwords, passkeys, SSH/API keys).",
@@ -206,6 +211,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "physical key (house key, car key, spare key)",
+     "strength": "primary"
+    },
+    {
+     "meaning": "password, passkey, or login credentials",
+     "strength": "primary"
+    },
+    {
+     "meaning": "API key, SSH key, or cryptographic token",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "access, permissions, or authentication",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "",
+   "near_misses": [
+    {
+     "task": "Practice scales in the key of F sharp minor on piano",
+     "better": "piano keyboard or musical note",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book snorkeling boat tour in Key West",
+     "better": "island, boat, or snorkel mask",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace cracked keycaps on the mechanical keyboard",
+     "better": "computer keyboard",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Write down Q3 objectives and key results for the engineering team",
+     "better": "target or checklist",
+     "trap": "property"
+    },
+    {
+     "task": "Buy combination padlock for the gym locker",
+     "better": "padlock",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Install smart video doorbell at the front entrance",
+     "better": "doorbell or camera",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "key"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4055,
+    "output": 1183,
+    "thoughts": 0,
+    "total": 5238
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:10Z"
+  }
+ },
+ "distinguishing": "Shows a classic warded or skeleton-style key with a flat square end and a single rectangular bit drop, unlike the pointed key with two jagged triangular teeth; the two are functionally interchangeable in meaning for almost all tasks."
 }

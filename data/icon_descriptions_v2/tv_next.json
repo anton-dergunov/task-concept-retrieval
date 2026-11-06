@@ -9,23 +9,23 @@
  },
  "readings": [
   {
+   "meaning": "external display output, screen sharing, or casting to TV",
+   "strength": "primary"
+  },
+  {
    "meaning": "computer monitor or desktop display",
    "strength": "primary"
   },
   {
    "meaning": "television or smart TV",
-   "strength": "primary"
-  },
-  {
-   "meaning": "external display output, screen sharing, or video port",
    "strength": "secondary"
   },
   {
-   "meaning": "command prompt or terminal on desktop",
+   "meaning": "command prompt, terminal, or remote desktop session",
    "strength": "secondary"
   }
  ],
- "ambiguity": "The corner chevron could be read as next channel, video output/forwarding, or a command line prompt, while at small sizes the icon reads simply as a monitor or TV.",
+ "ambiguity": "At small sizes, the rectangular screen and corner chevron can be mistaken for the rectangular speech bubble with a corner checkmark.",
  "modifier_semantics": [
   {
    "modifier": "right-pointing chevron",
@@ -161,6 +161,16 @@
  ],
  "near_misses": [
   {
+   "task": "Resolve all open comments on the Google Doc",
+   "better": "speech bubble with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Send RSVP confirmation text to the wedding planner",
+   "better": "speech bubble with checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Pay the monthly Netflix and Apple TV+ bills",
    "better": "credit card or receipt",
    "trap": "shared_vocabulary"
@@ -171,11 +181,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Screen the new backyard shrubs for aphids",
-   "better": "plant or bug",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Replace the torn mesh on the porch screen door",
    "better": "door or window",
    "trap": "shared_vocabulary"
@@ -183,11 +188,6 @@
   {
    "task": "Buy blue-light blocking glasses for computer work",
    "better": "eyeglasses",
-   "trap": "property"
-  },
-  {
-   "task": "Pack the digital camera with the flip-out screen",
-   "better": "camera",
    "trap": "property"
   },
   {
@@ -217,6 +217,99 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "computer monitor or desktop display",
+     "strength": "primary"
+    },
+    {
+     "meaning": "television or smart TV",
+     "strength": "primary"
+    },
+    {
+     "meaning": "external display output, screen sharing, or video port",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "command prompt or terminal on desktop",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "The corner chevron could be read as next channel, video output/forwarding, or a command line prompt, while at small sizes the icon reads simply as a monitor or TV.",
+   "near_misses": [
+    {
+     "task": "Pay the monthly Netflix and Apple TV+ bills",
+     "better": "credit card or receipt",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Monitor blood pressure every morning for two weeks",
+     "better": "heart or blood pressure cuff",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Screen the new backyard shrubs for aphids",
+     "better": "plant or bug",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Replace the torn mesh on the porch screen door",
+     "better": "door or window",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy blue-light blocking glasses for computer work",
+     "better": "eyeglasses",
+     "trap": "property"
+    },
+    {
+     "task": "Pack the digital camera with the flip-out screen",
+     "better": "camera",
+     "trap": "property"
+    },
+    {
+     "task": "Call Sony support for an RMA shipping label",
+     "better": "phone call",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "mark_chat_read"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4059,
+    "output": 1093,
+    "thoughts": 0,
+    "total": 5152
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:20Z"
+  }
+ },
+ "distinguishing": "This icon shows a monitor or TV screen on a centered rectangular stand with a right-pointing chevron in the bottom-right corner, representing display output or a desktop screen rather than a speech bubble with a checkmark."
 }

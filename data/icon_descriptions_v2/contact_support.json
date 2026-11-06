@@ -9,23 +9,23 @@
  },
  "readings": [
   {
-   "meaning": "ask a question / inquiry",
+   "meaning": "ask a question / conversational inquiry",
    "strength": "primary"
   },
   {
-   "meaning": "customer support / help chat",
+   "meaning": "customer support chat / help desk message",
    "strength": "primary"
   },
   {
-   "meaning": "FAQ / questions and answers",
+   "meaning": "Q&A session / interview questions",
    "strength": "secondary"
   },
   {
-   "meaning": "clarify or request information",
+   "meaning": "FAQ / clarify with someone",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Close to a plain help/question-mark circle icon when the small speech tail at the bottom becomes hard to notice at small sizes.",
+ "ambiguity": "Easily mistaken for a plain question mark inside a circle at small sizes where the bottom speech tail is subtle, and largely overlaps in meaning for general help or inquiry tasks.",
  "modifier_semantics": [
   {
    "modifier": "question mark inside speech bubble",
@@ -162,17 +162,27 @@
  ],
  "near_misses": [
   {
+   "task": "Read the software help documentation and troubleshooting guide",
+   "better": "question mark in a circle (general help) or book",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Write twenty trivia questions for Friday's pub quiz",
+   "better": "question mark in a circle (quiz/question) or trophy",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Reply to Sarah's text message about dinner",
+   "better": "plain speech bubble / message",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy a wireless lavalier microphone for the Q&A panel",
    "better": "microphone",
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Reply to Sarah's text message about dinner",
-   "better": "speech bubble / message",
-   "trap": "lookalike_glyph"
-  },
-  {
-   "task": "Questionable charge on the Chase Sapphire statement",
+   "task": "Dispute questionable charge on the Chase Sapphire statement",
    "better": "credit card or receipt",
    "trap": "property"
   },
@@ -182,20 +192,15 @@
    "trap": "parent_topic"
   },
   {
-   "task": "Write twenty geography questions for Friday's pub trivia night",
-   "better": "globe or quiz",
-   "trap": "shared_vocabulary"
-  },
-  {
    "task": "Check if the basement dehumidifier bucket is full",
-   "better": "water drop / appliance",
+   "better": "water drop or appliance",
    "trap": "generic_verb"
   }
  ],
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 4
+  "distinctiveness": 2
  },
  "discard": false,
  "reasoning": "Shows a speech bubble containing a question mark, universally understood as asking a question, Q&A, FAQ, or customer support chat. It fits a common class of communication and inquiry tasks, though it sits close to a plain question-mark circle or a regular chat bubble.",
@@ -213,6 +218,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "ask a question / inquiry",
+     "strength": "primary"
+    },
+    {
+     "meaning": "customer support / help chat",
+     "strength": "primary"
+    },
+    {
+     "meaning": "FAQ / questions and answers",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "clarify or request information",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Close to a plain help/question-mark circle icon when the small speech tail at the bottom becomes hard to notice at small sizes.",
+   "near_misses": [
+    {
+     "task": "Buy a wireless lavalier microphone for the Q&A panel",
+     "better": "microphone",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Reply to Sarah's text message about dinner",
+     "better": "speech bubble / message",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Questionable charge on the Chase Sapphire statement",
+     "better": "credit card or receipt",
+     "trap": "property"
+    },
+    {
+     "task": "Book the main conference room for the product Q&A session",
+     "better": "calendar or meeting room",
+     "trap": "parent_topic"
+    },
+    {
+     "task": "Write twenty geography questions for Friday's pub trivia night",
+     "better": "globe or quiz",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Check if the basement dehumidifier bucket is full",
+     "better": "water drop / appliance",
+     "trap": "generic_verb"
+    }
+   ],
+   "distinctiveness": 4
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "help_outline"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4045,
+    "output": 707,
+    "thoughts": 0,
+    "total": 4752
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:30Z"
+  }
+ },
+ "distinguishing": "A speech bubble with a pointed tail at the bottom containing a question mark, indicating spoken or messaged questions, support chat, or Q&A rather than a generic help symbol ( though largely interchangeable with the plain circled question mark for general inquiries)."
 }

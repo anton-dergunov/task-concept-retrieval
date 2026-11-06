@@ -9,23 +9,19 @@
  },
  "readings": [
   {
-   "meaning": "download / downloading in progress",
+   "meaning": "download or downloading in progress",
    "strength": "primary"
   },
   {
-   "meaning": "software update / install",
+   "meaning": "software update or package installation",
    "strength": "primary"
   },
   {
-   "meaning": "save offline / fetch data",
-   "strength": "secondary"
-  },
-  {
-   "meaning": "pending download / queued transfer",
+   "meaning": "pending or queued offline sync",
    "strength": "secondary"
   }
  ],
- "ambiguity": "At small sizes the dashed right half looks like a plain circle with a down arrow, or could be confused with a drop/scroll-down UI button.",
+ "ambiguity": "Can be mistaken for the top-open or bottom-open circular arrow icons when used generically for any download task, though the dashed right side makes it noticeably more specific to progress or status.",
  "modifier_semantics": [
   {
    "modifier": "half-dashed circular ring",
@@ -162,8 +158,13 @@
  ],
  "near_misses": [
   {
-   "task": "Cut monthly grocery spending down by $150",
-   "better": "trending down chart or shopping cart with minus",
+   "task": "Shut down and unplug the gaming PC before the storm",
+   "better": "top-open power circle with downward arrow",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Extract and export the raw audio stems from the project",
+   "better": "downward arrow exiting bottom-open circle",
    "trap": "lookalike_glyph"
   },
   {
@@ -173,23 +174,18 @@
   },
   {
    "task": "Print the downloaded boarding passes for tomorrow's flight",
-   "better": "printer or boarding pass / ticket",
+   "better": "printer or boarding pass",
    "trap": "property"
   },
   {
    "task": "Read the downloaded PDF paper on transformer architectures",
-   "better": "document / book / glasses",
+   "better": "document or book",
    "trap": "property"
   },
   {
    "task": "Check if the server backup job ran last night",
-   "better": "server or database with checkmark",
+   "better": "server or database",
    "trap": "generic_verb"
-  },
-  {
-   "task": "Renew the domain name before Tuesday",
-   "better": "globe / domain / calendar",
-   "trap": "parent_topic"
   }
  ],
  "scores": {
@@ -213,6 +209,95 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "download / downloading in progress",
+     "strength": "primary"
+    },
+    {
+     "meaning": "software update / install",
+     "strength": "primary"
+    },
+    {
+     "meaning": "save offline / fetch data",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "pending download / queued transfer",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "At small sizes the dashed right half looks like a plain circle with a down arrow, or could be confused with a drop/scroll-down UI button.",
+   "near_misses": [
+    {
+     "task": "Cut monthly grocery spending down by $150",
+     "better": "trending down chart or shopping cart with minus",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Take the Christmas decorations boxes down to the basement",
+     "better": "storage box or stairs",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Print the downloaded boarding passes for tomorrow's flight",
+     "better": "printer or boarding pass / ticket",
+     "trap": "property"
+    },
+    {
+     "task": "Read the downloaded PDF paper on transformer architectures",
+     "better": "document / book / glasses",
+     "trap": "property"
+    },
+    {
+     "task": "Check if the server backup job ran last night",
+     "better": "server or database with checkmark",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Renew the domain name before Tuesday",
+     "better": "globe / domain / calendar",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "output_circle",
+   "enable"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 3,
+   "usage": {
+    "prompt": 5384,
+    "output": 1520,
+    "thoughts": 181,
+    "total": 7085
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:47Z"
+  }
+ },
+ "distinguishing": "The downward arrow is completely detached inside a full ring whose left half is solid and right half is dashed, signaling an active or pending download progress rather than an arrow entering or exiting an open arc."
 }

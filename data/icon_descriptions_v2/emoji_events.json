@@ -23,7 +23,7 @@
    "strength": "secondary"
   }
  ],
- "ambiguity": "Could rarely be mistaken for a chalice or goblet at very small sizes, though the two side handles make the trophy silhouette unmistakable.",
+ "ambiguity": "Virtually interchangeable with the trophy with a central dot in the bowl, as the dot reads simply as a decorative emblem on the cup rather than a distinct concept.",
  "modifier_semantics": [],
  "domains": [
   "work",
@@ -157,6 +157,16 @@
  ],
  "near_misses": [
   {
+   "task": "Order custom engraved medal emblems for the tournament cups",
+   "better": "trophy cup with central medallion dot",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Rent six champagne goblets for the anniversary toast",
+   "better": "wine glass / stemware",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Buy that award-winning olive oil from the Italian deli",
    "better": "bottle / olive oil",
    "trap": "property"
@@ -172,16 +182,6 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Buy two packs of paper cups for the picnic",
-   "better": "disposable cup / drink",
-   "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Rent six champagne goblets for the anniversary toast",
-   "better": "wine glass / stemware",
-   "trap": "lookalike_glyph"
-  },
-  {
    "task": "Book hotel near the stadium for the Sunday matches",
    "better": "bed / hotel",
    "trap": "parent_topic"
@@ -190,7 +190,7 @@
  "scores": {
   "recognizability": 5,
   "task_fit": 4,
-  "distinctiveness": 5
+  "distinctiveness": 1
  },
  "discard": false,
  "reasoning": "A classic two-handled trophy cup on a base, universally recognized as an award, prize, tournament, or achievement. It fits tasks around buying or engraving trophies, entering contests, organizing tournaments, and tracking achievements, while being visually distinct from ordinary drinking cups or wine glasses.",
@@ -208,6 +208,94 @@
   },
   "soft_problems": [],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {},
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "trophy / award / prize",
+     "strength": "primary"
+    },
+    {
+     "meaning": "competition / tournament / contest",
+     "strength": "primary"
+    },
+    {
+     "meaning": "achievement / milestone / goal",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "ranking / leaderboard / winner",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Could rarely be mistaken for a chalice or goblet at very small sizes, though the two side handles make the trophy silhouette unmistakable.",
+   "near_misses": [
+    {
+     "task": "Buy that award-winning olive oil from the Italian deli",
+     "better": "bottle / olive oil",
+     "trap": "property"
+    },
+    {
+     "task": "Read the Booker Prize winner before book club next Tuesday",
+     "better": "book",
+     "trap": "property"
+    },
+    {
+     "task": "Soak the stained coffee cups in bleach overnight",
+     "better": "mug / coffee cup",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Buy two packs of paper cups for the picnic",
+     "better": "disposable cup / drink",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Rent six champagne goblets for the anniversary toast",
+     "better": "wine glass / stemware",
+     "trap": "lookalike_glyph"
+    },
+    {
+     "task": "Book hotel near the stadium for the Sunday matches",
+     "better": "bed / hotel",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 5
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "rewarded_ads"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 2,
+   "usage": {
+    "prompt": 4049,
+    "output": 1015,
+    "thoughts": 138,
+    "total": 5202
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:38:30Z"
+  }
+ },
+ "distinguishing": "This trophy has a completely plain, empty cup bowl, whereas the other icon has a solid circular dot centered inside the bowl; in practice the two are interchangeable as general trophy and award icons."
 }

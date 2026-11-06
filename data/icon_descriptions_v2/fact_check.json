@@ -9,11 +9,11 @@
  },
  "readings": [
   {
-   "meaning": "checklist, questionnaire, survey, or form to complete",
+   "meaning": "checklist, questionnaire, survey, or multi-item form",
    "strength": "primary"
   },
   {
-   "meaning": "verified card, approved registration, or pass",
+   "meaning": "verified ID card, membership pass, or credential",
    "strength": "primary"
   },
   {
@@ -21,11 +21,11 @@
    "strength": "secondary"
   },
   {
-   "meaning": "subtask list or task properties panel",
+   "meaning": "task details panel or subtask list",
    "strength": "secondary"
   }
  ],
- "ambiguity": "Can be read as a generic to-do list, an online form/survey, an ID or membership card with a verification check, or a tablet screen.",
+ "ambiguity": "Can be confused with the browser window with a checkmark or the file folder with a checkmark at small sizes since all three are landscape rectangles containing a checkmark.",
  "modifier_semantics": [
   {
    "modifier": "checkmark",
@@ -162,6 +162,21 @@
  ],
  "near_misses": [
   {
+   "task": "Sign and return the approved lease agreement PDF",
+   "better": "vertical document page with folded corner and checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Organize all tax receipts into the 2025 archive folder",
+   "better": "file folder with a checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
+   "task": "Verify the staging website in Chrome before launch",
+   "better": "browser window with top header bar and checkmark",
+   "trap": "lookalike_glyph"
+  },
+  {
    "task": "Check if the rear bike tire is still holding pressure",
    "better": "bicycle tire or pressure gauge",
    "trap": "generic_verb"
@@ -172,19 +187,9 @@
    "trap": "shared_vocabulary"
   },
   {
-   "task": "Approve the $450 invoice from the plumber",
-   "better": "invoice or receipt with dollar sign",
-   "trap": "generic_verb"
-  },
-  {
    "task": "Pick up a birthday card for Uncle Paul on the way home",
    "better": "greeting card with envelope",
    "trap": "shared_vocabulary"
-  },
-  {
-   "task": "Replace the cracked screen protector on the iPad",
-   "better": "tablet device",
-   "trap": "lookalike_glyph"
   },
   {
    "task": "Book the window seat on the return flight to Chicago",
@@ -195,7 +200,7 @@
  "scores": {
   "recognizability": 4,
   "task_fit": 4,
-  "distinctiveness": 3
+  "distinctiveness": 4
  },
  "discard": false,
  "reasoning": "Shows a rectangular card or form containing three horizontal text lines on the left and a large checkmark on the right. It fits tasks centered on checklists, questionnaires, surveys, inspection sheets, and registration forms, though it overlaps somewhat with generic clipboard/to-do list and ID card icons.",
@@ -215,6 +220,95 @@
    "example_tasks with parent: 3 != 4"
   ],
   "created": "2026-11-06T02:55:46Z",
-  "alias_of": null
- }
+  "alias_of": null,
+  "guard": {
+   "dropped": {
+    "near_misses": 1
+   },
+   "threshold": 0.95,
+   "model": "intfloat/multilingual-e5-small",
+   "eval_sets": [
+    "personal",
+    "realistic",
+    "personal_synth",
+    "public_short",
+    "public_expanded"
+   ]
+  },
+  "pass1": {
+   "readings": [
+    {
+     "meaning": "checklist, questionnaire, survey, or form to complete",
+     "strength": "primary"
+    },
+    {
+     "meaning": "verified card, approved registration, or pass",
+     "strength": "primary"
+    },
+    {
+     "meaning": "test results, grading rubric, or inspection sheet",
+     "strength": "secondary"
+    },
+    {
+     "meaning": "subtask list or task properties panel",
+     "strength": "secondary"
+    }
+   ],
+   "ambiguity": "Can be read as a generic to-do list, an online form/survey, an ID or membership card with a verification check, or a tablet screen.",
+   "near_misses": [
+    {
+     "task": "Check if the rear bike tire is still holding pressure",
+     "better": "bicycle tire or pressure gauge",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Buy a new SD card for the mirrorless camera",
+     "better": "SD memory card",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Approve the $450 invoice from the plumber",
+     "better": "invoice or receipt with dollar sign",
+     "trap": "generic_verb"
+    },
+    {
+     "task": "Pick up a birthday card for Uncle Paul on the way home",
+     "better": "greeting card with envelope",
+     "trap": "shared_vocabulary"
+    },
+    {
+     "task": "Book the window seat on the return flight to Chicago",
+     "better": "airplane or airline seat",
+     "trap": "parent_topic"
+    }
+   ],
+   "distinctiveness": 3
+  },
+  "passes": [
+   "describe",
+   "contrast"
+  ],
+  "lookalikes": [
+   "select_check_box",
+   "domain_verification",
+   "folder_check",
+   "library_add_check",
+   "task"
+  ],
+  "contrast": {
+   "model": "gemini-4-argon",
+   "prompt_version": "v2.1-contrast",
+   "mode": "batch",
+   "group_size": 6,
+   "usage": {
+    "prompt": 9373,
+    "output": 3078,
+    "thoughts": 235,
+    "total": 12686
+   },
+   "soft_problems": [],
+   "created": "2026-11-06T12:39:07Z"
+  }
+ },
+ "distinguishing": "Unlike the other checkmark frames, this horizontal rectangle contains three stacked horizontal lines alongside the checkmark, depicting a card with text or a multi-item checklist rather than a plain checkbox, window, folder, or document."
 }
