@@ -22,7 +22,7 @@ import os
 import subprocess
 import tempfile
 import time
-from typing import Callable, List, Optional, Sequence
+from typing import Callable, List, Optional, Sequence, Tuple
 
 from . import config
 
@@ -50,8 +50,11 @@ class LLMError(Exception):
     pass
 
 
-def _cache_path(backend: str, system: str, prompt: str, schema) -> "os.PathLike":
-    key = json.dumps([backend, system, prompt, schema], ensure_ascii=False, sort_keys=True)
+def _cache_path(backend: str, system: str, prompt: str, schema, extra=None) -> "os.PathLike":
+    """`extra` (image hashes, generation options) joins the key only when given, so
+    the keys of text-only calls, and their cached responses, stay as they were."""
+    parts = [backend, system, prompt, schema] + ([extra] if extra else [])
+    key = json.dumps(parts, ensure_ascii=False, sort_keys=True)
     return CACHE_DIR / (hashlib.sha1(key.encode("utf-8")).hexdigest() + ".json")
 
 
@@ -75,18 +78,43 @@ def _genai_client(backend: str):
 
 
 _CLIENTS = {}
+_CLIENTS_LOCK = __import__("threading").Lock()   # one client per backend, also across threads
 
 
-def _call_genai(backend: str, model: str, system: str, prompt: str, schema, temperature: float) -> str:
+def _call_genai(backend: str, model: str, system: str, prompt: str, schema, temperature: float,
+                images: Optional[Sequence[Tuple[bytes, str]]] = None,
+                gen: Optional[dict] = None) -> Tuple[str, dict]:
+    """(response text, usage). `images` are (bytes, mime type) pairs sent before the
+    prompt; `gen` takes `thinking_level` (minimal/low/medium/high) and
+    `media_resolution` (low/medium/high)."""
     from google.genai import types
-    if backend not in _CLIENTS:
-        _CLIENTS[backend] = _genai_client(backend)
+    with _CLIENTS_LOCK:
+        if backend not in _CLIENTS:
+            _CLIENTS[backend] = _genai_client(backend)
+    gen = gen or {}
+    extra = {}
+    if gen.get("thinking_level"):
+        extra["thinking_config"] = types.ThinkingConfig(
+            thinking_level=types.ThinkingLevel[gen["thinking_level"].upper()])
+    if gen.get("media_resolution"):
+        extra["media_resolution"] = types.MediaResolution[
+            "MEDIA_RESOLUTION_" + gen["media_resolution"].upper()]
     cfg = types.GenerateContentConfig(
         temperature=temperature, response_mime_type="application/json",
         system_instruction=system or None,
-        response_json_schema=schema if schema else None)
-    resp = _CLIENTS[backend].models.generate_content(model=model, contents=prompt, config=cfg)
-    return resp.text
+        response_json_schema=schema if schema else None, **extra)
+    contents = ([types.Part.from_bytes(data=b, mime_type=m) for b, m in images] + [prompt]
+                if images else prompt)
+    t0 = time.time()
+    resp = _CLIENTS[backend].models.generate_content(model=model, contents=contents, config=cfg)
+    um = resp.usage_metadata
+    usage = {"prompt": getattr(um, "prompt_token_count", None) or 0,
+             "output": getattr(um, "candidates_token_count", None) or 0,
+             "thoughts": getattr(um, "thoughts_token_count", None) or 0,
+             # total > prompt + output + thoughts would mean unreported (still billed) tokens
+             "total": getattr(um, "total_token_count", None) or 0,
+             "seconds": round(time.time() - t0, 2)}
+    return resp.text, usage
 
 
 def _call_claude(model: str, system: str, prompt: str, schema) -> dict:
@@ -125,16 +153,27 @@ def _parse_json(text: str):
 def complete_json(prompt: str, *, validate: Callable[[object], bool] = lambda d: True,
                   system: str = "", schema: Optional[dict] = None, backend: str = "gemini",
                   models: Optional[Sequence] = None, temperature: float = 0.4,
-                  private: bool = False, retries: int = 3, tag: str = "") -> dict:
-    """Return {"data": parsed JSON, "model": model id}. Cached on disk.
+                  private: bool = False, retries: int = 3, tag: str = "",
+                  images: Optional[Sequence[Tuple[bytes, str]]] = None,
+                  gen: Optional[dict] = None) -> dict:
+    """Return {"data": parsed JSON, "model": model id, "usage": {...}}. Cached on disk.
 
     `private=True` asserts the prompt contains private text; it is refused on
     backends that may train on prompts. `tag` separates otherwise-identical
-    prompts that must be sampled independently (e.g. repeated attacker runs).
+    prompts that must be sampled independently (e.g. repeated attacker runs, or
+    the same request to several models). `images` and `gen` (see `_call_genai`)
+    are for the gemini/vertex backends; `usage` sums the tokens of every attempt,
+    failed ones included, since those are billed too.
     """
     if private and backend not in PRIVATE_OK:
         raise ValueError(f"backend {backend!r} must not receive private text")
-    path = _cache_path(backend, system, prompt + ("\n#" + tag if tag else ""), schema)
+    if (images or gen) and backend == "claude-cli":
+        raise ValueError("images / gen are supported on the gemini and vertex backends only")
+    extra = None
+    if images or gen:
+        extra = {"images": [hashlib.sha1(b).hexdigest() for b, _ in images or []],
+                 "gen": gen or {}}
+    path = _cache_path(backend, system, prompt + ("\n#" + tag if tag else ""), schema, extra)
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
 
@@ -148,17 +187,26 @@ def complete_json(prompt: str, *, validate: Callable[[object], bool] = lambda d:
         raise ValueError(backend)
 
     last_err: Optional[Exception] = None
+    spent = {"prompt": 0, "output": 0, "thoughts": 0, "total": 0, "seconds": 0.0, "attempts": 0}
     for model, delay in chain:
         for attempt in range(retries):
             try:
                 if backend == "claude-cli":
                     data = _call_claude(model, system, prompt, schema)
                 else:
-                    data = _parse_json(_call_genai(backend, model, system, prompt, schema, temperature))
+                    text, usage = _call_genai(backend, model, system, prompt, schema, temperature,
+                                              images=images, gen=gen)
+                    for k in ("prompt", "output", "thoughts", "total", "seconds"):
+                        spent[k] += usage[k]
+                    spent["attempts"] += 1
+                    data = _parse_json(text)
                 time.sleep(delay)
                 if not validate(data):
                     raise LLMError("response failed validation")
                 result = {"data": data, "model": model}
+                if spent["attempts"]:
+                    spent["seconds"] = round(spent["seconds"], 2)
+                    result["usage"] = spent
                 CACHE_DIR.mkdir(parents=True, exist_ok=True)
                 path.write_text(json.dumps(result, ensure_ascii=False), encoding="utf-8")
                 return result

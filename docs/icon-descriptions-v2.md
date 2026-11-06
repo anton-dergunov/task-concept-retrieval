@@ -163,9 +163,26 @@ is cheap.
 
 ## 5. Generation process
 
-1. **Model pilot** (~$5): 50 random icons (including the 10 from the spot check) ×
-   {Gemini 3 Flash, 3.5 Flash, 3.1 Pro}. Each depiction is judged against the glyph by me
-   and spot-checked by the author. Pick the cheapest model with ≤ 5% misreadings.
+1. **Model pilot** (done 2026-11-06, `scripts/v2_pilot.py`, results in
+   `results/v2_pilot/`): 50 glyphs, stratified by the manual review (16 useful, 28
+   unsure, 6 reject, including 4 of the spot check's v1 misreads), × 5 configs with
+   the same prompt, references and 256 px glyph. A fresh Claude Opus agent judged the
+   readings blind (models hidden, slots shuffled per glyph); the author spot-checks.
+
+   | Config | Wrong | Partly | Text realism / fit / near-miss (1–5) | Rejects discarded | Pass 1, batch |
+   |---|---|---|---|---|---|
+   | Gemini 4 Argon | 0 | 0 | 4.7 / 3.6 / 4.2 | 5 of 6 | ~$44 (promo until 30 Nov; then double) |
+   | Gemini 3.1 Pro | 0 | 1 | 3.5 / 3.3 / 3.3 | 3 of 6 | ~$127 |
+   | Gemini 3.8 Flash, low thinking | 1 | 2 | 4.1 / 3.6 / 3.9 | 3 of 6 | ~$14 |
+   | Gemini 3.8 Flash | 1 | 3 | 4.1 / 3.2 / 3.7 | 3 of 6 | ~$24 |
+   | Gemini 3 Flash | 2 | 4 | 3.5 / 2.5 / 2.6 | 1 of 6 | ~$24 |
+
+   Misreadings concentrate on small corner badges, frames identified by one detail, and
+   glyphs with two plausible readings. Argon leads on every measure, though with 50
+   glyphs the error CIs overlap (0–7% for Argon, 0–10% for the 3.8 Flash variants).
+   Argon's one defect, a runaway field listing hundreds of terms, is now a retried
+   validation failure. **Decision: Argon for pass 1**, in batch mode (it hit rate limits
+   at 10 parallel requests).
 2. **Pass 1: describe.** One call per distinct glyph (3,486 kept + those discarded in v1, if
    re-judging `discard`), with the v2 prompt, the glyph at 256 px, rotating title
    references, and the domain list. Copy the result to aliases.
