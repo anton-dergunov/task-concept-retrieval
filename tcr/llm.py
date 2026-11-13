@@ -177,7 +177,8 @@ def complete_json(prompt: str, *, validate: Callable[[object], bool] = lambda d:
                  "gen": gen or {}}
     path = _cache_path(backend, system, prompt + ("\n#" + tag if tag else ""), schema, extra)
     if path.exists():
-        return json.loads(path.read_text(encoding="utf-8"))
+        # "cached" tells callers that keep a spend log not to count the usage again.
+        return {**json.loads(path.read_text(encoding="utf-8")), "cached": True}
 
     if backend == "gemini":
         chain = list(models or GEMINI_MODELS)

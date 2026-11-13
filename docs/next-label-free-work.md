@@ -39,6 +39,13 @@ are done, and move anything still open into fine-tuning-plan §8.
 
 ### 1. Training task pools (fine-tuning-plan §4, item 2)
 
+**Done 2026-11-13.** `data/train_pools/mslatte.jsonl` (3,000 public MS-LaTTE titles,
+`scripts/datasets/build_train_pools.py`) and the private Personal-style pool
+`data/private/train_pools/personal_synth_pool.jsonl` (~5,000,
+`scripts/datasets/synth_personal.py pool`). The MASSIVE leftovers and developer TODO
+corpora were skipped: the public pool is already the easy part of the mix. The original
+brief, kept for reference:
+
 Unlabelled task titles for the LLM judge to label later (step 5 of §8), disjoint from
 every eval set by source id **and** by `contamination_hits`.
 
@@ -93,6 +100,10 @@ Tests the training pipeline before judge labels exist.
   quality on abstract glyphs; the point is to measure it.
 
 ### 4. LLM-judge harness (§6), ready to calibrate
+
+**Done 2026-11-13** (fine-tuning-plan §6.1): `tcr/judge.py`, tuned on the author's first
+51 labels with `scripts/judge_dev.py`; bulk runs with `scripts/judge_batch.py`. The
+original brief, kept for reference:
 
 - One request per task: title (+ parent heading), the top-30 candidates pooled as in the
   labeller, shown as one contact sheet with large printed numbers

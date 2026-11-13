@@ -54,25 +54,37 @@ def log(msg):
 
 
 def gcloud(*args, check=True):
+    # .env may pick the gcloud configuration (CLOUDSDK_ACTIVE_CONFIG_NAME) for this project
+    # only; load it before every call, not just when a job is submitted.
+    from dotenv import load_dotenv
+    load_dotenv(config.ROOT / ".env")
     return subprocess.run(["gcloud", *args], capture_output=True, text=True, check=check)
 
 
 # --- requests and responses ----------------------------------------------------------
 
-def request_json(system: str, parts, schema: dict, temperature: float = 1.0) -> dict:
+def request_json(system: str, parts, schema: dict, temperature: float = 1.0,
+                 gen: dict = None) -> dict:
     """The REST body of one generateContent request. `parts` is a list of str (text) and
-    (bytes, mime type) (inline images), in order."""
+    (bytes, mime type) (inline images), in order. `gen` takes `thinking_level` and
+    `media_resolution`, as in tcr.llm."""
     out = []
     for p in parts:
         if isinstance(p, str):
             out.append({"text": p})
         else:
             out.append({"inlineData": {"mimeType": p[1], "data": base64.b64encode(p[0]).decode()}})
+    cfg = {"temperature": temperature, "responseMimeType": "application/json",
+           "responseJsonSchema": schema}
+    gen = gen or {}
+    if gen.get("thinking_level"):
+        cfg["thinkingConfig"] = {"thinkingLevel": gen["thinking_level"].upper()}
+    if gen.get("media_resolution"):
+        cfg["mediaResolution"] = "MEDIA_RESOLUTION_" + gen["media_resolution"].upper()
     return {
         "contents": [{"role": "user", "parts": out}],
         "systemInstruction": {"parts": [{"text": system}]},
-        "generationConfig": {"temperature": temperature, "responseMimeType": "application/json",
-                             "responseJsonSchema": schema},
+        "generationConfig": cfg,
     }
 
 

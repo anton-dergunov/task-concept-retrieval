@@ -61,14 +61,32 @@ def available() -> List[Dataset]:
 
 
 SPLIT_SEED = "split-v1"
+# Tasks used to develop the LLM judge (its prompt examples and error analysis): neither
+# dev nor test for matcher evaluation. Private ids, so the list lives in data/private/.
+JUDGE_DEV_IDS = config.PRIVATE_DIR / "judge" / "judge_dev_ids.txt"
+_judge_dev = None
+
+
+def judge_dev_ids() -> frozenset:
+    global _judge_dev
+    if _judge_dev is None:
+        _judge_dev = frozenset(
+            line.strip() for line in (JUDGE_DEV_IDS.read_text().splitlines()
+                                      if JUDGE_DEV_IDS.exists() else [])
+            if line.strip() and not line.startswith("#"))
+    return _judge_dev
 
 
 def split_of(task_id: str) -> str:
-    """Fixed 50/50 "dev" / "test" assignment by id hash (docs/fine-tuning-plan.md §2).
+    """"dev" / "test" / "judge-dev" (docs/fine-tuning-plan.md §2).
 
-    Independent of the labelling order (which uses a different hash), so any labelled
+    "judge-dev": the tasks the LLM judge was developed on (JUDGE_DEV_IDS); they never
+    count for matcher evaluation. Every other task is split 50/50 by id hash,
+    independent of the labelling order (which uses a different hash), so any labelled
     prefix is split evenly. "test" is touched only for final numbers; "dev" is for
     tuning, gate calibration and judge calibration.
     """
+    if task_id in judge_dev_ids():
+        return "judge-dev"
     h = int(hashlib.sha1((SPLIT_SEED + task_id).encode("utf-8")).hexdigest()[:8], 16)
     return "test" if h % 2 == 0 else "dev"

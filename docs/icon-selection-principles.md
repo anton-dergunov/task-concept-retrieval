@@ -30,6 +30,16 @@ misleading one** (abstention).
    urgent), quantities, dates, deadlines, and people's names are not shown: a rain icon
    for "waterproof" is wrong.
 
+**Abstract topics.** Many tasks are about ideas, not objects: things to learn, research
+directions, career moves. When the head noun is generic (*methods, approaches, ideas,
+overview, niche, notes*), the **qualifier that names the topic is the subject**: in
+*"Evolutionary strategies for black-box tuning"* the subject is evolution, not "strategy",
+so a branching tree or DNA is right and a generic gear is not. This is not rule 4: a
+qualifier that *names the topic* (evolutionary, Bayesian, contrastive) is the subject;
+one that only describes it (narrow, urgent, small) is still never shown. Look for the
+association that a person would recall the topic by: a visual metaphor of its core idea
+is fine when nothing literal exists.
+
 Further rules:
 
 - **Specific beats generic,** as long as it stays readable: headlamp > flashlight > light
@@ -53,6 +63,24 @@ support"*). The parent is context, not the answer:
   collection**; then rules or processing.
 - **Siblings should not all get the same icon.** Prefer what distinguishes the task from
   the other tasks of the same project, as long as the icon still reads as belonging to it.
+- **The same holds for the whole list.** A list dominated by one domain (say machine
+  learning) must not get one domain icon (a brain, a chip) on every task: that icon
+  tells nothing apart. Pick what distinguishes *this* task within its domain; fall back
+  to the domain icon only when nothing more specific fits.
+
+## How to choose (the procedure)
+
+The same steps for the human labeller and the LLM judge:
+
+1. **Understand the task.** Name its main topic at the level that sets it apart from
+   the rest of the list, then the visual associations of that topic, then the
+   qualifiers that define it.
+2. **Scan every candidate once** and collect each icon that is at least somewhat
+   relevant. The scan is the slow part, and it costs the same however many are kept.
+3. **Search** the descriptions for the associations when nothing collected fits well.
+4. **Prune and order:** drop the weak ones, put the best reminder first. Several
+   imperfect icons in a ranked list are a normal answer; "no good icon" when only
+   generic or property-level icons are left.
 
 ## Worked examples
 
@@ -61,6 +89,8 @@ support"*). The parent is context, not the answer:
 | Buy a small waterproof rechargeable headlamp for trips | headlamp | light / flashlight, or trips / hiking | rain (waterproof), battery (rechargeable), shopping cart (generic verb) |
 | Evaluate bids against my catalog rules (*Music catalog support*) | music library / album collection | rules / checklist / processing | a generic "evaluate" chart |
 | Verify that all devices including tablet and phones are using git sync correctly | git + sync (synchronization of a repository) | devices (tablet / phone) syncing | a check mark (generic "verify") |
+| Evolutionary strategies for black-box tuning, and where they actually win (*Optimization reading list*) | evolution: branching tree / DNA / mutation | tuning knobs, a target | a brain or chip (the list's domain), a gear (generic "methods"), a small-size icon ("where they win" is a property) |
+| Collect recorded talks by great speakers to study their delivery (*Public speaking*) | a speaker at a lectern / presenting | video library / playlist, an audience | a generic folder ("collect"), a star ("great") |
 
 ## Language
 

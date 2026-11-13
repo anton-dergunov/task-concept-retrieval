@@ -35,6 +35,11 @@ tool alternates test and dev tasks, so any labelled prefix is split exactly in h
 - **dev**: everything else. That includes hyperparameters, calibrating the abstention gate
   (the "no good icon" labels), calibrating and validating the LLM judge, model selection,
   and error analysis.
+- **judge-dev**: the first 51 labelled Personal tasks (2026-11-13), on which the LLM judge's
+  prompt was developed (§6.1): 5 are examples in its prompt, 46 were read for error
+  analysis. Both their test and dev halves were looked at, so they count for neither.
+  `split_of` returns `"judge-dev"` for the ids in `data/private/judge/judge_dev_ids.txt`.
+  Labels made after that keep alternating test and dev.
 
 ## 3. Is the labelled data enough for evaluation?
 
@@ -234,6 +239,47 @@ Output is billed at 6–8× the input rate, so it dominates the cost.
 - **Batch mode:** Vertex batch prediction returns within hours, which is fine for dataset
   building.
 
+### 6.1 As built (2026-11-13)
+
+The judge was built and tuned before many human labels existed, because Gemini access
+may end at any time. It works the way the author labels
+([icon-selection-principles.md](icon-selection-principles.md), "How to choose"), in
+single-request stages (`tcr/judge.py`):
+
+- **A, scan and plan:** the task (title, parent headings, body start, up to 10 sibling
+  titles), 5 of the author's labelled tasks as worked examples (in words), and the same
+  ~100 candidates the author saw in the labeller, as 4 numbered contact sheets with one
+  line each from the v2 description (never names). Output: the analysis (central subject,
+  what distinguishes it, associations, qualifiers), every somewhat relevant candidate, and
+  up to 4 description searches.
+- **Searches** run locally (M3 on v2, 10 new icons per query).
+- **B, decide:** the analysis, the collected icons and the search results → a ranking
+  graded 3 / 2 / 1, or "no good icon"; B may search once more.
+
+**Tuning.** On the judge-dev set (§2): 46 validation tasks, two runs per version, error
+analysis between versions, rules kept general (never a hint for one task). Each version
+fixed a pattern of misses: the action or a side noun instead of the subject, and puns (j2);
+the parent heading's domain (j3); the plain object before clever aspects (j4, neutral;
+frozen). Run-to-run noise: hit@1 differs on 3–6 of 45 tasks.
+
+| Frozen prompt j4 (2 runs each) | hit@1 | hit@1, icons the author saw | exact@1 | nDCG@5 | $ / task, batch |
+|---|---|---|---|---|---|
+| matcher M3.v2 (no LLM) | 0.33 | — | 0.09 | 0.21 | 0 |
+| Gemini 3.8 Flash, low thinking | 0.35 | 0.42 | 0.10 | 0.28 | 0.007 |
+| Gemini 3.1 Pro | 0.27 | 0.34 | 0.12 | 0.26 | 0.024 |
+| **Gemini 4 Argon** | **0.50** | **0.58** | **0.26** | **0.38** | 0.019 (promo) |
+
+hit@1: the judge's first icon is among the author's picks. Argon against Flash, per task:
+hit@1 better on 10, worse on 1; nDCG@5 better on 26, worse on 7. Medium thinking did not
+help Flash. **Argon is the judge** for Personal, the Personal-style pool, Personal-synth and
+Realistic; Flash for the easy public sets. The bias is known: the prompt was tuned on these
+46 tasks, so the unbiased check is the author's labels made after 2026-11-13.
+
+Development: `scripts/judge_dev.py` (run / score), the private log
+`data/private/judge/iterations.md` and report `data/private/judge/report.html`
+(`scripts/judge_report.py`); metrics only in `results/judge_dev/summary.json`. Bulk runs:
+`scripts/judge_batch.py`, hand-off in [judge-bulk-run.md](judge-bulk-run.md).
+
 ## 7. Icon description quality (v2 descriptions)
 
 The descriptions are the only matching signal, and v1 had measurable problems: glyph
@@ -251,24 +297,21 @@ starts first, and work that needs no labels runs alongside it.
 
 1. ~~Regenerate the icon descriptions (v2, §7)~~ (done 2026-11-06). The labelling pools
    were rebuilt over v1 + v2 the same day.
-2. **Label** about 400 Personal tasks (200 dev / 200 test) first, then continue toward the
-   targets in §3. The first 200 dev labels already decide v1 vs v2 and give the first real
-   baseline numbers.
-3. **Meanwhile, work that needs no labels** (hand-off for a separate session:
-   [next-label-free-work.md](next-label-free-work.md)):
-   - build the unlabelled training task pools (§4, item 2), disjoint from every eval set;
-   - a first fine-tune of the multilingual dual encoder on the free signal in v2 (§4, item 1):
-     example tasks (EN, ES, RU) as rank-1 positives, context tasks as rank-2, near-misses
-     as hard negatives. It tests the training pipeline early; only dev labels can judge
-     it, because the bootstrap eval uses the same examples;
-   - zero-shot image-tower baselines (SigLIP 2 / jina-clip-v2) and their fusion with M1;
-   - the LLM-judge harness (§6), smoke-tested on public tasks, ready to calibrate.
-4. **With ~200 dev labels:** v1 vs v2 (icon-descriptions.md §7); baselines B1, M1, M2, M3,
-   the image towers and the step-3 fine-tune on dev; judge calibration (§6), pick the
-   judge.
-5. **Judge about 3k training-pool tasks**; fine-tune the dual encoder on judge labels +
-   v2's free signal; learning curve; then 10k if it keeps improving. This is the step
-   most likely to produce the best fast model.
+2. **Label** Personal tasks, alternating test and dev, toward the targets in §3. The first
+   51 became the judge-dev set (§2); the labels after them give the final numbers and the
+   unbiased check of the judge.
+3. ~~The LLM judge (§6.1)~~ (done 2026-11-13) and the training pools: the private
+   Personal-style pool (~5,000, `synth_personal.py pool`) and 3,000 MS-LaTTE titles
+   (`data/train_pools/`). **Bulk judging** of every dataset and pool with Vertex batch, in
+   priority order, while access lasts: [judge-bulk-run.md](judge-bulk-run.md).
+4. **Still label-free** ([next-label-free-work.md](next-label-free-work.md)): a first
+   fine-tune of the multilingual dual encoder on v2's free signal; zero-shot image-tower
+   baselines (SigLIP 2 / jina-clip-v2) and their fusion with M1.
+5. **With ~200 dev labels:** v1 vs v2 (icon-descriptions.md §7); baselines B1, M1, M2, M3,
+   the image towers and the fine-tune on dev; the judge against the new labels.
+   **Fine-tune the dual encoder on judge labels** of the pools + v2's free signal;
+   learning curve at 1k / 3k / 8k pool tasks. This is the step most likely to produce the
+   best fast model.
 6. **Add image features; try the VLM reranker** and distil it into the dual encoder if
    it wins; fit the usefulness prior and calibrate the abstention gate on dev ("no good
    icon" labels).
