@@ -65,3 +65,15 @@ and `judge_batch.py` refuses to build the next round under another one.
   judge-dev set only; score the new labels against the exported Personal labels).
 - Training (fine-tuning-plan §8, step 5) uses the pool runs only; the eval-set runs serve
   evaluation (judge-vs-human, prediction-powered inference).
+
+## Continuing in a new Claude session
+
+No session is needed while the runs go: `run` does every round by itself, including the
+searches between rounds. Start a session afterwards, with this prompt:
+
+> Read CLAUDE.md, docs/judge-bulk-run.md and docs/fine-tuning-plan.md §6.1 and §8. The
+> judge's batch runs are finished or in progress: check each with `judge_batch.py status`,
+> export the finished ones, and summarise coverage (tasks done / failed / "no good icon"),
+> spend (`tcr.judge.spent()`) and the grade distribution. Then score the exported Personal
+> labels against my labels made after 2026-11-13 (not the judge-dev set): the unbiased
+> check of the judge. Then continue with fine-tuning-plan §8, step 4–5.

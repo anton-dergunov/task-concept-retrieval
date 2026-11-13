@@ -53,6 +53,8 @@ background:#fff;display:flex;align-items:center;justify-content:center}
 .ic.in{border-color:var(--hit)} .ic.u1{border-color:var(--top);border-width:3px}
 .ic b{position:absolute;top:-7px;left:-7px;background:var(--fg);color:var(--bg);font-size:10px;
 border-radius:8px;padding:0 4px;line-height:15px}
+.ic i{position:absolute;bottom:1px;right:3px;font-style:normal;font-size:9px;letter-spacing:-1px;
+color:#8a8a90}
 .note{font-size:12.5px;color:var(--mut);margin:6px 0 0 140px}
 .tag{font-size:11px;padding:1px 6px;border-radius:6px;border:1px solid var(--line);color:var(--mut)}
 .tag.hit{color:var(--hit);border-color:var(--hit)}
@@ -60,9 +62,10 @@ border-radius:8px;padding:0 4px;line-height:15px}
 """
 
 
-def icon(name: str, cls: str = "", badge: str = "", tip: str = "") -> str:
+def icon(name: str, cls: str = "", badge: str = "", tip: str = "", grade: int = 0) -> str:
+    dots = f"<i>{'●' * grade}</i>" if grade else ""
     return (f'<span class="ic {cls}" title="{html.escape(tip)}"><img src="{ICON_REL}/{name}.png" '
-            f'alt="">{f"<b>{badge}</b>" if badge else ""}</span>')
+            f'alt="">{f"<b>{badge}</b>" if badge else ""}{dots}</span>')
 
 
 def runs_by_name() -> dict:
@@ -145,9 +148,11 @@ def main() -> None:
     rep1 = {c: next((n for n in cfgs[c] if n.endswith("rep1") or "__rep1__" in n), cfgs[c][0])
             for c in shown}
     last = rep1.get(best) if best else None
-    h.append("<h2>Every task</h2><p class='legend'>Blue border: your first pick. Green: one of "
-             "your picks. Badges: your rank, or the judge's grade (3 subject, 2 context, 1 "
-             "partial). Tasks where the best configuration misses come first.</p>")
+    h.append("<h2>Every task</h2><p class='legend'>Badges are positions in each ranking (yours, "
+             "then each judge's). Blue border: your first pick; green: one of your other "
+             "picks. Dots: the judge's grade (●●● shows the subject, ●● its context, ● a "
+             "partial fit). Hover an icon for its description and the judge's reason. "
+             "Tasks where the best configuration misses come first.</p>")
 
     def key(t):
         s = runs.get(last, {}).get(t)
@@ -171,8 +176,9 @@ def main() -> None:
                 continue
             ranked = s["final"]["ranking"]
             cells = "".join(icon(x["icon"], "u1" if u and x["icon"] == u[0] else
-                                 "in" if x["icon"] in u else "", str(x["grade"]),
-                                 f"{J.icon_line(x['icon'])} — {x['why']}") for x in ranked[:8])
+                                 "in" if x["icon"] in u else "", str(i + 1),
+                                 f"grade {x['grade']}: {J.icon_line(x['icon'])} — {x['why']}",
+                                 grade=x["grade"]) for i, x in enumerate(ranked[:8]))
             hit = bool(ranked) and bool(u) and ranked[0]["icon"] in u
             tag = f"<span class='tag {'hit' if hit else ''}'>{'hit' if hit else 'miss'}</span>"
             if s["final"]["no_good_icon"]:
