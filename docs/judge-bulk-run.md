@@ -16,6 +16,10 @@ Gemini access lasts. Read CLAUDE.md first.
 
 ## Runs, in priority order
 
+**All of them in one go:** `scripts/judge_bulk.sh` runs the lines below one after another
+(prepare if needed → run → export) and is safe to rerun after any interruption. The lines
+below are the same steps, for running one dataset by hand.
+
 Access may end at any time, so the most valuable labels come first. Each line is one run;
 `run` submits a round, waits, collects, runs the searches locally, and submits the next
 round, until every task is done (2–3 rounds; each round takes minutes to a few hours).

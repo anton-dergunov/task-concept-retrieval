@@ -165,14 +165,20 @@ class Batch:
                                          "usd": round(J.usd(usage, meta["model"], batch=True), 6),
                                          "cached": False, "batch": name})
                 answered += 1
-            st = run.state()
-            st["collected"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-            run.save_state(st)
         all_states = list(states.values())
         for s in all_states:
             s["usd"] = round(sum(c.get("usd", 0) for c in s["calls"]), 6)
             s["model"] = meta["model"]
+        # Answers first, then the "collected" marks: an interrupt in between only makes the
+        # next collect download again (applying an answer twice is prevented by the key check).
         self.save_states(all_states)
+        stamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        for name in meta.get("jobs", []):
+            run = self.job(name)
+            st = run.state()
+            if not st.get("collected"):
+                st["collected"] = stamp
+                run.save_state(st)
         n_done = sum(s["stage"] == "done" for s in all_states)
         print(f"collected round {meta.get('round')}: {answered} answers, {failed} failed; "
               f"${spent:.2f}; {n_done}/{len(all_states)} tasks done; total logged ${J.spent():.2f}")
