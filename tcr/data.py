@@ -207,6 +207,15 @@ def _review_by_glyph() -> Dict[Optional[str], str]:
     return {hashes.get(n): lab for n, lab in icon_labels().items()}
 
 
+def rejected_names() -> frozenset:
+    """Every icon name whose glyph the manual review rejected (aliases included), read
+    live from the review log. v2 has no files for them; v1 still describes them. Methods
+    are not filtered by it: evaluation counts how often they show one (tcr/silver.py),
+    and a production export drops them (scripts/export_bundle.py)."""
+    rej = {h for h, lab in _review_by_glyph().items() if lab == "reject" and h is not None}
+    return frozenset(n for n, h in glyph_hashes().items() if h in rej)
+
+
 def icons_by_name(include_discarded: bool = False, version: Optional[str] = None) -> Dict[str, IconDoc]:
     return {ic.name: ic for ic in load_icons(include_discarded, version=version)}
 

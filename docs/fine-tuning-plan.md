@@ -292,8 +292,10 @@ batch; $238 of the $300 trial with development included.
   did (0.49 and 0.51).
 - The judge almost never abstains, and its top-1 has grade 3 on ~96% of tasks: its
   labels train ranking, not the abstention gate.
-- Icons rejected in the manual review reach the rankings through v1 (1,262 entries);
-  filter them before use.
+- Icons rejected in the manual review reach the rankings through v1 (1,262 entries;
+  top-1 on 0.78% of tasks). They are dropped from silver gold and training targets
+  (`tcr/silver.py`); methods stay unfiltered so evaluation reports how often each shows
+  one (`rej@1`), and only a production export filters them.
 - Details and what comes next: [next-label-free-work.md](next-label-free-work.md).
 
 Development: `scripts/judge_dev.py` (run / score), the private log

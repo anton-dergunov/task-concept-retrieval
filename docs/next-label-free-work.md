@@ -15,25 +15,30 @@ the abstention gate. The one deadline is Gemini access on Google Cloud, which ma
 - **Judge labels, all runs finished** (2026-11-14, prompt j4; details in fine-tuning-plan
   §6.1): Personal 2,941, Personal-synth 1,506, Realistic 623, Public-short 825,
   Public-expanded 500 (eval sets: evaluation only, never training); the Personal-style pool
-  4,986 and the MS-LaTTE pool 3,000 (training). One task failed in 15,381.
-  Public runs: `results/judge_labels/<run>.jsonl`; private: `data/private/judge/labels/`.
-- **Spend:** $248.50 of the $300 trial by the spend log (`tcr.judge.spent()`), including
-  the backfilled first pool generation. The log is an estimate: the billing console has
-  the real credit and the trial's end date.
+  4,986 + 1,890 (step 0c, run `pool-synth2-j4`) and the MS-LaTTE pool 3,000 (training).
+  One task failed in 16,271. Public runs: `results/judge_labels/<run>.jsonl`; private:
+  `data/private/judge/labels/`. Step 0 is done (validation below).
+- **Spend:** $291.14 by the spend log after step 0 (cap $295), including the backfilled
+  first pool generation. Gemini is no longer needed for the planned work.
 - **Human labels:** 51 Personal (all judge-dev, so they count for nothing else) and 10
   Public-short. The judge's hit@1 against the author is 0.49 on the judge-dev tasks (95%
   interval 0.35–0.63); the batch run reproduces the online runs.
 - **Matchers:** B0, B1 (BM25), M1 (field-weighted e5), M2 (nearest example), M3 (RRF of
-  B1 + M1), M3x (exported bundle), each on v1 or v2 descriptions. No fine-tuned or image
-  method yet.
+  B1 + M1), M3x (exported bundle), each on v1 or v2 descriptions; on the silver
+  leaderboard (step 1, done) M3.v2 leads. No fine-tuned or image method yet.
 
 Three facts about the judge labels that every step below must handle:
 
 1. **Rejected icons.** The 280 icons rejected in the manual review
-   (`data/labels/icon_curation.jsonl`, `tcr.data.icon_labels()`) are missing from v2 but
-   not filtered from v1, and the judge's candidates come from both. They appear in 1,262
-   ranking entries and are the top-1 on 0.2–1.1% of tasks. Drop them from training
-   targets and from silver gold.
+   (`data/labels/icon_curation.jsonl`, `tcr.data.rejected_names()`) are missing from v2
+   but not filtered from v1, and the judge's candidates come from both. They are the
+   judge's top-1 on 0.78% of tasks (127 of 16,271): payment 23, table 14, view_real_size
+   12, format_quote 7, and ~20 speed_* numbers picked by the literal number in the title
+   ("1.75 cues floating point"). **Decision (2026-11-14):** they are dropped from silver
+   gold and training targets; methods are *not* filtered, so evaluation can show which
+   methods show them (`rej@1`) and what the production filter changes ("served"
+   metrics). The hard rule applies only to serving: `scripts/export_bundle.py` leaves them
+   out (`--keep-rejected` to keep). More rules can be added the same way later.
 2. **The judge almost never abstains**: "no good icon" on 0.1% of tasks, against 2 of 51
    for the author. The top-1 gets grade 3 on about 96% of tasks. Judge labels can train
    the ranking but cannot calibrate the abstention gate; that needs the author's "none"
@@ -79,10 +84,13 @@ CREDIT_LEFT=<USD under Billing → Credits> scripts/gemini_last_jobs.sh
   (delete it to set the cap again). Every job refuses a round that would cross it, and
   the pool extension is sized to what is left: about 1,700 tasks if the whole $300 is
   credit. The log missed the first pool generation's Vertex calls ($10.32, backfilled
-  2026-11-14); pool generation now logs its calls. Billing lags by up to a day, and v2
-  description work may have been billed to the same account, which the log does not
-  show. So `CREDIT_LEFT` from the console is the real limit, and the $300 term only
-  guards against a lagging console.
+  2026-11-14); pool generation now logs its calls. On 2026-11-14 the console showed
+  £185.36 of the credit used (≈ $246.60 at the credit's own rate, $300 = £225.52) and
+  £40.16 (≈ $53) left, so the log matches the bill. The run was started with
+  `CREDIT_LEFT=53 RESERVE=5`.
+- **The account is a paid one** (upgraded before 2026-11-16 so the credit still covers
+  Gemini). Use beyond the credit is billed to the card afterwards, not refused, so the
+  cap is the only guard.
 - **0a + 0b:** `scripts/augment_pools.py run --judge-run <run>` translates every task of a
   finished judge run (title, parents, body) and, with `--gen-parents`, invents the
   parent headings, all in one Flash batch job per round. Output, one line per task:
@@ -101,6 +109,36 @@ CREDIT_LEFT=<USD under Billing → Credits> scripts/gemini_last_jobs.sh
 - Without Gemini later: `claude-cli` (the author's subscription) covers small private
   jobs, the free `gemini` tier covers public text.
 
+### Step 0 results (validated 2026-11-14)
+
+| Output | Check |
+|---|---|
+| `pool-synth2-j4` labels, 1,890 | ids match the run's snapshot; no failed task, unknown icon, bad grade or duplicate; top-1 grade 3 on 97.9% (first pool: 97.1%), rejected top-1 0.79% |
+| Pool extension | 1,908 new tasks after near-duplicate removal, 1,890 judged (budget), 18 not; no overlap with the first run. The rewritten `personal_synth_pool.jsonl` lost 2 judged tasks (`pool-33d0a3101c`, `pool-790c87ab8f`); the judge's snapshot keeps them |
+| `personal_synth_pool.aug.jsonl`, 6,876 | every judged task; RU titles all Cyrillic, no ES title equal to the EN one; 11 tasks with a translation flagged as too close to an eval title; generated parents on all (depth 1: 18%, 2: 81%, 3: 0.3%; Personal ~46 / 50 / 4%, but the query uses only the nearest parent) |
+| `train_mslatte.aug.jsonl`, 2,978 of 3,000 (public) | the 22 left out are brand names ("Path of exile") refused by the Cyrillic check; 59 RU titles equal the EN brand name; 59 tasks with a flagged translation; no private text or paths |
+
+Rules for training that follow: read task text from each judge run's snapshot
+(`data/private/judge/batch/<run>/tasks.jsonl`, `tcr.silver.run_tasks`), never from the pool
+file; skip a translation equal to the EN title and the languages listed in `contaminated`.
+
+### For the author's next icon review (~1 week)
+
+The judge also matches literal symbols with icons that are not reviewed yet. Two groups,
+by the judge's top-1 count over all 16,271 labelled tasks:
+
+- **v2 discarded them, v1 still describes them** (2.6% of top-1s): compress 40,
+  file_json 28, format_letter_spacing_wider 19 + _standard 17 (|A| read as a matrix
+  norm), text_compare 19, sql 18, vertical_align_center 14, format_line_spacing 12,
+  language_spanish 12, http 11, raw_on 10, match_word 9, decimal_increase 8.
+- **Kept by v2, the glyph is letters or numerals:** superscript 56 (x² for "scaling
+  laws", "second-order"), translate 29, generating_tokens 26, spellcheck 19,
+  handwriting_recognition 17, glyphs 13, markdown 10, language_japanese_kana 8,
+  picture_as_pdf 5, copyright 5. (format_list_numbered, 127, is used for ranking tasks
+  and looks fair.)
+
+Rejects take effect on the next `scripts/silver_eval.py` run with no code change.
+
 ## 1. Silver leaderboard
 
 The first comparison on real task distributions; the bootstrap eval (`tcr/eval.py`)
@@ -116,6 +154,39 @@ only tests on the generator's own example tasks.
 - What it can and cannot say: a relative ranking of methods, biased toward pool builders
   and limited by judge accuracy (~0.5 hit@1 against the author). The verdict stays with
   human dev labels.
+
+**Done 2026-11-14:** `scripts/silver_eval.py` (gold and metrics in `tcr/silver.py`),
+results in [results/silver/2026-11-14.md](../results/silver/2026-11-14.md); 3,230 dev
+tasks, ~15 min on the Mac. Pooled over the five sets:
+
+| method | nDCG@5 | hit@1 | judged@1 | rej@1 |
+|---|---:|---:|---:|---:|
+| M3.v2 | 0.337 | 0.437 | 1.00 | 0 |
+| M1.v2 | 0.292 | 0.377 | 0.97 | 0 |
+| B0.v2 | 0.262 | 0.354 | **0.69** | 0 |
+| B1.v2 | 0.242 | 0.322 | 0.92 | 0 |
+| M1.v1 | 0.206 | 0.262 | 0.97 | 0.031 |
+| M3.v1 | 0.200 | 0.259 | 1.00 | 0.035 |
+| B0.v1 | 0.174 | 0.222 | 0.64 | 0.059 |
+| M2.v2 / v1 | 0.096 | 0.13 | 0.64–0.78 | 0–0.024 |
+
+- **M3.v2 leads** on every set except Public-short, where M1.v2 has a higher nDCG@5
+  (+0.022, 95% CI +0.002 to +0.043) at the same hit@1. Personal is the hardest set
+  (M3.v2 hit@1 0.34; Public-short 0.66).
+- **v2 beats v1 for every method**, by 0.10–0.14 nDCG@5. The judge's pool drew from both
+  versions equally, so pool bias does not explain it, but the judge and v2 come from the
+  same model family. icon-descriptions.md §7 decides on human labels.
+- **The nearest parent adds nothing on silver** (M3.v2+parent: ΔnDCG@5 +0.000, 184 hit@1
+  wins and 184 losses).
+- **Rejected icons:** v1 methods put one at top-1 on 2–6% of tasks (B0 and B1 most); the
+  serving filter adds 0.5–0.9 points of hit@1. v2 shows none.
+- **The silver score cannot rank methods outside the judge's pool.** B0 was not a pool
+  source: 31% of its top-1s are unjudged and count as misses, while its hit@1 on judged
+  top-1s is the highest (0.51; partly selection, since the judged ones are where it
+  agrees with the pool). The same will hold for F1 and I1. Before comparing them, judge
+  their unjudged dev top-1s (public sets: free `gemini`; Personal: `claude-cli`), or
+  report the bounds (all unjudged wrong … all right).
+- M2 (nearest example on the title alone) is weak; in the pool it ran on title + body.
 
 ## 2. Fine-tune the dual encoder (the main bet)
 

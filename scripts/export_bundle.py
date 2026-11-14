@@ -1,10 +1,13 @@
 """Export a matcher as a standalone bundle for the agenda (see tcr/bundle.py).
 
-    python scripts/export_bundle.py --method M3 --out DIR [--check]
+    python scripts/export_bundle.py --method M3 --out DIR [--check] [--keep-rejected]
 
 DIR is typically agentic-org-planner's `icons/task-matcher/`. With --check, the
 exported bundle is compared with the in-repo method (fp32 sentence-transformers)
 on the Realistic tasks: top-1 agreement, gate agreement, and latency.
+
+The bundle leaves out every glyph the manual icon review rejected (the production hard
+rule; evaluation does not filter, see tcr/silver.py), unless --keep-rejected.
 """
 
 from __future__ import annotations
@@ -19,7 +22,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from tcr import bundle, config, datasets  # noqa: E402
-from tcr.data import load_icons  # noqa: E402
+from tcr.data import load_icons, rejected_names  # noqa: E402
 from tcr.methods import build_method  # noqa: E402
 from tcr.org_tasks import query_text  # noqa: E402
 
@@ -32,10 +35,19 @@ def _git_rev() -> str:
         return "unknown"
 
 
-def check(method: str, out: Path, dataset: str) -> None:
+def export_icons(keep_rejected: bool = False) -> tuple:
+    """The icons a production bundle may show."""
+    icons = load_icons()
+    if keep_rejected:
+        return icons
+    rej = rejected_names()
+    return tuple(ic for ic in icons if ic.name not in rej)
+
+
+def check(method: str, out: Path, dataset: str, keep_rejected: bool = False) -> None:
     tasks = datasets.load(dataset)
     exported = bundle.BundleMatcher(out)
-    reference = build_method(method)
+    reference = build_method(method, export_icons(keep_rejected))
     same_top1 = same_gate = shown = 0
     lat = []
     disagreements = []
@@ -65,14 +77,16 @@ def main(argv=None) -> None:
     ap.add_argument("--out", type=Path, default=config.BUNDLE_DIR)
     ap.add_argument("--check", action="store_true", help="compare the bundle with the in-repo method")
     ap.add_argument("--dataset", default="realistic", help="dataset used by --check")
+    ap.add_argument("--keep-rejected", action="store_true",
+                    help="also export the glyphs the manual icon review rejected")
     args = ap.parse_args(argv)
 
-    manifest = bundle.export(args.out, load_icons(), bundle.OnnxEncoder(),
+    manifest = bundle.export(args.out, export_icons(args.keep_rejected), bundle.OnnxEncoder(),
                              method=args.method, source=f"task-concept-retrieval@{_git_rev()}")
     size = sum(p.stat().st_size for p in args.out.iterdir()) / 1e6
     print(f"wrote {args.out} ({manifest['tag']}, {size:.1f} MB)")
     if args.check:
-        check(args.method, args.out, args.dataset)
+        check(args.method, args.out, args.dataset, args.keep_rejected)
 
 
 if __name__ == "__main__":
