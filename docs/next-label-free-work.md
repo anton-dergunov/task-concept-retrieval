@@ -17,9 +17,9 @@ the abstention gate. The one deadline is Gemini access on Google Cloud, which ma
   Public-expanded 500 (eval sets: evaluation only, never training); the Personal-style pool
   4,986 and the MS-LaTTE pool 3,000 (training). One task failed in 15,381.
   Public runs: `results/judge_labels/<run>.jsonl`; private: `data/private/judge/labels/`.
-- **Spend:** $238 of the $300 trial by the spend log (`tcr.judge.spent()`), about $62
-  left. The log is an estimate: check the billing console for the real credit and the
-  trial's end date before submitting more.
+- **Spend:** $248.50 of the $300 trial by the spend log (`tcr.judge.spent()`), including
+  the backfilled first pool generation. The log is an estimate: the billing console has
+  the real credit and the trial's end date.
 - **Human labels:** 51 Personal (all judge-dev, so they count for nothing else) and 10
   Public-short. The judge's hit@1 against the author is 0.49 on the judge-dev tasks (95%
   interval 0.35–0.63); the batch run reproduces the online runs.
@@ -65,16 +65,39 @@ need Gemini, cheapest first. Argon's promotional price ends 2026-11-30.
 |---|---|---|---|
 | **0a. Translate the labelled pools to ES and RU** | Multilingual training pairs with the same labels (the icon does not depend on the language); every pool task is English now, Public-short is 18% ES/RU | Flash, Vertex batch | ~$3–5 |
 | **0b. Parent headings for the Personal-style pool** | Personal has a parent heading on every task, the pool on none; without them the model never sees the `"Parent: task"` input it is evaluated on | Flash, Vertex batch | ~$1–2 |
-| **0c. ~2,500 more Personal-style pool tasks, judged with Argon** | The pool from ~8k to ~10.5k labelled tasks, the "comfortable" size of fine-tuning-plan §6; the learning curve (step 2) shows afterwards whether it mattered | generation Flash, judge Argon | ~$50 |
+| **0c. More Personal-style pool tasks, judged with Argon** | The pool from ~8k toward ~10k labelled tasks, the "comfortable" size of fine-tuning-plan §6; the learning curve (step 2) shows afterwards whether it mattered | generation Flash, judge Argon | what is left, $0.025 per task |
 
-- 0a and 0b only add inputs to tasks the judge has already labelled; no new judging.
-  Translations of private pool tasks go through `vertex` with `private=True`; MS-LaTTE
-  may use the free `gemini` backend.
-- 0c: `synth_personal.py pool --n 7500` (check first that it tops up the existing pool
-  rather than regenerating it), then `judge_batch.py prepare --run pool-synth2-j4 --pool …
-  --private --model gemini-4-argon` over the new tasks only, then `run --max-usd 295`.
-  The prompt must stay j4.
-- Leave about $5 unspent for the gap between the spend log and the real bill.
+**All three in one command** (unattended, a few hours; safe to rerun after any
+interruption):
+
+```bash
+CREDIT_LEFT=<USD under Billing → Credits> scripts/gemini_last_jobs.sh
+```
+
+- **Budget.** The first run fixes a cap on the spend log:
+  min(log + `CREDIT_LEFT`, $300) − $8 reserve, kept in `data/private/augment/cap.json`
+  (delete it to set the cap again). Every job refuses a round that would cross it, and
+  the pool extension is sized to what is left: about 1,700 tasks if the whole $300 is
+  credit. The log missed the first pool generation's Vertex calls ($10.32, backfilled
+  2026-11-14); pool generation now logs its calls. Billing lags by up to a day, and v2
+  description work may have been billed to the same account, which the log does not
+  show. So `CREDIT_LEFT` from the console is the real limit, and the $300 term only
+  guards against a lagging console.
+- **0a + 0b:** `scripts/augment_pools.py run --judge-run <run>` translates every task of a
+  finished judge run (title, parents, body) and, with `--gen-parents`, invents the
+  parent headings, all in one Flash batch job per round. Output, one line per task:
+  `data/private/train_pools/personal_synth_pool.aug.jsonl` (private) and
+  `data/train_pools/train_mslatte.aug.jsonl` (public: commit). Translated titles too close
+  to an eval title are flagged in `contaminated` and must not be trained on.
+- **0c:** the original pool is saved as `personal_synth_pool.before-extend.jsonl`.
+  `synth_personal.py pool --n … --rounds 4` then rewrites `personal_synth_pool.jsonl` with
+  the old tasks plus new ones, keeping the old ids. `augment_pools.py extra` keeps the new
+  tasks, minus near-duplicates of judged ones, in `personal_synth_pool_extra.jsonl`. The
+  judge run `pool-synth2-j4` (Argon, prompt j4) labels as many of them as the budget allows
+  and exports to `data/private/judge/labels/pool-synth2-j4.jsonl`.
+- **Watch:** `augment_pools.py status --judge-run <run>`;
+  `judge_batch.py status --run pool-synth2-j4`; the spend with
+  `python -c "from tcr import judge; print(judge.spent())"`.
 - Without Gemini later: `claude-cli` (the author's subscription) covers small private
   jobs, the free `gemini` tier covers public text.
 

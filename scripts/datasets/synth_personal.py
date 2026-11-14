@@ -266,6 +266,9 @@ def generate_round(rnd, deficits, skeletons, rng, stats, exemplars, workers, ove
                             schema=GEN_SCHEMA, backend=GEN_BACKEND, models=[GEN_TASK_MODEL],
                             private=True, tag=f"round{rnd}" if rnd else "",
                             validate=lambda d: len(d["tasks"]) == len(chunk))
+        if GEN_BACKEND == "vertex" and res.get("usage") and not res.get("cached"):
+            from tcr import judge as J   # the project's spend log, which the budget caps read
+            J.log_spend(res["model"], res["usage"], f"pool-gen:round{rnd}")
         return [{"cluster": c, "round": rnd, "title": t["title"].strip(), "body": t["body"].strip(),
                  "shape": chunk[i][0], "markup": chunk[i][1], "gen_model": res["model"]}
                 for i, t in enumerate(sorted(res["data"]["tasks"], key=lambda t: t["n"]))
