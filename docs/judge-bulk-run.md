@@ -1,5 +1,9 @@
 # Hand-off: the LLM judge's bulk batch runs
 
+**Done 2026-11-14:** every run below finished and was exported (results in
+fine-tuning-plan §6.1; what comes next in [next-label-free-work.md](next-label-free-work.md)).
+Kept as the reference for running the judge over a new dataset or pool.
+
 For the author, in their own terminal, or for a fresh session. The judge is built and
 tuned (fine-tuning-plan §6.1); this runs it over every dataset with Vertex batch jobs while
 Gemini access lasts. Read CLAUDE.md first.

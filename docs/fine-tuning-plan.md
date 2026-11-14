@@ -275,6 +275,27 @@ help Flash. **Argon is the judge** for Personal, the Personal-style pool, Person
 Realistic; Flash for the easy public sets. The bias is known: the prompt was tuned on these
 46 tasks, so the unbiased check is the author's labels made after 2026-11-13.
 
+**Bulk run (finished 2026-11-14).** Every dataset and both pools, prompt j4, Vertex
+batch; $238 of the $300 trial with development included.
+
+| Run | Model | Tasks | Failed | "No good icon" | $ |
+|---|---|---|---|---|---|
+| Personal | Argon | 2,941 | 0 | 3 | 57 |
+| Personal-style pool (training) | Argon | 4,986 | 1 | 4 | 95 |
+| Personal-synth | Argon | 1,506 | 0 | 0 | 28 |
+| Realistic | Argon | 623 | 0 | 0 | 12 |
+| Public-short | Flash | 825 | 0 | 0 | 6 |
+| Public-expanded | Flash | 500 | 0 | 0 | 4 |
+| MS-LaTTE pool (training) | Flash | 3,000 | 0 | 1 | 21 |
+
+- Scored on the 45 judge-dev tasks, the batch labels give hit@1 0.49, as the online runs
+  did (0.49 and 0.51).
+- The judge almost never abstains, and its top-1 has grade 3 on ~96% of tasks: its
+  labels train ranking, not the abstention gate.
+- Icons rejected in the manual review reach the rankings through v1 (1,262 entries);
+  filter them before use.
+- Details and what comes next: [next-label-free-work.md](next-label-free-work.md).
+
 Development: `scripts/judge_dev.py` (run / score), the private log
 `data/private/judge/iterations.md` and report `data/private/judge/report.html`
 (`scripts/judge_report.py`); metrics only in `results/judge_dev/summary.json`. Bulk runs:
@@ -302,11 +323,14 @@ starts first, and work that needs no labels runs alongside it.
    unbiased check of the judge.
 3. ~~The LLM judge (§6.1)~~ (done 2026-11-13) and the training pools: the private
    Personal-style pool (~5,000, `synth_personal.py pool`) and 3,000 MS-LaTTE titles
-   (`data/train_pools/`). **Bulk judging** of every dataset and pool with Vertex batch, in
-   priority order, while access lasts: [judge-bulk-run.md](judge-bulk-run.md).
-4. **Still label-free** ([next-label-free-work.md](next-label-free-work.md)): a first
-   fine-tune of the multilingual dual encoder on v2's free signal; zero-shot image-tower
-   baselines (SigLIP 2 / jina-clip-v2) and their fusion with M1.
+   (`data/train_pools/`). ~~**Bulk judging** of every dataset and pool~~ (done
+   2026-11-14, §6.1): [judge-bulk-run.md](judge-bulk-run.md).
+4. **Still label-free** ([next-label-free-work.md](next-label-free-work.md), the plan
+   while labelling): the last Gemini jobs (translations, parent headings, a larger
+   Personal-style pool); a silver leaderboard on the judge's eval-set labels; the
+   fine-tune of the dual encoder on the pools' judge labels + v2's free signal, with its
+   learning curve; zero-shot image towers and their fusion; the abstention gate's
+   features.
 5. **With ~200 dev labels:** v1 vs v2 (icon-descriptions.md §7); baselines B1, M1, M2, M3,
    the image towers and the fine-tune on dev; the judge against the new labels.
    **Fine-tune the dual encoder on judge labels** of the pools + v2's free signal;
