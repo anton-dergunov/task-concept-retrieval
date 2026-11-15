@@ -54,6 +54,9 @@ class Gold:
     seen: FrozenSet[str] = frozenset()      # every icon the judge looked at (incl. graded)
     order: List[str] = field(default_factory=list)   # the judge's ranking, as canonical names
     no_good_icon: bool = False
+    # icons the judge marked relevant (stage A shortlist) but left out of its final
+    # ranking: considered and set aside, neither positive nor negative for training
+    relevant: FrozenSet[str] = frozenset()
 
 
 # --- glyph identity --------------------------------------------------------------------
@@ -88,7 +91,9 @@ def label_path(run: str) -> Path:
     return pub if pub.exists() else PRIVATE_LABELS / f"{run}.jsonl"
 
 
-def _seen_by_run(run: str) -> Dict[str, FrozenSet[str]]:
+def _seen_by_run(run: str) -> Dict[str, tuple]:
+    """{task_id: (seen, relevant)} from the run's states: every icon the judge looked at,
+    and those it marked relevant or shortlisted (canonical names)."""
     p = JUDGE_BATCH / run / "states.jsonl"
     if not p.exists():
         return {}
@@ -97,7 +102,10 @@ def _seen_by_run(run: str) -> Dict[str, FrozenSet[str]]:
         for line in f:
             if line.strip():
                 s = json.loads(line)
-                out[s["task_id"]] = frozenset(canonical(n) for n in (s.get("ids") or {}).values())
+                ids = s.get("ids") or {}
+                rel = {str(i) for i in (s.get("relevant") or []) + (s.get("shortlist") or [])}
+                out[s["task_id"]] = (frozenset(canonical(n) for n in ids.values()),
+                                     frozenset(canonical(n) for i, n in ids.items() if i in rel))
     return out
 
 
@@ -118,9 +126,10 @@ def load_gold(runs: Sequence[str]) -> Dict[str, Gold]:
                     continue
                 grades[n] = int(e["grade"])
                 order.append(n)
-            s = seen.get(lab["task_id"], frozenset())
+            s, rel = seen.get(lab["task_id"], (frozenset(), frozenset()))
             out[lab["task_id"]] = Gold(lab["task_id"], grades, s | frozenset(grades), order,
-                                       bool(lab.get("no_good_icon")))
+                                       bool(lab.get("no_good_icon")),
+                                       rel - frozenset(grades) - rej)
     return out
 
 
@@ -159,10 +168,13 @@ def task_metrics(g: Gold, ranked: Sequence[str], k: int = 5) -> dict:
         "hit1_served": int(stop is not None and g.grades.get(stop, 0) >= 2),
     }
     m["hit1_judged"] = m["hit1"] if m["judged1"] else None
+    # upper bound for a method outside the judge's pool: an unjudged top-1 counted as a hit
+    m["hit1_ub"] = int(m["hit1"] or (top is not None and not m["judged1"]))
     return m
 
 
-METRICS = ("ndcg5", "hit1", "judged1", "hit1_judged", "rej1", "ndcg5_served", "hit1_served")
+METRICS = ("ndcg5", "hit1", "hit1_ub", "judged1", "hit1_judged", "rej1", "ndcg5_served",
+           "hit1_served")
 
 
 def aggregate(per_task: Dict[str, dict]) -> dict:

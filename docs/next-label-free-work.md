@@ -192,6 +192,15 @@ tasks, ~15 min on the Mac. Pooled over the five sets:
 
 Fine-tuning-plan §5 and §8 step 5: the step most likely to give the best fast model.
 
+**Status 2026-11-15: built, waiting for the Colab runs.** Design (data, loss, validation,
+the fair comparison with M3.v2) in [f1-dual-encoder.md](f1-dual-encoder.md); the hand-off
+for the runs in [f1-colab-run.md](f1-colab-run.md). Training moved to Colab: an MPS probe on
+the Mac did not finish one step in 10 minutes and made the laptop unusable. Data built
+(9,870 judged pool tasks → 26,423 training rows in EN/ES/RU + 2,928 validation rows, 75k
+free-signal rows, 139 icons held out); the scripts passed a CPU smoke test. Where the list
+below and that doc differ, the doc is what was built (e.g. a masked graded loss instead of
+MNRL, the judge's relevant-but-ungraded icons masked rather than used as negatives).
+
 - **Model:** `intfloat/multilingual-e5-small` (fast on CPU; the deployed model must stay
   small), `query:` / `passage:` prefixes kept. Query `"Parent: title"` where a parent
   exists.

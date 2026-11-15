@@ -7,6 +7,8 @@ Methods (see docs/matching-methods.md):
   M2 - nearest-example voting (task <-> example_tasks)
   M3 - hybrid: RRF of B1 + M1
   M3x - an exported bundle (tcr/bundle.py) scored as the agenda runs it
+  F1 - the fine-tuned dual encoder (docs/f1-dual-encoder.md), checkpoint in
+       .cache/models/F1/; F1@<tag> scores a training run's checkpoint, .cache/models/F1-<tag>/
 """
 
 from __future__ import annotations
@@ -56,10 +58,19 @@ def _bundle_matcher() -> Matcher:
     return BundleMatcher(config.BUNDLE_DIR)
 
 
-ALL_METHODS = ["B0", "B1", "M1", "M2", "M3", "M3x"]
+def _f1_matcher(key: str, icons) -> Matcher:
+    # Imported lazily: torch/transformers load only when F1 is used.
+    from ..finetune import FineTunedMatcher, model_dir
+    tag = key.split("@", 1)[1] if "@" in key else None
+    return FineTunedMatcher(icons, model_dir(tag), name=key)
+
+
+ALL_METHODS = ["B0", "B1", "M1", "M2", "M3", "M3x", "F1"]
 
 
 def build_method(key: str, icons: Sequence[IconDoc] = None, include_examples: bool = True) -> Matcher:
+    if key == "F1" or key.startswith("F1@"):
+        return _f1_matcher(key, icons if icons is not None else load_icons(version="v2"))
     if key not in _BUILDERS:
         raise KeyError(f"unknown method {key!r}; choices: {ALL_METHODS}")
     if icons is None:
