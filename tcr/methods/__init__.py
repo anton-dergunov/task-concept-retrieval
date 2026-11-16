@@ -9,6 +9,8 @@ Methods (see docs/matching-methods.md):
   M3x - an exported bundle (tcr/bundle.py) scored as the agenda runs it
   F1 - the fine-tuned dual encoder (docs/f1-dual-encoder.md), checkpoint in
        .cache/models/F1/; F1@<tag> scores a training run's checkpoint, .cache/models/F1-<tag>/
+  I1-sb / I1-so / I1-jc - zero-shot text -> glyph image (SigLIP 2 base / so400m, jina-clip-v2);
+       <text key>+<I1 key>~<w> fuses a text method with one (tcr/methods/image.py)
 """
 
 from __future__ import annotations
@@ -65,10 +67,28 @@ def _f1_matcher(key: str, icons) -> Matcher:
     return FineTunedMatcher(icons, model_dir(tag), name=key)
 
 
-ALL_METHODS = ["B0", "B1", "M1", "M2", "M3", "M3x", "F1"]
+def _image_matcher(key: str, icons) -> Matcher:
+    # Imported lazily: the CLIP-style text towers load only when I1 is used.
+    from .image import ImageTowerMatcher
+    return ImageTowerMatcher(icons, key)
+
+
+def _fusion(key: str, icons) -> Matcher:
+    from .image import FusionMatcher
+    text_key, rest = key.rsplit("+", 1)
+    image_key, w = rest.split("~")
+    return FusionMatcher(build_method(text_key, icons), _image_matcher(image_key, icons),
+                         float(w), name=key)
+
+
+ALL_METHODS = ["B0", "B1", "M1", "M2", "M3", "M3x", "F1", "I1-sb", "I1-so", "I1-jc"]
 
 
 def build_method(key: str, icons: Sequence[IconDoc] = None, include_examples: bool = True) -> Matcher:
+    if "+" in key and "~" in key:
+        return _fusion(key, icons if icons is not None else load_icons(version="v2"))
+    if key.startswith("I1-"):
+        return _image_matcher(key, icons if icons is not None else load_icons(version="v2"))
     if key == "F1" or key.startswith("F1@"):
         return _f1_matcher(key, icons if icons is not None else load_icons(version="v2"))
     if key not in _BUILDERS:

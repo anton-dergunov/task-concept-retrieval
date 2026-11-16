@@ -25,7 +25,9 @@ the abstention gate. The one deadline is Gemini access on Google Cloud, which ma
   interval 0.35–0.63); the batch run reproduces the online runs.
 - **Matchers:** B0, B1 (BM25), M1 (field-weighted e5), M2 (nearest example), M3 (RRF of
   B1 + M1), M3x (exported bundle), each on v1 or v2 descriptions; on the silver
-  leaderboard (step 1, done) M3.v2 leads. No fine-tuned or image method yet.
+  leaderboard (step 1, done) M3.v2 led until F1, the fine-tuned dual encoder (step 2,
+  round 1 done 2026-11-15), beat it by +0.10 nDCG@5. Image methods (step 3) are built and
+  wait for their glyph vectors.
 
 Three facts about the judge labels that every step below must handle:
 
@@ -192,6 +194,24 @@ tasks, ~15 min on the Mac. Pooled over the five sets:
 
 Fine-tuning-plan §5 and §8 step 5: the step most likely to give the best fast model.
 
+**Status 2026-11-16: round 1 done, F1 wins on silver; round 2 built, waiting for Kaggle.**
+Results in [f1-dual-encoder.md](f1-dual-encoder.md) "Results"; plot in
+[results/f1/learning_curve.png](../results/f1/learning_curve.png):
+
+- F1@all.v2+parent: nDCG@5 0.436, hit@1 0.557 (upper bound 0.683) against M3.v2's
+  0.337 / 0.437 (ΔnDCG@5 +0.100 [+0.090, +0.109], McNemar p < 0.001). The lower bound wins,
+  so no grading was needed for the decision. 12.5% of F1's top-1s are unjudged.
+- The learning curve is still rising: about +0.03 nDCG@5 per tripling of judged tasks
+  (0 / 1k / 3k / 8.9k → 0.330 / 0.364 / 0.393 / 0.428). The free signal alone only
+  matches M3.v2.
+- Within a run, the gain comes early, but F1@all's best was its last evaluation: the LR
+  decayed to 0 while validation still rose. Round 2 (f1-dual-encoder.md §10, hand-off
+  [f1-kaggle-run.md](f1-kaggle-run.md)) tests a higher LR with more epochs, negatives
+  from the whole catalogue, and e5-base as a teacher, on Kaggle's two T4s.
+- Review page (private): `scripts/f1_review.py` → `data/private/f1/review.html`, F1@all's
+  picks on 50 held-out pool tasks, chosen so they cannot anchor the author's labels of
+  eval tasks.
+
 **Status 2026-11-15: built, waiting for the Colab runs.** Design (data, loss, validation,
 the fair comparison with M3.v2) in [f1-dual-encoder.md](f1-dual-encoder.md); the hand-off
 for the runs in [f1-colab-run.md](f1-colab-run.md). Training moved to Colab: an MPS probe on
@@ -238,7 +258,20 @@ MNRL, the judge's relevant-but-ungraded icons masked rather than used as negativ
 - Methods `I1` (image only) and `I1+M1` / `I1+F1` (weighted sum of similarities).
   Weight chosen on the silver leaderboard for now; re-checked on human dev labels.
 - Expect modest zero-shot quality on abstract glyphs; the point is to measure what the
-  image adds on top of the descriptions. Runs on the Mac; Colab is faster.
+  image adds on top of the descriptions.
+
+**Status 2026-11-16: built, glyph vectors waiting for the Kaggle run.** The work is split
+by privacy:
+- Kaggle encodes the 2,862 public glyph renders (`scripts/i1_embed.py`, shipped in the F1
+  tarball, ~10 min on a T4; the Mac's CPU would need ~30 min under load).
+- The Mac encodes only the dev queries, once per tower, cached in `.cache/i1/`.
+
+Methods `I1-sb` (SigLIP 2 base), `I1-so` (SigLIP 2 so400m), `I1-jc` (jina-clip-v2) and
+fusions `<text>+<I1>~<w>` (standardized scores, weight w), all in `tcr/methods/image.py`.
+A 20-glyph test with SigLIP 2 base on the Mac picked sensible glyphs, including for
+Russian and Spanish titles ("Позвонить маме" → call). Gemini Flash-Lite's free tier is not
+needed here (no LLM reads the images). Its use would be grading unjudged top-1s on the
+public dev sets.
 
 ## 4. Abstention gate, built now and calibrated later
 
@@ -249,7 +282,7 @@ MNRL, the judge's relevant-but-ungraded icons masked rather than used as negativ
 - The real threshold is set on human dev labels (their "no good icon" and misses), since
   the judge almost never abstains. Until then the curve shows which features carry signal.
 
-## 5. GPU work (Colab)
+## 5. GPU work (Kaggle; Colab ends long jobs)
 
 The steps where the Mac is too slow:
 
@@ -257,8 +290,18 @@ The steps where the Mac is too slow:
   fine-tuned the same way; distil into e5-small if they win.
 - **VLM reranker** (§5.1 B) over the top 30, e.g. a 2–3B Qwen-VL-family model with LoRA,
   trained on the same judge labels; then distilled into the dual encoder (§5, order 3–4).
-- Colab free (T4) is enough for e5-base and LoRA on a 2B VLM at small batch; an A100
-  (Colab Pro) for anything larger or for sweeps.
+- Kaggle's free T4 ×2 (12 h per session, headless) is enough for e5-base and LoRA on a
+  2B VLM at small batch: one queue per GPU ([f1-kaggle-run.md](f1-kaggle-run.md)). An A100
+  is needed only for anything larger.
+- **Distillation from the best teacher** (round 2's e5-base, a larger encoder or the
+  reranker) into e5-small. The student learns the teacher's scores over all 2,862 icons on
+  *unlabelled* text: the MS-LaTTE tasks not in any pool or eval set
+  (`data/raw/MS-LaTTE.json`, public; eval titles removed with `contamination_hits`) and all
+  75k free-signal queries. The learning curve says more training signal still helps, and
+  this gets it without paying for more judging.
+- **Learned per-icon vectors** (§5 "hybrid") on top of the best F1.
+- **Grading unjudged top-1s** once F1 variants have to be told apart on silver (they share
+  the ~12% unjudged gap). Public sets on the free `gemini` tier, Personal on `claude-cli`.
 
 ## What waits for the human labels
 

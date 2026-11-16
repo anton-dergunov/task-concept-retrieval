@@ -73,6 +73,9 @@ def run(args) -> dict:
             views = [("title", False)]
             if key.split("@")[0] in PARENT_METHODS and not args.no_parent:
                 views.append(("parent", True))
+            if hasattr(m, "prepare"):      # batch-encode every query once (I1's text towers)
+                m.prepare([query_text(t["title"], parents=(t.get("parents") or []) if p else ())
+                           for _, p in views for d in datasets for t in tasks[d]])
             for view, with_parent in views:
                 label = f"{key}.{ver}" + ("+parent" if with_parent else "")
                 for d in datasets:     # +parent: tasks without one get the title alone

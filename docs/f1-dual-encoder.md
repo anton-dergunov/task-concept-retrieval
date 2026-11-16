@@ -4,7 +4,8 @@ Design of method **F1** ([next-label-free-work.md](next-label-free-work.md) step
 [fine-tuning-plan.md](fine-tuning-plan.md) §5): `intfloat/multilingual-e5-small`
 fine-tuned on the LLM judge's labels of the training pools and on the free signal in the
 v2 icon descriptions. This file explains every choice and why it was made; the run guide
-is [f1-colab-run.md](f1-colab-run.md), the results are at the end.
+is [f1-kaggle-run.md](f1-kaggle-run.md) (round 1: [f1-colab-run.md](f1-colab-run.md)), the
+results and round 2 are at the end.
 
 **Names.** *F1* is a method name, like B0, M1, M3 ("fine-tuned, first version"); it has
 nothing to do with the F1 score. A training run is named `F1@<pool tasks>`: `F1@0`
@@ -257,10 +258,77 @@ no eval data does.
 |---|---|
 | `tcr/finetune.py` | icon document, training rows, splits, `FineTunedMatcher` |
 | `scripts/f1_data.py` | builds `data/private/f1/f1_data.tar.gz` |
-| `scripts/train_f1.py` | training (standalone; runs on Colab) |
+| `scripts/train_f1.py` | training (standalone; runs on Kaggle or Colab) |
+| `scripts/f1_report.py` | learning-curve plot and tables from `results/f1/` |
+| `scripts/f1_review.py` | private HTML page: F1's picks on 50 held-out pool tasks, next to the judge's and M3.v2's |
 | `tcr/methods/__init__.py` | `F1` → `.cache/models/F1/`, `F1@<tag>` → `.cache/models/F1-<tag>/` |
 | `scripts/silver_eval.py` | scores F1; merges with stored rankings of earlier runs |
 
 ## Results
 
-(to come)
+Round 1 ran on Kaggle (one T4; Colab had ended the job after 3 hours), 2026-11-15. Silver
+leaderboard: [results/silver/2026-11-15.md](../results/silver/2026-11-15.md); training logs
+and the learning curve: [results/f1/](../results/f1/) (`scripts/f1_report.py` →
+`learning_curve.png`, `learning_curve.md`).
+
+**F1 wins on silver** (decision rule of §7). Pooled over the 3,230 dev tasks:
+
+| method | nDCG@5 | hit@1 [lower, upper] | judged@1 | Δ nDCG@5 vs M3.v2 | hit@1 wins / losses |
+|---|---:|---:|---:|---:|---:|
+| F1@all.v2+parent | 0.436 | 0.557 [0.557, 0.683] | 0.875 | +0.100 [+0.090, +0.109] | 769 / 380, p < 0.001 |
+| F1.v2+parent | 0.433 | 0.548 [0.548, 0.674] | 0.874 | +0.097 | 754 / 395, p < 0.001 |
+| F1@all.v2 | 0.428 | 0.544 | 0.864 | +0.092 | 726 / 381 |
+| M3.v2 | 0.337 | 0.437 | 0.998 | ref | |
+
+- The lower bound alone beats M3.v2 (p < 0.001), so the unjudged top-1s need no grading
+  for this decision. F1 leads on every eval set; the gain is largest on Personal (+0.13
+  nDCG@5 with the parent) and smallest on Public-expanded (+0.04).
+- 12.5% of F1's top-1s were never shown to the judge, so its absolute level lies between
+  the bounds. Telling F1 variants apart will need these graded (§7), since they all share
+  the bias.
+- **F1 ≈ F1@all**: holding out 5% of the icons costs nothing measurable. Unseen-icon
+  recall@10 rises from 0.27 (base) to 0.59, so F1 still works for icons it never trained on.
+- **The parent heading** helps F1 on Personal (+0.024 nDCG@5) and hurts on Realistic
+  (−0.03); pooled +0.008. For M3 it did nothing.
+
+**Learning curve (§6):**
+
+| pool tasks | 0 | 1k | 3k | 8.9k |
+|---|---:|---:|---:|---:|
+| silver nDCG@5 (pooled) | 0.330 | 0.364 | 0.393 | 0.428 |
+| held-out pool nDCG@5 | 0.283 | 0.348 | 0.391 | 0.450 |
+
+- The free signal alone (F1@0) only reaches M3.v2 (0.330 vs 0.337). The judge labels add
+  the +0.10.
+- **No plateau in the data:** roughly +0.03 silver nDCG@5 per tripling of judged tasks,
+  still rising at 8.9k. More training signal would pay off. Since the Gemini budget is
+  spent, that signal has to come from distillation (next-label-free-work.md, "Later").
+- **Within a run:** three quarters of the gain arrive in the first half epoch
+  (0.15 → 0.37 held-out), then +0.08 over the next 5.5 epochs. F1@all's best evaluation is
+  its last one: the linear LR decay to 0 ended it, not early stopping, and validation
+  never dropped (no overfitting). So round 1 was cut short by its LR schedule, not
+  limited by data. F1@1k and F1@3k did converge (best near epoch 5).
+- **Speed:** 1.48 s/step on a T4 with gradient checkpointing, three times the estimate.
+  F1 / F1@all took ~60 min each, the five runs ~3.5 hours on one of Kaggle's two GPUs.
+
+## 10. Round 2 (built 2026-11-16, waiting for the Kaggle run)
+
+Changes in `scripts/train_f1.py` (hand-off: [f1-kaggle-run.md](f1-kaggle-run.md)):
+
+- **Longer, faster learning** (`F1@all-lr`): LR 5e-5, 10 epochs.
+- **Full-catalogue negatives** (`F1@all-bank`, `--bank-negs`): in round 1 each query's
+  softmax covered only the ~184 icons in its batch, while evaluation ranks it against all
+  2,862. Now every other icon joins as a negative from a bank of stale vectors,
+  re-encoded every 100 steps, with no gradient through them. A bank icon is masked when it
+  is already in the batch, held out, graded for the query or set aside by the judge, the
+  same masks as §4.
+- Both together (`F1@all-lrbank`).
+- **A bigger encoder** (`F1@all-base`, `--model intfloat/multilingual-e5-base`): if it wins
+  clearly, it becomes the teacher to distil into e5-small.
+- **Two GPUs:** one process per GPU, each with a queue (`--run A,B,C`).
+- **Speed:** `--checkpointing auto` runs one worst-case step (passages padded to 256)
+  without gradient checkpointing and keeps it off if the step fits in 85% of the GPU's
+  memory. Inputs are padded to a multiple of 8, and peak memory is logged.
+- **Lighter scoring:** each best checkpoint carries its icon vectors (`icon_matrix.npz`,
+  with a hash of each icon's document), which `FineTunedMatcher` uses when the documents
+  are unchanged, so the Mac encodes only the queries.

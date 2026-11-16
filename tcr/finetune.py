@@ -253,10 +253,33 @@ class FineTunedMatcher(Matcher):
             data = np.load(cache)
             if list(data["names"]) == self.names:
                 return data["matrix"]
-        mat = self.enc.encode(docs, MAX_PASSAGE_LEN)
+        mat = self._precomputed(path, docs)
         config.CACHE_DIR.mkdir(parents=True, exist_ok=True)
         np.savez_compressed(cache, names=np.array(self.names), matrix=mat)
         return mat
+
+    def _precomputed(self, path: Path, docs: List[str]) -> np.ndarray:
+        """Icon vectors saved by train_f1.py next to the checkpoint (best/icon_matrix.npz),
+        for every icon whose document is unchanged; the rest are encoded here."""
+        saved = {}
+        p = path / "icon_matrix.npz"
+        if p.exists():
+            d = np.load(p)
+            if int(d["max_len"]) == MAX_PASSAGE_LEN:
+                mat = d["matrix"]            # read once: every d[key] decompresses again
+                saved = {str(n): (str(h), mat[i]) for i, (n, h) in enumerate(zip(d["names"], d["doc_sha1"]))}
+        rows, todo = [None] * len(docs), []
+        for i, (n, doc) in enumerate(zip(self.names, docs)):
+            hit = saved.get(n)
+            if hit and hit[0] == hashlib.sha1(doc.encode()).hexdigest():
+                rows[i] = hit[1]
+            else:
+                todo.append(i)
+        if todo:
+            enc = self.enc.encode([docs[i] for i in todo], MAX_PASSAGE_LEN)
+            for i, v in zip(todo, enc):
+                rows[i] = v
+        return np.stack(rows).astype(np.float32)
 
     def full_scores(self, query_text_: str):
         q = self.enc.encode([QUERY_PREFIX + query_text_], MAX_QUERY_LEN)[0]

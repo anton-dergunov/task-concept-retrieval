@@ -3,19 +3,30 @@
 scripts/f1_data.py. Standalone: needs only torch and transformers, so it runs unchanged
 on Colab (docs/f1-colab-run.md) or anywhere else.
 
-    python train_f1.py --data f1_data.tar.gz --out runs --plan        # all five runs
+    python train_f1.py --data f1_data.tar.gz --out runs --plan        # round 1: five runs
+    python train_f1.py --data f1_data --out runs --plan round2        # round 2 (PLANS)
     python train_f1.py --data f1_data --out runs --run F1@3k          # one run
+    python train_f1.py --data f1_data --out runs --run F1@all-lr,F1@all-bank   # a queue
+    python train_f1.py --data f1_data --out runs --probe              # speed / memory check
     python train_f1.py --data f1_data_smoke --out runs --run smoke --smoke   # Mac CPU test
+
+Two GPUs (Kaggle): one process per GPU, each with its own queue, e.g.
+CUDA_VISIBLE_DEVICES=1 python train_f1.py ... --run F1@all-base (docs/f1-kaggle-run.md).
 
 Every run writes runs/<name with @ as ->/: train_log.jsonl (loss every 20 steps, each
 evaluation), best/ (the HF checkpoint with the best held-out nDCG@5, plus f1_meta.json),
 last/state.pt while running (resume point, removed at the end) and done.json. A rerun
-skips finished runs and resumes an interrupted one from its last evaluation.
+skips finished runs and resumes an interrupted one from its last evaluation. best/ also
+holds icon_matrix.npz (every icon's vector, with a hash of its document), so scoring a
+checkpoint elsewhere encodes only the queries.
 
 Loss (§4): masked, graded multi-positive InfoNCE over the batch's icons (each query's
 target spread over every in-batch icon the judge graded for it, ∝ grade; the judge's
 relevant-but-ungraded icons and free-signal look-alikes masked), plus an icon→query term
-with each icon's own near-misses as hard negative queries.
+with each icon's own near-misses as hard negative queries. --bank-negs adds every other
+icon of the catalogue as a negative, from stale vectors refreshed every --bank-refresh
+steps (no gradient through them), so each query is ranked against all icons, as in
+evaluation.
 """
 
 from __future__ import annotations
@@ -35,15 +46,27 @@ import torch
 import torch.nn.functional as F
 
 BASE_MODEL = "intfloat/multilingual-e5-small"
-# name -> (pool tasks (None = all), hold out 5% of icons). The method itself first, so a
-# short Colab session still produces it.
-PLAN = {
-    "F1": (None, False),
-    "F1@all": (None, True),
-    "F1@0": (0, True),
-    "F1@1k": (1000, True),
-    "F1@3k": (3000, True),
+# plan -> run name -> settings: pool_tasks (None = all), holdout (5% of icons), and any
+# argument overrides. Round 1: the method itself first, so a short session still produces
+# it, then the learning curve. Round 2: the recipe (all comparable with F1@all).
+PLANS = {
+    "round1": {
+        "F1": {"pool_tasks": None, "holdout": False},
+        "F1@all": {"pool_tasks": None, "holdout": True},
+        "F1@0": {"pool_tasks": 0, "holdout": True},
+        "F1@1k": {"pool_tasks": 1000, "holdout": True},
+        "F1@3k": {"pool_tasks": 3000, "holdout": True},
+    },
+    "round2": {
+        "F1@all-lr": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10},
+        "F1@all-bank": {"pool_tasks": None, "holdout": True, "bank_negs": True},
+        "F1@all-lrbank": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                          "bank_negs": True},
+        "F1@all-base": {"pool_tasks": None, "holdout": True,
+                        "model": "intfloat/multilingual-e5-base"},
+    },
 }
+ALL_RUNS = {n: c for plan in PLANS.values() for n, c in plan.items()}
 NEG = -1e4      # masked logit (fp32)
 
 
@@ -124,6 +147,7 @@ class Encoder:
     """Mean-pooled, L2-normalized e5 (as tcr/finetune.py's matcher encodes)."""
 
     def __init__(self, path: str, device: str, train_embeddings: bool, checkpointing: bool):
+        self.checkpointing = checkpointing
         from transformers import AutoModel, AutoTokenizer
         self.device = device
         self.tok = AutoTokenizer.from_pretrained(path)
@@ -133,9 +157,20 @@ class Encoder:
         if checkpointing:
             self.model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
         self.amp = device == "cuda"
+        self.pad_full = False          # worst-case padding, for the memory check
+
+    def set_checkpointing(self, on: bool) -> None:
+        if on == self.checkpointing:
+            return
+        if on:
+            self.model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+        else:
+            self.model.gradient_checkpointing_disable()
+        self.checkpointing = on
 
     def __call__(self, texts, max_len: int) -> torch.Tensor:
-        enc = self.tok(list(texts), padding=True, truncation=True, max_length=max_len,
+        enc = self.tok(list(texts), padding="max_length" if self.pad_full else True,
+                       truncation=True, max_length=max_len, pad_to_multiple_of=8,
                        return_tensors="pt").to(self.device)
         ctx = torch.autocast("cuda", dtype=torch.float16) if self.amp else contextlib.nullcontext()
         with ctx:
@@ -155,7 +190,7 @@ class Encoder:
 
 # --- loss ----------------------------------------------------------------------------------
 
-def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a) -> tuple:
+def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank=None) -> tuple:
     man = data.manifest
     pos = [rng.choices(q["pos"], weights=[q["grades"][i] ** 2 for i in q["pos"]])[0] for q in rows]
     neg = [rng.choice(q["negs"]) if q["negs"] else None for q in rows]
@@ -177,7 +212,22 @@ def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a) -> t
     G, A = G.to(Q.device), A.to(Q.device)
     S = a.scale * Q @ P.T
     T = G / G.sum(1, keepdim=True)
-    loss_q = -(T * F.log_softmax(S.masked_fill(A, NEG), dim=1)).sum(1).mean()
+    logits = S.masked_fill(A, NEG)
+    if bank is not None:
+        # every other icon as a negative (stale vectors, no gradient): masked where it is
+        # in the batch already, held out, graded or set aside for this query
+        Mb = torch.zeros(B, bank.shape[0], dtype=torch.bool)
+        Mb[:, icons] = True
+        if data.held:
+            Mb[:, sorted(data.held)] = True
+        for r, q in enumerate(rows):
+            Mb[r, list(q["grades"])] = True
+            if q["ambiguous"]:
+                Mb[r, list(q["ambiguous"])] = True
+        Sb = (a.scale * Q @ bank.T).masked_fill(Mb.to(Q.device), NEG)
+        logits = torch.cat([logits, Sb], dim=1)
+        T = torch.cat([T, torch.zeros_like(Sb)], dim=1)
+    loss_q = -(T * F.log_softmax(logits, dim=1)).sum(1).mean()
 
     # icon -> query: rows = icons some query is graded for; own near-miss as an extra column
     rows_i = (G.sum(0) > 0).nonzero().flatten().tolist()
@@ -208,6 +258,7 @@ def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a) -> t
 def evaluate(enc: Encoder, data: Data, max_passage_len: int) -> dict:
     man = data.manifest
     I = enc.encode(data.docs, max_passage_len)
+    enc.last_icons = I
     Qv = enc.encode([man["query_prefix"] + q["text"] for q in data.val], man["max_query_len"])
     top = (Qv @ I.T).topk(10, dim=1).indices.cpu().numpy()
     disc = 1 / np.log2(np.arange(2, 7))
@@ -257,7 +308,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         f"{len(data.free)} free-signal rows ({a.free_per_epoch} per epoch), {len(data.val)} val, "
         f"{len(data.held)} icons held out")
     torch.manual_seed(a.seed)
-    enc = Encoder(BASE_MODEL, dev, a.train_embeddings, not a.no_checkpointing)
+    enc = Encoder(a.model, dev, a.train_embeddings, a.checkpointing != "off")
     params = [p for p in enc.model.parameters() if p.requires_grad]
     decay = [p for n, p in enc.model.named_parameters() if p.requires_grad and p.ndim > 1]
     nodecay = [p for n, p in enc.model.named_parameters() if p.requires_grad and p.ndim <= 1]
@@ -271,6 +322,14 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         opt, lambda s: min((s + 1) / warm, max(0.0, (total - s) / max(1, total - warm))))
     scaler = torch.amp.GradScaler("cuda", enabled=dev == "cuda")
     seg = max(1, steps_per_epoch // a.evals_per_epoch)
+    if a.checkpointing == "auto" and dev == "cuda":
+        try:
+            choose_checkpointing(enc, data, rows0, a, name)
+        except Exception as e:      # the check must never cost a run: fall back to the safe side
+            enc.pad_full = False
+            enc.model.zero_grad(set_to_none=True)
+            enc.set_checkpointing(True)
+            log(f"{name}: memory check failed ({type(e).__name__}: {e}); checkpointing on")
 
     st = {"step": 0, "best": -1.0, "bad": 0, "history": [], "t_train": 0.0}
     last = out / "last" / "state.pt"
@@ -283,6 +342,12 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         st = ck["st"]
         log(f"{name}: resumed at step {st['step']}")
     logf = open(out / "train_log.jsonl", "a", encoding="utf-8")
+    bank = None
+
+    def refresh_bank():
+        nonlocal bank
+        if a.bank_negs:
+            bank = enc.encode(data.docs, a.max_passage_len).detach()
 
     def write(rec):
         logf.write(json.dumps(rec) + "\n")
@@ -306,6 +371,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
 
     t_start = time.time()
     stop = False
+    refresh_bank()
     while st["step"] < total and not stop:
         epoch = st["step"] // steps_per_epoch
         rows = data.epoch_rows(epoch, a.seed, a.free_per_epoch)
@@ -315,7 +381,9 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         for b in range(in_epoch, steps_per_epoch):
             batch = rows[b * a.batch:(b + 1) * a.batch]
             rng = random.Random(f"{a.seed}:{st['step']}")
-            loss_q, loss_i, M = batch_loss(enc, data, batch, rng, a)
+            if a.bank_negs and st["step"] % a.bank_refresh == 0 and st["step"] > 0:
+                refresh_bank()
+            loss_q, loss_i, M = batch_loss(enc, data, batch, rng, a, bank)
             loss = loss_q + a.i2q_weight * loss_i
             opt.zero_grad(set_to_none=True)
             scaler.scale(loss).backward()
@@ -328,9 +396,10 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
             lq_acc += loss_q.item(); li_acc += loss_i.item(); m_acc += M; n_acc += 1
             if st["step"] % 20 == 0 or a.smoke:
                 dt = (time.time() - t_log) / n_acc
+                mem = round(torch.cuda.max_memory_allocated() / 2**30, 2) if dev == "cuda" else None
                 write({"step": st["step"], "loss_q": round(lq_acc / n_acc, 4),
                        "loss_i": round(li_acc / n_acc, 4), "icons_per_batch": m_acc // n_acc,
-                       "lr": sched.get_last_lr()[0], "sec_per_step": round(dt, 3)})
+                       "lr": sched.get_last_lr()[0], "sec_per_step": round(dt, 3), "max_mem_gb": mem})
                 eta = (total - st["step"]) * dt / 60
                 log(f"{name} step {st['step']}/{total} loss {lq_acc / n_acc:.3f} + {li_acc / n_acc:.3f} "
                     f"({dt:.2f} s/step, ≤ {eta:.0f} min left)")
@@ -364,6 +433,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     (out / "done.json").write_text(json.dumps({
         "run": name, "pool_tasks": data.pool_task_count, "holdout_icons": len(data.held),
         "steps": st["step"], "steps_per_epoch": steps_per_epoch, "base": st.get("base"), "best": best,
+        "checkpointing": enc.checkpointing, "train_minutes": round((time.time() - t_start) / 60, 1),
         "args": vars(a)}, indent=1))
     shutil.rmtree(out / "last", ignore_errors=True)
     log(f"{name}: done; best nDCG@5 {st['best']:.4f} (base {st['base']['all']['ndcg5']:.4f}) -> {out / 'best'}")
@@ -376,14 +446,78 @@ def save_best(enc: Encoder, path: Path, name: str, a, data: Data, st: dict, m: d
     enc.tok.save_pretrained(tmp)
     man = data.manifest
     (tmp / "f1_meta.json").write_text(json.dumps({
-        "run": name, "base_model": BASE_MODEL, "pooling": "mean", "normalize": True,
+        "run": name, "base_model": a.model, "pooling": "mean", "normalize": True,
         "query_prefix": man["query_prefix"], "passage_prefix": man["passage_prefix"],
         "max_query_len": man["max_query_len"], "max_passage_len": a.max_passage_len,
         "doc_format": man["format"], "step": st["step"], "val": m,
         "pool_tasks": data.pool_task_count, "holdout_icons": sorted(data.icons[i]["name"] for i in data.held),
         "args": vars(a)}, indent=1))
+    I = getattr(enc, "last_icons", None)          # from the evaluation that triggered this save
+    if I is not None:
+        np.savez_compressed(tmp / "icon_matrix.npz", names=np.array([r["name"] for r in data.icons]),
+                            doc_sha1=np.array([hashlib.sha1(d.encode()).hexdigest() for d in data.docs]),
+                            max_len=a.max_passage_len, matrix=I.cpu().numpy().astype(np.float32))
     shutil.rmtree(path, ignore_errors=True)
     tmp.rename(path)
+
+
+def choose_checkpointing(enc: Encoder, data: Data, rows: list, a, name: str) -> None:
+    """--checkpointing auto: one worst-case step (every passage padded to the maximum length)
+    without checkpointing; keep it off if peak memory stays under 85% of the GPU."""
+    total = torch.cuda.get_device_properties(0).total_memory
+    enc.set_checkpointing(False)
+    enc.pad_full = True
+    torch.cuda.reset_peak_memory_stats()
+    try:
+        lq, li, _ = batch_loss(enc, data, rows[:a.batch], random.Random(0), a,
+                               torch.zeros(len(data.docs), enc.model.config.hidden_size, device=enc.device)
+                               if a.bank_negs else None)
+        (lq + a.i2q_weight * li).backward()
+        peak = torch.cuda.max_memory_allocated()
+        ok = peak < 0.85 * total
+    except torch.cuda.OutOfMemoryError:
+        peak, ok = total, False
+    enc.model.zero_grad(set_to_none=True)
+    enc.pad_full = False
+    torch.cuda.empty_cache()
+    enc.set_checkpointing(not ok)
+    log(f"{name}: worst-case step without checkpointing peaks at {peak / 2**30:.1f} of "
+        f"{total / 2**30:.1f} GB -> checkpointing {'off' if ok else 'on'}")
+
+
+def probe(a, data_root: Path) -> None:
+    """Time 30 steps with and without gradient checkpointing (no checkpoint written)."""
+    dev = pick_device(a.device)
+    data = Data(data_root, None, True, a.smoke)
+    rows = data.epoch_rows(0, a.seed, a.free_per_epoch)
+    enc = Encoder(a.model, dev, a.train_embeddings, True)
+    opt = torch.optim.AdamW([p for p in enc.model.parameters() if p.requires_grad], lr=1e-6)
+    scaler = torch.amp.GradScaler("cuda", enabled=dev == "cuda")
+    bank = (enc.encode(data.docs, a.max_passage_len) if a.bank_negs else None)
+    for ck in (True, False):
+        enc.set_checkpointing(ck)
+        if dev == "cuda":
+            torch.cuda.empty_cache()
+            torch.cuda.reset_peak_memory_stats()
+        try:
+            for b in range(30):
+                if b == 5:
+                    if dev == "cuda":
+                        torch.cuda.synchronize()
+                    t0 = time.time()
+                lq, li, _ = batch_loss(enc, data, rows[b * a.batch:(b + 1) * a.batch],
+                                       random.Random(b), a, bank)
+                opt.zero_grad(set_to_none=True)
+                scaler.scale(lq + a.i2q_weight * li).backward()
+                scaler.step(opt)
+                scaler.update()
+            if dev == "cuda":
+                torch.cuda.synchronize()
+            mem = torch.cuda.max_memory_allocated() / 2**30 if dev == "cuda" else float("nan")
+            log(f"probe {a.model} checkpointing {'on ' if ck else 'off'}: "
+                f"{(time.time() - t0) / 25:.2f} s/step, peak {mem:.1f} GB")
+        except torch.cuda.OutOfMemoryError:
+            log(f"probe {a.model} checkpointing {'on ' if ck else 'off'}: out of GPU memory")
 
 
 def main() -> None:
@@ -391,10 +525,17 @@ def main() -> None:
     ap.add_argument("--data", required=True, help="f1_data dir or .tar.gz")
     ap.add_argument("--out", required=True, help="runs directory")
     g = ap.add_mutually_exclusive_group(required=True)
-    g.add_argument("--plan", action="store_true", help=f"the planned runs in order: {', '.join(PLAN)}")
-    g.add_argument("--run", help="one run: a PLAN name or any other name (with --pool-tasks)")
-    ap.add_argument("--pool-tasks", type=int, default=None, help="for a non-PLAN --run; default all")
-    ap.add_argument("--no-holdout", action="store_true", help="for a non-PLAN --run")
+    g.add_argument("--plan", nargs="?", const="round1", choices=list(PLANS),
+                   help="the planned runs in order (default round1); " +
+                   "; ".join(f"{k}: {', '.join(v)}" for k, v in PLANS.items()))
+    g.add_argument("--run", help="runs in order, comma-separated: PLANS names or new names "
+                                 "(new ones take --pool-tasks / --no-holdout and the flags)")
+    g.add_argument("--probe", action="store_true", help="time 30 steps with and without checkpointing")
+    ap.add_argument("--pool-tasks", type=int, default=None, help="for a new --run name; default all")
+    ap.add_argument("--no-holdout", action="store_true", help="for a new --run name")
+    ap.add_argument("--model", default=BASE_MODEL, help="base encoder (HF id)")
+    ap.add_argument("--bank-negs", action="store_true", help="all other icons as stale negatives")
+    ap.add_argument("--bank-refresh", type=int, default=100, help="steps between bank refreshes")
     ap.add_argument("--epochs", type=int, default=6)
     ap.add_argument("--batch", type=int, default=128)
     ap.add_argument("--lr", type=float, default=2e-5)
@@ -406,7 +547,8 @@ def main() -> None:
     ap.add_argument("--evals-per-epoch", type=int, default=2)
     ap.add_argument("--patience", type=int, default=3)
     ap.add_argument("--train-embeddings", action="store_true")
-    ap.add_argument("--no-checkpointing", action="store_true", help="faster, needs ~2x GPU memory")
+    ap.add_argument("--checkpointing", choices=["auto", "on", "off"], default="auto",
+                    help="gradient checkpointing; auto: off when a worst-case step fits the GPU")
     ap.add_argument("--device", default="auto")
     ap.add_argument("--threads", type=int, default=4, help="CPU threads (keeps a laptop usable)")
     ap.add_argument("--seed", type=int, default=0)
@@ -418,9 +560,18 @@ def main() -> None:
         a.batch, a.max_steps, a.free_per_epoch, a.max_passage_len = 8, 10, 200, 128
         a.evals_per_epoch, a.patience = 1, 99
     root = open_data(Path(a.data))
-    runs = PLAN.items() if a.plan else [(a.run, PLAN.get(a.run, (a.pool_tasks, not a.no_holdout)))]
-    for name, (n, held) in runs:
-        train(name, n, held, a, root)
+    if a.probe:
+        probe(a, root)
+        return
+    if a.plan:
+        runs = list(PLANS[a.plan].items())
+    else:
+        runs = [(n, ALL_RUNS.get(n, {"pool_tasks": a.pool_tasks, "holdout": not a.no_holdout}))
+                for n in a.run.split(",")]
+    for name, cfg in runs:
+        ra = argparse.Namespace(**{**vars(a), **{k: v for k, v in cfg.items()
+                                                 if k not in ("pool_tasks", "holdout")}})
+        train(name, cfg["pool_tasks"], cfg["holdout"], ra, root)
 
 
 if __name__ == "__main__":

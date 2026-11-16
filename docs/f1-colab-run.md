@@ -1,5 +1,9 @@
 # Running F1's training on Colab (hand-off)
 
+> **Superseded by [f1-kaggle-run.md](f1-kaggle-run.md)** (2026-11-16). Colab ended the
+> round-1 job after 3 hours; round 1 then ran on Kaggle. Kaggle runs a notebook headless
+> for up to 12 hours on two T4s. This file stays as the record of round 1.
+
 For the author, and for a fresh Claude Code session that continues afterwards. The
 design is in [f1-dual-encoder.md](f1-dual-encoder.md); this file is only how to run it.
 Training does not run on the Mac (f1-dual-encoder.md §9); data building, import and
