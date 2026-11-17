@@ -91,6 +91,15 @@ def label_path(run: str) -> Path:
     return pub if pub.exists() else PRIVATE_LABELS / f"{run}.jsonl"
 
 
+# Round 3's actively selected pools (scripts/select_active.py, vertex_round3_jobs.sh v2):
+# training pools once their labels exist. Their rows carry `sel` (active / random) and are
+# used only by runs that ask for them (train_f1.py --sel), never in validation.
+NEW_POOL_RUNS = {"personal_synth_pool": "pool-synth3-j4", "train_mslatte": "pool-mslatte2-j4"}
+for _ds, _run in NEW_POOL_RUNS.items():
+    if label_path(_run).exists() and _run not in POOL_RUNS[_ds]:
+        POOL_RUNS[_ds].append(_run)
+
+
 def _seen_by_run(run: str) -> Dict[str, tuple]:
     """{task_id: (seen, relevant)} from the run's states: every icon the judge looked at,
     and those it marked relevant or shortlisted (canonical names)."""
@@ -216,3 +225,84 @@ def mcnemar_exact(b: int, c: int) -> float:
     k = min(b, c)
     tail = sum(math.comb(n, i) for i in range(k + 1)) / 2 ** n
     return min(1.0, 2 * tail)
+
+
+# --- the translated eval set (docs/next-data-and-distillation.md) -----------------------
+# public_xling: dev tasks of the public eval sets translated into more languages (eval
+# only, never training). Scored as virtual datasets "xling-<lang>", plus "xling-src": the
+# same tasks in their original language, so a method's gain in a language is compared on
+# exactly the tasks it was translated from. Each translation keeps its original's gold.
+
+XLING_DATASET = "public_xling"
+XLING_LANGS = ("de", "fr", "pt", "it", "zh", "ja", "pl")
+XLING_SOURCES = ("public_short", "public_expanded", "realistic")
+
+
+def is_xling(dataset: str) -> bool:
+    return dataset.startswith("xling-")
+
+
+def _xling_records() -> List[dict]:
+    from .datasets import DATASETS
+    p = DATASETS[XLING_DATASET].path
+    return read_jsonl(p) if p.exists() else []
+
+
+def eval_gold(dataset: str) -> Dict[str, Gold]:
+    """{task_id: Gold} of an eval set; a virtual xling set takes its originals' gold."""
+    if not is_xling(dataset):
+        return load_gold(EVAL_RUNS[dataset])
+    orig = {}
+    for src in XLING_SOURCES:
+        orig.update(load_gold(EVAL_RUNS[src]))
+    lang = dataset.split("-", 1)[1]
+    out = {}
+    for r in _xling_records():
+        o = r["meta"]["orig_id"]
+        if o not in orig:
+            continue
+        if lang == "src":
+            out[o] = orig[o]
+        elif r["lang"] == lang:
+            out[r["id"]] = Gold(r["id"], orig[o].grades, orig[o].seen, orig[o].order,
+                                orig[o].no_good_icon, orig[o].relevant)
+    return out
+
+
+def eval_tasks(dataset: str) -> List[dict]:
+    """The tasks of an eval set (all splits; callers filter dev)."""
+    from .datasets import load
+    if not is_xling(dataset):
+        return load(dataset)
+    lang = dataset.split("-", 1)[1]
+    recs = _xling_records()
+    if lang != "src":
+        return [r for r in recs if r["lang"] == lang]
+    want = {r["meta"]["orig_id"] for r in recs}
+    return [t for src in XLING_SOURCES for t in load(src) if t["id"] in want]
+
+
+# --- extra grades of unjudged picks (scripts/grade_unjudged.py) ------------------------
+
+EXTRA_GRADES = config.PRIVATE_DIR / "judge" / "extra_grades"
+
+
+def with_extra(golds: Dict[str, Dict[str, Gold]], names: Sequence[str]) -> Dict[str, Dict[str, Gold]]:
+    """Gold with the extra grades of `names` (EXTRA_GRADES/<name>.jsonl) merged in: grade
+    ≥ 1 joins the grades, 0 only `seen`. Calibration rows (icons the judge had graded
+    already) are never merged. The judge's own grades always win."""
+    from dataclasses import replace
+    out = {d: dict(g) for d, g in golds.items()}
+    for name in names:
+        for r in read_jsonl(EXTRA_GRADES / f"{name}.jsonl"):
+            if r.get("calib"):
+                continue
+            g = out.get(r["dataset"], {}).get(r["task_id"])
+            n = canonical(r["icon"])
+            if g is None or n in g.grades:
+                continue
+            grades = dict(g.grades)
+            if int(r["grade"]) > 0:
+                grades[n] = int(r["grade"])
+            out[r["dataset"]][r["task_id"]] = replace(g, grades=grades, seen=g.seen | {n})
+    return out

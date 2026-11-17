@@ -15,7 +15,11 @@ text), unpacking to f1_data[_smoke]/ with
                   holdout, lookalikes (icon indices), near_misses (query texts)
   queries.jsonl   one training / validation query per line: task_id, source, split,
                   lang, text, text_parent (optional), grades {icon index: 3/2/1},
-                  ambiguous (masked icon indices), hard_negs (icon indices)
+                  ambiguous (masked icon indices), hard_negs (icon indices). Sources:
+                  pool-* (judged), free-* (v2 free signal), para-* (rewrites of judged
+                  tasks, with orig_task_id), distill-* (unlabelled: distill-mslatte = MS-LaTTE
+                  tasks in no pool or eval set, distill-cand = generated candidates; used
+                  only by runs with a teacher, docs/next-data-and-distillation.md)
   train_f1.py     the training script, so the tarball is all Colab / Kaggle needs
   i1_embed.py     glyph-image encoder for method I1 (tcr/methods/image.py)
   glyphs/<name>.png  each icon's glyph, 256 px, black on white (public)
@@ -36,6 +40,20 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from tcr import finetune  # noqa: E402
+
+
+def distill_sources() -> dict:
+    """Unlabelled text for distillation: MS-LaTTE tasks in no pool or eval set (public) and,
+    once generated, the Personal-style candidates (private, finetune.CANDIDATES_FILE)."""
+    sys.path.insert(0, str(ROOT / "scripts" / "datasets"))
+    from build_train_pools import mslatte_unused
+    out = {"distill-mslatte": mslatte_unused()}
+    if finetune.CANDIDATES_FILE.exists():
+        from tcr.datasets import read_jsonl
+        out["distill-cand"] = read_jsonl(finetune.CANDIDATES_FILE)
+    for k, v in out.items():
+        print(f"{k}: {len(v)} tasks", file=sys.stderr)
+    return out
 
 
 def write(data: dict, smoke: bool) -> Path:
@@ -79,6 +97,13 @@ def import_runs(src: Path) -> None:
         for p in i1:
             shutil.copy(p, I1_DIR / p.name)
             print(f"glyph vectors {p.name} -> {I1_DIR}")
+    teach = [p for p in base.rglob("*.npz") if p.parent.name == "teacher"]
+    if teach:                     # teacher scores per training row: input of select_active.py
+        tdir = finetune.OUT_DIR / "teacher"
+        tdir.mkdir(parents=True, exist_ok=True)
+        for p in teach:
+            shutil.copy(p, tdir / p.name)
+            print(f"teacher scores {p.name} -> {tdir}")
     res = ROOT / "results" / "f1"
     res.mkdir(parents=True, exist_ok=True)
     for run in sorted(found):
@@ -106,11 +131,12 @@ def main() -> None:
     ap.add_argument("cmd", choices=["build", "import"])
     ap.add_argument("src", nargs="?", help="import: the runs directory or f1_runs.zip")
     ap.add_argument("--smoke", action="store_true", help="200 pool tasks, 1 in 10 icons' free signal")
+    ap.add_argument("--no-distill", action="store_true", help="leave out the unlabelled distillation text")
     args = ap.parse_args()
     if args.cmd == "import":
         import_runs(Path(args.src))
         return
-    data = finetune.build(smoke=args.smoke)
+    data = finetune.build(smoke=args.smoke, distill=None if args.no_distill else distill_sources())
     tar = write(data, args.smoke)
     print(json.dumps(data["manifest"], indent=1, ensure_ascii=False))
     icons = data["icons"]

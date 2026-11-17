@@ -26,8 +26,10 @@ the abstention gate. The one deadline is Gemini access on Google Cloud, which ma
 - **Matchers:** B0, B1 (BM25), M1 (field-weighted e5), M2 (nearest example), M3 (RRF of
   B1 + M1), M3x (exported bundle), each on v1 or v2 descriptions; on the silver
   leaderboard (step 1, done) M3.v2 led until F1, the fine-tuned dual encoder (step 2,
-  round 1 done 2026-11-15), beat it by +0.10 nDCG@5. Image methods (step 3) are built and
-  wait for their glyph vectors.
+  rounds 1–2 done 2026-11-16), beat it by +0.10, then +0.14 nDCG@5 (e5-base). The image
+  method I1 (step 3) is scored: weak alone, +0.012 in fusion.
+- **Next:** [next-data-and-distillation.md](next-data-and-distillation.md) (from
+  2026-11-17): teachers, distillation into e5-small, cheap text, active Argon labels.
 
 Three facts about the judge labels that every step below must handle:
 
@@ -194,6 +196,11 @@ tasks, ~15 min on the Mac. Pooled over the five sets:
 
 Fine-tuning-plan §5 and §8 step 5: the step most likely to give the best fast model.
 
+**Status 2026-11-17: round 2 done** (f1-dual-encoder.md "Round 2 results"): the higher LR
++0.023 nDCG@5 over F1@all, e5-base +0.014 more (F1@all-base.v2+parent 0.474 / hit@1 0.603),
+full-catalogue negatives −0.02. The deployed model stays e5-small; e5-base and e5-large
+become teachers to distil from: [next-data-and-distillation.md](next-data-and-distillation.md).
+
 **Status 2026-11-16: round 1 done, F1 wins on silver; round 2 built, waiting for Kaggle.**
 Results in [f1-dual-encoder.md](f1-dual-encoder.md) "Results"; plot in
 [results/f1/learning_curve.png](../results/f1/learning_curve.png):
@@ -245,10 +252,9 @@ MNRL, the judge's relevant-but-ungraded icons masked rather than used as negativ
   `.cache/models/` (gitignored); usable by `tcr.eval`, the label bundle and
   `tcr/bundle.py` export ([deployment.md](deployment.md): encoder precision, ONNX).
   Results JSON in `results/`.
-- **Hardware:** the Mac (M1, 16 GB, PyTorch MPS) should be enough: ~120M parameters,
-  short texts, tens of thousands of pairs; expected tens of minutes per epoch. Write the
-  script so it runs unchanged on Colab (device auto-detected, data from one tarball)
-  for sweeps and bigger models.
+- **Hardware:** expected the Mac to be enough; it was not (an MPS probe made it unusable),
+  so all training runs on Kaggle (CLAUDE.md "Compute"); the script runs unchanged there
+  (device auto-detected, data from one tarball).
 
 ## 3. Zero-shot image towers and fusion (§5.1 A)
 
@@ -259,6 +265,11 @@ MNRL, the judge's relevant-but-ungraded icons masked rather than used as negativ
   Weight chosen on the silver leaderboard for now; re-checked on human dev labels.
 - Expect modest zero-shot quality on abstract glyphs; the point is to measure what the
   image adds on top of the descriptions.
+
+**Status 2026-11-17: SigLIP 2 base scored.** I1-sb alone: nDCG@5 0.168 (judged@1 only
+0.44, so underestimated); fused with F1@all at weight 0.2: +0.012 pooled
+[+0.009, +0.016], +0.001 on Personal. so400m glyph vectors exist, not scored; no
+jina-clip-v2 vectors came back. Further image ideas: next-data-and-distillation.md backlog.
 
 **Status 2026-11-16: built, glyph vectors waiting for the Kaggle run.** The work is split
 by privacy:

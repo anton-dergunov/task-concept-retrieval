@@ -37,7 +37,9 @@ OUT_DIR = config.DATA_DIR / "train_pools"
 SEED = 20261113
 
 
-def mslatte_pool(n: int) -> list:
+def mslatte_clean(verbose: bool = True) -> list:
+    """Every clean MS-LaTTE title no eval set uses and none is too close to (the pool is a
+    sample of these; the rest is unlabelled text for distillation, scripts/f1_data.py)."""
     used = set()
     for key in ("public_short", "public_expanded"):
         for r in read_jsonl(DATASETS[key].path):
@@ -61,8 +63,20 @@ def mslatte_pool(n: int) -> list:
                                             "place": location_stratum(r)}})
     exact, near = contamination_hits([r["title"] for r in pool])
     clean = [r for i, r in enumerate(pool) if i not in exact and i not in near]
-    print(f"MS-LaTTE: {len(recs)} items, {len(used)} used by eval sets; {len(pool)} clean "
-          f"unused titles; {len(exact | near)} dropped as contaminated; {len(clean)} left")
+    if verbose:
+        print(f"MS-LaTTE: {len(recs)} items, {len(used)} used by eval sets; {len(pool)} clean "
+              f"unused titles; {len(exact | near)} dropped as contaminated; {len(clean)} left")
+    return clean
+
+
+def mslatte_unused() -> list:
+    """Clean MS-LaTTE titles that are in no eval set and not in the judged pool."""
+    pool = {str((r.get("meta") or {}).get("source_id")) for r in read_jsonl(OUT_DIR / "mslatte.jsonl")}
+    return [r for r in mslatte_clean(verbose=False) if str(r["meta"]["source_id"]) not in pool]
+
+
+def mslatte_pool(n: int) -> list:
+    clean = mslatte_clean()
     rng = random.Random(SEED)
     return rng.sample(clean, min(n, len(clean)))
 

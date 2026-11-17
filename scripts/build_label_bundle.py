@@ -64,7 +64,7 @@ def main() -> None:
     ap.add_argument("--refresh", action="store_true", help="recompute existing candidates")
     args = ap.parse_args()
 
-    dsets = available()
+    dsets = [d for d in available() if d.labelled]
     if args.datasets:
         keys = args.datasets.split(",")
         dsets = [DATASETS[k] for k in keys]

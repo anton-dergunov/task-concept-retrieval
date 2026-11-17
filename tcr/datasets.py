@@ -23,6 +23,7 @@ class Dataset:
     path: Path
     id_prefix: str
     private: bool = False
+    labelled: bool = True      # shown in the labelling tool (a derived set is not)
 
 
 DATASETS: Dict[str, Dataset] = {d.key: d for d in [
@@ -33,6 +34,10 @@ DATASETS: Dict[str, Dataset] = {d.key: d for d in [
     Dataset("personal_synth", "Personal-synth", config.DATASETS_DIR / "personal_synth.jsonl", "syn"),
     Dataset("public_short", "Public-short", config.DATASETS_DIR / "public_short.jsonl", "pub"),
     Dataset("public_expanded", "Public-expanded", config.DATASETS_DIR / "public_expanded.jsonl", "exp"),
+    # Eval only: dev tasks of Public-short, Public-expanded and Realistic translated into
+    # more languages (augment_pools.py xling; tcr.silver.XLING_*). Ids "<original id>~<lang>".
+    Dataset("public_xling", "Public-xling", config.DATASETS_DIR / "public_xling.jsonl", "xl",
+            labelled=False),
 ]}
 
 
@@ -86,6 +91,8 @@ def split_of(task_id: str) -> str:
     prefix is split evenly. "test" is touched only for final numbers; "dev" is for
     tuning, gate calibration and judge calibration.
     """
+    # A derived task (a translation "<id>~de", a rewrite "<id>~rw0") shares its original's split.
+    task_id = task_id.split("~", 1)[0]
     if task_id in judge_dev_ids():
         return "judge-dev"
     h = int(hashlib.sha1((SPLIT_SEED + task_id).encode("utf-8")).hexdigest()[:8], 16)

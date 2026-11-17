@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The last Gemini jobs on the judged training pools (docs/next-label-free-work.md step 0).
+"""Gemini jobs on the judged task sets: step 0 (docs/next-label-free-work.md) and round 3.
 
 - **Translations:** every task of a judge run (scripts/judge_batch.py) into Spanish and
   Russian. The judge's labels carry over, since the icon does not depend on the language.
@@ -29,6 +29,14 @@ Commands:
   plan-extra  how many more Personal-style tasks the budget left under --cap can buy
   extra       the pool tasks not judged yet (after `synth_personal.py pool --n …`),
               near-duplicates of judged ones dropped                   -> --out FILE
+  rewrite     four rewrites (terse, reworded, casual ES, casual RU) of every judged
+              training task of --judge-run              -> <dataset>.rw.jsonl
+  translate   titles and parents into --langs: of a pool run (training, <dataset>.xl.jsonl)
+              or, with --eval, of an eval set's dev tasks (data/datasets/xling/)
+  xling-build the translated eval set data/datasets/public_xling.jsonl (eval only)
+
+Round 3 (docs/next-data-and-distillation.md, hand-off docs/vertex-round3-run.md):
+scripts/vertex_round3_jobs.sh.
 
 The whole sequence, with the pool extension: scripts/gemini_last_jobs.sh.
 """
@@ -62,6 +70,7 @@ POOL = config.PRIVATE_DIR / "train_pools" / "personal_synth_pool.jsonl"
 MAX_TASKS, MAX_CHARS = 15, 4000             # per request: output stays well under 8k tokens
 MAX_ATTEMPTS = 3
 TRIAL_USD = 300.0
+XLING_DEFAULT = ("de", "fr", "pt", "it", "zh", "ja", "pl")   # = tcr.silver.XLING_LANGS
 DUP_SIM = 0.95                              # as synth_personal.OS_DUP_SIM
 # Per-task costs for plan-extra, measured: Argon judge $0.0190 in batch (pool-synth-j4;
 # +10% so a later round is never refused), the first pool generation $10.32 for 4,986 kept
@@ -144,14 +153,21 @@ def save_results(path: Path, results: dict) -> None:
 
 
 class Aug:
-    """The augmentation state of one judge run: data/private/augment/<run>/."""
+    """The augmentation state of one judge run: data/private/augment/<run>/ (subclasses:
+    <run>.<kind>/). This class translates into ES/RU; Rewrite and Translate below reuse its
+    rounds, batch jobs, retries and budget checks with their own request and checks."""
+    kind = "aug"
+    system, schema = SYSTEM, SCHEMA
 
-    def __init__(self, run: str, gen_parents: bool):
+    def __init__(self, run: str, gen_parents: bool = False):
         self.run, self.gen_parents = run, gen_parents
         self.jmeta = judge_meta(run)
-        self.dir = WORK / run
+        self.dir = WORK / (run if self.kind == "aug" else f"{run}.{self.kind}")
         self.dir.mkdir(parents=True, exist_ok=True)
-        self.out = out_path(self.jmeta)
+        self.out = self.out_file()
+
+    def out_file(self) -> Path:
+        return out_path(self.jmeta)
 
     @property
     def meta(self) -> dict:
@@ -165,7 +181,12 @@ class Aug:
         return read_jsonl(Path(self.jmeta["source"]))
 
     def job(self, k: int) -> vb.Run:
-        return vb.Run(self.dir / "rounds", f"r{k}", f"augment/{self.run}", MODEL)
+        folder = f"augment/{self.run}" + ("" if self.kind == "aug" else f".{self.kind}")
+        return vb.Run(self.dir / "rounds", f"r{k}", folder, MODEL)
+
+    @property
+    def label(self) -> str:
+        return self.run if self.kind == "aug" else f"{self.run}-{self.kind}"
 
     def pending(self) -> list:
         done, att = set(load_results(self.out)), self.meta["attempts"]
@@ -221,7 +242,7 @@ class Aug:
             for j, ch in enumerate(chunks):
                 key = f"r{k}|{j}"
                 manifest[key] = [t["id"] for t in ch]
-                req = vb.request_json(SYSTEM, [self.prompt(ch)], SCHEMA, TEMPERATURE, GEN)
+                req = vb.request_json(self.system, [self.prompt(ch)], self.schema, TEMPERATURE, GEN)
                 f.write(json.dumps({"key": key, "request": req}, ensure_ascii=False) + "\n")
         run.save_manifest(manifest)
         m.update(round=k, job_round=k)
@@ -245,7 +266,7 @@ class Aug:
             resp = rec.get("response") or {}
             usage = vb.usage_of(resp) if resp else {}
             if usage:
-                spent += J.log_spend(MODEL, usage, f"batch:augment-{self.run}:r{k}", batch=True)
+                spent += J.log_spend(MODEL, usage, f"batch:augment-{self.label}:r{k}", batch=True)
             try:
                 items = {it["n"]: it for it in json.loads(vb.response_text(resp))["tasks"]}
             except Exception:  # noqa: BLE001 — every task of the request is retried
@@ -318,12 +339,293 @@ class Aug:
         vb.log(f"contamination check: {n} of {len(todo)} tasks have a flagged translation")
 
 
+# --- register rewrites (round 3, docs/next-data-and-distillation.md) -----------------
+
+SYSTEM_RW = """You rewrite personal to-do items from one person's org-mode task list the way
+the same person might have written them on another day. Each rewrite must point to the
+same icon: a glanceable reminder of what the task is about.
+
+Keep, in every rewrite: the central subject of the task (what it is about), its context
+or domain, and the action when the action is the point (call, pay, fix, read, sign). Keep
+names of products, tools, people and places, numbers and dates as they are. Add nothing
+(no new objects, people, places, reasons or details) and drop nothing that changes what
+the task is about. The parent headings are context only: do not repeat them in the title.
+
+For each task write four rewrites of the TITLE:
+- "terse": how the person jots it in a hurry: fewer words, articles and filler dropped,
+  common abbreviations allowed (appt, w/, re:, mtg, info), lowercase allowed.
+- "reworded": the same meaning in different words and word order (another verb or
+  construction, synonyms), about the same length; natural, never awkward.
+- "es": a short, natural Spanish to-do in a casual register (infinitive or noun phrase),
+  not a word-for-word translation.
+- "ru": a short, natural Russian to-do in a casual register (infinitive or noun phrase),
+  not a word-for-word translation.
+Return one entry per task, with the task's number n, in the same order."""
+
+SCHEMA_RW = {"type": "object", "properties": {"tasks": {"type": "array", "items": {
+    "type": "object", "properties": {"n": {"type": "integer"}, "terse": {"type": "string"},
+                                     "reworded": {"type": "string"}, "es": {"type": "string"},
+                                     "ru": {"type": "string"}},
+    "required": ["n", "terse", "reworded", "es", "ru"]}}}, "required": ["tasks"]}
+RW_STYLES = (("terse", "en"), ("reworded", "en"), ("es", "es"), ("ru", "ru"))
+
+
+def _rw_path(meta: dict) -> Path:
+    base = (config.PRIVATE_DIR / "train_pools") if meta["private"] else (config.DATA_DIR / "train_pools")
+    return base / f"{meta['dataset']}.rw.jsonl"
+
+
+class Rewrite(Aug):
+    """Four rewrites of every judged training task (not the validation tasks) of a pool run:
+    <dataset>.rw.jsonl, {"task_id", "variants": [{"lang", "style", "title"}],
+    "contaminated": [variant indices too close to an eval title], "model", "run"}.
+    tcr.finetune turns them into para-* rows that keep the original's grades."""
+    kind, system, schema = "rw", SYSTEM_RW, SCHEMA_RW
+
+    def out_file(self) -> Path:
+        return _rw_path(self.jmeta)
+
+    def tasks(self) -> list:
+        from tcr.finetune import is_val_task
+        from tcr.silver import load_gold
+        gold = load_gold([self.run])
+        aug = load_results(out_path(self.jmeta))
+        out = []
+        for t in super().tasks():
+            if t["id"] in gold and not is_val_task(t["id"]):
+                parents = list(t.get("parents") or []) or list((aug.get(t["id"]) or {}).get("parents") or [])
+                out.append({**t, "parents": parents, "body": ""})
+        return out
+
+    def chunks(self, tasks: list) -> list:
+        return [tasks[i:i + MAX_TASKS] for i in range(0, len(tasks), MAX_TASKS)]
+
+    def prompt(self, chunk: list) -> str:
+        lines = []
+        for i, t in enumerate(chunk, 1):
+            lines += [f"TASK {i}", f"TITLE: {t['title']}",
+                      "PARENTS: " + (" > ".join(t.get("parents") or []) or "(none)"), ""]
+        return "\n".join(lines)
+
+    def estimate(self, chunks: list) -> float:
+        p = J.PRICES[MODEL]
+        tin = tout = 0
+        for ch in chunks:
+            chars = sum(len(t["title"]) + len(" > ".join(t.get("parents") or [])) + 30 for t in ch)
+            tin += 700 + chars / 3.5
+            tout += 4 * chars / 3 + 30 * len(ch) + 400
+        return (tin * p[2] + tout * p[3]) / 1e6
+
+    def check(self, task: dict, it) -> dict | None:
+        if not it:
+            return None
+        from tcr.describe_v2 import norm
+        variants = []
+        for style, lang in RW_STYLES:
+            t = " ".join(str(it.get(style) or "").split())
+            if not t or len(t) > max(200, 3 * len(task["title"])):
+                continue
+            if lang == "en" and norm(t) == norm(task["title"]):
+                continue
+            if lang == "ru" and len(_WORD.findall(task["title"])) >= 2 and not _CYR.search(t):
+                continue
+            variants.append({"lang": lang, "style": style, "title": t})
+        if len(variants) < 2:
+            return None
+        return {"task_id": task["id"], "variants": variants, "model": MODEL, "run": self.run}
+
+    def finalize(self) -> None:
+        from tcr.describe_v2 import contamination_hits
+        results = load_results(self.out)
+        todo = [r for r in results.values() if "contaminated" not in r]
+        if not todo:
+            return
+        flat = [(r["task_id"], k, v["title"]) for r in todo for k, v in enumerate(r["variants"])]
+        exact, near = contamination_hits([t for _, _, t in flat])
+        flags = {r["task_id"]: [] for r in todo}
+        for i in exact | near:
+            flags[flat[i][0]].append(flat[i][1])
+        for r in todo:
+            r["contaminated"] = sorted(flags[r["task_id"]])
+        save_results(self.out, results)
+        vb.log(f"contamination check: {len(exact | near)} of {len(flat)} rewrites flagged")
+
+
+# --- translations into more languages ---------------------------------------------------
+
+LANG_STYLE = {
+    "es": ("Spanish", 'the infinitive or a noun phrase ("Revisar el informe")'),
+    "ru": ("Russian", 'the infinitive or a noun phrase ("Проверить отчёт")'),
+    "de": ("German", 'a noun phrase or the infinitive at the end ("Bericht prüfen", "Zahnarzttermin")'),
+    "fr": ("French", 'the infinitive or a noun phrase ("Vérifier le rapport", "RDV dentiste")'),
+    "pt": ("Brazilian Portuguese", 'the infinitive or a noun phrase ("Revisar o relatório")'),
+    "it": ("Italian", 'the infinitive or a noun phrase ("Controllare il report")'),
+    "zh": ("Simplified Chinese", 'a short verb–object phrase ("检查报告", "预约牙医")'),
+    "ja": ("Japanese", 'a short noun phrase or verb stem, as in a Japanese to-do list ("報告書を確認", "歯医者の予約")'),
+    "pl": ("Polish", 'the infinitive or a noun phrase ("Sprawdzić raport", "Wizyta u dentysty")'),
+}
+SYSTEM_XL = """You translate personal to-do items from one person's org-mode task list into
+{names}, the way a native speaker writes them in their own task list.
+
+- Natural, concise to-do style, as natives write lists:
+{styles}
+- Translate the meaning, not word by word. Keep the level of detail: add nothing, drop
+  nothing.
+- Keep unchanged: names of products, tools, libraries, models, datasets, papers, people
+  and places; code, identifiers, file names, URLs, numbers and dates; org markup.
+- Widely used English technical terms may stay in English where a native speaker in the
+  field would keep them.
+- The task may already be in Spanish or Russian: translate from whatever language it is in.
+- Return one entry per task, with the task's number n, in the same order."""
+_CJK = re.compile("[぀-ヿ㐀-鿿]")
+_LATIN = re.compile("[A-Za-zÀ-ÿĀ-ž]")
+
+
+def _xl_path(meta: dict, eval_mode: bool) -> Path:
+    if eval_mode:          # translations of eval tasks: eval only, never training
+        return config.DATASETS_DIR / "xling" / f"{meta['dataset']}.xl.jsonl"
+    base = (config.PRIVATE_DIR / "train_pools") if meta["private"] else (config.DATA_DIR / "train_pools")
+    return base / f"{meta['dataset']}.xl.jsonl"
+
+
+class Translate(Aug):
+    """Title and parent headings into `langs`. Eval mode (--eval): the dev tasks of an
+    eval set's judge run, for the translated eval set (xling-build); otherwise every task
+    of a pool run, for training in more languages. One line per task:
+    {"task_id", <lang>: {"title", "parents"}, "contaminated": [langs] (pool mode)}."""
+    kind = "xl"
+
+    def __init__(self, run: str, langs, eval_mode: bool):
+        self.langs, self.eval_mode = list(langs), eval_mode
+        self.kind = "xleval" if eval_mode else "xl"
+        names = ", ".join(f"{LANG_STYLE[l][0]} ({l})" for l in self.langs)
+        styles = "\n".join(f"  - {LANG_STYLE[l][0]}: {LANG_STYLE[l][1]}" for l in self.langs)
+        self.system = SYSTEM_XL.format(names=names, styles=styles)
+        lang_obj = {"type": "object", "properties": {"title": {"type": "string"}, "parents": _STR_LIST},
+                    "required": ["title", "parents"]}
+        self.schema = {"type": "object", "properties": {"tasks": {"type": "array", "items": {
+            "type": "object", "properties": {"n": {"type": "integer"}, **{l: lang_obj for l in self.langs}},
+            "required": ["n", *self.langs]}}}, "required": ["tasks"]}
+        super().__init__(run, False)
+
+    def out_file(self) -> Path:
+        return _xl_path(self.jmeta, self.eval_mode)
+
+    def tasks(self) -> list:
+        ts = super().tasks()
+        if self.eval_mode:
+            from tcr.datasets import split_of
+            from tcr.silver import load_gold
+            gold = load_gold([self.run])
+            ts = [t for t in ts if split_of(t["id"]) == "dev" and t["id"] in gold]
+        else:
+            aug = load_results(out_path(self.jmeta))
+            ts = [{**t, "parents": list(t.get("parents") or []) or
+                   list((aug.get(t["id"]) or {}).get("parents") or [])} for t in ts]
+        return [{**t, "body": ""} for t in ts]
+
+    def chunks(self, tasks: list) -> list:
+        n = max(4, MAX_TASKS * 2 // max(2, len(self.langs)))
+        return [tasks[i:i + n] for i in range(0, len(tasks), n)]
+
+    def prompt(self, chunk: list) -> str:
+        lines = ["The tasks carry their outline headings (PARENTS, outermost first, or \"(none)\"). "
+                 "Translate the title and every heading into each language; [] for none.", ""]
+        for i, t in enumerate(chunk, 1):
+            lines += [f"TASK {i}", f"TITLE: {t['title']}",
+                      "PARENTS: " + (" > ".join(t.get("parents") or []) or "(none)"), ""]
+        return "\n".join(lines)
+
+    def estimate(self, chunks: list) -> float:
+        p = J.PRICES[MODEL]
+        tin = tout = 0
+        for ch in chunks:
+            chars = sum(len(t["title"]) + len(" > ".join(t.get("parents") or [])) + 20 for t in ch)
+            tin += 800 + chars / 3.5
+            tout += len(self.langs) * (chars / 2 + 25 * len(ch)) + 400
+        return (tin * p[2] + tout * p[3]) / 1e6
+
+    def check(self, task: dict, it) -> dict | None:
+        if not it:
+            return None
+        parents = list(task.get("parents") or [])
+        out = {"task_id": task["id"], "parents": parents}
+        latin_src = len(_WORD.findall(task["title"])) >= 2
+        for lang in self.langs:
+            tr = it.get(lang) or {}
+            title = " ".join(str(tr.get("title") or "").split())
+            tp = [" ".join(str(x).split()) for x in tr.get("parents") or []]
+            if not title or len(tp) != len(parents) or not all(tp):
+                return None
+            if latin_src and lang in ("zh", "ja") and not _CJK.search(title):
+                return None
+            if latin_src and lang not in ("zh", "ja", "ru") and not _LATIN.search(title):
+                return None
+            out[lang] = {"title": title, "parents": tp}
+        out.update(model=MODEL, run=self.run, langs=self.langs)
+        return out
+
+    def finalize(self) -> None:
+        if self.eval_mode:
+            return
+        from tcr.describe_v2 import contamination_hits
+        results = load_results(self.out)
+        todo = [r for r in results.values() if "contaminated" not in r]
+        flags = {r["task_id"]: [] for r in todo}
+        for lang in self.langs:
+            rs = [r for r in todo if lang in r]
+            exact, near = contamination_hits([r[lang]["title"] for r in rs])
+            for i in exact | near:
+                flags[rs[i]["task_id"]].append(lang)
+        for r in todo:
+            r["contaminated"] = flags[r["task_id"]]
+        save_results(self.out, results)
+
+
+def xling_build() -> Path:
+    """data/datasets/public_xling.jsonl from the eval-mode translations (shared schema)."""
+    from tcr.datasets import DATASETS
+    from tcr.silver import XLING_LANGS
+    rows = []
+    for p in sorted((config.DATASETS_DIR / "xling").glob("*.xl.jsonl")):
+        src = p.name.split(".")[0]
+        for r in read_jsonl(p):
+            for lang in XLING_LANGS:
+                if lang in r:
+                    rows.append({"id": f"{r['task_id']}~{lang}", "dataset": "public_xling",
+                                 "title": r[lang]["title"], "body": "", "parents": r[lang]["parents"],
+                                 "lang": lang, "meta": {"orig_id": r["task_id"], "source": src,
+                                                        "model": r.get("model")}})
+    out = DATASETS["public_xling"].path
+    write_jsonl(out, rows)
+    vb.log(f"xling: {len(rows)} translated eval tasks -> {out}")
+    return out
+
+
 # --- commands ------------------------------------------------------------------------
 
 def cmd_run(args) -> None:
-    a = Aug(args.judge_run, args.gen_parents)
+    drive(Aug(args.judge_run, args.gen_parents), args)
+
+
+def cmd_rewrite(args) -> None:
+    drive(Rewrite(args.judge_run), args)
+
+
+def cmd_translate(args) -> None:
+    drive(Translate(args.judge_run, args.langs.split(","), args.eval), args)
+
+
+def cmd_xling_build(args) -> None:
+    xling_build()
+
+
+def drive(a: Aug, args) -> None:
+    """Rounds until every task is done: build → (budget check) submit → wait → collect."""
     if not a.jmeta.get("finished"):
-        sys.exit(f"judge run {args.judge_run} is not finished")
+        sys.exit(f"judge run {a.run} is not finished")
+    if getattr(args, "limit", 0):
+        a.tasks = (lambda f, n: (lambda: f()[:n]))(a.tasks, args.limit)
     while True:
         k = a.meta.get("job_round")
         if k:
@@ -334,7 +636,7 @@ def cmd_run(args) -> None:
                 if args.max_usd is not None and J.spent() + est > args.max_usd:
                     sys.exit(f"refusing: spent ${J.spent():.2f} + estimate ${est:.2f} "
                              f"> --max-usd {args.max_usd}")
-                run.submit(f"augment-{args.judge_run}-r{k}")
+                run.submit(f"augment-{a.label}-r{k}")
             job = run.wait(args.poll)
             a.collect(k, job)
             continue
@@ -342,7 +644,7 @@ def cmd_run(args) -> None:
         if not pending:
             a.finalize()
             done = len(load_results(a.out))
-            vb.log(f"{args.judge_run}: finished; {a.out} holds {done} tasks")
+            vb.log(f"{a.label}: finished; {a.out} holds {done} tasks")
             return
         k, chunks = a.build_round(pending)
         vb.log(f"round {k}: {len(pending)} tasks in {len(chunks)} requests; "
@@ -350,12 +652,14 @@ def cmd_run(args) -> None:
 
 
 def cmd_status(args) -> None:
-    a = Aug(args.judge_run, False)
+    a = {"aug": lambda: Aug(args.judge_run), "rw": lambda: Rewrite(args.judge_run),
+         "xl": lambda: Translate(args.judge_run, args.langs.split(","), False),
+         "xleval": lambda: Translate(args.judge_run, args.langs.split(","), True)}[args.kind]()
     ids = {t["id"] for t in a.tasks()}
     done = ids & set(load_results(a.out))
     m = a.meta
     failed = sum(1 for t, n in m["attempts"].items() if n >= MAX_ATTEMPTS and t not in done)
-    print(f"{args.judge_run}: {len(done)}/{len(ids)} done, {failed} given up; round {m['round']}")
+    print(f"{a.label}: {len(done)}/{len(ids)} done, {failed} given up; round {m['round']}")
     if m.get("job_round") and a.job(m["job_round"]).state().get("job"):
         print("  " + vb.describe_job(a.job(m["job_round"]).job()))
 
@@ -387,15 +691,21 @@ def cmd_backfill(args) -> None:
 
 
 def cmd_cap(args) -> None:
-    if CAP_FILE.exists():
-        print(json.loads(CAP_FILE.read_text())["cap"])
+    """The first trial: min(log + credit left, $300) − reserve, in cap.json. With --budget
+    (later credits): log + min(credit left − reserve, budget), in cap-<tag>.json."""
+    f = CAP_FILE if args.budget is None else WORK / f"cap-{args.tag}.json"
+    if f.exists():
+        print(json.loads(f.read_text())["cap"])
         return
     s = J.spent()
-    cap = round(min(s + args.credit_left, TRIAL_USD) - args.reserve, 2)
+    if args.budget is None:
+        cap = round(min(s + args.credit_left, TRIAL_USD) - args.reserve, 2)
+    else:
+        cap = round(s + min(args.credit_left - args.reserve, args.budget), 2)
     WORK.mkdir(parents=True, exist_ok=True)
-    CAP_FILE.write_text(json.dumps({"cap": cap, "spent_at_start": round(s, 2),
-                                    "credit_left": args.credit_left, "reserve": args.reserve,
-                                    "set": now()}, indent=1))
+    f.write_text(json.dumps({"cap": cap, "spent_at_start": round(s, 2),
+                             "credit_left": args.credit_left, "reserve": args.reserve,
+                             "budget": args.budget, "set": now()}, indent=1))
     print(f"cap: spend log ${s:.2f}, credit left ${args.credit_left:.2f}, reserve "
           f"${args.reserve:.2f} -> stop at ${cap:.2f} in the log", file=sys.stderr)
     print(cap)
@@ -457,10 +767,25 @@ def main() -> None:
     p.add_argument("--poll", type=int, default=120)
     p = sub.add_parser("status")
     p.add_argument("--judge-run", required=True)
+    p.add_argument("--kind", choices=["aug", "rw", "xl", "xleval"], default="aug")
+    p.add_argument("--langs", default=",".join(XLING_DEFAULT))
+    for name in ("rewrite", "translate"):
+        p = sub.add_parser(name)
+        p.add_argument("--judge-run", required=True)
+        p.add_argument("--max-usd", type=float, default=None)
+        p.add_argument("--poll", type=int, default=120)
+        p.add_argument("--limit", type=int, default=0, help="only the first N tasks (a trial)")
+        if name == "translate":
+            p.add_argument("--langs", default=",".join(XLING_DEFAULT))
+            p.add_argument("--eval", action="store_true",
+                           help="an eval set's run: its dev tasks, for the translated eval set")
+    sub.add_parser("xling-build")
     sub.add_parser("backfill")
     p = sub.add_parser("cap")
     p.add_argument("--credit-left", type=float, required=True)
     p.add_argument("--reserve", type=float, default=8.0)
+    p.add_argument("--budget", type=float, default=None, help="this round's budget (later credits)")
+    p.add_argument("--tag", default="round3", help="with --budget: cap-<tag>.json")
     p = sub.add_parser("plan-extra")
     p.add_argument("--cap", type=float, required=True)
     p.add_argument("--generated", action="store_true", help="the new tasks exist already")

@@ -43,6 +43,7 @@ from tcr.datasets import DATASETS, read_jsonl, write_jsonl  # noqa: E402
 BATCH_DIR = J.JUDGE_DIR / "batch"
 MAX_ERRORS = 2          # a task whose answer fails this often is finished as "failed"
 DEFAULT_EST = 0.0075    # USD per task in batch, if no online run measured it yet
+EXTRA_MAX = 15          # at most this many extra candidates per task
 
 
 class Batch:
@@ -225,9 +226,22 @@ def cmd_prepare(args) -> None:
     write_jsonl(sub, recs)
     b.save_meta({"run": args.run, "dataset": name, "source": str(sub), "private": private,
                  "model": args.model, "prompt_version": J.PROMPT_VERSION, "gen": J.GEN,
-                 "chunk": args.chunk, "n_tasks": len(recs),
+                 "chunk": args.chunk, "n_tasks": len(recs), "extra_candidates": args.extra_candidates,
                  "created": datetime.now(timezone.utc).isoformat(timespec="seconds")})
     ctx = b.ctx()
+    if args.extra_candidates:
+        # icons the models favour (select_active.py): they replace the tail of the ~100
+        # candidates, so the judge sees them and the pool keeps its size and numbering
+        extra = json.loads(Path(args.extra_candidates).read_text())
+        base_pool = ctx.pool
+
+        def pool_with_extra(rec, _base=base_pool):
+            from tcr.silver import canonical
+            pool = _base(rec)
+            have = {canonical(n) for n in pool}
+            add = [n for n in extra.get(rec["id"], []) if canonical(n) not in have][:EXTRA_MAX]
+            return pool[:len(pool) - len(add)] + add if add else pool
+        ctx.pool = pool_with_extra
     t0 = time.time()
     states = []
     for i, r in enumerate(recs):
@@ -308,6 +322,8 @@ def main() -> None:
     p.add_argument("--model", default=J.DEFAULT_MODEL)
     p.add_argument("--chunk", type=int, default=1000)
     p.add_argument("--limit", type=int, default=0)
+    p.add_argument("--extra-candidates", help="JSON {task_id: [icons]} to add to each task's "
+                                              "candidate pool (select_active.py's <pool>.extra.json)")
     for name in ("estimate", "submit", "status", "collect", "run", "export"):
         q = sub.add_parser(name)
         q.add_argument("--run", required=True)

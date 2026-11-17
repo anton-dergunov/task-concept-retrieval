@@ -27,6 +27,17 @@ with each icon's own near-misses as hard negative queries. --bank-negs adds ever
 icon of the catalogue as a negative, from stale vectors refreshed every --bank-refresh
 steps (no gradient through them), so each query is ranked against all icons, as in
 evaluation.
+
+Distillation (round 3, docs/next-data-and-distillation.md): a run with a teacher (preset
+"teacher" or --teacher) first scores every training text with the best finished teacher
+run (--score does only that: <out>/teacher/<run>.npz, top-64 icons per text), then adds
+--kd-weight × KL(teacher ‖ student) over the whole catalogue (fresh vectors for the
+batch's icons, the stale bank for the rest). Unlabelled rows (--distill-sources) count
+only there; rewrites of judged tasks (--para) either keep their original's grades where
+the teacher agrees ("graded") or learn from the teacher alone ("kd").
+
+    python train_f1.py --data f1_data --out runs --run F1@all-base-lr,F1@all-kd,F1@all-kd-ms
+    python train_f1.py --data f1_data --out runs --score F1@all-base-lr,F1@all-lr
 """
 
 from __future__ import annotations
@@ -46,6 +57,11 @@ import torch
 import torch.nn.functional as F
 
 BASE_MODEL = "intfloat/multilingual-e5-small"
+# Teacher candidates for the students, in --out: the finished one with the best held-out
+# nDCG@5 is used (override with --teacher).
+TEACHERS = ["F1@all-large", "F1@all-base-lr", "F1@all-base"]
+TOPK = 64            # teacher scores kept per text
+BASE_LANGS = ("en", "es", "ru")
 # plan -> run name -> settings: pool_tasks (None = all), holdout (5% of icons), and any
 # argument overrides. Round 1: the method itself first, so a short session still produces
 # it, then the learning curve. Round 2: the recipe (all comparable with F1@all).
@@ -64,6 +80,48 @@ PLANS = {
                           "bank_negs": True},
         "F1@all-base": {"pool_tasks": None, "holdout": True,
                         "model": "intfloat/multilingual-e5-base"},
+    },
+    # Round 3 (docs/next-data-and-distillation.md): teachers, then e5-small students that
+    # learn the best teacher's scores over the whole catalogue (--teacher picks it).
+    "round3": {
+        "F1@all-base-lr": {"pool_tasks": None, "holdout": True, "lr": 3e-5, "epochs": 10,
+                           "model": "intfloat/multilingual-e5-base"},
+        "F1@all-large": {"pool_tasks": None, "holdout": True, "epochs": 5,
+                         "model": "intfloat/multilingual-e5-large"},
+        "F1@all-kd": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                      "teacher": TEACHERS, "kd_weight": 1.0},
+        "F1@all-kd-ms": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                         "teacher": TEACHERS, "kd_weight": 1.0, "distill_sources": ["distill-mslatte"]},
+    },
+    # Round 4: the cheap text from Vertex V1 (rewrites, generated tasks); `para` rows are
+    # rewrites of judged pool tasks, used with the original's grades ("graded", kept only
+    # where the teacher agrees) or with teacher targets only ("kd").
+    "round4": {
+        "F1@all-lr-para": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                           "teacher": TEACHERS, "kd_weight": 0.0, "para": "graded"},
+        "F1@all-kd-para": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                           "teacher": TEACHERS, "kd_weight": 1.0, "para": "kd"},
+        "F1@all-kd-gen": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                          "teacher": TEACHERS, "kd_weight": 1.0,
+                          "distill_sources": ["distill-mslatte", "distill-cand"]},
+    },
+    # Round 5: + the Argon labels of round 3's selected tasks (2k active + 1k random). Equal
+    # sizes answer "did active selection beat random?"; all3k the learning-curve point; the
+    # last two the retrained teacher and the final student.
+    "round5": {
+        "F1@all-lr-rand1k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                             "sel": {"random": 1000}},
+        "F1@all-lr-act1k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                            "sel": {"active": 1000}},
+        "F1@all-lr-all3k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                            "sel": {"active": None, "random": None}},
+        "F1@all-base-lr-all3k": {"pool_tasks": None, "holdout": True, "lr": 3e-5, "epochs": 10,
+                                 "model": "intfloat/multilingual-e5-base",
+                                 "sel": {"active": None, "random": None}},
+        "F1@all-kd-final": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                            "teacher": ["F1@all-base-lr-all3k"], "kd_weight": 1.0,
+                            "sel": {"active": None, "random": None}, "para": "kd",
+                            "distill_sources": ["distill-mslatte", "distill-cand"]},
     },
 }
 ALL_RUNS = {n: c for plan in PLANS.values() for n, c in plan.items()}
@@ -98,26 +156,79 @@ def _h(s: str) -> int:
 
 
 class Data:
-    def __init__(self, root: Path, pool_tasks, holdout: bool, smoke: bool):
+    def __init__(self, root: Path, pool_tasks, holdout: bool, smoke: bool, distill_sources=(),
+                 para=None, teacher=None, sel=None, pool_langs=None):
         self.manifest = json.loads((root / "manifest.json").read_text())
         self.icons = read_jsonl(root / "icons.jsonl")
         self.docs = [self.manifest["passage_prefix"] + r["doc"] for r in self.icons]
         self.holdout_all = {i for i, r in enumerate(self.icons) if r["holdout"]}
         self.held = self.holdout_all if holdout else set()
+        self.teacher = teacher
         qs = read_jsonl(root / "queries.jsonl")
-        for q in qs:
+        self._sel_keep = {}
+        for v, n in (sel or {}).items():
+            if n is not None:
+                ids = sorted({q["task_id"] for q in qs if q.get("sel") == v}, key=lambda t: _h("f1-sel:" + t))
+                self._sel_keep[v] = set(ids[:n])
+        for i, q in enumerate(qs):
+            q["_i"] = i                       # row of the teacher's score arrays
             q["grades"] = {int(k): v for k, v in q["grades"].items()}
             q["ambiguous"] = set(q["ambiguous"])
             q["pos"] = [i for i in q["grades"] if i not in self.held]
             q["negs"] = [i for i in q["hard_negs"] if i not in self.held]
-        self.val = [q for q in qs if q["split"] == "val"]
-        pool = [q for q in qs if q["split"] == "train" and q["source"].startswith("pool")]
+        # Tasks of the selected pools (round 3's Argon judging) carry `sel`; they never join
+        # validation, and train only in runs that ask for them: sel = {value: max tasks or None}.
+        # Pool translations beyond EN/ES/RU train only where --pool-langs lists them; the
+        # validation set stays EN/ES/RU, so held-out numbers stay comparable.
+        langs = set(BASE_LANGS) | set(pool_langs or ())
+        self.val = [q for q in qs if q["split"] == "val" and not q.get("sel") and q["lang"] in BASE_LANGS]
+        pool = [q for q in qs if q["split"] == "train" and q["source"].startswith("pool")
+                and q["lang"] in langs and self._sel_ok(q, sel or {})]
         keep = self._select_tasks(pool, pool_tasks)
         self.pool = [q for q in pool if q["task_id"] in keep and q["pos"]]
         self.free = [q for q in qs if q["source"].startswith("free") and q["pos"]]
         self.pool_task_count = len(keep)
+        # Unlabelled text: learns from the teacher's scores only.
+        self.distill = [q for q in qs if q["split"] == "train"
+                        and any(q["source"] == s for s in distill_sources)]
+        # Rewrites of judged pool tasks (only those whose original is in this run's pool).
+        paras = [q for q in qs if q["split"] == "train" and q["source"].startswith("para")
+                 and q.get("orig_task_id") in keep] if para else []
+        self.para_dropped = 0
+        if para == "graded":
+            ok = [q for q in paras if q["pos"] and self.teacher_agrees(q)]
+            self.para_dropped = len(paras) - len(ok)
+            self.pool += ok
+        elif para == "kd":
+            for q in paras:
+                q["grades"], q["pos"], q["negs"], q["ambiguous"] = {}, [], [], set()
+            self.distill += paras
+        if self.distill and teacher is None:
+            raise SystemExit("distillation rows need a teacher (--teacher or the run's preset)")
         if smoke:
             self.val = self.val[:200]
+
+    _sel_keep: dict = {}
+
+    def _sel_ok(self, q: dict, sel: dict) -> bool:
+        v = q.get("sel")
+        if not v:
+            return True
+        if v not in sel:
+            return False
+        if sel[v] is None:
+            return True
+        if v not in self._sel_keep:     # the first n tasks of that kind in a fixed hash order
+            raise RuntimeError("call _prepare_sel first")
+        return q["task_id"] in self._sel_keep[v]
+
+    def teacher_agrees(self, q: dict, k: int = 10) -> bool:
+        """A rewrite keeps its original's grades only if the teacher still ranks one of the
+        original's grade-3 icons in its top k."""
+        if self.teacher is None:
+            raise SystemExit("para=graded filters rewrites with a teacher; none was found")
+        top = set(int(x) for x in self.teacher.top(q["_i"], 0)[:k])
+        return bool(top & {i for i, g in q["grades"].items() if g == 3})
 
     @staticmethod
     def _select_tasks(pool: list, n) -> set:
@@ -134,11 +245,47 @@ class Data:
             keep.update(sorted(ids, key=lambda t: _h("f1-curve:" + t))[:k])
         return keep
 
-    def epoch_rows(self, epoch: int, seed: int, free_per_epoch: int) -> list:
+    def epoch_rows(self, epoch: int, seed: int, free_per_epoch: int, distill_per_epoch: int = 0) -> list:
         rng = random.Random(seed * 1000 + epoch)
         rows = list(self.pool) + rng.sample(self.free, min(free_per_epoch, len(self.free)))
+        if self.distill:
+            n = len(self.distill) if not distill_per_epoch else min(distill_per_epoch, len(self.distill))
+            rows += rng.sample(self.distill, n)
         rng.shuffle(rows)
         return rows
+
+
+class Teacher:
+    """A teacher's top-K icons and scaled scores per query row and form (0 = title,
+    1 = parent + title), written by score_texts(); -1 where a row or form is missing."""
+
+    def __init__(self, path: Path):
+        d = np.load(path, allow_pickle=False)
+        self.path, self.run = path, str(d["run"])
+        self.idx, self.val = d["idx"], d["val"]
+        self.names = [str(n) for n in d["names"]]
+
+    def top(self, row: int, form: int) -> np.ndarray:
+        ix = self.idx[row, form]
+        if ix[0] < 0 and form == 1:
+            ix = self.idx[row, 0]
+        return ix[ix >= 0]
+
+    def target(self, row: int, form: int, n_icons: int, held: set, tau: float):
+        """Dense teacher distribution over the catalogue (held-out icons get no mass)."""
+        if self.idx[row, form, 0] < 0:
+            form = 0
+        ix, v = self.idx[row, form], self.val[row, form].astype(np.float32)
+        ok = ix >= 0
+        if held:
+            ok &= ~np.isin(ix, list(held))
+        if not ok.any():
+            return None
+        ix, v = ix[ok], v[ok] / tau
+        p = np.exp(v - v.max())
+        t = np.zeros(n_icons, np.float32)
+        t[ix] = p / p.sum()
+        return t
 
 
 # --- model ---------------------------------------------------------------------------------
@@ -190,14 +337,19 @@ class Encoder:
 
 # --- loss ----------------------------------------------------------------------------------
 
-def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank=None) -> tuple:
+def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank=None,
+               teacher: "Teacher | None" = None) -> tuple:
+    """(graded loss, icon->query loss, distillation loss, icons in the batch). Rows without
+    grades (distillation text) bring the teacher's top icon into the batch instead of a
+    drawn positive and count only in the distillation loss."""
     man = data.manifest
-    pos = [rng.choices(q["pos"], weights=[q["grades"][i] ** 2 for i in q["pos"]])[0] for q in rows]
+    pos = [rng.choices(q["pos"], weights=[q["grades"][i] ** 2 for i in q["pos"]])[0] if q["pos"]
+           else _teacher_top1(teacher, q, data.held) for q in rows]
     neg = [rng.choice(q["negs"]) if q["negs"] else None for q in rows]
-    icons = sorted(set(pos) | {n for n in neg if n is not None})
+    icons = sorted({p for p in pos if p is not None} | {n for n in neg if n is not None})
     col = {ic: j for j, ic in enumerate(icons)}
-    texts = [q["text_parent"] if q.get("text_parent") and rng.random() < a.parent_p else q["text"]
-             for q in rows]
+    forms = [1 if q.get("text_parent") and rng.random() < a.parent_p else 0 for q in rows]
+    texts = [q["text_parent"] if f else q["text"] for q, f in zip(rows, forms)]
     Q = enc([man["query_prefix"] + t for t in texts], man["max_query_len"])
     P = enc([data.docs[i] for i in icons], a.max_passage_len)
     B, M = len(rows), len(icons)
@@ -211,9 +363,10 @@ def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank
                 A[r, j] = True
     G, A = G.to(Q.device), A.to(Q.device)
     S = a.scale * Q @ P.T
-    T = G / G.sum(1, keepdim=True)
+    has = G.sum(1) > 0                           # rows with grades (all of them before round 3)
+    T = G / G.sum(1, keepdim=True).clamp(min=1e-9)
     logits = S.masked_fill(A, NEG)
-    if bank is not None:
+    if bank is not None and a.bank_negs:
         # every other icon as a negative (stale vectors, no gradient): masked where it is
         # in the batch already, held out, graded or set aside for this query
         Mb = torch.zeros(B, bank.shape[0], dtype=torch.bool)
@@ -227,7 +380,25 @@ def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank
         Sb = (a.scale * Q @ bank.T).masked_fill(Mb.to(Q.device), NEG)
         logits = torch.cat([logits, Sb], dim=1)
         T = torch.cat([T, torch.zeros_like(Sb)], dim=1)
-    loss_q = -(T * F.log_softmax(logits, dim=1)).sum(1).mean()
+    per_row = -(T * F.log_softmax(logits, dim=1)).sum(1)
+    loss_q = per_row[has].mean() if bool(has.any()) else per_row.sum() * 0
+
+    # distillation: KL(teacher || student) over the whole catalogue, fresh vectors for the
+    # batch's icons, the stale bank for the rest; held-out icons excluded on both sides
+    loss_kd = torch.zeros((), device=Q.device)
+    if teacher is not None and bank is not None:
+        tgt = [teacher.target(q["_i"], f, len(data.docs), data.held, a.kd_temp)
+               for q, f in zip(rows, forms)]
+        keep = [r for r, t in enumerate(tgt) if t is not None]
+        if keep:
+            Tk = torch.from_numpy(np.stack([tgt[r] for r in keep])).to(Q.device)
+            Sf = a.scale * Q[keep] @ bank.T
+            Sf = Sf.index_copy(1, torch.tensor(icons, device=Q.device), S[keep])
+            if data.held:
+                Sf[:, sorted(data.held)] = NEG
+            logp = F.log_softmax(Sf / a.kd_temp, dim=1)
+            ent = (Tk * torch.log(Tk.clamp(min=1e-12))).sum(1)
+            loss_kd = ((ent - (Tk * logp).sum(1)) * a.kd_temp ** 2).mean()
 
     # icon -> query: rows = icons some query is graded for; own near-miss as an extra column
     rows_i = (G.sum(0) > 0).nonzero().flatten().tolist()
@@ -250,7 +421,16 @@ def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank
         T2 = torch.cat([G[:, rows_i].T, torch.zeros(len(rows_i), 1, device=Q.device)], dim=1)
         T2 = T2 / T2.sum(1, keepdim=True)
         loss_i = -(T2 * F.log_softmax(S2, dim=1)).sum(1).mean()
-    return loss_q, loss_i, M
+    return loss_q, loss_i, loss_kd, M
+
+
+def _teacher_top1(teacher, q: dict, held: set):
+    if teacher is None:
+        raise SystemExit(f"row {q['task_id']} has no grades and there is no teacher")
+    for ic in teacher.top(q["_i"], 0):
+        if int(ic) not in held:
+            return int(ic)
+    return None
 
 
 # --- evaluation ----------------------------------------------------------------------------
@@ -299,14 +479,27 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     if (out / "done.json").exists():
         log(f"{name}: done already, skipped")
         return
-    out.mkdir(parents=True, exist_ok=True)
     dev = pick_device(a.device)
     if dev == "cpu":
         torch.set_num_threads(a.threads)
-    data = Data(data_root, pool_tasks, holdout, a.smoke)
+    teacher = None
+    if a.teacher:
+        cands = a.teacher if isinstance(a.teacher, list) else a.teacher.split(",")
+        t_run = pick_teacher(a, cands)
+        if t_run is None:
+            log(f"{name}: no finished teacher among {cands} in {a.out}; skipped")
+            return
+        teacher = Teacher(score_texts(a, data_root, t_run))
+        a.teacher_used = teacher.run
+        log(f"{name}: teacher {teacher.run}")
+    out.mkdir(parents=True, exist_ok=True)
+    data = Data(data_root, pool_tasks, holdout, a.smoke, a.distill_sources or (), a.para, teacher,
+                a.sel, a.pool_langs)
+    t_loss = teacher if a.kd_weight > 0 else None
     log(f"{name}: device {dev}; {data.pool_task_count} pool tasks ({len(data.pool)} rows), "
-        f"{len(data.free)} free-signal rows ({a.free_per_epoch} per epoch), {len(data.val)} val, "
-        f"{len(data.held)} icons held out")
+        f"{len(data.free)} free-signal rows ({a.free_per_epoch} per epoch), {len(data.distill)} "
+        f"distillation rows, {len(data.val)} val, {len(data.held)} icons held out"
+        + (f"; {data.para_dropped} rewrites dropped (teacher disagrees)" if a.para == "graded" else ""))
     torch.manual_seed(a.seed)
     enc = Encoder(a.model, dev, a.train_embeddings, a.checkpointing != "off")
     params = [p for p in enc.model.parameters() if p.requires_grad]
@@ -314,7 +507,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     nodecay = [p for n, p in enc.model.named_parameters() if p.requires_grad and p.ndim <= 1]
     opt = torch.optim.AdamW([{"params": decay, "weight_decay": 0.01},
                              {"params": nodecay, "weight_decay": 0.0}], lr=a.lr)
-    rows0 = data.epoch_rows(0, a.seed, a.free_per_epoch)
+    rows0 = data.epoch_rows(0, a.seed, a.free_per_epoch, a.distill_per_epoch)
     steps_per_epoch = max(1, len(rows0) // a.batch)
     total = a.max_steps or steps_per_epoch * a.epochs
     warm = max(1, int(0.05 * total))
@@ -324,7 +517,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     seg = max(1, steps_per_epoch // a.evals_per_epoch)
     if a.checkpointing == "auto" and dev == "cuda":
         try:
-            choose_checkpointing(enc, data, rows0, a, name)
+            choose_checkpointing(enc, data, rows0, a, name, t_loss)
         except Exception as e:      # the check must never cost a run: fall back to the safe side
             enc.pad_full = False
             enc.model.zero_grad(set_to_none=True)
@@ -344,9 +537,11 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     logf = open(out / "train_log.jsonl", "a", encoding="utf-8")
     bank = None
 
+    need_bank = a.bank_negs or t_loss is not None
+
     def refresh_bank():
         nonlocal bank
-        if a.bank_negs:
+        if need_bank:
             bank = enc.encode(data.docs, a.max_passage_len).detach()
 
     def write(rec):
@@ -374,17 +569,17 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     refresh_bank()
     while st["step"] < total and not stop:
         epoch = st["step"] // steps_per_epoch
-        rows = data.epoch_rows(epoch, a.seed, a.free_per_epoch)
+        rows = data.epoch_rows(epoch, a.seed, a.free_per_epoch, a.distill_per_epoch)
         in_epoch = st["step"] % steps_per_epoch
         enc.model.train()
-        t_log, lq_acc, li_acc, m_acc, n_acc = time.time(), 0.0, 0.0, 0, 0
+        t_log, lq_acc, li_acc, lk_acc, m_acc, n_acc = time.time(), 0.0, 0.0, 0.0, 0, 0
         for b in range(in_epoch, steps_per_epoch):
             batch = rows[b * a.batch:(b + 1) * a.batch]
             rng = random.Random(f"{a.seed}:{st['step']}")
-            if a.bank_negs and st["step"] % a.bank_refresh == 0 and st["step"] > 0:
+            if need_bank and st["step"] % a.bank_refresh == 0 and st["step"] > 0:
                 refresh_bank()
-            loss_q, loss_i, M = batch_loss(enc, data, batch, rng, a, bank)
-            loss = loss_q + a.i2q_weight * loss_i
+            loss_q, loss_i, loss_kd, M = batch_loss(enc, data, batch, rng, a, bank, t_loss)
+            loss = loss_q + a.i2q_weight * loss_i + a.kd_weight * loss_kd
             opt.zero_grad(set_to_none=True)
             scaler.scale(loss).backward()
             scaler.unscale_(opt)
@@ -393,17 +588,22 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
             scaler.update()
             sched.step()
             st["step"] += 1
-            lq_acc += loss_q.item(); li_acc += loss_i.item(); m_acc += M; n_acc += 1
+            lq_acc += loss_q.item(); li_acc += loss_i.item(); lk_acc += loss_kd.item()
+            m_acc += M; n_acc += 1
             if st["step"] % 20 == 0 or a.smoke:
                 dt = (time.time() - t_log) / n_acc
                 mem = round(torch.cuda.max_memory_allocated() / 2**30, 2) if dev == "cuda" else None
-                write({"step": st["step"], "loss_q": round(lq_acc / n_acc, 4),
+                rec = {"step": st["step"], "loss_q": round(lq_acc / n_acc, 4),
                        "loss_i": round(li_acc / n_acc, 4), "icons_per_batch": m_acc // n_acc,
-                       "lr": sched.get_last_lr()[0], "sec_per_step": round(dt, 3), "max_mem_gb": mem})
+                       "lr": sched.get_last_lr()[0], "sec_per_step": round(dt, 3), "max_mem_gb": mem}
+                if t_loss is not None:
+                    rec["loss_kd"] = round(lk_acc / n_acc, 4)
+                write(rec)
                 eta = (total - st["step"]) * dt / 60
-                log(f"{name} step {st['step']}/{total} loss {lq_acc / n_acc:.3f} + {li_acc / n_acc:.3f} "
+                kd = f" + kd {lk_acc / n_acc:.3f}" if t_loss is not None else ""
+                log(f"{name} step {st['step']}/{total} loss {lq_acc / n_acc:.3f} + {li_acc / n_acc:.3f}{kd} "
                     f"({dt:.2f} s/step, ≤ {eta:.0f} min left)")
-                t_log, lq_acc, li_acc, m_acc, n_acc = time.time(), 0.0, 0.0, 0, 0
+                t_log, lq_acc, li_acc, lk_acc, m_acc, n_acc = time.time(), 0.0, 0.0, 0.0, 0, 0
             seg_end = (st["step"] % steps_per_epoch) % seg == 0 or st["step"] % steps_per_epoch == 0
             minutes = (time.time() - t_start) / 60
             if a.max_minutes and minutes > a.max_minutes:
@@ -432,6 +632,8 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     best = max(st["history"][1:], key=lambda h: h["all"]["ndcg5"]) if len(st["history"]) > 1 else None
     (out / "done.json").write_text(json.dumps({
         "run": name, "pool_tasks": data.pool_task_count, "holdout_icons": len(data.held),
+        "distill_rows": len(data.distill), "teacher": teacher.run if teacher else None,
+        "para_dropped": data.para_dropped,
         "steps": st["step"], "steps_per_epoch": steps_per_epoch, "base": st.get("base"), "best": best,
         "checkpointing": enc.checkpointing, "train_minutes": round((time.time() - t_start) / 60, 1),
         "args": vars(a)}, indent=1))
@@ -461,7 +663,7 @@ def save_best(enc: Encoder, path: Path, name: str, a, data: Data, st: dict, m: d
     tmp.rename(path)
 
 
-def choose_checkpointing(enc: Encoder, data: Data, rows: list, a, name: str) -> None:
+def choose_checkpointing(enc: Encoder, data: Data, rows: list, a, name: str, teacher=None) -> None:
     """--checkpointing auto: one worst-case step (every passage padded to the maximum length)
     without checkpointing; keep it off if peak memory stays under 85% of the GPU."""
     total = torch.cuda.get_device_properties(0).total_memory
@@ -469,10 +671,10 @@ def choose_checkpointing(enc: Encoder, data: Data, rows: list, a, name: str) -> 
     enc.pad_full = True
     torch.cuda.reset_peak_memory_stats()
     try:
-        lq, li, _ = batch_loss(enc, data, rows[:a.batch], random.Random(0), a,
-                               torch.zeros(len(data.docs), enc.model.config.hidden_size, device=enc.device)
-                               if a.bank_negs else None)
-        (lq + a.i2q_weight * li).backward()
+        bank = (torch.zeros(len(data.docs), enc.model.config.hidden_size, device=enc.device)
+                if a.bank_negs or teacher is not None else None)
+        lq, li, lk, _ = batch_loss(enc, data, rows[:a.batch], random.Random(0), a, bank, teacher)
+        (lq + a.i2q_weight * li + a.kd_weight * lk).backward()
         peak = torch.cuda.max_memory_allocated()
         ok = peak < 0.85 * total
     except torch.cuda.OutOfMemoryError:
@@ -483,6 +685,65 @@ def choose_checkpointing(enc: Encoder, data: Data, rows: list, a, name: str) -> 
     enc.set_checkpointing(not ok)
     log(f"{name}: worst-case step without checkpointing peaks at {peak / 2**30:.1f} of "
         f"{total / 2**30:.1f} GB -> checkpointing {'off' if ok else 'on'}")
+
+
+def run_dir(a, run: str) -> Path:
+    return Path(a.out) / run.replace("@", "-")
+
+
+def pick_teacher(a, cands) -> "str | None":
+    """The finished candidate (a run in --out, or a checkpoint dir) with the best held-out
+    nDCG@5; a checkpoint dir given directly is taken as is."""
+    best = None
+    for r in cands:
+        if Path(r).is_dir() and (Path(r) / "config.json").exists():
+            return r
+        d = run_dir(a, r)
+        if (d / "done.json").exists() and (d / "best").is_dir():
+            s = (json.loads((d / "done.json").read_text()).get("best") or {}).get("all", {}).get("ndcg5", -1)
+            log(f"teacher candidate {r}: held-out nDCG@5 {s}")
+            if best is None or s > best[1]:
+                best = (r, s)
+    return best[0] if best else None
+
+
+def score_texts(a, data_root: Path, run: str) -> Path:
+    """Encode every training text (title and parent forms) with a trained checkpoint and
+    keep its top-K icons and scaled scores: <out>/teacher/<run>.npz. Reused while
+    queries.jsonl is unchanged. Also the input of scripts/select_active.py."""
+    src = Path(run) if Path(run).is_dir() else run_dir(a, run) / "best"
+    tag = (src.parent.name if src.name == "best" else src.name).replace("@", "-")
+    qp = data_root / "queries.jsonl"
+    sha = hashlib.sha1(qp.read_bytes()).hexdigest()
+    out = Path(a.out) / "teacher" / f"{tag}.npz"
+    if out.exists() and str(np.load(out)["queries_sha1"]) == sha:
+        return out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    man = json.loads((data_root / "manifest.json").read_text())
+    icons = read_jsonl(data_root / "icons.jsonl")
+    docs = [man["passage_prefix"] + r["doc"] for r in icons]
+    qs = read_jsonl(qp)
+    jobs = [(r, f, t) for r, q in enumerate(qs) if q["split"] == "train"
+            for f, t in ((0, q["text"]), (1, q.get("text_parent"))) if t]
+    t0 = time.time()
+    enc = Encoder(str(src), pick_device(a.device), False, False)
+    I = enc.encode(docs, a.max_passage_len)
+    idx = np.full((len(qs), 2, TOPK), -1, np.int16)
+    val = np.zeros((len(qs), 2, TOPK), np.float16)
+    for s in range(0, len(jobs), 4096):
+        chunk = jobs[s:s + 4096]
+        Qv = enc.encode([man["query_prefix"] + t for _, _, t in chunk], man["max_query_len"], batch=512)
+        v, ix = (a.scale * Qv @ I.T).topk(TOPK, dim=1)
+        v, ix = v.cpu().numpy(), ix.cpu().numpy()
+        for k, (r, f, _) in enumerate(chunk):
+            idx[r, f], val[r, f] = ix[k], v[k]
+    np.savez_compressed(out, run=tag, names=np.array([r["name"] for r in icons]), idx=idx, val=val,
+                        queries_sha1=sha, scale=a.scale)
+    log(f"teacher scores of {tag}: {len(jobs)} texts in {time.time() - t0:.0f} s -> {out}")
+    del enc, I
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+    return out
 
 
 def probe(a, data_root: Path) -> None:
@@ -505,8 +766,8 @@ def probe(a, data_root: Path) -> None:
                     if dev == "cuda":
                         torch.cuda.synchronize()
                     t0 = time.time()
-                lq, li, _ = batch_loss(enc, data, rows[b * a.batch:(b + 1) * a.batch],
-                                       random.Random(b), a, bank)
+                lq, li, _, _ = batch_loss(enc, data, rows[b * a.batch:(b + 1) * a.batch],
+                                          random.Random(b), a, bank)
                 opt.zero_grad(set_to_none=True)
                 scaler.scale(lq + a.i2q_weight * li).backward()
                 scaler.step(opt)
@@ -531,11 +792,25 @@ def main() -> None:
     g.add_argument("--run", help="runs in order, comma-separated: PLANS names or new names "
                                  "(new ones take --pool-tasks / --no-holdout and the flags)")
     g.add_argument("--probe", action="store_true", help="time 30 steps with and without checkpointing")
+    g.add_argument("--score", help="only write teacher scores (<out>/teacher/<run>.npz) for these "
+                                   "runs or checkpoint dirs, comma-separated (scripts/select_active.py)")
     ap.add_argument("--pool-tasks", type=int, default=None, help="for a new --run name; default all")
     ap.add_argument("--no-holdout", action="store_true", help="for a new --run name")
     ap.add_argument("--model", default=BASE_MODEL, help="base encoder (HF id)")
     ap.add_argument("--bank-negs", action="store_true", help="all other icons as stale negatives")
     ap.add_argument("--bank-refresh", type=int, default=100, help="steps between bank refreshes")
+    ap.add_argument("--teacher", default=None,
+                    help="distil from the best finished of these runs (comma-separated) or a checkpoint dir")
+    ap.add_argument("--kd-weight", type=float, default=0.0, help="weight of the distillation loss")
+    ap.add_argument("--kd-temp", type=float, default=1.0, help="softmax temperature of the distillation loss")
+    ap.add_argument("--distill-sources", type=lambda s: s.split(","), default=[],
+                    help="unlabelled row sources to train on (distill-mslatte, distill-cand)")
+    ap.add_argument("--distill-per-epoch", type=int, default=0, help="sample of distillation rows per epoch (0 = all)")
+    ap.add_argument("--para", choices=["graded", "kd"], default=None, help="use the rewrite rows")
+    ap.add_argument("--pool-langs", type=lambda s: s.split(","), default=[],
+                    help="pool translations beyond EN/ES/RU to train on (augment_pools.py translate)")
+    ap.add_argument("--sel", type=json.loads, default=None,
+                    help='selected-pool tasks to train on, JSON {"active": n|null, "random": n|null}')
     ap.add_argument("--epochs", type=int, default=6)
     ap.add_argument("--batch", type=int, default=128)
     ap.add_argument("--lr", type=float, default=2e-5)
@@ -562,6 +837,10 @@ def main() -> None:
     root = open_data(Path(a.data))
     if a.probe:
         probe(a, root)
+        return
+    if a.score:
+        for r in a.score.split(","):
+            score_texts(a, root, r)
         return
     if a.plan:
         runs = list(PLANS[a.plan].items())

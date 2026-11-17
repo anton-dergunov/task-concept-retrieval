@@ -31,6 +31,19 @@ AUG_FILES = {
     "train_mslatte": config.DATA_DIR / "train_pools" / "train_mslatte.aug.jsonl",
 }
 SOURCE = {"personal_synth_pool": "pool-synth", "train_mslatte": "pool-mslatte"}
+# Register rewrites of the judged pool tasks (augment_pools.py rewrite; Vertex V1 of
+# docs/next-data-and-distillation.md): one line per task, {"task_id", "variants": [{"lang",
+# "style", "title"}], "contaminated": [variant indices]}.
+REWRITE_FILES = {
+    "personal_synth_pool": config.PRIVATE_DIR / "train_pools" / "personal_synth_pool.rw.jsonl",
+    "train_mslatte": config.DATA_DIR / "train_pools" / "train_mslatte.rw.jsonl",
+}
+PARA_SOURCE = {"personal_synth_pool": "para-synth", "train_mslatte": "para-mslatte"}
+# Translations of the pools into more languages (augment_pools.py translate), used only by
+# runs that list the language in train_f1.py --pool-langs.
+XL_FILES = {k: v.with_name(v.name.replace(".aug.", ".xl.")) for k, v in AUG_FILES.items()}
+# Unlabelled text for distillation (rows without grades), shared dataset schema.
+CANDIDATES_FILE = config.PRIVATE_DIR / "train_pools" / "personal_synth_cand.jsonl"
 QUERY_PREFIX, PASSAGE_PREFIX = "query: ", "passage: "
 MAX_QUERY_LEN, MAX_PASSAGE_LEN = 64, 256
 VAL_EVERY = 10          # 1 in 10 pool tasks held out for early stopping
@@ -78,8 +91,13 @@ def _norm(t: str) -> str:
 
 # --- building the training data ---------------------------------------------------------
 
-def build(smoke: bool = False) -> dict:
-    """Everything train_f1.py needs: {"manifest", "icons", "queries"} (see f1_data.py)."""
+def build(smoke: bool = False, distill: Optional[dict] = None) -> dict:
+    """Everything train_f1.py needs: {"manifest", "icons", "queries"} (see f1_data.py).
+
+    `distill`: {source: [task in the shared schema]} of unlabelled text, written as rows
+    without grades (e.g. "distill-mslatte", "distill-cand"); train_f1.py uses them only in
+    runs that name the source, with a teacher. Rewrites in REWRITE_FILES, when present,
+    become `para-*` rows carrying their original's grades and split."""
     icons = list(load_icons(version="v2"))
     index = {ic.name: i for i, ic in enumerate(icons)}
     stats: Counter = Counter()
@@ -100,6 +118,9 @@ def build(smoke: bool = False) -> dict:
     eval_ids = _eval_ids()
     for ds, runs in silver.POOL_RUNS.items():
         aug = {r["task_id"]: r for r in read_jsonl(AUG_FILES[ds])}
+        rw = ({r["task_id"]: r for r in read_jsonl(REWRITE_FILES[ds])}
+              if REWRITE_FILES[ds].exists() else {})
+        xl = {r["task_id"]: r for r in read_jsonl(XL_FILES[ds])} if XL_FILES[ds].exists() else {}
         for run in runs:
             gold = silver.load_gold([run])
             tasks = silver.run_tasks(run)
@@ -123,6 +144,9 @@ def build(smoke: bool = False) -> dict:
                         "split": "val" if is_val_task(t["id"]) else "train",
                         "grades": {str(k): v for k, v in grades.items()},
                         "ambiguous": ambiguous, "hard_negs": hard}
+                sel = (t.get("meta") or {}).get("selection")
+                if sel:                                  # round 3's selected pools
+                    base["sel"] = sel
                 parents = list(t.get("parents") or []) or list(a.get("parents") or [])
                 queries.append({**base, "lang": "en", **_texts(t["title"], parents)})
                 for lang in ("es", "ru"):
@@ -137,6 +161,32 @@ def build(smoke: bool = False) -> dict:
                         stats[f"{lang} skipped: equal to EN"] += 1
                         continue
                     queries.append({**base, "lang": lang, **_texts(tr["title"], tr.get("parents") or [])})
+                x = xl.get(t["id"]) or {}
+                for lang in x.get("langs") or []:
+                    if lang in (x.get("contaminated") or []) or lang not in x:
+                        continue
+                    queries.append({**base, "lang": lang,
+                                    **_texts(x[lang]["title"], x[lang].get("parents") or [])})
+                r = rw.get(t["id"])
+                if r and base["split"] == "train":       # never a rewrite of a validation task
+                    bad = set(r.get("contaminated") or [])
+                    for k, v in enumerate(r.get("variants") or []):
+                        title = str(v.get("title", "")).strip()
+                        if k in bad or not title or _norm(title) == _norm(t["title"]):
+                            stats["rewrite skipped (contaminated, empty or unchanged)"] += 1
+                            continue
+                        lang = v.get("lang", "en")
+                        par = parents if lang == "en" else list(((a.get(lang) or {}).get("parents")) or [])
+                        queries.append({**base, "source": PARA_SOURCE[ds], "orig_task_id": t["id"],
+                                        "task_id": f"{t['id']}~rw{k}", "lang": lang, "style": v.get("style"),
+                                        **_texts(title, par)})
+
+    for src, tasks in (distill or {}).items():
+        for t in tasks[:200] if smoke else tasks:
+            assert t["id"] not in eval_ids, f"eval task {t['id']} in distillation source {src}"
+            queries.append({"task_id": t["id"], "source": src, "split": "train",
+                            "lang": t.get("lang", "en"), "grades": {}, "ambiguous": [], "hard_negs": [],
+                            **_texts(t["title"], list(t.get("parents") or []))})
 
     free = 0
     for i, ic in enumerate(icons):

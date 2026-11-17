@@ -5,7 +5,8 @@ Design of method **F1** ([next-label-free-work.md](next-label-free-work.md) step
 fine-tuned on the LLM judge's labels of the training pools and on the free signal in the
 v2 icon descriptions. This file explains every choice and why it was made; the run guide
 is [f1-kaggle-run.md](f1-kaggle-run.md) (round 1: [f1-colab-run.md](f1-colab-run.md)), the
-results and round 2 are at the end.
+results and rounds 2–3 are at the end; what comes next is in
+[next-data-and-distillation.md](next-data-and-distillation.md).
 
 **Names.** *F1* is a method name, like B0, M1, M3 ("fine-tuned, first version"); it has
 nothing to do with the F1 score. A training run is named `F1@<pool tasks>`: `F1@0`
@@ -311,7 +312,7 @@ and the learning curve: [results/f1/](../results/f1/) (`scripts/f1_report.py` �
 - **Speed:** 1.48 s/step on a T4 with gradient checkpointing, three times the estimate.
   F1 / F1@all took ~60 min each, the five runs ~3.5 hours on one of Kaggle's two GPUs.
 
-## 10. Round 2 (built 2026-11-16, waiting for the Kaggle run)
+## 10. Round 2 (ran 2026-11-16 on Kaggle's two T4s)
 
 Changes in `scripts/train_f1.py` (hand-off: [f1-kaggle-run.md](f1-kaggle-run.md)):
 
@@ -332,3 +333,76 @@ Changes in `scripts/train_f1.py` (hand-off: [f1-kaggle-run.md](f1-kaggle-run.md)
 - **Lighter scoring:** each best checkpoint carries its icon vectors (`icon_matrix.npz`,
   with a hash of each icon's document), which `FineTunedMatcher` uses when the documents
   are unchanged, so the Mac encodes only the queries.
+
+### Round 2 results
+
+Silver leaderboard: [results/silver/2026-11-16.md](../results/silver/2026-11-16.md); logs in
+[results/f1/](../results/f1/). Each run against the one it changes, on the same 3,230 pooled
+dev tasks, all with the parent heading (ΔnDCG@5 with its bootstrap 95% interval; hit@1:
+tasks only the first gets right / only the second, McNemar p):
+
+| comparison | ΔnDCG@5 | Personal | hit@1 | held-out nDCG@5 |
+|---|---:|---:|---:|---:|
+| F1@all-lr vs F1@all | **+0.023** [+0.018, +0.028] | +0.021 | 265 / 199, p = 0.003 | 0.494 vs 0.450 |
+| F1@all-base vs F1@all-lr | **+0.014** [+0.008, +0.022] | +0.018 | 426 / 343, p = 0.003 | 0.505 vs 0.494 |
+| F1@all-base vs F1@all | +0.037 [+0.030, +0.044] | +0.038 | 473 / 324, p < 0.001 | 0.505 vs 0.450 |
+| F1@all-bank vs F1@all | −0.022 [−0.028, −0.017] | −0.040 | 271 / 318, p = 0.058 | 0.414 vs 0.450 |
+| F1@all-lrbank vs F1@all-lr | −0.018 [−0.024, −0.013] | −0.024 | 244 / 281, p = 0.12 | 0.480 vs 0.494 |
+| F1@all + I1-sb (w 0.2) vs F1@all | +0.012 [+0.009, +0.016] | +0.001 | 212 / 143, p < 0.001 | – |
+
+Best pooled: **F1@all-base.v2+parent**, nDCG@5 0.474, hit@1 0.603 [upper bound 0.751],
+judged@1 0.852; F1@all-lr.v2+parent 0.459 / 0.578; M3.v2 0.337 / 0.437.
+
+- **The higher LR is the better recipe.** At 5e-5 with 10 epochs, F1@all-lr peaked at
+  epoch 5 (held-out 0.494) and early stopping ended it at epoch 6; at 2e-5 the schedule
+  had decayed to 0 while validation still rose. It also ran without gradient
+  checkpointing (12.7 GB peak), at 0.98 s/step instead of 1.48: 41 minutes.
+- **e5-base wins, by less than the LR did.** Same old recipe (2e-5, 6 epochs) as F1@all,
+  so e5-base with the new LR is untested (round 3). It is ahead of F1@all-lr on every set
+  except Personal-synth (−0.004). Its judged@1 is lower
+  (0.852 vs 0.877) and its upper bound higher (0.751 vs 0.700): it picks more icons the
+  judge never saw, so the gap is if anything understated. Speed: 3.35 s/step with
+  checkpointing (the worst case did not fit in 85% of the T4), 138 minutes.
+- **Size and speed of e5-base** (measured on the M1 Mac, PyTorch CPU, 2 threads, one query
+  at a time): 278M parameters (192M in the frozen word embeddings, 86M in the 12
+  transformer layers; e5-small 118M = 96M + 22M), 768-d vectors, 34 ms p50 / 69 ms p95 per
+  query against 9.6 / 14.5 ms, checkpoint 1.1 GB against 470 MB. Decision (author,
+  2026-11-17): the deployed model stays e5-small; bigger models are teachers, with the
+  option of shipping a bigger one (or several sizes) if it is much better.
+- **Full-catalogue negatives hurt**, most on Personal, and also on held-out pool tasks.
+  The likely cause is false negatives: every icon outside the judge's ~113 seen ones
+  becomes a negative, including good ones it never saw (12–15% of top-1s are such icons).
+  In-batch negatives are mostly icons graded for *other* tasks, a safer sample. Soft
+  targets from a teacher give those icons mass instead (round 3).
+- **Image fusion** helps a little pooled, nothing on Personal; I1-sb alone is weak (0.168,
+  but judged@1 0.44, so heavily underestimated). No jina-clip-v2 vectors came back (the run
+  guide expected its remote-code load to be the fragile one); SigLIP 2 so400m glyph
+  vectors exist, not scored yet.
+- The parent heading helps every run on Personal (+0.017 for e5-base) and hurts on
+  Realistic (−0.012), as in round 1.
+
+## 11. Round 3: teachers and distillation (built 2026-11-17)
+
+Plan, budget and schedule: [next-data-and-distillation.md](next-data-and-distillation.md);
+run guide: [f1-kaggle-run.md](f1-kaggle-run.md). Changes in `scripts/train_f1.py`:
+
+- **Teachers:** `F1@all-base-lr` (e5-base, LR 3e-5, 10 epochs) and `F1@all-large`
+  (multilingual-e5-large, 560M parameters, same prefixes and pooling; 2e-5, 5 epochs).
+- **Teacher scores** (`--score`, or automatically before a student run): the best finished
+  teacher by held-out nDCG@5 encodes every training text, title and parent forms, and keeps
+  its top 64 icons with scaled scores (`<out>/teacher/<run>.npz`, rows of queries.jsonl).
+- **Distillation loss** (`--kd-weight`, `--kd-temp`): KL(teacher ‖ student) over the whole
+  catalogue, fresh vectors for the batch's icons and the stale bank (§10) for the rest,
+  held-out icons excluded on both sides; added to the graded loss of §4, which stays.
+  Unlabelled rows count only here. This is the bank of §10 with soft targets: an icon the
+  judge never saw is no longer a plain negative.
+- **New rows** (`tcr/finetune.py`, `scripts/f1_data.py`): `distill-mslatte`, the 5,729
+  MS-LaTTE tasks in no pool or eval set; later `distill-cand` (generated Personal-style
+  tasks) and `para-*` rewrites of judged tasks, used with the original's grades where the
+  teacher still ranks a grade-3 icon in its top 10 (`--para graded`) or with teacher
+  targets only (`--para kd`); and tasks of the actively selected pools (`--sel`). None of
+  them changes the rows earlier runs train on (checked: the rebuilt queries.jsonl has
+  round 2's rows byte for byte, plus the new ones).
+- **Students:** `F1@all-kd` (e5-small, the LR recipe, KD on the existing texts) and
+  `F1@all-kd-ms` (+ MS-LaTTE). Rounds 4–5 add the rewrites, the candidates and the new
+  Argon labels (presets `round4`, `round5`).

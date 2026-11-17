@@ -6,6 +6,12 @@ tcr/silver.py).
     python scripts/silver_eval.py [--methods B0,B1,M1,M2,M3] [--versions v1,v2]
                                   [--datasets personal,...] [--ref M3.v2] [--no-parent]
                                   [--with latest|TAG,...|none] [--fresh] [--tag TAG]
+                                  [--extra-grades NAME]
+
+`--datasets xling` scores the translated eval set (tcr.silver XLING_*: one virtual set
+per language plus xling-src, the same tasks in their original language), written to
+<date>-xling. `--extra-grades` adds the grades of unjudged picks
+(scripts/grade_unjudged.py) to gold, written to <date>-extra.
 
 Methods not run now are merged in from stored rankings (data/private/silver/<tag>/):
 first the output tag's own, then --with (default: the most recent other tag), each
@@ -54,12 +60,14 @@ POOL_BUILDERS = ("M3 (title), M1, M2 and B1 (title + body) and M1 (parent + titl
 
 
 def dev_tasks(dataset: str, gold: dict) -> list:
-    return [t for t in load(dataset) if split_of(t["id"]) == "dev" and t["id"] in gold]
+    return [t for t in silver.eval_tasks(dataset) if split_of(t["id"]) == "dev" and t["id"] in gold]
 
 
 def run(args) -> dict:
-    datasets = args.datasets.split(",")
-    golds = {d: silver.load_gold(silver.EVAL_RUNS[d]) for d in datasets}
+    datasets = expand_datasets(args.datasets)
+    golds = {d: silver.eval_gold(d) for d in datasets}
+    if args.extra_grades:
+        golds = silver.with_extra(golds, args.extra_grades.split(","))
     tasks = {d: dev_tasks(d, golds[d]) for d in datasets}
     for d in datasets:
         print(f"{d}: {len(tasks[d])} dev tasks with judge labels", file=sys.stderr)
@@ -95,6 +103,15 @@ def run(args) -> dict:
     if not args.fresh:
         merge_stored(res, merge_tags(args), golds, tasks)
     return res
+
+
+def expand_datasets(spec: str) -> list:
+    """Comma-separated keys; "xling" stands for the translated set: xling-src (the original
+    tasks) and xling-<lang> per language."""
+    out = []
+    for d in spec.split(","):
+        out += (["xling-src"] + [f"xling-{l}" for l in silver.XLING_LANGS]) if d == "xling" else [d]
+    return out
 
 
 def merge_tags(args) -> list:
@@ -208,11 +225,17 @@ def main() -> None:
     ap.add_argument("--datasets", default=",".join(silver.EVAL_RUNS))
     ap.add_argument("--ref", default="M3.v2")
     ap.add_argument("--no-parent", action="store_true", help="skip the +parent query rows")
-    ap.add_argument("--tag", default=date.today().isoformat(), help="output file name")
+    ap.add_argument("--tag", default=None, help="output file name (default: the date, "
+                    "+ -xling for the translated set, + -extra with --extra-grades)")
+    ap.add_argument("--extra-grades", default=None,
+                    help="merge grades of unjudged picks (scripts/grade_unjudged.py), NAME[,NAME]")
     ap.add_argument("--with", dest="with_", default="latest",
                     help="stored rankings to merge: latest (default), TAG[,TAG], or none")
     ap.add_argument("--fresh", action="store_true", help="no merging with stored rankings")
     args = ap.parse_args()
+    if args.tag is None:
+        args.tag = (date.today().isoformat() + ("-xling" if "xling" in args.datasets.split(",") else "")
+                    + ("-extra" if args.extra_grades else ""))
 
     res = run(args)
     s = summarize(res, args.ref)

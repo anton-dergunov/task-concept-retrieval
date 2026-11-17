@@ -1,29 +1,28 @@
-# Running F1 round 2 and the I1 glyph vectors on Kaggle (hand-off)
+# Running F1 on Kaggle (hand-off): round 3, then rounds 4–5
 
-For the author, and for a fresh Claude Code session that continues afterwards. The
-design is in [f1-dual-encoder.md](f1-dual-encoder.md) (§10 for round 2). Kaggle replaced
-Colab: Colab ended the round-1 job after 3 hours, while Kaggle runs a notebook headless for
-up to 12 hours and gives two T4 GPUs. Data building, import and scoring stay on the Mac.
+For the author, and for a fresh Claude Code session that continues afterwards. The design
+is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
+[next-data-and-distillation.md](next-data-and-distillation.md). Kaggle runs a notebook
+headless for up to 12 hours on two T4 GPUs; data building, import and scoring stay on the
+Mac (CLAUDE.md "Compute"). Round 2's guide is this file's git history (2026-11-16).
 
-**State (2026-11-16):** `data/private/f1/f1_data.tar.gz` rebuilt (17.5 MB). Its training
-data is byte-for-byte the same as round 1's; new in it: the round-2 `train_f1.py`,
-`i1_embed.py` and `glyphs/` (2,862 glyph PNGs, 256 px). It is private: it holds the
-Personal-style pool text, approved for the author's Kaggle account. No eval data is in it.
+**State (2026-11-17):** `data/private/f1/f1_data.tar.gz` rebuilt (17.7 MB). Its training rows
+are round 2's byte for byte; new: 5,729 unlabelled MS-LaTTE rows (`distill-mslatte`) and the
+round-3 `train_f1.py`. Private (Personal-style pool text, approved for the author's Kaggle
+account); no eval data.
 
-## What runs
+## What runs (round 3)
 
 | GPU | queue | what it tests | estimate |
 |---|---|---|---|
-| 0 | `F1@all-lr` | learning rate 5e-5 (from 2e-5), 10 epochs (from 6): round 1 was still improving when the LR decayed to 0 | 1.2–1.7 h |
-| 0 | `F1@all-bank` | every other icon of the catalogue as a negative (stale vectors refreshed every 100 steps), not only the ~184 in the batch | 0.8–1.1 h |
-| 0 | `F1@all-lrbank` | both | 1.2–1.8 h |
-| 1 | `i1_embed.py` | glyph vectors for I1: SigLIP 2 base and so400m, jina-clip-v2 | ~10 min |
-| 1 | `F1@all-base` | `multilingual-e5-base` (278M parameters; teacher candidate), F1@all's recipe | 2–3 h |
+| 0 | `F1@all-base-lr` | e5-base with the LR recipe that won round 2 (3e-5, 10 epochs) | 2.5–4 h |
+| 0 | `F1@all-kd` | e5-small distilled from the best finished teacher (F1@all-base-lr or round 2's F1@all-base), plus the usual loss | 0.8–1.3 h |
+| 0 | `F1@all-kd-ms` | the same + 5.7k unlabelled MS-LaTTE tasks | 0.9–1.4 h |
+| 1 | `F1@all-large` | multilingual-e5-large (560M) as a teacher, 2e-5, 5 epochs | 6–8 h |
 
-All four runs are comparable with round 1's F1@all: same data, same 139 held-out icons.
-Checkpointing is chosen per run (`--checkpointing auto`): the first step is a worst-case
-memory check, and checkpointing stays off when it fits (faster). Round 1 ran at 1.48 s/step
-with it on. **In all about 4–5 hours**, within Kaggle's 12-hour limit.
+Before `F1@all-kd`, the queue scores every training text with the teacher (a few minutes,
+`runs/teacher/<run>.npz`). All runs are comparable with round 2: same rows, same 139
+held-out icons, same validation tasks.
 
 ## 1. Upload the data
 
@@ -32,35 +31,41 @@ Kaggle → *Datasets* → your F1 dataset → *New Version* → upload
 
 ## 2. Notebook settings
 
-The round-1 notebook, or a new one: *Settings* → Accelerator **GPU T4 ×2**, Internet **on**
-(models download from Hugging Face), Persistence: Files. Attach the dataset version from
-step 1.
+The round-2 notebook: *Settings* → Accelerator **GPU T4 ×2**, Internet **on**, Persistence:
+Files. Attach the new dataset version, and **attach round 2's version output** as an input
+(*Add Input* → *Your Work* → the notebook → the round-2 version): cell 2 copies its runs, so
+F1@all-base can be the teacher and F1@all-lr is there for round 4's scoring.
 
 ## 3. Cells
 
 ```python
-# 1. Find the data (as in round 1)
+# 1. Find the data
 from pathlib import Path
 INPUT_ROOT = Path("/kaggle/input")
-scripts = list(INPUT_ROOT.rglob("train_f1.py"))
+scripts = [p for p in INPUT_ROOT.rglob("train_f1.py") if "runs" not in p.parts]
 assert len(scripts) == 1, f"Expected exactly one train_f1.py, found {len(scripts)}: {scripts}"
 TRAIN_SCRIPT = scripts[0]
 DATA_DIR = TRAIN_SCRIPT.parent
-I1_SCRIPT = DATA_DIR / "i1_embed.py"
 WORK = Path("/kaggle/working")
-RUNS, I1_OUT = WORK / "runs", WORK / "i1"
+RUNS = WORK / "runs"
 print(TRAIN_SCRIPT, DATA_DIR, sorted(p.name for p in DATA_DIR.iterdir()))
 !nvidia-smi --query-gpu=index,name,memory.total --format=csv
 ```
 
 ```python
-# 2. Resume: if an earlier version's output is attached as an input, start from it
-#    (finished runs are skipped, an interrupted one resumes from its last evaluation).
-import shutil
-for d in INPUT_ROOT.rglob("*"):
-    if d.is_dir() and d.name in ("runs", "i1") and DATA_DIR not in d.parents:
-        shutil.copytree(d, WORK / d.name, dirs_exist_ok=True)
-        print("resumed from", d)
+# 2. Earlier versions' runs (attached outputs): copied in, so finished runs are skipped,
+#    an interrupted one resumes, and finished ones can be teachers.
+import shutil, zipfile
+for z in INPUT_ROOT.rglob("f1_runs.zip"):
+    with zipfile.ZipFile(z) as f:
+        f.extractall(WORK)
+    print("unpacked", z)
+for d in INPUT_ROOT.rglob("runs"):
+    if d.is_dir() and DATA_DIR not in d.parents:
+        shutil.copytree(d, RUNS, dirs_exist_ok=True)
+        print("copied", d)
+OLD = {p.parent.name for p in RUNS.glob("*/done.json")} if RUNS.exists() else set()
+print("finished before this version:", sorted(OLD))
 ```
 
 ```python
@@ -74,9 +79,8 @@ def launch(gpu, cmd, log):
 
 train = f"python {TRAIN_SCRIPT} --data {DATA_DIR} --out {RUNS}"
 jobs = [
-    launch(0, f"{train} --run F1@all-lr,F1@all-bank,F1@all-lrbank", "gpu0.log"),
-    launch(1, f"python {I1_SCRIPT} --data {DATA_DIR} --out {I1_OUT}; "
-              f"{train} --run F1@all-base", "gpu1.log"),
+    launch(0, f"{train} --run F1@all-base-lr,F1@all-kd,F1@all-kd-ms", "gpu0.log"),
+    launch(1, f"{train} --run F1@all-large", "gpu1.log"),
 ]
 while any(j.poll() is None for j in jobs):      # progress in the notebook log every 10 min
     time.sleep(600)
@@ -87,63 +91,70 @@ print("exit codes:", [j.returncode for j in jobs])
 ```
 
 ```python
-# 4. Package (without the resume states)
-!cd /kaggle/working && zip -qr f1_runs.zip runs i1 gpu0.log gpu1.log -x '*/last/*' && ls -lh f1_runs.zip
+# 4. Package this version's new runs (not the copied ones, not the resume states)
+new = [p.parent.name for p in RUNS.glob("*/done.json") if p.parent.name not in OLD]
+items = [f"runs/{n}" for n in new] + ["runs/teacher", "gpu0.log", "gpu1.log"]
+items = [i for i in items if (WORK / i).exists()]
+print("packaging", items)
+!cd /kaggle/working && zip -qr f1_runs.zip {" ".join(items)} -x '*/last/*' && ls -lh f1_runs.zip
 ```
 
 Then **Save Version → Save & Run All (Commit)**. It runs headless; you can close the
 browser. Watch it under the notebook's *Versions* → the running version → *Logs*: cell 3
-prints the last lines of both queues every 10 minutes. Each run logs `max_mem_gb` and
-`sec_per_step` every 20 steps in `runs/<run>/train_log.jsonl`.
+prints the last lines of both queues every 10 minutes. Each run logs `max_mem_gb`,
+`sec_per_step` and, for students, `loss_kd` every 20 steps in `runs/<run>/train_log.jsonl`.
 
-**Quick check before committing (optional, ~5 min, interactive session):**
-`!python {TRAIN_SCRIPT} --data {DATA_DIR} --out /tmp/p --probe` times 30 steps with and
-without gradient checkpointing for e5-small; add `--model intfloat/multilingual-e5-base`
-for the base model.
+**If e5-large runs out of memory** even with checkpointing (its first line says so), commit
+again with GPU 1's queue `F1@all-large --batch 96`; the run name stays, note it in the doc.
 
 ## 4. If a version fails or times out
 
-Open the failed version's *Output*. If it has `runs/` or `i1/`, attach that version as an
-input (*Add Input* → *Your Work* → the notebook) and commit again: cell 2 copies it back,
-finished runs are skipped, an interrupted one resumes from `last/state.pt`. A tower that
-fails in `i1_embed.py` (most likely jina-clip-v2, which needs remote code) is reported in
-`gpu1.log` and skipped; training still runs.
+Attach the failed version's output as an input too and commit again: cell 2 copies its
+runs, finished runs are skipped, an interrupted one resumes from `last/state.pt`.
 
 ## 5. Bring the results back
 
-Download `f1_runs.zip` from the version's *Output* (about 3 GB: three e5-small
-checkpoints of 470 MB and e5-base's ~1.1 GB), then on the Mac:
+Download `f1_runs.zip` from the version's *Output* (about 3 GB: e5-large's checkpoint is
+~2.2 GB), then on the Mac:
 
 ```bash
 .venv/bin/python scripts/f1_data.py import ~/Downloads/f1_runs.zip
 ```
 
-It copies each run's best checkpoint to `.cache/models/F1-all-lr`, … (gitignored), its
-`done.json` + `train_log.jsonl` to `results/f1/` (metrics only: commit them), and the glyph
-vectors to `.cache/i1/`. Each checkpoint now carries its icon vectors
-(`icon_matrix.npz`), so the Mac encodes only the short queries.
+It copies each run's best checkpoint to `.cache/models/F1-<tag>` (gitignored), its
+`done.json` + `train_log.jsonl` to `results/f1/` (commit them) and the teacher scores to
+`data/private/f1/teacher/`.
 
 ## 6. Score on the silver leaderboard (Mac)
 
 ```bash
-# round 2, ~2-4 min per checkpoint
-nice .venv/bin/python scripts/silver_eval.py --methods F1@all-lr,F1@all-bank,F1@all-lrbank,F1@all-base --versions v2
-# I1, image only: encodes the ~3.2k dev queries once per tower (siglip2-base ~5-10 min on
-# 2 threads; so400m several times longer, so only if base shows signal)
-nice .venv/bin/python scripts/silver_eval.py --methods I1-sb --versions v2
-# fusion with the best F1 so far, weight sweep (the query vectors are cached by then)
-nice .venv/bin/python scripts/silver_eval.py --methods F1@all+I1-sb~0.1,F1@all+I1-sb~0.2,F1@all+I1-sb~0.35 --versions v2
+nice .venv/bin/python scripts/silver_eval.py --methods F1@all-base-lr,F1@all-kd,F1@all-kd-ms,F1@all-large --versions v2
 ```
 
-Each call merges the earlier methods from the stored rankings, so `results/silver/<date>.md`
-grows into one table. I1 only works with `--versions v2` (the glyph vectors cover the v2
-icon set).
+Each checkpoint carries its icon vectors, so the Mac encodes only the ~6.5k dev queries:
+minutes for e5-small and e5-base, ~15 min for e5-large under `nice`. The table in
+`results/silver/<date>.md` grows by merging the stored rankings.
+
+## Rounds 4 and 5
+
+Same notebook, same cells; only the dataset version (rebuilt after the Vertex jobs,
+[vertex-round3-run.md](vertex-round3-run.md)) and cell 3's queues change. Attach the
+previous round's output each time.
+
+- **Round 4** (after Vertex v1). First the scores for active selection, then the students
+  (the presets name the teacher candidates; check `TEACHERS` in train_f1.py if a new
+  winner came out of round 3):
+  - GPU 0: `{train} --score F1@all-base-lr,F1@all-lr && {train} --run F1@all-kd-para,F1@all-kd-gen`
+  - GPU 1: `{train} --score F1@all-large; {train} --run F1@all-lr-para`
+  Then `select_active.py --teacher <best> --student F1-all-lr [--teacher2 <other>]` on the Mac.
+- **Round 5** (after Vertex v2 and `f1_data.py build`, which then includes the new labels):
+  - GPU 0: `--run F1@all-lr-rand1k,F1@all-lr-act1k,F1@all-lr-all3k`
+  - GPU 1: `--run F1@all-base-lr-all3k,F1@all-kd-final`
 
 ## 7. Continue in a new Claude Code session
 
-> Read CLAUDE.md, docs/f1-dual-encoder.md (§10) and docs/f1-kaggle-run.md. Round 2 and the
-> I1 glyph vectors are imported and scored (results/silver/<date>.md, results/f1/). Next:
-> compare each round-2 run with F1@all (ΔnDCG@5 with its interval, hit@1 bounds, held-out
-> curves via scripts/f1_report.py), decide the recipe for the next F1, judge whether e5-base
-> is worth distilling (next-label-free-work.md "Later"), and write the results into
-> f1-dual-encoder.md and next-label-free-work.md steps 2–3.
+> Read CLAUDE.md, docs/next-data-and-distillation.md and docs/f1-kaggle-run.md. Round <n> is
+> imported and scored (results/silver/<date>.md, results/f1/). Compare each new run with
+> its reference (paired ΔnDCG@5 with interval, hit@1 wins/losses, Personal separately,
+> held-out curves), decide the next step by the plan's questions, and write the results
+> into f1-dual-encoder.md and next-data-and-distillation.md.
