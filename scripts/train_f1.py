@@ -46,6 +46,7 @@ import argparse
 import contextlib
 import hashlib
 import json
+import os
 import random
 import shutil
 import tarfile
@@ -53,8 +54,14 @@ import time
 from pathlib import Path
 
 import numpy as np
-import torch
-import torch.nn.functional as F
+
+# Before torch touches CUDA: lets the allocator grow segments instead of failing on a
+# fragmented cache (round 3's first e5-large try died with 3.3 GB reserved but unusable).
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+
+import torch  # noqa: E402
+import torch.nn.functional as F  # noqa: E402
+from torch.utils.checkpoint import checkpoint  # noqa: E402
 
 BASE_MODEL = "intfloat/multilingual-e5-small"
 # Teacher candidates for the students, in --out: the finished one with the best held-out
@@ -87,7 +94,7 @@ PLANS = {
         "F1@all-base-lr": {"pool_tasks": None, "holdout": True, "lr": 3e-5, "epochs": 10,
                            "model": "intfloat/multilingual-e5-base"},
         "F1@all-large": {"pool_tasks": None, "holdout": True, "epochs": 5,
-                         "model": "intfloat/multilingual-e5-large"},
+                         "model": "intfloat/multilingual-e5-large", "chunk_tokens": 2048},
         "F1@all-kd": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                       "teacher": TEACHERS, "kd_weight": 1.0},
         "F1@all-kd-ms": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
@@ -293,8 +300,10 @@ class Teacher:
 class Encoder:
     """Mean-pooled, L2-normalized e5 (as tcr/finetune.py's matcher encodes)."""
 
-    def __init__(self, path: str, device: str, train_embeddings: bool, checkpointing: bool):
+    def __init__(self, path: str, device: str, train_embeddings: bool, checkpointing: bool,
+                 chunk_tokens: int = 0):
         self.checkpointing = checkpointing
+        self.chunk_tokens = chunk_tokens
         from transformers import AutoModel, AutoTokenizer
         self.device = device
         self.tok = AutoTokenizer.from_pretrained(path)
@@ -319,6 +328,22 @@ class Encoder:
         enc = self.tok(list(texts), padding="max_length" if self.pad_full else True,
                        truncation=True, max_length=max_len, pad_to_multiple_of=8,
                        return_tensors="pt").to(self.device)
+        keys = list(enc.keys())
+        n, L = enc["input_ids"].shape
+        step = max(1, self.chunk_tokens // L) if self.chunk_tokens else n
+        if step >= n or not torch.is_grad_enabled():
+            return self._embed(keys, *enc.values())
+        # --chunk-tokens: encode the texts in chunks of about this many tokens, each under
+        # an outer checkpoint that keeps only its output vectors and reruns the chunk in
+        # the backward pass (same dropout). The loss still sees the whole batch, so the
+        # gradients are those of the unchunked batch (as GradCache), at one chunk's
+        # activation memory; peak memory no longer grows with the batch's icon count.
+        return torch.cat([checkpoint(self._embed, keys, *(enc[k][s:s + step] for k in keys),
+                                     use_reentrant=False)
+                          for s in range(0, n, step)])
+
+    def _embed(self, keys, *tensors) -> torch.Tensor:
+        enc = dict(zip(keys, tensors))
         ctx = torch.autocast("cuda", dtype=torch.float16) if self.amp else contextlib.nullcontext()
         with ctx:
             h = self.model(**enc).last_hidden_state
@@ -501,7 +526,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         f"distillation rows, {len(data.val)} val, {len(data.held)} icons held out"
         + (f"; {data.para_dropped} rewrites dropped (teacher disagrees)" if a.para == "graded" else ""))
     torch.manual_seed(a.seed)
-    enc = Encoder(a.model, dev, a.train_embeddings, a.checkpointing != "off")
+    enc = Encoder(a.model, dev, a.train_embeddings, a.checkpointing != "off", a.chunk_tokens)
     params = [p for p in enc.model.parameters() if p.requires_grad]
     decay = [p for n, p in enc.model.named_parameters() if p.requires_grad and p.ndim > 1]
     nodecay = [p for n, p in enc.model.named_parameters() if p.requires_grad and p.ndim <= 1]
@@ -683,7 +708,8 @@ def choose_checkpointing(enc: Encoder, data: Data, rows: list, a, name: str, tea
     enc.pad_full = False
     torch.cuda.empty_cache()
     enc.set_checkpointing(not ok)
-    log(f"{name}: worst-case step without checkpointing peaks at {peak / 2**30:.1f} of "
+    chunk = f" (chunks of {a.chunk_tokens} tokens)" if a.chunk_tokens else ""
+    log(f"{name}: worst-case step without checkpointing{chunk} peaks at {peak / 2**30:.1f} of "
         f"{total / 2**30:.1f} GB -> checkpointing {'off' if ok else 'on'}")
 
 
@@ -751,7 +777,7 @@ def probe(a, data_root: Path) -> None:
     dev = pick_device(a.device)
     data = Data(data_root, None, True, a.smoke)
     rows = data.epoch_rows(0, a.seed, a.free_per_epoch)
-    enc = Encoder(a.model, dev, a.train_embeddings, True)
+    enc = Encoder(a.model, dev, a.train_embeddings, True, a.chunk_tokens)
     opt = torch.optim.AdamW([p for p in enc.model.parameters() if p.requires_grad], lr=1e-6)
     scaler = torch.amp.GradScaler("cuda", enabled=dev == "cuda")
     bank = (enc.encode(data.docs, a.max_passage_len) if a.bank_negs else None)
@@ -824,6 +850,9 @@ def main() -> None:
     ap.add_argument("--train-embeddings", action="store_true")
     ap.add_argument("--checkpointing", choices=["auto", "on", "off"], default="auto",
                     help="gradient checkpointing; auto: off when a worst-case step fits the GPU")
+    ap.add_argument("--chunk-tokens", type=int, default=0,
+                    help="encode a training batch in checkpointed chunks of about this many tokens "
+                         "(same gradients, far less activation memory; 0 = off; e5-large's preset: 2048)")
     ap.add_argument("--device", default="auto")
     ap.add_argument("--threads", type=int, default=4, help="CPU threads (keeps a laptop usable)")
     ap.add_argument("--seed", type=int, default=0)

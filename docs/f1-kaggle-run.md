@@ -9,7 +9,8 @@ Mac (CLAUDE.md "Compute"). Round 2's guide is this file's git history (2026-11-1
 **State (2026-11-17):** `data/private/f1/f1_data.tar.gz` rebuilt (17.7 MB). Its training rows
 are round 2's byte for byte; new: 5,729 unlabelled MS-LaTTE rows (`distill-mslatte`) and the
 round-3 `train_f1.py`. Private (Personal-style pool text, approved for the author's Kaggle
-account); no eval data.
+account); no eval data. Repacked 2026-11-18 with only train_f1.py changed (memory fixes for
+e5-large, below); upload it as a new version.
 
 ## What runs (round 3)
 
@@ -104,8 +105,16 @@ browser. Watch it under the notebook's *Versions* → the running version → *L
 prints the last lines of both queues every 10 minutes. Each run logs `max_mem_gb`,
 `sec_per_step` and, for students, `loss_kd` every 20 steps in `runs/<run>/train_log.jsonl`.
 
-**If e5-large runs out of memory** even with checkpointing (its first line says so), commit
-again with GPU 1's queue `F1@all-large --batch 96`; the run name stays, note it in the doc.
+**e5-large's memory.** The first try (2026-11-18) ran out of GPU memory: 10.8 of the
+T4's 14.6 GB were in use and 3.3 GB more were reserved but fragmented. train_f1.py now
+sets `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` itself, and the `F1@all-large`
+preset encodes each batch in checkpointed chunks of 2,048 tokens (`--chunk-tokens`). That
+gives the same gradients as the full batch of 128, so its in-batch negatives stay as in
+the other runs, while activation memory stays at one chunk's worth. The run's first lines
+say whether the memory check also turned on layer checkpointing. If it did, steps are
+about 25% slower (7.5–10 h, still under the 12 h limit, and resumable, §4). If it still
+runs out of memory, set GPU 1's queue to `F1@all-large --chunk-tokens 1024` and commit
+again.
 
 ## 4. If a version fails or times out
 

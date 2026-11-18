@@ -388,6 +388,12 @@ run guide: [f1-kaggle-run.md](f1-kaggle-run.md). Changes in `scripts/train_f1.py
 
 - **Teachers:** `F1@all-base-lr` (e5-base, LR 3e-5, 10 epochs) and `F1@all-large`
   (multilingual-e5-large, 560M parameters, same prefixes and pooling; 2e-5, 5 epochs).
+  On a T4, e5-large fits only with `--chunk-tokens 2048` (in its preset). The batch's texts
+  are encoded in chunks of about 2k tokens, each under an outer activation checkpoint that
+  keeps only the output vectors and reruns the chunk in the backward pass. The loss still
+  sees the whole batch, so the gradients are those of batch 128 (the effect of GradCache,
+  checked on CPU to 3e-7 relative), and activation memory no longer grows with the number
+  of icons in the batch.
 - **Teacher scores** (`--score`, or automatically before a student run): the best finished
   teacher by held-out nDCG@5 encodes every training text, title and parent forms, and keeps
   its top 64 icons with scaled scores (`<out>/teacher/<run>.npz`, rows of queries.jsonl).
