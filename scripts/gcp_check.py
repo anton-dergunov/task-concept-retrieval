@@ -22,7 +22,8 @@ from tcr import gcp  # noqa: E402
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--ping", action="store_true", help="send one tiny Flash request")
-    ap.add_argument("--model", default="gemini-2.5-flash")
+    ap.add_argument("--model", default="gemini-3.8-flash",
+                    help="the jobs' Flash model (tcr/judge.py, augment_pools.py); gemini-4-argon for v2")
     args = ap.parse_args()
 
     pin = gcp.verify()           # raises gcp.Refused (exit 1, message) on any mismatch
