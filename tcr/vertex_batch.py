@@ -18,7 +18,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import config
+from . import gcp
 
 ENDED = {"JOB_STATE_SUCCEEDED", "JOB_STATE_FAILED", "JOB_STATE_CANCELLED",
          "JOB_STATE_EXPIRED", "JOB_STATE_PARTIALLY_SUCCEEDED"}
@@ -26,13 +26,11 @@ BUCKET_LOCATION = "us-central1"   # a bucket needs a real region; global jobs re
 
 
 def env():
-    from dotenv import load_dotenv
-    load_dotenv(config.ROOT / ".env")
-    project = os.environ["VERTEX_PROJECT"]
+    """(project, location, bucket) of the pinned account (tcr/gcp.py; stops if unpinned)."""
+    pin = gcp.verify()
     # gemini-4-argon is served on the global endpoint only (us-central1: 404).
     location = os.environ.get("VERTEX_BATCH_LOCATION", "global")
-    bucket = os.environ.get("VERTEX_BATCH_BUCKET", f"{project}-tcr-batch")
-    return project, location, bucket
+    return pin.project, location, pin.bucket
 
 
 _CLIENT = None
@@ -45,7 +43,8 @@ def client():
     if _CLIENT is None:
         from google import genai
         project, location, _ = env()
-        _CLIENT = genai.Client(vertexai=True, project=project, location=location)
+        _CLIENT = genai.Client(vertexai=True, project=project, location=location,
+                               credentials=gcp.verify().credentials)
     return _CLIENT
 
 
@@ -54,11 +53,12 @@ def log(msg):
 
 
 def gcloud(*args, check=True):
-    # .env may pick the gcloud configuration (CLOUDSDK_ACTIVE_CONFIG_NAME) for this project
-    # only; load it before every call, not just when a job is submitted.
-    from dotenv import load_dotenv
-    load_dotenv(config.ROOT / ".env")
-    return subprocess.run(["gcloud", *args], capture_output=True, text=True, check=check)
+    """gcloud as the pinned account and project, on gs:// paths in the pinned bucket only
+    (tcr/gcp.py; verify() also puts .env's CLOUDSDK_ACTIVE_CONFIG_NAME in the environment)."""
+    flags = gcp.gcloud_flags()
+    for a in args:
+        gcp.check_gs(str(a))
+    return subprocess.run(["gcloud", *args, *flags], capture_output=True, text=True, check=check)
 
 
 # --- requests and responses ----------------------------------------------------------
@@ -156,6 +156,7 @@ class Run:
         job = client().batches.create(
             model=self.model, src=f"{prefix}/input.jsonl",
             config=types.CreateBatchJobConfig(dest=f"{prefix}/output", display_name=display_name))
+        gcp.check_job(job.name)
         state.update(job=job.name, prefix=prefix, submitted=stamp, location=location)
         self.save_state(state)
         log(f"submitted {job.name} ({job.state})")
@@ -164,7 +165,7 @@ class Run:
         state = self.state()
         if not state.get("job"):
             sys.exit("nothing submitted for this run")
-        return client().batches.get(name=state["job"])
+        return client().batches.get(name=gcp.check_job(state["job"]))
 
     def wait(self, poll: int):
         while True:

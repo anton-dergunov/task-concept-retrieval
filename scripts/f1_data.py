@@ -2,7 +2,7 @@
 """Build F1's training data (docs/f1-dual-encoder.md §2) into one tarball for Colab.
 
     python scripts/f1_data.py build [--smoke]
-    python scripts/f1_data.py import <runs dir or f1_runs.zip>   # Kaggle / Colab results back
+    python scripts/f1_data.py import <runs dir, f1_runs.tar.zst or .zip>   # Kaggle / Colab results back
 
 `import` copies each finished run's best/ checkpoint to .cache/models/F1[-<tag>]/ (where
 the methods F1 and F1@<tag> load it) and its done.json + train_log.jsonl (metrics only) to
@@ -79,13 +79,33 @@ def write(data: dict, smoke: bool) -> Path:
     return tar
 
 
+def _unpack_tar_zst(src: Path, dst: Path) -> None:
+    """f1_runs.tar.zst (Kaggle cell 4): macOS tar and Python 3.11's tarfile can't read zstd,
+    so the Homebrew `zstd` binary decompresses; tarfile's "data" filter keeps every member
+    inside dst (the archive is a download)."""
+    import subprocess
+    import tarfile
+    if not shutil.which("zstd"):
+        sys.exit("needs zstd: brew install zstd")
+    tar = dst / "f1_runs.tar"
+    with open(tar, "wb") as f:
+        subprocess.run(["zstd", "-dc", str(src)], stdout=f, check=True)
+    with tarfile.open(tar) as t:
+        t.extractall(dst, filter="data")
+    tar.unlink()
+
+
 def import_runs(src: Path) -> None:
     import tempfile
     import zipfile
-    if src.suffix == ".zip":
+    packed = src.suffix == ".zip" or src.name.endswith(".tar.zst")
+    if packed:
         tmp = Path(tempfile.mkdtemp(prefix="f1_runs_"))
-        with zipfile.ZipFile(src) as z:
-            z.extractall(tmp)
+        if src.suffix == ".zip":
+            with zipfile.ZipFile(src) as z:
+                z.extractall(tmp)
+        else:
+            _unpack_tar_zst(src, tmp)
         base = tmp
     else:
         base = src
@@ -122,14 +142,14 @@ def import_runs(src: Path) -> None:
         b, base = done.get("best") or {}, done.get("base") or {}
         print(f"{run.name} -> {dst}: val nDCG@5 {b.get('all', {}).get('ndcg5')} "
               f"(base {base.get('all', {}).get('ndcg5')}), step {b.get('step')} of {done.get('steps')}")
-    if src.suffix == ".zip":
+    if packed:
         shutil.rmtree(tmp, ignore_errors=True)
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("cmd", choices=["build", "import"])
-    ap.add_argument("src", nargs="?", help="import: the runs directory or f1_runs.zip")
+    ap.add_argument("src", nargs="?", help="import: the runs directory, f1_runs.tar.zst or f1_runs.zip")
     ap.add_argument("--smoke", action="store_true", help="200 pool tasks, 1 in 10 icons' free signal")
     ap.add_argument("--no-distill", action="store_true", help="leave out the unlabelled distillation text")
     args = ap.parse_args()

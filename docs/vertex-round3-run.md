@@ -9,6 +9,25 @@ work is skipped and a submitted batch job is never resubmitted.
 **When:** after the other Vertex job ends (~2026-11-20), and v2 before 2026-11-30, when
 Argon's promotional price ends (it doubles).
 
+## Account (pinned)
+
+Round 3 runs on the *contact* profile only (gcloud configuration `acervo-contact`, its
+project and ADC file), as pinned in `.env` (`VERTEX_ACCOUNT`, `VERTEX_PROJECT`,
+`GOOGLE_APPLICATION_CREDENTIALS`, `CLOUDSDK_ACTIVE_CONFIG_NAME`). `tcr/gcp.py` checks the pin
+before any Vertex call and stops otherwise: a shell variable that differs from `.env`, an
+ADC file of another account (asked from Google) or billing another project, a gcloud
+configuration of another account, a `gs://` path outside `gs://<project>-tcr-batch`, a
+batch job of another project. Every gcloud call gets `--account` and `--project`. The jobs
+script runs the preflight first:
+
+```bash
+.venv/bin/python scripts/gcp_check.py --ping    # account, project, billing, API, bucket, one Flash call
+```
+
+Once per project, enable the Vertex AI API (2026-11-19: off in the contact project):
+`gcloud services enable aiplatform.googleapis.com --configuration=acervo-contact
+--project=<VERTEX_PROJECT>`. The bucket is created by the first batch job.
+
 ## Budget
 
 The new $300 credit is a fresh trial; the spend log still holds the first one ($291.14).
@@ -64,7 +83,7 @@ Watch: `augment_pools.py status --judge-run <run> --kind rw|xleval`; the spend w
 ## Stage grade (after Kaggle round 3 is scored; ~1 h)
 
 ```bash
-CREDIT_LEFT=… BUDGET=115 GRADE_METHODS=F1@all-base.v2+parent,F1@all-lr.v2+parent,F1@all-base-lr.v2+parent,F1@all-kd.v2+parent \
+CREDIT_LEFT=… BUDGET=115 GRADE_METHODS=F1@all-large.v2+parent,F1@all-base-lr.v2+parent,F1@all-kd-ms.v2+parent,F1@all-lr.v2+parent,F1@all-base.v2+parent \
   scripts/vertex_round3_jobs.sh grade
 ```
 
@@ -79,7 +98,7 @@ reasons before using the grades. Then:
 
 ```bash
 .venv/bin/python scripts/f1_data.py import ~/Downloads/f1_runs.zip      # round 4, with teacher scores
-.venv/bin/python scripts/select_active.py --teacher F1-all-base-lr --student F1-all-lr [--teacher2 F1-all-large]
+.venv/bin/python scripts/select_active.py --teacher F1-all-large --student F1-all-lr --teacher2 F1-all-base-lr
 CREDIT_LEFT=… BUDGET=115 scripts/vertex_round3_jobs.sh v2
 ```
 

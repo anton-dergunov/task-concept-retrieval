@@ -102,8 +102,15 @@ PLANS = {
     },
     # Round 4: the cheap text from Vertex V1 (rewrites, generated tasks); `para` rows are
     # rewrites of judged pool tasks, used with the original's grades ("graded", kept only
-    # where the teacher agrees) or with teacher targets only ("kd").
+    # where the teacher agrees) or with teacher targets only ("kd"). The students below pick
+    # F1@all-large (the best held-out teacher after round 3); round 3's F1@all-kd(-ms) learned
+    # from F1@all-base-lr, so -L repeats them with e5-large: the controls for -para and -gen.
     "round4": {
+        "F1@all-kd-L": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                        "teacher": ["F1@all-large"], "kd_weight": 1.0},
+        "F1@all-kd-ms-L": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                           "teacher": ["F1@all-large"], "kd_weight": 1.0,
+                           "distill_sources": ["distill-mslatte"]},
         "F1@all-lr-para": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                            "teacher": TEACHERS, "kd_weight": 0.0, "para": "graded"},
         "F1@all-kd-para": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,

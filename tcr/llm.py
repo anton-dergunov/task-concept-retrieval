@@ -73,7 +73,9 @@ def _genai_client(backend: str):
     load_dotenv(config.ROOT / ".env")
     if backend == "gemini":
         return genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-    return genai.Client(vertexai=True, project=os.environ["VERTEX_PROJECT"],
+    from . import gcp
+    pin = gcp.verify()      # the pinned account only (tcr/gcp.py)
+    return genai.Client(vertexai=True, project=pin.project, credentials=pin.credentials,
                         location=os.environ.get("VERTEX_LOCATION", "global"))
 
 

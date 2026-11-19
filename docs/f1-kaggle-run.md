@@ -12,7 +12,43 @@ round-3 `train_f1.py`. Private (Personal-style pool text, approved for the autho
 account); no eval data. Repacked 2026-11-18 with only train_f1.py changed (memory fixes for
 e5-large, below); upload it as a new version.
 
-## What runs (round 3)
+## Round 4 (after Vertex v1; prepared 2026-11-19)
+
+Round 3 is imported (silver 2026-11-19): F1@all-large is the best teacher (held-out nDCG@5
+0.565 vs e5-base-lr 0.543), so every round-4 student picks it. Before the session:
+
+1. **Round 3's runs on Kaggle.** If round 3 has a committed version, attach its output. If it
+   ran as a Draft Session (its outputs are gone with the VM), upload
+   `~/Downloads/f1_runs.zip` as a new private dataset (Kaggle unpacks it; cell 2 copies its
+   `runs/`). Attach round 2's version output as before (F1@all-lr). Delete the zip on the
+   Mac only after this.
+2. `f1_data.py build` after v1 (it picks up the rewrites `*.rw.jsonl` and the candidates
+   `personal_synth_cand.jsonl`), then upload `f1_data.tar.gz` as a new version.
+
+| GPU | queue | what it tests | estimate |
+|---|---|---|---|
+| 0 | `--score F1@all-large,F1@all-base-lr,F1@all-lr` | teacher and student scores of every row, candidates included: input of select_active.py | 0.5–1 h |
+| 0 | `F1@all-kd-L` | round 3's F1@all-kd with the e5-large teacher: the control for -para | 0.8–1.3 h |
+| 0 | `F1@all-kd-ms-L` | F1@all-kd-ms with e5-large: the control for -gen | 0.9–1.4 h |
+| 0 | `F1@all-kd-gen` | + ~10k unlabelled generated Personal-style tasks | 1–1.5 h |
+| 1 | `F1@all-lr-para` | rewrites with the original's grades, kept where the teacher agrees | 1–1.5 h |
+| 1 | `F1@all-kd-para` | rewrites with teacher targets | 1–1.5 h |
+
+GPU 1 then has ~8 h left. Optional there: a longer e5-large (it was still improving at its
+last step, +0.003 per evaluation). That run needs a new preset, `F1@all-large` with
+`"epochs": 8` (~10 h; resumable, §4).
+
+Cell 3's two launches for round 4:
+
+```python
+jobs = [
+    launch(0, f"python {TRAIN_SCRIPT} --data {DATA_DIR} --out {RUNS} --score F1@all-large,F1@all-base-lr,F1@all-lr"
+              f" && {train} --run F1@all-kd-L,F1@all-kd-ms-L,F1@all-kd-gen", "gpu0.log"),
+    launch(1, f"{train} --run F1@all-lr-para,F1@all-kd-para", "gpu1.log"),
+]
+```
+
+## What ran (round 3)
 
 | GPU | queue | what it tests | estimate |
 |---|---|---|---|
@@ -56,10 +92,13 @@ print(TRAIN_SCRIPT, DATA_DIR, sorted(p.name for p in DATA_DIR.iterdir()))
 ```python
 # 2. Earlier versions' runs (attached outputs): copied in, so finished runs are skipped,
 #    an interrupted one resumes, and finished ones can be teachers.
-import shutil, zipfile
-for z in INPUT_ROOT.rglob("f1_runs.zip"):
+import shutil, subprocess, zipfile
+for z in INPUT_ROOT.rglob("f1_runs.zip"):          # rounds 1–3
     with zipfile.ZipFile(z) as f:
         f.extractall(WORK)
+    print("unpacked", z)
+for z in INPUT_ROOT.rglob("f1_runs.tar.zst"):      # round 4 on
+    subprocess.run(f"zstd -dc '{z}' | tar -xf - -C {WORK}", shell=True, check=True)
     print("unpacked", z)
 for d in INPUT_ROOT.rglob("runs"):
     if d.is_dir() and DATA_DIR not in d.parents:
@@ -97,8 +136,13 @@ new = [p.parent.name for p in RUNS.glob("*/done.json") if p.parent.name not in O
 items = [f"runs/{n}" for n in new] + ["runs/teacher", "gpu0.log", "gpu1.log"]
 items = [i for i in items if (WORK / i).exists()]
 print("packaging", items)
-!cd /kaggle/working && zip -qr f1_runs.zip {" ".join(items)} -x '*/last/*' && ls -lh f1_runs.zip
+!which zstd || apt-get install -y -qq zstd >/dev/null 2>&1; which zstd
+!cd /kaggle/working && tar -cf - --exclude='*/last/*' {" ".join(items)} | zstd -3 -T0 -q -o f1_runs.tar.zst && ls -lh f1_runs.tar.zst
 ```
+
+(Before round 4, cell 4 used `zip -qr f1_runs.zip …`: ~10 minutes for round 3's 3 GB;
+see "Faster packaging" below.) If `which zstd` still prints nothing, package with
+`zip -0 -qr f1_runs.zip …` instead (no compression: fast, 4.4 GB); import reads both.
 
 Then **Save Version → Save & Run All (Commit)**. It runs headless; you can close the
 browser. Watch it under the notebook's *Versions* → the running version → *Logs*: cell 3
@@ -123,16 +167,70 @@ runs, finished runs are skipped, an interrupted one resumes from `last/state.pt`
 
 ## 5. Bring the results back
 
-Download `f1_runs.zip` from the version's *Output* (about 3 GB: e5-large's checkpoint is
+Download `f1_runs.tar.zst` (rounds 1–3: `f1_runs.zip`) from the version's *Output* (about 3 GB: e5-large's checkpoint is
 ~2.2 GB), then on the Mac:
 
 ```bash
-.venv/bin/python scripts/f1_data.py import ~/Downloads/f1_runs.zip
+.venv/bin/python scripts/f1_data.py import ~/Downloads/f1_runs.tar.zst   # or f1_runs.zip
 ```
 
 It copies each run's best checkpoint to `.cache/models/F1-<tag>` (gitignored), its
 `done.json` + `train_log.jsonl` to `results/f1/` (commit them) and the teacher scores to
 `data/private/f1/teacher/`.
+
+### Faster packaging and download (chosen and built 2026-11-19)
+
+**Why cell 4 takes ~10 minutes.** `zip -r` compresses with deflate on one core. Round 3's
+zip shrank 4.42 GB to 3.17 GB (28% saved; the fp32 weights compress 23–35%, the `.npz`
+files not at all). Timed on the Mac on F1-all-kd's 470 MB checkpoint:
+
+| compressor | time | size |
+|---|---|---|
+| deflate (`gzip -6`, what zip uses) | 57 s | 65.0% |
+| `zstd -3`, one core | 2.9 s | 65.2% |
+| `zstd -3 -T0`, all cores | 0.8 s | 65.2% |
+
+So the time goes into deflate, not into the archive format. zstd gives the same size about
+20× faster on one core.
+
+**Choice: `tar` + `zstd -3 -T0` → `f1_runs.tar.zst`.** This should take under a minute on
+Kaggle, limited by the disk, and the download stays the size it is now. Three changes:
+
+- cell 4: `tar -cf - --exclude='*/last/*' {items} | zstd -3 -T0 -q -o f1_runs.tar.zst`
+  (first check `which zstd` on Kaggle; if it's missing, `apt-get install -y zstd` or
+  `pip install zstandard`);
+- cell 2: also unpack `f1_runs.tar.zst` from attached outputs, and still read the older
+  `f1_runs.zip`;
+- `f1_data.py import`: accept `.tar.zst`. macOS tar is built without zstd, and Python
+  3.11's tarfile can't read it, so decompress with the Homebrew `zstd` binary (or
+  `zstandard`) first.
+
+If a run is needed before this is built, `zip -0 -qr` (store without compressing) needs no
+other change. It packs in about a minute, but the download grows to 4.4 GB.
+
+**The slow download.** Round 3's zip was ready at 01:34 and was in `~/Downloads` at 01:43,
+so the click did register. Nothing appeared for the first ~2 minutes; the cause is
+unknown. The browser's download list (⌥⌘L in Safari, ⇧⌘J in Chrome) shows whether a
+download has started. That session was a *Draft Session*, so the file came from the live VM
+and is lost when the session ends. A committed version's output stays.
+
+**Later, if downloading stays awkward: upload to the project's bucket.** Kaggle's *Add-ons →
+Google Cloud Services* links a Google account. Then cell 4 runs
+`UserSecretsClient().set_gcloud_credentials(project=…)` and
+`gcloud storage cp f1_runs.tar.zst gs://<VERTEX_PROJECT>-tcr-batch/f1/round<n>/`. On the
+Mac, `gcloud storage cp gs://…/f1_runs.tar.zst ~/Downloads/` shows progress and retries on
+its own. The bucket is private and already holds the Vertex batch files, and gcloud is set
+up on the Mac (`tcr/vertex_batch.py`). Cost: about $0.12/GB of egress, so ~$0.40 per
+round; delete the file after import. Still to check: does the add-on's login also work
+in a committed (headless) run? A private Hugging Face repo would be free, but it puts
+weights trained on Personal-style text with a new third party, so it is not the choice.
+
+**Disk vs output.** The VM's disk is 57.6 GiB, but only `/kaggle/working` is saved, and that
+is capped at 19.5 GiB. It held 7.1 GiB after round 3: `runs/`, with the resume states and
+the copied earlier runs, plus the 3 GB archive. It grows each round as copied runs pile
+up. With the bucket upload, the archive can be written to `/kaggle/tmp` (not saved), which
+frees its 3 GB of output. A smaller lever: the `best/` checkpoints are fp32, and fp16 would
+halve them. But check [deployment.md](deployment.md) on encoder precision first.
 
 ## 6. Score on the silver leaderboard (Mac)
 

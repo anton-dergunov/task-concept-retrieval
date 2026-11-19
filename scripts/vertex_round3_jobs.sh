@@ -14,7 +14,7 @@
 #
 # Run (from the repo root, unattended, hours):
 #   CREDIT_LEFT=<USD under Billing → Credits> scripts/vertex_round3_jobs.sh v1
-#   CREDIT_LEFT=… GRADE_METHODS=F1@all-base.v2+parent,… scripts/vertex_round3_jobs.sh grade
+#   CREDIT_LEFT=… GRADE_METHODS=F1@all-large.v2+parent,… scripts/vertex_round3_jobs.sh grade
 #   CREDIT_LEFT=… scripts/vertex_round3_jobs.sh v2
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -28,6 +28,8 @@ SEL_SYNTH=data/private/train_pools/personal_synth_pool3.jsonl
 SEL_MS=data/train_pools/mslatte2.jsonl
 STAGE="${1:?usage: $0 v1|grade|v2}"
 : "${CREDIT_LEFT:?set CREDIT_LEFT to the credit left in USD (Billing → Credits)}"
+# Only the account and project pinned in .env (tcr/gcp.py); stop before any spend if not.
+$PY scripts/gcp_check.py || { echo "GCP preflight failed: nothing submitted"; exit 1; }
 BUDGET="${BUDGET:-100}"
 V2_RESERVE="${V2_RESERVE:-75}"      # kept for v2 + grading while v1 sizes the candidates
 N_CAND_MAX="${N_CAND_MAX:-10000}"
