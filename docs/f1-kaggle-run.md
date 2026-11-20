@@ -140,17 +140,28 @@ print("exit codes:", [j.returncode for j in jobs])
 
 ```python
 # 4. Package this version's new runs (not the copied ones, not the resume states)
+import shutil, subprocess
 new = [p.parent.name for p in RUNS.glob("*/done.json") if p.parent.name not in OLD]
 items = [f"runs/{n}" for n in new] + ["runs/teacher", "gpu0.log", "gpu1.log"]
 items = [i for i in items if (WORK / i).exists()]
 print("packaging", items)
-!which zstd || apt-get install -y -qq zstd >/dev/null 2>&1; which zstd
-!cd /kaggle/working && tar -cf - --exclude='*/last/*' {" ".join(items)} | zstd -3 -T0 -q -o f1_runs.tar.zst && ls -lh f1_runs.tar.zst
+if not shutil.which("zstd"):
+    subprocess.run("apt-get update -qq && apt-get install -y -qq zstd", shell=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+if shutil.which("zstd"):
+    cmd = f"tar -cf - --exclude='*/last/*' {' '.join(items)} | zstd -3 -T0 -q -o f1_runs.tar.zst"
+else:                                   # no zstd: store without compressing (fast, ~1.4x larger)
+    cmd = f"zip -0 -qr f1_runs.zip {' '.join(items)} -x '*/last/*'"
+print(cmd)
+subprocess.run(cmd, shell=True, check=True, cwd=WORK)
+!ls -lh /kaggle/working/f1_runs.*
 ```
 
 (Before round 4, cell 4 used `zip -qr f1_runs.zip …`: ~10 minutes for round 3's 3 GB;
-see "Faster packaging" below.) If `which zstd` still prints nothing, package with
-`zip -0 -qr f1_runs.zip …` instead (no compression: fast, 4.4 GB); import reads both.
+see "Faster packaging" below.) zstd is not preinstalled on Kaggle; `apt-get update` then
+`apt-get install zstd` works (checked 2026-11-20, Internet on). If the install ever fails,
+the cell falls back to `zip -0` (no compression: fast, ~4.4 GB) on its own, so a headless
+commit never loses its runs; `f1_data.py import` reads both.
 
 Then **Save Version → Save & Run All (Commit)**. It runs headless; you can close the
 browser. Watch it under the notebook's *Versions* → the running version → *Logs*: cell 3
@@ -205,8 +216,8 @@ So the time goes into deflate, not into the archive format. zstd gives the same 
 Kaggle, limited by the disk, and the download stays the size it is now. Three changes:
 
 - cell 4: `tar -cf - --exclude='*/last/*' {items} | zstd -3 -T0 -q -o f1_runs.tar.zst`
-  (first check `which zstd` on Kaggle; if it's missing, `apt-get install -y zstd` or
-  `pip install zstandard`);
+  (zstd is not preinstalled on Kaggle: the cell runs `apt-get update && apt-get install
+  zstd`, and falls back to `zip -0` if that fails);
 - cell 2: also unpack `f1_runs.tar.zst` from attached outputs, and still read the older
   `f1_runs.zip`;
 - `f1_data.py import`: accept `.tar.zst`. macOS tar is built without zstd, and Python
