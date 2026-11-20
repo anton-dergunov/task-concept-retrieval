@@ -22,7 +22,10 @@ Round 3 is imported (silver 2026-11-19): F1@all-large is the best teacher (held-
    ran as a Draft Session (its outputs are gone with the VM), upload
    `~/Downloads/f1_runs.zip` as a new private dataset (Kaggle unpacks it; cell 2 copies its
    `runs/`). Attach round 2's version output as before (F1@all-lr). Delete the zip on the
-   Mac only after this.
+   Mac only after this. (Done 2026-11-20: round 4 runs in a new notebook without round 2's
+   output, so `runs/F1-all-lr` was added to that zip from the Mac's imported copy,
+   `.cache/models/F1-all-lr` + `results/f1/F1-all-lr.*`; the zip, 3.66 GB, is the only
+   input besides the data.)
 2. Done 2026-11-20: `f1_data.py build` after v1. Upload `f1_data.tar.gz` as a new version.
 
 | GPU | queue | what it tests | estimate |
@@ -112,9 +115,21 @@ for d in INPUT_ROOT.rglob("runs"):
     if d.is_dir() and DATA_DIR not in d.parents:
         shutil.copytree(d, RUNS, dirs_exist_ok=True)
         print("copied", d)
+for done in INPUT_ROOT.rglob("done.json"):         # finished runs wherever an upload put them
+    d = done.parent
+    if DATA_DIR not in d.parents and not (RUNS / d.name / "done.json").exists():
+        shutil.copytree(d, RUNS / d.name, dirs_exist_ok=True)
+        print("copied run", d)
 OLD = {p.parent.name for p in RUNS.glob("*/done.json")} if RUNS.exists() else set()
 print("finished before this version:", sorted(OLD))
+NEED = {"F1-all-large", "F1-all-base-lr", "F1-all-lr"}   # round 4: scored, and the students' teacher
+assert NEED <= OLD, (f"missing earlier runs {sorted(NEED - OLD)}; inputs: "
+                     + "; ".join(str(p) for p in INPUT_ROOT.glob("*/*/*")))
 ```
+
+The `NEED` check stops the version within a minute when an earlier round's runs did not
+come in, instead of failing GPU 0's queue after launch while GPU 1 trains on (round 4's
+first commit, 2026-11-20: `--score` found no `runs/F1-all-large/best`).
 
 ```python
 # 3. Two queues, one per GPU; logs in /kaggle/working/gpu0.log and gpu1.log
