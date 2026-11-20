@@ -9,6 +9,12 @@ work is skipped and a submitted batch job is never resubmitted.
 **When:** after the other Vertex job ends (~2026-11-20), and v2 before 2026-11-30, when
 Argon's promotional price ends (it doubles).
 
+**State (2026-11-20):** v1 done 2026-11-19 ($30.9), grade done 2026-11-20 (g1, $4.7); the
+spend log is at $326.67 against the cap of $406.14, so $79.5 is left. After v1 and grade, all
+done but the author's rewrite spot-check: the translated eval set is scored, the extra-graded
+table is written ([2026-11-20-extra](../results/silver/2026-11-20-extra.md)), and the
+round-4 tarball is built. Next: Kaggle round 4, then `select_active.py` and stage v2.
+
 ## Account (pinned)
 
 Round 3 runs on the *contact* profile only (gcloud configuration `acervo-contact`, its
@@ -94,6 +100,12 @@ on the calibration icons (same grade / within 1 / same hit); below ~70% same hit
 reasons before using the grades. Then:
 `silver_eval.py --methods … --versions v2 --extra-grades g1` → `results/silver/<date>-extra.md`.
 
+g1 result: 48/50 calibration icons agree on hit, 46/50 on the grade; 30% of the unjudged
+top-1s are hits; $4.7 instead of the ~$10 estimate (f1-dual-encoder.md "Round 3 results").
+For later rounds, grade only the new leaders under a new name, e.g. `GRADE_NAME=g2
+GRADE_METHODS=F1@all-kd-L.v2+parent,… scripts/vertex_round3_jobs.sh grade`, then score with
+`--extra-grades g1,g2`.
+
 ## Stage v2 (after Kaggle round 4 and the selection; by ~2026-11-27)
 
 ```bash
@@ -104,7 +116,8 @@ CREDIT_LEFT=… BUDGET=115 scripts/vertex_round3_jobs.sh v2
 
 `select_active.py` writes `data/private/train_pools/personal_synth_pool3.jsonl` (private)
 and `data/train_pools/mslatte2.jsonl` (public: commit), each with `<file>.extra.json`, the
-teacher's top 15 per task, which join the judge's candidate pool. v2 judges them with Argon
+teacher's top 15 per task, which join the judge's candidate pool (`F1-all-large` is the teacher: round 3's best, and
+the one round 4 scores every row with). v2 judges them with Argon
 (runs `pool-synth3-j4`, `pool-mslatte2-j4`; `judge_batch.py status --run <run>` to
 watch), exports the labels, then translates them and invents the parents of the
 Personal-style ones.

@@ -102,26 +102,32 @@ PLANS = {
     },
     # Round 4: the cheap text from Vertex V1 (rewrites, generated tasks); `para` rows are
     # rewrites of judged pool tasks, used with the original's grades ("graded", kept only
-    # where the teacher agrees) or with teacher targets only ("kd"). The students below pick
-    # F1@all-large (the best held-out teacher after round 3); round 3's F1@all-kd(-ms) learned
-    # from F1@all-base-lr, so -L repeats them with e5-large: the controls for -para and -gen.
+    # where the teacher agrees) or with teacher targets only ("kd"). The students below learn
+    # from F1@all-large (the best held-out teacher after round 3), pinned so that a teacher
+    # finishing mid-session cannot change it; round 3's F1@all-kd(-ms) learned from
+    # F1@all-base-lr, so -L repeats them with e5-large: the controls for -para and -gen.
+    # F1@all-large-e8: e5-large was still improving at its last step; 8 epochs, ~10 h.
     "round4": {
+        "F1@all-large-e8": {"pool_tasks": None, "holdout": True, "epochs": 8,
+                            "model": "intfloat/multilingual-e5-large", "chunk_tokens": 2048},
         "F1@all-kd-L": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                         "teacher": ["F1@all-large"], "kd_weight": 1.0},
         "F1@all-kd-ms-L": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                            "teacher": ["F1@all-large"], "kd_weight": 1.0,
                            "distill_sources": ["distill-mslatte"]},
         "F1@all-lr-para": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
-                           "teacher": TEACHERS, "kd_weight": 0.0, "para": "graded"},
+                           "teacher": ["F1@all-large"], "kd_weight": 0.0, "para": "graded"},
         "F1@all-kd-para": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
-                           "teacher": TEACHERS, "kd_weight": 1.0, "para": "kd"},
+                           "teacher": ["F1@all-large"], "kd_weight": 1.0, "para": "kd"},
         "F1@all-kd-gen": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
-                          "teacher": TEACHERS, "kd_weight": 1.0,
+                          "teacher": ["F1@all-large"], "kd_weight": 1.0,
                           "distill_sources": ["distill-mslatte", "distill-cand"]},
     },
     # Round 5: + the Argon labels of round 3's selected tasks (2k active + 1k random). Equal
-    # sizes answer "did active selection beat random?"; all3k the learning-curve point; the
-    # last two the retrained teacher and the final student.
+    # sizes answer "did active selection beat random?"; all3k the learning-curve point; then
+    # the retrained teachers (e5-large, the better teacher in round 3; e5-base, the mid-size
+    # bundle option) and the final student, taught by the better of the two e5-large runs.
+    # Set F1@all-large-all3k's epochs to 8 if round 4's F1@all-large-e8 beats F1@all-large.
     "round5": {
         "F1@all-lr-rand1k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                              "sel": {"random": 1000}},
@@ -129,11 +135,15 @@ PLANS = {
                             "sel": {"active": 1000}},
         "F1@all-lr-all3k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                             "sel": {"active": None, "random": None}},
+        "F1@all-large-all3k": {"pool_tasks": None, "holdout": True, "epochs": 5,
+                               "model": "intfloat/multilingual-e5-large", "chunk_tokens": 2048,
+                               "sel": {"active": None, "random": None}},
         "F1@all-base-lr-all3k": {"pool_tasks": None, "holdout": True, "lr": 3e-5, "epochs": 10,
                                  "model": "intfloat/multilingual-e5-base",
                                  "sel": {"active": None, "random": None}},
         "F1@all-kd-final": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
-                            "teacher": ["F1@all-base-lr-all3k"], "kd_weight": 1.0,
+                            "teacher": ["F1@all-large-all3k", "F1@all-large-e8", "F1@all-large"],
+                            "kd_weight": 1.0,
                             "sel": {"active": None, "random": None}, "para": "kd",
                             "distill_sources": ["distill-mslatte", "distill-cand"]},
     },

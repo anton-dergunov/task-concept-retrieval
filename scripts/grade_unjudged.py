@@ -13,6 +13,7 @@ measure agreement with its own labels.
 
     python scripts/grade_unjudged.py prepare --name g1 \
         --methods F1@all-base.v2+parent,F1@all-lr.v2+parent,F1@all-kd.v2+parent
+    python scripts/grade_unjudged.py prepare --name g2 --methods ... --skip g1   # only new picks
     python scripts/grade_unjudged.py run --name g1 --max-usd <cap>
     python scripts/grade_unjudged.py status --name g1
     python scripts/silver_eval.py --methods ... --extra-grades g1   # gold + these grades
@@ -79,11 +80,14 @@ def judge_model(dataset: str) -> str:
 
 # --- prepare --------------------------------------------------------------------------
 
-def collect_pairs(methods, depth: int, datasets) -> dict:
+def collect_pairs(methods, depth: int, datasets, skip=()) -> dict:
     """{(dataset, task_id): set of icons} the judge never saw, among each method's top
-    `depth` on dev tasks; plus per-method counts."""
+    `depth` on dev tasks; plus per-method counts. Icons graded in the earlier grade sets
+    `skip` (EXTRA_GRADES/<name>.jsonl) are left out."""
     golds = {d: silver.load_gold(silver.EVAL_RUNS[d]) for d in datasets}
     rej = silver.rejected_canonical()
+    done = {(r["dataset"], r["task_id"], silver.canonical(r["icon"]))
+            for name in skip for r in read_jsonl(silver.EXTRA_GRADES / f"{name}.jsonl")}
     pairs, counts = defaultdict(set), Counter()
     for label in methods:
         for r in read_jsonl(stored(label)):
@@ -92,7 +96,7 @@ def collect_pairs(methods, depth: int, datasets) -> dict:
             if g is None or split_of(tid) != "dev":
                 continue
             for n in (silver.canonical(x) for x in r["top"][:depth]):
-                if n not in g.seen and n not in rej:
+                if n not in g.seen and n not in rej and (d, tid, n) not in done:
                     pairs[(d, tid)].add(n)
                     counts[label] += 1
     return pairs, counts, golds
@@ -104,7 +108,8 @@ def cmd_prepare(args) -> None:
         sys.exit(f"{args.name} exists; pick another name")
     datasets = args.datasets.split(",")
     methods = args.methods.split(",")
-    pairs, counts, golds = collect_pairs(methods, args.depth, datasets)
+    skip = [x for x in (args.skip or "").split(",") if x]
+    pairs, counts, golds = collect_pairs(methods, args.depth, datasets, skip)
     for m in methods:
         print(f"{m}: {counts[m]} unjudged picks in the top {args.depth}", file=sys.stderr)
     # calibration: on a hash-chosen subset of the tasks, one icon with a known verdict
@@ -275,6 +280,7 @@ def main() -> None:
     p.add_argument("--methods", required=True, help="method labels as in the silver tables")
     p.add_argument("--depth", type=int, default=1, help="grade unjudged picks in the top N")
     p.add_argument("--calib", type=int, default=50)
+    p.add_argument("--skip", default="", help="earlier grade sets NAME[,NAME]: their icons are not graded again")
     p.add_argument("--datasets", default=",".join(silver.EVAL_RUNS))
     for name in ("run", "status"):
         q = sub.add_parser(name)

@@ -1,4 +1,4 @@
-# Running F1 on Kaggle (hand-off): round 3, then rounds 4–5
+# Running F1 on Kaggle (hand-off): round 4, then round 5
 
 For the author, and for a fresh Claude Code session that continues afterwards. The design
 is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
@@ -6,47 +6,55 @@ is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
 headless for up to 12 hours on two T4 GPUs; data building, import and scoring stay on the
 Mac (CLAUDE.md "Compute"). Round 2's guide is this file's git history (2026-11-16).
 
-**State (2026-11-17):** `data/private/f1/f1_data.tar.gz` rebuilt (17.7 MB). Its training rows
-are round 2's byte for byte; new: 5,729 unlabelled MS-LaTTE rows (`distill-mslatte`) and the
-round-3 `train_f1.py`. Private (Personal-style pool text, approved for the author's Kaggle
-account); no eval data. Repacked 2026-11-18 with only train_f1.py changed (memory fixes for
-e5-large, below); upload it as a new version.
+**State (2026-11-20):** `data/private/f1/f1_data.tar.gz` rebuilt for round 4 (19.7 MB; round
+3's is kept as `f1_data.round3.tar.gz`). Round 3's rows are all there, unchanged and in the
+same relative order; new: 34,650 rewrite rows (`para-synth`, `para-mslatte`), 11,002
+generated Personal-style tasks (`distill-cand`) and the round-4 `train_f1.py`. Private
+(Personal-style pool text, approved for the author's Kaggle account); no eval data. Upload
+it as a new version.
 
-## Round 4 (after Vertex v1; prepared 2026-11-19)
+## Round 4 (after Vertex v1; prepared 2026-11-19, queues revised 2026-11-20)
 
 Round 3 is imported (silver 2026-11-19): F1@all-large is the best teacher (held-out nDCG@5
-0.565 vs e5-base-lr 0.543), so every round-4 student picks it. Before the session:
+0.565 vs e5-base-lr 0.543), so every round-4 student is pinned to it. Before the session:
 
 1. **Round 3's runs on Kaggle.** If round 3 has a committed version, attach its output. If it
    ran as a Draft Session (its outputs are gone with the VM), upload
    `~/Downloads/f1_runs.zip` as a new private dataset (Kaggle unpacks it; cell 2 copies its
    `runs/`). Attach round 2's version output as before (F1@all-lr). Delete the zip on the
    Mac only after this.
-2. `f1_data.py build` after v1 (it picks up the rewrites `*.rw.jsonl` and the candidates
-   `personal_synth_cand.jsonl`), then upload `f1_data.tar.gz` as a new version.
+2. Done 2026-11-20: `f1_data.py build` after v1. Upload `f1_data.tar.gz` as a new version.
 
 | GPU | queue | what it tests | estimate |
 |---|---|---|---|
 | 0 | `--score F1@all-large,F1@all-base-lr,F1@all-lr` | teacher and student scores of every row, candidates included: input of select_active.py | 0.5–1 h |
 | 0 | `F1@all-kd-L` | round 3's F1@all-kd with the e5-large teacher: the control for -para | 0.8–1.3 h |
 | 0 | `F1@all-kd-ms-L` | F1@all-kd-ms with e5-large: the control for -gen | 0.9–1.4 h |
-| 0 | `F1@all-kd-gen` | + ~10k unlabelled generated Personal-style tasks | 1–1.5 h |
-| 1 | `F1@all-lr-para` | rewrites with the original's grades, kept where the teacher agrees | 1–1.5 h |
-| 1 | `F1@all-kd-para` | rewrites with teacher targets | 1–1.5 h |
+| 0 | `F1@all-kd-gen` | + 11k unlabelled generated Personal-style tasks | 1–1.5 h |
+| 0 | `F1@all-lr-para` | rewrites with the original's grades, kept where the teacher agrees | 1–1.5 h |
+| 0 | `F1@all-kd-para` | rewrites with teacher targets | 1–1.5 h |
+| 1 | `F1@all-large-e8` | e5-large for 8 epochs instead of 5: round 3's run was still improving at its last step (+0.003 per evaluation). Sets round 5's teacher epochs | ~10 h |
 
-GPU 1 then has ~8 h left. Optional there: a longer e5-large (it was still improving at its
-last step, +0.003 per evaluation). That run needs a new preset, `F1@all-large` with
-`"epochs": 8` (~10 h; resumable, §4).
+GPU 0's queue is ~6–8 h. The e8 run is the longest single job so far (5 epochs took 6.3 h);
+if the session times out, it resumes from `last/state.pt` in round 5's session (§4), first
+in GPU 1's queue. The students are pinned to `F1@all-large`, so e8 finishing early cannot
+change their teacher.
 
 Cell 3's two launches for round 4:
 
 ```python
 jobs = [
     launch(0, f"python {TRAIN_SCRIPT} --data {DATA_DIR} --out {RUNS} --score F1@all-large,F1@all-base-lr,F1@all-lr"
-              f" && {train} --run F1@all-kd-L,F1@all-kd-ms-L,F1@all-kd-gen", "gpu0.log"),
-    launch(1, f"{train} --run F1@all-lr-para,F1@all-kd-para", "gpu1.log"),
+              f" && {train} --run F1@all-kd-L,F1@all-kd-ms-L,F1@all-kd-gen,F1@all-lr-para,F1@all-kd-para", "gpu0.log"),
+    launch(1, f"{train} --run F1@all-large-e8", "gpu1.log"),
 ]
 ```
+
+After import, score on the Mac:
+`nice .venv/bin/python scripts/silver_eval.py --methods F1@all-kd-L,F1@all-kd-ms-L,F1@all-kd-gen,F1@all-lr-para,F1@all-kd-para --versions v2`
+(e5-small: minutes each), and F1@all-large-e8 separately (~15 min under `nice`). Then grade
+the new leaders' unjudged top-1s (`GRADE_NAME=g2 … vertex_round3_jobs.sh grade`) and
+rescore with `--extra-grades g1,g2`.
 
 ## What ran (round 3)
 
@@ -248,15 +256,14 @@ Same notebook, same cells; only the dataset version (rebuilt after the Vertex jo
 [vertex-round3-run.md](vertex-round3-run.md)) and cell 3's queues change. Attach the
 previous round's output each time.
 
-- **Round 4** (after Vertex v1). First the scores for active selection, then the students
-  (the presets name the teacher candidates; check `TEACHERS` in train_f1.py if a new
-  winner came out of round 3):
-  - GPU 0: `{train} --score F1@all-base-lr,F1@all-lr && {train} --run F1@all-kd-para,F1@all-kd-gen`
-  - GPU 1: `{train} --score F1@all-large; {train} --run F1@all-lr-para`
-  Then `select_active.py --teacher <best> --student F1-all-lr [--teacher2 <other>]` on the Mac.
-- **Round 5** (after Vertex v2 and `f1_data.py build`, which then includes the new labels):
-  - GPU 0: `--run F1@all-lr-rand1k,F1@all-lr-act1k,F1@all-lr-all3k`
-  - GPU 1: `--run F1@all-base-lr-all3k,F1@all-kd-final`
+- **Round 4:** the queues above. Then `select_active.py --teacher F1-all-large --student
+  F1-all-lr --teacher2 F1-all-base-lr` on the Mac.
+- **Round 5** (after Vertex v2 and `f1_data.py build`, which then includes the new labels).
+  First set `F1@all-large-all3k`'s epochs in train_f1.py (8 if F1@all-large-e8 beat
+  F1@all-large, else 5) and adjust `F1@all-kd-final`'s sources to round 4's answers:
+  - GPU 0: `--run F1@all-lr-rand1k,F1@all-lr-act1k,F1@all-lr-all3k,F1@all-base-lr-all3k`
+  - GPU 1: `--run F1@all-large-e8,F1@all-large-all3k,F1@all-kd-final` (e8 only if it timed
+    out in round 4; finished runs are skipped)
 
 ## 7. Continue in a new Claude Code session
 

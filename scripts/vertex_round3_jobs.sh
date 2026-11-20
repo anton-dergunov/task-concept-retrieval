@@ -15,6 +15,7 @@
 # Run (from the repo root, unattended, hours):
 #   CREDIT_LEFT=<USD under Billing → Credits> scripts/vertex_round3_jobs.sh v1
 #   CREDIT_LEFT=… GRADE_METHODS=F1@all-large.v2+parent,… scripts/vertex_round3_jobs.sh grade
+#   (later rounds: GRADE_NAME=g2 …; picks graded in earlier sets are skipped)
 #   CREDIT_LEFT=… scripts/vertex_round3_jobs.sh v2
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -71,9 +72,13 @@ v1)
 grade)
   : "${GRADE_METHODS:?set GRADE_METHODS to the silver method labels to grade}"
   NAME="${GRADE_NAME:-g1}"
-  [ -f "data/private/judge/grade/$NAME/meta.json" ] || $G prepare --name "$NAME" --methods "$GRADE_METHODS"
+  # Picks graded in earlier sets (extra_grades/*.jsonl) are not graded again.
+  SKIP=$(ls data/private/judge/extra_grades/*.jsonl 2>/dev/null | xargs -n1 basename 2>/dev/null \
+         | sed 's/\.jsonl$//' | grep -vx "$NAME" | paste -sd, - || true)
+  [ -f "data/private/judge/grade/$NAME/meta.json" ] || \
+    $G prepare --name "$NAME" --methods "$GRADE_METHODS" --skip "${GRADE_SKIP-$SKIP}"
   $G run --name "$NAME" --max-usd "$CAP"
-  echo "grade done. Score with: silver_eval.py --methods … --extra-grades $NAME"
+  echo "grade done. Score with: silver_eval.py --methods … --extra-grades ${SKIP:+$SKIP,}$NAME"
   ;;
 v2)
   [ -f "$SEL_SYNTH" ] || [ -f "$SEL_MS" ] || { echo "run scripts/select_active.py first"; exit 1; }

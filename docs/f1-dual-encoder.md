@@ -412,3 +412,57 @@ run guide: [f1-kaggle-run.md](f1-kaggle-run.md). Changes in `scripts/train_f1.py
 - **Students:** `F1@all-kd` (e5-small, the LR recipe, KD on the existing texts) and
   `F1@all-kd-ms` (+ MS-LaTTE). Rounds 4–5 add the rewrites, the candidates and the new
   Argon labels (presets `round4`, `round5`).
+
+### Round 3 results (ran 2026-11-18/19; extra grades 2026-11-20)
+
+Silver leaderboards: [results/silver/2026-11-19.md](../results/silver/2026-11-19.md) (plain)
+and [results/silver/2026-11-20-extra.md](../results/silver/2026-11-20-extra.md) (with the
+grades of every unjudged top-1 of the five leaders, below); logs in
+[results/f1/](../results/f1/). Both students learned from F1@all-base-lr: e5-large finished
+after them. Same format as round 2, all with the parent heading, on the extra-graded gold:
+
+| comparison | ΔnDCG@5 | Personal | hit@1 | held-out nDCG@5 |
+|---|---:|---:|---:|---:|
+| F1@all-base-lr vs F1@all-base | +0.012 [+0.007, +0.016] | +0.022 | 243 / 213, p = 0.17 | 0.543 vs 0.505 |
+| F1@all-large vs F1@all-base-lr | **+0.028** [+0.021, +0.035] | +0.019 | 424 / 314, p < 0.001 | 0.565 vs 0.543 |
+| F1@all-kd vs F1@all-lr | +0.005 [+0.000, +0.009] | +0.013 | 173 / 195, p = 0.27 | 0.509 vs 0.494 |
+| F1@all-kd-ms vs F1@all-lr | **+0.009** [+0.004, +0.014] | +0.016 | 252 / 210, p = 0.06 | 0.516 vs 0.494 |
+| F1@all-kd-ms vs F1@all-kd | +0.004 [−0.000, +0.008] | +0.003 | 191 / 127, p < 0.001 | 0.516 vs 0.509 |
+| F1@all-base-lr vs F1@all-kd-ms | +0.023 [+0.016, +0.030] | +0.031 | 426 / 308, p < 0.001 | 0.543 vs 0.516 |
+
+Best pooled (extra-graded): **F1@all-large.v2+parent**, nDCG@5 0.543, hit@1 0.697; the best
+e5-small, F1@all-kd-ms.v2+parent, 0.493 / 0.626; F1@all-lr.v2+parent 0.484 / 0.613; M3.v2
+0.337 / 0.437. On the plain gold the same order: 0.513 / 0.467 / 0.459.
+
+- **e5-large is the teacher.** It beats e5-base-lr on every set (most on Realistic and
+  Public-expanded, +0.05; least on Personal and Public-short, +0.02) in 5 epochs and 6.3 h on a T4 with chunked encoding
+  (§11; no layer checkpointing needed). Its held-out curve was still rising at the last
+  evaluation (+0.003 per evaluation), partly the LR decaying to 0: round 4 runs it for 8
+  epochs (`F1@all-large-e8`).
+- **e5-base gains from the LR recipe**, less than e5-small did (+0.012 vs +0.023), more on
+  Personal (+0.022).
+- **Distillation keeps only part of the teacher's lead.** The teacher (e5-base-lr) was
+  0.032 ahead of F1@all-lr on silver; F1@all-kd-ms recovers 0.009 of it (28%; 35% on
+  Personal), short of the ≥ half the plan aimed at. On held-out pool tasks it recovers
+  45% (0.022 of 0.049), so part of what the student learns is the teacher's view of the
+  pool's own labels. Round 4 repeats both students with e5-large (`-L`), whose lead over
+  F1@all-lr is 0.059.
+- **The 5.7k unlabelled MS-LaTTE tasks add a little** (+0.004, interval touching 0; hit@1
+  191 / 127), nothing on Personal. Cheap text helps only through the teacher, so its value
+  is bounded by how much the student can absorb.
+- **Grading the unjudged picks** (`grade_unjudged.py`, g1: 1,421 picks of the five leaders on
+  971 dev tasks, each graded by its eval set's own judge model: Argon 860 tasks, Flash 111; $4.7): on 50 blind
+  calibration icons the graders gave the same hit (grade ≥ 2) as the original judge on 48
+  and the same grade on 46, so the grades are usable. Only **30% of the unjudged top-1s are
+  hits** (Argon 30%, Flash 32%), against ~72% of the judged ones: *hit@1 ub* overstates a
+  method by far. Per method, the share of its unjudged top-1s that are hits rises with
+  model size (e5-small 0.29, kd-ms 0.32, e5-base 0.34, e5-base-lr 0.35, e5-large 0.38),
+  so bigger models were underrated a little on the plain gold, but the order holds. Every
+  graded method gains ~0.03 nDCG@5; differences between them barely move (≤ 0.004). From
+  now on, compare graded methods on the `-extra` table and ungraded ones on the plain
+  table; a new method's unjudged picks are best graded before close calls.
+- **Other languages** (the translated eval set, DE FR PT IT ZH JA PL, 1,010 dev tasks each;
+  [2026-11-20-xling](../results/silver/2026-11-20-xling.md)): F1@all-kd-ms.v2+parent scores
+  0.456–0.482 against 0.516 on the original text, and gains more over the untuned
+  e5-small in every language (+0.13 to +0.17) than on the original (+0.09). No pool
+  translations are needed (next-data-and-distillation.md step 2).
