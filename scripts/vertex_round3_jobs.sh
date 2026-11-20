@@ -6,7 +6,7 @@
 #   grade (after round 3 is scored; ~$10): Argon/Flash grades of the leaders' unjudged
 #       top-1s on dev; set GRADE_METHODS to the method labels (silver table names)
 #   v2  (after Kaggle round 4 and select_active.py; ~$65, before 2026-11-30): Argon judges
-#       the selected tasks, then their ES/RU translations and parent headings
+#       the selected tasks, then their ES/RU translations, parent headings and rewrites
 #
 # Safe to rerun at any time: every step skips what is done, and a submitted batch job is
 # never resubmitted. The budget cap is fixed on the first run (data/private/augment/
@@ -99,6 +99,10 @@ v2)
     else
       $A run --judge-run "$RUN" --max-usd "$CAP"
     fi
+    # Round 4: rewrites with the original's grades were the best cheap text (+0.019 for
+    # e5-small), so the new tasks get them too (~$0.5; after the parents, which they use).
+    echo "=== rewrites of $RUN"
+    $A rewrite --judge-run "$RUN" --max-usd "$CAP"
   done
   echo "v2 done. Next: add the runs to tcr/silver.py POOL_RUNS, f1_data.py build, Kaggle round 5."
   ;;

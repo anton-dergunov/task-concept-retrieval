@@ -1,4 +1,4 @@
-# Plan: more training signal after F1 round 2 (from 2026-11-17; updated 2026-11-20)
+# Plan: more training signal after F1 round 2 (from 2026-11-17; updated 2026-11-20, round 4)
 
 For the author and for a fresh Claude Code session. Read CLAUDE.md first (hard rules), then
 [f1-dual-encoder.md](f1-dual-encoder.md) §10–11 (round 2 and round 3 results). Run
@@ -7,16 +7,18 @@ guides: [f1-kaggle-run.md](f1-kaggle-run.md) (training) and
 
 ## Where things stand (2026-11-20)
 
-Done: Kaggle round 3, Vertex v1 and grade. Next: Kaggle round 4 (tarball built), then
-selection and Vertex v2 by ~11-27.
+Done: Kaggle rounds 3 and 4, Vertex v1 and grade, the active selection (3,000 tasks). Next:
+Vertex v2 (the author, before 2026-11-30), then Kaggle round 5.
 
-- **Best on silver** (extra-graded, [2026-11-20-extra](../results/silver/2026-11-20-extra.md)):
-  F1@all-large.v2+parent (e5-large teacher), nDCG@5 0.543, hit@1 0.697; e5-base-lr 0.516;
-  the best e5-small, F1@all-kd-ms.v2+parent, 0.493 / 0.626; F1@all-lr.v2+parent 0.484;
-  M3.v2 0.337 / 0.437 (f1-dual-encoder.md "Round 3 results").
-- **e5-large is the teacher** (+0.028 over e5-base-lr). Distillation from e5-base-lr gave
-  the e5-small student only 28% of the teacher's lead (+0.009 of 0.032); round 4 repeats it
-  with e5-large, whose lead is 0.059, and adds the rewrites and the generated tasks.
+- **Best on silver** (plain gold, [2026-11-20](../results/silver/2026-11-20.md);
+  f1-dual-encoder.md §12): F1@all-large-e8.v2+parent nDCG@5 0.519, hit@1 0.653; the best
+  e5-small, **F1@all-lr-para.v2+parent** (rewrites with the original's grades), 0.479 /
+  0.592; F1@all-lr 0.459; M3.v2 0.337 / 0.437. Extra-graded (round 3's leaders only,
+  [2026-11-20-extra](../results/silver/2026-11-20-extra.md)): F1@all-large 0.543.
+- **Round 4's answers:** rewrites with grades +0.019 for e5-small (Personal +0.023,
+  Realistic +0.038); with teacher targets only +0.004. The e5-large teacher gives its
+  students +0.002–0.003 over e5-base-lr: distillation keeps 15% of the teacher's lead.
+  Generated tasks +0.004 (not on Personal). e5-large for 8 epochs +0.006.
 - **Unjudged top-1s are mostly misses:** graded blind, 30% of them are hits (calibration
   agreement with the judge 48/50), so *hit@1 ub* is no guide. Every graded method gained
   ~0.03; the order did not change.
@@ -64,8 +66,9 @@ The judge's labels are what lifted F1 (F1@0, the v2 free signal alone, only reac
 | 11-18/19 | Kaggle round 3 | 1. teachers e5-base-lr, e5-large; students F1@all-kd, F1@all-kd-ms | done |
 | 11-19 | Vertex v1 ($31) | 2. translated eval set; rewrites; 11k candidate tasks | done |
 | 11-20 | Vertex grade ($4.7) | 5. grades of the leaders' unjudged top-1s | done |
-| next | Kaggle round 4 | 3. score candidates; rewrite and candidate students; e5-large 8 epochs | tarball built |
-| after round 4 | Mac + Vertex v2 (~$65) | 4. select 2k + 1k; Argon judges them, by ~11-27 | |
+| 11-20 | Kaggle round 4 | 3. score candidates; rewrite and candidate students; e5-large 8 epochs | done |
+| 11-20 | Mac | 4a. select 2k active + 1k random | done |
+| next | Vertex v2 (~$66) | 4b. Argon judges them, + translations, parents, rewrites; g2 grading | the author, before 11-30 |
 | after v2 | Kaggle round 5 | 6. retrain with the new labels; e5-large teacher and final student | |
 
 ## 1. Round 3 (Kaggle) — done 2026-11-19
@@ -132,7 +135,21 @@ Design, as run:
   `personal_synth_cand.jsonl`. ~$31. They are distillation text and the pool that
   active selection picks from.
 
-## 3. Round 4 (Kaggle, next)
+## 3. Round 4 (Kaggle) — done 2026-11-20
+
+Answers (f1-dual-encoder.md §12, paired on silver with the parent heading):
+- e5-large teacher vs e5-base-lr for the student: +0.003 (kd-L vs kd), +0.002 (kd-ms-L vs
+  kd-ms). Distillation is not where the gains are.
+- Rewrites: **with the original's grades +0.019** over F1@all-lr (`F1@all-lr-para`, the best
+  e5-small, +0.012 over kd-L); with teacher targets only +0.004 over kd-L. Round 5 takes
+  graded rewrites, v2 writes them for the new tasks too.
+- 11k generated Personal-style tasks: +0.004 over kd-ms-L, +0.002 on Personal.
+- `F1@all-large-e8`: +0.006 [+0.002, +0.009] over F1@all-large; peaked at epoch 5 of the
+  slower schedule, stopped at epoch 6. Round 5's teacher keeps 8 epochs.
+- Found: a double evaluation at each odd-length epoch's end spent a patience slot; fixed in
+  train_f1.py for round 5.
+
+Design, as run:
 
 Tarball rebuilt 2026-11-20 (19.7 MB): round 3's rows unchanged and in the same relative
 order, plus 34,650 rewrite rows and 11,002 candidates; the teacher scores are recomputed,
@@ -151,6 +168,13 @@ F1@all-large. Queues (f1-kaggle-run.md):
   generated Personal-style tasks help (-gen vs kd-ms-L), on Personal above all?
 
 ## 4. Active selection and Vertex v2 (by ~11-27, ~$65)
+
+Selection done 2026-11-20 (`select_active.py --teacher F1-all-large --student F1-all-lr
+--teacher2 F1-all-base-lr`): 1,997 Personal-style + 1,003 MS-LaTTE tasks, 2,000 active (mean
+priority 1.72 against 1.15 over all 16,731 candidates; 1,120 distinct teacher top-1s) and
+1,000 random. v2 now also writes rewrites of the new tasks (~$0.5), since graded rewrites
+were round 4's best text. Grade round 4's leaders' unjudged top-1s in the same sitting
+(`GRADE_NAME=g2 GRADE_METHODS=F1@all-large-e8.v2+parent,F1@all-lr-para.v2+parent,F1@all-kd-gen.v2+parent`, ~$3–5).
 
 - `scripts/select_active.py`: priority = 1 − teacher top-1 probability + 0.5 if the
   teacher's top-1 is not in the student's top 5 + 0.5 if two teachers disagree; no junk
@@ -183,14 +207,17 @@ comparable):
 
 - `F1@all-lr-rand1k` vs `F1@all-lr-act1k`: **did active selection beat random** at equal size?
 - `F1@all-lr-all3k`: the learning-curve point at ~12.9k judged tasks.
-- `F1@all-large-all3k` (the teacher retrained; e5-large since round 3, 5 epochs, or 8
-  if round 4's `F1@all-large-e8` wins) → `F1@all-kd-final`, the student on everything,
-  taught by the best of the e5-large runs: the candidate for the next export
-  (deployment.md). Its sources (rewrites, candidates) follow round 4's answers.
-- `F1@all-base-lr-all3k`: e5-base retrained, the mid-size bundle option.
-- Queues: GPU 0 rand1k, act1k, all3k, base-lr-all3k (~7 h); GPU 1 large-all3k, then
-  kd-final (~9–11 h with 5 epochs; with 8 the teacher alone takes ~13 h, so kd-final moves
-  to a second session, where the timed-out teacher resumes first).
+- `F1@all-large-all3k`: the teacher retrained, 8 epochs (round 4: the e8 schedule won).
+- `F1@all-kd-final`, the student on everything: graded rewrites (round 4's best text) +
+  distillation + both unlabelled sources, pinned to `F1@all-large-e8` so it runs on GPU 0
+  in the same session as the teacher's retraining (the teacher matters little: round 4).
+  The candidate for the next export (deployment.md).
+- `F1@all-lr-para-all3k`: its control without distillation: does the teacher add anything
+  on top of graded rewrites?
+- `F1@all-base-lr-all3k`: e5-base retrained, the mid-size bundle option; preset kept, out
+  of the queues (e5-large and e5-small bracket it, and the deployed model stays e5-small).
+- Queues (f1-kaggle-run.md): GPU 0 rand1k, act1k, all3k, lr-para-all3k, kd-final (~8–9 h);
+  GPU 1 large-all3k (~9–11 h; resumes in a second session if it times out).
 
 ## Budget
 

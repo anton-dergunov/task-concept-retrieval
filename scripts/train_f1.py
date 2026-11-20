@@ -126,8 +126,13 @@ PLANS = {
     # Round 5: + the Argon labels of round 3's selected tasks (2k active + 1k random). Equal
     # sizes answer "did active selection beat random?"; all3k the learning-curve point; then
     # the retrained teachers (e5-large, the better teacher in round 3; e5-base, the mid-size
-    # bundle option) and the final student, taught by the better of the two e5-large runs.
-    # Set F1@all-large-all3k's epochs to 8 if round 4's F1@all-large-e8 beats F1@all-large.
+    # bundle option) and the final student.
+    # After round 4 (silver 2026-11-20): F1@all-large-e8 beat F1@all-large (+0.006 [+0.002,
+    # +0.009]), so the retrained teacher has the 8-epoch schedule. Rewrites with the original's
+    # grades were the best cheap text (F1@all-lr-para +0.019 over F1@all-lr), distillation added
+    # only +0.003-0.008, so the final student takes graded rewrites plus distillation, pinned
+    # to F1@all-large-e8: it runs on GPU 0 in the same session as the teacher's retraining.
+    # F1@all-lr-para-all3k is its control (does distillation add anything on top?).
     "round5": {
         "F1@all-lr-rand1k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                              "sel": {"random": 1000}},
@@ -135,16 +140,18 @@ PLANS = {
                             "sel": {"active": 1000}},
         "F1@all-lr-all3k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                             "sel": {"active": None, "random": None}},
-        "F1@all-large-all3k": {"pool_tasks": None, "holdout": True, "epochs": 5,
+        "F1@all-large-all3k": {"pool_tasks": None, "holdout": True, "epochs": 8,
                                "model": "intfloat/multilingual-e5-large", "chunk_tokens": 2048,
                                "sel": {"active": None, "random": None}},
+        "F1@all-lr-para-all3k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                                 "teacher": ["F1@all-large-e8"], "kd_weight": 0.0, "para": "graded",
+                                 "sel": {"active": None, "random": None}},
         "F1@all-base-lr-all3k": {"pool_tasks": None, "holdout": True, "lr": 3e-5, "epochs": 10,
                                  "model": "intfloat/multilingual-e5-base",
                                  "sel": {"active": None, "random": None}},
         "F1@all-kd-final": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
-                            "teacher": ["F1@all-large-all3k", "F1@all-large-e8", "F1@all-large"],
-                            "kd_weight": 1.0,
-                            "sel": {"active": None, "random": None}, "para": "kd",
+                            "teacher": ["F1@all-large-e8"], "kd_weight": 1.0,
+                            "sel": {"active": None, "random": None}, "para": "graded",
                             "distill_sources": ["distill-mslatte", "distill-cand"]},
     },
 }
@@ -556,7 +563,11 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     sched = torch.optim.lr_scheduler.LambdaLR(
         opt, lambda s: min((s + 1) / warm, max(0.0, (total - s) / max(1, total - warm))))
     scaler = torch.amp.GradScaler("cuda", enabled=dev == "cuda")
-    seg = max(1, steps_per_epoch // a.evals_per_epoch)
+    # In-epoch positions of the evaluations, the epoch end being 0. Before round 5 the test was
+    # `pos % (spe // E) == 0`, which with an odd epoch (401 steps) also fired one step before
+    # its end: two evaluations a step apart, the second spending a patience slot.
+    eval_at = {k * steps_per_epoch // a.evals_per_epoch % steps_per_epoch
+               for k in range(1, max(1, a.evals_per_epoch) + 1)}
     if a.checkpointing == "auto" and dev == "cuda":
         try:
             choose_checkpointing(enc, data, rows0, a, name, t_loss)
@@ -646,7 +657,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
                 log(f"{name} step {st['step']}/{total} loss {lq_acc / n_acc:.3f} + {li_acc / n_acc:.3f}{kd} "
                     f"({dt:.2f} s/step, ≤ {eta:.0f} min left)")
                 t_log, lq_acc, li_acc, lk_acc, m_acc, n_acc = time.time(), 0.0, 0.0, 0.0, 0, 0
-            seg_end = (st["step"] % steps_per_epoch) % seg == 0 or st["step"] % steps_per_epoch == 0
+            seg_end = st["step"] % steps_per_epoch in eval_at
             minutes = (time.time() - t_start) / 60
             if a.max_minutes and minutes > a.max_minutes:
                 log(f"{name}: --max-minutes reached")

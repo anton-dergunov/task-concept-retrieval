@@ -1,4 +1,4 @@
-# Running F1 on Kaggle (hand-off): round 4, then round 5
+# Running F1 on Kaggle (hand-off): round 5 next
 
 For the author, and for a fresh Claude Code session that continues afterwards. The design
 is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
@@ -6,7 +6,10 @@ is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
 headless for up to 12 hours on two T4 GPUs; data building, import and scoring stay on the
 Mac (CLAUDE.md "Compute"). Round 2's guide is this file's git history (2026-11-16).
 
-**State (2026-11-20):** `data/private/f1/f1_data.tar.gz` rebuilt for round 4 (19.7 MB; round
+**State (2026-11-20, late):** round 4 ran, is imported and scored (silver 2026-11-20;
+f1-dual-encoder.md §12). Next: Vertex v2, `f1_data.py build`, round 5 (below).
+
+Before round 4: `data/private/f1/f1_data.tar.gz` rebuilt for round 4 (19.7 MB; round
 3's is kept as `f1_data.round3.tar.gz`). Round 3's rows are all there, unchanged and in the
 same relative order; new: 34,650 rewrite rows (`para-synth`, `para-mslatte`), 11,002
 generated Personal-style tasks (`distill-cand`) and the round-4 `train_f1.py`. Private
@@ -53,9 +56,9 @@ jobs = [
 ]
 ```
 
-After import, score on the Mac:
-`nice .venv/bin/python scripts/silver_eval.py --methods F1@all-kd-L,F1@all-kd-ms-L,F1@all-kd-gen,F1@all-lr-para,F1@all-kd-para --versions v2`
-(e5-small: minutes each), and F1@all-large-e8 separately (~15 min under `nice`). Then grade
+After import, score on the Mac (done 2026-11-20):
+`nice .venv/bin/python scripts/silver_eval.py --methods F1@all-kd-L,F1@all-kd-ms-L,F1@all-kd-gen,F1@all-lr-para,F1@all-kd-para,F1@all-large-e8 --versions v2`
+(e5-small: minutes each, e5-large ~15 min under `nice`). Then grade
 the new leaders' unjudged top-1s (`GRADE_NAME=g2 … vertex_round3_jobs.sh grade`) and
 rescore with `--extra-grades g1,g2`.
 
@@ -248,7 +251,28 @@ unknown. The browser's download list (⌥⌘L in Safari, ⇧⌘J in Chrome) show
 download has started. That session was a *Draft Session*, so the file came from the live VM
 and is lost when the session ends. A committed version's output stays.
 
-**Later, if downloading stays awkward: upload to the project's bucket.** Kaggle's *Add-ons →
+**A committed version keeps its output; there is no hurry.** The output of a *Save & Run
+All (Commit)* version (round 4's included) stays with that version: close the tab or stop
+the editor session, download when convenient, and download again if the file is damaged.
+The next round attaches that version's output as an input (cell 2 unpacks
+`f1_runs.tar.zst`), so the archive never goes back up from the Mac. Only a Draft
+Session's `/kaggle/working` disappears with its VM. Round 4's archive (2026-11-20) took
+four clicks on *Output* → download before the browser started it.
+
+**Easiest command-line route: the Kaggle CLI** (free; nothing is stored with a third
+party). Once: `.venv/bin/pip install kaggle`, then Kaggle → *Settings* → *API* → *Create New
+Token*, and move the downloaded `kaggle.json` to `~/.kaggle/` (`chmod 600`). Per round:
+
+```bash
+.venv/bin/kaggle kernels output <user>/<notebook-slug> -p ~/Downloads --file-pattern '^f1_runs\.tar\.zst$'
+```
+
+It fetches the latest version's output; `--file-pattern` (a regex on the file name) keeps
+it from also downloading `runs/` (~7 GB, resume states included). Try it first with
+`'^gpu0\.log$'`. Not yet tried here; the bucket below is the fallback.
+
+**If both stay awkward: upload to the project's bucket** (Google Cloud Storage, not
+Drive). Kaggle's *Add-ons →
 Google Cloud Services* links a Google account. Then cell 4 runs
 `UserSecretsClient().set_gcloud_credentials(project=…)` and
 `gcloud storage cp f1_runs.tar.zst gs://<VERTEX_PROJECT>-tcr-batch/f1/round<n>/`. On the
@@ -284,12 +308,14 @@ previous round's output each time.
 
 - **Round 4:** the queues above. Then `select_active.py --teacher F1-all-large --student
   F1-all-lr --teacher2 F1-all-base-lr` on the Mac.
-- **Round 5** (after Vertex v2 and `f1_data.py build`, which then includes the new labels).
-  First set `F1@all-large-all3k`'s epochs in train_f1.py (8 if F1@all-large-e8 beat
-  F1@all-large, else 5) and adjust `F1@all-kd-final`'s sources to round 4's answers:
-  - GPU 0: `--run F1@all-lr-rand1k,F1@all-lr-act1k,F1@all-lr-all3k,F1@all-base-lr-all3k`
-  - GPU 1: `--run F1@all-large-e8,F1@all-large-all3k,F1@all-kd-final` (e8 only if it timed
-    out in round 4; finished runs are skipped)
+- **Round 5** (after Vertex v2 and `f1_data.py build`, which then includes the new labels
+  and the new tasks' rewrites). Presets set by round 4's answers (f1-dual-encoder.md §12):
+  the teacher retrains for 8 epochs, the final student takes graded rewrites and is pinned
+  to `F1@all-large-e8`, so both fit one session. Attach round 4's version output (it holds
+  F1-all-large-e8) and round 3's dataset; cell 2's `NEED` becomes `{"F1-all-large-e8"}`.
+  - GPU 0: `--run F1@all-lr-rand1k,F1@all-lr-act1k,F1@all-lr-all3k,F1@all-lr-para-all3k,F1@all-kd-final` (~8–9 h)
+  - GPU 1: `--run F1@all-large-all3k` (~9–11 h; if it times out, it resumes first in the
+    next session)
 
 ## 7. Continue in a new Claude Code session
 

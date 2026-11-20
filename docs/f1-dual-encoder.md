@@ -466,3 +466,60 @@ e5-small, F1@all-kd-ms.v2+parent, 0.493 / 0.626; F1@all-lr.v2+parent 0.484 / 0.6
   0.456–0.482 against 0.516 on the original text, and gains more over the untuned
   e5-small in every language (+0.13 to +0.17) than on the original (+0.09). No pool
   translations are needed (next-data-and-distillation.md step 2).
+
+## 12. Round 4: the e5-large teacher, rewrites, generated tasks (ran 2026-11-20)
+
+Queues and questions: [f1-kaggle-run.md](f1-kaggle-run.md) "Round 4". Every student learned
+from F1@all-large (pinned); the e5-large teacher scored every training row first (input of
+`select_active.py`). One session, both GPUs; the e8 run took 8.1 h.
+
+### Round 4 results
+
+Silver leaderboard: [results/silver/2026-11-20.md](../results/silver/2026-11-20.md) (plain
+gold: the round-4 runs' unjudged picks are not graded yet); logs in
+[results/f1/](../results/f1/). Paired, all with the parent heading:
+
+| comparison | ΔnDCG@5 [95%] | Personal | Realistic | hit@1 | held-out nDCG@5 |
+|---|---:|---:|---:|---:|---:|
+| F1@all-large-e8 vs F1@all-large | **+0.006** [+0.002, +0.009] | −0.001 | −0.002 | 172 / 141, p = 0.09 | 0.576 vs 0.565 |
+| F1@all-kd-L vs F1@all-kd | +0.003 [−0.000, +0.006] | +0.002 | +0.007 | 139 / 106, p = 0.04 | 0.517 vs 0.509 |
+| F1@all-kd-ms-L vs F1@all-kd-ms | +0.002 [−0.001, +0.006] | +0.004 | +0.008 | 122 / 143, p = 0.22 | 0.516 vs 0.516 |
+| F1@all-kd-gen vs F1@all-kd-ms-L | +0.004 [+0.000, +0.007] | +0.002 | +0.001 | 176 / 131, p = 0.01 | 0.527 vs 0.516 |
+| F1@all-kd-para vs F1@all-kd-L | +0.004 [−0.000, +0.008] | +0.003 | +0.005 | 193 / 169, p = 0.23 | 0.530 vs 0.517 |
+| F1@all-lr-para vs F1@all-lr | **+0.019** [+0.014, +0.025] | +0.023 | +0.038 | 284 / 237, p = 0.04 | 0.530 vs 0.494 |
+| F1@all-lr-para vs F1@all-kd-L | **+0.012** [+0.006, +0.017] | +0.007 | +0.031 | 259 / 227, p = 0.16 | 0.530 vs 0.517 |
+| F1@all-kd-para vs F1@all-lr-para | −0.007 [−0.013, −0.002] | −0.004 | −0.026 | 233 / 241, p = 0.75 | 0.530 vs 0.530 |
+| F1@all-large-e8 vs F1@all-lr-para | +0.040 | +0.035 | +0.066 | | 0.576 vs 0.530 |
+
+Best pooled (plain gold): **F1@all-large-e8.v2+parent**, nDCG@5 0.519, hit@1 0.653
+(F1@all-large 0.513 / 0.644); the best e5-small, **F1@all-lr-para.v2+parent**, 0.479 / 0.592
+(Personal 0.437, Realistic 0.453); F1@all-kd-gen 0.473; F1@all-lr 0.459; M3.v2 0.337 / 0.437.
+
+- **Rewrites with the original's grades are the best cheap text so far.** Four rewrites per
+  judged task (terse, reworded, casual ES, casual RU), each kept only where the teacher still
+  ranks one of the original's grade-3 icons in its top 10 (5,604 of 34,650 dropped), lift
+  e5-small by +0.019, most on Realistic (+0.038) and Personal (+0.023): the register
+  variation the eval sets have and the pool lacked. The same rewrites with teacher targets
+  only (`-para`, kd) give a third of that (+0.004 over kd-L): the original's grades carry
+  more than the teacher's view of them.
+- **A better teacher hardly moves the student.** With e5-large instead of e5-base-lr, the
+  distilled students gain +0.002–0.003. F1@all-large is 0.054 ahead of F1@all-lr, and
+  F1@all-kd-L keeps 0.008 of that (15%; round 3's e5-base-lr teacher: 28%). Distillation as
+  built (KL to the teacher's scores over the catalogue, top 64 kept per text) is not where
+  the next gains are; graded text is.
+- **The 11k generated Personal-style tasks add a little** (+0.004, hit@1 176 / 131,
+  p = 0.01), not on Personal (+0.002): unlabelled text through the teacher again.
+- **The longer schedule helps e5-large a little.** The 8-epoch run peaked at epoch 5 (its LR
+  decays more slowly than the 5-epoch run's) and stopped at epoch 6 by patience; +0.006 on
+  silver, from the public sets and Personal-synth, not Personal or Realistic. Round 5's
+  teacher keeps the 8-epoch schedule.
+- **A bug in the evaluation schedule** (found here, fixed for round 5): with an odd epoch
+  (401 steps, 2 evaluations per epoch) the training loop evaluated at in-epoch step 400 and
+  again at the epoch's end one step later. The second evaluation could only tie or lose,
+  so it spent one of the 3 patience slots: runs stopped after ~1 epoch without gain instead
+  of ~1.5. It changes when runs stop, not their best checkpoints, so earlier results stand.
+- **Other languages** ([2026-11-20-xling](../results/silver/2026-11-20-xling.md), nDCG@5
+  with the parent heading): F1@all-lr-para is the best e5-small in all 7 languages (DE
+  0.471, FR 0.478, PT 0.485, IT 0.469, ZH 0.495, JA 0.484, PL 0.464), +0.008 to +0.032
+  over F1@all-lr, although its rewrites add only casual ES and RU: varied phrasing
+  carries across languages. Still no pool translations needed.

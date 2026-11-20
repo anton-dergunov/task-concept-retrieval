@@ -14,7 +14,8 @@ per language plus xling-src, the same tasks in their original language), written
 (scripts/grade_unjudged.py) to gold, written to <date>-extra.
 
 Methods not run now are merged in from stored rankings (data/private/silver/<tag>/):
-first the output tag's own, then --with (default: the most recent other tag), each
+first the output tag's own, then --with (default: the most recent other tag with
+rankings for the datasets scored now), each
 rescored against the current gold. So `--methods F1 --versions v2` adds F1 next to every
 earlier method, with Δ vs --ref, instead of replacing the table. --fresh: no merging.
 
@@ -101,7 +102,7 @@ def run(args) -> dict:
     res = {"datasets": datasets, "tasks": {d: len(v) for d, v in tasks.items()},
            "per_task": per_task, "ranked": ranked_out, "merged": {}}
     if not args.fresh:
-        merge_stored(res, merge_tags(args), golds, tasks)
+        merge_stored(res, merge_tags(args, datasets), golds, tasks)
     return res
 
 
@@ -114,12 +115,25 @@ def expand_datasets(spec: str) -> list:
     return out
 
 
-def merge_tags(args) -> list:
+def _holds(folder: Path, datasets: list) -> bool:
+    """Whether a stored tag has rankings for any of these datasets (first row of one file):
+    an -xling tag holds only xling-*, a plain or -extra one only the eval sets."""
+    for f in folder.glob("*.jsonl"):
+        with open(f, encoding="utf-8") as fh:
+            line = fh.readline()
+        return bool(line) and json.loads(line)["dataset"] in datasets
+    return False
+
+
+def merge_tags(args, datasets: list) -> list:
+    """The output tag's own rankings, then --with: by default the most recent other tag that
+    holds rankings for the datasets scored now (so a translated-set run never hides the main
+    table, nor the reverse)."""
     tags = [args.tag]
     w = args.with_
     if w == "latest":
-        others = [p for p in PRIVATE_OUT.iterdir() if p.is_dir() and p.name != args.tag] \
-            if PRIVATE_OUT.exists() else []
+        others = [p for p in PRIVATE_OUT.iterdir() if p.is_dir() and p.name != args.tag
+                  and _holds(p, datasets)] if PRIVATE_OUT.exists() else []
         tags += [max(others, key=lambda p: p.stat().st_mtime).name] if others else []
     elif w and w != "none":
         tags += w.split(",")
