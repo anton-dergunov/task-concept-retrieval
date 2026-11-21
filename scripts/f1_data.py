@@ -47,12 +47,17 @@ def distill_sources() -> dict:
     once generated, the Personal-style candidates (private, finetune.CANDIDATES_FILE)."""
     sys.path.insert(0, str(ROOT / "scripts" / "datasets"))
     from build_train_pools import mslatte_unused
+    from tcr import silver
     out = {"distill-mslatte": mslatte_unused()}
     if finetune.CANDIDATES_FILE.exists():
         from tcr.datasets import read_jsonl
         out["distill-cand"] = read_jsonl(finetune.CANDIDATES_FILE)
+    # Tasks a judge run has labelled since (round 3's selection) are pool rows, not
+    # unlabelled text as well.
+    judged = {t["id"] for runs in silver.POOL_RUNS.values() for run in runs for t in silver.run_tasks(run)}
     for k, v in out.items():
-        print(f"{k}: {len(v)} tasks", file=sys.stderr)
+        out[k] = [t for t in v if t["id"] not in judged]
+        print(f"{k}: {len(out[k])} tasks ({len(v) - len(out[k])} judged since, left out)", file=sys.stderr)
     return out
 
 

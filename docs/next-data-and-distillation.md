@@ -1,20 +1,27 @@
-# Plan: more training signal after F1 round 2 (from 2026-11-17; updated 2026-11-20, round 4)
+# Plan: more training signal after F1 round 2 (from 2026-11-17; updated 2026-11-21, after v2)
 
 For the author and for a fresh Claude Code session. Read CLAUDE.md first (hard rules), then
 [f1-dual-encoder.md](f1-dual-encoder.md) §10–11 (round 2 and round 3 results). Run
 guides: [f1-kaggle-run.md](f1-kaggle-run.md) (training) and
 [vertex-round3-run.md](vertex-round3-run.md) (Gemini jobs).
 
-## Where things stand (2026-11-20)
+## Where things stand (2026-11-21)
 
-Done: Kaggle rounds 3 and 4, Vertex v1 and grade, the active selection (3,000 tasks). Next:
-Vertex v2 (the author, before 2026-11-30), then Kaggle round 5.
+Done: Kaggle rounds 3 and 4, Vertex v1, grade and v2 (3,000 selected tasks judged), the
+g2/g3 grading of round 4's leaders. Next: Kaggle round 5 (data built, f1-kaggle-run.md),
+then perhaps round 6's Argon batch before 2026-11-30 ([argon-experiments.md](argon-experiments.md)).
 
-- **Best on silver** (plain gold, [2026-11-20](../results/silver/2026-11-20.md);
-  f1-dual-encoder.md §12): F1@all-large-e8.v2+parent nDCG@5 0.519, hit@1 0.653; the best
-  e5-small, **F1@all-lr-para.v2+parent** (rewrites with the original's grades), 0.479 /
-  0.592; F1@all-lr 0.459; M3.v2 0.337 / 0.437. Extra-graded (round 3's leaders only,
-  [2026-11-20-extra](../results/silver/2026-11-20-extra.md)): F1@all-large 0.543.
+- **Best on silver** (extra-graded g1–g3, every leader's top-1 judged,
+  [2026-11-21-extra](../results/silver/2026-11-21-extra.md); f1-dual-encoder.md §12):
+  F1@all-large-e8.v2+parent nDCG@5 0.552, hit@1 0.711; the best e5-small,
+  **F1@all-lr-para.v2+parent** (rewrites with the original's grades), 0.507 / 0.636;
+  F1@all-kd-gen 0.502; F1@all-lr 0.487; M3.v2 0.336 / 0.437. Plain gold:
+  [2026-11-20](../results/silver/2026-11-20.md).
+- **v2 (2026-11-21, $58):** 2,999 of 3,000 selected tasks judged by Argon (1,998 active,
+  999 random with a label in the training data), all with ES/RU translations, the
+  Personal-style ones with invented parents, all with four rewrites. **The active tasks
+  are harder:** round 4's teacher has hit@1 0.559 on them against 0.761 on the random
+  ones (e5-small F1@all-lr: 0.506 vs 0.702; f1-dual-encoder.md "Round 5 inputs").
 - **Round 4's answers:** rewrites with grades +0.019 for e5-small (Personal +0.023,
   Realistic +0.038); with teacher targets only +0.004. The e5-large teacher gives its
   students +0.002–0.003 over e5-base-lr: distillation keeps 15% of the teacher's lead.
@@ -27,8 +34,9 @@ Vertex v2 (the author, before 2026-11-30), then Kaggle round 5.
 - **Cost of judged data** (spend log): Argon ≈ $19 per 1,000 tasks in batch at the promotional
   price, which doubles after 2026-11-30; generating Personal-style tasks with Flash ≈ $2.6 per
   1,000 (measured in v1). Tripling the pool at random (+20k tasks) would cost ~$400 for +0.03.
-- **Budget:** $35.5 of round 3's $115 cap spent (spend log $326.67, cap $406.14), $79.5
-  left for v2's ~$65.
+- **Budget:** $94.8 of round 3's $115 cap spent (spend log $385.97, cap $406.14), $20.2
+  left: the grading of round 5's leaders (~$3). The author allows ~$50 more (up to ~$100)
+  for [argon-experiments.md](argon-experiments.md), shaped by round 5.
 
 ## Decisions (author, 2026-11-17)
 
@@ -68,8 +76,10 @@ The judge's labels are what lifted F1 (F1@0, the v2 free signal alone, only reac
 | 11-20 | Vertex grade ($4.7) | 5. grades of the leaders' unjudged top-1s | done |
 | 11-20 | Kaggle round 4 | 3. score candidates; rewrite and candidate students; e5-large 8 epochs | done |
 | 11-20 | Mac | 4a. select 2k active + 1k random | done |
-| next | Vertex v2 (~$66) | 4b. Argon judges them, + translations, parents, rewrites; g2 grading | the author, before 11-30 |
-| after v2 | Kaggle round 5 | 6. retrain with the new labels; e5-large teacher and final student | |
+| 11-21 | Vertex v2 ($58) | 4b. Argon judges them, + translations, parents, rewrites; g2 grading | done |
+| 11-21 | Vertex g3 ($1.1) | grades of the round-4 picks g2 missed; rewrites of 290 more selected tasks | done |
+| next | Kaggle round 5 | 6. retrain with the new labels; e5-large teacher and final student; scores for round 6 | data built |
+| after round 5 | Vertex v3 (~$50) | round 6's Argon batch, [argon-experiments.md](argon-experiments.md) #1, if round 5 says so | before 11-30 |
 
 ## 1. Round 3 (Kaggle) — done 2026-11-19
 
@@ -167,7 +177,7 @@ F1@all-large. Queues (f1-kaggle-run.md):
   kd, against round 3's +0.005)? Do rewrites help, and which way (-para vs kd-L)? Do 11k
   generated Personal-style tasks help (-gen vs kd-ms-L), on Personal above all?
 
-## 4. Active selection and Vertex v2 (by ~11-27, ~$65)
+## 4. Active selection and Vertex v2 — done 2026-11-21 ($57.7)
 
 Selection done 2026-11-20 (`select_active.py --teacher F1-all-large --student F1-all-lr
 --teacher2 F1-all-base-lr`): 1,997 Personal-style + 1,003 MS-LaTTE tasks, 2,000 active (mean
@@ -185,12 +195,27 @@ were round 4's best text. Grade round 4's leaders' unjudged top-1s in the same s
 - `vertex_round3_jobs.sh v2`: Argon judges both pool files (`pool-synth3-j4`,
   `pool-mslatte2-j4`), then their ES/RU translations and parent headings. ~$63 + ~$2.
 
+Result: Argon $55.85 for 3,000 tasks ($18.6 per 1,000), translations, parents and
+rewrites $1.87. 2,999 labelled (1 failed; 2 without a graded v2 icon), ES/RU for all but 8
+MS-LaTTE tasks. Two fixes before round 5 (2026-11-21): the 290 selected tasks in the
+validation bucket now train (they never validate, so the bucket only dropped paid labels;
+their rewrites were written in the g3 sitting), and the 3,000 tasks are no longer also
+distillation text (distill-cand 9,005, distill-mslatte 4,726). How round 4's models do on
+these fresh tasks: f1-dual-encoder.md "Round 5 inputs".
+
 ## 5. Grading unjudged top-1s — done 2026-11-20 ($4.7)
 
 Result (f1-dual-encoder.md "Round 3 results"): 1,421 picks of the five round-2/3 leaders;
 48/50 calibration icons agree with the judge on hit; only 30% of the unjudged top-1s are
 hits; every graded method gains ~0.03 and the order holds. Grade the round-4 and round-5
 leaders the same way (`GRADE_NAME=g2`, ~$3–5 each time) before deciding close calls.
+
+Round 4's leaders (2026-11-21): g2 ($0.54) graded only F1@all-large-e8's 113 picks:
+`grade_unjudged.py` took each method's newest stored ranking, which for the two e5-small
+leaders was the translated-set run (no gold, so no picks). Fixed (it skips -xling
+rankings); g3 ($1.03) graded their 236 picks. Calibration 49/50 on hit both times; 39%
+(g2) and 26% (g3) of the picks are hits. With g1–g3 every leader's top-1 is judged, and
+round 4's answers hold (f1-dual-encoder.md §12). Round 5's leaders: `GRADE_NAME=g4`.
 
 Close variants now differ by 0.01–0.02 nDCG@5 while 12–15% of their top-1s were never shown
 to the judge (f1-dual-encoder.md §7). `scripts/grade_unjudged.py` asks each eval set's own
@@ -199,13 +224,18 @@ graded ranking as the scale and 50 blind calibration icons. `silver_eval.py
 --extra-grades g1` then scores with them (written to `<date>-extra`, so the plain table
 stays comparable). Grade the leaders of rounds 2–3 together: about 1,000 picks.
 
-## 6. Round 5 (Kaggle, after v2)
+## 6. Round 5 (Kaggle, after v2; data built 2026-11-21)
 
 Code done (presets `round5`; `tcr.silver.NEW_POOL_RUNS` joins the new runs once their labels
-exist; their tasks carry `sel` and never join validation, so held-out numbers stay
-comparable):
+exist; their tasks carry `sel`, all train and none validates, so held-out numbers stay
+comparable). Found while checking the data: the 1k subsets were drawn from the rewrite rows
+as well as the tasks, so rand1k and act1k held ~230 tasks each; fixed (999 and 1,000).
 
 - `F1@all-lr-rand1k` vs `F1@all-lr-act1k`: **did active selection beat random** at equal size?
+  On top of 8.9k tasks, 1k add only ~+0.004, so the difference may stay inside the interval:
+- `F1@1k-rand` vs `F1@1k-act`: the same question with the selected tasks alone (F1@1k's
+  recipe; F1@1k, 1k random tasks of the earlier pools, is the third point), where 1k
+  tasks are worth ~+0.04. These two decide round 6's batch (argon-experiments.md #1).
 - `F1@all-lr-all3k`: the learning-curve point at ~12.9k judged tasks.
 - `F1@all-large-all3k`: the teacher retrained, 8 epochs (round 4: the e8 schedule won).
 - `F1@all-kd-final`, the student on everything: graded rewrites (round 4's best text) +
@@ -216,8 +246,13 @@ comparable):
   on top of graded rewrites?
 - `F1@all-base-lr-all3k`: e5-base retrained, the mid-size bundle option; preset kept, out
   of the queues (e5-large and e5-small bracket it, and the deployed model stays e5-small).
-- Queues (f1-kaggle-run.md): GPU 0 rand1k, act1k, all3k, lr-para-all3k, kd-final (~8–9 h);
-  GPU 1 large-all3k (~9–11 h; resumes in a second session if it times out).
+- Queues (f1-kaggle-run.md): GPU 0 first scores every row with F1@all-large-e8,
+  F1@all-lr-para and F1@all-base-lr (round 6's selection input, ~0.5–1 h), then rand1k,
+  act1k, 1k-rand, 1k-act, all3k, lr-para-all3k, kd-final (~9–10 h); GPU 1 large-all3k
+  (~9–11 h; resumes in a second session if it times out).
+- After import: score on silver, grade the leaders (g4), and if round 6 goes ahead, run
+  `select_active.py` on **this** build's queries.jsonl (the scores are keyed by its hash:
+  do not rebuild the data before selecting).
 
 ## Budget
 
@@ -227,16 +262,22 @@ comparable):
 | rewrites | 4 | 1.52 |
 | ~10k candidates (11,002) | 31 | 28.83 |
 | unjudged grading (g1) | 10 | 4.68 |
-| Argon, 3k selected tasks | 63 | |
-| their translations and parents | 2 | |
-| **total** | **~111** | **35.52 so far** |
+| Argon, 3k selected tasks | 63 | 55.85 |
+| their translations, parents and rewrites | 2.5 | 1.87 |
+| unjudged grading of round 4's leaders (g2, g3) | 3–5 | 1.57 |
+| **total** | **~115** | **94.83** |
 
 The cap is fixed at $406.14 on the spend log (`data/private/augment/cap-round3.json`,
-`BUDGET=115`); the log stands at $326.67, so $79.5 is left: v2 (~$65), then ~$14 for
-pool translations into weak languages (step 2's rule, ~$2–3 each) and a g2 grading of
-round 4's leaders (~$3–5). The Argon price doubles after 2026-11-30.
+`BUDGET=115`); the log stands at $385.97, so $20.2 is left: g4 for round 5's leaders
+(~$3). No language needed pool translations. Beyond the cap, the author allows ~$50
+(up to ~$100) for [argon-experiments.md](argon-experiments.md). The Argon price doubles
+after 2026-11-30.
 
 ## Backlog (after rounds 3–5)
+
+Argon-paid experiments (active-learning strategies, adversarial tasks, minimal pairs,
+pairwise preferences, a VLM reranker teacher, the judge-noise ceiling), with costs:
+[argon-experiments.md](argon-experiments.md).
 
 Data and labels:
 - **Minimal pairs:** an LLM edits a task so the right icon changes ("Call the plumber about

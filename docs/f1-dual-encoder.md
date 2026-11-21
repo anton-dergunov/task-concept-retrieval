@@ -523,3 +523,41 @@ Best pooled (plain gold): **F1@all-large-e8.v2+parent**, nDCG@5 0.519, hit@1 0.6
   0.471, FR 0.478, PT 0.485, IT 0.469, ZH 0.495, JA 0.484, PL 0.464), +0.008 to +0.032
   over F1@all-lr, although its rewrites add only casual ES and RU: varied phrasing
   carries across languages. Still no pool translations needed.
+
+**With every leader's top-1 graded** (g1–g3, 2026-11-21,
+[2026-11-21-extra](../results/silver/2026-11-21-extra.md); judged@1 = 1.000 for all five
+below, paired with the parent heading):
+
+| comparison | ΔnDCG@5 [95%] | Personal | Realistic | hit@1 |
+|---|---:|---:|---:|---:|
+| F1@all-large-e8 vs F1@all-large | +0.005 [+0.002, +0.009] | −0.001 | −0.001 | 174 / 129, p = 0.01 |
+| F1@all-lr-para vs F1@all-lr | **+0.021** [+0.015, +0.026] | +0.025 | +0.037 | 306 / 233, p = 0.002 |
+| F1@all-kd-gen vs F1@all-kd-ms | +0.006 [+0.002, +0.010] | +0.006 | +0.009 | 190 / 166, p = 0.22 |
+| F1@all-lr-para vs F1@all-kd-ms | +0.012 [+0.006, +0.017] | +0.009 | +0.041 | 260 / 229, p = 0.17 |
+| F1@all-kd-gen vs F1@all-lr-para | −0.005 [−0.010, +0.000] | −0.003 | −0.032 | 246 / 253, p = 0.79 |
+| F1@all-large-e8 vs F1@all-lr-para | +0.045 [+0.037, +0.053] | +0.040 | +0.070 | 550 / 308, p < 0.001 |
+
+Pooled: F1@all-large-e8 0.552 / hit@1 0.711, F1@all-large 0.547, F1@all-lr-para 0.507 /
+0.636, F1@all-kd-gen 0.502, F1@all-lr 0.487. Grading moves nothing: graded rewrites stay
+the best e5-small text (now with p = 0.002 on hit@1), and the rest of round 4's answers stand.
+
+### Round 5 inputs (2026-11-21)
+
+Vertex v2 judged the 3,000 selected tasks (next-data-and-distillation.md §4). No model has
+trained on them, so round 4's scoring pass (`--score`, data/private/f1/teacher/) gives
+a fresh eval of its models on new Personal-style and MS-LaTTE text (title, parent where
+present; nDCG@5 / hit@1):
+
+| model | all (2,999) | random (1,000) | active (1,999) | random synth / ms | active synth / ms |
+|---|---:|---:|---:|---:|---:|
+| F1@all-large | 0.554 / 0.626 | 0.637 / 0.761 | 0.512 / 0.559 | 0.741 / 0.799 | 0.563 / 0.550 (hit@1) |
+| F1@all-base-lr | 0.522 / 0.618 | 0.607 / 0.732 | 0.480 / 0.560 | 0.731 / 0.735 | 0.565 / 0.551 (hit@1) |
+| F1@all-lr | 0.465 / 0.571 | 0.568 / 0.702 | 0.414 / 0.506 | 0.676 / 0.752 | 0.515 / 0.486 (hit@1) |
+
+- **Selection found hard tasks:** −0.20 hit@1 for the teacher, −0.20 for e5-small,
+  on Personal-style and MS-LaTTE alike. Whether hard tasks teach more is round 5's
+  question (rand1k vs act1k; 1k-rand vs 1k-act).
+- The judge's candidates included F1@all-large's top 15, so its top-1 is always judged
+  (judged@1 0.99, the others 0.93–0.97) and its numbers are a little favoured.
+- On random fresh tasks the e5-small student is 0.06 hit@1 behind the teacher, as on
+  silver (0.07 for F1@all-lr vs F1@all-large).

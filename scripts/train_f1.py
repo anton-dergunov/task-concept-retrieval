@@ -138,6 +138,11 @@ PLANS = {
                              "sel": {"random": 1000}},
         "F1@all-lr-act1k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                             "sel": {"active": 1000}},
+        # The same question where 1k tasks still matter (F1@0 -> F1@1k was +0.04): the
+        # selected tasks alone, in F1@1k's recipe, so F1@1k (1k random tasks of the earlier
+        # pools) is a third point. On top of 8.9k, 1k tasks add only ~+0.004.
+        "F1@1k-rand": {"pool_tasks": None, "holdout": True, "sel": {"random": 1000}, "sel_only": True},
+        "F1@1k-act": {"pool_tasks": None, "holdout": True, "sel": {"active": 1000}, "sel_only": True},
         "F1@all-lr-all3k": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
                             "sel": {"active": None, "random": None}},
         "F1@all-large-all3k": {"pool_tasks": None, "holdout": True, "epochs": 8,
@@ -188,7 +193,7 @@ def _h(s: str) -> int:
 
 class Data:
     def __init__(self, root: Path, pool_tasks, holdout: bool, smoke: bool, distill_sources=(),
-                 para=None, teacher=None, sel=None, pool_langs=None):
+                 para=None, teacher=None, sel=None, pool_langs=None, sel_only=False):
         self.manifest = json.loads((root / "manifest.json").read_text())
         self.icons = read_jsonl(root / "icons.jsonl")
         self.docs = [self.manifest["passage_prefix"] + r["doc"] for r in self.icons]
@@ -198,8 +203,9 @@ class Data:
         qs = read_jsonl(root / "queries.jsonl")
         self._sel_keep = {}
         for v, n in (sel or {}).items():
-            if n is not None:
-                ids = sorted({q["task_id"] for q in qs if q.get("sel") == v}, key=lambda t: _h("f1-sel:" + t))
+            if n is not None:      # n judged tasks: pool rows only (rewrites follow their original)
+                ids = sorted({q["task_id"] for q in qs if q.get("sel") == v and q["source"].startswith("pool")},
+                             key=lambda t: _h("f1-sel:" + t))
                 self._sel_keep[v] = set(ids[:n])
         for i, q in enumerate(qs):
             q["_i"] = i                       # row of the teacher's score arrays
@@ -208,13 +214,15 @@ class Data:
             q["pos"] = [i for i in q["grades"] if i not in self.held]
             q["negs"] = [i for i in q["hard_negs"] if i not in self.held]
         # Tasks of the selected pools (round 3's Argon judging) carry `sel`; they never join
-        # validation, and train only in runs that ask for them: sel = {value: max tasks or None}.
+        # validation (the data puts all of them in the train split), and train only in runs
+        # that ask for them: sel = {value: max tasks or None}.
         # Pool translations beyond EN/ES/RU train only where --pool-langs lists them; the
         # validation set stays EN/ES/RU, so held-out numbers stay comparable.
+        # sel_only: the selected tasks alone, without the earlier pools (F1@1k-act/-rand).
         langs = set(BASE_LANGS) | set(pool_langs or ())
         self.val = [q for q in qs if q["split"] == "val" and not q.get("sel") and q["lang"] in BASE_LANGS]
         pool = [q for q in qs if q["split"] == "train" and q["source"].startswith("pool")
-                and q["lang"] in langs and self._sel_ok(q, sel or {})]
+                and q["lang"] in langs and self._sel_ok(q, sel or {}) and (q.get("sel") or not sel_only)]
         keep = self._select_tasks(pool, pool_tasks)
         self.pool = [q for q in pool if q["task_id"] in keep and q["pos"]]
         self.free = [q for q in qs if q["source"].startswith("free") and q["pos"]]
@@ -543,7 +551,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         log(f"{name}: teacher {teacher.run}")
     out.mkdir(parents=True, exist_ok=True)
     data = Data(data_root, pool_tasks, holdout, a.smoke, a.distill_sources or (), a.para, teacher,
-                a.sel, a.pool_langs)
+                a.sel, a.pool_langs, a.sel_only)
     t_loss = teacher if a.kd_weight > 0 else None
     log(f"{name}: device {dev}; {data.pool_task_count} pool tasks ({len(data.pool)} rows), "
         f"{len(data.free)} free-signal rows ({a.free_per_epoch} per epoch), {len(data.distill)} "
@@ -865,6 +873,8 @@ def main() -> None:
                     help="pool translations beyond EN/ES/RU to train on (augment_pools.py translate)")
     ap.add_argument("--sel", type=json.loads, default=None,
                     help='selected-pool tasks to train on, JSON {"active": n|null, "random": n|null}')
+    ap.add_argument("--sel-only", action="store_true",
+                    help="train on the --sel tasks alone, without the earlier pools")
     ap.add_argument("--epochs", type=int, default=6)
     ap.add_argument("--batch", type=int, default=128)
     ap.add_argument("--lr", type=float, default=2e-5)

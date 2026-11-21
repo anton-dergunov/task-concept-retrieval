@@ -392,7 +392,10 @@ class Rewrite(Aug):
         aug = load_results(out_path(self.jmeta))
         out = []
         for t in super().tasks():
-            if t["id"] in gold and not is_val_task(t["id"]):
+            # Validation tasks get no rewrites; round 3's selected tasks (meta.selection)
+            # never validate (tcr.finetune), so all of them do.
+            sel = (t.get("meta") or {}).get("selection")
+            if t["id"] in gold and (sel or not is_val_task(t["id"])):
                 parents = list(t.get("parents") or []) or list((aug.get(t["id"]) or {}).get("parents") or [])
                 out.append({**t, "parents": parents, "body": ""})
         return out

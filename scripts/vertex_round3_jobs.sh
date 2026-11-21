@@ -104,7 +104,7 @@ v2)
     echo "=== rewrites of $RUN"
     $A rewrite --judge-run "$RUN" --max-usd "$CAP"
   done
-  echo "v2 done. Next: add the runs to tcr/silver.py POOL_RUNS, f1_data.py build, Kaggle round 5."
+  echo "v2 done. The runs join the training pools by themselves (tcr/silver.py NEW_POOL_RUNS). Next: f1_data.py build, Kaggle round 5."
   ;;
 *) echo "usage: $0 v1|grade|v2"; exit 1 ;;
 esac

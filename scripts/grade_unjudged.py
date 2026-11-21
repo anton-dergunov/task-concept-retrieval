@@ -66,8 +66,15 @@ def _h(s: str) -> int:
 
 
 def stored(label: str) -> Path:
-    """The most recent stored ranking of a method label (silver_eval's per-task output)."""
-    hits = sorted(SILVER_PRIVATE.glob(f"*/{label}.jsonl"), key=lambda p: p.stat().st_mtime)
+    """The most recent stored ranking of a method label on the eval sets (silver_eval's
+    per-task output). A translated-set run (-xling: xling-* datasets only, no gold here) is
+    skipped: g2 took those and found no picks for two of its three methods."""
+    def eval_sets(p: Path) -> bool:
+        with open(p, encoding="utf-8") as f:
+            line = f.readline()
+        return bool(line) and not json.loads(line)["dataset"].startswith("xling")
+    hits = sorted((p for p in SILVER_PRIVATE.glob(f"*/{label}.jsonl") if eval_sets(p)),
+                  key=lambda p: p.stat().st_mtime)
     if not hits:
         sys.exit(f"no stored ranking for {label} in {SILVER_PRIVATE} (run silver_eval.py first)")
     return hits[-1]

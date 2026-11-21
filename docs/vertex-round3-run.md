@@ -9,11 +9,13 @@ work is skipped and a submitted batch job is never resubmitted.
 **When:** after the other Vertex job ends (~2026-11-20), and v2 before 2026-11-30, when
 Argon's promotional price ends (it doubles).
 
-**State (2026-11-20):** v1 done 2026-11-19 ($30.9), grade done 2026-11-20 (g1, $4.7); the
-spend log is at $326.67 against the cap of $406.14, so $79.5 is left. After v1 and grade, all
-done but the author's rewrite spot-check: the translated eval set is scored, the extra-graded
-table is written ([2026-11-20-extra](../results/silver/2026-11-20-extra.md)), and the
-round-4 tarball is built. Next: Kaggle round 4, then `select_active.py` and stage v2.
+**State (2026-11-21):** all stages done: v1 2026-11-19 ($30.9), grade 2026-11-20 (g1,
+$4.7), v2 2026-11-21 ($57.7: Argon $55.85 for 3,000 tasks, translations, parents and
+rewrites $1.87), round 4's leaders graded (g2 $0.54, g3 $1.03; g2 missed two methods, see
+next-data-and-distillation.md §5). The spend log is at $385.97 against the cap of
+$406.14, so $20.2 is left: g4 for round 5's leaders (~$3). Open: the author's rewrite
+spot-check. Next on Vertex, after Kaggle round 5: perhaps round 6's Argon batch
+([argon-experiments.md](argon-experiments.md) #1, ~$50 beyond this cap, before 2026-11-30).
 
 ## Account (pinned)
 
@@ -123,8 +125,9 @@ watch), exports the labels, then translates them and invents the parents of the
 Personal-style ones.
 
 **After v2:** the labels exist, so `tcr.silver.NEW_POOL_RUNS` adds both runs to the training
-pools; their rows carry `sel` (active / random) and only round 5's presets train on them.
-`f1_data.py build`, upload, Kaggle round 5.
+pools; their rows carry `sel` (active / random), all are in the train split, and only round
+5's presets train on them. `f1_data.py build`, upload, Kaggle round 5 (done 2026-11-21 up
+to the upload).
 
 ## Continue in a new Claude Code session
 

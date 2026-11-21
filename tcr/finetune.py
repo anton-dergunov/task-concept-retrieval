@@ -140,12 +140,14 @@ def build(smoke: bool = False, distill: Optional[dict] = None) -> dict:
                 ambiguous = idx(g.relevant)
                 hard = idx(g.seen - g.relevant - set(g.grades))
                 a = aug.get(t["id"]) or {}
+                # Round 3's selected pools carry `sel` and never validate (train_f1.py), so
+                # all of them train: a val bucket would only drop paid labels.
+                sel = (t.get("meta") or {}).get("selection")
                 base = {"task_id": t["id"], "source": SOURCE[ds], "run": run,
-                        "split": "val" if is_val_task(t["id"]) else "train",
+                        "split": "val" if is_val_task(t["id"]) and not sel else "train",
                         "grades": {str(k): v for k, v in grades.items()},
                         "ambiguous": ambiguous, "hard_negs": hard}
-                sel = (t.get("meta") or {}).get("selection")
-                if sel:                                  # round 3's selected pools
+                if sel:
                     base["sel"] = sel
                 parents = list(t.get("parents") or []) or list(a.get("parents") or [])
                 queries.append({**base, "lang": "en", **_texts(t["title"], parents)})

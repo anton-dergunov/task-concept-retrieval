@@ -6,15 +6,69 @@ is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
 headless for up to 12 hours on two T4 GPUs; data building, import and scoring stay on the
 Mac (CLAUDE.md "Compute"). Round 2's guide is this file's git history (2026-11-16).
 
-**State (2026-11-20, late):** round 4 ran, is imported and scored (silver 2026-11-20;
-f1-dual-encoder.md §12). Next: Vertex v2, `f1_data.py build`, round 5 (below).
+**State (2026-11-21):** Vertex v2 done; `data/private/f1/f1_data.tar.gz` rebuilt for
+round 5 (21.3 MB; round 4's kept as `f1_data.round4.tar.gz`, round 3's as
+`f1_data.round3.tar.gz`). Next: upload it as a new version and run round 5
+([below](#round-5-after-vertex-v2-prepared-2026-11-21)).
 
-Before round 4: `data/private/f1/f1_data.tar.gz` rebuilt for round 4 (19.7 MB; round
-3's is kept as `f1_data.round3.tar.gz`). Round 3's rows are all there, unchanged and in the
-same relative order; new: 34,650 rewrite rows (`para-synth`, `para-mslatte`), 11,002
-generated Personal-style tasks (`distill-cand`) and the round-4 `train_f1.py`. Private
-(Personal-style pool text, approved for the author's Kaggle account); no eval data. Upload
-it as a new version.
+The round-5 data: 173,381 rows. Round 4's rows are all there, unchanged and in the same
+relative order, except the 3,000 distillation rows of the tasks Argon has judged since.
+New: the 2,997 selected tasks with labels (`sel` active 1,998 / random 999; EN, ES, RU:
+~8.9k rows), their 11,720 rewrite rows, and the round-5 `train_f1.py`. distill-cand 9,005,
+distill-mslatte 4,726. Private (Personal-style pool text, approved for the author's Kaggle
+account); no eval data. Checked on the Mac: each preset's pool (F1@all-lr 8,887 tasks;
+rand1k 9,886; act1k 9,887; all3k 11,884; F1@1k-rand 999 and F1@1k-act 1,000 alone), CPU
+smoke runs of F1@all-lr-act1k and F1@1k-act.
+
+## Round 5 (after Vertex v2; prepared 2026-11-21)
+
+Questions (next-data-and-distillation.md §6): does active selection beat random at equal
+size, on top of the pool (rand1k vs act1k) and alone, where 1k tasks still matter (1k-rand
+vs 1k-act)? Where is the learning curve at ~11.9k tasks? The retrained teacher, and the
+final student (graded rewrites + distillation) against its control without the teacher.
+GPU 0 first writes the scores round 6's selection needs (argon-experiments.md #1), so no
+second session is needed before selecting.
+
+Inputs to attach: the new data version; **round 4's version output** (`f1_runs.tar.zst`:
+F1-all-large-e8, F1-all-lr-para, the other round-4 runs); and **round 3's runs dataset**
+(the `f1_runs.zip` uploaded for round 4: F1-all-base-lr, F1-all-large, F1-all-lr). Cell 2's
+check becomes:
+
+```python
+NEED = {"F1-all-large-e8", "F1-all-lr-para", "F1-all-base-lr"}   # round 5: scored; the students' teacher
+```
+
+| GPU | queue | what it tests | estimate |
+|---|---|---|---|
+| 0 | `--score F1@all-large-e8,F1@all-lr-para,F1@all-base-lr` | every row, candidates included: round 6's selection input; large-e8's file is also the pinned students' teacher scores | 0.5–1 h |
+| 0 | `F1@all-lr-rand1k`, `F1@all-lr-act1k` | +1k random vs +1k active tasks on top of the 8.9k | ~1 h each |
+| 0 | `F1@1k-rand`, `F1@1k-act` | the same 1k alone (F1@1k's recipe) | ~0.5 h each |
+| 0 | `F1@all-lr-all3k` | all 2,997 new tasks: the learning-curve point | ~1.2 h |
+| 0 | `F1@all-lr-para-all3k` | + graded rewrites: kd-final's control | ~1.5–2 h |
+| 0 | `F1@all-kd-final` | + distillation from F1@all-large-e8 and both unlabelled sources: the export candidate | ~2 h |
+| 1 | `F1@all-large-all3k` | the teacher retrained on everything, 8 epochs | ~9–11 h |
+
+GPU 0's queue is ~9–10 h, ordered so that what decides round 6's spend comes first; if
+the session times out, kd-final (last) resumes in the next one (§4), as does GPU 1's run.
+
+```python
+jobs = [
+    launch(0, f"python {TRAIN_SCRIPT} --data {DATA_DIR} --out {RUNS} --score F1@all-large-e8,F1@all-lr-para,F1@all-base-lr"
+              f" && {train} --run F1@all-lr-rand1k,F1@all-lr-act1k,F1@1k-rand,F1@1k-act,F1@all-lr-all3k,F1@all-lr-para-all3k,F1@all-kd-final", "gpu0.log"),
+    launch(1, f"{train} --run F1@all-large-all3k", "gpu1.log"),
+]
+```
+
+After import (`f1_data.py import`), on the Mac:
+
+```bash
+nice .venv/bin/python scripts/silver_eval.py --methods F1@all-lr-rand1k,F1@all-lr-act1k,F1@1k-rand,F1@1k-act,F1@all-lr-all3k,F1@all-lr-para-all3k,F1@all-kd-final,F1@all-large-all3k --versions v2
+```
+
+then grade the leaders' unjudged top-1s (`GRADE_NAME=g4 GRADE_METHODS=… vertex_round3_jobs.sh
+grade`, skips g1–g3), rescore with `--extra-grades g1,g2,g3,g4`, and decide round 6 from
+1k-act vs 1k-rand. Do not rebuild the data before `select_active.py`: the new teacher
+scores are keyed by this build's queries.jsonl.
 
 ## Round 4 (after Vertex v1; prepared 2026-11-19, queues revised 2026-11-20)
 
@@ -308,14 +362,9 @@ previous round's output each time.
 
 - **Round 4:** the queues above. Then `select_active.py --teacher F1-all-large --student
   F1-all-lr --teacher2 F1-all-base-lr` on the Mac.
-- **Round 5** (after Vertex v2 and `f1_data.py build`, which then includes the new labels
-  and the new tasks' rewrites). Presets set by round 4's answers (f1-dual-encoder.md §12):
-  the teacher retrains for 8 epochs, the final student takes graded rewrites and is pinned
-  to `F1@all-large-e8`, so both fit one session. Attach round 4's version output (it holds
-  F1-all-large-e8) and round 3's dataset; cell 2's `NEED` becomes `{"F1-all-large-e8"}`.
-  - GPU 0: `--run F1@all-lr-rand1k,F1@all-lr-act1k,F1@all-lr-all3k,F1@all-lr-para-all3k,F1@all-kd-final` (~8–9 h)
-  - GPU 1: `--run F1@all-large-all3k` (~9–11 h; if it times out, it resumes first in the
-    next session)
+- **Round 5:** the queues and inputs in "Round 5" at the top. Presets set by round 4's
+  answers (f1-dual-encoder.md §12): the teacher retrains for 8 epochs, the final student
+  takes graded rewrites and is pinned to `F1@all-large-e8`, so both fit one session.
 
 ## 7. Continue in a new Claude Code session
 
