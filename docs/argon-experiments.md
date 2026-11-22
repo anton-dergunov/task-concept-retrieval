@@ -82,6 +82,9 @@ uncertainty + committee selection hurts when its tasks are most of the data. If 
 diversity-first arm (hard tasks spread over clusters, not piled on the hardest) is the one
 worth testing against random; uncertainty-only and committee-only would likely repeat this
 result. Decide together with round 5's all3k point (next-data-and-distillation.md §6).
+**all3k (2026-11-22):** +3k judged tasks gave +0.008 (title), exactly the curve's rate, so
+random labels still pay ~+0.005 per $50. #1 drops to the bottom of round 6's ranking
+(below).
 
 ### 2. Model-in-the-loop adversarial tasks (~$15–25)
 
@@ -149,7 +152,41 @@ how far silver differences of 0.005 can be trusted.
 | | all six | ~90–160 |
 
 With ~$50: #1. With ~$100: #1 and #2 or #3. #6 is cheap enough to add to any batch.
-After 2026-11-30 the same list costs about twice as much.
+After 2026-11-30 the same list costs about twice as much. (Superseded by round 6's choice
+below.)
+
+## Round 6's choice (2026-11-22, after round 5)
+
+**How it is ranked (author, 2026-11-22, CLAUDE.md):** first what an item teaches about ML,
+or whether it makes a blog post (~60%), then what it gains for the **big model**, the one
+that runs on the Mac (~40%; deployment.md "Two models"). Scores 1–5, judged here.
+
+| # | experiment | teaches / post (60%) | big-model gain (40%) | score | ~$ |
+|---|---|---:|---:|---:|---:|
+| 5 | VLM reranker as a teacher | 5: listwise multimodal reranking, cross-modal distillation | 3–4: the one teacher that can be better than e5-large, and the image signal reaches the big model through distillation | **4.4** | 20–40 |
+| 3 | minimal pairs | 5: contrast sets, counterfactual augmentation, a pairwise loss term, a contrast-set metric | 3: aims at what the model reads wrongly in a title | **4.2** | 10–20 |
+| 2 | adversarial tasks | 4: model-in-the-loop data collection, fooling rate | 3: hard examples of the big model's own confusions | **3.6** | 15–25 |
+| 4 | pairwise preferences | 4: preference labels, margin loss, how reliable absolute grades are | 2 | 3.2 | 10–20 |
+| 6 | judge-noise ceiling | 3: inter-annotator agreement, κ, the silver ceiling | 1: no gain, but says which Δs of 0.005 to trust | 2.2 | 5 |
+| 1 | active-learning arms | 2: round 5 has already taught its main lesson | 1: active ≤ random (f1-dual-encoder.md §13) | 1.6 | 30–50 |
+| — | more random tasks | 1 | 2: ~+0.005 per $50 on the curve (round 5's all3k landed on it) | 1.4 | any |
+
+**Recommendation: #5 + #3 + #2, with #6 added** (~$50–90 in all, within the ~$100 the
+author allows). #4 follows if money is left. #1 and plain random tasks are dropped. Round 5
+showed that random labels still pay at the curve's rate, but the rate is small (+0.005 per
+$50) and teaches nothing new. The four chosen items fit in **one v3 sitting**, and every
+Argon call must finish by 2026-11-30 (the price doubles after that):
+
+| when | where | step |
+|---|---|---|
+| 11-23/24 | Mac | code: `augment_pools.py minpair` (#3) and `adversarial` (#2) with Flash; the VLM-rerank request (#5: task + the big model's top 20 as glyph images, no names; reuse `tcr/describe_v2.py`'s image render); re-judge set (#6); a 30–50-task pilot of each, read by hand |
+| 11-25 | Vertex (Flash, ~$5) | generate ~1,000 minimal pairs and ~1,000 adversarial tasks; contamination and near-duplicate filters |
+| 11-26 | Vertex (Argon, ~$45–80) | one batch: judge minimal pairs + adversarial tasks (+ translations, rewrites), VLM rerank of ~2,000 tasks, re-judge 300 |
+| 11-27/29 | Mac | buffer for failed or retried requests; import; `f1_data.py build` |
+| from 11-28 | Kaggle (free) | round 6: the big model with each new kind of data, the VLM-distilled big model, and the small model last |
+
+Raising the cap: delete `data/private/augment/cap-round3.json` and rerun with
+`BUDGET=<new money>` (above). This waits for the author's go.
 
 **Not on the list:** labels for the abstention gate (it can be calibrated on the labels
 that exist). And a reminder that every item optimises toward Argon's taste: the author's

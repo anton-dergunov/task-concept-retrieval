@@ -13,10 +13,13 @@ four runs and `runs/teacher` were packaged by hand, imported and scored (f1-dual
 §13). The retry ([below](#round-5-retry-after-the-disk-ran-out-2026-11-21)) for the other
 four runs was first started in the editor too, then stopped and committed: **an editor
 session (running cells by hand) loses `/kaggle/working` when it ends; only Save Version →
-Save & Run All (Commit) keeps the output.** Next: download the commit's `f1_runs.tar.zst`,
-import, score. `data/private/f1/f1_data.tar.gz` is round 5's build (21.3 MB; round 4's kept
-as `f1_data.round4.tar.gz`, round 3's as `f1_data.round3.tar.gz`): **do not rebuild it** until
-round 6's selection is done.
+Save & Run All (Commit) keeps the output.** The retry finished all four runs; imported and
+scored 2026-11-22 (f1-dual-encoder.md §13, second half). Next: round 6a
+(next-data-and-distillation.md §7: e5-large with graded rewrites, self-distillation).
+`data/private/f1/f1_data.tar.gz` is round 5's build (21.3 MB; round 4's kept as
+`f1_data.round4.tar.gz`, round 3's as `f1_data.round3.tar.gz`). The active selection of
+round 6 is dropped, so it can be rebuilt once round 6's data exists; its teacher scores are
+F1@all-large-e8's.
 
 The round-5 data: 173,381 rows. Round 4's rows are all there, unchanged and in the same
 relative order, except the 3,000 distillation rows of the tasks Argon has judged since.
@@ -430,9 +433,16 @@ halve them. But check [deployment.md](deployment.md) on encoder precision first.
 
 ## 6. Score on the silver leaderboard (Mac)
 
+Import first (§5), then score **this round's runs**: the method list is in the round's own
+section ("After import"), not here. Both steps together:
+
 ```bash
-nice .venv/bin/python scripts/silver_eval.py --methods F1@all-base-lr,F1@all-kd,F1@all-kd-ms,F1@all-large --versions v2
+.venv/bin/python scripts/f1_data.py import ~/Downloads/f1_runs.tar.zst
+nice .venv/bin/python scripts/silver_eval.py --methods <this round's runs, e.g. F1@all-lr-all3k,F1@all-kd-final> --versions v2
 ```
+
+(Round 5's retry, 2026-11-22: the earlier example here named round 3's methods and was run
+as is, before any import; the table only re-merged stored rankings.)
 
 Each checkpoint carries its icon vectors, so the Mac encodes only the ~6.5k dev queries:
 minutes for e5-small and e5-base, ~15 min for e5-large under `nice`. The table in

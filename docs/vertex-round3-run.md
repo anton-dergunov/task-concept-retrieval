@@ -12,10 +12,11 @@ Argon's promotional price ends (it doubles).
 **State (2026-11-21):** all stages done: v1 2026-11-19 ($30.9), grade 2026-11-20 (g1,
 $4.7), v2 2026-11-21 ($57.7: Argon $55.85 for 3,000 tasks, translations, parents and
 rewrites $1.87), round 4's leaders graded (g2 $0.54, g3 $1.03; g2 missed two methods, see
-next-data-and-distillation.md §5). The spend log is at $385.97 against the cap of
-$406.14, so $20.2 is left: g4 for round 5's leaders (~$3). Open: the author's rewrite
-spot-check. Next on Vertex, after Kaggle round 5: perhaps round 6's Argon batch
-([argon-experiments.md](argon-experiments.md) #1, ~$50 beyond this cap, before 2026-11-30).
+next-data-and-distillation.md §5), round 5's leaders graded 2026-11-22 (g4 $1.85;
+calibration 50/50 on hit). The spend log is at $387.82 against the cap of $406.14, so $18.3
+is left. Open: the author's rewrite spot-check. Next on Vertex: round 6's Argon batch
+(argon-experiments.md "Round 6's choice": #5, #3, #2, #6, ~$50–90 beyond this cap; the
+author's go first; done by 2026-11-30).
 
 ## Account (pinned)
 

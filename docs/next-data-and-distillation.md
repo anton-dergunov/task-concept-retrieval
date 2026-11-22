@@ -1,28 +1,31 @@
-# Plan: more training signal after F1 round 2 (from 2026-11-17; updated 2026-11-21, after v2)
+# Plan: more training signal after F1 round 2 (from 2026-11-17; updated 2026-11-22, after round 5)
 
 For the author and for a fresh Claude Code session. Read CLAUDE.md first (hard rules), then
-[f1-dual-encoder.md](f1-dual-encoder.md) §10–11 (round 2 and round 3 results). Run
+[f1-dual-encoder.md](f1-dual-encoder.md) §12–13 (round 4 and round 5 results) and
+[deployment.md](deployment.md) "Two models". Run
 guides: [f1-kaggle-run.md](f1-kaggle-run.md) (training) and
 [vertex-round3-run.md](vertex-round3-run.md) (Gemini jobs).
 
-## Where things stand (2026-11-21, evening)
+## Where things stand (2026-11-22)
 
-Done: Kaggle rounds 3 and 4, Vertex v1, grade and v2 (3,000 selected tasks judged), the
-g2/g3 grading of round 4's leaders, round 5's first half (active vs random, scored). Running:
-round 5's retry commit (all3k, para-all3k, kd-final, the retrained teacher;
-f1-kaggle-run.md). Round 6's Argon batch waits for its all3k answer (§6).
+Done: Kaggle rounds 3–5, Vertex v1, grade, v2 and g2–g4 (every leader's top-1 judged).
+Round 5 is fully scored (f1-dual-encoder.md §13). The plan now has **two models**: a big
+one on the Mac, which comes first, and a small one for phones and tablets ("Decisions";
+deployment.md "Two models"). Next: round 6's Argon batch (argon-experiments.md "Round 6's
+choice", to be approved; all Argon work done by 2026-11-30) and the free Kaggle runs of §7.
 
-- **Round 5, first half (f1-dual-encoder.md §13): active selection did not beat random.**
-  On top of the pool they tie (ΔnDCG@5 0.000 [−0.004, +0.004]); alone, the active 1k are
-  worse (−0.007 [−0.010, −0.003]). +1k tasks of either kind gave +0.003, what the learning
-  curve predicts for +11% data.
-
-- **Best on silver** (extra-graded g1–g3, every leader's top-1 judged,
-  [2026-11-21-extra](../results/silver/2026-11-21-extra.md); f1-dual-encoder.md §12):
-  F1@all-large-e8.v2+parent nDCG@5 0.552, hit@1 0.711; the best e5-small,
-  **F1@all-lr-para.v2+parent** (rewrites with the original's grades), 0.507 / 0.636;
-  F1@all-kd-gen 0.502; F1@all-lr 0.487; M3.v2 0.336 / 0.437. Plain gold:
-  [2026-11-20](../results/silver/2026-11-20.md).
+- **Best on silver** (g1–g4, +parent, [2026-11-22-extra](../results/silver/2026-11-22-extra.md)):
+  **F1@all-large-all3k** (the big model's candidate) nDCG@5 0.567, hit@1 0.714;
+  **F1@all-kd-final** (the small model's candidate: graded rewrites + distillation)
+  0.534 / 0.659; F1@all-lr-para-all3k 0.521; F1@all-lr-para 0.512; M3.v2 0.336 / 0.437.
+  On the translated set, e5-large scores 0.568–0.594 in all 7 languages against 0.597 on
+  the original text; e5-small loses 0.035–0.076.
+- **Round 5's answers:** active selection did not beat random (a tie on top of the pool,
+  −0.007 alone). +3k judged tasks gave e5-small +0.008 (title only), as the learning curve
+  predicts, and e5-large +0.010. Graded rewrites add +0.019 on the larger pool, and
+  distillation now adds +0.013 on top of them: the two stack.
+- **The big model fits the Mac:** e5-large runs at a median 98 ms per task (4 CPU threads,
+  fp32) with 1.9 GB peak RSS, against a 200–400 ms budget.
 - **v2 (2026-11-21, $58):** 2,999 of 3,000 selected tasks judged by Argon (1,998 active,
   999 random with a label in the training data), all with ES/RU translations, the
   Personal-style ones with invented parents, all with four rewrites. **The active tasks
@@ -36,20 +39,28 @@ f1-kaggle-run.md). Round 6's Argon batch waits for its all3k answer (§6).
   agreement with the judge 48/50), so *hit@1 ub* is no guide. Every graded method gained
   ~0.03; the order did not change.
 - **The learning curve has not flattened:** about +0.03 nDCG@5 per tripling of judged pool
-  tasks (0 / 1k / 3k / 8.9k → 0.330 / 0.364 / 0.393 / 0.428).
+  tasks (0 / 1k / 3k / 8.9k → 0.330 / 0.364 / 0.393 / 0.428). The 11.9k point (round 5,
+  LR recipe) is on it: +0.008 over 8.9k, title only.
 - **Cost of judged data** (spend log): Argon ≈ $19 per 1,000 tasks in batch at the promotional
   price, which doubles after 2026-11-30; generating Personal-style tasks with Flash ≈ $2.6 per
   1,000 (measured in v1). Tripling the pool at random (+20k tasks) would cost ~$400 for +0.03.
-- **Budget:** $94.8 of round 3's $115 cap spent (spend log $385.97, cap $406.14), $20.2
-  left: the grading of round 5's leaders (~$3). The author allows ~$50 more (up to ~$100)
-  for [argon-experiments.md](argon-experiments.md), shaped by round 5.
+- **Budget:** $96.7 of round 3's $115 cap spent (spend log $387.82, cap $406.14), $18.3
+  left after g4 ($1.85). The author allows ~$50 more (up to ~$100) for
+  [argon-experiments.md](argon-experiments.md). The Vertex project showed £123.57 of credit
+  left on 2026-11-22 (102 of 226 GBP used; shared with other projects).
 
-## Decisions (author, 2026-11-17)
+## Decisions (author, 2026-11-17; updated 2026-11-22)
 
-- **The deployed model stays e5-small** (~10 ms per query on the Mac). e5-base (~35 ms,
-  1.1 GB) and e5-large are teachers; shipping a bigger model, or several sizes, stays an
-  option if it is much better. In the author's own use the model loads per process, so load
-  time dominates there; other uses need size and speed.
+- ~~The deployed model stays e5-small~~ **Replaced 2026-11-22 by two models**
+  (deployment.md "Two models", CLAUDE.md goals). A *big* model runs on the author's
+  MacBook Air M1 for the Emacs agenda (~200 ms per task, up to 300–400 ms; it must not
+  burden a busy Mac) and comes first. A *small* model runs on Android / iPad as a rare
+  fallback, limited first by memory. e5-large fits the big slot: 98 ms median per task on
+  4 CPU threads, 1.9 GB peak RSS in fp32 (measured 2026-11-22). e5-small (~9 ms, 0.9 GB)
+  stays the small one. So e5-large is no longer only a teacher, and distillation now serves
+  the small model only.
+- **How experiments are ranked** (author, 2026-11-22): what it teaches about ML or whether
+  it makes a blog post (~60%), then the gain for the big model (~40%).
 - **Budget ~$100** from a new $300 Gemini credit, including actively selected Argon judging.
   The Vertex jobs run in ~3 days (another Vertex job is running until then) and must finish
   before 2026-11-30. The author runs them (hand-off: vertex-round3-run.md).
@@ -84,8 +95,10 @@ The judge's labels are what lifted F1 (F1@0, the v2 free signal alone, only reac
 | 11-20 | Mac | 4a. select 2k active + 1k random | done |
 | 11-21 | Vertex v2 ($58) | 4b. Argon judges them, + translations, parents, rewrites; g2 grading | done |
 | 11-21 | Vertex g3 ($1.1) | grades of the round-4 picks g2 missed; rewrites of 290 more selected tasks | done |
-| 11-21/22 | Kaggle round 5 | 6. retrain with the new labels; e5-large teacher and final student; scores for round 6 | first half done (active ≤ random); retry running |
-| after round 5 | Vertex v3 (~$50) | round 6's Argon batch: not #1 as an active-vs-random batch (§6); its shape waits for all3k | before 11-30 |
+| 11-21/22 | Kaggle round 5 | 6. retrain with the new labels; e5-large teacher and final student; scores for round 6 | done (active ≤ random; all3k on the curve; kd-final and large-all3k lead) |
+| 11-22 | Vertex g4 ($1.85) | grades of round 5's leaders' unjudged top-1s | done |
+| 11-23/29 | Mac + Vertex v3 (~$50–90) | round 6's Argon batch: #5 VLM reranker, #3 minimal pairs, #2 adversarial tasks, #6 noise ceiling (argon-experiments.md "Round 6's choice"); waits for the author's go | Argon done by 11-30 |
+| any time | Kaggle round 6a (free) | §7: the big model with graded rewrites (+ self-distillation) | to prepare |
 
 ## 1. Round 3 (Kaggle) — done 2026-11-19
 
@@ -277,6 +290,53 @@ after `--score` and the four 1k runs; the rest run in a retry commit.
   give the predicted ~+0.008, more random labels still pay at the curve's rate; if less,
   the pool is past what more of the same can buy.
 
+**Answers, second half (2026-11-22; f1-dual-encoder.md §13, g1–g4, +parent unless noted).**
+
+- **all3k is on the curve:** +0.008 [+0.003, +0.013] title only (predicted +0.008), +0.013
+  with the parent heading (Personal +0.022). So more random labels still pay at the
+  curve's rate, ~+0.005 per $50 for e5-small, and e5-large gains a little more from the same
+  labels (+0.010).
+- **Graded rewrites on 11.9k tasks:** +0.019 over all3k (Realistic +0.062), the same as
+  round 4.
+- **Distillation on top of graded rewrites:** kd-final vs para-all3k +0.013 [+0.008,
+  +0.018] (title +0.017). The teacher's soft targets and the rewrites' grades stack, where
+  round 4's teacher targets *instead of* grades lost. F1@all-kd-final, 0.534 / 0.659, is
+  the best e5-small (+0.022 over F1@all-lr-para) and the small model's candidate.
+- **The retrained teacher:** +0.010 over e8 (F1@all-large-all3k, 0.567 / 0.714), the best
+  model and the big model's candidate. The student's gap shrank from 0.045 to 0.033.
+- **Languages:** e5-large loses 0.003–0.029 to translation, e5-small 0.035–0.076.
+- **Round 6's decision.** By the plan's rule, plain random labels still pay, but only
+  ~+0.005 per $50. By the author's ranking (what it teaches first, then the big model's
+  gain), they come last. Round 6's Argon batch is **#5 VLM reranker teacher, #3 minimal
+  pairs, #2 adversarial tasks, plus #6 the noise ceiling** (~$50–90).
+  argon-experiments.md "Round 6's choice" has the scores and an 8-day schedule. It waits
+  for the author's go and a raised cap. The teacher scores in `data/private/f1/teacher/`
+  are still F1@all-large-e8's (round 5's GPU 0 did not score with F1@all-large-all3k): any
+  step that needs the new teacher's scores first runs `--score F1@all-large-all3k` on
+  Kaggle.
+
+## 7. Next: round 6 (from 2026-11-22)
+
+**Argon (by 2026-11-30):** argon-experiments.md "Round 6's choice". Code and pilots
+11-23/24, Flash generation 11-25, one Argon batch 11-26, buffer to 11-29.
+
+**Kaggle round 6a (free; can start before the Argon data exists).** The big model is now
+the first priority, and it has never had the recipe that made the small one better:
+
+- `F1@all-large-para-all3k`: e5-large with graded rewrites (round 4/5's best text, +0.02
+  for e5-small, never given to e5-large). Rewrites raise steps per epoch from 471 to ~772,
+  so 8 epochs would take ~18 h at 10.8 s/step. Either use 5 epochs (~11.6 h, and check the
+  LR decay against e8's lesson) or `--max-minutes` with a resume in a second session (§4 of
+  f1-kaggle-run.md).
+- `F1@all-large-kd-self`: born-again self-distillation, an e5-large student of
+  F1@all-large-all3k with graded rewrites + the unlabelled text (the kd-final recipe at the
+  big size). This is a new technique for the project. It needs `--score F1@all-large-all3k`
+  first (~1 h).
+- The small model last: kd-final re-pinned to the best big model once round 6a has one.
+
+**Export (only when asked; deployment.md):** fp16 ONNX bundles of the big and the small
+candidates, each with latency and RSS measured on the exported encoder.
+
 ## Budget
 
 | item | planned $ | spent $ |
@@ -288,11 +348,12 @@ after `--score` and the four 1k runs; the rest run in a retry commit.
 | Argon, 3k selected tasks | 63 | 55.85 |
 | their translations, parents and rewrites | 2.5 | 1.87 |
 | unjudged grading of round 4's leaders (g2, g3) | 3–5 | 1.57 |
-| **total** | **~115** | **94.83** |
+| unjudged grading of round 5's leaders (g4) | 3–5 | 1.85 |
+| **total** | **~115** | **96.68** |
 
 The cap is fixed at $406.14 on the spend log (`data/private/augment/cap-round3.json`,
-`BUDGET=115`); the log stands at $385.97, so $20.2 is left: g4 for round 5's leaders
-(~$3). No language needed pool translations. Beyond the cap, the author allows ~$50
+`BUDGET=115`); the log stands at $387.82, so $18.3 is left. No language needed pool
+translations. Beyond the cap, the author allows ~$50
 (up to ~$100) for [argon-experiments.md](argon-experiments.md). The Argon price doubles
 after 2026-11-30.
 
@@ -310,7 +371,7 @@ Data and labels:
   parent in every run.
 - **Query noise on the fly** (no LLM): typos, lowercase, dropped diacritics, token dropout.
 - **Pool translations into more languages** where step 2's rule says so.
-- **More active rounds** if round 5 shows selection beats random.
+- ~~More active rounds if round 5 shows selection beats random~~: it did not (§6).
 
 Models and training:
 - **Positive-aware hard negatives** (NV-Retriever): mine with the teacher, drop negatives

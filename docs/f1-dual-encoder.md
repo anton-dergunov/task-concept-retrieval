@@ -565,7 +565,8 @@ present; nDCG@5 / hit@1):
 ## 13. Round 5: active vs random labels, the retrained teacher, the final student
 
 Queues: [f1-kaggle-run.md](f1-kaggle-run.md) "Round 5". The first session (2026-11-21)
-ran out of disk after four runs; the other four run in a retry commit (same guide).
+ran out of disk after four runs; the other four ran in a retry commit (same guide), scored
+2026-11-22 (second half below).
 
 ### Round 5 results, first half: active vs random (2026-11-21)
 
@@ -607,3 +608,89 @@ F1@1k 0.364 / 0.471, F1@1k-act 0.358 / 0.466.
 - **For the price:** a judged 1k costs ~$19 and gives +0.003; graded rewrites of the
   existing pool gave +0.021 for a few dollars of Flash (round 4; v1 was $31 with its
   11k candidates at $28.8).
+
+### Round 5 results, second half: all3k, the final student, the retrained teacher (2026-11-22)
+
+The retry commit finished all four runs (GPU 0's three in 8.3 h of training, GPU 1's e5-large in 9.8 h,
+stopped by patience before `--max-minutes`). Silver: [2026-11-22](../results/silver/2026-11-22.md)
+(plain gold), [2026-11-22-extra](../results/silver/2026-11-22-extra.md) (g1–g4). **g4**
+graded the four runs' 447 unjudged top-1s (+parent) for $1.85. Calibration agreed on hit for
+50/50 and on grade for 44/50; 30% of the picks are hits, as in g1–g3. Every new +parent row
+now has judged@1 = 1.000. F1@all-lr-rand1k was not graded (judged@1 0.86), so its row below
+slightly favours all3k; plain gold gives the same Δ (+0.009). Grading moved every Δ below by
+≤ 0.003 compared with plain gold. Paired with `silver_paired.py --extra-grades g1,g2,g3,g4`:
+
+| comparison | view | ΔnDCG@5 [95%] | Personal | Realistic | hit@1 | held-out nDCG@5 |
+|---|---|---:|---:|---:|---:|---:|
+| F1@all-lr-all3k vs F1@all-lr | title | +0.008 [+0.003, +0.013] | +0.014 | −0.015 | 229 / 206, p = 0.29 | 0.517 vs 0.494 |
+| | parent | **+0.013** [+0.008, +0.018] | +0.022 | −0.007 | 242 / 183, p < 0.01 | |
+| F1@all-lr-all3k vs F1@all-lr-rand1k | parent | +0.009 [+0.004, +0.013] | +0.008 | +0.013 | 226 / 182, p = 0.03 | 0.517 vs 0.507 |
+| F1@all-lr-para-all3k vs F1@all-lr-para | title | +0.010 [+0.006, +0.015] | +0.013 | +0.007 | 220 / 169, p = 0.01 | 0.544 vs 0.530 |
+| | parent | +0.009 [+0.005, +0.013] | +0.008 | +0.017 | 217 / 167, p = 0.01 | |
+| F1@all-lr-para-all3k vs F1@all-lr-all3k | parent | **+0.019** [+0.013, +0.025] | +0.013 | +0.062 | 297 / 233, p = 0.01 | 0.544 vs 0.517 |
+| F1@all-kd-final vs F1@all-lr-para-all3k | title | +0.017 [+0.012, +0.022] | +0.018 | +0.023 | 257 / 215, p = 0.06 | 0.561 vs 0.544 |
+| | parent | **+0.013** [+0.008, +0.018] | +0.013 | −0.001 | 238 / 213, p = 0.26 | |
+| F1@all-kd-final vs F1@all-lr-para | parent | **+0.022** [+0.017, +0.027] | +0.022 | +0.016 | 283 / 208, p < 0.001 | 0.561 vs 0.530 |
+| F1@all-large-all3k vs F1@all-large-e8 | title | +0.010 [+0.005, +0.015] | +0.012 | +0.013 | 264 / 225, p = 0.09 | 0.589 vs 0.576 |
+| | parent | **+0.010** [+0.005, +0.015] | +0.013 | +0.011 | 240 / 231, p = 0.71 | |
+| F1@all-large-all3k vs F1@all-kd-final | parent | +0.033 [+0.025, +0.040] | +0.031 | +0.062 | 485 / 309, p < 0.001 | 0.589 vs 0.561 |
+
+Leaders (g1–g4, +parent; nDCG@5 / hit@1):
+
+| method | pooled | Personal | Personal-synth | Realistic | Public-short | Public-expanded |
+|---|---:|---:|---:|---:|---:|---:|
+| **F1@all-large-all3k** | **0.567 / 0.714** | 0.526 / 0.68 | 0.571 / 0.72 | 0.562 / 0.70 | 0.692 / 0.84 | 0.576 / 0.71 |
+| F1@all-large-e8 | 0.557 / 0.711 | 0.513 / 0.66 | 0.561 / 0.72 | 0.551 / 0.70 | 0.691 / 0.86 | 0.571 / 0.71 |
+| **F1@all-kd-final** | **0.534 / 0.659** | 0.495 / 0.63 | 0.560 / 0.68 | 0.499 / 0.60 | 0.649 / 0.77 | 0.524 / 0.64 |
+| F1@all-lr-para-all3k | 0.521 / 0.651 | 0.481 / 0.62 | 0.548 / 0.68 | 0.500 / 0.61 | 0.635 / 0.76 | 0.501 / 0.61 |
+| F1@all-lr-para | 0.512 / 0.636 | 0.473 / 0.60 | 0.532 / 0.65 | 0.484 / 0.58 | 0.636 / 0.78 | 0.499 / 0.63 |
+| F1@all-lr-all3k | 0.503 / 0.632 | 0.468 / 0.60 | 0.523 / 0.66 | 0.438 / 0.56 | 0.623 / 0.75 | 0.509 / 0.63 |
+| F1@all-lr | 0.490 / 0.613 | 0.447 / 0.56 | 0.508 / 0.64 | 0.445 / 0.56 | 0.626 / 0.77 | 0.498 / 0.61 |
+| M3.v2 | 0.336 / 0.437 | 0.260 / 0.34 | 0.343 / 0.43 | 0.373 / 0.50 | 0.500 / 0.66 | 0.418 / 0.55 |
+
+(Plain gold, +parent: F1@all-large-all3k 0.527 / 0.650, F1@all-kd-final 0.497 / 0.608,
+F1@all-lr-para-all3k 0.486, F1@all-lr-all3k 0.471.)
+
+Translated eval set ([2026-11-22-xling](../results/silver/2026-11-22-xling.md), nDCG@5,
++parent, 1,010 tasks per language):
+
+| | src | de | fr | pt | it | zh | ja | pl |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| M1.v2 | 0.423 | 0.335 | 0.303 | 0.303 | 0.303 | 0.342 | 0.340 | 0.303 |
+| F1@all-lr-para | 0.530 | 0.471 | 0.478 | 0.485 | 0.469 | 0.495 | 0.484 | 0.464 |
+| F1@all-lr-para-all3k | 0.534 | 0.474 | 0.482 | 0.488 | 0.472 | 0.504 | 0.491 | 0.466 |
+| F1@all-kd-final | 0.546 | 0.485 | 0.480 | 0.498 | 0.482 | 0.511 | 0.494 | 0.470 |
+| **F1@all-large-all3k** | **0.597** | **0.585** | **0.571** | **0.587** | **0.594** | **0.569** | **0.568** | **0.583** |
+
+- **The +3k judged tasks landed on the learning curve.** Title only, F1@all-lr-all3k gains
+  +0.008 over F1@all-lr. The curve predicted +0.008 (+0.03 per tripling:
+  log₃(11.9/8.9) × 0.03). With the parent heading it is +0.013, most of it on Personal
+  (+0.022), where the new tasks' style is; Realistic loses a little (−0.007 to −0.015).
+  Against the +1k random run, +2k more tasks give +0.009. So more labels still pay at the
+  curve's rate, and the rate is small: ~+0.005 per $50 for e5-small. The big model gains
+  more from the same labels: +0.010 for e5-large.
+- **Graded rewrites still add on the larger pool:** +0.019 over all3k alone, as in round 4
+  (+0.021), mostly on Realistic (+0.062). The +3k tasks and the rewrites add up
+  (para-all3k vs para +0.009/+0.010).
+- **Distillation now adds on top of graded rewrites:** kd-final vs its control
+  para-all3k is +0.013 (+parent) and +0.017 (title), on Personal +0.013–0.018. In round 4,
+  teacher targets *in place of* the rewrites' grades lost (kd-para −0.007). Here the
+  rewrites keep their grades and the teacher's soft targets come on top, with 13.7k
+  unlabelled texts. The two signals stack. **F1@all-kd-final is the best e5-small**:
+  0.534 / 0.659, +0.022 over round 4's best (F1@all-lr-para), and better in every eval
+  set. It is the small model's candidate (deployment.md "Two models").
+- **The teacher retrained on 11.9k tasks** gains +0.010 (F1@all-large-all3k vs e8;
+  Personal +0.013, Realistic +0.011). It peaked at epoch 5 of 8 again and stopped at 6.5 by
+  patience (589 min). **F1@all-large-all3k is the best model**, 0.567 / 0.714, and the big
+  model's candidate.
+- **The student's gap to the teacher shrank** from 0.045 (round 4: e8 vs lr-para) to 0.033
+  (large-all3k vs kd-final); Realistic is still +0.062 for the teacher.
+- **e5-large barely loses to translation.** In every language it scores 0.568–0.594 against
+  0.597 on the original text (−0.003 to −0.029). The e5-small students lose 0.035–0.076,
+  most in PL, IT and DE. For the many-languages goal, the big model is the multilingual one.
+  The small model would be the one to get pool translations, if any (backlog).
+- **Held-out curves:** e5-large and all3k stopped by patience, near their best. The two
+  rewrite students had their best evaluation at the last step (epoch 10), but they flattened
+  over the last 2–3 epochs (+0.001–0.002 per evaluation, the LR decayed to zero). A longer
+  schedule would be worth at most a few thousandths. Held-out and silver agree on every
+  comparison's sign this time.
