@@ -11,8 +11,10 @@ guides: [f1-kaggle-run.md](f1-kaggle-run.md) (training) and
 Done: Kaggle rounds 3–5, Vertex v1, grade, v2 and g2–g4 (every leader's top-1 judged).
 Round 5 is fully scored (f1-dual-encoder.md §13). The plan now has **two models**: a big
 one on the Mac, which comes first, and a small one for phones and tablets ("Decisions";
-deployment.md "Two models"). Next: round 6's Argon batch (argon-experiments.md "Round 6's
-choice", to be approved; all Argon work done by 2026-11-30) and the free Kaggle runs of §7.
+deployment.md "Two models"). Round 6's Argon batch 1 (v3a: #6 noise ceiling, #3 minimal
+pairs) is done and scored (argon-experiments.md "Batch 1 results"). Kaggle round 6a is
+running (§7). Next: batch 2 (v3b: #5 VLM reranker, #2 adversarial tasks; code and pilots
+first; all Argon work done by 2026-11-30).
 
 - **Best on silver** (g1–g4, +parent, [2026-11-22-extra](../results/silver/2026-11-22-extra.md)):
   **F1@all-large-all3k** (the big model's candidate) nDCG@5 0.567, hit@1 0.714;

@@ -39,6 +39,16 @@ REWRITE_FILES = {
     "train_mslatte": config.DATA_DIR / "train_pools" / "train_mslatte.rw.jsonl",
 }
 PARA_SOURCE = {"personal_synth_pool": "para-synth", "train_mslatte": "para-mslatte"}
+# Round 6's minimal pairs (augment_pools.py minpair, argon-experiments.md #3): a judged
+# training task edited in 1-3 words so the right icon should change, the edit judged by
+# Argon (judge run, edits as judge input). Pairs of validation tasks are the contrast set
+# (scripts/contrast_eval.py) and never become rows. `mp-*` rows carry `orig_task_id` and
+# are used only by runs that ask for them.
+MP_RUNS = {
+    "personal_synth_pool": ("mp-synth-j4", config.PRIVATE_DIR / "train_pools" / "personal_synth_pool.mp_pool.jsonl"),
+    "train_mslatte": ("mp-mslatte-j4", config.DATA_DIR / "train_pools" / "train_mslatte.mp_pool.jsonl"),
+}
+MP_SOURCE = {"personal_synth_pool": "mp-synth", "train_mslatte": "mp-mslatte"}
 # Translations of the pools into more languages (augment_pools.py translate), used only by
 # runs that list the language in train_f1.py --pool-langs.
 XL_FILES = {k: v.with_name(v.name.replace(".aug.", ".xl.")) for k, v in AUG_FILES.items()}
@@ -182,6 +192,29 @@ def build(smoke: bool = False, distill: Optional[dict] = None) -> dict:
                         queries.append({**base, "source": PARA_SOURCE[ds], "orig_task_id": t["id"],
                                         "task_id": f"{t['id']}~rw{k}", "lang": lang, "style": v.get("style"),
                                         **_texts(title, par)})
+
+    for ds, (run, pool) in MP_RUNS.items():
+        if not pool.exists() or not silver.label_path(run).exists():
+            continue
+        gold = silver.load_gold([run])
+        for t in read_jsonl(pool)[:20] if smoke else read_jsonl(pool):
+            m = t.get("meta") or {}
+            if m.get("val"):
+                stats["minimal pair of a validation task (contrast set, not a row)"] += 1
+                continue
+            assert t["id"] not in eval_ids and not is_val_task(m["orig_task_id"]), t["id"]
+            g = gold.get(t["id"])
+            if g is None or g.no_good_icon:
+                stats["minimal pair without a label or a good icon"] += 1
+                continue
+            grades = {index[n]: v for n, v in g.grades.items() if n in index}
+            if not grades:
+                continue
+            queries.append({"task_id": t["id"], "source": MP_SOURCE[ds], "run": run, "split": "train",
+                            "orig_task_id": m["orig_task_id"], "lang": t.get("lang") or "en",
+                            "grades": {str(k): v for k, v in grades.items()},
+                            "ambiguous": idx(g.relevant), "hard_negs": idx(g.seen - g.relevant - set(g.grades)),
+                            **_texts(t["title"], list(t.get("parents") or []))})
 
     for src, tasks in (distill or {}).items():
         for t in tasks[:200] if smoke else tasks:

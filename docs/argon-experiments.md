@@ -201,6 +201,63 @@ change (`augment_pools.py minpair` → `<dataset>.mp.jsonl`). Argon then judges 
 the original's top 5 among the candidates (`minpair-pool`, runs mp-synth-j4 and
 mp-mslatte-j4). Batch 2 (v3b: #5, #2) follows.
 
+### Batch 1 results (run 2026-11-22, $23.89)
+
+The spend log went from $387.82 to $411.71, so **$76.11** of round 6's cap ($487.82) is left
+for batch 2. Every request succeeded.
+
+**#6 judge-noise ceiling** ([results/noise_ceiling.md](../results/noise_ceiling.md), 300
+dev tasks):
+- **Argon's top-1 is reliable, its grades are not.** The two runs name the same top-1 on 73%
+  of tasks, but each run's top-1 is a hit under the other's grades on 96%. Grade agreement
+  is low: quadratic κ 0.35. No-good-icon agrees on every task but one.
+- **The ceiling is far away.** The re-judge, scored as a method against the original gold,
+  reaches nDCG@5 0.888 and hit@1 0.96. The best model (F1@all-large-all3k+parent) reaches
+  0.502 / 0.63 on the same tasks. Judge noise explains little of the gap to 1.0; the model
+  explains most of it.
+- **Which Δs to trust.** All 75 stored methods were rescored against the re-judge's gold.
+  The method order hardly moves (Spearman ρ 0.994). Judge noise is a median 11% of the
+  per-task variance of a paired ΔnDCG@5. A bootstrap over tasks already includes it.
+  - On the pooled dev set (3,230 tasks), judge noise alone gives a paired Δ an SD of
+    ~0.0015. So a pooled Δ of 0.005 is ~3 SD of judge noise.
+  - The limit is which tasks are in the set, not the judge. The bootstrap intervals in
+    the silver tables stay the test.
+  - Per-set Δs on 75–150 tasks below ~0.01 can flip sign between runs of the judge.
+- **A hint of winner's curse.** The leaders lose a little under the re-judge, and the
+  baselines do not. F1@all-large-all3k+parent: −0.010, 95% [−0.027, +0.008]; M3.v2 −0.002.
+  The gap between the big and the small model shrinks from +0.040 to +0.029, still clearly
+  positive. Neither change is significant. They fit leaders chosen on this gold.
+- **Caveat:** this measures the noise of the same judge (candidate order, sampling), not
+  Argon's systematic taste. The author's own labels are still the only check of that.
+
+**#3 minimal pairs:**
+- **Pairs judged:** 988 (Personal-synth 747, MS-LaTTE 241, after the contamination filter).
+- **How many edits changed the icon:** an edit *flips* when the original's top icon is no
+  longer a hit on it. 85% of the MS-LaTTE edits flip, but only 50% of the Personal-synth
+  edits. Flash often edited a Personal-style title without changing what it is about; the
+  rest are kept as invariance pairs.
+- **The contrast set:** 198 pairs of validation tasks (118 flips, 80 keeps), scored by
+  `scripts/contrast_eval.py`
+  ([results/contrast/2026-11-22.md](../results/contrast/2026-11-22.md)). These are the
+  "before" numbers.
+  - **The models do follow edits.** On flips the F1 models change their top-1 90–95% of
+    the time. They keep a wrong icon ("stuck") 0–8% of the time; M3 does 8–12%.
+  - **Edits are not harder than originals.** hit@1 on the edit is mostly above the
+    original's: F1@all-large-all3k+parent 0.81 vs 0.67. Flash's edits name a concrete object
+    ("flight", "office keys"), so there is no contrast-set drop in Gardner et al.'s sense.
+  - **Pair accuracy** (both sides a hit): F1 0.53–0.59, M3.v2 0.39. F1@all-kd-final (0.59)
+    is level with the big models (0.54–0.55): ±0.09 on 118 flips, so not a difference.
+  - **On keeps**, the models name the same top-1 on 31–44% of pairs, and the judge itself
+    on 39%. They are no more jumpy than the judge.
+- **The training side:** the 790 pairs of training tasks are `mp-synth` / `mp-mslatte` rows
+  in the next `f1_data.py build` (tcr/finetune.py `MP_RUNS`). Each row carries its
+  `orig_task_id`. The original's top icons that the judge left ungraded are hard
+  negatives.
+  - No preset uses the rows yet. train_f1.py needs a flag for them (the plain rows) and the
+    `pair` loss term (a second arm).
+  - Since the models already follow edits, the question for round 6b is whether the pairs
+    raise pair accuracy and silver, not whether they make the model notice the edit.
+
 **Not on the list:** labels for the abstention gate (it can be calibrated on the labels
 that exist). And a reminder that every item optimises toward Argon's taste: the author's
 own labels (labeller, Personal) are the check that Argon's taste is the author's, and

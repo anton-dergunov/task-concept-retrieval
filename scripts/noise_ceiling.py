@@ -16,6 +16,9 @@ Report, per eval set and pooled:
 - the ceiling: the re-judge's ranking scored as a method against the original gold
   (nDCG@5 / hit@1, tcr.silver.task_metrics), next to the best model's numbers on the same
   tasks. A model cannot be expected to beat the judge at agreeing with the judge.
+- which Δs to trust: every stored silver ranking rescored against the re-judge's gold
+  (Spearman ρ of the method orders), judge noise's share of a paired Δ's per-task
+  variance, its SD on the full pooled dev set, and sign agreement by |Δ|.
 """
 
 from __future__ import annotations
@@ -78,8 +81,76 @@ def model_rankings(label: str) -> dict:
     return {}
 
 
+def all_rankings() -> dict:
+    """{label: {dataset/task_id: top}} of every stored silver ranking (newest tag wins)."""
+    out: dict = {}
+    for tag in sorted((p.name for p in STORE.iterdir() if p.is_dir() and not p.name.endswith("-xling")),
+                      reverse=True):
+        for p in sorted((STORE / tag).glob("*.jsonl")):
+            if p.stem not in out:
+                out[p.stem] = {f"{r['dataset']}/{r['task_id']}": r["top"] for r in map(json.loads, open(p))}
+    return out
+
+
+def trust(pairs_of_gold: dict, n_full: int) -> list:
+    """Does the leaderboard survive the re-judge? Every stored method scored on the
+    re-judged tasks against both golds; for every pair of methods, how much of the per-task
+    variance of their ΔnDCG@5 is judge noise. If the two runs are independent draws of the
+    judge, d1 - d2 (the task's Δ under each gold) has twice the noise variance of one run."""
+    import numpy as np
+    keys = sorted(pairs_of_gold)
+    runs = {lab: r for lab, r in all_rankings().items() if all(k in r for k in keys)}
+    s1 = {lab: np.array([silver.task_metrics(pairs_of_gold[k][0], r[k])["ndcg5"] for k in keys])
+          for lab, r in runs.items()}
+    s2 = {lab: np.array([silver.task_metrics(pairs_of_gold[k][1], r[k])["ndcg5"] for k in keys])
+          for lab, r in runs.items()}
+    labs = sorted(runs, key=lambda x: -s1[x].mean())
+    m1 = np.array([s1[x].mean() for x in labs])
+    m2 = np.array([s2[x].mean() for x in labs])
+    rank = lambda v: np.argsort(np.argsort(-v))  # noqa: E731
+    rho = float(np.corrcoef(rank(m1), rank(m2))[0, 1])
+    share, sd_noise, agree = [], [], {}
+    bins = [(0, 0.005), (0.005, 0.01), (0.01, 0.02), (0.02, 1)]
+    for i in range(len(labs)):
+        for j in range(i + 1, len(labs)):
+            d1 = s1[labs[i]] - s1[labs[j]]
+            d2 = s2[labs[i]] - s2[labs[j]]
+            var_noise = float(np.var(d1 - d2, ddof=1)) / 2
+            var_tot = float(np.var(d1, ddof=1))
+            if var_tot > 0:
+                share.append(min(1.0, var_noise / var_tot))
+            sd_noise.append((var_noise / n_full) ** 0.5)
+            a = abs(d1.mean())
+            for lo, hi in bins:
+                if lo <= a < hi:
+                    agree.setdefault((lo, hi), []).append(int(np.sign(d1.mean()) == np.sign(d2.mean())))
+    med = lambda v: float(np.median(v)) if v else float("nan")  # noqa: E731
+    lines = ["", "## Does the leaderboard survive the re-judge?", "",
+             f"Every stored method ({len(labs)}) on the {len(keys)} re-judged tasks, nDCG@5 against the "
+             f"original gold and against the re-judge's. Spearman ρ of the two method orders: **{rho:.3f}**.", "",
+             "| method | nDCG@5 original | nDCG@5 re-judge | change |", "|---|---:|---:|---:|"]
+    show = labs[:12] + [x for x in labs[12:] if x.split("@")[0].split(".")[0] in ("M3", "M1", "M2", "B1", "B0")]
+    for x in show:
+        k = labs.index(x)
+        lines.append(f"| {x} | {m1[k]:.3f} | {m2[k]:.3f} | {m2[k] - m1[k]:+.3f} |")
+    lines += ["", f"Over all {len(share)} pairs of methods: judge noise is a median **{med(share):.0%}** of the "
+              "per-task variance of a paired ΔnDCG@5 (the rest is which tasks happen to be in the set). "
+              "A bootstrap over tasks resamples each task with its one label, so its interval already "
+              f"covers that noise. On the full pooled dev set (n = {n_full}), judge noise alone gives a "
+              f"paired Δ a standard deviation of a median **{med(sd_noise):.4f}** "
+              f"(90% of pairs ≤ {float(__import__('numpy').percentile(sd_noise, 90)):.4f}).", "",
+              "Sign of the mean Δ on these tasks, original gold vs re-judge, by |Δ| under the original:", "",
+              "| \\|Δ\\| | pairs | same sign |", "|---|---:|---:|"]
+    for lo, hi in bins:
+        v = agree.get((lo, hi), [])
+        if v:
+            lines.append(f"| {lo:.3f}–{hi:.3f} | {len(v)} | {sum(v) / len(v):.2f} |")
+    return lines
+
+
 def report() -> None:
     model = model_rankings(MODEL_LABEL)
+    both: dict = {}             # dataset/task_id -> (original gold, re-judge gold)
     rows, pooled = [], {"n": 0}
     acc_all = {k: [] for k in ("same1", "hit_ab", "hit_ba", "ngi", "nd_j", "h1_j", "nd_m", "h1_m")}
     kp_all = []
@@ -94,7 +165,8 @@ def report() -> None:
             g1 = orig.get(t)
             if g1 is None:
                 continue
-            a, b = (g1.order[0] if g1.order else None), (g2.order[0] if g2.order else None)
+            both[f"{d}/{t}"] = (g1, g2)
+            a, b =(g1.order[0] if g1.order else None), (g2.order[0] if g2.order else None)
             acc["same1"].append(int(a is not None and a == b))
             acc["hit_ab"].append(int(b is not None and g1.grades.get(b, 0) >= 2))
             acc["hit_ba"].append(int(a is not None and g2.grades.get(a, 0) >= 2))
@@ -130,6 +202,9 @@ def report() -> None:
         lines.append(f"| {d} | {n} | {m['same1']:.2f} | {m['hit_ab']:.2f} | {m['hit_ba']:.2f} | "
                      f"{m['ngi']:.2f} | {k:.2f} | {m['nd_j']:.3f} / {m['h1_j']:.2f} | "
                      f"{m['nd_m']:.3f} / {m['h1_m']:.2f} |")
+    n_full = sum(len([t for t in silver.eval_tasks(d) if split_of(t["id"]) == "dev" and t["id"] in g])
+                 for d in silver.EVAL_RUNS for g in [silver.eval_gold(d)])
+    lines += trust(both, n_full)
     OUT.write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
     print(f"\n-> {OUT}")

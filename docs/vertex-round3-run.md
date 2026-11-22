@@ -14,9 +14,10 @@ $4.7), v2 2026-11-21 ($57.7: Argon $55.85 for 3,000 tasks, translations, parents
 rewrites $1.87), round 4's leaders graded (g2 $0.54, g3 $1.03; g2 missed two methods, see
 next-data-and-distillation.md §5), round 5's leaders graded 2026-11-22 (g4 $1.85;
 calibration 50/50 on hit). The spend log is at $387.82 against the cap of $406.14, so $18.3
-is left. Open: the author's rewrite spot-check. Next on Vertex: round 6's Argon batch
-(argon-experiments.md "Round 6's choice": #5, #3, #2, #6, ~$50–90 beyond this cap; the
-author's go first; done by 2026-11-30).
+is left. Open: the author's rewrite spot-check. Round 6 has its own cap
+(`CAP_TAG=round6`, $487.82): v3a ran 2026-11-22 ($23.89; argon-experiments.md "Batch 1
+results"), so $76.11 is left for v3b (#5 VLM reranker, #2 adversarial tasks; code not
+written yet; done by 2026-11-30).
 
 ## Account (pinned)
 
