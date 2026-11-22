@@ -97,3 +97,68 @@ def test_hybrid_ignores_a_member_that_matched_nothing():
     dense = _Fixed(names, [0.80, 0.86, 0.81], "M1")
     ranked, _ = HybridMatcher([bm25, dense]).rank_and_signal("Купить продукты")
     assert ranked[0][0] == "grocery"
+
+
+# --- F1 bundles -----------------------------------------------------------------
+
+class _VecEncoder:
+    """Returns a fixed unit vector per text (as OnnxEncoder.encode does)."""
+    def __init__(self, vec):
+        self.vec = np.asarray(vec, dtype=np.float32)
+
+    def encode(self, texts, prefix=""):
+        return np.array([self.vec for _ in texts], dtype=np.float32)
+
+
+SPEC = {"name": "stub", "query_prefix": "query: ", "max_length": 64,
+        "model": {"url": "https://example.org/a/model_fp16.onnx", "sha256": "ab" * 32, "size": 1},
+        "tokenizer": {"url": "https://example.org/a/tokenizer.json", "sha256": "cd" * 32, "size": 1}}
+
+
+def test_f1_bundle_is_dense_only_and_reads_parents(tmp_path):
+    names = ["savings", "dentistry", "grocery"]
+    matrix = np.eye(3, 4, dtype=np.float32)
+    (tmp_path / "bm25.npz").write_bytes(b"stale")
+    m = bundle.export_f1(tmp_path, names, matrix, SPEC, threshold=0.5, gate={"min_prob": 0.2})
+    assert not (tmp_path / "bm25.npz").exists()
+    assert m["bm25"] is None and m["query"]["inputs"] == ["title", "parents"]
+    assert m["tag"].startswith("F1-")
+    assert not np.load(tmp_path / "prior.npy").any()
+    got = bundle.BundleMatcher(tmp_path, encoder=_VecEncoder([0, 1, 0, 0]))
+    assert got.gate.threshold == 0.5
+    assert got.match_one("x").icon == "dentistry"
+    assert got.query_for({"title": "Book *it*", "parents": ["Health"]}) == "Health: Book it"
+
+
+def test_f1_tag_ignores_encoder_urls_and_gate_record(tmp_path):
+    names, matrix = ["a", "b"], np.eye(2, dtype=np.float32)
+    t1 = bundle.export_f1(tmp_path, names, matrix, SPEC, 0.5, {"min_prob": 0.2})["tag"]
+    moved = {**SPEC, "model": {**SPEC["model"], "url": "https://example.org/b/model_fp16.onnx"}}
+    t2 = bundle.export_f1(tmp_path, names, matrix, moved, 0.5, {"min_prob": 0.3})["tag"]
+    other = {**SPEC, "model": {**SPEC["model"], "sha256": "ef" * 32}}
+    t3 = bundle.export_f1(tmp_path, names, matrix, other, 0.5, {"min_prob": 0.2})["tag"]
+    t4 = bundle.export_f1(tmp_path, names, matrix, SPEC, 0.6, {"min_prob": 0.2})["tag"]
+    assert t1 == t2 and t1 != t3 and t1 != t4
+
+
+def test_f1_tokenizer_ships_without_padding(tmp_path):
+    """Training's padding in tokenizer.json would be mean-pooled into the query vector."""
+    import json
+    ckpt, out = tmp_path / "ckpt", tmp_path / "out"
+    ckpt.mkdir()
+    out.mkdir()
+    (ckpt / "f1_meta.json").write_text(json.dumps({
+        "run": "F1@t", "base_model": "intfloat/multilingual-e5-small",
+        "query_prefix": "query: ", "max_query_len": 64}))
+    tok = {"version": "1.0", "padding": {"pad_to_multiple_of": 8}, "truncation": {"max_length": 512},
+           "model": {"type": "Unigram"}}
+    (ckpt / "tokenizer.json").write_text(json.dumps(tok))
+    (out / "model_fp16.onnx").write_bytes(b"onnx")         # reused, not rebuilt
+    spec = bundle.export_f1_onnx(ckpt, out, "fp16", hf_repo="u/r")
+    shipped = json.loads((out / "tokenizer.json").read_text())
+    assert shipped["padding"] is None and shipped["truncation"] is None
+    assert shipped["model"] == tok["model"]
+    assert spec["model"]["url"] == "https://huggingface.co/u/r/resolve/main/model_fp16.onnx"
+    assert spec["max_length"] == 64
+    again = bundle.export_f1_onnx(ckpt, out, "fp16", hf_repo="u/r")
+    assert again["tokenizer"]["sha256"] == spec["tokenizer"]["sha256"]   # byte-stable

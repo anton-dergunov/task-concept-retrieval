@@ -226,6 +226,25 @@ def fused_dense(icons: Sequence[IconDoc], encoder: OnnxEncoder,
     return dense
 
 
+def _tag(out_dir: Path, files: Sequence[str], manifest: dict, method: str) -> str:
+    """Cache identity: a consumer that caches answers drops them when this changes.
+    It covers everything that decides an answer: the matrices and every setting
+    (encoder, query, fusion), but not `source`, which changes with every commit, nor
+    the encoder files' URLs: their sha256 already names them, so moving a file (e.g.
+    pinning a Hugging Face revision) keeps the agenda's cached icons."""
+    def strip(v):
+        if isinstance(v, dict):
+            return {k: strip(x) for k, x in v.items() if k != "url"}
+        return v
+    digest = hashlib.sha256()
+    for f in files:
+        digest.update((out_dir / f).read_bytes())
+    digest.update(json.dumps({k: (strip(v) if k == "encoder" else v)
+                              for k, v in manifest.items() if k not in ("source", "gate")},
+                             sort_keys=True).encode())
+    return f"{method}-{digest.hexdigest()[:12]}"
+
+
 def export(out_dir: Path, icons: Sequence[IconDoc], encoder: OnnxEncoder,
            method: str = "M3", source: str = "") -> dict:
     """Write a bundle for METHOD (M3: B1 + M1 fused by RRF; M1: dense only)."""
@@ -263,17 +282,165 @@ def export(out_dir: Path, icons: Sequence[IconDoc], encoder: OnnxEncoder,
                   "saturation": BM25Matcher.SAT_K} if method == "M3" else None),
         "fusion": {"rrf_k": config.RRF_K, "pool": 50, "threshold": config.ABSTAIN_THRESHOLD},
     }
-    # Cache identity: a consumer that caches answers drops them when this changes.
-    # It covers everything that decides an answer: the matrices and every setting
-    # (encoder, query, fusion), but not `source`, which changes with every commit.
-    digest = hashlib.sha256()
-    for f in files:
-        digest.update((out_dir / f).read_bytes())
-    digest.update(json.dumps({k: v for k, v in manifest.items() if k != "source"},
-                             sort_keys=True).encode())
-    manifest = {"tag": f"{method}-{digest.hexdigest()[:12]}", **manifest}
+    manifest = {"tag": _tag(out_dir, files, manifest, method), **manifest}
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return manifest
+
+
+# --- F1: a fine-tuned dual encoder (tcr/finetune.py) ------------------------------
+#
+# The checkpoint's transformer is exported to ONNX with `last_hidden_state` as its
+# output, the same interface as the Xenova export above: the runner tokenizes, mean
+# pools and L2-normalizes, exactly as train_f1.py does. The icon side is the matrix
+# FineTunedMatcher scores with (PyTorch fp32, mostly computed on Kaggle's GPU); the
+# export check measures how often the ONNX query side agrees with it.
+
+F1_PRECISIONS = ("fp16", "fp32", "int8")
+HF_RESOLVE = "https://huggingface.co/{repo}/resolve/{revision}/{file}"
+
+
+def _file_spec(path: Path, url: str) -> dict:
+    return {"url": url, "sha256": _sha256(path), "size": path.stat().st_size}
+
+
+def export_f1_onnx(model_path: Path, out_dir: Path, precision: str = "fp16",
+                   hf_repo: str = "", revision: str = "main") -> dict:
+    """Export F1 checkpoint MODEL_PATH as `model_<precision>.onnx` + `tokenizer.json`
+    in OUT_DIR (the folder that is uploaded to Hugging Face as HF_REPO). Returns the
+    manifest's encoder spec. An existing ONNX file is reused, not rebuilt.
+
+    fp32 is exported first (with external data: e5-large's fp32 weights are over
+    protobuf's 2 GB), then converted: fp16 with onnxruntime's converter (inputs and
+    output stay fp32), int8 with dynamic quantization. Each step runs on its own, so
+    only one copy of the weights is in memory at a time."""
+    import shutil
+
+    if precision not in F1_PRECISIONS:
+        raise ValueError(f"precision must be one of {F1_PRECISIONS}")
+    meta = json.loads((model_path / "f1_meta.json").read_text())
+    out_dir.mkdir(parents=True, exist_ok=True)
+    target = out_dir / f"model_{precision}.onnx"
+    if not target.exists():
+        tmp = out_dir / ".fp32"
+        fp32 = tmp / "model.onnx"
+        if not fp32.exists():
+            _torch_to_onnx(model_path, fp32)
+        if precision == "fp32":
+            if any(tmp.glob("*.data")) or fp32.stat().st_size > 2_000_000_000:
+                raise ValueError("fp32 needs external data for this model; the runner "
+                                 "loads one file, so use fp16")
+            shutil.move(str(fp32), target)
+        elif precision == "fp16":
+            import onnx
+            from onnxruntime.transformers.float16 import convert_float_to_float16
+            # Shape inference on the file: in memory it serializes the model, which
+            # fails past protobuf's 2 GB (e5-large).
+            shaped = tmp / "shaped.onnx"
+            onnx.shape_inference.infer_shapes_path(str(fp32), str(shaped))
+            model = onnx.load(str(shaped))
+            model = convert_float_to_float16(model, keep_io_types=True, disable_shape_infer=True)
+            onnx.save(model, str(target.with_suffix(".part")))
+            del model
+            target.with_suffix(".part").replace(target)
+        else:
+            from onnxruntime.quantization import QuantType, quantize_dynamic
+            quantize_dynamic(str(fp32), str(target.with_suffix(".part")),
+                             weight_type=QuantType.QInt8)
+            target.with_suffix(".part").replace(target)
+        shutil.rmtree(tmp, ignore_errors=True)
+    # The checkpoint's tokenizer.json keeps training's padding (to a multiple of 8). The
+    # runner feeds every id with attention mask 1, so pads would be mean-pooled into the
+    # vector (top-1 agreement with PyTorch fell to 78%). Shipped with padding and
+    # truncation off; the runner sets truncation from the manifest. Edited as JSON, not
+    # re-saved by `tokenizers`, whose output is not byte-stable (the sha256 would change
+    # with every export, and with it the bundle's tag).
+    tok = json.loads((model_path / "tokenizer.json").read_text(encoding="utf-8"))
+    tok["padding"] = tok["truncation"] = None
+    (out_dir / "tokenizer.json").write_text(json.dumps(tok, ensure_ascii=False), encoding="utf-8")
+
+    def url(name: str) -> str:
+        return HF_RESOLVE.format(repo=hf_repo, revision=revision, file=name) if hf_repo else ""
+    return {
+        "name": f"{meta['run']} (fine-tuned {meta['base_model']}, ONNX {precision})",
+        "model": _file_spec(target, url(target.name)),
+        "tokenizer": _file_spec(out_dir / "tokenizer.json", url("tokenizer.json")),
+        "query_prefix": meta["query_prefix"],
+        "max_length": meta["max_query_len"],
+    }
+
+
+def _torch_to_onnx(model_path: Path, out: Path) -> None:
+    """The checkpoint's transformer as fp32 ONNX: (input_ids, attention_mask) ->
+    last_hidden_state, dynamic batch and sequence axes."""
+    import torch
+    from transformers import AutoModel, AutoTokenizer
+
+    class _Hidden(torch.nn.Module):
+        def __init__(self, m):
+            super().__init__()
+            self.m = m
+
+        def forward(self, input_ids, attention_mask):
+            return self.m(input_ids=input_ids, attention_mask=attention_mask).last_hidden_state
+
+    tok = AutoTokenizer.from_pretrained(model_path)
+    model = _Hidden(AutoModel.from_pretrained(model_path, torch_dtype=torch.float32).eval())
+    enc = tok(["query: book a dentist appointment"], return_tensors="pt")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with torch.inference_mode():
+        torch.onnx.export(
+            model, (enc["input_ids"], enc["attention_mask"]), str(out),
+            input_names=["input_ids", "attention_mask"], output_names=["last_hidden_state"],
+            dynamic_axes={"input_ids": {0: "batch", 1: "seq"},
+                          "attention_mask": {0: "batch", 1: "seq"},
+                          "last_hidden_state": {0: "batch", 1: "seq"}},
+            opset_version=17, dynamo=False)
+
+
+def export_f1(out_dir: Path, names: Sequence[str], matrix: np.ndarray, encoder_spec: dict,
+              threshold: float, gate: dict, source: str = "") -> dict:
+    """Write a dense-only bundle for an F1 run: the icon matrix (fp16), a zero prior
+    (F1 has none), the title with its nearest parent as the query, and the gate's
+    z-threshold. `gate` records how the threshold was set (not part of the tag)."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "names.txt").write_text("\n".join(names) + "\n", encoding="utf-8")
+    np.save(out_dir / "dense.npy", np.asarray(matrix, dtype=np.float16))
+    np.save(out_dir / "prior.npy", np.zeros(len(names), dtype=np.float32))
+    if (out_dir / "bm25.npz").exists():
+        (out_dir / "bm25.npz").unlink()
+    files = ["names.txt", "dense.npy", "prior.npy"]
+    manifest = {
+        "format": BUNDLE_FORMAT,
+        "method": "F1",
+        "source": source,
+        "descriptions": "v2",
+        "icons": "names.txt",
+        "encoder": encoder_spec,
+        "query": {"inputs": ["title", "parents"], "normalize": "org-plain", "body_chars": 400},
+        "dense": {"matrix": "dense.npy", "prior": "prior.npy"},
+        "bm25": None,
+        "fusion": {"rrf_k": config.RRF_K, "pool": 50, "threshold": round(float(threshold), 4)},
+        "gate": gate,
+    }
+    manifest = {"tag": _tag(out_dir, files, manifest, "F1"), **manifest}
+    (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    return manifest
+
+
+def place_in_cache(spec: dict, path: Path, cache_dir: Path) -> Path:
+    """Put PATH where `fetch` (and the agenda runner's fetch) looks for SPEC, as a hard
+    link when possible, so neither downloads a file that is not uploaded yet."""
+    import os
+    import shutil
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    name = spec["url"].rsplit("/", 1)[-1] if spec.get("url") else path.name
+    dest = cache_dir / f"{spec['sha256'][:16]}-{name}"
+    if not dest.exists():
+        try:
+            os.link(path, dest)
+        except OSError:
+            shutil.copyfile(path, dest)
+    return dest
 
 
 # --- Scoring with a bundle (the runner's logic, as Matchers) ----------------------
