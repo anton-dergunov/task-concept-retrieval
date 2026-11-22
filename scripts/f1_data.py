@@ -2,6 +2,7 @@
 """Build F1's training data (docs/f1-dual-encoder.md §2) into one tarball for Colab.
 
     python scripts/f1_data.py build [--smoke]
+    python scripts/f1_data.py repack [--smoke]   # same data, current train_f1.py / i1_embed.py
     python scripts/f1_data.py import <runs dir, f1_runs.tar.zst or .zip>   # Kaggle / Colab results back
 
 `import` copies each finished run's best/ checkpoint to .cache/models/F1[-<tag>]/ (where
@@ -29,6 +30,7 @@ No eval-set task or label is in it (asserted in tcr.finetune.build).
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import random
 import shutil
@@ -72,15 +74,21 @@ def write(data: dict, smoke: bool) -> Path:
         with open(out / f"{key}.jsonl", "w", encoding="utf-8") as f:
             for r in data[key]:
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    for script in ("train_f1.py", "i1_embed.py"):
-        shutil.copy(ROOT / "scripts" / script, out / script)
     from tcr.describe_v2 import glyph_png
     (out / "glyphs").mkdir()
     for r in data["icons"]:
         (out / "glyphs" / f"{r['name']}.png").write_bytes(glyph_png(r["name"], 256))
-    tar = finetune.OUT_DIR / f"{name}.tar.gz"
+    return pack(out)
+
+
+def pack(out: Path) -> Path:
+    """Copy the current scripts into a built data dir and tar it. `repack` uses this alone:
+    queries.jsonl stays byte-identical, so teacher scores keyed by its hash stay valid."""
+    for script in ("train_f1.py", "i1_embed.py"):
+        shutil.copy(ROOT / "scripts" / script, out / script)
+    tar = finetune.OUT_DIR / f"{out.name}.tar.gz"
     with tarfile.open(tar, "w:gz") as t:
-        t.add(out, arcname=name)
+        t.add(out, arcname=out.name)
     return tar
 
 
@@ -153,13 +161,19 @@ def import_runs(src: Path) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("cmd", choices=["build", "import"])
+    ap.add_argument("cmd", choices=["build", "repack", "import"])
     ap.add_argument("src", nargs="?", help="import: the runs directory, f1_runs.tar.zst or f1_runs.zip")
     ap.add_argument("--smoke", action="store_true", help="200 pool tasks, 1 in 10 icons' free signal")
     ap.add_argument("--no-distill", action="store_true", help="leave out the unlabelled distillation text")
     args = ap.parse_args()
     if args.cmd == "import":
         import_runs(Path(args.src))
+        return
+    if args.cmd == "repack":
+        out = finetune.OUT_DIR / ("f1_data_smoke" if args.smoke else "f1_data")
+        sha = hashlib.sha1((out / "queries.jsonl").read_bytes()).hexdigest()
+        tar = pack(out)
+        print(f"-> {tar} ({tar.stat().st_size / 1e6:.1f} MB); queries.jsonl sha1 {sha[:12]} unchanged")
         return
     data = finetune.build(smoke=args.smoke, distill=None if args.no_distill else distill_sources())
     tar = write(data, args.smoke)

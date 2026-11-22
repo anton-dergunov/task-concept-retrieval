@@ -10,6 +10,8 @@ State lives in data/private/judge/batch/<run>/ (private: requests carry the prom
 examples), so every command resumes in a later session:
 
   prepare   build the task states and round 1        (--dataset KEY | --pool FILE --name N)
+            [--ids FILE: judge only these tasks, with the whole set as context (siblings);
+             --shuffle-seed N: another order of the ~100 candidates, for a re-judge]
   estimate  the expected cost, from the online runs' measured cost per task
   submit    submit the current round's jobs that are not submitted yet
   status    the state of the current round's jobs
@@ -27,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 import sys
 import time
 from datetime import datetime, timezone
@@ -73,7 +76,9 @@ class Batch:
     def ctx(self) -> J.Context:
         if self._ctx is None:
             m = self.meta
-            self._ctx = J.Context(m["dataset"], records=self.records())
+            # with --ids, the whole source set stays the context (sibling titles)
+            recs = read_jsonl(Path(m["context_source"])) if m.get("context_source") else self.records()
+            self._ctx = J.Context(m["dataset"], records=recs)
         return self._ctx
 
     def job(self, name: str) -> vb.Run:
@@ -219,14 +224,25 @@ def cmd_prepare(args) -> None:
     else:
         source, name, private = Path(args.pool).resolve(), args.name, args.private
     recs = read_jsonl(source)
+    b.dir.mkdir(parents=True, exist_ok=True)
+    context = None
+    if args.ids:
+        want = [l.strip() for l in Path(args.ids).read_text().splitlines() if l.strip()]
+        by_id = {r["id"]: r for r in recs}
+        missing = [i for i in want if i not in by_id]
+        if missing:
+            sys.exit(f"--ids: {len(missing)} ids not in {source}, e.g. {missing[:3]}")
+        context = b.dir / "context.jsonl"
+        write_jsonl(context, recs)
+        recs = [by_id[i] for i in want]
     if args.limit:
         recs = recs[:args.limit]
-    b.dir.mkdir(parents=True, exist_ok=True)
     sub = b.dir / "tasks.jsonl"        # the exact task list of this run
     write_jsonl(sub, recs)
     b.save_meta({"run": args.run, "dataset": name, "source": str(sub), "private": private,
                  "model": args.model, "prompt_version": J.PROMPT_VERSION, "gen": J.GEN,
                  "chunk": args.chunk, "n_tasks": len(recs), "extra_candidates": args.extra_candidates,
+                 "context_source": str(context) if context else None, "shuffle_seed": args.shuffle_seed,
                  "created": datetime.now(timezone.utc).isoformat(timespec="seconds")})
     ctx = b.ctx()
     if args.extra_candidates:
@@ -245,7 +261,15 @@ def cmd_prepare(args) -> None:
     t0 = time.time()
     states = []
     for i, r in enumerate(recs):
-        states.append(J.start(ctx, r))
+        st = J.start(ctx, r)
+        if args.shuffle_seed is not None:
+            # the same candidates in another order (and under other numbers): a re-judge
+            # that measures the judge's noise, not its reading of one fixed sheet
+            keys = sorted((k for k in st["ids"] if int(k) < J.SEARCH_ID0), key=int)
+            names = [st["ids"][k] for k in keys]
+            random.Random(f"{args.shuffle_seed}:{r['id']}").shuffle(names)
+            st["ids"].update(zip(keys, names))
+        states.append(st)
         if (i + 1) % 500 == 0:
             print(f"  pools: {i + 1}/{len(recs)} ({time.time() - t0:.0f}s)")
     b.save_states(states)
@@ -322,6 +346,9 @@ def main() -> None:
     p.add_argument("--model", default=J.DEFAULT_MODEL)
     p.add_argument("--chunk", type=int, default=1000)
     p.add_argument("--limit", type=int, default=0)
+    p.add_argument("--ids", help="a file of task ids (one per line): judge only these, "
+                                 "with the whole --dataset / --pool as context")
+    p.add_argument("--shuffle-seed", type=int, default=None, help="shuffle each task's candidate order")
     p.add_argument("--extra-candidates", help="JSON {task_id: [icons]} to add to each task's "
                                               "candidate pool (select_active.py's <pool>.extra.json)")
     for name in ("estimate", "submit", "status", "collect", "run", "export"):

@@ -185,8 +185,21 @@ Argon call must finish by 2026-11-30 (the price doubles after that):
 | 11-27/29 | Mac | buffer for failed or retried requests; import; `f1_data.py build` |
 | from 11-28 | Kaggle (free) | round 6: the big model with each new kind of data, the VLM-distilled big model, and the small model last |
 
-Raising the cap: delete `data/private/augment/cap-round3.json` and rerun with
-`BUDGET=<new money>` (above). This waits for the author's go.
+**Approved (author, 2026-11-22):** all of it, up to **$100**, on the contact account (the
+Vertex project showed £123.57 of credit left). Round 6 has its own cap, so round 3's stays
+as it was: `CAP_TAG=round6 BUDGET=100` fixes `data/private/augment/cap-round6.json` at the
+spend log + $100 ($487.82) on its first run.
+
+**Batch 1 = `vertex_round3_jobs.sh v3a`** (~$30): #6 re-judges 300 eval dev tasks
+(Personal 150, Personal-synth 75, Realistic 75; `noise_ceiling.py select`), same judge and
+prompt, the ~100 candidates in another order (`judge_batch.py prepare --ids …
+--shuffle-seed 1`, the whole set kept as context for sibling titles); `noise_ceiling.py
+report` → results/noise_ceiling.md. #3: Flash edits 1,000 judged tasks with a clear top
+icon and ≥ 3 words (pool-synth-j4 600, pool-synth2-j4 150, pool-mslatte-j4 250; 20% from
+validation tasks, the contrast set, never trained on) by 1–3 words so the best icon should
+change (`augment_pools.py minpair` → `<dataset>.mp.jsonl`). Argon then judges the edits with
+the original's top 5 among the candidates (`minpair-pool`, runs mp-synth-j4 and
+mp-mslatte-j4). Batch 2 (v3b: #5, #2) follows.
 
 **Not on the list:** labels for the abstention gate (it can be calibrated on the labels
 that exist). And a reminder that every item optimises toward Argon's taste: the author's

@@ -61,6 +61,13 @@ choice", to be approved; all Argon work done by 2026-11-30) and the free Kaggle 
   the small model only.
 - **How experiments are ranked** (author, 2026-11-22): what it teaches about ML or whether
   it makes a blog post (~60%), then the gain for the big model (~40%).
+- **Round 6's Argon money (author, 2026-11-22):** up to $100 on the contact account, for
+  argon-experiments.md "Round 6's choice"; its own cap (`CAP_TAG=round6`, $487.82 on the
+  spend log).
+- **Kaggle: 30 GPU-hours per week on one account** (the binding limit for e5-large runs,
+  ~10–12 h each); Colab's free tier is not an option (it terminated an F1 run after ~3 h).
+  The project is not in a hurry for final results, so Kaggle work follows the weekly reset
+  while the Argon work, which must finish by 2026-11-30, goes first.
 - **Budget ~$100** from a new $300 Gemini credit, including actively selected Argon judging.
   The Vertex jobs run in ~3 days (another Vertex job is running until then) and must finish
   before 2026-11-30. The author runs them (hand-off: vertex-round3-run.md).

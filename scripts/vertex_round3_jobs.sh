@@ -7,6 +7,10 @@
 #       top-1s on dev; set GRADE_METHODS to the method labels (silver table names)
 #   v2  (after Kaggle round 4 and select_active.py; ~$65, before 2026-11-30): Argon judges
 #       the selected tasks, then their ES/RU translations, parent headings and rewrites
+#   v3a (round 6, batch 1; ~$30, before 2026-11-30; argon-experiments.md "Round 6's
+#       choice"): #6 re-judge 300 eval dev tasks (the judge-noise ceiling) and #3 minimal
+#       pairs (Flash edits ~1,000 judged tasks, Argon judges the edits). Own cap:
+#       CAP_TAG=round6 BUDGET=100 (the author's approval of 2026-11-22)
 #
 # Safe to rerun at any time: every step skips what is done, and a submitted batch job is
 # never resubmitted. The budget cap is fixed on the first run (data/private/augment/
@@ -17,6 +21,7 @@
 #   CREDIT_LEFT=… GRADE_METHODS=F1@all-large.v2+parent,… scripts/vertex_round3_jobs.sh grade
 #   (later rounds: GRADE_NAME=g2 …; picks graded in earlier sets are skipped)
 #   CREDIT_LEFT=… scripts/vertex_round3_jobs.sh v2
+#   CREDIT_LEFT=155 CAP_TAG=round6 BUDGET=100 scripts/vertex_round3_jobs.sh v3a
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY=.venv/bin/python
@@ -27,7 +32,7 @@ POOL=data/private/train_pools/personal_synth_pool.jsonl
 CAND=data/private/train_pools/personal_synth_cand.jsonl
 SEL_SYNTH=data/private/train_pools/personal_synth_pool3.jsonl
 SEL_MS=data/train_pools/mslatte2.jsonl
-STAGE="${1:?usage: $0 v1|grade|v2}"
+STAGE="${1:?usage: $0 v1|grade|v2|v3a}"
 : "${CREDIT_LEFT:?set CREDIT_LEFT to the credit left in USD (Billing → Credits)}"
 # Only the account and project pinned in .env (tcr/gcp.py); stop before any spend if not.
 $PY scripts/gcp_check.py || { echo "GCP preflight failed: nothing submitted"; exit 1; }
@@ -36,7 +41,7 @@ V2_RESERVE="${V2_RESERVE:-75}"      # kept for v2 + grading while v1 sizes the c
 N_CAND_MAX="${N_CAND_MAX:-10000}"
 GEN_PER_TASK=0.0031                 # measured, augment_pools.py
 
-CAP=$($A cap --credit-left "$CREDIT_LEFT" --reserve "${RESERVE:-5}" --budget "$BUDGET" --tag round3)
+CAP=$($A cap --credit-left "$CREDIT_LEFT" --reserve "${RESERVE:-5}" --budget "$BUDGET" --tag "${CAP_TAG:-round3}")
 spent() { $PY -c 'from tcr import judge; print(round(judge.spent(), 2))'; }
 echo "=== budget: stop when the spend log reaches \$$CAP (now \$$(spent))"
 
@@ -106,6 +111,50 @@ v2)
   done
   echo "v2 done. The runs join the training pools by themselves (tcr/silver.py NEW_POOL_RUNS). Next: f1_data.py build, Kaggle round 5."
   ;;
-*) echo "usage: $0 v1|grade|v2"; exit 1 ;;
+v3a)
+  [ "${CAP_TAG:-round3}" = round6 ] || { echo "v3a spends round 6's money: set CAP_TAG=round6 BUDGET=100"; exit 1; }
+  LOGS=data/private/augment/v3a-logs
+  mkdir -p "$LOGS"
+  PIDS=()
+  bg() { local name=$1; shift; "$@" > "$LOGS/$name.log" 2>&1 & PIDS+=($!); echo "  started $name (log $LOGS/$name.log)"; }
+  waitall() { local bad=0; for p in ${PIDS[@]+"${PIDS[@]}"}; do wait "$p" || bad=1; done; PIDS=();
+              [ "$bad" = 0 ] || { echo "a job failed: read $LOGS/*.log, then rerun (done steps are skipped)"; exit 1; }; }
+
+  echo "=== #6 re-judge dev tasks of the Argon-judged eval sets (another candidate order)"
+  [ -f data/private/judge/rejudge/personal.ids ] || $PY scripts/noise_ceiling.py select
+  for D in personal personal_synth realistic; do
+    RUN="rejudge-$D"
+    [ -f "data/private/judge/batch/$RUN/meta.json" ] || \
+      $B prepare --run "$RUN" --dataset "$D" --ids "data/private/judge/rejudge/$D.ids" \
+         --shuffle-seed 1 --model gemini-4-argon
+    bg "$RUN" sh -c "$B run --run $RUN --max-usd $CAP && $B export --run $RUN"
+  done
+  REJUDGE=(${PIDS[@]+"${PIDS[@]}"}); PIDS=()          # waited for at the end, not before the pairs
+
+  echo "=== #3 minimal pairs: Flash edits judged tasks so the best icon should change"
+  bg mp-gen-synth sh -c "$A minpair --judge-run pool-synth-j4 --n ${MP_SYNTH:-600} --max-usd $CAP && \
+                         $A minpair --judge-run pool-synth2-j4 --n ${MP_SYNTH2:-150} --max-usd $CAP"
+  bg mp-gen-mslatte $A minpair --judge-run pool-mslatte-j4 --n "${MP_MSLATTE:-250}" --max-usd "$CAP"
+  waitall
+  $A minpair-pool --judge-runs pool-synth-j4,pool-synth2-j4,pool-mslatte-j4
+
+  echo "=== #3 Argon judges the edited tasks (the original's top icons among the candidates)"
+  for spec in "mp-synth-j4|data/private/train_pools/personal_synth_pool.mp_pool.jsonl|personal_synth_pool|--private" \
+              "mp-mslatte-j4|data/train_pools/train_mslatte.mp_pool.jsonl|train_mslatte|"; do
+    IFS='|' read -r RUN FILE NAME PRIV <<< "$spec"
+    [ -f "$FILE" ] || continue
+    if [ ! -f "data/private/judge/batch/$RUN/meta.json" ]; then
+      # shellcheck disable=SC2086
+      $B prepare --run "$RUN" --pool "$FILE" --name "$NAME" $PRIV --model gemini-4-argon \
+         --extra-candidates "${FILE%.jsonl}.extra.json"
+    fi
+    bg "$RUN" sh -c "$B run --run $RUN --max-usd $CAP && $B export --run $RUN"
+  done
+  PIDS+=(${REJUDGE[@]+"${REJUDGE[@]}"})
+  waitall
+  $PY scripts/noise_ceiling.py report
+  echo "v3a done. Next: batch 2 (v3b: #5 VLM reranker, #2 adversarial tasks)."
+  ;;
+*) echo "usage: $0 v1|grade|v2|v3a"; exit 1 ;;
 esac
 echo "spend log: \$$(spent) (cap \$$CAP)"

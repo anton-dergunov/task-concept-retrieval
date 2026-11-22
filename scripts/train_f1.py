@@ -159,6 +159,27 @@ PLANS = {
                             "sel": {"active": None, "random": None}, "para": "graded",
                             "distill_sources": ["distill-mslatte", "distill-cand"]},
     },
+    # Round 6a (2026-11-22, round 5 data, no rebuild): the big model is now the deployed one on
+    # the Mac (deployment.md "Two models"), and it never had graded rewrites, round 4/5's best
+    # text for e5-small (+0.02). 4 epochs: rewrites raise an epoch to ~772 steps, so 4 epochs
+    # (~3,090 steps) are about e8's step budget (3,208; best at ~2,000-2,400) and fit one
+    # 12 h session. The rewrites' teacher filter and the students' teacher is the retrained
+    # F1@all-large-all3k. -L2 is kd-final with that teacher; -t2 the same at KD temperature 2
+    # (softer targets: how much the teacher's "dark knowledge" below the top icon carries).
+    "round6": {
+        "F1@all-large-para-all3k": {"pool_tasks": None, "holdout": True, "epochs": 4,
+                                    "model": "intfloat/multilingual-e5-large", "chunk_tokens": 2048,
+                                    "teacher": ["F1@all-large-all3k"], "kd_weight": 0.0, "para": "graded",
+                                    "sel": {"active": None, "random": None}},
+        "F1@all-kd-final-L2": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                               "teacher": ["F1@all-large-all3k"], "kd_weight": 1.0,
+                               "sel": {"active": None, "random": None}, "para": "graded",
+                               "distill_sources": ["distill-mslatte", "distill-cand"]},
+        "F1@all-kd-final-L2-t2": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                                  "teacher": ["F1@all-large-all3k"], "kd_weight": 1.0, "kd_temp": 2.0,
+                                  "sel": {"active": None, "random": None}, "para": "graded",
+                                  "distill_sources": ["distill-mslatte", "distill-cand"]},
+    },
 }
 ALL_RUNS = {n: c for plan in PLANS.values() for n, c in plan.items()}
 NEG = -1e4      # masked logit (fp32)
@@ -679,9 +700,11 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
                     save_best(enc, out / "best", name, a, data, st, m)
                 else:
                     st["bad"] += 1
-                (out / "last").mkdir(exist_ok=True)
-                torch.save({"model": enc.model.state_dict(), "opt": opt.state_dict(),
-                            "sched": sched.state_dict(), "scaler": scaler.state_dict(), "st": st}, last)
+                # --state-at pause: no resume state while training (e5-large's is 6.6 GB), only
+                # when --max-minutes pauses the run, with Adam's moments in bf16 (4.4 GB):
+                # two e5-large runs then fit /kaggle/working. A crash loses the run.
+                if a.state_at == "eval" or (stop and a.max_minutes):
+                    save_state(last, enc, opt, sched, scaler, st, a.state_at == "pause")
                 if st["bad"] >= a.patience:
                     log(f"{name}: no improvement in {a.patience} evaluations, stopping")
                     stop = True
@@ -700,6 +723,21 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         "args": vars(a)}, indent=1))
     shutil.rmtree(out / "last", ignore_errors=True)
     log(f"{name}: done; best nDCG@5 {st['best']:.4f} (base {st['base']['all']['ndcg5']:.4f}) -> {out / 'best'}")
+
+
+def save_state(last: Path, enc: Encoder, opt, sched, scaler, st: dict, bf16_moments: bool) -> None:
+    """The resume point. With bf16_moments, Adam's exp_avg / exp_avg_sq are stored in bf16;
+    Optimizer.load_state_dict casts them back to the parameters' dtype on resume."""
+    o = opt.state_dict()
+    if bf16_moments:
+        o = {**o, "state": {k: {n: (v.to(torch.bfloat16) if torch.is_tensor(v) and v.is_floating_point()
+                                    and v.ndim > 0 else v) for n, v in s.items()}
+                            for k, s in o["state"].items()}}
+    last.parent.mkdir(parents=True, exist_ok=True)
+    tmp = last.with_suffix(".tmp")
+    torch.save({"model": enc.model.state_dict(), "opt": o, "sched": sched.state_dict(),
+                "scaler": scaler.state_dict(), "st": st}, tmp)
+    tmp.rename(last)
 
 
 def save_best(enc: Encoder, path: Path, name: str, a, data: Data, st: dict, m: dict) -> None:
@@ -799,8 +837,10 @@ def score_texts(a, data_root: Path, run: str) -> Path:
         v, ix = v.cpu().numpy(), ix.cpu().numpy()
         for k, (r, f, _) in enumerate(chunk):
             idx[r, f], val[r, f] = ix[k], v[k]
-    np.savez_compressed(out, run=tag, names=np.array([r["name"] for r in icons]), idx=idx, val=val,
+    tmp = out.with_suffix(".tmp.npz")    # written whole, then renamed: another GPU's queue may wait for it
+    np.savez_compressed(tmp, run=tag, names=np.array([r["name"] for r in icons]), idx=idx, val=val,
                         queries_sha1=sha, scale=a.scale)
+    tmp.rename(out)
     log(f"teacher scores of {tag}: {len(jobs)} texts in {time.time() - t0:.0f} s -> {out}")
     del enc, I
     if torch.cuda.is_available():
@@ -896,6 +936,9 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--max-steps", type=int, default=0)
     ap.add_argument("--max-minutes", type=float, default=0, help="pause (resumable) after this long")
+    ap.add_argument("--state-at", choices=["eval", "pause"], default="eval",
+                    help="write the resume state at every evaluation (default), or only when "
+                         "--max-minutes pauses the run (bf16 Adam moments; needs --max-minutes)")
     ap.add_argument("--smoke", action="store_true", help="tiny CPU test: batch 8, 10 steps, 200 val")
     a = ap.parse_args()
     if a.smoke:

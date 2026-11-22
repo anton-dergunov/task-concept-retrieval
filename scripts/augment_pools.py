@@ -34,6 +34,9 @@ Commands:
   translate   titles and parents into --langs: of a pool run (training, <dataset>.xl.jsonl)
               or, with --eval, of an eval set's dev tasks (data/datasets/xling/)
   xling-build the translated eval set data/datasets/public_xling.jsonl (eval only)
+  minpair     one minimal edit of --n judged tasks of --judge-run that should change the
+              best icon (round 6, argon-experiments.md #3)      -> <dataset>.mp.jsonl
+  minpair-pool the edited tasks as judge input -> <dataset>.mp_pool.jsonl + .extra.json
 
 Round 3 (docs/next-data-and-distillation.md, hand-off docs/vertex-round3-run.md):
 scripts/vertex_round3_jobs.sh.
@@ -454,6 +457,163 @@ class Rewrite(Aug):
         vb.log(f"contamination check: {len(exact | near)} of {len(flat)} rewrites flagged")
 
 
+# --- minimal pairs (round 6, docs/argon-experiments.md #3) ------------------------------
+
+SYSTEM_MP = """You make minimal pairs for a task-to-icon matcher. Each TASK is a to-do item
+from one person's org-mode task list, with the icon that marks it best now, described in
+words. The icon is a small black-and-white symbol shown next to the task: a glanceable
+reminder of what the task is about (its central object first, then its context, then a
+meaningful action).
+
+For each task, edit the TITLE as little as possible (change, add or remove one to three
+words) so that a DIFFERENT icon becomes the best reminder. Change the central object (what
+the task is about), or, where the action is the point, the action (call -> email,
+buy -> return, pay -> cancel). Keep the language, register, length, names and the rest of
+the wording; the edited task must still be a realistic to-do for the same person under the
+same headings. Never make an edit the current icon still fits (a synonym, a detail, a date,
+a quantity, a different brand of the same thing), and never change only the context when
+the central object stays.
+
+Return one entry per task, with the task's number n: "title" (the edited title),
+"changed" (the words you changed, as old -> new), "new_icon" (what the best icon for the
+edited task should show, in a few words)."""
+
+SCHEMA_MP = {"type": "object", "properties": {"tasks": {"type": "array", "items": {
+    "type": "object", "properties": {"n": {"type": "integer"}, "title": {"type": "string"},
+                                     "changed": {"type": "string"}, "new_icon": {"type": "string"}},
+    "required": ["n", "title", "changed", "new_icon"]}}}, "required": ["tasks"]}
+MP_VAL_SHARE = 0.2          # pairs from validation tasks: the contrast set, never trained on
+MP_TOP = 5                  # the original's top icons, shown to the judge of the edit
+MP_MIN_WORDS = 3
+
+
+def _mp_path(meta: dict) -> Path:
+    base = (config.PRIVATE_DIR / "train_pools") if meta["private"] else (config.DATA_DIR / "train_pools")
+    return base / f"{meta['dataset']}.mp.jsonl"
+
+
+def _word_edits(a: str, b: str) -> int:
+    """Words changed between two titles (replaced, inserted or deleted; the larger side)."""
+    import difflib
+    x, y = a.lower().split(), b.lower().split()
+    n = 0
+    for op, i1, i2, j1, j2 in difflib.SequenceMatcher(a=x, b=y, autojunk=False).get_opcodes():
+        if op != "equal":
+            n += max(i2 - i1, j2 - j1)
+    return n
+
+
+class MinPair(Aug):
+    """One counterfactual edit of judged training tasks whose top icon is clear (grade 3, a
+    good icon exists): the title changed by a few words so the best icon should change.
+    <dataset>.mp.jsonl, {"task_id", "mp_id" (<task_id>~mp0), "title", "parents", "lang",
+    "changed", "new_icon", "orig_top" (the original's top icons), "val" (the original is a
+    validation task: the pair joins the contrast set), "contaminated", "model", "run"}.
+    `minpair-pool` turns them into tasks for the judge (vertex_round3_jobs.sh v3a)."""
+    kind, system, schema = "mp", SYSTEM_MP, SCHEMA_MP
+
+    def __init__(self, run: str, n: int = 0):
+        self.n = n
+        super().__init__(run)
+
+    def out_file(self) -> Path:
+        return _mp_path(self.jmeta)
+
+    def tasks(self) -> list:
+        import hashlib
+        from tcr.finetune import is_val_task
+        from tcr.silver import load_gold
+        gold = load_gold([self.run])
+        aug = load_results(out_path(self.jmeta))
+        ok = []
+        for t in super().tasks():
+            g = gold.get(t["id"])
+            if not g or g.no_good_icon or not g.order or g.grades.get(g.order[0]) != 3:
+                continue
+            if len(t["title"].split()) < MP_MIN_WORDS:     # "Clg", "Find tag": no room for a minimal edit
+                continue
+            parents = list(t.get("parents") or []) or list((aug.get(t["id"]) or {}).get("parents") or [])
+            ok.append({**t, "parents": parents, "body": "", "_top": g.order[:MP_TOP],
+                       "_val": is_val_task(t["id"])})
+        ok.sort(key=lambda t: hashlib.sha1(f"mp:{t['id']}".encode()).hexdigest())
+        if not self.n:
+            return ok
+        n_val = round(self.n * MP_VAL_SHARE)
+        val = [t for t in ok if t["_val"]][:n_val]
+        return val + [t for t in ok if not t["_val"]][:self.n - len(val)]
+
+    def chunks(self, tasks: list) -> list:
+        return [tasks[i:i + MAX_TASKS] for i in range(0, len(tasks), MAX_TASKS)]
+
+    def prompt(self, chunk: list) -> str:
+        lines = []
+        for i, t in enumerate(chunk, 1):
+            lines += [f"TASK {i}", f"TITLE: {t['title']}",
+                      "PARENTS: " + (" > ".join(t.get("parents") or []) or "(none)"),
+                      f"ICON NOW: {J.icon_line(t['_top'][0])}", ""]
+        return "\n".join(lines)
+
+    def estimate(self, chunks: list) -> float:
+        p = J.PRICES[MODEL]
+        tin = tout = 0
+        for ch in chunks:
+            chars = sum(len(t["title"]) + len(" > ".join(t.get("parents") or [])) + 120 for t in ch)
+            tin += 800 + chars / 3.5
+            tout += 2 * chars / 3 + 40 * len(ch) + 400
+        return (tin * p[2] + tout * p[3]) / 1e6
+
+    def check(self, task: dict, it) -> dict | None:
+        if not it:
+            return None
+        from tcr.describe_v2 import norm
+        t = " ".join(str(it.get("title") or "").split())
+        if not t or norm(t) == norm(task["title"]) or len(t) > 2 * len(task["title"]) + 20:
+            return None
+        k = _word_edits(task["title"], t)
+        if not 1 <= k <= max(3, math.ceil(0.5 * len(task["title"].split()))):
+            return None
+        if _CYR.search(task["title"]) and not _CYR.search(t):
+            return None
+        return {"task_id": task["id"], "mp_id": f"{task['id']}~mp0", "title": t,
+                "parents": task.get("parents") or [], "lang": task.get("lang") or "en",
+                "changed": str(it.get("changed") or "").strip(), "new_icon": str(it.get("new_icon") or "").strip(),
+                "orig_top": task["_top"], "val": task["_val"], "word_edits": k,
+                "model": MODEL, "run": self.run}
+
+    def finalize(self) -> None:
+        from tcr.describe_v2 import contamination_hits
+        results = load_results(self.out)
+        todo = [r for r in results.values() if "contaminated" not in r]
+        if not todo:
+            return
+        exact, near = contamination_hits([r["title"] for r in todo])
+        for i, r in enumerate(todo):
+            r["contaminated"] = i in exact or i in near
+        save_results(self.out, results)
+        vb.log(f"contamination check: {len(exact | near)} of {len(todo)} edits flagged")
+
+
+def minpair_pool(runs: list) -> None:
+    """The edited tasks of the runs' .mp.jsonl as judge input, per dataset:
+    <dataset>.mp_pool.jsonl (shared task schema) + .mp_pool.extra.json (the original's top
+    icons join the edited task's candidates, so the judge decides whether they still fit)."""
+    by_ds: dict = {}
+    for run in runs:
+        meta = judge_meta(run)
+        for r in load_results(_mp_path(meta)).values():
+            if r["run"] == run and not r.get("contaminated"):
+                by_ds.setdefault((meta["dataset"], meta["private"]), {})[r["mp_id"]] = r
+    for (ds, private), rows in by_ds.items():
+        base = (config.PRIVATE_DIR / "train_pools") if private else (config.DATA_DIR / "train_pools")
+        pool = base / f"{ds}.mp_pool.jsonl"
+        recs = [{"id": r["mp_id"], "dataset": ds, "title": r["title"], "body": "", "parents": r["parents"],
+                 "lang": r["lang"], "meta": {"orig_task_id": r["task_id"], "minpair": True, "val": r["val"]}}
+                for r in sorted(rows.values(), key=lambda r: r["mp_id"])]
+        write_jsonl(pool, recs)
+        pool.with_suffix(".extra.json").write_text(json.dumps({r["mp_id"]: r["orig_top"] for r in rows.values()}))
+        print(f"{ds}: {len(recs)} edited tasks ({sum(r['val'] for r in rows.values())} contrast-set) -> {pool}")
+
+
 # --- translations into more languages ---------------------------------------------------
 
 LANG_STYLE = {
@@ -615,6 +775,14 @@ def cmd_rewrite(args) -> None:
     drive(Rewrite(args.judge_run), args)
 
 
+def cmd_minpair(args) -> None:
+    drive(MinPair(args.judge_run, args.n), args)
+
+
+def cmd_minpair_pool(args) -> None:
+    minpair_pool(args.judge_runs.split(","))
+
+
 def cmd_translate(args) -> None:
     drive(Translate(args.judge_run, args.langs.split(","), args.eval), args)
 
@@ -656,6 +824,7 @@ def drive(a: Aug, args) -> None:
 
 def cmd_status(args) -> None:
     a = {"aug": lambda: Aug(args.judge_run), "rw": lambda: Rewrite(args.judge_run),
+         "mp": lambda: MinPair(args.judge_run, args.n),
          "xl": lambda: Translate(args.judge_run, args.langs.split(","), False),
          "xleval": lambda: Translate(args.judge_run, args.langs.split(","), True)}[args.kind]()
     ids = {t["id"] for t in a.tasks()}
@@ -770,7 +939,8 @@ def main() -> None:
     p.add_argument("--poll", type=int, default=120)
     p = sub.add_parser("status")
     p.add_argument("--judge-run", required=True)
-    p.add_argument("--kind", choices=["aug", "rw", "xl", "xleval"], default="aug")
+    p.add_argument("--kind", choices=["aug", "rw", "mp", "xl", "xleval"], default="aug")
+    p.add_argument("--n", type=int, default=0, help="--kind mp: the run's --n")
     p.add_argument("--langs", default=",".join(XLING_DEFAULT))
     for name in ("rewrite", "translate"):
         p = sub.add_parser(name)
@@ -782,6 +952,14 @@ def main() -> None:
             p.add_argument("--langs", default=",".join(XLING_DEFAULT))
             p.add_argument("--eval", action="store_true",
                            help="an eval set's run: its dev tasks, for the translated eval set")
+    p = sub.add_parser("minpair")
+    p.add_argument("--judge-run", required=True)
+    p.add_argument("--n", type=int, required=True, help="tasks to edit (20%% from validation tasks)")
+    p.add_argument("--max-usd", type=float, default=None)
+    p.add_argument("--poll", type=int, default=120)
+    p.add_argument("--limit", type=int, default=0, help="only the first N tasks (a pilot)")
+    p = sub.add_parser("minpair-pool")
+    p.add_argument("--judge-runs", required=True, help="comma-separated judge runs with .mp.jsonl results")
     sub.add_parser("xling-build")
     sub.add_parser("backfill")
     p = sub.add_parser("cap")

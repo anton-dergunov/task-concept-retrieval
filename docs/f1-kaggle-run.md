@@ -6,7 +6,7 @@ is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
 headless for up to 12 hours on two T4 GPUs; data building, import and scoring stay on the
 Mac (CLAUDE.md "Compute"). Round 2's guide is this file's git history (2026-11-16).
 
-**State (2026-11-21, evening):** round 5's first session (an editor session) ran out of
+**State (2026-11-22):** round 6a ready ([below](#round-6a-prepared-2026-11-22-round-5s-data-repacked)). Round 5's history: **(2026-11-21, evening)** round 5's first session (an editor session) ran out of
 disk at 17:21: GPU 0 finished `--score`, rand1k, act1k, 1k-rand and 1k-act, then
 `F1@all-large-all3k` (GPU 1) and `F1@all-lr-all3k` (GPU 0) died writing checkpoints. Those
 four runs and `runs/teacher` were packaged by hand, imported and scored (f1-dual-encoder.md
@@ -29,6 +29,59 @@ distill-mslatte 4,726. Private (Personal-style pool text, approved for the autho
 account); no eval data. Checked on the Mac: each preset's pool (F1@all-lr 8,887 tasks;
 rand1k 9,886; act1k 9,887; all3k 11,884; F1@1k-rand 999 and F1@1k-act 1,000 alone), CPU
 smoke runs of F1@all-lr-act1k and F1@1k-act.
+
+## Round 6a (prepared 2026-11-22; round 5's data, repacked)
+
+**Quota:** the free account has **30 GPU-hours per week** (one account; a two-T4 session
+costs its wall time once, so both GPUs stay busy). Colab's free tier is no fallback: it
+terminated an F1 run after ~3 h. On 2026-11-22, 15 h were left this week; this session
+takes ~10.5 h.
+
+**Data:** the same round-5 data, repacked with the new train_f1.py (`f1_data.py repack`:
+queries.jsonl byte-identical, sha1 e82f6066a296, so teacher scores stay valid;
+`f1_data.round5.tar.gz` is the copy before). Upload `data/private/f1/f1_data.tar.gz` as a
+**new version** of the round-5 dataset.
+
+**Inputs:** that new data version + **the round-5 retry version's output**
+(F1-all-large-all3k). Cell 2: `NEED = {"F1-all-large-all3k"}`.
+
+| GPU | queue | estimate |
+|---|---|---|
+| 0 | `--score F1@all-large-all3k` (~0.5 h; the new teacher's scores, also GPU 1's), then `F1@all-large-para-all3k`: e5-large + graded rewrites, 4 epochs (~3,090 steps ≈ e8's step budget) | ~10.2 h; `--max-minutes 620` pauses it resumably if slow |
+| 1 | waits for the teacher file, then `F1@all-kd-final-L2` (kd-final with the new teacher) and `F1@all-kd-final-L2-t2` (the same at KD temperature 2) | ~8 h |
+
+Cell 3:
+
+```python
+T = RUNS / "teacher" / "F1-all-large-all3k.npz"     # written whole, then renamed
+jobs = [
+    launch(0, f"python {TRAIN_SCRIPT} --data {DATA_DIR} --out {RUNS} --score F1@all-large-all3k"
+              f" && {train} --run F1@all-large-para-all3k --max-minutes 620", "gpu0.log"),
+    launch(1, f"for i in $(seq 120); do [ -f {T} ] && break; sleep 60; done; [ -f {T} ] && "
+              f"{train} --run F1@all-kd-final-L2,F1@all-kd-final-L2-t2", "gpu1.log"),
+]
+```
+
+GPU 1 gives up after 2 h if the teacher file never appears, so a failed `--score` cannot
+hold the session to its 12 h. Run it as **Save Version → Save & Run All (Commit)**. If
+GPU 0's run pauses, attach this version's output to the next session and run
+`F1@all-large-para-all3k` alone (§4).
+
+**Two e5-large runs in one session (from round 6b):** `--state-at pause` keeps no resume
+state while training and writes one only when `--max-minutes` pauses the run, with Adam's
+moments in bf16 (e5-large: ~3.4 GB, since the embedding table is frozen). Two paused e5-large
+runs then need ~3.4 × 2 + 2.2 × 2 (best/) + 2.2 (NEED) ≈ 13.4 GB of the 19.5 GiB. A crash
+without a pause loses that run, so always pair it with `--max-minutes`.
+
+After import (§5), score on the Mac:
+
+```bash
+.venv/bin/python scripts/f1_data.py import ~/Downloads/f1_runs.tar.zst
+nice .venv/bin/python scripts/silver_eval.py --methods F1@all-large-para-all3k,F1@all-kd-final-L2,F1@all-kd-final-L2-t2 --versions v2
+```
+
+Questions: do graded rewrites lift e5-large as they lifted e5-small (+0.02)? Does the
+better teacher lift kd-final, and does a softer KD temperature carry more?
 
 ## Round 5 retry (after the disk ran out, 2026-11-21)
 
