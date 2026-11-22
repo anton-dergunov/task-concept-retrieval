@@ -6,10 +6,17 @@ is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
 headless for up to 12 hours on two T4 GPUs; data building, import and scoring stay on the
 Mac (CLAUDE.md "Compute"). Round 2's guide is this file's git history (2026-11-16).
 
-**State (2026-11-21):** Vertex v2 done; `data/private/f1/f1_data.tar.gz` rebuilt for
-round 5 (21.3 MB; round 4's kept as `f1_data.round4.tar.gz`, round 3's as
-`f1_data.round3.tar.gz`). Next: upload it as a new version and run round 5
-([below](#round-5-after-vertex-v2-prepared-2026-11-21)).
+**State (2026-11-21, evening):** round 5's first session (an editor session) ran out of
+disk at 17:21: GPU 0 finished `--score`, rand1k, act1k, 1k-rand and 1k-act, then
+`F1@all-large-all3k` (GPU 1) and `F1@all-lr-all3k` (GPU 0) died writing checkpoints. Those
+four runs and `runs/teacher` were packaged by hand, imported and scored (f1-dual-encoder.md
+§13). The retry ([below](#round-5-retry-after-the-disk-ran-out-2026-11-21)) for the other
+four runs was first started in the editor too, then stopped and committed: **an editor
+session (running cells by hand) loses `/kaggle/working` when it ends; only Save Version →
+Save & Run All (Commit) keeps the output.** Next: download the commit's `f1_runs.tar.zst`,
+import, score. `data/private/f1/f1_data.tar.gz` is round 5's build (21.3 MB; round 4's kept
+as `f1_data.round4.tar.gz`, round 3's as `f1_data.round3.tar.gz`): **do not rebuild it** until
+round 6's selection is done.
 
 The round-5 data: 173,381 rows. Round 4's rows are all there, unchanged and in the same
 relative order, except the 3,000 distillation rows of the tasks Argon has judged since.
@@ -19,6 +26,51 @@ distill-mslatte 4,726. Private (Personal-style pool text, approved for the autho
 account); no eval data. Checked on the Mac: each preset's pool (F1@all-lr 8,887 tasks;
 rand1k 9,886; act1k 9,887; all3k 11,884; F1@1k-rand 999 and F1@1k-act 1,000 alone), CPU
 smoke runs of F1@all-lr-act1k and F1@1k-act.
+
+## Round 5 retry (after the disk ran out, 2026-11-21)
+
+**What happened.** `/kaggle/working` (the saved output, 19.5 GiB) filled up. Cell 2 used to copy
+every earlier run into `runs/` (11 runs, ~10 GB, two of them e5-large at 2.2 GB), and an
+e5-large run needs ~11 GB of its own while it trains: `best/` 2.2 GB, `last/state.pt` (weights
++ Adam's two moments, fp32) ~6.6 GB, and `save_best` writes `best.tmp` before it removes the
+old `best/` (+2.2 GB for a moment). GPU 1 died at its 4th evaluation (step ~942), in
+`save_best`. GPU 0's queue died when its next checkpoint hit the full disk, and cell 4's archive
+was cut off at 1.08 GB. Round 4 fit only because it had fewer earlier runs to copy.
+
+**Fix (cells 2 and 4 below).** Cell 2 unpacks earlier runs to `/tmp/prev` (the VM's root disk,
+not saved) and copies into `runs/` only `NEED` (this round's teachers) and interrupted runs
+(those with `last/state.pt`), then checks that ≥ 15 GB is free. Cell 4 writes with `zstd -f`.
+A run that finished in an earlier version but was not copied is not skipped, so the queues list
+only the runs still to do. Peak use: ~16 GB.
+
+**Time.** All3k has 471 steps per epoch (e8: 401). At 10.8 s/step, 8 full epochs are 11.3 h
+plus 16 evaluations, over the limit. But e8 stopped by patience after epoch 6 (best at epoch 5,
+489 min); all3k doing the same is ~9.3 h. The epochs stay at 8: a shorter schedule changes the
+LR decay, which is what made e8 beat the 5-epoch run. `--max-minutes 630` pauses it resumably
+(§4) if it runs long, early enough for cell 4.
+
+Inputs: the round-5 data version and **round 4's version output** (F1-all-large-e8, the
+teacher of all three remaining students). Round 3's runs are not needed. Cell 2's check:
+
+```python
+NEED = {"F1-all-large-e8"}   # round 5 retry: the students' teacher
+```
+
+| GPU | queue | estimate |
+|---|---|---|
+| 0 | `F1@all-lr-all3k`, `F1@all-lr-para-all3k`, `F1@all-kd-final` (the first student scores e8's teacher file first, ~20–30 min) | ~6.5 h |
+| 1 | `F1@all-large-all3k --max-minutes 630` | ~9.3 h, at most ~11 h |
+
+```python
+jobs = [
+    launch(0, f"{train} --run F1@all-lr-all3k,F1@all-lr-para-all3k,F1@all-kd-final", "gpu0.log"),
+    launch(1, f"{train} --run F1@all-large-all3k --max-minutes 630", "gpu1.log"),
+]
+```
+
+Run it as **Save Version → Save & Run All (Commit)**, not in the editor: a commit keeps its
+output after a timeout, so a paused GPU 1 can resume from it. After import, score all eight
+round-5 runs as below.
 
 ## Round 5 (after Vertex v2; prepared 2026-11-21)
 
@@ -158,35 +210,63 @@ print(TRAIN_SCRIPT, DATA_DIR, sorted(p.name for p in DATA_DIR.iterdir()))
 ```
 
 ```python
-# 2. Earlier versions' runs (attached outputs): copied in, so finished runs are skipped,
-#    an interrupted one resumes, and finished ones can be teachers.
+# 2. Earlier versions' runs (attached outputs), unpacked to /tmp/prev (not saved). Only this
+#    round's teachers (NEED) and interrupted runs are copied into runs/: /kaggle/working is
+#    capped at 19.5 GiB and an e5-large run needs ~11 GB of it while training.
 import shutil, subprocess, zipfile
+PREV = Path("/tmp/prev")
+PREV.mkdir(parents=True, exist_ok=True)
 for z in INPUT_ROOT.rglob("f1_runs.zip"):          # rounds 1–3
     with zipfile.ZipFile(z) as f:
-        f.extractall(WORK)
+        f.extractall(PREV)
     print("unpacked", z)
-for z in INPUT_ROOT.rglob("f1_runs.tar.zst"):      # round 4 on
-    subprocess.run(f"zstd -dc '{z}' | tar -xf - -C {WORK}", shell=True, check=True)
+zsts = list(INPUT_ROOT.rglob("f1_runs.tar.zst"))   # round 4 on
+if zsts and not shutil.which("zstd"):              # not preinstalled on Kaggle (Internet on)
+    subprocess.run("apt-get update -qq && apt-get install -y -qq zstd", shell=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+if zsts and not shutil.which("zstd"):              # fallback: the Python decoder
+    subprocess.run("pip install -q zstandard", shell=True, check=True)
+for z in zsts:
+    if shutil.which("zstd"):
+        subprocess.run(f"zstd -dc '{z}' | tar -xf - -C {PREV}", shell=True, check=True)
+    else:
+        import tarfile, zstandard
+        with open(z, "rb") as fh, zstandard.ZstdDecompressor().stream_reader(fh) as r, \
+                tarfile.open(fileobj=r, mode="r|") as t:
+            t.extractall(PREV)
     print("unpacked", z)
-for d in INPUT_ROOT.rglob("runs"):
+P = PREV / "runs"
+for d in INPUT_ROOT.rglob("runs"):                 # an attached version's runs/ (resume states too)
     if d.is_dir() and DATA_DIR not in d.parents:
-        shutil.copytree(d, RUNS, dirs_exist_ok=True)
-        print("copied", d)
+        shutil.copytree(d, P, dirs_exist_ok=True)
+        print("found", d)
 for done in INPUT_ROOT.rglob("done.json"):         # finished runs wherever an upload put them
     d = done.parent
-    if DATA_DIR not in d.parents and not (RUNS / d.name / "done.json").exists():
-        shutil.copytree(d, RUNS / d.name, dirs_exist_ok=True)
-        print("copied run", d)
-OLD = {p.parent.name for p in RUNS.glob("*/done.json")} if RUNS.exists() else set()
-print("finished before this version:", sorted(OLD))
-NEED = {"F1-all-large", "F1-all-base-lr", "F1-all-lr"}   # round 4: scored, and the students' teacher
+    if DATA_DIR not in d.parents and not (P / d.name / "done.json").exists():
+        shutil.copytree(d, P / d.name, dirs_exist_ok=True)
+        print("found run", d)
+NEED = {"F1-all-large-e8"}   # round 5 retry: the students' teacher
+RUNS.mkdir(parents=True, exist_ok=True)
+for d in sorted(P.glob("*")) if P.exists() else []:
+    resume = (d / "last" / "state.pt").exists() and not (d / "done.json").exists()
+    if (d.name in NEED or resume) and not (RUNS / d.name).exists():
+        shutil.copytree(d, RUNS / d.name)
+        print("copied", d.name, "(resumes)" if resume else "")
+OLD = {p.parent.name for p in RUNS.glob("*/done.json")}
+print("finished before this version, copied:", sorted(OLD))
 assert NEED <= OLD, (f"missing earlier runs {sorted(NEED - OLD)}; inputs: "
                      + "; ".join(str(p) for p in INPUT_ROOT.glob("*/*/*")))
+free = shutil.disk_usage(WORK).free / 1e9
+print(f"/kaggle/working free: {free:.1f} GB")
+assert free >= 15, "an e5-large run needs ~11 GB in /kaggle/working, the small runs ~3 GB more"
 ```
 
 The `NEED` check stops the version within a minute when an earlier round's runs did not
 come in, instead of failing GPU 0's queue after launch while GPU 1 trains on (round 4's
-first commit, 2026-11-20: `--score` found no `runs/F1-all-large/best`).
+first commit, 2026-11-20: `--score` found no `runs/F1-all-large/best`). `NEED` lists every
+earlier run the queues read: `--score` targets and pinned teachers. Earlier runs not copied
+are not skipped, so list only runs still to do. The free-space check is round 5's lesson
+(see the retry section).
 
 ```python
 # 3. Two queues, one per GPU; logs in /kaggle/working/gpu0.log and gpu1.log
@@ -198,9 +278,10 @@ def launch(gpu, cmd, log):
                             stderr=subprocess.STDOUT)
 
 train = f"python {TRAIN_SCRIPT} --data {DATA_DIR} --out {RUNS}"
+# Round 5 retry's queues (each round's are in its own section above)
 jobs = [
-    launch(0, f"{train} --run F1@all-base-lr,F1@all-kd,F1@all-kd-ms", "gpu0.log"),
-    launch(1, f"{train} --run F1@all-large", "gpu1.log"),
+    launch(0, f"{train} --run F1@all-lr-all3k,F1@all-lr-para-all3k,F1@all-kd-final", "gpu0.log"),
+    launch(1, f"{train} --run F1@all-large-all3k --max-minutes 630", "gpu1.log"),
 ]
 while any(j.poll() is None for j in jobs):      # progress in the notebook log every 10 min
     time.sleep(600)
@@ -221,7 +302,7 @@ if not shutil.which("zstd"):
     subprocess.run("apt-get update -qq && apt-get install -y -qq zstd", shell=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 if shutil.which("zstd"):
-    cmd = f"tar -cf - --exclude='*/last/*' {' '.join(items)} | zstd -3 -T0 -q -o f1_runs.tar.zst"
+    cmd = f"tar -cf - --exclude='*/last/*' {' '.join(items)} | zstd -3 -T0 -q -f -o f1_runs.tar.zst"
 else:                                   # no zstd: store without compressing (fast, ~1.4x larger)
     cmd = f"zip -0 -qr f1_runs.zip {' '.join(items)} -x '*/last/*'"
 print(cmd)
@@ -254,7 +335,10 @@ again.
 ## 4. If a version fails or times out
 
 Attach the failed version's output as an input too and commit again: cell 2 copies its
-runs, finished runs are skipped, an interrupted one resumes from `last/state.pt`.
+interrupted runs, which resume from `last/state.pt`. Take the runs it finished out of the
+queues: cell 2 does not copy finished runs, so they would not be skipped. Cell 4 packages
+them; import them from that version's archive. If it ran out of disk, read the retry section
+of round 5 first.
 
 ## 5. Bring the results back
 

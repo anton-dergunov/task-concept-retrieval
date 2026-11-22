@@ -5,11 +5,17 @@ For the author and for a fresh Claude Code session. Read CLAUDE.md first (hard r
 guides: [f1-kaggle-run.md](f1-kaggle-run.md) (training) and
 [vertex-round3-run.md](vertex-round3-run.md) (Gemini jobs).
 
-## Where things stand (2026-11-21)
+## Where things stand (2026-11-21, evening)
 
 Done: Kaggle rounds 3 and 4, Vertex v1, grade and v2 (3,000 selected tasks judged), the
-g2/g3 grading of round 4's leaders. Next: Kaggle round 5 (data built, f1-kaggle-run.md),
-then perhaps round 6's Argon batch before 2026-11-30 ([argon-experiments.md](argon-experiments.md)).
+g2/g3 grading of round 4's leaders, round 5's first half (active vs random, scored). Running:
+round 5's retry commit (all3k, para-all3k, kd-final, the retrained teacher;
+f1-kaggle-run.md). Round 6's Argon batch waits for its all3k answer (§6).
+
+- **Round 5, first half (f1-dual-encoder.md §13): active selection did not beat random.**
+  On top of the pool they tie (ΔnDCG@5 0.000 [−0.004, +0.004]); alone, the active 1k are
+  worse (−0.007 [−0.010, −0.003]). +1k tasks of either kind gave +0.003, what the learning
+  curve predicts for +11% data.
 
 - **Best on silver** (extra-graded g1–g3, every leader's top-1 judged,
   [2026-11-21-extra](../results/silver/2026-11-21-extra.md); f1-dual-encoder.md §12):
@@ -78,8 +84,8 @@ The judge's labels are what lifted F1 (F1@0, the v2 free signal alone, only reac
 | 11-20 | Mac | 4a. select 2k active + 1k random | done |
 | 11-21 | Vertex v2 ($58) | 4b. Argon judges them, + translations, parents, rewrites; g2 grading | done |
 | 11-21 | Vertex g3 ($1.1) | grades of the round-4 picks g2 missed; rewrites of 290 more selected tasks | done |
-| next | Kaggle round 5 | 6. retrain with the new labels; e5-large teacher and final student; scores for round 6 | data built |
-| after round 5 | Vertex v3 (~$50) | round 6's Argon batch, [argon-experiments.md](argon-experiments.md) #1, if round 5 says so | before 11-30 |
+| 11-21/22 | Kaggle round 5 | 6. retrain with the new labels; e5-large teacher and final student; scores for round 6 | first half done (active ≤ random); retry running |
+| after round 5 | Vertex v3 (~$50) | round 6's Argon batch: not #1 as an active-vs-random batch (§6); its shape waits for all3k | before 11-30 |
 
 ## 1. Round 3 (Kaggle) — done 2026-11-19
 
@@ -253,6 +259,23 @@ as well as the tasks, so rand1k and act1k held ~230 tasks each; fixed (999 and 1
 - After import: score on silver, grade the leaders (g4), and if round 6 goes ahead, run
   `select_active.py` on **this** build's queries.jsonl (the scores are keyed by its hash:
   do not rebuild the data before selecting).
+
+**Answers so far (2026-11-21; f1-dual-encoder.md §13).** The first session ran out of disk
+after `--score` and the four 1k runs; the rest run in a retry commit.
+
+- **Active vs random, on top:** a tie, ΔnDCG@5 +0.000 [−0.004, +0.004] with the parent
+  heading (−0.002 title only). **Alone:** active is worse, −0.007 [−0.010, −0.003], hit@1
+  112 / 148 (p = 0.03). Uncertainty and committee selection found hard tasks (−0.20 hit@1
+  for the teacher), and those teach less than typical ones when they are most of the data.
+- **+1k judged tasks on 8.9k: +0.003** either way, as the curve predicts; all on Personal
+  (+0.012), from the new tasks' style. At ~$19 per 1k that is the price to beat; graded
+  rewrites gave +0.021 for a few dollars.
+- **Consequence for round 6:** argon-experiments.md #1 as planned (arms of acquisition
+  functions vs random) would measure differences smaller than this round's intervals; by
+  its own rule (a tie, or worse) it shrinks to the question itself or gives way to #2/#3,
+  which change the kind of data rather than its amount. Decide after all3k: if +3k tasks
+  give the predicted ~+0.008, more random labels still pay at the curve's rate; if less,
+  the pool is past what more of the same can buy.
 
 ## Budget
 

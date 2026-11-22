@@ -76,6 +76,13 @@ values in train_f1.py presets, a v3 stage in `vertex_round3_jobs.sh`.
 active strategies; if they tie, the study is the question itself (which signal, if any,
 helps), at a smaller size.
 
+**Round 5's answer (2026-11-21, f1-dual-encoder.md §13):** F1@1k-act is *worse* than
+F1@1k-rand (ΔnDCG@5 −0.007 [−0.010, −0.003]) and they tie on top of the pool. The combined
+uncertainty + committee selection hurts when its tasks are most of the data. If #1 runs, the
+diversity-first arm (hard tasks spread over clusters, not piled on the hardest) is the one
+worth testing against random; uncertainty-only and committee-only would likely repeat this
+result. Decide together with round 5's all3k point (next-data-and-distillation.md §6).
+
 ### 2. Model-in-the-loop adversarial tasks (~$15–25)
 
 **Technique:** adversarial data collection (Dynabench style): create hard examples rather

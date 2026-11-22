@@ -561,3 +561,49 @@ present; nDCG@5 / hit@1):
   (judged@1 0.99, the others 0.93–0.97) and its numbers are a little favoured.
 - On random fresh tasks the e5-small student is 0.06 hit@1 behind the teacher, as on
   silver (0.07 for F1@all-lr vs F1@all-large).
+
+## 13. Round 5: active vs random labels, the retrained teacher, the final student
+
+Queues: [f1-kaggle-run.md](f1-kaggle-run.md) "Round 5". The first session (2026-11-21)
+ran out of disk after four runs; the other four run in a retry commit (same guide).
+
+### Round 5 results, first half: active vs random (2026-11-21)
+
+Silver leaderboard: [results/silver/2026-11-21.md](../results/silver/2026-11-21.md); logs in
+[results/f1/](../results/f1/). Paired from the stored rankings with
+`scripts/silver_paired.py --extra-grades g1,g2,g3` (the new runs' unjudged top-1s are not
+graded: judged@1 0.82–0.87; with the judge's gold alone every Δ below moves ≤ 0.001):
+
+| comparison | view | ΔnDCG@5 [95%] | Personal | Realistic | hit@1 |
+|---|---|---:|---:|---:|---:|
+| F1@all-lr-act1k vs F1@all-lr-rand1k | title | −0.002 [−0.007, +0.002] | +0.003 | −0.020 | 197 / 185, p = 0.57 |
+| | parent | +0.000 [−0.004, +0.004] | +0.001 | +0.015 | 184 / 183, p = 1.00 |
+| F1@1k-act vs F1@1k-rand | title | **−0.007** [−0.011, −0.004] | −0.007 | +0.003 | 127 / 146, p = 0.28 |
+| | parent | **−0.007** [−0.010, −0.003] | −0.005 | −0.001 | 112 / 148, p = 0.03 |
+| F1@all-lr-rand1k vs F1@all-lr | parent | +0.003 [−0.002, +0.007] | +0.012 | −0.021 | 203 / 195, p = 0.73 |
+| F1@all-lr-act1k vs F1@all-lr | parent | +0.003 [−0.002, +0.008] | +0.013 | −0.006 | 216 / 207, p = 0.70 |
+| F1@1k-rand vs F1@1k | title | +0.001 [−0.003, +0.004] | +0.000 | −0.000 | 120 / 111, p = 0.60 |
+
+Pooled nDCG@5 / hit@1 (plain gold): F1@all-lr-act1k.v2+parent 0.463 / 0.579,
+F1@all-lr-rand1k 0.462 / 0.578, F1@all-lr 0.459 / 0.578; F1@1k-rand.v2 0.364 / 0.474,
+F1@1k 0.364 / 0.471, F1@1k-act 0.358 / 0.466.
+
+- **Active selection did not beat random.** On top of the 8.9k pool the two tie (Δ 0.000
+  with the parent heading). Alone, the active 1k are worse than a random 1k (−0.007, the
+  interval excludes 0; hit@1 112 / 148 with the parent heading, p = 0.03). The selection
+  found hard tasks (round 4's teacher: hit@1 0.56 on them vs 0.76 on random ones, "Round 5
+  inputs"), and hard, often ambiguous tasks teach a small training set less than typical
+  ones: the cold-start weakness of uncertainty sampling.
+- **The held-out numbers pointed the other way** (act1k 0.515 vs rand1k 0.507; 1k-act 0.340
+  vs 1k-rand 0.346): held-out icons are a different question from silver, and the
+  differences are as small there. Silver decides.
+- **+1k tasks on 8.9k gave +0.003** with either selection, as the learning curve predicts
+  (+0.03 per tripling: log₃(9.9 / 8.9) × 0.03 ≈ +0.003), and too small to resolve with
+  1k. The gain is on Personal (+0.012) and is lost on the other sets; both selections show
+  it, so it comes from the new tasks' Personal style, not from how they were chosen.
+  F1@all-lr-all3k (+3k, about +0.008 by the curve) is the measurable point.
+- **The experiment reproduces:** a new random 1k of the larger pool matches F1@1k (round 1's
+  random 1k) to 0.001.
+- **For the price:** a judged 1k costs ~$19 and gives +0.003; graded rewrites of the
+  existing pool gave +0.021 for a few dollars of Flash (round 4; v1 was $31 with its
+  11k candidates at $28.8).
