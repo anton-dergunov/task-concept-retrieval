@@ -183,7 +183,8 @@ v3b)
   echo "=== g5: grade the leaders' unjudged top-10 icons on dev"
   [ -f data/private/judge/grade/g5/meta.json ] || nice -n 19 $G prepare --name g5 --depth 10 --skip g1,g2,g3,g4 \
       --methods F1@all-large-all3k.v2+parent,F1@all-kd-final.v2+parent
-  bg g5 $G run --name g5 --max-usd "$CAP"
+  # run re-logs the spend each time it collects, so a finished grade set is not run again
+  [ -f data/private/judge/extra_grades/g5.jsonl ] || bg g5 $G run --name g5 --max-usd "$CAP"
 
   echo "=== #5 Argon reranks the top 20 (arm $ARM): dev, train, cand"
   for S in dev train cand; do
