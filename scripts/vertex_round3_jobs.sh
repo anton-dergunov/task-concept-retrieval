@@ -11,6 +11,13 @@
 #       choice"): #6 re-judge 300 eval dev tasks (the judge-noise ceiling) and #3 minimal
 #       pairs (Flash edits ~1,000 judged tasks, Argon judges the edits). Own cap:
 #       CAP_TAG=round6 BUDGET=100 (the author's approval of 2026-11-22)
+#   v3b (round 6, batch 2; ~$85, before 2026-11-30; argon-experiments.md "Batch 2"): g5
+#       (the leaders' unjudged top-10 icons on dev, graded), #5 VLM reranker (Argon ranks
+#       the big model's top 20 as glyph images: dev, 1,000 judged training tasks, 3,000
+#       unjudged candidates), #2 adversarial tasks (Flash writes 4 tasks per big-model
+#       error on validation tasks, Argon judges them), then g6 (the VLM's unjudged top 3).
+#       Own cap: CAP_TAG=round6b BUDGET=100 (the author's approval of 2026-11-23). Mac
+#       steps run on one thread (TCR_F1_THREADS=1, nice)
 #
 # Safe to rerun at any time: every step skips what is done, and a submitted batch job is
 # never resubmitted. The budget cap is fixed on the first run (data/private/augment/
@@ -22,6 +29,7 @@
 #   (later rounds: GRADE_NAME=g2 …; picks graded in earlier sets are skipped)
 #   CREDIT_LEFT=… scripts/vertex_round3_jobs.sh v2
 #   CREDIT_LEFT=155 CAP_TAG=round6 BUDGET=100 scripts/vertex_round3_jobs.sh v3a
+#   CREDIT_LEFT=130 CAP_TAG=round6b BUDGET=100 scripts/vertex_round3_jobs.sh v3b
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY=.venv/bin/python
@@ -32,7 +40,7 @@ POOL=data/private/train_pools/personal_synth_pool.jsonl
 CAND=data/private/train_pools/personal_synth_cand.jsonl
 SEL_SYNTH=data/private/train_pools/personal_synth_pool3.jsonl
 SEL_MS=data/train_pools/mslatte2.jsonl
-STAGE="${1:?usage: $0 v1|grade|v2|v3a}"
+STAGE="${1:?usage: $0 v1|grade|v2|v3a|v3b}"
 : "${CREDIT_LEFT:?set CREDIT_LEFT to the credit left in USD (Billing → Credits)}"
 # Only the account and project pinned in .env (tcr/gcp.py); stop before any spend if not.
 $PY scripts/gcp_check.py || { echo "GCP preflight failed: nothing submitted"; exit 1; }
@@ -44,6 +52,12 @@ GEN_PER_TASK=0.0031                 # measured, augment_pools.py
 CAP=$($A cap --credit-left "$CREDIT_LEFT" --reserve "${RESERVE:-5}" --budget "$BUDGET" --tag "${CAP_TAG:-round3}")
 spent() { $PY -c 'from tcr import judge; print(round(judge.spent(), 2))'; }
 echo "=== budget: stop when the spend log reaches \$$CAP (now \$$(spent))"
+
+# Background jobs of a stage (v3a, v3b): one log each in $LOGS; waitall stops on a failure.
+PIDS=()
+bg() { local name=$1; shift; "$@" > "$LOGS/$name.log" 2>&1 & PIDS+=($!); echo "  started $name (log $LOGS/$name.log)"; }
+waitall() { local bad=0; for p in ${PIDS[@]+"${PIDS[@]}"}; do wait "$p" || bad=1; done; PIDS=();
+            [ "$bad" = 0 ] || { echo "a job failed: read $LOGS/*.log, then rerun (done steps are skipped)"; exit 1; }; }
 
 case "$STAGE" in
 v1)
@@ -115,10 +129,6 @@ v3a)
   [ "${CAP_TAG:-round3}" = round6 ] || { echo "v3a spends round 6's money: set CAP_TAG=round6 BUDGET=100"; exit 1; }
   LOGS=data/private/augment/v3a-logs
   mkdir -p "$LOGS"
-  PIDS=()
-  bg() { local name=$1; shift; "$@" > "$LOGS/$name.log" 2>&1 & PIDS+=($!); echo "  started $name (log $LOGS/$name.log)"; }
-  waitall() { local bad=0; for p in ${PIDS[@]+"${PIDS[@]}"}; do wait "$p" || bad=1; done; PIDS=();
-              [ "$bad" = 0 ] || { echo "a job failed: read $LOGS/*.log, then rerun (done steps are skipped)"; exit 1; }; }
 
   echo "=== #6 re-judge dev tasks of the Argon-judged eval sets (another candidate order)"
   [ -f data/private/judge/rejudge/personal.ids ] || $PY scripts/noise_ceiling.py select
@@ -155,6 +165,64 @@ v3a)
   $PY scripts/noise_ceiling.py report
   echo "v3a done. Next: batch 2 (v3b: #5 VLM reranker, #2 adversarial tasks)."
   ;;
-*) echo "usage: $0 v1|grade|v2|v3a"; exit 1 ;;
+v3b)
+  [ "${CAP_TAG:-round3}" = round6b ] || { echo "v3b spends batch 2's money: set CAP_TAG=round6b BUDGET=100"; exit 1; }
+  LOGS=data/private/augment/v3b-logs
+  mkdir -p "$LOGS"
+  export TCR_F1_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 TOKENIZERS_PARALLELISM=false
+  V="nice -n 19 $PY scripts/vlm_rerank.py"
+  ARM="${VLM_ARM:-img+desc}"
+  if [ "$ARM" = img+desc ]; then VLM_LABEL="VLM@all-large-all3k.v2+parent"; else VLM_LABEL="VLM-img@all-large-all3k.v2+parent"; fi
+  SEED_RUNS=(pool-synth-j4 pool-synth2-j4 pool-mslatte-j4)
+
+  echo "=== the first stage's top 20 (Mac, one thread; skips what is scored)"
+  $V topk --sets dev,val,train,cand
+  echo "=== batch 2's estimate at measured rates (refuses above the cap)"
+  $V budget --cap "$CAP"
+
+  echo "=== g5: grade the leaders' unjudged top-10 icons on dev"
+  [ -f data/private/judge/grade/g5/meta.json ] || nice -n 19 $G prepare --name g5 --depth 10 --skip g1,g2,g3,g4 \
+      --methods F1@all-large-all3k.v2+parent,F1@all-kd-final.v2+parent
+  bg g5 $G run --name g5 --max-usd "$CAP"
+
+  echo "=== #5 Argon reranks the top 20 (arm $ARM): dev, train, cand"
+  for S in dev train cand; do
+    [ -f "data/private/vlm/batch/$S/meta.json" ] || $V prepare --set "$S" --arm "$ARM"
+    bg "vlm-$S" sh -c "$V run --set $S --arm $ARM --max-usd $CAP && $V export --set $S"
+  done
+
+  echo "=== #2 adversarial tasks: Flash writes them from the big model's errors, Argon judges them"
+  adversarial() {
+    for R in "${SEED_RUNS[@]}"; do $A adversarial --judge-run "$R" --max-usd "$CAP"; done
+    nice -n 19 $A adversarial-pool --judge-runs "$(IFS=,; echo "${SEED_RUNS[*]}")"
+    for spec in "adv-synth-j4|data/private/train_pools/personal_synth_pool.adv_pool.jsonl|personal_synth_pool|--private" \
+                "adv-mslatte-j4|data/train_pools/train_mslatte.adv_pool.jsonl|train_mslatte|"; do
+      IFS='|' read -r RUN FILE NAME PRIV <<< "$spec"
+      [ -f "$FILE" ] || continue
+      if [ ! -f "data/private/judge/batch/$RUN/meta.json" ]; then
+        # shellcheck disable=SC2086
+        nice -n 19 $B prepare --run "$RUN" --pool "$FILE" --name "$NAME" $PRIV --model gemini-4-argon \
+           --extra-candidates "${FILE%.jsonl}.extra.json"
+      fi
+      $B run --run "$RUN" --max-usd "$CAP"
+      $B export --run "$RUN"
+      $A run --judge-run "$RUN" --max-usd "$CAP"          # ES/RU translations
+      $A rewrite --judge-run "$RUN" --max-usd "$CAP"
+    done
+  }
+  bg adversarial adversarial
+  waitall
+
+  echo "=== g6: grade the VLM's unjudged top 3 on dev"
+  [ -f data/private/judge/grade/g6/meta.json ] || nice -n 19 $G prepare --name g6 --depth 3 \
+      --skip g1,g2,g3,g4,g5 --methods "$VLM_LABEL"
+  $G run --name g6 --max-usd "$CAP"
+
+  echo "=== reports"
+  $V report
+  $A adversarial-report
+  echo "v3b done. Score with: nice .venv/bin/python scripts/silver_eval.py --methods F1@all-large-all3k --versions v2 --extra-grades g1,g2,g3,g4,g5,g6"
+  ;;
+*) echo "usage: $0 v1|grade|v2|v3a|v3b"; exit 1 ;;
 esac
 echo "spend log: \$$(spent) (cap \$$CAP)"

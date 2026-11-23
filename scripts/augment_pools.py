@@ -48,10 +48,12 @@ from __future__ import annotations
 
 import argparse
 import glob
+import hashlib
 import json
 import math
 import re
 import sys
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -614,6 +616,300 @@ def minpair_pool(runs: list) -> None:
         print(f"{ds}: {len(recs)} edited tasks ({sum(r['val'] for r in rows.values())} contrast-set) -> {pool}")
 
 
+# --- adversarial tasks (round 6, docs/argon-experiments.md #2) -----------------------
+
+SYSTEM_ADV = """You write hard test cases for a task-to-icon matcher, from its mistakes. The
+matcher picks one small black-and-white icon for each to-do item in one person's org-mode task
+list: a glanceable reminder of what the task is about (its central object first, then its
+context, then a meaningful action). It reads only the title (and the parent headings).
+
+Each SEED is a to-do the matcher got wrong: the icon the judge chose (right) and the icon
+the matcher chose (wrong), both described in words. For each seed:
+1. "confusion": in one line, what misled the matcher, as a general pattern that applies to
+   other tasks (e.g. "took a side noun for the subject", "read the verb's literal sense",
+   "matched the parent heading instead of the task").
+2. "tasks": exactly four NEW to-dos that set the same trap on OTHER subjects: a reader
+   would see at once what each is about, but a matcher that falls for the same pattern
+   would pick the wrong kind of icon. Each must have a clear best icon that can be drawn
+   or shown by a common symbol, and must not be about the seed's subject.
+
+Write them like the seed's author: the same language, register, length and terseness
+(abbreviations, lowercase, missing articles if the seed has them), realistic for the same
+person; no explanations, no quotes, no numbering in the title. If the seed has parent
+headings, give each new task 1-2 short headings it would sit under (outermost first),
+otherwise none. For each new task also give "right_icon" (what its best icon shows, a few
+words) and "lure" (what the fooled matcher would pick, a few words).
+Return one entry per seed, with the seed's number n, in the same order."""
+
+SCHEMA_ADV = {"type": "object", "properties": {"tasks": {"type": "array", "items": {
+    "type": "object", "properties": {
+        "n": {"type": "integer"}, "confusion": {"type": "string"},
+        "tasks": {"type": "array", "items": {"type": "object", "properties": {
+            "title": {"type": "string"}, "parents": _STR_LIST,
+            "right_icon": {"type": "string"}, "lure": {"type": "string"}},
+            "required": ["title", "parents", "right_icon", "lure"]}}},
+    "required": ["n", "confusion", "tasks"]}}}, "required": ["tasks"]}
+ADV_PER_SEED = 4
+ADV_CHUNK = 8               # seeds per request
+ADV_RUNS = {"personal_synth_pool": "adv-synth-j4", "train_mslatte": "adv-mslatte-j4"}
+ROUND2_POOL_RUNS = ("pool-synth-j4", "pool-synth2-j4", "pool-mslatte-j4")   # the seeds' runs
+
+
+def _adv_path(meta: dict) -> Path:
+    base = (config.PRIVATE_DIR / "train_pools") if meta["private"] else (config.DATA_DIR / "train_pools")
+    return base / f"{meta['dataset']}.adv.jsonl"
+
+
+def _adv_pool_path(dataset: str, private: bool) -> Path:
+    base = (config.PRIVATE_DIR / "train_pools") if private else (config.DATA_DIR / "train_pools")
+    return base / f"{dataset}.adv_pool.jsonl"
+
+
+ADV_TOP = WORK / "adv-top.jsonl"     # the big model's top K on the generated tasks
+
+
+def adv_seeds(run: str) -> tuple:
+    """(seeds, base): F1's validation tasks of the run (never trained on by the big model)
+    where gold has a good icon and the model's top-1 is a judged miss (the judge saw it,
+    grade < 2: kind "miss") or one the judge never saw (kind "unjudged": a probable miss,
+    ~70% of such top-1s were in g1); base = (misses, judged top-1s) over all its
+    validation tasks: the rate to beat."""
+    from tcr import vlm
+    from tcr.silver import canonical, load_gold
+    top = {t: r for t, r in vlm.load_topk("val").items() if r["run"] == run}
+    if not top:
+        sys.exit("no top-K of the validation tasks: scripts/vlm_rerank.py topk --sets val")
+    gold = load_gold([run])
+    tasks = {t["id"]: t for t in read_jsonl(JUDGE_RUNS / run / "tasks.jsonl")}
+    aug = load_results(out_path(judge_meta(run)))
+    seeds, miss, judged = [], 0, 0
+    for tid, r in top.items():
+        g = gold.get(tid)
+        if g is None:
+            continue
+        t1 = canonical(r["top"][0])
+        kind = "miss" if t1 in g.seen else "unjudged"
+        if kind == "miss":
+            judged += 1
+            hit = g.grades.get(t1, 0) >= 2
+            miss += not hit
+            if hit:
+                continue
+        if g.no_good_icon or not g.order or g.grades.get(g.order[0], 0) < 2 or t1 == g.order[0]:
+            continue
+        t = tasks[tid]
+        parents = list(t.get("parents") or []) or list((aug.get(tid) or {}).get("parents") or [])
+        seeds.append({**t, "parents": parents, "body": "", "_right": g.order[0], "_wrong": t1,
+                      "_judged": g.order[:3], "_kind": kind})
+    seeds.sort(key=lambda t: hashlib.sha1(f"adv:{t['id']}".encode()).hexdigest())
+    return seeds, (miss, judged)
+
+
+class Adversarial(Aug):
+    """Model-in-the-loop hard tasks (Dynabench style): per seed (a validation task the big
+    model gets wrong), Flash names the confusion and writes four new tasks with the same
+    trap on other subjects. <dataset>.adv.jsonl, one line per seed: {"task_id" (the seed),
+    "seed_kind" (miss / unjudged, adv_seeds),
+    "confusion", "tasks": [{"adv_id" (<seed>~adv<i>), "title", "parents", "lang",
+    "right_icon", "lure"}], "seed_right", "seed_wrong" (icons), "model", "run"}.
+    `adversarial-pool` turns them into judge input (vertex_round3_jobs.sh v3b)."""
+    kind, system, schema = "adv", SYSTEM_ADV, SCHEMA_ADV
+
+    def __init__(self, run: str, n: int = 0):
+        self.n = n
+        super().__init__(run)
+
+    def out_file(self) -> Path:
+        return _adv_path(self.jmeta)
+
+    def tasks(self) -> list:
+        seeds, _ = adv_seeds(self.run)
+        return seeds[:self.n] if self.n else seeds
+
+    def chunks(self, tasks: list) -> list:
+        return [tasks[i:i + ADV_CHUNK] for i in range(0, len(tasks), ADV_CHUNK)]
+
+    def prompt(self, chunk: list) -> str:
+        lines = []
+        for i, t in enumerate(chunk, 1):
+            lines += [f"SEED {i}", f"TITLE: {t['title']}",
+                      "PARENTS: " + (" > ".join(t.get("parents") or []) or "(none)"),
+                      f"RIGHT ICON (the judge's): {J.icon_line(t['_right'])}",
+                      f"WRONG ICON (the matcher's): {J.icon_line(t['_wrong'])}", ""]
+        return "\n".join(lines)
+
+    def estimate(self, chunks: list) -> float:
+        p = J.PRICES[MODEL]
+        tin = tout = 0
+        for ch in chunks:
+            tin += 900 + sum(len(t["title"]) + 250 for t in ch) / 3.5
+            tout += 300 * len(ch) + 400
+        return (tin * p[2] + tout * p[3]) / 1e6
+
+    def check(self, task: dict, it) -> dict | None:
+        if not it:
+            return None
+        from tcr.describe_v2 import norm
+        out = []
+        for k, x in enumerate((it.get("tasks") or [])[:ADV_PER_SEED]):
+            t = " ".join(str(x.get("title") or "").split())
+            if not t or norm(t) == norm(task["title"]) or len(t) > max(120, 3 * len(task["title"])):
+                continue
+            if _CYR.search(task["title"]) and not _CYR.search(t):
+                continue
+            parents = [" ".join(str(p).split()) for p in x.get("parents") or [] if str(p).strip()][:2]
+            if not task.get("parents"):
+                parents = []
+            out.append({"adv_id": f"{task['id']}~adv{k}", "title": t, "parents": parents,
+                        "lang": task.get("lang") or "en",
+                        "right_icon": str(x.get("right_icon") or "").strip(),
+                        "lure": str(x.get("lure") or "").strip()})
+        if len(out) < 2:
+            return None
+        return {"task_id": task["id"], "confusion": str(it.get("confusion") or "").strip(), "tasks": out,
+                "seed_right": task["_right"], "seed_wrong": task["_wrong"], "seed_judged": task["_judged"],
+                "seed_kind": task["_kind"],
+                "model": MODEL, "run": self.run}
+
+    def collect_online(self, pending: list, workers: int = 4) -> None:
+        """The pilot: the same requests online (results count as done for the batch run)."""
+        from concurrent.futures import ThreadPoolExecutor
+        from tcr.llm import complete_json
+        results = load_results(self.out)
+
+        def one(ch):
+            res = complete_json(self.prompt(ch), system=self.system, schema=self.schema, backend="vertex",
+                                models=[MODEL], temperature=TEMPERATURE, private=True, gen=GEN,
+                                tag=f"adv-pilot|{self.run}", retries=3)
+            if not res.get("cached"):
+                J.log_spend(MODEL, res.get("usage", {}), f"augment-{self.label}:pilot")
+            items = {it.get("n"): it for it in (res["data"] or {}).get("tasks") or []}
+            return [(t, self.check(t, items.get(i))) for i, t in enumerate(ch, 1)]
+        with ThreadPoolExecutor(workers) as ex:
+            for got in ex.map(one, self.chunks(pending)):
+                for t, r in got:
+                    if r:
+                        results[t["id"]] = r
+        save_results(self.out, results)
+        vb.log(f"{self.label} pilot: {len(results)} seeds done")
+
+
+def adversarial_pool(runs: list, dup_sim: float = DUP_SIM) -> None:
+    """The generated tasks of the runs' .adv.jsonl as judge input, per dataset:
+    <dataset>.adv_pool.jsonl (shared schema) + .adv_pool.extra.json (the big model's top 10
+    and the seed's judged icons join the candidates, so the judge grades the model's top-1).
+    Dropped: titles close to an eval title, near-duplicates (e5 cosine > dup_sim) of a
+    judged task or of another generated one. The big model's top K: ADV_TOP."""
+    import numpy as np
+    from tcr import vlm
+    from tcr.describe_v2 import contamination_hits
+    from tcr.index import embed_texts
+    vlm.threads()
+    gen, private = [], {}
+    for run in runs:
+        meta = judge_meta(run)
+        private[meta["dataset"]] = meta["private"]
+        for r in load_results(_adv_path(meta)).values():
+            if r["run"] == run:
+                gen += [{**x, "dataset": meta["dataset"], "seed": r["task_id"], "confusion": r["confusion"],
+                         "seed_judged": r["seed_judged"], "seed_wrong": r["seed_wrong"],
+                         "seed_kind": r.get("seed_kind", "miss")} for x in r["tasks"]]
+    if not gen:
+        sys.exit("no generated tasks")
+    exact, near = contamination_hits([x["title"] for x in gen])
+    judged = []
+    for mp in JUDGE_RUNS.glob("*/meta.json"):
+        m = json.loads(mp.read_text())
+        if m["dataset"] in private and not m["run"].startswith("adv-"):
+            judged += [t["title"] for t in read_jsonl(Path(m["source"]))]
+    E_old = embed_texts(config.MULTILINGUAL_MODEL, judged, is_query=True)
+    E_new = embed_texts(config.MULTILINGUAL_MODEL, [x["title"] for x in gen], is_query=True)
+    best = np.concatenate([(E_new[s:s + 2048] @ E_old.T).max(axis=1) for s in range(0, len(gen), 2048)])
+    kept, kept_idx, drop = [], [], Counter()
+    for i, x in enumerate(gen):
+        if i in exact or i in near:
+            drop["eval"] += 1
+        elif best[i] > dup_sim:
+            drop["judged"] += 1
+        elif kept_idx and float((E_new[kept_idx] @ E_new[i]).max()) > dup_sim:
+            drop["generated"] += 1
+        else:
+            kept.append(x)
+            kept_idx.append(i)
+    done = {r["task_id"] for r in read_jsonl(ADV_TOP)} if ADV_TOP.exists() else set()
+    todo = [{"task_id": x["adv_id"], "title": x["title"], "parents": x["parents"], "dataset": x["dataset"],
+             "set": "adv", "run": ADV_RUNS[x["dataset"]]} for x in kept if x["adv_id"] not in done]
+    if todo:
+        vlm.score_rows(todo, ADV_TOP, log=vb.log, tag="adv")
+    top = {r["task_id"]: r for r in read_jsonl(ADV_TOP)}
+    for ds in sorted({x["dataset"] for x in kept}):
+        rows = [x for x in kept if x["dataset"] == ds]
+        pool = _adv_pool_path(ds, private[ds])
+        recs = [{"id": x["adv_id"], "dataset": ds, "title": x["title"], "body": "", "parents": x["parents"],
+                 "lang": x["lang"], "meta": {"seed_task_id": x["seed"], "adversarial": True,
+                                              "confusion": x["confusion"], "right_icon": x["right_icon"],
+                                              "lure": x["lure"], "seed_wrong": x["seed_wrong"],
+                                              "seed_kind": x["seed_kind"]}}
+                for x in sorted(rows, key=lambda x: x["adv_id"])]
+        write_jsonl(pool, recs)
+        extra = {x["adv_id"]: list(dict.fromkeys(top[x["adv_id"]]["top"][:10] + x["seed_judged"])) for x in rows}
+        pool.with_suffix(".extra.json").write_text(json.dumps(extra))
+        print(f"{ds}: {len(recs)} adversarial tasks -> {pool}")
+    print(f"generated {len(gen)}, kept {len(kept)}; dropped: " + ", ".join(f"{k} {v}" for k, v in drop.items()))
+
+
+def adversarial_report(runs: list) -> Path:
+    """Fooling rate of the big model on the judged adversarial tasks vs its miss rate on
+    the validation tasks they were seeded from: results/adversarial/<date>.md (aggregates)."""
+    from tcr.judging import wilson
+    from tcr.silver import canonical, load_gold, label_path
+    top = {r["task_id"]: r for r in read_jsonl(ADV_TOP)}
+    lines = [f"# Adversarial tasks (round 6 #2), {now()[:10]}", "",
+             "Fooled = the big model's (F1@all-large-all3k, +parent) top-1 is not a hit (grade < 2) "
+             "under the judge's labels; the model's top 10 were among the judge's candidates. "
+             "The base rate is the same model on the validation tasks of the pool the seeds came from.", "",
+             "| set | tasks | fooled | 95% CI | judged top-1 | no good icon | top-1 = seed's wrong icon |",
+             "|---|---:|---:|---|---:|---:|---:|"]
+    out = {}
+    for seed_run in ROUND2_POOL_RUNS:
+        _, (miss, judged) = adv_seeds(seed_run)
+        lo, hi = wilson(miss, judged)
+        out[f"base {seed_run}"] = {"n": judged, "fooled": miss / max(1, judged)}
+        lines.append(f"| base: {seed_run} val | {judged} | {miss / max(1, judged):.3f} | [{lo:.3f}, {hi:.3f}] | — | — | — |")
+    for run in runs:
+        if not label_path(run).exists():
+            continue
+        gold = load_gold([run])
+        meta = {r["id"]: r["meta"] for r in read_jsonl(JUDGE_RUNS / run / "tasks.jsonl")}
+        for kind in ("all", "miss", "unjudged"):
+            n = fooled = seen = ngi = same = 0
+            for tid, g in gold.items():
+                r, mt = top.get(tid), meta.get(tid, {})
+                if r is None or (kind != "all" and mt.get("seed_kind", "miss") != kind):
+                    continue
+                n += 1
+                t1 = canonical(r["top"][0])
+                seen += t1 in g.seen
+                ngi += g.no_good_icon
+                fooled += g.grades.get(t1, 0) < 2
+                same += t1 == canonical(mt.get("seed_wrong") or "")
+            if not n:
+                continue
+            lo, hi = wilson(fooled, n)
+            key = run if kind == "all" else f"{run} ({kind} seeds)"
+            out[key] = {"n": n, "fooled": fooled / n, "ci": [lo, hi], "judged1": seen / n,
+                        "no_good_icon": ngi / n, "seed_wrong": same / n}
+            lines.append(f"| {key} | {n} | {fooled / n:.3f} | [{lo:.3f}, {hi:.3f}] | {seen / n:.3f} "
+                         f"| {ngi / n:.3f} | {same / n:.3f} |")
+    d = config.RESULTS_DIR / "adversarial"
+    d.mkdir(parents=True, exist_ok=True)
+    p = d / f"{now()[:10]}.md"
+    p.write_text("\n".join(lines) + "\n")
+    p.with_suffix(".json").write_text(json.dumps(out, indent=1))
+    print("\n".join(lines))
+    return p
+
+
 # --- translations into more languages ---------------------------------------------------
 
 LANG_STYLE = {
@@ -783,6 +1079,72 @@ def cmd_minpair_pool(args) -> None:
     minpair_pool(args.judge_runs.split(","))
 
 
+def cmd_adversarial(args) -> None:
+    a = Adversarial(args.judge_run, args.seeds)
+    if args.pilot:
+        a.collect_online(a.pending()[:args.pilot])
+        return
+    drive(a, args)
+
+
+def cmd_adversarial_pool(args) -> None:
+    adversarial_pool(args.judge_runs.split(","))
+
+
+def cmd_adversarial_report(args) -> None:
+    adversarial_report(args.runs.split(","))
+
+
+def cmd_adversarial_pilot_judge(args) -> None:
+    """The pilot's generated tasks judged online by Argon (same prompt and candidates as the
+    batch judge: the ~100 pool + the extra icons), then the fooling rate on them."""
+    from concurrent.futures import ThreadPoolExecutor
+    from tcr import vlm
+    from tcr.silver import canonical
+    vlm.threads()
+    top = {r["task_id"]: r for r in read_jsonl(ADV_TOP)}
+    out = WORK / "adv-pilot-judged.jsonl"
+    done = {r["task_id"]: r for r in read_jsonl(out)} if out.exists() else {}
+    for ds in ADV_RUNS:
+        pool = _adv_pool_path(ds, ds == "personal_synth_pool")
+        if not pool.exists():
+            continue
+        recs = [r for r in read_jsonl(pool) if r["meta"]["seed_task_id"] in set(args.seed_ids.split(","))] \
+            if args.seed_ids else read_jsonl(pool)[:args.n]
+        extra = json.loads(pool.with_suffix(".extra.json").read_text())
+        ctx = J.Context(ds, records=read_jsonl(pool))
+        base = ctx.pool
+
+        def pool_with_extra(rec, _base=base):
+            p = _base(rec)
+            have = {canonical(n) for n in p}
+            add = [n for n in extra.get(rec["id"], []) if canonical(n) not in have][:15]
+            return p[:len(p) - len(add)] + add if add else p
+        ctx.pool = pool_with_extra
+        todo = [r for r in recs if r["id"] not in done]
+        if args.max_usd is not None and J.spent() + 0.05 * len(todo) > args.max_usd:
+            sys.exit(f"refusing: spent ${J.spent():.2f} + ~${0.05 * len(todo):.2f} > --max-usd {args.max_usd}")
+
+        def one(rec):
+            st = J.judge_online(ctx, rec, model="gemini-4-argon", tag="adv-pilot", private=True)
+            return rec, st
+        with ThreadPoolExecutor(args.workers) as ex:
+            for rec, st in ex.map(one, todo):
+                fin = st["final"] or {}
+                rk = [(canonical(x["icon"]), x["grade"]) for x in fin.get("ranking", [])]
+                t1 = canonical(top[rec["id"]]["top"][0])
+                g = dict(rk)
+                done[rec["id"]] = {"task_id": rec["id"], "dataset": ds, "title": rec["title"],
+                                   "parents": rec["parents"], "meta": rec["meta"], "ranking": rk,
+                                   "no_good_icon": bool(fin.get("no_good_icon")), "model_top": top[rec["id"]]["top"][:5],
+                                   "fooled": g.get(t1, 0) < 2, "usd": st["usd"]}
+                write_jsonl(out, list(done.values()))
+    rows = list(done.values())
+    n, f = len(rows), sum(r["fooled"] for r in rows)
+    print(f"pilot judged {n} tasks: fooled {f} ({f / max(1, n):.2f}); no good icon "
+          f"{sum(r['no_good_icon'] for r in rows)}; online ${sum(r['usd'] for r in rows):.2f} -> {out}")
+
+
 def cmd_translate(args) -> None:
     drive(Translate(args.judge_run, args.langs.split(","), args.eval), args)
 
@@ -825,6 +1187,7 @@ def drive(a: Aug, args) -> None:
 def cmd_status(args) -> None:
     a = {"aug": lambda: Aug(args.judge_run), "rw": lambda: Rewrite(args.judge_run),
          "mp": lambda: MinPair(args.judge_run, args.n),
+         "adv": lambda: Adversarial(args.judge_run, args.n),
          "xl": lambda: Translate(args.judge_run, args.langs.split(","), False),
          "xleval": lambda: Translate(args.judge_run, args.langs.split(","), True)}[args.kind]()
     ids = {t["id"] for t in a.tasks()}
@@ -939,7 +1302,7 @@ def main() -> None:
     p.add_argument("--poll", type=int, default=120)
     p = sub.add_parser("status")
     p.add_argument("--judge-run", required=True)
-    p.add_argument("--kind", choices=["aug", "rw", "mp", "xl", "xleval"], default="aug")
+    p.add_argument("--kind", choices=["aug", "rw", "mp", "adv", "xl", "xleval"], default="aug")
     p.add_argument("--n", type=int, default=0, help="--kind mp: the run's --n")
     p.add_argument("--langs", default=",".join(XLING_DEFAULT))
     for name in ("rewrite", "translate"):
@@ -958,6 +1321,21 @@ def main() -> None:
     p.add_argument("--max-usd", type=float, default=None)
     p.add_argument("--poll", type=int, default=120)
     p.add_argument("--limit", type=int, default=0, help="only the first N tasks (a pilot)")
+    p = sub.add_parser("adversarial")
+    p.add_argument("--judge-run", required=True)
+    p.add_argument("--seeds", type=int, default=0, help="seeds to use (0: every one)")
+    p.add_argument("--pilot", type=int, default=0, help="only N seeds, online (a pilot)")
+    p.add_argument("--max-usd", type=float, default=None)
+    p.add_argument("--poll", type=int, default=120)
+    p = sub.add_parser("adversarial-pool")
+    p.add_argument("--judge-runs", required=True, help="comma-separated judge runs with .adv.jsonl results")
+    p = sub.add_parser("adversarial-pilot-judge")
+    p.add_argument("--n", type=int, default=45)
+    p.add_argument("--seed-ids", default="", help="only tasks of these seeds")
+    p.add_argument("--workers", type=int, default=4)
+    p.add_argument("--max-usd", type=float, default=None)
+    p = sub.add_parser("adversarial-report")
+    p.add_argument("--runs", default=",".join(ADV_RUNS.values()))
     p = sub.add_parser("minpair-pool")
     p.add_argument("--judge-runs", required=True, help="comma-separated judge runs with .mp.jsonl results")
     sub.add_parser("xling-build")

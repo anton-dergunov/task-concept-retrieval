@@ -264,6 +264,102 @@ dev tasks):
 `grade_unjudged.py --depth 10`, ~8,000 icons, ~$10–25). A reranker can only be scored
 fairly with them ([reranker-plan.md](reranker-plan.md) §4).
 
+### Batch 2 (v3b): design and pilots (2026-11-23)
+
+**Budget (author, 2026-11-23):** ~$130 of credit left, **$100 the safe limit** for batch 2;
+cut nothing if possible, the adversarial count first if needed. Its own cap: `CAP_TAG=round6b`,
+spend log $411.71 + $100 = **$511.71**. The run: vertex-round3-run.md (`v3b`).
+
+| item | n | ~$ (measured rates) |
+|---|---:|---:|
+| g5: the two leaders' unjudged top-10 icons on dev (F1@all-large-all3k, F1@all-kd-final, +parent) | 12,792 icons on 2,843 tasks | 14 |
+| #5 VLM rerank, dev (the measurement) | 3,230 | 19 |
+| #5 VLM rerank, judged training tasks (non-val, random) | 1,000 | 6 |
+| #5 VLM rerank, unjudged candidates (75% Personal-style, 25% MS-LaTTE, random) | 3,000 | 18 |
+| #2 Flash generation (4 tasks per seed) | 248 seeds | 0.3 |
+| #2 Argon judging, ES/RU translations, rewrites | ~910 tasks | 20 |
+| g6: the VLM's unjudged top 3 on dev (after the VLM's dev run) | ~1,000 tasks | 5 |
+| **total** (`vlm_rerank.py budget`) | | **~83** |
+
+**#5 VLM reranker** (`tcr/vlm.py`, `scripts/vlm_rerank.py`). One request per task: the
+judge's system prompt and few-shot block, the task as the judge saw it (parents,
+siblings), and the big model's served top 20 on one numbered contact sheet. The order is
+hash-shuffled, so the VLM cannot copy the first stage's, and names are never shown. It
+returns the central subject, all 20 numbers best first with a grade 0–3 on the judge's
+scale, reasons for the top 3, and no_good_icon. Numbers it leaves out go to the end (more
+than 3 missing: retried once).
+- **Which tasks, and why** (the author asked for the best final quality and the most ML
+  learned):
+  - Dev measures the reranker and its agreement with the judge on 3,230 tasks.
+  - The 3,000 unjudged candidates are realistic first-stage lists (the model never trained
+    on them), the lists a reranker sees in use. They are new labels at a third of judging's
+    price, which asks whether a listwise VLM reranker works as a cheap labeller.
+  - The 1,000 judged training tasks give round 6 the clean A/B: the same texts trained
+    with the judge's grades vs the VLM's.
+- **Pilot** (online, 40 tasks: 30 dev over the five sets, 10 training; two arms; gold +
+  g1–g4):
+
+  | 30 dev tasks | nDCG@5 | hit@1 | ΔnDCG@5 vs first stage [95%] | numbers left out |
+  |---|---:|---:|---|---:|
+  | first stage (F1@all-large-all3k+parent) | 0.578 | 0.77 | | |
+  | VLM, images + one-line descriptions | **0.742** | **0.93** | +0.164 [+0.095, +0.238] | 0 |
+  | VLM, images only | 0.692 | 0.87 | +0.113 [+0.034, +0.200] | 17 |
+
+  On the 10 training tasks: 0.593 → 0.778 (img+desc). The descriptions help, and without
+  them the VLM drops more numbers, so **the full run uses img+desc**.
+  - 9 of the 40 VLM top-1s come from the first stage's ranks 11–20. The VLM finds what the
+    first stage buried: "Data residency, sovereign deployment…" gets the globe-lock at rank
+    14, the judge's #1; "Annotate" gets the highlighter at rank 18; "Pt session" gets
+    exercise, not bones. Those icons are often outside every grade set, hence g6.
+  - It grades more generously than the judge: many 3s where the judge gave 2. This matters
+    when its grades become training labels.
+  - Caveat: the judge and the reranker are the same model (Argon), so part of the gain is
+    agreement with its own taste. The noise ceiling (re-judge 0.888) bounds that, and the
+    author's labels stay the check.
+  - Cost: ~4.0k input and ~450 output tokens, **$0.0063 per request in batch**.
+- **After the run:** `vlm_rerank.py report` → results/vlm/<date>.md (VLM vs first stage per
+  set with paired bootstrap, top-1 agreement with the judge, how often the top-1 comes from
+  ranks 11–20, position bias, rank correlation with the first stage). The dev rankings are
+  a stored silver method (`VLM@all-large-all3k.v2+parent`), scored with
+  `silver_eval.py --extra-grades g1,…,g6`. The cand/train labels are in
+  `data/private/vlm/labels/`, for round 6's training code (not written yet: VLM-labelled
+  rows, distillation from the VLM's order).
+
+**#2 adversarial tasks** (`augment_pools.py adversarial|adversarial-pool|adversarial-report`).
+- **Seeds:** F1's validation tasks of the three round-2 pools (983; the big model never
+  trained on them), where gold has a good icon and the big model's top-1 is not it.
+  - Only **139 are judged misses** (the judge saw the top-1 and graded it < 2). The big
+    model misses only 13–20% of its judged validation top-1s (synth 12.7%, synth2 16.4%,
+    MS-LaTTE 20.3%); that is the base rate the fooling rate must beat.
+  - Another **109 have a top-1 the judge never saw**, kept as a second kind (in g1, ~70% of
+    such picks were misses). The report splits the two kinds: do verified errors make
+    better seeds than probable ones?
+- **Generation:** per seed, Flash gets the task and the right and wrong icons in words. It
+  names the confusion as a general pattern, then writes 4 new tasks with the same trap on
+  other subjects, in the seed's style, each with `right_icon` and `lure` (248 × 4 ≈ 990).
+- **Filters:** eval titles (contamination guard); near-duplicates (e5 cosine > 0.95) of any
+  judged pool task or of another generated task.
+- **Judging:** the big model's top 10 and the seed's judged icons join the judge's ~100
+  candidates, so the fooling rate needs no extra grading (runs adv-synth-j4, adv-mslatte-j4).
+- **Pilot** (12 seeds online → 48 tasks, 45 kept after 3 near-duplicates; Argon judged them
+  online):
+  - **Fooling rate 14/45 = 31%**, against the big model's 13–20% miss rate on the validation
+    tasks the seeds came from. By seed kind: 5/18 from judged misses, 9/27 from unjudged
+    top-1s, too few to tell apart. No task got no_good_icon, so the generated text is
+    realistic enough to have a right icon.
+  - Flash names real, general confusions: "matched the common consumer meaning of a
+    domain-specific ML term" (temperature scaling → thermometer, attention → eye), "the
+    action verb instead of the listing object" (Remove eBay listings), "the parent category
+    instead of the document" (Review syllabus → library). The tasks keep the seed's style
+    (MS-LaTTE seeds get terse two-word titles).
+  - Some "fools" are near-misses (a battery glyph next to the judge's battery glyphs), so
+    the fooling rate is an upper bound on real errors.
+  - The model's top-1 is never the seed's own wrong icon: the trap transfers as a pattern,
+    not as a glyph.
+- **Pilot spend in all:** $2.58 (VLM $1.0, adversarial $1.6).
+- **Examples:** `data/private/vlm/pilot.html` (private: Personal tasks; `vlm_rerank.py
+  pilot-report`).
+
 **Not on the list:** labels for the abstention gate (it can be calibrated on the labels
 that exist). And a reminder that every item optimises toward Argon's taste: the author's
 own labels (labeller, Personal) are the check that Argon's taste is the author's, and

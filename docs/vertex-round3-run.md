@@ -16,8 +16,22 @@ next-data-and-distillation.md §5), round 5's leaders graded 2026-11-22 (g4 $1.8
 calibration 50/50 on hit). The spend log is at $387.82 against the cap of $406.14, so $18.3
 is left. Open: the author's rewrite spot-check. Round 6 has its own cap
 (`CAP_TAG=round6`, $487.82): v3a ran 2026-11-22 ($23.89; argon-experiments.md "Batch 1
-results"), so $76.11 is left for v3b (#5 VLM reranker, #2 adversarial tasks; code not
-written yet; done by 2026-11-30).
+results"), so $76.11 was left for v3b. **Batch 2 (v3b) has its own cap** (author,
+2026-11-23: ~$130 of credit left, $100 the safe limit): `CAP_TAG=round6b`, set at the spend
+log $411.71 + $100 = **$511.71** (`data/private/augment/cap-round6b.json`). Code and pilots
+done 2026-11-23 (argon-experiments.md "Batch 2"); the run:
+
+```bash
+CREDIT_LEFT=130 CAP_TAG=round6b BUDGET=100 scripts/vertex_round3_jobs.sh v3b 2>&1 | tee -a data/private/augment/v3b.log
+```
+
+It takes hours (batch jobs) and must end by 2026-11-30. Watch: the logs in
+`data/private/augment/v3b-logs/`, `scripts/vlm_rerank.py status --set dev|train|cand`,
+`scripts/grade_unjudged.py status --name g5`, `scripts/judge_batch.py status --run
+adv-synth-j4`, `scripts/augment_pools.py status --judge-run pool-synth-j4 --kind adv`.
+Resume after any interruption by rerunning the same command (done steps are skipped, a
+submitted job is never resubmitted). It refuses to start when batch 2's estimate at
+measured rates (`vlm_rerank.py budget`) crosses the cap.
 
 ## Account (pinned)
 
