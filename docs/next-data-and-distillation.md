@@ -343,6 +343,15 @@ the first priority, and it has never had the recipe that made the small one bett
   first (~1 h).
 - The small model last: kd-final re-pinned to the best big model once round 6a has one.
 
+**Kaggle round 6b (after batch 2's data; one `f1_data.py build`):** the minimal-pair arms
+(train_f1.py plan `round6b`: F1@all-lr-para-all3k-mp, -mpp; argon-experiments.md "Batch 1
+results"), then batch 2's data on the big model. The new build changes queries.jsonl, so
+every teacher is scored again first: `--score F1@all-large-e8` for the -mp arms' rewrite
+filter, with that run's output attached.
+
+**After round 6: a second stage** that reorders the big model's top 10 (a cross-encoder or
+late interaction): [reranker-plan.md](reranker-plan.md).
+
 **Export (only when asked; deployment.md):** fp16 ONNX bundles of the big and the small
 candidates, each with latency and RSS measured on the exported encoder.
 

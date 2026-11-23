@@ -36,6 +36,10 @@ batch's icons, the stale bank for the rest). Unlabelled rows (--distill-sources)
 only there; rewrites of judged tasks (--para) either keep their original's grades where
 the teacher agrees ("graded") or learn from the teacher alone ("kd").
 
+Minimal pairs (round 6, --mp): edits of judged training tasks that change the right icon,
+judged by Argon. "rows" adds them as graded rows; "pair" also adds a pairwise term
+(--pair-weight; batch_loss) that ranks each side's best icon above the other side's.
+
     python train_f1.py --data f1_data --out runs --run F1@all-base-lr,F1@all-kd,F1@all-kd-ms
     python train_f1.py --data f1_data --out runs --score F1@all-base-lr,F1@all-lr
 """
@@ -180,6 +184,20 @@ PLANS = {
                                   "sel": {"active": None, "random": None}, "para": "graded",
                                   "distill_sources": ["distill-mslatte", "distill-cand"]},
     },
+    # Round 6b, minimal pairs (argon-experiments.md #3, "Batch 1 results"): first at the small
+    # size, as arms of F1@all-lr-para-all3k (round 5; same rows, same teacher filter, so it
+    # stays the control without a rerun). -mp adds the 790 edits as graded rows; -mpp also the
+    # pairwise term on the 492 flips. Scored on silver and on the contrast set
+    # (scripts/contrast_eval.py). The winner's recipe goes to the big model.
+    "round6b": {
+        "F1@all-lr-para-all3k-mp": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                                    "teacher": ["F1@all-large-e8"], "kd_weight": 0.0, "para": "graded",
+                                    "sel": {"active": None, "random": None}, "mp": "rows"},
+        "F1@all-lr-para-all3k-mpp": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                                     "teacher": ["F1@all-large-e8"], "kd_weight": 0.0, "para": "graded",
+                                     "sel": {"active": None, "random": None}, "mp": "pair",
+                                     "pair_weight": 0.2},
+    },
 }
 ALL_RUNS = {n: c for plan in PLANS.values() for n, c in plan.items()}
 NEG = -1e4      # masked logit (fp32)
@@ -214,7 +232,7 @@ def _h(s: str) -> int:
 
 class Data:
     def __init__(self, root: Path, pool_tasks, holdout: bool, smoke: bool, distill_sources=(),
-                 para=None, teacher=None, sel=None, pool_langs=None, sel_only=False):
+                 para=None, teacher=None, sel=None, pool_langs=None, sel_only=False, mp=None):
         self.manifest = json.loads((root / "manifest.json").read_text())
         self.icons = read_jsonl(root / "icons.jsonl")
         self.docs = [self.manifest["passage_prefix"] + r["doc"] for r in self.icons]
@@ -263,6 +281,28 @@ class Data:
             for q in paras:
                 q["grades"], q["pos"], q["negs"], q["ambiguous"] = {}, [], [], set()
             self.distill += paras
+        # Minimal pairs (round 6, --mp): an edit of a judged training task whose right icon
+        # should change, with its own Argon grades; only edits of tasks in this run's pool.
+        # "pair" also links each flip to its original's EN row (see batch_loss).
+        self.mp_rows = self.mp_pairs = 0
+        if mp:
+            mps = [q for q in qs if q["split"] == "train" and q["source"].startswith("mp-")
+                   and q.get("orig_task_id") in keep and q["pos"]]
+            if mp == "pair":
+                orig = {q["task_id"]: q for q in self.pool if q["lang"] == "en"}
+                for q in mps:
+                    o = orig.get(q["orig_task_id"])
+                    if o is None:
+                        continue
+                    e_hit = {i for i, g in q["grades"].items() if g >= 2}
+                    o_hit = {i for i, g in o["grades"].items() if g >= 2}
+                    a_ = sorted(i for i, g in q["grades"].items() if g == 3 and i not in o_hit and i not in self.held)
+                    b_ = sorted(i for i, g in o["grades"].items() if g == 3 and i not in e_hit and i not in self.held)
+                    if a_ and b_:          # a flip: each side's best icon is not a hit on the other
+                        q["pair"] = {"orig": o, "a": a_, "b": b_}
+                        self.mp_pairs += 1
+            self.pool += mps
+            self.mp_rows = len(mps)
         if self.distill and teacher is None:
             raise SystemExit("distillation rows need a teacher (--teacher or the run's preset)")
         if smoke:
@@ -417,14 +457,23 @@ class Encoder:
 
 def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank=None,
                teacher: "Teacher | None" = None) -> tuple:
-    """(graded loss, icon->query loss, distillation loss, icons in the batch). Rows without
-    grades (distillation text) bring the teacher's top icon into the batch instead of a
-    drawn positive and count only in the distillation loss."""
+    """(graded loss, icon->query loss, distillation loss, pair loss, icons in the batch).
+    Rows without grades (distillation text) bring the teacher's top icon into the batch
+    instead of a drawn positive and count only in the distillation loss.
+
+    Pair loss (--mp pair, --pair-weight): for a minimal pair that flips, with a = one of the
+    edit's grade-3 icons that is no hit on the original and b = the reverse, a pairwise
+    logistic (RankNet) term on each side: s(edit, a) > s(edit, b) and s(orig, b) > s(orig, a).
+    The original's title is encoded in the same step (the edit's view: title or parent +
+    title), and a and b join the batch's icons with fresh vectors."""
     man = data.manifest
     pos = [rng.choices(q["pos"], weights=[q["grades"][i] ** 2 for i in q["pos"]])[0] if q["pos"]
            else _teacher_top1(teacher, q, data.held) for q in rows]
     neg = [rng.choice(q["negs"]) if q["negs"] else None for q in rows]
-    icons = sorted({p for p in pos if p is not None} | {n for n in neg if n is not None})
+    prs = ([(r, q["pair"], rng.choice(q["pair"]["a"]), rng.choice(q["pair"]["b"]))
+            for r, q in enumerate(rows) if q.get("pair")] if getattr(a, "pair_weight", 0) > 0 else [])
+    icons = sorted({p for p in pos if p is not None} | {n for n in neg if n is not None}
+                   | {x for _, _, ia, ib in prs for x in (ia, ib)})
     col = {ic: j for j, ic in enumerate(icons)}
     forms = [1 if q.get("text_parent") and rng.random() < a.parent_p else 0 for q in rows]
     texts = [q["text_parent"] if f else q["text"] for q, f in zip(rows, forms)]
@@ -499,7 +548,19 @@ def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank
         T2 = torch.cat([G[:, rows_i].T, torch.zeros(len(rows_i), 1, device=Q.device)], dim=1)
         T2 = T2 / T2.sum(1, keepdim=True)
         loss_i = -(T2 * F.log_softmax(S2, dim=1)).sum(1).mean()
-    return loss_q, loss_i, loss_kd, M
+
+    loss_p = torch.zeros((), device=Q.device)
+    if prs:
+        o_texts = [p["orig"]["text_parent"] if forms[r] and p["orig"].get("text_parent") else p["orig"]["text"]
+                   for r, p, _, _ in prs]
+        Qo = enc([man["query_prefix"] + t for t in o_texts], man["max_query_len"])
+        r_ = torch.tensor([r for r, _, _, _ in prs], device=Q.device)
+        ja = torch.tensor([col[ia] for _, _, ia, _ in prs], device=Q.device)
+        jb = torch.tensor([col[ib] for _, _, _, ib in prs], device=Q.device)
+        so = a.scale * Qo @ P.T
+        k = torch.arange(len(prs), device=Q.device)
+        loss_p = 0.5 * (F.softplus(S[r_, jb] - S[r_, ja]) + F.softplus(so[k, ja] - so[k, jb])).mean()
+    return loss_q, loss_i, loss_kd, loss_p, M
 
 
 def _teacher_top1(teacher, q: dict, held: set):
@@ -572,12 +633,15 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         log(f"{name}: teacher {teacher.run}")
     out.mkdir(parents=True, exist_ok=True)
     data = Data(data_root, pool_tasks, holdout, a.smoke, a.distill_sources or (), a.para, teacher,
-                a.sel, a.pool_langs, a.sel_only)
+                a.sel, a.pool_langs, a.sel_only, a.mp)
     t_loss = teacher if a.kd_weight > 0 else None
     log(f"{name}: device {dev}; {data.pool_task_count} pool tasks ({len(data.pool)} rows), "
         f"{len(data.free)} free-signal rows ({a.free_per_epoch} per epoch), {len(data.distill)} "
         f"distillation rows, {len(data.val)} val, {len(data.held)} icons held out"
-        + (f"; {data.para_dropped} rewrites dropped (teacher disagrees)" if a.para == "graded" else ""))
+        + (f"; {data.para_dropped} rewrites dropped (teacher disagrees)" if a.para == "graded" else "")
+        + (f"; {data.mp_rows} minimal-pair rows ({data.mp_pairs} flips paired)" if a.mp else ""))
+    if a.pair_weight > 0 and a.mp != "pair":
+        raise SystemExit("--pair-weight needs --mp pair")
     torch.manual_seed(a.seed)
     enc = Encoder(a.model, dev, a.train_embeddings, a.checkpointing != "off", a.chunk_tokens)
     params = [p for p in enc.model.parameters() if p.requires_grad]
@@ -655,13 +719,14 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         in_epoch = st["step"] % steps_per_epoch
         enc.model.train()
         t_log, lq_acc, li_acc, lk_acc, m_acc, n_acc = time.time(), 0.0, 0.0, 0.0, 0, 0
+        lp_acc = 0.0
         for b in range(in_epoch, steps_per_epoch):
             batch = rows[b * a.batch:(b + 1) * a.batch]
             rng = random.Random(f"{a.seed}:{st['step']}")
             if need_bank and st["step"] % a.bank_refresh == 0 and st["step"] > 0:
                 refresh_bank()
-            loss_q, loss_i, loss_kd, M = batch_loss(enc, data, batch, rng, a, bank, t_loss)
-            loss = loss_q + a.i2q_weight * loss_i + a.kd_weight * loss_kd
+            loss_q, loss_i, loss_kd, loss_p, M = batch_loss(enc, data, batch, rng, a, bank, t_loss)
+            loss = loss_q + a.i2q_weight * loss_i + a.kd_weight * loss_kd + a.pair_weight * loss_p
             opt.zero_grad(set_to_none=True)
             scaler.scale(loss).backward()
             scaler.unscale_(opt)
@@ -670,7 +735,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
             scaler.update()
             sched.step()
             st["step"] += 1
-            lq_acc += loss_q.item(); li_acc += loss_i.item(); lk_acc += loss_kd.item()
+            lq_acc += loss_q.item(); li_acc += loss_i.item(); lk_acc += loss_kd.item(); lp_acc += loss_p.item()
             m_acc += M; n_acc += 1
             if st["step"] % 20 == 0 or a.smoke:
                 dt = (time.time() - t_log) / n_acc
@@ -680,12 +745,15 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
                        "lr": sched.get_last_lr()[0], "sec_per_step": round(dt, 3), "max_mem_gb": mem}
                 if t_loss is not None:
                     rec["loss_kd"] = round(lk_acc / n_acc, 4)
+                if a.pair_weight > 0:
+                    rec["loss_pair"] = round(lp_acc / n_acc, 4)
                 write(rec)
                 eta = (total - st["step"]) * dt / 60
                 kd = f" + kd {lk_acc / n_acc:.3f}" if t_loss is not None else ""
                 log(f"{name} step {st['step']}/{total} loss {lq_acc / n_acc:.3f} + {li_acc / n_acc:.3f}{kd} "
                     f"({dt:.2f} s/step, ≤ {eta:.0f} min left)")
                 t_log, lq_acc, li_acc, lk_acc, m_acc, n_acc = time.time(), 0.0, 0.0, 0.0, 0, 0
+                lp_acc = 0.0
             seg_end = st["step"] % steps_per_epoch in eval_at
             minutes = (time.time() - t_start) / 60
             if a.max_minutes and minutes > a.max_minutes:
@@ -717,7 +785,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     (out / "done.json").write_text(json.dumps({
         "run": name, "pool_tasks": data.pool_task_count, "holdout_icons": len(data.held),
         "distill_rows": len(data.distill), "teacher": teacher.run if teacher else None,
-        "para_dropped": data.para_dropped,
+        "para_dropped": data.para_dropped, "mp_rows": data.mp_rows, "mp_pairs": data.mp_pairs,
         "steps": st["step"], "steps_per_epoch": steps_per_epoch, "base": st.get("base"), "best": best,
         "checkpointing": enc.checkpointing, "train_minutes": round((time.time() - t_start) / 60, 1),
         "args": vars(a)}, indent=1))
@@ -772,8 +840,8 @@ def choose_checkpointing(enc: Encoder, data: Data, rows: list, a, name: str, tea
     try:
         bank = (torch.zeros(len(data.docs), enc.model.config.hidden_size, device=enc.device)
                 if a.bank_negs or teacher is not None else None)
-        lq, li, lk, _ = batch_loss(enc, data, rows[:a.batch], random.Random(0), a, bank, teacher)
-        (lq + a.i2q_weight * li + a.kd_weight * lk).backward()
+        lq, li, lk, lp, _ = batch_loss(enc, data, rows[:a.batch], random.Random(0), a, bank, teacher)
+        (lq + a.i2q_weight * li + a.kd_weight * lk + a.pair_weight * lp).backward()
         peak = torch.cuda.max_memory_allocated()
         ok = peak < 0.85 * total
     except torch.cuda.OutOfMemoryError:
@@ -868,7 +936,7 @@ def probe(a, data_root: Path) -> None:
                     if dev == "cuda":
                         torch.cuda.synchronize()
                     t0 = time.time()
-                lq, li, _, _ = batch_loss(enc, data, rows[b * a.batch:(b + 1) * a.batch],
+                lq, li, _, _, _ = batch_loss(enc, data, rows[b * a.batch:(b + 1) * a.batch],
                                           random.Random(b), a, bank)
                 opt.zero_grad(set_to_none=True)
                 scaler.scale(lq + a.i2q_weight * li).backward()
@@ -909,6 +977,10 @@ def main() -> None:
                     help="unlabelled row sources to train on (distill-mslatte, distill-cand)")
     ap.add_argument("--distill-per-epoch", type=int, default=0, help="sample of distillation rows per epoch (0 = all)")
     ap.add_argument("--para", choices=["graded", "kd"], default=None, help="use the rewrite rows")
+    ap.add_argument("--mp", choices=["rows", "pair"], default=None,
+                    help="use the minimal-pair rows (round 6); pair: also link flips to their originals")
+    ap.add_argument("--pair-weight", type=float, default=0.0,
+                    help="weight of the minimal-pair loss (needs --mp pair; mean over the batch's pairs)")
     ap.add_argument("--pool-langs", type=lambda s: s.split(","), default=[],
                     help="pool translations beyond EN/ES/RU to train on (augment_pools.py translate)")
     ap.add_argument("--sel", type=json.loads, default=None,

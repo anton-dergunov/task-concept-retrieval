@@ -125,6 +125,7 @@ def build(smoke: bool = False, distill: Optional[dict] = None) -> dict:
                                           if str(n.get("task", "")).strip()]})
 
     queries: List[dict] = []
+    pool_ids = set()          # judged pool tasks with rows (smoke: minimal pairs of these only)
     eval_ids = _eval_ids()
     for ds, runs in silver.POOL_RUNS.items():
         aug = {r["task_id"]: r for r in read_jsonl(AUG_FILES[ds])}
@@ -161,6 +162,7 @@ def build(smoke: bool = False, distill: Optional[dict] = None) -> dict:
                     base["sel"] = sel
                 parents = list(t.get("parents") or []) or list(a.get("parents") or [])
                 queries.append({**base, "lang": "en", **_texts(t["title"], parents)})
+                pool_ids.add(t["id"])
                 for lang in ("es", "ru"):
                     tr = a.get(lang)
                     if not tr:
@@ -197,8 +199,10 @@ def build(smoke: bool = False, distill: Optional[dict] = None) -> dict:
         if not pool.exists() or not silver.label_path(run).exists():
             continue
         gold = silver.load_gold([run])
-        for t in read_jsonl(pool)[:20] if smoke else read_jsonl(pool):
+        for t in read_jsonl(pool):
             m = t.get("meta") or {}
+            if smoke and m.get("orig_task_id") not in pool_ids:
+                continue
             if m.get("val"):
                 stats["minimal pair of a validation task (contrast set, not a row)"] += 1
                 continue

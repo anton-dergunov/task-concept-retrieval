@@ -253,10 +253,16 @@ dev tasks):
   in the next `f1_data.py build` (tcr/finetune.py `MP_RUNS`). Each row carries its
   `orig_task_id`. The original's top icons that the judge left ungraded are hard
   negatives.
-  - No preset uses the rows yet. train_f1.py needs a flag for them (the plain rows) and the
-    `pair` loss term (a second arm).
+  - train_f1.py uses them with `--mp rows` (plain graded rows) or `--mp pair
+    --pair-weight w`. The second also adds a pairwise term on the 492 flips: each side's
+    best icon must score above the other side's. The arms are preset in the `round6b` plan
+    (F1@all-lr-para-all3k-mp, -mpp), with round 5's F1@all-lr-para-all3k as the control.
   - Since the models already follow edits, the question for round 6b is whether the pairs
     raise pair accuracy and silver, not whether they make the model notice the edit.
+
+**Add to batch 2:** grade the unjudged icons in the leaders' top 10 on dev (`g5`,
+`grade_unjudged.py --depth 10`, ~8,000 icons, ~$10–25). A reranker can only be scored
+fairly with them ([reranker-plan.md](reranker-plan.md) §4).
 
 **Not on the list:** labels for the abstention gate (it can be calibrated on the labels
 that exist). And a reminder that every item optimises toward Argon's taste: the author's
