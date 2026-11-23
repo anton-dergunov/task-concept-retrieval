@@ -83,6 +83,74 @@ nice .venv/bin/python scripts/silver_eval.py --methods F1@all-large-para-all3k,F
 Questions: do graded rewrites lift e5-large as they lifted e5-small (+0.02)? Does the
 better teacher lift kd-final, and does a softer KD temperature carry more?
 
+### Round 6a outcome and the resume (2026-11-23)
+
+GPU 1's two students finished (results: f1-dual-encoder.md §14). GPU 0's
+`F1@all-large-para-all3k` paused at step 2894 of 3116 (`--max-minutes 620`; val nDCG@5
+0.5909 there, its teacher 0.5886), so it is not in the archive. About 222 steps are left:
+~47 min at 12.7 s/step, ~1–1.3 h of session with the copies, the final evaluation and
+packaging. Inputs: **the same data version** (queries.jsonl must not change under a resume
+state) + **round 6a's output**, which holds the paused run's `last/state.pt`, the teacher
+run it filters rewrites with (F1-all-large-all3k, copied there as round 6a's `NEED`) and
+the teacher scores.
+
+Cell 2: the same down to `P = PREV / "runs"` and the two copy loops; from `NEED` on:
+
+```python
+NEED = {"F1-all-large-all3k"}   # round 6a resume: the paused run's teacher (run dir names use "-")
+RUNS.mkdir(parents=True, exist_ok=True)
+for d in sorted(P.glob("*")) if P.exists() else []:
+    resume = (d / "last" / "state.pt").exists() and not (d / "done.json").exists()
+    if (d.name in NEED or resume) and not (RUNS / d.name).exists():
+        shutil.copytree(d, RUNS / d.name)
+        print("copied", d.name, "(resumes)" if resume else "")
+if (P / "teacher").is_dir():                     # its scores, so the resume does not re-score (~7 min)
+    shutil.copytree(P / "teacher", RUNS / "teacher", dirs_exist_ok=True)
+OLD = {p.parent.name for p in RUNS.glob("*/done.json")}
+print("finished before this version, copied:", sorted(OLD))
+assert NEED <= OLD, (f"missing earlier runs {sorted(NEED - OLD)}; inputs: "
+                     + "; ".join(str(p) for p in INPUT_ROOT.glob("*/*/*")))
+assert (RUNS / "F1-all-large-para-all3k" / "last" / "state.pt").exists(), "no resume state copied"
+free = shutil.disk_usage(WORK).free / 1e9
+print(f"/kaggle/working free: {free:.1f} GB")
+assert free >= 5, "the resume needs room for one more best/ (~2.2 GB) while the old one exists"
+```
+
+Three things differ from round 6a's cell. `NEED` names the finished teacher the resumed run
+reads, by its directory name (`F1-…`, not `F1@…`), never the paused run itself: that has no
+done.json, so the assert would stop the version (the paused run is copied by its
+`last/state.pt` anyway). The free-space floor is 5 GB, since the
+teacher (2.2 GB), the paused run's best/ (2.2 GB) and its resume state (~4.4 GB) already
+sit in /kaggle/working; and the teacher scores are copied.
+
+Cell 3, one queue (the loop skips a log that does not exist; reading a missing gpu1.log
+would raise after 10 minutes and end a headless commit, killing the run):
+
+```python
+# 3. One queue: the paused e5-large run resumes from last/state.pt
+import os, subprocess, time
+
+def launch(gpu, cmd, log):
+    env = {**os.environ, "CUDA_VISIBLE_DEVICES": str(gpu)}
+    return subprocess.Popen(cmd, shell=True, env=env, stdout=open(WORK / log, "w"),
+                            stderr=subprocess.STDOUT)
+
+train = f"python {TRAIN_SCRIPT} --data {DATA_DIR} --out {RUNS}"
+jobs = [launch(0, f"{train} --run F1@all-large-para-all3k --max-minutes 150", "gpu0.log")]
+while any(j.poll() is None for j in jobs):      # progress in the notebook log every 10 min
+    time.sleep(600)
+    for log in ("gpu0.log", "gpu1.log"):
+        if (WORK / log).exists():
+            lines = [l for l in (WORK / log).read_text().splitlines() if "warn" not in l.lower()]
+            print(log, *lines[-2:], sep="\n  ", flush=True)
+print("exit codes:", [j.returncode for j in jobs])
+```
+
+`--max-minutes 150` pauses again, resumably, if steps turn out much slower, so the
+session cannot run through the week's last ~4 h. The log's first lines should say
+`resumed at step 2894`. Cell 4 unchanged (it skips the missing gpu1.log). GPU 1 stays
+idle: nothing else is ready that fits ~1 h and is comparable with a full run.
+
 ## Round 5 retry (after the disk ran out, 2026-11-21)
 
 **What happened.** `/kaggle/working` (the saved output, 19.5 GiB) filled up. Cell 2 used to copy

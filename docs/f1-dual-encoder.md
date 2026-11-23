@@ -694,3 +694,45 @@ Translated eval set ([2026-11-22-xling](../results/silver/2026-11-22-xling.md), 
   over the last 2–3 epochs (+0.001–0.002 per evaluation, the LR decayed to zero). A longer
   schedule would be worth at most a few thousandths. Held-out and silver agree on every
   comparison's sign this time.
+
+## 14. Round 6a: rewrites for e5-large, students of the retrained teacher (ran 2026-11-22/23)
+
+Plan `round6` in train_f1.py (f1-kaggle-run.md "Round 6a"). GPU 1's two students finished
+(174 and 130 min); GPU 0's `F1@all-large-para-all3k` paused at step 2894 of 3116 and
+resumes in a short second session (f1-kaggle-run.md "Round 6a outcome and the resume"). At
+the pause its val nDCG@5 was 0.5909, against 0.5886 for F1@all-large-all3k, the run it
+would replace: graded rewrites may give e5-large little (held-out only; silver after the
+resume).
+
+Silver: [2026-11-23](../results/silver/2026-11-23.md) (plain gold). g5 grades the top 10 of
+F1@all-large-all3k and F1@all-kd-final, not of the new runs, so the g1–g5 rows slightly
+favour kd-final; they agree with plain gold. Paired (`silver_paired.py`):
+
+| comparison | gold | view | ΔnDCG@5 [95%] | Personal | Realistic | hit@1 | held-out nDCG@5 |
+|---|---|---|---:|---:|---:|---:|---:|
+| kd-final-L2 vs kd-final | plain | title | −0.004 [−0.008, +0.000] | −0.005 | −0.011 | 159 / 187, p = 0.15 | 0.557 vs 0.561 |
+| | plain | parent | −0.001 [−0.005, +0.003] | +0.001 | −0.007 | 177 / 183, p = 0.79 | |
+| | g1–g5 | parent | −0.001 [−0.005, +0.003] | +0.002 | −0.007 | 185 / 174, p = 0.60 | |
+| kd-final-L2-t2 vs kd-final-L2 | plain | title | −0.030 [−0.036, −0.024] | −0.032 | −0.007 | 240 / 330, p < 0.001 | 0.517 vs 0.557 |
+| | plain | parent | **−0.036** [−0.042, −0.031] | −0.042 | −0.033 | 237 / 339, p < 0.001 | |
+| | g1–g5 | parent | −0.039 [−0.044, −0.034] | −0.045 | −0.036 | 229 / 336, p < 0.001 | |
+| kd-final-L2 vs large-all3k | plain | parent | −0.031 [−0.039, −0.023] | −0.027 | −0.076 | 330 / 473, p < 0.001 | 0.557 vs 0.589 |
+
+(Plain gold, +parent: F1@all-kd-final 0.497 / 0.608, -L2 0.496 / 0.606, -L2-t2 0.460 /
+0.575, F1@all-large-all3k 0.527 / 0.650.)
+
+- **A better teacher did not make a better student.** The retrained teacher is +0.010 over
+  e8, and its student ties with e8's (−0.001, interval ±0.004). Round 4 measured that
+  distillation passes on ~15% of a teacher's lead, which predicts +0.0015 here, too small
+  to see. The student's gap to the teacher stays 0.031. The small model is held back by its
+  own capacity or by its data, not by its teacher: a stronger e5-large teacher is not the
+  way to improve e5-small. kd-final stays the small model's candidate (a tie, and it was
+  first).
+- **Softer targets hurt clearly.** KD at temperature 2 loses 0.030–0.039 on silver and 0.040
+  held out, on every eval set, and was behind from the first epoch (val 0.452 vs 0.475 at
+  epoch 1, then 0.03–0.04 below all the way; stopped by patience at epoch 7.5). It also
+  lowers recall@10 on held-out icons (0.58 vs 0.67), so the flattened tail did not carry
+  "dark knowledge" that generalises to unseen icons. Over a catalogue of ~4,000 icons, T = 2
+  spreads the teacher's mass over hundreds of weak icons, and the student learns that flat
+  tail instead of the sharp top that hit@1 needs. T = 1 stays; whether T < 1 (sharper
+  than the teacher) helps is an open, cheap question for a later round.

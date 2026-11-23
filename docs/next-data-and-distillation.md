@@ -16,6 +16,14 @@ pairs) is done and scored (argon-experiments.md "Batch 1 results"). Kaggle round
 running (§7). Next: batch 2 (v3b: #5 VLM reranker, #2 adversarial tasks; code and pilots
 first; all Argon work done by 2026-11-30).
 
+**2026-11-23:** round 6a's students are scored (f1-dual-encoder.md §14): the retrained
+teacher gives kd-final nothing (−0.001), and KD at temperature 2 loses 0.036. The e5-large
+rewrite run paused at step 2894 and resumes in a ~1 h session (f1-kaggle-run.md "Round 6a
+outcome"). Batch 2's VLM reranker is done on dev, train and cand; on plain gold it leads
+the first stage by +0.155 nDCG@5 (0.682 vs 0.527), before g6 grades its unjudged picks.
+g5 is done; adversarial generation and judging are running. A second Kaggle account (30 h
+this week) can take round 6b after batch 2's data is built.
+
 - **Best on silver** (g1–g4, +parent, [2026-11-22-extra](../results/silver/2026-11-22-extra.md)):
   **F1@all-large-all3k** (the big model's candidate) nDCG@5 0.567, hit@1 0.714;
   **F1@all-kd-final** (the small model's candidate: graded rewrites + distillation)
