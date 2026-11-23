@@ -1,4 +1,4 @@
-# Running F1 on Kaggle (hand-off): round 5 next
+# Running F1 on Kaggle (hand-off): round 6b next
 
 For the author, and for a fresh Claude Code session that continues afterwards. The design
 is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
@@ -6,7 +6,7 @@ is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
 headless for up to 12 hours on two T4 GPUs; data building, import and scoring stay on the
 Mac (CLAUDE.md "Compute"). Round 2's guide is this file's git history (2026-11-16).
 
-**State (2026-11-22):** round 6a ready ([below](#round-6a-prepared-2026-11-22-round-5s-data-repacked)). Round 5's history: **(2026-11-21, evening)** round 5's first session (an editor session) ran out of
+**State (2026-11-23):** round 6a done and imported (its e5-large run resumed and finished); round 6b ready ([below](#round-6b-prepared-2026-11-23-new-build-two-accounts)). Earlier: round 6a ready (2026-11-22). Round 5's history: **(2026-11-21, evening)** round 5's first session (an editor session) ran out of
 disk at 17:21: GPU 0 finished `--score`, rand1k, act1k, 1k-rand and 1k-act, then
 `F1@all-large-all3k` (GPU 1) and `F1@all-lr-all3k` (GPU 0) died writing checkpoints. Those
 four runs and `runs/teacher` were packaged by hand, imported and scored (f1-dual-encoder.md
@@ -29,6 +29,69 @@ distill-mslatte 4,726. Private (Personal-style pool text, approved for the autho
 account); no eval data. Checked on the Mac: each preset's pool (F1@all-lr 8,887 tasks;
 rand1k 9,886; act1k 9,887; all3k 11,884; F1@1k-rand 999 and F1@1k-act 1,000 alone), CPU
 smoke runs of F1@all-lr-act1k and F1@1k-act.
+
+## Round 6b (prepared 2026-11-23; new build, two accounts)
+
+**Why now:** the Argon price doubles after 2026-11-30, and whether to buy more VLM labels
+(argon-experiments.md "Batch 2 results") depends on whether they train well. The label A/B
+is short and goes first, on the first account's remaining 3 h 42 min; the long arms go to
+the second account (30 h, unused). TPU v5e-8 (20 h) is not used: train_f1.py is PyTorch with
+dynamic shapes (each batch has its own icon set and masks), which XLA would recompile on
+nearly every step; porting it is its own project.
+
+**Data:** a new build, `data/private/f1/f1_data.tar.gz` (round 6a's copy:
+`f1_data.round6a.tar.gz`). Round 5's 173,381 rows are a byte-exact prefix of its
+queries.jsonl, and it ships F1@all-large-e8's teacher scores (`teacher/`), so **no session
+needs an earlier version's output** (cell 2: `NEED = set()`). Private (the Personal-style
+pool text, as before); upload it on each account as a private dataset (account 1: a new
+version of the F1 dataset; account 2: a new dataset).
+
+**Account 2 setup (once):** a new notebook, *Settings* → Accelerator **GPU T4 ×2**, Internet
+**on** (needs the account's phone verification; the runs download e5 from Hugging Face),
+*Add Input* → the dataset. Cells 1–4 as in §3 below, with `NEED = set()` in cell 2 and the
+queues below in cell 3. Always **Save Version → Save & Run All (Commit)**: an editor session
+loses `/kaggle/working`.
+
+**Session 1, account 1 (~1.5 h of its 3 h 42 min): the label A/B** (plan `round6b-ab`,
+F1@1k's recipe, ~20 min each):
+
+```python
+jobs = [
+    launch(0, f"{train} --run F1@1k-vj,F1@1k-vv,F1@1k-vc,F1@1k-vc3k", "gpu0.log"),
+    launch(1, f"{train} --run F1@1k-vj-s1,F1@1k-vv-s1,F1@1k-vc-s1", "gpu1.log"),
+]
+```
+
+**Session 2, account 2 (~7.5 h): the VLM arms first, then batch 1/2's data** (plan
+`round6b`, e5-small arms of F1@all-lr-para-all3k, ~3.3–3.6 h each):
+
+```python
+jobs = [
+    launch(0, f"{train} --run F1@all-lr-para-all3k-vc,F1@all-lr-para-all3k-adv", "gpu0.log"),
+    launch(1, f"{train} --run F1@all-lr-para-all3k-vkd,F1@all-lr-para-all3k-mp", "gpu1.log"),
+]
+```
+
+**Session 3, account 2 (~7.5 h), after session 2:** `F1@all-lr-para-all3k-mpp` (GPU 0) and
+`F1@all-lr-para-all3k-s1` (GPU 1). It needs no earlier output either. The remaining ~15 h
+of the week go to the big model with round 6b's winning data (next-data-and-distillation.md
+§7).
+
+Each run's first log line counts its rows: check `VLM-graded rows` (vv: ~1,000, EN;
+vc: ~1,000 / 3,000), `rows with a VLM list` (vkd), `adversarial rows` (adv) and
+`teacher F1@all-large-e8: scores shipped with the data`.
+
+After each session, on the Mac:
+
+```bash
+.venv/bin/python scripts/f1_data.py import ~/Downloads/f1_runs.tar.zst
+nice .venv/bin/python scripts/silver_eval.py --methods F1@1k-vj,F1@1k-vv,F1@1k-vc,F1@1k-vc3k,F1@1k-vj-s1,F1@1k-vv-s1,F1@1k-vc-s1 --versions v2
+nice .venv/bin/python scripts/silver_paired.py F1@1k-vv:F1@1k-vj F1@1k-vc:F1@1k-vv F1@1k-vc3k:F1@1k-vc F1@1k-vj-s1:F1@1k-vj F1@1k-vv-s1:F1@1k-vv F1@1k-vc-s1:F1@1k-vc --extra-grades g1,g2,g3,g4,g5,g6
+```
+
+(and the same for session 2's and 3's arms against `F1@all-lr-para-all3k`, plus
+`scripts/contrast_eval.py` for -mp / -mpp). The decision on a last VLM batch is due by
+2026-11-27 (f1-dual-encoder.md §15, questions 1–3).
 
 ## Round 6a (prepared 2026-11-22; round 5's data, repacked)
 

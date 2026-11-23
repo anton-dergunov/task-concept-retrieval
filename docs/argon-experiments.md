@@ -364,3 +364,83 @@ than 3 missing: retried once).
 that exist). And a reminder that every item optimises toward Argon's taste: the author's
 own labels (labeller, Personal) are the check that Argon's taste is the author's, and
 100–200 of them are worth more confidence than any of the above.
+
+### Batch 2 results (run 2026-11-23, $83.60)
+
+The spend log went from $411.71 to $495.31: **$83.60**, at the estimate. Round 6 in all:
+$107.49. The author's console showed £41.36 (~$54) of credit left on 2026-11-23 (it lags by
+about a day). Every request succeeded. Reports: [results/vlm/2026-11-23.md](../results/vlm/2026-11-23.md),
+[results/adversarial/2026-11-23.md](../results/adversarial/2026-11-23.md).
+
+**g5, g6:** 12,792 unjudged icons in the two leaders' top 10 on dev, and the VLM's unjudged
+top 3, are graded. Scores below use gold + g1–g6.
+
+**#5 VLM reranker, dev (3,230 tasks, img+desc):**
+
+| set | first stage nDCG@5 | VLM nDCG@5 | Δ [95%] | first hit@1 | VLM hit@1 |
+|---|---:|---:|---|---:|---:|
+| Personal | 0.577 | 0.798 | +0.220 [+0.209, +0.233] | 0.677 | 0.942 |
+| Personal-synth | 0.626 | 0.822 | +0.196 [+0.180, +0.212] | 0.716 | 0.946 |
+| Public-expanded | 0.616 | 0.806 | +0.191 [+0.163, +0.218] | 0.714 | 0.946 |
+| Public-short | 0.713 | 0.819 | +0.106 [+0.088, +0.124] | 0.841 | 0.925 |
+| Realistic | 0.595 | 0.805 | +0.210 [+0.185, +0.235] | 0.698 | 0.927 |
+| pooled | 0.612 | 0.808 | **+0.196** [+0.188, +0.204] | 0.714 | **0.939** |
+
+(First stage: F1@all-large-all3k+parent, the deployed big model. Against round 6a's
+F1@all-large-para-all3k the VLM leads by +0.188 [+0.180, +0.196], hit@1 723 / 73.)
+
+- **The reranker almost reaches the judge's own ceiling.** hit@1 0.939, where the re-judge
+  of batch 1 reached 0.96 against the first run's gold. It gains most where the first
+  stage is weakest (Personal +0.22) and least on terse public titles (+0.11).
+- **It does not copy the first stage.** Rank correlation with the first stage's order is
+  0.40, with the shown position 0.03 (no position bias). Its top-1 is the first stage's
+  top-1 on 27% of tasks, and comes from ranks 11–20 on 20%: the top 20 holds the answer
+  much more often than the top 1 does.
+- **It is not a copy of the judge either.** Its top-1 equals the judge's top-1 on 52% of
+  tasks (the re-judge: 73%) and is a hit on 94%: it picks another good icon.
+- **Same-model caveat.** Judge, reranker and g6's grader read the same descriptions, and
+  the first two are the same model. Part of the gain is Argon agreeing with itself. The
+  author's labels are the check.
+- **On the 1,000 judged training tasks** the gain is +0.059 (Personal-style +0.042,
+  MS-LaTTE +0.101). The first stage trained on those labels, so its own numbers there are
+  inflated; the dev figures are the measurement.
+- **How its grades compare with the judge's** (the 20 shown icons of the 1,000 training
+  tasks; rows the VLM's grade, columns the judge's, "unseen" = outside the judge's
+  candidates):
+
+  | VLM \ judge | 0 (seen) | 1 | 2 | 3 | unseen |
+  |---|---:|---:|---:|---:|---:|
+  | 0 | 1,905 | 29 | 45 | 17 | 1,660 |
+  | 1 | 3,772 | 453 | 653 | 72 | 2,279 |
+  | 2 | 1,707 | 284 | 2,196 | 683 | 1,442 |
+  | 3 | 209 | 9 | 422 | 1,806 | 357 |
+
+  It grades generously: 9.1 icons per task at ≥ 2 against the judge's 7.1, and 7.2 at 1.
+  Its 3s are the judge's 2s and 3s (91% of the known ones); its 1s are mostly the judge's
+  0s (76%). So as training labels its grades are **calibrated**: 3 and 2 stay, 1 is masked,
+  0 is a hard negative (train_f1.py `vlm_grade_row`).
+- **Price:** $0.0063 per task in batch, a third of a full Argon judgment ($0.019).
+
+**#2 adversarial tasks (971 judged: 679 Personal-style, 292 MS-LaTTE):**
+
+| set | tasks | fooled [95%] | base rate (validation tasks of the seeds' pool) |
+|---|---:|---|---|
+| Personal-style | 679 | **0.274** [0.242, 0.309] | 0.127 (pool-synth), 0.164 (pool-synth2) |
+| MS-LaTTE | 292 | **0.277** [0.229, 0.331] | 0.203 |
+
+- **The trap transfers, roughly doubling the error rate on Personal-style text** (×1.4 on
+  MS-LaTTE). Fooled = the big model's top-1 is no hit under the judge, who saw the model's
+  top 10 (judged@1 0.99), so no extra grading is needed.
+- **Verified errors make no better seeds than probable ones:** 0.288 vs 0.262 (Personal-style),
+  0.271 vs 0.296 (MS-LaTTE); the intervals overlap.
+- **The model rarely falls for the seed's own wrong icon** (top-1 = the seed's wrong icon on
+  3–5%): the confusion carries over as a pattern, not as a glyph.
+- No-good-icon on 1 task of 971: the generated text is realistic enough to have an answer.
+
+**What it means for the rest of the money.** The VLM labels cost a third of judging, and
+they are the strongest labels the project has: they reach icons the judge's candidate pool
+missed. Whether they also **train** well is round 6b's first question (f1-kaggle-run.md
+"Round 6b"): the same 1,000 tasks with the judge's grades vs the VLM's, 1,000 / 3,000
+VLM-labelled candidates alone, and the 3,000 on top of the pool. If they train as well as
+the judge's grades, a last Argon batch (by 2026-11-29) reranks more unlabelled candidates:
+~10.7k remain (9.0k Personal-style, 4.7k MS-LaTTE, minus the 3,000), $19 per 3,000.

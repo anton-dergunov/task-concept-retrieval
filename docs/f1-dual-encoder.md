@@ -736,3 +736,72 @@ favour kd-final; they agree with plain gold. Paired (`silver_paired.py`):
   spreads the teacher's mass over hundreds of weak icons, and the student learns that flat
   tail instead of the sharp top that hit@1 needs. T = 1 stays; whether T < 1 (sharper
   than the teacher) helps is an open, cheap question for a later round.
+
+**The resumed e5-large run (2026-11-23).** `F1@all-large-para-all3k` finished in a 48-min
+second session (step 3116, val nDCG@5 0.5918 against 0.5886 for F1@all-large-all3k).
+Silver, gold + g1–g6, +parent (`silver_paired.py`):
+
+| comparison | ΔnDCG@5 [95%] | Personal | Realistic | hit@1 |
+|---|---:|---:|---:|---:|
+| large-para-all3k vs large-all3k | **+0.008** [+0.003, +0.012] | +0.006 | +0.019 | 253 / 174, p < 0.001 |
+| large-para-all3k vs kd-final | +0.050 [+0.043, +0.058] | +0.050 | +0.083 | 507 / 252, p < 0.001 |
+| VLM reranker vs large-para-all3k | +0.188 [+0.180, +0.196] | +0.214 | +0.191 | 723 / 73, p < 0.001 |
+
+(Plain gold, +parent: 0.536 / 0.673 against 0.527 / 0.650.)
+
+- **Graded rewrites help e5-large too, at about half the gain**: +0.008 against e5-small's
+  +0.019 (round 4). The bigger encoder already reads the terse and reworded registers
+  better, so rewrites teach it less. g5 graded F1@all-large-all3k's top 10, not this run's,
+  so the comparison slightly favours the older run; the gain holds on plain gold too
+  (+0.009).
+- **It is the big model's new candidate** (deployment.md; export only when asked).
+- The VLM reranker over the same model's top 20 is still far ahead
+  (argon-experiments.md "Batch 2 results"): the first stage's top 20 holds better icons
+  than its top 1, which is what round 6b's VLM arms and the planned reranker
+  ([reranker-plan.md](reranker-plan.md)) try to use.
+
+## 15. Round 6b: batch 2's data, and do VLM labels train? (built 2026-11-23)
+
+The data (`f1_data.py build --teachers F1-all-large-e8`) keeps round 5's 173,381 rows
+byte for byte and in order, and appends the new rows, so round 5's teacher scores stay valid
+for them. F1@all-large-e8's scores were extended on the Mac to the new rewrite rows (the
+only new rows a run without distillation asks a teacher about) and ship in the tarball
+(`teacher/F1-all-large-e8.npz`), so a session needs no teacher checkpoint. New rows: the
+minimal pairs (`mp-*`), the adversarial tasks (`adv-*`, + ES/RU, rewrites `para-adv-*`),
+and `vlm.jsonl` beside queries.jsonl (the VLM's order and grades of its 20 icons, for the
+1,000 training tasks and the 3,000 candidates; candidates are `distill-*` rows already).
+
+New in train_f1.py:
+- `--adv`: the adversarial rows; their rewrites follow `--para` (teacher-filtered).
+- `--vlm-rows train|cand`: the VLM's grades as the rows' labels, calibrated on the tasks
+  with both labels (3 and 2 kept, 1 masked, 0 a hard negative; argon-experiments.md
+  "Batch 2 results"); for `train` they replace the judge's on the task's own rows
+  (rewrites keep the judge's).
+- `--vlm-only`, `--vlm-n`, `--train-langs`: one VLM set alone, for the label A/B.
+- `--vlm-kd train,cand --vlm-weight w --vlm-k 5`: a listwise term, **top-k ListMLE**
+  (Plackett–Luce likelihood of the VLM's order; Xia et al. 2008): for each row with a VLM
+  list, −Σ_{j<k} [s_{π(j)} − log Σ_{m≥j} exp s_{π(m)}] / k over the list's ≤ 20 icons, k =
+  the VLM's count of grade ≥ 2 clipped to [1, 5]. Student scores use fresh vectors for the
+  batch's icons and the stale bank for the rest, as in distillation, so the gradient
+  reaches the query tower. Unlabelled candidates join as rows that train on this term
+  alone. This is the cross-modal distillation of #5: an image-reading reranker's order,
+  learnt by a text-only encoder at no query cost.
+
+Plans: `round6b` (the arms of the control F1@all-lr-para-all3k, e5-small, ~3.3 h each:
+-mp, -mpp, -adv, -vc, -vkd, -s1) and `round6b-ab` (F1@1k's recipe, ~20 min each, EN rows
+only: -vj, -vv, -vc, -vc3k, and seeds -s1 of the first three). Questions:
+1. **Do VLM labels train as well as the judge's?** F1@1k-vv vs F1@1k-vj (the same 1,000
+   texts). The first stage trained on these tasks, so its top 20 already holds the judge's
+   picks: the VLM's grades have an easier list here than on new text.
+2. **On honest lists?** F1@1k-vc (1,000 candidates the first stage never trained on) vs
+   F1@1k-vv, and -vc3k for the size. Against round 1's curve: F1@1k 0.364 → F1@3k 0.393
+   (EN/ES/RU rows there, so compare the arms with each other first).
+3. **What would more VLM labels buy on top?** -vc (the 3,000 as rows) vs the control.
+4. **Does the VLM's order teach more than its grades?** -vkd vs -vc, and vs the control.
+5. **Do minimal pairs / adversarial tasks help?** -mp, -mpp, -adv vs the control; -mpp also
+   on the contrast set (scripts/contrast_eval.py).
+6. **How large is seed noise?** -s1 vs the control (never measured; every Δ so far is a
+   bootstrap over tasks with one seed) and the three -s1 pairs at the 1k size.
+
+The arms with adversarial rows train on tasks seeded from validation tasks, so their
+held-out numbers read a little high; silver is the measure.

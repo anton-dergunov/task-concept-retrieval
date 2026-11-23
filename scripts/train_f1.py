@@ -39,6 +39,16 @@ the teacher agrees ("graded") or learn from the teacher alone ("kd").
 Minimal pairs (round 6, --mp): edits of judged training tasks that change the right icon,
 judged by Argon. "rows" adds them as graded rows; "pair" also adds a pairwise term
 (--pair-weight; batch_loss) that ranks each side's best icon above the other side's.
+Adversarial tasks (round 6, --adv): tasks written from the big model's errors, judged by
+Argon, with their translations and rewrites (rewrites follow --para).
+
+VLM labels (round 6, vlm.jsonl): Argon's ranking and 0-3 grades of the big model's top 20,
+for judged training tasks ("train") and unlabelled candidates ("cand"). --vlm-rows makes a
+set's tasks graded rows with the VLM's grades, calibrated on the tasks that have both
+labels (3 and 2 kept, 1 masked, 0 a hard negative); --vlm-only trains on one set alone
+(--vlm-n tasks); --vlm-weight adds a listwise term (top-k ListMLE, Plackett-Luce) that
+follows the VLM's order of its 20 icons, for the sets in --vlm-kd. Teacher scores shipped
+in the data (<data>/teacher/<run>.npz, same queries.jsonl) stand in for the teacher run.
 
     python train_f1.py --data f1_data --out runs --run F1@all-base-lr,F1@all-kd,F1@all-kd-ms
     python train_f1.py --data f1_data --out runs --score F1@all-base-lr,F1@all-lr
@@ -76,6 +86,11 @@ BASE_LANGS = ("en", "es", "ru")
 # plan -> run name -> settings: pool_tasks (None = all), holdout (5% of icons), and any
 # argument overrides. Round 1: the method itself first, so a short session still produces
 # it, then the learning curve. Round 2: the recipe (all comparable with F1@all).
+# Round 6b's control (round 5's F1@all-lr-para-all3k) and the A/B recipe (round 1's F1@1k)
+_CTRL6 = {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10, "teacher": ["F1@all-large-e8"],
+          "kd_weight": 0.0, "para": "graded", "sel": {"active": None, "random": None}}
+_AB = {"pool_tasks": None, "holdout": True, "vlm_only": "train", "train_langs": ["en"],
+       "sel": {"active": None, "random": None}}
 PLANS = {
     "round1": {
         "F1": {"pool_tasks": None, "holdout": False},
@@ -197,6 +212,28 @@ PLANS = {
                                      "teacher": ["F1@all-large-e8"], "kd_weight": 0.0, "para": "graded",
                                      "sel": {"active": None, "random": None}, "mp": "pair",
                                      "pair_weight": 0.2},
+        # Batch 2's data (argon-experiments.md "Batch 2 results"), each an arm of the same
+        # control. -adv: the 971 adversarial tasks (+ ES/RU, graded rewrites). -vc: the 3,000
+        # VLM-labelled candidates as rows with the VLM's calibrated grades (what more VLM labels
+        # would buy). -vkd: the listwise term on all 4,000 VLM lists (cross-modal distillation:
+        # the order of an image-reading reranker, at no query cost). -s1: the control again with
+        # another seed, the first measure of seed noise at this size.
+        "F1@all-lr-para-all3k-adv": {**_CTRL6, "adv": True},
+        "F1@all-lr-para-all3k-vc": {**_CTRL6, "vlm_rows": ["cand"]},
+        "F1@all-lr-para-all3k-vkd": {**_CTRL6, "vlm_kd": ["train", "cand"], "vlm_weight": 0.5},
+        "F1@all-lr-para-all3k-s1": {**_CTRL6, "seed": 1},
+    },
+    # Round 6b's A/B of the labels themselves (short: F1@1k's recipe, ~20 min each), EN rows
+    # only so the arms hold the same kind of rows: the 1,000 VLM-reranked judged training
+    # tasks with the judge's grades (-vj) or the VLM's (-vv), and 1,000 / 3,000 VLM-labelled
+    # candidates (-vc, -vc3k: texts the first stage never trained on, so their top 20 is an
+    # honest list, as more VLM labels would be). -s1: the same with another seed (the noise).
+    "round6b-ab": {
+        "F1@1k-vj": _AB, "F1@1k-vv": {**_AB, "vlm_rows": ["train"]},
+        "F1@1k-vc": {**_AB, "vlm_only": "cand", "vlm_n": 1000, "vlm_rows": ["cand"]},
+        "F1@1k-vc3k": {**_AB, "vlm_only": "cand", "vlm_rows": ["cand"]},
+        "F1@1k-vj-s1": {**_AB, "seed": 1}, "F1@1k-vv-s1": {**_AB, "vlm_rows": ["train"], "seed": 1},
+        "F1@1k-vc-s1": {**_AB, "vlm_only": "cand", "vlm_n": 1000, "vlm_rows": ["cand"], "seed": 1},
     },
 }
 ALL_RUNS = {n: c for plan in PLANS.values() for n, c in plan.items()}
@@ -232,7 +269,8 @@ def _h(s: str) -> int:
 
 class Data:
     def __init__(self, root: Path, pool_tasks, holdout: bool, smoke: bool, distill_sources=(),
-                 para=None, teacher=None, sel=None, pool_langs=None, sel_only=False, mp=None):
+                 para=None, teacher=None, sel=None, pool_langs=None, sel_only=False, mp=None,
+                 adv=False, vlm_rows=(), vlm_only=None, vlm_n=None, vlm_kd=(), train_langs=None):
         self.manifest = json.loads((root / "manifest.json").read_text())
         self.icons = read_jsonl(root / "icons.jsonl")
         self.docs = [self.manifest["passage_prefix"] + r["doc"] for r in self.icons]
@@ -246,10 +284,21 @@ class Data:
                 ids = sorted({q["task_id"] for q in qs if q.get("sel") == v and q["source"].startswith("pool")},
                              key=lambda t: _h("f1-sel:" + t))
                 self._sel_keep[v] = set(ids[:n])
+        vp = root / "vlm.jsonl"
+        self.vlm = {r["task_id"]: r for r in read_jsonl(vp)} if vp.exists() else {}
+        if (vlm_rows or vlm_only or vlm_kd) and not self.vlm:
+            raise SystemExit("this run uses VLM labels, and the data has no vlm.jsonl")
+        vlm_rows, vlm_kd = set(vlm_rows or ()), set(vlm_kd or ())
         for i, q in enumerate(qs):
             q["_i"] = i                       # row of the teacher's score arrays
             q["grades"] = {int(k): v for k, v in q["grades"].items()}
             q["ambiguous"] = set(q["ambiguous"])
+            lab = self.vlm.get(q["task_id"])
+            if lab and lab["set"] in vlm_rows:
+                vlm_grade_row(q, lab)
+            if lab and lab["set"] in vlm_kd:
+                q["vlm_list"] = [int(x) for x in lab["order"] if int(x) not in self.held]
+                q["vlm_k"] = sum(1 for g in lab["grades"].values() if g >= 2)
             q["pos"] = [i for i in q["grades"] if i not in self.held]
             q["negs"] = [i for i in q["hard_negs"] if i not in self.held]
         # Tasks of the selected pools (round 3's Argon judging) carry `sel`; they never join
@@ -260,14 +309,21 @@ class Data:
         # sel_only: the selected tasks alone, without the earlier pools (F1@1k-act/-rand).
         langs = set(BASE_LANGS) | set(pool_langs or ())
         self.val = [q for q in qs if q["split"] == "val" and not q.get("sel") and q["lang"] in BASE_LANGS]
-        pool = [q for q in qs if q["split"] == "train" and q["source"].startswith("pool")
+        # VLM-graded candidates (--vlm-rows cand) are distill rows with labels now: pool rows.
+        pool = [q for q in qs if q["split"] == "train" and (q["source"].startswith("pool") or q.get("vlm_graded"))
                 and q["lang"] in langs and self._sel_ok(q, sel or {}) and (q.get("sel") or not sel_only)]
+        if vlm_only:              # one VLM set alone (vlm_n tasks in a fixed hash order)
+            ids = sorted({k for k, r in self.vlm.items() if r["set"] == vlm_only}, key=lambda t: _h("f1-vlm:" + t))
+            ids = set(ids[:vlm_n] if vlm_n else ids)
+            pool = [q for q in pool if q["task_id"] in ids]
+        if train_langs:
+            pool = [q for q in pool if q["lang"] in train_langs]
         keep = self._select_tasks(pool, pool_tasks)
         self.pool = [q for q in pool if q["task_id"] in keep and q["pos"]]
         self.free = [q for q in qs if q["source"].startswith("free") and q["pos"]]
         self.pool_task_count = len(keep)
         # Unlabelled text: learns from the teacher's scores only.
-        self.distill = [q for q in qs if q["split"] == "train"
+        self.distill = [q for q in qs if q["split"] == "train" and not q.get("vlm_graded")
                         and any(q["source"] == s for s in distill_sources)]
         # Rewrites of judged pool tasks (only those whose original is in this run's pool).
         paras = [q for q in qs if q["split"] == "train" and q["source"].startswith("para")
@@ -303,6 +359,29 @@ class Data:
                         self.mp_pairs += 1
             self.pool += mps
             self.mp_rows = len(mps)
+        # Adversarial tasks (round 6, --adv): graded rows of their own; their rewrites follow
+        # --para like the pool's (teacher-filtered with "graded").
+        self.adv_rows = 0
+        if adv:
+            advs = [q for q in qs if q["source"].startswith("adv-") and q["pos"]
+                    and (not train_langs or q["lang"] in train_langs)]
+            ids = {q["task_id"] for q in advs}
+            ap = [q for q in qs if q["source"].startswith("para-adv-") and q.get("orig_task_id") in ids] if para else []
+            if para == "graded":
+                ok = [q for q in ap if q["pos"] and self.teacher_agrees(q)]
+                self.para_dropped += len(ap) - len(ok)
+                advs += ok
+            self.pool += advs
+            self.adv_rows = len(advs)
+        # VLM lists (--vlm-kd): rows of those tasks already in the run train on the listwise
+        # term too; unlabelled ones (cand) join as rows that train on it alone.
+        self.vlm_list_rows = 0
+        if vlm_kd:
+            have = {id(q) for q in self.pool}
+            extra = [q for q in qs if q.get("vlm_list") and q["split"] == "train" and not q["pos"]
+                     and id(q) not in have and q["source"].startswith(("distill", "pool"))]
+            self.pool += extra
+            self.vlm_list_rows = sum(1 for q in self.pool if q.get("vlm_list"))
         if self.distill and teacher is None:
             raise SystemExit("distillation rows need a teacher (--teacher or the run's preset)")
         if smoke:
@@ -353,6 +432,19 @@ class Data:
             rows += rng.sample(self.distill, n)
         rng.shuffle(rows)
         return rows
+
+
+def vlm_grade_row(q: dict, lab: dict) -> None:
+    """The VLM's grades as the row's labels, calibrated on the 1,000 training tasks with
+    both labels (argon-experiments.md "Batch 2 results"): its 3s are mostly the judge's 3s
+    and 2s and its 2s mostly hits, so both stay; its 1s are mostly icons the judge saw and
+    left at 0, but a quarter are hits, so they are masked; its 0s are hard negatives.
+    Replaces the judge's labels where a row had them."""
+    g = {int(k): int(v) for k, v in lab["grades"].items()}
+    q["grades"] = {i: v for i, v in g.items() if v >= 2}
+    q["ambiguous"] = {i for i, v in g.items() if v == 1}
+    q["hard_negs"] = [i for i, v in g.items() if v == 0]
+    q["vlm_graded"] = True
 
 
 class Teacher:
@@ -468,7 +560,8 @@ def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank
     title), and a and b join the batch's icons with fresh vectors."""
     man = data.manifest
     pos = [rng.choices(q["pos"], weights=[q["grades"][i] ** 2 for i in q["pos"]])[0] if q["pos"]
-           else _teacher_top1(teacher, q, data.held) for q in rows]
+           else q["vlm_list"][0] if q.get("vlm_list") else _teacher_top1(teacher, q, data.held)
+           for q in rows]
     neg = [rng.choice(q["negs"]) if q["negs"] else None for q in rows]
     prs = ([(r, q["pair"], rng.choice(q["pair"]["a"]), rng.choice(q["pair"]["b"]))
             for r, q in enumerate(rows) if q.get("pair")] if getattr(a, "pair_weight", 0) > 0 else [])
@@ -560,7 +653,29 @@ def batch_loss(enc: Encoder, data: Data, rows: list, rng: random.Random, a, bank
         so = a.scale * Qo @ P.T
         k = torch.arange(len(prs), device=Q.device)
         loss_p = 0.5 * (F.softplus(S[r_, jb] - S[r_, ja]) + F.softplus(so[k, ja] - so[k, jb])).mean()
-    return loss_q, loss_i, loss_kd, loss_p, M
+    # listwise term (--vlm-weight): top-k ListMLE over the VLM's order of its (up to) 20
+    # icons, k = its grade >= 2 count clipped to [1, --vlm-k]; student scores from fresh
+    # vectors for the batch's icons and the stale bank for the rest, as in distillation
+    loss_v = torch.zeros((), device=Q.device)
+    lr_ = [r for r, q in enumerate(rows) if q.get("vlm_list")] if getattr(a, "vlm_weight", 0) > 0 else []
+    if lr_ and bank is not None:
+        L = max(len(rows[r]["vlm_list"]) for r in lr_)
+        ix = torch.zeros(len(lr_), L, dtype=torch.long)
+        ok = torch.zeros(len(lr_), L, dtype=torch.bool)
+        kk = torch.zeros(len(lr_), L, dtype=torch.bool)
+        for n, r in enumerate(lr_):
+            lst = rows[r]["vlm_list"]
+            ix[n, :len(lst)] = torch.tensor(lst)
+            ok[n, :len(lst)] = True
+            kk[n, :max(1, min(a.vlm_k, rows[r]["vlm_k"], len(lst)))] = True
+        ix, ok, kk = ix.to(Q.device), ok.to(Q.device), kk.to(Q.device)
+        rr = torch.tensor(lr_, device=Q.device)
+        Sf = a.scale * Q[rr] @ bank.T
+        Sf = Sf.index_copy(1, torch.tensor(icons, device=Q.device), S[rr])
+        s = Sf.gather(1, ix).masked_fill(~ok, NEG)
+        lse = torch.logcumsumexp(s.flip(1), dim=1).flip(1)     # log sum over positions >= j
+        loss_v = (((lse - s) * kk).sum(1) / kk.sum(1)).mean()
+    return loss_q, loss_i, loss_kd, loss_p, loss_v, M
 
 
 def _teacher_top1(teacher, q: dict, held: set):
@@ -624,7 +739,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     teacher = None
     if a.teacher:
         cands = a.teacher if isinstance(a.teacher, list) else a.teacher.split(",")
-        t_run = pick_teacher(a, cands)
+        t_run = pick_teacher(a, cands) or shipped_teacher(data_root, cands)
         if t_run is None:
             log(f"{name}: no finished teacher among {cands} in {a.out}; skipped")
             return
@@ -633,13 +748,19 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         log(f"{name}: teacher {teacher.run}")
     out.mkdir(parents=True, exist_ok=True)
     data = Data(data_root, pool_tasks, holdout, a.smoke, a.distill_sources or (), a.para, teacher,
-                a.sel, a.pool_langs, a.sel_only, a.mp)
+                a.sel, a.pool_langs, a.sel_only, a.mp, a.adv, a.vlm_rows, a.vlm_only, a.vlm_n,
+                a.vlm_kd, a.train_langs)
     t_loss = teacher if a.kd_weight > 0 else None
     log(f"{name}: device {dev}; {data.pool_task_count} pool tasks ({len(data.pool)} rows), "
         f"{len(data.free)} free-signal rows ({a.free_per_epoch} per epoch), {len(data.distill)} "
         f"distillation rows, {len(data.val)} val, {len(data.held)} icons held out"
         + (f"; {data.para_dropped} rewrites dropped (teacher disagrees)" if a.para == "graded" else "")
-        + (f"; {data.mp_rows} minimal-pair rows ({data.mp_pairs} flips paired)" if a.mp else ""))
+        + (f"; {data.mp_rows} minimal-pair rows ({data.mp_pairs} flips paired)" if a.mp else "")
+        + (f"; {data.adv_rows} adversarial rows" if a.adv else "")
+        + (f"; {sum(1 for q in data.pool if q.get('vlm_graded'))} VLM-graded rows" if a.vlm_rows else "")
+        + (f"; {data.vlm_list_rows} rows with a VLM list" if a.vlm_kd else ""))
+    if a.vlm_weight > 0 and not a.vlm_kd:
+        raise SystemExit("--vlm-weight needs --vlm-kd")
     if a.pair_weight > 0 and a.mp != "pair":
         raise SystemExit("--pair-weight needs --mp pair")
     torch.manual_seed(a.seed)
@@ -683,7 +804,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
     logf = open(out / "train_log.jsonl", "a", encoding="utf-8")
     bank = None
 
-    need_bank = a.bank_negs or t_loss is not None
+    need_bank = a.bank_negs or t_loss is not None or a.vlm_weight > 0
 
     def refresh_bank():
         nonlocal bank
@@ -719,14 +840,15 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         in_epoch = st["step"] % steps_per_epoch
         enc.model.train()
         t_log, lq_acc, li_acc, lk_acc, m_acc, n_acc = time.time(), 0.0, 0.0, 0.0, 0, 0
-        lp_acc = 0.0
+        lp_acc = lv_acc = 0.0
         for b in range(in_epoch, steps_per_epoch):
             batch = rows[b * a.batch:(b + 1) * a.batch]
             rng = random.Random(f"{a.seed}:{st['step']}")
             if need_bank and st["step"] % a.bank_refresh == 0 and st["step"] > 0:
                 refresh_bank()
-            loss_q, loss_i, loss_kd, loss_p, M = batch_loss(enc, data, batch, rng, a, bank, t_loss)
-            loss = loss_q + a.i2q_weight * loss_i + a.kd_weight * loss_kd + a.pair_weight * loss_p
+            loss_q, loss_i, loss_kd, loss_p, loss_v, M = batch_loss(enc, data, batch, rng, a, bank, t_loss)
+            loss = (loss_q + a.i2q_weight * loss_i + a.kd_weight * loss_kd + a.pair_weight * loss_p
+                    + a.vlm_weight * loss_v)
             opt.zero_grad(set_to_none=True)
             scaler.scale(loss).backward()
             scaler.unscale_(opt)
@@ -736,6 +858,7 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
             sched.step()
             st["step"] += 1
             lq_acc += loss_q.item(); li_acc += loss_i.item(); lk_acc += loss_kd.item(); lp_acc += loss_p.item()
+            lv_acc += loss_v.item()
             m_acc += M; n_acc += 1
             if st["step"] % 20 == 0 or a.smoke:
                 dt = (time.time() - t_log) / n_acc
@@ -747,13 +870,15 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
                     rec["loss_kd"] = round(lk_acc / n_acc, 4)
                 if a.pair_weight > 0:
                     rec["loss_pair"] = round(lp_acc / n_acc, 4)
+                if a.vlm_weight > 0:
+                    rec["loss_vlm"] = round(lv_acc / n_acc, 4)
                 write(rec)
                 eta = (total - st["step"]) * dt / 60
                 kd = f" + kd {lk_acc / n_acc:.3f}" if t_loss is not None else ""
                 log(f"{name} step {st['step']}/{total} loss {lq_acc / n_acc:.3f} + {li_acc / n_acc:.3f}{kd} "
                     f"({dt:.2f} s/step, ≤ {eta:.0f} min left)")
                 t_log, lq_acc, li_acc, lk_acc, m_acc, n_acc = time.time(), 0.0, 0.0, 0.0, 0, 0
-                lp_acc = 0.0
+                lp_acc = lv_acc = 0.0
             seg_end = st["step"] % steps_per_epoch in eval_at
             minutes = (time.time() - t_start) / 60
             if a.max_minutes and minutes > a.max_minutes:
@@ -786,6 +911,8 @@ def train(name: str, pool_tasks, holdout: bool, a, data_root: Path) -> None:
         "run": name, "pool_tasks": data.pool_task_count, "holdout_icons": len(data.held),
         "distill_rows": len(data.distill), "teacher": teacher.run if teacher else None,
         "para_dropped": data.para_dropped, "mp_rows": data.mp_rows, "mp_pairs": data.mp_pairs,
+        "adv_rows": data.adv_rows, "vlm_list_rows": data.vlm_list_rows,
+        "vlm_graded_rows": sum(1 for q in data.pool if q.get("vlm_graded")),
         "steps": st["step"], "steps_per_epoch": steps_per_epoch, "base": st.get("base"), "best": best,
         "checkpointing": enc.checkpointing, "train_minutes": round((time.time() - t_start) / 60, 1),
         "args": vars(a)}, indent=1))
@@ -839,9 +966,9 @@ def choose_checkpointing(enc: Encoder, data: Data, rows: list, a, name: str, tea
     torch.cuda.reset_peak_memory_stats()
     try:
         bank = (torch.zeros(len(data.docs), enc.model.config.hidden_size, device=enc.device)
-                if a.bank_negs or teacher is not None else None)
-        lq, li, lk, lp, _ = batch_loss(enc, data, rows[:a.batch], random.Random(0), a, bank, teacher)
-        (lq + a.i2q_weight * li + a.kd_weight * lk + a.pair_weight * lp).backward()
+                if a.bank_negs or teacher is not None or a.vlm_weight > 0 else None)
+        lq, li, lk, lp, lv, _ = batch_loss(enc, data, rows[:a.batch], random.Random(0), a, bank, teacher)
+        (lq + a.i2q_weight * li + a.kd_weight * lk + a.pair_weight * lp + a.vlm_weight * lv).backward()
         peak = torch.cuda.max_memory_allocated()
         ok = peak < 0.85 * total
     except torch.cuda.OutOfMemoryError:
@@ -875,6 +1002,19 @@ def pick_teacher(a, cands) -> "str | None":
     return best[0] if best else None
 
 
+def shipped_teacher(data_root: Path, cands) -> "str | None":
+    """The first candidate whose scores came with the data (a session without its run)."""
+    sha = None
+    for r in cands:
+        p = data_root / "teacher" / f"{Path(r).name.replace('@', '-')}.npz"
+        if p.exists():
+            sha = sha or hashlib.sha1((data_root / "queries.jsonl").read_bytes()).hexdigest()
+            if str(np.load(p)["queries_sha1"]) == sha:
+                log(f"teacher {r}: scores shipped with the data (no run in --out)")
+                return r
+    return None
+
+
 def score_texts(a, data_root: Path, run: str) -> Path:
     """Encode every training text (title and parent forms) with a trained checkpoint and
     keep its top-K icons and scaled scores: <out>/teacher/<run>.npz. Reused while
@@ -887,6 +1027,11 @@ def score_texts(a, data_root: Path, run: str) -> Path:
     if out.exists() and str(np.load(out)["queries_sha1"]) == sha:
         return out
     out.parent.mkdir(parents=True, exist_ok=True)
+    shipped = data_root / "teacher" / f"{tag}.npz"      # f1_data.py build: scored on the Mac
+    if shipped.exists() and str(np.load(shipped)["queries_sha1"]) == sha:
+        shutil.copy(shipped, out)
+        log(f"teacher scores of {tag}: shipped with the data -> {out}")
+        return out
     man = json.loads((data_root / "manifest.json").read_text())
     icons = read_jsonl(data_root / "icons.jsonl")
     docs = [man["passage_prefix"] + r["doc"] for r in icons]
@@ -936,7 +1081,7 @@ def probe(a, data_root: Path) -> None:
                     if dev == "cuda":
                         torch.cuda.synchronize()
                     t0 = time.time()
-                lq, li, _, _, _ = batch_loss(enc, data, rows[b * a.batch:(b + 1) * a.batch],
+                lq, li, _, _, _, _ = batch_loss(enc, data, rows[b * a.batch:(b + 1) * a.batch],
                                           random.Random(b), a, bank)
                 opt.zero_grad(set_to_none=True)
                 scaler.scale(lq + a.i2q_weight * li).backward()
@@ -981,6 +1126,18 @@ def main() -> None:
                     help="use the minimal-pair rows (round 6); pair: also link flips to their originals")
     ap.add_argument("--pair-weight", type=float, default=0.0,
                     help="weight of the minimal-pair loss (needs --mp pair; mean over the batch's pairs)")
+    ap.add_argument("--adv", action="store_true", help="use the adversarial rows (round 6)")
+    ap.add_argument("--vlm-rows", type=lambda s: s.split(","), default=[],
+                    help="VLM sets (train, cand) whose tasks become rows with the VLM's calibrated grades")
+    ap.add_argument("--vlm-only", choices=["train", "cand"], default=None,
+                    help="train on this VLM set's tasks alone (with the free signal)")
+    ap.add_argument("--vlm-n", type=int, default=None, help="with --vlm-only: this many tasks (hash order)")
+    ap.add_argument("--vlm-kd", type=lambda s: s.split(","), default=[],
+                    help="VLM sets whose rankings train the listwise term (--vlm-weight)")
+    ap.add_argument("--vlm-weight", type=float, default=0.0, help="weight of the listwise VLM term")
+    ap.add_argument("--vlm-k", type=int, default=5, help="ListMLE depth cap (the VLM's top k)")
+    ap.add_argument("--train-langs", type=lambda s: s.split(","), default=None,
+                    help="pool rows of these languages only (validation unchanged)")
     ap.add_argument("--pool-langs", type=lambda s: s.split(","), default=[],
                     help="pool translations beyond EN/ES/RU to train on (augment_pools.py translate)")
     ap.add_argument("--sel", type=json.loads, default=None,

@@ -49,6 +49,22 @@ MP_RUNS = {
     "train_mslatte": ("mp-mslatte-j4", config.DATA_DIR / "train_pools" / "train_mslatte.mp_pool.jsonl"),
 }
 MP_SOURCE = {"personal_synth_pool": "mp-synth", "train_mslatte": "mp-mslatte"}
+# Round 6's adversarial tasks (augment_pools.py adversarial, argon-experiments.md #2): new
+# tasks written by Flash from the big model's errors on validation tasks, judged by Argon,
+# with ES/RU translations (AUG_FILES) and rewrites (REWRITE_FILES) under their own ids. All
+# train rows (`adv-*`; rewrites `para-adv-*` with orig_task_id), used only by runs that ask
+# for them (train_f1.py --adv). Their seeds are validation tasks, so a run that trains on
+# them reads its held-out numbers with a little optimism; silver is unaffected.
+ADV_RUNS = {
+    "personal_synth_pool": ("adv-synth-j4", config.PRIVATE_DIR / "train_pools" / "personal_synth_pool.adv_pool.jsonl"),
+    "train_mslatte": ("adv-mslatte-j4", config.DATA_DIR / "train_pools" / "train_mslatte.adv_pool.jsonl"),
+}
+ADV_SOURCE = {"personal_synth_pool": "adv-synth", "train_mslatte": "adv-mslatte"}
+# Round 6's VLM labels (scripts/vlm_rerank.py, argon-experiments.md #5): Argon's ranking and
+# 0-3 grades of the big model's top 20 for 1,000 judged training tasks ("train") and 3,000
+# unlabelled candidates ("cand", which are distill-* rows). f1_data.py writes them as
+# vlm.jsonl beside queries.jsonl, keyed by task_id, so queries.jsonl keeps its rows.
+VLM_LABELS = {s: config.PRIVATE_DIR / "vlm" / "labels" / f"{s}.jsonl" for s in ("train", "cand")}
 # Translations of the pools into more languages (augment_pools.py translate), used only by
 # runs that list the language in train_f1.py --pool-langs.
 XL_FILES = {k: v.with_name(v.name.replace(".aug.", ".xl.")) for k, v in AUG_FILES.items()}
@@ -195,6 +211,32 @@ def build(smoke: bool = False, distill: Optional[dict] = None) -> dict:
                                         "task_id": f"{t['id']}~rw{k}", "lang": lang, "style": v.get("style"),
                                         **_texts(title, par)})
 
+    for src, tasks in (distill or {}).items():
+        for t in tasks[:200] if smoke else tasks:
+            assert t["id"] not in eval_ids, f"eval task {t['id']} in distillation source {src}"
+            queries.append({"task_id": t["id"], "source": src, "split": "train",
+                            "lang": t.get("lang", "en"), "grades": {}, "ambiguous": [], "hard_negs": [],
+                            **_texts(t["title"], list(t.get("parents") or []))})
+
+    free = 0
+    for i, ic in enumerate(icons):
+        if smoke and i % 10:
+            continue
+        raw = _v2_raw(ic.name)
+        rows = [(e["task"], [e["parent"]] if str(e.get("parent", "")).strip() else [], "en", 3, "free-example")
+                for e in raw.get("example_tasks", [])]
+        rows += [(x, [], lang, 3, "free-example") for lang in ("es", "ru")
+                 for x in raw.get(f"example_tasks_{lang}", []) if str(x).strip()]
+        rows += [(c["task"], [], "en", 2, "free-context") for c in raw.get("context_tasks", [])]
+        for title, parents, lang, grade, src in rows:
+            queries.append({"task_id": f"{ic.name}#{free}", "source": src, "split": "train",
+                            "lang": lang, "grades": {str(i): grade},
+                            "ambiguous": icon_rows[i]["lookalikes"], "hard_negs": [],
+                            **_texts(title, parents)})
+            free += 1
+
+    # Rows added since round 5 come last, so an earlier build's rows keep their positions
+    # (f1_data.py extends that build's teacher scores to the new rows).
     for ds, (run, pool) in MP_RUNS.items():
         if not pool.exists() or not silver.label_path(run).exists():
             continue
@@ -220,29 +262,50 @@ def build(smoke: bool = False, distill: Optional[dict] = None) -> dict:
                             "ambiguous": idx(g.relevant), "hard_negs": idx(g.seen - g.relevant - set(g.grades)),
                             **_texts(t["title"], list(t.get("parents") or []))})
 
-    for src, tasks in (distill or {}).items():
-        for t in tasks[:200] if smoke else tasks:
-            assert t["id"] not in eval_ids, f"eval task {t['id']} in distillation source {src}"
-            queries.append({"task_id": t["id"], "source": src, "split": "train",
-                            "lang": t.get("lang", "en"), "grades": {}, "ambiguous": [], "hard_negs": [],
-                            **_texts(t["title"], list(t.get("parents") or []))})
-
-    free = 0
-    for i, ic in enumerate(icons):
-        if smoke and i % 10:
+    for ds, (run, pool) in ADV_RUNS.items():
+        if not pool.exists() or not silver.label_path(run).exists():
             continue
-        raw = _v2_raw(ic.name)
-        rows = [(e["task"], [e["parent"]] if str(e.get("parent", "")).strip() else [], "en", 3, "free-example")
-                for e in raw.get("example_tasks", [])]
-        rows += [(x, [], lang, 3, "free-example") for lang in ("es", "ru")
-                 for x in raw.get(f"example_tasks_{lang}", []) if str(x).strip()]
-        rows += [(c["task"], [], "en", 2, "free-context") for c in raw.get("context_tasks", [])]
-        for title, parents, lang, grade, src in rows:
-            queries.append({"task_id": f"{ic.name}#{free}", "source": src, "split": "train",
-                            "lang": lang, "grades": {str(i): grade},
-                            "ambiguous": icon_rows[i]["lookalikes"], "hard_negs": [],
-                            **_texts(title, parents)})
-            free += 1
+        gold = silver.load_gold([run])
+        aug = {r["task_id"]: r for r in read_jsonl(AUG_FILES[ds])}
+        rw = ({r["task_id"]: r for r in read_jsonl(REWRITE_FILES[ds])}
+              if REWRITE_FILES[ds].exists() else {})
+        tasks = silver.run_tasks(run)
+        for t in tasks[:40] if smoke else tasks:
+            m = t.get("meta") or {}
+            assert t["id"] not in eval_ids, t["id"]
+            g = gold.get(t["id"])
+            if g is None or g.no_good_icon:
+                stats["adversarial task without a label or a good icon"] += 1
+                continue
+            grades = {index[n]: v for n, v in g.grades.items() if n in index}
+            if not grades:
+                continue
+            base = {"task_id": t["id"], "source": ADV_SOURCE[ds], "run": run, "split": "train",
+                    "grades": {str(k): v for k, v in grades.items()},
+                    "ambiguous": idx(g.relevant), "hard_negs": idx(g.seen - g.relevant - set(g.grades)),
+                    "seed_task_id": m.get("seed_task_id")}
+            parents = list(t.get("parents") or [])
+            queries.append({**base, "lang": "en", **_texts(t["title"], parents)})
+            stats["adv rows"] += 1
+            a = aug.get(t["id"]) or {}
+            for lang in ("es", "ru"):
+                tr = a.get(lang)
+                if not tr or lang in (a.get("contaminated") or []) or _norm(tr["title"]) == _norm(t["title"]):
+                    continue
+                queries.append({**base, "lang": lang, **_texts(tr["title"], tr.get("parents") or [])})
+                stats["adv rows"] += 1
+            r = rw.get(t["id"])
+            bad = set((r or {}).get("contaminated") or [])
+            for k, v in enumerate((r or {}).get("variants") or []):
+                title = str(v.get("title", "")).strip()
+                if k in bad or not title or _norm(title) == _norm(t["title"]):
+                    continue
+                lang = v.get("lang", "en")
+                par = parents if lang == "en" else list(((a.get(lang) or {}).get("parents")) or [])
+                queries.append({**base, "source": "para-" + ADV_SOURCE[ds], "orig_task_id": t["id"],
+                                "task_id": f"{t['id']}~rw{k}", "lang": lang, "style": v.get("style"),
+                                **_texts(title, par)})
+                stats["adv rewrite rows"] += 1
 
     # Exact contamination check over every training text (the near check ran upstream).
     from .describe_v2 import contamination_hits

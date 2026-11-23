@@ -24,6 +24,15 @@ the first stage by +0.155 nDCG@5 (0.682 vs 0.527), before g6 grades its unjudged
 g5 is done; adversarial generation and judging are running. A second Kaggle account (30 h
 this week) can take round 6b after batch 2's data is built.
 
+**2026-11-23, evening:** batch 2 is done ($83.60; argon-experiments.md "Batch 2 results"). On
+gold + g1–g6 the VLM reranker reaches nDCG@5 0.808 / hit@1 0.939 over the big model's top 20
+(+0.196), the adversarial tasks fool the big model 27% of the time (base 13–20%), and round
+6a's resumed `F1@all-large-para-all3k` is the big model's new candidate (+0.008 over
+F1@all-large-all3k; f1-dual-encoder.md §14). **Round 6b is built** (§15 there;
+f1-kaggle-run.md "Round 6b"): first a short A/B of the VLM's labels against the judge's
+(account 1), then the arms with batch 1/2's data (account 2). Its answer decides, by 11-27,
+whether a last Argon batch reranks more candidates before the price doubles.
+
 - **Best on silver** (g1–g4, +parent, [2026-11-22-extra](../results/silver/2026-11-22-extra.md)):
   **F1@all-large-all3k** (the big model's candidate) nDCG@5 0.567, hit@1 0.714;
   **F1@all-kd-final** (the small model's candidate: graded rewrites + distillation)
@@ -115,7 +124,10 @@ The judge's labels are what lifted F1 (F1@0, the v2 free signal alone, only reac
 | 11-21/22 | Kaggle round 5 | 6. retrain with the new labels; e5-large teacher and final student; scores for round 6 | done (active ≤ random; all3k on the curve; kd-final and large-all3k lead) |
 | 11-22 | Vertex g4 ($1.85) | grades of round 5's leaders' unjudged top-1s | done |
 | 11-23/29 | Mac + Vertex v3 (~$50–90) | round 6's Argon batch: #5 VLM reranker, #3 minimal pairs, #2 adversarial tasks, #6 noise ceiling (argon-experiments.md "Round 6's choice"); waits for the author's go | Argon done by 11-30 |
-| any time | Kaggle round 6a (free) | §7: the big model with graded rewrites (+ self-distillation) | to prepare |
+| 11-22/23 | Kaggle round 6a (free) | §7: the big model with graded rewrites; kd-final with the new teacher | done (large-para-all3k +0.008; L2 ties, T = 2 hurts) |
+| 11-23 | Vertex v3b ($83.60) | batch 2: VLM reranker, adversarial tasks, g5, g6 | done |
+| 11-23/26 | Kaggle round 6b (free; two accounts) | label A/B, then the arms with batch 1/2's data | built |
+| by 11-29 | Vertex (optional, ≤ ~$40) | more VLM-labelled candidates, if round 6b says so | decide by 11-27 |
 
 ## 1. Round 3 (Kaggle) — done 2026-11-19
 
@@ -351,11 +363,19 @@ the first priority, and it has never had the recipe that made the small one bett
   first (~1 h).
 - The small model last: kd-final re-pinned to the best big model once round 6a has one.
 
-**Kaggle round 6b (after batch 2's data; one `f1_data.py build`):** the minimal-pair arms
-(train_f1.py plan `round6b`: F1@all-lr-para-all3k-mp, -mpp; argon-experiments.md "Batch 1
-results"), then batch 2's data on the big model. The new build changes queries.jsonl, so
-every teacher is scored again first: `--score F1@all-large-e8` for the -mp arms' rewrite
-filter, with that run's output attached.
+**Kaggle round 6b (built 2026-11-23; f1-dual-encoder.md §15, f1-kaggle-run.md "Round 6b"):**
+e5-small arms of F1@all-lr-para-all3k with each new kind of data (minimal pairs -mp / -mpp,
+adversarial tasks -adv, VLM-graded candidates -vc, the VLM's order as a listwise ListMLE
+term -vkd) and a second seed of the control (-s1); before them, the label A/B in F1@1k's
+recipe (plan `round6b-ab`). The build keeps round 5's rows as an exact prefix and ships
+F1@all-large-e8's scores extended to the new rewrite rows, so no session needs an earlier
+output. Then the big model (e5-large, F1@all-large-para-all3k's recipe) with what won, and
+the small model last.
+
+**A last Argon batch (decide by 11-27, run by 11-29):** VLM reranking of more unlabelled
+candidates (~10.7k left, $0.0063 per task), if the A/B shows that VLM labels train about as
+well as the judge's and -vc gains on top. The author's console showed ~$54 of credit on
+11-23.
 
 **After round 6: a second stage** that reorders the big model's top 10 (a cross-encoder or
 late interaction): [reranker-plan.md](reranker-plan.md).
