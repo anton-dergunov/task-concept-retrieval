@@ -1,0 +1,124 @@
+{
+ "run": "F1@all-kd-final-L2",
+ "pool_tasks": 11884,
+ "holdout_icons": 139,
+ "distill_rows": 13731,
+ "teacher": "F1-all-large-all3k",
+ "para_dropped": 6908,
+ "steps": 8860,
+ "steps_per_epoch": 886,
+ "base": {
+  "all": {
+   "n": 2928,
+   "ndcg5": 0.1533,
+   "hit1": 0.1902
+  },
+  "en": {
+   "n": 983,
+   "ndcg5": 0.2181,
+   "hit1": 0.2889
+  },
+  "es+ru": {
+   "n": 1945,
+   "ndcg5": 0.1205,
+   "hit1": 0.1404
+  },
+  "pool-synth": {
+   "n": 2007,
+   "ndcg5": 0.1348,
+   "hit1": 0.1669
+  },
+  "pool-mslatte": {
+   "n": 921,
+   "ndcg5": 0.1934,
+   "hit1": 0.241
+  },
+  "unseen_icon_recall10": {
+   "n": 368,
+   "value": 0.2663
+  }
+ },
+ "best": {
+  "step": 8417,
+  "all": {
+   "n": 2928,
+   "ndcg5": 0.5568,
+   "hit1": 0.6728
+  },
+  "en": {
+   "n": 983,
+   "ndcg5": 0.578,
+   "hit1": 0.6979
+  },
+  "es+ru": {
+   "n": 1945,
+   "ndcg5": 0.5461,
+   "hit1": 0.6602
+  },
+  "pool-synth": {
+   "n": 2007,
+   "ndcg5": 0.5598,
+   "hit1": 0.6721
+  },
+  "pool-mslatte": {
+   "n": 921,
+   "ndcg5": 0.5504,
+   "hit1": 0.6743
+  },
+  "unseen_icon_recall10": {
+   "n": 368,
+   "value": 0.6658
+  }
+ },
+ "checkpointing": false,
+ "train_minutes": 173.6,
+ "args": {
+  "plan": null,
+  "run": "F1@all-kd-final-L2,F1@all-kd-final-L2-t2",
+  "probe": false,
+  "score": null,
+  "pool_tasks": null,
+  "no_holdout": false,
+  "model": "intfloat/multilingual-e5-small",
+  "bank_negs": false,
+  "bank_refresh": 100,
+  "teacher": [
+   "F1@all-large-all3k"
+  ],
+  "kd_weight": 1.0,
+  "kd_temp": 1.0,
+  "distill_sources": [
+   "distill-mslatte",
+   "distill-cand"
+  ],
+  "distill_per_epoch": 0,
+  "para": "graded",
+  "pool_langs": [],
+  "sel": {
+   "active": null,
+   "random": null
+  },
+  "sel_only": false,
+  "epochs": 10,
+  "batch": 128,
+  "lr": 5e-05,
+  "scale": 20.0,
+  "i2q_weight": 0.3,
+  "free_per_epoch": 25000,
+  "parent_p": 0.5,
+  "max_passage_len": 256,
+  "evals_per_epoch": 2,
+  "patience": 3,
+  "train_embeddings": false,
+  "checkpointing": "auto",
+  "chunk_tokens": 0,
+  "device": "auto",
+  "threads": 4,
+  "seed": 0,
+  "max_steps": 0,
+  "max_minutes": 0,
+  "state_at": "eval",
+  "smoke": false,
+  "teacher_used": "F1-all-large-all3k"
+ }
+}

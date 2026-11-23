@@ -771,6 +771,10 @@ class Adversarial(Aug):
                 "seed_kind": task["_kind"],
                 "model": MODEL, "run": self.run}
 
+    def finalize(self) -> None:
+        """Nothing here: there are no translations, and adversarial_pool drops generated
+        titles close to an eval title."""
+
     def collect_online(self, pending: list, workers: int = 4) -> None:
         """The pilot: the same requests online (results count as done for the batch run)."""
         from concurrent.futures import ThreadPoolExecutor
