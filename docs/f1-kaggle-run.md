@@ -48,9 +48,48 @@ version of the F1 dataset; account 2: a new dataset).
 
 **Account 2 setup (once):** a new notebook, *Settings* → Accelerator **GPU T4 ×2**, Internet
 **on** (needs the account's phone verification; the runs download e5 from Hugging Face),
-*Add Input* → the dataset. Cells 1–4 as in §3 below, with `NEED = set()` in cell 2 and the
-queues below in cell 3. Always **Save Version → Save & Run All (Commit)**: an editor session
-loses `/kaggle/working`.
+*Add Input* → the dataset. Always **Save Version → Save & Run All (Commit)**: an editor
+session loses `/kaggle/working`.
+
+**Cells (every round 6b session):** cell 4 as in §3; cells 1 and 2 are these. Cell 1 stops at
+once if the notebook still reads an older dataset version (otherwise every teacher run
+would be skipped with "no finished teacher"); cell 2 copies nothing, since no earlier output
+is needed. The input is the dataset alone: remove earlier outputs from the notebook's
+inputs, or cell 2 would ignore them anyway.
+
+```python
+# 1. Find the data (round 6b build: vlm.jsonl and the shipped teacher scores)
+import hashlib
+import numpy as np
+from pathlib import Path
+INPUT_ROOT = Path("/kaggle/input")
+scripts = [p for p in INPUT_ROOT.rglob("train_f1.py") if "runs" not in p.parts]
+assert len(scripts) == 1, f"Expected exactly one train_f1.py, found {len(scripts)}: {scripts}"
+TRAIN_SCRIPT = scripts[0]
+DATA_DIR = TRAIN_SCRIPT.parent
+WORK = Path("/kaggle/working")
+RUNS = WORK / "runs"
+print(TRAIN_SCRIPT, DATA_DIR, sorted(p.name for p in DATA_DIR.iterdir()))
+T = DATA_DIR / "teacher" / "F1-all-large-e8.npz"
+assert (DATA_DIR / "vlm.jsonl").exists() and T.exists(), "not the round-6b build: update the dataset version"
+sha = hashlib.sha1((DATA_DIR / "queries.jsonl").read_bytes()).hexdigest()
+assert str(np.load(T)["queries_sha1"]) == sha, "teacher scores do not match queries.jsonl"
+print("queries.jsonl", sha[:12], "- teacher scores match")
+!nvidia-smi --query-gpu=index,name,memory.total --format=csv
+```
+
+```python
+# 2. No earlier runs needed: the teacher scores ship with the data
+import shutil
+RUNS.mkdir(parents=True, exist_ok=True)
+OLD = {p.parent.name for p in RUNS.glob("*/done.json")}
+print("finished before this version:", sorted(OLD))
+free = shutil.disk_usage(WORK).free / 1e9
+print(f"/kaggle/working free: {free:.1f} GB")
+assert free >= 5, "e5-small runs need ~0.5 GB each"
+```
+
+Cell 3 is §3's, with each session's `jobs` below.
 
 **Session 1, account 1 (~1.5 h of its 3 h 42 min): the label A/B** (plan `round6b-ab`,
 F1@1k's recipe, ~20 min each):
@@ -90,7 +129,19 @@ nice .venv/bin/python scripts/silver_paired.py F1@1k-vv:F1@1k-vj F1@1k-vc:F1@1k-
 ```
 
 (and the same for session 2's and 3's arms against `F1@all-lr-para-all3k`, plus
-`scripts/contrast_eval.py` for -mp / -mpp). The decision on a last VLM batch is due by
+`scripts/contrast_eval.py` for -mp / -mpp). Sessions 2 and 3 are one round 6b, so their arms
+are scored together:
+
+```bash
+nice .venv/bin/python scripts/silver_eval.py --methods F1@all-lr-para-all3k-vkd,F1@all-lr-para-all3k-mp,F1@all-lr-para-all3k-s1 --versions v2
+nice .venv/bin/python scripts/silver_paired.py F1@all-lr-para-all3k-vkd:F1@all-lr-para-all3k F1@all-lr-para-all3k-mp:F1@all-lr-para-all3k F1@all-lr-para-all3k-s1:F1@all-lr-para-all3k F1@all-lr-para-all3k-vkd:F1@all-lr-para-all3k-s1 F1@all-lr-para-all3k-mp:F1@all-lr-para-all3k-s1 --extra-grades g1,g2,g3,g4,g5,g6
+nice .venv/bin/python scripts/contrast_eval.py --methods F1@all-lr-para-all3k,F1@all-lr-para-all3k-mp,F1@all-lr-para-all3k-s1,F1@all-lr-para-all3k-vkd --versions v2
+```
+
+**What happened (2026-11-25):** GPU 0's queue crashed in its first minute in sessions 2 and 3
+(both queues copied the shipped teacher scores at once; GPU 0 read a half-copied file), so
+-vc, -adv and -mpp never ran. Fixed in train_f1.py; a rerun needs a new dataset version
+(`f1_data.py repack`). Results: f1-dual-encoder.md "Round 6b results". The decision on a last VLM batch is due by
 2026-11-27 (f1-dual-encoder.md §15, questions 1–3).
 
 ## Round 6a (prepared 2026-11-22; round 5's data, repacked)

@@ -1029,7 +1029,11 @@ def score_texts(a, data_root: Path, run: str) -> Path:
     out.parent.mkdir(parents=True, exist_ok=True)
     shipped = data_root / "teacher" / f"{tag}.npz"      # f1_data.py build: scored on the Mac
     if shipped.exists() and str(np.load(shipped)["queries_sha1"]) == sha:
-        shutil.copy(shipped, out)
+        # Copied whole, then renamed: both GPUs' queues start together and one would
+        # otherwise np.load a half-copied file (EOFError; round 6b lost -vc, -adv, -mpp).
+        tmp = out.with_suffix(f".{os.getpid()}.tmp.npz")
+        shutil.copy(shipped, tmp)
+        os.replace(tmp, out)
         log(f"teacher scores of {tag}: shipped with the data -> {out}")
         return out
     man = json.loads((data_root / "manifest.json").read_text())

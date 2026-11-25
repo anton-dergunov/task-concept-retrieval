@@ -805,3 +805,50 @@ only: -vj, -vv, -vc, -vc3k, and seeds -s1 of the first three). Questions:
 
 The arms with adversarial rows train on tasks seeded from validation tasks, so their
 held-out numbers read a little high; silver is the measure.
+
+### Round 6b results (ran 2026-11-24/25; silver 2026-11-25)
+
+Three sessions: the label A/B (account 1), then two of the e5-small arms' sessions (account
+2). **-vc, -adv and -mpp did not run:** both GPUs' queues copied the shipped teacher scores
+into `runs/teacher/` at the same moment, and GPU 0 read the half-copied file (`EOFError` in
+its first minute), which ended its whole queue in sessions 2 and 3. The copy is now written to
+a temporary name and renamed (train_f1.py `score_texts`). Paired ΔnDCG@5 below is on gold =
+judge + g1–g6 (`silver_paired.py`), title view, then parent view.
+
+**Seed noise (question 6).** A second seed moves nDCG@5 by **+0.001 to +0.008** at the 1k
+size (three pairs, two views) and by **+0.006 / +0.004** for the control (0.464 → 0.470;
+0.486 → 0.491 with the parent). Bootstrap intervals over tasks are narrower than that (the
+-s1 pairs' intervals often exclude 0), so from now on **a Δ under ~0.01 between single runs
+is noise**, whatever its interval says.
+
+**Label A/B (questions 1–2; F1@1k's recipe, EN rows only).**
+
+| A vs B | title | parent |
+|---|---:|---:|
+| F1@1k-vv vs -vj (VLM vs judge grades, same 1,000 texts) | −0.002 | +0.001 |
+| F1@1k-vc vs -vv (1,000 candidates the first stage never trained on) | +0.004 | −0.005 |
+| F1@1k-vc3k vs -vc (3,000 vs 1,000 VLM-graded candidates) | **+0.033** | **+0.031** |
+
+VLM grades train as well as the judge's, on easy lists and on honest ones alike (every Δ is
+within seed noise). Size matters far more than whose label it is: 3,000 VLM-graded
+candidates gain +0.033, about what the judge's labels gave from 1k to 3k in round 1
+(F1@1k 0.364 → F1@3k 0.393, with ES/RU rows there).
+
+**The e5-small arms (questions 4–5; Δ vs the control F1@all-lr-para-all3k).**
+
+| arm | title | parent | vs -s1 (title / parent) | nDCG@5 (parent) |
+|---|---:|---:|---:|---:|
+| -s1 (seed) | +0.006 | +0.004 | — | 0.491 |
+| -mp (790 minimal-pair edits as rows) | +0.007 | +0.005 | +0.001 / +0.001 | 0.491 |
+| **-vkd (the VLM's order, ListMLE)** | **+0.019** | **+0.021** | **+0.014 / +0.017** | **0.504** |
+
+- **-vkd is the round's winner**, at three times the seed gap. It is not an artefact of g6
+  (which grades the VLM's own picks): on judge-only gold it keeps +0.017 / +0.018 (+0.011 /
+  +0.013 vs -s1), and +0.019 / +0.020 with g1–g5. Its parent view (0.504) closes about a
+  third of the gap from the control (0.486) to e5-large (F1@all-large-para-all3k, 0.536),
+  so an image-reading reranker's order does carry into a text-only student, at no query cost.
+- **-mp: no gain.** Within seed noise on silver, and on the contrast set as well (flips
+  answered right on both sides: control 0.53 / 0.57 with the parent, -mp 0.56 / 0.58, -s1
+  0.58 / 0.57, -vkd 0.59 / 0.63; results/contrast/2026-11-25.md). With ~120 flips the set
+  cannot separate a few points.
+- Questions 3 (-vc) and the rest of 5 (-mpp, -adv) wait for the rerun.
