@@ -444,3 +444,24 @@ missed. Whether they also **train** well is round 6b's first question (f1-kaggle
 VLM-labelled candidates alone, and the 3,000 on top of the pool. If they train as well as
 the judge's grades, a last Argon batch (by 2026-11-29) reranks more unlabelled candidates:
 ~10.7k remain (9.0k Personal-style, 4.7k MS-LaTTE, minus the 3,000), $19 per 3,000.
+
+### Batch 3: the last VLM batch (submitted 2026-11-25, ~$67, cap $100)
+
+Decided on round 6b's results (f1-dual-encoder.md "Round 6b results"): VLM grades train as
+well as the judge's, 3,000 VLM-graded candidates beat 1,000 by +0.033, and the listwise term
+on the VLM's order (-vkd) gained +0.02 nDCG@5 on the full small model. The VLM (0.682
+nDCG@5 on silver, parent view) is far above the big model (0.536), its lists are the big
+model's own top 20, and the same lists can train the second stage (reranker-plan.md), so
+this is the best use of Argon for the big model too. It is the last Argon data before the
+price doubles on 2026-11-30.
+
+- Set `cand2` (tcr/vlm.py): every unjudged candidate not in `cand`, in the same hash order:
+  10,731 tasks (6,755 Personal-style, 3,976 MS-LaTTE), first stage F1@all-large-all3k as
+  before; 11 batch jobs, estimate $67.07 at the pilot's $0.00625 per task.
+- **Account:** the author's blog profile only (`acervo-blog`, project `acervo-514717`;
+  `.env` re-pinned, `gcp_check.py --ping` passed). `vlm_rerank.py lock` wrote
+  `data/private/augment/cap-round6c.json` (spend log $495.31 at the start, cap $595.31), and
+  `run` / `pilot` refuse unless `--expect-project`, the pin and the lock agree; the spend log
+  now records each Vertex call's project.
+- Use: session B of round 6b (f1-kaggle-run.md): the big model with -vkd on all ~14.7k lists,
+  and the small model's -vkd2 (what cand2 adds).

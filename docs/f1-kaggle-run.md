@@ -141,7 +141,35 @@ nice .venv/bin/python scripts/contrast_eval.py --methods F1@all-lr-para-all3k,F1
 **What happened (2026-11-25):** GPU 0's queue crashed in its first minute in sessions 2 and 3
 (both queues copied the shipped teacher scores at once; GPU 0 read a half-copied file), so
 -vc, -adv and -mpp never ran. Fixed in train_f1.py; a rerun needs a new dataset version
-(`f1_data.py repack`). Results: f1-dual-encoder.md "Round 6b results". The decision on a last VLM batch is due by
+(`f1_data.py repack`). Results: f1-dual-encoder.md "Round 6b results".
+
+**Session A, account 2 (~7.5 h; repacked 2026-11-25): the reruns.** Upload
+`data/private/f1/f1_data.tar.gz` as a new version of the round-6b dataset (same data, the
+fixed train_f1.py). Cells 1, 2 and 4 as above (cell 1's checks still pass: same
+queries.jsonl). `-vkd-w1` is -vkd with the listwise weight at 1.0 instead of 0.5; it picks
+the weight for the big model's -vkd run.
+
+```python
+jobs = [
+    launch(0, f"{train} --run F1@all-lr-para-all3k-vc,F1@all-lr-para-all3k-adv", "gpu0.log"),
+    launch(1, f"{train} --run F1@all-lr-para-all3k-mpp,F1@all-lr-para-all3k-vkd-w1", "gpu1.log"),
+]
+```
+
+Check both logs after ~5 min: each must reach `step 20/…`. A queue that stops in its first
+minute is the old race again (wrong dataset version).
+
+After it, on the Mac:
+
+```bash
+.venv/bin/python scripts/f1_data.py import ~/Downloads/f1_runs.tar.zst
+nice .venv/bin/python scripts/silver_eval.py --methods F1@all-lr-para-all3k-vc,F1@all-lr-para-all3k-adv,F1@all-lr-para-all3k-mpp,F1@all-lr-para-all3k-vkd-w1 --versions v2
+nice .venv/bin/python scripts/silver_paired.py F1@all-lr-para-all3k-vc:F1@all-lr-para-all3k F1@all-lr-para-all3k-adv:F1@all-lr-para-all3k F1@all-lr-para-all3k-mpp:F1@all-lr-para-all3k F1@all-lr-para-all3k-vkd-w1:F1@all-lr-para-all3k-vkd F1@all-lr-para-all3k-vc:F1@all-lr-para-all3k-s1 --extra-grades g1,g2,g3,g4,g5,g6
+nice .venv/bin/python scripts/contrast_eval.py --methods F1@all-lr-para-all3k,F1@all-lr-para-all3k-s1,F1@all-lr-para-all3k-mp,F1@all-lr-para-all3k-mpp,F1@all-lr-para-all3k-vkd,F1@all-lr-para-all3k-vkd-w1 --versions v2
+```
+
+**Session B (~10 h, after the last VLM batch is exported):** the big model with -vkd
+(f1-dual-encoder.md §15, "Round 6b results"); its cells come with that build. The decision on a last VLM batch is due by
 2026-11-27 (f1-dual-encoder.md §15, questions 1–3).
 
 ## Round 6a (prepared 2026-11-22; round 5's data, repacked)

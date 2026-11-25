@@ -222,6 +222,9 @@ PLANS = {
         "F1@all-lr-para-all3k-vc": {**_CTRL6, "vlm_rows": ["cand"]},
         "F1@all-lr-para-all3k-vkd": {**_CTRL6, "vlm_kd": ["train", "cand"], "vlm_weight": 0.5},
         "F1@all-lr-para-all3k-s1": {**_CTRL6, "seed": 1},
+        # -vkd won round 6b (+0.02, 3× seed noise); -w1 doubles the listwise weight, to pick
+        # the weight for the big model's -vkd run.
+        "F1@all-lr-para-all3k-vkd-w1": {**_CTRL6, "vlm_kd": ["train", "cand"], "vlm_weight": 1.0},
     },
     # Round 6b's A/B of the labels themselves (short: F1@1k's recipe, ~20 min each), EN rows
     # only so the arms hold the same kind of rows: the 1,000 VLM-reranked judged training

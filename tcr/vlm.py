@@ -11,6 +11,7 @@ Task sets (all under data/private/vlm/, private: Personal text):
   train  judged training tasks of the pools, not F1's validation tasks (same texts,
          judge's grades vs the VLM's)
   cand   unjudged candidate tasks (Personal-style + MS-LaTTE): new labels
+  cand2  every other unjudged candidate, in the same hash order (the last batch, 2026-11-25)
   val    F1's validation tasks of the round-2 pools: the adversarial seeds (#2), first
          stage only, never reranked
 
@@ -39,7 +40,7 @@ FIRST_LABEL = FIRST + ".v2+parent"    # its silver label
 LABEL = "VLM@all-large-all3k.v2+parent"
 K = 20
 MODEL = "gemini-4-argon"
-SETS = ("dev", "train", "cand", "val")
+SETS = ("dev", "train", "cand", "val", "cand2")
 CAND_N, CAND_MS_SHARE, TRAIN_N = 3000, 0.25, 1000
 ROUND2_POOL_RUNS = ("pool-synth-j4", "pool-synth2-j4", "pool-mslatte-j4")   # F1's val split applies
 
@@ -103,7 +104,7 @@ def set_tasks(name: str) -> List[dict]:
             out.sort(key=lambda r: _h("vlm-train:" + r["task_id"]))
             out = out[:TRAIN_N]
         return out
-    if name == "cand":
+    if name in ("cand", "cand2"):
         import sys
         sys.path.insert(0, str(config.ROOT / "scripts" / "datasets"))
         from build_train_pools import mslatte_unused
@@ -112,8 +113,13 @@ def set_tasks(name: str) -> List[dict]:
         synth = [r for r in read_jsonl(CANDIDATES_FILE) if r["id"] not in judged]
         ms = [r for r in mslatte_unused() if r["id"] not in judged]
         n_ms = round(CAND_N * CAND_MS_SHARE)
-        pick = (sorted(synth, key=lambda r: _h("vlm-cand:" + r["id"]))[:CAND_N - n_ms]
-                + sorted(ms, key=lambda r: _h("vlm-cand:" + r["id"]))[:n_ms])
+        synth = sorted(synth, key=lambda r: _h("vlm-cand:" + r["id"]))
+        ms = sorted(ms, key=lambda r: _h("vlm-cand:" + r["id"]))
+        if name == "cand":
+            pick = synth[:CAND_N - n_ms] + ms[:n_ms]
+        else:      # the rest; excludes cand's tasks even if the judged set has changed since
+            first = {t["task_id"] for t in load_topk("cand").values()}
+            pick = [r for r in synth[CAND_N - n_ms:] + ms[n_ms:] if r["id"] not in first]
         return [{"set": name, "dataset": r.get("dataset") or "cand", "run": None, "task_id": r["id"],
                  "title": r["title"], "parents": r.get("parents") or [], "body": r.get("body") or ""}
                 for r in pick]
@@ -237,9 +243,9 @@ SCHEMA = {"type": "object", "properties": {
     "required": ["subject", "ranking", "no_good_icon"]}
 
 
-@lru_cache(maxsize=1)
-def _cand_tasks() -> tuple:
-    return tuple(set_tasks("cand"))
+@lru_cache(maxsize=None)
+def _cand_tasks(name: str = "cand") -> tuple:
+    return tuple(set_tasks(name))
 
 
 def shuffled(task_id: str, top: Sequence[str]) -> List[str]:
@@ -254,13 +260,13 @@ class Contexts:
         self._c: Dict[str, J.Context] = {}
 
     def get(self, row: dict, rec: Optional[dict] = None) -> J.Context:
-        key = row["run"] or f"cand:{row['dataset']}"
+        key = row["run"] or f"{row['set']}:{row['dataset']}"     # cand / cand2: no judge run
         if key not in self._c:
             if row["run"]:
                 self._c[key] = J.Context(row["dataset"], records=silver.run_tasks(row["run"]))
             else:
                 recs = [{"id": t["task_id"], "title": t["title"], "parents": t["parents"], "body": t["body"]}
-                        for t in _cand_tasks() if t["dataset"] == row["dataset"]]
+                        for t in _cand_tasks(row["set"]) if t["dataset"] == row["dataset"]]
                 self._c[key] = J.Context(row["dataset"], records=recs)
         return self._c[key]
 

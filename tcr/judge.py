@@ -87,8 +87,10 @@ _SPEND_LOCK = threading.Lock()
 def log_spend(model: str, usage: dict, what: str, batch: bool = False) -> float:
     cost = usd(usage, model, batch)
     JUDGE_DIR.mkdir(parents=True, exist_ok=True)
+    from . import gcp
+    project = gcp.verify().project if gcp.verify.cache_info().currsize else None  # Vertex calls only
     rec = {"ts": datetime.now(timezone.utc).isoformat(timespec="seconds"), "model": model,
-           "what": what, "batch": batch, "usd": round(cost, 6),
+           "what": what, "batch": batch, "usd": round(cost, 6), **({"project": project} if project else {}),
            **{k: usage.get(k, 0) for k in ("prompt", "output", "thoughts")}}
     with _SPEND_LOCK, open(SPEND_LOG, "a") as f:
         f.write(json.dumps(rec) + "\n")

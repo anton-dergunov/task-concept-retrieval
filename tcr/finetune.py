@@ -64,7 +64,7 @@ ADV_SOURCE = {"personal_synth_pool": "adv-synth", "train_mslatte": "adv-mslatte"
 # 0-3 grades of the big model's top 20 for 1,000 judged training tasks ("train") and 3,000
 # unlabelled candidates ("cand", which are distill-* rows). f1_data.py writes them as
 # vlm.jsonl beside queries.jsonl, keyed by task_id, so queries.jsonl keeps its rows.
-VLM_LABELS = {s: config.PRIVATE_DIR / "vlm" / "labels" / f"{s}.jsonl" for s in ("train", "cand")}
+VLM_LABELS = {s: config.PRIVATE_DIR / "vlm" / "labels" / f"{s}.jsonl" for s in ("train", "cand", "cand2")}
 # Translations of the pools into more languages (augment_pools.py translate), used only by
 # runs that list the language in train_f1.py --pool-langs.
 XL_FILES = {k: v.with_name(v.name.replace(".aug.", ".xl.")) for k, v in AUG_FILES.items()}

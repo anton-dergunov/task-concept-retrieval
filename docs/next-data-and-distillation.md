@@ -376,6 +376,9 @@ the small model last.
 candidates (~10.7k left, $0.0063 per task), if the A/B shows that VLM labels train about as
 well as the judge's and -vc gains on top. The author's console showed ~$54 of credit on
 11-23.
+**Decided 2026-11-25: yes** (VLM labels train as well as the judge's; -vkd +0.02). Set
+`cand2`, 10,731 tasks, ~$67 with a $100 cap, on the blog account (argon-experiments.md
+"Batch 3"). The last Argon data before the price change.
 
 **After round 6: a second stage** that reorders the big model's top 10 (a cross-encoder or
 late interaction): [reranker-plan.md](reranker-plan.md).

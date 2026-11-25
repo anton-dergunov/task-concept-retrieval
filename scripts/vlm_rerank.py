@@ -5,7 +5,8 @@
     python scripts/vlm_rerank.py pilot --arms img+desc,img --max-usd <cap>    # online, 40 tasks
     python scripts/vlm_rerank.py pilot-report                                 # private HTML
     python scripts/vlm_rerank.py prepare --set dev [--arm img+desc] [--limit 3]
-    python scripts/vlm_rerank.py run --set dev [--arm img+desc] --max-usd <cap>
+    python scripts/vlm_rerank.py lock --project <p> --budget <usd>             # once per batch
+    python scripts/vlm_rerank.py run --set dev --expect-project <p> [--max-usd <cap>]
     python scripts/vlm_rerank.py status --set dev
     python scripts/vlm_rerank.py export --set dev
     python scripts/vlm_rerank.py report
@@ -49,6 +50,10 @@ MAX_ROUNDS = 2
 MAX_MISSING = 3            # more numbers left out than this: the answer is retried
 PER_TASK = 0.0060          # USD per request in batch; replaced by the pilot's measurement below
 EXTRA = ("g1", "g2", "g3", "g4", "g5", "g6")
+# The last VLM batch's lock (round 6c, 2026-11-25): the project it may run on and its cap
+# (`lock` writes it once). `run` and `pilot` refuse unless .env's pin, --expect-project and
+# this file name the same project, and they never spend past its cap.
+LOCK_FILE = config.PRIVATE_DIR / "augment" / "cap-round6c.json"
 
 
 def label_of(arm: str) -> str:
@@ -75,6 +80,43 @@ def golds_for(rows) -> dict:
     for run in {r["run"] for r in rows if r["set"] != "dev" and r["run"]}:
         out.update(silver.load_gold([run]))
     return out
+
+
+# --- the account and budget lock ----------------------------------------------------
+
+def cmd_lock(args) -> None:
+    from tcr import gcp
+    if LOCK_FILE.exists():
+        sys.exit(f"{LOCK_FILE} exists: {LOCK_FILE.read_text().strip()}")
+    pin = gcp.verify()
+    if pin.project != args.project:
+        sys.exit(f"refusing: .env pins project {pin.project}, not {args.project}")
+    from datetime import datetime, timezone
+    spent = J.spent()
+    lock = {"project": pin.project, "project_number": pin.number, "spent_at_start": round(spent, 2),
+            "budget": args.budget, "cap": round(spent + args.budget, 2),
+            "set": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    LOCK_FILE.parent.mkdir(parents=True, exist_ok=True)
+    LOCK_FILE.write_text(json.dumps(lock, indent=1) + "\n")
+    print(f"lock -> {LOCK_FILE}: {lock}")
+
+
+def check_lock(args) -> float:
+    """Stops unless the pin, --expect-project and the lock file agree; returns the cap
+    (the smaller of --max-usd and the lock's) on the spend log's running total."""
+    from tcr import gcp
+    if not LOCK_FILE.exists():
+        sys.exit(f"refusing: no {LOCK_FILE.name}; run `vlm_rerank.py lock` first")
+    lock = json.loads(LOCK_FILE.read_text())
+    pin = gcp.verify()
+    if not (pin.project == args.expect_project == lock["project"]) or pin.number != lock["project_number"]:
+        sys.exit(f"refusing: .env pins {pin.project} ({pin.number}), --expect-project is "
+                 f"{args.expect_project}, the lock names {lock['project']} ({lock['project_number']})")
+    if args.max_usd is not None and args.max_usd > lock["cap"]:
+        sys.exit(f"refusing: --max-usd {args.max_usd} is above the lock's cap ${lock['cap']:.2f}")
+    cap = lock["cap"] if args.max_usd is None else args.max_usd
+    print(f"lock ok: project {pin.project}; spent ${J.spent():.2f} of cap ${cap:.2f}", flush=True)
+    return cap
 
 
 # --- pilot (online) ------------------------------------------------------------------
@@ -106,6 +148,7 @@ def ask_online(ctxs, row, arm: str) -> dict:
 
 
 def cmd_pilot(args) -> None:
+    args.max_usd = check_lock(args)
     rows = pilot_rows()
     PILOT_DIR.mkdir(parents=True, exist_ok=True)
     ctxs = vlm.Contexts()
@@ -276,8 +319,8 @@ class SetBatch:
     """The batch state of one set: batch/<set>/{meta.json, answers.jsonl, rounds/}."""
 
     def __init__(self, name: str):
-        if name not in ("dev", "train", "cand"):
-            sys.exit("sets: dev, train, cand")
+        if name not in ("dev", "train", "cand", "cand2"):
+            sys.exit("sets: dev, train, cand, cand2")
         self.name = name
         self.dir = BATCH_DIR / name
         self.answers_path = self.dir / "answers.jsonl"
@@ -384,6 +427,7 @@ def cmd_prepare(args) -> None:
 
 
 def cmd_run(args) -> None:
+    args.max_usd = check_lock(args)
     sb = SetBatch(args.set)
     while True:
         open_runs = [n for n, r in sb.meta.get("runs", {}).items() if not r.get("collected")]
@@ -498,7 +542,7 @@ def _spearman(x, y) -> float:
 
 def cmd_report(args) -> None:
     out = {"date": date.today().isoformat(), "first_stage": vlm.FIRST_LABEL, "sets": {}}
-    for name in ("dev", "train", "cand"):
+    for name in ("dev", "train", "cand", "cand2"):
         sb = SetBatch(name)
         ans = sb.answers()
         if not ans:
@@ -573,6 +617,10 @@ def main() -> None:
     p.add_argument("--arms", default="img+desc,img")
     p.add_argument("--max-usd", type=float, default=None)
     p.add_argument("--workers", type=int, default=4)
+    p.add_argument("--expect-project", required=True)
+    p = sub.add_parser("lock")
+    p.add_argument("--project", required=True)
+    p.add_argument("--budget", type=float, required=True)
     sub.add_parser("pilot-report")
     sub.add_parser("pilot-summary")
     for name in ("prepare", "run", "status", "export"):
@@ -585,13 +633,14 @@ def main() -> None:
         if name == "run":
             q.add_argument("--max-usd", type=float, default=None)
             q.add_argument("--poll", type=int, default=120)
+            q.add_argument("--expect-project", required=True)
     sub.add_parser("report")
     p = sub.add_parser("budget")
     p.add_argument("--cap", type=float, required=True)
     args = ap.parse_args()
     {"topk": cmd_topk, "pilot": cmd_pilot, "pilot-report": cmd_pilot_report,
      "pilot-summary": lambda a: summarize_pilot(list(vlm.ARMS)),
-     "prepare": cmd_prepare, "run": cmd_run, "status": cmd_status, "export": cmd_export,
+     "lock": cmd_lock, "prepare": cmd_prepare, "run": cmd_run, "status": cmd_status, "export": cmd_export,
      "report": cmd_report, "budget": cmd_budget}[args.cmd](args)
 
 
