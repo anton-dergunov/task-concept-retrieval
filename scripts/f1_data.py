@@ -2,7 +2,7 @@
 """Build F1's training data (docs/f1-dual-encoder.md §2) into one tarball for Colab.
 
     python scripts/f1_data.py build [--smoke]
-    python scripts/f1_data.py repack [--smoke]   # same data, current train_f1.py / i1_embed.py
+    python scripts/f1_data.py repack [--smoke] [--teachers T,..]   # same data, current scripts (+ teacher scores)
     python scripts/f1_data.py import <runs dir, f1_runs.tar.zst or .zip>   # Kaggle / Colab results back
 
 `import` copies each finished run's best/ checkpoint to .cache/models/F1[-<tag>]/ (where
@@ -263,7 +263,7 @@ def main() -> None:
     ap.add_argument("--smoke", action="store_true", help="200 pool tasks, 1 in 10 icons' free signal")
     ap.add_argument("--no-distill", action="store_true", help="leave out the unlabelled distillation text")
     ap.add_argument("--teachers", default="",
-                    help="build: extend these teachers' scores to the new rows and ship them "
+                    help="build, repack: extend these teachers' scores to the new rows and ship them "
                          "(e.g. F1-all-large-e8,F1-all-large-all3k; see extend_teachers)")
     ap.add_argument("--threads", type=int, default=2, help="CPU threads for --teachers")
     args = ap.parse_args()
@@ -273,6 +273,12 @@ def main() -> None:
     if args.cmd == "repack":
         out = finetune.OUT_DIR / ("f1_data_smoke" if args.smoke else "f1_data")
         sha = hashlib.sha1((out / "queries.jsonl").read_bytes()).hexdigest()
+        if args.teachers and not args.smoke:
+            # Teachers scored on the build before this one (f1_data.prev, a prefix of it)
+            # join the shipped ones: e.g. round 6b's session B ships F1-all-large-all3k,
+            # the big model's rewrite filter, beside F1-all-large-e8.
+            extend_teachers(finetune.OUT_DIR / "f1_data.prev" / "queries.jsonl", out,
+                            [t for t in args.teachers.split(",") if t], args.threads)
         tar = pack(out)
         print(f"-> {tar} ({tar.stat().st_size / 1e6:.1f} MB); queries.jsonl sha1 {sha[:12]} unchanged")
         return

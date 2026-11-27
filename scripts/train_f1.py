@@ -226,6 +226,27 @@ PLANS = {
         # the weight for the big model's -vkd run.
         "F1@all-lr-para-all3k-vkd-w1": {**_CTRL6, "vlm_kd": ["train", "cand"], "vlm_weight": 1.0},
     },
+    # Round 6b, session B (2026-11-27): does the VLM's order lift the big model too? The big
+    # model's recipe (F1@all-large-para-all3k, round 6a: 4 epochs, graded rewrites filtered by
+    # F1@all-large-all3k, whose scores now ship with the data) plus -vkd's listwise term on
+    # the same 4,000 lists as the small model's test, at the weight session A picked (0.5:
+    # w1 lost on silver and held out). The last VLM batch (cand2) stalled on Vertex, so its
+    # lists wait for a later build. ~12.3 h on a T4: it pauses with --max-minutes and resumes.
+    # Beside it, two small-model arms: -vkd on the small model's candidate recipe (kd-final:
+    # the big model's distillation + rewrites), and the listwise term at a lower weight.
+    "round6b-B": {
+        "F1@all-large-para-all3k-vkd": {"pool_tasks": None, "holdout": True, "epochs": 4,
+                                        "model": "intfloat/multilingual-e5-large", "chunk_tokens": 2048,
+                                        "teacher": ["F1@all-large-all3k"], "kd_weight": 0.0, "para": "graded",
+                                        "sel": {"active": None, "random": None},
+                                        "vlm_kd": ["train", "cand"], "vlm_weight": 0.5},
+        "F1@all-kd-final-vkd": {"pool_tasks": None, "holdout": True, "lr": 5e-5, "epochs": 10,
+                                "teacher": ["F1@all-large-e8"], "kd_weight": 1.0,
+                                "sel": {"active": None, "random": None}, "para": "graded",
+                                "distill_sources": ["distill-mslatte", "distill-cand"],
+                                "vlm_kd": ["train", "cand"], "vlm_weight": 0.5},
+        "F1@all-lr-para-all3k-vkd-w25": {**_CTRL6, "vlm_kd": ["train", "cand"], "vlm_weight": 0.25},
+    },
     # Round 6b's A/B of the labels themselves (short: F1@1k's recipe, ~20 min each), EN rows
     # only so the arms hold the same kind of rows: the 1,000 VLM-reranked judged training
     # tasks with the judge's grades (-vj) or the VLM's (-vv), and 1,000 / 3,000 VLM-labelled

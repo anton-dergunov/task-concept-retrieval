@@ -465,3 +465,19 @@ price doubles on 2026-11-30.
   now records each Vertex call's project.
 - Use: session B of round 6b (f1-kaggle-run.md): the big model with -vkd on all ~14.7k lists,
   and the small model's -vkd2 (what cand2 adds).
+
+**What happened (checked 2026-11-27): the batch stalled.** All 11 jobs of round 1 ran for
+Vertex's maximum of 24 h and failed (`Deadline exceeded … maximum allowed duration of 24
+hours`) with 574 of 10,731 requests done; round 2, resubmitted automatically, had done 5 after
+23 h. The same request format finished in minutes on the earlier project (`cand`, 2026-11-23),
+so batch capacity for Gemini 4 Argon on the new project is the bottleneck, not the requests.
+`collect` read only succeeded jobs' output, so round 1's answers were dropped; a failed job
+keeps its finished rows (and they are billed), so `collect` now reads every ended job, and
+`vlm_rerank.py recollect --set cand2` recovered 570 answers ($3.55 logged; 4 were
+unparseable). Spend so far: ~$3.6 of the ~$67, which is why the billing page showed almost
+nothing. With `MAX_ROUNDS = 2` the poller stops after round 2 without resubmitting.
+Session B goes ahead on the 4,000 earlier lists. The Mac slept for hours at night, but that
+is not the cause: the jobs run on Vertex, and their own done counts stayed near zero.
+**Retry (author, 2026-11-27):** round 3 in 21 jobs of 500 (`run --max-rounds 3 --chunk 500`,
+run by the author in a terminal). If it stalls as well, the fallback is online requests
+(twice the batch price, ~$0.0125 per task) before the price doubles on 2026-11-30.

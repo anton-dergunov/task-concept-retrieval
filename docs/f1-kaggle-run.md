@@ -6,7 +6,7 @@ is in [f1-dual-encoder.md](f1-dual-encoder.md) (§11 for round 3), the plan in
 headless for up to 12 hours on two T4 GPUs; data building, import and scoring stay on the
 Mac (CLAUDE.md "Compute"). Round 2's guide is this file's git history (2026-11-16).
 
-**State (2026-11-23):** round 6a done and imported (its e5-large run resumed and finished); round 6b ready ([below](#round-6b-prepared-2026-11-23-new-build-two-accounts)). Earlier: round 6a ready (2026-11-22). Round 5's history: **(2026-11-21, evening)** round 5's first session (an editor session) ran out of
+**State (2026-11-27):** round 6b session A scored; session B ready ([below](#round-6b-prepared-2026-11-23-new-build-two-accounts), "Session B"). **(2026-11-23):** round 6a done and imported (its e5-large run resumed and finished); round 6b ready ([below](#round-6b-prepared-2026-11-23-new-build-two-accounts)). Earlier: round 6a ready (2026-11-22). Round 5's history: **(2026-11-21, evening)** round 5's first session (an editor session) ran out of
 disk at 17:21: GPU 0 finished `--score`, rand1k, act1k, 1k-rand and 1k-act, then
 `F1@all-large-all3k` (GPU 1) and `F1@all-lr-all3k` (GPU 0) died writing checkpoints. Those
 four runs and `runs/teacher` were packaged by hand, imported and scored (f1-dual-encoder.md
@@ -168,9 +168,74 @@ nice .venv/bin/python scripts/silver_paired.py F1@all-lr-para-all3k-vc:F1@all-lr
 nice .venv/bin/python scripts/contrast_eval.py --methods F1@all-lr-para-all3k,F1@all-lr-para-all3k-s1,F1@all-lr-para-all3k-mp,F1@all-lr-para-all3k-mpp,F1@all-lr-para-all3k-vkd,F1@all-lr-para-all3k-vkd-w1 --versions v2
 ```
 
-**Session B (~10 h, after the last VLM batch is exported):** the big model with -vkd
-(f1-dual-encoder.md §15, "Round 6b results"); its cells come with that build. The decision on a last VLM batch is due by
-2026-11-27 (f1-dual-encoder.md §15, questions 1–3).
+**Session B, account 2 (~10.3 h; repacked 2026-11-27): the big model with -vkd** (plan
+`round6b-B`, f1-dual-encoder.md §15 "Session A"). The last VLM batch (cand2) stalled on
+Vertex (argon-experiments.md "Batch 3"), so the big model gets the same 4,000 VLM lists as
+the small model's -vkd: first whether the term lifts e5-large at all, then more lists.
+Upload `data/private/f1/f1_data.tar.gz` (113.7 MB) as a **new version** of the round-6b
+dataset: same queries.jsonl (sha1 b8972e48b1f6), the current train_f1.py, and a second
+shipped teacher, `teacher/F1-all-large-all3k.npz` (the big model's rewrite filter, extended
+on the Mac to the build's new rewrite rows). Round 6b-A's tarball is kept as
+`f1_data.round6b-A.tar.gz`. The input is that version alone.
+
+| GPU | queue | estimate |
+|---|---|---|
+| 0 | `F1@all-large-para-all3k-vkd`: F1@all-large-para-all3k's recipe (4 epochs, ~3,200 steps) + the listwise term on the 4,000 lists at weight 0.5 | ~12.3 h in all (12.7 s/step + ~9% for the term, bank refreshes): pauses at 600 min, ~2.3 h left for a resume next week |
+| 1 | `F1@all-kd-final-vkd` (the small model's candidate recipe + the term, ~3.3 h), then `F1@all-lr-para-all3k-vkd-w25` (weight 0.25, ~3.7 h) | ~7 h |
+
+Cell 1 is round 6b's (above) with these lines at its end, before `nvidia-smi`:
+
+```python
+T2 = DATA_DIR / "teacher" / "F1-all-large-all3k.npz"
+assert T2.exists(), "not session B's version: update the dataset"
+assert str(np.load(T2)["queries_sha1"]) == sha, "F1-all-large-all3k scores do not match queries.jsonl"
+```
+
+Cell 2 is round 6b's with the e5-large floor: `assert free >= 15, "an e5-large run needs ~11 GB"`.
+Cell 4 as in §3. Cell 3:
+
+```python
+# 3. Two queues: the big model (pauses at 600 min) and two small arms
+import os, subprocess, time
+
+def launch(gpu, cmd, log):
+    env = {**os.environ, "CUDA_VISIBLE_DEVICES": str(gpu)}
+    return subprocess.Popen(cmd, shell=True, env=env, stdout=open(WORK / log, "w"),
+                            stderr=subprocess.STDOUT)
+
+train = f"python {TRAIN_SCRIPT} --data {DATA_DIR} --out {RUNS}"
+jobs = [
+    launch(0, f"{train} --run F1@all-large-para-all3k-vkd --max-minutes 600", "gpu0.log"),
+    launch(1, f"{train} --run F1@all-kd-final-vkd,F1@all-lr-para-all3k-vkd-w25", "gpu1.log"),
+]
+while any(j.poll() is None for j in jobs):      # progress in the notebook log every 10 min
+    time.sleep(600)
+    for log in ("gpu0.log", "gpu1.log"):
+        if (WORK / log).exists():
+            lines = [l for l in (WORK / log).read_text().splitlines() if "warn" not in l.lower()]
+            print(log, *lines[-2:], sep="\n  ", flush=True)
+print("exit codes:", [j.returncode for j in jobs])
+```
+
+Check after ~5 min: gpu0.log says `teacher F1-all-large-all3k: scores shipped with the data`
+and `5976 rows with a VLM list`, gpu1.log `teacher F1-all-large-e8: …` and the same count;
+both reach `step 20/…`. The paused run's `last/state.pt` (~4.4 GB) stays in the version's
+output (cell 4 leaves it out of the tarball); next week's resume attaches **this data
+version + session B's output** and uses round 6a's resume cells ("Round 6a outcome and the
+resume") with `NEED = set()`, the assert on
+`runs/F1-all-large-para-all3k-vkd/last/state.pt`, and
+`launch(0, f"{train} --run F1@all-large-para-all3k-vkd --max-minutes 200", "gpu0.log")`.
+
+After it, on the Mac (the e5-small arms now; the big model after its resume):
+
+```bash
+.venv/bin/python scripts/f1_data.py import ~/Downloads/f1_runs.tar.zst
+nice .venv/bin/python scripts/silver_eval.py --methods F1@all-kd-final-vkd,F1@all-lr-para-all3k-vkd-w25 --versions v2
+nice .venv/bin/python scripts/silver_paired.py F1@all-kd-final-vkd:F1@all-kd-final F1@all-lr-para-all3k-vkd-w25:F1@all-lr-para-all3k-vkd F1@all-lr-para-all3k-vkd-w25:F1@all-lr-para-all3k --extra-grades g1,g2,g3,g4,g5,g6
+# after the resume:
+nice .venv/bin/python scripts/silver_eval.py --methods F1@all-large-para-all3k-vkd --versions v2
+nice .venv/bin/python scripts/silver_paired.py F1@all-large-para-all3k-vkd:F1@all-large-para-all3k --extra-grades g1,g2,g3,g4,g5,g6
+```
 
 ## Round 6a (prepared 2026-11-22; round 5's data, repacked)
 

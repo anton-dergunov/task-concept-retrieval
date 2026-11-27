@@ -175,13 +175,17 @@ class Run:
                 return job
             time.sleep(poll)
 
-    def download(self):
-        """Download the job's output; yield every output record (request + response)."""
+    def download(self, missing_ok: bool = False):
+        """Download the job's output; yield every output record (request + response).
+        `missing_ok`: a job that did not succeed may have written nothing."""
         state = self.state()
         out = self.dir / "output"
         out.mkdir(exist_ok=True)
         log(f"downloading {state['prefix']}/output")
-        gcloud("storage", "cp", "-r", f"{state['prefix']}/output/*", str(out))
+        r = gcloud("storage", "cp", "-r", f"{state['prefix']}/output/*", str(out), check=not missing_ok)
+        if r.returncode != 0:
+            log(f"no output: {r.stderr.strip()[-200:]}")
+            return
         for path in sorted(out.rglob("*.jsonl")):
             for line in path.read_text(encoding="utf-8").splitlines():
                 if line.strip():

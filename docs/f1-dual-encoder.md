@@ -852,3 +852,31 @@ candidates gain +0.033, about what the judge's labels gave from 1k to 3k in roun
   0.58 / 0.57, -vkd 0.59 / 0.63; results/contrast/2026-11-25.md). With ~120 flips the set
   cannot separate a few points.
 - Questions 3 (-vc) and the rest of 5 (-mpp, -adv) wait for the rerun.
+
+### Session A: the reruns and the listwise weight (ran 2026-11-26/27; silver 2026-11-27)
+
+[results/silver/2026-11-27.md](../results/silver/2026-11-27.md); paired ΔnDCG@5 on judge +
+g1–g6, title / parent view (`silver_paired.py`); held-out nDCG@5 at the end of training.
+
+| arm | vs control | vs -s1 | nDCG@5 (plain, parent) | held-out |
+|---|---:|---:|---:|---:|
+| control F1@all-lr-para-all3k | — | — | 0.486 | 0.544 |
+| -vc (3,000 VLM-graded candidates as rows) | +0.005 / +0.011 | −0.000 / +0.006 | 0.496 | 0.545 |
+| -adv (971 adversarial tasks + ES/RU + rewrites) | +0.000 / +0.001 | — | 0.487 | — |
+| -mpp (minimal pairs + the pairwise term) | +0.008 / +0.006 | — | 0.492 | — |
+| -vkd (listwise, weight 0.5; round 6b) | +0.019 / +0.021 | +0.014 / +0.017 | 0.504 | 0.558 |
+| -vkd-w1 (weight 1.0) | +0.016 / +0.013 | — | 0.500 | 0.545 |
+
+- **Weight 0.5 stays.** Doubling the listwise weight loses −0.003 / −0.008 against -vkd
+  (−0.014 on Personal with the parent, +0.018 on Realistic) and 0.013 held out. The big
+  model's -vkd run uses 0.5; a 0.25 arm checks the other side of the curve.
+- **The VLM's order teaches more than its grades** (question 4): -vkd beats -vc by
+  +0.014 / +0.010 (p < 0.01) on the same lists. As rows, the 3,000 VLM-graded candidates
+  are within seed noise on top of the full data (question 3), although at the 1k size they
+  gained +0.033: on top of ~12k judged tasks, 3,000 more graded rows teach little, while the
+  order inside each top 20 is information no row carries.
+- **Adversarial tasks and minimal pairs: no gain** (question 5), on silver and on the
+  contrast set (-mpp both-right 0.51 with the parent, control 0.51;
+  results/contrast/2026-11-27.md). Batch 1's and 2's generated text stops here.
+- Next (session B, f1-kaggle-run.md): -vkd on the big model, on the small model's
+  candidate recipe (kd-final), and at weight 0.25.

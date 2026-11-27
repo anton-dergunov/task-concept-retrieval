@@ -318,10 +318,13 @@ def adversarial_pilot_html() -> list:
 class SetBatch:
     """The batch state of one set: batch/<set>/{meta.json, answers.jsonl, rounds/}."""
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, max_rounds: int = MAX_ROUNDS, chunk: int = CHUNK):
         if name not in ("dev", "train", "cand", "cand2"):
             sys.exit("sets: dev, train, cand, cand2")
         self.name = name
+        # A round asks every task still without an answer; one with max_rounds attempts is
+        # given up. Raising it (run --max-rounds) retries those, e.g. after a stalled round.
+        self.max_rounds, self.chunk = max_rounds, chunk
         self.dir = BATCH_DIR / name
         self.answers_path = self.dir / "answers.jsonl"
 
@@ -342,7 +345,7 @@ class SetBatch:
 
     def pending(self, rows: dict, limit: int = 0) -> list:
         ans, att = self.answers(), self.meta.get("attempts", {})
-        out = [r for t, r in rows.items() if t not in ans and att.get(t, 0) < MAX_ROUNDS]
+        out = [r for t, r in rows.items() if t not in ans and att.get(t, 0) < self.max_rounds]
         return out[:limit] if limit else out
 
     def build_round(self, arm: str, limit: int = 0) -> list:
@@ -358,9 +361,9 @@ class SetBatch:
         k = m["round"] + 1
         ctxs = vlm.Contexts()
         names = []
-        for j in range(0, len(todo), CHUNK):
-            chunk = todo[j:j + CHUNK]
-            rname = f"r{k}-c{j // CHUNK}"
+        for j in range(0, len(todo), self.chunk):
+            chunk = todo[j:j + self.chunk]
+            rname = f"r{k}-c{j // self.chunk}"
             run = self.run_obj(rname)
             manifest = {}
             with open(run.input, "w") as f:
@@ -378,17 +381,21 @@ class SetBatch:
         self.save_meta(m)
         return names
 
-    def collect(self, rname: str, job) -> None:
+    def collect(self, rname: str, job, again: bool = False) -> None:
+        """Read one ended job's answers. A FAILED job (e.g. Vertex's 24 h limit) still writes
+        the rows it finished, and those are billed, so its output is read too. `again`
+        (recollect): re-read a round marked collected, keep only answers not stored yet,
+        and leave the attempt counts alone (the first collect counted them)."""
         run = self.run_obj(rname)
         manifest = run.manifest()
         rows = vlm.load_topk(self.name)
         ans = self.answers()
         m = self.meta
-        records = run.download() if vb.succeeded(job) or "PARTIALLY" in str(job.state) else []
+        records = run.download(missing_ok=not vb.succeeded(job))
         got, bad, spent, seen = 0, 0, 0.0, set()
         for rec in records:
             tid = rec.get("key")
-            if tid not in manifest:
+            if tid not in manifest or (again and tid in ans):
                 continue
             seen.add(tid)
             resp = rec.get("response") or {}
@@ -402,7 +409,8 @@ class SetBatch:
             numbered = [tuple(x) for x in manifest[tid]["numbered"]]
             a = vlm.parse(data, numbered, rows[tid]["top"]) if data else None
             if a is None or a["missing"] > MAX_MISSING:
-                m["attempts"][tid] = m["attempts"].get(tid, 0) + 1
+                if not again:
+                    m["attempts"][tid] = m["attempts"].get(tid, 0) + 1
                 bad += 1
                 continue
             r = rows[tid]
@@ -410,13 +418,15 @@ class SetBatch:
                         "shown": [n for _, n in numbered], **a, "model": vlm.MODEL, "usage": usage}
             got += 1
         for tid in manifest:
-            if tid not in seen:
-                m["attempts"][tid] = m["attempts"].get(tid, 0) + 1
+            if tid not in seen and not (again and tid in ans):
+                if not again:
+                    m["attempts"][tid] = m["attempts"].get(tid, 0) + 1
                 bad += 1
         write_jsonl(self.answers_path, list(ans.values()))
         m["runs"][rname]["collected"] = True
         self.save_meta(m)
-        vb.log(f"{self.name} {rname}: {got} answers, {bad} to retry; ${spent:.2f}; total logged ${J.spent():.2f}")
+        vb.log(f"{self.name} {rname}: {got} {'new ' if again else ''}answers, {bad} without one; "
+               f"${spent:.2f}; total logged ${J.spent():.2f}")
 
 
 def cmd_prepare(args) -> None:
@@ -428,11 +438,11 @@ def cmd_prepare(args) -> None:
 
 def cmd_run(args) -> None:
     args.max_usd = check_lock(args)
-    sb = SetBatch(args.set)
+    sb = SetBatch(args.set, args.max_rounds, args.chunk)
     while True:
         open_runs = [n for n, r in sb.meta.get("runs", {}).items() if not r.get("collected")]
         if not open_runs:
-            if sb.meta.get("round", 0) >= MAX_ROUNDS:
+            if sb.meta.get("round", 0) >= sb.max_rounds:
                 break
             open_runs = sb.build_round(args.arm)
             if not open_runs:
@@ -448,6 +458,21 @@ def cmd_run(args) -> None:
             sb.collect(n, sb.run_obj(n).wait(args.poll))
     n_ans = len(sb.answers())
     print(f"{args.set}: {n_ans} answers of {len(vlm.load_topk(args.set))} tasks; total logged ${J.spent():.2f}")
+
+
+def cmd_recollect(args) -> None:
+    """Re-read every ended round marked collected (the rounds collected before failed jobs'
+    output was read: cand2's round 1). Idempotent: answers already stored are skipped, so
+    their spend is not logged twice."""
+    sb = SetBatch(args.set)
+    for n, r in sb.meta.get("runs", {}).items():
+        run = sb.run_obj(n)
+        if not r.get("collected") or not run.state().get("job"):
+            continue
+        job = run.job()
+        if vb.ended(job):
+            sb.collect(n, job, again=True)
+    print(f"{args.set}: {len(sb.answers())} answers of {len(vlm.load_topk(args.set))} tasks")
 
 
 def cmd_status(args) -> None:
@@ -623,7 +648,7 @@ def main() -> None:
     p.add_argument("--budget", type=float, required=True)
     sub.add_parser("pilot-report")
     sub.add_parser("pilot-summary")
-    for name in ("prepare", "run", "status", "export"):
+    for name in ("prepare", "run", "status", "recollect", "export"):
         q = sub.add_parser(name)
         q.add_argument("--set", required=True)
         if name in ("prepare", "run"):
@@ -634,13 +659,16 @@ def main() -> None:
             q.add_argument("--max-usd", type=float, default=None)
             q.add_argument("--poll", type=int, default=120)
             q.add_argument("--expect-project", required=True)
+            q.add_argument("--max-rounds", type=int, default=MAX_ROUNDS,
+                           help="rounds before a task is given up (raise it to retry them)")
+            q.add_argument("--chunk", type=int, default=CHUNK, help="requests per batch job")
     sub.add_parser("report")
     p = sub.add_parser("budget")
     p.add_argument("--cap", type=float, required=True)
     args = ap.parse_args()
     {"topk": cmd_topk, "pilot": cmd_pilot, "pilot-report": cmd_pilot_report,
      "pilot-summary": lambda a: summarize_pilot(list(vlm.ARMS)),
-     "lock": cmd_lock, "prepare": cmd_prepare, "run": cmd_run, "status": cmd_status, "export": cmd_export,
+     "lock": cmd_lock, "prepare": cmd_prepare, "run": cmd_run, "status": cmd_status, "recollect": cmd_recollect, "export": cmd_export,
      "report": cmd_report, "budget": cmd_budget}[args.cmd](args)
 
 
